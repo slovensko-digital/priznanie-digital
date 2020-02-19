@@ -2,6 +2,7 @@ interface TaxForm {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
   r001: string;
   // 02 - Dátum narodenia
+  // TODO Aky format?
   r002: string;
   // 03 - SK NACE - Hlavná, prevažná činnosť
   // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
@@ -12,8 +13,6 @@ interface TaxForm {
   r004: string;
   // 05 - Meno
   r005: string;
-  // 06 - Titul (pred menom / za priezviskom)
-  r006: string;
   // 07 - Ulica
   r007: string;
   // 08 - Súpisné/orientačné číslo *
@@ -24,7 +23,6 @@ interface TaxForm {
   r010: string;
   // 11 - Štát *
   r011: string;
-
 
   // Oddiel VI
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
@@ -44,9 +42,53 @@ interface TaxForm {
   // Strata (záporný rozdiel r. 41 a r. 42); výsledok hospodárenia (strata)
   r044: number;
 
-  // Základ dane (čiastkový základ dane) z príjmov podľa § 6 ods. 1 a 2 zákona (r. 43 + r. 44 + r. 45 - r. 46) > 0
+  // Základ dane (čiastkový základ dane) z príjmov (r. 43 + r. 44 + r. 45 - r. 46) > 0
   r047: number;
 
+  // Znížený čiastkový základ dane z príjmov o stratu z predchádzajúcich zdaňovacích období maximálne do sumy v r. 47 (r. 47 - r. 54)
+  // ASI zrkadlenie 047
+  r055: number;
+
+  // Základ dane (čiastkový základ dane) z príjmov znížený o odpočet výdavkov (nákladov) na výskum a vývoj zaokrúhlený na eurocenty nadol (r. 55 - r. 56)
+  // Zrkadlenie 55
+  r057: number;
+
+  // Základ dane z príjmov pred znížením o nezdaniteľnú časť základu dane (r. 40 + r. 57)
+  r072: number;
+
+  // Hardconuta value 3937.35 - nezdaniteľnú časť základu
+  r073: number;
+
+  // Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72
+  r077: number;
+
+  // Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)
+  r078: number;
+
+  //Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)
+  r080: number;
+  // Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na eurocenty nadol
+  // r080 * 0.19 TODO double check tax %
+  r081: number;
+
+  // Zrkadlenie r081
+  r090: number;
+
+  // Daň (daňová povinnosť) zo základu dane z osobitného základu dane a z osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2)
+  // Zrkadlenie r081
+  r105: number;
+
+  // Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106)
+  // Zrkadlenie r081
+  r107: number;
+
+  //Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené úroky(r. 107 - r. 112)
+  // zrkadli r107
+  r113: number;
+
+  // Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu podľa § 33 zákona33)
+  // r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 + r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r. 124 (+)
+  r125: number;
 
   // // Daňový preplatok
   // r126: number;
@@ -71,9 +113,4 @@ interface TaxForm {
   // r124: number;
 
   // r081: number;
-}
-
-
-const initialData = {
-
 }
