@@ -1,6 +1,6 @@
 function calculateRows(tf: TaxForm) {
-  tf.r008 = tf.r009 + tf.r010_income;
-  tf.r010_expense = tf.r010_income * 0.6;
+  tf.r008 = tf.r009 + tf.income;
+  tf.expense = tf.income * 0.6;
 
   tf.r105 = tf.r081;
 

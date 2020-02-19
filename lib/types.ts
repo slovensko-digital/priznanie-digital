@@ -68,9 +68,12 @@ interface TaxForm {
   r008: number;
   // Uhrn poistneho na socialne poistenie od vsetkych zamestnavatelov
   r009: number;
+
   // Aky celkovy prijem ste mali ako SZCO v roku 2018?
-  r010_income: number; // ? slovencina alebo anglictina?
-  r010_expense: number;
+  //VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
+  income: number; // ? slovencina alebo anglictina?
+  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
+  expense: number;
 
   // Rodne cislo
   r013: string;
