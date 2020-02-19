@@ -9,10 +9,10 @@ const sampleData: TaxForm = {
   r009: "82105",
   r010: "Bratislava",
   r011: "Slovensko",
-  income: 20000, // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
-  expense: 12000, // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r.
+  income: 20000,
+  expense: 14000, // pausalne 12000 + 2000 poistne
   r041: 20000,
-  r042: 14000, // pausalne 12000 + 2000 poistne
+  r042: 14000, 
   r043: 6000,
   r044: 0,
   r047: 6000,
@@ -23,12 +23,12 @@ const sampleData: TaxForm = {
   r077: 3937.35,
   r078: 2062.65,
   r080: 2062.65,
-  r081: 391.90,
-  r090: 391.90,
-  r105: 391.90,
-  r107: 391.90,
-  r113: 391.90,
-  r125: 391.90,
+  r081: 391.9,
+  r090: 391.9,
+  r105: 391.9,
+  r107: 391.9,
+  r113: 391.9,
+  r125: 391.9,
 
   priloha3_r11: 1000,
   priloha3_r13: 1000
