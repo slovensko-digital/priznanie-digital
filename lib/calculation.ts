@@ -5,6 +5,8 @@ function calculateRows(tf: TaxForm) {
   tf.r105 = tf.r081;
 
   tf = calculateTax(tf);
+
+  return tf;
 }
 
 function calculateTax(tf: TaxForm) {
