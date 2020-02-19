@@ -1,0 +1,32 @@
+const sampleData: TaxForm = {
+  r001: "111111",
+  r002: "02/22/1993",
+  r003: "62232",
+  r004: "Retzer",
+  r005: "Julius",
+  r007: "Kastielska",
+  r008: "13",
+  r009: "82105",
+  r010: "Bratislava",
+  r011: "Slovensko",
+  income: 20000, // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+  expense: 12000, // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r.
+  r041: 20000,
+  r042: 12000,
+  r043: 8000,
+  r044: 0,
+  r047: 8000,
+  r055: 8000,
+  r057: 8000,
+  r072: 8000,
+  r073: 3937.35,
+  r077: 3937.35,
+  r078: 4062.65,
+  r080: 4062.65,
+  r081: 771.9,
+  r090: 771.9,
+  r105: 771.9,
+  r107: 771.9,
+  r113: 771.9,
+  r125: 771.9
+};
