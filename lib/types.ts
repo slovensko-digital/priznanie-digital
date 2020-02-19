@@ -27,7 +27,7 @@ interface TaxForm {
   // Oddiel VI
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   income: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
-  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
+  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne? priloha3_r11 + priloha3_r13
   expense: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
 
   // Príjmy z tabuľky č. 1, stĺ. 1, r. 10
@@ -90,27 +90,10 @@ interface TaxForm {
   // r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 + r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r. 124 (+)
   r125: number;
 
-  // // Daňový preplatok
-  // r126: number;
-  // // Daň na úhradu
-  // r125: number;
 
-  // // TODO add comment to each row what it represents
-  // r105: number;
-  // r106: number;
-  // r108: number;
-  // r110: number;
-  // r112: number;
-  // r114: number;
-  // r116: number;
-  // r117: number;
-  // r118: number;
-  // r119: number;
-  // r120: number;
-  // r121: number;
-  // r122: number;
-  // r123: number;
-  // r124: number;
+  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
+  priloha3_r11: number;
 
-  // r081: number;
+  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
+  priloha3_r13: number;
 }
