@@ -12,7 +12,7 @@ const sampleData: TaxForm = {
   income: 20000,
   expense: 14000, // pausalne 12000 + 2000 poistne
   r041: 20000,
-  r042: 14000, 
+  r042: 14000,
   r043: 6000,
   r044: 0,
   r047: 6000,
@@ -22,14 +22,14 @@ const sampleData: TaxForm = {
   r073: 3937.35,
   r077: 3937.35,
   r078: 2062.65,
-  r080: 2062.65,
+  r080_zaklad_dane: 2062.65,
   r081: 391.9,
   r090: 391.9,
-  r105: 391.9,
+  r105_dan: 391.9,
   r107: 391.9,
   r113: 391.9,
-  r125: 391.9,
+  r125_dan_na_uhradu: 391.9,
 
-  priloha3_r11: 1000,
-  priloha3_r13: 1000
+  priloha3_r11_socialne: 1000,
+  priloha3_r13_zdravotne: 1000
 };

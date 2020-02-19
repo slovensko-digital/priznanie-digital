@@ -5,11 +5,11 @@ test("Should calculate r080", () => {
     income: 20000,
     expense: 12000,
 
-    priloha3_r11: 0,
-    priloha3_r13: 0
+    priloha3_r11_socialne: 0,
+    priloha3_r13_zdravotne: 0
   };
   const result = calculate(input);
-  expect(result.r080).toBe(4062.65);
+  expect(result.r080_zaklad_dane).toBe(4062.65);
 });
 
 test("Should calculate r080 with insurance deduction", () => {
@@ -17,9 +17,9 @@ test("Should calculate r080 with insurance deduction", () => {
     income: 20000,
     expense: 12000,
 
-    priloha3_r11: 1000,
-    priloha3_r13: 1000
+    priloha3_r11_socialne: 1000,
+    priloha3_r13_zdravotne: 1000
   };
   const result = calculate(input);
-  expect(result.r080).toBe(2062.65);
+  expect(result.r080_zaklad_dane).toBe(2062.65);
 });

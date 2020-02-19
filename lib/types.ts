@@ -66,7 +66,7 @@ interface TaxForm {
   r078?: number;
 
   //Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)
-  r080?: number;
+  r080_zaklad_dane?: number;
   // Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na eurocenty nadol
   // r080 * 0.19 TODO double check tax %
   r081?: number;
@@ -76,7 +76,7 @@ interface TaxForm {
 
   // Daň (daňová povinnosť) zo základu dane z osobitného základu dane a z osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2)
   // Zrkadlenie r081
-  r105?: number;
+  r105_dan?: number;
 
   // Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106)
   // Zrkadlenie r081
@@ -88,11 +88,11 @@ interface TaxForm {
 
   // Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu podľa § 33 zákona33)
   // r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 + r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r. 124 (+)
-  r125?: number;
+  r125_dan_na_uhradu?: number;
 
   // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11?: number;
+  priloha3_r11_socialne?: number;
 
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13?: number;
+  priloha3_r13_zdravotne?: number;
 }
