@@ -100,11 +100,6 @@ interface TaxForm {
   r081: number;
 }
 
-const initialData = {
-  r002: ""
-};
-
-// TODO should be split to smaller functions
 function calculateRows(tf: TaxForm) {
   tf.r008 = tf.r009 + tf.r010_income;
   tf.r010_expense = tf.r010_income * 0.6;
