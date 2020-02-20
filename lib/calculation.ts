@@ -1,6 +1,12 @@
+const nezdanitelnaCastZakladu = 3937.35;
+const flatrateExpensesMax = 20000;
+
 export function calculate(tf: TaxForm) {
   const flatrateExpenses = tf.income * 0.6;
-  tf.expense = flatrateExpenses < 20000 ? flatrateExpenses : 20000;
+  tf.expense =
+    flatrateExpenses < flatrateExpensesMax
+      ? flatrateExpenses
+      : flatrateExpensesMax;
 
   // wow toto je uplne sialena ezoterika :D ale tak je definovana business logika, ale tak urcite sa to da zjednodusit
   tf.r041 = tf.income;
@@ -9,7 +15,7 @@ export function calculate(tf: TaxForm) {
   tf.r047 = tf.r043; // tf.r044 + tf.r045 - tf.r046);
   tf.r055 = tf.r047;
   tf.r057 = tf.r055;
-  tf.r073 = 3937.35;
+  tf.r073 = nezdanitelnaCastZakladu;
   tf.r072 = tf.r057; // + tf.r040;
   tf.r077 = tf.r073; // + tf.r074 + tf.r075 + tf.r076;
   tf.r078 = tf.r072 - tf.r077;
