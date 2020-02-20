@@ -7,11 +7,12 @@ const MainForm = () => {
     initialValues: {
       income: 20000,
       expense: 12000,
-      priloha3_r11_socialne: 0,
-      priloha3_r13_zdravotne: 0
+      priloha3_r11_socialne: 1000,
+      priloha3_r13_zdravotne: 1000
     },
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(calculate(values), null, 2));
+      resetForm();
     }
   });
   return (
