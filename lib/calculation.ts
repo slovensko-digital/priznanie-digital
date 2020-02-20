@@ -7,10 +7,7 @@ export function calculate(taxForm: TaxForm) {
   const tf = Object.assign({}, taxForm);
 
   const flatrateExpenses = tf.income * 0.6;
-  tf.expense =
-    flatrateExpenses < flatrateExpensesMax
-      ? flatrateExpenses
-      : flatrateExpensesMax;
+  tf.expense = Math.min(flatrateExpenses, flatrateExpensesMax);
 
   // wow toto je uplne sialena ezoterika :D ale tak je definovana business logika, ale tak urcite sa to da zjednodusit
   tf.r041 = tf.income;
