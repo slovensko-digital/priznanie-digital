@@ -1,4 +1,6 @@
-const sampleData: TaxForm = {
+import { TaxForm } from "../../lib/types";
+
+export const sampleData: TaxForm = {
   r001: "111111",
   r002: "02/22/1993",
   r003: "62232",

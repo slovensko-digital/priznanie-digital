@@ -1,4 +1,4 @@
-interface TaxForm {
+export interface TaxForm {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
   r001?: string;
   // 02 - Dátum narodenia

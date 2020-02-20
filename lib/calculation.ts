@@ -1,3 +1,5 @@
+import { TaxForm } from "./types";
+
 const nezdanitelnaCastZakladu = 3937.35;
 const flatrateExpensesMax = 20000;
 

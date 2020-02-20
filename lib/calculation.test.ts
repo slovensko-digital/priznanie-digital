@@ -1,4 +1,5 @@
 import { calculate } from "./calculation";
+import { TaxForm } from "./types";
 
 test("Should calculate r080", () => {
   const input: TaxForm = {
