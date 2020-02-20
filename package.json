@@ -9,6 +9,7 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "formik": "^2.1.4",
     "next": "latest",
     "react": "16.12.0",
     "react-dom": "16.12.0"
