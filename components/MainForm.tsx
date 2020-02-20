@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { calculate } from "../lib/calculation";
 import styles from "./MainForm.module.css";
+import { TaxForm } from "../lib/types";
 
 const MainForm = () => {
+  const [taxForm, setTaxForm] = useState<TaxForm>({});
   return (
     <Formik
       initialValues={{
@@ -12,7 +14,7 @@ const MainForm = () => {
         priloha3_r13_zdravotne: 1000
       }}
       onSubmit={(values, { resetForm }) => {
-        alert(JSON.stringify(calculate(values), null, 2));
+        setTaxForm(calculate(values));
         resetForm();
       }}
     >
@@ -24,6 +26,7 @@ const MainForm = () => {
         <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
         <Field name="priloha3_r13_zdravotne" type="number" />
         <button type="submit">Submit</button>
+        <pre>{JSON.stringify(taxForm, null, 2)}</pre>
       </Form>
     </Formik>
   );
