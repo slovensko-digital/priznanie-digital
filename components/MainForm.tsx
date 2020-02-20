@@ -13,9 +13,8 @@ const MainForm = () => {
         priloha3_r11_socialne: 1000,
         priloha3_r13_zdravotne: 1000
       }}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={values => {
         setTaxForm(calculate(values));
-        resetForm();
       }}
     >
       <Form className={styles.form}>
