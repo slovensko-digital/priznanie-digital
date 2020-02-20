@@ -1,5 +1,5 @@
 import { TaxForm, TaxFormUserInput } from "./types";
-import { roundToTwoDecimals } from "./helpers";
+import round from "lodash.round";
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;
@@ -27,7 +27,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   tf.r080_zaklad_dane = tf.r078; //+ tf.r065 + tf.r071 + tf.r079)
 
-  tf.r081 = roundToTwoDecimals(tf.r080_zaklad_dane * DAN_Z_PRIJMU_SADZBA);
+  tf.r081 = round(tf.r080_zaklad_dane * DAN_Z_PRIJMU_SADZBA, 2);
   tf.r105_dan = tf.r081;
   return tf;
 }

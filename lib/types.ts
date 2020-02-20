@@ -24,11 +24,8 @@ export interface TaxFormUserInput {
   // 11 - Štát *
   r011?: string;
 
-  // Oddiel VI
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
-  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne? priloha3_r11 + priloha3_r13
-  t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
 
   // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
   priloha3_r11_socialne?: number;
@@ -63,7 +60,9 @@ export interface TaxForm extends TaxFormUserInput {
   // 11 - Štát *
   r011?: string;
 
-  // Príjmy z tabuľky č. 1, stĺ. 1, r. 10
+  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne? priloha3_r11 + priloha3_r13
+  t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
+
   // The same as income above
   r041?: number;
   // Výdavky z tabuľky č. 1, stĺ. 2, r.10
