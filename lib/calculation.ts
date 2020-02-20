@@ -29,6 +29,23 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   tf.r081 = round(tf.r080_zaklad_dane * DAN_Z_PRIJMU_SADZBA, 2);
   tf.r105_dan = tf.r081;
+
+  tf.r125_dan_na_uhradu = tf.r105_dan;
+  // - tf.r106 +
+  // tf.r108 +
+  // tf.r110 -
+  // tf.r112 +
+  // tf.r114 +
+  // tf.r116 +
+  // tf.r117 -
+  // tf.r118 -
+  // tf.r119 -
+  // tf.r120 -
+  // tf.r121 -
+  // tf.r122 -
+  // tf.r123 -
+  // tf.r124;
+  tf.r126_danovy_preplatok = Math.abs(Math.min(tf.r125_dan_na_uhradu, 0));
   return tf;
 }
 

@@ -121,4 +121,8 @@ export interface TaxForm extends TaxFormUserInput {
   // Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu podľa § 33 zákona33)
   // r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 + r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r. 124 (+)
   r125_dan_na_uhradu?: number;
+
+  //Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus podľa § 33 zákona
+  // Ak je r125_dan_na_uhradu, tak absolutna hodnota r125_dan_na_uhradu
+  r126_danovy_preplatok?: number;
 }
