@@ -13,6 +13,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   tf.t1r10_vydavky = Math.min(flatrateExpenses, PAUSALNE_VYDAVKY_MAX);
 
   // wow toto je uplne sialena ezoterika :D ale tak je definovana business logika, ale tak urcite sa to da zjednodusit
+  tf.r030 = 0; // TODO in next use cases
   tf.r041 = tf.t1r10_prijmy;
   tf.r042 =
     tf.t1r10_vydavky + tf.priloha3_r11_socialne + tf.priloha3_r13_zdravotne;
@@ -20,8 +21,11 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   tf.r047 = tf.r043; // tf.r044 + tf.r045 - tf.r046);
   tf.r055 = tf.r047;
   tf.r057 = tf.r055;
-  tf.r073 = NEZDANITELNA_CAST_ZAKLADU;
   tf.r072 = tf.r057; // + tf.r040;
+  tf.r073 =
+    tf.r072 > 20507
+      ? Math.max(0, 9064.094 - (1 / 4) * (tf.r072 - tf.r030)) // WTF Black Magic
+      : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - tf.r030);
   tf.r077 = tf.r073; // + tf.r074 + tf.r075 + tf.r076;
   tf.r078 = Math.max(tf.r072 - tf.r077, 0);
 

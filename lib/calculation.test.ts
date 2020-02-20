@@ -2,7 +2,7 @@ import { calculate } from "./calculation";
 import { TaxForm, TaxFormUserInput } from "./types";
 
 describe("r080_zaklad_dane", () => {
-  test("Should calculate r080", () => {
+  test("Case 1", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 20000,
 
@@ -13,7 +13,7 @@ describe("r080_zaklad_dane", () => {
     expect(result.r080_zaklad_dane).toBe(4062.65);
   });
 
-  test("Should calculate r080 with insurance deduction", () => {
+  test("Case 2", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 20000,
 
@@ -26,7 +26,7 @@ describe("r080_zaklad_dane", () => {
 });
 
 describe("r105_dan", () => {
-  test("Should calculate r105_dan and round to two decimals case 1", () => {
+  test("Case 1", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 20000,
 
@@ -37,7 +37,7 @@ describe("r105_dan", () => {
     expect(result.r105_dan).toBe(391.9);
   });
 
-  test("Should calculate r105_dan and round to two decimals case 2", () => {
+  test("Case 2", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 30000,
 
@@ -48,8 +48,7 @@ describe("r105_dan", () => {
     expect(result.r105_dan).toBe(771.9);
   });
 
-  // TODO Fix implementation
-  test.skip("Should calculate r105_dan and round to two decimals case 3 (high income)", () => {
+  test("Case 3 (high income)", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 45000,
 
@@ -58,5 +57,16 @@ describe("r105_dan", () => {
     };
     const result = calculate(input);
     expect(result.r105_dan).toBe(3740.32);
+  });
+
+  test("Case 4 (high income 2)", () => {
+    const input: TaxFormUserInput = {
+      t1r10_prijmy: 51000,
+
+      priloha3_r11_socialne: 1000,
+      priloha3_r13_zdravotne: 1320
+    };
+    const result = calculate(input);
+    expect(result.r105_dan).toBe(5089.32);
   });
 });
