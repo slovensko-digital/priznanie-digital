@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  margin-bottom: 4px;
+}
+
+.form input {
+  margin-bottom: 16px;
+}

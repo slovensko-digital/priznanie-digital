@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import styles from "./index.module.css";
+import MainForm from "../components/MainForm";
 
 const Home = () => (
   <div className={styles.container}>
@@ -11,6 +12,7 @@ const Home = () => (
 
     <main>
       <h1 className={styles.title}>priznanie.digital</h1>
+      <MainForm />
     </main>
 
     <footer></footer>
