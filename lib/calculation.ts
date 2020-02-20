@@ -1,7 +1,9 @@
 const nezdanitelnaCastZakladu = 3937.35;
 const flatrateExpensesMax = 20000;
 
-export function calculate(tf: TaxForm) {
+export function calculate(taxForm: TaxForm) {
+  const tf = Object.assign({}, taxForm);
+
   const flatrateExpenses = tf.income * 0.6;
   tf.expense =
     flatrateExpenses < flatrateExpensesMax
@@ -18,7 +20,7 @@ export function calculate(tf: TaxForm) {
   tf.r073 = nezdanitelnaCastZakladu;
   tf.r072 = tf.r057; // + tf.r040;
   tf.r077 = tf.r073; // + tf.r074 + tf.r075 + tf.r076;
-  tf.r078 = tf.r072 - tf.r077;
+  tf.r078 = Math.max(tf.r072 - tf.r077, 0);
   tf.r080_zaklad_dane = tf.r078; //+ tf.r065 + tf.r071 + tf.r079)
 
   return tf;
