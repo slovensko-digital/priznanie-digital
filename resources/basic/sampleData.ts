@@ -11,8 +11,8 @@ export const sampleData: TaxForm = {
   r009: "82105",
   r010: "Bratislava",
   r011: "Slovensko",
-  income: 20000,
-  expense: 14000, // pausalne 12000 + 2000 poistne
+  t1r10_prijmy: 20000,
+  t1r10_vydavky: 14000, // pausalne 12000 + 2000 poistne
   r041: 20000,
   r042: 14000,
   r043: 6000,

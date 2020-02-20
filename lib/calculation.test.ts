@@ -1,10 +1,10 @@
 import { calculate } from "./calculation";
-import { TaxForm } from "./types";
+import { TaxForm, TaxFormUserInput } from "./types";
 
 test("Should calculate r080", () => {
-  const input: TaxForm = {
-    income: 20000,
-    expense: 12000,
+  const input: TaxFormUserInput = {
+    t1r10_prijmy: 20000,
+    t1r10_vydavky: 12000,
 
     priloha3_r11_socialne: 0,
     priloha3_r13_zdravotne: 0
@@ -14,9 +14,9 @@ test("Should calculate r080", () => {
 });
 
 test("Should calculate r080 with insurance deduction", () => {
-  const input: TaxForm = {
-    income: 20000,
-    expense: 12000,
+  const input: TaxFormUserInput = {
+    t1r10_prijmy: 20000,
+    t1r10_vydavky: 12000,
 
     priloha3_r11_socialne: 1000,
     priloha3_r13_zdravotne: 1000

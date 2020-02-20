@@ -1,4 +1,4 @@
-export interface TaxForm {
+export interface TaxFormUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
   r001?: string;
   // 02 - Dátum narodenia
@@ -26,9 +26,42 @@ export interface TaxForm {
 
   // Oddiel VI
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
-  income?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+  t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne? priloha3_r11 + priloha3_r13
-  expense?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
+  t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
+
+  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
+  priloha3_r11_socialne?: number;
+
+  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
+  priloha3_r13_zdravotne?: number;
+}
+
+export interface TaxForm extends TaxFormUserInput {
+  // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
+  r001?: string;
+  // 02 - Dátum narodenia
+  // TODO Aky format?
+  r002?: string;
+  // 03 - SK NACE - Hlavná, prevažná činnosť
+  // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
+  r003?: string;
+
+  // Oddiel I
+  // 04 - Priezvisko
+  r004?: string;
+  // 05 - Meno
+  r005?: string;
+  // 07 - Ulica
+  r007?: string;
+  // 08 - Súpisné/orientačné číslo *
+  r008?: string;
+  // 09 - PSČ *
+  r009?: string;
+  // 10 - Obec *
+  r010?: string;
+  // 11 - Štát *
+  r011?: string;
 
   // Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   // The same as income above
@@ -89,10 +122,4 @@ export interface TaxForm {
   // Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu podľa § 33 zákona33)
   // r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 + r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r. 124 (+)
   r125_dan_na_uhradu?: number;
-
-  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11_socialne?: number;
-
-  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13_zdravotne?: number;
 }
