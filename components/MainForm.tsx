@@ -26,6 +26,12 @@ const MainForm = () => {
         <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
         <Field name="priloha3_r13_zdravotne" type="number" />
         <button type="submit">Submit</button>
+        <div className={styles.summary}>
+          <div>Základ dane: {taxForm.r080_zaklad_dane} </div>
+          <div>Daň: {taxForm.r105_dan}</div>
+          <div>Daň na úhradu: {taxForm.r125_dan_na_uhradu}</div>
+          <div>Daňový preplatok: {taxForm.r126_danovy_preplatok}</div>
+        </div>
         <pre>{JSON.stringify(taxForm, null, 2)}</pre>
       </Form>
     </Formik>
