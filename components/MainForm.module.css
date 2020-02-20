@@ -1,6 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  width: 250px;
 }
 
 .form label {
@@ -9,4 +10,8 @@
 
 .form input {
   margin-bottom: 16px;
+}
+
+.summary {
+  margin-top: 32px;
 }
