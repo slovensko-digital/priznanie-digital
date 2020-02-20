@@ -48,11 +48,3 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   tf.r126_danovy_preplatok = Math.abs(Math.min(tf.r125_dan_na_uhradu, 0));
   return tf;
 }
-
-function summary(tf: TaxForm) {
-  return {
-    "Základ dane": tf.r080_zaklad_dane,
-    Daň: tf.r105_dan,
-    "Daň na úhradu": tf.r125_dan_na_uhradu
-  };
-}
