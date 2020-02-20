@@ -27,7 +27,7 @@ const MainForm = () => {
         <Field name="priloha3_r13_zdravotne" type="number" />
         <button type="submit">Submit</button>
         <div className={styles.summary}>
-          <div>Základ dane: {taxForm.r080_zaklad_dane} </div>
+          <div>Základ dane: {taxForm.r080_zaklad_dane_celkovo} </div>
           <div>Daň: {taxForm.r105_dan}</div>
           <div>Daň na úhradu: {taxForm.r125_dan_na_uhradu}</div>
           <div>Daňový preplatok: {taxForm.r126_danovy_preplatok}</div>

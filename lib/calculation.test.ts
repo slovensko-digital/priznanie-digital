@@ -10,7 +10,7 @@ describe("r080_zaklad_dane", () => {
       priloha3_r13_zdravotne: 0
     };
     const result = calculate(input);
-    expect(result.r080_zaklad_dane).toBe(4062.65);
+    expect(result.r080_zaklad_dane_celkovo).toBe(4062.65);
   });
 
   test("Case 2", () => {
@@ -21,7 +21,7 @@ describe("r080_zaklad_dane", () => {
       priloha3_r13_zdravotne: 1000
     };
     const result = calculate(input);
-    expect(result.r080_zaklad_dane).toBe(2062.65);
+    expect(result.r080_zaklad_dane_celkovo).toBe(2062.65);
   });
 });
 
