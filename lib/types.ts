@@ -63,8 +63,12 @@ export interface TaxForm extends TaxFormUserInput {
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne? priloha3_r11 + priloha3_r13
   t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
 
-  // The same as income above
+  // Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za zdaňovacie obdobie (v eurách)6)
+  r030?: number;
+
+  // The same as t1r10_vydavky
   r041?: number;
+
   // Výdavky z tabuľky č. 1, stĺ. 2, r.10
   // The same as expense above
   r042?: number;
@@ -89,6 +93,7 @@ export interface TaxForm extends TaxFormUserInput {
   r072?: number;
 
   // Hardconuta value 3937.35 - nezdaniteľnú časť základu
+  //  Ak r.72>20 507, potom r.73 má byť výsledkom max(0,9 064.094-(1/4)*r.72–r.30). Ak r72<=20 507, potom r.73 má byť výsledkom max(0,3 937.35–r.30). (2814.10)
   r073?: number;
 
   // Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72
