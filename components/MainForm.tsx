@@ -98,7 +98,7 @@ const MainForm = () => {
             </>
           )}
 
-          <button type="submit">Submit</button>
+          <button type="submit">Vypocitaj</button>
           <h2>Vysledky</h2>
           <div className={styles.summary}>
             <div>Základ dane: {taxForm.r080_zaklad_dane_celkovo} </div>
