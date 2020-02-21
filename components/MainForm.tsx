@@ -5,7 +5,7 @@ import styles from "./MainForm.module.css";
 import { TaxForm, TaxFormUserInput } from "../lib/types";
 import * as Yup from "yup";
 
-const MainFormSchema = Yup.object().shape({
+const mainFormSchema = Yup.object().shape({
 	r005_meno: Yup.string().required("Pole je povinné."),
 	r004_priezvisko: Yup.string().required("Pole je povinné."),
 });
@@ -34,7 +34,7 @@ const MainForm = () => {
 			onSubmit={values => {
 				setTaxForm(calculate(values));
 			}}
-			validationSchema={MainFormSchema}
+			validationSchema={mainFormSchema}
 		>
 			{({ errors, touched }) => (
 				<Form className={styles.form}>
