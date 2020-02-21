@@ -11,10 +11,15 @@ import {
 } from "../lib/types";
 import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
+import { sortObjectKeys } from "../lib/utils";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [taxForm, setTaxForm] = useState<TaxForm>(initTaxFormUserInputValues);
-  const updateTaxForm = values => setTaxForm(calculate(values));
+  const updateTaxForm = values =>
+    setTaxForm(previousTaxForm => ({
+      ...previousTaxForm,
+      ...calculate(values),
+    }));
   return (
     <Layout>
       <Component
@@ -22,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         updateTaxForm={updateTaxForm}
         {...pageProps}
       />
-      <pre>{JSON.stringify(taxForm, null, 2)}</pre>
+      <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>
     </Layout>
   );
 }

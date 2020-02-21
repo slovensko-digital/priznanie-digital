@@ -47,7 +47,7 @@ export default ({ updateTaxForm }) => {
               )}
             </>
           )}
-          <Link href="/partner">
+          <Link href="/prijmy-a-vydavky">
             <button>Back</button>
           </Link>
           <button onClick={submitForm}>Next</button>
