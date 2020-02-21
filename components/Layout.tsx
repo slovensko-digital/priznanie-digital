@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./layout.module.css";
+import styles from "./Layout.module.css";
 import Head from "next/head";
 import Link from "next/link";
 
