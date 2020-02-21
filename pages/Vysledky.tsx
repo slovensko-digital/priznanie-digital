@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
-import styles from "./index.module.css";
+import styles from "./vysledky.module.css";
 import Link from "next/link";
 
 export default ({ taxForm }) => (

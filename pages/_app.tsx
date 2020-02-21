@@ -3,11 +3,11 @@ import { AppProps } from "next/app";
 import "../styles/global.css";
 
 import React, { useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { calculate, initTaxFormUserInputValues } from "../lib/calculation";
-import styles from "./MainForm.module.css";
 import { TaxForm, TaxFormUserInput } from "../lib/types";
 import * as Yup from "yup";
+import Layout from "../components/Layout";
 
 const mainFormSchema = Yup.object().shape({
   // Zatial bez validacie, aby nepodstatne fieldy nezdrzovali
@@ -24,8 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     priloha3_r13_zdravotne: 1000,
   };
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>priznanie.digital</h1>
+    <Layout>
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
@@ -34,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         validationSchema={mainFormSchema}
       >
         {formikBag => (
-          <Form className={styles.form}>
+          <Form className="form">
             <Component
               taxForm={taxForm}
               setTaxForm={setTaxForm}
@@ -46,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Form>
         )}
       </Formik>
-    </div>
+    </Layout>
   );
 }
 

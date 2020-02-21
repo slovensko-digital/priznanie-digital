@@ -5,7 +5,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>priznanie.digital</title>
           <link rel="icon" href="/favicon.ico" />
 
           <link rel="stylesheet" href="/stylesheets/libs.css"></link>
@@ -19,7 +18,7 @@ class MyDocument extends Document {
           <NextScript />
           <script src="javascript/libs.js"></script>
           <script src="javascript/navody-digital-0.1.8.min.js"></script>
-          <script>window.GOVUKFrontend.initAll()</script>
+          {/* <script>window.GOVUKFrontend.initAll()</script> */}
         </body>
       </Html>
     );

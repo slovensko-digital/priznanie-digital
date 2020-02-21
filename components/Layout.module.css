@@ -1,25 +1,3 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-}
-
-.form label {
-  margin-bottom: 4px;
-}
-
-.form input {
-  margin-bottom: 16px;
-}
-
-.form button {
-  height: 40px;
-}
-
-.summary {
-  margin-top: 32px;
-}
-
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;

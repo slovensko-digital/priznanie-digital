@@ -2,8 +2,6 @@ import React from "react";
 import { Field, ErrorMessage } from "formik";
 import Link from "next/link";
 
-import styles from "./index.module.css";
-
 export default () => (
   <main>
     <h2>Údaje o daňovníkovi</h2>
