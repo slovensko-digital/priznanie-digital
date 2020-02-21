@@ -50,7 +50,7 @@ const MainForm = () => {
           <label htmlFor="r008_cislo">Súpisné/orientačné číslo</label>
           <Field name="r008_cislo" type="text" />
           <label htmlFor="r009_psc">PSČ</label>
-          <Field name="r009_psc" type="number" />
+          <Field name="r009_psc" type="text" />
           <label htmlFor="r010_mesto">Mesto</label>
           <Field name="r010_mesto" type="text" />
           <label htmlFor="r011_stat">Štát</label>
@@ -71,6 +71,30 @@ const MainForm = () => {
             <>
               <label htmlFor="r031_priezvisko_a_meno">Prizevisko a meno</label>
               <Field name="r031_priezvisko_a_meno" type="text" />
+
+              <label htmlFor="r031_rodne_cislo">Rodne cislo</label>
+              <Field name="r031_rodne_cislo" type="text" />
+
+              <label htmlFor="r032_partner_vlastne_prijmy">
+                Vlastne prijmy
+              </label>
+              <Field name="r032_partner_vlastne_prijmy" type="number" />
+
+              <label htmlFor="r032_partner_pocet_mesiacov">
+                Pocet mesiacov
+              </label>
+              <Field name="r032_partner_pocet_mesiacov" type="number" />
+
+              <label htmlFor="r033_partner_kupele">Partner kupele</label>
+              <Field name="r033_partner_kupele" type="checkbox" />
+              {values.r033_partner_kupele && (
+                <>
+                  <label htmlFor="r033_partner_kupele_uhrady">
+                    Partner kupele uhrady
+                  </label>
+                  <Field name="r033_partner_kupele_uhrady" type="number" />
+                </>
+              )}
             </>
           )}
 
