@@ -9,7 +9,7 @@ const MainForm = () => {
   const initialValues: TaxFormUserInput = {
     t1r10_prijmy: 20000,
     priloha3_r11_socialne: 1000,
-    priloha3_r13_zdravotne: 1000
+    priloha3_r13_zdravotne: 1000,
   };
   return (
     <Formik

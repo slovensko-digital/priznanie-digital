@@ -14,7 +14,7 @@ const initValues: TaxFormUserInput = {
   r033_partner_kupele: false,
   r033_partner_kupele_uhrady: 0,
   priloha3_r11_socialne: 0,
-  priloha3_r13_zdravotne: 0
+  priloha3_r13_zdravotne: 0,
 };
 
 export function calculate(taxFormUserInput: TaxFormUserInput) {
@@ -48,13 +48,13 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
               (1 / 4) * tf.r072_pred_znizenim -
               Math.max(tf.r032_partner_vlastne_prijmy, 0)) *
               (1 / 12) *
-              tf.r032_partner_pocet_mesiacov
+              tf.r032_partner_pocet_mesiacov,
           )
         : Math.max(
             0,
             (3937.35 - Math.max(tf.r032_partner_vlastne_prijmy, 0)) *
               (1 / 12) *
-              tf.r032_partner_pocet_mesiacov
+              tf.r032_partner_pocet_mesiacov,
           );
   } else {
     tf.r074_znizenie_partner = 0;
@@ -70,7 +70,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   tf.r078_zaklad_dane_z_prijmov = Math.max(
     tf.r072_pred_znizenim - tf.r077_nezdanitelna_cast,
-    0
+    0,
   );
 
   tf.r080_zaklad_dane_celkovo = tf.r078_zaklad_dane_z_prijmov; // TODO + tf.r065 + tf.r071 + tf.r079)

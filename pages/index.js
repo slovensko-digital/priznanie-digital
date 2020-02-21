@@ -15,7 +15,7 @@ const Home = () => (
       <MainForm />
     </main>
 
-    <footer></footer>
+    <footer />
   </div>
 );
 

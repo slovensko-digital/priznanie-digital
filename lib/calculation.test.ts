@@ -15,7 +15,7 @@ describe("Basic use cases", () => {
       t1r10_prijmy: 20000,
 
       priloha3_r11_socialne: 1000,
-      priloha3_r13_zdravotne: 1000
+      priloha3_r13_zdravotne: 1000,
     };
     const result = calculate(input);
     expect(result.r080_zaklad_dane_celkovo).toBe(2062.65);
@@ -26,7 +26,7 @@ describe("Basic use cases", () => {
       t1r10_prijmy: 30000,
 
       priloha3_r11_socialne: 2000,
-      priloha3_r13_zdravotne: 2000
+      priloha3_r13_zdravotne: 2000,
     };
     const result = calculate(input);
     expect(result.r105_dan).toBe(771.9);
@@ -36,7 +36,7 @@ describe("Basic use cases", () => {
       t1r10_prijmy: 45000,
 
       priloha3_r11_socialne: 1000,
-      priloha3_r13_zdravotne: 1000
+      priloha3_r13_zdravotne: 1000,
     };
     const result = calculate(input);
     expect(result.r105_dan).toBe(3740.32);
@@ -46,7 +46,7 @@ describe("Basic use cases", () => {
       t1r10_prijmy: 51000,
 
       priloha3_r11_socialne: 1000,
-      priloha3_r13_zdravotne: 1320
+      priloha3_r13_zdravotne: 1320,
     };
     const result = calculate(input);
     expect(result.r105_dan).toBe(5089.32);
@@ -63,7 +63,7 @@ describe("With partner", () => {
       r032_partner_vlastne_prijmy: 1000,
       r032_partner_pocet_mesiacov: 12,
       r033_partner_kupele: true,
-      r033_partner_kupele_uhrady: 50
+      r033_partner_kupele_uhrady: 50,
     };
     const result = calculate(input);
     expect(result.r080_zaklad_dane_celkovo).toBe(7075.3);
