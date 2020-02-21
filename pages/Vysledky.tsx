@@ -1,5 +1,4 @@
 import React from "react";
-import { Field, ErrorMessage } from "formik";
 import styles from "./vysledky.module.css";
 import Link from "next/link";
 

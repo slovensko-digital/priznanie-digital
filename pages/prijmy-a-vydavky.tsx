@@ -1,29 +1,49 @@
 import React from "react";
 import Link from "next/link";
-import { Formik, Form, Field } from "formik";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 
-export default ({ handleSubmit }) => {
+const validationSchema = Yup.object().shape({
+  t1r10_prijmy: Yup.number()
+    .positive("Musi byt kladne.")
+    .required("Pole je povinné."),
+});
+
+export default ({ updateTaxForm }) => {
+  const router = useRouter();
+  const handleSubmit = values => {
+    updateTaxForm(values);
+    router.push("/partner");
+  };
   return (
     <Formik
       initialValues={incomeAndExpenseInitialValues}
       onSubmit={handleSubmit}
+      validationSchema={validationSchema}
     >
-      <Form className="form">
-        <h2>Prijmy vydavky</h2>
-        <Field name="t1r10_prijmy" type="number" />
-        <label htmlFor="priloha3_r11_socialne">Socialne poistenie</label>
-        <Field name="priloha3_r11_socialne" type="number" />
-        <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
-        <Field name="priloha3_r13_zdravotne" type="number" />
-        <Link href="/">
-          <button>Back</button>
-        </Link>
-        <Link href="/partner">
-          <button>Next</button>
-        </Link>
-        <button type="submit">Vypocitaj</button>
-      </Form>
+      {({ submitForm }) => (
+        <Form className="form">
+          <h2>Prijmy vydavky</h2>
+
+          <label htmlFor="t1r10_prijmy">Prijmy</label>
+          <Field name="t1r10_prijmy" type="number" />
+          <ErrorMessage name="t1r10_prijmy" />
+
+          <label htmlFor="priloha3_r11_socialne">Socialne poistenie</label>
+          <Field name="priloha3_r11_socialne" type="number" />
+
+          <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
+          <Field name="priloha3_r13_zdravotne" type="number" />
+
+          <Link href="/">
+            <button>Back</button>
+          </Link>
+          <button onClick={submitForm}>Next</button>
+        </Form>
+      )}
     </Formik>
   );
 };
