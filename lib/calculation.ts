@@ -37,7 +37,6 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
   tf.t1r10_vydavky = Math.min(flatrateExpenses, PAUSALNE_VYDAVKY_MAX);
 
-  // wow toto je uplne sialena ezoterika :D ale tak je definovana business logika, ale tak urcite sa to da zjednodusit
   tf.r030 = 0; // TODO in next use cases
   tf.r041 = tf.t1r10_prijmy;
   tf.r042 =
