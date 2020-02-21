@@ -8,7 +8,7 @@ import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 
 const validationSchema = Yup.object().shape({
   t1r10_prijmy: Yup.number()
-    .positive("Musi byt kladne.")
+    .min(0, "Musi byt kladne.")
     .required("Pole je povinné."),
 });
 
