@@ -4,14 +4,17 @@ import { Formik, Form, Field } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 
-export default ({ updateTaxForm }) => {
+export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
     router.push("/osobne-udaje");
   };
   return (
-    <Formik initialValues={partnerUserInitialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={{ ...partnerUserInitialValues, ...taxForm }}
+      onSubmit={handleSubmit}
+    >
       {({ values, submitForm }) => (
         <Form className="form">
           <h2>Partner</h2>

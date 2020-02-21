@@ -12,7 +12,7 @@ const validationSchema = Yup.object().shape({
     .required("Pole je povinné."),
 });
 
-export default ({ updateTaxForm }) => {
+export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -20,7 +20,7 @@ export default ({ updateTaxForm }) => {
   };
   return (
     <Formik
-      initialValues={incomeAndExpenseInitialValues}
+      initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { personalInformationUserInputInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 
-export default ({ updateTaxForm }) => {
+export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -12,7 +12,10 @@ export default ({ updateTaxForm }) => {
   };
   return (
     <Formik
-      initialValues={personalInformationUserInputInitialValues}
+      initialValues={{
+        ...personalInformationUserInputInitialValues,
+        ...taxForm,
+      }}
       onSubmit={handleSubmit}
     >
       {({ submitForm }) => (
