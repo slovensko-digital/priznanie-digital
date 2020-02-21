@@ -52,8 +52,8 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
       ? Math.max(0, 9064.094 - (1 / 4) * (tf.r072_pred_znizenim - tf.r030)) // WTF Black Magic
       : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - tf.r030);
 
-  if (tf.r031_rodne_cislo && tf.r031_priezvisko_a_meno) {
-    tf.r074_znizenie_partner =
+  if (tf.r032_uplatnujem_na_partnera) {
+    tf.r074_znizenie_partner = // TODO test both cases here
       tf.r072_pred_znizenim > 36256.38
         ? Math.max(
             0,
