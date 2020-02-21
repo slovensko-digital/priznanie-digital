@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "prettier": "prettier --write  './{lib,components,pages}/**/*.*'"
   },
   "dependencies": {
     "formik": "^2.1.4",
@@ -24,6 +25,7 @@
     "babel-jest": "^25.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
+    "prettier": "1.19.1",
     "react-test-renderer": "^16.12.0",
     "typescript": "^3.7.5"
   }
