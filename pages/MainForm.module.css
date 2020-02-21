@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.form label {
+  margin-bottom: 4px;
+}
+
+.form input {
+  margin-bottom: 16px;
+}
+
+.form button {
+  height: 40px;
+}
+
+.summary {
+  margin-top: 32px;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 32px;
+}
