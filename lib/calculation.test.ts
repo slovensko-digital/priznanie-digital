@@ -54,7 +54,7 @@ describe("Basic use cases", () => {
 });
 
 describe("With partner", () => {
-  test.only("Case 1", () => {
+  test("Case 1", () => {
     const input: TaxFormUserInput = {
       t1r10_prijmy: 20000,
       r031_priezvisko_a_meno: "Summer Smith",
@@ -66,8 +66,8 @@ describe("With partner", () => {
       r033_partner_kupele_uhrady: 50,
     };
     const result = calculate(input);
-    expect(result.r080_zaklad_dane_celkovo).toBe(7075.3);
-    expect(result.r105_dan).toBe(1344.3);
-    expect(result.r125_dan_na_uhradu).toBe(1344.3);
+    expect(result.r080_zaklad_dane_celkovo).toBe(1075.3);
+    expect(result.r105_dan).toBe(204.3);
+    expect(result.r125_dan_na_uhradu).toBe(204.3);
   });
 });

@@ -1,5 +1,5 @@
 import { TaxForm, TaxFormUserInput } from "./types";
-import round from "lodash.round";
+import floor from "lodash.floor";
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;
@@ -35,7 +35,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   tf.r057 = tf.r055;
   tf.r072_pred_znizenim = tf.r057; // + tf.r040;
   tf.r073 =
-    tf.r072_pred_znizenim > 20507
+    tf.r072_pred_znizenim > 20507 // TODO test both cases here
       ? Math.max(0, 9064.094 - (1 / 4) * (tf.r072_pred_znizenim - tf.r030)) // WTF Black Magic
       : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - tf.r030);
 
@@ -73,9 +73,9 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
     0,
   );
 
-  tf.r080_zaklad_dane_celkovo = tf.r078_zaklad_dane_z_prijmov; // TODO + tf.r065 + tf.r071 + tf.r079)
+  tf.r080_zaklad_dane_celkovo = floor(tf.r078_zaklad_dane_z_prijmov, 2); // TODO + tf.r065 + tf.r071 + tf.r079)
 
-  tf.r081 = round(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2);
+  tf.r081 = floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2);
   tf.r090 = tf.r081;
   tf.r105_dan = tf.r081;
   tf.r107 = tf.r081;
