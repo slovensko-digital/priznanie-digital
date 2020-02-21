@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { calculate } from "../lib/calculation";
+import { calculate, initTaxFormUserInputValues } from "../lib/calculation";
 import styles from "./MainForm.module.css";
 import { TaxForm, TaxFormUserInput } from "../lib/types";
 import * as Yup from "yup";
 
 const mainFormSchema = Yup.object().shape({
-  r005_meno: Yup.string().required("Pole je povinné."),
-  r004_priezvisko: Yup.string().required("Pole je povinné."),
+  // Zatial bez validacie, aby nepodstatne fieldy nezdrzovali
+  // r005_meno: Yup.string().required("Pole je povinné."),
+  // r004_priezvisko: Yup.string().required("Pole je povinné."),
 });
 
 const MainForm = () => {
   const [taxForm, setTaxForm] = useState<TaxForm>({});
   const initialValues: TaxFormUserInput = {
-    //Údaje o daňovníkovi
-    r001_dic: "",
-    r002_datum_narodenia: "",
-    r004_priezvisko: "",
-    r005_meno: "",
-    r007_ulica: "",
-    r008_cislo: "",
-    r009_psc: "",
-    r010_mesto: "",
-    r011_stat: "",
-
+    ...initTaxFormUserInputValues,
     t1r10_prijmy: 20000,
     priloha3_r11_socialne: 1000,
     priloha3_r13_zdravotne: 1000,
@@ -36,7 +27,7 @@ const MainForm = () => {
       }}
       validationSchema={mainFormSchema}
     >
-      {({ errors, touched }) => (
+      {({ values }) => (
         <Form className={styles.form}>
           <h2>Údaje o daňovníkovi</h2>
           <label htmlFor="r001_dic">DIČ</label>
@@ -65,12 +56,26 @@ const MainForm = () => {
           <label htmlFor="r011_stat">Štát</label>
           <Field name="r011_stat" type="text" />
           <label htmlFor="t1r10_prijmy">Prijem</label>
+
+          <h2>Prijmy vydavky</h2>
           <Field name="t1r10_prijmy" type="number" />
           <label htmlFor="priloha3_r11_socialne">Socialne poistenie</label>
           <Field name="priloha3_r11_socialne" type="number" />
           <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
           <Field name="priloha3_r13_zdravotne" type="number" />
+
+          <h2>Partner</h2>
+          <label htmlFor="r007_ulica">Uplatnujem na partnera</label>
+          <Field name="r032_uplatnujem_na_partnera" type="checkbox" />
+          {values.r032_uplatnujem_na_partnera && (
+            <>
+              <label htmlFor="r031_priezvisko_a_meno">Prizevisko a meno</label>
+              <Field name="r031_priezvisko_a_meno" type="text" />
+            </>
+          )}
+
           <button type="submit">Submit</button>
+          <h2>Vysledky</h2>
           <div className={styles.summary}>
             <div>Základ dane: {taxForm.r080_zaklad_dane_celkovo} </div>
             <div>Daň: {taxForm.r105_dan}</div>
