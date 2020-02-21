@@ -35,8 +35,8 @@ export interface TaxFormUserInput {
   r031_priezvisko_a_meno?: string;
   r031_rodne_cislo?: string;
   r032_uplatnujem_na_partnera?: boolean;
-  r032_vlastny_prijem?: number;
-  r032_pocet_mesiacov?: number;
+  r032_partner_vlastne_prijmy?: number;
+  r032_partner_pocet_mesiacov?: number;
   r033_partner_kupele?: boolean;
   // max 50
   r033_partner_kupele_uhrady?: number;
