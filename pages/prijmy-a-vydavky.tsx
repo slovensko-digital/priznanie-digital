@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
@@ -12,12 +12,17 @@ const validationSchema = Yup.object().shape({
     .required("Pole je povinné."),
 });
 
+const nextUrl = "/partner";
+
 export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
-    router.push("/partner");
+    router.push(nextUrl);
   };
+  useEffect(() => {
+    router.prefetch(nextUrl);
+  });
   return (
     <Formik
       initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}

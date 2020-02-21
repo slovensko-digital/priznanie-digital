@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { Formik, Form, Field } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 
+const nextUrl = "/osobne-udaje";
+
 export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
-    router.push("/osobne-udaje");
+    router.push(nextUrl);
   };
+  useEffect(() => {
+    router.prefetch(nextUrl);
+  });
   return (
     <Formik
       initialValues={{ ...partnerUserInitialValues, ...taxForm }}
