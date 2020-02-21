@@ -3,11 +3,11 @@ import { AppProps } from "next/app";
 import "../styles/global.css";
 
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
-import { calculate, initTaxFormUserInputValues } from "../lib/calculation";
+import { calculate } from "../lib/calculation";
 import { TaxForm, TaxFormUserInput } from "../lib/types";
 import * as Yup from "yup";
 import Layout from "../components/Layout";
+import { initTaxFormUserInputValues } from "../lib/initialValues";
 
 const mainFormSchema = Yup.object().shape({
   // Zatial bez validacie, aby nepodstatne fieldy nezdrzovali

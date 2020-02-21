@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Formik, Form, Field } from "formik";
-import { partnerUserInitialValues } from "../lib/types";
+import { partnerUserInitialValues } from "../lib/initialValues";
 
 export default ({ handleSubmit }) => (
   <Formik initialValues={partnerUserInitialValues} onSubmit={handleSubmit}>

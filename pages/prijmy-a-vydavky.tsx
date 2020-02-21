@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Formik, Form, Field } from "formik";
-import { incomeAndExpenseInitialValues } from "../lib/types";
+import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 
 export default ({ handleSubmit }) => {
   return (

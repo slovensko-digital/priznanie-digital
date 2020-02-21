@@ -1,38 +1,18 @@
 import { TaxForm, TaxFormUserInput } from "./types";
 import floor from "lodash.floor";
+import { initTaxFormUserInputValues } from "./initialValues";
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;
 const DAN_Z_PRIJMU_SADZBA = 0.19;
 
-export const initTaxFormUserInputValues: TaxFormUserInput = {
-  //Údaje o daňovníkovi
-  r001_dic: "",
-  r002_datum_narodenia: "",
-  r004_priezvisko: "",
-  r005_meno: "",
-  r007_ulica: "",
-  r008_cislo: "",
-  r009_psc: "",
-  r010_mesto: "",
-  r011_stat: "",
-  // Partner
-  r031_priezvisko_a_meno: "",
-  r031_rodne_cislo: "",
-  r032_uplatnujem_na_partnera: false,
-  r032_partner_vlastne_prijmy: 0,
-  r032_partner_pocet_mesiacov: 0,
-  r033_partner_kupele: false,
-  r033_partner_kupele_uhrady: 0,
-  // Prijmy/vydavky
-  t1r10_prijmy: 0,
-  priloha3_r11_socialne: 0,
-  priloha3_r13_zdravotne: 0,
-};
-
 export function calculate(taxFormUserInput: TaxFormUserInput) {
   // Make a copy of taxFormUserInput
-  const tf: TaxForm = Object.assign({}, initTaxFormUserInputValues, taxFormUserInput);
+  const tf: TaxForm = Object.assign(
+    {},
+    initTaxFormUserInputValues,
+    taxFormUserInput,
+  );
 
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
   tf.t1r10_vydavky = Math.min(flatrateExpenses, PAUSALNE_VYDAVKY_MAX);

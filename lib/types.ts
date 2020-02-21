@@ -9,12 +9,6 @@ export interface IncomeAndExpenseUserInput {
   priloha3_r13_zdravotne?: number;
 }
 
-export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
-  t1r10_prijmy: 0,
-  priloha3_r11_socialne: 0,
-  priloha3_r13_zdravotne: 0,
-};
-
 export interface PartnerUserInput {
   // Partner
   r031_priezvisko_a_meno?: string;
@@ -27,19 +21,7 @@ export interface PartnerUserInput {
   r033_partner_kupele_uhrady?: number;
 }
 
-export const partnerUserInitialValues: PartnerUserInput = {
-  r031_priezvisko_a_meno: "",
-  r031_rodne_cislo: "",
-  r032_uplatnujem_na_partnera: false,
-  r032_partner_vlastne_prijmy: 0,
-  r032_partner_pocet_mesiacov: 0,
-  r033_partner_kupele: false,
-  r033_partner_kupele_uhrady: 0,
-};
-
-export interface TaxFormUserInput
-  extends IncomeAndExpenseUserInput,
-    PartnerUserInput {
+export interface PersonalInformationUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
   r001_dic?: string;
   // 02 - Dátum narodenia
@@ -67,6 +49,11 @@ export interface TaxFormUserInput
   // 11 - Štát *
   r011_stat?: string;
 }
+
+export interface TaxFormUserInput
+  extends IncomeAndExpenseUserInput,
+    PartnerUserInput,
+    PersonalInformationUserInput {}
 
 export interface TaxForm extends TaxFormUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
