@@ -1,26 +1,30 @@
 export interface TaxFormUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
-  r001?: string;
-  // 02 - Dátum narodenia TODO Aky format?
-  r002?: string;
-  // 03 - SK NACE - Hlavná, prevažná činnosť TODO tu treba odkial natahat
-  // cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
+  r001_dic?: string;
+  // 02 - Dátum narodenia
+  // TODO Aky format?
+  r002_datum_narodenia?: string;
+  // 03 - SK NACE - Hlavná, prevažná činnosť
+  // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
   r003?: string;
 
-  // Oddiel I 04 - Priezvisko
-  r004?: string;
+  // Oddiel I
+  // 04 - Priezvisko
+  r004_priezvisko?: string;
   // 05 - Meno
-  r005?: string;
+  r005_meno?: string;
+  // 06 - Titul
+  r006_titul?: string;
   // 07 - Ulica
-  r007?: string;
+  r007_ulica?: string;
   // 08 - Súpisné/orientačné číslo *
-  r008?: string;
+  r008_cislo?: string;
   // 09 - PSČ *
-  r009?: string;
+  r009_psc?: string;
   // 10 - Obec *
-  r010?: string;
+  r010_mesto?: string;
   // 11 - Štát *
-  r011?: string;
+  r011_stat?: string;
 
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
