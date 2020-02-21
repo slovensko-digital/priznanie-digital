@@ -14,37 +14,15 @@ const mainFormSchema = Yup.object().shape({
   // r005_meno: Yup.string().required("Pole je povinné."),
   // r004_priezvisko: Yup.string().required("Pole je povinné."),
 });
+//         validationSchema={mainFormSchema}
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [taxForm, setTaxForm] = useState<TaxForm>({});
-  const initialValues: TaxFormUserInput = {
-    ...initTaxFormUserInputValues,
-    t1r10_prijmy: 20000,
-    priloha3_r11_socialne: 1000,
-    priloha3_r13_zdravotne: 1000,
-  };
+  const [taxForm, setTaxForm] = useState<TaxForm>(initTaxFormUserInputValues);
+  const handleSubmit = values => setTaxForm(calculate(values));
   return (
     <Layout>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={values => {
-          setTaxForm(calculate(values));
-        }}
-        validationSchema={mainFormSchema}
-      >
-        {formikBag => (
-          <Form className="form">
-            <Component
-              taxForm={taxForm}
-              setTaxForm={setTaxForm}
-              formikBag={formikBag}
-              {...pageProps}
-            />
-            <button type="submit">Vypocitaj</button>
-            <pre>{JSON.stringify(taxForm, null, 2)}</pre>
-          </Form>
-        )}
-      </Formik>
+      <Component taxForm={taxForm} handleSubmit={handleSubmit} {...pageProps} />
+      <pre>{JSON.stringify(taxForm, null, 2)}</pre>
     </Layout>
   );
 }

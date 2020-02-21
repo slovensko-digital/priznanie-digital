@@ -1,4 +1,21 @@
-export interface TaxFormUserInput {
+export interface IncomeAndExpenseUserInput {
+  // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
+  t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+
+  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
+  priloha3_r11_socialne?: number;
+
+  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
+  priloha3_r13_zdravotne?: number;
+}
+
+export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
+  t1r10_prijmy: 0,
+  priloha3_r11_socialne: 0,
+  priloha3_r13_zdravotne: 0,
+};
+
+export interface TaxFormUserInput extends IncomeAndExpenseUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
   r001_dic?: string;
   // 02 - Dátum narodenia
@@ -25,15 +42,6 @@ export interface TaxFormUserInput {
   r010_mesto?: string;
   // 11 - Štát *
   r011_stat?: string;
-
-  // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
-  t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
-
-  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11_socialne?: number;
-
-  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13_zdravotne?: number;
 
   // Partner
   r031_priezvisko_a_meno?: string;
