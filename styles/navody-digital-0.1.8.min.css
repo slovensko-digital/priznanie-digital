@@ -649,7 +649,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   display: inline-block;
   margin-left: 3px;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(../assets/images/icon-external-link.svg);
+  background-image: url(/assets/images/icon-external-link.svg);
   background-repeat: no-repeat;
   background-position: 0;
   background-size: contain;
@@ -659,7 +659,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   content: none !important;
 }
 .govuk-button[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
-  background-image: url(../assets/images/icon-external-link-white.svg) !important;
+  background-image: url(/assets/images/icon-external-link-white.svg) !important;
 }
 @media (min-width: 40.0625em) {
   .govuk-grid-row-same-height {
@@ -1379,7 +1379,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   line-height: 1;
   min-height: auto;
   padding: 8px 40px 8px 15px;
-  background-image: url(../assets/images/icon-pointer.png);
+  background-image: url(/assets/images/icon-pointer.png);
   background-repeat: no-repeat;
   background-position: 100% 50%;
 }
@@ -1402,7 +1402,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   only screen and (min-resolution: 2dppx),
   only screen and (min-resolution: 192dpi) {
   .govuk-button--start {
-    background-image: url(../assets/images/icon-pointer-2x.png);
+    background-image: url(/assets/images/icon-pointer-2x.png);
     background-size: 30px 19px;
   }
 }
@@ -4209,19 +4209,19 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .sdn-timeline__bullet--not-done {
   border-color: #dadadb;
-  background: #dadadb url(../assets/images/icon-dots.svg) no-repeat 50%;
+  background: #dadadb url(/assets/images/icon-dots.svg) no-repeat 50%;
 }
 .sdn-timeline__bullet--done {
   border-color: #4cae18;
-  background: #4cae18 url(../assets/images/icon-check.svg) no-repeat 50%;
+  background: #4cae18 url(/assets/images/icon-check.svg) no-repeat 50%;
 }
 .sdn-timeline__bullet--in-progress {
   border-color: #ff9120;
-  background: #ff9120 url(../assets/images/icon-pencil.svg) no-repeat center 5px;
+  background: #ff9120 url(/assets/images/icon-pencil.svg) no-repeat center 5px;
 }
 .sdn-timeline__bullet--waiting {
   border-color: #3a67e8;
-  background: #3a67e8 url(../assets/images/icon-hourglass.svg) no-repeat 50%;
+  background: #3a67e8 url(/assets/images/icon-hourglass.svg) no-repeat 50%;
 }
 .sdn-timeline__link {
   display: -webkit-box;
@@ -4312,7 +4312,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   right: 15px;
   width: 22px;
   height: 22px;
-  background: url(../assets/images/icon-check-black.svg) no-repeat 50%;
+  background: url(/assets/images/icon-check-black.svg) no-repeat 50%;
 }
 .sdn-timeline-dropdown__bullet {
   position: absolute;
@@ -5004,13 +5004,13 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   white-space: nowrap;
 }
 .footer-icon__facebook span {
-  background-image: url(../assets/images/icon-facebook.svg);
+  background-image: url(/assets/images/icon-facebook.svg);
 }
 .footer-icon__github span {
-  background-image: url(../assets/images/icon-github.svg);
+  background-image: url(/assets/images/icon-github.svg);
 }
 .footer-icon__youtube span {
-  background-image: url(../assets/images/icon-youtube.svg);
+  background-image: url(/assets/images/icon-youtube.svg);
 }
 .sdn-headline {
   background: #fafafa;
@@ -5309,7 +5309,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border-radius: 3px;
   opacity: 0.5;
   color: rgba(0, 0, 0, 0);
-  background: #fff url(../assets/images/icon-search.svg) no-repeat 50%;
+  background: #fff url(/assets/images/icon-search.svg) no-repeat 50%;
   background-size: 18px 18px;
 }
 .sdn-header__form button:focus {
@@ -6369,7 +6369,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   width: 16px;
   height: 20px;
   margin-left: -30px;
-  background-image: url(../assets/images/arrow-pointing-to-right.svg);
+  background-image: url(/assets/images/arrow-pointing-to-right.svg);
   background-repeat: no-repeat;
   background-position: 100%;
   background-size: cover;
