@@ -26,33 +26,35 @@ export default ({ taxForm, updateTaxForm }) => {
     router.prefetch(nextUrl);
   });
   return (
-    <Formik
-      initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-    >
-      <Form className="form">
-        <h2>Prijmy vydavky</h2>
+    <>
+      <Link href={backUrl}>
+        <a className="govuk-back-link">Naspat</a>
+      </Link>
+      <Formik
+        initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form className="form">
+          <h2>Prijmy vydavky</h2>
 
-        <Input name="t1r10_prijmy" type="number" label="Prijmy"></Input>
-        <Input
-          name="priloha3_r11_socialne"
-          type="number"
-          label="Socialne poistenie"
-        ></Input>
-        <Input
-          name="priloha3_r13_zdravotne"
-          type="number"
-          label="Zdravotne poistenie"
-        ></Input>
+          <Input name="t1r10_prijmy" type="number" label="Prijmy"></Input>
+          <Input
+            name="priloha3_r11_socialne"
+            type="number"
+            label="Socialne poistenie"
+          ></Input>
+          <Input
+            name="priloha3_r13_zdravotne"
+            type="number"
+            label="Zdravotne poistenie"
+          ></Input>
 
-        <Link href={backUrl}>
-          <button className="govuk-button">Back</button>
-        </Link>
-        <button className="govuk-button" type="submit">
-          Next
-        </button>
-      </Form>
-    </Formik>
+          <button className="govuk-button" type="submit">
+            Next
+          </button>
+        </Form>
+      </Formik>
+    </>
   );
 };
