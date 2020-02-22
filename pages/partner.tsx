@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Formik, Form, Field } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
+import { BooleanRadio } from "../components/FormComponents";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
@@ -27,9 +28,10 @@ export default ({ taxForm, updateTaxForm }) => {
       >
         {({ values }) => (
           <Form className="form">
-            <h2>Partner</h2>
-            <label htmlFor="r007_ulica">Uplatnujem na partnera</label>
-            <Field name="r032_uplatnujem_na_partnera" type="checkbox" />
+            <BooleanRadio
+              title="Uplatnujete danovy bonus na manzelku/manzela?"
+              name="r032_uplatnujem_na_partnera"
+            ></BooleanRadio>
             {values.r032_uplatnujem_na_partnera && (
               <>
                 <label htmlFor="r031_priezvisko_a_meno">
