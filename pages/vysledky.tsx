@@ -41,7 +41,7 @@ export default ({ taxForm }) => {
         </div>
       </dl>
       <button className="govuk-button" onClick={onExport}>
-        Stiahnut XML (TODO)
+        Stiahnut XML
       </button>
     </>
   );
