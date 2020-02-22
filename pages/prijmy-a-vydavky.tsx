@@ -51,7 +51,7 @@ export default ({ taxForm, updateTaxForm }) => {
           ></Input>
 
           <button className="govuk-button" type="submit">
-            Next
+            Dalej
           </button>
         </Form>
       </Formik>

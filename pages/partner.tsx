@@ -63,7 +63,7 @@ export default ({ taxForm, updateTaxForm }) => {
               </>
             )}
             <button className="govuk-button" type="submit">
-              Next
+              Dalej
             </button>
           </Form>
         )}

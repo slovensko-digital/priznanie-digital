@@ -54,7 +54,7 @@ export default ({ taxForm, updateTaxForm }) => {
           <Input name="r007_ulica" type="text" label="Ulica" />
 
           <button className="govuk-button" type="submit">
-            Next
+            Dalej
           </button>
         </Form>
       </Formik>
