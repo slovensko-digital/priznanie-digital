@@ -1,17 +1,46 @@
 import React from "react";
 
-import styles from "./Layout.module.css";
 import Head from "next/head";
-import Link from "next/link";
+import Header from "./Header";
+import Footer from "./Footer";
 
-export default ({ children }) => (
-  <div className={styles.container}>
+const DEBUG_ON = true;
+export default ({ children, debug }) => (
+  <div className="container">
     <Head>
       <title>priznanie.digital</title>
     </Head>
-    <Link href="/">
-      <h1 className={styles.title}>priznanie.digital</h1>
-    </Link>
-    {children}
+    <Header />
+    <div className="sdn-headline">
+      <div className="sdn-headline__container govuk-width-container">
+        <div className="sdn-headline__part">
+          <span className="sdn-headline__headline">
+            Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)
+          </span>
+        </div>
+      </div>
+    </div>
+    <div className="govuk-width-container content-container">
+      <main className="govuk-main-wrapper">
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">{children}</div>
+          {DEBUG_ON && (
+            <div className="govuk-grid-column-one-third">{debug}</div>
+          )}
+        </div>
+      </main>
+    </div>
+    <Footer />
+    <style jsx>{`
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      .content-container {
+        width: 100%;
+        flex-grow: 1;
+      }
+    `}</style>
   </div>
 );

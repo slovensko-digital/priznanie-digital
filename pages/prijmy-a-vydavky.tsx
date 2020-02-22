@@ -5,6 +5,7 @@ import * as Yup from "yup";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
+import { Input } from "../components/FormComponents";
 
 const validationSchema = Yup.object().shape({
   t1r10_prijmy: Yup.number()
@@ -13,6 +14,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const nextUrl = "/partner";
+const backUrl = "/";
 
 export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
@@ -24,31 +26,35 @@ export default ({ taxForm, updateTaxForm }) => {
     router.prefetch(nextUrl);
   });
   return (
-    <Formik
-      initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-    >
-      {({ submitForm }) => (
+    <>
+      <Link href={backUrl}>
+        <a className="govuk-back-link">Naspat</a>
+      </Link>
+      <Formik
+        initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
         <Form className="form">
           <h2>Prijmy vydavky</h2>
 
-          <label htmlFor="t1r10_prijmy">Prijmy</label>
-          <Field name="t1r10_prijmy" type="number" />
-          <ErrorMessage name="t1r10_prijmy" />
+          <Input name="t1r10_prijmy" type="number" label="Prijmy"></Input>
+          <Input
+            name="priloha3_r11_socialne"
+            type="number"
+            label="Socialne poistenie"
+          ></Input>
+          <Input
+            name="priloha3_r13_zdravotne"
+            type="number"
+            label="Zdravotne poistenie"
+          ></Input>
 
-          <label htmlFor="priloha3_r11_socialne">Socialne poistenie</label>
-          <Field name="priloha3_r11_socialne" type="number" />
-
-          <label htmlFor="priloha3_r13_zdravotne">Zdravotne poistenie</label>
-          <Field name="priloha3_r13_zdravotne" type="number" />
-
-          <Link href="/">
-            <button>Back</button>
-          </Link>
-          <button onClick={submitForm}>Next</button>
+          <button className="govuk-button" type="submit">
+            Dalej
+          </button>
         </Form>
-      )}
-    </Formik>
+      </Formik>
+    </>
   );
 };

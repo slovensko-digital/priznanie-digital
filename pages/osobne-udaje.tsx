@@ -3,8 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import { personalInformationUserInputInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
+import { Input } from "../components/FormComponents";
 
 const nextUrl = "/vysledky";
+const backUrl = "/partner";
 
 export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
@@ -16,48 +18,46 @@ export default ({ taxForm, updateTaxForm }) => {
     router.prefetch(nextUrl);
   });
   return (
-    <Formik
-      initialValues={{
-        ...personalInformationUserInputInitialValues,
-        ...taxForm,
-      }}
-      onSubmit={handleSubmit}
-    >
-      {({ submitForm }) => (
+    <>
+      <Link href={backUrl}>
+        <a className="govuk-back-link">Naspat</a>
+      </Link>
+      <Formik
+        initialValues={{
+          ...personalInformationUserInputInitialValues,
+          ...taxForm,
+        }}
+        onSubmit={handleSubmit}
+      >
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>
-          <label htmlFor="r001_dic">DIČ</label>
-          <Field name="r001_dic" type="text" />
 
-          <label htmlFor="r002_datum_narodenia">Dátum narodenia</label>
-          <Field name="r002_datum_narodenia" type="text" />
-
-          <label htmlFor="r005_meno">Meno</label>
-          <Field name="r005_meno" type="text" />
-          <ErrorMessage name="r005_meno" />
-
-          <label htmlFor="r004_priezvisko">Priezvisko</label>
-          <Field name="r004_priezvisko" type="text" />
-          <ErrorMessage name="r004_priezvisko" />
+          <Input name="r001_dic" type="text" label="DIČ" />
+          <Input
+            name="r002_datum_narodenia"
+            type="text"
+            label="Dátum narodenia"
+          />
+          <Input name="r005_meno" type="text" label="Meno" />
+          <Input name="r004_priezvisko" type="text" label="Priezvisko" />
 
           <h3>Adresa trvalého pobytu</h3>
-          <label htmlFor="r007_ulica">Ulica</label>
-          <Field name="r007_ulica" type="text" />
-          <label htmlFor="r008_cislo">Súpisné/orientačné číslo</label>
-          <Field name="r008_cislo" type="text" />
-          <label htmlFor="r009_psc">PSČ</label>
-          <Field name="r009_psc" type="text" />
-          <label htmlFor="r010_mesto">Mesto</label>
-          <Field name="r010_mesto" type="text" />
-          <label htmlFor="r011_stat">Štát</label>
-          <Field name="r011_stat" type="text" />
-          <label htmlFor="t1r10_prijmy">Prijem</label>
-          <Link href="/partner">
-            <button>Back</button>
-          </Link>
-          <button onClick={submitForm}>Next</button>
+          <Input name="r007_ulica" type="text" label="Ulica" />
+          <Input
+            name="r008_cislo"
+            type="text"
+            label="Súpisné/orientačné číslo"
+          />
+          <Input name="r009_psc" type="text" label="PSČ" />
+          <Input name="r010_mesto" type="text" label="Mesto" />
+          <Input name="r011_stat" type="text" label="Štát" />
+          <Input name="r007_ulica" type="text" label="Ulica" />
+
+          <button className="govuk-button" type="submit">
+            Dalej
+          </button>
         </Form>
-      )}
-    </Formik>
+      </Formik>
+    </>
   );
 };

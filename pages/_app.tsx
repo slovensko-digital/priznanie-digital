@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
 
 import "../styles/global.css";
+import "../styles/navody-digital-0.1.8.min.css";
+import "../styles/libs.css";
 
 import React, { useState } from "react";
 import { calculate } from "../lib/calculation";
@@ -21,13 +23,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       ...calculate(values),
     }));
   return (
-    <Layout>
+    <Layout
+      debug={<pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>}
+    >
       <Component
         taxForm={taxForm}
         updateTaxForm={updateTaxForm}
         {...pageProps}
       />
-      <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>
     </Layout>
   );
 }
