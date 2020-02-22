@@ -22,8 +22,12 @@ export default ({ children, debug }) => (
     </div>
     <div className="govuk-width-container">
       <main className="govuk-main-wrapper">
-        <div className="govuk-grid-column-two-thirds">{children}</div>
-        {DEBUG_ON && <div className="govuk-grid-column-one-third">{debug}</div>}
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">{children}</div>
+          {DEBUG_ON && (
+            <div className="govuk-grid-column-one-third">{debug}</div>
+          )}
+        </div>
       </main>
     </div>
     <Footer />
@@ -31,6 +35,9 @@ export default ({ children, debug }) => (
       .container {
         display: flex;
         flex-direction: column;
+      }
+      .govuk-width-container {
+        width: 100%;
       }
     `}</style>
   </div>
