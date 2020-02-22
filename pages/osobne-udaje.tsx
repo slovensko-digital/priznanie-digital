@@ -23,7 +23,7 @@ export default ({ taxForm, updateTaxForm }) => {
       }}
       onSubmit={handleSubmit}
     >
-      {({ submitForm }) => (
+      {() => (
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>
           <label htmlFor="r001_dic">DIČ</label>
@@ -55,7 +55,7 @@ export default ({ taxForm, updateTaxForm }) => {
           <Link href="/partner">
             <button>Back</button>
           </Link>
-          <button onClick={submitForm}>Next</button>
+          <button type="submit">Next</button>
         </Form>
       )}
     </Formik>

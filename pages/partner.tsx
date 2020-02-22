@@ -20,7 +20,7 @@ export default ({ taxForm, updateTaxForm }) => {
       initialValues={{ ...partnerUserInitialValues, ...taxForm }}
       onSubmit={handleSubmit}
     >
-      {({ values, submitForm }) => (
+      {({ values }) => (
         <Form className="form">
           <h2>Partner</h2>
           <label htmlFor="r007_ulica">Uplatnujem na partnera</label>
@@ -58,7 +58,7 @@ export default ({ taxForm, updateTaxForm }) => {
           <Link href="/prijmy-a-vydavky">
             <button>Back</button>
           </Link>
-          <button onClick={submitForm}>Next</button>
+          <button type="submit">Next</button>
         </Form>
       )}
     </Formik>

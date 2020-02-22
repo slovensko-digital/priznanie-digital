@@ -29,7 +29,7 @@ export default ({ taxForm, updateTaxForm }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ submitForm }) => (
+      {() => (
         <Form className="form">
           <h2>Prijmy vydavky</h2>
 
@@ -46,7 +46,7 @@ export default ({ taxForm, updateTaxForm }) => {
           <Link href="/">
             <button>Back</button>
           </Link>
-          <button onClick={submitForm}>Next</button>
+          <button type="submit">Next</button>
         </Form>
       )}
     </Formik>

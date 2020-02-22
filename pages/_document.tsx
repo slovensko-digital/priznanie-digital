@@ -20,9 +20,9 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script src="javascript/libs.js"></script>
+          {/* <script src="javascript/libs.js"></script>
           <script src="javascript/navody-digital-0.1.8.min.js"></script>
-          <script>window.GOVUKFrontend.initAll()</script>
+          <script>window.GOVUKFrontend.initAll()</script> */}
         </body>
       </Html>
     );
