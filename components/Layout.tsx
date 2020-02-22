@@ -5,7 +5,8 @@ import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
 
-export default ({ children }) => (
+const DEBUG_ON = true;
+export default ({ children, debug }) => (
   <>
     <Head>
       <title>priznanie.digital</title>
@@ -21,7 +22,10 @@ export default ({ children }) => (
       </div>
     </div>
     <div className="govuk-width-container">
-      <main className="govuk-main-wrapper">{children}</main>
+      <main className="govuk-main-wrapper">
+        <div className="govuk-grid-column-two-thirds">{children}</div>
+        {DEBUG_ON && <div className="govuk-grid-column-one-third">{debug}</div>}
+      </main>
     </div>
     <Footer />
   </>

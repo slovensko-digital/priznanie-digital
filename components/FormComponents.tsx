@@ -1,7 +1,7 @@
 import React from "react";
 import { useField } from "formik";
 
-interface Props {
+interface InputProps {
   name: string;
   label: string;
   type: "text" | "number";
@@ -10,7 +10,7 @@ interface Props {
 export function Input({
   label,
   ...props
-}: Props & React.HTMLProps<HTMLInputElement>) {
+}: InputProps & React.HTMLProps<HTMLInputElement>) {
   const [field, meta] = useField(props.name);
 
   return (

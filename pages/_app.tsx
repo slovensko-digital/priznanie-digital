@@ -21,13 +21,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       ...calculate(values),
     }));
   return (
-    <Layout>
+    <Layout
+      debug={<pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>}
+    >
       <Component
         taxForm={taxForm}
         updateTaxForm={updateTaxForm}
         {...pageProps}
       />
-      {/* <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre> */}
     </Layout>
   );
 }
