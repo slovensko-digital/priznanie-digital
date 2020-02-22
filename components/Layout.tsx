@@ -8,17 +8,23 @@ import Footer from "./Footer";
 
 export default ({ children }) => (
   <>
+    <Head>
+      <title>priznanie.digital</title>
+    </Head>
     <Header />
-    <div className={styles.container}>
-      <Head>
-        <title>priznanie.digital</title>
-      </Head>
-
-      <Link href="/">
-        <h1 className={styles.title}>priznanie.digital</h1>
-      </Link>
-      {children}
+    <div className="sdn-headline">
+      <div className="sdn-headline__container govuk-width-container">
+        <div className="sdn-headline__part">
+          <Link href="/">
+            <a className="sdn-headline__headline">
+              Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ
+              B)
+            </a>
+          </Link>
+        </div>
+      </div>
     </div>
+    <div className={styles.container}>{children}</div>
     <Footer />
   </>
 );
