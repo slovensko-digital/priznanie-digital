@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Formik, Form, Field } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
+import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
@@ -27,37 +28,43 @@ export default ({ taxForm, updateTaxForm }) => {
       >
         {({ values }) => (
           <Form className="form">
-            <h2>Partner</h2>
-            <label htmlFor="r007_ulica">Uplatnujem na partnera</label>
-            <Field name="r032_uplatnujem_na_partnera" type="checkbox" />
+            <BooleanRadio
+              title="Uplatnujete danovy bonus na manzelku/manzela?"
+              name="r032_uplatnujem_na_partnera"
+            ></BooleanRadio>
             {values.r032_uplatnujem_na_partnera && (
               <>
-                <label htmlFor="r031_priezvisko_a_meno">
-                  Prizevisko a meno
-                </label>
-                <Field name="r031_priezvisko_a_meno" type="text" />
-
-                <label htmlFor="r031_rodne_cislo">Rodne cislo</label>
-                <Field name="r031_rodne_cislo" type="text" />
-
-                <label htmlFor="r032_partner_vlastne_prijmy">
-                  Vlastne prijmy
-                </label>
-                <Field name="r032_partner_vlastne_prijmy" type="number" />
-
-                <label htmlFor="r032_partner_pocet_mesiacov">
-                  Pocet mesiacov
-                </label>
-                <Field name="r032_partner_pocet_mesiacov" type="number" />
-
-                <label htmlFor="r033_partner_kupele">Partner kupele</label>
-                <Field name="r033_partner_kupele" type="checkbox" />
+                <Input
+                  name="r031_priezvisko_a_meno"
+                  type="text"
+                  label="Prizevisko a meno"
+                />
+                <Input
+                  name="r031_rodne_cislo"
+                  type="text"
+                  label="Rodne cislo"
+                />
+                <Input
+                  name="r032_partner_vlastne_prijmy"
+                  type="text"
+                  label="Vlastne prijmy"
+                />
+                <Input
+                  name="r032_partner_pocet_mesiacov"
+                  type="number"
+                  label="Pocet mesiacov"
+                />
+                <Checkbox
+                  name="r033_partner_kupele"
+                  title="Partner kupele?"
+                />
                 {values.r033_partner_kupele && (
                   <>
-                    <label htmlFor="r033_partner_kupele_uhrady">
-                      Partner kupele uhrady
-                    </label>
-                    <Field name="r033_partner_kupele_uhrady" type="number" />
+                    <Input
+                      name="r033_partner_kupele_uhrady"
+                      type="number"
+                      label="Partner kupele uhrady"
+                    />
                   </>
                 )}
               </>
