@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
 
 import "../styles/global.css";
+import "../public/stylesheets/navody-digital-0.1.8.min.css";
+import "../public/stylesheets/libs.css";
 
 import React, { useState } from "react";
 import { calculate } from "../lib/calculation";
