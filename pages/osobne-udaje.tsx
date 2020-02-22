@@ -53,9 +53,9 @@ export default ({ taxForm, updateTaxForm }) => {
           <Field name="r011_stat" type="text" />
           <label htmlFor="t1r10_prijmy">Prijem</label>
           <Link href="/partner">
-            <button>Back</button>
+            <button className="govuk-button">Back</button>
           </Link>
-          <button type="submit">Next</button>
+          <button className="govuk-button" type="submit">Next</button>
         </Form>
       )}
     </Formik>

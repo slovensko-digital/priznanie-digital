@@ -44,9 +44,9 @@ export default ({ taxForm, updateTaxForm }) => {
           <Field name="priloha3_r13_zdravotne" type="number" />
 
           <Link href="/">
-            <button>Back</button>
+            <button className="govuk-button">Back</button>
           </Link>
-          <button type="submit">Next</button>
+          <button className="govuk-button" type="submit">Next</button>
         </Form>
       )}
     </Formik>

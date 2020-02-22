@@ -56,9 +56,9 @@ export default ({ taxForm, updateTaxForm }) => {
             </>
           )}
           <Link href="/prijmy-a-vydavky">
-            <button>Back</button>
+            <button className="govuk-button">Back</button>
           </Link>
-          <button type="submit">Next</button>
+          <button className="govuk-button" type="submit">Next</button>
         </Form>
       )}
     </Formik>

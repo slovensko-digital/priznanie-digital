@@ -8,7 +8,7 @@ export default () => (
     <p>Vitajte bla bla bla</p>
 
     <Link href="/prijmy-a-vydavky">
-      <button>Next</button>
+      <button className="govuk-button">>Next</button>
     </Link>
   </>
 );
