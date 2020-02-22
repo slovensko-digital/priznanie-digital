@@ -1,11 +1,12 @@
 import empty from "./empty";
 import { TaxForm } from "../types";
 import { OutputJson } from "./OutputJson";
+import xmljs from "xml-js";
 
 export function convertToJson(f: TaxForm): OutputJson {
   // load empty js object
-  // const t = Object.assign({}, empty) as OutputJson;
-  const t = empty as OutputJson;
+  const t = Object.assign({}, empty) as OutputJson;
+  // const t = empty as OutputJson;
 
   t.dokument.hlavicka.dic = f.r001_dic;
   t.dokument.hlavicka.skNace = {
@@ -77,4 +78,12 @@ export function convertToJson(f: TaxForm): OutputJson {
   const form: OutputJson = Object.assign({}, t);
 
   return form;
+}
+
+export function convertToXML(taxForm: TaxForm) {
+  const jsonForm = convertToJson(taxForm);
+  let XMLForm = xmljs.js2xml(jsonForm, { compact: true, spaces: 2 });
+  XMLForm += `<?xml version="1.0" encoding="utf-8"?>`;
+
+  return XMLForm;
 }
