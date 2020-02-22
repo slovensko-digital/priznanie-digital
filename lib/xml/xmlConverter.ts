@@ -40,7 +40,9 @@ export function convertToJson(taxForm: TaxForm) {
     s2: taxForm.t1r10_vydavky.toFixed(2),
   };
 
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(2);
+  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(
+    2,
+  );
 
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
   form.dokument.telo.r42 = taxForm.r042.toFixed(2);
@@ -81,8 +83,8 @@ export function convertToJson(taxForm: TaxForm) {
 
 export function convertToXML(taxForm: TaxForm) {
   const jsonForm = convertToJson(taxForm);
-  let XMLForm = `<?xml version="1.0" encoding="utf-8"?>`;
-  XMLForm += xmljs.js2xml(jsonForm, { compact: true, spaces: 2 });
+  let XMLForm = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  XMLForm += xmljs.js2xml(jsonForm, { compact: true, spaces: 3 });
 
   return XMLForm;
 }
