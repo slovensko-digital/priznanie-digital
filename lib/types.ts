@@ -157,5 +157,5 @@ export interface TaxForm extends TaxFormUserInput {
   // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
   // vydavkyPoistPar6ods11_ods1a2
   // TODO
-  vydavkyPoistne: number;
+  vydavkyPoistne?: number;
 }

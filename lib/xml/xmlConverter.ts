@@ -82,8 +82,8 @@ export function convertToJson(f: TaxForm): OutputJson {
 
 export function convertToXML(taxForm: TaxForm) {
   const jsonForm = convertToJson(taxForm);
-  let XMLForm = xmljs.js2xml(jsonForm, { compact: true, spaces: 2 });
-  XMLForm += `<?xml version="1.0" encoding="utf-8"?>`;
+  let XMLForm = `<?xml version="1.0" encoding="utf-8"?>`;
+  XMLForm += xmljs.js2xml(jsonForm, { compact: true, spaces: 2 });
 
   return XMLForm;
 }
