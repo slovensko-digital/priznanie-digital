@@ -18,7 +18,7 @@ export default () => (
       </p>
 
       <Link href="/prijmy-a-vydavky">
-        <button className="govuk-button">Dalej</button>
+        <button className="govuk-button">Suhlasím a chcem začat</button>
       </Link>
     </div>
   </>
