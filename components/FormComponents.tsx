@@ -71,3 +71,31 @@ export function BooleanRadio({ title, ...props }) {
   );
 }
 
+export function Checkbox({ title, ...props }) {
+  const [field, meta, helpers] = useField(props.name);
+  return (
+    <div className="govuk-form-group">
+      <fieldset className="govuk-fieldset" aria-describedby="waste-hint">
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 className="govuk-fieldset__heading">{title}</h1>
+        </legend>
+        <div className="govuk-checkboxes">
+          <div className="govuk-checkboxes__item">
+            <input
+              {...field}
+              {...props}
+              className="govuk-checkboxes__input"
+              type="checkbox"
+            />
+            <label
+              className="govuk-label govuk-checkboxes__label"
+              htmlFor="waste"
+            >
+              Ano
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  );
+}

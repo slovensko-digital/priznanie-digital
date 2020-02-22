@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Formik, Form, Field } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
-import { BooleanRadio, Input } from "../components/FormComponents";
+import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
@@ -54,10 +54,9 @@ export default ({ taxForm, updateTaxForm }) => {
                   type="number"
                   label="Pocet mesiacov"
                 />
-                <Input
+                <Checkbox
                   name="r033_partner_kupele"
-                  type="number"
-                  label="Partner kupele"
+                  title="Partner kupele?"
                 />
                 {values.r033_partner_kupele && (
                   <>
