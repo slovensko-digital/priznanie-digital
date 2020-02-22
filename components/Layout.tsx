@@ -24,7 +24,9 @@ export default ({ children }) => (
         </div>
       </div>
     </div>
-    <div className={styles.container}>{children}</div>
+    <div className="govuk-width-container">
+      <main className="govuk-main-wrapper">{children}</main>
+    </div>
     <Footer />
   </>
 );
