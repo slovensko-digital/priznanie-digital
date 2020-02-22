@@ -1,13 +1,12 @@
 import React from "react";
 
-// import styles from "./Layout.module.css";
 import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const DEBUG_ON = true;
 export default ({ children, debug }) => (
-  <>
+  <div className="container">
     <Head>
       <title>priznanie.digital</title>
     </Head>
@@ -28,5 +27,11 @@ export default ({ children, debug }) => (
       </main>
     </div>
     <Footer />
-  </>
+    <style jsx>{`
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+    `}</style>
+  </div>
 );
