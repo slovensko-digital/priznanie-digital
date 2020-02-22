@@ -15,6 +15,7 @@ export default ({ taxForm, updateTaxForm }) => {
     router.push(nextUrl);
   };
   useEffect(() => {
+    debugger;
     router.prefetch(nextUrl);
   });
   return (

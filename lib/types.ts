@@ -23,31 +23,31 @@ export interface PartnerUserInput {
 
 export interface PersonalInformationUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
-  r001_dic?: string;
+  r001_dic: string;
   // 02 - Dátum narodenia
   // TODO Aky format?
-  r002_datum_narodenia?: string;
+  r002_datum_narodenia: string;
   // 03 - SK NACE - Hlavná, prevažná činnosť
   // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
-  r003?: string;
+  r003_nace: string;
 
   // Oddiel I
   // 04 - Priezvisko
-  r004_priezvisko?: string;
+  r004_priezvisko: string;
   // 05 - Meno
-  r005_meno?: string;
+  r005_meno: string;
   // 06 - Titul
   r006_titul?: string;
   // 07 - Ulica
-  r007_ulica?: string;
+  r007_ulica: string;
   // 08 - Súpisné/orientačné číslo *
-  r008_cislo?: string;
+  r008_cislo: string;
   // 09 - PSČ *
-  r009_psc?: string;
+  r009_psc: string;
   // 10 - Obec *
-  r010_mesto?: string;
+  r010_obec: string;
   // 11 - Štát *
-  r011_stat?: string;
+  r011_stat: string;
 }
 
 export interface TaxFormUserInput
@@ -56,29 +56,6 @@ export interface TaxFormUserInput
     PersonalInformationUserInput {}
 
 export interface TaxForm extends TaxFormUserInput {
-  // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
-  r001?: string;
-  // 02 - Dátum narodenia TODO Aky format?
-  r002?: string;
-  // 03 - SK NACE - Hlavná, prevažná činnosť TODO tu treba odkial natahat
-  // cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
-  r003?: string;
-
-  // Oddiel I 04 - Priezvisko
-  r004?: string;
-  // 05 - Meno
-  r005?: string;
-  // 07 - Ulica
-  r007?: string;
-  // 08 - Súpisné/orientačné číslo *
-  r008?: string;
-  // 09 - PSČ *
-  r009?: string;
-  // 10 - Obec *
-  r010?: string;
-  // 11 - Štát *
-  r011?: string;
-
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne?
   // priloha3_r11 + priloha3_r13
   t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
@@ -177,4 +154,8 @@ export interface TaxForm extends TaxFormUserInput {
   // podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
   // r125_dan_na_uhradu
   r126_danovy_preplatok?: number;
+  // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
+  // vydavkyPoistPar6ods11_ods1a2
+  // TODO
+  vydavkyPoistne: number;
 }

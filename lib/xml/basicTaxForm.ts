@@ -1,7 +1,7 @@
-import { TaxForm } from "../../lib/types";
+import { TaxForm } from "../types";
 
-export const sampleData: TaxForm = {
-  r001_dic: "111111",
+const basicTaxForm: TaxForm = {
+  r001_dic: "111111111",
   r002_datum_narodenia: "02/22/1993",
   r003_nace: "62232",
   r004_priezvisko: "Retzer",
@@ -36,3 +36,5 @@ export const sampleData: TaxForm = {
   priloha3_r13_zdravotne: 1000,
   vydavkyPoistne: 2000,
 };
+
+export default basicTaxForm;
