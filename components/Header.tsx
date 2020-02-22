@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -8,10 +9,11 @@ export default function Header() {
       data-module="sdn-header"
     >
       <div className="sdn-header__container govuk-width-container ">
-        <a href="/" className="sdn-header__link">
-          <span className="sdn-header__product-name">priznanie.digital</span>
-        </a>
-
+        <Link href="/">
+          <a className="sdn-header__link">
+            <span className="sdn-header__product-name">priznanie.digital</span>
+          </a>
+        </Link>
         <div className="sdn-header__content">
           <button
             type="button"
@@ -37,7 +39,6 @@ export default function Header() {
           </nav>
         </div>
       </div>
-      
     </header>
   );
 }

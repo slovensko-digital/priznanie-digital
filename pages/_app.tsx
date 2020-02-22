@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         updateTaxForm={updateTaxForm}
         {...pageProps}
       />
-      <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>
+      {/* <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre> */}
     </Layout>
   );
 }
