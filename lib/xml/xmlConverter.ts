@@ -306,13 +306,72 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r142 = {
     ico: "",
     pravnaForma: "",
-    obchMeno: [{ riadok: "" }, { riadok: "" }],
+    obchMeno: { riadok: ["", ""] },
     ulica: "",
     cislo: "",
     psc: "",
     obec: "",
     suhlasZaslUdaje: "0",
   };
+    form.dokument.telo.osobitneZaznamy = {
+        "uvadza": "0",
+        "udajeOprijmoch": [
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          },
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          },
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          },
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          },
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          },
+          {
+            "kodStatu": "",
+            "druhPrimuPar": "",
+            "druhPrimuOds": "",
+            "druhPrimuPis": "",
+            "prijmy": "",
+            "vydavky": "",
+            "zTohoVydavky": ""
+          }
+        ],;
+
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = "19.02.2020";
@@ -321,9 +380,21 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.neuplatnujem = "1";
 
   form.dokument.telo.socZdravPoistenie = {
-    pr1: {},
+    pr1: tabulka,
+    pr2: "",
+    pr3: "",
+    pr4: "",
+    pr5: "",
+    pr6: "",
+    pr7: "",
+    pr8: "",
+    pr9: "",
+    pr10: "",
     pr11: taxForm.priloha3_r11_socialne.toFixed(2),
+    pr12: "",
     pr13: taxForm.priloha3_r13_zdravotne.toFixed(2),
+    pr14: "",
+    pr15: "",
     priPrimoch6ods1a2VediemPU: "0",
     datum: "19.02.2020",
   };
