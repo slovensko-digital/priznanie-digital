@@ -1,12 +1,18 @@
 import { convertToJson, convertToXML } from "./xmlConverter";
 import basicTaxForm from "./basicTaxForm";
 import basic from "./basic";
+import { promises as fs } from "fs";
 
 var libxml = require("libxmljs");
 
 describe("convertToJson", () => {
   test("Case 1", () => {
     const result = convertToJson(basicTaxForm);
+    //  fs.writeFile(
+    //    __dirname + "/testOutputs/xmlTestOutput_case1.json",
+    //    JSON.stringify(result, null, 2),
+    //  );
+
     expect(result).toMatchObject(basic);
   });
 });
@@ -14,14 +20,16 @@ describe("convertToJson", () => {
 describe("convertToXML", () => {
   test("Validate to schema", () => {
     const result = convertToXML(basicTaxForm);
+    fs.writeFile(__dirname + "/testOutputs/xmlTestOutput_schema.xml", result);
     var xsd = libxml.parseXml(schema);
     var xml = libxml.parseXml(result);
-
     xml.validate(xsd);
     expect(xml.validationErrors).toHaveLength(0);
   });
-  test.skip("Case 1", () => {
+  test("Case 1", () => {
     const result = convertToXML(basicTaxForm);
+    fs.writeFile(__dirname + "/testOutputs/xmlTestOutput_case1.xml", result);
+
     expect(result).toBe(xml);
   });
 });
