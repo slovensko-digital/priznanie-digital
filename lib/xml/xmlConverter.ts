@@ -182,16 +182,96 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r63 = "";
   form.dokument.telo.r64 = "";
   form.dokument.telo.r65 = "";
+  form.dokument.telo.tabulka2 = {
+    t2r1: tabulka,
+    t2r2: tabulka,
+    t2r3: tabulka,
+    t2r4: tabulka,
+    t2r5: tabulka,
+    t2r6: tabulka,
+    t2r7: tabulka,
+    t2r8: tabulka,
+    t2r9: tabulka,
+    t2r10: tabulka,
+    t2r11: tabulka,
+    t2r12: { s1: "" },
+  };
+
+  form.dokument.telo.r66 = "";
+  form.dokument.telo.r67 = "";
+  form.dokument.telo.r68 = "";
+
+  form.dokument.telo.tabulka3 = {
+    t3r1: tabulka,
+    t3r2: tabulka,
+    t3r3: tabulka,
+    t3r4: tabulka,
+    t3r5: tabulka,
+    t3r6: tabulka,
+    t3r7: tabulka,
+    t3r8: tabulka,
+    t3r9: tabulka,
+    t3r10: tabulka,
+    t3r11: tabulka,
+    t3r12: tabulka,
+    t3r13: tabulka,
+    t3r14: tabulka,
+    t3r15: tabulka,
+    t3r16: tabulka,
+    t3r17: tabulka,
+    t3r18: { s1: "" },
+    t3r19: tabulka,
+  };
+  form.dokument.telo.r69 = "";
+  form.dokument.telo.r70 = "";
+  form.dokument.telo.r71 = "";
 
   form.dokument.telo.r72 = taxForm.r072_pred_znizenim.toFixed(2);
   form.dokument.telo.r73 = taxForm.r073.toFixed(2);
+  form.dokument.telo.r71 = "";
+  form.dokument.telo.r72 = "";
+  form.dokument.telo.r73 = "";
+  form.dokument.telo.r74 = "";
+  form.dokument.telo.r75 = "";
+  form.dokument.telo.r76 = "";
+  form.dokument.telo.r76a = "";
+  form.dokument.telo.r76b = "";
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2);
   form.dokument.telo.r78 = taxForm.r078_zaklad_dane_z_prijmov.toFixed(2);
+  form.dokument.telo.r79 = "";
   form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2);
   form.dokument.telo.r81 = taxForm.r081.toFixed(2);
+  form.dokument.telo.r82 = "";
+  form.dokument.telo.r83 = "";
+  form.dokument.telo.r84 = "";
+  form.dokument.telo.r85 = "";
+  form.dokument.telo.r86 = "";
+  form.dokument.telo.r87 = "";
+  form.dokument.telo.r88 = "";
+  form.dokument.telo.r89 = "";
   form.dokument.telo.r90 = taxForm.r090.toFixed(2);
+  form.dokument.telo.r91 = "";
+  form.dokument.telo.r92 = "";
+  form.dokument.telo.r93 = "";
+  form.dokument.telo.r94 = "";
+  form.dokument.telo.r95 = "";
+  form.dokument.telo.r96 = "";
+  form.dokument.telo.r97 = "";
+  form.dokument.telo.r98 = "";
+  form.dokument.telo.r99 = "";
+  form.dokument.telo.r100 = "";
+  form.dokument.telo.r101 = "";
+  form.dokument.telo.r102 = "";
+  form.dokument.telo.r103 = "";
+  form.dokument.telo.r104 = "";
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2);
+  form.dokument.telo.r106 = "";
   form.dokument.telo.r107 = taxForm.r107.toFixed(2);
+  form.dokument.telo.r108 = "";
+  form.dokument.telo.r109 = "";
+  form.dokument.telo.r110 = "";
+  form.dokument.telo.r111 = "";
+  form.dokument.telo.r112 = "";
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
 
