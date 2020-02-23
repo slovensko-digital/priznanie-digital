@@ -342,6 +342,12 @@ export interface Tabulka3 {
 export interface ObchMeno {}
 
 export interface R142 {
+  ico: string;
+  pravnaForma: string;
+  ulica: string;
+  cislo: string;
+  psc: string;
+  obec: string;
   obchMeno: ObchMeno;
   suhlasZaslUdaje: string;
 }
@@ -501,14 +507,42 @@ export interface Telo {
   r105: string;
   r106: string;
   r107: string;
+  r108: string;
   r109: string;
+  r110: string;
+  r111: string;
   r112: string;
   r113: string;
+  r114: string;
   r115: string;
+  r116: string;
+  r117: string;
+  r118: string;
+  r119: string;
+  r120: string;
+  r121: string;
+  r122: string;
+  r123: string;
+  r124: string;
   r125: string;
+  r126: string;
+  r127: string;
+  r128: string;
+  r129: string;
+  r130: string;
+  r131: string;
+  r132: string;
+  r133: string;
+  r134: string;
+  r135: string;
+  r136: string;
+  r137: string;
+  r138: string;
   r139: string;
+  r140: string;
   neuplatnujem: string;
   splnam3per: string;
+  r141: string;
   r142: R142;
   osobitneZaznamy: OsobitneZaznamy;
   r143: string;

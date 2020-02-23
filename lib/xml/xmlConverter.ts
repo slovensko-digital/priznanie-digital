@@ -273,7 +273,46 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r111 = "";
   form.dokument.telo.r112 = "";
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
+  form.dokument.telo.r114 = "";
+  form.dokument.telo.r115 = "";
+  form.dokument.telo.r116 = "";
+  form.dokument.telo.r117 = "";
+  form.dokument.telo.r118 = "";
+  form.dokument.telo.r119 = "";
+  form.dokument.telo.r120 = "";
+  form.dokument.telo.r121 = "";
+  form.dokument.telo.r122 = "";
+  form.dokument.telo.r123 = "";
+  form.dokument.telo.r124 = "";
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
+  form.dokument.telo.r126 = "";
+  form.dokument.telo.r127 = "";
+  form.dokument.telo.r128 = "";
+  form.dokument.telo.r129 = "";
+  form.dokument.telo.r130 = "";
+  form.dokument.telo.r131 = "";
+  form.dokument.telo.r132 = "";
+  form.dokument.telo.r133 = "";
+  form.dokument.telo.r134 = "";
+  form.dokument.telo.r135 = "";
+  form.dokument.telo.r136 = "";
+  form.dokument.telo.r137 = "";
+  form.dokument.telo.r138 = "";
+  form.dokument.telo.r139 = "0";
+  form.dokument.telo.r140 = "";
+  form.dokument.telo.neuplatnujem = "0";
+  form.dokument.telo.splnam3per = "0";
+  form.dokument.telo.r141 = "";
+  form.dokument.telo.r142 = {
+    ico: "",
+    pravnaForma: "",
+    obchMeno: [{ riadok: "" }, { riadok: "" }],
+    ulica: "",
+    cislo: "",
+    psc: "",
+    obec: "",
+    suhlasZaslUdaje: "0",
+  };
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = "19.02.2020";
