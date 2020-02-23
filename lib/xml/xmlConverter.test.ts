@@ -4,6 +4,7 @@ import basic from "./basic";
 import { promises as fs } from "fs";
 // @ts-ignore
 import * as schema from "./schema.xsd";
+// @ts-ignore
 import * as basicCaseXml from "./basic.xml";
 
 var libxml = require("libxmljs");

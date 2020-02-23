@@ -793,7 +793,7 @@ export interface Telo {
   r143: string;
   datumVyhlasenia: string;
   danovyPreplatokBonus: DanovyPreplatokBonus;
-  prilPar30cOdpocetVydavkov: PrilPar30cOdpocetVydavkov;
+  prilPar30cOdpocetVydavkov?: PrilPar30cOdpocetVydavkov;
   prilPodielyNaZisku: PrilPodielyNaZisku;
   socZdravPoistenie: SocZdravPoistenie;
 }
