@@ -20,13 +20,19 @@ export function Input({
       </label>
       <input className="govuk-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <span id={props.name} className="govuk-error-message">
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
       ) : null}
     </div>
   );
 }
 
-export function BooleanRadio({ title, ...props }) {
+interface BooleanRadioProps {
+  name: string;
+  title: string;
+}
+export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
   const [field, meta, helpers] = useField(props.name);
   return (
     <div className="govuk-form-group">
@@ -66,6 +72,11 @@ export function BooleanRadio({ title, ...props }) {
             </label>
           </div>
         </div>
+        {meta.touched && meta.error ? (
+          <span id={props.name} className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          </span>
+        ) : null}
       </fieldset>
     </div>
   );
@@ -94,6 +105,11 @@ export function Checkbox({ title, ...props }) {
               Ano
             </label>
           </div>
+          {meta.touched && meta.error ? (
+            <span id={props.name} className="govuk-error-message">
+              <span className="govuk-visually-hidden">Error:</span> {meta.error}
+            </span>
+          ) : null}
         </div>
       </fieldset>
     </div>

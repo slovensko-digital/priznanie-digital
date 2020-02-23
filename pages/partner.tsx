@@ -11,14 +11,6 @@ import { assignOnlyExistingKeys } from "../lib/utils";
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
 
-const validationSchema = Yup.object().shape<PartnerUserInput>({
-  r032_uplatnujem_na_partnera: Yup.boolean().required(),
-  r031_priezvisko_a_meno: Yup.string().when("r032_uplatnujem_na_partnera", {
-    is: true,
-    then: Yup.string().required(),
-  }),
-});
-
 const Partner = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
@@ -38,7 +30,7 @@ const Partner = ({ taxForm, updateTaxForm }) => {
           partnerUserInitialValues,
           taxForm,
         )}
-        onSubmit={handleSubmit}t
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ values }) => (
@@ -90,5 +82,43 @@ const Partner = ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+const validationSchema = Yup.object().shape<PartnerUserInput>({
+  r032_uplatnujem_na_partnera: Yup.boolean()
+    .required()
+    .nullable(),
+  r031_priezvisko_a_meno: Yup.string().when("r032_uplatnujem_na_partnera", {
+    is: true,
+    then: Yup.string().required(),
+  }),
+  r031_rodne_cislo: Yup.string().when("r032_uplatnujem_na_partnera", {
+    is: true,
+    then: Yup.string()
+      .required()
+      .min(9)
+      .max(11),
+  }),
+  r032_partner_vlastne_prijmy: Yup.number().when(
+    "r032_uplatnujem_na_partnera",
+    {
+      is: true,
+      then: Yup.number().required(),
+    },
+  ),
+  r032_partner_pocet_mesiacov: Yup.number().when(
+    "r032_uplatnujem_na_partnera",
+    {
+      is: true,
+      then: Yup.number()
+        .min(0)
+        .max(12)
+        .required(),
+    },
+  ),
+  r033_partner_kupele_uhrady: Yup.number().when("r033_partner_kupele", {
+    is: true,
+    then: Yup.number().required(),
+  }),
+});
 
 export default Partner;
