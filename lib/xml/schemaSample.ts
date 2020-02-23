@@ -6,12 +6,12 @@ const sampleSchema: OutputJson = {
       dic: "",
       datumNarodenia: "",
       typDP: {
-        rdp: "0",
+        rdp: "1",
         odp: "0",
         ddp: "0",
       },
       zdanovacieObdobie: {
-        rok: "",
+        rok: "2019",
         datumDDP: "",
       },
       skNace: {
@@ -574,7 +574,7 @@ const sampleSchema: OutputJson = {
         rekreaciaSuma: "",
         zaznamy: "",
       },
-      r143: "",
+      r143: "3",
       datumVyhlasenia: "",
       danovyPreplatokBonus: {
         vyplatitDanovyBonus: "0",

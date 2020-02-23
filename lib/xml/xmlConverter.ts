@@ -1,13 +1,12 @@
 import schemaSample from "./schemaSample";
 import { TaxForm } from "../types";
-import { OutputJson } from "./OutputJson";
 import xmljs from "xml-js";
 
 export function convertToJson(taxForm: TaxForm) {
   const form = Object.assign({}, schemaSample);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
-  form.dokument.hlavicka.datumNarodenia = "19.02.2020";
+  form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
   form.dokument.hlavicka.skNace = {
     k1: "62",
     k2: "01",
@@ -59,6 +58,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
+  form.dokument.telo.neuplatnujem = "1";
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = "19.02.2020";
