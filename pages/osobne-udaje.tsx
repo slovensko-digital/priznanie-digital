@@ -11,22 +11,6 @@ import { assignOnlyExistingKeys } from "../lib/utils";
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
 
-const requiredMessege = "Pole je povinné";
-const validationSchema = Yup.object<PersonalInformationUserInput>().shape({
-  r001_dic: Yup.string()
-    .length(9)
-    .required(requiredMessege),
-  r002_datum_narodenia: Yup.string().required(requiredMessege),
-  r003_nace: Yup.string().required(requiredMessege),
-  r004_priezvisko: Yup.string().required(requiredMessege),
-  r005_meno: Yup.string().required(requiredMessege),
-  r007_ulica: Yup.string().required(requiredMessege),
-  r008_cislo: Yup.string().required(requiredMessege),
-  r009_psc: Yup.string().required(requiredMessege),
-  r010_obec: Yup.string().required(requiredMessege),
-  r011_stat: Yup.string().required(requiredMessege),
-});
-
 const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
@@ -52,14 +36,15 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>
 
+          <Input name="r005_meno" type="text" label="Meno" />
+          <Input name="r004_priezvisko" type="text" label="Priezvisko" />
+
           <Input name="r001_dic" type="text" label="DIČ" />
           <Input
             name="r002_datum_narodenia"
             type="text"
             label="Dátum narodenia"
           />
-          <Input name="r005_meno" type="text" label="Meno" />
-          <Input name="r004_priezvisko" type="text" label="Priezvisko" />
 
           <h3>Adresa trvalého pobytu</h3>
           <Input name="r007_ulica" type="text" label="Ulica" />
@@ -81,4 +66,18 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
   );
 };
 
+const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
+  r001_dic: Yup.string()
+    .required()
+    .length(10),
+  r002_datum_narodenia: Yup.string().required(),
+  r003_nace: Yup.string().required(),
+  r004_priezvisko: Yup.string().required(),
+  r005_meno: Yup.string().required(),
+  r007_ulica: Yup.string().required(),
+  r008_cislo: Yup.string().required(),
+  r009_psc: Yup.string().required(),
+  r010_obec: Yup.string().required(),
+  r011_stat: Yup.string().required(),
+});
 export default OsobneUdaje;

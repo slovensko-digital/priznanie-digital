@@ -1,24 +1,24 @@
 export interface IncomeAndExpenseUserInput {
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
-  t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+  t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
 
   // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11_socialne?: number;
+  priloha3_r11_socialne: number;
 
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13_zdravotne?: number;
+  priloha3_r13_zdravotne: number;
 }
 
 export interface PartnerUserInput {
   // Partner
-  r031_priezvisko_a_meno?: string;
-  r031_rodne_cislo?: string;
-  r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: number;
-  r032_partner_pocet_mesiacov?: number;
-  r033_partner_kupele?: boolean;
+  r031_priezvisko_a_meno: string;
+  r031_rodne_cislo: string;
+  r032_uplatnujem_na_partnera: boolean;
+  r032_partner_vlastne_prijmy: number;
+  r032_partner_pocet_mesiacov: number;
+  r033_partner_kupele: boolean;
   // max 50
-  r033_partner_kupele_uhrady?: number;
+  r033_partner_kupele_uhrady: number;
 }
 
 export interface PersonalInformationUserInput {

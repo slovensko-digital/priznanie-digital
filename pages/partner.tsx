@@ -117,8 +117,11 @@ const validationSchema = Yup.object().shape<PartnerUserInput>({
   ),
   r033_partner_kupele_uhrady: Yup.number().when("r033_partner_kupele", {
     is: true,
-    then: Yup.number().required(),
+    then: Yup.number()
+      .max(50)
+      .required(),
   }),
+  r033_partner_kupele: Yup.boolean().required(),
 });
 
 export default Partner;
