@@ -16,7 +16,10 @@ const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
-    router.push(nextUrl);
+    router
+      .push(nextUrl, nextUrl, { priority: 1 })
+      .then(console.log)
+      .catch(console.log);
   };
   useEffect(() => {
     router.prefetch(nextUrl);
@@ -49,7 +52,14 @@ const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
             label="Zdravotne poistenie"
           ></Input>
 
-          <button className="govuk-button" type="submit">
+          <button
+            className="govuk-button"
+            type="submit"
+            onMouseEnter={() => {
+              router.prefetch(nextUrl);
+              console.log("prefetching " + nextUrl);
+            }}
+          >
             Dalej
           </button>
         </Form>
