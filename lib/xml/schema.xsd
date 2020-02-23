@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Riadne, opravne a dodatocne danove priznanie k dani z prijmov fyzickej osoby, typ B, vzor 2019 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
