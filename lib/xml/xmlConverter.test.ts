@@ -12,7 +12,7 @@ describe("convertToJson", () => {
 });
 
 describe("convertToXML", () => {
-  test("Validation", () => {
+  test.only("Validation", () => {
     const result = convertToXML(basicTaxForm);
     var xsd = libxml.parseXml(schema);
     var xml = libxml.parseXml(result);

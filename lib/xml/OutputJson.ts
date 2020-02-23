@@ -6,6 +6,7 @@ export interface TypDP {
 
 export interface ZdanovacieObdobie {
   rok: string;
+  datumDDP: string;
 }
 
 export interface SkNace {
@@ -29,6 +30,9 @@ export interface Zastupca {}
 
 export interface Hlavicka {
   dic: string;
+  datumNarodenia: string;
+  titul: string;
+  titulZa: string;
   typDP: TypDP;
   zdanovacieObdobie: ZdanovacieObdobie;
   skNace: SkNace;

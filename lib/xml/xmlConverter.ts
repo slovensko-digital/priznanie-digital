@@ -4,9 +4,21 @@ import { OutputJson } from "./OutputJson";
 import xmljs from "xml-js";
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = Object.assign({}, empty) as OutputJson;
+  const form = Object.assign({
+    dokument: { hlavicka: {}, telo: {} },
+  }) as OutputJson;
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
+  form.dokument.hlavicka.datumNarodenia = "19.02.2020";
+  form.dokument.hlavicka.typDP = {
+    rdp: "1",
+    odp: "0",
+    ddp: "0",
+  };
+  form.dokument.hlavicka.zdanovacieObdobie = {
+    rok: "2019",
+    datumDDP: "",
+  };
   form.dokument.hlavicka.skNace = {
     k1: "62",
     k2: "01",
@@ -16,28 +28,66 @@ export function convertToJson(taxForm: TaxForm) {
 
   form.dokument.hlavicka.priezvisko = taxForm.r004_priezvisko;
   form.dokument.hlavicka.meno = taxForm.r005_meno;
-
-  form.dokument.hlavicka.adresaTrvPobytu.ulica = taxForm.r007_ulica;
-  form.dokument.hlavicka.adresaTrvPobytu.cislo = taxForm.r008_cislo;
-  form.dokument.hlavicka.adresaTrvPobytu.psc = taxForm.r009_psc;
-  form.dokument.hlavicka.adresaTrvPobytu.obec = taxForm.r010_obec;
-  form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat;
-
-  form.dokument.telo.r32.uplatnujemNCZDNaManzela = taxForm.r032_uplatnujem_na_partnera
-    ? "1"
-    : "0";
-  form.dokument.telo.r33.uplatNCZDNaKupelStarostlivost = taxForm.r033_partner_kupele
-    ? "1"
-    : "0";
-
-  form.dokument.telo.tabulka1.t1r2 = {
-    s1: taxForm.t1r10_prijmy.toFixed(2),
-    s2: taxForm.t1r10_vydavky.toFixed(2),
+  form.dokument.hlavicka.titul = "";
+  form.dokument.hlavicka.titulZa = "";
+  form.dokument.hlavicka.adresaTrvPobytu = {
+    ulica: taxForm.r007_ulica,
+    cislo: taxForm.r008_cislo,
+    psc: taxForm.r009_psc,
+    obec: taxForm.r010_obec,
+    stat: taxForm.r011_stat,
+  };
+  form.dokument.hlavicka.nerezident = "0";
+  form.dokument.hlavicka.prepojeniePar2 = "0";
+  form.dokument.hlavicka.adresaObvPobytu = {
+    ulica: "",
+    cislo: "",
+    psc: "",
+    obec: "",
+    stat: "",
+  };
+  form.dokument.hlavicka.zastupca = {
+    priezvisko: "",
+    meno: "",
+    titul: "",
+    titulZa: "",
+    rodneCislo: "",
+    ulica: "",
+    cislo: "",
+    psc: "",
+    obec: "",
+    stat: "",
+    tel: "",
+    email: "",
   };
 
-  form.dokument.telo.tabulka1.t1r10 = {
-    s1: taxForm.t1r10_prijmy.toFixed(2),
-    s2: taxForm.t1r10_vydavky.toFixed(2),
+  form.dokument.telo.r32 = {
+    uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? "1" : "0",
+  };
+  form.dokument.telo.r33 = {
+    uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? "1" : "0",
+  };
+  form.dokument.telo.tabulka1 = {
+    t1r1: {},
+
+    t1r2: {
+      s1: taxForm.t1r10_prijmy.toFixed(2),
+      s2: taxForm.t1r10_vydavky.toFixed(2),
+    },
+    t1r3: {},
+    t1r4: {},
+    t1r5: {},
+    t1r6: {},
+    t1r7: {},
+    t1r8: {},
+    t1r9: {},
+    t1r10: {
+      s1: taxForm.t1r10_prijmy.toFixed(2),
+      s2: taxForm.t1r10_vydavky.toFixed(2),
+    },
+    t1r11: {},
+    t1r12: {},
+    t1r13: {},
   };
 
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(
@@ -69,12 +119,13 @@ export function convertToJson(taxForm: TaxForm) {
   // TODO zistit co je toto, asi 2 percenta
   form.dokument.telo.neuplatnujem = "1";
 
-  form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
-    2,
-  );
-  form.dokument.telo.socZdravPoistenie.pr13 = taxForm.priloha3_r13_zdravotne.toFixed(
-    2,
-  );
+  form.dokument.telo.socZdravPoistenie = {
+    pr1: {},
+    pr11: taxForm.priloha3_r11_socialne.toFixed(2),
+    pr13: taxForm.priloha3_r13_zdravotne.toFixed(2),
+    priPrimoch6ods1a2VediemPU: "0",
+    datum: "19.02.2020",
+  };
   // TODO vygenerovat datum plnenia
   form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
 
