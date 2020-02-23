@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { Formik, Form, Field, yupToFormErrors } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
+import { PartnerUserInput } from "../lib/types";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
 
-export default ({ taxForm, updateTaxForm }) => {
+const validationSchema = Yup.object().shape<PartnerUserInput>({
+  r032_uplatnujem_na_partnera: Yup.boolean().required(),
+  r031_priezvisko_a_meno: Yup.string().when("r032_uplatnujem_na_partnera", {
+    is: true,
+    then: Yup.string().required(),
+  }),
+});
+
+const Partner = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -25,6 +35,7 @@ export default ({ taxForm, updateTaxForm }) => {
       <Formik
         initialValues={{ ...partnerUserInitialValues, ...taxForm }}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         {({ values }) => (
           <Form className="form">
@@ -54,10 +65,7 @@ export default ({ taxForm, updateTaxForm }) => {
                   type="number"
                   label="Pocet mesiacov"
                 />
-                <Checkbox
-                  name="r033_partner_kupele"
-                  title="Partner kupele?"
-                />
+                <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
                 {values.r033_partner_kupele && (
                   <>
                     <Input
@@ -78,3 +86,5 @@ export default ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+export default Partner;
