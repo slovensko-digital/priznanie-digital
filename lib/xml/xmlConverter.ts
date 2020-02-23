@@ -1,22 +1,21 @@
-import empty from "./empty";
+import schemaSample from "./schemaSample";
 import { TaxForm } from "../types";
-import { OutputJson } from "./OutputJson";
 import xmljs from "xml-js";
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = Object.assign({}, empty) as OutputJson;
+  const form = Object.assign({}, schemaSample);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
+  form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
   form.dokument.hlavicka.skNace = {
     k1: "62",
     k2: "01",
     k3: "0",
     cinnost: "Počítačové programovanie",
-  }; // TODO parse from t.r003_nace
+  };
 
   form.dokument.hlavicka.priezvisko = taxForm.r004_priezvisko;
   form.dokument.hlavicka.meno = taxForm.r005_meno;
-
   form.dokument.hlavicka.adresaTrvPobytu.ulica = taxForm.r007_ulica;
   form.dokument.hlavicka.adresaTrvPobytu.cislo = taxForm.r008_cislo;
   form.dokument.hlavicka.adresaTrvPobytu.psc = taxForm.r009_psc;
@@ -26,21 +25,19 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r32.uplatnujemNCZDNaManzela = taxForm.r032_uplatnujem_na_partnera
     ? "1"
     : "0";
+
   form.dokument.telo.r33.uplatNCZDNaKupelStarostlivost = taxForm.r033_partner_kupele
     ? "1"
     : "0";
 
-  form.dokument.telo.tabulka1.t1r2 = {
-    s1: taxForm.t1r10_prijmy.toFixed(2),
-    s2: taxForm.t1r10_vydavky.toFixed(2),
-  };
+  form.dokument.telo.tabulka1.t1r2.s1 = taxForm.t1r10_prijmy.toFixed(2);
+  form.dokument.telo.tabulka1.t1r2.s2 = taxForm.t1r10_vydavky.toFixed(2);
+  form.dokument.telo.tabulka1.t1r10.s1 = taxForm.t1r10_prijmy.toFixed(2);
+  form.dokument.telo.tabulka1.t1r10.s2 = taxForm.t1r10_vydavky.toFixed(2);
 
-  form.dokument.telo.tabulka1.t1r10 = {
-    s1: taxForm.t1r10_prijmy.toFixed(2),
-    s2: taxForm.t1r10_vydavky.toFixed(2),
-  };
-
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(2);
+  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(
+    2,
+  );
 
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
   form.dokument.telo.r42 = taxForm.r042.toFixed(2);
@@ -59,13 +56,12 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2);
   form.dokument.telo.r107 = taxForm.r107.toFixed(2);
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
+
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
+  form.dokument.telo.neuplatnujem = "1";
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = "19.02.2020";
-
-  // TODO zistit co je toto, asi 2 percenta
-  form.dokument.telo.neuplatnujem = "1";
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
     2,
@@ -73,7 +69,6 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.socZdravPoistenie.pr13 = taxForm.priloha3_r13_zdravotne.toFixed(
     2,
   );
-  // TODO vygenerovat datum plnenia
   form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
 
   return form;
@@ -81,8 +76,12 @@ export function convertToJson(taxForm: TaxForm) {
 
 export function convertToXML(taxForm: TaxForm) {
   const jsonForm = convertToJson(taxForm);
-  let XMLForm = `<?xml version="1.0" encoding="utf-8"?>`;
-  XMLForm += xmljs.js2xml(jsonForm, { compact: true, spaces: 2 });
+  let XMLForm = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  XMLForm += xmljs.js2xml(jsonForm, {
+    compact: true,
+    spaces: 3,
+    indentCdata: true,
+  });
 
   return XMLForm;
 }

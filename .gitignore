@@ -26,3 +26,5 @@ yarn-error.log*
 
 #Ignore yarn.lock
 yarn.lock
+
+testOutputs
