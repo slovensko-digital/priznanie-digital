@@ -26,7 +26,7 @@ const validationSchema = Yup.object<PersonalInformationUserInput>().shape({
   r011_stat: Yup.string().required(requiredMessege),
 });
 
-export default ({ taxForm, updateTaxForm }) => {
+const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -79,3 +79,5 @@ export default ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+export default OsobneUdaje;

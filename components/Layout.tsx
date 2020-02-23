@@ -5,7 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const DEBUG_ON = true;
-export default ({ children, debug }) => (
+const Layout = ({ children, debug }) => (
   <div className="container">
     <Head>
       <title>priznanie.digital</title>
@@ -44,3 +44,5 @@ export default ({ children, debug }) => (
     `}</style>
   </div>
 );
+
+export default Layout;

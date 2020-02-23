@@ -23,7 +23,7 @@ const validationSchema = Yup.object<IncomeAndExpenseUserInput>().shape({
 const nextUrl = "/partner";
 const backUrl = "/";
 
-export default ({ taxForm, updateTaxForm }) => {
+const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -65,3 +65,5 @@ export default ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+export default PrijmyAVydavky;
