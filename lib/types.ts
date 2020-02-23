@@ -52,7 +52,7 @@ export interface PersonalInformationUserInput {
 
 export interface TaxFormUserInput
   extends IncomeAndExpenseUserInput,
-    PartnerUserInput,
+    Partial<PartnerUserInput>,
     PersonalInformationUserInput {}
 
 export interface TaxForm extends TaxFormUserInput {
