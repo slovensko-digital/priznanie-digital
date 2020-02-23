@@ -11,6 +11,7 @@ const basicTaxForm: TaxForm = {
   r009_psc: "82105",
   r010_obec: "Bratislava",
   r011_stat: "Slovensko",
+  t1r2_prijmy: 20000,
   t1r10_prijmy: 20000,
   t1r10_vydavky: 14000, // pausalne 12000 + 2000 poistne
   r041: 20000,

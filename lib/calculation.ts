@@ -16,6 +16,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
   tf.t1r10_vydavky = Math.min(flatrateExpenses, PAUSALNE_VYDAVKY_MAX);
+  tf.t1r10_prijmy = tf.t1r10_prijmy;
   tf.priloha3_r08_poistne =
     tf.priloha3_r11_socialne + tf.priloha3_r13_zdravotne;
   tf.r030 = 0; // TODO in next use cases
@@ -67,7 +68,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   tf.r080_zaklad_dane_celkovo = floor(tf.r078_zaklad_dane_z_prijmov, 2); // TODO + tf.r065 + tf.r071 + tf.r079)
 
-  tf.r081 = floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2);
+  tf.r081 = floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2); // TODO high income  
   tf.r090 = tf.r081;
   tf.r105_dan = tf.r081;
   tf.r107 = tf.r081;

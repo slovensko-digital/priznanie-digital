@@ -30,8 +30,7 @@ export function convertToJson(taxForm: TaxForm) {
     ? "1"
     : "0";
 
-  form.dokument.telo.tabulka1.t1r2.s1 = taxForm.t1r10_prijmy.toFixed(2);
-  form.dokument.telo.tabulka1.t1r2.s2 = taxForm.t1r10_vydavky.toFixed(2);
+  form.dokument.telo.tabulka1.t1r2.s1 = taxForm.t1r2_prijmy.toFixed(2);
   form.dokument.telo.tabulka1.t1r10.s1 = taxForm.t1r10_prijmy.toFixed(2);
   form.dokument.telo.tabulka1.t1r10.s2 = taxForm.t1r10_vydavky.toFixed(2);
 
