@@ -2,6 +2,7 @@ export default {
   dokument: {
     hlavicka: {
       dic: "111111111",
+      datumNarodenia: "22.2.1993",
       typDP: {
         rdp: "1",
         odp: "0",

@@ -4,6 +4,7 @@ import basic from "./basic";
 import { promises as fs } from "fs";
 // @ts-ignore
 import * as schema from "./schema.xsd";
+import * as basicCaseXml from "./basic.xml";
 
 var libxml = require("libxmljs");
 
@@ -27,10 +28,10 @@ describe("convertToXML", () => {
     xml.validate(xsd);
     expect(xml.validationErrors).toHaveLength(0);
   });
-  test.skip("Case 1", () => {
+  test("Case 1", () => {
     const result = convertToXML(basicTaxForm);
     fs.writeFile(__dirname + "/testOutputs/xmlTestOutput_case1.xml", result);
-
+    const xml = basicCaseXml.default;
     expect(result).toBe(xml);
   });
 });
