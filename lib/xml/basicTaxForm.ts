@@ -32,9 +32,9 @@ const basicTaxForm: TaxForm = {
   r113: 391.9,
   r125_dan_na_uhradu: 391.9,
 
+  priloha3_r08_poistne: 2000,
   priloha3_r11_socialne: 1000,
   priloha3_r13_zdravotne: 1000,
-  vydavkyPoistne: 2000,
 };
 
 export default basicTaxForm;

@@ -31,7 +31,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
           taxForm,
         )}
         onSubmit={handleSubmit}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
       >
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>

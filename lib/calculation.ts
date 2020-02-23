@@ -16,10 +16,11 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
 
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
   tf.t1r10_vydavky = Math.min(flatrateExpenses, PAUSALNE_VYDAVKY_MAX);
-  tf.vydavkyPoistne = tf.priloha3_r11_socialne + tf.priloha3_r13_zdravotne;
+  tf.priloha3_r08_poistne =
+    tf.priloha3_r11_socialne + tf.priloha3_r13_zdravotne;
   tf.r030 = 0; // TODO in next use cases
   tf.r041 = tf.t1r10_prijmy;
-  tf.r042 = tf.t1r10_vydavky;
+  tf.r042 = tf.t1r10_vydavky + tf.priloha3_r08_poistne;
   tf.r043 = Math.abs(tf.r041 - tf.r042);
   tf.r047 = tf.r043; // tf.r044 + tf.r045 - tf.r046);
   tf.r055 = tf.r047;
