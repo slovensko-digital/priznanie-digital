@@ -645,7 +645,7 @@ const sampleSchema: OutputJson = {
           s2: "",
         },
         pr7: "",
-        pr8: "",
+        pr8: "7",
         pr9: "",
         pr10: "",
         pr11: "",
@@ -672,7 +672,7 @@ const sampleSchema: OutputJson = {
           s2: "",
         },
         pr25: "",
-        pr26: "",
+        pr26: "35",
         pr27: "",
         pr28: "",
       },
@@ -701,3 +701,5 @@ const sampleSchema: OutputJson = {
     },
   },
 };
+
+export default sampleSchema;

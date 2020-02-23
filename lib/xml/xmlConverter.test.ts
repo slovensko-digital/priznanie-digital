@@ -12,13 +12,13 @@ describe("convertToJson", () => {
 });
 
 describe("convertToXML", () => {
-  test.only("Validation", () => {
+  test.only("Validate to schema", () => {
     const result = convertToXML(basicTaxForm);
     var xsd = libxml.parseXml(schema);
     var xml = libxml.parseXml(result);
 
     xml.validate(xsd);
-    expect(xml.validationErrors).toBe(null);
+    expect(xml.validationErrors).toHaveLength(0);
   });
   test.skip("Case 1", () => {
     const result = convertToXML(basicTaxForm);
