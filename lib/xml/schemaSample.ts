@@ -1,4 +1,6 @@
-export default {
+import { OutputJson } from "./OutputJson";
+
+const sampleSchema: OutputJson = {
   dokument: {
     hlavicka: {
       dic: "",

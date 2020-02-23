@@ -313,65 +313,6 @@ export function convertToJson(taxForm: TaxForm) {
     obec: "",
     suhlasZaslUdaje: "0",
   };
-    form.dokument.telo.osobitneZaznamy = {
-        "uvadza": "0",
-        "udajeOprijmoch": [
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          },
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          },
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          },
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          },
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          },
-          {
-            "kodStatu": "",
-            "druhPrimuPar": "",
-            "druhPrimuOds": "",
-            "druhPrimuPis": "",
-            "prijmy": "",
-            "vydavky": "",
-            "zTohoVydavky": ""
-          }
-        ],;
-
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = "19.02.2020";
@@ -398,8 +339,6 @@ export function convertToJson(taxForm: TaxForm) {
     priPrimoch6ods1a2VediemPU: "0",
     datum: "19.02.2020",
   };
-  // TODO vygenerovat datum plnenia
-  form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
 
   return form;
 }
