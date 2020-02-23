@@ -3,12 +3,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
+import { IncomeAndExpenseUserInput } from "../lib/types";
 
-const validationSchema = Yup.object().shape({
+const validationSchema = Yup.object<IncomeAndExpenseUserInput>().shape({
   t1r10_prijmy: Yup.number()
+    .min(0, "Musi byt kladne.")
+    .required("Pole je povinné."),
+  priloha3_r11_socialne: Yup.number()
+    .min(0, "Musi byt kladne.")
+    .required("Pole je povinné."),
+  priloha3_r13_zdravotne: Yup.number()
     .min(0, "Musi byt kladne.")
     .required("Pole je povinné."),
 });

@@ -4,9 +4,27 @@ import Link from "next/link";
 import { personalInformationUserInputInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { Input } from "../components/FormComponents";
+import * as Yup from "yup";
+import { PersonalInformationUserInput } from "../lib/types";
 
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
+
+const requiredMessege = "Pole je povinné";
+const validationSchema = Yup.object<PersonalInformationUserInput>().shape({
+  r001_dic: Yup.string()
+    .length(9)
+    .required(requiredMessege),
+  r002_datum_narodenia: Yup.string().required(requiredMessege),
+  r003_nace: Yup.string().required(requiredMessege),
+  r004_priezvisko: Yup.string().required(requiredMessege),
+  r005_meno: Yup.string().required(requiredMessege),
+  r007_ulica: Yup.string().required(requiredMessege),
+  r008_cislo: Yup.string().required(requiredMessege),
+  r009_psc: Yup.string().required(requiredMessege),
+  r010_obec: Yup.string().required(requiredMessege),
+  r011_stat: Yup.string().required(requiredMessege),
+});
 
 export default ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
@@ -28,6 +46,7 @@ export default ({ taxForm, updateTaxForm }) => {
           ...taxForm,
         }}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>
@@ -49,9 +68,8 @@ export default ({ taxForm, updateTaxForm }) => {
             label="Súpisné/orientačné číslo"
           />
           <Input name="r009_psc" type="text" label="PSČ" />
-          <Input name="r010_mesto" type="text" label="Mesto" />
+          <Input name="r010_obec" type="text" label="Obec" />
           <Input name="r011_stat" type="text" label="Štát" />
-          <Input name="r007_ulica" type="text" label="Ulica" />
 
           <button className="govuk-button" type="submit">
             Dalej
