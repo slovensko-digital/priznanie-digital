@@ -6,6 +6,7 @@ import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { PartnerUserInput } from "../lib/types";
+import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
@@ -33,8 +34,11 @@ const Partner = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={{ ...partnerUserInitialValues, ...taxForm }}
-        onSubmit={handleSubmit}
+        initialValues={assignOnlyExistingKeys(
+          partnerUserInitialValues,
+          taxForm,
+        )}
+        onSubmit={handleSubmit}t
         validationSchema={validationSchema}
       >
         {({ values }) => (

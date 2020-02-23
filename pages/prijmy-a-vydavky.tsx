@@ -7,6 +7,7 @@ import { Formik, Form } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
 import { IncomeAndExpenseUserInput } from "../lib/types";
+import { assignOnlyExistingKeys } from "../lib/utils";
 
 const validationSchema = Yup.object<IncomeAndExpenseUserInput>().shape({
   t1r10_prijmy: Yup.number()
@@ -38,7 +39,10 @@ const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
+        initialValues={assignOnlyExistingKeys(
+          incomeAndExpenseInitialValues,
+          taxForm,
+        )}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >

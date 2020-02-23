@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Input } from "../components/FormComponents";
 import * as Yup from "yup";
 import { PersonalInformationUserInput } from "../lib/types";
+import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
@@ -41,10 +42,10 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={{
-          ...personalInformationUserInputInitialValues,
-          ...taxForm,
-        }}
+        initialValues={assignOnlyExistingKeys(
+          personalInformationUserInputInitialValues,
+          taxForm,
+        )}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
