@@ -24,20 +24,38 @@ export interface AdresaTrvPobytu {
   stat: string;
 }
 
-export interface AdresaObvPobytu {}
+export interface AdresaObvPobytu {
+  ulica: string;
+  cislo: string;
+  psc: string;
+  obec: string;
+}
 
-export interface Zastupca {}
+export interface Zastupca {
+  priezvisko: string;
+  meno: string;
+  titul: string;
+  titulZa: string;
+  rodneCislo: string;
+  ulica: string;
+  cislo: string;
+  psc: string;
+  obec: string;
+  stat: string;
+  tel: string;
+  email: string;
+}
 
 export interface Hlavicka {
   dic: string;
   datumNarodenia: string;
-  titul: string;
-  titulZa: string;
   typDP: TypDP;
   zdanovacieObdobie: ZdanovacieObdobie;
   skNace: SkNace;
   priezvisko: string;
   meno: string;
+  titul: string;
+  titulZa: string;
   adresaTrvPobytu: AdresaTrvPobytu;
   nerezident: string;
   prepojeniePar2: string;
@@ -45,17 +63,25 @@ export interface Hlavicka {
   zastupca: Zastupca;
 }
 
-export interface R31 {}
+export interface R31 {
+  priezviskoMeno: string;
+  rodneCislo: string;
+}
 
 export interface R32 {
   uplatnujemNCZDNaManzela: string;
+  vlastnePrijmy: string;
+  pocetMesiacov: string;
 }
 
 export interface R33 {
   uplatNCZDNaKupelStarostlivost: string;
+  preukazZaplatUhrady: void;
 }
 
 export interface Dieta {
+  priezviskoMeno: string;
+  rodneCislo: string;
   kupelnaStarostlivost: string;
   m00: string;
   m01: string;
@@ -78,39 +104,74 @@ export interface R34 {
 
 export interface R37 {
   uplatDanBonusZaplatUroky: string;
+  zaplateneUroky: string;
+  pocetMesiacov: string;
 }
 
-export interface T1r1 {}
+export interface T1r1 {
+  s1: string;
+  s2: string;
+}
 
 export interface T1r2 {
   s1: string;
   s2: string;
 }
 
-export interface T1r3 {}
+export interface T1r3 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r4 {}
+export interface T1r4 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r5 {}
+export interface T1r5 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r6 {}
+export interface T1r6 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r7 {}
+export interface T1r7 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r8 {}
+export interface T1r8 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r9 {}
+export interface T1r9 {
+  s1: string;
+  s2: string;
+}
 
 export interface T1r10 {
   s1: string;
   s2: string;
 }
 
-export interface T1r11 {}
+export interface T1r11 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r12 {}
+export interface T1r12 {
+  s1: string;
+  s2: string;
+}
 
-export interface T1r13 {}
+export interface T1r13 {
+  s1: string;
+  s2: string;
+}
 
 export interface Tabulka1 {
   t1r1: T1r1;
@@ -344,12 +405,18 @@ export interface SocZdravPoistenie {
 
 export interface Telo {
   r29: string;
+  r30: string;
   r31: R31;
   r32: R32;
   r33: R33;
   r34: R34;
   r35udajeDalsieDeti: string;
+  r36: string;
   r37: R37;
+  r38: string;
+  r38a: string;
+  r39: string;
+  r40: string;
   tabulka1: Tabulka1;
   vydavkyPar6ods11_ods1a2: string;
   vydavkyPar6ods11_ods3: string;
@@ -366,25 +433,47 @@ export interface Telo {
   r41: string;
   r42: string;
   r43: string;
+  r44: string;
+  r45: string;
+  r46: string;
   r47: string;
+  r48: string;
   r49: R49;
   r50: R50;
   r51: R51;
   r52: R52;
+  r53: string;
+  r54: string;
   r55: string;
+  r56: string;
   r57: string;
+  r58: string;
+  r59: string;
+  r60: string;
+  r61: string;
+  r62: string;
+  r63: string;
+  r64: string;
+  r65: string;
   tabulka2: Tabulka2;
   tabulka3: Tabulka3;
   r72: string;
   r73: string;
+  r74: string;
+  r76: string;
+  r76b: string;
   r77: string;
   r78: string;
   r80: string;
   r81: string;
   r90: string;
   r105: string;
+  r106: string;
   r107: string;
+  r109: string;
+  r112: string;
   r113: string;
+  r115: string;
   r125: string;
   r139: string;
   neuplatnujem: string;

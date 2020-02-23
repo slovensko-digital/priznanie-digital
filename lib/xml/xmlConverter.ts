@@ -44,7 +44,6 @@ export function convertToJson(taxForm: TaxForm) {
     cislo: "",
     psc: "",
     obec: "",
-    stat: "",
   };
   form.dokument.hlavicka.zastupca = {
     priezvisko: "",
@@ -61,45 +60,128 @@ export function convertToJson(taxForm: TaxForm) {
     email: "",
   };
 
+  form.dokument.telo.r29 = "0";
+  form.dokument.telo.r30 = "0";
+  form.dokument.telo.r31 = { priezviskoMeno: "", rodneCislo: "" };
   form.dokument.telo.r32 = {
     uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? "1" : "0",
+    vlastnePrijmy: "",
+    pocetMesiacov: "",
   };
   form.dokument.telo.r33 = {
     uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? "1" : "0",
+    preukazZaplatUhrady: null,
+  };
+
+  const dieta = {
+    priezviskoMeno: "",
+    rodneCislo: "",
+    kupelnaStarostlivost: "0",
+    m00: "0",
+    m01: "0",
+    m02: "0",
+    m03: "0",
+    m04: "0",
+    m05: "0",
+    m06: "0",
+    m07: "0",
+    m08: "0",
+    m09: "0",
+    m10: "0",
+    m11: "0",
+    m12: "0",
+  };
+  form.dokument.telo.r34 = {
+    dieta: [dieta, dieta, dieta, dieta],
+  };
+  form.dokument.telo.r35udajeDalsieDeti = "0";
+  form.dokument.telo.r36 = "";
+  form.dokument.telo.r37 = {
+    uplatDanBonusZaplatUroky: "0",
+    zaplateneUroky: "",
+    pocetMesiacov: "",
+  };
+  form.dokument.telo.r38 = "";
+  form.dokument.telo.r38a = "";
+  form.dokument.telo.r39 = "";
+  form.dokument.telo.r40 = "";
+
+  const tabulka = {
+    s1: "0",
+    s2: "0",
   };
   form.dokument.telo.tabulka1 = {
-    t1r1: {},
-
+    t1r1: tabulka,
     t1r2: {
       s1: taxForm.t1r10_prijmy.toFixed(2),
       s2: taxForm.t1r10_vydavky.toFixed(2),
     },
-    t1r3: {},
-    t1r4: {},
-    t1r5: {},
-    t1r6: {},
-    t1r7: {},
-    t1r8: {},
-    t1r9: {},
+    t1r3: tabulka,
+    t1r4: tabulka,
+    t1r5: tabulka,
+    t1r6: tabulka,
+    t1r7: tabulka,
+    t1r8: tabulka,
+    t1r9: tabulka,
     t1r10: {
       s1: taxForm.t1r10_prijmy.toFixed(2),
       s2: taxForm.t1r10_vydavky.toFixed(2),
     },
-    t1r11: {},
-    t1r12: {},
-    t1r13: {},
+    t1r11: tabulka,
+    t1r12: tabulka,
+    t1r13: tabulka,
   };
-
+  form.dokument.telo.vydavkyPar6ods11_ods1a2 = "0";
+  form.dokument.telo.vydavkyPar6ods11_ods3 = "0";
+  form.dokument.telo.vydavkyPar6ods11_ods4 = "0";
+  form.dokument.telo.vydavkyPar6ods10_ods1a2 = "0";
+  form.dokument.telo.vydavkyPar6ods10_ods4 = "0";
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistne.toFixed(
     2,
   );
+  form.dokument.telo.uplatnujemPar17ods17_ods1a2 = "0";
+  form.dokument.telo.uplatnujemPar17ods17_ods3a4 = "0";
+  form.dokument.telo.ukoncujemUplatnovaniePar17ods17_ods1a2 = "0";
+  form.dokument.telo.ukoncujemUplatnovaniePar17ods17_ods3a4 = "0";
+
+  form.dokument.telo.tabulka1a = {
+    t1r1: tabulka,
+    t1r2: tabulka,
+    t1r3: tabulka,
+    t1r4: tabulka,
+    t1r5: tabulka,
+  };
+
+  form.dokument.telo.tabulka1b = {
+    t1r1: tabulka,
+    t1r2: tabulka,
+  };
 
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
   form.dokument.telo.r42 = taxForm.r042.toFixed(2);
   form.dokument.telo.r43 = taxForm.r043.toFixed(2);
+  form.dokument.telo.r44 = "";
+  form.dokument.telo.r45 = "";
+  form.dokument.telo.r46 = "";
   form.dokument.telo.r47 = taxForm.r047.toFixed(2);
+  form.dokument.telo.r48 = "";
+  form.dokument.telo.r49 = { predchObdobie: { rok: "", strata: "" } };
+  form.dokument.telo.r50 = { predchObdobie: { rok: "", strata: "" } };
+  form.dokument.telo.r51 = { predchObdobie: { rok: "", strata: "" } };
+  form.dokument.telo.r52 = { predchObdobie: { rok: "", strata: "" } };
+  form.dokument.telo.r53 = "";
+  form.dokument.telo.r54 = "";
   form.dokument.telo.r55 = taxForm.r055.toFixed(2);
+  form.dokument.telo.r56 = "";
   form.dokument.telo.r57 = taxForm.r057.toFixed(2);
+  form.dokument.telo.r58 = "";
+  form.dokument.telo.r59 = "";
+  form.dokument.telo.r60 = "";
+  form.dokument.telo.r61 = "";
+  form.dokument.telo.r62 = "";
+  form.dokument.telo.r63 = "";
+  form.dokument.telo.r64 = "";
+  form.dokument.telo.r65 = "";
 
   form.dokument.telo.r72 = taxForm.r072_pred_znizenim.toFixed(2);
   form.dokument.telo.r73 = taxForm.r073.toFixed(2);
