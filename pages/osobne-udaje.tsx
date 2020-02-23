@@ -38,6 +38,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
 
           <Input name="r005_meno" type="text" label="Meno" />
           <Input name="r004_priezvisko" type="text" label="Priezvisko" />
+          <Input name="r003_nace" type="text" label="NACE" />
 
           <Input name="r001_dic" type="text" label="DIČ" />
           <Input
@@ -69,9 +70,9 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
 const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
   r001_dic: Yup.string()
     .required()
-    .length(10),
-  r002_datum_narodenia: Yup.string().required(),
-  r003_nace: Yup.string().required(),
+    .min(9),
+  r002_datum_narodenia: Yup.string(),
+  r003_nace: Yup.string(),
   r004_priezvisko: Yup.string().required(),
   r005_meno: Yup.string().required(),
   r007_ulica: Yup.string().required(),
