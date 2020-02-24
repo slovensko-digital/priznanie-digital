@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { Formik, Form, Field, yupToFormErrors } from "formik";
 import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
+import { PartnerUserInput } from "../lib/types";
+import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
 
-export default ({ taxForm, updateTaxForm }) => {
+const Partner = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
@@ -23,8 +26,12 @@ export default ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={{ ...partnerUserInitialValues, ...taxForm }}
+        initialValues={assignOnlyExistingKeys(
+          partnerUserInitialValues,
+          taxForm,
+        )}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         {({ values }) => (
           <Form className="form">
@@ -54,10 +61,7 @@ export default ({ taxForm, updateTaxForm }) => {
                   type="number"
                   label="Pocet mesiacov"
                 />
-                <Checkbox
-                  name="r033_partner_kupele"
-                  title="Partner kupele?"
-                />
+                <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
                 {values.r033_partner_kupele && (
                   <>
                     <Input
@@ -78,3 +82,46 @@ export default ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+const validationSchema = Yup.object().shape<PartnerUserInput>({
+  r032_uplatnujem_na_partnera: Yup.boolean()
+    .required()
+    .nullable(),
+  r031_priezvisko_a_meno: Yup.string().when("r032_uplatnujem_na_partnera", {
+    is: true,
+    then: Yup.string().required(),
+  }),
+  r031_rodne_cislo: Yup.string().when("r032_uplatnujem_na_partnera", {
+    is: true,
+    then: Yup.string()
+      .required()
+      .min(9)
+      .max(11),
+  }),
+  r032_partner_vlastne_prijmy: Yup.number().when(
+    "r032_uplatnujem_na_partnera",
+    {
+      is: true,
+      then: Yup.number().required(),
+    },
+  ),
+  r032_partner_pocet_mesiacov: Yup.number().when(
+    "r032_uplatnujem_na_partnera",
+    {
+      is: true,
+      then: Yup.number()
+        .min(0)
+        .max(12)
+        .required(),
+    },
+  ),
+  r033_partner_kupele_uhrady: Yup.number().when("r033_partner_kupele", {
+    is: true,
+    then: Yup.number()
+      .max(50)
+      .required(),
+  }),
+  r033_partner_kupele: Yup.boolean().required(),
+});
+
+export default Partner;

@@ -5,7 +5,7 @@ import fileDownload from "js-file-download";
 import { convertToXML } from "../lib/xml/xmlConverter";
 
 const backUrl = "/osobne-udaje";
-export default ({ taxForm }) => {
+const Vysledky = ({ taxForm }) => {
   const onExport = () => {
     const xml = convertToXML(taxForm);
     fileDownload(xml, "priznanie.xml");
@@ -46,3 +46,5 @@ export default ({ taxForm }) => {
     </>
   );
 };
+
+export default Vysledky;

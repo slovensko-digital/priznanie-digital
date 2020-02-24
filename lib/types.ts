@@ -1,24 +1,24 @@
 export interface IncomeAndExpenseUserInput {
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
-  t1r10_prijmy?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+  t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
 
   // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11_socialne?: number;
+  priloha3_r11_socialne: number;
 
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13_zdravotne?: number;
+  priloha3_r13_zdravotne: number;
 }
 
 export interface PartnerUserInput {
   // Partner
-  r031_priezvisko_a_meno?: string;
-  r031_rodne_cislo?: string;
-  r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: number;
-  r032_partner_pocet_mesiacov?: number;
-  r033_partner_kupele?: boolean;
+  r031_priezvisko_a_meno: string;
+  r031_rodne_cislo: string;
+  r032_uplatnujem_na_partnera: boolean;
+  r032_partner_vlastne_prijmy: number;
+  r032_partner_pocet_mesiacov: number;
+  r033_partner_kupele: boolean;
   // max 50
-  r033_partner_kupele_uhrady?: number;
+  r033_partner_kupele_uhrady: number;
 }
 
 export interface PersonalInformationUserInput {
@@ -51,18 +51,26 @@ export interface PersonalInformationUserInput {
 }
 
 export interface TaxFormUserInput
-  extends IncomeAndExpenseUserInput,
-    PartnerUserInput,
-    PersonalInformationUserInput {}
+  extends Partial<IncomeAndExpenseUserInput>,
+    Partial<PartnerUserInput>,
+    Partial<PersonalInformationUserInput> {}
 
 export interface TaxForm extends TaxFormUserInput {
-  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10 + TODO ?pripocitat poistne?
-  // priloha3_r11 + priloha3_r13
-  t1r10_vydavky?: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 2, r. 2
+  // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
+
+  t1r10_vydavky?: number;
+  t1r2_prijmy?: number;
+  t1r10_prijmy?: number;
+  // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
+  // vydavkyPoistPar6ods11_ods1a2
+  priloha3_r08_poistne?: number;
 
   // Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za
   // zdaňovacie obdobie (v eurách)6)
   r030?: number;
+
+  // Uhrn poistneho
+  r039?: number;
 
   // The same as t1r10_vydavky
   r041?: number;
@@ -154,8 +162,4 @@ export interface TaxForm extends TaxFormUserInput {
   // podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
   // r125_dan_na_uhradu
   r126_danovy_preplatok?: number;
-  // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
-  // vydavkyPoistPar6ods11_ods1a2
-  // TODO
-  vydavkyPoistne?: number;
 }
