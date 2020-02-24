@@ -27,5 +27,9 @@ module.exports = {
     "xsd",
     "xml",
   ],
-  watchPathIgnorePatterns: ["testOutputs", "*.output"],
+  watchPathIgnorePatterns: [
+    "testOutputs",
+    `.*\.output\.json`,
+    `.*\.output\.xml`,
+  ],
 };
