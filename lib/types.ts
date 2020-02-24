@@ -23,31 +23,31 @@ export interface PartnerUserInput {
 
 export interface PersonalInformationUserInput {
   // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
-  r001_dic: string;
+  r001_dic?: string;
   // 02 - Dátum narodenia
   // TODO Aky format?
-  r002_datum_narodenia: string;
+  r002_datum_narodenia?: string;
   // 03 - SK NACE - Hlavná, prevažná činnosť
   // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
-  r003_nace: string;
+  r003_nace?: string;
 
   // Oddiel I
   // 04 - Priezvisko
-  r004_priezvisko: string;
+  r004_priezvisko?: string;
   // 05 - Meno
-  r005_meno: string;
+  r005_meno?: string;
   // 06 - Titul
   r006_titul?: string;
   // 07 - Ulica
-  r007_ulica: string;
+  r007_ulica?: string;
   // 08 - Súpisné/orientačné číslo *
-  r008_cislo: string;
+  r008_cislo?: string;
   // 09 - PSČ *
-  r009_psc: string;
+  r009_psc?: string;
   // 10 - Obec *
-  r010_obec: string;
+  r010_obec?: string;
   // 11 - Štát *
-  r011_stat: string;
+  r011_stat?: string;
 }
 
 export interface TaxFormUserInput
