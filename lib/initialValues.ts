@@ -14,7 +14,7 @@ export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
 export const partnerUserInitialValues: PartnerUserInput = {
   r031_priezvisko_a_meno: "",
   r031_rodne_cislo: "",
-  r032_uplatnujem_na_partnera: null,
+  r032_uplatnujem_na_partnera: undefined,
   r032_partner_vlastne_prijmy: 0,
   r032_partner_pocet_mesiacov: 0,
   r033_partner_kupele: false,
