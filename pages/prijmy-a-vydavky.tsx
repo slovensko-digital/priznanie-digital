@@ -3,27 +3,26 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
-
-const validationSchema = Yup.object().shape({
-  t1r10_prijmy: Yup.number()
-    .min(0, "Musi byt kladne.")
-    .required("Pole je povinné."),
-});
+import { IncomeAndExpenseUserInput } from "../lib/types";
+import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/partner";
 const backUrl = "/";
 
-export default ({ taxForm, updateTaxForm }) => {
+const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
   const router = useRouter();
   const handleSubmit = values => {
     updateTaxForm(values);
     router.push(nextUrl);
   };
   useEffect(() => {
-    router.prefetch(nextUrl);
+    router
+      .prefetch(nextUrl, nextUrl, { priority: true })
+      .then(console.log)
+      .catch(console.log);
   });
   return (
     <>
@@ -31,7 +30,10 @@ export default ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={{ ...incomeAndExpenseInitialValues, ...taxForm }}
+        initialValues={assignOnlyExistingKeys(
+          incomeAndExpenseInitialValues,
+          taxForm,
+        )}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -58,3 +60,17 @@ export default ({ taxForm, updateTaxForm }) => {
     </>
   );
 };
+
+const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput>({
+  t1r10_prijmy: Yup.number()
+    .min(0, "Musi byt kladne.")
+    .required("Pole je povinné."),
+  priloha3_r11_socialne: Yup.number()
+    .min(0, "Musi byt kladne.")
+    .required("Pole je povinné."),
+  priloha3_r13_zdravotne: Yup.number()
+    .min(0, "Musi byt kladne.")
+    .required("Pole je povinné."),
+});
+
+export default PrijmyAVydavky;

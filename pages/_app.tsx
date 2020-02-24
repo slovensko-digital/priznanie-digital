@@ -17,11 +17,15 @@ import { sortObjectKeys } from "../lib/utils";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [taxForm, setTaxForm] = useState<TaxForm>(initTaxFormUserInputValues);
-  const updateTaxForm = values =>
-    setTaxForm(previousTaxForm => ({
-      ...previousTaxForm,
-      ...calculate(values),
-    }));
+  const updateTaxForm = values => {
+    setTaxForm(previousTaxForm => {
+      return calculate({
+        ...previousTaxForm,
+        ...values,
+      });
+    });
+  };
+
   return (
     <Layout
       debug={<pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>}

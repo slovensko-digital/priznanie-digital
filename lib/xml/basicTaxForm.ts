@@ -11,6 +11,7 @@ const basicTaxForm: TaxForm = {
   r009_psc: "82105",
   r010_obec: "Bratislava",
   r011_stat: "Slovensko",
+  t1r2_prijmy: 20000,
   t1r10_prijmy: 20000,
   t1r10_vydavky: 14000, // pausalne 12000 + 2000 poistne
   r041: 20000,
@@ -32,9 +33,9 @@ const basicTaxForm: TaxForm = {
   r113: 391.9,
   r125_dan_na_uhradu: 391.9,
 
+  priloha3_r08_poistne: 2000,
   priloha3_r11_socialne: 1000,
   priloha3_r13_zdravotne: 1000,
-  vydavkyPoistne: 2000,
 };
 
 export default basicTaxForm;
