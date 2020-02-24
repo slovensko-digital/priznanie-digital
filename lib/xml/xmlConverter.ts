@@ -87,7 +87,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.socZdravPoistenie.pr13 = taxForm.priloha3_r13_zdravotne.toFixed(
     2,
   );
-  form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
+  // form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
 
   return form;
 }
