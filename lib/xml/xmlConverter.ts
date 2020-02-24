@@ -38,6 +38,25 @@ export function convertToJson(taxForm: TaxForm) {
     2,
   );
 
+  if (taxForm.r032_uplatnujem_na_partnera) {
+    form.dokument.telo.r31 = {
+      priezviskoMeno: taxForm.r031_priezvisko_a_meno,
+      rodneCislo: taxForm.r031_rodne_cislo,
+    };
+    form.dokument.telo.r32 = {
+      uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? "1" : "0",
+      vlastnePrijmy: taxForm.r032_partner_vlastne_prijmy.toFixed(2),
+      pocetMesiacov: taxForm.r032_partner_pocet_mesiacov.toFixed(2),
+    };
+
+    form.dokument.telo.r33 = {
+      uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? "1" : "0",
+      preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady.toFixed(2),
+    };
+
+    form.dokument.telo.r74 = taxForm.r074_znizenie_partner.toFixed(2);
+  }
+
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
   form.dokument.telo.r42 = taxForm.r042.toFixed(2);
   form.dokument.telo.r43 = taxForm.r043.toFixed(2);
