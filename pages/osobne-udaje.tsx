@@ -11,10 +11,10 @@ import { assignOnlyExistingKeys } from "../lib/utils";
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
 
-const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
+const OsobneUdaje = ({ taxForm, setTaxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
   useEffect(() => {
@@ -31,7 +31,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
           taxForm,
         )}
         onSubmit={handleSubmit}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
       >
         <Form className="form">
           <h2>Údaje o daňovníkovi</h2>

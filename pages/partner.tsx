@@ -11,10 +11,10 @@ import { assignOnlyExistingKeys } from "../lib/utils";
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
 
-const Partner = ({ taxForm, updateTaxForm }) => {
+const Partner = ({ taxForm, setTaxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
   useEffect(() => {

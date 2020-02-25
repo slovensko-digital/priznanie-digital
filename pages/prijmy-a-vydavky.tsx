@@ -12,17 +12,14 @@ import { assignOnlyExistingKeys } from "../lib/utils";
 const nextUrl = "/partner";
 const backUrl = "/";
 
-const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
+const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
   useEffect(() => {
-    router
-      .prefetch(nextUrl, nextUrl, { priority: true })
-      .then(console.log)
-      .catch(console.log);
+    router.prefetch(nextUrl);
   });
   return (
     <>
@@ -32,7 +29,7 @@ const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
       <Formik
         initialValues={assignOnlyExistingKeys(
           incomeAndExpenseInitialValues,
-          taxForm,
+          taxFormUserInput,
         )}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
