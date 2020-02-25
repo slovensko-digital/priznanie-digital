@@ -48,6 +48,9 @@ export interface PersonalInformationUserInput {
   r010_obec?: string;
   // 11 - Štát *
   r011_stat?: string;
+  /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
+   * failovali test*/
+  datum?: string;
 }
 
 export interface TaxFormUserInput

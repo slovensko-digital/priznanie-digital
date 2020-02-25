@@ -36,6 +36,7 @@ const basicTaxForm: TaxForm = {
   priloha3_r08_poistne: 2000,
   priloha3_r11_socialne: 1000,
   priloha3_r13_zdravotne: 1000,
+  datum: "19.02.2020",
 };
 
 export default basicTaxForm;
