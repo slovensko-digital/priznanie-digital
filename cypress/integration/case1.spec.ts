@@ -79,6 +79,31 @@ describe("Case 1", function() {
     // cy.readFile(
     //   "/Users/Jules/repos/work/slovensko.digital/priznanie-digital/__tests__/testCases/withPartner.xml",
     // ).then(console.log);
-    cy.visit("file:///Users/Jules/Downloads/form.451/form.451.html");
+
+    cy.readFile("__tests__/testCases/withPartner.xml", "utf-8").then(
+      (xmlExpected: string) => {
+        // debugger;
+        cy.visit("/form/form.451.html");
+        const stub = cy.stub();
+        cy.on("window:alert", stub);
+
+        cy.get("#form-button-load").click();
+        // @ts-ignore
+        cy.get("#form-buttons-load-dialog > input").upload({
+          fileContent: xmlExpected,
+          fileName: "hmm.xml",
+          mimeType: "application/xml",
+          encoding: "utf-8",
+        });
+        cy.get("#form-buttons-load-dialog-confirm > .ui-button-text").click();
+        cy.get("#form-button-validate")
+          .click()
+          .then(() => {
+            expect(stub).to.be.calledWith(
+              "Naplnenie formulára prebehlo úspešne",
+            );
+          });
+      },
+    );
   });
 });
