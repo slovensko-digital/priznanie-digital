@@ -7,7 +7,6 @@ import { Formik, Form } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
 import { IncomeAndExpenseUserInput } from "../lib/types";
-import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/partner";
 const backUrl = "/";
@@ -27,10 +26,7 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={assignOnlyExistingKeys(
-          incomeAndExpenseInitialValues,
-          taxFormUserInput,
-        )}
+        initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >

@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import Link from "next/link";
-import { personalInformationUserInputInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { Input } from "../components/FormComponents";
 import * as Yup from "yup";
 import { PersonalInformationUserInput } from "../lib/types";
-import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
 
-const OsobneUdaje = ({ taxForm, setTaxFormUserInput }) => {
+const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
     setTaxFormUserInput(values);
@@ -26,10 +24,7 @@ const OsobneUdaje = ({ taxForm, setTaxFormUserInput }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={assignOnlyExistingKeys(
-          personalInformationUserInputInitialValues,
-          taxForm,
-        )}
+        initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
