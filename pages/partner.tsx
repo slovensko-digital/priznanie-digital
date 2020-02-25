@@ -53,7 +53,7 @@ const Partner = ({ taxForm, updateTaxForm }) => {
                 />
                 <Input
                   name="r032_partner_vlastne_prijmy"
-                  type="text"
+                  type="number"
                   label="Vlastne prijmy"
                 />
                 <Input

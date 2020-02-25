@@ -70,7 +70,8 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
 const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
   r001_dic: Yup.string()
     .required()
-    .min(9),
+    .min(9)
+    .max(10),
   r002_datum_narodenia: Yup.string(),
   r003_nace: Yup.string(),
   r004_priezvisko: Yup.string().required(),
