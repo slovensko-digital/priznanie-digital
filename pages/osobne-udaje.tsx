@@ -19,18 +19,16 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
   };
 
   const getCity = zip => {
-    return new Promise((resolve, reject) => {
-      fetch(`https://api.posta.sk/private/search?q=${zip}&m=zip`)
-        .then(response => response.json())
-        .then(pscData => {
-          return pscData &&
-            pscData.offices &&
-            pscData.offices[0] &&
-            pscData.offices[0].name
-            ? resolve(pscData.offices[0].name)
-            : resolve("");
-        });
-    });
+    return fetch(`https://api.posta.sk/private/search?q=${zip}&m=zip`)
+      .then(response => response.json())
+      .then(pscData => {
+        return pscData &&
+          pscData.offices &&
+          pscData.offices[0] &&
+          pscData.offices[0].name
+          ? pscData.offices[0].name
+          : "";
+      });
   };
 
   useEffect(() => {
