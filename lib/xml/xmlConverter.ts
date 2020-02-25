@@ -46,7 +46,7 @@ export function convertToJson(taxForm: TaxForm) {
     form.dokument.telo.r32 = {
       uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? "1" : "0",
       vlastnePrijmy: taxForm.r032_partner_vlastne_prijmy.toFixed(2),
-      pocetMesiacov: taxForm.r032_partner_pocet_mesiacov.toFixed(2),
+      pocetMesiacov: taxForm.r032_partner_pocet_mesiacov.toString(),
     };
 
     form.dokument.telo.r33 = {
@@ -55,6 +55,8 @@ export function convertToJson(taxForm: TaxForm) {
     };
 
     form.dokument.telo.r74 = taxForm.r074_znizenie_partner.toFixed(2);
+    form.dokument.telo.r76 = taxForm.r076_kupele_spolu.toFixed(2);
+    form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.toFixed(2);
   }
 
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
@@ -87,7 +89,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.socZdravPoistenie.pr13 = taxForm.priloha3_r13_zdravotne.toFixed(
     2,
   );
-  // form.dokument.telo.socZdravPoistenie.datum = "19.02.2020";
+  form.dokument.telo.socZdravPoistenie.datum = taxForm.datum;
 
   return form;
 }

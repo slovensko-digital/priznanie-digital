@@ -8,7 +8,7 @@ import { calculate } from "../lib/calculation";
 
 const comparable = (xml: string) => xml2json(xml, { compact: true, spaces: 2 });
 const stringify = (object: object) => JSON.stringify(object, null, 2);
-test("withPartner", () => {
+test.only("withPartner", () => {
   const taxForm = calculate(withPartnerInput);
   fs.writeFile(
     __dirname + "/testCases/withPartnerTaxForm.output.json",
