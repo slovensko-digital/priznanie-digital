@@ -36,12 +36,14 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
 
   const getAutoformByPersonName = (fullName: string) => {
     //TODO: Load data from Autoform API
-    /*return fetch(
-      `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${fullName}&private_access_token=07b5d1d69b1a3325a38846f761ea31361e5e5b88d6b8b4bc576a1cacd470db1312d2bff562955ae3`,
+    return fetch(
+      `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${fullName}&private_access_token=89e56e0d966f79a2dca7d1a0f6f97799796e6cc77b616bbc4b796c086290c0acd1ab2f91dad4fb56
+`,
     )
       .then(response => response.json())
-      .then(json => json);*/
+      .then(json => json);
 
+    /** In case of just testing on localhost
     return [
       {
         id: 1358414,
@@ -71,6 +73,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
         registration_number: "VVS/1-900/90-48099",
       },
     ];
+     */
   };
 
   const handleAutoform = async (values, setFieldValue) => {
@@ -83,6 +86,15 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
         setAutoFormPersons(personsData);
       }
     }
+  };
+
+  const handlePersonAutoform = (person, setFieldValue) => {
+    setFieldValue("r001_dic", person.tin);
+    setFieldValue("r007_ulica", person.street);
+    setFieldValue("r008_cislo", person.street_number);
+    setFieldValue("r009_psc", person.postal_code);
+    setFieldValue("r010_obec", person.municipality);
+    setFieldValue("r011_stat", person.country);
   };
 
   useEffect(() => {
@@ -132,15 +144,11 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
                 <ol className="govuk-list govuk-list--number">
                   {autoformPersons.map(person => (
                     <li
+                      key={person.id}
                       className={styles.clickable}
-                      onClick={() => {
-                        props.setFieldValue("r001_dic", person.tin);
-                        props.setFieldValue("r007_ulica", person.street);
-                        props.setFieldValue("r008_cislo", person.street_number);
-                        props.setFieldValue("r009_psc", person.postal_code);
-                        props.setFieldValue("r010_obec", person.municipality);
-                        props.setFieldValue("r011_stat", person.country);
-                      }}
+                      onClick={() =>
+                        handlePersonAutoform(person, props.setFieldValue)
+                      }
                     >
                       {person.name} : {person.formatted_address}
                     </li>
