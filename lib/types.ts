@@ -1,28 +1,34 @@
-export interface IncomeAndExpenseUserInput {
-  // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
-  t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+export type IncomeAndExpenseUserInput = Pick<
+  TaxFormUserInput,
+  "t1r10_prijmy" | "priloha3_r11_socialne" | "priloha3_r13_zdravotne"
+>;
 
-  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
-  priloha3_r11_socialne: number;
+export type PartnerUserInput = Pick<
+  TaxFormUserInput,
+  | "r031_priezvisko_a_meno"
+  | "r031_rodne_cislo"
+  | "r032_uplatnujem_na_partnera"
+  | "r032_partner_vlastne_prijmy"
+  | "r032_partner_pocet_mesiacov"
+  | "r033_partner_kupele"
+  | "r033_partner_kupele_uhrady"
+>;
+export type PersonalInformationUserInput = Pick<
+  TaxFormUserInput,
+  | "r001_dic"
+  | "r002_datum_narodenia"
+  | "r003_nace"
+  | "r004_priezvisko"
+  | "r005_meno"
+  | "r007_ulica"
+  | "r008_cislo"
+  | "r010_obec"
+  | "r011_stat"
+  | "datum"
+>;
 
-  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
-  priloha3_r13_zdravotne: number;
-}
-
-export interface PartnerUserInput {
-  // Partner
-  r031_priezvisko_a_meno: string;
-  r031_rodne_cislo: string;
-  r032_uplatnujem_na_partnera: boolean;
-  r032_partner_vlastne_prijmy: number;
-  r032_partner_pocet_mesiacov: number;
-  r033_partner_kupele: boolean;
-  // max 50
-  r033_partner_kupele_uhrady: number;
-}
-
-export interface PersonalInformationUserInput {
-  // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
+export interface TaxFormUserInput {
+  // 01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)
   r001_dic?: string;
   // 02 - Dátum narodenia
   // TODO Aky format?
@@ -36,8 +42,6 @@ export interface PersonalInformationUserInput {
   r004_priezvisko?: string;
   // 05 - Meno
   r005_meno?: string;
-  // 06 - Titul
-  r006_titul?: string;
   // 07 - Ulica
   r007_ulica?: string;
   // 08 - Súpisné/orientačné číslo *
@@ -51,19 +55,33 @@ export interface PersonalInformationUserInput {
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test*/
   datum?: string;
-}
 
-export interface TaxFormUserInput
-  extends Partial<IncomeAndExpenseUserInput>,
-    Partial<PartnerUserInput>,
-    Partial<PersonalInformationUserInput> {}
+  // Partner
+  r031_priezvisko_a_meno: string;
+  r031_rodne_cislo: string;
+  r032_uplatnujem_na_partnera: boolean;
+  r032_partner_vlastne_prijmy: number;
+  r032_partner_pocet_mesiacov: number;
+  r033_partner_kupele: boolean;
+  // max 50
+  r033_partner_kupele_uhrady: number;
+
+  // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
+  t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
+
+  // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
+  priloha3_r11_socialne: number;
+
+  // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
+  priloha3_r13_zdravotne: number;
+}
 
 export interface TaxForm extends TaxFormUserInput {
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
 
   t1r10_vydavky?: number;
   t1r2_prijmy?: number;
-  t1r10_prijmy?: number;
+  t1r10_prijmy: number;
   // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
   // vydavkyPoistPar6ods11_ods1a2
   priloha3_r08_poistne?: number;
