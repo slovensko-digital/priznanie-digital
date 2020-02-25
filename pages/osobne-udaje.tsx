@@ -17,9 +17,24 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
     updateTaxForm(values);
     router.push(nextUrl);
   };
+
+  const getCity = zip => {
+    return fetch(`https://api.posta.sk/private/search?q=${zip}&m=zip`)
+      .then(response => response.json())
+      .then(pscData => {
+        return pscData &&
+          pscData.offices &&
+          pscData.offices[0] &&
+          pscData.offices[0].name
+          ? pscData.offices[0].name
+          : "";
+      });
+  };
+
   useEffect(() => {
     router.prefetch(nextUrl);
   });
+
   return (
     <>
       <Link href={backUrl}>
@@ -31,37 +46,54 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
           taxForm,
         )}
         onSubmit={handleSubmit}
+        getCity={getCity}
         // validationSchema={validationSchema}
       >
-        <Form className="form">
-          <h2>Údaje o daňovníkovi</h2>
+        {props => (
+          <Form className="form">
+            <h2>Údaje o daňovníkovi</h2>
 
-          <Input name="r005_meno" type="text" label="Meno" />
-          <Input name="r004_priezvisko" type="text" label="Priezvisko" />
-          <Input name="r003_nace" type="text" label="NACE" />
+            <Input name="r005_meno" type="text" label="Meno" />
+            <Input name="r004_priezvisko" type="text" label="Priezvisko" />
+            <Input name="r003_nace" type="text" label="NACE" />
 
-          <Input name="r001_dic" type="text" label="DIČ" />
-          <Input
-            name="r002_datum_narodenia"
-            type="text"
-            label="Dátum narodenia"
-          />
+            <Input name="r001_dic" type="text" label="DIČ" />
+            <Input
+              name="r002_datum_narodenia"
+              type="text"
+              label="Dátum narodenia"
+            />
 
-          <h3>Adresa trvalého pobytu</h3>
-          <Input name="r007_ulica" type="text" label="Ulica" />
-          <Input
-            name="r008_cislo"
-            type="text"
-            label="Súpisné/orientačné číslo"
-          />
-          <Input name="r009_psc" type="text" label="PSČ" />
-          <Input name="r010_obec" type="text" label="Obec" />
-          <Input name="r011_stat" type="text" label="Štát" />
+            <h3>Adresa trvalého pobytu</h3>
+            <Input name="r007_ulica" type="text" label="Ulica" />
+            <Input
+              name="r008_cislo"
+              type="text"
+              label="Súpisné/orientačné číslo"
+            />
+            <Input
+              name="r009_psc"
+              type="text"
+              label="PSČ"
+              onChange={async e => {
+                props.handleChange(e);
+                const pscValue = e.target["value"];
+                const trimmedPSC = pscValue.replace(/ /g, "");
 
-          <button className="govuk-button" type="submit">
-            Dalej
-          </button>
-        </Form>
+                if (trimmedPSC.length === 5) {
+                  const city = await getCity(trimmedPSC);
+                  props.setFieldValue("r010_obec", city);
+                }
+              }}
+            />
+            <Input name="r010_obec" type="text" label="Obec" />
+            <Input name="r011_stat" type="text" label="Štát" />
+
+            <button className="govuk-button" type="submit">
+              Dalej
+            </button>
+          </Form>
+        )}
       </Formik>
     </>
   );
