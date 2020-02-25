@@ -13,7 +13,6 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
     initTaxFormUserInputValues,
     taxFormUserInput,
   );
-
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
 
   tf.priloha3_r08_poistne =

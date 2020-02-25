@@ -10,7 +10,7 @@ module.exports = {
     "/node_modules/",
     "/.next/",
     "/__tests__/testCases",
-    "/cypress/",
+    "/cypress",
   ],
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
@@ -36,5 +36,6 @@ module.exports = {
     "testOutputs",
     `.*\.output\.json`,
     `.*\.output\.xml`,
+    "/cypress",
   ],
 };
