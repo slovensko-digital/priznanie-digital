@@ -35,7 +35,6 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
   };
 
   const getAutoformByPersonName = (fullName: string) => {
-    //TODO: Load data from Autoform API
     return fetch(
       `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${fullName}&private_access_token=89e56e0d966f79a2dca7d1a0f6f97799796e6cc77b616bbc4b796c086290c0acd1ab2f91dad4fb56
 `,
@@ -76,7 +75,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
      */
   };
 
-  const handleAutoform = async (values, setFieldValue) => {
+  const handleAutoform = async values => {
     if (values["r005_meno"].length > 0 && values["r004_priezvisko"].length) {
       const personsData = await getAutoformByPersonName(
         `${values["r005_meno"]} ${values["r004_priezvisko"]}`,
@@ -125,7 +124,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
               label="Meno"
               onBlur={e => {
                 props.handleBlur(e);
-                handleAutoform(props.values, props.setFieldValue);
+                handleAutoform(props.values);
               }}
             />
             <Input
@@ -134,7 +133,7 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
               label="Priezvisko"
               onBlur={e => {
                 props.handleBlur(e);
-                handleAutoform(props.values, props.setFieldValue);
+                handleAutoform(props.values);
               }}
             />
 
