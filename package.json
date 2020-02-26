@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run test:noWatch && next build",
+    "build": "npm run test:ci && next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:noWatch": "jest",
-    "test:ci": "jest --ci",
+    "test:ci": "jest --ci && npm run cy:ci",
     "prettier": "prettier --write  './{lib,components,pages}/**/*.*'",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run --headless",
+    "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run"
   },
   "dependencies": {
     "formik": "^2.1.4",
@@ -38,6 +38,7 @@
     "libxmljs": "^0.19.7",
     "prettier": "1.19.1",
     "react-test-renderer": "^16.12.0",
+    "start-server-and-test": "^1.10.8",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5"
   }
