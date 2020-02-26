@@ -1,7 +1,7 @@
 import { convertToJson, convertToXML } from "./xmlConverter";
 import basicTaxForm from "./basicTaxForm";
 import basic from "./basic";
-import fs from "fs";
+import { promises as fs } from "fs";
 // @ts-ignore
 import * as schema from "./schema.xsd";
 // @ts-ignore
@@ -17,7 +17,7 @@ describe("convertToJson", () => {
 });
 
 describe("convertToXML", () => {
-  test("Validate to schema", () => {
+  test("Validate to schema", async () => {
     const result = convertToXML(basicTaxForm);
     const schemaDefault = schema.default;
     // await fs.writeFile(
@@ -31,11 +31,7 @@ describe("convertToXML", () => {
   });
   test("Case 1", () => {
     const result = convertToXML(basicTaxForm);
-    fs.writeFile(
-      __dirname + "/testOutputs/xmlTestOutput_case1.xml",
-      result,
-      () => {},
-    );
+    fs.writeFile(__dirname + "/testOutputs/xmlTestOutput_case1.xml", result);
     const xml = basicCaseXml.default;
     expect(result).toBe(xml);
   });
