@@ -1,4 +1,72 @@
-export interface IncomeAndExpenseUserInput {
+export type IncomeAndExpenseUserInput = Pick<
+  TaxFormUserInput,
+  "t1r10_prijmy" | "priloha3_r11_socialne" | "priloha3_r13_zdravotne"
+>;
+
+export type PartnerUserInput = Pick<
+  TaxFormUserInput,
+  | "r031_priezvisko_a_meno"
+  | "r031_rodne_cislo"
+  | "r032_uplatnujem_na_partnera"
+  | "r032_partner_vlastne_prijmy"
+  | "r032_partner_pocet_mesiacov"
+  | "r033_partner_kupele"
+  | "r033_partner_kupele_uhrady"
+>;
+export type PersonalInformationUserInput = Pick<
+  TaxFormUserInput,
+  | "r001_dic"
+  | "r002_datum_narodenia"
+  | "r003_nace"
+  | "r004_priezvisko"
+  | "r005_meno"
+  | "r007_ulica"
+  | "r008_cislo"
+  | "r009_psc"
+  | "r010_obec"
+  | "r011_stat"
+  | "datum"
+>;
+
+export interface TaxFormUserInput {
+  // 01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)
+  r001_dic: string;
+  // 02 - Dátum narodenia
+  // TODO Aky format?
+  r002_datum_narodenia: string;
+  // 03 - SK NACE - Hlavná, prevažná činnosť
+  // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
+  r003_nace: string;
+
+  // Oddiel I
+  // 04 - Priezvisko
+  r004_priezvisko: string;
+  // 05 - Meno
+  r005_meno: string;
+  // 07 - Ulica
+  r007_ulica: string;
+  // 08 - Súpisné/orientačné číslo *
+  r008_cislo: string;
+  // 09 - PSČ *
+  r009_psc: string;
+  // 10 - Obec *
+  r010_obec: string;
+  // 11 - Štát *
+  r011_stat: string;
+  /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
+   * failovali test*/
+  datum?: string;
+
+  // Partner
+  r031_priezvisko_a_meno: string;
+  r031_rodne_cislo: string;
+  r032_uplatnujem_na_partnera: boolean;
+  r032_partner_vlastne_prijmy: number;
+  r032_partner_pocet_mesiacov: number;
+  r033_partner_kupele: boolean;
+  // max 50
+  r033_partner_kupele_uhrady: number;
+
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
 
@@ -9,61 +77,12 @@ export interface IncomeAndExpenseUserInput {
   priloha3_r13_zdravotne: number;
 }
 
-export interface PartnerUserInput {
-  // Partner
-  r031_priezvisko_a_meno: string;
-  r031_rodne_cislo: string;
-  r032_uplatnujem_na_partnera: boolean;
-  r032_partner_vlastne_prijmy: number;
-  r032_partner_pocet_mesiacov: number;
-  r033_partner_kupele: boolean;
-  // max 50
-  r033_partner_kupele_uhrady: number;
-}
-
-export interface PersonalInformationUserInput {
-  // 01 - DIČ (ak nie je pridelené, uvádza sa rodné číslo)
-  r001_dic?: string;
-  // 02 - Dátum narodenia
-  // TODO Aky format?
-  r002_datum_narodenia?: string;
-  // 03 - SK NACE - Hlavná, prevažná činnosť
-  // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
-  r003_nace?: string;
-
-  // Oddiel I
-  // 04 - Priezvisko
-  r004_priezvisko?: string;
-  // 05 - Meno
-  r005_meno?: string;
-  // 06 - Titul
-  r006_titul?: string;
-  // 07 - Ulica
-  r007_ulica?: string;
-  // 08 - Súpisné/orientačné číslo *
-  r008_cislo?: string;
-  // 09 - PSČ *
-  r009_psc?: string;
-  // 10 - Obec *
-  r010_obec?: string;
-  // 11 - Štát *
-  r011_stat?: string;
-  /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
-   * failovali test*/
-  datum?: string;
-}
-
-export interface TaxFormUserInput
-  extends Partial<IncomeAndExpenseUserInput>,
-    Partial<PartnerUserInput>,
-    Partial<PersonalInformationUserInput> {}
-
 export interface TaxForm extends TaxFormUserInput {
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
 
   t1r10_vydavky?: number;
   t1r2_prijmy?: number;
-  t1r10_prijmy?: number;
+  t1r10_prijmy: number;
   // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
   // vydavkyPoistPar6ods11_ods1a2
   priloha3_r08_poistne?: number;

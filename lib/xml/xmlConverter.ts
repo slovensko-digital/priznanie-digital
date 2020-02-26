@@ -81,7 +81,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.neuplatnujem = "1";
 
   // TODO doplnit dnesny datum
-  form.dokument.telo.datumVyhlasenia = "19.02.2020";
+  form.dokument.telo.datumVyhlasenia = taxForm.datum;
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
     2,

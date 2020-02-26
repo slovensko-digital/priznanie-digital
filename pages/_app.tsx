@@ -6,16 +6,13 @@ import "../styles/libs.css";
 
 import React, { useState } from "react";
 import { calculate } from "../lib/calculation";
-import {
-  TaxForm,
-  TaxFormUserInput,
-} from "../lib/types";
+import { TaxForm, TaxFormUserInput } from "../lib/types";
 import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
 import { sortObjectKeys } from "../lib/utils";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [taxForm, setTaxForm] = useState<TaxForm>({});
+  const [taxForm, setTaxForm] = useState<Partial<TaxForm>>({});
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
   );
@@ -35,7 +32,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           TaxFormUserInput
           <pre>{JSON.stringify(sortObjectKeys(taxFormUserInput), null, 2)}</pre>
           TaxForm
-          <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>
+          <pre id="TaxForm">
+            {JSON.stringify(sortObjectKeys(taxForm), null, 2)}
+          </pre>
         </div>
       }
     >
