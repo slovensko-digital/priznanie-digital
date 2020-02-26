@@ -2,9 +2,6 @@ import { withPartnerInput } from "../../__tests__/testCases/withPartnerInput";
 
 import { TaxFormUserInput, TaxForm } from "../../lib/types";
 import { convertToXML } from "../../lib/xml/xmlConverter";
-import { xml2json } from "xml-js";
-
-const comparable = (xml: string) => xml2json(xml, { compact: true });
 
 function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
@@ -58,31 +55,17 @@ describe("Case 1", function() {
     getInput("r007_ulica").type(withPartnerInput.r007_ulica.toString());
     getInput("r008_cislo").type(withPartnerInput.r008_cislo.toString());
     getInput("r009_psc").type(withPartnerInput.r009_psc.toString());
-    // getInput("r010_obec").type(withPartnerInput.r010_obec.toString());
+    // cy.wait(1000);
+    getInput("r010_obec").type(withPartnerInput.r010_obec.toString());
     getInput("r011_stat").type(withPartnerInput.r011_stat.toString());
 
     cy.contains("Dalej").click();
     cy.contains("XML");
 
-    // cy.readFile("__tests__/testCases/withPartner.xml").then(
-    //   (xmlExpected: string) => {
-    //     cy.get(`pre[id="TaxForm"]`)
-    //       .invoke("text")
-    //       .then(txt => convertToXML(JSON.parse(txt.toString()) as TaxForm))
-    //       .then(xmlResult =>
-    //         expect(comparable(xmlResult)).to.deep.equal(
-    //           comparable(xmlExpected),
-    //         ),
-    //       );
-    //   },
-    // );
-    // cy.readFile(
-    //   "/Users/Jules/repos/work/slovensko.digital/priznanie-digital/__tests__/testCases/withPartner.xml",
-    // ).then(console.log);
-
-    cy.readFile("__tests__/testCases/withPartner.xml", "utf-8").then(
-      (xmlExpected: string) => {
-        // debugger;
+    cy.get(`pre[id="TaxForm"]`)
+      .invoke("text")
+      .then(txt => convertToXML(JSON.parse(txt.toString()) as TaxForm))
+      .then(xmlResult => {
         cy.visit("/form/form.451.html");
         const stub = cy.stub();
         cy.on("window:alert", stub);
@@ -90,7 +73,7 @@ describe("Case 1", function() {
         cy.get("#form-button-load").click();
         // @ts-ignore
         cy.get("#form-buttons-load-dialog > input").upload({
-          fileContent: xmlExpected,
+          fileContent: xmlResult,
           fileName: "hmm.xml",
           mimeType: "application/xml",
           encoding: "utf-8",
@@ -102,8 +85,12 @@ describe("Case 1", function() {
             expect(stub).to.be.calledWith(
               "Naplnenie formulára prebehlo úspešne",
             );
+
+            cy.get("#errorsContainer")
+              // .children()
+              .invoke("text")
+              .then(errors => expect(errors).to.be.empty());
           });
-      },
-    );
+      });
   });
 });
