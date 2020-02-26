@@ -17,7 +17,7 @@ describe("convertToJson", () => {
 });
 
 describe("convertToXML", () => {
-  test("Validate to schema", async () => {
+  test("Validate to schema", () => {
     const result = convertToXML(basicTaxForm);
     const schemaDefault = schema.default;
     // await fs.writeFile(
