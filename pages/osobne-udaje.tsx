@@ -32,12 +32,9 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   };
 
   const getAutoformByPersonName = (fullName: string) => {
-    return fetch(
-      `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${fullName}&private_access_token=89e56e0d966f79a2dca7d1a0f6f97799796e6cc77b616bbc4b796c086290c0acd1ab2f91dad4fb56
-`,
-    )
-      .then(response => response.json())
-      .then(json => json);
+    return fetch(`api/autoform?fullName=${fullName}`).then(response =>
+      response.json(),
+    );
 
     /** In case of just testing on localhost
     return [
