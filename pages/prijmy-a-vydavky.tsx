@@ -7,22 +7,18 @@ import { Formik, Form } from "formik";
 import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
 import { IncomeAndExpenseUserInput } from "../lib/types";
-import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/partner";
 const backUrl = "/";
 
-const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
+const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
   useEffect(() => {
-    router
-      .prefetch(nextUrl, nextUrl, { priority: true })
-      .then(console.log)
-      .catch(console.log);
+    router.prefetch(nextUrl);
   });
   return (
     <>
@@ -30,10 +26,7 @@ const PrijmyAVydavky = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={assignOnlyExistingKeys(
-          incomeAndExpenseInitialValues,
-          taxForm,
-        )}
+        initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >

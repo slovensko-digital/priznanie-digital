@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./osobne-udaje.module.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import Link from "next/link";
-import { personalInformationUserInputInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { Input } from "../components/FormComponents";
 import * as Yup from "yup";
 import { PersonalInformationUserInput } from "../lib/types";
-import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/vysledky";
 const backUrl = "/partner";
 
-const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
+const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const [autoformPersons, setAutoFormPersons] = useState([]);
-
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
 
@@ -106,13 +103,10 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={assignOnlyExistingKeys(
-          personalInformationUserInputInitialValues,
-          taxForm,
-        )}
+        initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
         getCity={getCity}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
       >
         {props => (
           <Form className="form">
@@ -203,7 +197,8 @@ const OsobneUdaje = ({ taxForm, updateTaxForm }) => {
 const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
   r001_dic: Yup.string()
     .required()
-    .min(9),
+    .min(9)
+    .max(10),
   r002_datum_narodenia: Yup.string(),
   r003_nace: Yup.string(),
   r004_priezvisko: Yup.string().required(),

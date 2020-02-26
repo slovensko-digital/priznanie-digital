@@ -2,19 +2,17 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form, Field, yupToFormErrors } from "formik";
-import { partnerUserInitialValues } from "../lib/initialValues";
 import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { PartnerUserInput } from "../lib/types";
-import { assignOnlyExistingKeys } from "../lib/utils";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/prijmy-a-vydavky";
 
-const Partner = ({ taxForm, updateTaxForm }) => {
+const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const router = useRouter();
   const handleSubmit = values => {
-    updateTaxForm(values);
+    setTaxFormUserInput(values);
     router.push(nextUrl);
   };
   useEffect(() => {
@@ -26,10 +24,7 @@ const Partner = ({ taxForm, updateTaxForm }) => {
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <Formik
-        initialValues={assignOnlyExistingKeys(
-          partnerUserInitialValues,
-          taxForm,
-        )}
+        initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -53,7 +48,7 @@ const Partner = ({ taxForm, updateTaxForm }) => {
                 />
                 <Input
                   name="r032_partner_vlastne_prijmy"
-                  type="text"
+                  type="number"
                   label="Vlastne prijmy"
                 />
                 <Input

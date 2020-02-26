@@ -8,31 +8,41 @@ import React, { useState } from "react";
 import { calculate } from "../lib/calculation";
 import {
   TaxForm,
-  IncomeAndExpenseUserInput,
-  PartnerUserInput,
+  TaxFormUserInput,
 } from "../lib/types";
 import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
 import { sortObjectKeys } from "../lib/utils";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [taxForm, setTaxForm] = useState<TaxForm>(initTaxFormUserInputValues);
-  const updateTaxForm = values => {
-    setTaxForm(previousTaxForm => {
-      return calculate({
-        ...previousTaxForm,
-        ...values,
-      });
+  const [taxForm, setTaxForm] = useState<TaxForm>({});
+  const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
+    initTaxFormUserInputValues,
+  );
+
+  const updateTaxFormUserInput = values => {
+    setTaxFormUserInput(prevUserInput => {
+      const newUserInput = { ...prevUserInput, ...values };
+      setTaxForm(calculate(newUserInput));
+      return newUserInput;
     });
   };
 
   return (
     <Layout
-      debug={<pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>}
+      debug={
+        <div>
+          TaxFormUserInput
+          <pre>{JSON.stringify(sortObjectKeys(taxFormUserInput), null, 2)}</pre>
+          TaxForm
+          <pre>{JSON.stringify(sortObjectKeys(taxForm), null, 2)}</pre>
+        </div>
+      }
     >
       <Component
         taxForm={taxForm}
-        updateTaxForm={updateTaxForm}
+        taxFormUserInput={taxFormUserInput}
+        setTaxFormUserInput={updateTaxFormUserInput}
         {...pageProps}
       />
     </Layout>

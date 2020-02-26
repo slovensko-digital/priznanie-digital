@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./vysledky.module.css";
 import Link from "next/link";
 import fileDownload from "js-file-download";
 import { convertToXML } from "../lib/xml/xmlConverter";
