@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import styles from "./osobne-udaje.module.css";
 import { Formik, Form } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,6 +11,7 @@ const nextUrl = "/vysledky";
 const backUrl = "/partner";
 
 const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
+  const [autoformPersons, setAutoFormPersons] = useState([]);
   const router = useRouter();
   const handleSubmit = values => {
     setTaxFormUserInput(values);
@@ -27,6 +29,68 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
           ? pscData.offices[0].name
           : "";
       });
+  };
+
+  const getAutoformByPersonName = (fullName: string) => {
+    return fetch(
+      `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${fullName}&private_access_token=89e56e0d966f79a2dca7d1a0f6f97799796e6cc77b616bbc4b796c086290c0acd1ab2f91dad4fb56
+`,
+    )
+      .then(response => response.json())
+      .then(json => json);
+
+    /** In case of just testing on localhost
+    return [
+      {
+        id: 1358414,
+        cin: "50 158 635",
+        tin: 2120264674,
+        vatin: null,
+        name: "Slovensko.Digital",
+        datahub_corporate_body: {
+          id: 1358414,
+          url:
+            "https://datahub.ekosystem.slovensko.digital/api/datahub/corporate_bodies/1358414",
+        },
+        formatted_address:
+          "Staré Grunty 6207/12, 841 04 Bratislava - mestská časť Karlova Ves",
+        street: "Staré Grunty",
+        reg_number: 6207,
+        building_number: "12",
+        street_number: "6207/12",
+        formatted_street: "Staré Grunty 6207/12",
+        postal_code: "841 04",
+        municipality: "Bratislava - mestská časť Karlova Ves",
+        country: "Slovenská republika",
+        established_on: "2016-01-29",
+        terminated_on: null,
+        vatin_paragraph: null,
+        registration_office: "MV SR",
+        registration_number: "VVS/1-900/90-48099",
+      },
+    ];
+     */
+  };
+
+  const handleAutoform = async values => {
+    if (values["r005_meno"].length > 0 && values["r004_priezvisko"].length) {
+      const personsData = await getAutoformByPersonName(
+        `${values["r005_meno"]} ${values["r004_priezvisko"]}`,
+      );
+      console.log(personsData);
+      if (personsData) {
+        setAutoFormPersons(personsData);
+      }
+    }
+  };
+
+  const handlePersonAutoform = (person, setFieldValue) => {
+    setFieldValue("r001_dic", person.tin);
+    setFieldValue("r007_ulica", person.street);
+    setFieldValue("r008_cislo", person.street_number);
+    setFieldValue("r009_psc", person.postal_code);
+    setFieldValue("r010_obec", person.municipality);
+    setFieldValue("r011_stat", person.country);
   };
 
   useEffect(() => {
@@ -48,9 +112,43 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
           <Form className="form">
             <h2>Údaje o daňovníkovi</h2>
 
-            <Input name="r005_meno" type="text" label="Meno" />
-            <Input name="r004_priezvisko" type="text" label="Priezvisko" />
-            <Input name="r003_nace" type="text" label="NACE" />
+            <Input
+              name="r005_meno"
+              type="text"
+              label="Meno"
+              onBlur={e => {
+                props.handleBlur(e);
+                handleAutoform(props.values);
+              }}
+            />
+            <Input
+              name="r004_priezvisko"
+              type="text"
+              label="Priezvisko"
+              onBlur={e => {
+                props.handleBlur(e);
+                handleAutoform(props.values);
+              }}
+            />
+
+            {autoformPersons.length > 0 && (
+              <div>
+                <h2>Udaje nemusite vypisovat, staci si vybrat osobu:</h2>
+                <ol className="govuk-list govuk-list--number">
+                  {autoformPersons.map(person => (
+                    <li
+                      key={person.id}
+                      className={styles.clickable}
+                      onClick={() =>
+                        handlePersonAutoform(person, props.setFieldValue)
+                      }
+                    >
+                      {person.name} : {person.formatted_address}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
 
             <Input name="r001_dic" type="text" label="DIČ" />
             <Input
@@ -58,6 +156,8 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
               type="text"
               label="Dátum narodenia"
             />
+
+            <Input name="r003_nace" type="text" label="NACE" />
 
             <h3>Adresa trvalého pobytu</h3>
             <Input name="r007_ulica" type="text" label="Ulica" />
