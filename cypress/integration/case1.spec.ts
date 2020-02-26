@@ -1,5 +1,6 @@
-import { withPartnerInput } from "../../__tests__/testCases/withPartnerInput";
+/// <reference types="cypress" />
 
+import { withPartnerInput } from "../../__tests__/testCases/withPartnerInput";
 import { TaxFormUserInput, TaxForm } from "../../lib/types";
 import { convertToXML } from "../../lib/xml/xmlConverter";
 
@@ -9,6 +10,8 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
 
 describe("Case 1", function() {
   it("it successfully completes the flow", function() {
+    // cy.clock(new Date(2020, 1, 22).getTime());
+    // console.log(new Date().toLocaleString("sk-sk"));
     cy.visit("/");
     cy.contains("Suhlasím").click();
     getInput("t1r10_prijmy").type(withPartnerInput.t1r10_prijmy.toString());
@@ -74,7 +77,7 @@ describe("Case 1", function() {
         // @ts-ignore
         cy.get("#form-buttons-load-dialog > input").upload({
           fileContent: xmlResult,
-          fileName: "hmm.xml",
+          fileName: "xmlResult.xml",
           mimeType: "application/xml",
           encoding: "utf-8",
         });
@@ -85,11 +88,11 @@ describe("Case 1", function() {
             expect(stub).to.be.calledWith(
               "Naplnenie formulára prebehlo úspešne",
             );
-
             cy.get("#errorsContainer")
-              // .children()
               .invoke("text")
-              .then(errors => expect(errors).to.be.empty());
+              .then(errors => expect(errors).to.be.empty);
+
+            // cy.get(`input.warning[type="text"]`).each($el => $el.dblclick());
           });
       });
   });
