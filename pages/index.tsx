@@ -24,7 +24,7 @@ export default () => (
 
       <Link href="/prijmy-a-vydavky">
         <button className="govuk-button govuk-button--large govuk-button--start">
-          Suhlasím a chcem začat
+          Pripraviť daňové priznanie
         </button>
       </Link>
     </div>
