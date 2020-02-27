@@ -146,7 +146,11 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
               </div>
             )}
 
-            <Input name="r001_dic" type="text" label="DIČ" />
+            <Input
+              name="r001_dic"
+              type="text"
+              label="DIČ (ak nie je pridelené, uvádza sa rodné číslo) "
+            />
 
             <Input name="r003_nace" type="text" label="NACE" />
 
