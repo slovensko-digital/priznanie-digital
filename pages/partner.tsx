@@ -7,7 +7,7 @@ import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { PartnerUserInput } from "../lib/types";
 
 const nextUrl = "/osobne-udaje";
-const backUrl = "/prijmy-a-vydavky";
+const backUrl = "/zamestnanie";
 
 const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const router = useRouter();
