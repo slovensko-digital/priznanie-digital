@@ -42,6 +42,7 @@ const Layout = ({ children, debug }) => (
       }
       .content-container {
         flex-grow: 1;
+        width: 100%;
       }
     `}</style>
   </div>
