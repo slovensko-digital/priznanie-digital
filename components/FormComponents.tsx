@@ -29,14 +29,16 @@ export function Input<Name extends keyof TaxFormUserInput>({
   );
 }
 
+interface BooleanRadioProps<Name> {
+  name: Name;
+  title: string;
+}
 export function BooleanRadio<Name extends keyof TaxFormUserInput>({
   title,
   ...props
-}: {
-  name: Name;
-  title: string;
-}) {
+}: BooleanRadioProps<Name>) {
   const [field, meta, helpers] = useField(props.name);
+
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset">
@@ -50,6 +52,7 @@ export function BooleanRadio<Name extends keyof TaxFormUserInput>({
               {...props}
               className="govuk-radios__input"
               type="radio"
+              checked={field.value}
               onChange={() => helpers.setValue(true)}
             />
             <label
@@ -65,6 +68,7 @@ export function BooleanRadio<Name extends keyof TaxFormUserInput>({
               {...props}
               className="govuk-radios__input"
               type="radio"
+              checked={field.value === undefined ? false : !field.value}
               onChange={() => helpers.setValue(false)}
             />
             <label
