@@ -43,9 +43,8 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
                       e.preventDefault();
                     }}
                   >
-                    Pridat dalsie dieta
+                    Pridať ďalšie dieťa
                   </button>
-                  <h3>Dieta c.1</h3>
                   <Input
                     // @ts-ignore TODO temporary solution
                     name={`r034[${index}].priezviskoMeno`}
@@ -56,7 +55,7 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
                     // @ts-ignore TODO temporary solution
                     name={`r034[${index}].rodneCislo`}
                     type="text"
-                    label="Rodne cislo"
+                    label="Rodné číslo"
                   />
                 </>
               ))}
