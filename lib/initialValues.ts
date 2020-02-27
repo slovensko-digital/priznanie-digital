@@ -3,6 +3,7 @@ import {
   PartnerUserInput,
   IncomeAndExpenseUserInput,
   TaxFormUserInput,
+  EmployedUserInput,
 } from "./types";
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -34,8 +35,13 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   datum: new Date().toLocaleString("sk-sk"),
 };
 
+export const employmentUserInputInitialValues: EmployedUserInput = {
+  employed: undefined,
+};
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
+  ...employmentUserInputInitialValues,
 };

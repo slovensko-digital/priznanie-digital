@@ -1,5 +1,6 @@
 import React from "react";
 import { useField } from "formik";
+import { TaxFormUserInput } from "../lib/types";
 
 interface InputProps {
   name: string;
@@ -28,11 +29,13 @@ export function Input({
   );
 }
 
-interface BooleanRadioProps {
-  name: string;
+export function BooleanRadio<Name extends keyof TaxFormUserInput>({
+  title,
+  ...props
+}: {
+  name: Name;
   title: string;
-}
-export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
+}) {
   const [field, meta, helpers] = useField(props.name);
   return (
     <div className="govuk-form-group">

@@ -3,6 +3,8 @@ export type IncomeAndExpenseUserInput = Pick<
   "t1r10_prijmy" | "priloha3_r11_socialne" | "priloha3_r13_zdravotne"
 >;
 
+export type EmployedUserInput = Pick<TaxFormUserInput, "employed">;
+
 export type PartnerUserInput = Pick<
   TaxFormUserInput,
   | "r031_priezvisko_a_meno"
@@ -75,6 +77,7 @@ export interface TaxFormUserInput {
 
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
   priloha3_r13_zdravotne: number;
+  employed: boolean;
 }
 
 export interface TaxForm extends TaxFormUserInput {

@@ -24,6 +24,10 @@ describe("Case 1", function() {
 
     cy.contains("Pokračovať").click();
 
+    getInput("employed")
+      .first()
+      .click();
+
     getInput("r032_uplatnujem_na_partnera")
       .first()
       .click();

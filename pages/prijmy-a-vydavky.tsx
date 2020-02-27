@@ -8,7 +8,7 @@ import { incomeAndExpenseInitialValues } from "../lib/initialValues";
 import { Input } from "../components/FormComponents";
 import { IncomeAndExpenseUserInput } from "../lib/types";
 
-const nextUrl = "/partner";
+const nextUrl = "/zamestnanie";
 const backUrl = "/";
 
 const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
