@@ -1,7 +1,5 @@
 {
-  "build": {
-    "env": {
-      "autoformtoken": "@autoformtoken"
-    }
+  "env": {
+    "autoformtoken": "@autoformtoken"
   }
 }
