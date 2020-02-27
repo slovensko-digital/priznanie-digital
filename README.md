@@ -1,17 +1,15 @@
-# Next.js + Jest
+# priznanie.digital - Návod na vyplnenie daňového priznania pre SZČO
 
-This example shows how to configure Jest to work with Next.js.
+Daňové priznanie je jeden z najväčších byrokratických strašiakov podnikateľov. A pritom pri zadaní pár jednoduchých údajov si
+ho môže vyplniť ktokoľvek za pár minút bez väčších problémov. Chceme takto malými krokmi uľahčiť život státisicom živnostníkov.
+Ak ste SZČO (živnostník) a uplatňujete si paušálne výdavky, tak vám pomôžeme vyplniť daňové priznanie (k dani z príjmov fyzickej osoby, typ B) a tiež vás detailne prevedieme aj procesom podania na stránkach Finančnej správy.
 
-This includes Next.js' built-in support for Global CSS, CSS Modules, and TypeScript!
-
-## How to Use
-
-Quickly get started using [Create Next App](https://github.com/zeit/next.js/tree/canary/packages/create-next-app#readme)!
+## How to develop
 
 In your terminal, run the following command:
 
 ```bash
-npx create-next-app --example with-jest
+npm run dev
 ```
 
 ## Run Jest Tests
@@ -19,3 +17,12 @@ npx create-next-app --example with-jest
 ```bash
 npm test
 ```
+
+## Run e2e tests
+
+```bash
+npm run cy:open
+```
+
+## Env variables
+Add .env file with necessary env variables
