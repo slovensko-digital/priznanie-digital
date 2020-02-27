@@ -81,6 +81,11 @@ const Vysledky = ({ taxForm }) => {
           </li>
         </ol>
       </div>
+      <style jsx>{`
+        li {
+          margin-top: 8px;
+        }
+      `}</style>
     </>
   );
 };
