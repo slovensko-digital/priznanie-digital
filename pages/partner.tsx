@@ -21,7 +21,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Naspat</a>
+        <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik
         initialValues={taxFormUserInput}
@@ -31,7 +31,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Uplatnujete danovy bonus na manzelku/manzela?"
+              title="Ste vydatá/ženatý a chcete si uplatniť daňový bonus na manžela/manželku?"
               name="r032_uplatnujem_na_partnera"
             ></BooleanRadio>
             {values.r032_uplatnujem_na_partnera && (
@@ -69,7 +69,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
               </>
             )}
             <button className="govuk-button" type="submit">
-              Dalej
+              Pokračovať
             </button>
           </Form>
         )}

@@ -24,9 +24,12 @@ const Layout = ({ children, debug }) => (
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
-          {DEBUG_ON && (
-            <div className="govuk-grid-column-one-third">{debug}</div>
-          )}
+          <div
+            className="govuk-grid-column-one-third"
+            style={{ visibility: DEBUG_ON ? "visible" : "hidden" }}
+          >
+            {debug}
+          </div>
         </div>
       </main>
     </div>
@@ -38,7 +41,6 @@ const Layout = ({ children, debug }) => (
         height: 100vh;
       }
       .content-container {
-        width: 100%;
         flex-grow: 1;
       }
     `}</style>

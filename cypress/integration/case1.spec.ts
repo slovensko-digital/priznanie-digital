@@ -9,7 +9,7 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
 }
 
 describe("Case 1", function() {
-  it("it successfully completes the flow", function() {
+  it("UI only", function() {
     // cy.clock(new Date(2020, 1, 22).getTime());
     // console.log(new Date().toLocaleString("sk-sk"));
     cy.visit("/");
@@ -22,7 +22,7 @@ describe("Case 1", function() {
       withPartnerInput.priloha3_r13_zdravotne.toString(),
     );
 
-    cy.contains("Dalej").click();
+    cy.contains("Pokračovať").click();
 
     getInput("r032_uplatnujem_na_partnera")
       .first()
@@ -44,7 +44,7 @@ describe("Case 1", function() {
     getInput("r033_partner_kupele_uhrady").type(
       withPartnerInput.r033_partner_kupele_uhrady.toString(),
     );
-    cy.contains("Dalej").click();
+    cy.contains("Pokračovať").click();
 
     getInput("r001_dic").type(withPartnerInput.r001_dic!.toString());
     getInput("r002_datum_narodenia").type(
@@ -62,7 +62,7 @@ describe("Case 1", function() {
     getInput("r010_obec").type(withPartnerInput.r010_obec.toString());
     getInput("r011_stat").type(withPartnerInput.r011_stat.toString());
 
-    cy.contains("Dalej").click();
+    cy.contains("Pokračovať").click();
     cy.contains("XML");
 
     cy.get(`pre[id="TaxForm"]`)

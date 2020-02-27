@@ -23,7 +23,7 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Naspat</a>
+        <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik
         initialValues={taxFormUserInput}
@@ -31,22 +31,22 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
         validationSchema={validationSchema}
       >
         <Form className="form">
-          <h2>Prijmy vydavky</h2>
+          <h2>Príjmy a výdavky</h2>
 
-          <Input name="t1r10_prijmy" type="number" label="Prijmy"></Input>
+          <Input name="t1r10_prijmy" type="number" label="Príjmy"></Input>
           <Input
             name="priloha3_r11_socialne"
             type="number"
-            label="Socialne poistenie"
+            label="Sociálne poistenie"
           ></Input>
           <Input
             name="priloha3_r13_zdravotne"
             type="number"
-            label="Zdravotne poistenie"
+            label="Zdravotné poistenie"
           ></Input>
 
           <button className="govuk-button" type="submit">
-            Dalej
+            Pokračovať
           </button>
         </Form>
       </Formik>

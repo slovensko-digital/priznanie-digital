@@ -37,7 +37,7 @@ export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
         <div className="govuk-radios">
@@ -53,7 +53,7 @@ export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
               className="govuk-label govuk-radios__label"
               htmlFor="where-do-you-live"
             >
-              Ano
+              Áno
             </label>
           </div>
           <div className="govuk-radios__item">

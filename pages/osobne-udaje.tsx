@@ -100,7 +100,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Naspat</a>
+        <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik
         initialValues={taxFormUserInput}
@@ -185,7 +185,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <Input name="r011_stat" type="text" label="Štát" />
 
             <button className="govuk-button" type="submit">
-              Dalej
+              Pokračovať
             </button>
           </Form>
         )}
