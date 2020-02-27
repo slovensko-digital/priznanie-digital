@@ -14,7 +14,6 @@
     "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
     "formik": "^2.1.4",
     "isomorphic-unfetch": "^3.0.0",
     "js-file-download": "^0.4.10",
