@@ -74,7 +74,6 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
       const personsData = await getAutoformByPersonName(
         `${values["r005_meno"]} ${values["r004_priezvisko"]}`,
       );
-      console.log(personsData);
       if (personsData) {
         setAutoFormPersons(personsData);
       }
