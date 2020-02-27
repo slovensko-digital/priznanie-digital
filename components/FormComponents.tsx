@@ -1,16 +1,17 @@
 import React from "react";
 import { useField } from "formik";
+import { TaxFormUserInput } from "../lib/types";
 
-interface InputProps {
-  name: string;
+interface InputProps<Name> {
+  name: Name;
   label: string;
   type: "text" | "number";
 }
 
-export function Input({
+export function Input<Name extends keyof TaxFormUserInput>({
   label,
   ...props
-}: InputProps & React.HTMLProps<HTMLInputElement>) {
+}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) {
   const [field, meta] = useField(props.name);
 
   return (
@@ -28,16 +29,18 @@ export function Input({
   );
 }
 
-interface BooleanRadioProps {
-  name: string;
+export function BooleanRadio<Name extends keyof TaxFormUserInput>({
+  title,
+  ...props
+}: {
+  name: Name;
   title: string;
-}
-export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
+}) {
   const [field, meta, helpers] = useField(props.name);
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
         <div className="govuk-radios">
@@ -53,7 +56,7 @@ export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
               className="govuk-label govuk-radios__label"
               htmlFor="where-do-you-live"
             >
-              Ano
+              Áno
             </label>
           </div>
           <div className="govuk-radios__item">

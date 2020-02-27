@@ -3,6 +3,8 @@ import {
   PartnerUserInput,
   IncomeAndExpenseUserInput,
   TaxFormUserInput,
+  EmployedUserInput,
+  KidsUserInput,
 } from "./types";
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -34,8 +36,40 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   datum: new Date().toLocaleString("sk-sk"),
 };
 
+export const employmentUserInputInitialValues: EmployedUserInput = {
+  employed: undefined,
+  r038: 0,
+  r039: 0,
+};
+
+export const kidsUserInputInitialValues: KidsUserInput = {
+  kids: undefined,
+  r034: [
+    {
+      priezviskoMeno: "",
+      rodneCislo: "",
+      kupelnaStarostlivost: false,
+      m00: false,
+      m01: false,
+      m02: false,
+      m03: false,
+      m04: false,
+      m05: false,
+      m06: false,
+      m07: false,
+      m08: false,
+      m09: false,
+      m10: false,
+      m11: false,
+      m12: false,
+    },
+  ],
+};
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
+  ...employmentUserInputInitialValues,
+  ...kidsUserInputInitialValues,
 };

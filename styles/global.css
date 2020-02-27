@@ -8,3 +8,12 @@ body {
   width: 1rem;
   margin: 0 0.75rem -2px 0;
 }
+
+/* Temporary solution with important */
+.btn-secondary {
+  border: 2px solid #3a67e8 !important;
+  color: #3a67e8 !important;
+  background-color: inherit !important;
+  border-radius: 3px !important;
+  margin-bottom: 0 !important;
+}
