@@ -27,6 +27,9 @@ describe("Case 1", function() {
     getInput("employed")
       .first()
       .click();
+    getInput("r038").type("3000");
+    getInput("r039").type("300");
+    cy.contains("Pokračovať").click();
 
     getInput("r032_uplatnujem_na_partnera")
       .first()

@@ -37,6 +37,8 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
+  r038: 0,
+  r039: 0,
 };
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {

@@ -2,16 +2,16 @@ import React from "react";
 import { useField } from "formik";
 import { TaxFormUserInput } from "../lib/types";
 
-interface InputProps {
-  name: string;
+interface InputProps<N> {
+  name: N;
   label: string;
   type: "text" | "number";
 }
 
-export function Input({
+export function Input<Name extends keyof TaxFormUserInput>({
   label,
   ...props
-}: InputProps & React.HTMLProps<HTMLInputElement>) {
+}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) {
   const [field, meta] = useField(props.name);
 
   return (

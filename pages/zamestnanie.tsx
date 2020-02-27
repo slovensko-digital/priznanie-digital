@@ -5,6 +5,7 @@ import { Formik, Form, Field, yupToFormErrors } from "formik";
 import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { PartnerUserInput } from "../lib/types";
+import { employmentUserInputInitialValues } from "../lib/initialValues";
 
 const nextUrl = "/partner";
 const backUrl = "/prijmy-a-vydavky";
@@ -24,7 +25,7 @@ const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
         <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik
-        initialValues={{ zamestnany: false }}
+        initialValues={employmentUserInputInitialValues}
         onSubmit={handleSubmit}
         // validationSchema={validationSchema}
       >
@@ -34,7 +35,7 @@ const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
               title="Boli ste v roku 2019 zamestnaný/á v SR?"
               name="employed"
             ></BooleanRadio>
-            {values.zamestnany && (
+            {values.employed && (
               <>
                 <Input
                   name="r038"
