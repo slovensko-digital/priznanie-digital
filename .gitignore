@@ -29,3 +29,4 @@ yarn.lock
 
 testOutputs
 __tests__/**/*.output.*
+.now
