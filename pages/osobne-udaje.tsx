@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { PersonalInformationUserInput } from "../lib/types";
 
 const nextUrl = "/vysledky";
-const backUrl = "/partner";
+const backUrl = "/deti";
 
 const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const [autoformPersons, setAutoFormPersons] = useState([]);

@@ -8,7 +8,7 @@ export type EmployedUserInput = Pick<
   "employed" | "r038" | "r039"
 >;
 
-export type KidsUserInput = Pick<TaxFormUserInput, "kids">;
+export type KidsUserInput = Pick<TaxFormUserInput, "kids" | "r034">;
 
 export type PartnerUserInput = Pick<
   TaxFormUserInput,
@@ -90,6 +90,26 @@ export interface TaxFormUserInput {
 
   // Deti
   kids: boolean;
+  r034: [
+    {
+      priezviskoMeno: string;
+      rodneCislo: string;
+      kupelnaStarostlivost: boolean;
+      m00: boolean;
+      m01: boolean;
+      m02: boolean;
+      m03: boolean;
+      m04: boolean;
+      m05: boolean;
+      m06: boolean;
+      m07: boolean;
+      m08: boolean;
+      m09: boolean;
+      m10: boolean;
+      m11: boolean;
+      m12: boolean;
+    },
+  ];
 }
 
 export interface TaxForm extends TaxFormUserInput {

@@ -3,7 +3,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
-import { BooleanRadio, Input } from "../components/FormComponents";
+import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { KidsUserInput } from "../lib/types";
 
 const nextUrl = "/osobne-udaje";
@@ -34,20 +34,32 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="kids"
             ></BooleanRadio>
-            {values.kids && (
-              <>
-                <Input
-                  name="r038"
-                  type="text"
-                  label="Úhrn príjmov od všetkých zamestnávateľov"
-                />
-                <Input
-                  name="r039"
-                  type="text"
-                  label="Úhrn povinného poistného"
-                />
-              </>
-            )}
+            {values.kids &&
+              values.r034.map((_kid, index) => (
+                <>
+                  <button
+                    className="btn-secondary govuk-button"
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                  >
+                    Pridat dalsie dieta
+                  </button>
+                  <h3>Dieta c.1</h3>
+                  <Input
+                    // @ts-ignore TODO temporary solution
+                    name={`r034[${index}].priezviskoMeno`}
+                    type="text"
+                    label="Meno a priezvisko"
+                  />
+                  <Input
+                    // @ts-ignore TODO temporary solution
+                    name={`r034[${index}].rodneCislo`}
+                    type="text"
+                    label="Rodne cislo"
+                  />
+                </>
+              ))}
             <button className="govuk-button" type="submit">
               Pokračovať
             </button>
@@ -62,10 +74,10 @@ const validationSchema = Yup.object().shape<KidsUserInput>({
   kids: Yup.boolean()
     .required()
     .nullable(),
-  // r038: Yup.number().when("employed", {
-  //   is: true,
-  //   then: Yup.number().required(),
-  // }),
+  r034: Yup.mixed().when("kids", {
+    is: true,
+    then: Yup.mixed(),
+  }),
   // r039: Yup.number().when("employed", {
   //   is: true,
   //   then: Yup.number().required(),

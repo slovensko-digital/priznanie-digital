@@ -2,8 +2,8 @@ import React from "react";
 import { useField } from "formik";
 import { TaxFormUserInput } from "../lib/types";
 
-interface InputProps<N> {
-  name: N;
+interface InputProps<Name> {
+  name: Name;
   label: string;
   type: "text" | "number";
 }
