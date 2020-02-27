@@ -9,11 +9,13 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
 }
 
 describe("Case 1", function() {
-  it("UI only", function() {
+  it("Complete flow", function() {
     // cy.clock(new Date(2020, 1, 22).getTime());
     // console.log(new Date().toLocaleString("sk-sk"));
     cy.visit("/");
-    cy.contains("Suhlasím").click();
+
+    cy.contains("Pripraviť daňové priznanie").click();
+
     getInput("t1r10_prijmy").type(withPartnerInput.t1r10_prijmy.toString());
     getInput("priloha3_r11_socialne").type(
       withPartnerInput.priloha3_r11_socialne.toString(),
