@@ -55,6 +55,12 @@ describe("Case 1", function() {
     );
     cy.contains("Pokračovať").click();
 
+    getInput("kids")
+      .first()
+      .click();
+
+    cy.contains("Pokračovať").click();
+
     getInput("r001_dic").type(withPartnerInput.r001_dic!.toString());
     getInput("r002_datum_narodenia").type(
       withPartnerInput.r002_datum_narodenia!.toString(),

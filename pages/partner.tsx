@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
 import { PartnerUserInput } from "../lib/types";
 
-const nextUrl = "/osobne-udaje";
+const nextUrl = "/deti";
 const backUrl = "/zamestnanie";
 
 const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {

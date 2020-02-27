@@ -8,6 +8,8 @@ export type EmployedUserInput = Pick<
   "employed" | "r038" | "r039"
 >;
 
+export type KidsUserInput = Pick<TaxFormUserInput, "kids">;
+
 export type PartnerUserInput = Pick<
   TaxFormUserInput,
   | "r031_priezvisko_a_meno"
@@ -81,9 +83,13 @@ export interface TaxFormUserInput {
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
   priloha3_r13_zdravotne: number;
 
+  // Zamestnanie
   employed: boolean;
   r038?: number;
   r039?: number;
+
+  // Deti
+  kids: boolean;
 }
 
 export interface TaxForm extends TaxFormUserInput {

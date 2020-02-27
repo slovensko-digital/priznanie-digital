@@ -4,6 +4,7 @@ import {
   IncomeAndExpenseUserInput,
   TaxFormUserInput,
   EmployedUserInput,
+  KidsUserInput,
 } from "./types";
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -41,9 +42,14 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   r039: 0,
 };
 
+export const kidsUserInputInitialValues: KidsUserInput = {
+  kids: undefined,
+};
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
+  ...kidsUserInputInitialValues,
 };
