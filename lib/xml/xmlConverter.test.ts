@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { convertToJson, convertToXML } from "./xmlConverter";
 import basicTaxForm from "./basicTaxForm";
 import basic from "./basic";

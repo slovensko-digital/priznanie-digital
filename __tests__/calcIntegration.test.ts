@@ -24,5 +24,6 @@ test("withPartner", () => {
     stringify(outputJson),
   );
 
+  // @ts-ignore
   expect(comparable(outputXml)).toBe(comparable(withPartnerXML.default));
 });

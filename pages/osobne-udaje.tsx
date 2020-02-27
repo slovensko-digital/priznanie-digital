@@ -147,11 +147,6 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
             )}
 
             <Input name="r001_dic" type="text" label="DIČ" />
-            <Input
-              name="r002_datum_narodenia"
-              type="text"
-              label="Dátum narodenia"
-            />
 
             <Input name="r003_nace" type="text" label="NACE" />
 
@@ -195,7 +190,6 @@ const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
     .required()
     .min(9)
     .max(10),
-  r002_datum_narodenia: Yup.string(),
   r003_nace: Yup.string(),
   r004_priezvisko: Yup.string().required(),
   r005_meno: Yup.string().required(),

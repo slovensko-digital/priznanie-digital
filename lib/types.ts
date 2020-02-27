@@ -23,7 +23,7 @@ export type PartnerUserInput = Pick<
 export type PersonalInformationUserInput = Pick<
   TaxFormUserInput,
   | "r001_dic"
-  | "r002_datum_narodenia"
+  // | "r002_datum_narodenia"
   | "r003_nace"
   | "r004_priezvisko"
   | "r005_meno"
@@ -40,7 +40,7 @@ export interface TaxFormUserInput {
   r001_dic: string;
   // 02 - Dátum narodenia
   // TODO Aky format?
-  r002_datum_narodenia: string;
+  // r002_datum_narodenia: string;
   // 03 - SK NACE - Hlavná, prevažná činnosť
   // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
   r003_nace: string;
@@ -84,13 +84,13 @@ export interface TaxFormUserInput {
   priloha3_r13_zdravotne: number;
 
   // Zamestnanie
-  employed: boolean;
+  employed?: boolean;
   r038?: number;
   r039?: number;
 
   // Deti
-  kids: boolean;
-  r034: [
+  kids?: boolean;
+  r034?: [
     {
       priezviskoMeno: string;
       rodneCislo: string;
