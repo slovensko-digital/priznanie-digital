@@ -1,4 +1,3 @@
-/// <reference types="jest" />
 import { calculate } from "./calculation";
 import { TaxFormUserInput } from "./types";
 
