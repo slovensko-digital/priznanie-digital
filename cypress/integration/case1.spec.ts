@@ -49,10 +49,10 @@ describe("Case 1", function() {
     getInput("r032_partner_pocet_mesiacov").type(
       withPartnerInput.r032_partner_pocet_mesiacov.toString(),
     );
-    getInput("r033_partner_kupele").click();
-    getInput("r033_partner_kupele_uhrady").type(
-      withPartnerInput.r033_partner_kupele_uhrady.toString(),
-    );
+    // getInput("r033_partner_kupele").click();
+    // getInput("r033_partner_kupele_uhrady").type(
+    //   withPartnerInput.r033_partner_kupele_uhrady.toString(),
+    // );
     cy.contains("Pokračovať").click();
 
     getInput("kids")
