@@ -32,11 +32,12 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   };
 
   const getAutoformByPersonName = (fullName: string) => {
+    /*
     return fetch(`api/autoform?fullName=${fullName}`).then(response =>
       response.json(),
-    );
+    );*/
 
-    /** In case of just testing on localhost
+    /** In case of just testing on localhost */
     return [
       {
         id: 1358414,
@@ -66,7 +67,6 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
         registration_number: "VVS/1-900/90-48099",
       },
     ];
-     */
   };
 
   const handleAutoform = async values => {
@@ -84,7 +84,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
     person.tin && setFieldValue("r001_dic", person.tin);
     setFieldValue("r007_ulica", person.street);
     setFieldValue("r008_cislo", person.street_number);
-    setFieldValue("r009_psc", person.postal_code);
+    setFieldValue("r009_psc", person.postal_code.replace(/\D/g, ""));
     setFieldValue("r010_obec", person.municipality);
     setFieldValue("r011_stat", person.country);
   };
@@ -190,10 +190,15 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 name="r009_psc"
                 type="text"
                 label="PSČ"
+                onBlur={e => {
+                  props.handleBlur(e);
+                  const pscValue = e.target["value"];
+                  props.setFieldValue("r009_psc", pscValue.replace(/\D/g, ""));
+                }}
                 onChange={async e => {
                   props.handleChange(e);
                   const pscValue = e.target["value"];
-                  const trimmedPSC = pscValue.replace(/ /g, "");
+                  const trimmedPSC = pscValue.replace(/\D/g, "");
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
