@@ -63,14 +63,14 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
 
 const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput>({
   t1r10_prijmy: Yup.number()
-    .min(0, "Musi byt kladne.")
-    .required("Pole je povinné."),
+    .min(0)
+    .required(),
   priloha3_r11_socialne: Yup.number()
-    .min(0, "Musi byt kladne.")
-    .required("Pole je povinné."),
+    .min(0)
+    .required(),
   priloha3_r13_zdravotne: Yup.number()
-    .min(0, "Musi byt kladne.")
-    .required("Pole je povinné."),
+    .min(0)
+    .required(),
 });
 
 export default PrijmyAVydavky;
