@@ -11,6 +11,23 @@ import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
 import { sortObjectKeys } from "../lib/utils";
 
+import { setLocale } from "yup";
+
+setLocale({
+  mixed: {
+    default: "Hodnota nie je správna",
+    required: "Toto pole musí byť vyplnené",
+  },
+  number: {
+    min: "Môže mať hodnotu najmenej  ${min}",
+    max: "Môže mať hodnotu najviac ${max}",
+  },
+  string: {
+    min: "Musí mať aspoň ${min} znakov",
+    max: "Môže mať maximálne ${max} znakov",
+  },
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [taxForm, setTaxForm] = useState<Partial<TaxForm>>({});
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
