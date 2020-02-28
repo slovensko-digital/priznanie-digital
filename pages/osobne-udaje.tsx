@@ -110,6 +110,21 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
+                name="r001_dic"
+                type="text"
+                label="DIČ"
+              />
+
+              <Input
+                className={styles.inlineField}
+                name="r003_nace"
+                type="text"
+                label="NACE"
+              />
+            </div>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
                 name="r005_meno"
                 type="text"
                 label="Meno"
@@ -148,14 +163,6 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 </ol>
               </div>
             )}
-
-            <Input
-              name="r001_dic"
-              type="text"
-              label="DIČ (ak nie je pridelené, uvádza sa rodné číslo) "
-            />
-
-            <Input name="r003_nace" type="text" label="NACE" />
 
             <h2>Adresa trvalého pobytu</h2>
             <div className={styles.inlineFieldContainer}>
