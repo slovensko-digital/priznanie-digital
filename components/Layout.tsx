@@ -4,7 +4,7 @@ import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const DEBUG_ON = true;
+const DEBUG_ON = false;
 const Layout = ({ children, debug }) => (
   <div className="container">
     <Head>
@@ -20,13 +20,22 @@ const Layout = ({ children, debug }) => (
         </div>
       </div>
     </div>
+
     <div className="govuk-width-container content-container">
+      <div className="govuk-phase-banner">
+        <p className="govuk-phase-banner__content">
+          <strong className="govuk-tag govuk-phase-banner__content__tag">
+            Alpha
+          </strong>
+          <span className="govuk-phase-banner__text">
+            Táto služba je vo vývoji.
+          </span>
+        </p>
+      </div>
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
-          {DEBUG_ON && (
-            <div className="govuk-grid-column-one-third">{debug}</div>
-          )}
+          <div className="govuk-grid-column-one-third debug">{debug}</div>
         </div>
       </main>
     </div>
@@ -38,8 +47,13 @@ const Layout = ({ children, debug }) => (
         height: 100vh;
       }
       .content-container {
-        width: 100%;
         flex-grow: 1;
+        width: 100%;
+      }
+      .debug {
+        visibility: ${DEBUG_ON ? "visible" : "hidden"};
+        max-height: 400px;
+        overflow-y: scroll;
       }
     `}</style>
   </div>

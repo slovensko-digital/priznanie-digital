@@ -3,6 +3,13 @@ export type IncomeAndExpenseUserInput = Pick<
   "t1r10_prijmy" | "priloha3_r11_socialne" | "priloha3_r13_zdravotne"
 >;
 
+export type EmployedUserInput = Pick<
+  TaxFormUserInput,
+  "employed" | "r038" | "r039"
+>;
+
+export type KidsUserInput = Pick<TaxFormUserInput, "kids" | "r034">;
+
 export type PartnerUserInput = Pick<
   TaxFormUserInput,
   | "r031_priezvisko_a_meno"
@@ -16,7 +23,7 @@ export type PartnerUserInput = Pick<
 export type PersonalInformationUserInput = Pick<
   TaxFormUserInput,
   | "r001_dic"
-  | "r002_datum_narodenia"
+  // | "r002_datum_narodenia"
   | "r003_nace"
   | "r004_priezvisko"
   | "r005_meno"
@@ -33,7 +40,7 @@ export interface TaxFormUserInput {
   r001_dic: string;
   // 02 - Dátum narodenia
   // TODO Aky format?
-  r002_datum_narodenia: string;
+  // r002_datum_narodenia: string;
   // 03 - SK NACE - Hlavná, prevažná činnosť
   // TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum, UX musi byt zvladnute
   r003_nace: string;
@@ -75,6 +82,34 @@ export interface TaxFormUserInput {
 
   // Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov
   priloha3_r13_zdravotne: number;
+
+  // Zamestnanie
+  employed?: boolean;
+  r038?: number;
+  r039?: number;
+
+  // Deti
+  kids?: boolean;
+  r034?: [
+    {
+      priezviskoMeno: string;
+      rodneCislo: string;
+      kupelnaStarostlivost: boolean;
+      m00: boolean;
+      m01: boolean;
+      m02: boolean;
+      m03: boolean;
+      m04: boolean;
+      m05: boolean;
+      m06: boolean;
+      m07: boolean;
+      m08: boolean;
+      m09: boolean;
+      m10: boolean;
+      m11: boolean;
+      m12: boolean;
+    },
+  ];
 }
 
 export interface TaxForm extends TaxFormUserInput {

@@ -23,8 +23,8 @@ export default () => (
       </p>
 
       <Link href="/prijmy-a-vydavky">
-        <button className="govuk-button govuk-button--large">
-          Suhlasím a chcem začat
+        <button className="govuk-button govuk-button--large govuk-button--start">
+          Pripraviť daňové priznanie
         </button>
       </Link>
     </div>
@@ -45,7 +45,7 @@ export default () => (
 
     <div className="govuk-grid-column-full">
       <Link href="/prijmy-a-vydavky">
-        <button className="govuk-button govuk-button--secondary">
+        <button className="btn-secondary govuk-button">
           Odložiť daňové priznanie
         </button>
       </Link>

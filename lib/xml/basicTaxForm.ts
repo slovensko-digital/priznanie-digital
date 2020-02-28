@@ -2,7 +2,7 @@ import { TaxForm } from "../types";
 
 const basicTaxForm: Partial<TaxForm> = {
   r001_dic: "111111111",
-  r002_datum_narodenia: "22.2.1993",
+  // r002_datum_narodenia: "22.2.1993",
   r003_nace: "62232",
   r004_priezvisko: "Retzer",
   r005_meno: "Julius",

@@ -155,10 +155,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <style jsx>{`
-          footer {
-          }
-        `}</style>
       </footer>
     </>
   );

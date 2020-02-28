@@ -1,20 +1,24 @@
 import React from "react";
 import { useField } from "formik";
+import { TaxFormUserInput } from "../lib/types";
+import classnames from "classnames";
 
-interface InputProps {
-  name: string;
+interface InputProps<Name> {
+  name: Name;
   label: string;
+  className?: string;
   type: "text" | "number";
 }
 
-export function Input({
+export function Input<Name extends keyof TaxFormUserInput>({
   label,
+  className,
   ...props
-}: InputProps & React.HTMLProps<HTMLInputElement>) {
+}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) {
   const [field, meta] = useField(props.name);
 
   return (
-    <div className="govuk-form-group">
+    <div className={classnames(["govuk-form-group", className])}>
       <label className="govuk-label" htmlFor={props.name}>
         {label}
       </label>
@@ -24,20 +28,29 @@ export function Input({
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
         </span>
       ) : null}
+      <style jsx>{`
+        .govuk-form-group {
+          height: 75px;
+        }
+      `}</style>
     </div>
   );
 }
 
-interface BooleanRadioProps {
-  name: string;
+interface BooleanRadioProps<Name> {
+  name: Name;
   title: string;
 }
-export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
+export function BooleanRadio<Name extends keyof TaxFormUserInput>({
+  title,
+  ...props
+}: BooleanRadioProps<Name>) {
   const [field, meta, helpers] = useField(props.name);
+
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
         <div className="govuk-radios">
@@ -47,13 +60,14 @@ export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
               {...props}
               className="govuk-radios__input"
               type="radio"
+              checked={field.value}
               onChange={() => helpers.setValue(true)}
             />
             <label
               className="govuk-label govuk-radios__label"
               htmlFor="where-do-you-live"
             >
-              Ano
+              Áno
             </label>
           </div>
           <div className="govuk-radios__item">
@@ -62,6 +76,7 @@ export function BooleanRadio({ title, ...props }: BooleanRadioProps) {
               {...props}
               className="govuk-radios__input"
               type="radio"
+              checked={field.value === undefined ? false : !field.value}
               onChange={() => helpers.setValue(false)}
             />
             <label

@@ -13,7 +13,7 @@ module.exports = {
     "/cypress",
   ],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "\\.xml$": "jest-raw-loader",
     "\\.xsd$": "jest-raw-loader",

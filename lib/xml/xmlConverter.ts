@@ -6,7 +6,7 @@ export function convertToJson(taxForm: TaxForm) {
   const form = Object.assign({}, schemaSample);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
-  form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
+  // form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
   form.dokument.hlavicka.skNace = {
     k1: "62",
     k2: "01",
