@@ -70,9 +70,9 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   };
 
   const handleAutoform = async values => {
-    if (values["r005_meno"].length > 0 && values["r004_priezvisko"].length) {
+    if (values.r005_meno.length > 0 && values.r004_priezvisko.length > 1) {
       const personsData = await getAutoformByPersonName(
-        `${values["r005_meno"]} ${values["r004_priezvisko"]}`,
+        `${values.r005_meno} ${values.r004_priezvisko}`,
       );
       if (personsData) {
         setAutoFormPersons(personsData);
@@ -101,31 +101,54 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Formik
         initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
-        getCity={getCity}
         validationSchema={validationSchema}
       >
         {props => (
           <Form className="form">
             <h2>Údaje o daňovníkovi</h2>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r001_dic"
+                type="text"
+                label="DIČ"
+              />
 
-            <Input
-              name="r005_meno"
-              type="text"
-              label="Meno"
-              onBlur={e => {
-                props.handleBlur(e);
-                handleAutoform(props.values);
-              }}
-            />
-            <Input
-              name="r004_priezvisko"
-              type="text"
-              label="Priezvisko"
-              onBlur={e => {
-                props.handleBlur(e);
-                handleAutoform(props.values);
-              }}
-            />
+              <Input
+                className={styles.inlineField}
+                name="r003_nace"
+                type="text"
+                label="NACE"
+              />
+            </div>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r005_meno"
+                type="text"
+                label="Meno"
+                onChange={e => {
+                  props.handleChange(e);
+                  handleAutoform({
+                    ...props.values,
+                    ...{ r005_meno: e.currentTarget.value },
+                  });
+                }}
+              />
+              <Input
+                className={styles.inlineField}
+                name="r004_priezvisko"
+                type="text"
+                label="Priezvisko"
+                onChange={e => {
+                  props.handleChange(e);
+                  handleAutoform({
+                    ...props.values,
+                    ...{ r004_priezvisko: e.currentTarget.value },
+                  });
+                }}
+              />
+            </div>
 
             {autoformPersons.length > 0 && (
               <div>
@@ -146,38 +169,47 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
               </div>
             )}
 
-            <Input name="r001_dic" type="text" label="DIČ" />
-            <Input
-              name="r002_datum_narodenia"
-              type="text"
-              label="Dátum narodenia"
-            />
+            <h2>Adresa trvalého pobytu</h2>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r007_ulica"
+                type="text"
+                label="Ulica"
+              />
+              <Input
+                className={styles.inlineField}
+                name="r008_cislo"
+                type="text"
+                label="Súpisné/orientačné číslo"
+              />
+            </div>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r009_psc"
+                type="text"
+                label="PSČ"
+                onChange={async e => {
+                  props.handleChange(e);
+                  const pscValue = e.target["value"];
+                  const trimmedPSC = pscValue.replace(/ /g, "");
 
-            <Input name="r003_nace" type="text" label="NACE" />
+                  if (trimmedPSC.length === 5) {
+                    const city = await getCity(trimmedPSC);
+                    props.setFieldValue("r010_obec", city);
+                  }
+                }}
+              />
 
-            <h3>Adresa trvalého pobytu</h3>
-            <Input name="r007_ulica" type="text" label="Ulica" />
-            <Input
-              name="r008_cislo"
-              type="text"
-              label="Súpisné/orientačné číslo"
-            />
-            <Input
-              name="r009_psc"
-              type="text"
-              label="PSČ"
-              onChange={async e => {
-                props.handleChange(e);
-                const pscValue = e.target["value"];
-                const trimmedPSC = pscValue.replace(/ /g, "");
+              <Input
+                className={styles.inlineField}
+                name="r010_obec"
+                type="text"
+                label="Obec"
+              />
+            </div>
 
-                if (trimmedPSC.length === 5) {
-                  const city = await getCity(trimmedPSC);
-                  props.setFieldValue("r010_obec", city);
-                }
-              }}
-            />
-            <Input name="r010_obec" type="text" label="Obec" />
             <Input name="r011_stat" type="text" label="Štát" />
 
             <button className="govuk-button" type="submit">
@@ -195,7 +227,6 @@ const validationSchema = Yup.object().shape<PersonalInformationUserInput>({
     .required()
     .min(9)
     .max(10),
-  r002_datum_narodenia: Yup.string(),
   r003_nace: Yup.string(),
   r004_priezvisko: Yup.string().required(),
   r005_meno: Yup.string().required(),

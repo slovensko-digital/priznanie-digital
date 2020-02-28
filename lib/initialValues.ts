@@ -24,7 +24,7 @@ export const partnerUserInitialValues: PartnerUserInput = {
 };
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
   r001_dic: "",
-  r002_datum_narodenia: "",
+  // r002_datum_narodenia: "",
   r003_nace: "",
   r004_priezvisko: "",
   r005_meno: "",

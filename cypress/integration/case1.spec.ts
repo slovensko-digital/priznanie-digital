@@ -62,9 +62,9 @@ describe("Case 1", function() {
     cy.contains("Pokračovať").click();
 
     getInput("r001_dic").type(withPartnerInput.r001_dic!.toString());
-    getInput("r002_datum_narodenia").type(
-      withPartnerInput.r002_datum_narodenia!.toString(),
-    );
+    // getInput("r002_datum_narodenia").type(
+    //   withPartnerInput.r002_datum_narodenia!.toString(),
+    // );
     getInput("r003_nace").type(withPartnerInput.r003_nace.toString());
     getInput("r004_priezvisko").type(
       withPartnerInput.r004_priezvisko.toString(),

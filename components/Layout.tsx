@@ -4,7 +4,7 @@ import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const DEBUG_ON = true;
+const DEBUG_ON = false;
 const Layout = ({ children, debug }) => (
   <div className="container">
     <Head>
@@ -25,26 +25,17 @@ const Layout = ({ children, debug }) => (
       <div className="govuk-phase-banner">
         <p className="govuk-phase-banner__content">
           <strong className="govuk-tag govuk-phase-banner__content__tag">
-            alpha
+            Alpha
           </strong>
           <span className="govuk-phase-banner__text">
-            This is a new service – your{" "}
-            <a className="govuk-link" href="#">
-              feedback
-            </a>{" "}
-            will help us to improve it.
+            Táto služba je vo vývoji.
           </span>
         </p>
       </div>
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
-          <div
-            className="govuk-grid-column-one-third"
-            style={{ visibility: DEBUG_ON ? "visible" : "hidden" }}
-          >
-            {debug}
-          </div>
+          <div className="govuk-grid-column-one-third debug">{debug}</div>
         </div>
       </main>
     </div>
@@ -58,6 +49,11 @@ const Layout = ({ children, debug }) => (
       .content-container {
         flex-grow: 1;
         width: 100%;
+      }
+      .debug {
+        visibility: ${DEBUG_ON ? "visible" : "hidden"};
+        max-height: 400px;
+        overflow-y: scroll;
       }
     `}</style>
   </div>
