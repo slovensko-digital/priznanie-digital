@@ -35,12 +35,7 @@ const Layout = ({ children, debug }) => (
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
-          <div
-            className="govuk-grid-column-one-third"
-            style={{ visibility: DEBUG_ON ? "visible" : "hidden" }}
-          >
-            {debug}
-          </div>
+          <div className="govuk-grid-column-one-third debug">{debug}</div>
         </div>
       </main>
     </div>
@@ -54,6 +49,11 @@ const Layout = ({ children, debug }) => (
       .content-container {
         flex-grow: 1;
         width: 100%;
+      }
+      .debug {
+        visibility: ${DEBUG_ON ? "visible" : "hidden"};
+        max-height: 400px;
+        overflow-y: scroll;
       }
     `}</style>
   </div>
