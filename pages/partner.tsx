@@ -56,8 +56,8 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
                   type="number"
                   label="Počet mesiacov, kedy mala manželka príjem?"
                 />
-                <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
-                {/* {values.r033_partner_kupele && (
+                {/* <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
+                {values.r033_partner_kupele && (
                   <>
                     <Input
                       name="r033_partner_kupele_uhrady"
