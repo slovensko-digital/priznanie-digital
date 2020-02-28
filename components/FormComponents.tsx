@@ -28,6 +28,11 @@ export function Input<Name extends keyof TaxFormUserInput>({
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
         </span>
       ) : null}
+      <style jsx>{`
+        .govuk-form-group {
+          height: 75px;
+        }
+      `}</style>
     </div>
   );
 }
