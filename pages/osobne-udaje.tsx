@@ -81,7 +81,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   };
 
   const handlePersonAutoform = (person, setFieldValue) => {
-    setFieldValue("r001_dic", person.tin);
+    person.tin && setFieldValue("r001_dic", person.tin);
     setFieldValue("r007_ulica", person.street);
     setFieldValue("r008_cislo", person.street_number);
     setFieldValue("r009_psc", person.postal_code);
