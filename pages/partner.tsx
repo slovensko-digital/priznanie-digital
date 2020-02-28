@@ -33,7 +33,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <BooleanRadio
               title="Uplatňujete si daňový bonus na manželku/manžela?"
               name="r032_uplatnujem_na_partnera"
-            ></BooleanRadio>
+             />
             {values.r032_uplatnujem_na_partnera && (
               <>
                 <Input

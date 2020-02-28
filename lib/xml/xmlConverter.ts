@@ -1,9 +1,9 @@
+import xmljs from "xml-js";
 import schemaSample from "./schemaSample";
 import { TaxForm } from "../types";
-import xmljs from "xml-js";
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = Object.assign({}, schemaSample);
+  const form = { ...schemaSample};
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;

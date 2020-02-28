@@ -1,7 +1,7 @@
 import React from "react";
 import { useField } from "formik";
-import { TaxFormUserInput } from "../lib/types";
 import classnames from "classnames";
+import { TaxFormUserInput } from "../lib/types";
 
 interface InputProps<Name> {
   name: Name;

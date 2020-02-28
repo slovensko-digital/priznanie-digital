@@ -11,7 +11,7 @@ const backUrl = "/prijmy-a-vydavky";
 
 const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
   const router = useRouter();
-  const handleSubmit = values => {
+  const handleSubmit = (values: never) => {
     setTaxFormUserInput(values);
     router.push(nextUrl);
   };
@@ -33,7 +33,7 @@ const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <BooleanRadio
               title="Boli ste v roku 2019 zamestnaný/á v SR?"
               name="employed"
-            ></BooleanRadio>
+            />
             {values.employed && (
               <>
                 <Input

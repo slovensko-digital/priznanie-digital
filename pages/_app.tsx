@@ -5,13 +5,13 @@ import "../styles/navody-digital-0.1.8.min.css";
 import "../styles/libs.css";
 
 import React, { useState } from "react";
+import { setLocale } from "yup";
 import { calculate } from "../lib/calculation";
 import { TaxForm, TaxFormUserInput } from "../lib/types";
 import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
 import { sortObjectKeys } from "../lib/utils";
 
-import { setLocale } from "yup";
 
 setLocale({
   mixed: {

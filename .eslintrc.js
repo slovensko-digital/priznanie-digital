@@ -44,9 +44,10 @@ module.exports = {
     ],
     "@typescript-eslint/no-use-before-define": [
       "error",
-      { functions: false, classes: true, variables: true, typedefs: true },
+      { functions: false, classes: false, variables: false, typedefs: false },
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
+    "spaced-comment": ["error", "always", { markers: ["/"] }],
   },
 };

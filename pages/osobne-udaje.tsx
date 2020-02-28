@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./osobne-udaje.module.css";
 import { Formik, Form } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Input } from "../components/FormComponents";
 import * as Yup from "yup";
+import { Input } from "../components/FormComponents";
+import styles from "./osobne-udaje.module.css";
 import { PersonalInformationUserInput } from "../lib/types";
 
 const nextUrl = "/vysledky";
@@ -192,7 +192,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 label="PSČ"
                 onChange={async e => {
                   props.handleChange(e);
-                  const pscValue = e.target["value"];
+                  const pscValue = e.target.value;
                   const trimmedPSC = pscValue.replace(/ /g, "");
 
                   if (trimmedPSC.length === 5) {

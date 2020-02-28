@@ -33,7 +33,7 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="kids"
-            ></BooleanRadio>
+             />
             {values.kids &&
               values.r034.map((_kid, index) => (
                 <>

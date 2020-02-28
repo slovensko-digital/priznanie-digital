@@ -97,7 +97,7 @@ export default function Footer() {
             </div>
             <div className="sdn-footer__donate">
               <span className="sdn-footer__heart-wrapper">
-                <span className="sdn-footer__heart"></span>
+                <span className="sdn-footer__heart" />
               </span>
               <span className="sdn-footer__donate-text">
                 Páči sa vám čo pre vás robíme?

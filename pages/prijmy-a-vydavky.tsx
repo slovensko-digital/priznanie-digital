@@ -38,19 +38,19 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
             type="number"
             label="Príjmy"
             small="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
-          ></Input>
+           />
           <Input
             name="priloha3_r11_socialne"
             type="number"
             label="Sociálne poistenie"
             small="Celkové uhradené poistné v roku 2019"
-          ></Input>
+           />
           <Input
             name="priloha3_r13_zdravotne"
             small="Celkové uhradené poistné v roku 2019"
             type="number"
             label="Zdravotné poistenie"
-          ></Input>
+           />
 
           <button className="govuk-button" type="submit">
             Pokračovať

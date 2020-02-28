@@ -1,5 +1,5 @@
-import { TaxForm, TaxFormUserInput } from "./types";
 import floor from "lodash.floor";
+import { TaxForm, TaxFormUserInput } from "./types";
 import { initTaxFormUserInputValues } from "./initialValues";
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
@@ -8,11 +8,11 @@ const DAN_Z_PRIJMU_SADZBA = 0.19;
 
 export function calculate(taxFormUserInput: TaxFormUserInput) {
   // Make a copy of taxFormUserInput
-  const tf: TaxForm = Object.assign(
-    {},
-    initTaxFormUserInputValues,
-    taxFormUserInput,
-  );
+  const tf: TaxForm = {
+    
+    ...initTaxFormUserInputValues,
+    ...taxFormUserInput,
+  };
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
 
   tf.priloha3_r08_poistne =
