@@ -57,7 +57,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
                   label="Počet mesiacov, kedy mala manželka príjem?"
                 />
                 <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
-                {values.r033_partner_kupele && (
+                {/* {values.r033_partner_kupele && (
                   <>
                     <Input
                       name="r033_partner_kupele_uhrady"
@@ -65,7 +65,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
                       label="Partner kupele uhrady"
                     />
                   </>
-                )}
+                )} */}
               </>
             )}
             <button className="govuk-button" type="submit">
