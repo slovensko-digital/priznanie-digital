@@ -43,7 +43,7 @@ const Vysledky = ({ taxForm }) => {
         Stiahnut XML
       </button>
       <div>
-        <ol>
+        <ol className="govuk-list govuk-list--number">
           <li>
             Prihláste sa na portál Finančnej správy - buď pomocou Identifikátora
             a hesla, Kvalifikovaného elektronického podpisu (KEP) alebo

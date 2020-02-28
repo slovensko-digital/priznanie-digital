@@ -70,9 +70,9 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
   };
 
   const handleAutoform = async values => {
-    if (values["r005_meno"].length > 0 && values["r004_priezvisko"].length) {
+    if (values.r005_meno.length > 0 && values.r004_priezvisko.length > 1) {
       const personsData = await getAutoformByPersonName(
-        `${values["r005_meno"]} ${values["r004_priezvisko"]}`,
+        `${values.r005_meno} ${values.r004_priezvisko}`,
       );
       if (personsData) {
         setAutoFormPersons(personsData);
@@ -101,7 +101,6 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Formik
         initialValues={taxFormUserInput}
         onSubmit={handleSubmit}
-        getCity={getCity}
         validationSchema={validationSchema}
       >
         {props => (
@@ -128,9 +127,12 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 name="r005_meno"
                 type="text"
                 label="Meno"
-                onBlur={e => {
-                  props.handleBlur(e);
-                  handleAutoform(props.values);
+                onChange={e => {
+                  props.handleChange(e);
+                  handleAutoform({
+                    ...props.values,
+                    ...{ r005_meno: e.currentTarget.value },
+                  });
                 }}
               />
               <Input
@@ -138,9 +140,12 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 name="r004_priezvisko"
                 type="text"
                 label="Priezvisko"
-                onBlur={e => {
-                  props.handleBlur(e);
-                  handleAutoform(props.values);
+                onChange={e => {
+                  props.handleChange(e);
+                  handleAutoform({
+                    ...props.values,
+                    ...{ r004_priezvisko: e.currentTarget.value },
+                  });
                 }}
               />
             </div>
