@@ -107,25 +107,28 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
         {props => (
           <Form className="form">
             <h2>Údaje o daňovníkovi</h2>
-
-            <Input
-              name="r005_meno"
-              type="text"
-              label="Meno"
-              onBlur={e => {
-                props.handleBlur(e);
-                handleAutoform(props.values);
-              }}
-            />
-            <Input
-              name="r004_priezvisko"
-              type="text"
-              label="Priezvisko"
-              onBlur={e => {
-                props.handleBlur(e);
-                handleAutoform(props.values);
-              }}
-            />
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r005_meno"
+                type="text"
+                label="Meno"
+                onBlur={e => {
+                  props.handleBlur(e);
+                  handleAutoform(props.values);
+                }}
+              />
+              <Input
+                className={styles.inlineField}
+                name="r004_priezvisko"
+                type="text"
+                label="Priezvisko"
+                onBlur={e => {
+                  props.handleBlur(e);
+                  handleAutoform(props.values);
+                }}
+              />
+            </div>
 
             {autoformPersons.length > 0 && (
               <div>
@@ -154,29 +157,47 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
 
             <Input name="r003_nace" type="text" label="NACE" />
 
-            <h3>Adresa trvalého pobytu</h3>
-            <Input name="r007_ulica" type="text" label="Ulica" />
-            <Input
-              name="r008_cislo"
-              type="text"
-              label="Súpisné/orientačné číslo"
-            />
-            <Input
-              name="r009_psc"
-              type="text"
-              label="PSČ"
-              onChange={async e => {
-                props.handleChange(e);
-                const pscValue = e.target["value"];
-                const trimmedPSC = pscValue.replace(/ /g, "");
+            <h2>Adresa trvalého pobytu</h2>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r007_ulica"
+                type="text"
+                label="Ulica"
+              />
+              <Input
+                className={styles.inlineField}
+                name="r008_cislo"
+                type="text"
+                label="Súpisné/orientačné číslo"
+              />
+            </div>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="r009_psc"
+                type="text"
+                label="PSČ"
+                onChange={async e => {
+                  props.handleChange(e);
+                  const pscValue = e.target["value"];
+                  const trimmedPSC = pscValue.replace(/ /g, "");
 
-                if (trimmedPSC.length === 5) {
-                  const city = await getCity(trimmedPSC);
-                  props.setFieldValue("r010_obec", city);
-                }
-              }}
-            />
-            <Input name="r010_obec" type="text" label="Obec" />
+                  if (trimmedPSC.length === 5) {
+                    const city = await getCity(trimmedPSC);
+                    props.setFieldValue("r010_obec", city);
+                  }
+                }}
+              />
+
+              <Input
+                className={styles.inlineField}
+                name="r010_obec"
+                type="text"
+                label="Obec"
+              />
+            </div>
+
             <Input name="r011_stat" type="text" label="Štát" />
 
             <button className="govuk-button" type="submit">
