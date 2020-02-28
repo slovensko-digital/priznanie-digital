@@ -17,7 +17,7 @@
   "exclude": ["node_modules"],
   "include": [
     "next-env.d.ts",
-    "{pages,components,api,__tests_}/**/*.ts",
-    "{pages,components,api,__tests_}**/*.tsx"
+    "{pages,components,api,__tests__}/**/*.ts",
+    "{pages,components,api,__tests__}**/*.tsx"
   ]
 }
