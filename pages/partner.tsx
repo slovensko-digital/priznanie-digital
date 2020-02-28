@@ -31,7 +31,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Ste vydatá/ženatý a chcete si uplatniť daňový bonus na manžela/manželku?"
+              title="Uplatňujete si daňový bonus na manželku/manžela?"
               name="r032_uplatnujem_na_partnera"
             ></BooleanRadio>
             {values.r032_uplatnujem_na_partnera && (
@@ -39,22 +39,22 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 <Input
                   name="r031_priezvisko_a_meno"
                   type="text"
-                  label="Prizevisko a meno"
+                  label="Meno a priezvisko manželky/manžela"
                 />
                 <Input
                   name="r031_rodne_cislo"
                   type="text"
-                  label="Rodne cislo"
+                  label="Rodné číslo"
                 />
                 <Input
                   name="r032_partner_vlastne_prijmy"
                   type="number"
-                  label="Vlastne prijmy"
+                  label="Vlastné príjmy manželky/manžela"
                 />
                 <Input
                   name="r032_partner_pocet_mesiacov"
                   type="number"
-                  label="Pocet mesiacov"
+                  label="Počet mesiacov, kedy mala manželka príjem?"
                 />
                 <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
                 {values.r033_partner_kupele && (
