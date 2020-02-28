@@ -4,7 +4,7 @@ import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const DEBUG_ON = true;
+const DEBUG_ON = t;
 const Layout = ({ children, debug }) => (
   <div className="container">
     <Head>
