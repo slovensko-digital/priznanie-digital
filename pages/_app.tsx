@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { AppProps } from "next/app";
 
 import "../styles/global.css";
@@ -12,7 +13,7 @@ import Layout from "../components/Layout";
 import { initTaxFormUserInputValues } from "../lib/initialValues";
 import { sortObjectKeys } from "../lib/utils";
 
-
+/* eslint-disable no-template-curly-in-string */
 setLocale({
   mixed: {
     default: "Hodnota nie je správna",
@@ -27,14 +28,15 @@ setLocale({
     max: "Môže mať maximálne ${max} znakov",
   },
 });
+/* eslint-enable no-template-curly-in-string */
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [taxForm, setTaxForm] = useState<Partial<TaxForm>>({});
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
+  const [taxForm, setTaxForm] = useState<TaxForm | {}>({});
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
   );
 
-  const updateTaxFormUserInput = values => {
+  const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
       const newUserInput = { ...prevUserInput, ...values };
       setTaxForm(calculate(newUserInput));
@@ -63,6 +65,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
     </Layout>
   );
-}
+};
 
 export default MyApp;

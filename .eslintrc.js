@@ -4,20 +4,11 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.json",
   },
-  plugins: [
-    "@typescript-eslint",
-    "eslint-comments",
-    "jest",
-    "promise",
-    "unicorn",
-  ],
+  plugins: ["@typescript-eslint", "eslint-comments", "jest", "only-warn"],
   extends: [
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:eslint-comments/recommended",
     "plugin:jest/recommended",
-    "plugin:promise/recommended",
-    "plugin:unicorn/recommended",
     "prettier",
     "prettier/react",
     "prettier/@typescript-eslint",
@@ -27,7 +18,6 @@ module.exports = {
     "no-prototype-builtins": "off",
     // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
     "import/prefer-default-export": "off",
-    "import/no-default-export": "error",
     // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
     "react/destructuring-assignment": "off",
     // No jsx extension: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904
@@ -38,10 +28,7 @@ module.exports = {
       { functions: false, classes: true, variables: false },
     ],
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      { allowExpressions: true, allowTypedFunctionExpressions: true },
-    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-use-before-define": [
       "error",
       { functions: false, classes: false, variables: false, typedefs: false },
@@ -49,5 +36,14 @@ module.exports = {
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
     "spaced-comment": ["error", "always", { markers: ["/"] }],
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/jsx-props-no-spreading": "off",
+    "eslint-comments/disable-enable-pair": "off",
+    "import/no-default-export": 0,
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      1,
+      { allowShortCircuit: true, allowTernary: true },
+    ],
   },
 };

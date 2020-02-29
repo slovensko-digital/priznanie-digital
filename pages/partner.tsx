@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import * as Yup from "yup";
-import { Formik, Form, Field, yupToFormErrors } from "formik";
+import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
-import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
-import { PartnerUserInput } from "../lib/types";
+import { NextPage } from "next";
+import { BooleanRadio, Input } from "../components/FormComponents";
+import { PartnerUserInput, TaxFormUserInput } from "../lib/types";
 
 const nextUrl = "/deti";
 const backUrl = "/zamestnanie";
 
-const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
+interface Props {
+  setTaxFormUserInput: (values: PartnerUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+
+const Partner: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -23,9 +28,12 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik
+      <Formik<PartnerUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
         validationSchema={validationSchema}
       >
         {({ values }) => (
@@ -33,7 +41,7 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <BooleanRadio
               title="Uplatňujete si daňový bonus na manželku/manžela?"
               name="r032_uplatnujem_na_partnera"
-             />
+            />
             {values.r032_uplatnujem_na_partnera && (
               <>
                 <Input

@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import * as Yup from "yup";
-import { Formik, Form, Field, yupToFormErrors } from "formik";
+import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
-import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
-import { EmployedUserInput } from "../lib/types";
+import { NextPage } from "next";
+import { BooleanRadio, Input } from "../components/FormComponents";
+import { EmployedUserInput, TaxFormUserInput } from "../lib/types";
 
 const nextUrl = "/partner";
 const backUrl = "/prijmy-a-vydavky";
 
-const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
+interface Props {
+  setTaxFormUserInput: (values: EmployedUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+
+const Zamestnanie: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = (values: never) => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -23,9 +28,12 @@ const Zamestnanie = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik
+      <Formik<EmployedUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
         validationSchema={validationSchema}
       >
         {({ values }) => (
