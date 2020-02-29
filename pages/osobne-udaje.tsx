@@ -73,9 +73,10 @@ interface AutoformPerson {
 }
 const handlePersonAutoform = (
   person: AutoformPerson,
-  { setValues, values }: FormikProps<Partial<PersonalInformationUserInput>>,
+  { setValues, values }: FormikProps<PersonalInformationUserInput>,
 ) => {
   setValues({
+    ...values,
     r001_dic: person.tin ? person.tin : values.r001_dic,
     r007_ulica: person.street,
     r008_cislo: person.street_number,
