@@ -40,6 +40,7 @@
     "cypress": "^4.0.2",
     "cypress-file-upload": "^3.5.3",
     "eslint-config-xo-react": "^0.23.0",
+    "eslint-config-xo-typescript": "^0.26.0",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
     "identity-obj-proxy": "^3.0.0",

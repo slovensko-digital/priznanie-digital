@@ -47,7 +47,7 @@ export default () => (
 
     <div className="govuk-grid-column-full">
       <Link href="/prijmy-a-vydavky">
-        <button className="btn-secondary govuk-button">
+        <button type="button" className="btn-secondary govuk-button">
           Odložiť daňové priznanie
         </button>
       </Link>

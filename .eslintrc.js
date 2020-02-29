@@ -1,6 +1,7 @@
 {
   "extends": [
 		"xo",
-		"xo-react/space"
+		"xo-react",
+		"xo-typescript"
 	]
 }

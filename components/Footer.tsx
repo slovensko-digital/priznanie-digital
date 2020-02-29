@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <>
       <div className="sdn-feedbackbar">
@@ -158,4 +158,6 @@ export default function Footer() {
       </footer>
     </>
   );
-}
+};
+
+export default Footer;

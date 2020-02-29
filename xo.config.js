@@ -1,5 +1,6 @@
 module.exports = {
-  extends: ['xo/esnext', 'xo-react'],
+  extends: ['xo/esnext', 'xo-react', 'xo-typescript'],
+  envs: ['browser', 'node', 'jest', 'es2020'],
   space: true,
   prettier: true,
   globals: ['describe', 'test', 'expect', 'cy', 'fetch'],
