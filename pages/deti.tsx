@@ -3,18 +3,21 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
-import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
-import { KidsUserInput } from "../lib/types";
+import { NextPage } from "next";
+import { BooleanRadio, Input } from "../components/FormComponents";
+import { KidsUserInput, TaxFormUserInput } from "../lib/types";
 
 const nextUrl = "/osobne-udaje";
 const backUrl = "/partner";
-
-const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
+interface Props {
+  setTaxFormUserInput: (values: KidsUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+const Deti: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -25,7 +28,10 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
       </Link>
       <Formik<KidsUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
         validationSchema={validationSchema}
       >
         {({ values }) => (
@@ -33,12 +39,13 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="kids"
-             />
+            />
             {values.kids &&
               values.r034.map((_kid, index) => (
                 <>
                   <button
                     className="btn-secondary govuk-button"
+                    type="button"
                     onClick={e => {
                       e.preventDefault();
                     }}
