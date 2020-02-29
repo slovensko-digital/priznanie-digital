@@ -6,7 +6,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     throw new Error("Autoform token is missing in `process.env` variable");
   }
   const personsDataJson = await fetch(
-    `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${req.query.fullName}&limit=20&active=true&private_access_token=${process.env.autoformtoken}
+    `https://autoform.ekosystem.slovensko.digital/api/corporate_bodies/search?q=name:${encodeURI(
+      req.query.firstName as string,
+    )}+${encodeURI(
+      req.query.lastName as string,
+    )}&limit=20&active=true&private_access_token=${process.env.autoformtoken}
 `,
   );
 
