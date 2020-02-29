@@ -11,16 +11,16 @@ const stringify = (object: object) => JSON.stringify(object, null, 2);
 test("withPartner", () => {
   const taxForm = calculate(withPartnerInput);
   fs.writeFile(
-    `${__dirname  }/testCases/withPartnerTaxForm.output.json`,
+    `${__dirname}/testCases/withPartnerTaxForm.output.json`,
     stringify(taxForm),
   );
 
   const outputXml = convertToXML(taxForm);
   const outputJson = convertToJson(taxForm);
 
-  fs.writeFile(`${__dirname  }/testCases/withPartner.output.xml`, outputXml);
+  fs.writeFile(`${__dirname}/testCases/withPartner.output.xml`, outputXml);
   fs.writeFile(
-    `${__dirname  }/testCases/withPartner.output.json`,
+    `${__dirname}/testCases/withPartner.output.json`,
     stringify(outputJson),
   );
 
