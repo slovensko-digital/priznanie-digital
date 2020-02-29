@@ -28,11 +28,11 @@ const Deti: NextPage<Props> = ({
       </Link>
       <Formik<KidsUserInput>
         initialValues={taxFormUserInput}
+        validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextUrl);
         }}
-        validationSchema={validationSchema}
       >
         {({ values }) => (
           <Form className="form">

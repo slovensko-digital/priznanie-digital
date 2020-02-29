@@ -45,7 +45,7 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
           </dd>
         </div>
       </dl>
-      <button className="govuk-button" onClick={onExport} type="button">
+      <button className="govuk-button" type="button" onClick={onExport}>
         Stiahnut XML
       </button>
       <div>

@@ -31,11 +31,11 @@ const PrijmyAVydavky: NextPage<Props> = ({
       </Link>
       <Formik<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
+        validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextUrl);
         }}
-        validationSchema={validationSchema}
       >
         <Form className="form">
           <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>

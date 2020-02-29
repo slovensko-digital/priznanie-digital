@@ -61,11 +61,11 @@ const OsobneUdaje: NextPage<Props> = ({
       </Link>
       <Formik<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
+        validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextUrl);
         }}
-        validationSchema={validationSchema}
       >
         {props => (
           <Form className="form">

@@ -11,12 +11,12 @@ interface InputProps<Name> {
   type: 'text' | 'number';
 }
 
-export function Input<Name extends keyof TaxFormUserInput>({
+export var Input = <Name extends keyof TaxFormUserInput>({
   label,
   small,
   className,
   ...props
-}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) {
+}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
   const [field, meta] = useField(props.name);
 
   return (
@@ -38,16 +38,16 @@ export function Input<Name extends keyof TaxFormUserInput>({
       `}</style>
     </div>
   );
-}
+};
 
 interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
 }
-export function BooleanRadio<Name extends keyof TaxFormUserInput>({
+export var BooleanRadio = <Name extends keyof TaxFormUserInput>({
   title,
   ...props
-}: BooleanRadioProps<Name>) {
+}: BooleanRadioProps<Name>) => {
   const [field, meta, helpers] = useField(props.name);
 
   return (
@@ -98,9 +98,9 @@ export function BooleanRadio<Name extends keyof TaxFormUserInput>({
       </fieldset>
     </div>
   );
-}
+};
 
-export function Checkbox({ title, ...props }) {
+export var Checkbox = ({ title, ...props }) => {
   const [field, meta, helpers] = useField(props.name);
   return (
     <div className="govuk-form-group">
@@ -132,4 +132,4 @@ export function Checkbox({ title, ...props }) {
       </fieldset>
     </div>
   );
-}
+};

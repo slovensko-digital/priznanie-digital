@@ -30,11 +30,11 @@ const Partner: NextPage<Props> = ({
       </Link>
       <Formik<PartnerUserInput>
         initialValues={taxFormUserInput}
+        validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextUrl);
         }}
-        validationSchema={validationSchema}
       >
         {({ values }) => (
           <Form className="form">
