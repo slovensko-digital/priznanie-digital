@@ -99,7 +99,7 @@ const OsobneUdaje: NextPage<Props> = ({
 
   const handleAutoform = async (values: PersonalInformationUserInput) => {
     if (values.r005_meno.length > 0 && values.r004_priezvisko.length > 1) {
-      const personsData = await getAutoformByPersonName(
+      const personsData: AutoformPerson[] = await getAutoformByPersonName(
         values.r005_meno,
         values.r004_priezvisko,
       );
