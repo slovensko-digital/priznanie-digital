@@ -41,8 +41,8 @@ const Deti: NextPage<Props> = ({
               name="kids"
             />
             {values.kids &&
-              values.r034.map((_kid, index) => (
-                <>
+              values.r034.map((kid, index) => (
+                <div key={kid.rodneCislo}>
                   <button
                     className="btn-secondary govuk-button"
                     type="button"
@@ -64,7 +64,7 @@ const Deti: NextPage<Props> = ({
                     type="text"
                     label="Rodné číslo"
                   />
-                </>
+                </div>
               ))}
             <button className="govuk-button" type="submit">
               Pokračovať

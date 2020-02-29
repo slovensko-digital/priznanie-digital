@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header
       className="sdn-header sdn-header-1200 "

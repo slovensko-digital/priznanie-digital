@@ -10,7 +10,7 @@ import * as schema from './schema.xsd';
 import * as basicCaseXml from './basic.xml';
 import { TaxForm } from '../types';
 
-const libxml = require('libxmljs');
+import libxml from 'libxmljs';
 
 describe('convertToJson', () => {
   test('Case 1', () => {

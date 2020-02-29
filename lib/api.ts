@@ -1,14 +1,9 @@
-export const getCity = (zip: string) => {
-  return fetch(`https://api.posta.sk/private/search?q=${zip}&m=zip`)
-    .then(response => response.json())
-    .then(pscData => {
-      return pscData &&
-        pscData.offices &&
-        pscData.offices[0] &&
-        pscData.offices[0].name
-        ? pscData.offices[0].name
-        : "";
-    });
+export const getCity = async (zip: string) => {
+  const response = await fetch(
+    `https://api.posta.sk/private/search?q=${zip}&m=zip`,
+  );
+  const pscData = await response.json();
+  return pscData?.offices[0]?.name;
 };
 
 export interface AutoformPerson {
@@ -23,13 +18,13 @@ export interface AutoformPerson {
   country: string;
 }
 
-export const getAutoformByPersonName = (
+export const getAutoformByPersonName = async (
   firstName: string,
   lastName: string,
 ): Promise<AutoformPerson[]> => {
   return fetch(
     `api/autoform?firstName=${firstName}&lastName=${lastName}`,
-  ).then(response => response.json());
+  ).then(async response => response.json());
 
   /** In case of just testing on localhost
     return [

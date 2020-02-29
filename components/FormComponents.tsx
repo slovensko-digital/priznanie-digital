@@ -100,8 +100,15 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
   );
 };
 
-export const Checkbox = ({ title, ...props }) => {
-  const [field, meta, helpers] = useField(props.name);
+interface BooleanRadioProps<Name> {
+  name: Name;
+  title: string;
+}
+export const Checkbox = <Name extends keyof TaxFormUserInput>({
+  title,
+  ...props
+}: BooleanRadioProps<Name>) => {
+  const [field, meta] = useField(props.name);
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset" aria-describedby="waste-hint">

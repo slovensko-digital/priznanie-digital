@@ -4,8 +4,13 @@ import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
 
+interface Props {
+  debug: boolean;
+  children: React.ReactNode;
+}
+
 const DEBUG_ON = false;
-const Layout = ({ children, debug }) => (
+const Layout: React.FC<Props> = ({ children, debug }: Props) => (
   <div className="container">
     <Head>
       <title>priznanie.digital</title>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './index.module.css';
 
 export default () => (
   <>
@@ -23,7 +22,10 @@ export default () => (
       </p>
 
       <Link href="/prijmy-a-vydavky">
-        <button className="govuk-button govuk-button--large govuk-button--start">
+        <button
+          type="button"
+          className="govuk-button govuk-button--large govuk-button--start"
+        >
           Pripraviť daňové priznanie
         </button>
       </Link>

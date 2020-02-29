@@ -1,9 +1,10 @@
-/* eslint-disable import/no-default-export */
 import { AppProps } from 'next/app';
 
+/* eslint-disable import/no-unassigned-import */
 import '../styles/global.css';
 import '../styles/navody-digital-0.1.8.min.css';
 import '../styles/libs.css';
+/* eslint-enable import/no-unassigned-import */
 
 import React, { useState } from 'react';
 import { setLocale } from 'yup';
