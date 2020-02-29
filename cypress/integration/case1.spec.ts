@@ -8,8 +8,8 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
 }
 
-describe("Case 1", function() {
-  it("Complete flow", function() {
+describe("Case 1", () => {
+  it("Complete flow", () => {
     // cy.clock(new Date(2020, 1, 22).getTime());
     // console.log(new Date().toLocaleString("sk-sk"));
     cy.visit("/");
