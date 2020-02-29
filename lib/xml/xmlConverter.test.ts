@@ -34,7 +34,7 @@ describe("convertToXML", () => {
   });
   test("Case 1", () => {
     const result = convertToXML(basicTaxForm as TaxForm);
-    fs.writeFile(`${__dirname  }/testOutputs/xmlTestOutput_case1.xml`, result);
+    fs.writeFile(`${__dirname}/testOutputs/xmlTestOutput_case1.xml`, result);
     const xml = basicCaseXml.default;
     expect(result).toBe(xml);
   });

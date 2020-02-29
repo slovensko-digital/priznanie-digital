@@ -9,7 +9,6 @@ const DAN_Z_PRIJMU_SADZBA = 0.19;
 export function calculate(taxFormUserInput: TaxFormUserInput) {
   // Make a copy of taxFormUserInput
   const tf: TaxForm = {
-    
     ...initTaxFormUserInputValues,
     ...taxFormUserInput,
   };

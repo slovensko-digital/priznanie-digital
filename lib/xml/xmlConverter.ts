@@ -3,7 +3,7 @@ import schemaSample from "./schemaSample";
 import { TaxForm } from "../types";
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = { ...schemaSample};
+  const form = { ...schemaSample };
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
