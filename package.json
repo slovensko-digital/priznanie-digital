@@ -13,6 +13,7 @@
     "cy:run": "cypress run --headless",
     "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:watch": "esw . -w --color --ext .js,.jsx,.ts,.tsx",
     "eslint-check": "eslint --print-config pages/api/_app.tsx | eslint-config-prettier-check"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-unicorn": "^16.1.1",
+    "eslint-watch": "^6.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "jest-raw-loader": "^1.0.1",

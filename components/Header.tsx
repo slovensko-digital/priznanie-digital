@@ -17,7 +17,6 @@ export default function Header() {
         <div className="sdn-header__content">
           <button
             type="button"
-            role="button"
             className="sdn-header__menu-button sdn-header__menu-button js-header-toggle"
             aria-controls="navigation"
             aria-label="Show or hide Top Level Navigation"
