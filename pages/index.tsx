@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import styles from "./index.module.css";
+import React from 'react';
+import Link from 'next/link';
+import styles from './index.module.css';
 
 export default () => (
   <>

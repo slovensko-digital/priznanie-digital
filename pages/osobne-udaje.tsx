@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Form, FormikProps } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
-import { NextPage } from "next";
-import { Input } from "../components/FormComponents";
-import styles from "./osobne-udaje.module.css";
-import { PersonalInformationUserInput, TaxFormUserInput } from "../lib/types";
-import { getCity, getAutoformByPersonName, AutoformPerson } from "../lib/api";
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, FormikProps } from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { NextPage } from 'next';
+import { Input } from '../components/FormComponents';
+import styles from './osobne-udaje.module.css';
+import { PersonalInformationUserInput, TaxFormUserInput } from '../lib/types';
+import { getCity, getAutoformByPersonName, AutoformPerson } from '../lib/api';
 
-const nextUrl = "/vysledky";
-const backUrl = "/deti";
+const nextUrl = '/vysledky';
+const backUrl = '/deti';
 
 const handlePersonAutoform = (
   person: AutoformPerson,
@@ -155,11 +155,11 @@ const OsobneUdaje: NextPage<Props> = ({
                 onChange={async e => {
                   props.handleChange(e);
                   const pscValue = e.currentTarget.value;
-                  const trimmedPSC = pscValue.replace(/ /g, "");
+                  const trimmedPSC = pscValue.replace(/ /g, '');
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
-                    props.setFieldValue("r010_obec", city);
+                    props.setFieldValue('r010_obec', city);
                   }
                 }}
               />

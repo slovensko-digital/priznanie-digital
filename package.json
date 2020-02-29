@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "npm run test:noWatch && next build",
     "start": "next start",
-    "test": "jest --watch",
+    "test": "xo && jest --watch",
+    "xo": "xo ./{lib,components,pages,__tests__,types}/**/*.{ts,tsx,js,css} --space --plugin=react --prettier --ext .js,.jsx,.ts,.tsx",
     "test:noWatch": "jest",
     "test:ci": "jest --ci && npm run cy:ci",
     "prettier": "prettier --write  './{lib,components,pages,__tests__,types}/**/*.{ts,tsx,js,css}'",
@@ -63,6 +64,7 @@
     "start-server-and-test": "1.10.7",
     "ts-jest": "^25.2.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "xo": "^0.27.2"
   }
 }

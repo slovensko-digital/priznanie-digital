@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Footer() {
   return (
@@ -29,12 +29,12 @@ export default function Footer() {
           <div className="sdn-footer__container">
             <div className="sdn-footer__newsletter">
               <span className="sdn-footer__newsletter-heading">
-                Novinky emailom{" "}
+                Novinky emailom{' '}
                 <small className="sdn-footer__newsletter-heading-tooltip">
                   (raz mesačne)
                 </small>
               </span>
-              <div id="newsletter-success" style={{ display: "none" }}>
+              <div id="newsletter-success" style={{ display: 'none' }}>
                 <p>
                   <strong>
                     Na Váš e-mail sme poslali potvrdzovaciu správu.
@@ -81,14 +81,14 @@ export default function Footer() {
               <span className="sdn-footer__newsletter-disclaimer">
                 Prihlásením dávam dobrovoľný súhlas OZ Slovensko.Digital na
                 zasielanie bezplatného newslettera na mnou zadaný e-mail. Tento
-                súhlas môžem kedykoľvek odvolať na{" "}
+                súhlas môžem kedykoľvek odvolať na{' '}
                 <a
                   href="mailto:kontakt@slovensko.digital"
                   className="sdn-footer__link"
                 >
                   kontakt@slovensko.digital
                 </a>
-                . Oboznámil(a) som sa s informáciami v sekcii{" "}
+                . Oboznámil(a) som sa s informáciami v sekcii{' '}
                 <a href="#" className="sdn-footer__link">
                   Ochrana osobných údajov
                 </a>

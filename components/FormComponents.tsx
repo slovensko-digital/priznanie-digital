@@ -1,14 +1,14 @@
-import React from "react";
-import { useField } from "formik";
-import classnames from "classnames";
-import { TaxFormUserInput } from "../lib/types";
+import React from 'react';
+import { useField } from 'formik';
+import classnames from 'classnames';
+import { TaxFormUserInput } from '../lib/types';
 
 interface InputProps<Name> {
   name: Name;
   label: string;
   small?: string;
   className?: string;
-  type: "text" | "number";
+  type: 'text' | 'number';
 }
 
 export function Input<Name extends keyof TaxFormUserInput>({
@@ -20,7 +20,7 @@ export function Input<Name extends keyof TaxFormUserInput>({
   const [field, meta] = useField(props.name);
 
   return (
-    <div className={classnames(["govuk-form-group", className])}>
+    <div className={classnames(['govuk-form-group', className])}>
       <label className="govuk-label" htmlFor={props.name}>
         <div>{label}</div>
         <small>{small}</small>

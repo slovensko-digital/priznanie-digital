@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
-import { Formik, Form } from "formik";
-import { NextPage } from "next";
-import { Input } from "../components/FormComponents";
-import { IncomeAndExpenseUserInput, TaxFormUserInput } from "../lib/types";
+import { Formik, Form } from 'formik';
+import { NextPage } from 'next';
+import { Input } from '../components/FormComponents';
+import { IncomeAndExpenseUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/zamestnanie";
-const backUrl = "/";
+const nextUrl = '/zamestnanie';
+const backUrl = '/';
 
 interface Props {
   setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void;

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import { useRouter } from "next/router";
-import { NextPage } from "next";
-import { BooleanRadio, Input } from "../components/FormComponents";
-import { EmployedUserInput, TaxFormUserInput } from "../lib/types";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { BooleanRadio, Input } from '../components/FormComponents';
+import { EmployedUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/partner";
-const backUrl = "/prijmy-a-vydavky";
+const nextUrl = '/partner';
+const backUrl = '/prijmy-a-vydavky';
 
 interface Props {
   setTaxFormUserInput: (values: EmployedUserInput) => void;
@@ -70,11 +70,11 @@ const validationSchema = Yup.object().shape<EmployedUserInput>({
   employed: Yup.boolean()
     .required()
     .nullable(),
-  r038: Yup.number().when("employed", {
+  r038: Yup.number().when('employed', {
     is: true,
     then: Yup.number().required(),
   }),
-  r039: Yup.number().when("employed", {
+  r039: Yup.number().when('employed', {
     is: true,
     then: Yup.number().required(),
   }),

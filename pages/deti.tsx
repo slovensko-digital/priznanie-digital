@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import { useRouter } from "next/router";
-import { NextPage } from "next";
-import { BooleanRadio, Input } from "../components/FormComponents";
-import { KidsUserInput, TaxFormUserInput } from "../lib/types";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { BooleanRadio, Input } from '../components/FormComponents';
+import { KidsUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/osobne-udaje";
-const backUrl = "/partner";
+const nextUrl = '/osobne-udaje';
+const backUrl = '/partner';
 interface Props {
   setTaxFormUserInput: (values: KidsUserInput) => void;
   taxFormUserInput: TaxFormUserInput;
@@ -80,11 +80,11 @@ const validationSchema = Yup.object().shape<KidsUserInput>({
   kids: Yup.boolean()
     .required()
     .nullable(),
-  r034: Yup.mixed().when("kids", {
+  r034: Yup.mixed().when('kids', {
     is: true,
     then: Yup.mixed(),
   }),
-  // r039: Yup.number().when("employed", {
+  // R039: Yup.number().when("employed", {
   //   is: true,
   //   then: Yup.number().required(),
   // }),

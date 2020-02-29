@@ -1,19 +1,20 @@
-import React from "react";
-import Link from "next/link";
-import fileDownload from "js-file-download";
-import { NextPage } from "next";
-import { convertToXML } from "../lib/xml/xmlConverter";
-import { TaxForm } from "../lib/types";
+import React from 'react';
+import Link from 'next/link';
+import fileDownload from 'js-file-download';
+import { NextPage } from 'next';
+import { convertToXML } from '../lib/xml/xmlConverter';
+import { TaxForm } from '../lib/types';
 
-const backUrl = "/osobne-udaje";
+const backUrl = '/osobne-udaje';
 interface Props {
   taxForm: TaxForm;
 }
 const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
   const onExport = () => {
     const xml = convertToXML(taxForm);
-    fileDownload(xml, "priznanie.xml");
+    fileDownload(xml, 'priznanie.xml');
   };
+
   return (
     <>
       <Link href={backUrl}>
