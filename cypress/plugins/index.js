@@ -2,6 +2,7 @@
  * Used to setup TypeScript support in cypress
  */
 const wp = require("@cypress/webpack-preprocessor");
+
 module.exports = on => {
   const options = {
     webpackOptions: {
