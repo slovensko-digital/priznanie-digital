@@ -2,10 +2,10 @@ import {
   PersonalInformationUserInput,
   PartnerUserInput,
   IncomeAndExpenseUserInput,
-  TaxFormUserInput,
   EmployedUserInput,
   KidsUserInput,
-} from '../types/types';
+} from '../types/PageUserInputs';
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: 0,

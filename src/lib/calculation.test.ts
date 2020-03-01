@@ -1,5 +1,5 @@
 import { calculate } from './calculation';
-import { TaxFormUserInput } from '../types/types';
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
 
 describe('Basic use cases', () => {
   test('Case 1', () => {
