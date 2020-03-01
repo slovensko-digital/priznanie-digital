@@ -12,7 +12,7 @@ import { calculate } from '../lib/calculation';
 import { TaxForm, TaxFormUserInput } from '../lib/types';
 import Layout from '../components/Layout';
 import { initTaxFormUserInputValues } from '../lib/initialValues';
-import { sortObjectKeys } from '../lib/utils';
+import { sortObjectKeys, setDate } from '../lib/utils';
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -31,6 +31,7 @@ setLocale({
 });
 /* eslint-enable no-template-curly-in-string */
 
+
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm | Record<string, unknown>>({});
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
@@ -40,7 +41,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
       const newUserInput = { ...prevUserInput, ...values };
-      setTaxForm(calculate(newUserInput));
+      setTaxForm(calculate(setDate(newUserInput)));
       return newUserInput;
     });
   };
