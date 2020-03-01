@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import { BooleanRadio, Input } from '../components/form-components';
 import { PartnerUserInput, TaxFormUserInput } from '../lib/types';
 
 const nextUrl = '/deti';

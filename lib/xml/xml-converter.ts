@@ -1,5 +1,5 @@
 import xmljs from 'xml-js';
-import schemaSample from './schemaSample';
+import schemaSample from './schema-sample';
 import { TaxForm } from '../types';
 
 export function convertToJson(taxForm: TaxForm) {

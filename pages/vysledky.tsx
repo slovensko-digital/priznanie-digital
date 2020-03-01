@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import fileDownload from 'js-file-download';
 import { NextPage } from 'next';
-import { convertToXML } from '../lib/xml/xmlConverter';
+import { convertToXML } from '../lib/xml/xml-converter';
 import { TaxForm } from '../lib/types';
 
 const backUrl = '/osobne-udaje';

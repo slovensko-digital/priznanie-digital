@@ -57,11 +57,12 @@ module.exports = {
       'error',
       {
         devDependencies: [
-          '**/*.test.js',
-          '**/*.spec.js',
-          'cypress',
-          '__tests__',
-          'setupTests.js',
+          '**/*.test.*',
+          '**/*.spec.*',
+          'cypress/**/*',
+          '__tests__/**/*',
+          'setup-tests.js',
+          'jest.config.js',
         ],
       },
     ],

@@ -10,8 +10,8 @@ import React, { useState } from 'react';
 import { setLocale } from 'yup';
 import { calculate } from '../lib/calculation';
 import { TaxForm, TaxFormUserInput } from '../lib/types';
-import Layout from '../components/Layout';
-import { initTaxFormUserInputValues } from '../lib/initialValues';
+import Layout from '../components/layout';
+import { initTaxFormUserInputValues } from '../lib/initial-values';
 import { sortObjectKeys } from '../lib/utils';
 
 /* eslint-disable no-template-curly-in-string */
