@@ -1,4 +1,4 @@
-import { TaxFormUserInput } from '../../../lib/types';
+import { TaxFormUserInput } from '../../lib/types';
 
 export const withPartnerInput: TaxFormUserInput = {
   priloha3_r11_socialne: 1000,

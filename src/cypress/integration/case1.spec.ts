@@ -4,7 +4,7 @@
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
-import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
+import { withPartnerInput } from '../../../__tests__/testCases/withPartnerInput';
 import { TaxFormUserInput, TaxForm } from '../../lib/types';
 import { convertToXML } from '../../lib/xml/xmlConverter';
 

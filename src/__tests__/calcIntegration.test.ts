@@ -4,7 +4,7 @@ import { withPartnerInput } from './testCases/withPartnerInput';
 import { convertToXML, convertToJson } from '../lib/xml/xmlConverter';
 // @ts-ignore
 import * as withPartnerXML from './testCases/withPartner.xml';
-import { calculate } from '../../lib/calculation';
+import { calculate } from '../lib/calculation';
 
 const comparable = (xml: string) => xml2json(xml, { compact: true, spaces: 2 });
 const stringify = (object: object) => JSON.stringify(object, null, 2);
