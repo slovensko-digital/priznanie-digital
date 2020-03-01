@@ -68,7 +68,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor="where-do-you-live"
+              htmlFor={props.name}
             >
               Áno
             </label>
@@ -84,7 +84,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor="where-do-you-live-2"
+              htmlFor={props.name}
             >
               Nie
             </label>
@@ -125,7 +125,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
             />
             <label
               className="govuk-label govuk-checkboxes__label"
-              htmlFor="waste"
+              htmlFor={props.name}
             >
               Ano
             </label>
