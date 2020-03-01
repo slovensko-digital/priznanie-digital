@@ -6,12 +6,14 @@ import classnames from "classnames";
 interface InputProps<Name> {
   name: Name;
   label: string;
+  small?: string;
   className?: string;
   type: "text" | "number";
 }
 
 export function Input<Name extends keyof TaxFormUserInput>({
   label,
+  small,
   className,
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) {
@@ -20,7 +22,8 @@ export function Input<Name extends keyof TaxFormUserInput>({
   return (
     <div className={classnames(["govuk-form-group", className])}>
       <label className="govuk-label" htmlFor={props.name}>
-        {label}
+        <div>{label}</div>
+        <small>{small}</small>
       </label>
       <input className="govuk-input" {...field} {...props} />
       {meta.touched && meta.error ? (
