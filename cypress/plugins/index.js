@@ -1,6 +1,7 @@
 /**
  * Used to setup TypeScript support in cypress
  */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const wp = require("@cypress/webpack-preprocessor");
 
 module.exports = on => {

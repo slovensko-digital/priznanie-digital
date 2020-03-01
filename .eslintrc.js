@@ -57,13 +57,15 @@ module.exports = {
       'error',
       {
         devDependencies: [
-          '**/*.test.js',
-          '**/*.spec.js',
-          'cypress',
-          '__tests__',
+          '**/*.test.*',
+          '**/*.spec.*',
+          'cypress/**/*',
+          '__tests__/**/*',
           'setupTests.js',
+          'jest.config.js',
         ],
       },
     ],
+    'unicorn/filename-case': 'off',
   },
 };
