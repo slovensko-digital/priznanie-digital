@@ -1,92 +1,53 @@
-import React, { useEffect, useState } from "react";
-import styles from "./osobne-udaje.module.css";
-import { Formik, Form } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Input } from "../components/FormComponents";
-import * as Yup from "yup";
-import { PersonalInformationUserInput } from "../lib/types";
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, FormikProps } from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { NextPage } from 'next';
+import { Input } from '../components/FormComponents';
+import styles from './osobne-udaje.module.css';
+import { PersonalInformationUserInput, TaxFormUserInput } from '../lib/types';
+import { getCity, getAutoformByPersonName, AutoformPerson } from '../lib/api';
 
-const nextUrl = "/vysledky";
-const backUrl = "/deti";
+const nextUrl = '/vysledky';
+const backUrl = '/deti';
 
-const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
-  const [autoformPersons, setAutoFormPersons] = useState([]);
+const handlePersonAutoform = (
+  person: AutoformPerson,
+  { setValues, values }: FormikProps<PersonalInformationUserInput>,
+) => {
+  setValues({
+    ...values,
+    r001_dic: person.tin ? person.tin : values.r001_dic,
+    r007_ulica: person.street,
+    r008_cislo: person.street_number,
+    r009_psc: person.postal_code,
+    r010_obec: person.municipality,
+    r011_stat: person.country,
+  });
+};
+
+interface Props {
+  setTaxFormUserInput: (values: PersonalInformationUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+const OsobneUdaje: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
+  const [autoformPersons, setAutoFormPersons] = useState<AutoformPerson[]>([]);
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
 
-  const getCity = zip => {
-    return fetch(`https://api.posta.sk/private/search?q=${zip}&m=zip`)
-      .then(response => response.json())
-      .then(pscData => {
-        return pscData &&
-          pscData.offices &&
-          pscData.offices[0] &&
-          pscData.offices[0].name
-          ? pscData.offices[0].name
-          : "";
-      });
-  };
-
-  const getAutoformByPersonName = (fullName: string) => {
-    return fetch(`api/autoform?fullName=${fullName}`).then(response =>
-      response.json(),
-    );
-
-    /** In case of just testing on localhost
-    return [
-      {
-        id: 1358414,
-        cin: "50 158 635",
-        tin: 2120264674,
-        vatin: null,
-        name: "Slovensko.Digital",
-        datahub_corporate_body: {
-          id: 1358414,
-          url:
-            "https://datahub.ekosystem.slovensko.digital/api/datahub/corporate_bodies/1358414",
-        },
-        formatted_address:
-          "Staré Grunty 6207/12, 841 04 Bratislava - mestská časť Karlova Ves",
-        street: "Staré Grunty",
-        reg_number: 6207,
-        building_number: "12",
-        street_number: "6207/12",
-        formatted_street: "Staré Grunty 6207/12",
-        postal_code: "841 04",
-        municipality: "Bratislava - mestská časť Karlova Ves",
-        country: "Slovenská republika",
-        established_on: "2016-01-29",
-        terminated_on: null,
-        vatin_paragraph: null,
-        registration_office: "MV SR",
-        registration_number: "VVS/1-900/90-48099",
-      },
-    ];
-     */
-  };
-
-  const handleAutoform = async values => {
+  const handleAutoform = async (values: PersonalInformationUserInput) => {
     if (values.r005_meno.length > 0 && values.r004_priezvisko.length > 1) {
       const personsData = await getAutoformByPersonName(
-        `${values.r005_meno} ${values.r004_priezvisko}`,
+        values.r005_meno,
+        values.r004_priezvisko,
       );
       if (personsData) {
         setAutoFormPersons(personsData);
       }
     }
-  };
-
-  const handlePersonAutoform = (person, setFieldValue) => {
-    person.tin && setFieldValue("r001_dic", person.tin);
-    setFieldValue("r007_ulica", person.street);
-    setFieldValue("r008_cislo", person.street_number);
-    setFieldValue("r009_psc", person.postal_code);
-    setFieldValue("r010_obec", person.municipality);
-    setFieldValue("r011_stat", person.country);
   };
 
   useEffect(() => {
@@ -98,10 +59,13 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik
+      <Formik<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
       >
         {props => (
           <Form className="form">
@@ -158,9 +122,7 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                     <li
                       key={person.id}
                       className={styles.clickable}
-                      onClick={() =>
-                        handlePersonAutoform(person, props.setFieldValue)
-                      }
+                      onClick={() => handlePersonAutoform(person, props)}
                     >
                       {person.name} : {person.formatted_address}
                     </li>
@@ -192,12 +154,12 @@ const OsobneUdaje = ({ setTaxFormUserInput, taxFormUserInput }) => {
                 label="PSČ"
                 onChange={async e => {
                   props.handleChange(e);
-                  const pscValue = e.target["value"];
-                  const trimmedPSC = pscValue.replace(/ /g, "");
+                  const pscValue = e.currentTarget.value;
+                  const trimmedPSC = pscValue.replace(/ /g, '');
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
-                    props.setFieldValue("r010_obec", city);
+                    props.setFieldValue('r010_obec', city);
                   }
                 }}
               />

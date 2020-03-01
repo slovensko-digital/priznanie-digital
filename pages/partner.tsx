@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import * as Yup from "yup";
-import { Formik, Form, Field, yupToFormErrors } from "formik";
-import { useRouter } from "next/router";
-import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
-import { PartnerUserInput } from "../lib/types";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { BooleanRadio, Input } from '../components/FormComponents';
+import { PartnerUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/deti";
-const backUrl = "/zamestnanie";
+const nextUrl = '/deti';
+const backUrl = '/zamestnanie';
 
-const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
+interface Props {
+  setTaxFormUserInput: (values: PartnerUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+
+const Partner: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -23,17 +28,20 @@ const Partner = ({ setTaxFormUserInput, taxFormUserInput }) => {
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik
+      <Formik<PartnerUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
       >
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
               title="Uplatňujete si daňový bonus na manželku/manžela?"
               name="r032_uplatnujem_na_partnera"
-            ></BooleanRadio>
+            />
             {values.r032_uplatnujem_na_partnera && (
               <>
                 <Input
@@ -82,11 +90,11 @@ const validationSchema = Yup.object().shape<PartnerUserInput>({
   r032_uplatnujem_na_partnera: Yup.boolean()
     .required()
     .nullable(),
-  r031_priezvisko_a_meno: Yup.string().when("r032_uplatnujem_na_partnera", {
+  r031_priezvisko_a_meno: Yup.string().when('r032_uplatnujem_na_partnera', {
     is: true,
     then: Yup.string().required(),
   }),
-  r031_rodne_cislo: Yup.string().when("r032_uplatnujem_na_partnera", {
+  r031_rodne_cislo: Yup.string().when('r032_uplatnujem_na_partnera', {
     is: true,
     then: Yup.string()
       .required()
@@ -94,14 +102,14 @@ const validationSchema = Yup.object().shape<PartnerUserInput>({
       .max(11),
   }),
   r032_partner_vlastne_prijmy: Yup.number().when(
-    "r032_uplatnujem_na_partnera",
+    'r032_uplatnujem_na_partnera',
     {
       is: true,
       then: Yup.number().required(),
     },
   ),
   r032_partner_pocet_mesiacov: Yup.number().when(
-    "r032_uplatnujem_na_partnera",
+    'r032_uplatnujem_na_partnera',
     {
       is: true,
       then: Yup.number()
@@ -110,7 +118,7 @@ const validationSchema = Yup.object().shape<PartnerUserInput>({
         .required(),
     },
   ),
-  r033_partner_kupele_uhrady: Yup.number().when("r033_partner_kupele", {
+  r033_partner_kupele_uhrady: Yup.number().when('r033_partner_kupele', {
     is: true,
     then: Yup.number()
       .max(50)

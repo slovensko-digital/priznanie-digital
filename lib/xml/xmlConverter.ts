@@ -1,17 +1,17 @@
-import schemaSample from "./schemaSample";
-import { TaxForm } from "../types";
-import xmljs from "xml-js";
+import xmljs from 'xml-js';
+import schemaSample from './schemaSample';
+import { TaxForm } from '../types';
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = Object.assign({}, schemaSample);
+  const form = { ...schemaSample };
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
-  // form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
+  // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
   form.dokument.hlavicka.skNace = {
-    k1: "62",
-    k2: "01",
-    k3: "0",
-    cinnost: "Počítačové programovanie",
+    k1: '62',
+    k2: '01',
+    k3: '0',
+    cinnost: 'Počítačové programovanie',
   };
 
   form.dokument.hlavicka.priezvisko = taxForm.r004_priezvisko;
@@ -23,12 +23,12 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat;
 
   form.dokument.telo.r32.uplatnujemNCZDNaManzela = taxForm.r032_uplatnujem_na_partnera
-    ? "1"
-    : "0";
+    ? '1'
+    : '0';
 
   form.dokument.telo.r33.uplatNCZDNaKupelStarostlivost = taxForm.r033_partner_kupele
-    ? "1"
-    : "0";
+    ? '1'
+    : '0';
 
   form.dokument.telo.tabulka1.t1r2.s1 = taxForm.t1r2_prijmy.toFixed(2);
   form.dokument.telo.tabulka1.t1r10.s1 = taxForm.t1r10_prijmy.toFixed(2);
@@ -44,13 +44,13 @@ export function convertToJson(taxForm: TaxForm) {
       rodneCislo: taxForm.r031_rodne_cislo,
     };
     form.dokument.telo.r32 = {
-      uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? "1" : "0",
+      uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? '1' : '0',
       vlastnePrijmy: taxForm.r032_partner_vlastne_prijmy.toFixed(2),
       pocetMesiacov: taxForm.r032_partner_pocet_mesiacov.toString(),
     };
 
     form.dokument.telo.r33 = {
-      uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? "1" : "0",
+      uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? '1' : '0',
       preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady.toFixed(2),
     };
 
@@ -78,7 +78,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
-  form.dokument.telo.neuplatnujem = "1";
+  form.dokument.telo.neuplatnujem = '1';
 
   // TODO doplnit dnesny datum
   form.dokument.telo.datumVyhlasenia = taxForm.datum;

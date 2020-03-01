@@ -1,22 +1,26 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
-import { Formik, Form } from "formik";
-import { incomeAndExpenseInitialValues } from "../lib/initialValues";
-import { Input } from "../components/FormComponents";
-import { IncomeAndExpenseUserInput } from "../lib/types";
+import { Formik, Form } from 'formik';
+import { NextPage } from 'next';
+import { Input } from '../components/FormComponents';
+import { IncomeAndExpenseUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/zamestnanie";
-const backUrl = "/";
+const nextUrl = '/zamestnanie';
+const backUrl = '/';
 
-const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
+interface Props {
+  setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+
+const PrijmyAVydavky: NextPage<Props> = ({
+  taxFormUserInput,
+  setTaxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -25,10 +29,13 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik
+      <Formik<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
       >
         <Form className="form">
           <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
@@ -38,19 +45,19 @@ const PrijmyAVydavky = ({ taxFormUserInput, setTaxFormUserInput }) => {
             type="number"
             label="Príjmy"
             small="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
-          ></Input>
+          />
           <Input
             name="priloha3_r11_socialne"
             type="number"
             label="Sociálne poistenie"
             small="Celkové uhradené poistné v roku 2019"
-          ></Input>
+          />
           <Input
             name="priloha3_r13_zdravotne"
             small="Celkové uhradené poistné v roku 2019"
             type="number"
             label="Zdravotné poistenie"
-          ></Input>
+          />
 
           <button className="govuk-button" type="submit">
             Pokračovať

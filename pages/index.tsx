@@ -1,6 +1,5 @@
-import React from "react";
-import Link from "next/link";
-import styles from "./index.module.css";
+import React from 'react';
+import Link from 'next/link';
 
 export default () => (
   <>
@@ -23,7 +22,10 @@ export default () => (
       </p>
 
       <Link href="/prijmy-a-vydavky">
-        <button className="govuk-button govuk-button--large govuk-button--start">
+        <button
+          type="button"
+          className="govuk-button govuk-button--large govuk-button--start"
+        >
           Pripraviť daňové priznanie
         </button>
       </Link>
@@ -45,7 +47,7 @@ export default () => (
 
     <div className="govuk-grid-column-full">
       <Link href="/prijmy-a-vydavky">
-        <button className="btn-secondary govuk-button">
+        <button type="button" className="btn-secondary govuk-button">
           Odložiť daňové priznanie
         </button>
       </Link>
