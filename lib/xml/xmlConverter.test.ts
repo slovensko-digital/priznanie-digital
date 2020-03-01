@@ -2,8 +2,8 @@
 
 import { promises as fs } from 'fs';
 import libxml from 'libxmljs';
-import { convertToJson, convertToXML } from './xml-converter';
-import basicTaxForm from './basic-tax-form';
+import { convertToJson, convertToXML } from './xmlConverter';
+import basicTaxForm from './basicTaxForm';
 import basic from './basic';
 // @ts-ignore
 import * as schema from './schema.xsd';

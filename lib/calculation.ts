@@ -1,6 +1,6 @@
 import floor from 'lodash.floor';
 import { TaxForm, TaxFormUserInput } from './types';
-import { initTaxFormUserInputValues } from './initial-values';
+import { initTaxFormUserInputValues } from './initialValues';
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;

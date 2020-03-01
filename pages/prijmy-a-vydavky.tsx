@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { Formik, Form } from 'formik';
 import { NextPage } from 'next';
-import { Input } from '../components/form-components';
+import { Input } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput, TaxFormUserInput } from '../lib/types';
 
 const nextUrl = '/zamestnanie';

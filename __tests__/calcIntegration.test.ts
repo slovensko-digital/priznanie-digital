@@ -1,7 +1,7 @@
 import { xml2json } from 'xml-js';
 import { promises as fs } from 'fs';
-import { withPartnerInput } from './testCases/with-partner-input';
-import { convertToXML, convertToJson } from '../lib/xml/xml-converter';
+import { withPartnerInput } from './testCases/withPartnerInput';
+import { convertToXML, convertToJson } from '../lib/xml/xmlConverter';
 // @ts-ignore
 import * as withPartnerXML from './testCases/withPartner.xml';
 import { calculate } from '../lib/calculation';

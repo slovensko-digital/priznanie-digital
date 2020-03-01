@@ -62,7 +62,6 @@
     "eslint-watch": "^6.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
-    "jest-config": "^25.1.0",
     "jest-raw-loader": "^1.0.1",
     "libxmljs": "^0.19.7",
     "prettier": "1.19.1",

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { withPartnerInput } from "../../__tests__/testCases/with-partner-input";
+import { withPartnerInput } from "../../__tests__/testCases/withPartnerInput";
 import { TaxFormUserInput, TaxForm } from "../../lib/types";
 import { convertToXML } from "../../lib/xml/xmlConverter";
 

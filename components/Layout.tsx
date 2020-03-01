@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Head from 'next/head';
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 
 interface Props {
   debug: React.ReactNode;

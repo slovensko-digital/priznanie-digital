@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { NextPage } from 'next';
-import { Input } from '../components/form-components';
+import { Input } from '../components/FormComponents';
 import styles from './osobne-udaje.module.css';
 import { PersonalInformationUserInput, TaxFormUserInput } from '../lib/types';
 import { getCity, getAutoformByPersonName, AutoformPerson } from '../lib/api';
