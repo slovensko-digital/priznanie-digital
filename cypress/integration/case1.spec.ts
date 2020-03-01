@@ -8,6 +8,8 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
 }
 
+const nextButton = "Pokračovať";
+
 describe("Case 1", () => {
   it("Complete flow", () => {
     // cy.clock(new Date(2020, 1, 22).getTime());
@@ -24,14 +26,14 @@ describe("Case 1", () => {
       withPartnerInput.priloha3_r13_zdravotne.toString(),
     );
 
-    cy.contains("Pokračovať").click();
+    cy.contains(nextButton).click();
 
     getInput("employed")
       .first()
       .click();
     getInput("r038").type("3000");
     getInput("r039").type("300");
-    cy.contains("Pokračovať").click();
+    cy.contains(nextButton).click();
 
     getInput("r032_uplatnujem_na_partnera")
       .first()
@@ -53,13 +55,13 @@ describe("Case 1", () => {
     // getInput("r033_partner_kupele_uhrady").type(
     //   withPartnerInput.r033_partner_kupele_uhrady.toString(),
     // );
-    cy.contains("Pokračovať").click();
+    cy.contains(nextButton).click();
 
     getInput("kids")
       .first()
       .click();
 
-    cy.contains("Pokračovať").click();
+    cy.contains(nextButton).click();
 
     getInput("r001_dic").type(withPartnerInput.r001_dic!.toString());
     // getInput("r002_datum_narodenia").type(
@@ -77,7 +79,7 @@ describe("Case 1", () => {
     getInput("r010_obec").type(withPartnerInput.r010_obec.toString());
     getInput("r011_stat").type(withPartnerInput.r011_stat.toString());
 
-    cy.contains("Pokračovať").click();
+    cy.contains(nextButton).click();
     cy.contains("XML");
 
     cy.get(`pre[id="TaxForm"]`)

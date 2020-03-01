@@ -1,6 +1,7 @@
 // / <reference types="jest" />
 
 import { promises as fs } from 'fs';
+import libxml from 'libxmljs';
 import { convertToJson, convertToXML } from './xmlConverter';
 import basicTaxForm from './basicTaxForm';
 import basic from './basic';
@@ -9,8 +10,6 @@ import * as schema from './schema.xsd';
 // @ts-ignore
 import * as basicCaseXml from './basic.xml';
 import { TaxForm } from '../types';
-
-import libxml from 'libxmljs';
 
 describe('convertToJson', () => {
   test('Case 1', () => {
