@@ -1,3 +1,7 @@
+/* eslint-disable func-names */
+/* eslint-disable promise/no-nesting */
+/* eslint-disable promise/always-return */
+/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
@@ -10,8 +14,8 @@ function getInput<K extends keyof TaxFormUserInput>(key: K) {
 
 const nextButton = 'Pokračovať';
 
-describe('Case 1', () => {
-  it('Complete flow', () => {
+describe('Case 1', function() {
+  it('Complete flow', function() {
     // cy.clock(new Date(2020, 1, 22).getTime());
     // console.log(new Date().toLocaleString("sk-sk"));
     cy.visit('/');
@@ -82,28 +86,36 @@ describe('Case 1', () => {
     cy.contains(nextButton).click();
     cy.contains('XML');
 
-    return cy
-      .get(`pre[id="TaxForm"]`)
+    cy.get(`pre[id="TaxForm"]`)
       .invoke('text')
-      .then(txt => convertToXML(JSON.parse(txt.toString()) as TaxForm))
-      .then(xmlResult => {
+      .then(xmlJson => {
+        const xmlResult = convertToXML(
+          JSON.parse(xmlJson.toString()) as TaxForm,
+        );
+
         cy.visit('/form/form.451.html');
         const stub = cy.stub();
         cy.on('window:alert', stub);
 
         cy.get('#form-button-load').click();
-        // @ts-ignore
         cy.get('#form-buttons-load-dialog > input').upload({
           fileContent: xmlResult,
           fileName: 'xmlResult.xml',
           mimeType: 'application/xml',
           encoding: 'utf-8',
         });
+
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click();
-        cy.get('#form-button-validate').click();
-        expect(stub).to.be.calledWith('Naplnenie formulára prebehlo úspešne');
-        return cy.get('#errorsContainer').invoke('text');
-      })
-      .then(errors => expect(errors).to.be.empty);
+        cy.get('#form-button-validate')
+          .click()
+          .should(() => {
+            expect(stub).to.be.calledWith(
+              'Naplnenie formulára prebehlo úspešne',
+            );
+          });
+        cy.get('#errorsContainer').should(el => expect(el.text()).to.be.empty);
+      });
+
+    //
   });
 });
