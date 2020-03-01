@@ -21,7 +21,7 @@ const handlePersonAutoform = (
     r001_dic: person.tin ? person.tin : values.r001_dic,
     r007_ulica: person.street,
     r008_cislo: person.street_number,
-    r009_psc: person.postal_code,
+    r009_psc: person.postal_code.replace(/\D/g, ''),
     r010_obec: person.municipality,
     r011_stat: person.country,
   });
@@ -152,10 +152,15 @@ const OsobneUdaje: NextPage<Props> = ({
                 name="r009_psc"
                 type="text"
                 label="PSČ"
-                onChange={async e => {
-                  props.handleChange(e);
-                  const pscValue = e.currentTarget.value;
-                  const trimmedPSC = pscValue.replace(/ /g, '');
+                onBlur={event => {
+                  props.handleBlur(event);
+                  const pscValue = event.target.value;
+                  props.setFieldValue('r009_psc', pscValue.replace(/\D/g, ''));
+                }}
+                onChange={async event => {
+                  props.handleChange(event);
+                  const pscValue = event.currentTarget.value;
+                  const trimmedPSC = pscValue.replace(/\D/g, '');
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
