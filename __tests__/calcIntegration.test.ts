@@ -1,10 +1,10 @@
 import { xml2json } from 'xml-js';
-import { promises as fs } from 'fs';../src/lib/xml/xmlConverter
+import { promises as fs } from 'fs';
 import { withPartnerInput } from './testCases/withPartnerInput';
-import { convertToXML, convertToJson } from '../lib/xml/xmlConverter';
+import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 // @ts-ignore
 import * as withPartnerXML from './testCases/withPartner.xml';
-import { calculate } from '../lib/calculation';
+import { calculate } from '../src/lib/calculation';
 
 const comparable = (xml: string) => xml2json(xml, { compact: true, spaces: 2 });
 const stringify = (object: object) => JSON.stringify(object, null, 2);

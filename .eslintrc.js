@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./tsconfig.json', './src/cypress/tsconfig.json'],
+    project: ['./tsconfig.json', './cypress/tsconfig.json'],
     ecmaVersion: '2020',
     sourceType: 'module',
     ecmaFeatures: {
@@ -66,7 +66,7 @@ module.exports = {
         devDependencies: [
           '**/*.test.*',
           '**/*.spec.*',
-          'src/cypress/**/*',
+          'cypress/**/*',
           '__tests__/**/*',
           'setupTests.js',
           'jest.config.js',

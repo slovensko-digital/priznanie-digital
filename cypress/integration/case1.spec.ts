@@ -4,9 +4,9 @@
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
-import { withPartnerInput } from '../../../__tests__/testCases/withPartnerInput';
-import { TaxFormUserInput, TaxForm } from '../../lib/types';
-import { convertToXML } from '../../lib/xml/xmlConverter';
+import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
+import { TaxFormUserInput, TaxForm } from '../../src/lib/types';
+import { convertToXML } from '../../src/lib/xml/xmlConverter';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
@@ -98,6 +98,7 @@ describe('Case 1', function() {
         cy.on('window:alert', stub);
 
         cy.get('#form-button-load').click();
+        // @ts-ignore
         cy.get('#form-buttons-load-dialog > input').upload({
           fileContent: xmlResult,
           fileName: 'xmlResult.xml',
