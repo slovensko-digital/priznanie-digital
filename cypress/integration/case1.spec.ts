@@ -5,7 +5,8 @@
 /// <reference types="cypress" />
 
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
-import { TaxFormUserInput, TaxForm } from '../../src/lib/types';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxForm } from '../../src/types/TaxForm';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K) {

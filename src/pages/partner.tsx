@@ -5,7 +5,8 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
-import { PartnerUserInput, TaxFormUserInput } from '../lib/types';
+import { PartnerUserInput } from '../types/PageUserInputs';
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
 
 const nextUrl = '/deti';
 const backUrl = '/zamestnanie';

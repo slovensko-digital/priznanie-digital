@@ -9,7 +9,7 @@ import basic from './basic';
 import * as schema from './schema.xsd';
 // @ts-ignore
 import * as basicCaseXml from './basic.xml';
-import { TaxForm } from '../types';
+import { TaxForm } from "../../types/TaxForm";
 
 describe('convertToJson', () => {
   test('Case 1', () => {
