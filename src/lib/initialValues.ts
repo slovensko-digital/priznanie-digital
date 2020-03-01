@@ -5,7 +5,7 @@ import {
   TaxFormUserInput,
   EmployedUserInput,
   KidsUserInput,
-} from './types';
+} from '../types/types';
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: 0,
