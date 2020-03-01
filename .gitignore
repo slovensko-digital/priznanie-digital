@@ -30,3 +30,5 @@ yarn.lock
 testOutputs
 __tests__/**/*.output.*
 .now
+cypress/screenshots
+cypress/videos

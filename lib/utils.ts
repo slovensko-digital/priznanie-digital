@@ -2,7 +2,7 @@ export const sortObjectKeys = object => {
   const ordered = {};
   Object.keys(object)
     .sort()
-    .forEach(function(key) {
+    .forEach(key => {
       ordered[key] = object[key];
     });
   return ordered;

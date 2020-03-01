@@ -1,11 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import Head from "next/head";
-import Header from "./Header";
-import Footer from "./Footer";
+import Head from 'next/head';
+import Header from './Header';
+import Footer from './Footer';
+
+interface Props {
+  debug: React.ReactNode;
+  children: React.ReactNode;
+}
 
 const DEBUG_ON = false;
-const Layout = ({ children, debug }) => (
+const Layout: React.FC<Props> = ({ children, debug }: Props) => (
   <div className="container">
     <Head>
       <title>priznanie.digital</title>
@@ -51,7 +56,7 @@ const Layout = ({ children, debug }) => (
         width: 100%;
       }
       .debug {
-        visibility: ${DEBUG_ON ? "visible" : "hidden"};
+        visibility: ${DEBUG_ON ? 'visible' : 'hidden'};
         max-height: 400px;
         overflow-y: scroll;
       }

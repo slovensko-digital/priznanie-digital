@@ -1,19 +1,19 @@
-import { TaxForm } from "../types";
+import { TaxForm } from '../types';
 
 const basicTaxForm: Partial<TaxForm> = {
-  r001_dic: "111111111",
-  // r002_datum_narodenia: "22.2.1993",
-  r003_nace: "62232",
-  r004_priezvisko: "Retzer",
-  r005_meno: "Julius",
-  r007_ulica: "Kastielska",
-  r008_cislo: "13",
-  r009_psc: "82105",
-  r010_obec: "Bratislava",
-  r011_stat: "Slovensko",
+  r001_dic: '111111111',
+  // R002_datum_narodenia: "22.2.1993",
+  r003_nace: '62232',
+  r004_priezvisko: 'Retzer',
+  r005_meno: 'Julius',
+  r007_ulica: 'Kastielska',
+  r008_cislo: '13',
+  r009_psc: '82105',
+  r010_obec: 'Bratislava',
+  r011_stat: 'Slovensko',
   t1r2_prijmy: 20000,
   t1r10_prijmy: 20000,
-  t1r10_vydavky: 14000, // pausalne 12000 + 2000 poistne
+  t1r10_vydavky: 14000, // Pausalne 12000 + 2000 poistne
   r041: 20000,
   r042: 14000,
   r043: 6000,
@@ -36,7 +36,7 @@ const basicTaxForm: Partial<TaxForm> = {
   priloha3_r08_poistne: 2000,
   priloha3_r11_socialne: 1000,
   priloha3_r13_zdravotne: 1000,
-  datum: "19.02.2020",
+  datum: '19.02.2020',
 };
 
 export default basicTaxForm;

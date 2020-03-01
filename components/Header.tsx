@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-export default function Header() {
+const Header: React.FC = () => {
   return (
     <header
       className="sdn-header sdn-header-1200 "
@@ -17,7 +17,6 @@ export default function Header() {
         <div className="sdn-header__content">
           <button
             type="button"
-            role="button"
             className="sdn-header__menu-button sdn-header__menu-button js-header-toggle"
             aria-controls="navigation"
             aria-label="Show or hide Top Level Navigation"
@@ -41,4 +40,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

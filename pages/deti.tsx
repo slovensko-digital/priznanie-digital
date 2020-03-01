@@ -1,20 +1,23 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import { useRouter } from "next/router";
-import { BooleanRadio, Input, Checkbox } from "../components/FormComponents";
-import { KidsUserInput } from "../lib/types";
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { BooleanRadio, Input } from '../components/FormComponents';
+import { KidsUserInput, TaxFormUserInput } from '../lib/types';
 
-const nextUrl = "/osobne-udaje";
-const backUrl = "/partner";
-
-const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
+const nextUrl = '/osobne-udaje';
+const backUrl = '/partner';
+interface Props {
+  setTaxFormUserInput: (values: KidsUserInput) => void;
+  taxFormUserInput: TaxFormUserInput;
+}
+const Deti: NextPage<Props> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+}: Props) => {
   const router = useRouter();
-  const handleSubmit = values => {
-    setTaxFormUserInput(values);
-    router.push(nextUrl);
-  };
   useEffect(() => {
     router.prefetch(nextUrl);
   });
@@ -25,20 +28,24 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
       </Link>
       <Formik<KidsUserInput>
         initialValues={taxFormUserInput}
-        onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        onSubmit={values => {
+          setTaxFormUserInput(values);
+          router.push(nextUrl);
+        }}
       >
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="kids"
-            ></BooleanRadio>
+            />
             {values.kids &&
-              values.r034.map((_kid, index) => (
-                <>
+              values.r034.map((kid, index) => (
+                <div key={kid.rodneCislo}>
                   <button
                     className="btn-secondary govuk-button"
+                    type="button"
                     onClick={e => {
                       e.preventDefault();
                     }}
@@ -57,7 +64,7 @@ const Deti = ({ setTaxFormUserInput, taxFormUserInput }) => {
                     type="text"
                     label="Rodné číslo"
                   />
-                </>
+                </div>
               ))}
             <button className="govuk-button" type="submit">
               Pokračovať
@@ -73,11 +80,11 @@ const validationSchema = Yup.object().shape<KidsUserInput>({
   kids: Yup.boolean()
     .required()
     .nullable(),
-  r034: Yup.mixed().when("kids", {
+  r034: Yup.mixed().when('kids', {
     is: true,
     then: Yup.mixed(),
   }),
-  // r039: Yup.number().when("employed", {
+  // R039: Yup.number().when("employed", {
   //   is: true,
   //   then: Yup.number().required(),
   // }),

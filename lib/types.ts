@@ -1,38 +1,38 @@
 export type IncomeAndExpenseUserInput = Pick<
   TaxFormUserInput,
-  "t1r10_prijmy" | "priloha3_r11_socialne" | "priloha3_r13_zdravotne"
+  't1r10_prijmy' | 'priloha3_r11_socialne' | 'priloha3_r13_zdravotne'
 >;
 
 export type EmployedUserInput = Pick<
   TaxFormUserInput,
-  "employed" | "r038" | "r039"
+  'employed' | 'r038' | 'r039'
 >;
 
-export type KidsUserInput = Pick<TaxFormUserInput, "kids" | "r034">;
+export type KidsUserInput = Pick<TaxFormUserInput, 'kids' | 'r034'>;
 
 export type PartnerUserInput = Pick<
   TaxFormUserInput,
-  | "r031_priezvisko_a_meno"
-  | "r031_rodne_cislo"
-  | "r032_uplatnujem_na_partnera"
-  | "r032_partner_vlastne_prijmy"
-  | "r032_partner_pocet_mesiacov"
-  | "r033_partner_kupele"
-  | "r033_partner_kupele_uhrady"
+  | 'r031_priezvisko_a_meno'
+  | 'r031_rodne_cislo'
+  | 'r032_uplatnujem_na_partnera'
+  | 'r032_partner_vlastne_prijmy'
+  | 'r032_partner_pocet_mesiacov'
+  | 'r033_partner_kupele'
+  | 'r033_partner_kupele_uhrady'
 >;
 export type PersonalInformationUserInput = Pick<
   TaxFormUserInput,
-  | "r001_dic"
+  | 'r001_dic'
   // | "r002_datum_narodenia"
-  | "r003_nace"
-  | "r004_priezvisko"
-  | "r005_meno"
-  | "r007_ulica"
-  | "r008_cislo"
-  | "r009_psc"
-  | "r010_obec"
-  | "r011_stat"
-  | "datum"
+  | 'r003_nace'
+  | 'r004_priezvisko'
+  | 'r005_meno'
+  | 'r007_ulica'
+  | 'r008_cislo'
+  | 'r009_psc'
+  | 'r010_obec'
+  | 'r011_stat'
+  | 'datum'
 >;
 
 export interface TaxFormUserInput {
@@ -61,7 +61,7 @@ export interface TaxFormUserInput {
   // 11 - Štát *
   r011_stat: string;
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
-   * failovali test*/
+   * failovali test */
   datum?: string;
 
   // Partner
@@ -184,7 +184,7 @@ export interface TaxForm extends TaxFormUserInput {
   // Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)
   r078_zaklad_dane_z_prijmov?: number;
 
-  //Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)
+  // Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)
   r080_zaklad_dane_celkovo?: number;
   // Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na
   // eurocenty nadol r080 * 0.19
@@ -205,7 +205,7 @@ export interface TaxForm extends TaxFormUserInput {
   // r081
   r107?: number;
 
-  //Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
+  // Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
   // úroky(r. 107 - r. 112) zrkadli r107
   r113?: number;
 
@@ -215,7 +215,7 @@ export interface TaxForm extends TaxFormUserInput {
   // 124 (+)
   r125_dan_na_uhradu?: number;
 
-  //Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
+  // Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
   // podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
   // r125_dan_na_uhradu
   r126_danovy_preplatok?: number;

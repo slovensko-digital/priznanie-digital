@@ -5,7 +5,7 @@ import {
   TaxFormUserInput,
   EmployedUserInput,
   KidsUserInput,
-} from "./types";
+} from './types';
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: 0,
@@ -14,8 +14,8 @@ export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
 };
 
 export const partnerUserInitialValues: PartnerUserInput = {
-  r031_priezvisko_a_meno: "",
-  r031_rodne_cislo: "",
+  r031_priezvisko_a_meno: '',
+  r031_rodne_cislo: '',
   r032_uplatnujem_na_partnera: undefined,
   r032_partner_vlastne_prijmy: 0,
   r032_partner_pocet_mesiacov: 0,
@@ -23,17 +23,17 @@ export const partnerUserInitialValues: PartnerUserInput = {
   r033_partner_kupele_uhrady: 0,
 };
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
-  r001_dic: "",
+  r001_dic: '',
   // r002_datum_narodenia: "",
-  r003_nace: "",
-  r004_priezvisko: "",
-  r005_meno: "",
-  r007_ulica: "",
-  r008_cislo: "",
-  r009_psc: "",
-  r010_obec: "",
-  r011_stat: "",
-  datum: new Date().toLocaleString("sk-sk"),
+  r003_nace: '',
+  r004_priezvisko: '',
+  r005_meno: '',
+  r007_ulica: '',
+  r008_cislo: '',
+  r009_psc: '',
+  r010_obec: '',
+  r011_stat: '',
+  datum: new Date().toLocaleString('sk-sk'),
 };
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
@@ -46,8 +46,8 @@ export const kidsUserInputInitialValues: KidsUserInput = {
   kids: undefined,
   r034: [
     {
-      priezviskoMeno: "",
-      rodneCislo: "",
+      priezviskoMeno: '',
+      rodneCislo: '',
       kupelnaStarostlivost: false,
       m00: false,
       m01: false,
