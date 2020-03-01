@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
+import Head from "next/head";
+import Header from "./Header";
+import Footer from "./Footer";
 
 interface Props {
-  debug: boolean;
+  debug: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -56,7 +56,7 @@ const Layout: React.FC<Props> = ({ children, debug }: Props) => (
         width: 100%;
       }
       .debug {
-        visibility: ${DEBUG_ON ? 'visible' : 'hidden'};
+        visibility: ${DEBUG_ON ? "visible" : "hidden"};
         max-height: 400px;
         overflow-y: scroll;
       }
