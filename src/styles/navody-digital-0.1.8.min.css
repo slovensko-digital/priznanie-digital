@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&subset=latin-ext";
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&subset=latin-ext';
 .govuk-link,
 a {
   font-family: Roboto, Arial, sans-serif;
@@ -37,7 +37,7 @@ a:focus {
 }
 @media print {
   .govuk-link[href^="/"]:after,.govuk-link[href^="http://"]:after,.govuk-link[href^="https://"]:after,a[href^="/"]:after,a[href^="http://"]:after,a[href^="https://"]:after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
     font-size: 90%;
     word-wrap: break-word;
   }
@@ -645,7 +645,7 @@ p + .govuk-heading-s {
   border-bottom: 1px solid #bfc1c3;
 }
 a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
-  content: "\00a0\00a0\00a0" !important;
+  content: '\00a0\00a0\00a0' !important;
   display: inline-block;
   margin-left: 3px;
   background-color: rgba(0, 0, 0, 0);
@@ -668,7 +668,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
     display: -ms-flexbox;
     display: flex;
   }
-  .govuk-grid-row-same-height div[class*="govuk-grid-column-"] {
+  .govuk-grid-row-same-height div[class*='govuk-grid-column-'] {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -692,7 +692,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin-bottom: 20px;
 }
 .govuk-form-group:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -717,7 +717,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin-left: -15px;
 }
 .govuk-grid-row:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -1056,7 +1056,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   background: none;
 }
 .js-enabled .govuk-accordion__section-button:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;
@@ -1076,7 +1076,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .js-enabled .govuk-accordion__icon:after,
 .js-enabled .govuk-accordion__icon:before {
-  content: "";
+  content: '';
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -1096,7 +1096,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   height: 100%;
 }
 .js-enabled .govuk-accordion__section--expanded .govuk-accordion__icon:after {
-  content: " ";
+  content: ' ';
   display: none;
 }
 .govuk-back-link {
@@ -1159,7 +1159,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border-style: solid;
   border-width: 5px 6px 5px 0;
   border-right-color: inherit;
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   margin: auto;
@@ -1205,7 +1205,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   list-style-type: none;
 }
 .govuk-breadcrumbs__list:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -1218,7 +1218,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   float: left;
 }
 .govuk-breadcrumbs__list-item:before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: -1px;
@@ -1338,7 +1338,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   box-shadow: none;
 }
 .govuk-button:before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: -2px;
@@ -1351,24 +1351,24 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   top: -4px;
 }
 .govuk-button--disabled,
-.govuk-button[disabled="disabled"],
+.govuk-button[disabled='disabled'],
 .govuk-button[disabled] {
   opacity: 0.5;
   background: #4cae18;
 }
 .govuk-button--disabled:hover,
-.govuk-button[disabled="disabled"]:hover,
+.govuk-button[disabled='disabled']:hover,
 .govuk-button[disabled]:hover {
   background-color: #4cae18;
   cursor: default;
 }
 .govuk-button--disabled:focus,
-.govuk-button[disabled="disabled"]:focus,
+.govuk-button[disabled='disabled']:focus,
 .govuk-button[disabled]:focus {
   outline: none;
 }
 .govuk-button--disabled:active,
-.govuk-button[disabled="disabled"]:active,
+.govuk-button[disabled='disabled']:active,
 .govuk-button[disabled]:active {
   top: 0;
   box-shadow: 0 2px 0 #2f6b0f;
@@ -1448,7 +1448,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border: 0;
 }
 .govuk-fieldset:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -1702,7 +1702,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   touch-action: manipulation;
 }
 .govuk-checkboxes__label:before {
-  content: "";
+  content: '';
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -1713,7 +1713,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   background: rgba(0, 0, 0, 0);
 }
 .govuk-checkboxes__label:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 11px;
   left: 9px;
@@ -1772,7 +1772,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   float: left;
 }
 .govuk-checkboxes--small .govuk-checkboxes__item:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -2033,7 +2033,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin: 0;
   -webkit-appearance: none;
 }
-.govuk-input[type="number"] {
+.govuk-input[type='number'] {
   -moz-appearance: textfield;
 }
 .govuk-input--error {
@@ -2064,7 +2064,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   font-size: 0;
 }
 .govuk-date-input:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -2139,7 +2139,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   display: none;
 }
 .govuk-details__summary:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -2605,7 +2605,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border-bottom: 10px solid #3a67e8;
 }
 .govuk-header__container:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -2799,7 +2799,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border-style: solid;
   border-width: 8.66px 5px 0;
   border-top-color: inherit;
-  content: "";
+  content: '';
   margin-left: 5px;
 }
 .govuk-header__menu-button:focus {
@@ -3251,7 +3251,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin-left: 25px;
 }
 .govuk-tabs__list-item:before {
-  content: "\2014 ";
+  content: '\2014 ';
   margin-left: -25px;
   padding-right: 5px;
 }
@@ -3303,7 +3303,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
     line-height: 1.15;
   }
 }
-.govuk-tabs__tab[aria-current="true"] {
+.govuk-tabs__tab[aria-current='true'] {
   color: #06070b;
   text-decoration: none;
 }
@@ -3320,7 +3320,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
     border-bottom: 1px solid #bfc1c3;
   }
   .js-enabled .govuk-tabs__list:after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }
@@ -3432,7 +3432,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   touch-action: manipulation;
 }
 .govuk-radios__label:before {
-  content: "";
+  content: '';
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -3444,7 +3444,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   background: rgba(0, 0, 0, 0);
 }
 .govuk-radios__label:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 10px;
   left: 10px;
@@ -3477,7 +3477,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 @media (min-width: 40.0625em) {
   .govuk-radios--inline:after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }
@@ -3547,7 +3547,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   float: left;
 }
 .govuk-radios--small .govuk-radios__item:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -4080,11 +4080,11 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   -ms-flex-align: stretch;
   align-items: stretch;
 }
-.sdn-searchbar-block input[type="search"] {
+.sdn-searchbar-block input[type='search'] {
   width: 100%;
   border: 0;
 }
-.sdn-searchbar-block input[type="search"]:focus {
+.sdn-searchbar-block input[type='search']:focus {
   outline: 0;
 }
 .sdn-searchbar-block__item {
@@ -4155,7 +4155,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   }
 }
 .sdn-timeline__step:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -4167,7 +4167,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   padding-bottom: 24px;
 }
 .sdn-timeline__step:last-child:after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   bottom: 0;
@@ -4242,7 +4242,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   text-decoration-color: currentColor;
 }
 .sdn-timeline__link:before {
-  content: counter(li) ". ";
+  content: counter(li) '. ';
   margin-right: 6px;
   counter-increment: li;
 }
@@ -4260,7 +4260,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .sdn-timeline-dropdown:after,
 .sdn-timeline-dropdown:before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   width: 0;
@@ -4305,7 +4305,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   background-color: #dadadb;
 }
 .sdn-timeline-dropdown__option--selected:after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 10px;
@@ -4547,7 +4547,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .sdn-footer__heart:after,
 .sdn-footer__heart:before {
-  content: "";
+  content: '';
   position: absolute;
   width: 14px;
   height: 14px;
@@ -5230,7 +5230,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin-left: 40px;
 }
 .sdn-header__navigation > li + li:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -5389,7 +5389,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   text-decoration: none;
 }
 .sdn-header__dropdown-toggle:after {
-  content: " \25BE";
+  content: ' \25BE';
   position: absolute;
   top: 0;
   right: -15px;
@@ -5469,7 +5469,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   border-style: solid;
   border-width: 8.66px 5px 0;
   border-top-color: inherit;
-  content: "";
+  content: '';
   margin-left: 5px;
 }
 .sdn-header__menu-button:focus {
@@ -6364,7 +6364,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   margin-left: 10px;
 }
 .sdn-next-link__link:before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 16px;
   height: 20px;
@@ -6563,7 +6563,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
     display: block;
   }
   .sdn-todo-list-box .sdn-todo-list__items .sdn-todo-list__item:after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }
@@ -6589,7 +6589,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
     display: block;
   }
   .sdn-todo-list-box .sdn-todo-list__items .sdn-todo-list__item > div:after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }
@@ -6790,7 +6790,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.14286;
-  content: "alebo";
+  content: 'alebo';
   position: absolute;
   border-top: 3px solid rgba(0, 0, 0, 0);
   color: #000;
@@ -7113,7 +7113,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   }
 }
 .govuk-clearfix:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }

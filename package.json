@@ -11,11 +11,12 @@
     "test": "jest --watch",
     "test:noWatch": "jest",
     "ci": "npm run lint && jest --ci && npm run cy:ci",
-    "prettier": "prettier --write  './{lib,components,pages,__tests__,types}/**/*.{ts,tsx,js,css}'",
+    "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run",
-    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx "
+    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx",
+    "check:ts": "tsc --noEmit"
   },
   "dependencies": {
     "classnames": "^2.2.6",
