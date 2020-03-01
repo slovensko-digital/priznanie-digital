@@ -15,7 +15,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run",
-    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx "
+    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx",
+    "check:ts": "tsc --noEmit"
   },
   "dependencies": {
     "classnames": "^2.2.6",
