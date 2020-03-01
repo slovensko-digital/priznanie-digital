@@ -82,7 +82,8 @@ describe('Case 1', () => {
     cy.contains(nextButton).click();
     cy.contains('XML');
 
-    cy.get(`pre[id="TaxForm"]`)
+    return cy
+      .get(`pre[id="TaxForm"]`)
       .invoke('text')
       .then(txt => convertToXML(JSON.parse(txt.toString()) as TaxForm))
       .then(xmlResult => {
@@ -99,18 +100,10 @@ describe('Case 1', () => {
           encoding: 'utf-8',
         });
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click();
-        cy.get('#form-button-validate')
-          .click()
-          .then(() => {
-            expect(stub).to.be.calledWith(
-              'Naplnenie formulára prebehlo úspešne',
-            );
-            cy.get('#errorsContainer')
-              .invoke('text')
-              .then(errors => expect(errors).to.be.empty);
-
-            // cy.get(`input.warning[type="text"]`).each($el => $el.dblclick());
-          });
-      });
+        cy.get('#form-button-validate').click();
+        expect(stub).to.be.calledWith('Naplnenie formulára prebehlo úspešne');
+        return cy.get('#errorsContainer').invoke('text');
+      })
+      .then(errors => expect(errors).to.be.empty);
   });
 });

@@ -16,8 +16,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run --headless",
     "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:watch": "esw . -w --color --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx ",
     "eslint-check": "eslint --print-config pages/api/_app.tsx | eslint-config-prettier-check"
   },
   "dependencies": {
@@ -48,6 +47,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.0.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-formatter-pretty": "^3.0.1",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.0",
@@ -59,7 +59,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-sonarjs": "^0.5.0",
     "eslint-plugin-unicorn": "^16.1.1",
-    "eslint-watch": "^6.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "jest-raw-loader": "^1.0.1",
