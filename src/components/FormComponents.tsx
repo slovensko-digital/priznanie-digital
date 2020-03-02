@@ -1,7 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 interface InputProps<Name> {
   name: Name;
@@ -68,7 +68,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               {...props}
               className="govuk-radios__input"
               type="radio"
-              data-test={`${field.name}-yes`}
+              data-test={`${field.name}-input-yes`}
               checked={field.value}
               onChange={() => helpers.setValue(true)}
             />
@@ -84,7 +84,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               {...field}
               {...props}
               className="govuk-radios__input"
-              data-test={`${field.name}-no`}
+              data-test={`${field.name}-input-no`}
               type="radio"
               checked={field.value === undefined ? false : !field.value}
               onChange={() => helpers.setValue(false)}

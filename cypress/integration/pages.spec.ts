@@ -5,21 +5,8 @@
 /// <reference types="cypress" />
 
 // import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
-import { TaxFormUserInput } from '../../src/lib/types';
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
-
-function getInput<K extends keyof TaxFormUserInput>(key: K) {
-  return cy.get(`[data-test="${key}-input"]`);
-}
-
-function typeToInput<K extends keyof TaxFormUserInput>(
-  key: K,
-  input: TaxFormUserInput,
-) {
-  const inputText =
-    typeof input[key] === 'string' ? input[key] : input[key].toString();
-  return getInput(key).type(inputText as string);
-}
+import { getInput, typeToInput } from './cases.spec';
 
 const getNextButton = () => cy.get('[data-test=next]');
 const getError = () => cy.get('[data-test=error]');
@@ -40,7 +27,7 @@ describe('Employment page', function() {
     getError();
 
     // When presses yes, additional fields appears
-    cy.get('[data-test=employed-yes]').click();
+    cy.get('[data-test=employed-input-yes]').click();
 
     // FIXME When try to submit, error appear
     // getNextButton().click();
@@ -54,13 +41,13 @@ describe('Employment page', function() {
     getError().should('not.exist');
 
     // When presses no, the fields disappear
-    cy.get('[data-test=employed-no]').click();
+    cy.get('[data-test=employed-input-no]').click();
 
     getInput('r038').should('not.exist');
     getInput('r039').should('not.exist');
 
     // When presses yes, additional fields appears
-    cy.get('[data-test=employed-yes]').click();
+    cy.get('[data-test=employed-input-yes]').click();
     // FIXME This is a bug, the value should
     // be '4000' not '0400'. Related to formik initial values
     getInput('r038').should('have.value', `0${withPartnerInput.r038}`);

@@ -5,9 +5,30 @@ import { withPartnerInput } from './testCases/withPartnerInput';
 import { withEmploymentInput } from './testCases/withEmploymentInput';
 import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 import { calculate } from '../src/lib/calculation';
+import { baseInput } from './testCases/baseInput';
 
 const comparable = (xml: string) => xml2json(xml, { compact: true, spaces: 2 });
 const stringify = (object: object) => JSON.stringify(object, null, 2);
+test('base', async () => {
+  return fs.readFile(`${__dirname}/testCases/base.xml`).then(baseXML => {
+    const taxForm = calculate(baseInput);
+    fs.writeFile(
+      `${__dirname}/testCases/baseTaxForm.output.json`,
+      stringify(taxForm),
+    );
+
+    const outputXml = convertToXML(taxForm);
+    const outputJson = convertToJson(taxForm);
+
+    fs.writeFile(`${__dirname}/testCases/base.output.xml`, outputXml);
+    fs.writeFile(
+      `${__dirname}/testCases/base.output.json`,
+      stringify(outputJson),
+    );
+
+    return expect(comparable(outputXml)).toBe(comparable(baseXML.toString()));
+  });
+});
 test('withPartner', async () => {
   return fs
     .readFile(`${__dirname}/testCases/withPartner.xml`)

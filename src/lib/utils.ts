@@ -1,4 +1,4 @@
-import { TaxForm } from './types';
+import { TaxForm } from '../types/TaxForm';
 
 export const sortObjectKeys = object => {
   const ordered = {};
