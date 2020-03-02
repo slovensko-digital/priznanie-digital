@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { xml2json } from 'xml-js';
 import { promises as fs } from 'fs';
 import { withPartnerInput } from './testCases/withPartnerInput';

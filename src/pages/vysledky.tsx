@@ -3,7 +3,7 @@ import Link from 'next/link';
 import fileDownload from 'js-file-download';
 import { NextPage } from 'next';
 import { convertToXML } from '../lib/xml/xmlConverter';
-import { TaxForm } from '../lib/types';
+import { TaxForm } from "../types/TaxForm";
 
 const backUrl = '/osobne-udaje';
 interface Props {
