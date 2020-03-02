@@ -98,7 +98,6 @@ describe('Case 1', function() {
         cy.on('window:alert', stub);
 
         cy.get('#form-button-load').click();
-        // @ts-ignore
         cy.get('#form-buttons-load-dialog > input').upload({
           fileContent: xmlResult,
           fileName: 'xmlResult.xml',
