@@ -16,6 +16,6 @@ export const withEmploymentInput: TaxFormUserInput = {
   t1r10_prijmy: 25000,
   r038: 4000,
   r039: 1000,
-  datum: '22.02.2020',
   employed: true,
+  datum: '22.02.2020',
 };

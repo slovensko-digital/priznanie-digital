@@ -26,7 +26,7 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   /** Employed */
   tf.r038 = taxFormUserInput?.r038 ?? 0;
   tf.r039 = taxFormUserInput?.r039 ?? 0;
-  tf.r040 = taxFormUserInput.r038 - taxFormUserInput.r039;
+  tf.r040 = tf.r038 - tf.r039;
 
   tf.r041 = tf.t1r10_prijmy;
   tf.r042 = tf.t1r10_vydavky;

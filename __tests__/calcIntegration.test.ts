@@ -53,7 +53,7 @@ test('withPartner', async () => {
       );
     });
 });
-test.only('withEmployment', async () => {
+test('withEmployment', async () => {
   return fs
     .readFile(`${__dirname}/testCases/withEmployment.xml`)
     .then(withEmploymentXML => {

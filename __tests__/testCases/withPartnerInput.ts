@@ -21,9 +21,5 @@ export const withPartnerInput: TaxFormUserInput = {
   r033_partner_kupele: true,
   r033_partner_kupele_uhrady: 40,
   t1r10_prijmy: 25000,
-  r038: 4000,
-  r039: 1000,
   datum: '19.02.2020',
-  // Employed: false,
-  // kids: false,
 };
