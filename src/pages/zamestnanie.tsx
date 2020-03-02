@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
 import { EmployedUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 const nextUrl = '/partner';
 const backUrl = '/prijmy-a-vydavky';
@@ -49,12 +49,12 @@ const Zamestnanie: NextPage<Props> = ({
               <>
                 <Input
                   name="r038"
-                  type="text"
+                  type="number"
                   label="Úhrn príjmov od všetkých zamestnávateľov"
                 />
                 <Input
                   name="r039"
-                  type="text"
+                  type="number"
                   label="Úhrn povinného poistného"
                 />
               </>

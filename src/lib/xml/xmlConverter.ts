@@ -61,10 +61,10 @@ export function convertToJson(taxForm: TaxForm) {
 
   /** Employed */
   if (taxForm.employed) {
-    form.dokument.telo.r38 = taxForm.r038.toFixed(2);
-    form.dokument.telo.r39 = taxForm.r039.toFixed(2);
-    form.dokument.telo.r40 = taxForm.r040.toFixed(2);
-    form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2);
+    form.dokument.telo.r38 = taxForm?.r038.toFixed(2) ?? '0';
+    form.dokument.telo.r39 = taxForm?.r039.toFixed(2) ?? '0';
+    form.dokument.telo.r40 = taxForm?.r040.toFixed(2) ?? '0';
+    form.dokument.telo.socZdravPoistenie.pr8 = taxForm?.r039.toFixed(2);
   }
 
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);

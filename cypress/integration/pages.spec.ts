@@ -48,10 +48,9 @@ describe('Employment page', function() {
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click();
-    // FIXME This is a bug, the value should
-    // be '4000' not '0400'. Related to formik initial values
-    getInput('r038').should('have.value', `0${withPartnerInput.r038}`);
-    getInput('r039').should('have.value', `0${withPartnerInput.r039}`);
+
+    getInput('r038').should('have.value', withPartnerInput.r038.toString());
+    getInput('r039').should('have.value', withPartnerInput.r039.toString());
 
     // Should submit and next page should be parter
     getNextButton().click();
