@@ -56,17 +56,17 @@
 		<r29>0</r29>
 		<r30></r30>
 		<r31>
-			<priezviskoMeno>Fake Fake</priezviskoMeno>
-			<rodneCislo>9609226286</rodneCislo>
+			<priezviskoMeno></priezviskoMeno>
+			<rodneCislo></rodneCislo>
 		</r31>
 		<r32>
-			<uplatnujemNCZDNaManzela>1</uplatnujemNCZDNaManzela>
-			<vlastnePrijmy>4000.00</vlastnePrijmy>
-			<pocetMesiacov>12</pocetMesiacov>
+			<uplatnujemNCZDNaManzela>0</uplatnujemNCZDNaManzela>
+			<vlastnePrijmy></vlastnePrijmy>
+			<pocetMesiacov></pocetMesiacov>
 		</r32>
 		<r33>
 			<uplatNCZDNaKupelStarostlivost>0</uplatNCZDNaKupelStarostlivost>
-			<preukazZaplatUhrady>0.00</preukazZaplatUhrady>
+			<preukazZaplatUhrady></preukazZaplatUhrady>
 		</r33>
 		<r34>
 			<dieta>
@@ -428,11 +428,11 @@
 		<r71></r71>
 		<r72>11000.00</r72>
 		<r73>3937.35</r73>
-		<r74>0.00</r74>
+		<r74></r74>
 		<r75></r75>
-		<r76>0.00</r76>
+		<r76></r76>
 		<r76a></r76a>
-		<r76b>0.00</r76b>
+		<r76b></r76b>
 		<r77>3937.35</r77>
 		<r78>7062.65</r78>
 		<r79></r79>

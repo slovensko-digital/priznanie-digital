@@ -53,19 +53,18 @@ test('withPartner', async () => {
       );
     });
 });
-test('withEmployment', async () => {
+test.only('withEmployment', async () => {
   return fs
     .readFile(`${__dirname}/testCases/withEmployment.xml`)
     .then(withEmploymentXML => {
       const taxForm = calculate(withEmploymentInput);
+      const outputXml = convertToXML(taxForm);
+      const outputJson = convertToJson(taxForm);
+
       fs.writeFile(
         `${__dirname}/testCases/withEmploymentTaxForm.output.json`,
         stringify(taxForm),
       );
-
-      const outputXml = convertToXML(taxForm);
-      const outputJson = convertToJson(taxForm);
-
       fs.writeFile(
         `${__dirname}/testCases/withEmployment.output.xml`,
         outputXml,
