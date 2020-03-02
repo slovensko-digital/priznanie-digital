@@ -10,20 +10,8 @@ import { TaxForm } from '../../src/types/TaxForm';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
 import { setDate } from '../../src/lib/utils';
 
-export function getInput<K extends keyof TaxFormUserInput>(
-  key: K,
-  suffix = '',
-) {
+function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
-}
-
-export function typeToInput<K extends keyof TaxFormUserInput>(
-  key: K,
-  input: TaxFormUserInput,
-) {
-  const inputText =
-    typeof input[key] === 'string' ? input[key] : input[key].toString();
-  return getInput(key).type(inputText as string);
 }
 
 const nextButton = 'Pokračovať';
