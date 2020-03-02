@@ -7,6 +7,7 @@
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
 import { TaxFormUserInput, TaxForm } from '../../src/lib/types';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
+import { setDate } from '../../src/lib/utils';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
@@ -16,8 +17,7 @@ const nextButton = 'Pokračovať';
 
 describe('Case 1', function() {
   it('Complete flow', function() {
-    // cy.clock(new Date(2020, 1, 22).getTime());
-    // console.log(new Date().toLocaleString("sk-sk"));
+    const now = new Date(2020, 1, 22);
     cy.visit('/');
 
     cy.contains('Pripraviť daňové priznanie').click();
@@ -80,7 +80,7 @@ describe('Case 1', function() {
     getInput('r008_cislo').type(withPartnerInput.r008_cislo.toString());
     getInput('r009_psc').type(withPartnerInput.r009_psc.toString());
     // cy.wait(1000);
-    getInput('r010_obec').type(withPartnerInput.r010_obec.toString());
+    // getInput('r010_obec').type(withPartnerInput.r010_obec.toString());
     getInput('r011_stat').type(withPartnerInput.r011_stat.toString());
 
     cy.contains(nextButton).click();
@@ -89,11 +89,11 @@ describe('Case 1', function() {
     cy.get(`pre[id="TaxForm"]`)
       .invoke('text')
       .then(xmlJson => {
-        const xmlResult = convertToXML(
-          JSON.parse(xmlJson.toString()) as TaxForm,
-        );
+        const taxForm = setDate(JSON.parse(xmlJson.toString()) as TaxForm, now);
+        const xmlResult = convertToXML(taxForm);
 
         cy.visit('/form/form.451.html');
+
         const stub = cy.stub();
         cy.on('window:alert', stub);
 
