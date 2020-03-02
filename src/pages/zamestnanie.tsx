@@ -26,7 +26,9 @@ const Zamestnanie: NextPage<Props> = ({
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Späť</a>
+        <a className="govuk-back-link" data-test="back">
+          Späť
+        </a>
       </Link>
       <Formik<EmployedUserInput>
         initialValues={taxFormUserInput}
@@ -56,7 +58,7 @@ const Zamestnanie: NextPage<Props> = ({
                 />
               </>
             )}
-            <button className="govuk-button" type="submit">
+            <button data-test="next" className="govuk-button" type="submit">
               Pokračovať
             </button>
           </Form>

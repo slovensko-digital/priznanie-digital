@@ -59,7 +59,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
             label="Zdravotné poistenie"
           />
 
-          <button className="govuk-button" type="submit">
+          <button data-test="next" className="govuk-button" type="submit">
             Pokračovať
           </button>
         </Form>
