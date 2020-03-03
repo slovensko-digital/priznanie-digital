@@ -10,9 +10,9 @@ export type EmployedUserInput<T = string> = Pick<
   'employed' | 'r038' | 'r039'
 >;
 
-export type KidsUserInput<T = string> = Pick<
+export type ChildrenUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
-  'kids' | 'r034'
+  'children' | 'r034'
 >;
 
 export type PartnerUserInput<T = string> = Pick<
@@ -37,5 +37,4 @@ export type PersonalInformationUserInput<T = string> = Pick<
   | 'r009_psc'
   | 'r010_obec'
   | 'r011_stat'
-  | 'datum'
 >;

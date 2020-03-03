@@ -160,6 +160,8 @@ export function calculate(i: TaxFormUserInput): TaxForm {
       return Math.abs(Math.min(this.r125_dan_na_uhradu, 0));
     },
     datum: i.datum,
+    children: i?.children ?? false,
+    employed: i?.employed ?? false,
   };
 
   return tf;

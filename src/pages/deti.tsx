@@ -5,13 +5,13 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
-import { KidsUserInput } from '../types/PageUserInputs';
+import { ChildrenUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from "../types/TaxFormUserInput";
 
 const nextUrl = '/osobne-udaje';
 const backUrl = '/partner';
 interface Props {
-  setTaxFormUserInput: (values: KidsUserInput) => void;
+  setTaxFormUserInput: (values: ChildrenUserInput) => void;
   taxFormUserInput: TaxFormUserInput;
 }
 const Deti: NextPage<Props> = ({
@@ -27,7 +27,7 @@ const Deti: NextPage<Props> = ({
       <Link href={backUrl}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik<KidsUserInput>
+      <Formik<ChildrenUserInput>
         initialValues={taxFormUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -39,9 +39,9 @@ const Deti: NextPage<Props> = ({
           <Form className="form">
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
-              name="kids"
+              name="children"
             />
-            {values.kids &&
+            {values.children &&
               values.r034.map((kid, index) => (
                 <div key={kid.rodneCislo}>
                   <button
@@ -77,8 +77,8 @@ const Deti: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<KidsUserInput>({
-  kids: Yup.boolean()
+const validationSchema = Yup.object().shape<ChildrenUserInput>({
+  children: Yup.boolean()
     .required()
     .nullable(),
   r034: Yup.mixed().when('kids', {

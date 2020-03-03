@@ -62,12 +62,9 @@ export interface TaxFormUserInputBase<T> {
       m12: boolean;
     },
   ];
+
+  children?: boolean;
+  employed?: boolean;
 }
 
-interface AdditionalInputs {
-  kids: boolean;
-  employed: boolean;
-}
-
-export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T> &
-  AdditionalInputs;
+export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T>;

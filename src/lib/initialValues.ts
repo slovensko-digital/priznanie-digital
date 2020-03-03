@@ -3,9 +3,9 @@ import {
   PartnerUserInput,
   IncomeAndExpenseUserInput,
   EmployedUserInput,
-  KidsUserInput,
+  ChildrenUserInput,
 } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '0',
@@ -41,8 +41,8 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   r039: '0',
 };
 
-export const kidsUserInputInitialValues: KidsUserInput = {
-  kids: undefined,
+export const kidsUserInputInitialValues: ChildrenUserInput = {
+  children: undefined,
   r034: [
     {
       priezviskoMeno: '',
@@ -71,4 +71,5 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
   ...kidsUserInputInitialValues,
+  ...{ datum: '' },
 };
