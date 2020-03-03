@@ -21,7 +21,7 @@ export interface TaxFormUserInputBase<T> {
   r011_stat: string;
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */
-  datum?: string;
+  datum: string;
 
   /**  Partner*/
   r031_priezvisko_a_meno?: string;
@@ -39,11 +39,9 @@ export interface TaxFormUserInputBase<T> {
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: T;
   /**   Zamestnanie */
-  employed?: boolean;
   r038?: T;
   r039?: T;
   /**   Deti*/
-  kids?: boolean;
   r034?: [
     {
       priezviskoMeno: string;
@@ -66,4 +64,10 @@ export interface TaxFormUserInputBase<T> {
   ];
 }
 
-export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T>;
+interface AdditionalInputs {
+  kids: boolean;
+  employed: boolean;
+}
+
+export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T> &
+  AdditionalInputs;

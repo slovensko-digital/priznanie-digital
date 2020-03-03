@@ -1,6 +1,6 @@
 import { TaxFormUserInputBase } from './TaxFormUserInput';
 
-export interface TaxForm extends TaxFormUserInputBase<number> {
+export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
   t1r10_vydavky?: number;
   t1r2_prijmy?: number;
@@ -11,9 +11,9 @@ export interface TaxForm extends TaxFormUserInputBase<number> {
   // zdaňovacie obdobie (v eurách)6)
   r030?: number;
   // Uhrn poistneho
-  r039?: number;
+  r039: number;
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
-  r040?: number;
+  r040: number;
   // The same as t1r10_vydavky
   r041?: number;
   // Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above
