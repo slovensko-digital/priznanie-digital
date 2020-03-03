@@ -66,4 +66,4 @@ export interface TaxFormUserInputBase<T> {
   ];
 }
 
-export type TaxFormUserInput = TaxFormUserInputBase<string>;
+export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T>;

@@ -6,6 +6,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:cy": " start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",

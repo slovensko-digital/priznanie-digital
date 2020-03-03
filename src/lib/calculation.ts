@@ -10,37 +10,37 @@ function parseInt10(input: string) {
   return parseInt(input, 10);
 }
 
-export function calculate(a: TaxFormUserInput): TaxForm {
+export function calculate(input: TaxFormUserInput): TaxForm {
   /** Combine default vaules with user input */
   const tf: TaxForm = {
-    r001_dic: a.r001_dic,
-    r003_nace: a.r003_nace,
-    r004_priezvisko: a.r004_priezvisko,
-    r005_meno: a.r005_meno,
-    r007_ulica: a.r007_ulica,
-    r008_cislo: a.r008_cislo,
-    r009_psc: a.r009_psc,
-    r010_obec: a.r010_obec,
-    r011_stat: a.r011_stat,
-    r031_priezvisko_a_meno: a.r031_priezvisko_a_meno,
-    r031_rodne_cislo: a.r031_rodne_cislo,
-    r032_uplatnujem_na_partnera: a.r032_uplatnujem_na_partnera,
+    r001_dic: input.r001_dic,
+    r003_nace: input.r003_nace,
+    r004_priezvisko: input.r004_priezvisko,
+    r005_meno: input.r005_meno,
+    r007_ulica: input.r007_ulica,
+    r008_cislo: input.r008_cislo,
+    r009_psc: input.r009_psc,
+    r010_obec: input.r010_obec,
+    r011_stat: input.r011_stat,
+    r031_priezvisko_a_meno: input.r031_priezvisko_a_meno,
+    r031_rodne_cislo: input.r031_rodne_cislo,
+    r032_uplatnujem_na_partnera: input.r032_uplatnujem_na_partnera,
     r032_partner_vlastne_prijmy: parseInt10(
-      a?.r032_partner_vlastne_prijmy ?? '0',
+      input?.r032_partner_vlastne_prijmy ?? '0',
     ),
     r032_partner_pocet_mesiacov: parseInt10(
-      a?.r032_partner_pocet_mesiacov ?? '0',
+      input?.r032_partner_pocet_mesiacov ?? '0',
     ),
-    r033_partner_kupele: a.r033_partner_kupele,
+    r033_partner_kupele: input.r033_partner_kupele,
     r033_partner_kupele_uhrady: parseInt10(
-      a?.r033_partner_kupele_uhrady ?? '0',
+      input?.r033_partner_kupele_uhrady ?? '0',
     ),
-    t1r10_prijmy: parseInt10(a.t1r10_prijmy),
-    priloha3_r11_socialne: parseInt10(a.priloha3_r11_socialne),
-    priloha3_r13_zdravotne: parseInt10(a.priloha3_r13_zdravotne),
-    employed: a.employed,
-    r038: parseInt10(a?.r038 ?? '0'),
-    r039: parseInt10(a?.r039 ?? '0'),
+    t1r10_prijmy: parseInt10(input.t1r10_prijmy),
+    priloha3_r11_socialne: parseInt10(input.priloha3_r11_socialne),
+    priloha3_r13_zdravotne: parseInt10(input.priloha3_r13_zdravotne),
+    employed: input.employed,
+    r038: parseInt10(input?.r038 ?? '0'),
+    r039: parseInt10(input?.r039 ?? '0'),
   };
   const flatrateExpenses = tf.t1r10_prijmy * 0.6;
 
@@ -125,6 +125,6 @@ export function calculate(a: TaxFormUserInput): TaxForm {
   // tf.r123 -
   // tf.r124;
   tf.r126_danovy_preplatok = Math.abs(Math.min(tf.r125_dan_na_uhradu, 0));
-  tf.datum = a.datum;
+  tf.datum = input.datum;
   return tf;
 }

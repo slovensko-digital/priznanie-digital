@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
 import { PartnerUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 const nextUrl = '/deti';
 const backUrl = '/zamestnanie';
@@ -87,7 +87,7 @@ const Partner: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<PartnerUserInput>({
+const validationSchema = Yup.object().shape<PartnerUserInput<number>>({
   r032_uplatnujem_na_partnera: Yup.boolean()
     .required()
     .nullable(),
