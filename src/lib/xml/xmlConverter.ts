@@ -69,7 +69,6 @@ export function convertToJson(taxForm: TaxForm) {
     form.dokument.telo.r40 = taxForm.r040?.toFixed(2) ?? '0';
     form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039?.toFixed(2) ?? '0';
   }
-  
   form.dokument.telo.r41 = taxForm.r041?.toFixed(2) ?? '';
   form.dokument.telo.r42 = taxForm.r042?.toFixed(2) ?? '';
   form.dokument.telo.r43 = taxForm.r043?.toFixed(2) ?? '';
