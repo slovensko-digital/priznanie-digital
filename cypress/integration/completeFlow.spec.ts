@@ -6,9 +6,9 @@
 
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
-import { TaxForm } from '../../src/types/TaxForm';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
 import { setDate } from '../../src/lib/utils';
+import { calculate } from '../../src/lib/calculation';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K) {
   return cy.get(`input[name="${key}"]`);
@@ -61,7 +61,7 @@ it('Complete flow', function() {
   // );
   cy.contains(nextButton).click();
 
-  getInput('kids')
+  getInput('children')
     .first()
     .click();
 
@@ -84,11 +84,14 @@ it('Complete flow', function() {
   cy.contains(nextButton).click();
   cy.contains('XML');
 
-  cy.get(`pre[id="TaxForm"]`)
+  cy.get(`[data-test="taxFormUserInput"]`)
     .invoke('text')
-    .then(xmlJson => {
-      const taxForm = setDate(JSON.parse(xmlJson.toString()) as TaxForm, now);
-      const xmlResult = convertToXML(taxForm);
+    .then(output => {
+      const taxFormUserInput = setDate(
+        JSON.parse(output.toString()) as TaxFormUserInput,
+        now,
+      );
+      const xmlResult = convertToXML(calculate(taxFormUserInput));
 
       cy.visit('/form/form.451.html');
 

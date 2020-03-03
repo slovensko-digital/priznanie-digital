@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 const nextUrl = '/osobne-udaje';
 const backUrl = '/partner';

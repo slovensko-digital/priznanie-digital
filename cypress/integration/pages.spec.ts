@@ -19,10 +19,6 @@ function typeToInput<K extends keyof TaxFormUserInput>(
   if (typeof value === 'string') {
     return getInput(key).type(value);
   }
-  if (typeof value === 'number') {
-    return getInput(key).type(value.toString());
-  }
-
   throw new Error(`Incorrect type of input: ${value}`);
 }
 
