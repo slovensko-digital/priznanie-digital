@@ -4,7 +4,6 @@ export const withPartnerInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r001_dic: '233123123',
-  // R002_datum_narodenia: "22.02.1993",
   r003_nace: '123123',
   r004_priezvisko: 'Name',
   r005_meno: 'Fake',

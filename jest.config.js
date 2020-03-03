@@ -41,4 +41,11 @@ module.exports = {
     `.*.output.xml`,
     '/cypress',
   ],
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        warnOnly: 'true',
+      },
+    },
+  },
 };

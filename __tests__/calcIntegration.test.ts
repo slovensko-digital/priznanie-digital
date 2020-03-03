@@ -29,7 +29,9 @@ describe('calcIntergration', () => {
         stringify(outputJson),
       );
 
-      return expect(comparable(outputXml)).toBe(comparable(baseXML.toString()));
+      return expect(comparable(outputXml)).toStrictEqual(
+        comparable(baseXML.toString()),
+      );
     });
   });
   test('withPartner', async () => {
@@ -54,12 +56,12 @@ describe('calcIntergration', () => {
           stringify(outputJson),
         );
 
-        return expect(comparable(outputXml)).toBe(
+        return expect(comparable(outputXml)).toStrictEqual(
           comparable(withPartnerXML.toString()),
         );
       });
   });
-  test.only('withEmployment', async () => {
+  test('withEmployment', async () => {
     const withEmploymentXML = await fs.readFile(
       `${__dirname}/testCases/withEmployment.xml`,
     );

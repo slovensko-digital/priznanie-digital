@@ -1,9 +1,10 @@
 import xmljs from 'xml-js';
+import cloneDeep from 'lodash.clonedeep';
 import schemaSample from './schemaSample';
 import { TaxForm } from '../../types/TaxForm';
 
 export function convertToJson(taxForm: TaxForm) {
-  const form = { ...schemaSample };
+  const form = cloneDeep(schemaSample);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
@@ -51,8 +52,7 @@ export function convertToJson(taxForm: TaxForm) {
 
     form.dokument.telo.r33 = {
       uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? '1' : '0',
-      preukazZaplatUhrady:
-        taxForm.r033_partner_kupele_uhrady?.toFixed(2) ?? '',
+      preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady?.toFixed(2) ?? '',
     };
 
     form.dokument.telo.r74 = taxForm.r074_znizenie_partner?.toFixed(2) ?? '';
