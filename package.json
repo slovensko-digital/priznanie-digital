@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm run test:noWatch && next build",
+    "build": "next build",
     "start": "next start",
     "test": "jest --watch",
     "test:noWatch": "jest",
@@ -14,7 +14,7 @@
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:ci": "start-server-and-test dev http://localhost:3000/ cy:run",
+    "cy:ci": "npm run build && start-server-and-test start http://localhost:3000/ cy:run",
     "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx",
     "check:ts": "tsc --noEmit"
   },
