@@ -5,7 +5,8 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
-import { EmployedUserInput, TaxFormUserInput } from '../lib/types';
+import { EmployedUserInput } from '../types/PageUserInputs';
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 const nextUrl = '/partner';
 const backUrl = '/prijmy-a-vydavky';
@@ -26,7 +27,9 @@ const Zamestnanie: NextPage<Props> = ({
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Späť</a>
+        <a className="govuk-back-link" data-test="back">
+          Späť
+        </a>
       </Link>
       <Formik<EmployedUserInput>
         initialValues={taxFormUserInput}
@@ -46,17 +49,17 @@ const Zamestnanie: NextPage<Props> = ({
               <>
                 <Input
                   name="r038"
-                  type="text"
+                  type="number"
                   label="Úhrn príjmov od všetkých zamestnávateľov"
                 />
                 <Input
                   name="r039"
-                  type="text"
+                  type="number"
                   label="Úhrn povinného poistného"
                 />
               </>
             )}
-            <button className="govuk-button" type="submit">
+            <button data-test="next" className="govuk-button" type="submit">
               Pokračovať
             </button>
           </Form>

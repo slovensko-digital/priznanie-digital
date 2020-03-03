@@ -1,5 +1,6 @@
 import floor from 'lodash.floor';
-import { TaxForm, TaxFormUserInput } from './types';
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { TaxForm } from '../types/TaxForm';
 import { initTaxFormUserInputValues } from './initialValues';
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
@@ -21,18 +22,25 @@ export function calculate(taxFormUserInput: TaxFormUserInput) {
   tf.t1r2_prijmy = tf.t1r10_prijmy;
 
   tf.r030 = 0; // TODO in next use cases
+
+  /** Employed */
+  tf.r038 = taxFormUserInput?.r038 ?? 0;
+  tf.r039 = taxFormUserInput?.r039 ?? 0;
+  tf.r040 = tf.r038 - tf.r039;
+
   tf.r041 = tf.t1r10_prijmy;
   tf.r042 = tf.t1r10_vydavky;
   tf.r043 = Math.abs(tf.r041 - tf.r042);
   tf.r047 = tf.r043; // tf.r044 + tf.r045 - tf.r046);
   tf.r055 = tf.r047;
   tf.r057 = tf.r055;
-  tf.r072_pred_znizenim = tf.r057; // + tf.r040;
+  tf.r072_pred_znizenim = tf.r057 + tf.r040;
   tf.r073 =
     tf.r072_pred_znizenim > 20507 // TODO test both cases here
       ? Math.max(0, 9064.094 - (1 / 4) * (tf.r072_pred_znizenim - tf.r030)) // WTF Black Magic
       : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - tf.r030);
 
+  /** Partner */
   if (tf.r032_uplatnujem_na_partnera) {
     tf.r074_znizenie_partner = // TODO test both cases here
       tf.r072_pred_znizenim > 36256.38

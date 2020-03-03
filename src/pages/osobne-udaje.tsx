@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import styles from './osobne-udaje.module.css';
-import { PersonalInformationUserInput, TaxFormUserInput } from '../lib/types';
+import { PersonalInformationUserInput } from '../types/PageUserInputs';
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
 import { getCity, getAutoformByPersonName, AutoformPerson } from '../lib/api';
 
 const nextUrl = '/vysledky';

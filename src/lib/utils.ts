@@ -1,4 +1,4 @@
-import { TaxForm } from './types';
+import { TaxForm } from '../types/TaxForm';
 
 export const sortObjectKeys = object => {
   const ordered = {};
@@ -10,6 +10,7 @@ export const sortObjectKeys = object => {
   return ordered;
 };
 
-export const setDate = (taxform: TaxForm): TaxForm => {
-  return { ...taxform, datum: new Date().toLocaleString('sk-sk') };
+export const setDate = (taxform: TaxForm, date?: Date): TaxForm => {
+  const currentDate = date || new Date();
+  return { ...taxform, datum: currentDate.toLocaleString('sk-sk') };
 };
