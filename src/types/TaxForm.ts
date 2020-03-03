@@ -2,9 +2,8 @@ import { TaxFormUserInputBase } from './TaxFormUserInput';
 
 export interface TaxForm extends TaxFormUserInputBase<number> {
   // VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10
-  t1r10_vydavky: number;
-  t1r2_prijmy: number;
-  t1r10_prijmy: number;
+  t1r10_vydavky?: number;
+  t1r2_prijmy?: number;
   // Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
   // vydavkyPoistPar6ods11_ods1a2
   priloha3_r08_poistne?: number;

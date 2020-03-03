@@ -1,7 +1,6 @@
 import floor from 'lodash.floor';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
-import { initTaxFormUserInputValues } from './initialValues';
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;
@@ -43,7 +42,7 @@ export function calculate(a: TaxFormUserInput): TaxForm {
     r038: parseInt10(a?.r038 ?? '0'),
     r039: parseInt10(a?.r039 ?? '0'),
   };
-  const flatrateExpenses = a.t1r10_prijmy * 0.6;
+  const flatrateExpenses = tf.t1r10_prijmy * 0.6;
 
   tf.priloha3_r08_poistne =
     tf.priloha3_r11_socialne + tf.priloha3_r13_zdravotne;
@@ -54,8 +53,6 @@ export function calculate(a: TaxFormUserInput): TaxForm {
   tf.r030 = 0; // TODO in next use cases
 
   /** Employed */
-  tf.r038 = a?.r038 ?? 0;
-  tf.r039 = a?.r039 ?? 0;
   tf.r040 = tf.r038 - tf.r039;
 
   tf.r041 = tf.t1r10_prijmy;
