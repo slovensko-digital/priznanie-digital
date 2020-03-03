@@ -1,7 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 interface InputProps<Name> {
   name: Name;
@@ -25,7 +25,12 @@ export const Input = <Name extends keyof TaxFormUserInput>({
         <div>{label}</div>
         <small>{small}</small>
       </label>
-      <input className="govuk-input" {...field} {...props} />
+      <input
+        className="govuk-input"
+        data-test={`${field.name}-input`}
+        {...field}
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <span id={props.name} className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
@@ -63,6 +68,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               {...props}
               className="govuk-radios__input"
               type="radio"
+              data-test={`${field.name}-input-yes`}
               checked={field.value}
               onChange={() => helpers.setValue(true)}
             />
@@ -78,6 +84,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               {...field}
               {...props}
               className="govuk-radios__input"
+              data-test={`${field.name}-input-no`}
               type="radio"
               checked={field.value === undefined ? false : !field.value}
               onChange={() => helpers.setValue(false)}
@@ -91,7 +98,7 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
           </div>
         </div>
         {meta.touched && meta.error ? (
-          <span id={props.name} className="govuk-error-message">
+          <span data-test="error" className="govuk-error-message">
             <span className="govuk-visually-hidden">Error:</span> {meta.error}
           </span>
         ) : null}

@@ -1,6 +1,6 @@
 import xmljs from 'xml-js';
 import schemaSample from './schemaSample';
-import { TaxForm } from "../../types/TaxForm";
+import { TaxForm } from '../../types/TaxForm';
 
 export function convertToJson(taxForm: TaxForm) {
   const form = { ...schemaSample };
@@ -59,6 +59,14 @@ export function convertToJson(taxForm: TaxForm) {
     form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.toFixed(2);
   }
 
+  /** Employed */
+  if (taxForm.employed) {
+    form.dokument.telo.r38 = taxForm?.r038.toFixed(2) ?? '0';
+    form.dokument.telo.r39 = taxForm?.r039.toFixed(2) ?? '0';
+    form.dokument.telo.r40 = taxForm?.r040.toFixed(2) ?? '0';
+    form.dokument.telo.socZdravPoistenie.pr8 = taxForm?.r039.toFixed(2);
+  }
+
   form.dokument.telo.r41 = taxForm.r041.toFixed(2);
   form.dokument.telo.r42 = taxForm.r042.toFixed(2);
   form.dokument.telo.r43 = taxForm.r043.toFixed(2);
@@ -89,6 +97,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.socZdravPoistenie.pr13 = taxForm.priloha3_r13_zdravotne.toFixed(
     2,
   );
+
   form.dokument.telo.socZdravPoistenie.datum = taxForm.datum;
 
   return form;

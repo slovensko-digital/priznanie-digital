@@ -26,14 +26,14 @@ export interface TaxFormUserInput {
    * failovali test */
   datum?: string;
   // Partner
-  r031_priezvisko_a_meno: string;
-  r031_rodne_cislo: string;
-  r032_uplatnujem_na_partnera: boolean;
-  r032_partner_vlastne_prijmy: number;
-  r032_partner_pocet_mesiacov: number;
-  r033_partner_kupele: boolean;
+  r031_priezvisko_a_meno?: string;
+  r031_rodne_cislo?: string;
+  r032_uplatnujem_na_partnera?: boolean;
+  r032_partner_vlastne_prijmy?: number;
+  r032_partner_pocet_mesiacov?: number;
+  r033_partner_kupele?: boolean;
   // max 50
-  r033_partner_kupele_uhrady: number;
+  r033_partner_kupele_uhrady?: number;
   // VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 10
   t1r10_prijmy: number; // TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2
   // Preukázateľne zaplatené poistné na sociálne poistenie z príjmov
@@ -46,22 +46,24 @@ export interface TaxFormUserInput {
   r039?: number;
   // Deti
   kids?: boolean;
-  r034?: [{
-    priezviskoMeno: string;
-    rodneCislo: string;
-    kupelnaStarostlivost: boolean;
-    m00: boolean;
-    m01: boolean;
-    m02: boolean;
-    m03: boolean;
-    m04: boolean;
-    m05: boolean;
-    m06: boolean;
-    m07: boolean;
-    m08: boolean;
-    m09: boolean;
-    m10: boolean;
-    m11: boolean;
-    m12: boolean;
-  }];
+  r034?: [
+    {
+      priezviskoMeno: string;
+      rodneCislo: string;
+      kupelnaStarostlivost: boolean;
+      m00: boolean;
+      m01: boolean;
+      m02: boolean;
+      m03: boolean;
+      m04: boolean;
+      m05: boolean;
+      m06: boolean;
+      m07: boolean;
+      m08: boolean;
+      m09: boolean;
+      m10: boolean;
+      m11: boolean;
+      m12: boolean;
+    },
+  ];
 }

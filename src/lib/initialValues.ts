@@ -33,7 +33,6 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   r009_psc: '',
   r010_obec: '',
   r011_stat: '',
-  datum: new Date().toLocaleString('sk-sk'),
 };
 
 export const employmentUserInputInitialValues: EmployedUserInput = {

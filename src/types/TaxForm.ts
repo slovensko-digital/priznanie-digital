@@ -13,6 +13,8 @@ export interface TaxForm extends TaxFormUserInput {
   r030?: number;
   // Uhrn poistneho
   r039?: number;
+  /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
+  r040?: number;
   // The same as t1r10_vydavky
   r041?: number;
   // Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above
