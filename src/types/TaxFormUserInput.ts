@@ -1,11 +1,9 @@
-export interface TaxFormUserInput {
+export interface TaxFormUserInputBase<T> {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string;
-  /**   02 - Dátum narodenia*/
-  /**   TODO Aky format?*/
-  /**   03 - SK NACE - Hlavná, prevažná činnosť*/
-  /**   TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum,
-   * UX musi byt zvladnute */
+  /** 03 - SK NACE - Hlavná, prevažná činnosť
+   *  TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum,
+   *  UX musi byt zvladnute */
   r003_nace: string;
   /**   04 - Priezvisko*/
   r004_priezvisko: string;
@@ -29,21 +27,21 @@ export interface TaxFormUserInput {
   r031_priezvisko_a_meno?: string;
   r031_rodne_cislo?: string;
   r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: number;
-  r032_partner_pocet_mesiacov?: number;
+  r032_partner_vlastne_prijmy?: T;
+  r032_partner_pocet_mesiacov?: T;
   r033_partner_kupele?: boolean;
   /**   max 50*/
-  r033_partner_kupele_uhrady?: number;
+  r033_partner_kupele_uhrady?: T;
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
-  t1r10_prijmy: number;
+  t1r10_prijmy: T;
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
-  priloha3_r11_socialne: number;
+  priloha3_r11_socialne: T;
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
-  priloha3_r13_zdravotne: number;
+  priloha3_r13_zdravotne: T;
   /**   Zamestnanie */
   employed?: boolean;
-  r038?: number;
-  r039?: number;
+  r038?: T;
+  r039?: T;
   /**   Deti*/
   kids?: boolean;
   r034?: [
@@ -67,3 +65,5 @@ export interface TaxFormUserInput {
     },
   ];
 }
+
+export type TaxFormUserInput = TaxFormUserInputBase<string>;
