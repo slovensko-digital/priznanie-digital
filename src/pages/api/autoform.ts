@@ -7,6 +7,10 @@ const baseUrl =
 const limit = 20;
 const token = process.env.autoformtoken;
 
+if (!token) {
+  throw new Error(' process.env.autoformtoken is not defined');
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const firstName = encodeURI(req.query.firstName as string);
   const lastName = encodeURI(req.query.lastName as string);
