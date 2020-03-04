@@ -103,7 +103,7 @@ describe('Cases', function() {
           /** Summary */
           cy.contains('XML');
 
-          // HACK to by pass file download, because cypress cannot do it
+          /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)
             .invoke('text')
             .then(output => {
