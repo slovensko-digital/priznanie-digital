@@ -1,3 +1,4 @@
+/* eslint-disable promise/no-callback-in-promise */
 /* eslint-disable func-names */
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/always-return */
@@ -30,7 +31,7 @@ function next() {
 // const testCase = 'base';
 describe('Cases', function() {
   // ['base', 'withPartner', 'withEmployment'].forEach(testCase => {
-  ['base', 'withPartner', 'withEmployment'].forEach(testCase => {
+  ['complete'].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
         inputModule => {

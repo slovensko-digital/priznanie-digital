@@ -104,9 +104,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 (1 / 12) *
                 this.r032_partner_pocet_mesiacov,
             );
-      } else {
-        return 0;
       }
+      return 0;
     },
     get r076_kupele_spolu() {
       return this.r076a_kupele_danovnik + this.r076b_kupele_partner_a_deti;
