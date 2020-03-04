@@ -7,7 +7,7 @@ const PAUSALNE_VYDAVKY_MAX = 20000;
 const DAN_Z_PRIJMU_SADZBA = 0.19;
 
 function parseInt10(input: string) {
-  return parseInt(input, 10);
+  return parseInt(input || '0', 10);
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
