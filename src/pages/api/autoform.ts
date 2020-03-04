@@ -5,8 +5,7 @@ import { AutoformResponseBody } from '../../types/api';
 const baseUrl =
   'https://autoform.ekosystem.slovensko.digital/api/corporate_bodies';
 const limit = 20;
-const token =
-  '89e56e0d966f79a2dca7d1a0f6f97799796e6cc77b616bbc4b796c086290c0acd1ab2f91dad4fb56';
+const token = process.env.autoformtoken;
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const firstName = encodeURI(req.query.firstName as string);

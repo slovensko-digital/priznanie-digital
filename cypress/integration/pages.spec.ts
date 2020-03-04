@@ -91,7 +91,7 @@ describe('osobne-udaje page', function() {
     next();
     getError();
   });
-  it('with autoform', function() {
+  it.only('with autoform', function() {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
