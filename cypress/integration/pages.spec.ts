@@ -34,7 +34,7 @@ describe('Employment page', function() {
     cy.url().should('include', '/prijmy-a-vydavky');
 
     //  Go back to our page
-    getNextButton().click();
+    cy.visit('/zamestnanie');
 
     // Shows error, when presses next withou interaction
     getNextButton().click();
