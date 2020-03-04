@@ -91,7 +91,7 @@ describe('osobne-udaje page', function() {
     next();
     getError();
   });
-  it.only('with autoform', function() {
+  it('with autoform', function() {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
@@ -110,7 +110,7 @@ describe('osobne-udaje page', function() {
 
     next();
   });
-  it.only('with posta api', function() {
+  it('with posta api', function() {
     cy.visit('/osobne-udaje');
 
     typeToInput('r009_psc', baseInput);
