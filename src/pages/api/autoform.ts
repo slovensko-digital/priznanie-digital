@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AutoformResponseBody } from '../../types/autoformResponse';
+import { AutoformResponseBody } from '../../types/api';
 
 const baseUrl =
   'https://autoform.ekosystem.slovensko.digital/api/corporate_bodies';

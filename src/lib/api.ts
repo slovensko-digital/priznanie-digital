@@ -1,11 +1,11 @@
-import { AutoformResponseBody } from '../types/autoformResponse';
+import { AutoformResponseBody, PSCResponseBody } from '../types/api';
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
     `https://api.posta.sk/private/search?q=${zip}&m=zip`,
   );
-  const pscData = await response.json();
-  return pscData?.offices[0]?.name ?? '';
+  const pscData: PSCResponseBody = await response.json();
+  return pscData?.offices?.[0].name ?? '';
 };
 
 export const getAutoformByPersonName = async (

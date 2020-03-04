@@ -9,7 +9,7 @@ import styles from './osobne-udaje.module.css';
 import { PersonalInformationUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getCity, getAutoformByPersonName } from '../lib/api';
-import { AutoformResponseBody } from '../types/autoformResponse';
+import { AutoformResponseBody } from '../types/api';
 
 const nextUrl = '/vysledky';
 const backUrl = '/deti';

@@ -28,3 +28,14 @@ export interface AutoformResponseBody {
   registration_number: string;
   datahub_corporate_body: DatahubCorporateBody;
 }
+
+interface Offices {
+  id?: string;
+  nsk?: string;
+  name?: string;
+}
+
+export interface PSCResponseBody {
+  addresses: never[];
+  offices?: Offices[];
+}
