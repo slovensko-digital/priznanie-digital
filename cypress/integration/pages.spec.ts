@@ -5,6 +5,7 @@
 /// <reference types="cypress" />
 
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
+import { baseInput } from '../../__tests__/testCases/baseInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
@@ -22,7 +23,10 @@ function typeToInput<K extends keyof TaxFormUserInput>(
   throw new Error(`Incorrect type of input: ${value}`);
 }
 
-const getNextButton = () => cy.get('[data-test=next]');
+function next() {
+  return cy.contains('Pokračovať').click();
+}
+
 const getError = () => cy.get('[data-test=error]');
 
 describe('Employment page', function() {
@@ -37,14 +41,14 @@ describe('Employment page', function() {
     cy.visit('/zamestnanie');
 
     // Shows error, when presses next withou interaction
-    getNextButton().click();
+    next();
     getError();
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click();
 
     // FIXME When try to submit, error should appear
-    // getNextButton().click();
+    // next();
     // getError();
 
     // Type to input
@@ -67,7 +71,62 @@ describe('Employment page', function() {
     getInput('r039').should('have.value', withEmploymentInput.r039.toString());
 
     // Should submit and next page should be parter
-    getNextButton().click();
+    next();
     cy.url().should('include', '/partner');
+  });
+});
+
+describe('osobne-udaje page', function() {
+  it.only('Back and next', function() {
+    cy.visit('/osobne-udaje');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    cy.url().should('include', '/deti');
+
+    //  Go back to our page
+    cy.visit('/osobne-udaje');
+
+    // Shows error, when presses next without interaction
+    next();
+    getError();
+  });
+  it.only('with autoform', function() {
+    cy.visit('/osobne-udaje');
+
+    /** With autoform */
+    typeToInput('r001_dic', baseInput);
+    typeToInput('r003_nace', baseInput);
+    getInput('r005_meno').type('Július');
+    getInput('r004_priezvisko').type('Ret');
+
+    cy.contains('Július Retzer').click();
+
+    getInput('r007_ulica').should('contain.value', 'Mierová');
+    getInput('r008_cislo').should('contain.value', '4');
+    getInput('r009_psc').should('contain.value', '82105');
+    getInput('r010_obec').should('contain.value', 'Bratislava');
+    getInput('r011_stat').should('contain.value', 'Slovenská republika');
+
+    next();
+  });
+  it.only('with posta api', function() {
+    cy.visit('/osobne-udaje');
+
+    /** With autoform */
+    typeToInput('r001_dic', baseInput);
+    typeToInput('r003_nace', baseInput);
+    getInput('r005_meno').type('Július');
+    getInput('r004_priezvisko').type('Ret');
+
+    cy.contains('Július Retzer').click();
+
+    getInput('r007_ulica').should('contain.value', 'Mierová');
+    getInput('r008_cislo').should('contain.value', '4');
+    getInput('r009_psc').should('contain.value', '82105');
+    getInput('r010_obec').should('contain.value', 'Bratislava');
+    getInput('r011_stat').should('contain.value', 'Slovenská republika');
+
+    next();
   });
 });

@@ -32,7 +32,7 @@ export const Input = <Name extends keyof TaxFormUserInput>({
         {...props}
       />
       {meta.touched && meta.error ? (
-        <span id={props.name} className="govuk-error-message">
+        <span id={props.name} data-test="error" className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
         </span>
       ) : null}
