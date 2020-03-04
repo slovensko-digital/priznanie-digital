@@ -38,7 +38,6 @@ describe('Cases', function() {
           // Access named export
           const input: TaxFormUserInput = inputModule[`${testCase}Input`];
 
-          const now = new Date(2020, 1, 22);
           cy.visit('/');
 
           cy.contains('Pripraviť daňové priznanie').click();
@@ -108,6 +107,8 @@ describe('Cases', function() {
           cy.get(`[data-test="taxFormUserInput"]`)
             .invoke('text')
             .then(output => {
+              const now = new Date(2020, 1, 22);
+
               const taxFormUserInput = setDate(
                 JSON.parse(output.toString()) as TaxFormUserInput,
                 now,

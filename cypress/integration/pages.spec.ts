@@ -77,7 +77,7 @@ describe('Employment page', function() {
 });
 
 describe('osobne-udaje page', function() {
-  it.only('Back and next', function() {
+  it('Back and next', function() {
     cy.visit('/osobne-udaje');
 
     // Back button should work and be the correct page
@@ -91,7 +91,7 @@ describe('osobne-udaje page', function() {
     next();
     getError();
   });
-  it.only('with autoform', function() {
+  it('with autoform', function() {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
@@ -113,19 +113,22 @@ describe('osobne-udaje page', function() {
   it.only('with posta api', function() {
     cy.visit('/osobne-udaje');
 
+    typeToInput('r009_psc', baseInput);
+    getInput('r010_obec').should('have.value', baseInput.r010_obec);
+  });
+  it('Manual entry', function() {
+    cy.visit('/osobne-udaje');
+
     /** With autoform */
     typeToInput('r001_dic', baseInput);
     typeToInput('r003_nace', baseInput);
-    getInput('r005_meno').type('Július');
-    getInput('r004_priezvisko').type('Ret');
-
-    cy.contains('Július Retzer').click();
-
-    getInput('r007_ulica').should('contain.value', 'Mierová');
-    getInput('r008_cislo').should('contain.value', '4');
-    getInput('r009_psc').should('contain.value', '82105');
-    getInput('r010_obec').should('contain.value', 'Bratislava');
-    getInput('r011_stat').should('contain.value', 'Slovenská republika');
+    typeToInput('r004_priezvisko', baseInput);
+    typeToInput('r005_meno', baseInput);
+    typeToInput('r007_ulica', baseInput);
+    typeToInput('r008_cislo', baseInput);
+    typeToInput('r009_psc', baseInput);
+    typeToInput('r010_obec', baseInput);
+    typeToInput('r011_stat', baseInput);
 
     next();
   });
