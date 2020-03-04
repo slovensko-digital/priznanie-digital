@@ -3,24 +3,24 @@ import {
   PartnerUserInput,
   IncomeAndExpenseUserInput,
   EmployedUserInput,
-  KidsUserInput,
+  ChildrenUserInput,
 } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
-  t1r10_prijmy: 0,
-  priloha3_r11_socialne: 0,
-  priloha3_r13_zdravotne: 0,
+  t1r10_prijmy: '',
+  priloha3_r11_socialne: '',
+  priloha3_r13_zdravotne: '',
 };
 
 export const partnerUserInitialValues: PartnerUserInput = {
   r031_priezvisko_a_meno: '',
   r031_rodne_cislo: '',
   r032_uplatnujem_na_partnera: undefined,
-  r032_partner_vlastne_prijmy: 0,
-  r032_partner_pocet_mesiacov: 0,
+  r032_partner_vlastne_prijmy: '',
+  r032_partner_pocet_mesiacov: '',
   r033_partner_kupele: false,
-  r033_partner_kupele_uhrady: 0,
+  r033_partner_kupele_uhrady: '',
 };
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
   r001_dic: '',
@@ -37,12 +37,12 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
-  r038: 0,
-  r039: 0,
+  r038: '',
+  r039: '',
 };
 
-export const kidsUserInputInitialValues: KidsUserInput = {
-  kids: undefined,
+export const kidsUserInputInitialValues: ChildrenUserInput = {
+  children: undefined,
   r034: [
     {
       priezviskoMeno: '',
@@ -71,4 +71,5 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
   ...kidsUserInputInitialValues,
+  ...{ datum: '' },
 };

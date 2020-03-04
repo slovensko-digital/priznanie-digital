@@ -19,10 +19,6 @@ function typeToInput<K extends keyof TaxFormUserInput>(
   if (typeof value === 'string') {
     return getInput(key).type(value);
   }
-  if (typeof value === 'number') {
-    return getInput(key).type(value.toString());
-  }
-
   throw new Error(`Incorrect type of input: ${value}`);
 }
 
@@ -38,7 +34,7 @@ describe('Employment page', function() {
     cy.url().should('include', '/prijmy-a-vydavky');
 
     //  Go back to our page
-    getNextButton().click();
+    cy.visit('/zamestnanie');
 
     // Shows error, when presses next withou interaction
     getNextButton().click();

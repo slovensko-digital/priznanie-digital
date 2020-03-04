@@ -1,4 +1,4 @@
-import { TaxForm } from "../../types/TaxForm";
+import { TaxForm } from '../../types/TaxForm';
 
 const basicTaxForm: Partial<TaxForm> = {
   r001_dic: '111111111',
@@ -17,7 +17,7 @@ const basicTaxForm: Partial<TaxForm> = {
   r041: 20000,
   r042: 14000,
   r043: 6000,
-  r044: 0,
+  // r044: 0,
   r047: 6000,
   r055: 6000,
   r057: 6000,

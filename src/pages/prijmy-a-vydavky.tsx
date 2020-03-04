@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik';
 import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 const nextUrl = '/zamestnanie';
 const backUrl = '/';
@@ -69,7 +69,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput>({
+const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput<number>>({
   t1r10_prijmy: Yup.number()
     .min(0)
     .required(),

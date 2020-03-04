@@ -41,7 +41,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
-      const newUserInput = { ...prevUserInput, ...values };
+      const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values };
       setTaxForm(calculate(setDate(newUserInput)));
       return newUserInput;
     });
@@ -52,9 +52,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       debug={
         <div>
           TaxFormUserInput
-          <pre>{JSON.stringify(sortObjectKeys(taxFormUserInput), null, 2)}</pre>
+          <pre data-test="taxFormUserInput">
+            {JSON.stringify(sortObjectKeys(taxFormUserInput), null, 2)}
+          </pre>
           TaxForm
-          <pre id="TaxForm">
+          <pre data-test="taxForm">
             {JSON.stringify(sortObjectKeys(taxForm), null, 2)}
           </pre>
         </div>

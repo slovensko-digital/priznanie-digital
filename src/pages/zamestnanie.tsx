@@ -69,7 +69,7 @@ const Zamestnanie: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<EmployedUserInput>({
+const validationSchema = Yup.object().shape<EmployedUserInput<number>>({
   employed: Yup.boolean()
     .required()
     .nullable(),
