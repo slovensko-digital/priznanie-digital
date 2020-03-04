@@ -31,7 +31,7 @@ function next() {
 // const testCase = 'base';
 describe('Cases', function() {
   // ['base', 'withPartner', 'withEmployment'].forEach(testCase => {
-  ['complete'].forEach(testCase => {
+  ['base', 'complete', 'withPartner', 'withEmployment'].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
         inputModule => {
