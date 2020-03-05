@@ -7,19 +7,20 @@ import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import styles from './osobne-udaje.module.css';
 import { PersonalInformationUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
-import { getCity, getAutoformByPersonName, AutoformPerson } from '../lib/api';
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { getCity, getAutoformByPersonName } from '../lib/api';
+import { AutoformResponseBody } from '../types/api';
 
 const nextUrl = '/vysledky';
 const backUrl = '/deti';
 
 const handlePersonAutoform = (
-  person: AutoformPerson,
+  person: AutoformResponseBody,
   { setValues, values }: FormikProps<PersonalInformationUserInput>,
 ) => {
   setValues({
     ...values,
-    r001_dic: person.tin ? person.tin : values.r001_dic,
+    r001_dic: person?.tin ?? values.r001_dic,
     r007_ulica: person.street,
     r008_cislo: person.street_number,
     r009_psc: person.postal_code.replace(/\D/g, ''),
@@ -36,7 +37,9 @@ const OsobneUdaje: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const [autoformPersons, setAutoFormPersons] = useState<AutoformPerson[]>([]);
+  const [autoformPersons, setAutoFormPersons] = useState<
+    AutoformResponseBody[]
+  >([]);
   const router = useRouter();
 
   const handleAutoform = async (values: PersonalInformationUserInput) => {
@@ -58,7 +61,9 @@ const OsobneUdaje: NextPage<Props> = ({
   return (
     <>
       <Link href={backUrl}>
-        <a className="govuk-back-link">Späť</a>
+        <a data-test="back" className="govuk-back-link">
+          Späť
+        </a>
       </Link>
       <Formik<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
