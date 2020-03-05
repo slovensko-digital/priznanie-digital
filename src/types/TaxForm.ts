@@ -8,9 +8,6 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */
   priloha3_r08_poistne: number;
-  /**   Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za
-   *   zdaňovacie obdobie (v eurách)6) */
-  r030: number;
   /**   Uhrn poistneho*/
   r039: number;
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */

@@ -41,8 +41,15 @@ const Deti: NextPage<Props> = ({
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="children"
             />
+            <div>
+              V prípade, že sa staráte o nezaopatrené dieťa do 16 rokov,
+              študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré
+              je dlhodobo choré, máte právo na zľavu na dani vo výške 21.56 €
+              mesačne. Ročný bonus na dieťa činí 258.72 €. Daňový bonus na dieťa
+              si môže uplatniť iba jeden z rodičov.
+            </div>
             {values.children &&
-              values.r034.map((kid, index) => (
+              values?.r034?.map((kid, index) => (
                 <div key={kid.rodneCislo}>
                   <button
                     className="btn-secondary govuk-button"

@@ -19,11 +19,14 @@ export interface TaxFormUserInputBase<T> {
   r010_obec: string;
   /**   11 - Štát **/
   r011_stat: string;
-  /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
-   * failovali test */
-  datum: string;
 
-  /**  Partner*/
+  /** SECTION Dochodok */
+  /** Poberal (a) som na začiatku zdaňovacieho obdobia dôchodok (ky) uvedený (é) v § 11 ods. 6 zákona alebo mi bol tento (tieto) dôchodok (ky) priznaný (é) spätne k začiatku príslušného zdaňovacieho obdobia (vypĺňa sa, len ak daňovník bol poberateľom dôchodku uvedeného v § 11 ods. 6 zákona na začiatku zdaňovacieho obdobia alebo mu tento dôchodok bol priznaný spätne k začiatku príslušného zdaňovacieho obdobia)  */
+  r029_poberal_dochodok?: boolean;
+  /** Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za zdaňovacie obdobie (v eurách) */
+  r030_vyska_dochodku?: T;
+
+  /** SECTION  Partner*/
   r031_priezvisko_a_meno?: string;
   r031_rodne_cislo?: string;
   r032_uplatnujem_na_partnera?: boolean;
@@ -65,6 +68,9 @@ export interface TaxFormUserInputBase<T> {
 
   children?: boolean;
   employed?: boolean;
+  /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
+   * failovali test */
+  datum: string;
 }
 
 export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T>;

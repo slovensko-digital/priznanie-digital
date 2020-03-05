@@ -7,7 +7,8 @@ const PAUSALNE_VYDAVKY_MAX = 20000;
 const DAN_Z_PRIJMU_SADZBA = 0.19;
 
 function parseInt10(input: string) {
-  return parseInt(input || '0', 10);
+  return parseInt(input.length === 0 ? '0' : input, 10);
+  // return parseInt(input|| '0', 10);
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
@@ -22,7 +23,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r009_psc: input.r009_psc,
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
-    r030: 0, // TODO in next use cases
+    /** SECTION Dochodok */
+    r029_poberal_dochodok: input?.r029_poberal_dochodok ?? false,
+    r030_vyska_dochodku: parseInt10(input?.r030_vyska_dochodku ?? '0'), // TODO in next use cases
+    /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
     r031_rodne_cislo: input?.r031_rodne_cislo ?? '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
@@ -83,9 +87,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r072_pred_znizenim > 20507 // TODO test both cases here
         ? Math.max(
             0,
-            9064.094 - (1 / 4) * (this.r072_pred_znizenim - this.r030),
+            9064.094 - (1 / 4) * (this.r072_pred_znizenim - this.r030_vyska_dochodku),
           )
-        : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - this.r030);
+        : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - this.r030_vyska_dochodku);
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {

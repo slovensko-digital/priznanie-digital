@@ -39,6 +39,10 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.priloha3_r08_poistne.toFixed(
     2,
   );
+  if (taxForm.r029_poberal_dochodok) {
+    form.dokument.telo.r29 = taxForm.r029_poberal_dochodok ? '1' : '0';
+    form.dokument.telo.r30 = taxForm.r030_vyska_dochodku.toFixed(2);
+  }
 
   if (taxForm.r032_uplatnujem_na_partnera) {
     form.dokument.telo.r31 = {
