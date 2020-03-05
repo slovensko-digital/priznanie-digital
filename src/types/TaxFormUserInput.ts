@@ -35,6 +35,13 @@ export interface TaxFormUserInputBase<T> {
   r033_partner_kupele?: boolean;
   /**   max 50*/
   r033_partner_kupele_uhrady?: T;
+
+  /** SECTION  Mortage */
+  r037_uplatnuje_uroky?: boolean;
+  r037_zaplatene_uroky?: T;
+  r037_pocetMesiacov?: T;
+
+  /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
   t1r10_prijmy: T;
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/

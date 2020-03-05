@@ -41,6 +41,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       input?.r033_partner_kupele_uhrady ?? '0',
     ),
     r034: input.r034 as any, // TODO
+
+    /** SECTION Mortgage */
+    r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
+    r037_zaplatene_uroky: parseInt10(input?.r037_zaplatene_uroky ?? '0'),
+    r037_pocetMesiacov: parseInt10(input?.r037_pocetMesiacov ?? '0'),
+
     priloha3_r11_socialne: parseInt10(input.priloha3_r11_socialne),
     priloha3_r13_zdravotne: parseInt10(input.priloha3_r13_zdravotne),
     r038: parseInt10(input?.r038 ?? '0'),
@@ -87,7 +93,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r072_pred_znizenim > 20507 // TODO test both cases here
         ? Math.max(
             0,
-            9064.094 - (1 / 4) * (this.r072_pred_znizenim - this.r030_vyska_dochodku),
+            9064.094 -
+              (1 / 4) * (this.r072_pred_znizenim - this.r030_vyska_dochodku),
           )
         : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - this.r030_vyska_dochodku);
     },

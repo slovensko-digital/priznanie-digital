@@ -2,10 +2,11 @@ import xmljs from 'xml-js';
 import cloneDeep from 'lodash.clonedeep';
 import schemaSample from './schemaSample';
 import { TaxForm } from '../../types/TaxForm';
+import { OutputJson } from './OutputJson';
 
 // TODO remove fallbacks, they should be unncessary now
-export function convertToJson(taxForm: TaxForm) {
-  const form = cloneDeep(schemaSample);
+export function convertToJson(taxForm: TaxForm): OutputJson {
+  const form: OutputJson = cloneDeep(schemaSample);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
@@ -44,6 +45,7 @@ export function convertToJson(taxForm: TaxForm) {
     form.dokument.telo.r30 = taxForm.r030_vyska_dochodku.toFixed(2);
   }
 
+  /** SECTION Partner */
   if (taxForm.r032_uplatnujem_na_partnera) {
     form.dokument.telo.r31 = {
       priezviskoMeno: taxForm?.r031_priezvisko_a_meno ?? '',
@@ -66,7 +68,15 @@ export function convertToJson(taxForm: TaxForm) {
       taxForm.r076b_kupele_partner_a_deti?.toFixed(2) ?? '';
   }
 
-  /** Employed */
+  /** SECTION Mortgage */
+  if (taxForm.r037_uplatnuje_uroky) {
+    form.dokument.telo.r37 = {
+      uplatDanBonusZaplatUroky: taxForm.r037_uplatnuje_uroky ? '1' : '0',
+      zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
+      pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
+    };
+  }
+  /** SECTION Employed */
   if (taxForm.employed) {
     form.dokument.telo.r38 = taxForm.r038?.toFixed(2) ?? '0';
     form.dokument.telo.r39 = taxForm.r039?.toFixed(2) ?? '0';
