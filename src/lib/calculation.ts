@@ -146,16 +146,27 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r107() {
       return this.r081;
     },
+    /** TODO High income test case */
+    get r112() {
+      return Math.min(this.r037_zaplatene_uroky * 0.5, 400);
+    },
     get r113() {
-      return this.r107; // TODO - tf.r112;
+      return this.r107 - this.r112;
+    },
+    /** TODO */
+    get r114() {
+      return 0;
+    },
+    get r115() {
+      return Math.max(this.r112 - this.r114, 0);
     },
     get r125_dan_na_uhradu() {
-      return this.r105_dan;
+      return this.r105_dan + this.r114 - this.r112;
       // - tf.r106 +
       // tf.r108 +
       // tf.r110 -
-      // tf.r112 +
-      // tf.r114 +
+      // // tf.r112 +
+      // // tf.r114 +
       // tf.r116 +
       // tf.r117 -
       // tf.r118 -

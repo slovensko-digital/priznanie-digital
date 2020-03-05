@@ -99,7 +99,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r90 = taxForm.r090.toFixed(2);
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2);
   form.dokument.telo.r107 = taxForm.r107.toFixed(2);
+  form.dokument.telo.r112 = taxForm.r112.toFixed(2);
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
+  form.dokument.telo.r114 = '';
+  form.dokument.telo.r115 = taxForm.r115.toFixed(2);
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
   form.dokument.telo.neuplatnujem = '1';

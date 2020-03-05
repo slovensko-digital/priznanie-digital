@@ -72,6 +72,9 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
   r107: number;
+
+  /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
+  r112: number;
   /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
    *   úroky(r. 107 - r. 112) zrkadli r107*/
   r113: number;
@@ -79,6 +82,12 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
    *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
    *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
    *   124 (+)*/
+
+  /** Suma daňového bonusu podľa § 33a zákona priznaného a vyplateného zamestnávateľom */
+  r114: number;
+  /** Rozdiel r. 112 - r. 114 > 0  */
+  r115: number;
+
   r125_dan_na_uhradu: number;
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
    *   podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
