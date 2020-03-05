@@ -1,27 +1,17 @@
+import { AutoformResponseBody, PSCResponseBody } from '../types/api';
+
 export const getCity = async (zip: string) => {
   const response = await fetch(
     `https://api.posta.sk/private/search?q=${zip}&m=zip`,
   );
-  const pscData = await response.json();
-  return pscData?.offices[0]?.name;
+  const pscData: PSCResponseBody = await response.json();
+  return pscData?.offices?.[0].name ?? '';
 };
-
-export interface AutoformPerson {
-  name: string;
-  id: string;
-  tin: string;
-  formatted_address: string;
-  street: string;
-  street_number: string;
-  postal_code: string;
-  municipality: string;
-  country: string;
-}
 
 export const getAutoformByPersonName = async (
   firstName: string,
   lastName: string,
-): Promise<AutoformPerson[]> => {
+): Promise<AutoformResponseBody[]> => {
   return fetch(
     `api/autoform?firstName=${firstName}&lastName=${lastName}`,
   ).then(async response => response.json());
