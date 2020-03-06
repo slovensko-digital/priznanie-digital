@@ -145,9 +145,9 @@
     <r35udajeDalsieDeti>0</r35udajeDalsieDeti>
     <r36></r36>
     <r37>
-      <uplatDanBonusZaplatUroky>0</uplatDanBonusZaplatUroky>
-      <zaplateneUroky></zaplateneUroky>
-      <pocetMesiacov></pocetMesiacov>
+      <uplatDanBonusZaplatUroky>1</uplatDanBonusZaplatUroky>
+      <zaplateneUroky>200.00</zaplateneUroky>
+      <pocetMesiacov>12</pocetMesiacov>
     </r37>
     <r38>4000.00</r38>
     <r38a></r38a>
@@ -468,10 +468,10 @@
     <r109></r109>
     <r110></r110>
     <r111></r111>
-    <r112></r112>
-    <r113>1341.90</r113>
+    <r112>100.00</r112>
+    <r113>1241.90</r113>
     <r114></r114>
-    <r115></r115>
+    <r115>100.00</r115>
     <r116></r116>
     <r117></r117>
     <r118></r118>
@@ -481,7 +481,7 @@
     <r122></r122>
     <r123></r123>
     <r124></r124>
-    <r125>1341.90</r125>
+    <r125>1241.90</r125>
     <r126></r126>
     <r127></r127>
     <r128></r128>
