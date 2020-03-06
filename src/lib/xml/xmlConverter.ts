@@ -1,12 +1,12 @@
 import xmljs from 'xml-js';
 import cloneDeep from 'lodash.clonedeep';
-import schemaSample from './schemaSample';
+import outputBasis from './outputBasis';
 import { TaxForm } from '../../types/TaxForm';
-import { OutputJson } from './OutputJson';
+import { OutputJson } from '../../types/OutputJson';
 
 // TODO remove fallbacks, they should be unncessary now
 export function convertToJson(taxForm: TaxForm): OutputJson {
-  const form: OutputJson = cloneDeep(schemaSample);
+  const form: OutputJson = cloneDeep(outputBasis);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
