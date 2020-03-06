@@ -32,10 +32,14 @@ const basicTaxForm: Partial<TaxForm> = {
   r107: 391.9,
   r113: 391.9,
   r125_dan_na_uhradu: 391.9,
-
+  r029_poberal_dochodok: true,
+  r030_vyska_dochodku: 800,
   priloha3_r08_poistne: 2000,
   priloha3_r11_socialne: 1000,
   priloha3_r13_zdravotne: 1000,
+  r037_uplatnuje_uroky: true,
+  r037_zaplatene_uroky: 200,
+  r037_pocetMesiacov: 12,
   datum: '19.02.2020',
 };
 
