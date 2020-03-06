@@ -1,6 +1,6 @@
-import { calculate } from './calculation';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { initTaxFormUserInputValues } from './initialValues';
+import { calculate } from '../src/lib/calculation';
+import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
+import { initTaxFormUserInputValues } from '../src/lib/initialValues';
 
 describe('Basic use cases', () => {
   test('Case 1', () => {
