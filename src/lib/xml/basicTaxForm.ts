@@ -1,6 +1,9 @@
 import { TaxForm } from '../../types/TaxForm';
+import { completeInput } from '../../../__tests__/testCases/completeInput';
 
-const basicTaxForm: Partial<TaxForm> = {
+/** This file is mostly deprecated, use /__tests__/testCases/completeInput */
+const basicTaxForm: TaxForm = {
+  ...completeInput,
   r001_dic: '111111111',
   // R002_datum_narodenia: "22.2.1993",
   r003_nace: '62232',
