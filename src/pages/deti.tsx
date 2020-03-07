@@ -5,7 +5,12 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import styles from './deti.module.css';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import {
+  BooleanRadio,
+  Input,
+  Checkbox,
+  CheckboxSmall,
+} from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
@@ -47,7 +52,7 @@ const Deti: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti? (zatial nefunguje spravne)"
+              title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="children"
             />
             <p>
@@ -71,6 +76,41 @@ const Deti: NextPage<Props> = ({
                       type="text"
                       label="Rodné číslo"
                     />
+                    <div className="govuk-form-group">
+                      <fieldset
+                        className="govuk-fieldset"
+                        aria-describedby="waste-hint"
+                      >
+                        <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
+                          <h1 className="govuk-fieldset__heading">
+                            Daňový bonus podľa § 33 zákona uplatňujem v
+                            mesiacoch
+                          </h1>
+                        </legend>
+                        <span id="waste-hint" className="govuk-hint">
+                          Select all that apply.
+                        </span>
+                        <div className="govuk-checkboxes">
+                          {[
+                            [`r034[${index}].m00`, 'Januar az december'],
+                            [`r034[${index}].m01`, 'Januar'],
+                            [`r034[${index}].m02`, 'Feburar'],
+                            [`r034[${index}].m03`, 'Marec'],
+                            [`r034[${index}].m04`, 'April'],
+                            [`r034[${index}].m05`, 'Maj'],
+                            [`r034[${index}].m06`, 'Jun'],
+                            [`r034[${index}].m07`, 'Jul'],
+                            [`r034[${index}].m08`, 'August'],
+                            [`r034[${index}].m09`, 'September'],
+                            [`r034[${index}].m10`, 'Oktober'],
+                            [`r034[${index}].m11`, 'November'],
+                            [`r034[${index}].m12`, 'December'],
+                          ].map(([name, label]) => (
+                            <CheckboxSmall name={name} label={label} />
+                          ))}
+                        </div>
+                      </fieldset>
+                    </div>
                   </div>
                 ))}
                 <button

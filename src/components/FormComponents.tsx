@@ -147,3 +147,29 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
     </div>
   );
 };
+
+interface CheckboxSmallProps {
+  name: string;
+  label: string;
+}
+export const CheckboxSmall = ({
+  name,
+  label,
+  ...props
+}: CheckboxSmallProps) => {
+  const [field] = useField(name);
+  return (
+    <div className="govuk-checkboxes__item">
+      <input
+        {...field}
+        {...props}
+        className="govuk-checkboxes__input"
+        type="checkbox"
+        value="carcasses"
+      />
+      <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
+        {label}
+      </label>
+    </div>
+  );
+};
