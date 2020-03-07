@@ -2,7 +2,8 @@ import xmljs from 'xml-js';
 import cloneDeep from 'lodash.clonedeep';
 import outputBasis from './outputBasis';
 import { TaxForm } from '../../types/TaxForm';
-import { OutputJson } from '../../types/OutputJson';
+import { Child } from '../../types/TaxFormUserInput';
+import { OutputJson, Dieta } from '../../types/OutputJson';
 
 // TODO remove fallbacks, they should be unncessary now
 export function convertToJson(taxForm: TaxForm): OutputJson {
@@ -66,6 +67,26 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.r76 = taxForm.r076_kupele_spolu?.toFixed(2) ?? '';
     form.dokument.telo.r76b =
       taxForm.r076b_kupele_partner_a_deti?.toFixed(2) ?? '';
+  }
+  /** SECTION Children */
+  if (taxForm.children) {
+    // form.dokument.telo.r34.dieta = taxForm.r034;
+    form.dokument.telo.r34.dieta = taxForm.r034.map(child => {
+      return Object.fromEntries(
+        Object.entries(child).map(([key, value]) => [
+          key,
+          // value,
+          typeof value === 'boolean' ? (value ? '1' : '0') : value,
+        ]),
+      );
+    }) as any;
+    // form.dokument.telo.r34.dieta = Object.entries(taxForm.r034).map(
+    //   ([key, value]) => [
+    //     key,
+    //     value, // typeof value === boolean ? (value ? '1' : '0') : value,
+    //   ],
+    // );
+    // form.dokument.telo.r36 = taxForm.r036.toFixed(2);
   }
 
   /** SECTION Mortgage */

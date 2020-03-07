@@ -7,6 +7,7 @@
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { Route } from '../../src/lib/routes';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
