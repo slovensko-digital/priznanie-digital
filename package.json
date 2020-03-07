@@ -29,6 +29,7 @@
     "next": "latest",
     "react": "16.12.0",
     "react-dom": "16.12.0",
+    "rodnecislo": "1.5.5",
     "xml-js": "^1.6.11",
     "yup": "^0.28.1"
   },

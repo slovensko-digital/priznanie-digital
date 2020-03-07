@@ -1,4 +1,5 @@
 import floor from 'lodash.floor';
+import { rodnecislo } from 'rodnecislo';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
 
@@ -146,6 +147,53 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     get r105_dan() {
       return this.r090;
+    },
+    get r106() {
+      return this.r034.reduce((previousSum, currentChild) => {
+        let currentSum = 0;
+        const rateJanuaryToMarch = 22.17;
+        const age = rodnecislo(currentChild.rodneCislo).age();
+        const rateAprilToDecember = age > 6 ? 22.17 : 44.34;
+
+        if (currentChild.m00 || currentChild.m01) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m02) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m03) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m04) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m05) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m06) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m07) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m08) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m09) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m10) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m11) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m12) {
+          currentSum += rateAprilToDecember;
+        }
+
+        return previousSum + currentSum;
+      }, 0);
     },
     get r107() {
       return this.r081;

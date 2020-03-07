@@ -17,7 +17,7 @@ export const withChildrenInput: TaxFormUserInput = {
   r034: [
     {
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0012207140',
+      rodneCislo: '1607201167',
       kupelnaStarostlivost: false,
       m00: false,
       m01: false,
@@ -35,8 +35,8 @@ export const withChildrenInput: TaxFormUserInput = {
     },
     {
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '0012207140',
-      kupelnaStarostlivost: true,
+      rodneCislo: '1057201167',
+      kupelnaStarostlivost: false,
       m00: true,
       m01: false,
       m02: false,
@@ -52,6 +52,5 @@ export const withChildrenInput: TaxFormUserInput = {
       m12: false,
     },
   ],
-  r036: '30',
   children: true,
 };

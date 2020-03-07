@@ -22,7 +22,7 @@ describe('calcIntergration', () => {
     // 'withMortgage',
     'withChildren',
   ].forEach(testCase => {
-    test(testCase, async () => {
+    test('withChildren', async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/${testCase}.xml`,
       );

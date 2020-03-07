@@ -69,6 +69,9 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
   r105_dan: number;
+  /**
+Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
+  r106: number;
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
   r107: number;
