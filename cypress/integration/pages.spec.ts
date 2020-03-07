@@ -28,6 +28,9 @@ function next() {
 }
 
 const getError = () => cy.get('[data-test=error]');
+function assertUrl(url: Route) {
+  cy.url().should('include', url);
+}
 
 describe('Employment page', function() {
   it('has working ui', function() {
@@ -35,7 +38,7 @@ describe('Employment page', function() {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
-    cy.url().should('include', '/prijmy-a-vydavky');
+    assertUrl('/prijmy-a-vydavky');
 
     //  Go back to our page
     cy.visit('/zamestnanie');
@@ -82,7 +85,7 @@ describe('osobne-udaje page', function() {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
-    cy.url().should('include', '/deti');
+    assertUrl('/hypoteka');
 
     //  Go back to our page
     cy.visit('/osobne-udaje');
