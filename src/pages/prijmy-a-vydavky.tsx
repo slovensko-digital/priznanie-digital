@@ -8,9 +8,9 @@ import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { getRoutes } from '../lib/routes';
 
-const nextUrl = '/zamestnanie';
-const backUrl = '/';
+const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
 
 interface Props {
   setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void;
@@ -23,11 +23,11 @@ const PrijmyAVydavky: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter();
   useEffect(() => {
-    router.prefetch(nextUrl);
+    router.prefetch(nextRoute);
   });
   return (
     <>
-      <Link href={backUrl}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik<IncomeAndExpenseUserInput>
@@ -35,7 +35,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
         validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
-          router.push(nextUrl);
+          router.push(nextRoute);
         }}
       >
         <Form className="form">

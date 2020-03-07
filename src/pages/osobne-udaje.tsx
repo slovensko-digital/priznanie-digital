@@ -10,9 +10,9 @@ import { PersonalInformationUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getCity, getAutoformByPersonName } from '../lib/api';
 import { AutoformResponseBody } from '../types/api';
+import { getRoutes } from '../lib/routes';
 
-const nextUrl = '/vysledky';
-const backUrl = '/deti';
+const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
 
 const handlePersonAutoform = (
   person: AutoformResponseBody,
@@ -55,12 +55,12 @@ const OsobneUdaje: NextPage<Props> = ({
   };
 
   useEffect(() => {
-    router.prefetch(nextUrl);
+    router.prefetch(nextRoute);
   });
 
   return (
     <>
-      <Link href={backUrl}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -70,7 +70,7 @@ const OsobneUdaje: NextPage<Props> = ({
         validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
-          router.push(nextUrl);
+          router.push(nextRoute);
         }}
       >
         {props => (

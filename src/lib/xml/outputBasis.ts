@@ -1,4 +1,4 @@
-import { OutputJson } from './OutputJson';
+import { OutputJson } from '../../types/OutputJson';
 
 const sampleSchema: OutputJson = {
   dokument: {

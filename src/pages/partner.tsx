@@ -8,8 +8,9 @@ import { BooleanRadio, Input } from '../components/FormComponents';
 import { PartnerUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
-const nextUrl = '/deti';
-const backUrl = '/zamestnanie';
+import { getRoutes } from '../lib/routes';
+
+const { nextRoute, previousRoute } = getRoutes('/partner');
 
 interface Props {
   setTaxFormUserInput: (values: PartnerUserInput) => void;
@@ -22,11 +23,11 @@ const Partner: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter();
   useEffect(() => {
-    router.prefetch(nextUrl);
+    router.prefetch(nextRoute);
   });
   return (
     <>
-      <Link href={backUrl}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link">Späť</a>
       </Link>
       <Formik<PartnerUserInput>
@@ -34,7 +35,7 @@ const Partner: NextPage<Props> = ({
         validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
-          router.push(nextUrl);
+          router.push(nextRoute);
         }}
       >
         {({ values }) => (
