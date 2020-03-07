@@ -5,6 +5,7 @@
 /// <reference types="cypress" />
 
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
+import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 import { Route } from '../../src/lib/routes';
@@ -135,5 +136,44 @@ describe('osobne-udaje page', function() {
     typeToInput('r011_stat', baseInput);
 
     next();
+  });
+});
+
+describe('Children page', function() {
+  it('has working navigation', function() {
+    cy.visit('/deti');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/partner');
+
+    //  Go back to our page
+    cy.visit('/deti');
+  });
+  it('has working validation', function() {
+    cy.visit('/deti');
+
+    // Shows error, when presses next withou interaction
+    next();
+    getError();
+  });
+  it.only('has working ui', function() {
+    cy.visit('/deti');
+
+    // When presses yes, additional fields appears
+    getInput('children', '-yes').click();
+
+    // Type to input
+    cy.get('[data-test="r034[0].priezviskoMeno-input"]').type(
+      withChildrenInput.r034[0].priezviskoMeno,
+    );
+    cy.get('[data-test="r034[0].rodneCislo-input"]').type(
+      withChildrenInput.r034[0].rodneCislo,
+    );
+
+    cy.get('[data-test="add-child"]').click();
+
+    // Should submit and next page should be parter
+    // next();
   });
 });

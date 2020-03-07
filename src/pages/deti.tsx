@@ -8,6 +8,7 @@ import { BooleanRadio, Input } from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
+import { emptyChild } from '../lib/initialValues';
 
 const { nextRoute, previousRoute } = getRoutes('/deti');
 
@@ -23,6 +24,12 @@ const Deti: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute);
   });
+
+  const addEmptyChild = () => {
+    setTaxFormUserInput({
+      r034: taxFormUserInput?.r034?.concat([emptyChild]),
+    });
+  };
   return (
     <>
       <Link href={previousRoute}>
@@ -30,7 +37,7 @@ const Deti: NextPage<Props> = ({
       </Link>
       <Formik<ChildrenUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
@@ -42,40 +49,41 @@ const Deti: NextPage<Props> = ({
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti? (zatial nefunguje spravne)"
               name="children"
             />
-            <div>
+            <p>
               V prípade, že sa staráte o nezaopatrené dieťa do 16 rokov,
               študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré
               je dlhodobo choré, máte právo na zľavu na dani vo výške 21.56 €
               mesačne. Ročný bonus na dieťa činí 258.72 €. Daňový bonus na dieťa
               si môže uplatniť iba jeden z rodičov.
-            </div>
+            </p>
             {values.children &&
-              values?.r034?.map((kid, index) => (
-                <div key={kid.rodneCislo}>
-                  <button
-                    className="btn-secondary govuk-button"
-                    type="button"
-                    onClick={e => {
-                      e.preventDefault();
-                    }}
-                  >
-                    Pridať ďalšie dieťa
-                  </button>
+              taxFormUserInput?.r034?.map((child, index) => (
+                <div key={child.rodneCislo}>
                   <Input
-                    // @ts-ignore TODO temporary solution
-                    name={`r034[${index}].priezviskoMeno`}
+                    name={`r034[${index}].priezviskoMeno` as any}
                     type="text"
                     label="Meno a priezvisko"
                   />
                   <Input
-                    // @ts-ignore TODO temporary solution
-                    name={`r034[${index}].rodneCislo`}
+                    name={`r034[${index}].rodneCislo` as any}
                     type="text"
                     label="Rodné číslo"
                   />
+                  <button
+                    className="btn-secondary govuk-button"
+                    type="button"
+                    onClick={addEmptyChild}
+                    data-test="add-child"
+                  >
+                    Pridať ďalšie dieťa
+                  </button>
                 </div>
               ))}
-            <button className="govuk-button" type="submit">
+            <button
+              className="govuk-button"
+              type="submit"
+              onClick={addEmptyChild}
+            >
               Pokračovať
             </button>
           </Form>
@@ -85,18 +93,18 @@ const Deti: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<ChildrenUserInput>({
-  children: Yup.boolean()
-    .required()
-    .nullable(),
-  r034: Yup.mixed().when('kids', {
-    is: true,
-    then: Yup.mixed(),
-  }),
-  // R039: Yup.number().when("employed", {
-  //   is: true,
-  //   then: Yup.number().required(),
-  // }),
-});
+// const validationSchema = Yup.object().shape<ChildrenUserInput>({
+//   children: Yup.boolean()
+//     .required()
+//     .nullable(),
+//   r034: Yup.mixed().when('childs', {
+//     is: true,
+//     then: Yup.mixed(),
+//   }),
+//   // R039: Yup.number().when("employed", {
+//   //   is: true,
+//   //   then: Yup.number().required(),
+//   // }),
+// });
 
 export default Deti;

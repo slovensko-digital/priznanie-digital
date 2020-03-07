@@ -9,8 +9,8 @@ import '../styles/libs.css';
 import React, { useState } from 'react';
 import { setLocale } from 'yup';
 import { calculate } from '../lib/calculation';
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
-import { TaxForm } from "../types/TaxForm";
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { TaxForm } from '../types/TaxForm';
 import Layout from '../components/Layout';
 import { initTaxFormUserInputValues } from '../lib/initialValues';
 import { sortObjectKeys, setDate } from '../lib/utils';
@@ -32,7 +32,6 @@ setLocale({
 });
 /* eslint-enable no-template-curly-in-string */
 
-
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm | Record<string, unknown>>({});
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
@@ -41,6 +40,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
+      debugger;
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values };
       setTaxForm(calculate(setDate(newUserInput)));
       return newUserInput;
