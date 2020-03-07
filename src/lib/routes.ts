@@ -14,6 +14,7 @@ type Route =
   | '/zamestnanie'
   | '/partner'
   | '/deti'
+  | '/dochodok'
   | '/osobne-udaje'
   | '/vysledky';
 
@@ -23,6 +24,7 @@ const routesOrder: ReadonlyArray<Route> = [
   '/zamestnanie',
   '/partner',
   '/deti',
+  '/dochodok',
   '/osobne-udaje',
   '/vysledky',
 ];

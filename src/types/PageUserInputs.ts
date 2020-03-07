@@ -38,3 +38,8 @@ export type PersonalInformationUserInput<T = string> = Pick<
   | 'r010_obec'
   | 'r011_stat'
 >;
+
+export type PensionUserInput<T = string> = Pick<
+  TaxFormUserInput<T>,
+  'r029_poberal_dochodok' | 'r030_vyska_dochodku'
+>;

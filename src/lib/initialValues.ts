@@ -4,6 +4,7 @@ import {
   IncomeAndExpenseUserInput,
   EmployedUserInput,
   ChildrenUserInput,
+  PensionUserInput,
 } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
@@ -65,11 +66,17 @@ export const kidsUserInputInitialValues: ChildrenUserInput = {
   ],
 };
 
+export const pensionInitialValues: PensionUserInput = {
+  r029_poberal_dochodok: undefined,
+  r030_vyska_dochodku: '',
+};
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
   ...kidsUserInputInitialValues,
+  ...pensionInitialValues,
   ...{ datum: '' },
 };
