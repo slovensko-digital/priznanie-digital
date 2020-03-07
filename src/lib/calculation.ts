@@ -40,7 +40,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r033_partner_kupele_uhrady: parseInt10(
       input?.r033_partner_kupele_uhrady ?? '0',
     ),
+    /** SECTION Children */
+
     r034: input.r034 as any, // TODO
+    r036: Math.min(parseInt10(input?.r036 ?? '0'), 50),
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
@@ -123,7 +126,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     r076a_kupele_danovnik: 0, // TODO asi z inputu
     get r076b_kupele_partner_a_deti() {
-      return this.r033_partner_kupele_uhrady; // TODO + kupele deti;
+      return this.r033_partner_kupele_uhrady + this.r036;
     },
     get r077_nezdanitelna_cast() {
       return this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu; // TODO + tf.r075;
@@ -140,8 +143,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r090() {
       return this.r081;
     },
+
     get r105_dan() {
-      return this.r081;
+      return this.r090;
     },
     get r107() {
       return this.r081;

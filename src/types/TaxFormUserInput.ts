@@ -73,6 +73,7 @@ export interface TaxFormUserInputBase<T> {
 
   /**   Deti*/
   r034?: Child[];
+  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: T;
 
   children?: boolean;
