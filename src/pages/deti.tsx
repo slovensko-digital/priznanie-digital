@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import styles from './deti.module.css';
 import { BooleanRadio, Input } from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
@@ -56,34 +57,34 @@ const Deti: NextPage<Props> = ({
               mesačne. Ročný bonus na dieťa činí 258.72 €. Daňový bonus na dieťa
               si môže uplatniť iba jeden z rodičov.
             </p>
-            {values.children &&
-              taxFormUserInput?.r034?.map((child, index) => (
-                <div key={child.rodneCislo}>
-                  <Input
-                    name={`r034[${index}].priezviskoMeno` as any}
-                    type="text"
-                    label="Meno a priezvisko"
-                  />
-                  <Input
-                    name={`r034[${index}].rodneCislo` as any}
-                    type="text"
-                    label="Rodné číslo"
-                  />
-                  <button
-                    className="btn-secondary govuk-button"
-                    type="button"
-                    onClick={addEmptyChild}
-                    data-test="add-child"
-                  >
-                    Pridať ďalšie dieťa
-                  </button>
-                </div>
-              ))}
-            <button
-              className="govuk-button"
-              type="submit"
-              onClick={addEmptyChild}
-            >
+            {values.children && (
+              <div className={styles.childrenInputGroup}>
+                {taxFormUserInput?.r034?.map((child, index) => (
+                  <div key={child.rodneCislo}>
+                    <Input
+                      name={`r034[${index}].priezviskoMeno` as any}
+                      type="text"
+                      label="Meno a priezvisko"
+                    />
+                    <Input
+                      name={`r034[${index}].rodneCislo` as any}
+                      type="text"
+                      label="Rodné číslo"
+                    />
+                  </div>
+                ))}
+                <button
+                  className="btn-secondary govuk-button"
+                  type="button"
+                  onClick={addEmptyChild}
+                  data-test="add-child"
+                >
+                  Pridať ďalšie dieťa
+                </button>
+              </div>
+            )}
+
+            <button className="govuk-button" type="submit">
               Pokračovať
             </button>
           </Form>
