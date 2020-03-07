@@ -1,13 +1,3 @@
-// export enum Routes {
-//   '/index',
-//   '/prijmy-a-vydavky',
-//   '/zamestnanie',
-//   '/partner',
-//   '/deti',
-//   '/osobne-udaje',
-//   '/vysledky',
-// }
-
 export type Route =
   | '/'
   | '/prijmy-a-vydavky'
