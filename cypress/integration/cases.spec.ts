@@ -9,6 +9,7 @@ import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
 import { setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
+import { Route } from '../../src/lib/routes';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
@@ -28,10 +29,20 @@ function typeToInput<K extends keyof TaxFormUserInput>(
 function next() {
   return cy.contains('Pokračovať').click();
 }
-// const testCase = 'base';
+
+function assertUrl(url: Route) {
+  cy.url().should('include', url);
+}
+
 describe('Cases', function() {
-  // ['base', 'withPartner', 'withEmployment'].forEach(testCase => {
-  ['base', 'complete', 'withPartner', 'withEmployment'].forEach(testCase => {
+  [
+    'base',
+    'complete',
+    'withPartner',
+    'withEmployment',
+    'withMortgage',
+    'withPension',
+  ].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
         inputModule => {
@@ -42,7 +53,7 @@ describe('Cases', function() {
 
           cy.contains('Pripraviť daňové priznanie').click();
 
-          /** Prijmy a vydavky */
+          /**  SECTION Prijmy a vydavky */
           getInput('t1r10_prijmy').type(input.t1r10_prijmy.toString());
           getInput('priloha3_r11_socialne').type(
             input.priloha3_r11_socialne.toString(),
@@ -53,9 +64,10 @@ describe('Cases', function() {
 
           next();
 
-          /** Zemestnanie */
+          /**  SECTION Zamestnanie */
+          assertUrl('/zamestnanie');
+
           if (input.employed) {
-            /** Todo */
             getInput('employed', '-yes').click();
             typeToInput('r038', input);
             typeToInput('r039', input);
@@ -65,7 +77,9 @@ describe('Cases', function() {
 
           next();
 
-          /** Partner */
+          /**  SECTION Partner */
+          assertUrl('/partner');
+
           if (input.r032_uplatnujem_na_partnera) {
             getInput('r032_uplatnujem_na_partnera', '-yes').click();
             typeToInput('r031_priezvisko_a_meno', input);
@@ -78,7 +92,9 @@ describe('Cases', function() {
 
           next();
 
-          /** Kids */
+          /**  SECTION Kids */
+          assertUrl('/deti');
+
           if (input.children) {
             getInput('children', '-yes').click();
           } else {
@@ -87,7 +103,34 @@ describe('Cases', function() {
 
           next();
 
-          /** Osobne udaje */
+          /**  SECTION Dochodok */
+          assertUrl('/dochodok');
+
+          if (input.r029_poberal_dochodok) {
+            getInput('r029_poberal_dochodok', '-yes').click();
+            typeToInput('r030_vyska_dochodku', input);
+          } else {
+            getInput('r029_poberal_dochodok', '-no').click();
+          }
+
+          next();
+
+          /**  SECTION Hypoteka */
+          assertUrl('/hypoteka');
+
+          if (input.r037_uplatnuje_uroky) {
+            getInput('r037_uplatnuje_uroky', '-yes').click();
+            typeToInput('r037_zaplatene_uroky', input);
+            typeToInput('r037_pocetMesiacov', input);
+          } else {
+            getInput('r037_uplatnuje_uroky', '-no').click();
+          }
+
+          next();
+
+          /**  SECTION Osobne udaje */
+          assertUrl('/osobne-udaje');
+
           typeToInput('r001_dic', input);
           typeToInput('r003_nace', input);
           typeToInput('r004_priezvisko', input);
@@ -100,7 +143,9 @@ describe('Cases', function() {
 
           next();
 
-          /** Summary */
+          /**  SECTION Summary */
+          assertUrl('/vysledky');
+
           cy.contains('XML');
 
           /**  HACK to work around file download, because cypress cannot do it */
@@ -114,9 +159,9 @@ describe('Cases', function() {
                 now,
               );
               const xmlResult = convertToXML(calculate(taxFormUserInput));
-              /** HACK END */
+              /**  HACK END */
 
-              /** Validate our results with the FS form */
+              /**  Validate our results with the FS form */
               cy.visit('/form/form.451.html');
 
               const stub = cy.stub();

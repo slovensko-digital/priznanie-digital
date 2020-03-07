@@ -1,11 +1,12 @@
 import xmljs from 'xml-js';
 import cloneDeep from 'lodash.clonedeep';
-import schemaSample from './schemaSample';
+import outputBasis from './outputBasis';
 import { TaxForm } from '../../types/TaxForm';
+import { OutputJson } from '../../types/OutputJson';
 
 // TODO remove fallbacks, they should be unncessary now
-export function convertToJson(taxForm: TaxForm) {
-  const form = cloneDeep(schemaSample);
+export function convertToJson(taxForm: TaxForm): OutputJson {
+  const form: OutputJson = cloneDeep(outputBasis);
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
@@ -39,7 +40,12 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.priloha3_r08_poistne.toFixed(
     2,
   );
+  if (taxForm.r029_poberal_dochodok) {
+    form.dokument.telo.r29 = taxForm.r029_poberal_dochodok ? '1' : '0';
+    form.dokument.telo.r30 = taxForm.r030_vyska_dochodku.toFixed(2);
+  }
 
+  /** SECTION Partner */
   if (taxForm.r032_uplatnujem_na_partnera) {
     form.dokument.telo.r31 = {
       priezviskoMeno: taxForm?.r031_priezvisko_a_meno ?? '',
@@ -62,7 +68,17 @@ export function convertToJson(taxForm: TaxForm) {
       taxForm.r076b_kupele_partner_a_deti?.toFixed(2) ?? '';
   }
 
-  /** Employed */
+  /** SECTION Mortgage */
+  if (taxForm.r037_uplatnuje_uroky) {
+    form.dokument.telo.r37 = {
+      uplatDanBonusZaplatUroky: taxForm.r037_uplatnuje_uroky ? '1' : '0',
+      zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
+      pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
+    };
+    form.dokument.telo.r112 = taxForm.r112.toFixed(2);
+    form.dokument.telo.r115 = taxForm.r115.toFixed(2);
+  }
+  /** SECTION Employed */
   if (taxForm.employed) {
     form.dokument.telo.r38 = taxForm.r038?.toFixed(2) ?? '0';
     form.dokument.telo.r39 = taxForm.r039?.toFixed(2) ?? '0';
@@ -86,6 +102,7 @@ export function convertToJson(taxForm: TaxForm) {
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2);
   form.dokument.telo.r107 = taxForm.r107.toFixed(2);
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
+  form.dokument.telo.r114 = '';
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2);
   form.dokument.telo.neuplatnujem = '1';

@@ -3,9 +3,12 @@ import Link from 'next/link';
 import fileDownload from 'js-file-download';
 import { NextPage } from 'next';
 import { convertToXML } from '../lib/xml/xmlConverter';
-import { TaxForm } from "../types/TaxForm";
+import { TaxForm } from '../types/TaxForm';
 
-const backUrl = '/osobne-udaje';
+import { getRoutes } from '../lib/routes';
+
+const { previousRoute } = getRoutes('/vysledky');
+
 interface Props {
   taxForm: TaxForm;
 }
@@ -17,7 +20,7 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
 
   return (
     <>
-      <Link href={backUrl}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link">Naspat</a>
       </Link>
       <h2>Vysledky</h2>
