@@ -43,3 +43,8 @@ export type PensionUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'r029_poberal_dochodok' | 'r030_vyska_dochodku'
 >;
+
+export type MortgageUserInput<T = string> = Pick<
+  TaxFormUserInput<T>,
+  'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
+>;

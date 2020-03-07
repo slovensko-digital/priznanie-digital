@@ -5,18 +5,18 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, Input } from '../components/FormComponents';
-import { PensionUserInput } from '../types/PageUserInputs';
+import { MortgageUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 
-const { nextRoute, previousRoute } = getRoutes('/dochodok');
+const { nextRoute, previousRoute } = getRoutes('/hypoteka');
 
 interface Props {
-  setTaxFormUserInput: (values: PensionUserInput) => void;
+  setTaxFormUserInput: (values: MortgageUserInput) => void;
   taxFormUserInput: TaxFormUserInput;
 }
 
-const Dochodok: NextPage<Props> = ({
+const Hypoteka: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
@@ -31,7 +31,7 @@ const Dochodok: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PensionUserInput>
+      <Formik<MortgageUserInput>
         initialValues={taxFormUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -42,15 +42,20 @@ const Dochodok: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
-              name="r029_poberal_dochodok"
+              title="Platili ste úroky z hypotéky v roku 2019?"
+              name="r037_uplatnuje_uroky"
             />
-            {values.r029_poberal_dochodok && (
+            {values.r037_uplatnuje_uroky && (
               <>
                 <Input
-                  name="r030_vyska_dochodku"
+                  name="r037_zaplatene_uroky"
                   type="number"
-                  label="Úhrn príjmov od všetkých zamestnávateľov"
+                  label="Zaplatene uroky"
+                />
+                <Input
+                  name="r037_pocetMesiacov"
+                  type="number"
+                  label="Pocet mesiacov"
                 />
               </>
             )}
@@ -64,14 +69,18 @@ const Dochodok: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<PensionUserInput<number>>({
-  r029_poberal_dochodok: Yup.boolean()
+const validationSchema = Yup.object().shape<MortgageUserInput<number>>({
+  r037_uplatnuje_uroky: Yup.boolean()
     .required()
     .nullable(),
-  r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
+  r037_zaplatene_uroky: Yup.number().when('r037_uplatnuje_uroky', {
+    is: true,
+    then: Yup.number().required(),
+  }),
+  r037_pocetMesiacov: Yup.number().when('r037_uplatnuje_uroky', {
     is: true,
     then: Yup.number().required(),
   }),
 });
 
-export default Dochodok;
+export default Hypoteka;

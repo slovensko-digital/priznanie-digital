@@ -8,13 +8,14 @@
 //   '/vysledky',
 // }
 
-type Route =
+export type Route =
   | '/'
   | '/prijmy-a-vydavky'
   | '/zamestnanie'
   | '/partner'
   | '/deti'
   | '/dochodok'
+  | '/hypoteka'
   | '/osobne-udaje'
   | '/vysledky';
 
@@ -25,6 +26,7 @@ const routesOrder: ReadonlyArray<Route> = [
   '/partner',
   '/deti',
   '/dochodok',
+  '/hypoteka',
   '/osobne-udaje',
   '/vysledky',
 ];
