@@ -33,9 +33,8 @@ function next() {
 function assertUrl(url: Route) {
   cy.url().should('include', url);
 }
-// const testCase = 'base';
+
 describe('Cases', function() {
-  // ['base', 'withPartner', 'withEmployment'].forEach(testCase => {
   [
     'base',
     'complete',

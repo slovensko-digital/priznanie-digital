@@ -50,7 +50,7 @@ const Dochodok: NextPage<Props> = ({
                 <Input
                   name="r030_vyska_dochodku"
                   type="number"
-                  label="Úhrn príjmov od všetkých zamestnávateľov"
+                  label="Vyska dochodku"
                 />
               </>
             )}

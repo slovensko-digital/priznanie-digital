@@ -39,7 +39,7 @@ const Deti: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
+              title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti? (zatial nefunguje spravne)"
               name="children"
             />
             <div>
