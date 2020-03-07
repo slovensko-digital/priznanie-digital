@@ -152,7 +152,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = 0;
         const rateJanuaryToMarch = 22.17;
-        const age = rodnecislo(currentChild.rodneCislo).age();
+        const age = rodnecislo(currentChild.rodneCislo).age(); // TODO edge cases
         const rateAprilToDecember = age > 6 ? 22.17 : 44.34;
 
         if (currentChild.m00 || currentChild.m01) {
@@ -196,7 +196,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }, 0);
     },
     get r107() {
-      return this.r081;
+      return this.r105_dan - this.r106;
+    },
+    get r108() {
+      return 0; // TODO
+    },
+    get r109() {
+      return Math.max(this.r106 - this.r108, 0);
     },
     /** TODO High income test case */
     get r112() {
@@ -213,8 +219,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Math.max(this.r112 - this.r114, 0);
     },
     get r125_dan_na_uhradu() {
-      return this.r105_dan + this.r114 - this.r112;
-      // - tf.r106 +
+      return this.r105_dan + this.r114 - this.r112 - tf.r106;
+      // // - tf.r106 +
       // tf.r108 +
       // tf.r110 -
       // // tf.r112 +
