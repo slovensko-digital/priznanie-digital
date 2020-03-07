@@ -60,7 +60,11 @@ const OsobneUdaje: NextPage<Props> = ({
 
   return (
     <>
+<<<<<<< HEAD
       <Link href={previousRoute}>
+=======
+      <Link href={backUrl}>
+>>>>>>> origin/master
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
