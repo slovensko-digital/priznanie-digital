@@ -43,7 +43,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     /** SECTION Children */
 
-    r034: input.r034 as any, // TODO
+    r034: input?.r034 ?? [],
     r036: Math.min(parseInt10(input?.r036 ?? '0'), 50),
 
     /** SECTION Mortgage */
@@ -130,7 +130,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r033_partner_kupele_uhrady + this.r036;
     },
     get r077_nezdanitelna_cast() {
-      return this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu; // TODO + tf.r075;
+      return Math.min(
+        this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu,
+        this.r072_pred_znizenim,
+      ); // TODO + tf.r075;
     },
     get r078_zaklad_dane_z_prijmov() {
       return Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0);

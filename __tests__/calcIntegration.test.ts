@@ -14,15 +14,15 @@ const comparable = (xml: string) =>
 const stringify = (object: object) => JSON.stringify(object, null, 2);
 describe('calcIntergration', () => {
   [
-    // 'base',
-    // 'complete',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withPension',
-    // 'withMortgage',
+    'base',
+    'complete',
+    'withPartner',
+    'withEmployment',
+    'withPension',
+    'withMortgage',
     'withChildren',
   ].forEach(testCase => {
-    test('withChildren', async () => {
+    test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/${testCase}.xml`,
       );

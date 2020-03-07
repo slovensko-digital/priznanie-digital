@@ -109,16 +109,19 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r72 = taxForm.r072_pred_znizenim.toFixed(2);
   form.dokument.telo.r73 = taxForm.r073.toFixed(2);
   form.dokument.telo.r76 = taxForm.r076_kupele_spolu.toFixed(2);
-  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.toFixed(2);
+
+  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti
+    ? taxForm.r076b_kupele_partner_a_deti.toFixed(2)
+    : '';
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2);
   form.dokument.telo.r78 = taxForm.r078_zaklad_dane_z_prijmov.toFixed(2);
   form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2);
   form.dokument.telo.r81 = taxForm.r081.toFixed(2);
   form.dokument.telo.r90 = taxForm.r090.toFixed(2);
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2);
-  form.dokument.telo.r106 = taxForm.r106.toFixed(2);
+  form.dokument.telo.r106 = taxForm.r106 ? taxForm.r106.toFixed(2) : '';
   form.dokument.telo.r107 = taxForm.r107.toFixed(2);
-  form.dokument.telo.r109 = taxForm.r109.toFixed(2);
+  form.dokument.telo.r109 = taxForm.r109 ? taxForm.r109.toFixed(2) : '';
   form.dokument.telo.r113 = taxForm.r113.toFixed(2);
   form.dokument.telo.r114 = '';
 

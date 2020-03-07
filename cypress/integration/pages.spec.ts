@@ -72,8 +72,14 @@ describe('Employment page', function() {
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click();
 
-    getInput('r038').should('have.value', withEmploymentInput.r038.toString());
-    getInput('r039').should('have.value', withEmploymentInput.r039.toString());
+    getInput('r038').should(
+      'have.value',
+      withEmploymentInput?.r038?.toString(),
+    );
+    getInput('r039').should(
+      'have.value',
+      withEmploymentInput?.r039?.toString(),
+    );
 
     // Should submit and next page should be parter
     next();
@@ -165,10 +171,10 @@ describe('Children page', function() {
 
     // Type to input
     cy.get('[data-test="r034[0].priezviskoMeno-input"]').type(
-      withChildrenInput.r034[0].priezviskoMeno,
+      withChildrenInput?.r034?.[0]?.priezviskoMeno ?? '',
     );
     cy.get('[data-test="r034[0].rodneCislo-input"]').type(
-      withChildrenInput.r034[0].rodneCislo,
+      withChildrenInput?.r034?.[0]?.rodneCislo ?? '',
     );
 
     cy.get('[data-test="add-child"]').click();
