@@ -156,7 +156,8 @@ describe('Children page', function() {
     //  Go back to our page
     cy.visit('/deti');
   });
-  it('has working validation', function() {
+  // TODO
+  it.skip('has working validation', function() {
     cy.visit('/deti');
 
     // Shows error, when presses next withou interaction
