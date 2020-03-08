@@ -12,22 +12,25 @@ interface InputProps<Name> {
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2;
 }
 
+export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
+
 export const Input = <Name extends keyof TaxFormUserInput>({
   label,
   hint,
-  width = 10,
+  width = 20,
   className,
+  type,
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
   const [field, meta] = useField(props.name);
 
   const getNumberInputProps = () => {
-    if (props.type === 'number') {
+    if (type === 'number') {
       return {
-        pattern: '^(([1-9]*)|(([1-9]*).([0-9]*)))$',
+        pattern: numberInputRegexp,
         inputMode: 'numeric' as 'numeric',
         spellCheck: false,
-        placeholder: 'Suma v EUR',
+        placeholder: 'Suma v EUR, napríklad 123,45',
       };
     }
     return {};
@@ -60,6 +63,7 @@ export const Input = <Name extends keyof TaxFormUserInput>({
         {...getNumberInputProps()}
         {...field}
         {...props}
+        type="text"
       />
     </div>
   );

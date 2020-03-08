@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
-import { Input } from '../components/FormComponents';
+import { Input, numberInputRegexp } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
@@ -89,13 +89,30 @@ const validate = (
   if (!values.t1r10_prijmy) {
     errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
   }
+  if (values.t1r10_prijmy && !values.t1r10_prijmy.match(numberInputRegexp)) {
+    errors.t1r10_prijmy = 'Zadajte sumu vo formáte 123,45';
+  }
+
   if (!values.priloha3_r11_socialne) {
     errors.priloha3_r11_socialne =
       'Zadajte vaše celkové uhradené sociálne poistné';
   }
+  if (
+    values.priloha3_r11_socialne &&
+    !values.priloha3_r11_socialne.match(numberInputRegexp)
+  ) {
+    errors.priloha3_r11_socialne = 'Zadajte sumu vo formáte 123,45';
+  }
+
   if (!values.priloha3_r13_zdravotne) {
     errors.priloha3_r13_zdravotne =
       'Zadajte vaše celkové uhradené zdravotné poistné';
+  }
+  if (
+    values.priloha3_r13_zdravotne &&
+    !values.priloha3_r13_zdravotne.match(numberInputRegexp)
+  ) {
+    errors.priloha3_r13_zdravotne = 'Zadajte sumu vo formáte 123,45';
   }
 
   return errors;
