@@ -75,7 +75,7 @@ const Zamestnanie: NextPage<Props> = ({
 const validate = (values: EmployedUserInput): any => {
   const errors: any = {};
 
-  if (!values.employed) {
+  if (typeof values.employed === 'undefined') {
     errors.employed = 'TODO';
   }
 
