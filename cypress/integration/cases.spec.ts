@@ -36,14 +36,14 @@ function assertUrl(url: Route) {
 
 describe('Cases', function() {
   [
-    // 'base',
-    // 'complete',
+    'base',
+    'complete',
     'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
+    'withPartner',
+    'withEmployment',
+    'withMortgage',
+    'withPension',
+    'withChildren',
   ].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(

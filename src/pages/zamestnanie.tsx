@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
