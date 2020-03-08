@@ -33,7 +33,7 @@ const Dochodok: NextPage<Props> = ({
       </Link>
       <Formik<PensionUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
@@ -64,14 +64,14 @@ const Dochodok: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<PensionUserInput<number>>({
-  r029_poberal_dochodok: Yup.boolean()
-    .required()
-    .nullable(),
-  r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
-    is: true,
-    then: Yup.number().required(),
-  }),
-});
+// const validationSchema = Yup.object().shape<PensionUserInput<number>>({
+//   r029_poberal_dochodok: Yup.boolean()
+//     .required()
+//     .nullable(),
+//   r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
+//     is: true,
+//     then: Yup.number().required(),
+//   }),
+// });
 
 export default Dochodok;

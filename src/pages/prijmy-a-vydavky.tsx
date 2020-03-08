@@ -81,10 +81,8 @@ const PrijmyAVydavky: NextPage<Props> = ({
   );
 };
 
-const validate = (
-  values: IncomeAndExpenseUserInput,
-): Partial<IncomeAndExpenseUserInput> => {
-  const errors: Partial<IncomeAndExpenseUserInput> = {};
+const validate = (values: IncomeAndExpenseUserInput): any => {
+  const errors: any = {};
 
   if (!values.t1r10_prijmy) {
     errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
