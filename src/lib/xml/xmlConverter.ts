@@ -108,7 +108,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r72 = taxForm.r072_pred_znizenim.toFixed(2);
   form.dokument.telo.r73 = taxForm.r073.toFixed(2);
-  form.dokument.telo.r76 = taxForm.r076_kupele_spolu.toFixed(2);
+  form.dokument.telo.r76 = taxForm.r076_kupele_spolu
+    ? taxForm.r076_kupele_spolu.toFixed(2)
+    : '';
 
   form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti
     ? taxForm.r076b_kupele_partner_a_deti.toFixed(2)

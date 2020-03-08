@@ -39,7 +39,9 @@ const Deti: NextPage<Props> = ({
   return (
     <>
       <Link href={previousRoute}>
-        <a className="govuk-back-link">Späť</a>
+        <a data-test="back" className="govuk-back-link">
+          Späť
+        </a>
       </Link>
       <Formik<ChildrenUserInput>
         initialValues={taxFormUserInput}

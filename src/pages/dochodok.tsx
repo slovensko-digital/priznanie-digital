@@ -27,7 +27,7 @@ const Dochodok: NextPage<Props> = ({
   return (
     <>
       <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
+        <a data-test="back" className="govuk-back-link" data-test="back">
           Späť
         </a>
       </Link>

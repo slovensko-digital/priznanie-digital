@@ -163,7 +163,7 @@ describe('Children page', function() {
     next();
     getError();
   });
-  it.only('has working ui', function() {
+  it('has working ui', function() {
     cy.visit('/deti');
 
     // When presses yes, additional fields appears
