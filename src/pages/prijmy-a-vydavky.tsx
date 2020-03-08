@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 
 import { Formik, Form } from 'formik';
 import { NextPage } from 'next';
@@ -32,7 +31,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
       </Link>
       <Formik<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        validate={validate}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
@@ -69,16 +68,25 @@ const PrijmyAVydavky: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput<number>>({
-  t1r10_prijmy: Yup.number()
-    .min(0)
-    .required(),
-  priloha3_r11_socialne: Yup.number()
-    .min(0)
-    .required(),
-  priloha3_r13_zdravotne: Yup.number()
-    .min(0)
-    .required(),
-});
+
+const validate = (
+  values: IncomeAndExpenseUserInput,
+): Partial<IncomeAndExpenseUserInput> => {
+  const errors: Partial<IncomeAndExpenseUserInput> = {};
+
+  if (!values.t1r10_prijmy) {
+    errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
+  }
+  if (!values.priloha3_r11_socialne) {
+    errors.priloha3_r11_socialne =
+      'Zadajte vaše celkové uhradené sociálne poistné';
+  }
+  if (!values.priloha3_r13_zdravotne) {
+    errors.priloha3_r13_zdravotne =
+      'Zadajte vaše celkové uhradené zdravotné poistné';
+  }
+
+  return errors;
+};
 
 export default PrijmyAVydavky;
