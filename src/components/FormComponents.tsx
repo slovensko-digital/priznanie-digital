@@ -24,9 +24,10 @@ export const Input = <Name extends keyof TaxFormUserInput>({
   const getNumberInputProps = () => {
     if (props.type === 'number') {
       return {
-        pattern: '[0-9]*',
+        pattern: '^(([1-9]*)|(([1-9]*).([0-9]*)))$',
         inputMode: 'numeric' as 'numeric',
         spellCheck: false,
+        placeholder: 'Suma v EUR',
       };
     }
     return {};

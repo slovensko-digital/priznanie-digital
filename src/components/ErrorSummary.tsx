@@ -8,8 +8,13 @@ interface Props<Values> {
 
 export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
   const errorEntries = Object.entries(errors);
-  const touchedEntries = Object.entries(touched);
-  return errorEntries.length !== 0 && touchedEntries.length !== 0 ? (
+
+  /** Check if we have at least one error and touched intersection */
+  const shouldShowErrorSummary =
+    errorEntries.length !== 0 &&
+    Object.entries(errors).some(([error]) => Boolean(touched[error]));
+
+  return shouldShowErrorSummary ? (
     <div
       className="govuk-error-summary"
       aria-labelledby="error-summary-title"
@@ -18,14 +23,14 @@ export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
       data-module="govuk-error-summary"
     >
       <h2 className="govuk-error-summary__title" id="error-summary-title">
-        Vyskytol sa problem
+        Vyskytol sa problém
       </h2>
       <div className="govuk-error-summary__body">
         <ul className="govuk-list govuk-error-summary__list">
           {errorEntries.map(([name, label]) => {
             return (
               touched[name] && (
-                <li>
+                <li key={name}>
                   <a href={`#${name}`}>{label}</a>
                 </li>
               )
