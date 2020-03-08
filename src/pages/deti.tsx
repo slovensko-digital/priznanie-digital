@@ -8,7 +8,6 @@ import styles from './deti.module.css';
 import {
   BooleanRadio,
   Input,
-  Checkbox,
   CheckboxSmall,
 } from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';

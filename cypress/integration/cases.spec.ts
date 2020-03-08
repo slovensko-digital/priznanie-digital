@@ -126,7 +126,7 @@ describe('Cases', function() {
                   cy.get(`[data-test="${field}"]`).click();
                 }
               });
-              if (index < input.r034.length) {
+              if (index < input?.r034?.length) {
                 cy.get('[data-test="add-child"]').click();
               }
             });
