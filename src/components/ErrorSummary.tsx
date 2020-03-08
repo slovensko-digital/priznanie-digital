@@ -9,33 +9,30 @@ interface Props<Values> {
 export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
   const errorEntries = Object.entries(errors);
   const touchedEntries = Object.entries(touched);
-  return (
-    errorEntries.length &&
-    touchedEntries.length && (
-      <div
-        className="govuk-error-summary"
-        aria-labelledby="error-summary-title"
-        role="alert"
-        tabIndex={-1}
-        data-module="govuk-error-summary"
-      >
-        <h2 className="govuk-error-summary__title" id="error-summary-title">
-          Vyskytol sa problem
-        </h2>
-        <div className="govuk-error-summary__body">
-          <ul className="govuk-list govuk-error-summary__list">
-            {errorEntries.map(([name, label]) => {
-              return (
-                touched[name] && (
-                  <li>
-                    <a href={`#${name}`}>{label}</a>
-                  </li>
-                )
-              );
-            })}
-          </ul>
-        </div>
+  return errorEntries.length !== 0 && touchedEntries.length !== 0 ? (
+    <div
+      className="govuk-error-summary"
+      aria-labelledby="error-summary-title"
+      role="alert"
+      tabIndex={-1}
+      data-module="govuk-error-summary"
+    >
+      <h2 className="govuk-error-summary__title" id="error-summary-title">
+        Vyskytol sa problem
+      </h2>
+      <div className="govuk-error-summary__body">
+        <ul className="govuk-list govuk-error-summary__list">
+          {errorEntries.map(([name, label]) => {
+            return (
+              touched[name] && (
+                <li>
+                  <a href={`#${name}`}>{label}</a>
+                </li>
+              )
+            );
+          })}
+        </ul>
       </div>
-    )
-  );
+    </div>
+  ) : null;
 }
