@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
+import { ErrorSummary } from '../components/ErrorSummary';
 
 const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
 
@@ -21,9 +22,11 @@ const PrijmyAVydavky: NextPage<Props> = ({
   setTaxFormUserInput,
 }: Props) => {
   const router = useRouter();
+
   useEffect(() => {
     router.prefetch(nextRoute);
   });
+
   return (
     <>
       <Link href={previousRoute}>
@@ -37,37 +40,46 @@ const PrijmyAVydavky: NextPage<Props> = ({
           router.push(nextRoute);
         }}
       >
-        <Form className="form">
-          <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
+        {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {
+          return (
+            <>
+              <ErrorSummary<IncomeAndExpenseUserInput>
+                errors={errors}
+                touched={touched}
+              />
+              <Form className="form">
+                <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
 
-          <Input
-            name="t1r10_prijmy"
-            type="number"
-            label="Príjmy"
-            hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
-          />
-          <Input
-            name="priloha3_r11_socialne"
-            type="number"
-            label="Sociálne poistenie"
-            hint="Celkové uhradené poistné v roku 2019"
-          />
-          <Input
-            name="priloha3_r13_zdravotne"
-            hint="Celkové uhradené poistné v roku 2019"
-            type="number"
-            label="Zdravotné poistenie"
-          />
+                <Input
+                  name="t1r10_prijmy"
+                  type="number"
+                  label="Príjmy"
+                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
+                />
+                <Input
+                  name="priloha3_r11_socialne"
+                  type="number"
+                  label="Sociálne poistenie"
+                  hint="Celkové uhradené poistné v roku 2019"
+                />
+                <Input
+                  name="priloha3_r13_zdravotne"
+                  hint="Celkové uhradené poistné v roku 2019"
+                  type="number"
+                  label="Zdravotné poistenie"
+                />
 
-          <button data-test="next" className="govuk-button" type="submit">
-            Pokračovať
-          </button>
-        </Form>
+                <button data-test="next" className="govuk-button" type="submit">
+                  Pokračovať
+                </button>
+              </Form>
+            </>
+          );
+        }}
       </Formik>
     </>
   );
 };
-
 
 const validate = (
   values: IncomeAndExpenseUserInput,

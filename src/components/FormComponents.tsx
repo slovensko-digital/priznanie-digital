@@ -50,15 +50,13 @@ export const Input = <Name extends keyof TaxFormUserInput>({
         </span>
       ) : null}
       <input
+        id={props.name}
         className={classnames(['govuk-input', `govuk-input--width-${width}`])}
         data-test={`${field.name}-input`}
         {...getNumberInputProps()}
         {...field}
         {...props}
       />
-      <style jsx>{`
-        
-      `}</style>
     </div>
   );
 };
