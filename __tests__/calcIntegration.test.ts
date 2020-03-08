@@ -6,6 +6,8 @@ import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 import { calculate } from '../src/lib/calculation';
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
 
+const WRITE_FILES = true;
+
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true });
 
@@ -18,6 +20,7 @@ describe('calcIntergration', () => {
     'withEmployment',
     'withPension',
     'withMortgage',
+    'withChildren',
   ].forEach(testCase => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
@@ -31,19 +34,24 @@ describe('calcIntergration', () => {
 
       const taxForm = calculate(input);
 
-      fs.writeFile(
-        `${__dirname}/testCases/${testCase}TaxForm.output.json`,
-        stringify(taxForm),
-      );
-
       const outputXml = convertToXML(taxForm);
-      const outputJson = convertToJson(taxForm);
 
-      fs.writeFile(`${__dirname}/testCases/${testCase}.output.xml`, outputXml);
-      fs.writeFile(
-        `${__dirname}/testCases/${testCase}.output.json`,
-        stringify(outputJson),
-      );
+      if (WRITE_FILES) {
+        const outputJson = convertToJson(taxForm);
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}TaxForm.output.json`,
+          stringify(taxForm),
+        );
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}.output.xml`,
+          outputXml,
+        );
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}.output.json`,
+          stringify(outputJson),
+        );
+      }
+
       const result = await comparable(outputXml);
       const expected = await comparable(testCaseValidatedXML.toString());
 

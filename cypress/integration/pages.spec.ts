@@ -5,8 +5,10 @@
 /// <reference types="cypress" />
 
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
+import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { Route } from '../../src/lib/routes';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
@@ -70,8 +72,14 @@ describe('Employment page', function() {
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click();
 
-    getInput('r038').should('have.value', withEmploymentInput.r038.toString());
-    getInput('r039').should('have.value', withEmploymentInput.r039.toString());
+    getInput('r038').should(
+      'have.value',
+      withEmploymentInput?.r038?.toString(),
+    );
+    getInput('r039').should(
+      'have.value',
+      withEmploymentInput?.r039?.toString(),
+    );
 
     // Should submit and next page should be parter
     next();
@@ -134,5 +142,45 @@ describe('osobne-udaje page', function() {
     typeToInput('r011_stat', baseInput);
 
     next();
+  });
+});
+
+describe('Children page', function() {
+  it('has working navigation', function() {
+    cy.visit('/deti');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/partner');
+
+    //  Go back to our page
+    cy.visit('/deti');
+  });
+  // TODO
+  it.skip('has working validation', function() {
+    cy.visit('/deti');
+
+    // Shows error, when presses next withou interaction
+    next();
+    getError();
+  });
+  it('has working ui', function() {
+    cy.visit('/deti');
+
+    // When presses yes, additional fields appears
+    getInput('children', '-yes').click();
+
+    // Type to input
+    cy.get('[data-test="r034[0].priezviskoMeno-input"]').type(
+      withChildrenInput?.r034?.[0]?.priezviskoMeno ?? '',
+    );
+    cy.get('[data-test="r034[0].rodneCislo-input"]').type(
+      withChildrenInput?.r034?.[0]?.rodneCislo ?? '',
+    );
+
+    cy.get('[data-test="add-child"]').click();
+
+    // Should submit and next page should be parter
+    // next();
   });
 });

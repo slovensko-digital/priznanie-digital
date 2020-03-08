@@ -1,3 +1,22 @@
+export interface Child {
+  priezviskoMeno: string;
+  rodneCislo: string;
+  kupelnaStarostlivost: boolean;
+  m00: boolean;
+  m01: boolean;
+  m02: boolean;
+  m03: boolean;
+  m04: boolean;
+  m05: boolean;
+  m06: boolean;
+  m07: boolean;
+  m08: boolean;
+  m09: boolean;
+  m10: boolean;
+  m11: boolean;
+  m12: boolean;
+}
+
 export interface TaxFormUserInputBase<T> {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string;
@@ -51,27 +70,11 @@ export interface TaxFormUserInputBase<T> {
   /**   Zamestnanie */
   r038?: T;
   r039?: T;
+
   /**   Deti*/
-  r034?: [
-    {
-      priezviskoMeno: string;
-      rodneCislo: string;
-      kupelnaStarostlivost: boolean;
-      m00: boolean;
-      m01: boolean;
-      m02: boolean;
-      m03: boolean;
-      m04: boolean;
-      m05: boolean;
-      m06: boolean;
-      m07: boolean;
-      m08: boolean;
-      m09: boolean;
-      m10: boolean;
-      m11: boolean;
-      m12: boolean;
-    },
-  ];
+  r034?: Child[];
+  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
+  r036?: T;
 
   children?: boolean;
   employed?: boolean;

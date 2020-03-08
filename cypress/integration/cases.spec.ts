@@ -42,6 +42,7 @@ describe('Cases', function() {
     'withEmployment',
     'withMortgage',
     'withPension',
+    'withChildren',
   ].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -97,6 +98,38 @@ describe('Cases', function() {
 
           if (input.children) {
             getInput('children', '-yes').click();
+            input?.r034?.forEach((child, index) => {
+              cy.get(`[data-test="r034[${index}].priezviskoMeno-input"]`).type(
+                child.priezviskoMeno,
+              );
+              cy.get(`[data-test="r034[${index}].rodneCislo-input"]`).type(
+                child.rodneCislo,
+              );
+
+              [
+                `r034[${index}].m00`,
+                `r034[${index}].m01`,
+                `r034[${index}].m02`,
+                `r034[${index}].m03`,
+                `r034[${index}].m04`,
+                `r034[${index}].m05`,
+                `r034[${index}].m06`,
+                `r034[${index}].m07`,
+                `r034[${index}].m08`,
+                `r034[${index}].m09`,
+                `r034[${index}].m10`,
+                `r034[${index}].m11`,
+                `r034[${index}].m12`,
+              ].forEach(field => {
+                const key = field.slice(-3);
+                if (child[key]) {
+                  cy.get(`[data-test="${field}"]`).click();
+                }
+              });
+              if (index < input?.r034?.length) {
+                cy.get('[data-test="add-child"]').click();
+              }
+            });
           } else {
             getInput('children', '-no').click();
           }

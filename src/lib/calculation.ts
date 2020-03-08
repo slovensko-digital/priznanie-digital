@@ -1,4 +1,5 @@
 import floor from 'lodash.floor';
+import { rodnecislo } from 'rodnecislo';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
 
@@ -40,7 +41,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r033_partner_kupele_uhrady: parseInt10(
       input?.r033_partner_kupele_uhrady ?? '0',
     ),
-    r034: input.r034 as any, // TODO
+    /** SECTION Children */
+
+    r034: input?.r034 ?? [],
+    r036: Math.min(parseInt10(input?.r036 ?? '0'), 50),
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
@@ -123,10 +127,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     r076a_kupele_danovnik: 0, // TODO asi z inputu
     get r076b_kupele_partner_a_deti() {
-      return this.r033_partner_kupele_uhrady; // TODO + kupele deti;
+      return this.r033_partner_kupele_uhrady + this.r036;
     },
     get r077_nezdanitelna_cast() {
-      return this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu; // TODO + tf.r075;
+      return Math.min(
+        this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu,
+        this.r072_pred_znizenim,
+      ); // TODO + tf.r075;
     },
     get r078_zaklad_dane_z_prijmov() {
       return Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0);
@@ -140,11 +147,65 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r090() {
       return this.r081;
     },
+
     get r105_dan() {
-      return this.r081;
+      return this.r090;
+    },
+    get r106() {
+      return this.r034.reduce((previousSum, currentChild) => {
+        let currentSum = 0;
+        const rateJanuaryToMarch = 22.17;
+        const age = rodnecislo(currentChild.rodneCislo).age(); // TODO edge cases
+        const rateAprilToDecember = age > 6 ? 22.17 : 44.34;
+
+        if (currentChild.m00 || currentChild.m01) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m02) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m03) {
+          currentSum += rateJanuaryToMarch;
+        }
+        if (currentChild.m00 || currentChild.m04) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m05) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m06) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m07) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m08) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m09) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m10) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m11) {
+          currentSum += rateAprilToDecember;
+        }
+        if (currentChild.m00 || currentChild.m12) {
+          currentSum += rateAprilToDecember;
+        }
+
+        return previousSum + currentSum;
+      }, 0);
     },
     get r107() {
-      return this.r081;
+      return this.r105_dan - this.r106;
+    },
+    get r108() {
+      return 0; // TODO
+    },
+    get r109() {
+      return Math.max(this.r106 - this.r108, 0);
     },
     /** TODO High income test case */
     get r112() {
@@ -161,8 +222,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Math.max(this.r112 - this.r114, 0);
     },
     get r125_dan_na_uhradu() {
-      return this.r105_dan + this.r114 - this.r112;
-      // - tf.r106 +
+      return this.r105_dan + this.r114 - this.r112 - tf.r106;
+      // // - tf.r106 +
       // tf.r108 +
       // tf.r110 -
       // // tf.r112 +
