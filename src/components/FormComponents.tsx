@@ -20,6 +20,7 @@ export const Input = <Name extends keyof TaxFormUserInput>({
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
   const [field, meta] = useField(props.name);
+
   const getNumberInputProps = () => {
     if (props.type === 'number') {
       return {
@@ -28,7 +29,9 @@ export const Input = <Name extends keyof TaxFormUserInput>({
         spellCheck: false,
       };
     }
+    return {};
   };
+
   return (
     <div
       className={classnames([
