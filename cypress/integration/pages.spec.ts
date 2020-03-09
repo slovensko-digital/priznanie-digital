@@ -190,9 +190,10 @@ describe('Feedback', function() {
     cy.visit('/');
     cy.get('[data-test=feedback]').click();
 
-    cy.get('[data-test=whatWereYouDoing]').type('Just some normal stuff');
-    cy.get('[data-test=whatWentWrong]').type('It all blew up');
+    cy.get('[data-test=whatWereYouDoing]').type('Cypress tests');
+    cy.get('[data-test=whatWentWrong]').type('Testing the spam');
     cy.get('[data-test=agree]').click();
-    cy.get('[data-test=submit]').click();
+    /** Don't spam the mail */
+    // cy.get('[data-test=submit]').click();
   });
 });
