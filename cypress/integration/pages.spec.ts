@@ -185,7 +185,7 @@ describe('Children page', function() {
   });
 });
 
-describe.only('Feedback', function() {
+describe('Feedback', function() {
   it('has working ui', function() {
     cy.visit('/');
     cy.get('[data-test=feedback]').click();
