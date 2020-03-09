@@ -6,41 +6,65 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput';
 interface InputProps<Name> {
   name: Name;
   label: string;
-  small?: string;
+  hint?: string;
   className?: string;
   type: 'text' | 'number';
+  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2;
 }
+
+export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
 
 export const Input = <Name extends keyof TaxFormUserInput>({
   label,
-  small,
+  hint,
+  width = 20,
   className,
+  type,
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
   const [field, meta] = useField(props.name);
 
+  const getNumberInputProps = () => {
+    if (type === 'number') {
+      return {
+        pattern: numberInputRegexp,
+        inputMode: 'numeric' as 'numeric',
+        spellCheck: false,
+        placeholder: 'Suma v EUR, napríklad 123,45',
+      };
+    }
+    return {};
+  };
+
   return (
-    <div className={classnames(['govuk-form-group', className])}>
-      <label className="govuk-label" htmlFor={props.name}>
-        <div>{label}</div>
-        <small>{small}</small>
+    <div
+      className={classnames([
+        'govuk-form-group',
+        className,
+        meta.touched && meta.error && 'govuk-form-group--error',
+      ])}
+    >
+      <label
+        className="govuk-label govuk-!-font-weight-bold"
+        htmlFor={props.name}
+      >
+        {label}
       </label>
-      <input
-        className="govuk-input"
-        data-test={`${field.name}-input`}
-        {...field}
-        {...props}
-      />
+      <span className="govuk-hint">{hint}</span>
       {meta.touched && meta.error ? (
         <span id={props.name} data-test="error" className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
         </span>
       ) : null}
-      <style jsx>{`
-        .govuk-form-group {
-          height: 75px;
-        }
-      `}</style>
+      <input
+        id={props.name}
+        className={classnames(['govuk-input', `govuk-input--width-${width}`])}
+        data-test={`${field.name}-input`}
+        {...getNumberInputProps()}
+        {...field}
+        {...props}
+        type="text"
+      />
     </div>
   );
 };

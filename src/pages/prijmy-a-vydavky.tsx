@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
-import { Input } from '../components/FormComponents';
+import { Input, numberInputRegexp } from '../components/FormComponents';
 import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
+import { ErrorSummary } from '../components/ErrorSummary';
 
 const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
 
@@ -22,9 +22,11 @@ const PrijmyAVydavky: NextPage<Props> = ({
   setTaxFormUserInput,
 }: Props) => {
   const router = useRouter();
+
   useEffect(() => {
     router.prefetch(nextRoute);
   });
+
   return (
     <>
       <Link href={previousRoute}>
@@ -32,53 +34,86 @@ const PrijmyAVydavky: NextPage<Props> = ({
       </Link>
       <Formik<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        validate={validate}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}
       >
-        <Form className="form">
-          <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
+        {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {
+          return (
+            <>
+              <ErrorSummary<IncomeAndExpenseUserInput>
+                errors={errors}
+                touched={touched}
+              />
+              <Form className="form">
+                <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
 
-          <Input
-            name="t1r10_prijmy"
-            type="number"
-            label="Príjmy"
-            small="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
-          />
-          <Input
-            name="priloha3_r11_socialne"
-            type="number"
-            label="Sociálne poistenie"
-            small="Celkové uhradené poistné v roku 2019"
-          />
-          <Input
-            name="priloha3_r13_zdravotne"
-            small="Celkové uhradené poistné v roku 2019"
-            type="number"
-            label="Zdravotné poistenie"
-          />
+                <Input
+                  name="t1r10_prijmy"
+                  type="number"
+                  label="Príjmy"
+                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
+                />
+                <Input
+                  name="priloha3_r11_socialne"
+                  type="number"
+                  label="Sociálne poistenie"
+                  hint="Celkové uhradené poistné v roku 2019"
+                />
+                <Input
+                  name="priloha3_r13_zdravotne"
+                  hint="Celkové uhradené poistné v roku 2019"
+                  type="number"
+                  label="Zdravotné poistenie"
+                />
 
-          <button data-test="next" className="govuk-button" type="submit">
-            Pokračovať
-          </button>
-        </Form>
+                <button data-test="next" className="govuk-button" type="submit">
+                  Pokračovať
+                </button>
+              </Form>
+            </>
+          );
+        }}
       </Formik>
     </>
   );
 };
 
-const validationSchema = Yup.object().shape<IncomeAndExpenseUserInput<number>>({
-  t1r10_prijmy: Yup.number()
-    .min(0)
-    .required(),
-  priloha3_r11_socialne: Yup.number()
-    .min(0)
-    .required(),
-  priloha3_r13_zdravotne: Yup.number()
-    .min(0)
-    .required(),
-});
+const validate = (values: IncomeAndExpenseUserInput): any => {
+  const errors: any = {};
+
+  if (!values.t1r10_prijmy) {
+    errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
+  }
+  if (values.t1r10_prijmy && !values.t1r10_prijmy.match(numberInputRegexp)) {
+    errors.t1r10_prijmy = 'Zadajte sumu vo formáte 123,45';
+  }
+
+  if (!values.priloha3_r11_socialne) {
+    errors.priloha3_r11_socialne =
+      'Zadajte vaše celkové uhradené sociálne poistné';
+  }
+  if (
+    values.priloha3_r11_socialne &&
+    !values.priloha3_r11_socialne.match(numberInputRegexp)
+  ) {
+    errors.priloha3_r11_socialne = 'Zadajte sumu vo formáte 123,45';
+  }
+
+  if (!values.priloha3_r13_zdravotne) {
+    errors.priloha3_r13_zdravotne =
+      'Zadajte vaše celkové uhradené zdravotné poistné';
+  }
+  if (
+    values.priloha3_r13_zdravotne &&
+    !values.priloha3_r13_zdravotne.match(numberInputRegexp)
+  ) {
+    errors.priloha3_r13_zdravotne = 'Zadajte sumu vo formáte 123,45';
+  }
+
+  return errors;
+};
 
 export default PrijmyAVydavky;

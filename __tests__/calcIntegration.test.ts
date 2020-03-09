@@ -6,7 +6,7 @@ import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 import { calculate } from '../src/lib/calculation';
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
 
-const WRITE_FILES = true;
+const WRITE_FILES = false;
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true });
@@ -16,6 +16,7 @@ describe('calcIntergration', () => {
   [
     'base',
     'complete',
+    'completeDecimal',
     'withPartner',
     'withEmployment',
     'withPension',
