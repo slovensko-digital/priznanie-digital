@@ -1,27 +1,17 @@
 import React from 'react';
+import { Feedback } from './Feedback';
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
-const Footer = () => {
+interface Props {
+  taxFormUserInput: TaxFormUserInput;
+}
+
+const Footer = ({ taxFormUserInput }: Props) => {
   return (
     <>
       <div className="sdn-feedbackbar">
         <div className="govuk-width-container ">
-          <div
-            className="sdn-feedbackbar__container"
-            id="sdn-feedbackbar-container"
-          >
-            <div className="govuk-grid-column-one-half">
-              <img src="/assets/images/icon-lock.svg" alt="" className="icon" />
-              <span>Bezpečné SSL pripojenie</span>
-            </div>
-            <div className="govuk-grid-column-one-half">
-              <img
-                src="/assets/images/icon-correct.svg"
-                alt=""
-                className="icon"
-              />
-              <span>Overené certifikovaným účtovníkom</span>
-            </div>
-          </div>
+          <Feedback taxFormUserInput={taxFormUserInput} />
         </div>
       </div>
       <footer className="sdn-footer " role="contentinfo">

@@ -3,14 +3,20 @@ import React from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
+import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 interface Props {
   debug: React.ReactNode;
   children: React.ReactNode;
+  taxFormUserInput: TaxFormUserInput;
 }
 
 const DEBUG_ON = false;
-const Layout: React.FC<Props> = ({ children, debug }: Props) => (
+const Layout: React.FC<Props> = ({
+  children,
+  debug,
+  taxFormUserInput,
+}: Props) => (
   <div className="container">
     <Head>
       <title>priznanie.digital</title>
@@ -44,7 +50,7 @@ const Layout: React.FC<Props> = ({ children, debug }: Props) => (
         </div>
       </main>
     </div>
-    <Footer />
+    <Footer taxFormUserInput={taxFormUserInput} />
     <style jsx>{`
       .container {
         display: flex;

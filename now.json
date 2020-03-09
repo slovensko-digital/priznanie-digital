@@ -1,5 +1,6 @@
 {
   "env": {
-    "autoformtoken": "@autoformtoken"
+    "autoformtoken": "@autoformtoken",
+    "SENDGRID_API_KEY": "@sendgrid_api_key"
   }
 }

@@ -184,3 +184,15 @@ describe('Children page', function() {
     // next();
   });
 });
+
+describe('Feedback', function() {
+  it('has working ui', function() {
+    cy.visit('/');
+    cy.get('[data-test=feedback]').click();
+
+    cy.get('[data-test=whatWereYouDoing]').type('Just some normal stuff');
+    cy.get('[data-test=whatWentWrong]').type('It all blew up');
+    cy.get('[data-test=agree]').click();
+    cy.get('[data-test=submit]').click();
+  });
+});
