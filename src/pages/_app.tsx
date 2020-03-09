@@ -13,7 +13,8 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
 import Layout from '../components/Layout';
 import { initTaxFormUserInputValues } from '../lib/initialValues';
-import {  setDate } from '../lib/utils';
+import { setDate } from '../lib/utils';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -37,6 +38,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
   );
+  const [postponeUserInput, setPostponeUserInput] = useState<PostponeUserInput>(
+    { prijmyZoZahranicia: undefined },
+  );
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
@@ -52,6 +56,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
+        postponeUserInput={postponeUserInput}
+        setPostponeUserInput={setPostponeUserInput}
         {...pageProps}
       />
     </Layout>

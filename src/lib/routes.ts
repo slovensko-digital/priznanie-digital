@@ -29,3 +29,20 @@ export const getRoutes = (currentRoute: Route) => {
     previousRoute: routesOrder[currentRouteIndex + -1],
   };
 };
+
+
+export type PostponeRoute = '/' | '/prijmy-zo-zahranicia';
+
+const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
+  '/',
+  '/prijmy-zo-zahranicia',
+];
+
+export const getPostponeRoutes = (currentRoute: PostponeRoute) => {
+  const currentRouteIndex = postponeRoutesOrder.indexOf(currentRoute);
+  return {
+    currentRoute,
+    nextRoute: postponeRoutesOrder[currentRouteIndex + 1],
+    previousRoute: postponeRoutesOrder[currentRouteIndex + -1],
+  };
+};

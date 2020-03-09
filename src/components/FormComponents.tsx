@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { UserInput } from '../types/UserInput';
 
 interface InputProps<Name> {
   name: Name;
@@ -73,7 +74,7 @@ interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
 }
-export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
+export const BooleanRadio = <Name extends keyof UserInput>({
   title,
   ...props
 }: BooleanRadioProps<Name>) => {
@@ -134,9 +135,11 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
 interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
+  hint?: string;
 }
 export const Checkbox = <Name extends keyof TaxFormUserInput>({
   title,
+  hint,
   ...props
 }: BooleanRadioProps<Name>) => {
   const [field, meta] = useField(props.name);
@@ -146,6 +149,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
+        {hint ? <span className="govuk-hint">{hint}</span> : null}
         <div className="govuk-checkboxes">
           <div className="govuk-checkboxes__item">
             <input

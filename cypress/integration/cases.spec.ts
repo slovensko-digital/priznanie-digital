@@ -5,20 +5,18 @@
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { UserInput } from '../../src/types/UserInput';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
 import { setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
-import { Route } from '../../src/lib/routes';
+import { Route, PostponeRoute } from '../../src/lib/routes';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 
-function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
+function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
-function typeToInput<K extends keyof TaxFormUserInput>(
-  key: K,
-  userInput: TaxFormUserInput,
-) {
+function typeToInput<K extends keyof UserInput>(key: K, userInput: UserInput) {
   const value = userInput[key];
   if (typeof value === 'string') {
     return getInput(key).type(value);
@@ -30,9 +28,11 @@ function next() {
   return cy.contains('Pokračovať').click();
 }
 
-function assertUrl(url: Route) {
+function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url);
 }
+
+const getError = () => cy.get('[data-test=error]');
 
 describe('Cases', function() {
   [
@@ -222,5 +222,23 @@ describe('Cases', function() {
         },
       );
     });
+  });
+});
+
+describe.only('Postpone cases', function() {
+  it('Postpones', function() {
+    cy.visit('/');
+
+    cy.contains('Odložiť daňové priznanie').click();
+    assertUrl('/prijmy-zo-zahranicia');
+
+    next();
+
+    getError();
+
+    getInput('prijmyZoZahranicia', '-yes').click();
+
+    cy.contains('Nový termín pre podanie daňového priznania je 30.9.2020.');
+    next();
   });
 });
