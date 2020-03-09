@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { CheckboxSmall } from './FormComponents';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { completeInput } from '../../__tests__/testCases/completeInput';
 
 interface Props {
   taxFormUserInput: TaxFormUserInput;
@@ -11,6 +10,7 @@ interface Props {
 // export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
 export const Feedback: React.FC<Props> = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   if (isOpen) {
     return (
       <div
@@ -42,63 +42,72 @@ export const Feedback: React.FC<Props> = () => {
         </div>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
-            <Formik
-              initialValues={{
-                whatWereYouDoing: '',
-                whatWentWrong: '',
-                agree: false,
-              }}
-              onSubmit={* => {
-                fetch('api/feedback', {
-                  method: 'POST',
-                  body: JSON.stringify({
-                    whatWereYouDoing: values.whatWereYouDoing,
-                    whatWentWrong: values.whatWentWrong,
-                    taxFormUserInput: values.agree ? completeInput : null, // TODO clean from USER INFO
-                    // taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
-                  }),
-                });
-              }}
-            >
-              {formik => (
-                <Form>
-                  <div className="govuk-form-group">
-                    <label className="govuk-label" htmlFor="whatWereYouDoing">
-                      Čo ste robili?
-                    </label>
-                    <input
-                      type="text"
-                      name="whatWereYouDoing"
-                      data-test="whatWereYouDoing"
-                      className="govuk-textarea"
-                      {...formik.getFieldProps('whatWereYouDoing')}
+            {isSubmitted ? (
+              <p className="govuk-body">Dakujeme za feedback</p>
+            ) : (
+              <Formik
+                initialValues={{
+                  whatWereYouDoing: '',
+                  whatWentWrong: '',
+                  agree: false,
+                }}
+                onSubmit={(values, formik) => {
+                  return fetch('api/feedback', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      whatWereYouDoing: values.whatWereYouDoing,
+                      whatWentWrong: values.whatWentWrong,
+                      // taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
+                    }),
+                  }).then(() => {
+                    setIsSubmitted(true);
+                    return formik.setSubmitting(false);
+                  });
+                }}
+              >
+                {formik => (
+                  <Form>
+                    <div className="govuk-form-group">
+                      <label className="govuk-label" htmlFor="whatWereYouDoing">
+                        Čo ste robili?
+                      </label>
+                      <input
+                        type="text"
+                        name="whatWereYouDoing"
+                        data-test="whatWereYouDoing"
+                        className="govuk-textarea"
+                        {...formik.getFieldProps('whatWereYouDoing')}
+                      />
+                    </div>
+                    <div className="govuk-form-group">
+                      <label className="govuk-label" htmlFor="whatWentWrong">
+                        Čo sa nepodarilo?
+                      </label>
+                      <textarea
+                        name="whatWentWrong"
+                        data-test="whatWentWrong"
+                        className="govuk-textarea"
+                        rows={3}
+                        required
+                        {...formik.getFieldProps('whatWentWrong')}
+                      />
+                    </div>
+                    <CheckboxSmall
+                      name="agree"
+                      label="Suhlasim s posielanim dat (zatial nie anonymne)?"
                     />
-                  </div>
-                  <div className="govuk-form-group">
-                    <label className="govuk-label" htmlFor="whatWentWrong">
-                      Čo sa nepodarilo?
-                    </label>
-                    <textarea
-                      name="whatWentWrong"
-                      data-test="whatWentWrong"
-                      className="govuk-textarea"
-                      rows={3}
-                      required
-                      {...formik.getFieldProps('whatWentWrong')}
-                    />
-                  </div>
-                  <CheckboxSmall name="agree" label="Agree?" />
-                  <button
-                    type="submit"
-                    data-test="submit"
-                    className="govuk-button"
-                  >
-                    Odoslat
-                  </button>
-                  <p className="govuk-body feedback-submitted-feedback govuk-!-padding-left-4 govuk-!-padding-top-2 govuk-!-display-inline-block" />
-                </Form>
-              )}
-            </Formik>
+                    <button
+                      type="submit"
+                      data-test="submit"
+                      className="govuk-button govuk-!-margin-top-4"
+                    >
+                      Odoslat
+                    </button>
+                    <p className="govuk-body feedback-submitted-feedback govuk-!-padding-left-4 govuk-!-padding-top-2 govuk-!-display-inline-block" />
+                  </Form>
+                )}
+              </Formik>
+            )}
           </div>
         </div>
       </div>
