@@ -48,6 +48,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   return (
     <Layout
+      taxFormUserInput={taxFormUserInput}
       debug={
         <div>
           TaxFormUserInput
