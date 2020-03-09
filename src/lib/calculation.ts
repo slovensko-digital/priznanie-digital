@@ -7,8 +7,9 @@ const NEZDANITELNA_CAST_ZAKLADU = 3937.35;
 const PAUSALNE_VYDAVKY_MAX = 20000;
 const DAN_Z_PRIJMU_SADZBA = 0.19;
 
-function parseInt10(input: string) {
-  return parseInt(input.length === 0 ? '0' : input, 10);
+function parse(input: string) {
+  const cleanedInput = input === '' ? '0' : input.replace(',', '.');
+  return Number(cleanedInput);
   // return parseInt(input|| '0', 10);
 }
 
@@ -26,37 +27,35 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r011_stat: input.r011_stat,
     /** SECTION Dochodok */
     r029_poberal_dochodok: input?.r029_poberal_dochodok ?? false,
-    r030_vyska_dochodku: parseInt10(input?.r030_vyska_dochodku ?? '0'), // TODO in next use cases
+    r030_vyska_dochodku: parse(input?.r030_vyska_dochodku ?? '0'), // TODO in next use cases
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
     r031_rodne_cislo: input?.r031_rodne_cislo ?? '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
-    r032_partner_vlastne_prijmy: parseInt10(
+    r032_partner_vlastne_prijmy: parse(
       input?.r032_partner_vlastne_prijmy ?? '0',
     ),
-    r032_partner_pocet_mesiacov: parseInt10(
+    r032_partner_pocet_mesiacov: parse(
       input?.r032_partner_pocet_mesiacov ?? '0',
     ),
     r033_partner_kupele: input?.r033_partner_kupele ?? false,
-    r033_partner_kupele_uhrady: parseInt10(
-      input?.r033_partner_kupele_uhrady ?? '0',
-    ),
+    r033_partner_kupele_uhrady: parse(input?.r033_partner_kupele_uhrady ?? '0'),
     /** SECTION Children */
 
     r034: input?.r034 ?? [],
-    r036: Math.min(parseInt10(input?.r036 ?? '0'), 50),
+    r036: Math.min(parse(input?.r036 ?? '0'), 50),
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    r037_zaplatene_uroky: parseInt10(input?.r037_zaplatene_uroky ?? '0'),
-    r037_pocetMesiacov: parseInt10(input?.r037_pocetMesiacov ?? '0'),
+    r037_zaplatene_uroky: parse(input?.r037_zaplatene_uroky ?? '0'),
+    r037_pocetMesiacov: parse(input?.r037_pocetMesiacov ?? '0'),
 
-    priloha3_r11_socialne: parseInt10(input.priloha3_r11_socialne),
-    priloha3_r13_zdravotne: parseInt10(input.priloha3_r13_zdravotne),
-    r038: parseInt10(input?.r038 ?? '0'),
-    r039: parseInt10(input?.r039 ?? '0'),
+    priloha3_r11_socialne: parse(input.priloha3_r11_socialne),
+    priloha3_r13_zdravotne: parse(input.priloha3_r13_zdravotne),
+    r038: parse(input?.r038 ?? '0'),
+    r039: parse(input?.r039 ?? '0'),
 
-    t1r10_prijmy: parseInt10(input.t1r10_prijmy),
+    t1r10_prijmy: parse(input.t1r10_prijmy),
     get t1r2_prijmy() {
       return this.t1r10_prijmy;
     },

@@ -89,6 +89,7 @@ module.exports = {
         assert: 'htmlFor',
       },
     ],
+    'no-useless-escape': 0,
     // '@typescript-eslint/no-unused-vars': 0,
   },
 };

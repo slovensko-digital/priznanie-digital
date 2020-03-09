@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
@@ -33,7 +32,7 @@ const Hypoteka: NextPage<Props> = ({
       </Link>
       <Formik<MortgageUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
@@ -69,18 +68,18 @@ const Hypoteka: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<MortgageUserInput<number>>({
-  r037_uplatnuje_uroky: Yup.boolean()
-    .required()
-    .nullable(),
-  r037_zaplatene_uroky: Yup.number().when('r037_uplatnuje_uroky', {
-    is: true,
-    then: Yup.number().required(),
-  }),
-  r037_pocetMesiacov: Yup.number().when('r037_uplatnuje_uroky', {
-    is: true,
-    then: Yup.number().required(),
-  }),
-});
+// const validationSchema = Yup.object().shape<MortgageUserInput<number>>({
+//   r037_uplatnuje_uroky: Yup.boolean()
+//     .required()
+//     .nullable(),
+//   r037_zaplatene_uroky: Yup.number().when('r037_uplatnuje_uroky', {
+//     is: true,
+//     then: Yup.number().required(),
+//   }),
+//   r037_pocetMesiacov: Yup.number().when('r037_uplatnuje_uroky', {
+//     is: true,
+//     then: Yup.number().required(),
+//   }),
+// });
 
 export default Hypoteka;

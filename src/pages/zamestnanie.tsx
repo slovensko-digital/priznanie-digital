@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import {
+  BooleanRadio,
+  Input,
+  numberInputRegexp,
+} from '../components/FormComponents';
 import { EmployedUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
@@ -33,7 +36,7 @@ const Zamestnanie: NextPage<Props> = ({
       </Link>
       <Formik<EmployedUserInput>
         initialValues={taxFormUserInput}
-        validationSchema={validationSchema}
+        validate={validate}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
@@ -69,18 +72,28 @@ const Zamestnanie: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<EmployedUserInput<number>>({
-  employed: Yup.boolean()
-    .required()
-    .nullable(),
-  r038: Yup.number().when('employed', {
-    is: true,
-    then: Yup.number().required(),
-  }),
-  r039: Yup.number().when('employed', {
-    is: true,
-    then: Yup.number().required(),
-  }),
-});
+const validate = (values: EmployedUserInput): any => {
+  const errors: any = {};
+
+  if (typeof values.employed === 'undefined') {
+    errors.employed = 'TODO';
+  }
+
+  if (values.employed && !values.r038) {
+    errors.r038 = 'TODO';
+  }
+  if (values.r038 && !values.r038.match(numberInputRegexp)) {
+    errors.r038 = 'Zadajte sumu vo formáte 123,45';
+  }
+
+  if (values.employed && !values.r039) {
+    errors.r039 = 'TODO';
+  }
+  if (values.r039 && !values.r039.match(numberInputRegexp)) {
+    errors.r039 = 'Zadajte sumu vo formáte 123,45';
+  }
+
+  return errors;
+};
 
 export default Zamestnanie;
