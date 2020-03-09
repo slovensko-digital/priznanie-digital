@@ -7,8 +7,7 @@ interface Props {
   taxFormUserInput: TaxFormUserInput;
 }
 
-// export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
-export const Feedback: React.FC<Props> = () => {
+export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   if (isOpen) {
@@ -57,7 +56,7 @@ export const Feedback: React.FC<Props> = () => {
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      // taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
+                      taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
                     }),
                   }).then(() => {
                     setIsSubmitted(true);
