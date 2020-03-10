@@ -3,25 +3,27 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { getPostponeRoutes } from '../lib/routes';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import { BooleanRadio } from '../../components/FormComponents';
+import { getPostponeRoutes } from '../../lib/routes';
+import { PostponeUserInput } from '../../types/PostponeUserInput';
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/prijmy-zo-zahranicia');
+const { nextRoute, previousRoute } = getPostponeRoutes(
+  '/odklad/prijmy-zo-zahranicia',
+);
 
 interface Props {
   setPostponeUserInput: React.Dispatch<React.SetStateAction<PostponeUserInput>>;
-  postponeUserInput: PostponeUserInput;
+  // postponeUserInput: PostponeUserInput;
 }
 
 const PrijmyZoZahranicia: NextPage<Props> = ({
   setPostponeUserInput,
-  postponeUserInput,
-}: Props) => {
+}: // postponeUserInput,
+Props) => {
   const router = useRouter();
-  // useEffect(() => {
-  //   router.prefetch(nextRoute);
-  // });
+  useEffect(() => {
+    router.prefetch(nextRoute);
+  });
   return (
     <>
       <Link href={previousRoute}>

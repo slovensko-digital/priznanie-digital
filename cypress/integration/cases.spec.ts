@@ -230,7 +230,7 @@ describe.only('Postpone cases', function() {
     cy.visit('/');
 
     cy.contains('Odložiť daňové priznanie').click();
-    assertUrl('/prijmy-zo-zahranicia');
+    assertUrl('/odklad/prijmy-zo-zahranicia');
 
     next();
 
