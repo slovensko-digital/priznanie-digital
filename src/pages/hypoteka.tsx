@@ -32,6 +32,7 @@ const Hypoteka: NextPage<Props> = ({
       </Link>
       <Formik<MortgageUserInput>
         initialValues={taxFormUserInput}
+        validate={validate}
         // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
@@ -44,6 +45,7 @@ const Hypoteka: NextPage<Props> = ({
               title="Platili ste úroky z hypotéky v roku 2019?"
               name="r037_uplatnuje_uroky"
             />
+
             {values.r037_uplatnuje_uroky && (
               <>
                 <Input
@@ -66,6 +68,20 @@ const Hypoteka: NextPage<Props> = ({
       </Formik>
     </>
   );
+};
+
+const validate = (values: MortgageUserInput): any => {
+  const errors: any = {};
+
+  if (values.r037_uplatnuje_uroky && !values.r037_zaplatene_uroky) {
+    errors.r037_zaplatene_uroky = 'Zadajte vysku zaplatenych urokov';
+  }
+  if (values.r037_uplatnuje_uroky && !values.r037_pocetMesiacov) {
+    errors.r037_pocetMesiacov =
+      'Zadajte pocet mesiacov, kedy ste platili uroky';
+  }
+
+  return errors;
 };
 
 // const validationSchema = Yup.object().shape<MortgageUserInput<number>>({
