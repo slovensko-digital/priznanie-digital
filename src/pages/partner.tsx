@@ -3,9 +3,14 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import {
+  BooleanRadio,
+  Input,
+  numberInputRegexp,
+} from '../components/FormComponents';
 import { PartnerUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { ErrorSummary } from '../components/ErrorSummary';
 
 import { getRoutes } from '../lib/routes';
 
@@ -31,18 +36,20 @@ const Partner: NextPage<Props> = ({
       </Link>
       <Formik<PartnerUserInput>
         initialValues={taxFormUserInput}
+        validate={validate}
         // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}
       >
-        {({ values }) => (
+        {({ values, errors, touched }) => (
           <Form className="form">
             <BooleanRadio
               title="Uplatňujete si daňový bonus na manželku/manžela?"
               name="r032_uplatnujem_na_partnera"
             />
+            <ErrorSummary<PartnerUserInput> errors={errors} touched={touched} />
             {values.r032_uplatnujem_na_partnera && (
               <>
                 <Input
@@ -85,6 +92,34 @@ const Partner: NextPage<Props> = ({
       </Formik>
     </>
   );
+};
+
+const validate = (values: PartnerUserInput): any => {
+  const errors: any = {};
+
+  if (values.r032_uplatnujem_na_partnera) {
+    if (!values.r031_priezvisko_a_meno) {
+      errors.r031_priezvisko_a_meno =
+        'Zadajte meno vasho/vasej manzela/manzelky.';
+    }
+    if (!values.r031_rodne_cislo) {
+      errors.r031_rodne_cislo = 'Zadajte rodne cislo manzela/manzelky';
+    }
+
+    if (
+      !values.r032_partner_vlastne_prijmy &&
+      !values.r032_partner_vlastne_prijmy.match(numberInputRegexp)
+    ) {
+      errors.r032_partner_vlastne_prijmy =
+        'Zadajte vlastne prijmy manzela/manzelky';
+    }
+    if (!values.r032_partner_pocet_mesiacov) {
+      errors.r032_partner_pocet_mesiacov =
+        'Zadajte pocet mesiacov, kedy mal/a manzel/manzelka prijem.';
+    }
+  }
+
+  return errors;
 };
 
 // const validationSchema = Yup.object().shape<PartnerUserInput<number>>({
