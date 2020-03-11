@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import {
+  BooleanRadio,
+  Input,
+  numberInputRegexp,
+} from '../components/FormComponents';
 import { PensionUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
@@ -32,6 +36,7 @@ const Dochodok: NextPage<Props> = ({
       </Link>
       <Formik<PensionUserInput>
         initialValues={taxFormUserInput}
+        validate={validate}
         // validationSchema={validationSchema}
         onSubmit={values => {
           setTaxFormUserInput(values);
@@ -61,6 +66,20 @@ const Dochodok: NextPage<Props> = ({
       </Formik>
     </>
   );
+};
+
+const validate = (values: PensionUserInput): any => {
+  const errors: any = {};
+
+  if (
+    values.r029_poberal_dochodok &&
+    !values.r030_vyska_dochodku &&
+    !values.r030_vyska_dochodku.match(numberInputRegexp)
+  ) {
+    errors.r030_vyska_dochodku = 'Zadajte vysku dochodku';
+  }
+
+  return errors;
 };
 
 // const validationSchema = Yup.object().shape<PensionUserInput<number>>({
