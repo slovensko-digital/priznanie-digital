@@ -204,14 +204,18 @@ const OsobneUdaje: NextPage<Props> = ({
   );
 };
 
+/**
+ * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+ */
 const isValidDIC = (dic: string): boolean => {
-  return true;
+  const dicRegExp = /\d{9,10}/;
+  return dicRegExp.test(dic);
 };
 
 const validate = (values: PersonalInformationUserInput): any => {
   const errors: any = {};
 
-  if (!values.r001_dic && isValidDIC(values.r001_dic)) {
+  if (!isValidDIC(values.r001_dic)) {
     errors.r001_dic = 'Zadajte pridelene DIC';
   }
 
