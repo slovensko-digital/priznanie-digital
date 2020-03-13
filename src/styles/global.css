@@ -17,3 +17,8 @@ body {
   border-radius: 3px !important;
   margin-bottom: 0 !important;
 }
+
+/* Numeric fields can have spaces as thousand separator or between number and currency name. */
+.govuk-table__cell--numeric {
+  white-space: nowrap;
+}

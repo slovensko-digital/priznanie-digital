@@ -196,3 +196,22 @@ describe('Feedback', function() {
     cy.get('[data-test=submit]').click();
   });
 });
+
+describe('Results page', function() {
+  it('has working navigation', function() {
+    cy.visit('/vysledky');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/osobne-udaje');
+
+    //  Go back to our page
+    cy.visit('/vysledky');
+  });
+  it('has working ui', function() {
+    cy.visit('/vysledky');
+
+    cy.get('h1').contains('Výpočet dane za rok');
+    cy.get('h2').contains('Stručný prehľad');
+  });
+});
