@@ -1,8 +1,8 @@
 import xmljs from 'xml-js';
 import cloneDeep from 'lodash.clonedeep';
-import { postponeBasis } from './postponeBasis';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
 import { PostponeOutput } from './PostponeOutput';
+import { PostponeUserInput } from '../../types/PostponeUserInput';
+import { postponeBasis } from './postponeBasis';
 
 // TODO remove fallbacks, they should be unncessary now
 export function convertPostponeToJson(

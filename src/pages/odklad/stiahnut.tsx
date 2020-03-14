@@ -3,14 +3,10 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { getPostponeRoutes } from '../../lib/routes';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/stiahnut');
 
-interface Props {
-  postponeUserInput: PostponeUserInput;
-}
-const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
+const Stiahnut: NextPage = () => {
   const [didDownload, setDidDownload] = useState<boolean>(false);
   const router = useRouter();
 
