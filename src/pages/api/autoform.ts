@@ -12,10 +12,9 @@ if (!token) {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const firstName = encodeURI(req.query.firstName as string);
-  const lastName = encodeURI(req.query.lastName as string);
+  const name = encodeURI(`${req.query.name}`);
 
-  const query = `name:${firstName}+${lastName}`;
+  const query = `name:${name}`;
 
   const response = await fetch(
     `${baseUrl}/search?q=${query}&limit=${limit}&private_access_token=${token}&filter=active`,

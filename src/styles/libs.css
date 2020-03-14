@@ -87,8 +87,7 @@
 .autocomplete__option--odd {
   background-color: #fafafa;
 }
-.autocomplete__option--focused,
-.autocomplete__option:hover {
+.autocomplete__option--focused {
   background-color: #005ea5;
   border-color: #005ea5;
   color: #fff;

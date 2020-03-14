@@ -24,10 +24,8 @@ export interface TaxFormUserInputBase<T> {
    *  TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum,
    *  UX musi byt zvladnute */
   r003_nace: string;
-  /**   04 - Priezvisko*/
-  r004_priezvisko: string;
-  /**   05 - Meno*/
-  r005_meno: string;
+  /** Spoločné pole pre meno a priezvisko **/
+  meno_priezvisko: string;
   /**   07 - Ulica*/
   r007_ulica: string;
   /**   08 - Súpisné/orientačné číslo **/

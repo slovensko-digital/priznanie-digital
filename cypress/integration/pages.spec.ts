@@ -108,11 +108,11 @@ describe('osobne-udaje page', function() {
     /** With autoform */
     typeToInput('r001_dic', baseInput);
     typeToInput('r003_nace', baseInput);
-    getInput('r005_meno').type('Július');
-    getInput('r004_priezvisko').type('Ret');
+    getInput('meno_priezvisko').type('Július Ret');
 
     cy.contains('Július Retzer').click();
 
+    getInput('meno_priezvisko').should('contain.value', 'Július Retzer');
     getInput('r007_ulica').should('contain.value', 'Mierová');
     getInput('r008_cislo').should('contain.value', '4');
     getInput('r009_psc').should('contain.value', '82105');
@@ -133,8 +133,7 @@ describe('osobne-udaje page', function() {
     /** With autoform */
     typeToInput('r001_dic', baseInput);
     typeToInput('r003_nace', baseInput);
-    typeToInput('r004_priezvisko', baseInput);
-    typeToInput('r005_meno', baseInput);
+    typeToInput('meno_priezvisko', baseInput);
     typeToInput('r007_ulica', baseInput);
     typeToInput('r008_cislo', baseInput);
     typeToInput('r009_psc', baseInput);
