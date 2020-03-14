@@ -11,9 +11,7 @@ export const getCity = async (zip: string) => {
 export const getAutoformByPersonName = async (
   name: string,
 ): Promise<AutoformResponseBody[]> => {
-  return fetch(`/api/autoform?name=${name}`).then(async response =>
-    response.json(),
-  );
+  return fetch(`/api/autoform?name=${name}`).then(response => response.json());
 
   /** In case of just testing on localhost
     return [
@@ -46,4 +44,16 @@ export const getAutoformByPersonName = async (
       },
     ];
      */
+};
+
+export const saveEmail = async (
+  name: string,
+  email: string,
+  newsletter: boolean,
+): Promise<boolean> => {
+  return fetch(
+    `/api/email?name=${name}&email=${email}&newsletter=${
+      newsletter ? 'true' : 'false'
+    }`,
+  ).then(response => response.json());
 };

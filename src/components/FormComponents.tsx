@@ -139,11 +139,13 @@ export const BooleanRadio = <Name extends keyof UserInput>({
 interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
+  label?: string;
   hint?: string;
 }
 export const Checkbox = <Name extends keyof TaxFormUserInput>({
   title,
   hint,
+  label,
   ...props
 }: BooleanRadioProps<Name>) => {
   const [field, meta] = useField(props.name);
@@ -159,6 +161,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
             <input
               {...field}
               {...props}
+              id={props.name}
               className="govuk-checkboxes__input"
               type="checkbox"
             />
@@ -166,7 +169,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
               className="govuk-label govuk-checkboxes__label"
               htmlFor={props.name}
             >
-              Ano
+              {label ?? 'Ano'}
             </label>
           </div>
           {meta.touched && meta.error ? (

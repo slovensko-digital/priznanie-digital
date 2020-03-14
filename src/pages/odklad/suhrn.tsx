@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
+import { EmailForm } from '../../components/EmailForm';
 
 const { previousRoute } = getPostponeRoutes('/odklad/suhrn');
 
@@ -94,6 +95,8 @@ const Vysledky: NextPage<Props> = ({ postponeUserInput }: Props) => {
           </tr>
         </tbody>
       </table>
+
+      <EmailForm name={postponeUserInput.meno_priezvisko} />
     </>
   );
 };
