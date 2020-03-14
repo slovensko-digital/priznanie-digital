@@ -5,15 +5,14 @@
     <zaRok>2019</zaRok>
     <dovodDoplnenia>0</dovodDoplnenia>
     <fyzickaOsoba>
-      <priezvisko>Meno</priezvisko>
-      <meno>Priezvisko</meno>
+      <priezvisko>Heisenberg</priezvisko>
+      <meno>Werner</meno>
       <rodneCislo>
         <rcPredLom>200310</rcPredLom>
         <rcZaLom>0011</rcZaLom>
       </rodneCislo>
     </fyzickaOsoba>
     <sidlo>
-
       <psc>82105</psc>
       <obec>Bratislava</obec>
       <stat>Slovensko</stat>

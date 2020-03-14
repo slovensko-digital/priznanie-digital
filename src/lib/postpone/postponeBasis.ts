@@ -14,9 +14,6 @@ export const postponeBasis: PostponeOutput = {
           rcZaLom: '',
         },
       },
-      pravnickaOsoba: {
-        obchodneMeno: {},
-      },
       sidlo: {
         psc: '',
         obec: '',
@@ -27,7 +24,7 @@ export const postponeBasis: PostponeOutput = {
         predlzenie493b: '0',
         datumLehota: '30.06.2020',
       },
-      vypracoval: { dna: '22.02.2020' },
+      vypracoval: { dna: 'xxx' },
       podpis: '1',
     },
   },
