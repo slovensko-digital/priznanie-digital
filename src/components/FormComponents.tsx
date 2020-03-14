@@ -184,7 +184,7 @@ export const Checkbox = <Name extends keyof UserInput>({
 
 interface CheckboxSmallProps {
   name: string;
-  label: string;
+  label: string | React.ReactNode;
 }
 export const CheckboxSmall = ({
   name,

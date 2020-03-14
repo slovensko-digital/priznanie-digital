@@ -54,7 +54,7 @@ export const EmailForm = ({ name }: EmailFormProps) => {
           name="newsletter"
           label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
         />
-        <p>
+        <p className="govuk-!-margin-top-3">
           Oboznámil(a) som sa s informáciami v sekcii{' '}
           <a href="#gdpr">Ochrana osobných údajov</a>
         </p>
