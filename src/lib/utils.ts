@@ -16,3 +16,11 @@ export const setDate = (
 ): TaxFormUserInput => {
   return { ...taxform, datum: date.toLocaleString('sk-sk') };
 };
+
+export const formatCurrency = (value: number): string => {
+  const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g;
+  return `${(value || 0)
+    .toFixed(2)
+    .replace(findPlaceForThousandsDivider, ' ')
+    .replace('.', ',')} EUR`;
+};

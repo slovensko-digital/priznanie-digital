@@ -7,7 +7,7 @@
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
-import { setDate } from '../../src/lib/utils';
+import { formatCurrency, setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
 import { Route } from '../../src/lib/routes';
 
@@ -55,7 +55,7 @@ describe('Cases', function() {
 
           cy.contains('Pripraviť daňové priznanie').click();
 
-        /**  SECTION Prijmy a vydavky */
+          /**  SECTION Prijmy a vydavky */
           getInput('t1r10_prijmy').type(input.t1r10_prijmy);
           getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne);
           getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne);
@@ -177,6 +177,10 @@ describe('Cases', function() {
           assertUrl('/vysledky');
 
           cy.contains('XML');
+
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseFloat(input.t1r10_prijmy)),
+          );
 
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)
