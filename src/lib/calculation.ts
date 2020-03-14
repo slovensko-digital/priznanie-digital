@@ -14,12 +14,17 @@ function parse(input: string) {
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
+  const [firstName, ...lastNames] = input.meno_priezvisko
+    .split(' ')
+    .map(v => v.trim());
+
   /** Combine default vaules with user input */
   const tf: TaxForm = {
     r001_dic: input.r001_dic,
     r003_nace: input.r003_nace,
-    r004_priezvisko: input.r004_priezvisko,
-    r005_meno: input.r005_meno,
+    meno_priezvisko: input.meno_priezvisko,
+    r004_priezvisko: lastNames.join(' '),
+    r005_meno: firstName,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
     r009_psc: input.r009_psc,

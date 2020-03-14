@@ -163,8 +163,7 @@ describe('Cases', function() {
 
           typeToInput('r001_dic', input);
           typeToInput('r003_nace', input);
-          typeToInput('r004_priezvisko', input);
-          typeToInput('r005_meno', input);
+          typeToInput('meno_priezvisko', input);
           typeToInput('r007_ulica', input);
           typeToInput('r008_cislo', input);
           typeToInput('r009_psc', input);

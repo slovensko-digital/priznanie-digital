@@ -9,12 +9,11 @@ export const getCity = async (zip: string) => {
 };
 
 export const getAutoformByPersonName = async (
-  firstName: string,
-  lastName: string,
+  name: string,
 ): Promise<AutoformResponseBody[]> => {
-  return fetch(
-    `api/autoform?firstName=${firstName}&lastName=${lastName}`,
-  ).then(async response => response.json());
+  return fetch(`api/autoform?name=${name}`).then(async response =>
+    response.json(),
+  );
 
   /** In case of just testing on localhost
     return [
