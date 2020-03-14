@@ -7,9 +7,12 @@ describe('Basic use cases', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
       t1r10_prijmy: '20000',
+      meno_priezvisko: 'Johnny Mike Bravo',
     };
     const result = calculate(input as TaxFormUserInput);
     expect(result.r080_zaklad_dane_celkovo).toBe(4062.65);
+    expect(result.r005_meno).toBe('Johnny');
+    expect(result.r004_priezvisko).toBe('Mike Bravo');
   });
 
   test('Case 2', () => {

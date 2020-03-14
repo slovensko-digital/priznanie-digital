@@ -25,13 +25,13 @@ export type PartnerUserInput<T = string> = Pick<
   | 'r033_partner_kupele'
   | 'r033_partner_kupele_uhrady'
 >;
+
 export type PersonalInformationUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   | 'r001_dic'
   // | "r002_datum_narodenia"
   | 'r003_nace'
-  | 'r004_priezvisko'
-  | 'r005_meno'
+  | 'meno_priezvisko'
   | 'r007_ulica'
   | 'r008_cislo'
   | 'r009_psc'

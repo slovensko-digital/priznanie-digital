@@ -7,7 +7,7 @@
 
 import { UserInput } from '../../src/types/UserInput';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
-import { setDate } from '../../src/lib/utils';
+import { formatCurrency, setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
 import { Route, PostponeRoute } from '../../src/lib/routes';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
@@ -163,8 +163,7 @@ describe('Cases', function() {
 
           typeToInput('r001_dic', input);
           typeToInput('r003_nace', input);
-          typeToInput('r004_priezvisko', input);
-          typeToInput('r005_meno', input);
+          typeToInput('meno_priezvisko', input);
           typeToInput('r007_ulica', input);
           typeToInput('r008_cislo', input);
           typeToInput('r009_psc', input);
@@ -177,6 +176,10 @@ describe('Cases', function() {
           assertUrl('/vysledky');
 
           cy.contains('XML');
+
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseFloat(input.t1r10_prijmy)),
+          );
 
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)
