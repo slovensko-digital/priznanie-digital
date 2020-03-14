@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
 import { EmailForm } from '../../components/EmailForm';
 
-const { previousRoute } = getPostponeRoutes('/odklad/suhrn');
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn');
 
 interface Props {
   postponeUserInput: PostponeUserInput;
 }
-const Vysledky: NextPage<Props> = ({ postponeUserInput }: Props) => {
+const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(nextRoute);
+  });
+
   return (
     <>
       <Link href={previousRoute}>
@@ -97,8 +104,14 @@ const Vysledky: NextPage<Props> = ({ postponeUserInput }: Props) => {
       </table>
 
       <EmailForm name={postponeUserInput.meno_priezvisko} />
+
+      <Link href={nextRoute}>
+        <button className="govuk-button" type="button">
+          Pokračovať
+        </button>
+      </Link>
     </>
   );
 };
 
-export default Vysledky;
+export default Suhrn;

@@ -47,7 +47,7 @@ export const EmailForm = ({ name }: EmailFormProps) => {
         setSavingInProgress(false);
       }}
     >
-      <Form className={styles.newsletterFormWrapper}>
+      <Form className="box">
         <Input
           name="email"
           type="email"
