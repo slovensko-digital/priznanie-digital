@@ -3,13 +3,9 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import classNames from 'classnames';
 import styles from './EmailForm.module.css';
-import { Checkbox, Input } from './FormComponents';
+import { CheckboxSmall, Input } from './FormComponents';
 import { saveEmail } from '../lib/api';
-
-interface EmailFormFields {
-  email: string;
-  newsletter: boolean;
-}
+import { EmailUserInput } from '../types/UserInput';
 
 export interface EmailFormProps {
   name: string;
@@ -36,7 +32,7 @@ export const EmailForm = ({ name }: EmailFormProps) => {
   }
 
   return (
-    <Formik<EmailFormFields>
+    <Formik<EmailUserInput>
       initialValues={{ email: '', newsletter: false }}
       validationSchema={validationSchema}
       onSubmit={async values => {
@@ -54,7 +50,7 @@ export const EmailForm = ({ name }: EmailFormProps) => {
           label="Chcete dostať upozornenie o novom termíne podania?"
           hint="Nechajte nám email a my vám včas pošleme notifikáciu"
         />
-        <Checkbox
+        <CheckboxSmall
           name="newsletter"
           label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
         />
@@ -79,7 +75,7 @@ export const EmailForm = ({ name }: EmailFormProps) => {
   );
 };
 
-const validationSchema = Yup.object().shape<EmailFormFields>({
+const validationSchema = Yup.object().shape<EmailUserInput>({
   email: Yup.string()
     .required('Zadajte email')
     .email('Nesprávny formát'),
