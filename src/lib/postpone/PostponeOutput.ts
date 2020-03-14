@@ -39,7 +39,6 @@ interface RodneCislo {
   rcZaLom: string;
 }
 
-
 interface Sidlo {
   psc: string;
   obec: string;

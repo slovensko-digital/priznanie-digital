@@ -7,11 +7,16 @@ import { Debug } from './Debug';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 interface Props {
+  headline: string;
   children: React.ReactNode;
   taxFormUserInput: TaxFormUserInput;
 }
 
-const Layout: React.FC<Props> = ({ children, taxFormUserInput }: Props) => (
+const Layout: React.FC<Props> = ({
+  headline,
+  children,
+  taxFormUserInput,
+}: Props) => (
   <div className="container">
     <Head>
       <title>priznanie.digital</title>
@@ -20,9 +25,7 @@ const Layout: React.FC<Props> = ({ children, taxFormUserInput }: Props) => (
     <div className="sdn-headline">
       <div className="sdn-headline__container govuk-width-container">
         <div className="sdn-headline__part">
-          <span className="sdn-headline__headline">
-            Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)
-          </span>
+          <span className="sdn-headline__headline">{headline}</span>
         </div>
       </div>
     </div>

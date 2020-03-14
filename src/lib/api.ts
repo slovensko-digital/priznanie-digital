@@ -11,7 +11,7 @@ export const getCity = async (zip: string) => {
 export const getAutoformByPersonName = async (
   name: string,
 ): Promise<AutoformResponseBody[]> => {
-  return fetch(`api/autoform?name=${name}`).then(async response =>
+  return fetch(`/api/autoform?name=${name}`).then(async response =>
     response.json(),
   );
 

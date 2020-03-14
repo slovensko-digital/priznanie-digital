@@ -96,12 +96,13 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               className="govuk-radios__input"
               type="radio"
               data-test={`${field.name}-input-yes`}
-              checked={field.value}
+              id={`${field.name}-input-yes`}
+              checked={field.value === true}
               onChange={() => helpers.setValue(true)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-yes`}
             >
               Áno
             </label>
@@ -112,13 +113,14 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               {...props}
               className="govuk-radios__input"
               data-test={`${field.name}-input-no`}
+              id={`${field.name}-input-no`}
               type="radio"
-              checked={field.value === undefined ? false : !field.value}
+              checked={field.value === false}
               onChange={() => helpers.setValue(false)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-no`}
             >
               Nie
             </label>

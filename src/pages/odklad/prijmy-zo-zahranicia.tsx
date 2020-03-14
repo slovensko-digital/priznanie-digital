@@ -6,20 +6,23 @@ import { NextPage } from 'next';
 import { BooleanRadio } from '../../components/FormComponents';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
+import { IncomeSourceCountryUserInput } from '../../types/PageUserInputs';
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
 );
 
 interface Props {
-  setPostponeUserInput: React.Dispatch<React.SetStateAction<PostponeUserInput>>;
-  // postponeUserInput: PostponeUserInput;
+  setPostponeUserInput: React.Dispatch<
+    React.SetStateAction<IncomeSourceCountryUserInput>
+  >;
+  postponeUserInput: PostponeUserInput;
 }
 
 const PrijmyZoZahranicia: NextPage<Props> = ({
   setPostponeUserInput,
-}: // postponeUserInput,
-Props) => {
+  postponeUserInput,
+}: Props) => {
   const router = useRouter();
   useEffect(() => {
     router.prefetch(nextRoute);
@@ -31,8 +34,8 @@ Props) => {
           Späť
         </a>
       </Link>
-      <Formik<PostponeUserInput>
-        initialValues={{ prijmyZoZahranicia: undefined }}
+      <Formik<IncomeSourceCountryUserInput>
+        initialValues={postponeUserInput}
         validate={validate}
         onSubmit={values => {
           setPostponeUserInput(values);
@@ -44,11 +47,19 @@ Props) => {
             <BooleanRadio
               title="Mali ste v roku 2019 príjem zo zahraničia?"
               hint="Rozhodujúcim faktorom pre posúdenie príjmu zo živnosti je územie, na ktorom ste činnosť fyzicky vykonávali, nie štátna príslušnosť či adresa druhej strany a zároveň dátum, kedy vám bola odmena pripísaná na váš účet, nie dátum dodania alebo vystavenia faktúry."
-              name="prijmyZoZahranicia"
+              name="prijmy_zo_zahranicia"
             />
-            {values.prijmyZoZahranicia && (
+            {values.prijmy_zo_zahranicia !== undefined && (
               <>
-                <p>Nový termín pre podanie daňového priznania je 30.9.2020.</p>
+                <p>
+                  Nový termín pre podanie daňového priznania je{' '}
+                  <strong>
+                    {values.prijmy_zo_zahranicia
+                      ? '30. septembra 2020'
+                      : '30. júna 2020'}
+                  </strong>
+                  .
+                </p>
                 <p>
                   Samozrejme, priznanie môžete podať aj skôr, tento termín je
                   však záväzný a posledný možný. Odporúčame vám si ho poznačiť.
@@ -70,8 +81,8 @@ Props) => {
 const validate = (values: PostponeUserInput): Partial<PostponeUserInput> => {
   const errors: any = {};
 
-  if (typeof values.prijmyZoZahranicia === 'undefined') {
-    errors.prijmyZoZahranicia = 'Vyznačte jednu z moznosti';
+  if (values.prijmy_zo_zahranicia === undefined) {
+    errors.prijmy_zo_zahranicia = 'Vyznačte jednu z moznosti';
   }
 
   return errors;

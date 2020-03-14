@@ -52,7 +52,10 @@ export default () => (
 
     <div className="govuk-grid-column-full">
       <Link href={nextPostponeRoute}>
-        <button type="button" className="btn-secondary govuk-button">
+        <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+        >
           Odložiť daňové priznanie
         </button>
       </Link>
