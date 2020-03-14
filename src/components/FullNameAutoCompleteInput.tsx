@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../pages/osobne-udaje.module.css';
+import styles from './FullNameAutoCompleteInput.module.css';
 import { Input } from './FormComponents';
 import { getAutoformByPersonName } from '../lib/api';
 import { AutoformResponseBody } from '../types/api';
@@ -16,6 +16,7 @@ export const FullNameAutoCompleteInput = ({
   const [autoformPersons, setAutoFormPersons] = useState<
     AutoformResponseBody[]
   >([]);
+  const [isLoadingAutoform, setIsLoadingAutoform] = useState<boolean>(false);
   const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false);
   const [
     autocompleteDebounceTimeout,
@@ -28,10 +29,12 @@ export const FullNameAutoCompleteInput = ({
 
   const handleAutoform = async (name: string) => {
     if (name.length > 2) {
+      setIsLoadingAutoform(true);
       const personsData = await getAutoformByPersonName(name);
       if (personsData) {
         setAutoFormPersons(personsData);
       }
+      setIsLoadingAutoform(false);
     }
   };
 
@@ -99,6 +102,7 @@ export const FullNameAutoCompleteInput = ({
           label="Meno a priezvisko"
           width="auto"
           autoComplete="12iubu312b3"
+          className={isLoadingAutoform ? styles.autocompleteFieldLoading : ''}
           onChange={event => {
             handleChange(event);
             debounceAutoform(event.currentTarget.value);
