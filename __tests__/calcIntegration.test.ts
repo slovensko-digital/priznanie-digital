@@ -5,8 +5,14 @@ import { parseStringPromise } from 'xml2js';
 import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 import { calculate } from '../src/lib/calculation';
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
+import { PostponeOutput } from '../src/lib/postpone/PostponeOutput';
+import { PostponeUserInput } from '../src/types/PostponeUserInput';
+import {
+  convertPostponeToXML,
+  convertPostponeToJson,
+} from '../src/lib/postpone/postponeConverter';
 
-const WRITE_FILES = false;
+const WRITE_FILES = true;
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true });
@@ -50,6 +56,39 @@ describe('calcIntergration', () => {
         fs.writeFile(
           `${__dirname}/testCases/${testCase}.output.json`,
           stringify(outputJson),
+        );
+      }
+
+      const result = await comparable(outputXml);
+      const expected = await comparable(testCaseValidatedXML.toString());
+
+      return expect(result).toStrictEqual(expected);
+    });
+  });
+});
+
+describe.only('postpone', () => {
+  ['basic'].forEach(testCase => {
+    test(testCase, async () => {
+      const testCaseValidatedXML = await fs.readFile(
+        `${__dirname}/testCases/postpone/${testCase}.xml`,
+      );
+
+      const inputModule = await import(`./testCases/postpone/${testCase}Input`);
+
+      // Access named export
+      const input: PostponeUserInput = inputModule[`${testCase}Input`];
+
+      const outputXml = convertPostponeToXML(input);
+
+      if (WRITE_FILES) {
+        fs.writeFile(
+          `${__dirname}/testCases/postpone/${testCase}.output.json`,
+          stringify(convertPostponeToJson(input)),
+        );
+        fs.writeFile(
+          `${__dirname}/testCases/postpone/${testCase}.output.xml`,
+          outputXml,
         );
       }
 
