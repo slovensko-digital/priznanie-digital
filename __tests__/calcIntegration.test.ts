@@ -5,14 +5,13 @@ import { parseStringPromise } from 'xml2js';
 import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter';
 import { calculate } from '../src/lib/calculation';
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
-import { PostponeOutput } from '../src/lib/postpone/PostponeOutput';
 import { PostponeUserInput } from '../src/types/PostponeUserInput';
 import {
   convertPostponeToXML,
   convertPostponeToJson,
 } from '../src/lib/postpone/postponeConverter';
 
-const WRITE_FILES = true;
+const WRITE_FILES = false;
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true });
@@ -67,8 +66,8 @@ describe('calcIntergration', () => {
   });
 });
 
-describe.only('postpone', () => {
-  ['basic'].forEach(testCase => {
+describe('postpone', () => {
+  ['basic', 'foreignIncome'].forEach(testCase => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/postpone/${testCase}.xml`,

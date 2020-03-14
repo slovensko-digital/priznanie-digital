@@ -24,6 +24,18 @@ export function convertPostponeToJson(
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec;
   form.dokument.hlavicka.sidlo.stat = postponeUserInput.stat;
 
+  form.dokument.hlavicka.novaLehota.predlzenie493a = postponeUserInput.prijmy_zo_zahranicia
+    ? '0'
+    : '1';
+
+  form.dokument.hlavicka.novaLehota.predlzenie493b = postponeUserInput.prijmy_zo_zahranicia
+    ? '1'
+    : '0';
+
+  form.dokument.hlavicka.novaLehota.datumLehota = postponeUserInput.prijmy_zo_zahranicia
+    ? '30.09.2020'
+    : '30.06.2020';
+
   form.dokument.hlavicka.vypracoval.dna = postponeUserInput.datum;
 
   return form;
