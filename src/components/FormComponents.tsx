@@ -1,7 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { UserInput } from '../types/UserInput';
 
 interface InputProps<Name> {
@@ -9,13 +8,13 @@ interface InputProps<Name> {
   label: string;
   hint?: string;
   className?: string;
-  type: 'text' | 'number';
+  type: 'text' | 'number' | 'email';
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
 }
 
 export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
 
-export const Input = <Name extends keyof TaxFormUserInput>({
+export const Input = <Name extends keyof UserInput>({
   label,
   hint,
   width = 20,
@@ -142,7 +141,7 @@ interface BooleanRadioProps<Name> {
   label?: string;
   hint?: string;
 }
-export const Checkbox = <Name extends keyof TaxFormUserInput>({
+export const Checkbox = <Name extends keyof UserInput>({
   title,
   hint,
   label,

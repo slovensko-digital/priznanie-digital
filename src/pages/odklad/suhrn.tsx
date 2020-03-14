@@ -57,7 +57,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">DIČ</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.r001_dic}
+              {postponeUserInput.dic}
             </td>
           </tr>
           <tr className="govuk-table__row">
@@ -81,23 +81,15 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">
-            <td className="govuk-table__cell govuk-!-width-one-half">
-              Ulica a súpisné číslo
-            </td>
-            <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.r007_ulica} {postponeUserInput.r008_cislo}
-            </td>
-          </tr>
-          <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">PSČ</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.r009_psc}
+              {postponeUserInput.psc}
             </td>
           </tr>
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">Obec</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.r010_obec}
+              {postponeUserInput.obec}
             </td>
           </tr>
         </tbody>
