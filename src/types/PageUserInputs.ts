@@ -1,4 +1,5 @@
 import { TaxFormUserInput } from './TaxFormUserInput';
+import { PostponeUserInput } from './PostponeUserInput';
 
 export type IncomeAndExpenseUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
@@ -25,13 +26,24 @@ export type PartnerUserInput<T = string> = Pick<
   | 'r033_partner_kupele'
   | 'r033_partner_kupele_uhrady'
 >;
+
 export type PersonalInformationUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   | 'r001_dic'
   // | "r002_datum_narodenia"
   | 'r003_nace'
-  | 'r004_priezvisko'
-  | 'r005_meno'
+  | 'meno_priezvisko'
+  | 'r007_ulica'
+  | 'r008_cislo'
+  | 'r009_psc'
+  | 'r010_obec'
+  | 'r011_stat'
+>;
+
+export type PersonalInformationUserInputWithoutNace = Pick<
+  PostponeUserInput,
+  | 'r001_dic'
+  | 'meno_priezvisko'
   | 'r007_ulica'
   | 'r008_cislo'
   | 'r009_psc'
@@ -47,4 +59,9 @@ export type PensionUserInput<T = string> = Pick<
 export type MortgageUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
+>;
+
+export type IncomeSourceCountryUserInput = Pick<
+  PostponeUserInput,
+  'prijmy_zo_zahranicia'
 >;

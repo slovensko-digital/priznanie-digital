@@ -10,7 +10,7 @@ interface InputProps<Name> {
   hint?: string;
   className?: string;
   type: 'text' | 'number';
-  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2;
+  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
 }
 
 export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
@@ -59,7 +59,9 @@ export const Input = <Name extends keyof TaxFormUserInput>({
       ) : null}
       <input
         id={props.name}
-        className={classnames(['govuk-input', `govuk-input--width-${width}`])}
+        className={classnames('govuk-input', {
+          [`govuk-input--width-${width}`]: width !== 'auto',
+        })}
         data-test={`${field.name}-input`}
         {...getNumberInputProps()}
         {...field}
@@ -94,12 +96,13 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               className="govuk-radios__input"
               type="radio"
               data-test={`${field.name}-input-yes`}
-              checked={field.value}
+              id={`${field.name}-input-yes`}
+              checked={field.value === true}
               onChange={() => helpers.setValue(true)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-yes`}
             >
               Áno
             </label>
@@ -110,13 +113,14 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               {...props}
               className="govuk-radios__input"
               data-test={`${field.name}-input-no`}
+              id={`${field.name}-input-no`}
               type="radio"
-              checked={field.value === undefined ? false : !field.value}
+              checked={field.value === false}
               onChange={() => helpers.setValue(false)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-no`}
             >
               Nie
             </label>

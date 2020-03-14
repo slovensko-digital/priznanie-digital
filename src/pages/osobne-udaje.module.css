@@ -1,6 +1,3 @@
-.clickable {
-  cursor: pointer;
-}
 .inlineFieldContainer {
   display: flex;
   flex-direction: row;

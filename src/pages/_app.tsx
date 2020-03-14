@@ -12,9 +12,13 @@ import { calculate } from '../lib/calculation';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
 import Layout from '../components/Layout';
-import { initTaxFormUserInputValues } from '../lib/initialValues';
+import {
+  initialPostponeUserInput,
+  initTaxFormUserInputValues,
+} from '../lib/initialValues';
 import { setDate } from '../lib/utils';
 import { PostponeUserInput } from '../types/PostponeUserInput';
+import { useRouter } from 'next/router';
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -39,7 +43,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     initTaxFormUserInputValues,
   );
   const [postponeUserInput, setPostponeUserInput] = useState<PostponeUserInput>(
-    { prijmyZoZahranicia: undefined },
+    initialPostponeUserInput,
   );
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
@@ -50,8 +54,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     });
   };
 
+  const { pathname } = useRouter();
+
+  const headline = /^\/odklad\//.test(pathname)
+    ? 'Odklad daňového priznania'
+    : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
+
   return (
-    <Layout taxFormUserInput={taxFormUserInput}>
+    <Layout headline={headline} taxFormUserInput={taxFormUserInput}>
       <Component
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
