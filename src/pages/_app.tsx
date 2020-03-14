@@ -7,6 +7,7 @@ import '../styles/libs.css';
 /* eslint-enable import/no-unassigned-import */
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { setLocale } from 'yup';
 import { calculate } from '../lib/calculation';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
@@ -18,7 +19,6 @@ import {
 } from '../lib/initialValues';
 import { setDate } from '../lib/utils';
 import { PostponeUserInput } from '../types/PostponeUserInput';
-import { useRouter } from 'next/router';
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({

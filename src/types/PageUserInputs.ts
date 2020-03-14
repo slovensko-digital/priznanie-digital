@@ -59,3 +59,5 @@ export type IncomeSourceCountryUserInput = Pick<
   PostponeUserInput,
   'prijmy_zo_zahranicia'
 >;
+
+export type FormErrors<FormInput extends {}> = Record<keyof FormInput, string>;

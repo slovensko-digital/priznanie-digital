@@ -34,13 +34,17 @@ export type PostponeRoute =
   | '/'
   | '/odklad/prijmy-zo-zahranicia'
   | '/odklad/osobne-udaje'
-  | '/odklad/suhrn';
+  | '/odklad/suhrn'
+  | '/odklad/stiahnut'
+  | '/odklad/navod';
 
 const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
   '/',
   '/odklad/prijmy-zo-zahranicia',
   '/odklad/osobne-udaje',
   '/odklad/suhrn',
+  '/odklad/stiahnut',
+  '/odklad/navod',
 ];
 
 export const getPostponeRoutes = (currentRoute: PostponeRoute) => {

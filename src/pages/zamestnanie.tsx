@@ -8,7 +8,7 @@ import {
   Input,
   numberInputRegexp,
 } from '../components/FormComponents';
-import { EmployedUserInput } from '../types/PageUserInputs';
+import { EmployedUserInput, FormErrors } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 
@@ -72,8 +72,8 @@ const Zamestnanie: NextPage<Props> = ({
   );
 };
 
-const validate = (values: EmployedUserInput): any => {
-  const errors: any = {};
+const validate = (values: EmployedUserInput) => {
+  const errors: Partial<FormErrors<EmployedUserInput>> = {};
 
   if (typeof values.employed === 'undefined') {
     errors.employed = 'TODO';
