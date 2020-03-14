@@ -17,6 +17,9 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
   useEffect(() => {
     router.prefetch(nextRoute);
   });
+  const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
+    .split(' ')
+    .map(v => v.trim());
 
   return (
     <>
@@ -63,7 +66,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">Meno</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.meno_priezvisko}
+              {firstName}
             </td>
           </tr>
           <tr className="govuk-table__row">
@@ -71,7 +74,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
               Priezvisko
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.meno_priezvisko}
+              {lastNames.join(' ')}
             </td>
           </tr>
         </tbody>
