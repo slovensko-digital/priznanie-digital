@@ -239,9 +239,11 @@ describe.only('Postpone cases', function() {
 
     getError();
 
-    getInput('prijmyZoZahranicia', '-yes').click();
+    getInput('prijmy_zo_zahranicia', '-yes').click();
 
-    cy.contains('Nový termín pre podanie daňového priznania je 30.9.2020.');
+    cy.contains(
+      'Nový termín pre podanie daňového priznania je 30. septembra 2020.',
+    );
     next();
   });
 });
