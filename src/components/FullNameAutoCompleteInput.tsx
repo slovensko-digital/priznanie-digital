@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import styles from './FullNameAutoCompleteInput.module.css';
 import { Input } from './FormComponents';
 import { getAutoformByPersonName } from '../lib/api';
 import { AutoformResponseBody } from '../types/api';
-import classNames from 'classnames';
 
 export interface FullNameAutoCompleteInput {
   handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -131,6 +131,9 @@ export const FullNameAutoCompleteInput = ({
                   setSelectedPersonIndex(-1);
                 }}
                 onMouseOver={() => {
+                  setSelectedPersonIndex(index);
+                }}
+                onFocus={() => {
                   setSelectedPersonIndex(index);
                 }}
               >

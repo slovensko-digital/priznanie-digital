@@ -6,7 +6,10 @@ import { NextPage } from 'next';
 import { BooleanRadio } from '../../components/FormComponents';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { IncomeSourceCountryUserInput } from '../../types/PageUserInputs';
+import {
+  FormErrors,
+  IncomeSourceCountryUserInput,
+} from '../../types/PageUserInputs';
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
@@ -78,8 +81,8 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
   );
 };
 
-const validate = (values: PostponeUserInput): Partial<PostponeUserInput> => {
-  const errors: any = {};
+const validate = (values: IncomeSourceCountryUserInput) => {
+  const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {};
 
   if (values.prijmy_zo_zahranicia === undefined) {
     errors.prijmy_zo_zahranicia = 'Vyznačte jednu z moznosti';

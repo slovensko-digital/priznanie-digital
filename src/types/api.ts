@@ -39,5 +39,3 @@ export interface PSCResponseBody {
   addresses: never[];
   offices?: Offices[];
 }
-
-export interface NewsletterResponse {}

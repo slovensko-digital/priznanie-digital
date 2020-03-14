@@ -34,7 +34,9 @@ const makeHandlePersonAutoform = ({
 };
 
 interface Props {
-  setPostponeUserInput: (values: PostponeUserInput) => void;
+  setPostponeUserInput: (
+    values: PersonalInformationUserInputWithoutNace,
+  ) => void;
   postponeUserInput: PostponeUserInput;
 }
 const OsobneUdaje: NextPage<Props> = ({
