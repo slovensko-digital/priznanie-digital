@@ -83,11 +83,11 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
 
 export const initialPostponeUserInput: PostponeUserInput = {
   prijmy_zo_zahranicia: undefined,
-  r001_dic: '',
+  dic: '',
   meno_priezvisko: '',
-  r007_ulica: '',
-  r008_cislo: '',
-  r009_psc: '',
-  r010_obec: '',
-  r011_stat: '',
+  psc: '',
+  obec: '',
+  stat: '',
+  rodne_cislo: '',
+  datum: '',
 };

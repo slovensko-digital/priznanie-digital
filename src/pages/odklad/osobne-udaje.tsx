@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { NextPage } from 'next';
 import { Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
-import { PersonalInformationUserInputWithoutNace } from '../../types/PageUserInputs';
+import { PersonalInformationPostpone } from '../../types/PageUserInputs';
 import { getCity } from '../../lib/api';
 import { AutoformResponseBody } from '../../types/api';
 import { getPostponeRoutes } from '../../lib/routes';
@@ -18,23 +18,21 @@ const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
 const makeHandlePersonAutoform = ({
   setValues,
   values,
-}: FormikProps<PersonalInformationUserInputWithoutNace>) => {
+}: FormikProps<PersonalInformationPostpone>) => {
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
       meno_priezvisko: person.name,
-      r001_dic: person?.tin ?? '',
-      r007_ulica: person.street ?? person.municipality,
-      r008_cislo: person.street_number,
-      r009_psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
-      r010_obec: person.municipality,
-      r011_stat: person.country,
+      dic: person?.tin ?? '',
+      psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
+      obec: person.municipality,
+      stat: person.country,
     });
   };
 };
 
 interface Props {
-  setPostponeUserInput: (values: PostponeUserInput) => void;
+  setPostponeUserInput: (values: PersonalInformationPostpone) => void;
   postponeUserInput: PostponeUserInput;
 }
 const OsobneUdaje: NextPage<Props> = ({
@@ -54,7 +52,7 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationUserInputWithoutNace>
+      <Formik<PersonalInformationPostpone>
         initialValues={postponeUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -142,18 +140,14 @@ const OsobneUdaje: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<
-  PersonalInformationUserInputWithoutNace
->({
-  r001_dic: Yup.string()
+const validationSchema = Yup.object().shape<PersonalInformationPostpone>({
+  dic: Yup.string()
     .required()
     .min(9)
     .max(10),
   meno_priezvisko: Yup.string().required(),
-  r007_ulica: Yup.string().required(),
-  r008_cislo: Yup.string().required(),
-  r009_psc: Yup.string().required(),
-  r010_obec: Yup.string().required(),
-  r011_stat: Yup.string().required(),
+  psc: Yup.string().required(),
+  obec: Yup.string().required(),
+  stat: Yup.string().required(),
 });
 export default OsobneUdaje;
