@@ -16,9 +16,7 @@ interface Hlavicka {
   zaRok: string;
   dovodDoplnenia: string;
   fyzickaOsoba: FyzickaOsoba;
-  // pravnickaOsoba: PravnickaOsoba;
   sidlo: Sidlo;
-  // adresaSr: any;
   novaLehota: NovaLehota;
   vypracoval: Vypracoval;
   podpis: string;
@@ -29,10 +27,6 @@ interface NovaLehota {
   predlzenie493b: string;
   datumLehota: string;
 }
-
-// interface PravnickaOsoba {
-//   obchodneMeno: any;
-// }
 
 interface RodneCislo {
   rcPredLom: string;
