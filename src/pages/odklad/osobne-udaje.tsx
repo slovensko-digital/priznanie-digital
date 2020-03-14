@@ -76,14 +76,14 @@ const OsobneUdaje: NextPage<Props> = ({
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r001_dic"
+                name="dic"
                 type="text"
                 label="DIČ"
               />
             </div>
 
             <h2>Adresa trvalého pobytu</h2>
-            <div className={styles.inlineFieldContainer}>
+            {/* <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
                 name="r007_ulica"
@@ -96,17 +96,17 @@ const OsobneUdaje: NextPage<Props> = ({
                 type="text"
                 label="Súpisné/orientačné číslo"
               />
-            </div>
+            </div> */}
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r009_psc"
+                name="psc"
                 type="text"
                 label="PSČ"
                 onBlur={event => {
                   props.handleBlur(event);
                   const pscValue = event.target.value;
-                  props.setFieldValue('r009_psc', pscValue.replace(/\D/g, ''));
+                  props.setFieldValue('psc', pscValue.replace(/\D/g, ''));
                 }}
                 onChange={async event => {
                   props.handleChange(event);
@@ -115,20 +115,20 @@ const OsobneUdaje: NextPage<Props> = ({
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
-                    props.setFieldValue('r010_obec', city);
+                    props.setFieldValue('obec', city);
                   }
                 }}
               />
 
               <Input
                 className={styles.inlineField}
-                name="r010_obec"
+                name="obec"
                 type="text"
                 label="Obec"
               />
             </div>
 
-            <Input name="r011_stat" type="text" label="Štát" />
+            <Input name="stat" type="text" label="Štát" />
 
             <button className="govuk-button" type="submit">
               Pokračovať
