@@ -235,7 +235,7 @@ describe('Results page', function() {
   });
 });
 
-describe.only('/odklad/osobne-udaje page', function() {
+describe('/odklad/osobne-udaje page', function() {
   it('Back and next', function() {
     cy.visit('/odklad/osobne-udaje');
 
@@ -250,7 +250,7 @@ describe.only('/odklad/osobne-udaje page', function() {
     next();
     getError();
   });
-  it.only('with autoform', function() {
+  it('with autoform', function() {
     cy.visit('/odklad/osobne-udaje');
 
     /** With autoform */
@@ -268,27 +268,36 @@ describe.only('/odklad/osobne-udaje page', function() {
     getInputPostpone('psc').should('contain.value', '82105');
     getInputPostpone('obec').should('contain.value', 'Bratislava');
     getInputPostpone('stat').should('contain.value', 'Slovenská republika');
-
-    next();
   });
   it('with posta api', function() {
-    cy.visit('/osobne-udaje');
+    cy.visit('/odklad/osobne-udaje');
 
     typeToInputPostpone('psc', foreignIncomeInput);
     getInputPostpone('obec').should('have.value', foreignIncomeInput.obec);
   });
   it('Manual entry', function() {
-    cy.visit('/osobne-udaje');
+    cy.visit('/odklad/osobne-udaje');
 
     /** With autoform */
     typeToInputPostpone('dic', foreignIncomeInput);
     typeToInputPostpone('meno_priezvisko', foreignIncomeInput);
     typeToInputPostpone('ulica', foreignIncomeInput);
     typeToInputPostpone('cislo', foreignIncomeInput);
-    typeToInputPostpone('psc', foreignIncomeInput);
     typeToInputPostpone('obec', foreignIncomeInput);
+    typeToInputPostpone('psc', foreignIncomeInput);
     typeToInputPostpone('stat', foreignIncomeInput);
+  });
+});
 
-    next();
+describe('/odklad/suhrn page', function() {
+  it('Back', function() {
+    cy.visit('/odklad/suhrn');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/odklad/osobne-udaje');
+  });
+  it.only('Back', function() {
+    cy.visit('/odklad/suhrn');
   });
 });
