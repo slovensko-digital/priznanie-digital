@@ -16,7 +16,10 @@ function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
-function typeToInput<K extends keyof UserInput>(key: K, userInput: UserInput) {
+function typeToInput<K extends keyof UserInput>(
+  key: K,
+  userInput: Partial<UserInput>,
+) {
   const value = userInput[key];
   if (typeof value === 'string') {
     return getInput(key).type(value);
@@ -228,7 +231,7 @@ describe('Cases', function() {
   });
 });
 
-describe.only('Postpone cases', function() {
+describe('Postpone cases', function() {
   it('Postpones', function() {
     cy.visit('/');
 
