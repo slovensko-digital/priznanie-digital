@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { NextPage } from 'next';
+import classnames from 'classnames';
 import { Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
 import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
@@ -65,6 +66,17 @@ const OsobneUdaje: NextPage<Props> = ({
         {props => (
           <Form className="form">
             <h2>Údaje o daňovníkovi</h2>
+
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="dic"
+                type="text"
+                label="DIČ"
+                width={10}
+              />
+            </div>
+
             <p>
               Údaje môžete vyhladať a automaticky vyplniť podľa mena a
               priezviska.
@@ -75,42 +87,32 @@ const OsobneUdaje: NextPage<Props> = ({
               handleChange={props.handleChange}
             />
 
-            <div className={styles.inlineFieldContainer}>
-              <Input
-                className={styles.inlineField}
-                name="dic"
-                type="text"
-                label="DIČ"
-              />
-              {/* <Input
-                className={styles.inlineField}
-                name="rodne_cislo"
-                type="text"
-                label="Rodné číslo"
-              /> */}
-            </div>
-
             <h2>Adresa trvalého pobytu</h2>
             <div className={styles.inlineFieldContainer}>
               <Input
-                className={styles.inlineField}
                 name="ulica"
                 type="text"
                 label="Ulica"
+                width="auto"
+                className={classnames(
+                  styles.flexGrow,
+                  'govuk-!-margin-right-5',
+                )}
               />
               <Input
-                className={styles.inlineField}
                 name="cislo"
                 type="text"
                 label="Súpisné/orientačné číslo"
+                width="auto"
               />
             </div>
             <div className={styles.inlineFieldContainer}>
               <Input
-                className={styles.inlineField}
+                className="govuk-!-margin-right-5"
                 name="psc"
                 type="text"
                 label="PSČ"
+                width={5}
                 onBlur={event => {
                   props.handleBlur(event);
                   const pscValue = event.target.value;
@@ -129,14 +131,15 @@ const OsobneUdaje: NextPage<Props> = ({
               />
 
               <Input
-                className={styles.inlineField}
                 name="obec"
                 type="text"
                 label="Obec"
+                width="auto"
+                className={styles.flexGrow}
               />
             </div>
 
-            <Input name="stat" type="text" label="Štát" />
+            <Input name="stat" type="text" label="Štát" width={10} />
 
             <button className="govuk-button" type="submit">
               Pokračovať
@@ -153,8 +156,7 @@ const OsobneUdaje: NextPage<Props> = ({
 const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
   dic: Yup.string()
     .required()
-    .min(9)
-    .max(10),
+    .length(10),
   meno_priezvisko: Yup.string().required(),
   psc: Yup.string().required(),
   // rodne_cislo: Yup.string()

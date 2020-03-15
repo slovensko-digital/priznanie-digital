@@ -7,10 +7,18 @@
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
+import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
-import { Route } from '../../src/lib/routes';
+import { Route, PostponeRoute } from '../../src/lib/routes';
+import { PostponeUserInput } from '../../src/types/PostponeUserInput';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
+  return cy.get(`[data-test="${key}-input${suffix}"]`);
+}
+function getInputPostpone<K extends keyof PostponeUserInput>(
+  key: K,
+  suffix = '',
+) {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
@@ -25,12 +33,23 @@ function typeToInput<K extends keyof TaxFormUserInput>(
   throw new Error(`Incorrect type of input: ${value}`);
 }
 
+function typeToInputPostpone<K extends keyof PostponeUserInput>(
+  key: K,
+  userInput: PostponeUserInput,
+) {
+  const value = userInput[key];
+  if (typeof value === 'string') {
+    return getInputPostpone(key).type(value);
+  }
+  throw new Error(`Incorrect type of input: ${value}`);
+}
+
 function next() {
   return cy.contains('Pokračovať').click();
 }
 
 const getError = () => cy.get('[data-test=error]');
-function assertUrl(url: Route) {
+function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url);
 }
 
@@ -213,5 +232,63 @@ describe('Results page', function() {
 
     cy.get('h1').contains('Výpočet dane za rok');
     cy.get('h2').contains('Stručný prehľad');
+  });
+});
+
+describe.only('/odklad/osobne-udaje page', function() {
+  it('Back and next', function() {
+    cy.visit('/odklad/osobne-udaje');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+
+    //  Go back to our page
+    cy.visit('/odklad/osobne-udaje');
+
+    // Shows error, when presses next without interaction
+    next();
+    getError();
+  });
+  it.only('with autoform', function() {
+    cy.visit('/odklad/osobne-udaje');
+
+    /** With autoform */
+    typeToInputPostpone('dic', foreignIncomeInput);
+    getInputPostpone('meno_priezvisko').type('Július Ret');
+
+    cy.contains('Július Retzer').click();
+
+    getInputPostpone('meno_priezvisko').should(
+      'contain.value',
+      'Július Retzer',
+    );
+    getInputPostpone('ulica').should('contain.value', 'Mierová');
+    getInputPostpone('cislo').should('contain.value', '4');
+    getInputPostpone('psc').should('contain.value', '82105');
+    getInputPostpone('obec').should('contain.value', 'Bratislava');
+    getInputPostpone('stat').should('contain.value', 'Slovenská republika');
+
+    next();
+  });
+  it('with posta api', function() {
+    cy.visit('/osobne-udaje');
+
+    typeToInputPostpone('psc', foreignIncomeInput);
+    getInputPostpone('obec').should('have.value', foreignIncomeInput.obec);
+  });
+  it('Manual entry', function() {
+    cy.visit('/osobne-udaje');
+
+    /** With autoform */
+    typeToInputPostpone('dic', foreignIncomeInput);
+    typeToInputPostpone('meno_priezvisko', foreignIncomeInput);
+    typeToInputPostpone('ulica', foreignIncomeInput);
+    typeToInputPostpone('cislo', foreignIncomeInput);
+    typeToInputPostpone('psc', foreignIncomeInput);
+    typeToInputPostpone('obec', foreignIncomeInput);
+    typeToInputPostpone('stat', foreignIncomeInput);
+
+    next();
   });
 });
