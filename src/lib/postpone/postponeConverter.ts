@@ -22,6 +22,8 @@ export function convertPostponeToJson(
 
   form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc;
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec;
+  form.dokument.hlavicka.sidlo.ulica = postponeUserInput.ulica;
+  form.dokument.hlavicka.sidlo.supisneOrientacneCislo = postponeUserInput.cislo;
   form.dokument.hlavicka.sidlo.stat = postponeUserInput.stat;
 
   form.dokument.hlavicka.novaLehota.predlzenie493a = postponeUserInput.prijmy_zo_zahranicia

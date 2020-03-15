@@ -61,7 +61,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
       )}
 
       <Link href={nextRoute}>
-        <button className="govuk-button" disabled={!didDownload}>
+        <button className="govuk-button" disabled={!didDownload} type="button">
           Pokračovať
         </button>
       </Link>

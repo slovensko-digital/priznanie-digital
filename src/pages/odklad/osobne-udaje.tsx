@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { NextPage } from 'next';
 import { Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
-import { PersonalInformationPostpone } from '../../types/PageUserInputs';
+import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
 import { getCity } from '../../lib/api';
 import { AutoformResponseBody } from '../../types/api';
 import { getPostponeRoutes } from '../../lib/routes';
@@ -18,12 +18,14 @@ const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
 const makeHandlePersonAutoform = ({
   setValues,
   values,
-}: FormikProps<PersonalInformationPostpone>) => {
+}: FormikProps<PersonalInformationPostponePage>) => {
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
       meno_priezvisko: person.name,
       dic: person?.tin ?? '',
+      ulica: person.street ?? person.municipality,
+      cislo: person.street_number,
       psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
       obec: person.municipality,
       stat: person.country,
@@ -32,7 +34,7 @@ const makeHandlePersonAutoform = ({
 };
 
 interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostpone) => void;
+  setPostponeUserInput: (values: PersonalInformationPostponePage) => void;
   postponeUserInput: PostponeUserInput;
 }
 const OsobneUdaje: NextPage<Props> = ({
@@ -52,7 +54,7 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationPostpone>
+      <Formik<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -83,20 +85,20 @@ const OsobneUdaje: NextPage<Props> = ({
             </div>
 
             <h2>Adresa trvalého pobytu</h2>
-            {/* <div className={styles.inlineFieldContainer}>
+            <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r007_ulica"
+                name="ulica"
                 type="text"
                 label="Ulica"
               />
               <Input
                 className={styles.inlineField}
-                name="r008_cislo"
+                name="cislo"
                 type="text"
                 label="Súpisné/orientačné číslo"
               />
-            </div> */}
+            </div>
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
@@ -140,7 +142,7 @@ const OsobneUdaje: NextPage<Props> = ({
   );
 };
 
-const validationSchema = Yup.object().shape<PersonalInformationPostpone>({
+const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
   dic: Yup.string()
     .required()
     .min(9)
@@ -148,6 +150,8 @@ const validationSchema = Yup.object().shape<PersonalInformationPostpone>({
   meno_priezvisko: Yup.string().required(),
   psc: Yup.string().required(),
   obec: Yup.string().required(),
+  ulica: Yup.string().required(),
+  cislo: Yup.string().required(),
   stat: Yup.string().required(),
 });
 export default OsobneUdaje;

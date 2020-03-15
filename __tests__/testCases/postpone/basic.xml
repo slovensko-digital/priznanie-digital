@@ -13,6 +13,8 @@
       </rodneCislo>
     </fyzickaOsoba>
     <sidlo>
+      <ulica>Mierová</ulica>
+      <supisneOrientacneCislo>4</supisneOrientacneCislo>
       <psc>82105</psc>
       <obec>Bratislava</obec>
       <stat>Slovensko</stat>

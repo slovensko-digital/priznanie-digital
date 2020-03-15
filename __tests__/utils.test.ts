@@ -4,7 +4,6 @@ import {
   setDate,
   formatDate,
 } from '../src/lib/utils';
-import { TaxFormUserInput } from '../src/types/TaxFormUserInput';
 
 describe('utils', () => {
   describe('#sortObjectKeys', () => {

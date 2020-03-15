@@ -35,7 +35,9 @@ interface RodneCislo {
 
 interface Sidlo {
   psc: string;
+  ulica: string;
   obec: string;
+  supisneOrientacneCislo: string;
   stat: string;
 }
 

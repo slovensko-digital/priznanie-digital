@@ -87,6 +87,8 @@ export const initialPostponeUserInput: PostponeUserInput = {
   meno_priezvisko: '',
   psc: '',
   obec: '',
+  ulica: '',
+  cislo: '',
   stat: '',
   rodne_cislo: '',
   datum: '',
