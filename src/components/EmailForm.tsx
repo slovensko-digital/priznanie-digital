@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import classNames from 'classnames';
@@ -6,6 +6,7 @@ import styles from './EmailForm.module.css';
 import { CheckboxSmall, Input } from './FormComponents';
 import { saveEmail } from '../lib/api';
 import { EmailUserInput } from '../types/UserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
@@ -22,17 +23,16 @@ export interface EmailFormProps {
   applicantFullName: string;
   deadline: string;
   formName: string;
+  postponeUserInput: PostponeUserInput;
+  setPostponeUserInput: (values: Partial<PostponeUserInput>) => void;
 }
 export const EmailForm = ({
   applicantFullName,
   deadline,
   formName,
+  postponeUserInput,
+  setPostponeUserInput,
 }: EmailFormProps) => {
-  const [savedWithNewsletter, setSavedWithNewsletter] = useState<boolean>(
-    undefined,
-  );
-  const [savedEmail, setSavedEmail] = useState<string>('');
-
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
     const [firstName, ...lastName] = applicantFullName.split(' ');
     const { id, code, message } = await saveEmail(email, {
@@ -43,22 +43,26 @@ export const EmailForm = ({
       form: formName,
     });
     if (id) {
-      setSavedWithNewsletter(newsletter);
-      setSavedEmail(email);
+      setPostponeUserInput({ email, newsletter });
     } else {
       setFieldError('email', getErrorMessage(code, message));
     }
   };
 
-  if (savedWithNewsletter !== undefined) {
+  if (postponeUserInput.email) {
     return (
       <div className={styles.newsletterFormWrapper}>
         <p className={styles.newsletterFormSuccess}>
-          Váš email <strong>{savedEmail}</strong> sme úspešne zaregistrovali.
+          Váš email <strong>{postponeUserInput.email}</strong> sme úspešne
+          zaregistrovali.
           <br />
-          Pošleme vám notifikáciu pred termínom.
+          Pošleme vám notifikáciu pred novým termínom{' '}
+          {postponeUserInput.prijmy_zo_zahranicia
+            ? '(30. jún 2020)'
+            : '(30. september 2020)'}
+          .
           <br />
-          {savedWithNewsletter && ' Pošleme vám aj newsletter.'}
+          {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
         </p>
       </div>
     );

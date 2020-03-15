@@ -9,4 +9,6 @@ export const basicInput: PostponeUserInput = {
   obec: 'Bratislava',
   stat: 'Slovensko',
   datum: '22.02.2020',
+  email: 'test@example.com',
+  newsletter: true,
 };

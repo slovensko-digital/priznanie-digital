@@ -12,4 +12,5 @@ cache:
     - $HOME/.npm
 
 script:
+  - npm run build
   - npm run ci

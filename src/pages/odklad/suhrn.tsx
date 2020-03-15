@@ -10,8 +10,12 @@ const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn');
 
 interface Props {
   postponeUserInput: PostponeUserInput;
+  setPostponeUserInput: (values: PostponeUserInput) => void;
 }
-const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
+const Suhrn: NextPage<Props> = ({
+  postponeUserInput,
+  setPostponeUserInput,
+}: Props) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -96,6 +100,8 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
       </table>
 
       <EmailForm
+        postponeUserInput={postponeUserInput}
+        setPostponeUserInput={setPostponeUserInput}
         formName="postpone"
         applicantFullName={postponeUserInput.meno_priezvisko}
         deadline={
