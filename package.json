@@ -22,6 +22,8 @@
   "dependencies": {
     "@sendgrid/mail": "6.5.4",
     "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "1.7.0",
     "formik": "^2.1.4",
     "isomorphic-unfetch": "^3.0.0",
     "js-file-download": "^0.4.10",
@@ -58,7 +60,6 @@
     "babel-loader": "8.0.6",
     "cypress": "^4.1.0",
     "cypress-file-upload": "^3.5.3",
-    "dotenv-webpack": "1.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.0.0",
     "eslint-config-prettier": "^6.10.0",
