@@ -1,4 +1,10 @@
-import { AutoformResponseBody, PSCResponseBody } from '../types/api';
+import {
+  AutoformResponseBody,
+  PSCResponseBody,
+  SaveEmailAttributes,
+  SaveEmailResponse,
+} from '../types/api';
+import fetch from 'isomorphic-unfetch';
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
@@ -47,13 +53,15 @@ export const getAutoformByPersonName = async (
 };
 
 export const saveEmail = async (
-  name: string,
   email: string,
-  newsletter: boolean,
-): Promise<boolean> => {
-  return fetch(
-    `/api/email?name=${name}&email=${email}&newsletter=${
-      newsletter ? 'true' : 'false'
-    }`,
-  ).then(response => response.json());
+  attributes: SaveEmailAttributes,
+): Promise<SaveEmailResponse> => {
+  return fetch('/api/email', {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ email, attributes }),
+  }).then(response => response.json());
 };
