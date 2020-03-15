@@ -21,6 +21,9 @@ const Suhrn: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute);
   });
+  const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
+    .split(' ')
+    .map(v => v.trim());
 
   return (
     <>
@@ -67,7 +70,7 @@ const Suhrn: NextPage<Props> = ({
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">Meno</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.meno_priezvisko}
+              {firstName}
             </td>
           </tr>
           <tr className="govuk-table__row">
@@ -75,7 +78,7 @@ const Suhrn: NextPage<Props> = ({
               Priezvisko
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.meno_priezvisko}
+              {lastNames.join(' ')}
             </td>
           </tr>
         </tbody>
@@ -84,6 +87,14 @@ const Suhrn: NextPage<Props> = ({
       <h2>Adresa trvalého pobytu</h2>
       <table className="govuk-table">
         <tbody className="govuk-table__body">
+          <tr className="govuk-table__row">
+            <td className="govuk-table__cell govuk-!-width-one-half">
+              Ulica a súpisné číslo
+            </td>
+            <td className="govuk-table__cell govuk-!-width-one-half">
+              {postponeUserInput.ulica} {postponeUserInput.cislo}
+            </td>
+          </tr>
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">PSČ</td>
             <td className="govuk-table__cell govuk-!-width-one-half">

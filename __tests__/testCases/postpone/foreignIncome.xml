@@ -7,14 +7,12 @@
     <fyzickaOsoba>
       <priezvisko>Heisenberg</priezvisko>
       <meno>Werner</meno>
-      <rodneCislo>
-        <rcPredLom>200310</rcPredLom>
-        <rcZaLom>0011</rcZaLom>
-      </rodneCislo>
     </fyzickaOsoba>
     <sidlo>
+      <ulica>Mierová</ulica>
+      <supisneOrientacneCislo>4</supisneOrientacneCislo>
       <psc>82105</psc>
-      <obec>Bratislava</obec>
+      <obec>Bratislava 3</obec>
       <stat>Slovensko</stat>
     </sidlo>
     <novaLehota>

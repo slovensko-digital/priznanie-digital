@@ -11,12 +11,17 @@ import { formatCurrency, setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
 import { Route, PostponeRoute } from '../../src/lib/routes';
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { PostponeUserInput } from '../../src/types/PostponeUserInput';
+import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter';
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
-function typeToInput<K extends keyof UserInput>(key: K, userInput: UserInput) {
+function typeToInput<K extends keyof UserInput>(
+  key: K,
+  userInput: Partial<UserInput>,
+) {
   const value = userInput[key];
   if (typeof value === 'string') {
     return getInput(key).type(value);
@@ -228,22 +233,88 @@ describe('Cases', function() {
   });
 });
 
-describe.only('Postpone cases', function() {
-  it('Postpones', function() {
-    cy.visit('/');
+describe('Postpone cases', function() {
+  ['basic', 'foreignIncome'].forEach(testCase => {
+    it(testCase, function(done) {
+      import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
+        inputModule => {
+          // Access named export
+          const input: PostponeUserInput = inputModule[`${testCase}Input`];
 
-    cy.contains('Odložiť daňové priznanie').click();
-    assertUrl('/odklad/prijmy-zo-zahranicia');
+          cy.visit('/');
 
-    next();
+          cy.contains('Odložiť daňové priznanie').click();
+          assertUrl('/odklad/prijmy-zo-zahranicia');
 
-    getError();
+          next();
 
-    getInput('prijmy_zo_zahranicia', '-yes').click();
+          getError();
 
-    cy.contains(
-      'Nový termín pre podanie daňového priznania je 30. septembra 2020.',
-    );
-    next();
+          getInput('prijmy_zo_zahranicia', '-yes').click();
+
+          cy.contains(
+            'Nový termín pre podanie daňového priznania je 30. septembra 2020.',
+          );
+          next();
+          assertUrl('/odklad/osobne-udaje');
+
+          typeToInput('meno_priezvisko', input);
+          typeToInput('dic', input);
+          // typeToInput('rodne_cislo', input); // TODO
+          typeToInput('ulica', input);
+          typeToInput('cislo', input);
+          typeToInput('psc', input);
+          getInput('obec').should('have.value', input.obec);
+          typeToInput('stat', input);
+
+          next();
+          assertUrl('/odklad/suhrn');
+
+          next();
+          assertUrl('/odklad/stiahnut');
+
+          /**  HACK to work around file download, because cypress cannot do it */
+          cy.get(`[data-test="postponeUserInput"]`)
+            .invoke('text')
+            .then(postponeUserInput => {
+              const xml = convertPostponeToXML(
+                setDate(
+                  JSON.parse(postponeUserInput.toString()) as PostponeUserInput,
+                ),
+              );
+
+              /**  HACK END */
+
+              /**  Validate our results with the FS form */
+              cy.visit('/form-odklad/form.401.html');
+
+              const stub = cy.stub();
+              cy.on('window:alert', stub);
+
+              cy.get('#form-button-load').click();
+              cy.get('#form-buttons-load-dialog > input').upload({
+                fileContent: xml,
+                fileName: 'xmlResult.xml',
+                mimeType: 'application/xml',
+                encoding: 'utf-8',
+              });
+
+              cy.get(
+                '#form-buttons-load-dialog-confirm > .ui-button-text',
+              ).click();
+              cy.get('#form-button-validate')
+                .click()
+                .should(() => {
+                  expect(stub).to.be.calledWith(
+                    'Naplnenie formulára prebehlo úspešne',
+                  );
+                });
+              cy.get('#errorsContainer')
+                .should(el => expect(el.text()).to.be.empty)
+                .then(() => done());
+            });
+        },
+      );
+    });
   });
 });

@@ -9,13 +9,11 @@ export const postponeBasis: PostponeOutput = {
       fyzickaOsoba: {
         priezvisko: '',
         meno: '',
-        rodneCislo: {
-          rcPredLom: '',
-          rcZaLom: '',
-        },
       },
       sidlo: {
         psc: '',
+        ulica: '',
+        supisneOrientacneCislo: '',
         obec: '',
         stat: '',
       },

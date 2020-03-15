@@ -8,7 +8,7 @@ interface Dokument {
 interface FyzickaOsoba {
   priezvisko: string;
   meno: string;
-  rodneCislo: RodneCislo;
+  // rodneCislo: RodneCislo;
 }
 
 interface Hlavicka {
@@ -28,14 +28,16 @@ interface NovaLehota {
   datumLehota: string;
 }
 
-interface RodneCislo {
-  rcPredLom: string;
-  rcZaLom: string;
-}
+// interface RodneCislo {
+//   rcPredLom: string;
+//   rcZaLom: string;
+// }
 
 interface Sidlo {
   psc: string;
+  ulica: string;
   obec: string;
+  supisneOrientacneCislo: string;
   stat: string;
 }
 

@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import fileDownload from 'js-file-download';
+
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { getPostponeRoutes } from '../../lib/routes';
+import { PostponeUserInput } from '../../types/PostponeUserInput';
+import { convertPostponeToXML } from '../../lib/postpone/postponeConverter';
+import { setDate } from '../../lib/utils';
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/stiahnut');
 
-const Stiahnut: NextPage = () => {
+interface Props {
+  postponeUserInput: PostponeUserInput;
+}
+
+const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
   const [didDownload, setDidDownload] = useState<boolean>(false);
   const router = useRouter();
 
@@ -31,6 +40,8 @@ const Stiahnut: NextPage = () => {
           type="submit"
           className="btn-secondary govuk-button govuk-button--large"
           onClick={() => {
+            const xml = convertPostponeToXML(setDate(postponeUserInput));
+            fileDownload(xml, 'odklad_danoveho_priznania.xml');
             setDidDownload(true);
           }}
         >
@@ -50,7 +61,7 @@ const Stiahnut: NextPage = () => {
       )}
 
       <Link href={nextRoute}>
-        <button className="govuk-button" disabled={!didDownload}>
+        <button className="govuk-button" disabled={!didDownload} type="button">
           Pokračovať
         </button>
       </Link>

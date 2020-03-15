@@ -5,17 +5,20 @@ import Header from './Header';
 import Footer from './Footer';
 import { Debug } from './Debug';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 interface Props {
   headline: string;
   children: React.ReactNode;
   taxFormUserInput: TaxFormUserInput;
+  postponeUserInput: PostponeUserInput;
 }
 
 const Layout: React.FC<Props> = ({
   headline,
   children,
   taxFormUserInput,
+  postponeUserInput,
 }: Props) => (
   <div className="container">
     <Head>
@@ -47,7 +50,10 @@ const Layout: React.FC<Props> = ({
         </div>
       </main>
     </div>
-    <Debug taxFormUserInput={taxFormUserInput} />
+    <Debug
+      taxFormUserInput={taxFormUserInput}
+      postponeUserInput={postponeUserInput}
+    />
     <Footer taxFormUserInput={taxFormUserInput} />
     <style jsx>{`
       .container {

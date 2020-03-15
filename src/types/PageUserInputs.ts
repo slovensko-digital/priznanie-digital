@@ -40,9 +40,16 @@ export type PersonalInformationUserInput<T = string> = Pick<
   | 'r011_stat'
 >;
 
-export type PersonalInformationPostpone = Pick<
+export type PersonalInformationPostponePage = Pick<
   PostponeUserInput,
-  'dic' | 'meno_priezvisko' | 'psc' | 'obec' | 'stat'
+  | 'dic'
+  | 'meno_priezvisko'
+  | 'ulica'
+  | 'cislo'
+  | 'psc'
+  | 'obec'
+  | 'stat'
+  // | 'rodne_cislo'
 >;
 
 export type PensionUserInput<T = string> = Pick<

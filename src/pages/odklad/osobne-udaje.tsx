@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { NextPage } from 'next';
 import { Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
-import { PersonalInformationPostpone } from '../../types/PageUserInputs';
+import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
 import { getCity } from '../../lib/api';
 import { AutoformResponseBody } from '../../types/api';
 import { getPostponeRoutes } from '../../lib/routes';
@@ -18,12 +18,14 @@ const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
 const makeHandlePersonAutoform = ({
   setValues,
   values,
-}: FormikProps<PersonalInformationPostpone>) => {
+}: FormikProps<PersonalInformationPostponePage>) => {
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
       meno_priezvisko: person.name,
       dic: person?.tin ?? '',
+      ulica: person.street ?? person.municipality,
+      cislo: person.street_number,
       psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
       obec: person.municipality,
       stat: person.country,
@@ -32,7 +34,7 @@ const makeHandlePersonAutoform = ({
 };
 
 interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostpone) => void;
+  setPostponeUserInput: (values: PersonalInformationPostponePage) => void;
   postponeUserInput: PostponeUserInput;
 }
 const OsobneUdaje: NextPage<Props> = ({
@@ -52,7 +54,7 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationPostpone>
+      <Formik<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -76,23 +78,29 @@ const OsobneUdaje: NextPage<Props> = ({
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r001_dic"
+                name="dic"
                 type="text"
                 label="DIČ"
               />
+              {/* <Input
+                className={styles.inlineField}
+                name="rodne_cislo"
+                type="text"
+                label="Rodné číslo"
+              /> */}
             </div>
 
             <h2>Adresa trvalého pobytu</h2>
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r007_ulica"
+                name="ulica"
                 type="text"
                 label="Ulica"
               />
               <Input
                 className={styles.inlineField}
-                name="r008_cislo"
+                name="cislo"
                 type="text"
                 label="Súpisné/orientačné číslo"
               />
@@ -100,13 +108,13 @@ const OsobneUdaje: NextPage<Props> = ({
             <div className={styles.inlineFieldContainer}>
               <Input
                 className={styles.inlineField}
-                name="r009_psc"
+                name="psc"
                 type="text"
                 label="PSČ"
                 onBlur={event => {
                   props.handleBlur(event);
                   const pscValue = event.target.value;
-                  props.setFieldValue('r009_psc', pscValue.replace(/\D/g, ''));
+                  props.setFieldValue('psc', pscValue.replace(/\D/g, ''));
                 }}
                 onChange={async event => {
                   props.handleChange(event);
@@ -115,20 +123,20 @@ const OsobneUdaje: NextPage<Props> = ({
 
                   if (trimmedPSC.length === 5) {
                     const city = await getCity(trimmedPSC);
-                    props.setFieldValue('r010_obec', city);
+                    props.setFieldValue('obec', city);
                   }
                 }}
               />
 
               <Input
                 className={styles.inlineField}
-                name="r010_obec"
+                name="obec"
                 type="text"
                 label="Obec"
               />
             </div>
 
-            <Input name="r011_stat" type="text" label="Štát" />
+            <Input name="stat" type="text" label="Štát" />
 
             <button className="govuk-button" type="submit">
               Pokračovať
@@ -139,15 +147,22 @@ const OsobneUdaje: NextPage<Props> = ({
     </>
   );
 };
+/** https://github.com/kub1x/rodnecislo */
+// const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
 
-const validationSchema = Yup.object().shape<PersonalInformationPostpone>({
+const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
   dic: Yup.string()
     .required()
     .min(9)
     .max(10),
   meno_priezvisko: Yup.string().required(),
   psc: Yup.string().required(),
+  // rodne_cislo: Yup.string()
+  //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
+  //   .required(),
   obec: Yup.string().required(),
+  ulica: Yup.string().required(),
+  cislo: Yup.string().required(),
   stat: Yup.string().required(),
 });
 export default OsobneUdaje;
