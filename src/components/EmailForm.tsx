@@ -43,7 +43,7 @@ export const EmailForm = ({
       form: formName,
     });
     if (id) {
-      setPostponeUserInput({ email, newsletter });
+      setPostponeUserInput({ ...postponeUserInput, email, newsletter });
     } else {
       setFieldError('email', getErrorMessage(code, message));
     }
