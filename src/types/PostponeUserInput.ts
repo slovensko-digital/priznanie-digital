@@ -8,4 +8,7 @@ export interface PostponeUserInput {
   obec: string;
   stat: string;
   datum: string;
+
+  email?: string;
+  newsletter?: boolean;
 }

@@ -11,7 +11,7 @@ export const getCity = async (zip: string) => {
     `https://api.posta.sk/private/search?q=${zip}&m=zip`,
   );
   const pscData: PSCResponseBody = await response.json();
-  return pscData?.offices?.[0].name ?? '';
+  return pscData?.offices?.[0]?.name ?? '';
 };
 
 export const getAutoformByPersonName = async (
