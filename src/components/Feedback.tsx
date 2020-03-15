@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 // import { CheckboxSmall } from './FormComponents';
 import classNames from 'classnames';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
+// import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
-interface Props {
-  taxFormUserInput: TaxFormUserInput;
-}
+// interface Props {
+//   taxFormUserInput: TaxFormUserInput;
+// }
 
-export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
+export const Feedback: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   if (isOpen) {
