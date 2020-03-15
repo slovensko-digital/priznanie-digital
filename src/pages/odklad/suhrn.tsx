@@ -106,7 +106,13 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </tbody>
       </table>
 
-      <EmailForm name={postponeUserInput.meno_priezvisko} />
+      <EmailForm
+        formName="postpone"
+        applicantFullName={postponeUserInput.meno_priezvisko}
+        deadline={
+          postponeUserInput.prijmy_zo_zahranicia ? '2020-06-30' : '2020-09-30'
+        }
+      />
 
       <Link href={nextRoute}>
         <button className="govuk-button" type="button">
