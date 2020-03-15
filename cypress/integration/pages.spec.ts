@@ -287,6 +287,14 @@ describe('/odklad/osobne-udaje page', function() {
     typeToInputPostpone('psc', foreignIncomeInput);
     typeToInputPostpone('stat', foreignIncomeInput);
   });
+  it.only('Errors', function() {
+    cy.visit('/odklad/osobne-udaje');
+
+    getInputPostpone('dic').type('invalid');
+
+    next();
+    cy.get('.govuk-error-summary');
+  });
 });
 
 describe('/odklad/suhrn page', function() {
@@ -297,7 +305,7 @@ describe('/odklad/suhrn page', function() {
     cy.get('[data-test=back]').click();
     assertUrl('/odklad/osobne-udaje');
   });
-  it.only('Back', function() {
+  it('Back', function() {
     cy.visit('/odklad/suhrn');
   });
 });

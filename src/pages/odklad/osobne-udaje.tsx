@@ -13,6 +13,7 @@ import { AutoformResponseBody } from '../../types/api';
 import { getPostponeRoutes } from '../../lib/routes';
 import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
+import { ErrorSummary } from '../../components/ErrorSummary';
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
 
@@ -64,87 +65,93 @@ const OsobneUdaje: NextPage<Props> = ({
         }}
       >
         {props => (
-          <Form className="form">
-            <h2>Údaje o daňovníkovi</h2>
-
-            <div className={styles.inlineFieldContainer}>
-              <Input
-                className={styles.inlineField}
-                name="dic"
-                type="text"
-                label="DIČ"
-                width={10}
-              />
-            </div>
-
-            <p>
-              Údaje môžete vyhladať a automaticky vyplniť podľa mena a
-              priezviska.
-            </p>
-
-            <FullNameAutoCompleteInput
-              handlePersonAutoform={makeHandlePersonAutoform(props)}
-              handleChange={props.handleChange}
+          <>
+            <ErrorSummary<PersonalInformationPostponePage>
+              errors={props.errors}
+              touched={props.touched}
             />
+            <Form className="form">
+              <h2>Údaje o daňovníkovi</h2>
 
-            <h2>Adresa trvalého pobytu</h2>
-            <div className={styles.inlineFieldContainer}>
-              <Input
-                name="ulica"
-                type="text"
-                label="Ulica"
-                width="auto"
-                className={classnames(
-                  styles.flexGrow,
-                  'govuk-!-margin-right-5',
-                )}
-              />
-              <Input
-                name="cislo"
-                type="text"
-                label="Súpisné/orientačné číslo"
-                width="auto"
-              />
-            </div>
-            <div className={styles.inlineFieldContainer}>
-              <Input
-                className="govuk-!-margin-right-5"
-                name="psc"
-                type="text"
-                label="PSČ"
-                width={5}
-                onBlur={event => {
-                  props.handleBlur(event);
-                  const pscValue = event.target.value;
-                  props.setFieldValue('psc', pscValue.replace(/\D/g, ''));
-                }}
-                onChange={async event => {
-                  props.handleChange(event);
-                  const pscValue = event.currentTarget.value;
-                  const trimmedPSC = pscValue.replace(/\D/g, '');
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  className={styles.inlineField}
+                  name="dic"
+                  type="text"
+                  label="DIČ"
+                  width={10}
+                />
+              </div>
 
-                  if (trimmedPSC.length === 5) {
-                    const city = await getCity(trimmedPSC);
-                    props.setFieldValue('obec', city);
-                  }
-                }}
+              <p>
+                Údaje môžete vyhladať a automaticky vyplniť podľa mena a
+                priezviska.
+              </p>
+
+              <FullNameAutoCompleteInput
+                handlePersonAutoform={makeHandlePersonAutoform(props)}
+                handleChange={props.handleChange}
               />
 
-              <Input
-                name="obec"
-                type="text"
-                label="Obec"
-                width="auto"
-                className={styles.flexGrow}
-              />
-            </div>
+              <h2>Adresa trvalého pobytu</h2>
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  name="ulica"
+                  type="text"
+                  label="Ulica"
+                  width="auto"
+                  className={classnames(
+                    styles.flexGrow,
+                    'govuk-!-margin-right-5',
+                  )}
+                />
+                <Input
+                  name="cislo"
+                  type="text"
+                  label="Súpisné/orientačné číslo"
+                  width="auto"
+                />
+              </div>
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  className="govuk-!-margin-right-5"
+                  name="psc"
+                  type="text"
+                  label="PSČ"
+                  width={5}
+                  onBlur={event => {
+                    props.handleBlur(event);
+                    const pscValue = event.target.value;
+                    props.setFieldValue('psc', pscValue.replace(/\D/g, ''));
+                  }}
+                  onChange={async event => {
+                    props.handleChange(event);
+                    const pscValue = event.currentTarget.value;
+                    const trimmedPSC = pscValue.replace(/\D/g, '');
 
-            <Input name="stat" type="text" label="Štát" width={10} />
+                    if (trimmedPSC.length === 5) {
+                      const city = await getCity(trimmedPSC);
+                      props.setFieldValue('obec', city);
+                    }
+                  }}
+                />
 
-            <button className="govuk-button" type="submit">
-              Pokračovať
-            </button>
-          </Form>
+                <Input
+                  name="obec"
+                  type="text"
+                  label="Obec"
+                  width="auto"
+                  className={styles.flexGrow}
+                />
+              </div>
+
+              <Input name="stat" type="text" label="Štát" width={10} />
+
+              <button className="govuk-button" type="submit">
+                Pokračovať
+              </button>
+            </Form>
+          </>
         )}
       </Formik>
     </>
