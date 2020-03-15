@@ -234,7 +234,7 @@ describe('Cases', function() {
 });
 
 describe.only('Postpone cases', function() {
-  ['basic', 'foreign'].forEach(testCase => {
+  ['basic', 'foreignIncome'].forEach(testCase => {
     it(testCase, function(done) {
       import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
         inputModule => {
