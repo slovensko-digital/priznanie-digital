@@ -11,7 +11,7 @@ interface Props {
  * so it has to grab the data from the DOM
  */
 export const Debug = ({ taxFormUserInput, postponeUserInput }: Props) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.WITH_DEBUG !== 'true') {
     return null;
   }
   return (
