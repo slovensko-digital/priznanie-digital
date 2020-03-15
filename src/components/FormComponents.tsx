@@ -1,20 +1,20 @@
 import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { UserInput } from '../types/UserInput';
 
 interface InputProps<Name> {
   name: Name;
   label: string;
   hint?: string;
   className?: string;
-  type: 'text' | 'number';
+  type: 'text' | 'number' | 'email';
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
 }
 
 export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
 
-export const Input = <Name extends keyof TaxFormUserInput>({
+export const Input = <Name extends keyof UserInput>({
   label,
   hint,
   width = 20,
@@ -75,7 +75,7 @@ interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
 }
-export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
+export const BooleanRadio = <Name extends keyof UserInput>({
   title,
   ...props
 }: BooleanRadioProps<Name>) => {
@@ -95,12 +95,13 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               className="govuk-radios__input"
               type="radio"
               data-test={`${field.name}-input-yes`}
-              checked={field.value}
+              id={`${field.name}-input-yes`}
+              checked={field.value === true}
               onChange={() => helpers.setValue(true)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-yes`}
             >
               Áno
             </label>
@@ -111,13 +112,14 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
               {...props}
               className="govuk-radios__input"
               data-test={`${field.name}-input-no`}
+              id={`${field.name}-input-no`}
               type="radio"
-              checked={field.value === undefined ? false : !field.value}
+              checked={field.value === false}
               onChange={() => helpers.setValue(false)}
             />
             <label
               className="govuk-label govuk-radios__label"
-              htmlFor={props.name}
+              htmlFor={`${props.name}-input-no`}
             >
               Nie
             </label>
@@ -136,9 +138,13 @@ export const BooleanRadio = <Name extends keyof TaxFormUserInput>({
 interface BooleanRadioProps<Name> {
   name: Name;
   title: string;
+  label?: string;
+  hint?: string;
 }
-export const Checkbox = <Name extends keyof TaxFormUserInput>({
+export const Checkbox = <Name extends keyof UserInput>({
   title,
+  hint,
+  label,
   ...props
 }: BooleanRadioProps<Name>) => {
   const [field, meta] = useField(props.name);
@@ -148,11 +154,13 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
+        {hint ? <span className="govuk-hint">{hint}</span> : null}
         <div className="govuk-checkboxes">
           <div className="govuk-checkboxes__item">
             <input
               {...field}
               {...props}
+              id={props.name}
               className="govuk-checkboxes__input"
               type="checkbox"
             />
@@ -160,7 +168,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
               className="govuk-label govuk-checkboxes__label"
               htmlFor={props.name}
             >
-              Ano
+              {label ?? 'Ano'}
             </label>
           </div>
           {meta.touched && meta.error ? (
@@ -176,7 +184,7 @@ export const Checkbox = <Name extends keyof TaxFormUserInput>({
 
 interface CheckboxSmallProps {
   name: string;
-  label: string;
+  label: string | React.ReactNode;
 }
 export const CheckboxSmall = ({
   name,

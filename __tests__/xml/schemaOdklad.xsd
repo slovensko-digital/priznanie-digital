@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:simpleType name="ldt_Label">
+<xs:restriction base="xs:string">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_DIC_iba_10_cislic">
+<xs:restriction base="xs:string">
+<xs:pattern value="|\d{10}" />
+<xs:maxLength value="10" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Rodne_cislo1">
+<xs:restriction base="xs:string">
+<xs:pattern value="|\d{6}" />
+<xs:maxLength value="6" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Rodne_cislo2">
+<xs:restriction base="xs:string">
+<xs:pattern value="|\d{3,4}" />
+<xs:maxLength value="4" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Datum">
+<xs:restriction base="xs:date">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Obchodne_meno">
+<xs:restriction base="xs:string">
+<xs:maxLength value="120" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_label">
+<xs:restriction base="xs:string">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_ICO">
+<xs:restriction base="xs:string">
+<xs:pattern value="|\d{8}" />
+<xs:minLength value="8" />
+<xs:maxLength value="8" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt60">
+<xs:restriction base="xs:string">
+<xs:maxLength value="60" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt20">
+<xs:restriction base="xs:string">
+<xs:maxLength value="20" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_PSC_10znakov">
+<xs:restriction base="xs:string">
+<xs:maxLength value="10" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt40">
+<xs:restriction base="xs:string">
+<xs:maxLength value="40" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Stat">
+<xs:restriction base="xs:string">
+<xs:maxLength value="37" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="LDT_Checkbox">
+<xs:restriction base="xs:boolean">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt50">
+<xs:restriction base="xs:string">
+<xs:maxLength value="50" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt13">
+<xs:restriction base="xs:string">
+<xs:maxLength value="13" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_Rok_2017_az_2020">
+<xs:restriction base="xs:string">
+<xs:enumeration value="2017">
+<xs:annotation>
+<xs:documentation>2017</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="2018">
+<xs:annotation>
+<xs:documentation>2018</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="2019">
+<xs:annotation>
+<xs:documentation>2019</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+<xs:enumeration value="2020">
+<xs:annotation>
+<xs:documentation>2020</xs:documentation>
+</xs:annotation>
+</xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ldt_edane_txt5">
+<xs:restriction base="xs:string">
+<xs:maxLength value="5" />
+</xs:restriction>
+</xs:simpleType>
+
+
+<xs:element name="OznamenieOVykonaniUpravyZakladuDane176v16">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaNazov" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaNazovPodlaPar" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaDicZdObdobie" minOccurs="1" maxOccurs="1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbDic" type="ldt_DIC_iba_10_cislic" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>01 - Daňové identifikačné číslo</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaZdanObdobie" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="zaRok" type="ldt_Rok_2017_az_2020" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Za rok</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="dtpZdObdobieOd" type="LDT_Datum" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>od</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="dtpZdObdobieDo" type="LDT_Datum" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>do</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaDovod" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaDovod2" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="cbDovod" type="LDT_Checkbox" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Oznámenie podávam z dôvodu opravy údajov uvedených v predchádzajúcom oznámení, ktoré bolo správcovi dane podané dňa:</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="dtpOznamDovodu" type="LDT_Datum" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Dátum podania dôvodu opravy údajov uvedených v predchádzajúcom oznámení správcovi</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaOdd1" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaOdd1FO" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="secpom_1" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbOdd1Priezvisko" type="ldt_edane_txt40" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>02 - Priezvisko</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbOdd1Meno" type="ldt_edane_txt40" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>03 - Meno</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbOdd1TitulPred" type="ldt_edane_txt20" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>04 - Titul (pred menom)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbOdd1TitulZa" type="ldt_edane_txt20" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>04 - Titul (za menom)</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="tbRodneCislo" type="LDT_Rodne_cislo1" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>05 - Rodné číslo (pred lomkou)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbRodneCislo_2" type="LDT_Rodne_cislo2" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>05 -Rodné číslo (za lomkou)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="dtpDatNarodenia" type="LDT_Datum" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>06 - Dátum narodenia</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaOdd1PO" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="taOdd1ObchMeno" type="LDT_Obchodne_meno" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>07 - Obchodné meno alebo názov</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ico" type="LDT_ICO" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>08 - IČO</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaTPAdresa" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaTPAdresa1" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbTPUlica" type="ldt_edane_txt60" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>09 - Ulica</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tdTPCislo" type="ldt_edane_txt20" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>10 - Súpisné / orientačné číslo</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaTPAdresa2" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbTPPSC" type="ldt_PSC_10znakov" minOccurs="1">
+<xs:annotation>
+<xs:documentation>11 - PSČ</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbTPObec" type="ldt_edane_txt40" minOccurs="1">
+<xs:annotation>
+<xs:documentation>12 - Obec</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbTPStat" type="LDT_Stat" minOccurs="1">
+<xs:annotation>
+<xs:documentation>13 - Štát</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaAdresaSK" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaAdresaSK1" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbUlicaSK" type="ldt_edane_txt60" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>14 - Ulica</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tdCisloSK" type="ldt_edane_txt20" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>15 - Súpisné / orientačné číslo</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaAdresaSK2" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbPSCSK" type="ldt_edane_txt5" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>16 - PSČ</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbObecSK" type="ldt_edane_txt40" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>17 - Obec</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaNovaLehota" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="cbPismA" type="LDT_Checkbox" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>predĺženie lehoty podľa <b>§ 49 ods. 3 písm. a) zákona</b> (najviac o tri celé kalendárne mesiace)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="cbPismB" type="LDT_Checkbox" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>predĺženie lehoty podľa <b>§ 49 ods. 3 písm. b) zákona</b> (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí)</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="dtpLehota" type="LDT_Datum" minOccurs="1">
+<xs:annotation>
+<xs:documentation>nová lehota</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaVypracoval" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="sekciaOdd3Vypracoval" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tbOdd3Vypracoval" type="ldt_edane_txt50" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Vypracoval</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbOdd3Dna" type="LDT_Datum" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Dňa</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="tbOdd3Telefon" type="ldt_edane_txt13" minOccurs="0" nillable="true">
+<xs:annotation>
+<xs:documentation>Telefónne číslo</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaOdd3Vyhlasenie" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sekciaVysvetlivky" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+

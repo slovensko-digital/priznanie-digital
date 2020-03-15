@@ -7,13 +7,18 @@ import '../styles/libs.css';
 /* eslint-enable import/no-unassigned-import */
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { setLocale } from 'yup';
 import { calculate } from '../lib/calculation';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { TaxForm } from '../types/TaxForm';
 import Layout from '../components/Layout';
-import { initTaxFormUserInputValues } from '../lib/initialValues';
-import { sortObjectKeys, setDate } from '../lib/utils';
+import {
+  initialPostponeUserInput,
+  initTaxFormUserInputValues,
+} from '../lib/initialValues';
+import { setDate } from '../lib/utils';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -37,6 +42,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
   );
+  const [postponeUserInput, setPostponeUserInput] = useState<PostponeUserInput>(
+    initialPostponeUserInput,
+  );
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput(prevUserInput => {
@@ -46,26 +54,24 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     });
   };
 
+  const { pathname } = useRouter();
+
+  const headline = /^\/odklad\//.test(pathname)
+    ? 'Odklad daňového priznania'
+    : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
+
   return (
     <Layout
+      headline={headline}
       taxFormUserInput={taxFormUserInput}
-      debug={
-        <div>
-          TaxFormUserInput
-          <pre data-test="taxFormUserInput">
-            {JSON.stringify(sortObjectKeys(taxFormUserInput), null, 2)}
-          </pre>
-          TaxForm
-          <pre data-test="taxForm">
-            {JSON.stringify(sortObjectKeys(taxForm), null, 2)}
-          </pre>
-        </div>
-      }
+      postponeUserInput={postponeUserInput}
     >
       <Component
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
+        postponeUserInput={postponeUserInput}
+        setPostponeUserInput={setPostponeUserInput}
         {...pageProps}
       />
     </Layout>

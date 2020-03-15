@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dokument>
+  <hlavicka>
+    <dic>1231231232</dic>
+    <zaRok>2019</zaRok>
+    <dovodDoplnenia>0</dovodDoplnenia>
+    <fyzickaOsoba>
+      <priezvisko>Heisenberg</priezvisko>
+      <meno>Werner</meno>
+    </fyzickaOsoba>
+    <sidlo>
+      <ulica>Mierová</ulica>
+      <supisneOrientacneCislo>4</supisneOrientacneCislo>
+      <psc>82105</psc>
+      <obec>Bratislava 3</obec>
+      <stat>Slovensko</stat>
+    </sidlo>
+    <novaLehota>
+      <predlzenie493a>0</predlzenie493a>
+      <predlzenie493b>1</predlzenie493b>
+      <datumLehota>30.09.2020</datumLehota>
+    </novaLehota>
+    <vypracoval>
+      <dna>22.02.2020</dna>
+    </vypracoval>
+    <podpis>1</podpis>
+  </hlavicka>
+</dokument>

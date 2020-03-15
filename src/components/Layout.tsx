@@ -3,19 +3,22 @@ import React from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
+import { Debug } from './Debug';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 interface Props {
-  debug: React.ReactNode;
+  headline: string;
   children: React.ReactNode;
   taxFormUserInput: TaxFormUserInput;
+  postponeUserInput: PostponeUserInput;
 }
 
-const DEBUG_ON = false;
 const Layout: React.FC<Props> = ({
+  headline,
   children,
-  debug,
   taxFormUserInput,
+  postponeUserInput,
 }: Props) => (
   <div className="container">
     <Head>
@@ -25,9 +28,7 @@ const Layout: React.FC<Props> = ({
     <div className="sdn-headline">
       <div className="sdn-headline__container govuk-width-container">
         <div className="sdn-headline__part">
-          <span className="sdn-headline__headline">
-            Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)
-          </span>
+          <span className="sdn-headline__headline">{headline}</span>
         </div>
       </div>
     </div>
@@ -46,10 +47,13 @@ const Layout: React.FC<Props> = ({
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
-          <div className="govuk-grid-column-one-third debug">{debug}</div>
         </div>
       </main>
     </div>
+    <Debug
+      taxFormUserInput={taxFormUserInput}
+      postponeUserInput={postponeUserInput}
+    />
     <Footer taxFormUserInput={taxFormUserInput} />
     <style jsx>{`
       .container {
@@ -60,11 +64,6 @@ const Layout: React.FC<Props> = ({
       .content-container {
         flex-grow: 1;
         width: 100%;
-      }
-      .debug {
-        visibility: ${DEBUG_ON ? 'visible' : 'hidden'};
-        max-height: 400px;
-        overflow-y: scroll;
       }
     `}</style>
   </div>

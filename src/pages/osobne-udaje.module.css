@@ -8,21 +8,3 @@
 .inlineField:first-child {
   margin-right: 16px;
 }
-.autocompleteFieldWrapper > div {
-  margin-bottom: 0;
-}
-.autocompleteFieldSpacer {
-  margin-bottom: 20px;
-}
-@media (min-width: 40.0625em) {
-  .autocompleteFieldWrapper > div {
-    margin-bottom: 0;
-  }
-  .autocompleteFieldSpacer {
-    margin-bottom: 30px;
-  }
-}
-.autocompleteWrapper {
-  width: 100%;
-  position: relative;
-}

@@ -1,5 +1,3 @@
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-
 export const sortObjectKeys = (object: object) => {
   const ordered = {};
   Object.keys(object)
@@ -10,11 +8,19 @@ export const sortObjectKeys = (object: object) => {
   return ordered;
 };
 
-export const setDate = (
-  taxform: TaxFormUserInput,
-  date: Date = new Date(),
-): TaxFormUserInput => {
-  return { ...taxform, datum: date.toLocaleString('sk-sk') };
+export const formatDate = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+
+export const setDate = <T>(input: T, date: Date = new Date()) => {
+  return {
+    ...input,
+    datum: formatDate(date),
+  };
 };
 
 export const formatCurrency = (value: number): string => {

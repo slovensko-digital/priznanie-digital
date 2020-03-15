@@ -6,12 +6,12 @@ import { convertToXML } from '../src/lib/xml/xmlConverter';
 import taxForm from './testCases/completeTaxForm.json';
 import { TaxForm } from '../src/types/TaxForm';
 
-describe('convertToXML', () => {
-  test.only('Validate to schema', async () => {
+describe('Converters ', () => {
+  test('DP validate to schema', async () => {
     const schema = await fs.readFile(`${__dirname}/xml/schema.xsd`);
     const result = convertToXML(taxForm as TaxForm);
 
-    const xsd = libxml.parseXml(schema);
+    const xsd = libxml.parseXml((schema as any) as string);
     const xml = libxml.parseXml(result);
 
     xml.validate(xsd);

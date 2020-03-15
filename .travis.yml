@@ -3,11 +3,7 @@ os: linux
 language: node_js
 
 node_js:
-  - "12"
-
-branches:
-  only:
-    - master
+  - '12'
 
 cache:
   directories:
@@ -16,5 +12,5 @@ cache:
     - $HOME/.npm
 
 script:
+  - npm run build
   - npm run ci
-

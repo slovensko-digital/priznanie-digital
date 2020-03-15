@@ -10,6 +10,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.hlavicka.dic = taxForm.r001_dic;
   // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
+  // TODO real NACE
   form.dokument.hlavicka.skNace = {
     k1: '62',
     k2: '01',
