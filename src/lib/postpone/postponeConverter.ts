@@ -13,12 +13,12 @@ export function convertPostponeToJson(
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
     .split(' ')
     .map(v => v.trim());
-  const [beforeSlash, afterSlash] = postponeUserInput.rodne_cislo.split('/');
+  // const [beforeSlash, afterSlash] = postponeUserInput.rodne_cislo.split('/');
 
   form.dokument.hlavicka.fyzickaOsoba.meno = firstName;
   form.dokument.hlavicka.fyzickaOsoba.priezvisko = lastNames.join(' ');
-  form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcPredLom = beforeSlash;
-  form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcZaLom = afterSlash;
+  // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcPredLom = beforeSlash;
+  // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcZaLom = afterSlash;
 
   form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc;
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec;

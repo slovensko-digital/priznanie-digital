@@ -49,7 +49,7 @@ export type PersonalInformationPostponePage = Pick<
   | 'psc'
   | 'obec'
   | 'stat'
-  | 'rodne_cislo'
+  // | 'rodne_cislo'
 >;
 
 export type PensionUserInput<T = string> = Pick<

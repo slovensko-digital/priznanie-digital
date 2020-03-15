@@ -260,7 +260,7 @@ describe('Postpone cases', function() {
 
           typeToInput('meno_priezvisko', input);
           typeToInput('dic', input);
-          typeToInput('rodne_cislo', input); // TODO
+          // typeToInput('rodne_cislo', input); // TODO
           typeToInput('ulica', input);
           typeToInput('cislo', input);
           typeToInput('psc', input);

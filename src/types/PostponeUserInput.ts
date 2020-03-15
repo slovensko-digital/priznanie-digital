@@ -1,5 +1,5 @@
 export interface PostponeUserInput {
-  rodne_cislo: string;
+  // rodne_cislo: string;
   dic: string;
   prijmy_zo_zahranicia: boolean;
 
