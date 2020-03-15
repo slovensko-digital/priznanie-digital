@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { CheckboxSmall } from './FormComponents';
+// import { CheckboxSmall } from './FormComponents';
+import classNames from 'classnames';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
 interface Props {
@@ -42,7 +43,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
             {isSubmitted ? (
-              <p className="govuk-body">Dakujeme za feedback</p>
+              <p className="govuk-body">Ďakujeme za feedback</p>
             ) : (
               <Formik
                 initialValues={{
@@ -56,7 +57,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
+                      // taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
                     }),
                   }).then(() => {
                     setIsSubmitted(true);
@@ -91,16 +92,22 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    <CheckboxSmall
+                    {/* <CheckboxSmall
                       name="agree"
                       label="Suhlasim s posielanim dat (zatial nie anonymne)?"
-                    />
+                    /> */}
                     <button
                       type="submit"
                       data-test="submit"
-                      className="govuk-button govuk-!-margin-top-4"
+                      className={classNames(
+                        'govuk-button',
+                        'govuk-button--large',
+                        'govuk-!-margin-top-4',
+                        { 'govuk-button--disabled': formik.isSubmitting },
+                      )}
+                      disabled={formik.isSubmitting}
                     >
-                      Odoslat
+                      {formik.isSubmitting ? 'Posielam...' : 'Poslať'}
                     </button>
                     <p className="govuk-body feedback-submitted-feedback govuk-!-padding-left-4 govuk-!-padding-top-2 govuk-!-display-inline-block" />
                   </Form>

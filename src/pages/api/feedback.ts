@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
 
-// const util = require('util');
+import util from 'util';
 
 const token = process.env.SENDGRID_API_KEY;
 
@@ -19,22 +19,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     from: 'priznanie.digital@slovensko.digital',
     subject: parsedBody.whatWereYouDoing,
     text: parsedBody.whatWentWrong,
-    attachments: [
-      {
-        filename: 'userInput.json',
-        content: Buffer.from(
-          JSON.stringify(parsedBody.taxFormUserInput),
-        ).toString('base64'),
-      },
-    ],
+    // attachments: [
+    //   {
+    //     filename: 'userInput.json',
+    //     content: Buffer.from(
+    //       JSON.stringify(parsedBody.taxFormUserInput),
+    //     ).toString('base64'),
+    //   },
+    // ],
   };
   try {
     await sgMail.send(content);
     res.status(200).send('Message sent successfully.');
   } catch (error) {
-    // console.log(
-    //   util.inspect(error, { compact: true, depth: 10, breakLength: 80 }),
-    // );
+    console.error(
+      util.inspect(error, { compact: true, depth: 10, breakLength: 80 }),
+    );
     res.status(400).send('Message not sent.');
   }
 };

@@ -287,7 +287,7 @@ describe('/odklad/osobne-udaje page', function() {
     typeToInputPostpone('psc', foreignIncomeInput);
     typeToInputPostpone('stat', foreignIncomeInput);
   });
-  it.only('Errors', function() {
+  it('Errors', function() {
     cy.visit('/odklad/osobne-udaje');
 
     getInputPostpone('dic').type('invalid');
