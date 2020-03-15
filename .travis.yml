@@ -8,9 +8,20 @@ node_js:
 cache:
   directories:
     - node_modules
-    - $HOME/.nvm
-    - $HOME/.npm
+    - .next/cache
+    - ~/.nvm
+    - ~/.npm
+    - ~/.cache
 
 script:
-  - npm run build
   - npm run ci
+
+# use private ssh key from env var to deploy to production ("deploy" is run on merge)
+#deploy:
+#  - eval "$(ssh-agent -s)"
+#  - echo '-----BEGIN OPENSSH PRIVATE KEY-----' > ~/.deploy_pkey
+#  - echo $DEPLOY_PKEY >> ~/.deploy_pkey
+#  - echo '-----END OPENSSH PRIVATE KEY-----' >> ~/.deploy_pkey
+#  - chmod 400 ~/.deploy_pkey
+#  - ssh -o "StrictHostKeyChecking no" -i ~/.deploy_pkey user@host
+
