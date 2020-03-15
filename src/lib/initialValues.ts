@@ -90,6 +90,6 @@ export const initialPostponeUserInput: PostponeUserInput = {
   ulica: '',
   cislo: '',
   stat: '',
-  rodne_cislo: '',
+  // rodne_cislo: '',
   datum: '',
 };
