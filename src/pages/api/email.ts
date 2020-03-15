@@ -1,14 +1,31 @@
+import fetch from 'isomorphic-unfetch';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { SaveEmailAttributes } from '../../types/api';
+
+const baseUrl = 'https://api.sendinblue.com/v3';
+const token = process.env.sendinbluetoken;
+
+if (!token) {
+  throw new Error(' process.env.sendinbluetoken is not defined');
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const name = `${req.query.name}`;
-  const email = `${req.query.email}`;
-  const newsletter = `${req.query.newsletter}` === 'true';
+  const email = `${req.body.email}`;
+  const attributes = req.body.attributes as SaveEmailAttributes;
 
-  console.log('/api/email', { name, email, newsletter }); // TODO: save data
+  const response = await fetch(`${baseUrl}/contacts`, {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'api-key': token,
+    },
+    body: JSON.stringify({
+      email,
+      attributes,
+    }),
+  });
 
-  setTimeout(() => {
-    res.statusCode = 200;
-    res.end(JSON.stringify({ saved: true }));
-  }, 1000);
+  res.statusCode = response.status;
+  res.send(await response.json());
 };

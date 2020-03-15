@@ -7,21 +7,54 @@ import { CheckboxSmall, Input } from './FormComponents';
 import { saveEmail } from '../lib/api';
 import { EmailUserInput } from '../types/UserInput';
 
+const getErrorMessage = (code: string, message: string) => {
+  switch (code) {
+    case 'duplicate_parameter':
+      return 'Tento email už v databáze existuje';
+    case 'invalid_parameter':
+      return 'Nesprávny formát emailovej adresy';
+    default:
+      return `Chyba: ${message}`;
+  }
+};
+
 export interface EmailFormProps {
-  name: string;
+  applicantFullName: string;
+  deadline: string;
+  formName: string;
 }
-export const EmailForm = ({ name }: EmailFormProps) => {
-  const [savingInProgress, setSavingInProgress] = useState<boolean>(false);
+export const EmailForm = ({
+  applicantFullName,
+  deadline,
+  formName,
+}: EmailFormProps) => {
   const [savedWithNewsletter, setSavedWithNewsletter] = useState<boolean>(
     undefined,
   );
-  const [email, setEmail] = useState<string>('');
+  const [savedEmail, setSavedEmail] = useState<string>('');
+
+  const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
+    const [firstName, ...lastName] = applicantFullName.split(' ');
+    const { id, code, message } = await saveEmail(email, {
+      firstname: firstName,
+      lastname: lastName.join(' '),
+      newsletter: !!newsletter,
+      deadline,
+      form: formName,
+    });
+    if (id) {
+      setSavedWithNewsletter(newsletter);
+      setSavedEmail(email);
+    } else {
+      setFieldError('email', getErrorMessage(code, message));
+    }
+  };
 
   if (savedWithNewsletter !== undefined) {
     return (
       <div className={styles.newsletterFormWrapper}>
         <p className={styles.newsletterFormSuccess}>
-          Váš email <strong>{email}</strong> sme úspešne zaregistrovali.
+          Váš email <strong>{savedEmail}</strong> sme úspešne zaregistrovali.
           <br />
           Pošleme vám notifikáciu pred termínom.
           <br />
@@ -35,42 +68,38 @@ export const EmailForm = ({ name }: EmailFormProps) => {
     <Formik<EmailUserInput>
       initialValues={{ email: '', newsletter: false }}
       validationSchema={validationSchema}
-      onSubmit={async values => {
-        setSavingInProgress(true);
-        await saveEmail(name, values.email, values.newsletter);
-        setSavedWithNewsletter(values.newsletter);
-        setEmail(values.email);
-        setSavingInProgress(false);
-      }}
+      onSubmit={handleSubmit}
     >
-      <Form className="box">
-        <Input
-          name="email"
-          type="email"
-          label="Chcete dostať upozornenie o novom termíne podania?"
-          hint="Nechajte nám email a my vám včas pošleme notifikáciu"
-        />
-        <CheckboxSmall
-          name="newsletter"
-          label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
-        />
-        <p>
-          Oboznámil(a) som sa s informáciami v sekcii{' '}
-          <a href="#gdpr">Ochrana osobných údajov</a>
-        </p>
-        <button
-          type="submit"
-          className={classNames(
-            'btn-secondary',
-            'govuk-button',
-            'govuk-button--large',
-            { 'govuk-button--disabled': savingInProgress },
-          )}
-          disabled={savingInProgress}
-        >
-          {savingInProgress ? 'Posielam...' : 'Poslať'}
-        </button>
-      </Form>
+      {({ isSubmitting }) => (
+        <Form className="box">
+          <Input
+            name="email"
+            type="email"
+            label="Chcete dostať upozornenie o novom termíne podania?"
+            hint="Nechajte nám email a my vám včas pošleme notifikáciu"
+          />
+          <CheckboxSmall
+            name="newsletter"
+            label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
+          />
+          <p>
+            Oboznámil(a) som sa s informáciami v sekcii{' '}
+            <a href="#gdpr">Ochrana osobných údajov</a>
+          </p>
+          <button
+            type="submit"
+            className={classNames(
+              'btn-secondary',
+              'govuk-button',
+              'govuk-button--large',
+              { 'govuk-button--disabled': isSubmitting },
+            )}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Posielam...' : 'Poslať'}
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };
