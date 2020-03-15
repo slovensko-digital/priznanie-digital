@@ -286,7 +286,7 @@ describe.only('Postpone cases', function() {
               /**  HACK END */
 
               /**  Validate our results with the FS form */
-              cy.visit('/form/form.451.html');
+              cy.visit('/form-odklad/form.401.html');
 
               const stub = cy.stub();
               cy.on('window:alert', stub);

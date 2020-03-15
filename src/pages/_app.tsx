@@ -61,7 +61,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
 
   return (
-    <Layout headline={headline} taxFormUserInput={taxFormUserInput}>
+    <Layout
+      headline={headline}
+      taxFormUserInput={taxFormUserInput}
+      postponeUserInput={postponeUserInput}
+    >
       <Component
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
