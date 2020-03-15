@@ -50,15 +50,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await saveEmail(email, attributes);
 
   if (response.status === 201) {
-    sendConfirmationEmail(
+    const confirmation = await sendConfirmationEmail(
       attributes.newsletter
         ? TEMPLATE_WITH_NEWSLETTER
         : TEMPLATE_WITHOUT_NEWSLETTER,
       email,
       attributes,
     );
+    if (confirmation.status !== 201) {
+      const confirmationResponse = await confirmation.json();
+      console.error(`Error sending email ${email}`, confirmationResponse);
+    }
   }
 
   res.statusCode = response.status;
-  res.send(await response.json());
+  res.send({ ...(await response.json()) });
 };

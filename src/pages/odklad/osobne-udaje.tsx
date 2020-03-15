@@ -44,6 +44,9 @@ const OsobneUdaje: NextPage<Props> = ({
   const router = useRouter();
 
   useEffect(() => {
+    if (postponeUserInput.prijmy_zo_zahranicia === undefined) {
+      router.replace(previousRoute);
+    }
     router.prefetch(nextRoute);
   });
 

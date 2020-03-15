@@ -200,6 +200,7 @@ export const CheckboxSmall = ({
         className="govuk-checkboxes__input"
         type="checkbox"
         data-test={name}
+        id={name}
       />
       <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
         {label}
