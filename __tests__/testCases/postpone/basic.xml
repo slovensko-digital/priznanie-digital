@@ -7,10 +7,6 @@
     <fyzickaOsoba>
       <priezvisko>Heisenberg</priezvisko>
       <meno>Werner</meno>
-      <rodneCislo>
-        <rcPredLom>200310</rcPredLom>
-        <rcZaLom>0011</rcZaLom>
-      </rodneCislo>
     </fyzickaOsoba>
     <sidlo>
       <ulica>Mierová</ulica>
