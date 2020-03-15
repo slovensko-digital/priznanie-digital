@@ -19,6 +19,9 @@ const Suhrn: NextPage<Props> = ({
   const router = useRouter();
 
   useEffect(() => {
+    if (!postponeUserInput.meno_priezvisko) {
+      router.replace(previousRoute);
+    }
     router.prefetch(nextRoute);
   });
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
