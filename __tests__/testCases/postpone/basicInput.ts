@@ -8,7 +8,7 @@ export const basicInput: PostponeUserInput = {
   psc: '82105',
   ulica: 'Mierová',
   cislo: '4',
-  obec: 'Bratislava',
+  obec: 'Bratislava 3',
   stat: 'Slovensko',
   datum: '22.02.2020',
 };

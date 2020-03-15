@@ -82,6 +82,12 @@ const OsobneUdaje: NextPage<Props> = ({
                 type="text"
                 label="DIČ"
               />
+              <Input
+                className={styles.inlineField}
+                name="rodne_cislo"
+                type="text"
+                label="Rodné číslo"
+              />
             </div>
 
             <h2>Adresa trvalého pobytu</h2>
@@ -141,6 +147,8 @@ const OsobneUdaje: NextPage<Props> = ({
     </>
   );
 };
+/** https://github.com/kub1x/rodnecislo */
+const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
 
 const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
   dic: Yup.string()
@@ -149,6 +157,9 @@ const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
     .max(10),
   meno_priezvisko: Yup.string().required(),
   psc: Yup.string().required(),
+  rodne_cislo: Yup.string()
+    .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
+    .required(),
   obec: Yup.string().required(),
   ulica: Yup.string().required(),
   cislo: Yup.string().required(),

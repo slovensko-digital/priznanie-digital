@@ -84,6 +84,14 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">
+            <td className="govuk-table__cell govuk-!-width-one-half">
+              Ulica a súpisné číslo
+            </td>
+            <td className="govuk-table__cell govuk-!-width-one-half">
+              {postponeUserInput.ulica} {postponeUserInput.cislo}
+            </td>
+          </tr>
+          <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">PSČ</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
               {postponeUserInput.psc}
