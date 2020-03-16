@@ -33,6 +33,7 @@ export const sendEmailUsingTemplate = async ({
   attributes,
   attachment,
 }: SendEmailUsingTemplateParams) => {
+  // TODO this enpoint is deprecated, use https://developers.sendinblue.com/reference#sendtransacemail
   const result = await fetch(`${baseUrl}/smtp/templates/${templateId}/send`, {
     method: 'POST',
     headers,
@@ -49,6 +50,7 @@ export const sendEmailUsingTemplate = async ({
       response: await result.json(),
     };
   }
+  return result;
 };
 
 export interface SendEmailAttachment {
