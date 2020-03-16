@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { CheckboxSmall } from './FormComponents';
+import classNames from 'classnames';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 interface Props {
   taxFormUserInput: TaxFormUserInput;
+  postponeUserInput: PostponeUserInput;
 }
 
-export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
+export const Feedback: React.FC<Props> = ({
+  taxFormUserInput,
+  postponeUserInput,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
+    undefined,
+  );
   if (isOpen) {
     return (
       <div
@@ -41,8 +48,8 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
         </div>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
-            {isSubmitted ? (
-              <p className="govuk-body">Dakujeme za feedback</p>
+            {isSubmittedSuccessfully === true ? (
+              <p className="govuk-body">Ďakujeme za feedback</p>
             ) : (
               <Formik
                 initialValues={{
@@ -50,22 +57,30 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                   whatWentWrong: '',
                   agree: false,
                 }}
-                onSubmit={(values, formik) => {
-                  return fetch('api/feedback', {
+                onSubmit={async values => {
+                  const response = await fetch('/api/feedback', {
                     method: 'POST',
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
                       taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
+                      postponeUserInput: values.agree
+                        ? postponeUserInput
+                        : null,
+                      url: window.location.href,
                     }),
-                  }).then(() => {
-                    setIsSubmitted(true);
-                    return formik.setSubmitting(false);
                   });
+
+                  setIsSubmittedSuccessfully(response.status === 200);
                 }}
               >
                 {formik => (
                   <Form>
+                    {isSubmittedSuccessfully === false && (
+                      <span className="govuk-error-message">
+                        Chyba pri odosielaní, skúste znovu
+                      </span>
+                    )}
                     <div className="govuk-form-group">
                       <label className="govuk-label" htmlFor="whatWereYouDoing">
                         Čo ste robili?
@@ -91,16 +106,22 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    <CheckboxSmall
+                    {/* <CheckboxSmall
                       name="agree"
-                      label="Suhlasim s posielanim dat (zatial nie anonymne)?"
-                    />
+                      label="Suhlasím s odoslaním dát ktoré som vyplnil (zatiaľ nie anonymne)"
+                    /> */}
                     <button
                       type="submit"
                       data-test="submit"
-                      className="govuk-button govuk-!-margin-top-4"
+                      className={classNames(
+                        'govuk-button',
+                        'govuk-button--large',
+                        'govuk-!-margin-top-4',
+                        { 'govuk-button--disabled': formik.isSubmitting },
+                      )}
+                      disabled={formik.isSubmitting}
                     >
-                      Odoslat
+                      {formik.isSubmitting ? 'Odosielam...' : 'Odoslať'}
                     </button>
                     <p className="govuk-body feedback-submitted-feedback govuk-!-padding-left-4 govuk-!-padding-top-2 govuk-!-display-inline-block" />
                   </Form>

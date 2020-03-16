@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { getRoutes } from '../lib/routes';
+import { getRoutes, getPostponeRoutes } from '../lib/routes';
 
 const { nextRoute } = getRoutes('/');
+
+const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/');
 
 export default () => (
   <>
@@ -24,7 +26,7 @@ export default () => (
         Finančnej správy.
       </p>
 
-      <Link href="/prijmy-a-vydavky">
+      <Link href={nextRoute}>
         <button
           type="button"
           className="govuk-button govuk-button--large govuk-button--start"
@@ -49,8 +51,11 @@ export default () => (
     </div>
 
     <div className="govuk-grid-column-full">
-      <Link href={nextRoute}>
-        <button type="button" className="btn-secondary govuk-button">
+      <Link href={nextPostponeRoute}>
+        <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+        >
           Odložiť daňové priznanie
         </button>
       </Link>

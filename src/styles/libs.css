@@ -87,8 +87,7 @@
 .autocomplete__option--odd {
   background-color: #fafafa;
 }
-.autocomplete__option--focused,
-.autocomplete__option:hover {
+.autocomplete__option--focused {
   background-color: #005ea5;
   border-color: #005ea5;
   color: #fff;
@@ -116,4 +115,8 @@
     font-size: 19px;
     line-height: 1.31579;
   }
+}
+.box {
+  background-color: #f4f4f4;
+  padding: 40px 30px;
 }

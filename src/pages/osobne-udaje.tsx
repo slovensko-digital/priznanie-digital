@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Input } from '../components/FormComponents';
 import styles from './osobne-udaje.module.css';
-import { PersonalInformationUserInput } from '../types/PageUserInputs';
+import {
+  PersonalInformationUserInput,
+  FormErrors,
+} from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getCity, getAutoformByPersonName } from '../lib/api';
+import { getCity } from '../lib/api';
 import { AutoformResponseBody } from '../types/api';
 import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
+import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput';
 
 const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
 
-const handlePersonAutoform = (
-  person: AutoformResponseBody,
-  { setValues, values }: FormikProps<PersonalInformationUserInput>,
-) => {
-  setValues({
-    ...values,
-    r001_dic: person?.tin ?? values.r001_dic,
-    r007_ulica: person.street,
-    r008_cislo: person.street_number,
-    r009_psc: person.postal_code.replace(/\D/g, ''),
-    r010_obec: person.municipality,
-    r011_stat: person.country,
-  });
+const makeHandlePersonAutoform = ({
+  setValues,
+  values,
+}: FormikProps<PersonalInformationUserInput>) => {
+  return (person: AutoformResponseBody) => {
+    setValues({
+      ...values,
+      meno_priezvisko: person.name,
+      r001_dic: person?.tin ?? '',
+      r007_ulica: person.street ?? person.municipality,
+      r008_cislo: person.street_number,
+      r009_psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
+      r010_obec: person.municipality,
+      r011_stat: person.country,
+    });
+  };
 };
 
 interface Props {
@@ -37,22 +44,7 @@ const OsobneUdaje: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const [autoformPersons, setAutoFormPersons] = useState<
-    AutoformResponseBody[]
-  >([]);
   const router = useRouter();
-
-  const handleAutoform = async (values: PersonalInformationUserInput) => {
-    if (values.r005_meno.length > 0 && values.r004_priezvisko.length > 1) {
-      const personsData = await getAutoformByPersonName(
-        values.r005_meno,
-        values.r004_priezvisko,
-      );
-      if (personsData) {
-        setAutoFormPersons(personsData);
-      }
-    }
-  };
 
   useEffect(() => {
     router.prefetch(nextRoute);
@@ -81,6 +73,16 @@ const OsobneUdaje: NextPage<Props> = ({
             />
             <Form className="form">
               <h2>Údaje o daňovníkovi</h2>
+              <p>
+                Údaje môžete vyhladať a automaticky vyplniť podľa mena a
+                priezviska.
+              </p>
+
+              <FullNameAutoCompleteInput
+                handlePersonAutoform={makeHandlePersonAutoform(props)}
+                handleChange={props.handleChange}
+              />
+
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
@@ -96,51 +98,6 @@ const OsobneUdaje: NextPage<Props> = ({
                   label="NACE"
                 />
               </div>
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  name="r005_meno"
-                  type="text"
-                  label="Meno"
-                  onChange={e => {
-                    props.handleChange(e);
-                    handleAutoform({
-                      ...props.values,
-                      ...{ r005_meno: e.currentTarget.value },
-                    });
-                  }}
-                />
-                <Input
-                  className={styles.inlineField}
-                  name="r004_priezvisko"
-                  type="text"
-                  label="Priezvisko"
-                  onChange={e => {
-                    props.handleChange(e);
-                    handleAutoform({
-                      ...props.values,
-                      ...{ r004_priezvisko: e.currentTarget.value },
-                    });
-                  }}
-                />
-              </div>
-
-              {autoformPersons.length > 0 && (
-                <div>
-                  <h2>Udaje nemusite vypisovat, staci si vybrat osobu:</h2>
-                  <ol className="govuk-list govuk-list--number">
-                    {autoformPersons.map(person => (
-                      <li
-                        key={person.id}
-                        className={styles.clickable}
-                        onClick={() => handlePersonAutoform(person, props)}
-                      >
-                        {person.name} : {person.formatted_address}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
 
               <h2>Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
@@ -204,47 +161,45 @@ const OsobneUdaje: NextPage<Props> = ({
   );
 };
 
-/**
- * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
- */
-const isValidDIC = (dic: string): boolean => {
-  const dicRegExp = /\d{9,10}/;
-  return dicRegExp.test(dic);
-};
-
 const validate = (values: PersonalInformationUserInput): any => {
-  const errors: any = {};
+  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {};
 
-  if (!isValidDIC(values.r001_dic)) {
-    errors.r001_dic = 'Zadajte pridelene DIC';
+  if (!values.r001_dic) {
+    errors.r001_dic = 'Zadajte pridelené DIČ';
   }
 
-  if (!values.r004_priezvisko) {
-    errors.r004_priezvisko = 'Zadajte Vase priezvisko.';
+  /**
+   * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+   */
+  if (values.r001_dic.length < 9) {
+    errors.r001_dic = 'DIČ môže mať minimálne 9 znakov';
+  }
+  if (values.r001_dic.length > 10) {
+    errors.r001_dic = 'DIČ môže mať maximálne 10 znakov';
   }
 
-  if (!values.r005_meno) {
-    errors.r005_meno = 'Zadajte Vase meno';
+  if (!values.meno_priezvisko) {
+    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko';
   }
 
   if (!values.r007_ulica) {
-    errors.r007_ulica = 'Zadajte ulicu.';
+    errors.r007_ulica = 'Zadajte ulicu';
   }
 
   if (!values.r008_cislo) {
-    errors.r008_cislo = 'Zadajte cislo domu.';
+    errors.r008_cislo = 'Zadajte číslo domu';
   }
 
   if (!values.r009_psc) {
-    errors.r009_psc = 'Zadajte PSC.';
+    errors.r009_psc = 'Zadajte PSČ';
   }
 
   if (!values.r010_obec) {
-    errors.r010_obec = 'Zadajte obec.';
+    errors.r010_obec = 'Zadajte obec';
   }
 
   if (!values.r011_stat) {
-    errors.r011_stat = 'Zadajte stat.';
+    errors.r011_stat = 'Zadajte štát';
   }
 
   return errors;

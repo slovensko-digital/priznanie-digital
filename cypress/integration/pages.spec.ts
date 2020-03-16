@@ -7,10 +7,20 @@
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput';
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
+import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput';
+import { withEmailInput } from '../../__tests__/testCases/postpone/withEmailInput';
+
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
-import { Route } from '../../src/lib/routes';
+import { Route, PostponeRoute } from '../../src/lib/routes';
+import { PostponeUserInput } from '../../src/types/PostponeUserInput';
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
+  return cy.get(`[data-test="${key}-input${suffix}"]`);
+}
+function getInputPostpone<K extends keyof PostponeUserInput>(
+  key: K,
+  suffix = '',
+) {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
@@ -25,12 +35,23 @@ function typeToInput<K extends keyof TaxFormUserInput>(
   throw new Error(`Incorrect type of input: ${value}`);
 }
 
+function typeToInputPostpone<K extends keyof PostponeUserInput>(
+  key: K,
+  userInput: PostponeUserInput,
+) {
+  const value = userInput[key];
+  if (typeof value === 'string') {
+    return getInputPostpone(key).type(value);
+  }
+  throw new Error(`Incorrect type of input: ${value}`);
+}
+
 function next() {
   return cy.contains('Pokračovať').click();
 }
 
 const getError = () => cy.get('[data-test=error]');
-function assertUrl(url: Route) {
+function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url);
 }
 
@@ -108,11 +129,11 @@ describe('osobne-udaje page', function() {
     /** With autoform */
     typeToInput('r001_dic', baseInput);
     typeToInput('r003_nace', baseInput);
-    getInput('r005_meno').type('Július');
-    getInput('r004_priezvisko').type('Ret');
+    getInput('meno_priezvisko').type('Július Ret');
 
     cy.contains('Július Retzer').click();
 
+    getInput('meno_priezvisko').should('contain.value', 'Július Retzer');
     getInput('r007_ulica').should('contain.value', 'Mierová');
     getInput('r008_cislo').should('contain.value', '4');
     getInput('r009_psc').should('contain.value', '82105');
@@ -133,8 +154,7 @@ describe('osobne-udaje page', function() {
     /** With autoform */
     typeToInput('r001_dic', baseInput);
     typeToInput('r003_nace', baseInput);
-    typeToInput('r004_priezvisko', baseInput);
-    typeToInput('r005_meno', baseInput);
+    typeToInput('meno_priezvisko', baseInput);
     typeToInput('r007_ulica', baseInput);
     typeToInput('r008_cislo', baseInput);
     typeToInput('r009_psc', baseInput);
@@ -190,9 +210,132 @@ describe('Feedback', function() {
     cy.visit('/');
     cy.get('[data-test=feedback]').click();
 
-    cy.get('[data-test=whatWereYouDoing]').type('Just some normal stuff');
-    cy.get('[data-test=whatWentWrong]').type('It all blew up');
-    cy.get('[data-test=agree]').click();
+    cy.get('[data-test=whatWereYouDoing]').type('Cypress tests');
+    cy.get('[data-test=whatWentWrong]').type('Testing the spam');
     cy.get('[data-test=submit]').click();
+    /** Don't spam the mail */
+    // cy.get('[data-test=submit]').click();
+  });
+});
+
+describe('Results page', function() {
+  it('has working navigation', function() {
+    cy.visit('/vysledky');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/osobne-udaje');
+
+    //  Go back to our page
+    cy.visit('/vysledky');
+  });
+  it('has working ui', function() {
+    cy.visit('/vysledky');
+
+    cy.get('h1').contains('Výpočet dane za rok');
+    cy.get('h2').contains('Stručný prehľad');
+  });
+});
+
+describe('/odklad/osobne-udaje page', function() {
+  beforeEach('Navigate to test page', function() {
+    cy.visit('/');
+
+    cy.contains('Odložiť daňové priznanie').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+    getInputPostpone('prijmy_zo_zahranicia', '-yes').click();
+
+    next();
+  });
+  it('Back and validation', function() {
+    assertUrl('/odklad/osobne-udaje');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+
+    //  Go back to our page
+    next();
+
+    // Shows error, when presses next without interaction
+    next();
+    getError();
+  });
+  it('with autoform', function() {
+    assertUrl('/odklad/osobne-udaje');
+
+    /** With autoform */
+    typeToInputPostpone('dic', foreignIncomeInput);
+    getInputPostpone('meno_priezvisko').type('Július Ret');
+
+    cy.contains('Július Retzer').click();
+
+    getInputPostpone('meno_priezvisko').should(
+      'contain.value',
+      'Július Retzer',
+    );
+    getInputPostpone('ulica').should('contain.value', 'Mierová');
+    getInputPostpone('cislo').should('contain.value', '4');
+    getInputPostpone('psc').should('contain.value', '82105');
+    getInputPostpone('obec').should('contain.value', 'Bratislava');
+    getInputPostpone('stat').should('contain.value', 'Slovenská republika');
+  });
+  it('with posta api', function() {
+    assertUrl('/odklad/osobne-udaje');
+
+    typeToInputPostpone('psc', foreignIncomeInput);
+    getInputPostpone('obec').should('have.value', foreignIncomeInput.obec);
+  });
+  it('Manual entry', function() {
+    assertUrl('/odklad/osobne-udaje');
+
+    typeToInputPostpone('dic', foreignIncomeInput);
+    typeToInputPostpone('meno_priezvisko', foreignIncomeInput);
+    typeToInputPostpone('ulica', foreignIncomeInput);
+    typeToInputPostpone('cislo', foreignIncomeInput);
+    typeToInputPostpone('obec', foreignIncomeInput);
+    typeToInputPostpone('psc', foreignIncomeInput);
+    typeToInputPostpone('stat', foreignIncomeInput);
+  });
+  it('Errors', function() {
+    assertUrl('/odklad/osobne-udaje');
+
+    getInputPostpone('dic').type('invalid');
+
+    next();
+    cy.get('.govuk-error-summary');
+  });
+});
+
+describe('/odklad/suhrn page', function() {
+  beforeEach('Navigate to test page', function() {
+    cy.visit('/');
+
+    cy.contains('Odložiť daňové priznanie').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+    getInputPostpone('prijmy_zo_zahranicia', '-yes').click();
+
+    next();
+
+    typeToInputPostpone('dic', foreignIncomeInput);
+    getInputPostpone('meno_priezvisko').type('Július Ret');
+
+    cy.contains('Július Retzer').click();
+
+    next();
+  });
+  it('Back', function() {
+    assertUrl('/odklad/suhrn');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/odklad/osobne-udaje');
+  });
+  it('Email', function() {
+    assertUrl('/odklad/suhrn');
+
+    typeToInputPostpone('email', withEmailInput);
+    getInputPostpone('newsletter').click();
+    cy.get('[data-test=send-email]').click();
   });
 });

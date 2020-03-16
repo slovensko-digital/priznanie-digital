@@ -5,19 +5,22 @@
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { UserInput } from '../../src/types/UserInput';
 import { convertToXML } from '../../src/lib/xml/xmlConverter';
-import { setDate } from '../../src/lib/utils';
+import { formatCurrency, setDate } from '../../src/lib/utils';
 import { calculate } from '../../src/lib/calculation';
-import { Route } from '../../src/lib/routes';
+import { Route, PostponeRoute } from '../../src/lib/routes';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { PostponeUserInput } from '../../src/types/PostponeUserInput';
+import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter';
 
-function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
+function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`);
 }
 
-function typeToInput<K extends keyof TaxFormUserInput>(
+function typeToInput<K extends keyof UserInput>(
   key: K,
-  userInput: TaxFormUserInput,
+  userInput: Partial<UserInput>,
 ) {
   const value = userInput[key];
   if (typeof value === 'string') {
@@ -30,9 +33,11 @@ function next() {
   return cy.contains('Pokračovať').click();
 }
 
-function assertUrl(url: Route) {
+function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url);
 }
+
+const getError = () => cy.get('[data-test=error]');
 
 describe('Cases', function() {
   [
@@ -55,7 +60,7 @@ describe('Cases', function() {
 
           cy.contains('Pripraviť daňové priznanie').click();
 
-        /**  SECTION Prijmy a vydavky */
+          /**  SECTION Prijmy a vydavky */
           getInput('t1r10_prijmy').type(input.t1r10_prijmy);
           getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne);
           getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne);
@@ -120,7 +125,7 @@ describe('Cases', function() {
               ].forEach(field => {
                 const key = field.slice(-3);
                 if (child[key]) {
-                  cy.get(`[data-test="${field}"]`).click();
+                  cy.get(`[data-test="${field}-input"]`).click();
                 }
               });
               if (index < input?.r034?.length) {
@@ -163,8 +168,7 @@ describe('Cases', function() {
 
           typeToInput('r001_dic', input);
           typeToInput('r003_nace', input);
-          typeToInput('r004_priezvisko', input);
-          typeToInput('r005_meno', input);
+          typeToInput('meno_priezvisko', input);
           typeToInput('r007_ulica', input);
           typeToInput('r008_cislo', input);
           typeToInput('r009_psc', input);
@@ -177,6 +181,10 @@ describe('Cases', function() {
           assertUrl('/vysledky');
 
           cy.contains('XML');
+
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseFloat(input.t1r10_prijmy)),
+          );
 
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)
@@ -200,6 +208,92 @@ describe('Cases', function() {
               cy.get('#form-button-load').click();
               cy.get('#form-buttons-load-dialog > input').upload({
                 fileContent: xmlResult,
+                fileName: 'xmlResult.xml',
+                mimeType: 'application/xml',
+                encoding: 'utf-8',
+              });
+
+              cy.get(
+                '#form-buttons-load-dialog-confirm > .ui-button-text',
+              ).click();
+              cy.get('#form-button-validate')
+                .click()
+                .should(() => {
+                  expect(stub).to.be.calledWith(
+                    'Naplnenie formulára prebehlo úspešne',
+                  );
+                });
+              cy.get('#errorsContainer')
+                .should(el => expect(el.text()).to.be.empty)
+                .then(() => done());
+            });
+        },
+      );
+    });
+  });
+});
+
+describe('Postpone cases', function() {
+  ['basic', 'foreignIncome'].forEach(testCase => {
+    it(testCase, function(done) {
+      import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
+        inputModule => {
+          // Access named export
+          const input: PostponeUserInput = inputModule[`${testCase}Input`];
+
+          cy.visit('/');
+
+          cy.contains('Odložiť daňové priznanie').click();
+          assertUrl('/odklad/prijmy-zo-zahranicia');
+
+          next();
+
+          getError();
+
+          getInput('prijmy_zo_zahranicia', '-yes').click();
+
+          cy.contains(
+            'Nový termín pre podanie daňového priznania je 30. septembra 2020.',
+          );
+          next();
+          assertUrl('/odklad/osobne-udaje');
+
+          typeToInput('meno_priezvisko', input);
+          typeToInput('dic', input);
+          // typeToInput('rodne_cislo', input); // TODO
+          typeToInput('ulica', input);
+          typeToInput('cislo', input);
+          typeToInput('psc', input);
+          getInput('obec').should('have.value', input.obec);
+          typeToInput('stat', input);
+
+          next();
+          assertUrl('/odklad/suhrn');
+
+          next();
+          assertUrl('/odklad/stiahnut');
+
+          /**  HACK to work around file download, because cypress cannot do it */
+          cy.get(`[data-test="postponeUserInput"]`)
+            .invoke('text')
+            .then(postponeUserInput => {
+              const xml = convertPostponeToXML(
+                setDate(
+                  JSON.parse(postponeUserInput.toString()) as PostponeUserInput,
+                ),
+              );
+
+              /**  HACK END */
+
+              /**  Validate our results with the FS form */
+              cy.visit('/form-odklad/form.401.html');
+
+              const stub = cy.stub();
+              cy.on('window:alert', stub);
+
+              cy.get('#form-button-load').click();
+              cy.get('#form-buttons-load-dialog > input').upload({
+                fileContent: xml,
                 fileName: 'xmlResult.xml',
                 mimeType: 'application/xml',
                 encoding: 'utf-8',

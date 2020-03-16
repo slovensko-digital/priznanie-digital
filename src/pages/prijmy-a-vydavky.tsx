@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
 import { Input, numberInputRegexp } from '../components/FormComponents';
-import { IncomeAndExpenseUserInput } from '../types/PageUserInputs';
+import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
@@ -81,8 +81,8 @@ const PrijmyAVydavky: NextPage<Props> = ({
   );
 };
 
-const validate = (values: IncomeAndExpenseUserInput): any => {
-  const errors: any = {};
+const validate = (values: IncomeAndExpenseUserInput) => {
+  const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {};
 
   if (!values.t1r10_prijmy) {
     errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';

@@ -5,6 +5,10 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
   t1r10_vydavky: number;
   t1r2_prijmy: number;
   t1r10_prijmy: number;
+  /**   04 - Priezvisko*/
+  r004_priezvisko: string;
+  /**   05 - Meno*/
+  r005_meno: string;
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */
   priloha3_r08_poistne: number;
@@ -69,7 +73,7 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
   r105_dan: number;
-  
+
   /**
 Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r106: number;

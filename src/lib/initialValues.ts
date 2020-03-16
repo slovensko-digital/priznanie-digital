@@ -7,6 +7,7 @@ import {
   PensionUserInput,
 } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
@@ -27,8 +28,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   r001_dic: '',
   // r002_datum_narodenia: "",
   r003_nace: '',
-  r004_priezvisko: '',
-  r005_meno: '',
+  meno_priezvisko: '',
   r007_ulica: '',
   r008_cislo: '',
   r009_psc: '',
@@ -79,4 +79,17 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...kidsUserInputInitialValues,
   ...pensionInitialValues,
   ...{ datum: '' },
+};
+
+export const initialPostponeUserInput: PostponeUserInput = {
+  prijmy_zo_zahranicia: undefined,
+  dic: '',
+  meno_priezvisko: '',
+  psc: '',
+  obec: '',
+  ulica: '',
+  cislo: '',
+  stat: '',
+  // rodne_cislo: '',
+  datum: '',
 };
