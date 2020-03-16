@@ -307,7 +307,7 @@ describe('/odklad/osobne-udaje page', function() {
   });
 });
 
-describe.only('/odklad/suhrn page', function() {
+describe('/odklad/suhrn page', function() {
   beforeEach('Navigate to test page', function() {
     cy.visit('/');
 
