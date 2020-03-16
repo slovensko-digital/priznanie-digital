@@ -7,6 +7,7 @@ import { CheckboxSmall, Input } from './FormComponents';
 import { saveEmail } from '../lib/api';
 import { EmailUserInput } from '../types/UserInput';
 import { PostponeUserInput } from '../types/PostponeUserInput';
+import { setDate } from '../lib/utils';
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
@@ -35,13 +36,17 @@ export const EmailForm = ({
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
     const [firstName, ...lastName] = applicantFullName.split(' ');
-    const { id, code, message } = await saveEmail(email, {
-      firstname: firstName,
-      lastname: lastName.join(' '),
-      newsletter: !!newsletter,
-      deadline,
-      form: formName,
-    });
+    const { id, code, message } = await saveEmail(
+      email,
+      {
+        firstname: firstName,
+        lastname: lastName.join(' '),
+        newsletter: !!newsletter,
+        deadline,
+        form: formName,
+      },
+      setDate(postponeUserInput),
+    );
     if (id) {
       setPostponeUserInput({ ...postponeUserInput, email, newsletter });
     } else {
