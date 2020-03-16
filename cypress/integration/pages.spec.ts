@@ -210,7 +210,7 @@ describe('Feedback', function() {
 
     cy.get('[data-test=whatWereYouDoing]').type('Cypress tests');
     cy.get('[data-test=whatWentWrong]').type('Testing the spam');
-    cy.get('[data-test=agree]').click();
+    cy.get('[data-test=submit]').click();
     /** Don't spam the mail */
     // cy.get('[data-test=submit]').click();
   });
@@ -236,22 +236,31 @@ describe('Results page', function() {
 });
 
 describe('/odklad/osobne-udaje page', function() {
-  it('Back and next', function() {
-    cy.visit('/odklad/osobne-udaje');
+  beforeEach('Navigate to test page', function() {
+    cy.visit('/');
+
+    cy.contains('Odložiť daňové priznanie').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+    getInputPostpone('prijmy_zo_zahranicia', '-yes').click();
+
+    next();
+  });
+  it('Back and validation', function() {
+    assertUrl('/odklad/osobne-udaje');
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
     assertUrl('/odklad/prijmy-zo-zahranicia');
 
     //  Go back to our page
-    cy.visit('/odklad/osobne-udaje');
+    next();
 
     // Shows error, when presses next without interaction
     next();
     getError();
   });
   it('with autoform', function() {
-    cy.visit('/odklad/osobne-udaje');
+    assertUrl('/odklad/osobne-udaje');
 
     /** With autoform */
     typeToInputPostpone('dic', foreignIncomeInput);
@@ -270,15 +279,14 @@ describe('/odklad/osobne-udaje page', function() {
     getInputPostpone('stat').should('contain.value', 'Slovenská republika');
   });
   it('with posta api', function() {
-    cy.visit('/odklad/osobne-udaje');
+    assertUrl('/odklad/osobne-udaje');
 
     typeToInputPostpone('psc', foreignIncomeInput);
     getInputPostpone('obec').should('have.value', foreignIncomeInput.obec);
   });
   it('Manual entry', function() {
-    cy.visit('/odklad/osobne-udaje');
+    assertUrl('/odklad/osobne-udaje');
 
-    /** With autoform */
     typeToInputPostpone('dic', foreignIncomeInput);
     typeToInputPostpone('meno_priezvisko', foreignIncomeInput);
     typeToInputPostpone('ulica', foreignIncomeInput);
@@ -288,7 +296,7 @@ describe('/odklad/osobne-udaje page', function() {
     typeToInputPostpone('stat', foreignIncomeInput);
   });
   it('Errors', function() {
-    cy.visit('/odklad/osobne-udaje');
+    assertUrl('/odklad/osobne-udaje');
 
     getInputPostpone('dic').type('invalid');
 
@@ -298,14 +306,27 @@ describe('/odklad/osobne-udaje page', function() {
 });
 
 describe('/odklad/suhrn page', function() {
+  beforeEach('Navigate to test page', function() {
+    cy.visit('/');
+
+    cy.contains('Odložiť daňové priznanie').click();
+    assertUrl('/odklad/prijmy-zo-zahranicia');
+    getInputPostpone('prijmy_zo_zahranicia', '-yes').click();
+
+    next();
+
+    typeToInputPostpone('dic', foreignIncomeInput);
+    getInputPostpone('meno_priezvisko').type('Július Ret');
+
+    cy.contains('Július Retzer').click();
+
+    next();
+  });
   it('Back', function() {
-    cy.visit('/odklad/suhrn');
+    assertUrl('/odklad/suhrn');
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
     assertUrl('/odklad/osobne-udaje');
-  });
-  it('Back', function() {
-    cy.visit('/odklad/suhrn');
   });
 });
