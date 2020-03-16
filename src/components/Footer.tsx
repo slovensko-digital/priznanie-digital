@@ -1,17 +1,17 @@
 import React from 'react';
 import { Feedback } from './Feedback';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
+// import { TaxFormUserInput } from '../types/TaxFormUserInput';
 
-interface Props {
-  taxFormUserInput: TaxFormUserInput;
-}
+// interface Props {
+//   taxFormUserInput: TaxFormUserInput;
+// }
 
-const Footer = ({ taxFormUserInput }: Props) => {
+const Footer = () => {
   return (
     <>
       <div className="sdn-feedbackbar">
         <div className="govuk-width-container ">
-          <Feedback taxFormUserInput={taxFormUserInput} />
+          <Feedback />
         </div>
       </div>
       <footer className="sdn-footer " role="contentinfo">

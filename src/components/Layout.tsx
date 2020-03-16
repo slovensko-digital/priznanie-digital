@@ -54,7 +54,7 @@ const Layout: React.FC<Props> = ({
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     />
-    <Footer taxFormUserInput={taxFormUserInput} />
+    <Footer />
     <style jsx>{`
       .container {
         display: flex;
