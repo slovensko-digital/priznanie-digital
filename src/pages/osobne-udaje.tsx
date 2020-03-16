@@ -80,7 +80,6 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <FullNameAutoCompleteInput
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
-                handleChange={props.handleChange}
               />
 
               <div className={styles.inlineFieldContainer}>

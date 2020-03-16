@@ -79,6 +79,7 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
+                  hint="Napríklad 1234567890"
                   name="dic"
                   type="text"
                   label="DIČ"
@@ -99,6 +100,7 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   name="ulica"
+                  hint="Napríklad Obchodná"
                   type="text"
                   label="Ulica"
                   width="auto"
@@ -110,6 +112,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   name="cislo"
                   type="text"
+                  hint="Napríklad 9"
                   label="Súpisné/orientačné číslo"
                   width="auto"
                 />
@@ -118,6 +121,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   className="govuk-!-margin-right-5"
                   name="psc"
+                  hint="Napr. 811 06"
                   type="text"
                   label="PSČ"
                   width={5}
@@ -141,13 +145,20 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   name="obec"
                   type="text"
+                  hint="Napríklad Bratislava"
                   label="Obec"
                   width="auto"
                   className={styles.flexGrow}
                 />
               </div>
 
-              <Input name="stat" type="text" label="Štát" width={10} />
+              <Input
+                name="stat"
+                type="text"
+                label="Štát"
+                width={10}
+                hint="Napríklad Slovensko"
+              />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
@@ -171,7 +182,7 @@ const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
     .min(9, 'DIČ môže mať minimálne 9 znakov')
     .max(10, 'DIČ môže mať maximálne 10 znakov'),
   meno_priezvisko: Yup.string().required('Zadajte vaše meno a priezvisko'),
-  psc: Yup.string().required(),
+  psc: Yup.string().required('Zadajte PSČ'),
   // rodne_cislo: Yup.string()
   //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
   //   .required(),
