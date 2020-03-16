@@ -13,10 +13,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const email = `${req.body.email}`;
   const attributes = req.body.attributes as EmailAttributes;
 
-  const response = await saveEmailAddress(email, attributes);
-
-  if (response.status === 201) {
-    await sendEmailUsingTemplate({
+  try {
+    const sendEmailResponse = await sendEmailUsingTemplate({
       templateId: attributes.newsletter
         ? TEMPLATE_WITH_NEWSLETTER
         : TEMPLATE_WITHOUT_NEWSLETTER,
@@ -26,8 +24,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         makeAttachment('odklad_danoveho_priznania.xml', req.body.file),
       ],
     });
-  }
 
-  res.statusCode = response.status;
-  res.send({ ...(await response.json()) });
+    if (sendEmailResponse.ok) {
+      const saveEmailResponse = await saveEmailAddress(email, attributes);
+      if (!saveEmailResponse.ok) {
+        res.statusCode = saveEmailResponse.status;
+        return res.send({ ...(await saveEmailResponse.json()) });
+      }
+    }
+
+    res.statusCode = sendEmailResponse.status;
+    res.send({ ...(await sendEmailResponse.json()) });
+  } catch (error) {
+    res.statusCode = 500;
+    res.send(error);
+  }
 };

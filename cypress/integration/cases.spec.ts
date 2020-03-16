@@ -125,7 +125,7 @@ describe('Cases', function() {
               ].forEach(field => {
                 const key = field.slice(-3);
                 if (child[key]) {
-                  cy.get(`[data-test="${field}"]`).click();
+                  cy.get(`[data-test="${field}-input"]`).click();
                 }
               });
               if (index < input?.r034?.length) {

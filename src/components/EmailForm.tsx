@@ -36,7 +36,7 @@ export const EmailForm = ({
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
     const [firstName, ...lastName] = applicantFullName.split(' ');
-    const { id, code, message } = await saveEmail(
+    const { messageId, code, message } = await saveEmail(
       email,
       {
         firstname: firstName,
@@ -47,7 +47,7 @@ export const EmailForm = ({
       },
       setDate(postponeUserInput),
     );
-    if (id) {
+    if (messageId) {
       setPostponeUserInput({ ...postponeUserInput, email, newsletter });
     } else {
       setFieldError('email', getErrorMessage(code, message));
@@ -97,6 +97,7 @@ export const EmailForm = ({
           </p>
           <button
             type="submit"
+            data-test="send-email"
             className={classNames(
               'btn-secondary',
               'govuk-button',
