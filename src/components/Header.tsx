@@ -14,7 +14,8 @@ const Header: React.FC = () => {
             <span className="sdn-header__product-name">priznanie.digital</span>
           </a>
         </Link>
-        <div className="sdn-header__content">
+        {/* TODO use later */}
+        {/* <div className="sdn-header__content">
           <button
             type="button"
             className="sdn-header__menu-button sdn-header__menu-button js-header-toggle"
@@ -36,7 +37,7 @@ const Header: React.FC = () => {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
       </div>
     </header>
   );

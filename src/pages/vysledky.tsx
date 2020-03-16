@@ -57,8 +57,10 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
           Naspat
         </a>
       </Link>
-      <h1>Výpočet dane za rok 2019</h1>
-      <h2>Stručný prehľad</h2>
+      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+        Výpočet dane za rok 2019
+      </h1>
+      <h2 className="govuk-heading-l govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary
         rows={[
           { title: 'Príjmy', value: taxForm.t1r2_prijmy },

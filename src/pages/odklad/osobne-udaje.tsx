@@ -74,11 +74,14 @@ const OsobneUdaje: NextPage<Props> = ({
               touched={props.touched}
             />
             <Form className="form">
-              <h2>Údaje o daňovníkovi</h2>
+              <h1 className="govuk-heading-l govuk-!-margin-top-3">
+                Údaje o daňovníkovi
+              </h1>
 
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
+                  hint="Napríklad 1234567890"
                   name="dic"
                   type="text"
                   label="DIČ"
@@ -93,13 +96,13 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <FullNameAutoCompleteInput
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
-                handleChange={props.handleChange}
               />
 
               <h2>Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
                 <Input
                   name="ulica"
+                  hint="Napríklad Obchodná"
                   type="text"
                   label="Ulica"
                   width="auto"
@@ -111,6 +114,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   name="cislo"
                   type="text"
+                  hint="Napríklad 9"
                   label="Súpisné/orientačné číslo"
                   width="auto"
                 />
@@ -119,6 +123,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   className="govuk-!-margin-right-5"
                   name="psc"
+                  hint="Napr. 811 06"
                   type="text"
                   label="PSČ"
                   width={5}
@@ -142,13 +147,20 @@ const OsobneUdaje: NextPage<Props> = ({
                 <Input
                   name="obec"
                   type="text"
+                  hint="Napríklad Bratislava"
                   label="Obec"
                   width="auto"
                   className={styles.flexGrow}
                 />
               </div>
 
-              <Input name="stat" type="text" label="Štát" width={10} />
+              <Input
+                name="stat"
+                type="text"
+                label="Štát"
+                width={10}
+                hint="Napríklad Slovensko"
+              />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
@@ -164,17 +176,21 @@ const OsobneUdaje: NextPage<Props> = ({
 // const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
 
 const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
+  /**
+   * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+   */
   dic: Yup.string()
-    .required()
-    .length(10),
-  meno_priezvisko: Yup.string().required(),
-  psc: Yup.string().required(),
+    .required('Zadajte pridelené DIČ')
+    .min(9, 'DIČ môže mať minimálne 9 znakov')
+    .max(10, 'DIČ môže mať maximálne 10 znakov'),
+  meno_priezvisko: Yup.string().required('Zadajte vaše meno a priezvisko'),
+  psc: Yup.string().required('Zadajte PSČ'),
   // rodne_cislo: Yup.string()
   //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
   //   .required(),
-  obec: Yup.string().required(),
-  ulica: Yup.string().required(),
-  cislo: Yup.string().required(),
-  stat: Yup.string().required(),
+  obec: Yup.string().required('Zadajte obec'),
+  ulica: Yup.string().required('Zadajte ulicu'),
+  cislo: Yup.string().required('Zadajte číslo domu'),
+  stat: Yup.string().required('Zadajte štát'),
 });
 export default OsobneUdaje;

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import { useField } from 'formik';
 import styles from './FullNameAutoCompleteInput.module.css';
 import { Input } from './FormComponents';
 import { getAutoformByPersonName } from '../lib/api';
 import { AutoformResponseBody } from '../types/api';
 
 export interface FullNameAutoCompleteInput {
-  handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
   handlePersonAutoform: (person: AutoformResponseBody) => void;
 }
 export const FullNameAutoCompleteInput = ({
-  handleChange,
   handlePersonAutoform,
 }: FullNameAutoCompleteInput) => {
   const [autoformPersons, setAutoFormPersons] = useState<
@@ -26,6 +25,7 @@ export const FullNameAutoCompleteInput = ({
     number
   >(null);
   const [selectedPersonIndex, setSelectedPersonIndex] = useState<number>(-1);
+  const [field] = useField('meno_priezvisko');
 
   const handleAutoform = async (name: string) => {
     if (name.length > 2) {
@@ -51,11 +51,12 @@ export const FullNameAutoCompleteInput = ({
     setShowAutocomplete(true);
   };
 
-  const handleAutocompleteInputBlur = () => {
+  const handleAutocompleteInputBlur = event => {
     const timeout = window.setTimeout(() => {
       setShowAutocomplete(false);
     }, 250);
     setAutocompleteBlurTimeout(timeout);
+    field.onBlur(event);
   };
 
   const getNextNavigationIndex = () => {
@@ -97,6 +98,7 @@ export const FullNameAutoCompleteInput = ({
     <>
       <div className={styles.autocompleteFieldWrapper}>
         <Input
+          {...field}
           name="meno_priezvisko"
           type="text"
           label="Meno a priezvisko"
@@ -104,7 +106,7 @@ export const FullNameAutoCompleteInput = ({
           autoComplete="12iubu312b3"
           className={isLoadingAutoform ? styles.autocompleteFieldLoading : ''}
           onChange={event => {
-            handleChange(event);
+            field.onChange(event);
             debounceAutoform(event.currentTarget.value);
           }}
           onClick={handleAutocompleteInputFocus}

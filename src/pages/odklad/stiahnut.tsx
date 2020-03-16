@@ -34,10 +34,12 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </a>
       </Link>
       <div className="box">
-        <h1>Žiadosť o odklad daňového priznania je pripravená</h1>
+        <h1 className="govuk-heading-l govuk-!-margin-top-3">
+          Žiadosť o odklad daňového priznania je pripravená
+        </h1>
         <p>
           Stiahnite si súbor do počítača. Použijete ho neskôr na portáli
-          finančnej správy.
+          Finančnej správy.
         </p>
         <button
           type="submit"
@@ -64,7 +66,11 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
       )}
 
       <Link href={nextRoute}>
-        <button className="govuk-button" disabled={!didDownload} type="button">
+        <button
+          className="govuk-button govuk-!-margin-top-9"
+          disabled={!didDownload}
+          type="button"
+        >
           Pokračovať
         </button>
       </Link>

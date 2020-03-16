@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: row;
 }
+@media only screen and (max-width: 600px) {
+  .inlineFieldContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .inlineField {
   width: 50%;
 }
@@ -12,4 +18,3 @@
 .flexGrow {
   flex-grow: 1;
 }
-
