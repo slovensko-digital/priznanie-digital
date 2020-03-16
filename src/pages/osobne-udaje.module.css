@@ -8,3 +8,8 @@
 .inlineField:first-child {
   margin-right: 16px;
 }
+
+.flexGrow {
+  flex-grow: 1;
+}
+

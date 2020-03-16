@@ -124,7 +124,7 @@ const Suhrn: NextPage<Props> = ({
       />
 
       <Link href={nextRoute}>
-        <button className="govuk-button" type="button">
+        <button className="govuk-button govuk-!-margin-top-4" type="button">
           Pokračovať
         </button>
       </Link>
