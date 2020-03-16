@@ -1,66 +1,31 @@
-import fetch from 'isomorphic-unfetch';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { SaveEmailAttributes } from '../../types/api';
+import {
+  EmailAttributes,
+  makeAttachment,
+  saveEmailAddress,
+  sendEmailUsingTemplate,
+} from '../../lib/sendinblue';
 
-const baseUrl = 'https://api.sendinblue.com/v3';
-const token = process.env.sendinbluetoken;
 const TEMPLATE_WITHOUT_NEWSLETTER = 3;
 const TEMPLATE_WITH_NEWSLETTER = 4;
 
-if (!token) {
-  throw new Error(' process.env.sendinbluetoken is not defined');
-}
-
-const saveEmail = (email: string, attributes: SaveEmailAttributes) =>
-  fetch(`${baseUrl}/contacts`, {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-      'api-key': token,
-    },
-    body: JSON.stringify({
-      email,
-      attributes,
-    }),
-  });
-
-const sendConfirmationEmail = (
-  templateId: number,
-  email: string,
-  attributes: SaveEmailAttributes,
-) =>
-  fetch(`${baseUrl}/smtp/templates/${templateId}/send`, {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-      'api-key': token,
-    },
-    body: JSON.stringify({
-      emailTo: [email],
-      attributes,
-    }),
-  });
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const email = `${req.body.email}`;
-  const attributes = req.body.attributes as SaveEmailAttributes;
+  const attributes = req.body.attributes as EmailAttributes;
 
-  const response = await saveEmail(email, attributes);
+  const response = await saveEmailAddress(email, attributes);
 
   if (response.status === 201) {
-    const confirmation = await sendConfirmationEmail(
-      attributes.newsletter
+    await sendEmailUsingTemplate({
+      templateId: attributes.newsletter
         ? TEMPLATE_WITH_NEWSLETTER
         : TEMPLATE_WITHOUT_NEWSLETTER,
       email,
       attributes,
-    );
-    if (confirmation.status !== 201) {
-      const confirmationResponse = await confirmation.json();
-      console.error(`Error sending email ${email}`, confirmationResponse);
-    }
+      attachment: [
+        makeAttachment('odklad_danoveho_priznania.xml', req.body.file),
+      ],
+    });
   }
 
   res.statusCode = response.status;
