@@ -35,9 +35,7 @@ const Suhrn: NextPage<Props> = ({
           Naspat
         </a>
       </Link>
-      <h1>Súhrn a kontrola vyplnených údajov</h1>
-
-      <h2>Predĺžená lehota na podanie daňového priznania</h2>
+      <h1 className="govuk-heading-l">Súhrn a kontrola vyplnených údajov</h1>
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">

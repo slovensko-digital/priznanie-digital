@@ -34,7 +34,9 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </a>
       </Link>
       <div className="box">
-        <h1>Žiadosť o odklad daňového priznania je pripravená</h1>
+        <h1 className="govuk-heading-l">
+          Žiadosť o odklad daňového priznania je pripravená
+        </h1>
         <p>
           Stiahnite si súbor do počítača. Použijete ho neskôr na portáli
           finančnej správy.

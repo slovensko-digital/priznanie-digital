@@ -13,7 +13,9 @@ const Stiahnut: NextPage<{}> = () => {
           Naspat
         </a>
       </Link>
-      <h1>Návod na podanie žiadosti na portáli finančnej správy</h1>
+      <h1 className="govuk-heading-l">
+        Návod na podanie žiadosti na portáli finančnej správy
+      </h1>
       <div>
         <ol className="govuk-list govuk-list--number">
           <li>

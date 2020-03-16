@@ -74,7 +74,7 @@ const OsobneUdaje: NextPage<Props> = ({
               touched={props.touched}
             />
             <Form className="form">
-              <h1>Údaje o daňovníkovi</h1>
+              <h1 className="govuk-heading-l">Údaje o daňovníkovi</h1>
 
               <div className={styles.inlineFieldContainer}>
                 <Input
