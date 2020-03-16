@@ -20,6 +20,9 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!postponeUserInput.meno_priezvisko) {
+      router.replace(previousRoute);
+    }
     router.prefetch(nextRoute);
   });
 
