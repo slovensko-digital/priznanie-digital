@@ -93,7 +93,6 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <FullNameAutoCompleteInput
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
-                handleChange={props.handleChange}
               />
 
               <h2>Adresa trvalého pobytu</h2>

@@ -126,7 +126,10 @@ export const BooleanRadio = <Name extends keyof UserInput>({
           </div>
         </div>
         {meta.touched && meta.error ? (
-          <span data-test="error" className="govuk-error-message">
+          <span
+            data-test="error"
+            className="govuk-error-message govuk-!-margin-top-3"
+          >
             <span className="govuk-visually-hidden">Error:</span> {meta.error}
           </span>
         ) : null}
