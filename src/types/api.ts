@@ -40,14 +40,6 @@ export interface PSCResponseBody {
   offices?: Offices[];
 }
 
-export interface SaveEmailAttributes {
-  firstname: string;
-  lastname: string;
-  newsletter: boolean;
-  deadline: string;
-  form: string;
-}
-
 export interface SaveEmailResponse {
   id?: string;
   code?: string;

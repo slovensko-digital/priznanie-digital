@@ -1,40 +1,40 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import sgMail from '@sendgrid/mail';
-
-// const util = require('util');
-
-const token = process.env.SENDGRID_API_KEY;
-
-if (!token) {
-  throw new Error('process.env.SENDGRID_API_KEY is not defined');
-}
+import { makeAttachment, sendEmail } from '../../lib/sendinblue';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const parsedBody = JSON.parse(req.body);
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const ipAddress =
+    req.connection.remoteAddress || req.headers['x-forwarded-for'] || '?';
 
-  const content = {
-    to: 'priznanie.digital@protonmail.com',
-    from: 'priznanie.digital@slovensko.digital',
-    subject: parsedBody.whatWereYouDoing,
-    text: parsedBody.whatWentWrong,
-    attachments: [
-      {
-        filename: 'userInput.json',
-        content: Buffer.from(
-          JSON.stringify(parsedBody.taxFormUserInput),
-        ).toString('base64'),
-      },
-    ],
-  };
+  const attachment = [];
+  if (parsedBody.taxFormUserInput) {
+    attachment.push(
+      makeAttachment('taxFormUserInput.json.txt', parsedBody.taxFormUserInput),
+    );
+  }
+  if (parsedBody.postponeUserInput) {
+    attachment.push(
+      makeAttachment(
+        'postponeUserInput.json.txt',
+        parsedBody.postponeUserInput,
+      ),
+    );
+  }
+
   try {
-    await sgMail.send(content);
-    res.status(200).send('Message sent successfully.');
+    await sendEmail({
+      from: 'priznanie.digital@slovensko.digital',
+      to: 'priznanie.digital@protonmail.com',
+      subject: parsedBody.whatWereYouDoing,
+      textContent: `${parsedBody.whatWentWrong}\n\n
+URL: ${parsedBody.url}
+IP adresa: ${ipAddress}
+Dátum: ${new Date().toLocaleString()}`,
+      attachment,
+    });
+    res.status(200).send({ sent: true });
   } catch (error) {
-    // console.log(
-    //   util.inspect(error, { compact: true, depth: 10, breakLength: 80 }),
-    // );
-    res.status(400).send('Message not sent.');
+    res.status(400).send({ sent: false });
   }
 };

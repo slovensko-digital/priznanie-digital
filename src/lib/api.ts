@@ -2,9 +2,10 @@ import fetch from 'isomorphic-unfetch';
 import {
   AutoformResponseBody,
   PSCResponseBody,
-  SaveEmailAttributes,
   SaveEmailResponse,
 } from '../types/api';
+import { PostponeUserInput } from '../types/PostponeUserInput';
+import { EmailAttributes } from './sendinblue';
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
@@ -22,7 +23,8 @@ export const getAutoformByPersonName = async (
 
 export const saveEmail = async (
   email: string,
-  attributes: SaveEmailAttributes,
+  attributes: EmailAttributes,
+  file: PostponeUserInput,
 ): Promise<SaveEmailResponse> => {
   return fetch('/api/email', {
     method: 'POST',
@@ -30,6 +32,6 @@ export const saveEmail = async (
       accept: 'application/json',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ email, attributes }),
+    body: JSON.stringify({ email, attributes, file }),
   }).then(response => response.json());
 };
