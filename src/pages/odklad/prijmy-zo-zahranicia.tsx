@@ -85,7 +85,7 @@ const validate = (values: IncomeSourceCountryUserInput) => {
   const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {};
 
   if (values.prijmy_zo_zahranicia === undefined) {
-    errors.prijmy_zo_zahranicia = 'Vyznačte jednu z moznosti';
+    errors.prijmy_zo_zahranicia = 'Vyznačte, či ste mali príjmy zo zahraničia';
   }
 
   return errors;
