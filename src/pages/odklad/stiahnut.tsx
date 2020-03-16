@@ -39,7 +39,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </h1>
         <p>
           Stiahnite si súbor do počítača. Použijete ho neskôr na portáli
-          finančnej správy.
+          Finančnej správy.
         </p>
         <button
           type="submit"
