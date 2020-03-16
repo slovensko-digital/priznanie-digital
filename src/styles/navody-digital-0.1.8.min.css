@@ -191,7 +191,7 @@ a:focus {
     margin-bottom: 50px;
   }
 }
-.govuk-heading-l govuk-!-margin-top-3 {
+.govuk-heading-l {
   color: #06070b;
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -205,26 +205,26 @@ a:focus {
   margin-bottom: 20px;
 }
 @media print {
-  .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-heading-l {
     color: #000;
     font-family: sans-serif;
   }
 }
 @media (min-width: 40.0625em) {
-  .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-heading-l {
     font-size: 36px;
     font-size: 2.25rem;
     line-height: 1.11111;
   }
 }
 @media print {
-  .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-heading-l {
     font-size: 24pt;
     line-height: 1.05;
   }
 }
 @media (min-width: 40.0625em) {
-  .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-heading-l {
     margin-bottom: 30px;
   }
 }
@@ -555,29 +555,29 @@ p {
     margin-bottom: 20px;
   }
 }
-.govuk-body-l + .govuk-heading-l govuk-!-margin-top-3,
-.govuk-body-lead + .govuk-heading-l govuk-!-margin-top-3 {
+.govuk-body-l + .govuk-heading-l,
+.govuk-body-lead + .govuk-heading-l {
   padding-top: 5px;
 }
 @media (min-width: 40.0625em) {
-  .govuk-body-l + .govuk-heading-l govuk-!-margin-top-3,
-  .govuk-body-lead + .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-body-l + .govuk-heading-l,
+  .govuk-body-lead + .govuk-heading-l {
     padding-top: 10px;
   }
 }
-.govuk-body + .govuk-heading-l govuk-!-margin-top-3,
-.govuk-body-m + .govuk-heading-l govuk-!-margin-top-3,
-.govuk-body-s + .govuk-heading-l govuk-!-margin-top-3,
-.govuk-list + .govuk-heading-l govuk-!-margin-top-3,
-p + .govuk-heading-l govuk-!-margin-top-3 {
+.govuk-body + .govuk-heading-l,
+.govuk-body-m + .govuk-heading-l,
+.govuk-body-s + .govuk-heading-l,
+.govuk-list + .govuk-heading-l,
+p + .govuk-heading-l {
   padding-top: 15px;
 }
 @media (min-width: 40.0625em) {
-  .govuk-body + .govuk-heading-l govuk-!-margin-top-3,
-  .govuk-body-m + .govuk-heading-l govuk-!-margin-top-3,
-  .govuk-body-s + .govuk-heading-l govuk-!-margin-top-3,
-  .govuk-list + .govuk-heading-l govuk-!-margin-top-3,
-  p + .govuk-heading-l govuk-!-margin-top-3 {
+  .govuk-body + .govuk-heading-l,
+  .govuk-body-m + .govuk-heading-l,
+  .govuk-body-s + .govuk-heading-l,
+  .govuk-list + .govuk-heading-l,
+  p + .govuk-heading-l {
     padding-top: 20px;
   }
 }
