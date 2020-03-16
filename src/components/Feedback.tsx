@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { CheckboxSmall } from './FormComponents';
+import classNames from 'classnames';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { PostponeUserInput } from '../types/PostponeUserInput';
 
@@ -106,14 +106,19 @@ export const Feedback: React.FC<Props> = ({
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    <CheckboxSmall
+                    {/* <CheckboxSmall
                       name="agree"
                       label="Suhlasím s odoslaním dát ktoré som vyplnil (zatiaľ nie anonymne)"
-                    />
+                    /> */}
                     <button
                       type="submit"
                       data-test="submit"
-                      className="govuk-button govuk-!-margin-top-4"
+                      className={classNames(
+                        'govuk-button',
+                        'govuk-button--large',
+                        'govuk-!-margin-top-4',
+                        { 'govuk-button--disabled': formik.isSubmitting },
+                      )}
                       disabled={formik.isSubmitting}
                     >
                       {formik.isSubmitting ? 'Odosielam...' : 'Odoslať'}

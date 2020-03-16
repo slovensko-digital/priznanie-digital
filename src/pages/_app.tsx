@@ -33,6 +33,7 @@ setLocale({
   string: {
     min: 'Musí mať aspoň ${min} znakov',
     max: 'Môže mať maximálne ${max} znakov',
+    length: 'Musí mať presne ${length} znakov',
   },
 });
 /* eslint-enable no-template-curly-in-string */
