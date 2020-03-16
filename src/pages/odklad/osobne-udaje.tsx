@@ -164,17 +164,21 @@ const OsobneUdaje: NextPage<Props> = ({
 // const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
 
 const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
+  /**
+   * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+   */
   dic: Yup.string()
-    .required()
-    .length(10),
-  meno_priezvisko: Yup.string().required(),
+    .required('Zadajte pridelené DIČ')
+    .min(9, 'DIČ môže mať minimálne 9 znakov')
+    .max(10, 'DIČ môže mať maximálne 10 znakov'),
+  meno_priezvisko: Yup.string().required('Zadajte vaše meno a priezvisko'),
   psc: Yup.string().required(),
   // rodne_cislo: Yup.string()
   //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
   //   .required(),
-  obec: Yup.string().required(),
-  ulica: Yup.string().required(),
-  cislo: Yup.string().required(),
-  stat: Yup.string().required(),
+  obec: Yup.string().required('Zadajte obec'),
+  ulica: Yup.string().required('Zadajte ulicu'),
+  cislo: Yup.string().required('Zadajte číslo domu'),
+  stat: Yup.string().required('Zadajte štát'),
 });
 export default OsobneUdaje;
