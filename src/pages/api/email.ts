@@ -13,19 +13,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const email = `${req.body.email}`;
   const attributes = req.body.attributes as EmailAttributes;
 
-  const response = await sendEmailUsingTemplate({
-    templateId: attributes.newsletter
-      ? TEMPLATE_WITH_NEWSLETTER
-      : TEMPLATE_WITHOUT_NEWSLETTER,
-    email,
-    attributes,
-    attachment: [
-      makeAttachment('odklad_danoveho_priznania.xml', req.body.file),
-    ],
-  });
+  const response = await saveEmailAddress(email, attributes);
 
   if (response.status === 201) {
-    const saveResponse = await saveEmailAddress(email, attributes);
+    await sendEmailUsingTemplate({
+      templateId: attributes.newsletter
+        ? TEMPLATE_WITH_NEWSLETTER
+        : TEMPLATE_WITHOUT_NEWSLETTER,
+      email,
+      attributes,
+      attachment: [
+        makeAttachment('odklad_danoveho_priznania.xml', req.body.file),
+      ],
+    });
   }
 
   res.statusCode = response.status;

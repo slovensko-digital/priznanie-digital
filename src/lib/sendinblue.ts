@@ -49,7 +49,6 @@ export const sendEmailUsingTemplate = async ({
       response: await result.json(),
     };
   }
-  return result;
 };
 
 export interface SendEmailAttachment {
