@@ -1,17 +1,22 @@
 import React from 'react';
 import { Feedback } from './Feedback';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
+import { PostponeUserInput } from '../types/PostponeUserInput';
 
 interface Props {
   taxFormUserInput: TaxFormUserInput;
+  postponeUserInput: PostponeUserInput;
 }
 
-const Footer = ({ taxFormUserInput }: Props) => {
+const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
   return (
     <>
       <div className="sdn-feedbackbar">
         <div className="govuk-width-container ">
-          <Feedback taxFormUserInput={taxFormUserInput} />
+          <Feedback
+            taxFormUserInput={taxFormUserInput}
+            postponeUserInput={postponeUserInput}
+          />
         </div>
       </div>
       <footer className="sdn-footer " role="contentinfo">
