@@ -51,11 +51,6 @@ export const Input = <Name extends keyof UserInput>({
         {label}
       </label>
       <span className="govuk-hint">{hint}</span>
-      {meta.touched && meta.error ? (
-        <span id={props.name} data-test="error" className="govuk-error-message">
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
-        </span>
-      ) : null}
       <input
         id={props.name}
         className={classnames('govuk-input', {
@@ -67,6 +62,15 @@ export const Input = <Name extends keyof UserInput>({
         {...props}
         type="text"
       />
+      {meta.touched && meta.error ? (
+        <span
+          id={props.name}
+          data-test="error"
+          className="govuk-error-message govuk-!-margin-top-2 govuk-!-margin-bottom-0"
+        >
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
     </div>
   );
 };
