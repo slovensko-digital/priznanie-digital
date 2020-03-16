@@ -41,7 +41,7 @@ export interface PSCResponseBody {
 }
 
 export interface SaveEmailResponse {
-  id?: string;
+  messageId?: string;
   code?: string;
   message?: string;
 }

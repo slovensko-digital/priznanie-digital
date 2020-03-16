@@ -8,6 +8,8 @@ import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInp
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput';
 import { baseInput } from '../../__tests__/testCases/baseInput';
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput';
+import { withEmailInput } from '../../__tests__/testCases/postpone/withEmailInput';
+
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
 import { Route, PostponeRoute } from '../../src/lib/routes';
 import { PostponeUserInput } from '../../src/types/PostponeUserInput';
@@ -305,7 +307,7 @@ describe('/odklad/osobne-udaje page', function() {
   });
 });
 
-describe('/odklad/suhrn page', function() {
+describe.only('/odklad/suhrn page', function() {
   beforeEach('Navigate to test page', function() {
     cy.visit('/');
 
@@ -328,5 +330,12 @@ describe('/odklad/suhrn page', function() {
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
     assertUrl('/odklad/osobne-udaje');
+  });
+  it.only('Email', function() {
+    assertUrl('/odklad/suhrn');
+
+    typeToInputPostpone('email', withEmailInput);
+    getInputPostpone('newsletter').click();
+    cy.get('[data-test=send-email]').click();
   });
 });
