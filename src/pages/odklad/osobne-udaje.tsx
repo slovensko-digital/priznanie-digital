@@ -74,7 +74,7 @@ const OsobneUdaje: NextPage<Props> = ({
               touched={props.touched}
             />
             <Form className="form">
-              <h1 className="govuk-heading-l govuk-!-margin-top-3 govuk-!-margin-top-3">
+              <h1 className="govuk-heading-l govuk-!-margin-top-3">
                 Údaje o daňovníkovi
               </h1>
 
