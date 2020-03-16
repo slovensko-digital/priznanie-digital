@@ -34,7 +34,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </a>
       </Link>
       <div className="box">
-        <h1 className="govuk-heading-l">
+        <h1 className="govuk-heading-l govuk-!-margin-top-3">
           Žiadosť o odklad daňového priznania je pripravená
         </h1>
         <p>

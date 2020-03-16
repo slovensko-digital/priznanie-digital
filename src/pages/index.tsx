@@ -9,7 +9,7 @@ const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/');
 export default () => (
   <>
     <div className="govuk-grid-column-full">
-      <h1 className="govuk-heading-l">
+      <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Návod na vyplnenie daňového priznania pre SZČO
       </h1>
       <p>

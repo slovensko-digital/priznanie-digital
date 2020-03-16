@@ -13,7 +13,7 @@ const Stiahnut: NextPage<{}> = () => {
           Naspat
         </a>
       </Link>
-      <h1 className="govuk-heading-l">
+      <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Návod na podanie žiadosti na portáli finančnej správy
       </h1>
       <div>
