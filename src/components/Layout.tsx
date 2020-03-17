@@ -25,16 +25,16 @@ const Layout: React.FC<Props> = ({
       <title>priznanie.digital</title>
     </Head>
     <Header />
-    <div className="sdn-headline">
+    {/* <div className="sdn-headline">
       <div className="sdn-headline__container govuk-width-container">
         <div className="sdn-headline__part">
           <span className="sdn-headline__headline">{headline}</span>
         </div>
       </div>
-    </div>
+    </div> */}
 
     <div className="govuk-width-container content-container">
-      <div className="govuk-phase-banner">
+      {/* <div className="govuk-phase-banner">
         <p className="govuk-phase-banner__content">
           <strong className="govuk-tag govuk-phase-banner__content__tag">
             Alpha
@@ -43,7 +43,7 @@ const Layout: React.FC<Props> = ({
             Táto služba je vo vývoji.
           </span>
         </p>
-      </div>
+      </div> */}
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>

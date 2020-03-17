@@ -19,7 +19,7 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
           />
         </div>
       </div>
-      <footer className="sdn-footer " role="contentinfo">
+      <footer className="sdn-footer" role="contentinfo">
         <div className="sdn-footer__bottom-container">
           <div className="govuk-width-container">
             <div className="sdn-footer__bottom-columns">

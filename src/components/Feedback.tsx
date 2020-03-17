@@ -136,12 +136,12 @@ export const Feedback: React.FC<Props> = ({
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
       <div className="govuk-grid-column-one-third">
-        <img src="/assets/images/icon-lock.svg" alt="" className="icon" />
-        <span>Bezpečné SSL pripojenie</span>
+        {/* <img src="/assets/images/icon-lock.svg" alt="" className="icon" />
+        <span>Bezpečné SSL pripojenie</span> */}
       </div>
       <div className="govuk-grid-column-one-third">
-        <img src="/assets/images/icon-correct.svg" alt="" className="icon" />
-        <span>Overené certifikovaným účtovníkom</span>
+        {/* <img src="/assets/images/icon-correct.svg" alt="" className="icon" />
+        <span>Overené certifikovaným účtovníkom</span> */}
       </div>
       <div className="sdn-feedbackbar__foundbug">
         <span>Našli ste na stránke chybu?&nbsp;</span>

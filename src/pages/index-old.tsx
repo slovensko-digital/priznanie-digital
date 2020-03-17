@@ -1,10 +1,16 @@
 import React from 'react';
+import Link from 'next/link';
+import { getRoutes, getPostponeRoutes } from '../lib/routes';
+
+const { nextRoute } = getRoutes('/');
+
+const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/');
 
 export default () => (
   <>
     <div className="govuk-grid-column-full">
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Informacie o danovom priznani v sucasnej situacii
+        Návod na vyplnenie daňového priznania pre SZČO
       </h1>
       <p>
         Daňové priznanie je jeden z najväčších byrokratických strašiakov
@@ -19,6 +25,15 @@ export default () => (
         B) a tiež vás detailne prevedieme aj procesom podania na stránkach
         Finančnej správy.
       </p>
+
+      <Link href={nextRoute}>
+        <button
+          type="button"
+          className="govuk-button govuk-button--large govuk-button--start"
+        >
+          Pripraviť daňové priznanie
+        </button>
+      </Link>
     </div>
 
     <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
@@ -35,6 +50,15 @@ export default () => (
       </strong>
     </div>
 
-    <div className="govuk-grid-column-full" />
+    <div className="govuk-grid-column-full">
+      <Link href={nextPostponeRoute}>
+        <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+        >
+          Odložiť daňové priznanie
+        </button>
+      </Link>
+    </div>
   </>
 );
