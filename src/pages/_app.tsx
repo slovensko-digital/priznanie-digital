@@ -7,7 +7,7 @@ import '../styles/libs.css';
 /* eslint-enable import/no-unassigned-import */
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { setLocale } from 'yup';
 import { calculate } from '../lib/calculation';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
@@ -55,15 +55,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     });
   };
 
-  const { pathname } = useRouter();
+  // const { pathname } = useRouter();
 
-  const headline = /^\/odklad\//.test(pathname)
-    ? 'Odklad daňového priznania'
-    : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
+  // const headline = /^\/odklad\//.test(pathname)
+  //   ? 'Odklad daňového priznania'
+  //   : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
 
   return (
     <Layout
-      headline={headline}
+      // headline={headline}
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     >

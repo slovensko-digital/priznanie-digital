@@ -8,14 +8,14 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { PostponeUserInput } from '../types/PostponeUserInput';
 
 interface Props {
-  headline: string;
+  // headline: string;
   children: React.ReactNode;
   taxFormUserInput: TaxFormUserInput;
   postponeUserInput: PostponeUserInput;
 }
 
 const Layout: React.FC<Props> = ({
-  headline,
+  // headline,
   children,
   taxFormUserInput,
   postponeUserInput,
