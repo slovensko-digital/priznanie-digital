@@ -23,6 +23,14 @@ const Layout: React.FC<Props> = ({
   <div className="container">
     <Head>
       <title>priznanie.digital</title>
+      {process.env.BUILD_TIMESTAMP && (
+        <meta
+          name="version"
+          content={new Date(
+            parseInt(process.env.BUILD_TIMESTAMP) * 1000,
+          ).toISOString()}
+        />
+      )}
     </Head>
     <Header />
     {/* <div className="sdn-headline">
