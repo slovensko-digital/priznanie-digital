@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import classNames from 'classnames';
 import styles from './EmailForm.module.css';
 import { CheckboxSmall, Input } from './FormComponents';
 import { saveEmailInfo } from '../lib/api';
-import { EmailUserInput } from '../types/UserInput';
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
@@ -14,33 +13,39 @@ const getErrorMessage = (code: string, message: string) => {
     case 'invalid_parameter':
       return 'Nesprávny formát emailovej adresy';
     default:
-      return `Chyba: ${message}`;
+      return message ? `Chyba: ${message}` : 'Nastala chyba';
   }
 };
+
+interface EmailFormInfo {
+  email: string;
+  gdpr: boolean;
+}
 
 export interface EmailFormProps {
   formName: string;
 }
 export const EmailFormInfo = ({ formName }: EmailFormProps) => {
-  const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const handleSubmit = async ({ email }, { setFieldError }) => {
     const { messageId, code, message } = await saveEmailInfo(email, {
-      newsletter: !!newsletter,
       form: formName,
     });
 
     if (!messageId) {
-      setFieldError('email', getErrorMessage(code, message));
+      return setFieldError('email', getErrorMessage(code, message));
     }
+    return setHasSubmitted(true);
   };
 
   return (
-    <Formik<EmailUserInput>
-      initialValues={{ email: '', newsletter: false }}
+    <Formik<EmailFormInfo>
+      initialValues={{ email: '', gdpr: false }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       {({ isSubmitting, values }) => {
-        if (values.email) {
+        if (hasSubmitted) {
           return (
             <div className={styles.newsletterFormWrapper}>
               <p className={styles.newsletterFormSuccess}>
@@ -48,8 +53,6 @@ export const EmailFormInfo = ({ formName }: EmailFormProps) => {
                 zaregistrovali.
                 <br />
                 Pošleme vám notifikáciu ked nasu aplikaciu spustime
-                <br />
-                {values.newsletter && ' Pošleme vám aj newsletter.'}
               </p>
             </div>
           );
@@ -61,16 +64,19 @@ export const EmailFormInfo = ({ formName }: EmailFormProps) => {
                 name="email"
                 type="email"
                 label="Chcete dostať upozornenie ked spustime?"
-                hint="Nechajte nám email a my vám včas pošleme notifikáciu"
+                hint="Pripravujeme pre vás jednoduchý návod na vyplnenie daňového priznania zodpovedaním pár jednoduchých otázok.
+Nechajte nám váš email a budete o tom vedieť ako prví."
               />
               <CheckboxSmall
-                name="newsletter"
-                label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
+                name="gdpr"
+                label={
+                  <p>
+                    Oboznámil(a) som sa s informáciami v sekcii{' '}
+                    <a href="#gdpr">Ochrana osobných údajov</a>
+                  </p>
+                }
               />
-              <p>
-                Oboznámil(a) som sa s informáciami v sekcii{' '}
-                <a href="#gdpr">Ochrana osobných údajov</a>
-              </p>
+
               <button
                 type="submit"
                 data-test="send-email"
@@ -92,9 +98,9 @@ export const EmailFormInfo = ({ formName }: EmailFormProps) => {
   );
 };
 
-const validationSchema = Yup.object().shape<EmailUserInput>({
+const validationSchema = Yup.object().shape<EmailFormInfo>({
   email: Yup.string()
     .required('Zadajte email')
     .email('Nesprávny formát'),
-  newsletter: Yup.boolean(),
+  gdpr: Yup.boolean().oneOf([true], 'Musíte súhlasit s GDPR'),
 });

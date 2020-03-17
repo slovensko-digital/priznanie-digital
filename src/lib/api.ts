@@ -38,9 +38,9 @@ export const saveEmail = async (
 
 export const saveEmailInfo = async (
   email: string,
-  attributes: Pick<EmailAttributes, 'newsletter' | 'form'>,
+  attributes: Pick<EmailAttributes, 'form'>,
 ): Promise<SaveEmailResponse> => {
-  return fetch('/api/email', {
+  return fetch('/api/saveEmail', {
     method: 'POST',
     headers: {
       accept: 'application/json',

@@ -198,7 +198,7 @@ export const CheckboxSmall = ({
   label,
   ...props
 }: CheckboxSmallProps) => {
-  const [field] = useField(name);
+  const [field, meta] = useField(name);
   return (
     <div className="govuk-checkboxes__item">
       <input
@@ -212,6 +212,11 @@ export const CheckboxSmall = ({
       <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
         {label}
       </label>
+      {meta.touched && meta.error ? (
+        <span id={name} className="govuk-error-message">
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
     </div>
   );
 };
