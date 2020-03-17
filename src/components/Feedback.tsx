@@ -18,6 +18,15 @@ export const Feedback: React.FC<Props> = ({
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
   );
+
+  const usefulOnClick = () => {
+    fetch(
+      'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
+      { method: 'POST' },
+    );
+    setIsUsefulSubmitted(true);
+  };
+
   if (isFeedbackOpen) {
     return (
       <div
@@ -138,7 +147,7 @@ export const Feedback: React.FC<Props> = ({
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
       <div className="sdn-feedbackbar__useful">
         {!isUsefulSubmitted ? (
-          <div id="sdn-feedbackbar-useful">
+          <>
             <span className="sdn-feedbackbar__useful-question">
               Boli tieto informácie pre vás užitočné?
             </span>
@@ -146,10 +155,9 @@ export const Feedback: React.FC<Props> = ({
               <span className="sdn-feedbackbar__yes">
                 <a
                   className="sdn-feedbackbar__link"
-                  data-remote="true"
                   rel="nofollow"
-                  data-method="post"
-                  href="https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful"
+                  href="#"
+                  onClick={usefulOnClick}
                 >
                   Áno
                 </a>
@@ -167,13 +175,14 @@ export const Feedback: React.FC<Props> = ({
                 </a>
               </span>
             </span>
-          </div>
+          </>
         ) : (
-          <div id="sdn-feedbackbar-thanks" className="sdn-appear-link-hide">
+          <div id="sdn-feedbackbar-thanks">
             <span>Ďakujeme za odozvu!&nbsp;</span>
           </div>
         )}
       </div>
+
       <div className="sdn-feedbackbar__foundbug">
         <span>Našli ste na stránke chybu?&nbsp;</span>
         <span>
