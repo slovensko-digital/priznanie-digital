@@ -13,11 +13,12 @@ export const Feedback: React.FC<Props> = ({
   taxFormUserInput,
   postponeUserInput,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false);
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
   );
-  if (isOpen) {
+  if (isFeedbackOpen) {
     return (
       <div
         id="sdn-feedbackbar-form-foundbug"
@@ -39,7 +40,7 @@ export const Feedback: React.FC<Props> = ({
               href="#"
               onClick={e => {
                 e.preventDefault();
-                setIsOpen(false);
+                setIsFeedbackOpen(false);
               }}
             >
               zatvoriť
@@ -135,13 +136,43 @@ export const Feedback: React.FC<Props> = ({
   }
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
-      <div className="govuk-grid-column-one-third">
-        {/* <img src="/assets/images/icon-lock.svg" alt="" className="icon" />
-        <span>Bezpečné SSL pripojenie</span> */}
-      </div>
-      <div className="govuk-grid-column-one-third">
-        {/* <img src="/assets/images/icon-correct.svg" alt="" className="icon" />
-        <span>Overené certifikovaným účtovníkom</span> */}
+      <div className="sdn-feedbackbar__useful">
+        {!isUsefulSubmitted ? (
+          <div id="sdn-feedbackbar-useful">
+            <span className="sdn-feedbackbar__useful-question">
+              Boli tieto informácie pre vás užitočné?
+            </span>
+            <span className="govuk-!-display-inline-block">
+              <span className="sdn-feedbackbar__yes">
+                <a
+                  className="sdn-feedbackbar__link"
+                  data-remote="true"
+                  rel="nofollow"
+                  data-method="post"
+                  href="https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful"
+                >
+                  Áno
+                </a>
+              </span>
+              <span className="sdn-feedbackbar__no">
+                <a
+                  href="#"
+                  className="sdn-feedbackbar__link"
+                  onClick={e => {
+                    e.preventDefault();
+                    setIsFeedbackOpen(true);
+                  }}
+                >
+                  Nie
+                </a>
+              </span>
+            </span>
+          </div>
+        ) : (
+          <div id="sdn-feedbackbar-thanks" className="sdn-appear-link-hide">
+            <span>Ďakujeme za odozvu!&nbsp;</span>
+          </div>
+        )}
       </div>
       <div className="sdn-feedbackbar__foundbug">
         <span>Našli ste na stránke chybu?&nbsp;</span>
@@ -152,7 +183,7 @@ export const Feedback: React.FC<Props> = ({
             data-test="feedback"
             onClick={e => {
               e.preventDefault();
-              setIsOpen(true);
+              setIsFeedbackOpen(true);
             }}
           >
             Napíšte nám
