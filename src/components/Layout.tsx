@@ -22,7 +22,7 @@ const Layout: React.FC<Props> = ({
 }: Props) => (
   <div className="container">
     <Head>
-      <title>priznanie.digital</title>
+      <title>Priznanie.Digital</title>
       {process.env.BUILD_TIMESTAMP && (
         <meta
           name="version"

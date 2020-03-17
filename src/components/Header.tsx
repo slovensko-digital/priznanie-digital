@@ -11,7 +11,7 @@ const Header: React.FC = () => {
       <div className="sdn-header__container govuk-width-container ">
         <Link href="/">
           <a className="sdn-header__link">
-            <span className="sdn-header__product-name">priznanie.digital</span>
+            <span className="sdn-header__product-name">Priznanie.Digital</span>
           </a>
         </Link>
         {/* TODO use later */}
