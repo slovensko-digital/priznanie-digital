@@ -35,3 +35,17 @@ export const saveEmail = async (
     body: JSON.stringify({ email, attributes, file }),
   }).then(response => response.json());
 };
+
+export const saveEmailInfo = async (
+  email: string,
+  attributes: Pick<EmailAttributes, 'newsletter' | 'form'>,
+): Promise<SaveEmailResponse> => {
+  return fetch('/api/email', {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ email, attributes }),
+  }).then(response => response.json());
+};
