@@ -27,7 +27,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r005_meno: firstName,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
-    r009_psc: input.r009_psc,
+    psc: input.psc,
+    r009_psc: `${input.psc}`.replace(/\D/, ''),
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
     /** SECTION Dochodok */

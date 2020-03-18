@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import classnames from 'classnames';
 import { UserInput } from '../types/UserInput';
+import { numberInputRegexp } from '../lib/utils';
 
 interface InputProps<Name> {
   name: Name;
@@ -11,8 +12,6 @@ interface InputProps<Name> {
   type: 'text' | 'number' | 'email';
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
 }
-
-export const numberInputRegexp = '^[0-9][0-9,\\.]+$';
 
 export const Input = <Name extends keyof UserInput>({
   label,

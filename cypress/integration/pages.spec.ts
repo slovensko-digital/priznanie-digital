@@ -136,7 +136,7 @@ describe('osobne-udaje page', function() {
     getInput('meno_priezvisko').should('contain.value', 'Július Retzer');
     getInput('r007_ulica').should('contain.value', 'Mierová');
     getInput('r008_cislo').should('contain.value', '4');
-    getInput('r009_psc').should('contain.value', '82105');
+    getInput('psc').should('contain.value', '821 05');
     getInput('r010_obec').should('contain.value', 'Bratislava');
     getInput('r011_stat').should('contain.value', 'Slovenská republika');
 
@@ -145,7 +145,7 @@ describe('osobne-udaje page', function() {
   it('with posta api', function() {
     cy.visit('/osobne-udaje');
 
-    typeToInput('r009_psc', baseInput);
+    typeToInput('psc', baseInput);
     getInput('r010_obec').should('have.value', baseInput.r010_obec);
   });
   it('Manual entry', function() {
@@ -157,7 +157,7 @@ describe('osobne-udaje page', function() {
     typeToInput('meno_priezvisko', baseInput);
     typeToInput('r007_ulica', baseInput);
     typeToInput('r008_cislo', baseInput);
-    typeToInput('r009_psc', baseInput);
+    typeToInput('psc', baseInput);
     typeToInput('r010_obec', baseInput);
     typeToInput('r011_stat', baseInput);
 
@@ -224,7 +224,7 @@ describe('Results page', function() {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
-    assertUrl('/osobne-udaje');
+    assertUrl('/suhrn');
 
     //  Go back to our page
     cy.visit('/vysledky');
@@ -234,6 +234,25 @@ describe('Results page', function() {
 
     cy.get('h1').contains('Výpočet dane za rok');
     cy.get('h2').contains('Stručný prehľad');
+  });
+});
+
+describe('Summary page', function() {
+  it('has working navigation', function() {
+    cy.visit('/suhrn');
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click();
+    assertUrl('/osobne-udaje');
+
+    //  Go back to our page
+    cy.visit('/vysledky');
+  });
+  it('has working ui', function() {
+    cy.visit('/suhrn');
+
+    cy.get('h1').contains('Súhrn a kontrola vyplnených údajov');
+    cy.get('h2').contains('Príjmy a odvody do sociálnej poisťovne');
   });
 });
 
@@ -276,7 +295,7 @@ describe('/odklad/osobne-udaje page', function() {
     );
     getInputPostpone('ulica').should('contain.value', 'Mierová');
     getInputPostpone('cislo').should('contain.value', '4');
-    getInputPostpone('psc').should('contain.value', '82105');
+    getInputPostpone('psc').should('contain.value', '821 05');
     getInputPostpone('obec').should('contain.value', 'Bratislava');
     getInputPostpone('stat').should('contain.value', 'Slovenská republika');
   });

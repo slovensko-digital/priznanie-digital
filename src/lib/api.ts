@@ -9,7 +9,7 @@ import { EmailAttributes } from './sendinblue';
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
-    `https://api.posta.sk/private/search?q=${zip}&m=zip`,
+    `https://api.posta.sk/private/search?q=${zip.replace(/\D/g, '')}&m=zip`,
   );
   const pscData: PSCResponseBody = await response.json();
   return pscData?.offices?.[0]?.name ?? '';

@@ -14,6 +14,7 @@ import { getPostponeRoutes } from '../../lib/routes';
 import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
 import { ErrorSummary } from '../../components/ErrorSummary';
+import { formatPsc } from '../../lib/utils';
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
 
@@ -28,7 +29,7 @@ const makeHandlePersonAutoform = ({
       dic: person?.tin ?? values.dic,
       ulica: person.street ?? person.municipality,
       cislo: person.street_number,
-      psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
+      psc: person.postal_code ? formatPsc(person.postal_code) : '',
       obec: person.municipality,
       stat: person.country,
     });
@@ -127,18 +128,19 @@ const OsobneUdaje: NextPage<Props> = ({
                   type="text"
                   label="PSČ"
                   width={5}
-                  onBlur={event => {
-                    props.handleBlur(event);
-                    const pscValue = event.target.value;
-                    props.setFieldValue('psc', pscValue.replace(/\D/g, ''));
-                  }}
+                  maxLength={6}
                   onChange={async event => {
-                    props.handleChange(event);
-                    const pscValue = event.currentTarget.value;
-                    const trimmedPSC = pscValue.replace(/\D/g, '');
+                    const pscValue = formatPsc(
+                      event.currentTarget.value,
+                      props.values.psc,
+                    );
+                    props.setFieldValue('psc', pscValue);
 
-                    if (trimmedPSC.length === 5) {
-                      const city = await getCity(trimmedPSC);
+                    if (
+                      pscValue.length === 6 &&
+                      props.values.obec.length === 0
+                    ) {
+                      const city = await getCity(pscValue);
                       props.setFieldValue('obec', city);
                     }
                   }}

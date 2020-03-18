@@ -20,7 +20,7 @@ export function convertPostponeToJson(
   // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcPredLom = beforeSlash;
   // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcZaLom = afterSlash;
 
-  form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc;
+  form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc.replace(/\D/g, '');
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec;
   form.dokument.hlavicka.sidlo.ulica = postponeUserInput.ulica;
   form.dokument.hlavicka.sidlo.supisneOrientacneCislo = postponeUserInput.cislo;
