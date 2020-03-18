@@ -26,3 +26,12 @@ npm run cy:open
 
 ## Env variables
 Add .env file with necessary env variables
+
+## Environments
+
+* staging: https://priznanie.staging.slovensko.digital/
+
+## Infrastructure
+
+* Github repository: https://github.com/wormyy/priznanie-digital
+* Travis CI: https://travis-ci.com/github/wormyy/priznanie-digital
