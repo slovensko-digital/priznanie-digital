@@ -9,6 +9,8 @@ export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
   r004_priezvisko: string;
   /**   05 - Meno*/
   r005_meno: string;
+  /** PSC */
+  r009_psc: string;
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */
   priloha3_r08_poistne: number;

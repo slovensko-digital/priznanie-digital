@@ -30,3 +30,16 @@ export const formatCurrency = (value: number): string => {
     .replace(findPlaceForThousandsDivider, ' ')
     .replace('.', ',')} EUR`;
 };
+
+export const numberInputRegexp = '^[0-9]+([,\\.][0-9]{1,2})?$';
+
+export const formatPsc = (newValue: string, previousValue = '') => {
+  const formattedNewValue = newValue.replace(/\D/g, '');
+  // when deleting space using backspace, delete both space and the number before it
+  if (`${newValue} ` === previousValue) {
+    return formattedNewValue.slice(0, -1);
+  }
+
+  // add space after first 3 digits
+  return formattedNewValue.replace(/^(\d{3})/, '$1 ');
+};

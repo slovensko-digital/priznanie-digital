@@ -171,20 +171,39 @@ describe('Cases', function() {
           typeToInput('meno_priezvisko', input);
           typeToInput('r007_ulica', input);
           typeToInput('r008_cislo', input);
-          typeToInput('r009_psc', input);
+          typeToInput('psc', input);
           getInput('r010_obec').should('have.value', input.r010_obec);
           typeToInput('r011_stat', input);
 
           next();
 
           /**  SECTION Summary */
-          assertUrl('/vysledky');
+          assertUrl('/suhrn');
 
-          cy.contains('XML');
+          cy.get('h1').contains('Súhrn a kontrola vyplnených údajov');
 
           cy.get('.govuk-table__cell').contains(
             formatCurrency(parseFloat(input.t1r10_prijmy)),
           );
+          cy.get('.govuk-table__cell').contains(input.r001_dic);
+
+          next();
+
+          /**  SECTION Results */
+          assertUrl('/vysledky');
+
+          cy.contains('Daň na úhradu');
+
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseFloat(input.t1r10_prijmy)),
+          );
+
+          next();
+
+          /** SECTION Download */
+          assertUrl('/stiahnut');
+
+          cy.contains('Stiahnuť dáta');
 
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)

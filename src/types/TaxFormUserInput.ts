@@ -31,7 +31,7 @@ export interface TaxFormUserInputBase<T> {
   /**   08 - Súpisné/orientačné číslo **/
   r008_cislo: string;
   /**   09 - PSČ **/
-  r009_psc: string;
+  psc: string;
   /**   10 - Obec **/
   r010_obec: string;
   /**   11 - Štát **/

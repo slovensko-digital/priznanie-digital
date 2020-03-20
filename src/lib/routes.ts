@@ -7,7 +7,9 @@ export type Route =
   | '/dochodok'
   | '/hypoteka'
   | '/osobne-udaje'
-  | '/vysledky';
+  | '/suhrn'
+  | '/vysledky'
+  | '/stiahnut';
 
 const routesOrder: ReadonlyArray<Route> = [
   '/',
@@ -18,7 +20,9 @@ const routesOrder: ReadonlyArray<Route> = [
   '/dochodok',
   '/hypoteka',
   '/osobne-udaje',
+  '/suhrn',
   '/vysledky',
+  '/stiahnut',
 ];
 
 export const getRoutes = (currentRoute: Route) => {
@@ -35,8 +39,7 @@ export type PostponeRoute =
   | '/odklad/prijmy-zo-zahranicia'
   | '/odklad/osobne-udaje'
   | '/odklad/suhrn'
-  | '/odklad/stiahnut'
-  | '/odklad/navod';
+  | '/odklad/stiahnut';
 
 const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
   '/',
@@ -44,7 +47,6 @@ const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
   '/odklad/osobne-udaje',
   '/odklad/suhrn',
   '/odklad/stiahnut',
-  '/odklad/navod',
 ];
 
 export const getPostponeRoutes = (currentRoute: PostponeRoute) => {

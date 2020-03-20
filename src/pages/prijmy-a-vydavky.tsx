@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 
 import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
-import { Input, numberInputRegexp } from '../components/FormComponents';
+import { Input } from '../components/FormComponents';
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
+import { numberInputRegexp } from '../lib/utils';
 
 const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
 

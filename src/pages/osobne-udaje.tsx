@@ -15,6 +15,7 @@ import { AutoformResponseBody } from '../types/api';
 import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput';
+import { formatPsc } from '../lib/utils';
 
 const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
 
@@ -29,7 +30,7 @@ const makeHandlePersonAutoform = ({
       r001_dic: person?.tin ?? '',
       r007_ulica: person.street ?? person.municipality,
       r008_cislo: person.street_number,
-      r009_psc: person.postal_code ? person.postal_code.replace(/\D/g, '') : '',
+      psc: person.postal_code ? formatPsc(person.postal_code) : '',
       r010_obec: person.municipality,
       r011_stat: person.country,
     });
@@ -116,24 +117,22 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="r009_psc"
+                  name="psc"
                   type="text"
                   label="PSČ"
-                  onBlur={event => {
-                    props.handleBlur(event);
-                    const pscValue = event.target.value;
-                    props.setFieldValue(
-                      'r009_psc',
-                      pscValue.replace(/\D/g, ''),
-                    );
-                  }}
+                  maxLength={6}
                   onChange={async event => {
-                    props.handleChange(event);
-                    const pscValue = event.currentTarget.value;
-                    const trimmedPSC = pscValue.replace(/\D/g, '');
+                    const pscValue = formatPsc(
+                      event.currentTarget.value,
+                      props.values.psc,
+                    );
+                    props.setFieldValue('psc', pscValue);
 
-                    if (trimmedPSC.length === 5) {
-                      const city = await getCity(trimmedPSC);
+                    if (
+                      pscValue.length === 6 &&
+                      props.values.r010_obec.length === 0
+                    ) {
+                      const city = await getCity(pscValue);
                       props.setFieldValue('r010_obec', city);
                     }
                   }}
@@ -189,8 +188,11 @@ const validate = (values: PersonalInformationUserInput): any => {
     errors.r008_cislo = 'Zadajte číslo domu';
   }
 
-  if (!values.r009_psc) {
-    errors.r009_psc = 'Zadajte PSČ';
+  const pscNumberFormat = /^\d{3} \d{2}$/;
+  if (!values.psc) {
+    errors.psc = 'Zadajte PSČ';
+  } else if (!values.psc.match(pscNumberFormat)) {
+    errors.psc = 'PSČ môže obsahovať iba 5 čísel';
   }
 
   if (!values.r010_obec) {

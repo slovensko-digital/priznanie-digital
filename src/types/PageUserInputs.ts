@@ -35,7 +35,7 @@ export type PersonalInformationUserInput<T = string> = Pick<
   | 'meno_priezvisko'
   | 'r007_ulica'
   | 'r008_cislo'
-  | 'r009_psc'
+  | 'psc'
   | 'r010_obec'
   | 'r011_stat'
 >;
