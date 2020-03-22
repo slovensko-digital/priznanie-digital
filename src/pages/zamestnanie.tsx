@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
+import {
+  BooleanRadio,
+  FormWrapper,
+  Input,
+  makeValidator,
+} from '../components/FormComponents';
 import { EmployedUserInput, FormErrors } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
@@ -31,7 +36,7 @@ const Zamestnanie: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<EmployedUserInput>
+      <FormWrapper<EmployedUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={values => {
@@ -64,7 +69,7 @@ const Zamestnanie: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
+import { Form, FormikProps } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { NextPage } from 'next';
 import classnames from 'classnames';
-import { Input } from '../../components/FormComponents';
+import { FormWrapper, Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
 import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
 import { getCity } from '../../lib/api';
@@ -60,7 +60,7 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationPostponePage>
+      <FormWrapper<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -170,7 +170,7 @@ const OsobneUdaje: NextPage<Props> = ({
             </Form>
           </>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };

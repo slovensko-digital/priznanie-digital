@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { PartnerUserInput } from '../types/PageUserInputs';
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
+import {
+  EmployedUserInput,
+  FormErrors,
+  PartnerUserInput,
+} from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { ErrorSummary } from '../components/ErrorSummary';
-
 import { getRoutes } from '../lib/routes';
 import { numberInputRegexp } from '../lib/utils';
 
@@ -31,7 +34,7 @@ const Partner: NextPage<Props> = ({
       <Link href={previousRoute}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik<PartnerUserInput>
+      <FormWrapper<PartnerUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         // validationSchema={validationSchema}
@@ -86,13 +89,13 @@ const Partner: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: PartnerUserInput): any => {
-  const errors: any = {};
+const validate = (values: PartnerUserInput) => {
+  const errors: Partial<FormErrors<PartnerUserInput>> = {};
 
   if (values.r032_uplatnujem_na_partnera) {
     if (!values.r031_priezvisko_a_meno) {
@@ -118,46 +121,5 @@ const validate = (values: PartnerUserInput): any => {
 
   return errors;
 };
-
-// const validationSchema = Yup.object().shape<PartnerUserInput<number>>({
-//   r032_uplatnujem_na_partnera: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r031_priezvisko_a_meno: Yup.string().when('r032_uplatnujem_na_partnera', {
-//     is: true,
-//     then: Yup.string().required(),
-//   }),
-//   r031_rodne_cislo: Yup.string().when('r032_uplatnujem_na_partnera', {
-//     is: true,
-//     then: Yup.string()
-//       .required()
-//       .min(9)
-//       .max(11),
-//   }),
-//   r032_partner_vlastne_prijmy: Yup.number().when(
-//     'r032_uplatnujem_na_partnera',
-//     {
-//       is: true,
-//       then: Yup.number().required(),
-//     },
-//   ),
-//   r032_partner_pocet_mesiacov: Yup.number().when(
-//     'r032_uplatnujem_na_partnera',
-//     {
-//       is: true,
-//       then: Yup.number()
-//         .min(0)
-//         .max(12)
-//         .required(),
-//     },
-//   ),
-//   r033_partner_kupele_uhrady: Yup.number().when('r033_partner_kupele', {
-//     is: true,
-//     then: Yup.number()
-//       .max(50)
-//       .required(),
-//   }),
-//   r033_partner_kupele: Yup.boolean().required(),
-// });
 
 export default Partner;

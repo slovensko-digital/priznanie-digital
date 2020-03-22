@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio } from '../../components/FormComponents';
+import {
+  BooleanRadio,
+  FormWrapper,
+  makeValidator,
+} from '../../components/FormComponents';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
-import {
-  FormErrors,
-  IncomeSourceCountryUserInput,
-} from '../../types/PageUserInputs';
+import { IncomeSourceCountryUserInput } from '../../types/PageUserInputs';
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
@@ -37,7 +38,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<IncomeSourceCountryUserInput>
+      <FormWrapper<IncomeSourceCountryUserInput>
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={values => {
@@ -76,7 +77,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };

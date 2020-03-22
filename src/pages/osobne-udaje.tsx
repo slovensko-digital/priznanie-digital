@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
+import { Form, FormikProps } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { Input } from '../components/FormComponents';
+import { FormWrapper, Input } from '../components/FormComponents';
 import styles from './osobne-udaje.module.css';
 import {
   PersonalInformationUserInput,
@@ -58,7 +58,7 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationUserInput>
+      <FormWrapper<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={values => {
@@ -154,12 +154,12 @@ const OsobneUdaje: NextPage<Props> = ({
             </Form>
           </>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: PersonalInformationUserInput): any => {
+const validate = (values: PersonalInformationUserInput) => {
   const errors: Partial<FormErrors<PersonalInformationUserInput>> = {};
 
   if (!values.r001_dic) {

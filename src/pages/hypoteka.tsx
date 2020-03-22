@@ -3,8 +3,12 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { MortgageUserInput } from '../types/PageUserInputs';
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
+import {
+  EmployedUserInput,
+  FormErrors,
+  MortgageUserInput,
+} from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 
@@ -30,7 +34,7 @@ const Hypoteka: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<MortgageUserInput>
+      <FormWrapper<MortgageUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         // validationSchema={validationSchema}
@@ -65,13 +69,13 @@ const Hypoteka: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: MortgageUserInput): any => {
-  const errors: any = {};
+const validate = (values: MortgageUserInput) => {
+  const errors: Partial<FormErrors<MortgageUserInput>> = {};
 
   if (values.r037_uplatnuje_uroky && !values.r037_zaplatene_uroky) {
     errors.r037_zaplatene_uroky = 'Zadajte vysku zaplatenych urokov';
@@ -83,19 +87,5 @@ const validate = (values: MortgageUserInput): any => {
 
   return errors;
 };
-
-// const validationSchema = Yup.object().shape<MortgageUserInput<number>>({
-//   r037_uplatnuje_uroky: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r037_zaplatene_uroky: Yup.number().when('r037_uplatnuje_uroky', {
-//     is: true,
-//     then: Yup.number().required(),
-//   }),
-//   r037_pocetMesiacov: Yup.number().when('r037_uplatnuje_uroky', {
-//     is: true,
-//     then: Yup.number().required(),
-//   }),
-// });
 
 export default Hypoteka;
