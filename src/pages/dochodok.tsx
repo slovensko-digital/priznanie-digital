@@ -65,7 +65,7 @@ const Dochodok: NextPage<Props> = ({
   );
 };
 
-const validate = (values: PensionUserInput) => {
+export const validate = (values: PensionUserInput) => {
   const errors: Partial<FormErrors<PensionUserInput>> = {};
 
   if (typeof values.r029_poberal_dochodok === 'undefined') {

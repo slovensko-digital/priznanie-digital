@@ -94,7 +94,7 @@ const Partner: NextPage<Props> = ({
   );
 };
 
-const validate = (values: PartnerUserInput) => {
+export const validate = (values: PartnerUserInput) => {
   const errors: Partial<FormErrors<PartnerUserInput>> = {};
 
   if (typeof values.r032_uplatnujem_na_partnera === 'undefined') {

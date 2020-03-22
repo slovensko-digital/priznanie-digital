@@ -81,7 +81,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
   );
 };
 
-const validate = (values: IncomeSourceCountryUserInput) => {
+export const validate = (values: IncomeSourceCountryUserInput) => {
   const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {};
 
   if (values.prijmy_zo_zahranicia === undefined) {

@@ -81,7 +81,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
   );
 };
 
-const validate = (values: IncomeAndExpenseUserInput) => {
+export const validate = (values: IncomeAndExpenseUserInput) => {
   const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {};
 
   if (!values.t1r10_prijmy) {
