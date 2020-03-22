@@ -13,10 +13,12 @@ module.exports = {
     '/node_modules/',
     '/.next/',
     '/__tests__/testCases',
+    '/__tests__/utils',
     '/cypress',
   ],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/ts-jest',
+    '^.+\\.(js|jsx|ts)$': '<rootDir>/node_modules/ts-jest',
+    '^.+\\.tsx?$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
     '\\.xml$': 'jest-raw-loader',
     '\\.xsd$': 'jest-raw-loader',

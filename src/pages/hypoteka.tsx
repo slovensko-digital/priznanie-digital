@@ -75,7 +75,7 @@ const Hypoteka: NextPage<Props> = ({
   );
 };
 
-const validate = (values: MortgageUserInput) => {
+export const validate = (values: MortgageUserInput) => {
   const errors: Partial<FormErrors<MortgageUserInput>> = {};
 
   if (typeof values.r037_uplatnuje_uroky === 'undefined') {

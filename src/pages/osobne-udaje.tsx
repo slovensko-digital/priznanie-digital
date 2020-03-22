@@ -159,7 +159,7 @@ const OsobneUdaje: NextPage<Props> = ({
   );
 };
 
-const validate = (values: PersonalInformationUserInput) => {
+export const validate = (values: PersonalInformationUserInput) => {
   const errors: Partial<FormErrors<PersonalInformationUserInput>> = {};
 
   if (!values.r001_dic) {

@@ -74,7 +74,7 @@ const Zamestnanie: NextPage<Props> = ({
   );
 };
 
-const validate = (values: EmployedUserInput) => {
+export const validate = (values: EmployedUserInput) => {
   const errors: Partial<FormErrors<EmployedUserInput>> = {};
 
   if (typeof values.employed === 'undefined') {
