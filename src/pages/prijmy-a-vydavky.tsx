@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import { Formik, Form, FormikProps } from 'formik';
 import { NextPage } from 'next';
-import { Input } from '../components/FormComponents';
+import { Form, FormikProps } from 'formik';
+import { FormWrapper, Input } from '../components/FormComponents';
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
-import { ErrorSummary } from '../components/ErrorSummary';
 import { numberInputRegexp } from '../lib/utils';
+import { ErrorSummary } from '../components/ErrorSummary';
 
 const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
 
@@ -33,7 +32,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
       <Link href={previousRoute}>
         <a className="govuk-back-link">Späť</a>
       </Link>
-      <Formik<IncomeAndExpenseUserInput>
+      <FormWrapper<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={values => {
@@ -77,7 +76,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
             </>
           );
         }}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };

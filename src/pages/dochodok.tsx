@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { PensionUserInput } from '../types/PageUserInputs';
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
+import { FormErrors, PensionUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 import { numberInputRegexp } from '../lib/utils';
@@ -31,7 +31,7 @@ const Dochodok: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PensionUserInput>
+      <FormWrapper<PensionUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         // validationSchema={validationSchema}
@@ -60,13 +60,13 @@ const Dochodok: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: PensionUserInput): any => {
-  const errors: any = {};
+const validate = (values: PensionUserInput) => {
+  const errors: Partial<FormErrors<PensionUserInput>> = {};
 
   if (
     values.r029_poberal_dochodok &&
@@ -78,15 +78,5 @@ const validate = (values: PensionUserInput): any => {
 
   return errors;
 };
-
-// const validationSchema = Yup.object().shape<PensionUserInput<number>>({
-//   r029_poberal_dochodok: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
-//     is: true,
-//     then: Yup.number().required(),
-//   }),
-// });
 
 export default Dochodok;

@@ -91,5 +91,6 @@ module.exports = {
     ],
     'no-useless-escape': 0,
     // '@typescript-eslint/no-unused-vars': 0,
+    'sonarjs/no-duplicate-string': 0
   },
 };

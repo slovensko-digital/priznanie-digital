@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-// import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import styles from './deti.module.css';
@@ -9,6 +8,7 @@ import {
   BooleanRadio,
   Input,
   CheckboxSmall,
+  FormWrapper,
 } from '../components/FormComponents';
 import { ChildrenUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
@@ -42,7 +42,7 @@ const Deti: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<ChildrenUserInput>
+      <FormWrapper<ChildrenUserInput>
         initialValues={taxFormUserInput}
         // validationSchema={validationSchema}
         onSubmit={values => {
@@ -130,7 +130,7 @@ const Deti: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
