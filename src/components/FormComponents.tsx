@@ -123,7 +123,10 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               data-test={`${field.name}-input-yes`}
               id={`${field.name}-input-yes`}
               checked={field.value === true}
-              onChange={() => helpers.setValue(true)}
+              onChange={() => {
+                helpers.setValue(true);
+                helpers.setError(undefined);
+              }}
             />
             <label
               className="govuk-label govuk-radios__label"
@@ -141,7 +144,10 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               id={`${field.name}-input-no`}
               type="radio"
               checked={field.value === false}
-              onChange={() => helpers.setValue(false)}
+              onChange={() => {
+                helpers.setValue(false);
+                helpers.setError(undefined);
+              }}
             />
             <label
               className="govuk-label govuk-radios__label"
