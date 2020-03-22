@@ -2,9 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Fuse from 'fuse.js';
 import nace from '../../lib/nace.json';
 
-const baseUrl =
-  'https://autoform.ekosystem.slovensko.digital/api/corporate_bodies';
-const limit = 20;
 const token = process.env.autoformtoken;
 
 if (!token) {
