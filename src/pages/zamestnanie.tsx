@@ -3,12 +3,7 @@ import Link from 'next/link';
 import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import {
-  BooleanRadio,
-  FormWrapper,
-  Input,
-  makeValidator,
-} from '../components/FormComponents';
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
 import { EmployedUserInput, FormErrors } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';

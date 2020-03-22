@@ -4,11 +4,7 @@ import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
-import {
-  EmployedUserInput,
-  FormErrors,
-  PartnerUserInput,
-} from '../types/PageUserInputs';
+import { FormErrors, PartnerUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { ErrorSummary } from '../components/ErrorSummary';
 import { getRoutes } from '../lib/routes';

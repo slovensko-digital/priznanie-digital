@@ -9,7 +9,6 @@ import {
 import classnames from 'classnames';
 import { UserInput } from '../types/UserInput';
 import { numberInputRegexp } from '../lib/utils';
-import { FormErrors, FormValidator } from '../types/PageUserInputs';
 
 export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
   children: (formikProps: FormikProps<FormikInput>) => ReactNode;

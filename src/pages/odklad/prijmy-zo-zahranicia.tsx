@@ -3,14 +3,13 @@ import Link from 'next/link';
 import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import {
-  BooleanRadio,
-  FormWrapper,
-  makeValidator,
-} from '../../components/FormComponents';
+import { BooleanRadio, FormWrapper } from '../../components/FormComponents';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { IncomeSourceCountryUserInput } from '../../types/PageUserInputs';
+import {
+  FormErrors,
+  IncomeSourceCountryUserInput,
+} from '../../types/PageUserInputs';
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',

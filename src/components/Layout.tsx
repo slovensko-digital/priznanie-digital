@@ -27,7 +27,7 @@ const Layout: React.FC<Props> = ({
         <meta
           name="version"
           content={new Date(
-            parseInt(process.env.BUILD_TIMESTAMP) * 1000,
+            parseInt(process.env.BUILD_TIMESTAMP, 10) * 1000,
           ).toISOString()}
         />
       )}

@@ -66,23 +66,23 @@ describe('Employment page', function() {
     //  Go back to our page
     cy.visit('/zamestnanie');
 
-    // Shows error, when presses next withou interaction
+    // Shows error, when presses next without interaction
     next();
-    getError();
+    getError().should('have.length', 1);
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click();
 
-    // FIXME When try to submit, error should appear
-    // next();
-    // getError();
+    next();
+    getError().should('have.length', 2);
 
     // Type to input
     typeToInput('r038', withEmploymentInput);
-    typeToInput('r039', withEmploymentInput);
 
-    // Error disappears
-    getError().should('not.exist');
+    next();
+    getError().should('have.length', 1);
+
+    typeToInput('r039', withEmploymentInput);
 
     // When presses no, the fields disappear
     cy.get('[data-test=employed-input-no]').click();
