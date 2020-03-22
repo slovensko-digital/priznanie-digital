@@ -8,6 +8,7 @@ import { EmployedUserInput, FormErrors } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 import { numberInputRegexp } from '../lib/utils';
+import { ErrorSummary } from '../components/ErrorSummary';
 
 const { nextRoute, previousRoute } = getRoutes('/zamestnanie');
 
@@ -39,14 +40,18 @@ const Zamestnanie: NextPage<Props> = ({
           router.push(nextRoute);
         }}
       >
-        {({ values }) => (
-          <Form className="form">
+        {({ values, errors, touched }) => (
+          <Form className="form" noValidate>
             <BooleanRadio
               title="Boli ste v roku 2019 zamestnaný/á v SR?"
               name="employed"
             />
             {values.employed && (
               <>
+                <ErrorSummary<EmployedUserInput>
+                  errors={errors}
+                  touched={touched}
+                />
                 <Input
                   name="r038"
                   type="number"
@@ -73,21 +78,21 @@ const validate = (values: EmployedUserInput) => {
   const errors: Partial<FormErrors<EmployedUserInput>> = {};
 
   if (typeof values.employed === 'undefined') {
-    errors.employed = 'TODO';
+    errors.employed = 'Vyznačte odpoveď';
   }
 
-  if (values.employed && !values.r038) {
-    errors.r038 = 'TODO';
-  }
-  if (values.r038 && !values.r038.match(numberInputRegexp)) {
-    errors.r038 = 'Zadajte sumu vo formáte 123,45';
-  }
+  if (values.employed) {
+    if (!values.r038) {
+      errors.r038 = 'Zadajte úhrn príjmov od všetkých zamestnávateľov';
+    } else if (!values.r038.match(numberInputRegexp)) {
+      errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45';
+    }
 
-  if (values.employed && !values.r039) {
-    errors.r039 = 'TODO';
-  }
-  if (values.r039 && !values.r039.match(numberInputRegexp)) {
-    errors.r039 = 'Zadajte sumu vo formáte 123,45';
+    if (!values.r039) {
+      errors.r039 = 'Zadajte úhrn povinného poistného';
+    } else if (!values.r039.match(numberInputRegexp)) {
+      errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45';
+    }
   }
 
   return errors;

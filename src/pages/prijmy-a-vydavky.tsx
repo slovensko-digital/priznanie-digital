@@ -47,7 +47,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
                 errors={errors}
                 touched={touched}
               />
-              <Form className="form">
+              <Form className="form" noValidate>
                 <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
 
                 <Input
@@ -88,7 +88,7 @@ const validate = (values: IncomeAndExpenseUserInput) => {
     errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
   }
   if (values.t1r10_prijmy && !values.t1r10_prijmy.match(numberInputRegexp)) {
-    errors.t1r10_prijmy = 'Zadajte sumu vo formáte 123,45';
+    errors.t1r10_prijmy = 'Zadajte sumu príjmov vo formáte 123,45';
   }
 
   if (!values.priloha3_r11_socialne) {
@@ -99,7 +99,8 @@ const validate = (values: IncomeAndExpenseUserInput) => {
     values.priloha3_r11_socialne &&
     !values.priloha3_r11_socialne.match(numberInputRegexp)
   ) {
-    errors.priloha3_r11_socialne = 'Zadajte sumu vo formáte 123,45';
+    errors.priloha3_r11_socialne =
+      'Zadajte sumu sociálneho poistenia vo formáte 123,45';
   }
 
   if (!values.priloha3_r13_zdravotne) {
@@ -110,7 +111,8 @@ const validate = (values: IncomeAndExpenseUserInput) => {
     values.priloha3_r13_zdravotne &&
     !values.priloha3_r13_zdravotne.match(numberInputRegexp)
   ) {
-    errors.priloha3_r13_zdravotne = 'Zadajte sumu vo formáte 123,45';
+    errors.priloha3_r13_zdravotne =
+      'Zadajte sumu zdravotného poistenia vo formáte 123,45';
   }
 
   return errors;

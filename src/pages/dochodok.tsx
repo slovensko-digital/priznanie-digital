@@ -41,7 +41,7 @@ const Dochodok: NextPage<Props> = ({
         }}
       >
         {({ values }) => (
-          <Form className="form">
+          <Form className="form" noValidate>
             <BooleanRadio
               title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
               name="r029_poberal_dochodok"
@@ -51,7 +51,7 @@ const Dochodok: NextPage<Props> = ({
                 <Input
                   name="r030_vyska_dochodku"
                   type="number"
-                  label="Vyska dochodku"
+                  label="Výška zaplatených príspevkov za rok 2019"
                 />
               </>
             )}
@@ -68,12 +68,16 @@ const Dochodok: NextPage<Props> = ({
 const validate = (values: PensionUserInput) => {
   const errors: Partial<FormErrors<PensionUserInput>> = {};
 
-  if (
-    values.r029_poberal_dochodok &&
-    !values.r030_vyska_dochodku &&
-    !values.r030_vyska_dochodku.match(numberInputRegexp)
-  ) {
-    errors.r030_vyska_dochodku = 'Zadajte vysku dochodku';
+  if (typeof values.r029_poberal_dochodok === 'undefined') {
+    errors.r029_poberal_dochodok = 'Vyznačte odpoveď';
+  }
+
+  if (values.r029_poberal_dochodok) {
+    if (!values.r030_vyska_dochodku) {
+      errors.r030_vyska_dochodku = 'Zadajte výšku zaplatených príspevkov';
+    } else if (!values.r030_vyska_dochodku.match(numberInputRegexp)) {
+      errors.r030_vyska_dochodku = 'Zadajte výšku príspevkov vo formáte 123,45';
+    }
   }
 
   return errors;
