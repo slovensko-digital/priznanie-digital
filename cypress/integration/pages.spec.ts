@@ -142,6 +142,14 @@ describe('osobne-udaje page', function() {
 
     next();
   });
+  it.only('with NACE', function() {
+    cy.visit('/osobne-udaje');
+
+    /** With autoform */
+    getInput('r003_nace').type('ryza');
+
+    cy.contains('ryza').click();
+  });
   it('with posta api', function() {
     cy.visit('/osobne-udaje');
 

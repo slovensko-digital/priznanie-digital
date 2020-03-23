@@ -16,6 +16,7 @@ import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput';
 import { formatPsc } from '../lib/utils';
+import { Nace } from '../components/Nace';
 
 const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
 
@@ -90,13 +91,13 @@ const OsobneUdaje: NextPage<Props> = ({
                   type="text"
                   label="DIČ"
                 />
-
-                <Input
+                <Nace
                   className={styles.inlineField}
                   name="r003_nace"
                   type="text"
                   label="NACE"
-                />
+                ></Nace>
+                
               </div>
 
               <h2>Adresa trvalého pobytu</h2>

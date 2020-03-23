@@ -35,3 +35,7 @@ export const saveEmail = async (
     body: JSON.stringify({ email, attributes, file }),
   }).then(response => response.json());
 };
+
+export const nace = async (query = '') => {
+  return (await fetch(`/api/nace?q=${query}`)).json();
+};

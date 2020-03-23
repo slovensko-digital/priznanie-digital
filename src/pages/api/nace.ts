@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const q = req.query.q as string;
 
   if (!q) {
-    return res.status(400).send('q parameter missing');
+    return res.json(nace);
   }
 
   const result = fuse.search(q);
