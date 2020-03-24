@@ -10,7 +10,7 @@ if (!token) {
 const options = {
   shouldSort: true,
   includeScore: true,
-  threshold: 0.4,
+  threshold: 0.3,
   location: 0,
   distance: 100,
   minMatchCharLength: 1,
@@ -22,7 +22,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const q = req.query.q as string;
 
   if (!q) {
-    return res.json(nace);
+    return res.json(
+      nace.map(item => ({
+        item,
+        score: 1,
+      })),
+    );
   }
 
   const result = fuse.search(q);

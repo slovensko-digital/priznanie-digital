@@ -56,8 +56,11 @@ export const Nace: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    fetchData({ value: '' });
+    if (naceItems.length === 0) {
+      onSuggestionsFetchRequested.current({ value: '' });
+    }
   }, []);
+  console.log(naceItems.length === 0);
 
   const inputProps = {
     ...field,
