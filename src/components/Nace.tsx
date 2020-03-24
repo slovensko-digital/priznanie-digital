@@ -100,8 +100,10 @@ export const Nace: React.FC<Props> = ({
   };
 
   const theme: Theme = {
-    suggestionsContainerOpen:
+    suggestionsContainerOpen: classnames(
       'govuk-list govuk-list--number autocomplete__menu',
+      styles.absolute,
+    ),
     suggestion: 'autocomplete__option',
     suggestionHighlighted: 'autocomplete__option--focused',
     suggestionsList: { padding: 0, margin: 0 },
@@ -114,6 +116,7 @@ export const Nace: React.FC<Props> = ({
         className,
         meta.touched && meta.error && 'govuk-form-group--error',
         isLoading ? [styles.autocompleteFieldLoading] : '',
+        styles.relative,
       ])}
     >
       <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>

@@ -84,6 +84,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
               />
 
+              <Nace label="NACE" />
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
@@ -91,13 +92,6 @@ const OsobneUdaje: NextPage<Props> = ({
                   type="text"
                   label="DIČ"
                 />
-                <Nace
-                  className={styles.inlineField}
-                  name="r003_nace"
-                  type="text"
-                  label="NACE"
-                ></Nace>
-                
               </div>
 
               <h2>Adresa trvalého pobytu</h2>

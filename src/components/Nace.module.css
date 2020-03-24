@@ -14,3 +14,12 @@
   background: url('/assets/images/spinner.png') center center no-repeat !important;
   pointer-events: none;
 }
+
+.absolute {
+  position: absolute;
+  z-index: 100;
+}
+
+.relative {
+  position: relative;
+}
