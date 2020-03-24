@@ -28,7 +28,7 @@ const makeHandlePersonAutoform = ({
     setValues({
       ...values,
       meno_priezvisko: person.name,
-      r001_dic: person?.tin ?? '',
+      r001_dic: person?.tin ?? values.r001_dic,
       r007_ulica: person.street ?? person.municipality,
       r008_cislo: person.street_number,
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
