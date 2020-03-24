@@ -4,13 +4,6 @@ import { useField } from 'formik';
 import classnames from 'classnames';
 import { nace } from '../lib/api';
 
-interface Props {
-  label: string;
-  hint?: string;
-  className?: string;
-  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
-}
-
 interface NaceItem {
   item: {
     code: string;
@@ -30,6 +23,12 @@ const Suggestion: React.FC<SuggestionProps> = ({
   </div>
 );
 
+interface Props {
+  label: string;
+  hint?: string;
+  className?: string;
+  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
+}
 export const Nace: React.FC<Props> = ({
   className = '',
   label = 'NACE',
@@ -38,7 +37,7 @@ export const Nace: React.FC<Props> = ({
 }: Props) => {
   const name = 'r003_nace';
   const [naceItems, setNaceItems] = useState<NaceItem[]>([]);
-  const [field, meta] = useField(name);
+  const [field, meta, helpers] = useField(name);
 
   const fetchData = async ({ value }) => {
     const result = await nace(value);
@@ -97,11 +96,19 @@ export const Nace: React.FC<Props> = ({
       <Autosuggest<NaceItem>
         onSuggestionsFetchRequested={fetchData}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={suggestion => suggestion?.item?.label}
+        getSuggestionValue={suggestion =>
+          `${suggestion?.item?.code} ${suggestion?.item?.label}`
+        }
         suggestions={naceItems}
         renderSuggestion={suggestion => <Suggestion suggestion={suggestion} />}
         inputProps={inputProps}
         theme={theme}
+        shouldRenderSuggestions={() => true}
+        onSuggestionSelected={(_event, { suggestion }) => {
+          helpers.setValue(
+            `${suggestion?.item?.code} - ${suggestion?.item?.label}`,
+          );
+        }}
       />
     </div>
   );
