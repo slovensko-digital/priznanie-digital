@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import Autosuggest, { Theme } from 'react-autosuggest';
 import { useField } from 'formik';
 import classnames from 'classnames';
-import throttle from 'lodash.throttle';
 import Fuse from 'fuse.js';
 import { getNace } from '../lib/api';
 import styles from './Nace.module.css';
@@ -16,6 +15,16 @@ const options = {
   minMatchCharLength: 1,
   keys: ['code', 'label'],
 };
+
+function useFuse<T>(data: T[]): Fuse<T, { includeScore: true }> {
+  const fuseRef = useRef(new Fuse(data, options));
+
+  useEffect(() => {
+    fuseRef.current = new Fuse(data, options);
+  }, [data]);
+
+  return fuseRef.current;
+}
 
 interface Nace {
   code: string;
@@ -52,6 +61,7 @@ export const Nace: React.FC<Props> = ({
   >([]);
   const [isLoading, setIsLoading] = useState(false);
   const [field, meta, helpers] = useField(name);
+  const fuse = useFuse(naceData);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -60,19 +70,18 @@ export const Nace: React.FC<Props> = ({
     setIsLoading(false);
   };
 
-  const fuse = new Fuse(naceData, options);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    const searchResult = fuse.search<Nace, true>(value);
+    const searchResult = fuse.search(value);
     setNaceSearchResult(searchResult);
   };
   const onSuggestionsClearRequested = () => {
     setNaceSearchResult([]);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const inputProps = {
     ...field,
