@@ -3,6 +3,7 @@ import Autosuggest, { Theme } from 'react-autosuggest';
 import { useField } from 'formik';
 import classnames from 'classnames';
 import { nace } from '../lib/api';
+import styles from './Nace.module.css';
 
 interface NaceItem {
   item: {
@@ -37,10 +38,13 @@ export const Nace: React.FC<Props> = ({
 }: Props) => {
   const name = 'r003_nace';
   const [naceItems, setNaceItems] = useState<NaceItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [field, meta, helpers] = useField(name);
 
-  const fetchData = async ({ value }) => {
+  const onSuggestionsFetchRequested = async ({ value }) => {
+    setIsLoading(true);
     const result = await nace(value);
+    setIsLoading(false);
     setNaceItems(result);
   };
   const onSuggestionsClearRequested = () => {
@@ -48,7 +52,7 @@ export const Nace: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    fetchData({ value: field.value });
+    onSuggestionsFetchRequested({ value: field.value });
   }, []);
 
   const inputProps = {
@@ -75,6 +79,7 @@ export const Nace: React.FC<Props> = ({
         'govuk-form-group',
         className,
         meta.touched && meta.error && 'govuk-form-group--error',
+        isLoading ? [styles.autocompleteFieldLoading] : '',
       ])}
     >
       <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>
@@ -94,7 +99,7 @@ export const Nace: React.FC<Props> = ({
       <span className="govuk-hint">{hint}</span>
 
       <Autosuggest<NaceItem>
-        onSuggestionsFetchRequested={fetchData}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={suggestion =>
           `${suggestion?.item?.code} ${suggestion?.item?.label}`
