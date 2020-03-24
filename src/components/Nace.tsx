@@ -31,16 +31,8 @@ interface Nace {
   label: string;
 }
 
-interface SuggestionProps {
-  suggestion: Fuse.FuseResultWithScore<Nace>;
-}
-const Suggestion: React.FC<SuggestionProps> = ({
-  suggestion,
-}: SuggestionProps) => (
-  <div>
-    {suggestion?.item?.code} - {suggestion?.item?.label}
-  </div>
-);
+const formatNace = (nace: Fuse.FuseResultWithScore<Nace>) =>
+  `${nace?.item?.code} - ${nace?.item?.label}`;
 
 interface Props {
   label: string;
@@ -138,18 +130,14 @@ export const Nace: React.FC<Props> = ({
       <Autosuggest<Fuse.FuseResultWithScore<Nace>>
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={suggestion =>
-          `${suggestion?.item?.code} ${suggestion?.item?.label}`
-        }
+        getSuggestionValue={formatNace}
         suggestions={naceSearchResult}
-        renderSuggestion={suggestion => <Suggestion suggestion={suggestion} />}
+        renderSuggestion={suggestion => <>{formatNace(suggestion)}</>}
         inputProps={inputProps}
         theme={theme}
         shouldRenderSuggestions={() => true}
         onSuggestionSelected={(_event, { suggestion }) => {
-          helpers.setValue(
-            `${suggestion?.item?.code} - ${suggestion?.item?.label}`,
-          );
+          helpers.setValue(formatNace(suggestion));
         }}
       />
     </div>
