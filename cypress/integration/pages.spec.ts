@@ -142,13 +142,18 @@ describe('osobne-udaje page', function() {
 
     next();
   });
-  it.only('with NACE', function() {
+  it('with NACE', function() {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
-    getInput('r003_nace').type('ryza');
+    getInput('r003_nace').type('ryža');
 
-    cy.contains('ryza').click();
+    cy.contains('ryže').click({ force: true });
+
+    getInput('r003_nace').should(
+      'have.value',
+      '01110 - Pestovanie obilnín (okrem ryže), strukovín a olejnatých semien',
+    );
   });
   it('with posta api', function() {
     cy.visit('/osobne-udaje');
