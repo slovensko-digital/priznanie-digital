@@ -9,10 +9,10 @@ import styles from './Nace.module.css';
 const options = {
   shouldSort: true,
   includeScore: true,
-  threshold: 0.3,
-  location: 0,
+  threshold: 0.4,
+  location: 30,
   distance: 100,
-  minMatchCharLength: 1,
+  minMatchCharLength: 2,
   keys: ['code', 'label'],
 };
 
@@ -65,8 +65,9 @@ export const Nace: React.FC<Props> = ({
 
   const fetchData = async () => {
     setIsLoading(true);
-    const result = await getNace();
+    const result: Nace[] = await getNace();
     setNaceData(result);
+    setNaceSearchResult(result.map(item => ({ item, score: 1, refIndex: 0 })));
     setIsLoading(false);
   };
 
@@ -76,12 +77,17 @@ export const Nace: React.FC<Props> = ({
 
   const onSuggestionsFetchRequested = ({ value }) => {
     const searchResult = fuse.search(value);
-    setNaceSearchResult(searchResult);
+    setNaceSearchResult(
+      searchResult.length === 0
+        ? naceData.map(item => ({ item, score: 1, refIndex: 0 }))
+        : searchResult,
+    );
   };
   const onSuggestionsClearRequested = () => {
-    setNaceSearchResult([]);
+    setNaceSearchResult(
+      naceData.map(item => ({ item, score: 1, refIndex: 0 })),
+    );
   };
-
 
   const inputProps = {
     ...field,
