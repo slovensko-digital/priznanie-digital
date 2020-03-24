@@ -1,8 +1,31 @@
-import React from 'react';
-import { useField } from 'formik';
+import React, { ReactNode } from 'react';
+import {
+  Formik,
+  FormikProps,
+  useField,
+  FormikConfig,
+  FormikValues,
+} from 'formik';
 import classnames from 'classnames';
 import { UserInput } from '../types/UserInput';
 import { numberInputRegexp } from '../lib/utils';
+
+export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
+  children: (formikProps: FormikProps<FormikInput>) => ReactNode;
+};
+
+export const FormWrapper = <FormikInput extends FormikValues>({
+  children,
+  ...formikProps
+}: FormWrapperProps<FormikInput>) => (
+  <Formik<FormikInput>
+    validateOnChange={false}
+    validateOnBlur={false}
+    {...formikProps}
+  >
+    {children}
+  </Formik>
+);
 
 interface InputProps<Name> {
   name: Name;
@@ -100,7 +123,10 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               data-test={`${field.name}-input-yes`}
               id={`${field.name}-input-yes`}
               checked={field.value === true}
-              onChange={() => helpers.setValue(true)}
+              onChange={() => {
+                helpers.setValue(true);
+                helpers.setError(undefined);
+              }}
             />
             <label
               className="govuk-label govuk-radios__label"
@@ -118,7 +144,10 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               id={`${field.name}-input-no`}
               type="radio"
               checked={field.value === false}
-              onChange={() => helpers.setValue(false)}
+              onChange={() => {
+                helpers.setValue(false);
+                helpers.setError(undefined);
+              }}
             />
             <label
               className="govuk-label govuk-radios__label"

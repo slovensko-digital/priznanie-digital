@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useField } from 'formik';
 import styles from './FullNameAutoCompleteInput.module.css';
@@ -15,6 +15,7 @@ export const FullNameAutoCompleteInput = ({
   const [autoformPersons, setAutoFormPersons] = useState<
     AutoformResponseBody[]
   >([]);
+  const autocompleteList = useRef(null);
   const [isLoadingAutoform, setIsLoadingAutoform] = useState<boolean>(false);
   const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false);
   const [
@@ -46,9 +47,10 @@ export const FullNameAutoCompleteInput = ({
     setAutocompleteDebounceTimeout(timeout);
   };
 
-  const handleAutocompleteInputFocus = () => {
+  const handleAutocompleteInputFocus = async () => {
     clearTimeout(autocompleteBlurTimeout);
-    setShowAutocomplete(true);
+    await setShowAutocomplete(true);
+    handleScroll();
   };
 
   const handleAutocompleteInputBlur = event => {
@@ -71,18 +73,38 @@ export const FullNameAutoCompleteInput = ({
       : selectedPersonIndex - 1;
   };
 
-  const handleArrowNavigation = event => {
+  const handleScroll = () => {
+    if (autocompleteList.current) {
+      const focusedElement: HTMLElement = document.querySelector(
+        '.autocomplete__option--focused',
+      );
+      const top = focusedElement && focusedElement.offsetTop;
+
+      const scrollDown = top - 260;
+      const scrollUp = top - 40;
+
+      if (autocompleteList.current.scrollTop < scrollDown) {
+        autocompleteList.current.scrollTop = scrollDown;
+      } else if (autocompleteList.current.scrollTop > scrollUp) {
+        autocompleteList.current.scrollTop = scrollUp;
+      }
+    }
+  };
+
+  const handleArrowNavigation = async event => {
     if (
       !showAutocomplete &&
       (event.key === 'ArrowDown' || event.key === 'ArrowUp')
     ) {
-      setShowAutocomplete(true);
+      await setShowAutocomplete(true);
       event.preventDefault();
     } else if (event.key === 'ArrowDown') {
-      setSelectedPersonIndex(getNextNavigationIndex());
+      await setSelectedPersonIndex(getNextNavigationIndex());
+      handleScroll();
       event.preventDefault();
     } else if (event.key === 'ArrowUp') {
-      setSelectedPersonIndex(getPreviousNavigationIndex());
+      await setSelectedPersonIndex(getPreviousNavigationIndex());
+      handleScroll();
       event.preventDefault();
     } else if (event.key === 'Escape') {
       setShowAutocomplete(false);
@@ -120,6 +142,7 @@ export const FullNameAutoCompleteInput = ({
           <ul
             className="govuk-list govuk-list--number autocomplete__menu"
             style={{ position: 'absolute', zIndex: 100 }}
+            ref={autocompleteList}
           >
             {autoformPersons.map((person, index) => (
               <li

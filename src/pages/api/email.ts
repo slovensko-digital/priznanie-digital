@@ -9,7 +9,10 @@ import {
 const TEMPLATE_WITHOUT_NEWSLETTER = 3;
 const TEMPLATE_WITH_NEWSLETTER = 4;
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> => {
   const email = `${req.body.email}`;
   const attributes = req.body.attributes as EmailAttributes;
 
@@ -34,9 +37,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     res.statusCode = sendEmailResponse.status;
-    res.send({ ...(await sendEmailResponse.json()) });
+    return res.send({ ...(await sendEmailResponse.json()) });
   } catch (error) {
     res.statusCode = 500;
-    res.send(error);
+    return res.send(error);
   }
 };

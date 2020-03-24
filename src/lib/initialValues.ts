@@ -5,6 +5,7 @@ import {
   EmployedUserInput,
   ChildrenUserInput,
   PensionUserInput,
+  MortgageUserInput,
 } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { PostponeUserInput } from '../types/PostponeUserInput';
@@ -71,6 +72,12 @@ export const pensionInitialValues: PensionUserInput = {
   r030_vyska_dochodku: '',
 };
 
+export const mortgageInitialValues: MortgageUserInput = {
+  r037_pocetMesiacov: '',
+  r037_zaplatene_uroky: '',
+  r037_uplatnuje_uroky: undefined,
+};
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
@@ -78,6 +85,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...employmentUserInputInitialValues,
   ...kidsUserInputInitialValues,
   ...pensionInitialValues,
+  ...mortgageInitialValues,
   ...{ datum: '' },
 };
 

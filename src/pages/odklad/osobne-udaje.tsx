@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
+import { Form, FormikProps } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 import { NextPage } from 'next';
 import classnames from 'classnames';
-import { Input } from '../../components/FormComponents';
+import { FormWrapper, Input } from '../../components/FormComponents';
 import styles from '../osobne-udaje.module.css';
-import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
+import {
+  FormErrors,
+  PersonalInformationPostponePage,
+} from '../../types/PageUserInputs';
 import { getCity } from '../../lib/api';
 import { AutoformResponseBody } from '../../types/api';
 import { getPostponeRoutes } from '../../lib/routes';
@@ -60,9 +62,9 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationPostponePage>
+      <FormWrapper<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
-        validationSchema={validationSchema}
+        validate={validate}
         onSubmit={values => {
           setPostponeUserInput(values);
           router.push(nextRoute);
@@ -170,29 +172,55 @@ const OsobneUdaje: NextPage<Props> = ({
             </Form>
           </>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
-/** https://github.com/kub1x/rodnecislo */
-// const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
 
-const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
+export const validate = (values: PersonalInformationPostponePage) => {
+  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {};
+
+  if (!values.dic) {
+    errors.dic = 'Zadajte pridelené DIČ';
+  }
+
   /**
    * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
    */
-  dic: Yup.string()
-    .required('Zadajte pridelené DIČ')
-    .min(9, 'DIČ môže mať minimálne 9 znakov')
-    .max(10, 'DIČ môže mať maximálne 10 znakov'),
-  meno_priezvisko: Yup.string().required('Zadajte vaše meno a priezvisko'),
-  psc: Yup.string().required('Zadajte PSČ'),
-  // rodne_cislo: Yup.string()
-  //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
-  //   .required(),
-  obec: Yup.string().required('Zadajte obec'),
-  ulica: Yup.string().required('Zadajte ulicu'),
-  cislo: Yup.string().required('Zadajte číslo domu'),
-  stat: Yup.string().required('Zadajte štát'),
-});
+  if (values.dic.length < 9) {
+    errors.dic = 'DIČ môže mať minimálne 9 znakov';
+  }
+  if (values.dic.length > 10) {
+    errors.dic = 'DIČ môže mať maximálne 10 znakov';
+  }
+
+  if (!values.meno_priezvisko) {
+    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko';
+  }
+
+  if (!values.ulica) {
+    errors.ulica = 'Zadajte ulicu';
+  }
+
+  if (!values.cislo) {
+    errors.cislo = 'Zadajte číslo domu';
+  }
+
+  const pscNumberFormat = /^\d{3} \d{2}$/;
+  if (!values.psc) {
+    errors.psc = 'Zadajte PSČ';
+  } else if (!values.psc.match(pscNumberFormat)) {
+    errors.psc = 'PSČ môže obsahovať iba 5 čísel';
+  }
+
+  if (!values.obec) {
+    errors.obec = 'Zadajte obec';
+  }
+
+  if (!values.stat) {
+    errors.stat = 'Zadajte štát';
+  }
+
+  return errors;
+};
 export default OsobneUdaje;

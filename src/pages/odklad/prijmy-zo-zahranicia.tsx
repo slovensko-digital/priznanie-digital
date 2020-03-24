@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio } from '../../components/FormComponents';
+import { BooleanRadio, FormWrapper } from '../../components/FormComponents';
 import { getPostponeRoutes } from '../../lib/routes';
 import { PostponeUserInput } from '../../types/PostponeUserInput';
 import {
@@ -37,7 +37,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<IncomeSourceCountryUserInput>
+      <FormWrapper<IncomeSourceCountryUserInput>
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={values => {
@@ -76,12 +76,12 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: IncomeSourceCountryUserInput) => {
+export const validate = (values: IncomeSourceCountryUserInput) => {
   const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {};
 
   if (values.prijmy_zo_zahranicia === undefined) {

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { PensionUserInput } from '../types/PageUserInputs';
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
+import { FormErrors, PensionUserInput } from '../types/PageUserInputs';
 import { TaxFormUserInput } from '../types/TaxFormUserInput';
 import { getRoutes } from '../lib/routes';
 import { numberInputRegexp } from '../lib/utils';
@@ -31,7 +31,7 @@ const Dochodok: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PensionUserInput>
+      <FormWrapper<PensionUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         // validationSchema={validationSchema}
@@ -41,7 +41,7 @@ const Dochodok: NextPage<Props> = ({
         }}
       >
         {({ values }) => (
-          <Form className="form">
+          <Form className="form" noValidate>
             <BooleanRadio
               title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
               name="r029_poberal_dochodok"
@@ -51,7 +51,7 @@ const Dochodok: NextPage<Props> = ({
                 <Input
                   name="r030_vyska_dochodku"
                   type="number"
-                  label="Vyska dochodku"
+                  label="Výška zaplatených príspevkov za rok 2019"
                 />
               </>
             )}
@@ -60,33 +60,27 @@ const Dochodok: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
   );
 };
 
-const validate = (values: PensionUserInput): any => {
-  const errors: any = {};
+export const validate = (values: PensionUserInput) => {
+  const errors: Partial<FormErrors<PensionUserInput>> = {};
 
-  if (
-    values.r029_poberal_dochodok &&
-    !values.r030_vyska_dochodku &&
-    !values.r030_vyska_dochodku.match(numberInputRegexp)
-  ) {
-    errors.r030_vyska_dochodku = 'Zadajte vysku dochodku';
+  if (typeof values.r029_poberal_dochodok === 'undefined') {
+    errors.r029_poberal_dochodok = 'Vyznačte odpoveď';
+  }
+
+  if (values.r029_poberal_dochodok) {
+    if (!values.r030_vyska_dochodku) {
+      errors.r030_vyska_dochodku = 'Zadajte výšku zaplatených príspevkov';
+    } else if (!values.r030_vyska_dochodku.match(numberInputRegexp)) {
+      errors.r030_vyska_dochodku = 'Zadajte výšku príspevkov vo formáte 123,45';
+    }
   }
 
   return errors;
 };
-
-// const validationSchema = Yup.object().shape<PensionUserInput<number>>({
-//   r029_poberal_dochodok: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
-//     is: true,
-//     then: Yup.number().required(),
-//   }),
-// });
 
 export default Dochodok;
