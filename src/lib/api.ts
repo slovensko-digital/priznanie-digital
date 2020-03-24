@@ -36,6 +36,6 @@ export const saveEmail = async (
   }).then(response => response.json());
 };
 
-export const nace = async (query = '') => {
-  return (await fetch(`/api/nace?q=${query}`)).json();
+export const getNace = async () => {
+  return (await fetch(`nace.json`)).json();
 };

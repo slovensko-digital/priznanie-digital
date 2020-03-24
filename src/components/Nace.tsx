@@ -3,19 +3,27 @@ import Autosuggest, { Theme } from 'react-autosuggest';
 import { useField } from 'formik';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
-import { nace } from '../lib/api';
+import Fuse from 'fuse.js';
+import { getNace } from '../lib/api';
 import styles from './Nace.module.css';
 
-interface NaceItem {
-  item: {
-    code: string;
-    label: string;
-  };
-  score: number;
+const options = {
+  shouldSort: true,
+  includeScore: true,
+  threshold: 0.3,
+  location: 0,
+  distance: 100,
+  minMatchCharLength: 1,
+  keys: ['code', 'label'],
+};
+
+interface Nace {
+  code: string;
+  label: string;
 }
 
 interface SuggestionProps {
-  suggestion: NaceItem;
+  suggestion: Fuse.FuseResultWithScore<Nace>;
 }
 const Suggestion: React.FC<SuggestionProps> = ({
   suggestion,
@@ -38,29 +46,33 @@ export const Nace: React.FC<Props> = ({
   hint = '',
 }: Props) => {
   const name = 'r003_nace';
-  const [naceItems, setNaceItems] = useState<NaceItem[]>([]);
+  const [naceData, setNaceData] = useState<Nace[]>([]);
+  const [naceSearchResult, setNaceSearchResult] = useState<
+    Fuse.FuseResultWithScore<Nace>[]
+  >([]);
   const [isLoading, setIsLoading] = useState(false);
   const [field, meta, helpers] = useField(name);
 
-  const fetchData = async ({ value }) => {
+  const fetchData = async () => {
     setIsLoading(true);
-    const result = await nace(value);
-    setNaceItems(result);
+    const result = await getNace();
+    setNaceData(result);
     setIsLoading(false);
   };
 
-  const onSuggestionsFetchRequested = useRef(throttle(fetchData, 2000));
+  const fuse = new Fuse(naceData, options);
 
+  const onSuggestionsFetchRequested = ({ value }) => {
+    const searchResult = fuse.search<Nace, true>(value);
+    setNaceSearchResult(searchResult);
+  };
   const onSuggestionsClearRequested = () => {
-    setNaceItems([]);
+    setNaceSearchResult([]);
   };
 
   useEffect(() => {
-    if (naceItems.length === 0) {
-      onSuggestionsFetchRequested.current({ value: '' });
-    }
+    fetchData();
   }, []);
-  console.log(naceItems.length === 0);
 
   const inputProps = {
     ...field,
@@ -105,13 +117,13 @@ export const Nace: React.FC<Props> = ({
 
       <span className="govuk-hint">{hint}</span>
 
-      <Autosuggest<NaceItem>
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested.current}
+      <Autosuggest<Fuse.FuseResultWithScore<Nace>>
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={suggestion =>
           `${suggestion?.item?.code} ${suggestion?.item?.label}`
         }
-        suggestions={naceItems}
+        suggestions={naceSearchResult}
         renderSuggestion={suggestion => <Suggestion suggestion={suggestion} />}
         inputProps={inputProps}
         theme={theme}
