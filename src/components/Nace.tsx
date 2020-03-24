@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Autosuggest, { Theme } from 'react-autosuggest';
 import { useField } from 'formik';
 import classnames from 'classnames';
+import throttle from 'lodash.throttle';
 import { nace } from '../lib/api';
 import styles from './Nace.module.css';
 
@@ -41,18 +42,21 @@ export const Nace: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [field, meta, helpers] = useField(name);
 
-  const onSuggestionsFetchRequested = async ({ value }) => {
+  const fetchData = async ({ value }) => {
     setIsLoading(true);
     const result = await nace(value);
-    setIsLoading(false);
     setNaceItems(result);
+    setIsLoading(false);
   };
+
+  const onSuggestionsFetchRequested = useRef(throttle(fetchData, 2000));
+
   const onSuggestionsClearRequested = () => {
     setNaceItems([]);
   };
 
   useEffect(() => {
-    onSuggestionsFetchRequested({ value: field.value });
+    fetchData({ value: '' });
   }, []);
 
   const inputProps = {
@@ -99,7 +103,7 @@ export const Nace: React.FC<Props> = ({
       <span className="govuk-hint">{hint}</span>
 
       <Autosuggest<NaceItem>
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested.current}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={suggestion =>
           `${suggestion?.item?.code} ${suggestion?.item?.label}`
