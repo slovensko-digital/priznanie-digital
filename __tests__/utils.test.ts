@@ -50,7 +50,7 @@ describe('utils', () => {
     describe('for valid values', () => {
       const validInputs = ['0', '10', '120,3', '120,34', '120.3', '120.34'];
 
-      validInputs.forEach(value => {
+      validInputs.forEach((value) => {
         it(`should return true for ${value}`, () => {
           expect(new RegExp(numberInputRegexp).test(value)).toBe(true);
         });
@@ -72,7 +72,7 @@ describe('utils', () => {
         '-15.20',
       ];
 
-      invalidInputs.forEach(value => {
+      invalidInputs.forEach((value) => {
         it(`should return false for ${value}`, () => {
           expect(new RegExp(numberInputRegexp).test(value)).toBe(false);
         });

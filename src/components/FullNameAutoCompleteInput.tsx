@@ -53,7 +53,7 @@ export const FullNameAutoCompleteInput = ({
     handleScroll();
   };
 
-  const handleAutocompleteInputBlur = event => {
+  const handleAutocompleteInputBlur = (event) => {
     const timeout = window.setTimeout(() => {
       setShowAutocomplete(false);
     }, 250);
@@ -91,7 +91,7 @@ export const FullNameAutoCompleteInput = ({
     }
   };
 
-  const handleArrowNavigation = async event => {
+  const handleArrowNavigation = async (event) => {
     if (
       !showAutocomplete &&
       (event.key === 'ArrowDown' || event.key === 'ArrowUp')
@@ -127,7 +127,7 @@ export const FullNameAutoCompleteInput = ({
           width="auto"
           autoComplete="12iubu312b3"
           className={isLoadingAutoform ? styles.autocompleteFieldLoading : ''}
-          onChange={event => {
+          onChange={(event) => {
             field.onChange(event);
             debounceAutoform(event.currentTarget.value);
           }}

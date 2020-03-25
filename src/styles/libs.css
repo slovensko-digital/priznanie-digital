@@ -88,7 +88,7 @@
   background-color: #fafafa;
 }
 .autocomplete__option--focused,
-.autocomplete__option--focused:hover{
+.autocomplete__option--focused:hover {
   background-color: #005ea5;
   border-color: #005ea5;
   color: #fff;

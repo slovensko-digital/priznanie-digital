@@ -70,7 +70,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
   /** SECTION Children */
   if (taxForm.children) {
-    form.dokument.telo.r34.dieta = taxForm.r034.map(child => {
+    form.dokument.telo.r34.dieta = taxForm.r034.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,

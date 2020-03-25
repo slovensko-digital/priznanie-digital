@@ -45,7 +45,7 @@ const Deti: NextPage<Props> = ({
       <FormWrapper<ChildrenUserInput>
         initialValues={taxFormUserInput}
         // validationSchema={validationSchema}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

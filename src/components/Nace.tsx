@@ -59,7 +59,9 @@ export const Nace: React.FC<Props> = ({
     setIsLoading(true);
     const result: Nace[] = await getNace();
     setNaceData(result);
-    setNaceSearchResult(result.map(item => ({ item, score: 1, refIndex: 0 })));
+    setNaceSearchResult(
+      result.map((item) => ({ item, score: 1, refIndex: 0 })),
+    );
     setIsLoading(false);
   };
 
@@ -71,13 +73,13 @@ export const Nace: React.FC<Props> = ({
     const searchResult = fuse.search(value);
     setNaceSearchResult(
       searchResult.length === 0
-        ? naceData.map(item => ({ item, score: 1, refIndex: 0 }))
+        ? naceData.map((item) => ({ item, score: 1, refIndex: 0 }))
         : searchResult,
     );
   };
   const onSuggestionsClearRequested = () => {
     setNaceSearchResult(
-      naceData.map(item => ({ item, score: 1, refIndex: 0 })),
+      naceData.map((item) => ({ item, score: 1, refIndex: 0 })),
     );
   };
 
@@ -132,7 +134,7 @@ export const Nace: React.FC<Props> = ({
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={formatNace}
         suggestions={naceSearchResult}
-        renderSuggestion={suggestion => <>{formatNace(suggestion)}</>}
+        renderSuggestion={(suggestion) => <>{formatNace(suggestion)}</>}
         inputProps={inputProps}
         theme={theme}
         shouldRenderSuggestions={() => true}

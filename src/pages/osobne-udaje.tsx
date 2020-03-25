@@ -62,12 +62,12 @@ const OsobneUdaje: NextPage<Props> = ({
       <FormWrapper<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}
       >
-        {props => (
+        {(props) => (
           <>
             <ErrorSummary<PersonalInformationUserInput>
               errors={props.errors}
@@ -116,7 +116,7 @@ const OsobneUdaje: NextPage<Props> = ({
                   type="text"
                   label="PSČ"
                   maxLength={6}
-                  onChange={async event => {
+                  onChange={async (event) => {
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,

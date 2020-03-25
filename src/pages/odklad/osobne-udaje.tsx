@@ -65,12 +65,12 @@ const OsobneUdaje: NextPage<Props> = ({
       <FormWrapper<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setPostponeUserInput(values);
           router.push(nextRoute);
         }}
       >
-        {props => (
+        {(props) => (
           <>
             <ErrorSummary<PersonalInformationPostponePage>
               errors={props.errors}
@@ -131,7 +131,7 @@ const OsobneUdaje: NextPage<Props> = ({
                   label="PSČ"
                   width={5}
                   maxLength={6}
-                  onChange={async event => {
+                  onChange={async (event) => {
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,
