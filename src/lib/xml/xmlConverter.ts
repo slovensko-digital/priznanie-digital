@@ -4,6 +4,10 @@ import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson } from '../../types/OutputJson'
 
+const boolToString = (bool: boolean) => {
+  return bool ? '1' : '0'
+}
+
 // TODO remove fallbacks, they should be unncessary now
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
@@ -42,7 +46,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     2,
   )
   if (taxForm.r029_poberal_dochodok) {
-    form.dokument.telo.r29 = taxForm.r029_poberal_dochodok ? '1' : '0'
+    form.dokument.telo.r29 = boolToString(taxForm.r029_poberal_dochodok)
     form.dokument.telo.r30 = taxForm.r030_vyska_dochodku.toFixed(2)
   }
 
@@ -53,13 +57,15 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       rodneCislo: taxForm?.r031_rodne_cislo ?? '',
     }
     form.dokument.telo.r32 = {
-      uplatnujemNCZDNaManzela: taxForm.r032_uplatnujem_na_partnera ? '1' : '0',
+      uplatnujemNCZDNaManzela: boolToString(
+        taxForm.r032_uplatnujem_na_partnera,
+      ),
       vlastnePrijmy: taxForm?.r032_partner_vlastne_prijmy?.toFixed(2) ?? '',
       pocetMesiacov: taxForm?.r032_partner_pocet_mesiacov?.toString() ?? '',
     }
 
     form.dokument.telo.r33 = {
-      uplatNCZDNaKupelStarostlivost: taxForm.r033_partner_kupele ? '1' : '0',
+      uplatNCZDNaKupelStarostlivost: boolToString(taxForm.r033_partner_kupele),
       preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady?.toFixed(2) ?? '',
     }
 
@@ -85,7 +91,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   /** SECTION Mortgage */
   if (taxForm.r037_uplatnuje_uroky) {
     form.dokument.telo.r37 = {
-      uplatDanBonusZaplatUroky: taxForm.r037_uplatnuje_uroky ? '1' : '0',
+      uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
       zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
       pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
     }
