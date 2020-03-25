@@ -74,7 +74,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,
-          // value,
           typeof value === 'boolean' ? (value ? '1' : '0') : value,
         ]),
       )

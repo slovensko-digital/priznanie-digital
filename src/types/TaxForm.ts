@@ -1,21 +1,72 @@
-import { TaxFormUserInputBase } from './TaxFormUserInput'
+import { Child } from './TaxFormUserInput'
 
-export interface TaxForm extends Required<TaxFormUserInputBase<number>> {
-  /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
-  t1r10_vydavky: number
-  t1r2_prijmy: number
-  t1r10_prijmy: number
+export interface TaxForm {
+  /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
+  r001_dic: string
+  /** 03 - SK NACE - Hlavná, prevažná činnosť */
+  r003_nace: string
   /**   04 - Priezvisko*/
   r004_priezvisko: string
   /**   05 - Meno*/
   r005_meno: string
+  /**   07 - Ulica*/
+  r007_ulica: string
+  /**   08 - Súpisné/orientačné číslo **/
+  r008_cislo: string
   /** PSC */
   r009_psc: string
+  /**   10 - Obec **/
+  r010_obec: string
+  /**   11 - Štát **/
+  r011_stat: string
+
+  /** SECTION Dochodok */
+  /** Poberal (a) som na začiatku zdaňovacieho obdobia dôchodok (ky) uvedený (é) v § 11 ods. 6 zákona alebo mi bol tento (tieto) dôchodok (ky) priznaný (é) spätne k začiatku príslušného zdaňovacieho obdobia (vypĺňa sa, len ak daňovník bol poberateľom dôchodku uvedeného v § 11 ods. 6 zákona na začiatku zdaňovacieho obdobia alebo mu tento dôchodok bol priznaný spätne k začiatku príslušného zdaňovacieho obdobia)  */
+  r029_poberal_dochodok?: boolean
+  /** Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za zdaňovacie obdobie (v eurách) */
+  r030_vyska_dochodku?: number
+
+  /** SECTION  Partner*/
+  r031_priezvisko_a_meno?: string
+  r031_rodne_cislo?: string
+  r032_uplatnujem_na_partnera?: boolean
+  r032_partner_vlastne_prijmy?: number
+  r032_partner_pocet_mesiacov?: number
+  r033_partner_kupele?: boolean
+  /**   max 50*/
+  r033_partner_kupele_uhrady?: number
+
+  /** SECTION  Mortage */
+  r037_uplatnuje_uroky?: boolean
+  r037_zaplatene_uroky?: number
+  r037_pocetMesiacov?: number
+
+  /** SECTION Prijmy a poistenie  */
+  /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
+  t1r10_prijmy: number
+  /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
+  priloha3_r11_socialne: number
+  /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
+  priloha3_r13_zdravotne: number
+
+  /**   Deti*/
+  r034?: Child[]
+  r036?: number
+
+  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každ
+  /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
+  t1r10_vydavky: number
+  t1r2_prijmy: number
+
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */
   priloha3_r08_poistne: number
+
+  /** SECTION  Zamestnanie */
+  r038?: number
   /**   Uhrn poistneho*/
   r039: number
+
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
   r040: number
   /**   The same as t1r10_vydavky*/
@@ -110,4 +161,10 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
    *   podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
    *   r125_dan_na_uhradu */
   r126_danovy_preplatok: number
+
+  datum: string
+
+  /** Helper properties from input, that are not part of taxForm */
+  children: boolean
+  employed: boolean
 }

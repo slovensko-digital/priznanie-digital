@@ -20,9 +20,7 @@ export interface Child {
 export interface TaxFormUserInputBase<T> {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
-  /** 03 - SK NACE - Hlavná, prevažná činnosť
-   *  TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum,
-   *  UX musi byt zvladnute */
+  /** 03 - SK NACE - Hlavná, prevažná činnosť*/
   r003_nace: string
   /** Spoločné pole pre meno a priezvisko **/
   meno_priezvisko: string
