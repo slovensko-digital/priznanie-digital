@@ -56,7 +56,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
   });
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
-    .map(v => v.trim());
+    .map((v) => v.trim());
 
   return (
     <>
@@ -150,7 +150,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
         rows={
           taxFormUserInput.children
             ? taxFormUserInput.r034
-                .map(child => [
+                .map((child) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
                   { title: 'Rodné číslo', value: child.rodneCislo },
                 ])

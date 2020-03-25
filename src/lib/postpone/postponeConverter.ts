@@ -12,7 +12,7 @@ export function convertPostponeToJson(
   form.dokument.hlavicka.dic = postponeUserInput.dic;
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
     .split(' ')
-    .map(v => v.trim());
+    .map((v) => v.trim());
   // const [beforeSlash, afterSlash] = postponeUserInput.rodne_cislo.split('/');
 
   form.dokument.hlavicka.fyzickaOsoba.meno = firstName;

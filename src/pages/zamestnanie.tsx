@@ -35,7 +35,7 @@ const Zamestnanie: NextPage<Props> = ({
       <FormWrapper<EmployedUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

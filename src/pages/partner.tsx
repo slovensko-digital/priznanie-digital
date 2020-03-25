@@ -34,7 +34,7 @@ const Partner: NextPage<Props> = ({
       <FormWrapper<PartnerUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

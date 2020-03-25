@@ -55,8 +55,8 @@ function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url);
 }
 
-describe('Employment page', function() {
-  it('has working ui', function() {
+describe('Employment page', function () {
+  it('has working ui', function () {
     cy.visit('/zamestnanie');
 
     // Back button should work and be the correct page
@@ -108,8 +108,8 @@ describe('Employment page', function() {
   });
 });
 
-describe('osobne-udaje page', function() {
-  it('Back and next', function() {
+describe('osobne-udaje page', function () {
+  it('Back and next', function () {
     cy.visit('/osobne-udaje');
 
     // Back button should work and be the correct page
@@ -123,7 +123,7 @@ describe('osobne-udaje page', function() {
     next();
     getError();
   });
-  it('with autoform', function() {
+  it('with autoform', function () {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
@@ -142,7 +142,7 @@ describe('osobne-udaje page', function() {
 
     next();
   });
-  it('with NACE', function() {
+  it('with NACE', function () {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
@@ -155,13 +155,13 @@ describe('osobne-udaje page', function() {
       '01110 - Pestovanie obilnín (okrem ryže), strukovín a olejnatých semien',
     );
   });
-  it('with posta api', function() {
+  it('with posta api', function () {
     cy.visit('/osobne-udaje');
 
     typeToInput('psc', baseInput);
     getInput('r010_obec').should('have.value', baseInput.r010_obec);
   });
-  it('Manual entry', function() {
+  it('Manual entry', function () {
     cy.visit('/osobne-udaje');
 
     /** With autoform */
@@ -178,8 +178,8 @@ describe('osobne-udaje page', function() {
   });
 });
 
-describe('Children page', function() {
-  it('has working navigation', function() {
+describe('Children page', function () {
+  it('has working navigation', function () {
     cy.visit('/deti');
 
     // Back button should work and be the correct page
@@ -190,14 +190,14 @@ describe('Children page', function() {
     cy.visit('/deti');
   });
   // TODO
-  it.skip('has working validation', function() {
+  it.skip('has working validation', function () {
     cy.visit('/deti');
 
     // Shows error, when presses next withou interaction
     next();
     getError();
   });
-  it('has working ui', function() {
+  it('has working ui', function () {
     cy.visit('/deti');
 
     // When presses yes, additional fields appears
@@ -218,8 +218,8 @@ describe('Children page', function() {
   });
 });
 
-describe('Feedback', function() {
-  it('has working ui', function() {
+describe('Feedback', function () {
+  it('has working ui', function () {
     cy.visit('/');
     cy.get('[data-test=feedback]').click();
 
@@ -231,8 +231,8 @@ describe('Feedback', function() {
   });
 });
 
-describe('Results page', function() {
-  it('has working navigation', function() {
+describe('Results page', function () {
+  it('has working navigation', function () {
     cy.visit('/vysledky');
 
     // Back button should work and be the correct page
@@ -242,7 +242,7 @@ describe('Results page', function() {
     //  Go back to our page
     cy.visit('/vysledky');
   });
-  it('has working ui', function() {
+  it('has working ui', function () {
     cy.visit('/vysledky');
 
     cy.get('h1').contains('Výpočet dane za rok');
@@ -250,8 +250,8 @@ describe('Results page', function() {
   });
 });
 
-describe('Summary page', function() {
-  it('has working navigation', function() {
+describe('Summary page', function () {
+  it('has working navigation', function () {
     cy.visit('/suhrn');
 
     // Back button should work and be the correct page
@@ -261,7 +261,7 @@ describe('Summary page', function() {
     //  Go back to our page
     cy.visit('/vysledky');
   });
-  it('has working ui', function() {
+  it('has working ui', function () {
     cy.visit('/suhrn');
 
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov');
@@ -269,8 +269,8 @@ describe('Summary page', function() {
   });
 });
 
-describe('/odklad/osobne-udaje page', function() {
-  beforeEach('Navigate to test page', function() {
+describe('/odklad/osobne-udaje page', function () {
+  beforeEach('Navigate to test page', function () {
     cy.visit('/');
 
     cy.contains('Odložiť daňové priznanie').click();
@@ -279,7 +279,7 @@ describe('/odklad/osobne-udaje page', function() {
 
     next();
   });
-  it('Back and validation', function() {
+  it('Back and validation', function () {
     assertUrl('/odklad/osobne-udaje');
 
     // Back button should work and be the correct page
@@ -293,7 +293,7 @@ describe('/odklad/osobne-udaje page', function() {
     next();
     getError();
   });
-  it('with autoform', function() {
+  it('with autoform', function () {
     assertUrl('/odklad/osobne-udaje');
 
     /** With autoform */
@@ -312,13 +312,13 @@ describe('/odklad/osobne-udaje page', function() {
     getInputPostpone('obec').should('contain.value', 'Bratislava');
     getInputPostpone('stat').should('contain.value', 'Slovenská republika');
   });
-  it('with posta api', function() {
+  it('with posta api', function () {
     assertUrl('/odklad/osobne-udaje');
 
     typeToInputPostpone('psc', foreignIncomeInput);
     getInputPostpone('obec').should('have.value', foreignIncomeInput.obec);
   });
-  it('Manual entry', function() {
+  it('Manual entry', function () {
     assertUrl('/odklad/osobne-udaje');
 
     typeToInputPostpone('dic', foreignIncomeInput);
@@ -329,7 +329,7 @@ describe('/odklad/osobne-udaje page', function() {
     typeToInputPostpone('psc', foreignIncomeInput);
     typeToInputPostpone('stat', foreignIncomeInput);
   });
-  it('Errors', function() {
+  it('Errors', function () {
     assertUrl('/odklad/osobne-udaje');
 
     getInputPostpone('dic').type('invalid');
@@ -339,8 +339,8 @@ describe('/odklad/osobne-udaje page', function() {
   });
 });
 
-describe('/odklad/suhrn page', function() {
-  beforeEach('Navigate to test page', function() {
+describe('/odklad/suhrn page', function () {
+  beforeEach('Navigate to test page', function () {
     cy.visit('/');
 
     cy.contains('Odložiť daňové priznanie').click();
@@ -356,14 +356,14 @@ describe('/odklad/suhrn page', function() {
 
     next();
   });
-  it('Back', function() {
+  it('Back', function () {
     assertUrl('/odklad/suhrn');
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click();
     assertUrl('/odklad/osobne-udaje');
   });
-  it('Email', function() {
+  it('Email', function () {
     assertUrl('/odklad/suhrn');
 
     typeToInputPostpone('email', withEmailInput);

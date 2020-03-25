@@ -48,7 +48,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   );
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
-    setTaxFormUserInput(prevUserInput => {
+    setTaxFormUserInput((prevUserInput) => {
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values };
       setTaxForm(calculate(setDate(newUserInput)));
       return newUserInput;

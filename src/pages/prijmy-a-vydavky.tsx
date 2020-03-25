@@ -35,7 +35,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
       <FormWrapper<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

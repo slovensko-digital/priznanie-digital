@@ -37,7 +37,7 @@ export const Feedback: React.FC<Props> = ({
           >
             <a
               href="#"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setIsOpen(false);
               }}
@@ -57,7 +57,7 @@ export const Feedback: React.FC<Props> = ({
                   whatWentWrong: '',
                   agree: false,
                 }}
-                onSubmit={async values => {
+                onSubmit={async (values) => {
                   const response = await fetch('/api/feedback', {
                     method: 'POST',
                     body: JSON.stringify({
@@ -74,7 +74,7 @@ export const Feedback: React.FC<Props> = ({
                   setIsSubmittedSuccessfully(response.status === 200);
                 }}
               >
-                {formik => (
+                {(formik) => (
                   <Form>
                     {isSubmittedSuccessfully === false && (
                       <span className="govuk-error-message">
@@ -150,7 +150,7 @@ export const Feedback: React.FC<Props> = ({
             href="#"
             className="sdn-feedbackbar__link"
             data-test="feedback"
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               setIsOpen(true);
             }}

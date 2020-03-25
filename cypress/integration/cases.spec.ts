@@ -39,7 +39,7 @@ function assertUrl(url: Route | PostponeRoute) {
 
 const getError = () => cy.get('[data-test=error]');
 
-describe('Cases', function() {
+describe('Cases', function () {
   [
     'base',
     'complete',
@@ -49,10 +49,10 @@ describe('Cases', function() {
     'withMortgage',
     'withPension',
     'withChildren',
-  ].forEach(testCase => {
-    it(testCase, function(done) {
+  ].forEach((testCase) => {
+    it(testCase, function (done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
-        inputModule => {
+        (inputModule) => {
           // Access named export
           const input: TaxFormUserInput = inputModule[`${testCase}Input`];
 
@@ -122,7 +122,7 @@ describe('Cases', function() {
                 `r034[${index}].m10`,
                 `r034[${index}].m11`,
                 `r034[${index}].m12`,
-              ].forEach(field => {
+              ].forEach((field) => {
                 const key = field.slice(-3);
                 if (child[key]) {
                   cy.get(`[data-test="${field}-input"]`).click();
@@ -208,7 +208,7 @@ describe('Cases', function() {
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="taxFormUserInput"]`)
             .invoke('text')
-            .then(output => {
+            .then((output) => {
               const now = new Date(2020, 1, 22);
 
               const taxFormUserInput = setDate(
@@ -243,7 +243,7 @@ describe('Cases', function() {
                   );
                 });
               cy.get('#errorsContainer')
-                .should(el => expect(el.text()).to.be.empty)
+                .should((el) => expect(el.text()).to.be.empty)
                 .then(() => done());
             });
         },
@@ -252,11 +252,11 @@ describe('Cases', function() {
   });
 });
 
-describe('Postpone cases', function() {
-  ['basic', 'foreignIncome'].forEach(testCase => {
-    it(testCase, function(done) {
+describe('Postpone cases', function () {
+  ['basic', 'foreignIncome'].forEach((testCase) => {
+    it(testCase, function (done) {
       import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
-        inputModule => {
+        (inputModule) => {
           // Access named export
           const input: PostponeUserInput = inputModule[`${testCase}Input`];
 
@@ -295,7 +295,7 @@ describe('Postpone cases', function() {
           /**  HACK to work around file download, because cypress cannot do it */
           cy.get(`[data-test="postponeUserInput"]`)
             .invoke('text')
-            .then(postponeUserInput => {
+            .then((postponeUserInput) => {
               const xml = convertPostponeToXML(
                 setDate(
                   JSON.parse(postponeUserInput.toString()) as PostponeUserInput,
@@ -329,7 +329,7 @@ describe('Postpone cases', function() {
                   );
                 });
               cy.get('#errorsContainer')
-                .should(el => expect(el.text()).to.be.empty)
+                .should((el) => expect(el.text()).to.be.empty)
                 .then(() => done());
             });
         },

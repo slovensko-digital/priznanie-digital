@@ -18,7 +18,9 @@ export const getCity = async (zip: string) => {
 export const getAutoformByPersonName = async (
   name: string,
 ): Promise<AutoformResponseBody[]> => {
-  return fetch(`/api/autoform?name=${name}`).then(response => response.json());
+  return fetch(`/api/autoform?name=${name}`).then((response) =>
+    response.json(),
+  );
 };
 
 export const saveEmail = async (
@@ -33,7 +35,7 @@ export const saveEmail = async (
       'content-type': 'application/json',
     },
     body: JSON.stringify({ email, attributes, file }),
-  }).then(response => response.json());
+  }).then((response) => response.json());
 };
 
 export const getNace = async () => {

@@ -27,7 +27,7 @@ describe('calcIntergration', () => {
     'withPension',
     'withMortgage',
     'withChildren',
-  ].forEach(testCase => {
+  ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/${testCase}.xml`,
@@ -67,7 +67,7 @@ describe('calcIntergration', () => {
 });
 
 describe('postpone', () => {
-  ['basic', 'foreignIncome'].forEach(testCase => {
+  ['basic', 'foreignIncome'].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/postpone/${testCase}.xml`,

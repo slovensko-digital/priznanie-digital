@@ -35,7 +35,7 @@ const Dochodok: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         // validationSchema={validationSchema}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

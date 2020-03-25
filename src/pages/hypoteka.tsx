@@ -35,7 +35,7 @@ const Hypoteka: NextPage<Props> = ({
       <FormWrapper<MortgageUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setTaxFormUserInput(values);
           router.push(nextRoute);
         }}

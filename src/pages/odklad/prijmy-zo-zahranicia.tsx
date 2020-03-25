@@ -40,7 +40,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
       <FormWrapper<IncomeSourceCountryUserInput>
         initialValues={postponeUserInput}
         validate={validate}
-        onSubmit={values => {
+        onSubmit={(values) => {
           setPostponeUserInput(values);
           router.push(nextRoute);
         }}

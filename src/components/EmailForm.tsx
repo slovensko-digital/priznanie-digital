@@ -115,8 +115,6 @@ export const EmailForm = ({
 };
 
 const validationSchema = Yup.object().shape<EmailUserInput>({
-  email: Yup.string()
-    .required('Zadajte email')
-    .email('Nesprávny formát'),
+  email: Yup.string().required('Zadajte email').email('Nesprávny formát'),
   newsletter: Yup.boolean(),
 });
