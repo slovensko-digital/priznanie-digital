@@ -2,7 +2,7 @@ import xmljs from 'xml-js'
 import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
-import { OutputJson } from '../../types/OutputJson'
+import { OutputJson, Dieta } from '../../types/OutputJson'
 
 const boolToString = (bool: boolean) => {
   return bool ? '1' : '0'
@@ -80,10 +80,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,
-          typeof value === 'boolean' ? (value ? '1' : '0') : value,
+          typeof value === 'boolean' ? boolToString(value) : value,
         ]),
       )
-    }) as any
+    }) as Dieta[]
 
     form.dokument.telo.r36 = taxForm.r036.toFixed(2)
   }
