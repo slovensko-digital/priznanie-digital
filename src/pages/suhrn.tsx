@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { getRoutes } from '../lib/routes';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { formatCurrency } from '../lib/utils';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { getRoutes } from '../lib/routes'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { formatCurrency } from '../lib/utils'
 
-const { nextRoute, previousRoute } = getRoutes('/suhrn');
+const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
 interface SummaryRow {
-  title: string;
-  value?: string;
-  currency?: boolean;
+  title: string
+  value?: string
+  currency?: boolean
 }
 interface SummaryProps {
-  title: string;
-  rows: SummaryRow[];
+  title: string
+  rows: SummaryRow[]
 }
 const Summary = (props: SummaryProps) => (
   <>
@@ -43,20 +43,20 @@ const Summary = (props: SummaryProps) => (
       </tbody>
     </table>
   </>
-);
+)
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
+  taxFormUserInput: TaxFormUserInput
 }
 const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
-    .map((v) => v.trim());
+    .map((v) => v.trim())
 
   return (
     <>
@@ -190,7 +190,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
         </button>
       </Link>
     </>
-  );
-};
+  )
+}
 
-export default Suhrn;
+export default Suhrn

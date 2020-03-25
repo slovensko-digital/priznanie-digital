@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { getPostponeRoutes } from '../../lib/routes';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { EmailForm } from '../../components/EmailForm';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { getPostponeRoutes } from '../../lib/routes'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { EmailForm } from '../../components/EmailForm'
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn');
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
 interface Props {
-  postponeUserInput: PostponeUserInput;
-  setPostponeUserInput: (values: PostponeUserInput) => void;
+  postponeUserInput: PostponeUserInput
+  setPostponeUserInput: (values: PostponeUserInput) => void
 }
 const Suhrn: NextPage<Props> = ({
   postponeUserInput,
   setPostponeUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (!postponeUserInput.meno_priezvisko) {
-      router.replace(previousRoute);
+      router.replace(previousRoute)
     }
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
     .split(' ')
-    .map((v) => v.trim());
+    .map((v) => v.trim())
 
   return (
     <>
@@ -129,7 +129,7 @@ const Suhrn: NextPage<Props> = ({
         </button>
       </Link>
     </>
-  );
-};
+  )
+}
 
-export default Suhrn;
+export default Suhrn

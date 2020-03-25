@@ -1,20 +1,20 @@
-import React from 'react';
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { TaxForm } from '../types/TaxForm';
+import React from 'react'
+import Link from 'next/link'
+import { NextPage } from 'next'
+import { TaxForm } from '../types/TaxForm'
 
-import { getRoutes } from '../lib/routes';
-import { formatCurrency } from '../lib/utils';
+import { getRoutes } from '../lib/routes'
+import { formatCurrency } from '../lib/utils'
 
-const { previousRoute, nextRoute } = getRoutes('/vysledky');
+const { previousRoute, nextRoute } = getRoutes('/vysledky')
 
 interface SummaryRow {
-  title: string;
-  value: number;
-  fontSize?: number;
+  title: string
+  value: number
+  fontSize?: number
 }
 interface SummaryProps {
-  rows: SummaryRow[];
+  rows: SummaryRow[]
 }
 const Summary = ({ rows }: SummaryProps) => (
   <table className="govuk-table">
@@ -37,10 +37,10 @@ const Summary = ({ rows }: SummaryProps) => (
       ))}
     </tbody>
   </table>
-);
+)
 
 interface Props {
-  taxForm: TaxForm;
+  taxForm: TaxForm
 }
 const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
   return (
@@ -97,7 +97,7 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
         </button>
       </Link>
     </>
-  );
-};
+  )
+}
 
-export default Vysledky;
+export default Vysledky

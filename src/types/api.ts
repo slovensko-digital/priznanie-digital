@@ -1,47 +1,47 @@
 interface DatahubCorporateBody {
-  id: number;
-  url: string;
+  id: number
+  url: string
 }
 
 export interface AutoformResponseBody {
-  id: number;
+  id: number
   /**  IČ0 */
-  cin: string;
+  cin: string
   /**  DIČ niekedy sa z api vracia null*/
-  tin?: string;
+  tin?: string
   /** IČ DPH */
-  vatin: string;
-  name: string;
-  formatted_address: string;
-  street: string;
-  reg_number: number;
-  building_number: string;
-  street_number: string;
-  formatted_street: string;
-  postal_code: string;
-  municipality: string;
-  country: string;
-  established_on: string;
-  terminated_on: string;
-  vatin_paragraph: string;
-  registration_office: string;
-  registration_number: string;
-  datahub_corporate_body: DatahubCorporateBody;
+  vatin: string
+  name: string
+  formatted_address: string
+  street: string
+  reg_number: number
+  building_number: string
+  street_number: string
+  formatted_street: string
+  postal_code: string
+  municipality: string
+  country: string
+  established_on: string
+  terminated_on: string
+  vatin_paragraph: string
+  registration_office: string
+  registration_number: string
+  datahub_corporate_body: DatahubCorporateBody
 }
 
 interface Offices {
-  id?: string;
-  nsk?: string;
-  name?: string;
+  id?: string
+  nsk?: string
+  name?: string
 }
 
 export interface PSCResponseBody {
-  addresses: never[];
-  offices?: Offices[];
+  addresses: never[]
+  offices?: Offices[]
 }
 
 export interface SaveEmailResponse {
-  messageId?: string;
-  code?: string;
-  message?: string;
+  messageId?: string
+  code?: string
+  message?: string
 }

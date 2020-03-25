@@ -1,27 +1,25 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from 'isomorphic-unfetch'
 import {
   AutoformResponseBody,
   PSCResponseBody,
   SaveEmailResponse,
-} from '../types/api';
-import { PostponeUserInput } from '../types/PostponeUserInput';
-import { EmailAttributes } from './sendinblue';
+} from '../types/api'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { EmailAttributes } from './sendinblue'
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
     `https://api.posta.sk/private/search?q=${zip.replace(/\D/g, '')}&m=zip`,
-  );
-  const pscData: PSCResponseBody = await response.json();
-  return pscData?.offices?.[0]?.name ?? '';
-};
+  )
+  const pscData: PSCResponseBody = await response.json()
+  return pscData?.offices?.[0]?.name ?? ''
+}
 
 export const getAutoformByPersonName = async (
   name: string,
 ): Promise<AutoformResponseBody[]> => {
-  return fetch(`/api/autoform?name=${name}`).then((response) =>
-    response.json(),
-  );
-};
+  return fetch(`/api/autoform?name=${name}`).then((response) => response.json())
+}
 
 export const saveEmail = async (
   email: string,
@@ -35,9 +33,9 @@ export const saveEmail = async (
       'content-type': 'application/json',
     },
     body: JSON.stringify({ email, attributes, file }),
-  }).then((response) => response.json());
-};
+  }).then((response) => response.json())
+}
 
 export const getNace = async () => {
-  return (await fetch(`nace.json`)).json();
-};
+  return (await fetch(`nace.json`)).json()
+}

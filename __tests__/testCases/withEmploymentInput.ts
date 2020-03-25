@@ -1,4 +1,4 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
 export const withEmploymentInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
@@ -18,4 +18,4 @@ export const withEmploymentInput: TaxFormUserInput = {
   employed: true,
   children: false,
   datum: '22.02.2020',
-};
+}

@@ -1,11 +1,11 @@
-import React from 'react';
-import { Feedback } from './Feedback';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import React from 'react'
+import { Feedback } from './Feedback'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
@@ -65,7 +65,7 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
         </div>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

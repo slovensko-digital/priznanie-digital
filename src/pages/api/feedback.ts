@@ -1,17 +1,17 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { makeAttachment, sendEmail } from '../../lib/sendinblue';
+import { NextApiRequest, NextApiResponse } from 'next'
+import { makeAttachment, sendEmail } from '../../lib/sendinblue'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const parsedBody = JSON.parse(req.body);
+  const parsedBody = JSON.parse(req.body)
 
   const ipAddress =
-    req.connection.remoteAddress || req.headers['x-forwarded-for'] || '?';
+    req.connection.remoteAddress || req.headers['x-forwarded-for'] || '?'
 
-  const attachment = [];
+  const attachment = []
   if (parsedBody.taxFormUserInput) {
     attachment.push(
       makeAttachment('taxFormUserInput.json.txt', parsedBody.taxFormUserInput),
-    );
+    )
   }
   if (parsedBody.postponeUserInput) {
     attachment.push(
@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         'postponeUserInput.json.txt',
         parsedBody.postponeUserInput,
       ),
-    );
+    )
   }
 
   try {
@@ -32,9 +32,9 @@ URL: ${parsedBody.url}
 IP adresa: ${ipAddress}
 Dátum: ${new Date().toLocaleString()}`,
       attachment,
-    });
-    res.status(200).send({ sent: true });
+    })
+    res.status(200).send({ sent: true })
   } catch (error) {
-    res.status(400).send({ sent: false });
+    res.status(400).send({ sent: false })
   }
-};
+}

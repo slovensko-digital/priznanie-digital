@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import classNames from 'classnames';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import React, { useState } from 'react'
+import { Formik, Form } from 'formik'
+import classNames from 'classnames'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 export const Feedback: React.FC<Props> = ({
   taxFormUserInput,
   postponeUserInput,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
-  );
+  )
   if (isOpen) {
     return (
       <div
@@ -38,8 +38,8 @@ export const Feedback: React.FC<Props> = ({
             <a
               href="#"
               onClick={(e) => {
-                e.preventDefault();
-                setIsOpen(false);
+                e.preventDefault()
+                setIsOpen(false)
               }}
             >
               zatvoriť
@@ -69,9 +69,9 @@ export const Feedback: React.FC<Props> = ({
                         : null,
                       url: window.location.href,
                     }),
-                  });
+                  })
 
-                  setIsSubmittedSuccessfully(response.status === 200);
+                  setIsSubmittedSuccessfully(response.status === 200)
                 }}
               >
                 {(formik) => (
@@ -131,7 +131,7 @@ export const Feedback: React.FC<Props> = ({
           </div>
         </div>
       </div>
-    );
+    )
   }
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
@@ -151,8 +151,8 @@ export const Feedback: React.FC<Props> = ({
             className="sdn-feedbackbar__link"
             data-test="feedback"
             onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(true);
+              e.preventDefault()
+              setIsOpen(true)
             }}
           >
             Napíšte nám
@@ -160,5 +160,5 @@ export const Feedback: React.FC<Props> = ({
         </span>
       </div>
     </div>
-  );
-};
+  )
+}

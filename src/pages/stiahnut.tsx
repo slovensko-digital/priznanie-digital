@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import fileDownload from 'js-file-download';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import fileDownload from 'js-file-download'
 
-import { NextPage } from 'next';
-import { getRoutes } from '../lib/routes';
-import { PostponeUserInput } from '../types/PostponeUserInput';
-import { convertPostponeToXML } from '../lib/postpone/postponeConverter';
-import { setDate } from '../lib/utils';
+import { NextPage } from 'next'
+import { getRoutes } from '../lib/routes'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { convertPostponeToXML } from '../lib/postpone/postponeConverter'
+import { setDate } from '../lib/utils'
 
-const { previousRoute } = getRoutes('/stiahnut');
+const { previousRoute } = getRoutes('/stiahnut')
 
 interface Props {
-  postponeUserInput: PostponeUserInput;
+  postponeUserInput: PostponeUserInput
 }
 
 const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
-  const [didDownload, setDidDownload] = useState<boolean>(false);
+  const [didDownload, setDidDownload] = useState<boolean>(false)
 
   return (
     <>
@@ -36,9 +36,9 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
           type="submit"
           className="btn-secondary govuk-button govuk-button--large"
           onClick={() => {
-            const xml = convertPostponeToXML(setDate(postponeUserInput));
-            fileDownload(xml, 'odklad_danoveho_priznania.xml');
-            setDidDownload(true);
+            const xml = convertPostponeToXML(setDate(postponeUserInput))
+            fileDownload(xml, 'odklad_danoveho_priznania.xml')
+            setDidDownload(true)
           }}
         >
           Stiahnuť dáta (XML)
@@ -62,13 +62,13 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         type="button"
         onClick={() => {
           window.location.href =
-            'https://staging.navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania';
+            'https://staging.navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
         Pokračovať na navody.digital
       </button>
     </>
-  );
-};
+  )
+}
 
-export default Stiahnut;
+export default Stiahnut

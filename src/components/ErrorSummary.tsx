@@ -1,18 +1,18 @@
-import React from 'react';
-import { FormikErrors, FormikTouched } from 'formik';
+import React from 'react'
+import { FormikErrors, FormikTouched } from 'formik'
 
 interface Props<Values> {
-  errors: FormikErrors<Values>;
-  touched: FormikTouched<Values>;
+  errors: FormikErrors<Values>
+  touched: FormikTouched<Values>
 }
 
 export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
-  const errorEntries = Object.entries(errors);
+  const errorEntries = Object.entries(errors)
 
   /** Check if we have at least one error and touched intersection */
   const shouldShowErrorSummary =
     errorEntries.length !== 0 &&
-    Object.entries(errors).some(([error]) => Boolean(touched[error]));
+    Object.entries(errors).some(([error]) => Boolean(touched[error]))
 
   return shouldShowErrorSummary ? (
     <div
@@ -34,10 +34,10 @@ export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
                   <a href={`#${name}`}>{label}</a>
                 </li>
               )
-            );
+            )
           })}
         </ul>
       </div>
     </div>
-  ) : null;
+  ) : null
 }

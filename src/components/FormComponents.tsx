@@ -1,18 +1,18 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
 import {
   Formik,
   FormikProps,
   useField,
   FormikConfig,
   FormikValues,
-} from 'formik';
-import classnames from 'classnames';
-import { UserInput } from '../types/UserInput';
-import { numberInputRegexp } from '../lib/utils';
+} from 'formik'
+import classnames from 'classnames'
+import { UserInput } from '../types/UserInput'
+import { numberInputRegexp } from '../lib/utils'
 
 export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
-  children: (formikProps: FormikProps<FormikInput>) => ReactNode;
-};
+  children: (formikProps: FormikProps<FormikInput>) => ReactNode
+}
 
 export const FormWrapper = <FormikInput extends FormikValues>({
   children,
@@ -25,15 +25,15 @@ export const FormWrapper = <FormikInput extends FormikValues>({
   >
     {children}
   </Formik>
-);
+)
 
 interface InputProps<Name> {
-  name: Name;
-  label: string;
-  hint?: string;
-  className?: string;
-  type: 'text' | 'number' | 'email';
-  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
+  name: Name
+  label: string
+  hint?: string
+  className?: string
+  type: 'text' | 'number' | 'email'
+  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 
 export const Input = <Name extends keyof UserInput>({
@@ -44,7 +44,7 @@ export const Input = <Name extends keyof UserInput>({
   type,
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
-  const [field, meta] = useField(props.name);
+  const [field, meta] = useField(props.name)
 
   const getNumberInputProps = () => {
     if (type === 'number') {
@@ -53,10 +53,10 @@ export const Input = <Name extends keyof UserInput>({
         inputMode: 'numeric' as 'numeric',
         spellCheck: false,
         placeholder: 'Suma v EUR, napríklad 123,45',
-      };
+      }
     }
-    return {};
-  };
+    return {}
+  }
 
   return (
     <div
@@ -94,18 +94,18 @@ export const Input = <Name extends keyof UserInput>({
         </span>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 interface BooleanRadioProps<Name> {
-  name: Name;
-  title: string;
+  name: Name
+  title: string
 }
 export const BooleanRadio = <Name extends keyof UserInput>({
   title,
   ...props
 }: BooleanRadioProps<Name>) => {
-  const [field, meta, helpers] = useField(props.name);
+  const [field, meta, helpers] = useField(props.name)
 
   return (
     <div className="govuk-form-group">
@@ -124,8 +124,8 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               id={`${field.name}-input-yes`}
               checked={field.value === true}
               onChange={() => {
-                helpers.setValue(true);
-                helpers.setError(undefined);
+                helpers.setValue(true)
+                helpers.setError(undefined)
               }}
             />
             <label
@@ -145,8 +145,8 @@ export const BooleanRadio = <Name extends keyof UserInput>({
               type="radio"
               checked={field.value === false}
               onChange={() => {
-                helpers.setValue(false);
-                helpers.setError(undefined);
+                helpers.setValue(false)
+                helpers.setError(undefined)
               }}
             />
             <label
@@ -167,14 +167,14 @@ export const BooleanRadio = <Name extends keyof UserInput>({
         ) : null}
       </fieldset>
     </div>
-  );
-};
+  )
+}
 
 interface BooleanRadioProps<Name> {
-  name: Name;
-  title: string;
-  label?: string;
-  hint?: string;
+  name: Name
+  title: string
+  label?: string
+  hint?: string
 }
 export const Checkbox = <Name extends keyof UserInput>({
   title,
@@ -182,7 +182,7 @@ export const Checkbox = <Name extends keyof UserInput>({
   label,
   ...props
 }: BooleanRadioProps<Name>) => {
-  const [field, meta] = useField(props.name);
+  const [field, meta] = useField(props.name)
   return (
     <div className="govuk-form-group">
       <fieldset className="govuk-fieldset" aria-describedby="waste-hint">
@@ -214,19 +214,19 @@ export const Checkbox = <Name extends keyof UserInput>({
         </div>
       </fieldset>
     </div>
-  );
-};
+  )
+}
 
 interface CheckboxSmallProps {
-  name: string;
-  label: string | React.ReactNode;
+  name: string
+  label: string | React.ReactNode
 }
 export const CheckboxSmall = ({
   name,
   label,
   ...props
 }: CheckboxSmallProps) => {
-  const [field] = useField(name);
+  const [field] = useField(name)
   return (
     <div className="govuk-checkboxes__item">
       <input
@@ -241,5 +241,5 @@ export const CheckboxSmall = ({
         {label}
       </label>
     </div>
-  );
-};
+  )
+}

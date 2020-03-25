@@ -1,4 +1,4 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
 export const withPensionInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
@@ -17,4 +17,4 @@ export const withPensionInput: TaxFormUserInput = {
   /** Pension */
   r029_poberal_dochodok: true,
   r030_vyska_dochodku: '800',
-};
+}

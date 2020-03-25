@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/zamestnanie';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/zamestnanie'
+import { testValidation } from './utils/testValidation'
 
 describe('zamestnanie', () => {
   describe('#validate', () => {
@@ -31,6 +31,6 @@ describe('zamestnanie', () => {
         },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

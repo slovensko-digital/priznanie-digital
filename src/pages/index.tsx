@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import { getRoutes, getPostponeRoutes } from '../lib/routes';
+import React from 'react'
+import Link from 'next/link'
+import { getRoutes, getPostponeRoutes } from '../lib/routes'
 
-const { nextRoute } = getRoutes('/');
+const { nextRoute } = getRoutes('/')
 
-const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/');
+const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/')
 
 export default () => (
   <>
@@ -61,4 +61,4 @@ export default () => (
       </Link>
     </div>
   </>
-);
+)

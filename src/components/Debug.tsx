@@ -1,10 +1,10 @@
-import React from 'react';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import React from 'react'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 /** This component is a HACK that exists because Cypress cannot download the XML
@@ -12,7 +12,7 @@ interface Props {
  */
 export const Debug = ({ taxFormUserInput, postponeUserInput }: Props) => {
   if (process.env.WITH_DEBUG !== 'true') {
-    return null;
+    return null
   }
   return (
     <div className="debug">
@@ -31,5 +31,5 @@ export const Debug = ({ taxFormUserInput, postponeUserInput }: Props) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}

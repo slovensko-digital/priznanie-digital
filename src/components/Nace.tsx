@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Autosuggest, { Theme } from 'react-autosuggest';
-import { useField } from 'formik';
-import classnames from 'classnames';
-import Fuse from 'fuse.js';
-import { getNace } from '../lib/api';
-import styles from './Nace.module.css';
+import React, { useEffect, useState, useRef } from 'react'
+import Autosuggest, { Theme } from 'react-autosuggest'
+import { useField } from 'formik'
+import classnames from 'classnames'
+import Fuse from 'fuse.js'
+import { getNace } from '../lib/api'
+import styles from './Nace.module.css'
 
 const options = {
   shouldSort: true,
@@ -14,31 +14,31 @@ const options = {
   distance: 100,
   minMatchCharLength: 2,
   keys: ['code', 'label'],
-};
+}
 
 function useFuse<T>(data: T[]): Fuse<T, { includeScore: true }> {
-  const fuseRef = useRef(new Fuse(data, options));
+  const fuseRef = useRef(new Fuse(data, options))
 
   useEffect(() => {
-    fuseRef.current = new Fuse(data, options);
-  }, [data]);
+    fuseRef.current = new Fuse(data, options)
+  }, [data])
 
-  return fuseRef.current;
+  return fuseRef.current
 }
 
 interface Nace {
-  code: string;
-  label: string;
+  code: string
+  label: string
 }
 
 const formatNace = (nace: Fuse.FuseResultWithScore<Nace>) =>
-  `${nace?.item?.code} - ${nace?.item?.label}`;
+  `${nace?.item?.code} - ${nace?.item?.label}`
 
 interface Props {
-  label: string;
-  hint?: string;
-  className?: string;
-  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto';
+  label: string
+  hint?: string
+  className?: string
+  width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 export const Nace: React.FC<Props> = ({
   className = '',
@@ -46,42 +46,40 @@ export const Nace: React.FC<Props> = ({
   width = 'auto',
   hint = '',
 }: Props) => {
-  const name = 'r003_nace';
-  const [naceData, setNaceData] = useState<Nace[]>([]);
+  const name = 'r003_nace'
+  const [naceData, setNaceData] = useState<Nace[]>([])
   const [naceSearchResult, setNaceSearchResult] = useState<
     Fuse.FuseResultWithScore<Nace>[]
-  >([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [field, meta, helpers] = useField(name);
-  const fuse = useFuse(naceData);
+  >([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [field, meta, helpers] = useField(name)
+  const fuse = useFuse(naceData)
 
   const fetchData = async () => {
-    setIsLoading(true);
-    const result: Nace[] = await getNace();
-    setNaceData(result);
-    setNaceSearchResult(
-      result.map((item) => ({ item, score: 1, refIndex: 0 })),
-    );
-    setIsLoading(false);
-  };
+    setIsLoading(true)
+    const result: Nace[] = await getNace()
+    setNaceData(result)
+    setNaceSearchResult(result.map((item) => ({ item, score: 1, refIndex: 0 })))
+    setIsLoading(false)
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    const searchResult = fuse.search(value);
+    const searchResult = fuse.search(value)
     setNaceSearchResult(
       searchResult.length === 0
         ? naceData.map((item) => ({ item, score: 1, refIndex: 0 }))
         : searchResult,
-    );
-  };
+    )
+  }
   const onSuggestionsClearRequested = () => {
     setNaceSearchResult(
       naceData.map((item) => ({ item, score: 1, refIndex: 0 })),
-    );
-  };
+    )
+  }
 
   const inputProps = {
     ...field,
@@ -91,7 +89,7 @@ export const Nace: React.FC<Props> = ({
       [`govuk-input--width-${width}`]: width !== 'auto',
     }),
     'data-test': `${field.name}-input`,
-  };
+  }
 
   const theme: Theme = {
     suggestionsContainerOpen: classnames(
@@ -101,7 +99,7 @@ export const Nace: React.FC<Props> = ({
     suggestion: 'autocomplete__option',
     suggestionHighlighted: 'autocomplete__option--focused',
     suggestionsList: { padding: 0, margin: 0 },
-  };
+  }
 
   return (
     <div
@@ -139,9 +137,9 @@ export const Nace: React.FC<Props> = ({
         theme={theme}
         shouldRenderSuggestions={() => true}
         onSuggestionSelected={(_event, { suggestion }) => {
-          helpers.setValue(formatNace(suggestion));
+          helpers.setValue(formatNace(suggestion))
         }}
       />
     </div>
-  );
-};
+  )
+}

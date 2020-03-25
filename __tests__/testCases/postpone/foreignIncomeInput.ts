@@ -1,4 +1,4 @@
-import { PostponeUserInput } from '../../../src/types/PostponeUserInput';
+import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
 
 export const foreignIncomeInput: PostponeUserInput = {
   prijmy_zo_zahranicia: true,
@@ -13,4 +13,4 @@ export const foreignIncomeInput: PostponeUserInput = {
   datum: '22.02.2020',
   email: 'test@example.com',
   newsletter: true,
-};
+}

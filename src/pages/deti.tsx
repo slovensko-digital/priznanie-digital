@@ -1,40 +1,40 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import styles from './deti.module.css';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import styles from './deti.module.css'
 import {
   BooleanRadio,
   Input,
   CheckboxSmall,
   FormWrapper,
-} from '../components/FormComponents';
-import { ChildrenUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { emptyChild } from '../lib/initialValues';
+} from '../components/FormComponents'
+import { ChildrenUserInput } from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getRoutes } from '../lib/routes'
+import { emptyChild } from '../lib/initialValues'
 
-const { nextRoute, previousRoute } = getRoutes('/deti');
+const { nextRoute, previousRoute } = getRoutes('/deti')
 
 interface Props {
-  setTaxFormUserInput: (values: ChildrenUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: ChildrenUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 const Deti: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
 
   const addEmptyChild = () => {
     setTaxFormUserInput({
       r034: taxFormUserInput?.r034?.concat([emptyChild]),
-    });
-  };
+    })
+  }
   return (
     <>
       <Link href={previousRoute}>
@@ -46,8 +46,8 @@ const Deti: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         // validationSchema={validationSchema}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ values }) => (
@@ -132,8 +132,8 @@ const Deti: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 // const validationSchema = Yup.object().shape<ChildrenUserInput>({
 //   children: Yup.boolean()
@@ -149,4 +149,4 @@ const Deti: NextPage<Props> = ({
 //   // }),
 // });
 
-export default Deti;
+export default Deti

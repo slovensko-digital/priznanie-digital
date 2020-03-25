@@ -1,4 +1,4 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
 export const withMortgageInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
@@ -17,4 +17,4 @@ export const withMortgageInput: TaxFormUserInput = {
   r037_uplatnuje_uroky: true,
   r037_zaplatene_uroky: '200',
   r037_pocetMesiacov: '12',
-};
+}

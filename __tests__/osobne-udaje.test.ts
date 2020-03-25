@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/osobne-udaje';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/osobne-udaje'
+import { testValidation } from './utils/testValidation'
 
 describe('osobne-udaje', () => {
   describe('#validate', () => {
@@ -48,6 +48,6 @@ describe('osobne-udaje', () => {
         },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

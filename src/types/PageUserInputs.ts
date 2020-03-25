@@ -1,20 +1,20 @@
-import { TaxFormUserInput } from './TaxFormUserInput';
-import { PostponeUserInput } from './PostponeUserInput';
+import { TaxFormUserInput } from './TaxFormUserInput'
+import { PostponeUserInput } from './PostponeUserInput'
 
 export type IncomeAndExpenseUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   't1r10_prijmy' | 'priloha3_r11_socialne' | 'priloha3_r13_zdravotne'
->;
+>
 
 export type EmployedUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'employed' | 'r038' | 'r039'
->;
+>
 
 export type ChildrenUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'children' | 'r034'
->;
+>
 
 export type PartnerUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
@@ -25,7 +25,7 @@ export type PartnerUserInput<T = string> = Pick<
   | 'r032_partner_pocet_mesiacov'
   | 'r033_partner_kupele'
   | 'r033_partner_kupele_uhrady'
->;
+>
 
 export type PersonalInformationUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
@@ -38,27 +38,27 @@ export type PersonalInformationUserInput<T = string> = Pick<
   | 'psc'
   | 'r010_obec'
   | 'r011_stat'
->;
+>
 
 export type PersonalInformationPostponePage = Pick<
   PostponeUserInput,
   'dic' | 'meno_priezvisko' | 'ulica' | 'cislo' | 'psc' | 'obec' | 'stat'
   // | 'rodne_cislo'
->;
+>
 
 export type PensionUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'r029_poberal_dochodok' | 'r030_vyska_dochodku'
->;
+>
 
 export type MortgageUserInput<T = string> = Pick<
   TaxFormUserInput<T>,
   'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
->;
+>
 
 export type IncomeSourceCountryUserInput = Pick<
   PostponeUserInput,
   'prijmy_zo_zahranicia'
->;
+>
 
-export type FormErrors<FormInput extends {}> = Record<keyof FormInput, string>;
+export type FormErrors<FormInput extends {}> = Record<keyof FormInput, string>

@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { Form, FormikProps } from 'formik';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { FormWrapper, Input } from '../components/FormComponents';
-import styles from './osobne-udaje.module.css';
+import React, { useEffect } from 'react'
+import { Form, FormikProps } from 'formik'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { FormWrapper, Input } from '../components/FormComponents'
+import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
-} from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getCity } from '../lib/api';
-import { AutoformResponseBody } from '../types/api';
-import { getRoutes } from '../lib/routes';
-import { ErrorSummary } from '../components/ErrorSummary';
-import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput';
-import { formatPsc } from '../lib/utils';
-import { Nace } from '../components/Nace';
+} from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getCity } from '../lib/api'
+import { AutoformResponseBody } from '../types/api'
+import { getRoutes } from '../lib/routes'
+import { ErrorSummary } from '../components/ErrorSummary'
+import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
+import { formatPsc } from '../lib/utils'
+import { Nace } from '../components/Nace'
 
-const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
+const { nextRoute, previousRoute } = getRoutes('/osobne-udaje')
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -34,23 +34,23 @@ const makeHandlePersonAutoform = ({
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
       r010_obec: person.municipality,
       r011_stat: person.country,
-    });
-  };
-};
+    })
+  }
+}
 
 interface Props {
-  setTaxFormUserInput: (values: PersonalInformationUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: PersonalInformationUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 const OsobneUdaje: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
 
   return (
     <>
@@ -63,8 +63,8 @@ const OsobneUdaje: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {(props) => (
@@ -120,15 +120,15 @@ const OsobneUdaje: NextPage<Props> = ({
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,
-                    );
-                    props.setFieldValue('psc', pscValue);
+                    )
+                    props.setFieldValue('psc', pscValue)
 
                     if (
                       pscValue.length === 6 &&
                       props.values.r010_obec.length === 0
                     ) {
-                      const city = await getCity(pscValue);
-                      props.setFieldValue('r010_obec', city);
+                      const city = await getCity(pscValue)
+                      props.setFieldValue('r010_obec', city)
                     }
                   }}
                 />
@@ -151,54 +151,54 @@ const OsobneUdaje: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: PersonalInformationUserInput) => {
-  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {};
+  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {}
 
   if (!values.r001_dic) {
-    errors.r001_dic = 'Zadajte pridelené DIČ';
+    errors.r001_dic = 'Zadajte pridelené DIČ'
   }
 
   /**
    * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
    */
   if (values.r001_dic.length < 9) {
-    errors.r001_dic = 'DIČ môže mať minimálne 9 znakov';
+    errors.r001_dic = 'DIČ môže mať minimálne 9 znakov'
   }
   if (values.r001_dic.length > 10) {
-    errors.r001_dic = 'DIČ môže mať maximálne 10 znakov';
+    errors.r001_dic = 'DIČ môže mať maximálne 10 znakov'
   }
 
   if (!values.meno_priezvisko) {
-    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko';
+    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
   }
 
   if (!values.r007_ulica) {
-    errors.r007_ulica = 'Zadajte ulicu';
+    errors.r007_ulica = 'Zadajte ulicu'
   }
 
   if (!values.r008_cislo) {
-    errors.r008_cislo = 'Zadajte číslo domu';
+    errors.r008_cislo = 'Zadajte číslo domu'
   }
 
-  const pscNumberFormat = /^\d{3} \d{2}$/;
+  const pscNumberFormat = /^\d{3} \d{2}$/
   if (!values.psc) {
-    errors.psc = 'Zadajte PSČ';
+    errors.psc = 'Zadajte PSČ'
   } else if (!values.psc.match(pscNumberFormat)) {
-    errors.psc = 'PSČ môže obsahovať iba 5 čísel';
+    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 
   if (!values.r010_obec) {
-    errors.r010_obec = 'Zadajte obec';
+    errors.r010_obec = 'Zadajte obec'
   }
 
   if (!values.r011_stat) {
-    errors.r011_stat = 'Zadajte štát';
+    errors.r011_stat = 'Zadajte štát'
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default OsobneUdaje;
+export default OsobneUdaje

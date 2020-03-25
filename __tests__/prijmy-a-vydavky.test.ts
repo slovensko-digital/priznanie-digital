@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/prijmy-a-vydavky';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/prijmy-a-vydavky'
+import { testValidation } from './utils/testValidation'
 
 describe('prijmy-a-vydavky', () => {
   describe('#validate', () => {
@@ -28,6 +28,6 @@ describe('prijmy-a-vydavky', () => {
         },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

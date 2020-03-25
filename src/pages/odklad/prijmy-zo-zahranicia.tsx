@@ -1,35 +1,35 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, FormWrapper } from '../../components/FormComponents';
-import { getPostponeRoutes } from '../../lib/routes';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { BooleanRadio, FormWrapper } from '../../components/FormComponents'
+import { getPostponeRoutes } from '../../lib/routes'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
 import {
   FormErrors,
   IncomeSourceCountryUserInput,
-} from '../../types/PageUserInputs';
+} from '../../types/PageUserInputs'
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
-);
+)
 
 interface Props {
   setPostponeUserInput: React.Dispatch<
     React.SetStateAction<IncomeSourceCountryUserInput>
-  >;
-  postponeUserInput: PostponeUserInput;
+  >
+  postponeUserInput: PostponeUserInput
 }
 
 const PrijmyZoZahranicia: NextPage<Props> = ({
   setPostponeUserInput,
   postponeUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   return (
     <>
       <Link href={previousRoute}>
@@ -41,8 +41,8 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setPostponeUserInput(values);
-          router.push(nextRoute);
+          setPostponeUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ values }) => (
@@ -78,17 +78,17 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: IncomeSourceCountryUserInput) => {
-  const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {};
+  const errors: Partial<FormErrors<IncomeSourceCountryUserInput>> = {}
 
   if (values.prijmy_zo_zahranicia === undefined) {
-    errors.prijmy_zo_zahranicia = 'Vyznačte, či ste mali príjmy zo zahraničia';
+    errors.prijmy_zo_zahranicia = 'Vyznačte, či ste mali príjmy zo zahraničia'
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default PrijmyZoZahranicia;
+export default PrijmyZoZahranicia
