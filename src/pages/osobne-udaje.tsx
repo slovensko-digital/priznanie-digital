@@ -16,6 +16,7 @@ import { getRoutes } from '../lib/routes';
 import { ErrorSummary } from '../components/ErrorSummary';
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput';
 import { formatPsc } from '../lib/utils';
+import { Nace } from '../components/Nace';
 
 const { nextRoute, previousRoute } = getRoutes('/osobne-udaje');
 
@@ -27,7 +28,7 @@ const makeHandlePersonAutoform = ({
     setValues({
       ...values,
       meno_priezvisko: person.name,
-      r001_dic: person?.tin ?? '',
+      r001_dic: person?.tin ?? values.r001_dic,
       r007_ulica: person.street ?? person.municipality,
       r008_cislo: person.street_number,
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
@@ -83,19 +84,13 @@ const OsobneUdaje: NextPage<Props> = ({
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
               />
 
+              <Nace label="NACE" />
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
                   name="r001_dic"
                   type="text"
                   label="DIČ"
-                />
-
-                <Input
-                  className={styles.inlineField}
-                  name="r003_nace"
-                  type="text"
-                  label="NACE"
                 />
               </div>
 

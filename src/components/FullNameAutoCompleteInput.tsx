@@ -141,7 +141,7 @@ export const FullNameAutoCompleteInput = ({
         <div className={styles.autocompleteWrapper}>
           <ul
             className="govuk-list govuk-list--number autocomplete__menu"
-            style={{ position: 'absolute' }}
+            style={{ position: 'absolute', zIndex: 100 }}
             ref={autocompleteList}
           >
             {autoformPersons.map((person, index) => (

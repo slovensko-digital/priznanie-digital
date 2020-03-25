@@ -35,3 +35,7 @@ export const saveEmail = async (
     body: JSON.stringify({ email, attributes, file }),
   }).then(response => response.json());
 };
+
+export const getNace = async () => {
+  return (await fetch(`nace.json`)).json();
+};
