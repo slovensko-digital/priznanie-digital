@@ -9,7 +9,7 @@ export type Route =
   | '/osobne-udaje'
   | '/suhrn'
   | '/vysledky'
-  | '/stiahnut';
+  | '/stiahnut'
 
 const routesOrder: ReadonlyArray<Route> = [
   '/',
@@ -23,23 +23,23 @@ const routesOrder: ReadonlyArray<Route> = [
   '/suhrn',
   '/vysledky',
   '/stiahnut',
-];
+]
 
 export const getRoutes = (currentRoute: Route) => {
-  const currentRouteIndex = routesOrder.indexOf(currentRoute);
+  const currentRouteIndex = routesOrder.indexOf(currentRoute)
   return {
     currentRoute,
     nextRoute: routesOrder[currentRouteIndex + 1],
     previousRoute: routesOrder[currentRouteIndex + -1],
-  };
-};
+  }
+}
 
 export type PostponeRoute =
   | '/'
   | '/odklad/prijmy-zo-zahranicia'
   | '/odklad/osobne-udaje'
   | '/odklad/suhrn'
-  | '/odklad/stiahnut';
+  | '/odklad/stiahnut'
 
 const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
   '/',
@@ -47,13 +47,13 @@ const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
   '/odklad/osobne-udaje',
   '/odklad/suhrn',
   '/odklad/stiahnut',
-];
+]
 
 export const getPostponeRoutes = (currentRoute: PostponeRoute) => {
-  const currentRouteIndex = postponeRoutesOrder.indexOf(currentRoute);
+  const currentRouteIndex = postponeRoutesOrder.indexOf(currentRoute)
   return {
     currentRoute,
     nextRoute: postponeRoutesOrder[currentRouteIndex + 1],
     previousRoute: postponeRoutesOrder[currentRouteIndex + -1],
-  };
-};
+  }
+}

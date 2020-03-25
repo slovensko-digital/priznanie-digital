@@ -1,31 +1,31 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
-import classNames from 'classnames';
-import styles from './EmailForm.module.css';
-import { CheckboxSmall, Input } from './FormComponents';
-import { saveEmail } from '../lib/api';
-import { EmailUserInput } from '../types/UserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
-import { setDate } from '../lib/utils';
+import React from 'react'
+import * as Yup from 'yup'
+import { Form, Formik } from 'formik'
+import classNames from 'classnames'
+import styles from './EmailForm.module.css'
+import { CheckboxSmall, Input } from './FormComponents'
+import { saveEmail } from '../lib/api'
+import { EmailUserInput } from '../types/UserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { setDate } from '../lib/utils'
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
     case 'duplicate_parameter':
-      return 'Tento email už v databáze existuje';
+      return 'Tento email už v databáze existuje'
     case 'invalid_parameter':
-      return 'Nesprávny formát emailovej adresy';
+      return 'Nesprávny formát emailovej adresy'
     default:
-      return `Chyba: ${message}`;
+      return `Chyba: ${message}`
   }
-};
+}
 
 export interface EmailFormProps {
-  applicantFullName: string;
-  deadline: string;
-  formName: string;
-  postponeUserInput: PostponeUserInput;
-  setPostponeUserInput: (values: Partial<PostponeUserInput>) => void;
+  applicantFullName: string
+  deadline: string
+  formName: string
+  postponeUserInput: PostponeUserInput
+  setPostponeUserInput: (values: Partial<PostponeUserInput>) => void
 }
 export const EmailForm = ({
   applicantFullName,
@@ -35,7 +35,7 @@ export const EmailForm = ({
   setPostponeUserInput,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
-    const [firstName, ...lastName] = applicantFullName.split(' ');
+    const [firstName, ...lastName] = applicantFullName.split(' ')
     const { messageId, code, message } = await saveEmail(
       email,
       {
@@ -46,13 +46,13 @@ export const EmailForm = ({
         form: formName,
       },
       setDate(postponeUserInput),
-    );
+    )
     if (messageId) {
-      setPostponeUserInput({ ...postponeUserInput, email, newsletter });
+      setPostponeUserInput({ ...postponeUserInput, email, newsletter })
     } else {
-      setFieldError('email', getErrorMessage(code, message));
+      setFieldError('email', getErrorMessage(code, message))
     }
-  };
+  }
 
   if (postponeUserInput.email) {
     return (
@@ -70,7 +70,7 @@ export const EmailForm = ({
           {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
         </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -111,10 +111,10 @@ export const EmailForm = ({
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
 const validationSchema = Yup.object().shape<EmailUserInput>({
   email: Yup.string().required('Zadajte email').email('Nesprávny formát'),
   newsletter: Yup.boolean(),
-});
+})

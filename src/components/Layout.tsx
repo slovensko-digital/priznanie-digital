@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
-import { Debug } from './Debug';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import Head from 'next/head'
+import Header from './Header'
+import Footer from './Footer'
+import { Debug } from './Debug'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 interface Props {
-  headline: string;
-  children: React.ReactNode;
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  headline: string
+  children: React.ReactNode
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 const Layout: React.FC<Props> = ({
@@ -78,6 +78,6 @@ const Layout: React.FC<Props> = ({
       }
     `}</style>
   </div>
-);
+)
 
-export default Layout;
+export default Layout

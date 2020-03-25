@@ -1,4 +1,5 @@
-const wp = require('@cypress/webpack-preprocessor');
+const wp = require('@cypress/webpack-preprocessor')
+
 
 module.exports = (on) => {
   const options = {
@@ -20,6 +21,6 @@ module.exports = (on) => {
         ],
       },
     },
-  };
-  on('file:preprocessor', wp(options));
-};
+  }
+  on('file:preprocessor', wp(options))
+}

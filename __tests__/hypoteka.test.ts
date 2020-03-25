@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/hypoteka';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/hypoteka'
+import { testValidation } from './utils/testValidation'
 
 describe('hypoteka', () => {
   describe('#validate', () => {
@@ -37,6 +37,6 @@ describe('hypoteka', () => {
         },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

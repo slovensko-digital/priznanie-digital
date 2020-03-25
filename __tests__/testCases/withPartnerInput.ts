@@ -1,4 +1,4 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
 export const withPartnerInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
@@ -20,4 +20,4 @@ export const withPartnerInput: TaxFormUserInput = {
   r033_partner_kupele_uhrady: '40',
   t1r10_prijmy: '25000',
   datum: '19.02.2020',
-};
+}

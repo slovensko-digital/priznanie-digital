@@ -6,15 +6,15 @@ import {
   ChildrenUserInput,
   PensionUserInput,
   MortgageUserInput,
-} from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+} from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
   priloha3_r11_socialne: '',
   priloha3_r13_zdravotne: '',
-};
+}
 
 export const partnerUserInitialValues: PartnerUserInput = {
   r031_priezvisko_a_meno: '',
@@ -24,7 +24,7 @@ export const partnerUserInitialValues: PartnerUserInput = {
   r032_partner_pocet_mesiacov: '',
   r033_partner_kupele: false,
   r033_partner_kupele_uhrady: '',
-};
+}
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
   r001_dic: '',
   // r002_datum_narodenia: "",
@@ -35,13 +35,13 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   psc: '',
   r010_obec: '',
   r011_stat: '',
-};
+}
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
   r038: '',
   r039: '',
-};
+}
 
 export const emptyChild = {
   priezviskoMeno: '',
@@ -60,23 +60,23 @@ export const emptyChild = {
   m10: false,
   m11: false,
   m12: false,
-};
+}
 
 export const kidsUserInputInitialValues: ChildrenUserInput = {
   children: undefined,
   r034: [emptyChild],
-};
+}
 
 export const pensionInitialValues: PensionUserInput = {
   r029_poberal_dochodok: undefined,
   r030_vyska_dochodku: '',
-};
+}
 
 export const mortgageInitialValues: MortgageUserInput = {
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
   r037_uplatnuje_uroky: undefined,
-};
+}
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
@@ -87,7 +87,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...pensionInitialValues,
   ...mortgageInitialValues,
   ...{ datum: '' },
-};
+}
 
 export const initialPostponeUserInput: PostponeUserInput = {
   prijmy_zo_zahranicia: undefined,
@@ -100,4 +100,4 @@ export const initialPostponeUserInput: PostponeUserInput = {
   stat: '',
   // rodne_cislo: '',
   datum: '',
-};
+}

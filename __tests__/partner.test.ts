@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/partner';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/partner'
+import { testValidation } from './utils/testValidation'
 
 describe('partner', () => {
   describe('#validate', () => {
@@ -52,6 +52,6 @@ describe('partner', () => {
         },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

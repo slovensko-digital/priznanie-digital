@@ -1,29 +1,29 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
-import { FormErrors, PensionUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { numberInputRegexp } from '../lib/utils';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getRoutes } from '../lib/routes'
+import { numberInputRegexp } from '../lib/utils'
 
-const { nextRoute, previousRoute } = getRoutes('/dochodok');
+const { nextRoute, previousRoute } = getRoutes('/dochodok')
 
 interface Props {
-  setTaxFormUserInput: (values: PensionUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: PensionUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 
 const Dochodok: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   return (
     <>
       <Link href={previousRoute}>
@@ -36,8 +36,8 @@ const Dochodok: NextPage<Props> = ({
         validate={validate}
         // validationSchema={validationSchema}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ values }) => (
@@ -62,25 +62,25 @@ const Dochodok: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: PensionUserInput) => {
-  const errors: Partial<FormErrors<PensionUserInput>> = {};
+  const errors: Partial<FormErrors<PensionUserInput>> = {}
 
   if (typeof values.r029_poberal_dochodok === 'undefined') {
-    errors.r029_poberal_dochodok = 'Vyznačte odpoveď';
+    errors.r029_poberal_dochodok = 'Vyznačte odpoveď'
   }
 
   if (values.r029_poberal_dochodok) {
     if (!values.r030_vyska_dochodku) {
-      errors.r030_vyska_dochodku = 'Zadajte výšku zaplatených príspevkov';
+      errors.r030_vyska_dochodku = 'Zadajte výšku zaplatených príspevkov'
     } else if (!values.r030_vyska_dochodku.match(numberInputRegexp)) {
-      errors.r030_vyska_dochodku = 'Zadajte výšku príspevkov vo formáte 123,45';
+      errors.r030_vyska_dochodku = 'Zadajte výšku príspevkov vo formáte 123,45'
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default Dochodok;
+export default Dochodok

@@ -1,30 +1,30 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
-import { EmployedUserInput, FormErrors } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { numberInputRegexp } from '../lib/utils';
-import { ErrorSummary } from '../components/ErrorSummary';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getRoutes } from '../lib/routes'
+import { numberInputRegexp } from '../lib/utils'
+import { ErrorSummary } from '../components/ErrorSummary'
 
-const { nextRoute, previousRoute } = getRoutes('/zamestnanie');
+const { nextRoute, previousRoute } = getRoutes('/zamestnanie')
 
 interface Props {
-  setTaxFormUserInput: (values: EmployedUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: EmployedUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 
 const Zamestnanie: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   return (
     <>
       <Link href={previousRoute}>
@@ -36,8 +36,8 @@ const Zamestnanie: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ values, errors, touched }) => (
@@ -71,31 +71,31 @@ const Zamestnanie: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: EmployedUserInput) => {
-  const errors: Partial<FormErrors<EmployedUserInput>> = {};
+  const errors: Partial<FormErrors<EmployedUserInput>> = {}
 
   if (typeof values.employed === 'undefined') {
-    errors.employed = 'Vyznačte odpoveď';
+    errors.employed = 'Vyznačte odpoveď'
   }
 
   if (values.employed) {
     if (!values.r038) {
-      errors.r038 = 'Zadajte úhrn príjmov od všetkých zamestnávateľov';
+      errors.r038 = 'Zadajte úhrn príjmov od všetkých zamestnávateľov'
     } else if (!values.r038.match(numberInputRegexp)) {
-      errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45';
+      errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45'
     }
 
     if (!values.r039) {
-      errors.r039 = 'Zadajte úhrn povinného poistného';
+      errors.r039 = 'Zadajte úhrn povinného poistného'
     } else if (!values.r039.match(numberInputRegexp)) {
-      errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45';
+      errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default Zamestnanie;
+export default Zamestnanie

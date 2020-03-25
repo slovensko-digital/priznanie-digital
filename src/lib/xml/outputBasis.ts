@@ -1,4 +1,4 @@
-import { OutputJson } from '../../types/OutputJson';
+import { OutputJson } from '../../types/OutputJson'
 
 const sampleSchema: OutputJson = {
   dokument: {
@@ -700,6 +700,6 @@ const sampleSchema: OutputJson = {
       },
     },
   },
-};
+}
 
-export default sampleSchema;
+export default sampleSchema

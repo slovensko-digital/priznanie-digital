@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { Form, FormikProps } from 'formik';
-import { FormWrapper, Input } from '../components/FormComponents';
-import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { numberInputRegexp } from '../lib/utils';
-import { ErrorSummary } from '../components/ErrorSummary';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { Form, FormikProps } from 'formik'
+import { FormWrapper, Input } from '../components/FormComponents'
+import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getRoutes } from '../lib/routes'
+import { numberInputRegexp } from '../lib/utils'
+import { ErrorSummary } from '../components/ErrorSummary'
 
-const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky');
+const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky')
 
 interface Props {
-  setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 
 const PrijmyAVydavky: NextPage<Props> = ({
   taxFormUserInput,
   setTaxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
 
   return (
     <>
@@ -36,8 +36,8 @@ const PrijmyAVydavky: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {
@@ -74,48 +74,48 @@ const PrijmyAVydavky: NextPage<Props> = ({
                 </button>
               </Form>
             </>
-          );
+          )
         }}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: IncomeAndExpenseUserInput) => {
-  const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {};
+  const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {}
 
   if (!values.t1r10_prijmy) {
-    errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy';
+    errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy'
   }
   if (values.t1r10_prijmy && !values.t1r10_prijmy.match(numberInputRegexp)) {
-    errors.t1r10_prijmy = 'Zadajte sumu príjmov vo formáte 123,45';
+    errors.t1r10_prijmy = 'Zadajte sumu príjmov vo formáte 123,45'
   }
 
   if (!values.priloha3_r11_socialne) {
     errors.priloha3_r11_socialne =
-      'Zadajte vaše celkové uhradené sociálne poistné';
+      'Zadajte vaše celkové uhradené sociálne poistné'
   }
   if (
     values.priloha3_r11_socialne &&
     !values.priloha3_r11_socialne.match(numberInputRegexp)
   ) {
     errors.priloha3_r11_socialne =
-      'Zadajte sumu sociálneho poistenia vo formáte 123,45';
+      'Zadajte sumu sociálneho poistenia vo formáte 123,45'
   }
 
   if (!values.priloha3_r13_zdravotne) {
     errors.priloha3_r13_zdravotne =
-      'Zadajte vaše celkové uhradené zdravotné poistné';
+      'Zadajte vaše celkové uhradené zdravotné poistné'
   }
   if (
     values.priloha3_r13_zdravotne &&
     !values.priloha3_r13_zdravotne.match(numberInputRegexp)
   ) {
     errors.priloha3_r13_zdravotne =
-      'Zadajte sumu zdravotného poistenia vo formáte 123,45';
+      'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default PrijmyAVydavky;
+export default PrijmyAVydavky

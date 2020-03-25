@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { Form, FormikProps } from 'formik';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import classnames from 'classnames';
-import { FormWrapper, Input } from '../../components/FormComponents';
-import styles from '../osobne-udaje.module.css';
+import React, { useEffect } from 'react'
+import { Form, FormikProps } from 'formik'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import classnames from 'classnames'
+import { FormWrapper, Input } from '../../components/FormComponents'
+import styles from '../osobne-udaje.module.css'
 import {
   FormErrors,
   PersonalInformationPostponePage,
-} from '../../types/PageUserInputs';
-import { getCity } from '../../lib/api';
-import { AutoformResponseBody } from '../../types/api';
-import { getPostponeRoutes } from '../../lib/routes';
-import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { ErrorSummary } from '../../components/ErrorSummary';
-import { formatPsc } from '../../lib/utils';
+} from '../../types/PageUserInputs'
+import { getCity } from '../../lib/api'
+import { AutoformResponseBody } from '../../types/api'
+import { getPostponeRoutes } from '../../lib/routes'
+import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { ErrorSummary } from '../../components/ErrorSummary'
+import { formatPsc } from '../../lib/utils'
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -34,26 +34,26 @@ const makeHandlePersonAutoform = ({
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
       obec: person.municipality,
       stat: person.country,
-    });
-  };
-};
+    })
+  }
+}
 
 interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostponePage) => void;
-  postponeUserInput: PostponeUserInput;
+  setPostponeUserInput: (values: PersonalInformationPostponePage) => void
+  postponeUserInput: PostponeUserInput
 }
 const OsobneUdaje: NextPage<Props> = ({
   setPostponeUserInput,
   postponeUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (postponeUserInput.prijmy_zo_zahranicia === undefined) {
-      router.replace(previousRoute);
+      router.replace(previousRoute)
     }
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
 
   return (
     <>
@@ -66,8 +66,8 @@ const OsobneUdaje: NextPage<Props> = ({
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setPostponeUserInput(values);
-          router.push(nextRoute);
+          setPostponeUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {(props) => (
@@ -135,15 +135,15 @@ const OsobneUdaje: NextPage<Props> = ({
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,
-                    );
-                    props.setFieldValue('psc', pscValue);
+                    )
+                    props.setFieldValue('psc', pscValue)
 
                     if (
                       pscValue.length === 6 &&
                       props.values.obec.length === 0
                     ) {
-                      const city = await getCity(pscValue);
-                      props.setFieldValue('obec', city);
+                      const city = await getCity(pscValue)
+                      props.setFieldValue('obec', city)
                     }
                   }}
                 />
@@ -174,53 +174,53 @@ const OsobneUdaje: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: PersonalInformationPostponePage) => {
-  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {};
+  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {}
 
   if (!values.dic) {
-    errors.dic = 'Zadajte pridelené DIČ';
+    errors.dic = 'Zadajte pridelené DIČ'
   }
 
   /**
    * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
    */
   if (values.dic.length < 9) {
-    errors.dic = 'DIČ môže mať minimálne 9 znakov';
+    errors.dic = 'DIČ môže mať minimálne 9 znakov'
   }
   if (values.dic.length > 10) {
-    errors.dic = 'DIČ môže mať maximálne 10 znakov';
+    errors.dic = 'DIČ môže mať maximálne 10 znakov'
   }
 
   if (!values.meno_priezvisko) {
-    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko';
+    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
   }
 
   if (!values.ulica) {
-    errors.ulica = 'Zadajte ulicu';
+    errors.ulica = 'Zadajte ulicu'
   }
 
   if (!values.cislo) {
-    errors.cislo = 'Zadajte číslo domu';
+    errors.cislo = 'Zadajte číslo domu'
   }
 
-  const pscNumberFormat = /^\d{3} \d{2}$/;
+  const pscNumberFormat = /^\d{3} \d{2}$/
   if (!values.psc) {
-    errors.psc = 'Zadajte PSČ';
+    errors.psc = 'Zadajte PSČ'
   } else if (!values.psc.match(pscNumberFormat)) {
-    errors.psc = 'PSČ môže obsahovať iba 5 čísel';
+    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 
   if (!values.obec) {
-    errors.obec = 'Zadajte obec';
+    errors.obec = 'Zadajte obec'
   }
 
   if (!values.stat) {
-    errors.stat = 'Zadajte štát';
+    errors.stat = 'Zadajte štát'
   }
 
-  return errors;
-};
-export default OsobneUdaje;
+  return errors
+}
+export default OsobneUdaje

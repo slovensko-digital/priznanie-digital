@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/dochodok';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/dochodok'
+import { testValidation } from './utils/testValidation'
 
 describe('dochodok', () => {
   describe('#validate', () => {
@@ -21,6 +21,6 @@ describe('dochodok', () => {
         input: { r029_poberal_dochodok: true, r030_vyska_dochodku: '10' },
         expected: [],
       },
-    ]);
-  });
-});
+    ])
+  })
+})

@@ -1,30 +1,30 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents';
-import { FormErrors, MortgageUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { ErrorSummary } from '../components/ErrorSummary';
-import { numberInputRegexp } from '../lib/utils';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { FormErrors, MortgageUserInput } from '../types/PageUserInputs'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { getRoutes } from '../lib/routes'
+import { ErrorSummary } from '../components/ErrorSummary'
+import { numberInputRegexp } from '../lib/utils'
 
-const { nextRoute, previousRoute } = getRoutes('/hypoteka');
+const { nextRoute, previousRoute } = getRoutes('/hypoteka')
 
 interface Props {
-  setTaxFormUserInput: (values: MortgageUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
+  setTaxFormUserInput: (values: MortgageUserInput) => void
+  taxFormUserInput: TaxFormUserInput
 }
 
 const Hypoteka: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   return (
     <>
       <Link href={previousRoute}>
@@ -36,8 +36,8 @@ const Hypoteka: NextPage<Props> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ values, errors, touched }) => (
@@ -72,35 +72,35 @@ const Hypoteka: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: MortgageUserInput) => {
-  const errors: Partial<FormErrors<MortgageUserInput>> = {};
+  const errors: Partial<FormErrors<MortgageUserInput>> = {}
 
   if (typeof values.r037_uplatnuje_uroky === 'undefined') {
-    errors.r037_uplatnuje_uroky = 'Vyznačte odpoveď';
+    errors.r037_uplatnuje_uroky = 'Vyznačte odpoveď'
   }
 
   if (values.r037_uplatnuje_uroky) {
     if (!values.r037_zaplatene_uroky) {
-      errors.r037_zaplatene_uroky = 'Zadajte výšku zaplatených úrokov';
+      errors.r037_zaplatene_uroky = 'Zadajte výšku zaplatených úrokov'
     } else if (!values.r037_zaplatene_uroky.match(numberInputRegexp)) {
-      errors.r037_zaplatene_uroky = 'Zadajte zaplatené úroky vo formáte 123,45';
+      errors.r037_zaplatene_uroky = 'Zadajte zaplatené úroky vo formáte 123,45'
     }
     if (!values.r037_pocetMesiacov) {
       errors.r037_pocetMesiacov =
-        'Zadajte počet mesiacov, kedy ste platili úroky';
+        'Zadajte počet mesiacov, kedy ste platili úroky'
     } else if (
       !values.r037_pocetMesiacov.match(/^\d+$/) ||
       parseInt(values.r037_pocetMesiacov, 10) < 0 ||
       parseInt(values.r037_pocetMesiacov, 10) > 12
     ) {
-      errors.r037_pocetMesiacov = 'Zadajte počet mesiacov - číslo od 0 do 12';
+      errors.r037_pocetMesiacov = 'Zadajte počet mesiacov - číslo od 0 do 12'
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default Hypoteka;
+export default Hypoteka

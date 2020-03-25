@@ -1,5 +1,5 @@
-import { validate } from '../src/pages/odklad/prijmy-zo-zahranicia';
-import { testValidation } from './utils/testValidation';
+import { validate } from '../src/pages/odklad/prijmy-zo-zahranicia'
+import { testValidation } from './utils/testValidation'
 
 describe('odklad/prijmy-zo-zahranicia', () => {
   describe('#validate', () => {
@@ -10,6 +10,6 @@ describe('odklad/prijmy-zo-zahranicia', () => {
       },
       { input: { prijmy_zo_zahranicia: true }, expected: [] },
       { input: { prijmy_zo_zahranicia: false }, expected: [] },
-    ]);
-  });
-});
+    ])
+  })
+})

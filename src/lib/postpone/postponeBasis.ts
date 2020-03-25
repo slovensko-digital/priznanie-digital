@@ -1,4 +1,4 @@
-import { PostponeOutput } from './PostponeOutput';
+import { PostponeOutput } from './PostponeOutput'
 
 export const postponeBasis: PostponeOutput = {
   dokument: {
@@ -26,4 +26,4 @@ export const postponeBasis: PostponeOutput = {
       podpis: '1',
     },
   },
-};
+}
