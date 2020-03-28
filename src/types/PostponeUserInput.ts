@@ -1,7 +1,7 @@
 export interface PostponeUserInput {
   // rodne_cislo: string;
   dic: string
-  prijmy_zo_zahranicia: boolean
+  prijmy_zo_zahranicia?: boolean
 
   meno_priezvisko: string
   ulica: string

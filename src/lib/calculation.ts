@@ -22,12 +22,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
   const tf: TaxForm = {
     r001_dic: input.r001_dic,
     r003_nace: input.r003_nace,
-    meno_priezvisko: input.meno_priezvisko,
     r004_priezvisko: lastNames.join(' '),
     r005_meno: firstName,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
-    psc: input.psc,
     r009_psc: `${input.psc}`.replace(/\D/, ''),
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,

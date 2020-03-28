@@ -1,23 +1,20 @@
 import { TaxFormUserInput } from './TaxFormUserInput'
 import { PostponeUserInput } from './PostponeUserInput'
 
-export type IncomeAndExpenseUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type IncomeAndExpenseUserInput = Pick<
+  TaxFormUserInput,
   't1r10_prijmy' | 'priloha3_r11_socialne' | 'priloha3_r13_zdravotne'
 >
 
-export type EmployedUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type EmployedUserInput = Pick<
+  TaxFormUserInput,
   'employed' | 'r038' | 'r039'
 >
 
-export type ChildrenUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
-  'children' | 'r034'
->
+export type ChildrenUserInput = Pick<TaxFormUserInput, 'children' | 'r034'>
 
-export type PartnerUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type PartnerUserInput = Pick<
+  TaxFormUserInput,
   | 'r031_priezvisko_a_meno'
   | 'r031_rodne_cislo'
   | 'r032_uplatnujem_na_partnera'
@@ -27,8 +24,8 @@ export type PartnerUserInput<T = string> = Pick<
   | 'r033_partner_kupele_uhrady'
 >
 
-export type PersonalInformationUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type PersonalInformationUserInput = Pick<
+  TaxFormUserInput,
   | 'r001_dic'
   // | "r002_datum_narodenia"
   | 'r003_nace'
@@ -46,13 +43,13 @@ export type PersonalInformationPostponePage = Pick<
   // | 'rodne_cislo'
 >
 
-export type PensionUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type PensionUserInput = Pick<
+  TaxFormUserInput,
   'r029_poberal_dochodok' | 'r030_vyska_dochodku'
 >
 
-export type MortgageUserInput<T = string> = Pick<
-  TaxFormUserInput<T>,
+export type MortgageUserInput = Pick<
+  TaxFormUserInput,
   'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
 >
 

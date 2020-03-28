@@ -39,5 +39,7 @@ export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
         </ul>
       </div>
     </div>
-  ) : null
+  ) : (
+    <></>
+  )
 }
