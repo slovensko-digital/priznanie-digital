@@ -12,13 +12,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
 
   form.dokument.hlavicka.dic = taxForm.r001_dic
-  // Form.dokument.hlavicka.datumNarodenia = taxForm.r002_datum_narodenia;
-  // TODO real NACE
+
+  const [naceCode, naceLabel] = taxForm.r003_nace.split(' - ')
+
   form.dokument.hlavicka.skNace = {
-    k1: '62',
-    k2: '01',
-    k3: '0',
-    cinnost: 'Počítačové programovanie',
+    k1: naceCode.slice(0, 2),
+    k2: naceCode.slice(2, 4),
+    k3: naceCode.slice(4, 5),
+    cinnost: naceLabel,
   }
 
   form.dokument.hlavicka.priezvisko = taxForm.r004_priezvisko
