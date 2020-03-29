@@ -63,7 +63,7 @@ export const Input = <Name extends keyof UserInput>({
       className={classnames([
         'govuk-form-group',
         className,
-        meta.touched && meta.error && 'govuk-form-group--error',
+        meta.error && 'govuk-form-group--error',
       ])}
     >
       <label
@@ -84,7 +84,7 @@ export const Input = <Name extends keyof UserInput>({
         {...props}
         type="text"
       />
-      {meta.touched && meta.error ? (
+      {meta.error ? (
         <span
           id={props.name}
           data-test="error"
@@ -157,7 +157,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
             </label>
           </div>
         </div>
-        {meta.touched && meta.error ? (
+        {meta.error ? (
           <span
             data-test="error"
             className="govuk-error-message govuk-!-margin-top-3"
@@ -206,7 +206,7 @@ export const Checkbox = <Name extends keyof UserInput>({
               {label ?? 'Ano'}
             </label>
           </div>
-          {meta.touched && meta.error ? (
+          {meta.error ? (
             <span id={props.name} className="govuk-error-message">
               <span className="govuk-visually-hidden">Error:</span> {meta.error}
             </span>
@@ -236,10 +236,71 @@ export const CheckboxSmall = ({
         type="checkbox"
         data-test={`${field.name}-input`}
         id={name}
+        checked={field.value === true}
       />
       <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
         {label}
       </label>
+    </div>
+  )
+}
+
+interface SelectProps {
+  name: string
+  options: string[]
+  className?: string
+  label: string | React.ReactNode
+
+  /** boolean=true disables the <select> while keeping selected value
+   *  number value temporarily selects a value while field is disabled */
+  disabled?: boolean | number
+}
+export const Select = ({
+  name,
+  options,
+  label,
+  className,
+  disabled = false,
+  ...props
+}: SelectProps) => {
+  const [field, meta] = useField(name)
+
+  return (
+    <div
+      className={classnames([
+        'govuk-form-group',
+        className,
+        meta.error && 'govuk-form-group--error',
+      ])}
+    >
+      <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>
+        {label}
+      </label>
+      <select
+        className="govuk-select"
+        style={{ width: '100%' }}
+        id={name}
+        {...props}
+        {...field}
+        disabled={disabled !== false}
+        value={typeof disabled === 'number' ? disabled : field.value}
+        data-test={`${name}-select`}
+      >
+        {options.map((name, key) => (
+          <option key={key} value={key}>
+            {name}
+          </option>
+        ))}
+      </select>
+      {meta.error ? (
+        <span
+          id={name}
+          data-test="error"
+          className="govuk-error-message govuk-!-margin-top-2 govuk-!-margin-bottom-0"
+        >
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
     </div>
   )
 }

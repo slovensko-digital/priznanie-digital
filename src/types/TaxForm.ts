@@ -1,4 +1,21 @@
-import { Child } from './TaxFormUserInput'
+export interface Child {
+  priezviskoMeno: string
+  rodneCislo: string
+  kupelnaStarostlivost: boolean
+  m00: boolean
+  m01: boolean
+  m02: boolean
+  m03: boolean
+  m04: boolean
+  m05: boolean
+  m06: boolean
+  m07: boolean
+  m08: boolean
+  m09: boolean
+  m10: boolean
+  m11: boolean
+  m12: boolean
+}
 
 export interface TaxForm {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/

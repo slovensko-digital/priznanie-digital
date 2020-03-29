@@ -17,4 +17,7 @@ export const withMortgageInput: TaxFormUserInput = {
   r037_uplatnuje_uroky: true,
   r037_zaplatene_uroky: '200',
   r037_pocetMesiacov: '12',
+
+  hasChildren: false,
+  children: [],
 }

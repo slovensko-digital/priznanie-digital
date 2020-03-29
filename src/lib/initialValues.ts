@@ -7,7 +7,7 @@ import {
   PensionUserInput,
   MortgageUserInput,
 } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -43,28 +43,19 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   r039: '',
 }
 
-export const emptyChild = {
+export const makeEmptyChild = (): ChildInput => ({
+  id: Date.now(),
   priezviskoMeno: '',
   rodneCislo: '',
   kupelnaStarostlivost: false,
-  m00: false,
-  m01: false,
-  m02: false,
-  m03: false,
-  m04: false,
-  m05: false,
-  m06: false,
-  m07: false,
-  m08: false,
-  m09: false,
-  m10: false,
-  m11: false,
-  m12: false,
-}
+  wholeYear: false,
+  monthFrom: '0',
+  monthTo: '11',
+})
 
-export const kidsUserInputInitialValues: ChildrenUserInput = {
-  children: undefined,
-  r034: [emptyChild],
+export const childrenUserInputInitialValues: ChildrenUserInput = {
+  hasChildren: undefined,
+  children: [makeEmptyChild()],
 }
 
 export const pensionInitialValues: PensionUserInput = {
@@ -83,7 +74,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
-  ...kidsUserInputInitialValues,
+  ...childrenUserInputInitialValues,
   ...pensionInitialValues,
   ...mortgageInitialValues,
   ...{ datum: '' },
