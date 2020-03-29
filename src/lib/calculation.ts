@@ -1,7 +1,7 @@
 import floor from 'lodash.floor'
 import { rodnecislo } from 'rodnecislo'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { TaxForm } from '../types/TaxForm'
+import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
+import { Child, TaxForm } from '../types/TaxForm'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -11,6 +11,30 @@ function parse(input: string) {
   const cleanedInput = input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
   // return parseInt(input|| '0', 10);
+}
+
+const mapChild = (child: ChildInput): Child => {
+  const monthFrom = parseInt(child.monthFrom, 10)
+  const monthTo = parseInt(child.monthTo, 10)
+
+  return {
+    priezviskoMeno: child.priezviskoMeno,
+    rodneCislo: child.rodneCislo,
+    kupelnaStarostlivost: child.kupelnaStarostlivost,
+    m00: child.wholeYear,
+    m01: !child.wholeYear && monthFrom === 0,
+    m02: !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
+    m03: !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
+    m04: !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
+    m05: !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
+    m06: !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
+    m07: !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
+    m08: !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
+    m09: !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
+    m10: !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
+    m11: !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
+    m12: !child.wholeYear && monthTo === 11,
+  }
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
@@ -46,7 +70,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r033_partner_kupele_uhrady: parse(input?.r033_partner_kupele_uhrady ?? '0'),
     /** SECTION Children */
 
-    r034: input?.r034 ?? [],
+    r034: input.hasChildren ? input.children.map(mapChild) : [],
     r036: Math.min(parse(input?.r036 ?? '0'), 50),
 
     /** SECTION Mortgage */
@@ -245,7 +269,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Math.abs(Math.min(this.r125_dan_na_uhradu, 0))
     },
     datum: input.datum,
-    children: input?.children ?? false,
+    children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
   }
 

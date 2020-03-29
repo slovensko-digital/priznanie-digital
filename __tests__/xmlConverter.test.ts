@@ -9,7 +9,7 @@ import { TaxForm } from '../src/types/TaxForm'
 describe('Converters ', () => {
   test('DP validate to schema', async () => {
     const schema = await fs.readFile(`${__dirname}/xml/schema.xsd`)
-    const result = convertToXML(taxForm as any as TaxForm)
+    const result = convertToXML((taxForm as any) as TaxForm)
 
     const xsd = libxml.parseXml((schema as any) as string)
     const xml = libxml.parseXml(result)

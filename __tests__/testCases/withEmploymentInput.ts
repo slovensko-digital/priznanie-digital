@@ -16,6 +16,7 @@ export const withEmploymentInput: TaxFormUserInput = {
   r038: '4000',
   r039: '1000',
   employed: true,
-  children: false,
+  hasChildren: false,
+  children: [],
   datum: '22.02.2020',
 }

@@ -17,4 +17,7 @@ export const withPensionInput: TaxFormUserInput = {
   /** Pension */
   r029_poberal_dochodok: true,
   r030_vyska_dochodku: '800',
+
+  hasChildren: false,
+  children: [],
 }

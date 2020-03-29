@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
-import { Form } from 'formik'
+import { FieldArray, Form } from 'formik'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import styles from './deti.module.css'
@@ -9,11 +9,18 @@ import {
   Input,
   CheckboxSmall,
   FormWrapper,
+  Select,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import {
+  ChildInput,
+  monthNames,
+  TaxFormUserInput,
+} from '../types/TaxFormUserInput'
 import { getRoutes } from '../lib/routes'
-import { emptyChild } from '../lib/initialValues'
+import { makeEmptyChild } from '../lib/initialValues'
+import classnames from 'classnames'
+import { rodnecislo } from 'rodnecislo'
 
 const { nextRoute, previousRoute } = getRoutes('/deti')
 
@@ -30,11 +37,6 @@ const Deti: NextPage<Props> = ({
     router.prefetch(nextRoute)
   })
 
-  const addEmptyChild = () => {
-    setTaxFormUserInput({
-      r034: taxFormUserInput?.r034?.concat([emptyChild]),
-    })
-  }
   return (
     <>
       <Link href={previousRoute}>
@@ -44,17 +46,17 @@ const Deti: NextPage<Props> = ({
       </Link>
       <FormWrapper<ChildrenUserInput>
         initialValues={taxFormUserInput}
-        // validationSchema={validationSchema}
+        validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
           router.push(nextRoute)
         }}
       >
-        {({ values }) => (
+        {({ values, setErrors, validateForm }) => (
           <Form className="form">
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
-              name="children"
+              name="hasChildren"
             />
             <p>
               V prípade, že sa staráte o nezaopatrené dieťa do 16 rokov,
@@ -63,66 +65,56 @@ const Deti: NextPage<Props> = ({
               mesačne. Ročný bonus na dieťa činí 258.72 €. Daňový bonus na dieťa
               si môže uplatniť iba jeden z rodičov.
             </p>
-            {values.children && (
-              <div className={styles.childrenInputGroup}>
-                {taxFormUserInput?.r034?.map((child, index) => (
-                  <div key={child.rodneCislo}>
-                    <Input
-                      name={`r034[${index}].priezviskoMeno` as any}
-                      type="text"
-                      label="Meno a priezvisko"
-                    />
-                    <Input
-                      name={`r034[${index}].rodneCislo` as any}
-                      type="text"
-                      label="Rodné číslo"
-                    />
-                    <div className="govuk-form-group">
-                      <fieldset
-                        className="govuk-fieldset"
-                        aria-describedby="waste-hint"
-                      >
-                        <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
-                          <h1 className="govuk-fieldset__heading">
-                            Daňový bonus podľa § 33 zákona uplatňujem v
-                            mesiacoch
-                          </h1>
-                        </legend>
-                        <span id="waste-hint" className="govuk-hint">
-                          Select all that apply.
-                        </span>
-                        <div className="govuk-checkboxes">
-                          {[
-                            [`r034[${index}].m00`, 'Januar az december'],
-                            [`r034[${index}].m01`, 'Januar'],
-                            [`r034[${index}].m02`, 'Feburar'],
-                            [`r034[${index}].m03`, 'Marec'],
-                            [`r034[${index}].m04`, 'April'],
-                            [`r034[${index}].m05`, 'Maj'],
-                            [`r034[${index}].m06`, 'Jun'],
-                            [`r034[${index}].m07`, 'Jul'],
-                            [`r034[${index}].m08`, 'August'],
-                            [`r034[${index}].m09`, 'September'],
-                            [`r034[${index}].m10`, 'Oktober'],
-                            [`r034[${index}].m11`, 'November'],
-                            [`r034[${index}].m12`, 'December'],
-                          ].map(([name, label]) => (
-                            <CheckboxSmall name={name} label={label} />
-                          ))}
-                        </div>
-                      </fieldset>
-                    </div>
+            {values.hasChildren && (
+              <FieldArray name="children">
+                {(arrayHelpers) => (
+                  <div className={styles.childrenInputGroup}>
+                    {values.children.map((child, index) => (
+                      <div key={child.id}>
+                        {values.children.length > 1 && (
+                          <h2
+                            className={classnames(
+                              'govuk-heading-m',
+                              'govuk-!-margin-top-3',
+                              styles.childHeadline,
+                            )}
+                          >
+                            {index + 1}. dieťa
+                            <button
+                              className="govuk-button btn-secondary btn-warning"
+                              type="button"
+                              onClick={() => arrayHelpers.remove(index)}
+                              data-test={`remove-child-${index}`}
+                            >
+                              Odstrániť {index + 1}. dieťa
+                            </button>
+                          </h2>
+                        )}
+                        <ChildForm
+                          savedValues={child}
+                          index={index}
+                          key={index}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      className="btn-secondary govuk-button"
+                      type="button"
+                      onClick={async () => {
+                        const errors = await validateForm()
+                        setErrors(errors)
+                        const hasErrors = Object.keys(errors).length > 0
+                        if (!hasErrors) {
+                          arrayHelpers.push(makeEmptyChild())
+                        }
+                      }}
+                      data-test="add-child"
+                    >
+                      Pridať ďalšie dieťa
+                    </button>
                   </div>
-                ))}
-                <button
-                  className="btn-secondary govuk-button"
-                  type="button"
-                  onClick={addEmptyChild}
-                  data-test="add-child"
-                >
-                  Pridať ďalšie dieťa
-                </button>
-              </div>
+                )}
+              </FieldArray>
             )}
 
             <button className="govuk-button" type="submit">
@@ -135,18 +127,116 @@ const Deti: NextPage<Props> = ({
   )
 }
 
-// const validationSchema = Yup.object().shape<ChildrenUserInput>({
-//   children: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r034: Yup.mixed().when('childs', {
-//     is: true,
-//     then: Yup.mixed(),
-//   }),
-//   // R039: Yup.number().when("employed", {
-//   //   is: true,
-//   //   then: Yup.number().required(),
-//   // }),
-// });
+interface ChildFormProps {
+  index: number
+  savedValues: ChildInput
+}
+const ChildForm = ({ savedValues, index }: ChildFormProps) => {
+  return (
+    <>
+      <Input
+        name={`children[${index}].priezviskoMeno` as any}
+        type="text"
+        label="Meno a priezvisko"
+        width="auto"
+      />
+      <Input
+        name={`children[${index}].rodneCislo` as any}
+        type="text"
+        label="Rodné číslo"
+        width="auto"
+      />
+      <div className="govuk-form-group">
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h1 className="govuk-fieldset__heading">
+            Daňový bonus podľa § 33 zákona uplatňujem v mesiacoch
+          </h1>
+        </legend>
+        <div className="govuk-checkboxes">
+          <CheckboxSmall
+            name={`children[${index}].wholeYear`}
+            label="Za celý kalendárny rok"
+          />
+        </div>
+      </div>
+      <div
+        className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+      >
+        <Select
+          name={`children[${index}].monthFrom`}
+          label="Od"
+          className={styles.inlineField}
+          options={monthNames}
+          disabled={savedValues.wholeYear ? 0 : false}
+        />
+        <Select
+          name={`children[${index}].monthTo`}
+          label="Do"
+          className={styles.inlineField}
+          options={monthNames}
+          disabled={savedValues.wholeYear ? 11 : false}
+        />
+      </div>
+    </>
+  )
+}
+
+interface ChildFormErrors {
+  priezviskoMeno?: string
+  rodneCislo?: string
+  monthTo?: string
+}
+interface ChildrenFormErrors {
+  hasChildren?: string
+  children?: ChildFormErrors[]
+}
+
+export const validate = (values: ChildrenUserInput) => {
+  const errors: ChildrenFormErrors = {}
+
+  if (typeof values.hasChildren === 'undefined') {
+    errors.hasChildren = 'Vyznačte odpoveď'
+  }
+
+  if (values.hasChildren) {
+    const childrenErrors = values.children.map((childValues, index) => {
+      const childErrors: ChildFormErrors = {}
+
+      if (childValues.priezviskoMeno.length === 0) {
+        childErrors.priezviskoMeno = 'Zadajte meno a priezvisko dieťaťa'
+      }
+      if (!childValues.rodneCislo) {
+        childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
+      } else if (!rodnecislo(childValues.rodneCislo).isValid()) {
+        childErrors.rodneCislo = 'Zadajte rodné číslo (bez medzier)'
+      } else if (
+        values.children
+          .slice(0, index)
+          .find((v) => v.rodneCislo === childValues.rodneCislo)
+      ) {
+        childErrors.rodneCislo = 'Každé dieťa môže byť zadané iba 1 krát'
+      }
+
+      if (
+        !childValues.wholeYear &&
+        parseInt(childValues.monthFrom, 10) > parseInt(childValues.monthTo, 10)
+      ) {
+        childErrors.monthTo = `Musí byť ${
+          monthNames[childValues.monthFrom]
+        } alebo neskôr`
+      }
+
+      return childErrors
+    })
+
+    if (
+      childrenErrors.filter((err) => Object.keys(err).length > 0).length > 0
+    ) {
+      errors.children = childrenErrors
+    }
+  }
+
+  return errors
+}
 
 export default Deti

@@ -179,36 +179,120 @@ describe('Children page', function () {
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/partner')
-
-    //  Go back to our page
-    cy.visit('/deti')
   })
-  // TODO
-  it.skip('has working validation', function () {
+  it('has working validation for checkbox', function () {
     cy.visit('/deti')
 
-    // Shows error, when presses next withou interaction
+    // Shows error, when presses next without interaction
     next()
     getError()
   })
-  it('has working ui', function () {
+  it('has working validation for child form', function () {
     cy.visit('/deti')
 
     // When presses yes, additional fields appears
-    getInput('children', '-yes').click()
+    getInput('hasChildren', '-yes').click()
 
-    // Type to input
-    cy.get('[data-test="r034[0].priezviskoMeno-input"]').type(
-      withChildrenInput?.r034?.[0]?.priezviskoMeno ?? '',
+    // Try to add 2nd child
+    next()
+
+    // Show errors when trying to add 2nd child
+    getError().should('have.length', 2)
+
+    // Enter child data
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withChildrenInput.children?.[0]?.priezviskoMeno ?? '',
     )
-    cy.get('[data-test="r034[0].rodneCislo-input"]').type(
-      withChildrenInput?.r034?.[0]?.rodneCislo ?? '',
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withChildrenInput.children?.[0]?.rodneCislo ?? '',
     )
 
+    next()
+    assertUrl('/dochodok')
+  })
+  it('has working ui for adding children', function () {
+    cy.visit('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    // Try to add 2nd child
     cy.get('[data-test="add-child"]').click()
 
-    // Should submit and next page should be parter
-    // next();
+    // Show errors when trying to add 2nd child
+    getError().should('have.length', 2)
+
+    // Enter 1st child data
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withChildrenInput.children?.[0]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withChildrenInput.children?.[0]?.rodneCislo ?? '',
+    )
+
+    // Add 2nd child
+    cy.get('[data-test="add-child"]').click()
+
+    next()
+
+    // Show errors for 2nd child
+    getError().should('have.length', 2)
+
+    // Enter 2nd child data
+    cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
+      withChildrenInput.children?.[1]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[1].rodneCislo-input"]').type(
+      withChildrenInput.children?.[1]?.rodneCislo ?? '',
+    )
+
+    // Add 3rd child
+    cy.get('[data-test="add-child"]').click()
+
+    next()
+
+    // Show errors for 3rd child
+    getError().should('have.length', 2)
+
+    // Remove 2rd child
+    cy.get('[data-test="remove-child-2"]').click()
+
+    next()
+    assertUrl('/dochodok')
+  })
+  it('has working validation for child form months', function () {
+    cy.visit('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    // Enter invalid months (November - April)
+    cy.get('[data-test="children[0].monthFrom-select"]').select('10')
+    cy.get('[data-test="children[0].monthTo-select"]').select('3')
+
+    // Try to add 2nd child
+    next()
+
+    // Should have error for invalid months
+    getError().should('have.length', 3)
+
+    // Enter valid months (November - April)
+    cy.get('[data-test="children[0].monthFrom-select"]').select('3')
+    cy.get('[data-test="children[0].monthTo-select"]').select('10')
+
+    // Try to continue
+    next()
+
+    // Should not have error for invalid months
+    getError().should('have.length', 2)
+
+    // Check checkbox for whole year
+    cy.get('[data-test="children[0].wholeYear-input"]').click()
+
+    next()
+
+    // Should not have error for invalid months
+    getError().should('have.length', 2)
   })
 })
 

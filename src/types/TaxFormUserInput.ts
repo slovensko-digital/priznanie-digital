@@ -1,20 +1,26 @@
-export interface Child {
+export const monthNames: string[] = [
+  'Január',
+  'Február',
+  'Marec',
+  'Apríl',
+  'Máj',
+  'Jún',
+  'Júl',
+  'August',
+  'September',
+  'Október',
+  'November',
+  'December',
+]
+
+export interface ChildInput {
+  id: number
   priezviskoMeno: string
   rodneCislo: string
   kupelnaStarostlivost: boolean
-  m00: boolean
-  m01: boolean
-  m02: boolean
-  m03: boolean
-  m04: boolean
-  m05: boolean
-  m06: boolean
-  m07: boolean
-  m08: boolean
-  m09: boolean
-  m10: boolean
-  m11: boolean
-  m12: boolean
+  wholeYear: boolean
+  monthFrom: string
+  monthTo: string
 }
 
 export interface TaxFormUserInput {
@@ -68,11 +74,11 @@ export interface TaxFormUserInput {
   r039?: string
 
   /**   Deti*/
-  r034?: Child[]
+  children: ChildInput[]
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string
 
-  children?: boolean
+  hasChildren?: boolean
   employed?: boolean
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */

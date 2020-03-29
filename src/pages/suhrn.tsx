@@ -148,8 +148,8 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
       <Summary
         title="Dieťa do 16 rokov alebo študent do 25 rokov, v spoločnej domácnosti"
         rows={
-          taxFormUserInput.children
-            ? taxFormUserInput.r034
+          taxFormUserInput.hasChildren
+            ? taxFormUserInput.children
                 .map((child) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
                   { title: 'Rodné číslo', value: child.rodneCislo },

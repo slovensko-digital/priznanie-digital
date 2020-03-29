@@ -11,7 +11,10 @@ export type EmployedUserInput = Pick<
   'employed' | 'r038' | 'r039'
 >
 
-export type ChildrenUserInput = Pick<TaxFormUserInput, 'children' | 'r034'>
+export type ChildrenUserInput = Pick<
+  TaxFormUserInput,
+  'hasChildren' | 'children'
+>
 
 export type PartnerUserInput = Pick<
   TaxFormUserInput,

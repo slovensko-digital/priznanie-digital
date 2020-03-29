@@ -18,6 +18,16 @@ body {
   margin-bottom: 0 !important;
 }
 
+.btn-secondary.btn-warning {
+  border: 2px solid #d4351c !important;
+  color: #d4351c !important;
+  background-color: white !important;
+}
+
+.btn-warning {
+  background-color: #d4351c !important;
+}
+
 /* Numeric fields can have spaces as thousand separator or between number and currency name. */
 .govuk-table__cell--numeric {
   white-space: nowrap;
