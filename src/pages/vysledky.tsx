@@ -47,13 +47,13 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
     <>
       <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Výpočet dane za rok 2019
       </h1>
-      <h2 className="govuk-heading-l govuk-!-margin-top-3">Stručný prehľad</h2>
+      <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary
         rows={[
           { title: 'Príjmy', value: taxForm.t1r2_prijmy },

@@ -24,7 +24,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     await sendEmail({
-      from: 'priznanie.digital@slovensko.digital',
       to: 'priznanie.digital@protonmail.com',
       subject: parsedBody.whatWereYouDoing,
       textContent: `${parsedBody.whatWentWrong}\n\n
