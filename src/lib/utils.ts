@@ -43,3 +43,8 @@ export const formatPsc = (newValue: string, previousValue = '') => {
   // add space after first 3 digits
   return formattedNewValue.replace(/^(\d{3})/, '$1 ')
 }
+
+export const formatRodneCislo = (value: string, withSlash = true) =>
+  value
+    .replace(/\D/g, '')
+    .replace(/^(\d{6})(\d{4})$/, withSlash ? '$1 / $2' : '$1$2')
