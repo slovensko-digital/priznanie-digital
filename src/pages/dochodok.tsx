@@ -22,11 +22,11 @@ const Dochodok: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute)
+    router.prefetch(nextRoute())
   })
   return (
     <>
-      <Link href={previousRoute}>
+      <Link href={previousRoute()}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -37,7 +37,7 @@ const Dochodok: NextPage<Props> = ({
         // validationSchema={validationSchema}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute)
+          router.push(nextRoute())
         }}
       >
         {({ values }) => (

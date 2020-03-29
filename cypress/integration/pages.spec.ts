@@ -358,6 +358,10 @@ describe('Summary page', function () {
       cy.visit('/suhrn')
       cy.get('h2 > a').eq(index).click()
       assertUrl(link)
+
+      // Back button should navigate back to summary page
+      cy.get('[data-test=back]').click()
+      cy.visit('/suhrn')
     })
   })
 })

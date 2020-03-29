@@ -19,7 +19,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
 
   return (
     <>
-      <Link href={previousRoute}>
+      <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
           Naspat
         </a>

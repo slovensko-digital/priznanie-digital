@@ -45,7 +45,7 @@ interface Props {
 const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
   return (
     <>
-      <Link href={previousRoute}>
+      <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
           Naspat
         </a>
@@ -91,7 +91,7 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
           },
         ]}
       />
-      <Link href={nextRoute}>
+      <Link href={nextRoute()}>
         <button data-test="next" className="govuk-button" type="button">
           Pokračovať
         </button>
