@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { EmailForm } from '../../components/EmailForm'
+import { setDate } from '../../lib/utils'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -19,9 +20,9 @@ const Suhrn: NextPage<Props> = ({
   const router = useRouter()
 
   useEffect(() => {
-    if (!postponeUserInput.meno_priezvisko) {
-      router.replace(previousRoute)
-    }
+    // if (!postponeUserInput.meno_priezvisko) {
+    //   router.replace(previousRoute)
+    // }
     router.prefetch(nextRoute)
   })
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
@@ -32,7 +33,7 @@ const Suhrn: NextPage<Props> = ({
     <>
       <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
@@ -113,15 +114,36 @@ const Suhrn: NextPage<Props> = ({
         </tbody>
       </table>
 
-      <EmailForm
-        postponeUserInput={postponeUserInput}
-        setPostponeUserInput={setPostponeUserInput}
-        formName="postpone"
-        applicantFullName={postponeUserInput.meno_priezvisko}
-        deadline={
-          postponeUserInput.prijmy_zo_zahranicia ? '2020-06-30' : '2020-09-30'
-        }
-      />
+      <div className="box">
+        {postponeUserInput.email ? (
+          <p>
+            Váš email <strong>{postponeUserInput.email}</strong> sme úspešne
+            zaregistrovali.
+            <br />
+            Pošleme vám notifikáciu pred novým termínom{' '}
+            {postponeUserInput.prijmy_zo_zahranicia
+              ? '(30. jún 2020)'
+              : '(30. september 2020)'}
+            .
+            <br />
+            {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
+          </p>
+        ) : (
+          <EmailForm
+            label="Chcete dostať upozornenie o novom termíne podania?"
+            hint="Nechajte nám email a my vám včas pošleme notifikáciu"
+            attachment={setDate(postponeUserInput)}
+            saveForm={(email, newsletter) => {
+              setPostponeUserInput({ ...postponeUserInput, email, newsletter })
+            }}
+            attributes={{
+              form: 'postpone',
+              firstname: firstName,
+              lastname: lastNames.join(' '),
+            }}
+          />
+        )}
+      </div>
 
       <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">

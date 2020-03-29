@@ -6,6 +6,7 @@ import { getRoutes } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { formatCurrency, formatRodneCislo } from '../lib/utils'
 import styles from './suhrn.module.css'
+import classnames from 'classnames'
 
 const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
@@ -21,7 +22,7 @@ interface SummaryProps {
 }
 const Summary = (props: SummaryProps) => (
   <>
-    <h2 className={styles.summaryTitle}>
+    <h2 className={classnames('govuk-heading-m', 'govuk-!-margin-top-3', styles.summaryTitle)}>
       <span>{props.title}</span>
       {props.href && (
         <Link href={`${props.href}?edit`}>
@@ -71,7 +72,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
     <>
       <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">

@@ -29,7 +29,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
     <>
       <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <div className="box">
@@ -69,8 +69,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         disabled={!didDownload}
         type="button"
         onClick={() => {
-          window.location.href =
-            'https://staging.navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania' // TODO: spravnu URL na navod pre odklad
+          window.location.href = 'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
         Pokračovať na navody.digital

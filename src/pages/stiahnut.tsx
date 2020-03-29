@@ -21,7 +21,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
     <>
       <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <div className="box">
