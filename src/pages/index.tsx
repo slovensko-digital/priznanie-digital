@@ -26,7 +26,7 @@ export default () => (
         Finančnej správy.
       </p>
 
-      <Link href={nextRoute}>
+      <Link href={nextRoute()}>
         <button
           type="button"
           className="govuk-button govuk-button--large govuk-button--start"

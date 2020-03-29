@@ -23,11 +23,11 @@ const Hypoteka: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter()
   useEffect(() => {
-    router.prefetch(nextRoute)
+    router.prefetch(nextRoute())
   })
   return (
     <>
-      <Link href={previousRoute}>
+      <Link href={previousRoute()}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -37,7 +37,7 @@ const Hypoteka: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute)
+          router.push(nextRoute())
         }}
       >
         {({ values, errors, touched }) => (

@@ -24,20 +24,22 @@ const PrijmyAVydavky: NextPage<Props> = ({
   const router = useRouter()
 
   useEffect(() => {
-    router.prefetch(nextRoute)
+    router.prefetch(nextRoute())
   })
 
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link">Späť</a>
+      <Link href={previousRoute()}>
+        <a className="govuk-back-link" data-test="back">
+          Späť
+        </a>
       </Link>
       <FormWrapper<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute)
+          router.push(nextRoute())
         }}
       >
         {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {

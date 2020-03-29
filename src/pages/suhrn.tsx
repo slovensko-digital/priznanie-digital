@@ -61,7 +61,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
   const router = useRouter()
 
   useEffect(() => {
-    router.prefetch(nextRoute)
+    router.prefetch(nextRoute())
   })
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
@@ -69,7 +69,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
 
   return (
     <>
-      <Link href={previousRoute}>
+      <Link href={previousRoute()}>
         <a className="govuk-back-link" data-test="back">
           Naspat
         </a>
@@ -229,7 +229,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
           { title: 'Obec', value: taxFormUserInput.r010_obec },
         ]}
       />
-      <Link href={nextRoute}>
+      <Link href={nextRoute()}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
           Pokračovať
         </button>
