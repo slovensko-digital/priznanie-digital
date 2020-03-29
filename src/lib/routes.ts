@@ -26,6 +26,16 @@ const routesOrder: ReadonlyArray<Route> = [
 ]
 
 export const getRoutes = (currentRoute: Route) => {
+  const isEditing =
+    typeof window !== 'undefined' && window.location.search.indexOf('edit') > -1
+  if (isEditing) {
+    return {
+      currentRoute,
+      nextRoute: '/suhrn',
+      previousRoute: '/suhrn',
+    }
+  }
+
   const currentRouteIndex = routesOrder.indexOf(currentRoute)
   return {
     currentRoute,

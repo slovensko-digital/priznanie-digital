@@ -4,7 +4,8 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { getRoutes } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency } from '../lib/utils'
+import { formatCurrency, formatRodneCislo } from '../lib/utils'
+import styles from './suhrn.module.css'
 
 const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
@@ -16,10 +17,18 @@ interface SummaryRow {
 interface SummaryProps {
   title: string
   rows: SummaryRow[]
+  href?: string
 }
 const Summary = (props: SummaryProps) => (
   <>
-    <h2>{props.title}</h2>
+    <h2 className={styles.summaryTitle}>
+      <span>{props.title}</span>
+      {props.href && (
+        <Link href={`${props.href}?edit`}>
+          <a className={styles.editLink}>upraviť</a>
+        </Link>
+      )}
+    </h2>
     <table className="govuk-table">
       <tbody className="govuk-table__body">
         {props.rows.map(({ title, value, currency }) => (
@@ -68,9 +77,9 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Súhrn a kontrola vyplnených údajov
       </h1>
-
       <Summary
         title="Príjmy a odvody do sociálnej poisťovne"
+        href={'/prijmy-a-vydavky'}
         rows={[
           {
             title: 'Príjmy',
@@ -89,9 +98,9 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
           },
         ]}
       />
-
       <Summary
         title="Zamestnanie v SR pre rok 2019"
+        href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
             ? [
@@ -113,9 +122,9 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
               ]
         }
       />
-
       <Summary
         title="Daňový bonus na manželku / manžela"
+        href={'/partner'}
         rows={
           taxFormUserInput.r032_uplatnujem_na_partnera
             ? [
@@ -125,7 +134,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                 },
                 {
                   title: 'Rodné číslo',
-                  value: taxFormUserInput.r031_rodne_cislo,
+                  value: formatRodneCislo(taxFormUserInput.r031_rodne_cislo),
                 },
                 {
                   title: 'Vlastné príjmy manželky / menžela',
@@ -144,15 +153,18 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
               ]
         }
       />
-
       <Summary
         title="Dieťa do 16 rokov alebo študent do 25 rokov, v spoločnej domácnosti"
+        href={'/deti'}
         rows={
           taxFormUserInput.hasChildren
             ? taxFormUserInput.children
                 .map((child) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
-                  { title: 'Rodné číslo', value: child.rodneCislo },
+                  {
+                    title: 'Rodné číslo',
+                    value: formatRodneCislo(child.rodneCislo),
+                  },
                 ])
                 .reduce((result, value) => [...result, ...value], [])
             : [
@@ -162,18 +174,52 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
               ]
         }
       />
-
+      <Summary
+        title="Príspevky na doplnkové dôchodkové poistenie (III. pilier)"
+        href={'/dochodok'}
+        rows={
+          taxFormUserInput.r029_poberal_dochodok
+            ? [
+                {
+                  title: 'Výška zaplatených príspevkov',
+                  value: taxFormUserInput.r030_vyska_dochodku,
+                  currency: true,
+                },
+              ]
+            : [{ title: 'Neplatil som' }]
+        }
+      />
+      <Summary
+        title="Zaplatené úroky z hypotéky"
+        href={'/hypoteka'}
+        rows={
+          taxFormUserInput.r037_uplatnuje_uroky
+            ? [
+                {
+                  title: 'Zaplatené úroky',
+                  value: taxFormUserInput.r037_zaplatene_uroky,
+                  currency: true,
+                },
+                {
+                  title: 'Počet mesiacov',
+                  value: taxFormUserInput.r037_pocetMesiacov,
+                },
+              ]
+            : [{ title: 'Neplatil som' }]
+        }
+      />
       <Summary
         title="Údaje o daňovníkovi"
+        href={'/osobne-udaje'}
         rows={[
           { title: 'DIČ', value: taxFormUserInput.r001_dic },
           { title: 'Meno', value: firstName },
           { title: 'Priezvisko', value: lastNames.join(' ') },
         ]}
       />
-
       <Summary
         title="Adresa trvalého pobytu"
+        href={'/osobne-udaje'}
         rows={[
           {
             title: 'Ulica a súpisné číslo',
@@ -183,7 +229,6 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
           { title: 'Obec', value: taxFormUserInput.r010_obec },
         ]}
       />
-
       <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
           Pokračovať

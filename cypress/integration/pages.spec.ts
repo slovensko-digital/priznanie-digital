@@ -49,7 +49,6 @@ function typeToInputPostpone<K extends keyof PostponeUserInput>(
 function next() {
   return cy.contains('Pokračovať').click()
 }
-
 const getError = () => cy.get('[data-test=error]')
 function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url)
@@ -344,6 +343,22 @@ describe('Summary page', function () {
 
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody do sociálnej poisťovne')
+  })
+  ;[
+    '/prijmy-a-vydavky',
+    '/zamestnanie',
+    '/partner',
+    '/deti',
+    '/dochodok',
+    '/hypoteka',
+    '/osobne-udaje',
+    '/osobne-udaje',
+  ].forEach((link: Route, index) => {
+    it(`has working edit link to ${link}`, function () {
+      cy.visit('/suhrn')
+      cy.get('h2 > a').eq(index).click()
+      assertUrl(link)
+    })
   })
 })
 
