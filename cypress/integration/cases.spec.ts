@@ -107,7 +107,6 @@ describe('Cases', function () {
               cy.get(`[data-test="r034[${index}].rodneCislo-input"]`).type(
                 child.rodneCislo,
               )
-
               ;[
                 `r034[${index}].m00`,
                 `r034[${index}].m01`,
@@ -168,6 +167,7 @@ describe('Cases', function () {
 
           typeToInput('r001_dic', input)
           typeToInput('r003_nace', input)
+          // getInput('r003_nace').click()
           typeToInput('meno_priezvisko', input)
           typeToInput('r007_ulica', input)
           typeToInput('r008_cislo', input)

@@ -5,7 +5,7 @@ export const withPensionInput: TaxFormUserInput = {
   priloha3_r13_zdravotne: '1000',
   t1r10_prijmy: '25000',
   r001_dic: '233123123',
-  r003_nace: '123123',
+  r003_nace: '62010 - Počítačové programovanie',
   meno_priezvisko: 'Fake Name',
   r007_ulica: 'Mierova',
   r008_cislo: '4',
