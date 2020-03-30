@@ -137,10 +137,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.neuplatnujem = boolToString(!taxForm.twoPercent)
 
   if (taxForm.twoPercent && taxForm.r142) {
+    form.dokument.telo.r141 = taxForm.r141.toFixed(2)
     form.dokument.telo.r142 = {
       ...taxForm.r142,
       obchMeno: {
-        riadok: taxForm.r142.obchMeno,
+        riadok: [taxForm.r142.obchMeno],
       },
       suhlasZaslUdaje: boolToString(taxForm.r142.suhlasZaslUdaje),
       pravnaForma: '',

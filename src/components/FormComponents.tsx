@@ -43,7 +43,7 @@ export function Input<FormFields = any>({
   className,
   type,
   ...props
-}: InputProps<FormFields> & React.HTMLProps<HTMLInputElement>) {
+}: InputProps<FormFields> & Omit<React.HTMLProps<HTMLInputElement>, 'name'>) {
   const [field, meta] = useField(props.name)
 
   const getNumberInputProps = () => {

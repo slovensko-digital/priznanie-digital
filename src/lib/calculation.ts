@@ -268,11 +268,25 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r126_danovy_preplatok() {
       return Math.abs(Math.min(this.r125_dan_na_uhradu, 0))
     },
-    datum: input.datum,
+    get r141() {
+      if (!input.twoPercent) {
+        return 0
+      }
+
+      // TODO do 3% as well
+      const rate = 2
+      const NGOamount = floor((this.r113 / 100) * rate, 2)
+
+      /** Min of 3 EUR is required */
+      return NGOamount >= 3 ? NGOamount : 0
+    },
+    r142: input?.NGO ?? undefined,
+
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
     twoPercent: input?.twoPercent ?? false,
-    r142: input?.NGO ?? undefined,
+
+    datum: input.datum,
   }
 
   return tf
