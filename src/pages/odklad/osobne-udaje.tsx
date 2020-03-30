@@ -17,6 +17,7 @@ import { FullNameAutoCompleteInput } from '../../components/FullNameAutoComplete
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc } from '../../lib/utils'
+import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 

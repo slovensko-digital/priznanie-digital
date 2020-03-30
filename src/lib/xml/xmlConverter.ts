@@ -133,9 +133,20 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r114 = ''
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
-  form.dokument.telo.neuplatnujem = '1'
+  /** SECTION 2 percent */
+  form.dokument.telo.neuplatnujem = boolToString(!taxForm.twoPercent)
 
-  // TODO doplnit dnesny datum
+  if (taxForm.twoPercent && taxForm.r142) {
+    form.dokument.telo.r142 = {
+      ...taxForm.r142,
+      obchMeno: {
+        riadok: taxForm.r142.obchMeno,
+      },
+      suhlasZaslUdaje: boolToString(taxForm.r142.suhlasZaslUdaje),
+      pravnaForma: '',
+    }
+  }
+
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(

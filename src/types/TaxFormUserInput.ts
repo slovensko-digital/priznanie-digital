@@ -23,6 +23,16 @@ export interface ChildInput {
   monthTo: string
 }
 
+export interface NGOInput {
+  ico: string
+  obchMeno: string
+  ulica: string
+  cislo: string
+  psc: string
+  obec: string
+  suhlasZaslUdaje: boolean
+}
+
 export interface TaxFormUserInput {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
@@ -70,16 +80,21 @@ export interface TaxFormUserInput {
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
   /**   Zamestnanie */
+  employed?: boolean
   r038?: string
   r039?: string
 
-  /**   Deti*/
+  /** SECTION  Deti*/
+  hasChildren?: boolean
   children: ChildInput[]
+
+  /** SECTION  Dve percenta */
+  twoPercent?: boolean
+  NGO?: NGOInput
+  /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string
 
-  hasChildren?: boolean
-  employed?: boolean
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */
   datum: string

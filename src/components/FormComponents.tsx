@@ -27,8 +27,8 @@ export const FormWrapper = <FormikInput extends FormikValues>({
   </Formik>
 )
 
-interface InputProps<Name> {
-  name: Name
+interface InputProps<FormFields> {
+  name: keyof FormFields
   label: string
   hint?: string
   className?: string
@@ -36,14 +36,14 @@ interface InputProps<Name> {
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 
-export const Input = <Name extends keyof UserInput>({
+export function Input<FormFields = any>({
   label,
   hint,
   width = 20,
   className,
   type,
   ...props
-}: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
+}: InputProps<FormFields> & React.HTMLProps<HTMLInputElement>) {
   const [field, meta] = useField(props.name)
 
   const getNumberInputProps = () => {

@@ -466,7 +466,7 @@ export interface Tabulka3 {
 }
 
 export interface ObchMeno {
-  riadok: string[]
+  riadok: string
 }
 
 export interface R142 {

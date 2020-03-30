@@ -271,6 +271,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     datum: input.datum,
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
+    twoPercent: input?.twoPercent ?? false,
+    r142: input?.NGO ?? undefined,
   }
 
   return tf

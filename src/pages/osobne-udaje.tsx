@@ -88,7 +88,7 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="r001_dic"
+                  name="r001_"
                   type="text"
                   label="DIČ"
                 />
