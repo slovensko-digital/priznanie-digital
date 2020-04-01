@@ -11,7 +11,7 @@ import {
   convertPostponeToJson,
 } from '../src/lib/postpone/postponeConverter'
 
-const WRITE_FILES = true
+const WRITE_FILES = false
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
