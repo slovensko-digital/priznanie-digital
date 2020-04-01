@@ -16,7 +16,11 @@ export const formatDate = (date: Date): string => {
   return `${day}.${month}.${year}`
 }
 
-export const setDate = <T>(input: T, date: Date = new Date()) => {
+/** TODO HACK IMPORTANT to workaround old eform we need to set date before
+original deadline. When the new eform is released and before going public we
+need to set the current date
+*/
+export const setDate = <T>(input: T, date: Date = new Date(2020, 2, 31)) => {
   return {
     ...input,
     datum: formatDate(date),

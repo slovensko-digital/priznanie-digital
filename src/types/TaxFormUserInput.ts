@@ -70,16 +70,27 @@ export interface TaxFormUserInput {
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
   /**   Zamestnanie */
+  employed?: boolean
   r038?: string
   r039?: string
 
-  /**   Deti*/
+  /** SECTION  Deti*/
+  hasChildren?: boolean
   children: ChildInput[]
+
+  /** SECTION  Dve percenta */
+  twoPercent?: boolean
+  ngo_ico?: string
+  ngo_obchMeno?: string
+  ngo_ulica?: string
+  ngo_cislo?: string
+  ngo_psc?: string
+  ngo_obec?: string
+  suhlasZaslUdaje?: boolean
+  /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string
 
-  hasChildren?: boolean
-  employed?: boolean
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */
   datum: string

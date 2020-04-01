@@ -30,7 +30,6 @@ export type PartnerUserInput = Pick<
 export type PersonalInformationUserInput = Pick<
   TaxFormUserInput,
   | 'r001_dic'
-  // | "r002_datum_narodenia"
   | 'r003_nace'
   | 'meno_priezvisko'
   | 'r007_ulica'
@@ -43,7 +42,6 @@ export type PersonalInformationUserInput = Pick<
 export type PersonalInformationPostponePage = Pick<
   PostponeUserInput,
   'dic' | 'meno_priezvisko' | 'ulica' | 'cislo' | 'psc' | 'obec' | 'stat'
-  // | 'rodne_cislo'
 >
 
 export type PensionUserInput = Pick<
@@ -54,6 +52,18 @@ export type PensionUserInput = Pick<
 export type MortgageUserInput = Pick<
   TaxFormUserInput,
   'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
+>
+
+export type TwoPercentUserInput = Pick<
+  TaxFormUserInput,
+  | 'twoPercent'
+  | 'ngo_ico'
+  | 'ngo_obchMeno'
+  | 'ngo_ulica'
+  | 'ngo_cislo'
+  | 'ngo_psc'
+  | 'ngo_obec'
+  | 'suhlasZaslUdaje'
 >
 
 export type IncomeSourceCountryUserInput = Pick<

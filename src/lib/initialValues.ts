@@ -6,6 +6,7 @@ import {
   ChildrenUserInput,
   PensionUserInput,
   MortgageUserInput,
+  TwoPercentUserInput,
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
@@ -69,6 +70,17 @@ export const mortgageInitialValues: MortgageUserInput = {
   r037_uplatnuje_uroky: undefined,
 }
 
+export const twoPercentInitialValues: TwoPercentUserInput = {
+  twoPercent: undefined,
+  ngo_ico: '',
+  ngo_obchMeno: '',
+  ngo_ulica: '',
+  ngo_cislo: '',
+  ngo_psc: '',
+  ngo_obec: '',
+  suhlasZaslUdaje: false,
+}
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
@@ -77,6 +89,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...childrenUserInputInitialValues,
   ...pensionInitialValues,
   ...mortgageInitialValues,
+  ...twoPercentInitialValues,
   ...{ datum: '' },
 }
 
@@ -89,6 +102,5 @@ export const initialPostponeUserInput: PostponeUserInput = {
   ulica: '',
   cislo: '',
   stat: '',
-  // rodne_cislo: '',
   datum: '',
 }

@@ -27,6 +27,7 @@ describe('calcIntergration', () => {
     'withPension',
     'withMortgage',
     'withChildren',
+    'with2percent',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
