@@ -143,6 +143,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       obchMeno: {
         riadok: [taxForm.r142.obchMeno],
       },
+      psc: taxForm.r142.psc.replace(' ', ''),
       suhlasZaslUdaje: boolToString(taxForm.r142.suhlasZaslUdaje),
       pravnaForma: '',
     }

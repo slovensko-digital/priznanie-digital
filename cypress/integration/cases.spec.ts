@@ -13,6 +13,7 @@ import { Route, PostponeRoute } from '../../src/lib/routes'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter'
+import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -39,16 +40,17 @@ function assertUrl(url: Route | PostponeRoute) {
 
 const getError = () => cy.get('[data-test=error]')
 
-describe('Cases', function () {
+describe.only('Cases', function () {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    'withMortgage',
-    'withPension',
-    'withChildren',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // 'withMortgage',
+    // 'withPension',
+    // 'withChildren',
+    'with2percent',
   ].forEach((testCase) => {
     it(testCase, function (done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -152,6 +154,23 @@ describe('Cases', function () {
             typeToInput('r037_pocetMesiacov', input)
           } else {
             getInput('r037_uplatnuje_uroky', '-no').click()
+          }
+
+          next()
+
+          /**  SECTION Two percent */
+          assertUrl('/dve-percenta')
+
+          if (input.twoPercent) {
+            getInput('twoPercent', '-yes').click()
+            typeToInput('ngo_ico', with2percentInput)
+            typeToInput('ngo_obchMeno', with2percentInput)
+            typeToInput('ngo_ulica', with2percentInput)
+            typeToInput('ngo_cislo', with2percentInput)
+            typeToInput('ngo_psc', with2percentInput)
+            typeToInput('ngo_obec', with2percentInput)
+          } else {
+            getInput('twoPercent', '-no').click()
           }
 
           next()
