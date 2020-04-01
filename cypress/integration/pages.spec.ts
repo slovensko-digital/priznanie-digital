@@ -9,6 +9,7 @@ import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { withEmailInput } from '../../__tests__/testCases/postpone/withEmailInput'
+import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute } from '../../src/lib/routes'
@@ -17,6 +18,7 @@ import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
 }
+
 function getInputPostpone<K extends keyof PostponeUserInput>(
   key: K,
   suffix = '',
@@ -107,7 +109,7 @@ describe('osobne-udaje page', function () {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/hypoteka')
+    assertUrl('/dve-percenta')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
@@ -292,6 +294,50 @@ describe('Children page', function () {
 
     // Should not have error for invalid months
     getError().should('have.length', 2)
+  })
+})
+
+describe('twoPercent page', function () {
+  it('has working ui', function () {
+    cy.visit('/dve-percenta')
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click()
+    assertUrl('/hypoteka')
+
+    //  Go back to our page
+    cy.visit('/dve-percenta')
+
+    // Shows error, when presses next without interaction
+    next()
+    getError().should('have.length', 1)
+
+    // When presses yes, additional fields appear
+    cy.get('[data-test=twoPercent-input-yes]').click()
+
+    // All aditional fields should be required
+    next()
+    getError().should('have.length', 6)
+
+    // Type to input
+    typeToInput('ngo_ico', with2percentInput)
+    typeToInput('ngo_obchMeno', with2percentInput)
+    typeToInput('ngo_ulica', with2percentInput)
+    typeToInput('ngo_cislo', with2percentInput)
+    typeToInput('ngo_psc', with2percentInput)
+    typeToInput('ngo_obec', with2percentInput)
+
+    next()
+    cy.url().should('include', '/osobne-udaje')
+  })
+  it('works with no', function () {
+    cy.visit('/dve-percenta')
+
+    cy.get('[data-test=twoPercent-input-no]').click()
+    next()
+    getError().should('have.length', 0)
+
+    cy.url().should('include', '/osobne-udaje')
   })
 })
 
