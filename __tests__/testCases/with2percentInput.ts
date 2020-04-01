@@ -22,5 +22,5 @@ export const with2percentInput: TaxFormUserInput = {
   r142_cislo: '205/18',
   r142_psc: '84104',
   r142_obec: 'Bratislava - mestská časť Karlova Ves',
-  suhlasZaslUdaje: true,
+  XIIoddiel_suhlasZaslUdaje: true,
 }

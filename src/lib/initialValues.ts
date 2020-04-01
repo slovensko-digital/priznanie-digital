@@ -78,7 +78,7 @@ export const twoPercentInitialValues: TwoPercentUserInput = {
   r142_cislo: '',
   r142_psc: '',
   r142_obec: '',
-  suhlasZaslUdaje: false,
+  XIIoddiel_suhlasZaslUdaje: false,
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {

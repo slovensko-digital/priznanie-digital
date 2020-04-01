@@ -80,13 +80,13 @@ export interface TaxFormUserInput {
 
   /** SECTION  Dve percenta */
   XIIoddiel_uplatnujem2percenta?: boolean
+  XIIoddiel_suhlasZaslUdaje?: boolean
   r142_ico?: string
   r142_obchMeno?: string
   r142_ulica?: string
   r142_cislo?: string
   r142_psc?: string
   r142_obec?: string
-  suhlasZaslUdaje?: boolean
   /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string

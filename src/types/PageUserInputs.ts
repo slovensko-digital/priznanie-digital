@@ -63,7 +63,7 @@ export type TwoPercentUserInput = Pick<
   | 'r142_cislo'
   | 'r142_psc'
   | 'r142_obec'
-  | 'suhlasZaslUdaje'
+  | 'XIIoddiel_suhlasZaslUdaje'
 >
 
 export type IncomeSourceCountryUserInput = Pick<

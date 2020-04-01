@@ -291,7 +291,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         cislo: input.r142_cislo,
         psc: input.r142_psc,
         obec: input.r142_obec,
-        suhlasZaslUdaje: input.suhlasZaslUdaje,
+        suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
       }
     },
     children: input?.hasChildren ?? false,
