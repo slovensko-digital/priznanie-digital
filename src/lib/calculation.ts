@@ -280,8 +280,20 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       /** Min of 3 EUR is required */
       return NGOamount >= 3 ? NGOamount : 0
     },
-    r142: input?.NGO ?? undefined,
-
+    get r142() {
+      if (!input.twoPercent) {
+        return undefined
+      }
+      return {
+        ico: input.ngo_ico,
+        obchMeno: input.ngo_obchMeno,
+        ulica: input.ngo_ulica,
+        cislo: input.ngo_cislo,
+        psc: input.ngo_psc,
+        obec: input.ngo_obec,
+        suhlasZaslUdaje: input.suhlasZaslUdaje,
+      }
+    },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
     twoPercent: input?.twoPercent ?? false,
