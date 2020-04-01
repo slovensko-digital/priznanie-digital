@@ -109,7 +109,7 @@ describe('osobne-udaje page', function () {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/hypoteka')
+    assertUrl('/dve-percenta')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
