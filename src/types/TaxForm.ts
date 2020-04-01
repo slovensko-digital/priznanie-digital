@@ -180,7 +180,7 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   r126_danovy_preplatok: number
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   r141: number
-  
+
   r142?: {
     ico: string
     obchMeno: string
