@@ -33,7 +33,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   meno_priezvisko: '',
   r007_ulica: '',
   r008_cislo: '',
-  psc: '',
+  r009_psc: '',
   r010_obec: '',
   r011_stat: '',
 }
