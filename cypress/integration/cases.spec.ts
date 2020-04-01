@@ -294,7 +294,7 @@ describe('Postpone cases', function () {
           // typeToInput('rodne_cislo', input); // TODO
           typeToInput('ulica', input)
           typeToInput('cislo', input)
-          typeToInput('r009_psc', input)
+          typeToInput('psc', input)
           getInput('obec').should('have.value', input.obec)
           typeToInput('stat', input)
 
