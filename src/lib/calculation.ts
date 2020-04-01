@@ -73,7 +73,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Children */
     r034: input.hasChildren ? input.children.map(mapChild) : [],
-    r036: Math.min(parse(input?.r036_deti_kupele ?? '0'), 50),
+    get r036_deti_kupele() {
+      const maxAmountPerChild = 50
+      const maxAmountChildrenTotal =
+        (this.r034?.length ?? 0) * maxAmountPerChild
+
+      return Math.min(
+        parse(input?.r036_deti_kupele ?? '0'),
+        maxAmountChildrenTotal,
+      )
+    },
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
@@ -84,7 +93,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     priloha3_r13_zdravotne: parse(input.priloha3_r13_zdravotne),
     r038: parse(input?.r038 ?? '0'),
     r039: parse(input?.r039 ?? '0'),
-    
+
     /** SECTION Prijmy */
     t1r10_prijmy: parse(input.t1r10_prijmy),
     get t1r2_prijmy() {
@@ -159,7 +168,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return parse(input?.r076a_kupele_danovnik ?? '0')
     },
     get r076b_kupele_partner_a_deti() {
-      return this.r033_partner_kupele_uhrady + this.r036
+      return this.r033_partner_kupele_uhrady + this.r036_deti_kupele
     },
     get r077_nezdanitelna_cast() {
       return Math.min(

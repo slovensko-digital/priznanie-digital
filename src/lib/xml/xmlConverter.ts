@@ -84,7 +84,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       )
     }) as Dieta[]
 
-    form.dokument.telo.r36 = taxForm.r036.toFixed(2)
+    form.dokument.telo.r36 = taxForm.r036_deti_kupele.toFixed(2)
   }
 
   /** SECTION Mortgage */

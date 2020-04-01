@@ -18,55 +18,56 @@ const comparable = (xml: string) =>
 
 const stringify = (object: object) => JSON.stringify(object, null, 2)
 describe('calcIntergration', () => {
-  ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withPension',
-    // 'withMortgage',
-    // 'withChildren',
-    // 'with2percent',
-    'withSpa',
-  ].forEach((testCase) => {
-    test(testCase, async () => {
-      const testCaseValidatedXML = await fs.readFile(
-        `${__dirname}/testCases/${testCase}.xml`,
+  // ;[
+  //   // 'base',
+  //   // 'complete',
+  //   // 'completeDecimal',
+  //   // 'withPartner',
+  //   // 'withEmployment',
+  //   // 'withPension',
+  //   // 'withMortgage',
+  //   // 'withChildren',
+  //   // 'with2percent',
+  //   'withSpa',
+  // ].forEach((testCase) => {
+  const testCase = 'withSpa'
+  test('withSpa', async () => {
+    const testCaseValidatedXML = await fs.readFile(
+      `${__dirname}/testCases/${testCase}.xml`,
+    )
+
+    const inputModule = await import(`./testCases/${testCase}Input`)
+
+    // Access named export
+    const input: TaxFormUserInput = inputModule[`${testCase}Input`]
+
+    if (!input) {
+      throw new Error(`Could not load input: ${testCase}Input`)
+    }
+
+    const taxForm = calculate(input)
+
+    const outputXml = convertToXML(taxForm)
+
+    if (WRITE_FILES) {
+      const outputJson = convertToJson(taxForm)
+      fs.writeFile(
+        `${__dirname}/testCases/${testCase}TaxForm.output.json`,
+        stringify(taxForm),
       )
+      fs.writeFile(`${__dirname}/testCases/${testCase}.output.xml`, outputXml)
+      fs.writeFile(
+        `${__dirname}/testCases/${testCase}.output.json`,
+        stringify(outputJson),
+      )
+    }
 
-      const inputModule = await import(`./testCases/${testCase}Input`)
+    const result = await comparable(outputXml)
+    const expected = await comparable(testCaseValidatedXML.toString())
 
-      // Access named export
-      const input: TaxFormUserInput = inputModule[`${testCase}Input`]
-
-      if (!input) {
-        throw new Error(`Could not load input: ${testCase}Input`)
-      }
-
-      const taxForm = calculate(input)
-
-      const outputXml = convertToXML(taxForm)
-
-      if (WRITE_FILES) {
-        const outputJson = convertToJson(taxForm)
-        fs.writeFile(
-          `${__dirname}/testCases/${testCase}TaxForm.output.json`,
-          stringify(taxForm),
-        )
-        fs.writeFile(`${__dirname}/testCases/${testCase}.output.xml`, outputXml)
-        fs.writeFile(
-          `${__dirname}/testCases/${testCase}.output.json`,
-          stringify(outputJson),
-        )
-      }
-
-      const result = await comparable(outputXml)
-      const expected = await comparable(testCaseValidatedXML.toString())
-
-      return expect(result).toStrictEqual(expected)
-    })
+    return expect(result).toStrictEqual(expected)
   })
+  // })
 })
 
 describe('postpone', () => {
