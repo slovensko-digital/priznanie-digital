@@ -40,14 +40,14 @@ export const completeInput: TaxFormUserInput = {
   r033_partner_kupele: true,
   r033_partner_kupele_uhrady: '20',
   r076a_kupele_danovnik: '20',
-  
+
   /** SECTION Children */
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: false,
+      kupelnaStarostlivost: true,
       wholeYear: false,
       monthFrom: '6',
       monthTo: '11',
@@ -56,7 +56,7 @@ export const completeInput: TaxFormUserInput = {
       id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: false,
+      kupelnaStarostlivost: true,
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',

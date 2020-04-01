@@ -27,7 +27,7 @@ export const withSpaInput: TaxFormUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: false,
+      kupelnaStarostlivost: true,
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',

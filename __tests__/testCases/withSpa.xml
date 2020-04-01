@@ -73,7 +73,7 @@
         <priezviskoMeno>Morty Smith</priezviskoMeno>
         <rodneCislo>1607201167</rodneCislo>
         <kupelnaStarostlivost>1</kupelnaStarostlivost>
-        <m00>0</m00>
+        <m00>1</m00>
         <m01>0</m01>
         <m02>0</m02>
         <m03>0</m03>
@@ -91,7 +91,7 @@
         <priezviskoMeno>Summer Smith</priezviskoMeno>
         <rodneCislo>1057201167</rodneCislo>
         <kupelnaStarostlivost>1</kupelnaStarostlivost>
-        <m00>0</m00>
+        <m00>1</m00>
         <m01>0</m01>
         <m02>0</m02>
         <m03>0</m03>
@@ -426,14 +426,14 @@
     <r103></r103>
     <r104></r104>
     <r105>744.16</r105>
-    <r106></r106>
-    <r107>744.16</r107>
+    <r106>731.61</r106>
+    <r107>12.55</r107>
     <r108></r108>
-    <r109></r109>
+    <r109>731.61</r109>
     <r110></r110>
     <r111></r111>
     <r112></r112>
-    <r113>744.16</r113>
+    <r113>12.55</r113>
     <r114></r114>
     <r115></r115>
     <r116></r116>
@@ -445,7 +445,7 @@
     <r122></r122>
     <r123></r123>
     <r124></r124>
-    <r125>744.16</r125>
+    <r125>12.55</r125>
     <r126></r126>
     <r127></r127>
     <r128></r128>
