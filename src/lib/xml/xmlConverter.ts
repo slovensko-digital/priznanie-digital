@@ -11,6 +11,10 @@ const boolToString = (bool: boolean) => {
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
 
+  if (!taxForm.r001_dic) {
+    return form // return empty xml if the form is not filled out
+  }
+
   form.dokument.hlavicka.dic = taxForm.r001_dic
 
   const [naceCode, naceLabel] = taxForm.r003_nace.split(' - ')

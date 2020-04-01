@@ -4,17 +4,17 @@ import fileDownload from 'js-file-download'
 
 import { NextPage } from 'next'
 import { getRoutes } from '../lib/routes'
-import { PostponeUserInput } from '../types/PostponeUserInput'
-import { convertPostponeToXML } from '../lib/postpone/postponeConverter'
 import { setDate } from '../lib/utils'
+import { TaxForm } from '../types/TaxForm'
+import { convertToXML } from '../lib/xml/xmlConverter'
 
 const { previousRoute } = getRoutes('/stiahnut')
 
 interface Props {
-  postponeUserInput: PostponeUserInput
+  taxForm: TaxForm
 }
 
-const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
+const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
 
   return (
@@ -36,8 +36,8 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
           type="submit"
           className="btn-secondary govuk-button govuk-button--large"
           onClick={() => {
-            const xml = convertPostponeToXML(setDate(postponeUserInput))
-            fileDownload(xml, 'odklad_danoveho_priznania.xml')
+            const xml = convertToXML(setDate(taxForm))
+            fileDownload(xml, 'danove_priznanie.xml')
             setDidDownload(true)
           }}
         >

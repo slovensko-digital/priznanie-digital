@@ -6,6 +6,7 @@ import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { EmailForm } from '../../components/EmailForm'
 import { setDate } from '../../lib/utils'
+import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -20,9 +21,9 @@ const Suhrn: NextPage<Props> = ({
   const router = useRouter()
 
   useEffect(() => {
-    // if (!postponeUserInput.meno_priezvisko) {
-    //   router.replace(previousRoute)
-    // }
+    if (!postponeUserInput.meno_priezvisko) {
+      router.replace(previousRoute)
+    }
     router.prefetch(nextRoute)
   })
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
@@ -132,7 +133,7 @@ const Suhrn: NextPage<Props> = ({
           <EmailForm
             label="Chcete dostať upozornenie o novom termíne podania?"
             hint="Nechajte nám email a my vám včas pošleme notifikáciu"
-            attachment={setDate(postponeUserInput)}
+            attachment={convertPostponeToXML(setDate(postponeUserInput))}
             saveForm={(email, newsletter) => {
               setPostponeUserInput({ ...postponeUserInput, email, newsletter })
             }}
