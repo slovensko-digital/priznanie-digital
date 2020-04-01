@@ -4,9 +4,12 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { getRoutes } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency, formatRodneCislo } from '../lib/utils'
+import { formatCurrency, formatRodneCislo, setDate } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
+import { EmailForm } from '../components/EmailForm'
+import { convertToXML } from '../lib/xml/xmlConverter'
+import { TaxForm } from '../types/TaxForm'
 
 const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
@@ -22,7 +25,13 @@ interface SummaryProps {
 }
 const Summary = (props: SummaryProps) => (
   <>
-    <h2 className={classnames('govuk-heading-m', 'govuk-!-margin-top-3', styles.summaryTitle)}>
+    <h2
+      className={classnames(
+        'govuk-heading-m',
+        'govuk-!-margin-top-3',
+        styles.summaryTitle,
+      )}
+    >
       <span>{props.title}</span>
       {props.href && (
         <Link href={`${props.href}?edit`}>
@@ -57,8 +66,14 @@ const Summary = (props: SummaryProps) => (
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
+  taxForm: TaxForm
+  setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
 }
-const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
+const Suhrn: NextPage<Props> = ({
+  taxFormUserInput,
+  taxForm,
+  setTaxFormUserInput,
+}: Props) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -230,6 +245,30 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
           { title: 'Obec', value: taxFormUserInput.r010_obec },
         ]}
       />
+      <div className="box">
+        {taxFormUserInput.email ? (
+          <p>
+            Váš email <strong>{taxFormUserInput.email}</strong> sme úspešne
+            zaregistrovali.
+            <br />
+            {taxFormUserInput.newsletter && 'Pošleme vám aj newsletter.'}
+          </p>
+        ) : (
+          <EmailForm
+            label="Pošleme vám tento výpočet dane na email?"
+            hint="Bude sa vám hodiť pri úhrade daní"
+            attachment={convertToXML(setDate(taxForm))}
+            saveForm={(email, newsletter) => {
+              setTaxFormUserInput({ email, newsletter })
+            }}
+            attributes={{
+              form: 'tax',
+              firstname: firstName,
+              lastname: lastNames.join(' '),
+            }}
+          />
+        )}
+      </div>
       <Link href={nextRoute()}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
           Pokračovať
