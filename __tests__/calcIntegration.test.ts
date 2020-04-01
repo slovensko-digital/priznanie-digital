@@ -11,7 +11,7 @@ import {
   convertPostponeToJson,
 } from '../src/lib/postpone/postponeConverter'
 
-const WRITE_FILES = false
+const WRITE_FILES = true
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
@@ -19,15 +19,16 @@ const comparable = (xml: string) =>
 const stringify = (object: object) => JSON.stringify(object, null, 2)
 describe('calcIntergration', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    'withPension',
-    'withMortgage',
-    'withChildren',
-    'with2percent',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // 'withPension',
+    // 'withMortgage',
+    // 'withChildren',
+    // 'with2percent',
+    'withSpa',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
@@ -38,6 +39,10 @@ describe('calcIntergration', () => {
 
       // Access named export
       const input: TaxFormUserInput = inputModule[`${testCase}Input`]
+
+      if (!input) {
+        throw new Error(`Could not load input: ${testCase}Input`)
+      }
 
       const taxForm = calculate(input)
 

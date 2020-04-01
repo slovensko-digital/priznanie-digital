@@ -1,6 +1,6 @@
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
-export const baseInput: TaxFormUserInput = {
+export const withSpaInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   meno_priezvisko: 'Fake Name',
@@ -28,7 +28,7 @@ export const baseInput: TaxFormUserInput = {
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
       kupelnaStarostlivost: false,
-      wholeYear: false,
+      wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
     },
@@ -45,8 +45,8 @@ export const baseInput: TaxFormUserInput = {
   hasChildren: true,
 
   /** SECTION SPA */
-  r036_deti_kupele: '30',
+  r036_deti_kupele: '60',
   r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '20',
-  r076a_kupele_danovnik: '20',
+  r033_partner_kupele_uhrady: '45',
+  r076a_kupele_danovnik: '41',
 }
