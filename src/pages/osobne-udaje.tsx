@@ -112,7 +112,7 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="psc"
+                  name="r009_psc"
                   type="text"
                   label="PSČ"
                   maxLength={6}
@@ -121,7 +121,7 @@ const OsobneUdaje: NextPage<Props> = ({
                       event.currentTarget.value,
                       props.values.r009_psc,
                     )
-                    props.setFieldValue('psc', pscValue)
+                    props.setFieldValue('r009_psc', pscValue)
 
                     if (
                       pscValue.length === 6 &&
