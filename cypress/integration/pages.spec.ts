@@ -131,7 +131,7 @@ describe('osobne-udaje page', function () {
     getInput('meno_priezvisko').should('contain.value', 'Július Retzer')
     getInput('r007_ulica').should('contain.value', 'Mierová')
     getInput('r008_cislo').should('contain.value', '4')
-    getInput('psc').should('contain.value', '821 05')
+    getInput('r009_psc').should('contain.value', '821 05')
     getInput('r010_obec').should('contain.value', 'Bratislava')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
@@ -153,7 +153,7 @@ describe('osobne-udaje page', function () {
   it('with posta api', function () {
     cy.visit('/osobne-udaje')
 
-    typeToInput('psc', baseInput)
+    typeToInput('r009_psc', baseInput)
     getInput('r010_obec').should('have.value', baseInput.r010_obec)
   })
   it('Manual entry', function () {
@@ -165,7 +165,7 @@ describe('osobne-udaje page', function () {
     typeToInput('meno_priezvisko', baseInput)
     typeToInput('r007_ulica', baseInput)
     typeToInput('r008_cislo', baseInput)
-    typeToInput('psc', baseInput)
+    typeToInput('r009_psc', baseInput)
     typeToInput('r010_obec', baseInput)
     typeToInput('r011_stat', baseInput)
 
@@ -313,19 +313,19 @@ describe('twoPercent page', function () {
     getError().should('have.length', 1)
 
     // When presses yes, additional fields appear
-    cy.get('[data-test=twoPercent-input-yes]').click()
+    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
 
     // All aditional fields should be required
     next()
     getError().should('have.length', 6)
 
     // Type to input
-    typeToInput('ngo_ico', with2percentInput)
-    typeToInput('ngo_obchMeno', with2percentInput)
-    typeToInput('ngo_ulica', with2percentInput)
-    typeToInput('ngo_cislo', with2percentInput)
-    typeToInput('ngo_psc', with2percentInput)
-    typeToInput('ngo_obec', with2percentInput)
+    typeToInput('r142_ico', with2percentInput)
+    typeToInput('r142_obchMeno', with2percentInput)
+    typeToInput('r142_ulica', with2percentInput)
+    typeToInput('r142_cislo', with2percentInput)
+    typeToInput('r142_psc', with2percentInput)
+    typeToInput('r142_obec', with2percentInput)
 
     next()
     cy.url().should('include', '/osobne-udaje')
@@ -333,7 +333,7 @@ describe('twoPercent page', function () {
   it('works with no', function () {
     cy.visit('/dve-percenta')
 
-    cy.get('[data-test=twoPercent-input-no]').click()
+    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
     next()
     getError().should('have.length', 0)
 

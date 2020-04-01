@@ -71,13 +71,13 @@ export const mortgageInitialValues: MortgageUserInput = {
 }
 
 export const twoPercentInitialValues: TwoPercentUserInput = {
-  twoPercent: undefined,
-  ngo_ico: '',
-  ngo_obchMeno: '',
-  ngo_ulica: '',
-  ngo_cislo: '',
-  ngo_psc: '',
-  ngo_obec: '',
+  XIIoddiel_uplatnujem2percenta: undefined,
+  r142_ico: '',
+  r142_obchMeno: '',
+  r142_ulica: '',
+  r142_cislo: '',
+  r142_psc: '',
+  r142_obec: '',
   suhlasZaslUdaje: false,
 }
 

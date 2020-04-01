@@ -79,13 +79,13 @@ export interface TaxFormUserInput {
   children: ChildInput[]
 
   /** SECTION  Dve percenta */
-  twoPercent?: boolean
-  ngo_ico?: string
-  ngo_obchMeno?: string
-  ngo_ulica?: string
-  ngo_cislo?: string
-  ngo_psc?: string
-  ngo_obec?: string
+  XIIoddiel_uplatnujem2percenta?: boolean
+  r142_ico?: string
+  r142_obchMeno?: string
+  r142_ulica?: string
+  r142_cislo?: string
+  r142_psc?: string
+  r142_obec?: string
   suhlasZaslUdaje?: boolean
   /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
