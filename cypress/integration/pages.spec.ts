@@ -297,8 +297,8 @@ describe('Children page', function () {
   })
 })
 
-describe.only('twoPercent page', function () {
-  it.only('has working ui', function () {
+describe('twoPercent page', function () {
+  it('has working ui', function () {
     cy.visit('/dve-percenta')
 
     // Back button should work and be the correct page

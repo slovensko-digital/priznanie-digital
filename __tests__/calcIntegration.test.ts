@@ -17,16 +17,16 @@ const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
 const stringify = (object: object) => JSON.stringify(object, null, 2)
-describe.only('calcIntergration', () => {
+describe('calcIntergration', () => {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withPension',
-    // 'withMortgage',
-    // 'withChildren',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    'withPension',
+    'withMortgage',
+    'withChildren',
     'with2percent',
   ].forEach((testCase) => {
     test(testCase, async () => {

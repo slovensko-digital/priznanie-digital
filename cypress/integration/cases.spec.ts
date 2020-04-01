@@ -40,16 +40,16 @@ function assertUrl(url: Route | PostponeRoute) {
 
 const getError = () => cy.get('[data-test=error]')
 
-describe.only('Cases', function () {
+describe('Cases', function () {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    'withMortgage',
+    'withPension',
+    'withChildren',
     'with2percent',
   ].forEach((testCase) => {
     it(testCase, function (done) {
