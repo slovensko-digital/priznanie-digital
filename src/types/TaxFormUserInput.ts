@@ -23,16 +23,6 @@ export interface ChildInput {
   monthTo: string
 }
 
-export interface NGOInput {
-  ico: string
-  obchMeno: string
-  ulica: string
-  cislo: string
-  psc: string
-  obec: string
-  suhlasZaslUdaje: boolean
-}
-
 export interface TaxFormUserInput {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
@@ -90,7 +80,13 @@ export interface TaxFormUserInput {
 
   /** SECTION  Dve percenta */
   twoPercent?: boolean
-  NGO?: NGOInput
+  ngo_ico: string
+  ngo_obchMeno: string
+  ngo_ulica: string
+  ngo_cislo: string
+  ngo_psc: string
+  ngo_obec: string
+  suhlasZaslUdaje: boolean
   /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string
