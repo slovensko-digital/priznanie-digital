@@ -31,7 +31,7 @@ const makeHandlePersonAutoform = ({
       r001_dic: person?.tin ?? values.r001_dic,
       r007_ulica: person.street ?? person.municipality,
       r008_cislo: person.street_number,
-      psc: person.postal_code ? formatPsc(person.postal_code) : '',
+      r009_psc: person.postal_code ? formatPsc(person.postal_code) : '',
       r010_obec: person.municipality,
       r011_stat: person.country,
     })
@@ -112,16 +112,16 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="psc"
+                  name="r009_psc"
                   type="text"
                   label="PSČ"
                   maxLength={6}
                   onChange={async (event) => {
                     const pscValue = formatPsc(
                       event.currentTarget.value,
-                      props.values.psc,
+                      props.values.r009_psc,
                     )
-                    props.setFieldValue('psc', pscValue)
+                    props.setFieldValue('r009_psc', pscValue)
 
                     if (
                       pscValue.length === 6 &&
@@ -184,10 +184,10 @@ export const validate = (values: PersonalInformationUserInput) => {
   }
 
   const pscNumberFormat = /^\d{3} \d{2}$/
-  if (!values.psc) {
-    errors.psc = 'Zadajte PSČ'
-  } else if (!values.psc.match(pscNumberFormat)) {
-    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
+  if (!values.r009_psc) {
+    errors.r009_psc = 'Zadajte PSČ'
+  } else if (!values.r009_psc.match(pscNumberFormat)) {
+    errors.r009_psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 
   if (!values.r010_obec) {

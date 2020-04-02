@@ -34,7 +34,7 @@ export type PersonalInformationUserInput = Pick<
   | 'meno_priezvisko'
   | 'r007_ulica'
   | 'r008_cislo'
-  | 'psc'
+  | 'r009_psc'
   | 'r010_obec'
   | 'r011_stat'
 >
@@ -56,14 +56,14 @@ export type MortgageUserInput = Pick<
 
 export type TwoPercentUserInput = Pick<
   TaxFormUserInput,
-  | 'twoPercent'
-  | 'ngo_ico'
-  | 'ngo_obchMeno'
-  | 'ngo_ulica'
-  | 'ngo_cislo'
-  | 'ngo_psc'
-  | 'ngo_obec'
-  | 'suhlasZaslUdaje'
+  | 'XIIoddiel_uplatnujem2percenta'
+  | 'r142_ico'
+  | 'r142_obchMeno'
+  | 'r142_ulica'
+  | 'r142_cislo'
+  | 'r142_psc'
+  | 'r142_obec'
+  | 'XIIoddiel_suhlasZaslUdaje'
 >
 
 export type IncomeSourceCountryUserInput = Pick<
