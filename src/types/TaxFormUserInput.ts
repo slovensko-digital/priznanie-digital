@@ -35,7 +35,7 @@ export interface TaxFormUserInput {
   /**   08 - Súpisné/orientačné číslo **/
   r008_cislo: string
   /**   09 - PSČ **/
-  psc: string
+  r009_psc: string
   /**   10 - Obec **/
   r010_obec: string
   /**   11 - Štát **/

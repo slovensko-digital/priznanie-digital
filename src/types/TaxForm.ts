@@ -195,5 +195,5 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
   employed: boolean
-  twoPercent: boolean
+  XIIoddiel_uplatnujem2percenta: boolean
 }

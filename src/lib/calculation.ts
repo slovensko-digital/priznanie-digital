@@ -50,7 +50,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r005_meno: firstName,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
-    r009_psc: `${input.psc}`.replace(/\D/, ''),
+    r009_psc: `${input.r009_psc}`.replace(/\D/, ''),
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
 
@@ -283,7 +283,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Math.abs(Math.min(this.r125_dan_na_uhradu, 0))
     },
     get r141() {
-      if (!input.twoPercent) {
+      if (!input.XIIoddiel_uplatnujem2percenta) {
         return 0
       }
 
@@ -295,22 +295,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return NGOamount >= 3 ? NGOamount : 0
     },
     get r142() {
-      if (!input.twoPercent) {
+      if (!input.XIIoddiel_uplatnujem2percenta) {
         return undefined
       }
       return {
-        ico: input.ngo_ico,
-        obchMeno: input.ngo_obchMeno,
-        ulica: input.ngo_ulica,
-        cislo: input.ngo_cislo,
-        psc: input.ngo_psc,
-        obec: input.ngo_obec,
-        suhlasZaslUdaje: input.suhlasZaslUdaje,
+        ico: input.r142_ico,
+        obchMeno: input.r142_obchMeno,
+        ulica: input.r142_ulica,
+        cislo: input.r142_cislo,
+        psc: input.r142_psc,
+        obec: input.r142_obec,
+        suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
       }
     },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
-    twoPercent: input?.twoPercent ?? false,
+    XIIoddiel_uplatnujem2percenta:
+      input?.XIIoddiel_uplatnujem2percenta ?? false,
 
     datum: input.datum,
   }

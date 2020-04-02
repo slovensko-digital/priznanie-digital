@@ -161,16 +161,16 @@ describe('Cases', function () {
           /**  SECTION Two percent */
           assertUrl('/dve-percenta')
 
-          if (input.twoPercent) {
-            getInput('twoPercent', '-yes').click()
-            typeToInput('ngo_ico', with2percentInput)
-            typeToInput('ngo_obchMeno', with2percentInput)
-            typeToInput('ngo_ulica', with2percentInput)
-            typeToInput('ngo_cislo', with2percentInput)
-            typeToInput('ngo_psc', with2percentInput)
-            typeToInput('ngo_obec', with2percentInput)
+          if (input.XIIoddiel_uplatnujem2percenta) {
+            getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
+            typeToInput('r142_ico', with2percentInput)
+            typeToInput('r142_obchMeno', with2percentInput)
+            typeToInput('r142_ulica', with2percentInput)
+            typeToInput('r142_cislo', with2percentInput)
+            typeToInput('r142_psc', with2percentInput)
+            typeToInput('r142_obec', with2percentInput)
           } else {
-            getInput('twoPercent', '-no').click()
+            getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
           }
 
           next()
@@ -183,7 +183,7 @@ describe('Cases', function () {
           typeToInput('meno_priezvisko', input)
           typeToInput('r007_ulica', input)
           typeToInput('r008_cislo', input)
-          typeToInput('psc', input)
+          typeToInput('r009_psc', input)
           getInput('r010_obec').should('have.value', input.r010_obec)
           typeToInput('r011_stat', input)
 
