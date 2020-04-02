@@ -8,7 +8,7 @@ export const completeInput: TaxFormUserInput = {
   meno_priezvisko: 'Fake Name',
   r007_ulica: 'Mierova',
   r008_cislo: '4',
-  psc: '82105',
+  r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',

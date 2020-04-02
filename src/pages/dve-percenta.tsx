@@ -51,14 +51,14 @@ const DvePercenta: NextPage<Props> = ({
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Chcete poukazat 2 percenta"
-                name="twoPercent"
+                name="XIIoddiel_uplatnujem2percenta"
               />
-              {values.twoPercent && (
+              {values.XIIoddiel_uplatnujem2percenta && (
                 <>
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
-                      name="ngo_obchMeno"
+                      name="r142_obchMeno"
                       type="text"
                       label="Nazov"
                     />
@@ -66,7 +66,7 @@ const DvePercenta: NextPage<Props> = ({
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
-                      name="ngo_ico"
+                      name="r142_ico"
                       type="text"
                       label="ICO"
                     />
@@ -76,13 +76,13 @@ const DvePercenta: NextPage<Props> = ({
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
-                      name="ngo_ulica"
+                      name="r142_ulica"
                       type="text"
                       label="Ulica"
                     />
                     <Input
                       className={styles.inlineField}
-                      name="ngo_cislo"
+                      name="r142_cislo"
                       type="text"
                       label="Súpisné/orientačné číslo"
                     />
@@ -90,30 +90,30 @@ const DvePercenta: NextPage<Props> = ({
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
-                      name="ngo_psc"
+                      name="r142_psc"
                       type="text"
                       label="PSČ"
                       maxLength={6}
                       onChange={async (event) => {
                         const pscValue = formatPsc(
                           event.currentTarget.value,
-                          values.ngo_psc,
+                          values.r142_psc,
                         )
-                        setFieldValue('ngo_psc', pscValue)
+                        setFieldValue('r142_psc', pscValue)
 
                         if (
                           pscValue.length === 6 &&
-                          values.ngo_obec.length === 0
+                          values.r142_obec.length === 0
                         ) {
                           const city = await getCity(pscValue)
-                          setFieldValue('ngo_obec', city)
+                          setFieldValue('r142_obec', city)
                         }
                       }}
                     />
 
                     <Input
                       className={styles.inlineField}
-                      name="ngo_obec"
+                      name="r142_obec"
                       type="text"
                       label="Obec"
                     />
@@ -135,35 +135,35 @@ type Errors = Partial<FormErrors<TwoPercentUserInput>>
 export const validate = (values: TwoPercentUserInput): Errors => {
   const errors: Errors = {}
 
-  if (typeof values.twoPercent === 'undefined') {
-    errors.twoPercent = 'Vyznačte odpoveď'
+  if (typeof values.XIIoddiel_uplatnujem2percenta === 'undefined') {
+    errors.XIIoddiel_uplatnujem2percenta = 'Vyznačte odpoveď'
   }
-  if (values.twoPercent) {
-    if (!values.ngo_ico) {
-      errors.ngo_ico = 'Zadajte IČO'
+  if (values.XIIoddiel_uplatnujem2percenta) {
+    if (!values.r142_ico) {
+      errors.r142_ico = 'Zadajte IČO'
     }
 
-    if (!values.ngo_obchMeno) {
-      errors.ngo_obchMeno = 'Zadajte obchodne meno'
+    if (!values.r142_obchMeno) {
+      errors.r142_obchMeno = 'Zadajte obchodne meno'
     }
 
-    if (!values.ngo_ulica) {
-      errors.ngo_ulica = 'Zadajte ulicu'
+    if (!values.r142_ulica) {
+      errors.r142_ulica = 'Zadajte ulicu'
     }
 
-    if (!values.ngo_cislo) {
-      errors.ngo_cislo = 'Zadajte číslo domu'
+    if (!values.r142_cislo) {
+      errors.r142_cislo = 'Zadajte číslo domu'
     }
 
     const pscNumberFormat = /^\d{3} \d{2}$/
-    if (!values.ngo_psc) {
-      errors.ngo_psc = 'Zadajte PSČ'
-    } else if (!values.ngo_psc.match(pscNumberFormat)) {
-      errors.ngo_psc = 'PSČ môže obsahovať iba 5 čísel'
+    if (!values.r142_psc) {
+      errors.r142_psc = 'Zadajte PSČ'
+    } else if (!values.r142_psc.match(pscNumberFormat)) {
+      errors.r142_psc = 'PSČ môže obsahovať iba 5 čísel'
     }
 
-    if (!values.ngo_obec) {
-      errors.ngo_obec = 'Zadajte obec'
+    if (!values.r142_obec) {
+      errors.r142_obec = 'Zadajte obec'
     }
   }
   return errors

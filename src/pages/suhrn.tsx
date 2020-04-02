@@ -241,7 +241,7 @@ const Suhrn: NextPage<Props> = ({
             title: 'Ulica a súpisné číslo',
             value: `${taxFormUserInput.r007_ulica} ${taxFormUserInput.r008_cislo}`,
           },
-          { title: 'PSČ', value: taxFormUserInput.psc },
+          { title: 'PSČ', value: taxFormUserInput.r009_psc },
           { title: 'Obec', value: taxFormUserInput.r010_obec },
         ]}
       />

@@ -35,7 +35,7 @@ export interface TaxFormUserInput {
   /**   08 - Súpisné/orientačné číslo **/
   r008_cislo: string
   /**   09 - PSČ **/
-  psc: string
+  r009_psc: string
   /**   10 - Obec **/
   r010_obec: string
   /**   11 - Štát **/
@@ -79,14 +79,14 @@ export interface TaxFormUserInput {
   children: ChildInput[]
 
   /** SECTION  Dve percenta */
-  twoPercent?: boolean
-  ngo_ico?: string
-  ngo_obchMeno?: string
-  ngo_ulica?: string
-  ngo_cislo?: string
-  ngo_psc?: string
-  ngo_obec?: string
-  suhlasZaslUdaje?: boolean
+  XIIoddiel_uplatnujem2percenta?: boolean
+  XIIoddiel_suhlasZaslUdaje?: boolean
+  r142_ico?: string
+  r142_obchMeno?: string
+  r142_ulica?: string
+  r142_cislo?: string
+  r142_psc?: string
+  r142_obec?: string
   /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
   r036?: string

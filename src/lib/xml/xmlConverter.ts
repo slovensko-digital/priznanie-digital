@@ -138,9 +138,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
   /** SECTION 2 percent */
-  form.dokument.telo.neuplatnujem = boolToString(!taxForm.twoPercent)
+  form.dokument.telo.neuplatnujem = boolToString(
+    !taxForm.XIIoddiel_uplatnujem2percenta,
+  )
 
-  if (taxForm.twoPercent && taxForm.r142) {
+  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r142) {
     form.dokument.telo.r141 = taxForm.r141.toFixed(2)
     form.dokument.telo.r142 = {
       ...taxForm.r142,

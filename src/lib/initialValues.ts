@@ -33,7 +33,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   meno_priezvisko: '',
   r007_ulica: '',
   r008_cislo: '',
-  psc: '',
+  r009_psc: '',
   r010_obec: '',
   r011_stat: '',
 }
@@ -71,14 +71,14 @@ export const mortgageInitialValues: MortgageUserInput = {
 }
 
 export const twoPercentInitialValues: TwoPercentUserInput = {
-  twoPercent: undefined,
-  ngo_ico: '',
-  ngo_obchMeno: '',
-  ngo_ulica: '',
-  ngo_cislo: '',
-  ngo_psc: '',
-  ngo_obec: '',
-  suhlasZaslUdaje: false,
+  XIIoddiel_uplatnujem2percenta: undefined,
+  r142_ico: '',
+  r142_obchMeno: '',
+  r142_ulica: '',
+  r142_cislo: '',
+  r142_psc: '',
+  r142_obec: '',
+  XIIoddiel_suhlasZaslUdaje: false,
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {
