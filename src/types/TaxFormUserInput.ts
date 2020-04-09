@@ -53,9 +53,6 @@ export interface TaxFormUserInput {
   r032_uplatnujem_na_partnera?: boolean
   r032_partner_vlastne_prijmy?: string
   r032_partner_pocet_mesiacov?: string
-  r033_partner_kupele?: boolean
-  /**   max 50*/
-  r033_partner_kupele_uhrady?: string
 
   /** SECTION  Mortage */
   r037_uplatnuje_uroky?: boolean
@@ -80,16 +77,22 @@ export interface TaxFormUserInput {
 
   /** SECTION  Dve percenta */
   XIIoddiel_uplatnujem2percenta?: boolean
-  XIIoddiel_suhlasZaslUdaje?: boolean
   r142_ico?: string
   r142_obchMeno?: string
   r142_ulica?: string
   r142_cislo?: string
   r142_psc?: string
   r142_obec?: string
+  XIIoddiel_suhlasZaslUdaje?: boolean
+
   /** SECTION  Kupele */
   /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
-  r036?: string
+  r036_deti_kupele?: string
+  r033_partner_kupele?: boolean
+  /**   max 50*/
+  r033_partner_kupele_uhrady?: string
+  /**   Kupele danovik*/
+  r076a_kupele_danovnik?: string
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */

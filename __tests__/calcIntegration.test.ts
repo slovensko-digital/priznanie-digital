@@ -28,6 +28,7 @@ describe('calcIntergration', () => {
     'withMortgage',
     'withChildren',
     'with2percent',
+    'withSpa',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
@@ -38,6 +39,10 @@ describe('calcIntergration', () => {
 
       // Access named export
       const input: TaxFormUserInput = inputModule[`${testCase}Input`]
+
+      if (!input) {
+        throw new Error(`Could not load input: ${testCase}Input`)
+      }
 
       const taxForm = calculate(input)
 

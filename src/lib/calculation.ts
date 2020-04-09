@@ -10,7 +10,6 @@ const DAN_Z_PRIJMU_SADZBA = 0.19
 function parse(input: string) {
   const cleanedInput = input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
-  // return parseInt(input|| '0', 10);
 }
 
 const mapChild = (child: ChildInput): Child => {
@@ -44,6 +43,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
   /** Combine default vaules with user input */
   const tf: TaxForm = {
+    /** SECTION Osobne udaje */
     r001_dic: input.r001_dic,
     r003_nace: input.r003_nace,
     r004_priezvisko: lastNames.join(' '),
@@ -53,9 +53,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r009_psc: `${input.r009_psc}`.replace(/\D/, ''),
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
+
     /** SECTION Dochodok */
     r029_poberal_dochodok: input?.r029_poberal_dochodok ?? false,
-    r030_vyska_dochodku: parse(input?.r030_vyska_dochodku ?? '0'), // TODO in next use cases
+    r030_vyska_dochodku: parse(input?.r030_vyska_dochodku ?? '0'),
+
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
     r031_rodne_cislo: input?.r031_rodne_cislo ?? '',
@@ -68,10 +70,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r033_partner_kupele: input?.r033_partner_kupele ?? false,
     r033_partner_kupele_uhrady: parse(input?.r033_partner_kupele_uhrady ?? '0'),
-    /** SECTION Children */
 
+    /** SECTION Children */
     r034: input.hasChildren ? input.children.map(mapChild) : [],
-    r036: Math.min(parse(input?.r036 ?? '0'), 50),
+    get r036_deti_kupele() {
+      const maxAmountPerChild = 50
+      const maxAmountChildrenTotal =
+        (this.r034?.length ?? 0) * maxAmountPerChild
+
+      return Math.min(
+        parse(input?.r036_deti_kupele ?? '0'),
+        maxAmountChildrenTotal,
+      )
+    },
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
@@ -83,6 +94,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r038: parse(input?.r038 ?? '0'),
     r039: parse(input?.r039 ?? '0'),
 
+    /** SECTION Prijmy */
     t1r10_prijmy: parse(input.t1r10_prijmy),
     get t1r2_prijmy() {
       return this.t1r10_prijmy
@@ -152,9 +164,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r076_kupele_spolu() {
       return this.r076a_kupele_danovnik + this.r076b_kupele_partner_a_deti
     },
-    r076a_kupele_danovnik: 0, // TODO asi z inputu
+    get r076a_kupele_danovnik() {
+      return parse(input?.r076a_kupele_danovnik ?? '0')
+    },
     get r076b_kupele_partner_a_deti() {
-      return this.r033_partner_kupele_uhrady + this.r036
+      return this.r033_partner_kupele_uhrady + this.r036_deti_kupele
     },
     get r077_nezdanitelna_cast() {
       return Math.min(

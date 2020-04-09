@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   process() {
     return 'module.exports = {};'
   },
