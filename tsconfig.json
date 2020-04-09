@@ -20,5 +20,5 @@
     "keyofStringsOnly": true
   },
   "exclude": ["node_modules", "cypress", "public"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
