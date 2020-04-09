@@ -73,9 +73,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady.toFixed(2),
     }
 
-    form.dokument.telo.r74 = taxForm.r074_znizenie_partner.toFixed(2)
+    form.dokument.telo.r74 = taxForm.r074_znizenie_partner
+      ? taxForm.r074_znizenie_partner.toFixed(2)
+      : ''
     form.dokument.telo.r76 = taxForm.r076_kupele_spolu.toFixed(2)
     form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.toFixed(2)
+    form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik
+      ? taxForm.r076a_kupele_danovnik.toFixed(2)
+      : ''
   }
   /** SECTION Children */
   if (taxForm.children) {
@@ -88,7 +93,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       )
     }) as Dieta[]
 
-    form.dokument.telo.r36 = taxForm.r036.toFixed(2)
+    form.dokument.telo.r36 = taxForm.r036_deti_kupele.toFixed(2)
   }
 
   /** SECTION Mortgage */
