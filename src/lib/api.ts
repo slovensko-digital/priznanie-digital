@@ -5,7 +5,7 @@ import {
   SaveEmailResponse,
 } from '../types/api'
 import { PostponeUserInput } from '../types/PostponeUserInput'
-import { TemplateAttributes } from './sendinblue'
+import { TemplateParams } from './sendinblue'
 
 export const getCity = async (zip: string) => {
   const response = await fetch(
@@ -23,7 +23,7 @@ export const getAutoformByPersonName = async (
 
 export const saveEmail = async (
   email: string,
-  attributes: TemplateAttributes,
+  params: TemplateParams,
   file: PostponeUserInput,
 ): Promise<SaveEmailResponse> => {
   return fetch('/api/email', {
@@ -32,7 +32,7 @@ export const saveEmail = async (
       accept: 'application/json',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ email, attributes, file }),
+    body: JSON.stringify({ email, params, file }),
   }).then((response) => response.json())
 }
 

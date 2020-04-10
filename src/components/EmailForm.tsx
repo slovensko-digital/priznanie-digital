@@ -20,21 +20,21 @@ const getErrorMessage = (code: string, message: string) => {
 export interface EmailFormProps {
   label: string
   hint?: string
-  attributes: Record<string, string>
+  params: Record<string, string>
   attachment: any
   saveForm: (email: string, newsletter: boolean) => void
 }
 export const EmailForm = ({
   label,
   hint,
-  attributes,
+  params,
   attachment,
   saveForm,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
     const { messageId, code, message } = await saveEmail(
       email,
-      { ...attributes, newsletter: !!newsletter } as any,
+      { ...params, newsletter: !!newsletter } as any,
       attachment,
     )
     if (messageId) {

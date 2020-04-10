@@ -118,8 +118,8 @@ const Suhrn: NextPage<Props> = ({
       <div className="box">
         {postponeUserInput.email ? (
           <p>
-            Váš email <strong>{postponeUserInput.email}</strong> sme úspešne
-            zaregistrovali.
+            Váš email <strong>{postponeUserInput.email}</strong> sme odoslali
+            XML súbor potrebný pre odklad dane.
             <br />
             Pošleme vám notifikáciu pred novým termínom{' '}
             {postponeUserInput.prijmy_zo_zahranicia
@@ -137,7 +137,7 @@ const Suhrn: NextPage<Props> = ({
             saveForm={(email, newsletter) => {
               setPostponeUserInput({ ...postponeUserInput, email, newsletter })
             }}
-            attributes={{
+            params={{
               form: 'postpone',
               firstname: firstName,
               lastname: lastNames.join(' '),
