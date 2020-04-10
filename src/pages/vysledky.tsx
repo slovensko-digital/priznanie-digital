@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { NextPage } from 'next'
 import { TaxForm } from '../types/TaxForm'
 
 import { getRoutes } from '../lib/routes'
-import { formatCurrency } from '../lib/utils'
+import { formatCurrency, setDate } from '../lib/utils'
+import { EmailForm } from '../components/EmailForm'
+import { convertToXML } from '../lib/xml/xmlConverter'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
 const { previousRoute, nextRoute } = getRoutes('/vysledky')
 
@@ -17,32 +20,49 @@ interface SummaryProps {
   rows: SummaryRow[]
 }
 const Summary = ({ rows }: SummaryProps) => (
-  <table className="govuk-table">
-    <tbody className="govuk-table__body">
-      {rows.map(({ title, value, fontSize }) => (
-        <tr
-          className="govuk-table__row"
-          style={fontSize ? { fontSize } : undefined}
-          key={title}
-        >
-          <td className="govuk-table__cell">{title}</td>
-          <td className="govuk-table__cell govuk-table__cell--numeric">
-            {value > 0 ? (
-              <strong>{formatCurrency(value)}</strong>
-            ) : (
-              <span>0,00 EUR</span>
-            )}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+  <div id="summary">
+    <table className="govuk-table">
+      <tbody className="govuk-table__body">
+        {rows.map(({ title, value, fontSize }) => (
+          <tr
+            className="govuk-table__row"
+            style={fontSize ? { fontSize } : undefined}
+            key={title}
+          >
+            <td className="govuk-table__cell">{title}</td>
+            <td className="govuk-table__cell govuk-table__cell--numeric">
+              {value > 0 ? (
+                <strong>{formatCurrency(value)}</strong>
+              ) : (
+                <span>0,00 EUR</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 )
 
 interface Props {
   taxForm: TaxForm
+  taxFormUserInput: TaxFormUserInput
+  setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
 }
-const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
+const Vysledky: NextPage<Props> = ({
+  taxForm,
+  taxFormUserInput,
+  setTaxFormUserInput,
+}: Props) => {
+  const [summaryHtml, setSummaryHtml] = useState('')
+  const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
+    .split(' ')
+    .map((v) => v.trim())
+
+  useEffect(() => {
+    setSummaryHtml(document.getElementById('summary').innerHTML)
+  }, [])
+
   return (
     <>
       <Link href={previousRoute()}>
@@ -91,6 +111,31 @@ const Vysledky: NextPage<Props> = ({ taxForm }: Props) => {
           },
         ]}
       />
+      <div className="box">
+        {taxFormUserInput.email ? (
+          <p>
+            Na váš email <strong>{taxFormUserInput.email}</strong> sme odoslali
+            XMl súbor potrebný pre odklad dane.
+            <br />
+            {taxFormUserInput.newsletter && 'Pošleme vám aj newsletter.'}
+          </p>
+        ) : (
+          <EmailForm
+            label="Pošleme vám tento výpočet dane na email?"
+            hint="Bude sa vám hodiť pri úhrade daní"
+            attachment={convertToXML(setDate(taxForm))}
+            saveForm={(email, newsletter) => {
+              setTaxFormUserInput({ email, newsletter })
+            }}
+            params={{
+              form: 'tax',
+              firstname: firstName,
+              lastname: lastNames.join(' '),
+              summaryTable: summaryHtml,
+            }}
+          />
+        )}
+      </div>
       <Link href={nextRoute()}>
         <button data-test="next" className="govuk-button" type="button">
           Pokračovať

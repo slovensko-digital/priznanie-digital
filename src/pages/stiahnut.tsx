@@ -62,7 +62,7 @@ const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
         type="button"
         onClick={() => {
           window.location.href =
-            'https://staging.navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
+            'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
         Pokračovať na navody.digital

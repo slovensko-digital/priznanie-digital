@@ -1,41 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
   makeAttachment,
-  TemplateAttributes,
+  TemplateParams,
   sendEmail,
   createOrUpdateContact,
 } from '../../lib/sendinblue'
 
-const TEMPLATE_POSTPONE_WITH_NEWSLETTER = parseInt(
-  process.env.sendinblue_tpl_postpone_with_newsletter,
-  10,
-)
-const TEMPLATE_POSTPONE_WITHOUT_NEWSLETTER = parseInt(
-  process.env.sendinblue_tpl_postpone_without_newsletter,
-  10,
-)
-const TEMPLATE_TAX_WITH_NEWSLETTER = parseInt(
-  process.env.sendinblue_tpl_tax_with_newsletter,
-  10,
-)
-const TEMPLATE_TAX_WITHOUT_NEWSLETTER = parseInt(
-  process.env.sendinblue_tpl_tax_without_newsletter,
-  10,
-)
-
-const getTemplateId = ({ form, newsletter }: TemplateAttributes) => {
-  switch (form) {
-    case 'postpone':
-      return newsletter
-        ? TEMPLATE_POSTPONE_WITH_NEWSLETTER
-        : TEMPLATE_POSTPONE_WITHOUT_NEWSLETTER
-    case 'tax':
-      return newsletter
-        ? TEMPLATE_TAX_WITH_NEWSLETTER
-        : TEMPLATE_TAX_WITHOUT_NEWSLETTER
-    default:
-      return undefined
-  }
+const templates = {
+  tax: parseInt(process.env.sendinblue_tpl_tax, 10),
+  postpone: parseInt(process.env.sendinblue_tpl_postpone, 10),
 }
 
 export default async (
@@ -43,16 +16,16 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   const email = `${req.body.email}`
-  const attributes = req.body.attributes as TemplateAttributes
+  const params = req.body.params as TemplateParams
 
   try {
     const sendEmailResponse = await sendEmail({
-      templateId: getTemplateId(attributes),
+      templateId: templates[params.form],
       to: email,
-      attributes,
+      params,
       attachment: [
         makeAttachment(
-          attributes.form === 'postpone'
+          params.form === 'postpone'
             ? 'odklad_danoveho_priznania.xml'
             : 'danove_priznanie.xml',
           req.body.file,
@@ -61,7 +34,7 @@ export default async (
     })
 
     if (sendEmailResponse.ok) {
-      const contactResponse = await createOrUpdateContact(email, attributes)
+      const contactResponse = await createOrUpdateContact(email, params)
       if (!contactResponse.ok) {
         res.statusCode = contactResponse.status
         return res.send({ ...contactResponse })
@@ -71,7 +44,7 @@ export default async (
     res.statusCode = sendEmailResponse.status
     return res.send({ ...(await sendEmailResponse.json()) })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.statusCode = 500
     return res.send({ message: error.message })
   }

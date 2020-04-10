@@ -8,7 +8,7 @@ const sender = {
 }
 
 if (!token) {
-  throw new Error(' process.env.sendinbluetoken is not defined')
+  throw new Error('process.env.sendinbluetoken is not defined')
 }
 
 const headers = {
@@ -17,11 +17,20 @@ const headers = {
   'api-key': token,
 }
 
-export interface TemplateAttributes {
+export type TemplateParams = PostponeTemplateParams | TaxTemplateParams
+
+export interface PostponeTemplateParams extends BaseTemplateParams {
+  deadline?: string
+}
+
+export interface TaxTemplateParams extends BaseTemplateParams {
+  summaryTable: string
+}
+
+export interface BaseTemplateParams {
   firstname: string
   lastname: string
   newsletter: boolean
-  deadline: string
   form: string
 }
 
@@ -38,7 +47,7 @@ export interface SendTextParams {
 export interface SendTemplateParams {
   to: string
   templateId: number
-  attributes: TemplateAttributes
+  params: TemplateParams
   attachment?: SendEmailAttachment[]
 }
 export type SendEmailParams = SendTextParams | SendTemplateParams
@@ -49,23 +58,23 @@ const isTemplateParams = (
   return (params as SendTemplateParams).templateId !== undefined
 }
 
-const buildEmailBody = (params: SendEmailParams) => {
+const buildEmailBody = (emailParams: SendEmailParams) => {
   let body
-  if (isTemplateParams(params)) {
-    const { templateId, attributes } = params
+  if (isTemplateParams(emailParams)) {
+    const { templateId, params } = emailParams
     body = {
-      attributes,
+      params,
       templateId,
     }
   } else {
-    const { subject, textContent } = params
+    const { subject, textContent } = emailParams
     body = {
       subject,
       textContent,
     }
   }
 
-  const { to, attachment } = params
+  const { to, attachment } = emailParams
   return {
     sender,
     to: [{ email: to }],
@@ -96,7 +105,7 @@ export const makeAttachment = (name: string, content: any) => ({
   content: Buffer.from(JSON.stringify(content, null, 4)).toString('base64'),
 })
 
-const createContact = (email: string, attributes: TemplateAttributes) =>
+const createContact = (email: string, attributes: TemplateParams) =>
   fetch(`${baseUrl}/contacts`, {
     method: 'POST',
     headers,
@@ -106,7 +115,7 @@ const createContact = (email: string, attributes: TemplateAttributes) =>
     }),
   })
 
-const updateContact = (email: string, attributes: TemplateAttributes) =>
+const updateContact = (email: string, attributes: TemplateParams) =>
   fetch(`${baseUrl}/contacts/${email}`, {
     method: 'PUT',
     headers,
@@ -118,21 +127,17 @@ const getContact = (email: string) =>
 
 export const createOrUpdateContact = async (
   email: string,
-  attributes: TemplateAttributes,
+  params: TemplateParams,
 ): Promise<Response> => {
-  const saveReponse = await createContact(email, attributes)
+  const saveReponse = await createContact(email, params)
   if (!saveReponse.ok) {
     const saveReponseJson = await saveReponse.json()
-    console.log(saveReponseJson)
     if (saveReponseJson.code === 'duplicate_parameter') {
       const savedContact = await (await getContact(email)).json()
-      console.log(savedContact)
       const form = savedContact.attributes.FORM || ''
       return await updateContact(email, {
-        ...attributes,
-        form: form.includes(attributes.form)
-          ? form
-          : `${form},${attributes.form}`,
+        ...params,
+        form: form.includes(params.form) ? form : `${form},${params.form}`,
       })
     }
   }

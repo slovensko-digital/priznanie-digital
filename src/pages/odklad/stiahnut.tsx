@@ -69,7 +69,8 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         disabled={!didDownload}
         type="button"
         onClick={() => {
-          window.location.href = 'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
+          window.location.href =
+            'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
         Pokračovať na navody.digital
