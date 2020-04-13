@@ -6,6 +6,7 @@ export type Route =
   | '/deti'
   | '/dochodok'
   | '/hypoteka'
+  | '/kupele'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -20,6 +21,7 @@ const routesOrder: ReadonlyArray<Route> = [
   '/deti',
   '/dochodok',
   '/hypoteka',
+  '/kupele',
   '/dve-percenta',
   '/osobne-udaje',
   '/suhrn',

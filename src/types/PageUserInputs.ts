@@ -66,6 +66,15 @@ export type TwoPercentUserInput = Pick<
   | 'XIIoddiel_suhlasZaslUdaje'
 >
 
+export type SpaUserInput = Pick<
+  TaxFormUserInput,
+  | 'kupele'
+  | 'r036_deti_kupele'
+  | 'r033_partner_kupele'
+  | 'r033_partner_kupele_uhrady'
+  | 'r076a_kupele_danovnik'
+>
+
 export type IncomeSourceCountryUserInput = Pick<
   PostponeUserInput,
   'prijmy_zo_zahranicia'

@@ -170,7 +170,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
   )
 }
 
-interface BooleanRadioProps<Name> {
+interface CheckboxProps<Name> {
   name: Name
   title: string
   label?: string
@@ -181,7 +181,7 @@ export const Checkbox = <Name extends keyof UserInput>({
   hint,
   label,
   ...props
-}: BooleanRadioProps<Name>) => {
+}: CheckboxProps<Name>) => {
   const [field, meta] = useField(props.name)
   return (
     <div className="govuk-form-group">
