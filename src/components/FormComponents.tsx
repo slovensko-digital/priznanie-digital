@@ -219,16 +219,19 @@ export const Checkbox = <Name extends keyof UserInput>({
 
 interface CheckboxSmallProps {
   name: string
+  className?: string
+
   label: string | React.ReactNode
 }
 export const CheckboxSmall = ({
   name,
   label,
+  className,
   ...props
 }: CheckboxSmallProps) => {
   const [field] = useField(name)
   return (
-    <div className="govuk-checkboxes__item">
+    <div className={classnames(['govuk-checkboxes__item', className])}>
       <input
         {...field}
         {...props}

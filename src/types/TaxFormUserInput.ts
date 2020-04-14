@@ -94,8 +94,10 @@ export interface TaxFormUserInput {
    * dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí
    * */
   r036_deti_kupele?: string
+  childrenInSpa?: boolean
   /**   Kupele danovik*/
   r076a_kupele_danovnik?: string
+  danovnikInSpa?: boolean
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */

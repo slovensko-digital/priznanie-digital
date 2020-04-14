@@ -378,42 +378,44 @@ describe.only('Spa page', function () {
 
   it('works with both partner, children and user', function () {
     /** First enter data for partner */
-    cy.visit('/partner')
-    cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    // cy.visit('/partner')
+    // cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
 
-    typeToInput('r031_priezvisko_a_meno', withSpaInput)
-    typeToInput('r031_rodne_cislo', withSpaInput)
-    typeToInput('r032_partner_vlastne_prijmy', withSpaInput)
-    typeToInput('r032_partner_pocet_mesiacov', withSpaInput)
+    // typeToInput('r031_priezvisko_a_meno', withSpaInput)
+    // typeToInput('r031_rodne_cislo', withSpaInput)
+    // typeToInput('r032_partner_vlastne_prijmy', withSpaInput)
+    // typeToInput('r032_partner_pocet_mesiacov', withSpaInput)
 
-    next()
-    assertUrl('/deti')
+    // next()
+    // assertUrl('/deti')
 
-    getInput('hasChildren', '-yes').click()
+    // getInput('hasChildren', '-yes').click()
 
-    // Enter 1st child data
-    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
-      withSpaInput.children?.[0]?.priezviskoMeno ?? '',
-    )
-    cy.get('[data-test="children[0].rodneCislo-input"]').type(
-      withSpaInput.children?.[0]?.rodneCislo ?? '',
-    )
+    // // Enter 1st child data
+    // cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+    //   withSpaInput.children?.[0]?.priezviskoMeno ?? '',
+    // )
+    // cy.get('[data-test="children[0].rodneCislo-input"]').type(
+    //   withSpaInput.children?.[0]?.rodneCislo ?? '',
+    // )
 
-    cy.get('[data-test="add-child"]').click()
-    cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
-      withSpaInput.children?.[1]?.priezviskoMeno ?? '',
-    )
-    cy.get('[data-test="children[1].rodneCislo-input"]').type(
-      withSpaInput.children?.[1]?.rodneCislo ?? '',
-    )
+    // cy.get('[data-test="add-child"]').click()
+    // cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
+    //   withSpaInput.children?.[1]?.priezviskoMeno ?? '',
+    // )
+    // cy.get('[data-test="children[1].rodneCislo-input"]').type(
+    //   withSpaInput.children?.[1]?.rodneCislo ?? '',
+    // )
 
-    next()
-    getInput('r029_poberal_dochodok', '-no').click()
+    // next()
+    // getInput('r029_poberal_dochodok', '-no').click()
 
-    next()
-    getInput('r037_uplatnuje_uroky', '-no').click()
+    // next()
+    // getInput('r037_uplatnuje_uroky', '-no').click()
 
-    next()
+    // next()
+    cy.visit('/kupele')
+
     getInput('kupele', '-yes').click()
 
     // // Type to input

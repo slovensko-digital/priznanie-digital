@@ -4,8 +4,6 @@ import { Form } from 'formik'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 
-import styles from './osobne-udaje.module.css'
-
 import {
   BooleanRadio,
   FormWrapper,
@@ -32,19 +30,6 @@ const Kupele: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute())
   })
-  const partnerSection = taxFormUserInput.r032_uplatnujem_na_partnera && (
-    <>
-      <Input
-        name="r076a_kupele_danovnik"
-        type="text"
-        label="Uhrady v kupeloch za partnera"
-      />
-      <CheckboxSmall
-        name="r076a_kupele_danovnik"
-        label="Uhrady v kupeloch za partnera"
-      ></CheckboxSmall>
-    </>
-  )
 
   return (
     <>
@@ -71,15 +56,48 @@ const Kupele: NextPage<Props> = ({
               />
               {values.kupele && (
                 <>
-                  <Input
-                    className={styles.inlineField}
-                    name="r076a_kupele_danovnik"
-                    type="text"
-                    label="Uhrady v kupeloch za vas"
+                  <h2>Na koho si uplatnujete znizenie dane?</h2>
+                  <CheckboxSmall name="danovnikInSpa" label="Na seba" />
+                  {values.danovnikInSpa && (
+                    <Input
+                      className="govuk-!-margin-bottom-6"
+                      name="r076a_kupele_danovnik"
+                      type="text"
+                      label="Uhrady v kupeloch za vas"
+                    />
+                  )}
+
+                  <CheckboxSmall
+                    name="r033_partner_kupele"
+                    label="Na manzela/manzelku"
                   />
-                  {partnerSection}
+                  {values.r033_partner_kupele && (
+                    <Input
+                      className="govuk-!-margin-bottom-6"
+                      name="r033_partner_kupele_uhrady"
+                      type="text"
+                      label="Uhrady v kupeloch za partnera"
+                    />
+                  )}
+
+                  <CheckboxSmall name="childrenInSpa" label="Na deti" />
+                  {values.childrenInSpa && (
+                    <Input
+                      className="govuk-!-margin-bottom-6"
+                      name="r036_deti_kupele"
+                      type="text"
+                      label="Uhrady v kupeloch za deti"
+                    />
+                  )}
+
+                  <div className="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+                    <a href="https://podpora.financnasprava.sk/886734-Zaplaten%C3%A9-%C3%BAhrady-s%C3%BAvisiace-s-k%C3%BApe%C4%BEnou-starostlivos%C5%A5ou">
+                      Podrobnosti o podmienkach
+                    </a>
+                  </div>
                 </>
               )}
+
               <button data-test="next" className="govuk-button" type="submit">
                 Pokračovať
               </button>
