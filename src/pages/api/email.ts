@@ -5,6 +5,9 @@ import {
   sendEmail,
   createOrUpdateContact,
 } from '../../lib/sendinblue'
+import { convertToXML } from '../../lib/xml/xmlConverter'
+import { setDate } from '../../lib/utils'
+import { buildPdf } from './pdf'
 
 const templates = {
   tax: parseInt(process.env.sendinblue_tpl_tax, 10),
@@ -18,18 +21,20 @@ export default async (
   const email = `${req.body.email}`
   const params = req.body.params as TemplateParams
 
+  const attachmentXml = convertToXML(setDate(req.body.taxForm))
+  const attachmentPdf = buildPdf(req.body.taxForm)
+
   try {
     const sendEmailResponse = await sendEmail({
       templateId: templates[params.form],
       to: email,
       params,
       attachment: [
-        makeAttachment(
-          params.form === 'postpone'
-            ? 'odklad_danoveho_priznania.xml'
-            : 'danove_priznanie.xml',
-          req.body.file,
-        ),
+        makeAttachment('danove_priznanie.xml', attachmentXml),
+        {
+          name: 'danove_priznanie.pdf',
+          content: attachmentPdf.toBuffer().toString('base64'),
+        },
       ],
     })
 

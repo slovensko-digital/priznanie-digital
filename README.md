@@ -35,3 +35,8 @@ Add .env file with necessary env variables
 
 * Github repository: https://github.com/wormyy/priznanie-digital
 * Travis CI: https://travis-ci.com/github/wormyy/priznanie-digital
+
+
+## Notes
+
+We use [HummusJS](https://github.com/galkahana/HummusJS) to generate PDFs (its not maintained  for a few months now). Unfortunatelly the more popular PDFKit library [does not support editing existing files](https://github.com/foliojs/pdfkit).
