@@ -141,6 +141,9 @@ const Suhrn: NextPage<Props> = ({
               form: 'postpone',
               firstname: firstName,
               lastname: lastNames.join(' '),
+              deadline: postponeUserInput.prijmy_zo_zahranicia
+                ? '30. jún 2020'
+                : '30. september 2020',
             }}
           />
         )}
