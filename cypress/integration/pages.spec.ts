@@ -52,10 +52,7 @@ function typeToInputPostpone<K extends keyof PostponeUserInput>(
 function next() {
   return cy.contains('Pokračovať').click()
 }
-function skip() {
-  cy.get(':nth-child(2) > .govuk-radios__input').click()
-  next()
-}
+
 const getError = () => cy.get('[data-test=error]')
 function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url)
@@ -346,15 +343,15 @@ describe('twoPercent page', function () {
   })
 })
 
-describe.only('Spa page', function () {
-  it.skip('works with no', function () {
+describe('Spa page', function () {
+  it('works with no', function () {
     cy.visit('/kupele')
     getInput('kupele', '-no').click()
     next()
     getError().should('have.length', 0)
     cy.url().should('include', '/dve-percenta')
   })
-  it.skip('Links and errors', function () {
+  it('Links and errors', function () {
     cy.visit('/kupele')
 
     // Back button should work and be the correct page
@@ -373,11 +370,10 @@ describe.only('Spa page', function () {
 
     // All aditional fields should be required
     next()
-    getError().should('have.length', 1)
+    cy.get('.govuk-error-summary')
   })
 
   it('works with both partner, children and user', function () {
-
     cy.visit('/kupele')
 
     getInput('kupele', '-yes').click()
@@ -391,7 +387,6 @@ describe.only('Spa page', function () {
 
     getInput('childrenInSpa').click()
     getInput('r036_deti_kupele')
-
   })
 })
 
