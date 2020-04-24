@@ -377,64 +377,22 @@ describe.only('Spa page', function () {
   })
 
   it('works with both partner, children and user', function () {
-    /** First enter data for partner */
-    // cy.visit('/partner')
-    // cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
 
-    // typeToInput('r031_priezvisko_a_meno', withSpaInput)
-    // typeToInput('r031_rodne_cislo', withSpaInput)
-    // typeToInput('r032_partner_vlastne_prijmy', withSpaInput)
-    // typeToInput('r032_partner_pocet_mesiacov', withSpaInput)
-
-    // next()
-    // assertUrl('/deti')
-
-    // getInput('hasChildren', '-yes').click()
-
-    // // Enter 1st child data
-    // cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
-    //   withSpaInput.children?.[0]?.priezviskoMeno ?? '',
-    // )
-    // cy.get('[data-test="children[0].rodneCislo-input"]').type(
-    //   withSpaInput.children?.[0]?.rodneCislo ?? '',
-    // )
-
-    // cy.get('[data-test="add-child"]').click()
-    // cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
-    //   withSpaInput.children?.[1]?.priezviskoMeno ?? '',
-    // )
-    // cy.get('[data-test="children[1].rodneCislo-input"]').type(
-    //   withSpaInput.children?.[1]?.rodneCislo ?? '',
-    // )
-
-    // next()
-    // getInput('r029_poberal_dochodok', '-no').click()
-
-    // next()
-    // getInput('r037_uplatnuje_uroky', '-no').click()
-
-    // next()
     cy.visit('/kupele')
 
     getInput('kupele', '-yes').click()
 
     // // Type to input
-    // typeToInput('r142_ico', with2percentInput)
-    // typeToInput('r142_obchMeno', with2percentInput)
-    // typeToInput('r142_ulica', with2percentInput)
-    // typeToInput('r142_cislo', with2percentInput)
-    // typeToInput('r142_psc', with2percentInput)
-    // typeToInput('r142_obec', with2percentInput)
+    getInput('danovnikInSpa').click()
+    getInput('r076a_kupele_danovnik')
+
+    getInput('r033_partner_kupele').click()
+    getInput('r033_partner_kupele_uhrady')
+
+    getInput('childrenInSpa').click()
+    getInput('r036_deti_kupele')
+
   })
-  // it('works with no', function () {
-  //   cy.visit('/dve-percenta')
-
-  //   cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
-  //   next()
-  //   getError().should('have.length', 0)
-
-  //   cy.url().should('include', '/osobne-udaje')
-  // })
 })
 
 describe('Feedback', function () {
