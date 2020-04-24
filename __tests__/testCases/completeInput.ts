@@ -40,6 +40,8 @@ export const completeInput: TaxFormUserInput = {
   r033_partner_kupele: true,
   r033_partner_kupele_uhrady: '20',
   r076a_kupele_danovnik: '20',
+  danovnikInSpa: true,
+  kupele: true,
 
   /** SECTION Children */
   children: [

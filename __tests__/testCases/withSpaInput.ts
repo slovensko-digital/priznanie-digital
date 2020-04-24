@@ -45,8 +45,11 @@ export const withSpaInput: TaxFormUserInput = {
   hasChildren: true,
 
   /** SECTION SPA */
-  r036_deti_kupele: '60',
+  kupele: true,
   r033_partner_kupele: true,
   r033_partner_kupele_uhrady: '45',
+  childrenInSpa: true,
+  r036_deti_kupele: '60',
+  danovnikInSpa: true,
   r076a_kupele_danovnik: '41',
 }
