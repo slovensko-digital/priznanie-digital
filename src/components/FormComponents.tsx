@@ -100,6 +100,7 @@ export const Input = <Name extends keyof UserInput>({
 interface BooleanRadioProps<Name> {
   name: Name
   title: string
+  hint?: string
 }
 export const BooleanRadio = <Name extends keyof UserInput>({
   title,
