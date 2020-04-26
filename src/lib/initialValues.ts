@@ -88,6 +88,7 @@ export const spaInitialInput: SpaUserInput = {
   r076a_kupele_danovnik: '',
   childrenInSpa: false,
   danovnikInSpa: false,
+  children: [],
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {
