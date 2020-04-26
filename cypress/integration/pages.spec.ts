@@ -388,6 +388,46 @@ describe('Spa page', function () {
     getInput('childrenInSpa').click()
     getInput('r036_deti_kupele')
   })
+  it.only('children UI', function () {
+    cy.visit('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Enter child data
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[0]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withSpaInput.children?.[0]?.rodneCislo ?? '',
+    )
+
+    cy.get('[data-test=add-child]').click()
+
+    cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[1]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[1].rodneCislo-input"]').type(
+      withSpaInput.children?.[1]?.rodneCislo ?? '',
+    )
+
+    next()
+    cy.get('[data-test=r029_poberal_dochodok-input-no]').click()
+    next()
+    cy.get('[data-test=r037_uplatnuje_uroky-input-no]').click()
+    next()
+
+    getInput('kupele', '-yes').click()
+
+    // // Type to input
+    getInput('danovnikInSpa').click()
+    getInput('r076a_kupele_danovnik')
+
+    getInput('r033_partner_kupele').click()
+    getInput('r033_partner_kupele_uhrady')
+
+    getInput('childrenInSpa').click()
+    getInput('r036_deti_kupele')
+  })
 })
 
 describe('Feedback', function () {

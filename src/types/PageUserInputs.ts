@@ -75,6 +75,7 @@ export type SpaUserInput = Pick<
   | 'r076a_kupele_danovnik'
   | 'danovnikInSpa'
   | 'childrenInSpa'
+  | 'children'
 >
 
 export type IncomeSourceCountryUserInput = Pick<

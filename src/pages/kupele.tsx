@@ -30,6 +30,7 @@ const Kupele: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute())
   })
+  console.log(taxFormUserInput)
 
   return (
     <>
@@ -82,12 +83,25 @@ const Kupele: NextPage<Props> = ({
 
                   <CheckboxSmall name="childrenInSpa" label="Na deti" />
                   {values.childrenInSpa && (
-                    <Input
-                      className="govuk-!-margin-bottom-6"
-                      name="r036_deti_kupele"
-                      type="text"
-                      label="Uhrady v kupeloch za deti"
-                    />
+                    <>
+                      <p className="govuk-!-margin-bottom-3">
+                        Ktore z vasich deti navstivili kupele?
+                      </p>
+                      {taxFormUserInput.children.map((child, index) => (
+                        <div key={child.id} className="govuk-!-margin-bottom-3">
+                          <CheckboxSmall
+                            name={`children[${index}].kupelnaStarostlivost`}
+                            label={child.priezviskoMeno}
+                          />
+                        </div>
+                      ))}
+                      <Input
+                        className="govuk-!-margin-bottom-6"
+                        name="r036_deti_kupele"
+                        type="text"
+                        label="Uhrady v kupeloch za deti"
+                      />
+                    </>
                   )}
 
                   <div className="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
