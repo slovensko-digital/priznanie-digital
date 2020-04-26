@@ -42,15 +42,15 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', function () {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    'withMortgage',
+    'withPension',
+    'withChildren',
+    'with2percent',
     'withSpa',
   ].forEach((testCase) => {
     it(testCase, function (done) {
@@ -177,6 +177,16 @@ describe('Cases', function () {
             if (input.childrenInSpa) {
               getInput('childrenInSpa').click()
               typeToInput('r036_deti_kupele', input)
+              const childrenWithSpa = input.children.filter(
+                (child) => child.kupelnaStarostlivost,
+              )
+              childrenWithSpa.forEach((child, index) => {
+                if (child.kupelnaStarostlivost) {
+                  cy.get(
+                    `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
+                  ).click()
+                }
+              })
             }
           } else {
             getInput('kupele', '-no').click()

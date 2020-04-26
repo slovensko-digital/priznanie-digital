@@ -418,7 +418,7 @@ describe('Spa page', function () {
 
     getInput('kupele', '-yes').click()
 
-    // // Type to input
+    // Type to input
     getInput('danovnikInSpa').click()
     getInput('r076a_kupele_danovnik')
 
