@@ -100,6 +100,7 @@ export const Input = <Name extends keyof UserInput>({
 interface BooleanRadioProps<Name> {
   name: Name
   title: string
+  hint?: string
 }
 export const BooleanRadio = <Name extends keyof UserInput>({
   title,
@@ -170,7 +171,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
   )
 }
 
-interface BooleanRadioProps<Name> {
+interface CheckboxProps<Name> {
   name: Name
   title: string
   label?: string
@@ -181,7 +182,7 @@ export const Checkbox = <Name extends keyof UserInput>({
   hint,
   label,
   ...props
-}: BooleanRadioProps<Name>) => {
+}: CheckboxProps<Name>) => {
   const [field, meta] = useField(props.name)
   return (
     <div className="govuk-form-group">
@@ -219,16 +220,19 @@ export const Checkbox = <Name extends keyof UserInput>({
 
 interface CheckboxSmallProps {
   name: string
+  className?: string
+
   label: string | React.ReactNode
 }
 export const CheckboxSmall = ({
   name,
   label,
+  className,
   ...props
 }: CheckboxSmallProps) => {
   const [field] = useField(name)
   return (
-    <div className="govuk-checkboxes__item">
+    <div className={classnames(['govuk-checkboxes__item', className])}>
       <input
         {...field}
         {...props}

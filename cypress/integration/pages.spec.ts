@@ -10,6 +10,7 @@ import { baseInput } from '../../__tests__/testCases/baseInput'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { withEmailInput } from '../../__tests__/testCases/postpone/withEmailInput'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
+import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute } from '../../src/lib/routes'
@@ -51,6 +52,7 @@ function typeToInputPostpone<K extends keyof PostponeUserInput>(
 function next() {
   return cy.contains('Pokračovať').click()
 }
+
 const getError = () => cy.get('[data-test=error]')
 function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url)
@@ -303,7 +305,7 @@ describe('twoPercent page', function () {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/hypoteka')
+    assertUrl('/kupele')
 
     //  Go back to our page
     cy.visit('/dve-percenta')
@@ -338,6 +340,93 @@ describe('twoPercent page', function () {
     getError().should('have.length', 0)
 
     cy.url().should('include', '/osobne-udaje')
+  })
+})
+
+describe('Spa page', function () {
+  it('works with no', function () {
+    cy.visit('/kupele')
+    getInput('kupele', '-no').click()
+    next()
+    getError().should('have.length', 0)
+    cy.url().should('include', '/dve-percenta')
+  })
+  it('Links and errors', function () {
+    cy.visit('/kupele')
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click()
+    assertUrl('/hypoteka')
+
+    //  Go back to our page
+    cy.visit('/kupele')
+
+    // Shows error, when presses next without interaction
+    next()
+    getError().should('have.length', 1)
+
+    // When presses yes, additional fields appear
+    getInput('kupele', '-yes').click()
+
+    // All aditional fields should be required
+    next()
+    cy.get('.govuk-error-summary')
+  })
+
+  it('works with both partner, children and user', function () {
+    cy.visit('/kupele')
+
+    getInput('kupele', '-yes').click()
+
+    // // Type to input
+    getInput('danovnikInSpa').click()
+    getInput('r076a_kupele_danovnik')
+
+    getInput('r033_partner_kupele').click()
+    getInput('r033_partner_kupele_uhrady')
+
+    getInput('childrenInSpa').click()
+    getInput('r036_deti_kupele')
+  })
+  it.only('children UI', function () {
+    cy.visit('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Enter child data
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[0]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withSpaInput.children?.[0]?.rodneCislo ?? '',
+    )
+
+    cy.get('[data-test=add-child]').click()
+
+    cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[1]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[1].rodneCislo-input"]').type(
+      withSpaInput.children?.[1]?.rodneCislo ?? '',
+    )
+
+    next()
+    cy.get('[data-test=r029_poberal_dochodok-input-no]').click()
+    next()
+    cy.get('[data-test=r037_uplatnuje_uroky-input-no]').click()
+    next()
+
+    getInput('kupele', '-yes').click()
+
+    // Type to input
+    getInput('danovnikInSpa').click()
+    getInput('r076a_kupele_danovnik')
+
+    getInput('r033_partner_kupele').click()
+    getInput('r033_partner_kupele_uhrady')
+
+    getInput('childrenInSpa').click()
+    getInput('r036_deti_kupele')
   })
 })
 

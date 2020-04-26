@@ -86,13 +86,18 @@ export interface TaxFormUserInput {
   XIIoddiel_suhlasZaslUdaje?: boolean
 
   /** SECTION  Kupele */
-  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
-  r036_deti_kupele?: string
+  kupele?: boolean
   r033_partner_kupele?: boolean
   /**   max 50*/
   r033_partner_kupele_uhrady?: string
+  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované
+   * dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí
+   * */
+  r036_deti_kupele?: string
+  childrenInSpa?: boolean
   /**   Kupele danovik*/
   r076a_kupele_danovnik?: string
+  danovnikInSpa?: boolean
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */
