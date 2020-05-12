@@ -36,7 +36,7 @@ export default () => (
       </Link>
     </div>
 
-    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
+    {/* <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
       <span className="govuk-warning-text__icon" aria-hidden="true">
         !
       </span>
@@ -59,6 +59,6 @@ export default () => (
           Odložiť daňové priznanie
         </button>
       </Link>
-    </div>
+    </div> */}
   </>
 )
