@@ -32,6 +32,10 @@ const Kupele: NextPage<Props> = ({
   })
   console.log(taxFormUserInput)
 
+  const shouldShowChildren = taxFormUserInput.children.some((child) =>
+    Boolean(child.rodneCislo),
+  )
+  
   return (
     <>
       <Link href={previousRoute()}>
@@ -80,27 +84,33 @@ const Kupele: NextPage<Props> = ({
                       label="Uhrady v kupeloch za partnera"
                     />
                   )}
-
-                  <CheckboxSmall name="childrenInSpa" label="Na deti" />
-                  {values.childrenInSpa && (
+                  {shouldShowChildren && (
                     <>
-                      <p className="govuk-!-margin-bottom-3">
-                        Ktore z vasich deti navstivili kupele?
-                      </p>
-                      {taxFormUserInput.children.map((child, index) => (
-                        <div key={child.id} className="govuk-!-margin-bottom-3">
-                          <CheckboxSmall
-                            name={`children[${index}].kupelnaStarostlivost`}
-                            label={child.priezviskoMeno}
+                      <CheckboxSmall name="childrenInSpa" label="Na deti" />
+                      {values.childrenInSpa && (
+                        <>
+                          <p className="govuk-!-margin-bottom-3">
+                            Ktore z vasich deti navstivili kupele?
+                          </p>
+                          {taxFormUserInput.children.map((child, index) => (
+                            <div
+                              key={child.id}
+                              className="govuk-!-margin-bottom-3"
+                            >
+                              <CheckboxSmall
+                                name={`children[${index}].kupelnaStarostlivost`}
+                                label={child.priezviskoMeno}
+                              />
+                            </div>
+                          ))}
+                          <Input
+                            className="govuk-!-margin-bottom-6"
+                            name="r036_deti_kupele"
+                            type="text"
+                            label="Uhrady v kupeloch za deti"
                           />
-                        </div>
-                      ))}
-                      <Input
-                        className="govuk-!-margin-bottom-6"
-                        name="r036_deti_kupele"
-                        type="text"
-                        label="Uhrady v kupeloch za deti"
-                      />
+                        </>
+                      )}
                     </>
                   )}
 
