@@ -35,7 +35,7 @@ const Kupele: NextPage<Props> = ({
   const shouldShowChildren = taxFormUserInput.children.some((child) =>
     Boolean(child.rodneCislo),
   )
-  
+
   return (
     <>
       <Link href={previousRoute()}>
@@ -141,33 +141,28 @@ export const validate = (values: SpaUserInput): Errors => {
     errors.kupele = 'Vyznačte odpoveď'
   }
   if (values.kupele) {
-    if (!values.r076a_kupele_danovnik) {
+    if (
+      !values.danovnikInSpa &&
+      !values.r033_partner_kupele &&
+      !values.childrenInSpa
+    ) {
+      errors.kupele = 'Vyznačte aspon jednu z moznosti'
+    }
+
+    if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
       errors.r076a_kupele_danovnik = 'Zadajte vysku uhrad kupelov za vas'
     }
 
-    //   if (!values.r142_obchMeno) {
-    //     errors.r142_obchMeno = 'Zadajte obchodne meno'
-    //   }
+    if (values.r033_partner_kupele && !values.r033_partner_kupele_uhrady) {
+      errors.r033_partner_kupele_uhrady =
+        'Zadajte vysku uhrad kupelov za manzela/manzelku'
+    }
 
-    //   if (!values.r142_ulica) {
-    //     errors.r142_ulica = 'Zadajte ulicu'
-    //   }
-
-    //   if (!values.r142_cislo) {
-    //     errors.r142_cislo = 'Zadajte číslo domu'
-    //   }
-
-    //   const pscNumberFormat = /^\d{3} \d{2}$/
-    //   if (!values.r142_psc) {
-    //     errors.r142_psc = 'Zadajte PSČ'
-    //   } else if (!values.r142_psc.match(pscNumberFormat)) {
-    //     errors.r142_psc = 'PSČ môže obsahovať iba 5 čísel'
-    //   }
-
-    //   if (!values.r142_obec) {
-    //     errors.r142_obec = 'Zadajte obec'
-    //   }
+    if (values.childrenInSpa && !values.r036_deti_kupele) {
+      errors.r036_deti_kupele = 'Zadajte vysku uhrad kupelov za deti'
+    }
   }
+  console.log(errors)
   return errors
 }
 
