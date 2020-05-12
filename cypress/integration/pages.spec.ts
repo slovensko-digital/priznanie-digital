@@ -388,7 +388,7 @@ describe('Spa page', function () {
     getInput('childrenInSpa').click()
     getInput('r036_deti_kupele')
   })
-  it.only('children UI', function () {
+  it('Spa UI', function () {
     cy.visit('/deti')
 
     getInput('hasChildren', '-yes').click()

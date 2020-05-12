@@ -30,7 +30,6 @@ const Kupele: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute())
   })
-  console.log(taxFormUserInput)
 
   const shouldShowChildren = taxFormUserInput.children.some((child) =>
     Boolean(child.rodneCislo),
@@ -162,7 +161,6 @@ export const validate = (values: SpaUserInput): Errors => {
       errors.r036_deti_kupele = 'Zadajte vysku uhrad kupelov za deti'
     }
   }
-  console.log(errors)
   return errors
 }
 
