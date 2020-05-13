@@ -5,6 +5,7 @@ import {
   formatDate,
   numberInputRegexp,
   formatPsc,
+  formatIco,
 } from '../src/lib/utils'
 
 describe('utils', () => {
@@ -87,6 +88,24 @@ describe('utils', () => {
 
     it('should remove last number and space when using backspace', () => {
       expect(formatPsc('841', '841 ')).toBe('84')
+    })
+  })
+
+  describe('#formatIco', () => {
+    it('should add space after first 2 digits', () => {
+      expect(formatIco('12', '')).toBe('12 ')
+    })
+
+    it('should add space after next 3 digits', () => {
+      expect(formatIco('12345678', '')).toBe('12 345 678')
+    })
+
+    it('should remove last number and space when using backspace after first space', () => {
+      expect(formatIco('12', '12 ')).toBe('1')
+    })
+
+    it('should remove last number and space when using backspace after second space', () => {
+      expect(formatIco('12 345', '12 345 ')).toBe('12 34')
     })
   })
 })

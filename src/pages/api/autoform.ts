@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     `${baseUrl}/search?q=${query}&limit=${limit}&private_access_token=${token}&filter=active`,
   )
 
-  const personsData: AutoformResponseBody = await response.json()
+  const personsData: AutoformResponseBody[] = await response.json()
 
   res.statusCode = response.status
   res.send(personsData)

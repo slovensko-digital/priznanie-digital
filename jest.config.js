@@ -12,8 +12,8 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/',
     '/.next/',
-    '/__tests__/testCases',
-    '/__tests__/utils',
+    '/__tests__/testCases/',
+    '/__tests__/utils/',
     '/cypress',
   ],
   transform: {

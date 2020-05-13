@@ -322,12 +322,35 @@ describe('twoPercent page', function () {
     getError().should('have.length', 6)
 
     // Type to input
-    typeToInput('r142_ico', with2percentInput)
     typeToInput('r142_obchMeno', with2percentInput)
+    typeToInput('r142_ico', with2percentInput)
     typeToInput('r142_ulica', with2percentInput)
     typeToInput('r142_cislo', with2percentInput)
     typeToInput('r142_psc', with2percentInput)
     typeToInput('r142_obec', with2percentInput)
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+
+    next()
+    cy.url().should('include', '/osobne-udaje')
+  })
+  it('with autoform', function () {
+    cy.visit('/dve-percenta')
+
+    // When presses yes, additional fields appear
+    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
+
+    /** With autoform */
+    getInput('r142_obchMeno').type('starter')
+
+    cy.contains('starter, o.z.').click()
+
+    getInput('r142_obchMeno').should('contain.value', 'starter, o.z.')
+    getInput('r142_ico').should('contain.value', '50 825 909')
+    getInput('r142_ulica').should('contain.value', 'Ševčenkova')
+    getInput('r142_cislo').should('contain.value', '902/25')
+    getInput('r142_psc').should('contain.value', '851 01')
+    getInput('r142_obec').should('contain.value', 'Bratislava-Petržalka')
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
     cy.url().should('include', '/osobne-udaje')
@@ -388,7 +411,7 @@ describe('Spa page', function () {
     getInput('childrenInSpa').click()
     getInput('r036_deti_kupele')
   })
-  it.only('children UI', function () {
+  it('children UI', function () {
     cy.visit('/deti')
 
     getInput('hasChildren', '-yes').click()
