@@ -299,7 +299,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return undefined
       }
       return {
-        ico: input.r142_ico,
+        ico: input.r142_ico.replace(/\D/g, ''),
         obchMeno: input.r142_obchMeno,
         ulica: input.r142_ulica,
         cislo: input.r142_cislo,

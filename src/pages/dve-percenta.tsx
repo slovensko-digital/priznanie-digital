@@ -1,18 +1,42 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
-import { Form } from 'formik'
+import { Form, FormikProps } from 'formik'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import {
+  BooleanRadio,
+  CheckboxSmall,
+  FormWrapper,
+  Input,
+} from '../components/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getRoutes } from '../lib/routes'
 import styles from './osobne-udaje.module.css'
-import { formatPsc } from '../lib/utils'
-import { getCity } from '../lib/api'
+import { formatIco, formatPsc } from '../lib/utils'
+import { getCity, getNgoByName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
+import { AutoformResponseBody } from '../types/api'
 
 const { nextRoute, previousRoute } = getRoutes('/dve-percenta')
+
+const makeHandleOrganisationAutoform = ({
+  setValues,
+  values,
+}: FormikProps<TwoPercentUserInput>) => {
+  return (org: AutoformResponseBody) => {
+    setValues({
+      ...values,
+      r142_obchMeno: org.name || '',
+      r142_ico: org.cin ? formatIco(org.cin) : '',
+      r142_ulica: org.street || org.municipality || '',
+      r142_cislo: org.street_number || '',
+      r142_psc: org.postal_code ? formatPsc(org.postal_code) : '',
+      r142_obec: org.municipality || '',
+    })
+  }
+}
 
 interface Props {
   setTaxFormUserInput: (values: TwoPercentUserInput) => void
@@ -42,37 +66,49 @@ const DvePercenta: NextPage<Props> = ({
           router.push(nextRoute())
         }}
       >
-        {({ values, errors, touched, setFieldValue }) => (
+        {(props) => (
           <>
             <ErrorSummary<TwoPercentUserInput>
-              errors={errors}
-              touched={touched}
+              errors={props.errors}
+              touched={props.touched}
             />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Chcete poukazat 2 percenta"
+                title="Chcete poukazat 2 percenta?"
                 name="XIIoddiel_uplatnujem2percenta"
               />
-              {values.XIIoddiel_uplatnujem2percenta && (
+              {props.values.XIIoddiel_uplatnujem2percenta && (
                 <>
-                  <div className={styles.inlineFieldContainer}>
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_obchMeno"
-                      type="text"
-                      label="Nazov"
-                    />
-                  </div>
+                  <h2>Údaje o prijímateľovi</h2>
+                  <p>
+                    Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
+                  </p>
+
+                  <FullNameAutoCompleteInput
+                    name="r142_obchMeno"
+                    label="Názov neziskovej organizácie alebo občianskeho združenia"
+                    handlePersonAutoform={makeHandleOrganisationAutoform(props)}
+                    fetchData={getNgoByName}
+                  />
+
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
                       name="r142_ico"
                       type="text"
-                      label="ICO"
+                      label="IČO"
+                      maxLength={10}
+                      onChange={async (event) => {
+                        const icoValue = formatIco(
+                          event.currentTarget.value,
+                          props.values.r142_ico,
+                        )
+                        props.setFieldValue('r142_ico', icoValue)
+                      }}
                     />
                   </div>
 
-                  <h2>Adresa neziskovky</h2>
+                  <h2>Sídlo</h2>
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
@@ -97,16 +133,16 @@ const DvePercenta: NextPage<Props> = ({
                       onChange={async (event) => {
                         const pscValue = formatPsc(
                           event.currentTarget.value,
-                          values.r142_psc,
+                          props.values.r142_psc,
                         )
-                        setFieldValue('r142_psc', pscValue)
+                        props.setFieldValue('r142_psc', pscValue)
 
                         if (
                           pscValue.length === 6 &&
-                          values.r142_obec.length === 0
+                          props.values.r142_obec.length === 0
                         ) {
                           const city = await getCity(pscValue)
-                          setFieldValue('r142_obec', city)
+                          props.setFieldValue('r142_obec', city)
                         }
                       }}
                     />
@@ -118,6 +154,12 @@ const DvePercenta: NextPage<Props> = ({
                       label="Obec"
                     />
                   </div>
+
+                  <h2>Súhlas so zaslaním údajov</h2>
+                  <CheckboxSmall
+                    name="XIIoddiel_suhlasZaslUdaje"
+                    label="súhlasím so zaslaním údajov (meno, priezvisko a adresa trvalého pobytu) mnou určenému prijímateľovi podielu zaplatenej dane"
+                  />
                 </>
               )}
               <button data-test="next" className="govuk-button" type="submit">
@@ -164,6 +206,11 @@ export const validate = (values: TwoPercentUserInput): Errors => {
 
     if (!values.r142_obec) {
       errors.r142_obec = 'Zadajte obec'
+    }
+
+    if (!values.XIIoddiel_suhlasZaslUdaje) {
+      errors.XIIoddiel_suhlasZaslUdaje =
+        'Musíte súhlasiť so zaslaním údajov prijímateľovi'
     }
   }
   return errors

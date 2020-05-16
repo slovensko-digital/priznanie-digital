@@ -21,6 +21,12 @@ export const getAutoformByPersonName = async (
   return fetch(`/api/autoform?name=${name}`).then((response) => response.json())
 }
 
+export const getNgoByName = async (
+  name: string,
+): Promise<AutoformResponseBody[]> => {
+  return fetch(`/api/ngo?name=${name}`).then((response) => response.json())
+}
+
 export const saveEmail = async (
   email: string,
   params: TemplateParams,
