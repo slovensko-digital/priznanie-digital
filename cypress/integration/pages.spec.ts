@@ -521,7 +521,7 @@ describe('Summary page', function () {
   })
 })
 
-describe('/odklad/osobne-udaje page', function () {
+describe.skip('/odklad/osobne-udaje page', function () {
   beforeEach('Navigate to test page', function () {
     cy.visit('/')
 
