@@ -373,20 +373,17 @@ describe('Spa page', function () {
     cy.get('.govuk-error-summary')
   })
 
-  it('works with both partner, children and user', function () {
+  it('works with both partner and user', function () {
     cy.visit('/kupele')
 
     getInput('kupele', '-yes').click()
 
-    // // Type to input
+    // Type to input
     getInput('danovnikInSpa').click()
     getInput('r076a_kupele_danovnik')
 
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')
-
-    getInput('childrenInSpa').click()
-    getInput('r036_deti_kupele')
   })
   it('Spa UI', function () {
     cy.visit('/deti')
