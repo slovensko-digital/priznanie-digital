@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import { getRoutes, getPostponeRoutes } from '../lib/routes'
+import { getRoutes } from '../lib/routes'
+// import { getPostponeRoutes } from '../lib/routes'
 
 const { nextRoute } = getRoutes('/')
 
-const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/')
+// const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/')
 
 export default () => (
   <>
@@ -36,7 +37,7 @@ export default () => (
       </Link>
     </div>
 
-    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
+    {/* <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
       <span className="govuk-warning-text__icon" aria-hidden="true">
         !
       </span>
@@ -59,6 +60,6 @@ export default () => (
           Odložiť daňové priznanie
         </button>
       </Link>
-    </div>
+    </div> */}
   </>
 )
