@@ -3,14 +3,20 @@ import classNames from 'classnames'
 import { useField } from 'formik'
 import styles from './FullNameAutoCompleteInput.module.css'
 import { Input } from './FormComponents'
-import { getAutoformByPersonName } from '../lib/api'
 import { AutoformResponseBody } from '../types/api'
+import { UserInput } from '../types/UserInput'
 
 export interface FullNameAutoCompleteInput {
+  name: keyof UserInput
+  label: string
   handlePersonAutoform: (person: AutoformResponseBody) => void
+  fetchData: (name: string) => Promise<AutoformResponseBody[]>
 }
 export const FullNameAutoCompleteInput = ({
+  name,
+  label,
   handlePersonAutoform,
+  fetchData,
 }: FullNameAutoCompleteInput) => {
   const [autoformPersons, setAutoFormPersons] = useState<
     AutoformResponseBody[]
@@ -26,12 +32,12 @@ export const FullNameAutoCompleteInput = ({
     number
   >(null)
   const [selectedPersonIndex, setSelectedPersonIndex] = useState<number>(-1)
-  const [field] = useField('meno_priezvisko')
+  const [field] = useField(name)
 
   const handleAutoform = async (name: string) => {
     if (name.length > 2) {
       setIsLoadingAutoform(true)
-      const personsData = await getAutoformByPersonName(name)
+      const personsData = await fetchData(name)
       if (personsData) {
         setAutoFormPersons(personsData)
       }
@@ -121,9 +127,9 @@ export const FullNameAutoCompleteInput = ({
       <div className={styles.autocompleteFieldWrapper}>
         <Input
           {...field}
-          name="meno_priezvisko"
+          name={name}
           type="text"
-          label="Meno a priezvisko"
+          label={label}
           width="auto"
           autoComplete="12iubu312b3"
           className={isLoadingAutoform ? styles.autocompleteFieldLoading : ''}

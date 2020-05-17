@@ -10,7 +10,7 @@ import {
   FormErrors,
 } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getCity } from '../lib/api'
+import { getAutoformByPersonName, getCity } from '../lib/api'
 import { AutoformResponseBody } from '../types/api'
 import { getRoutes } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -27,13 +27,13 @@ const makeHandlePersonAutoform = ({
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
-      meno_priezvisko: person.name,
-      r001_dic: person?.tin ?? values.r001_dic,
-      r007_ulica: person.street ?? person.municipality,
-      r008_cislo: person.street_number,
+      meno_priezvisko: person.name || '',
+      r001_dic: person?.tin || values.r001_dic || '',
+      r007_ulica: person.street || person.municipality || '',
+      r008_cislo: person.street_number || '',
       r009_psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      r010_obec: person.municipality,
-      r011_stat: person.country,
+      r010_obec: person.municipality || '',
+      r011_stat: person.country || '',
     })
   }
 }
@@ -81,7 +81,10 @@ const OsobneUdaje: NextPage<Props> = ({
               </p>
 
               <FullNameAutoCompleteInput
+                name="meno_priezvisko"
+                label="Meno a priezvisko"
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
+                fetchData={getAutoformByPersonName}
               />
 
               <Nace label="NACE" />

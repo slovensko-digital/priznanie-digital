@@ -199,12 +199,13 @@ describe('Cases', function () {
 
           if (input.XIIoddiel_uplatnujem2percenta) {
             getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
-            typeToInput('r142_ico', with2percentInput)
             typeToInput('r142_obchMeno', with2percentInput)
+            typeToInput('r142_ico', with2percentInput)
             typeToInput('r142_ulica', with2percentInput)
             typeToInput('r142_cislo', with2percentInput)
             typeToInput('r142_psc', with2percentInput)
             typeToInput('r142_obec', with2percentInput)
+            cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
           } else {
             getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
           }

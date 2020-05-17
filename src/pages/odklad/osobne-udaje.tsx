@@ -10,14 +10,13 @@ import {
   FormErrors,
   PersonalInformationPostponePage,
 } from '../../types/PageUserInputs'
-import { getCity } from '../../lib/api'
+import { getAutoformByPersonName, getCity } from '../../lib/api'
 import { AutoformResponseBody } from '../../types/api'
 import { getPostponeRoutes } from '../../lib/routes'
 import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc } from '../../lib/utils'
-
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
@@ -28,13 +27,13 @@ const makeHandlePersonAutoform = ({
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
-      meno_priezvisko: person.name,
-      dic: person?.tin ?? values.dic,
-      ulica: person.street ?? person.municipality,
-      cislo: person.street_number,
+      meno_priezvisko: person.name || '',
+      dic: person?.tin || values.dic || '',
+      ulica: person.street || person.municipality || '',
+      cislo: person.street_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      obec: person.municipality,
-      stat: person.country,
+      obec: person.municipality || '',
+      stat: person.country || '',
     })
   }
 }
@@ -99,7 +98,10 @@ const OsobneUdaje: NextPage<Props> = ({
               </p>
 
               <FullNameAutoCompleteInput
+                name="meno_priezvisko"
+                label="Meno a priezvisko"
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
+                fetchData={getAutoformByPersonName}
               />
 
               <h2>Adresa trvalého pobytu</h2>
