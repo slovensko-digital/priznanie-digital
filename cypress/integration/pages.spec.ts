@@ -506,7 +506,7 @@ describe('Summary page', function () {
     '/deti',
     '/dochodok',
     '/hypoteka',
-    '/osobne-udaje',
+    '/kupele',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, function () {
