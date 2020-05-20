@@ -240,7 +240,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                   title: 'Kúpelné úhrady za manžela/manželku',
                   value: taxFormUserInput.r033_partner_kupele
                     ? taxFormUserInput.r033_partner_kupele_uhrady
-                    : 'Neuplatnuje',
+                    : 'Neuplatňuje',
                   currency: Boolean(taxFormUserInput.r033_partner_kupele),
                   testId: 'r033_partner_kupele_uhrady',
                 },
@@ -248,7 +248,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                   title: 'Kúpelné úhrady za deti',
                   value: taxFormUserInput.childrenInSpa
                     ? taxFormUserInput.r036_deti_kupele
-                    : 'Neuplatnuje',
+                    : 'Neuplatňuje',
                   currency: Boolean(taxFormUserInput.childrenInSpa),
                   testId: 'r036_deti_kupele',
                 },
