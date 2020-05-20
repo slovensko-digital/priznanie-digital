@@ -102,6 +102,10 @@ const Vysledky: NextPage<Props> = ({
             title: 'Príspevok na dôchodkové poistenie (III. pilier)',
             value: taxForm.r030_vyska_dochodku,
           },
+          {
+            title: 'Úhrady za kúpele spolu',
+            value: taxForm.r076_kupele_spolu,
+          },
           { title: 'Základ dane', value: taxForm.r080_zaklad_dane_celkovo },
           { title: 'Daňový preplatok', value: taxForm.r126_danovy_preplatok },
           {
