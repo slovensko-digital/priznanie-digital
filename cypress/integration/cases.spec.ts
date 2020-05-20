@@ -236,6 +236,23 @@ describe('Cases', function () {
           )
           cy.get('.govuk-table__cell').contains(input.r001_dic)
 
+          if (input.kupele) {
+            if (input.danovnikInSpa) {
+              cy.get(`[data-test="r076a_kupele_danovnik"]`).contains(
+                input.r076a_kupele_danovnik,
+              )
+            }
+            if (input.r033_partner_kupele) {
+              cy.get(`[data-test="r033_partner_kupele_uhrady"]`).contains(
+                input.r033_partner_kupele_uhrady,
+              )
+            }
+            if (input.childrenInSpa)
+              cy.get(`[data-test="r036_deti_kupele"]`).contains(
+                input.r036_deti_kupele,
+              )
+          }
+
           next()
 
           /**  SECTION Results */
