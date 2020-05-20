@@ -41,7 +41,7 @@ const Summary = (props: SummaryProps) => (
     <table className="govuk-table">
       <tbody className="govuk-table__body">
         {props.rows.map(({ title, value, currency, testId }) => (
-          <tr className="govuk-table__row" key={title} >
+          <tr className="govuk-table__row" key={title}>
             {value ? (
               <>
                 <td className="govuk-table__cell govuk-!-width-one-half">
@@ -232,7 +232,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                   title: 'Kúpelné úhrady za seba',
                   value: taxFormUserInput.danovnikInSpa
                     ? taxFormUserInput.r076a_kupele_danovnik
-                    : 'Neuplatnuje',
+                    : 'Neuplatňuje',
                   currency: Boolean(taxFormUserInput.danovnikInSpa),
                   testId: 'r076a_kupele_danovnik',
                 },
