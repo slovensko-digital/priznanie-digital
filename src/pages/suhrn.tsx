@@ -15,6 +15,7 @@ interface SummaryRow {
   title: string
   value?: string
   currency?: boolean
+  testId?: string
 }
 interface SummaryProps {
   title: string
@@ -39,14 +40,17 @@ const Summary = (props: SummaryProps) => (
     </h2>
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {props.rows.map(({ title, value, currency }) => (
-          <tr className="govuk-table__row" key={title}>
+        {props.rows.map(({ title, value, currency, testId }) => (
+          <tr className="govuk-table__row" key={title} >
             {value ? (
               <>
                 <td className="govuk-table__cell govuk-!-width-one-half">
                   {title}
                 </td>
-                <td className="govuk-table__cell govuk-!-width-one-half">
+                <td
+                  className="govuk-table__cell govuk-!-width-one-half"
+                  data-test={testId}
+                >
                   {currency ? formatCurrency(parseFloat(value)) : value}
                 </td>
               </>
@@ -216,6 +220,40 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                 },
               ]
             : [{ title: 'Neplatil som' }]
+        }
+      />
+      <Summary
+        title="Kúpele"
+        href={'/kupele'}
+        rows={
+          taxFormUserInput.kupele
+            ? [
+                {
+                  title: 'Kúpelné úhrady za seba',
+                  value: taxFormUserInput.danovnikInSpa
+                    ? taxFormUserInput.r076a_kupele_danovnik
+                    : 'Neuplatnuje',
+                  currency: Boolean(taxFormUserInput.danovnikInSpa),
+                  testId: 'r076a_kupele_danovnik',
+                },
+                {
+                  title: 'Kúpelné úhrady za manžela/manželku',
+                  value: taxFormUserInput.r033_partner_kupele
+                    ? taxFormUserInput.r033_partner_kupele_uhrady
+                    : 'Neuplatnuje',
+                  currency: Boolean(taxFormUserInput.r033_partner_kupele),
+                  testId: 'r033_partner_kupele_uhrady',
+                },
+                {
+                  title: 'Kúpelné úhrady za deti',
+                  value: taxFormUserInput.childrenInSpa
+                    ? taxFormUserInput.r036_deti_kupele
+                    : 'Neuplatnuje',
+                  currency: Boolean(taxFormUserInput.childrenInSpa),
+                  testId: 'r036_deti_kupele',
+                },
+              ]
+            : [{ title: 'Nenavštívil' }]
         }
       />
       <Summary
