@@ -1,3 +1,15 @@
+.autocompleteField::after {
+  content: '▼' !important;
+  position: absolute;
+  width: 30px;
+  height: 36px;
+  line-height: 36px;
+  right: 2px;
+  top: 35px;
+  pointer-events: none;
+  color: rgba(0,0,0,.7);
+  background: white;
+}
 .autocompleteFieldLoading {
   position: relative;
 }
@@ -5,9 +17,9 @@
   padding-right: 40px;
 }
 .autocompleteFieldLoading::after {
-  content: '';
+  content: '' !important;
   position: absolute;
-  width: 40px;
+  width: 30px;
   height: 40px;
   right: 5px;
   top: 32px;

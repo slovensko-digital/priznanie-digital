@@ -6,6 +6,7 @@ import {
   numberInputRegexp,
   formatPsc,
   formatIco,
+  translit,
 } from '../src/lib/utils'
 
 describe('utils', () => {
@@ -106,6 +107,12 @@ describe('utils', () => {
 
     it('should remove last number and space when using backspace after second space', () => {
       expect(formatIco('12 345', '12 345 ')).toBe('12 34')
+    })
+  })
+
+  describe('#translit', () => {
+    it('should replace accented characters', () => {
+      expect(translit('ľščťžýáíéúäôň-qwe123')).toBe('lsctzyaieuaon-qwe123')
     })
   })
 })

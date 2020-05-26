@@ -66,3 +66,6 @@ export const formatRodneCislo = (value: string, withSlash = true) =>
   value
     .replace(/\D/g, '')
     .replace(/^(\d{6})(\d{4})$/, withSlash ? '$1 / $2' : '$1$2')
+
+export const translit = (value: string) =>
+  value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
