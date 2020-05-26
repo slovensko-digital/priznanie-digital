@@ -13,7 +13,7 @@ const options = {
   location: 30,
   distance: 100,
   minMatchCharLength: 2,
-  keys: ['code', 'label'],
+  keys: ['code', 'label', 'translit'],
 }
 
 function useFuse<T>(data: T[]): Fuse<T, { includeScore: true }> {
@@ -109,6 +109,7 @@ export const Nace: React.FC<Props> = ({
         meta.touched && meta.error && 'govuk-form-group--error',
         isLoading ? [styles.autocompleteFieldLoading] : '',
         styles.relative,
+        styles.autocompleteField,
       ])}
     >
       <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>
@@ -136,7 +137,8 @@ export const Nace: React.FC<Props> = ({
         inputProps={inputProps}
         theme={theme}
         shouldRenderSuggestions={() => true}
-        onSuggestionSelected={(_event, { suggestion }) => {
+        onSuggestionSelected={(event, { suggestion }) => {
+          event.preventDefault()
           helpers.setValue(formatNace(suggestion))
         }}
       />
