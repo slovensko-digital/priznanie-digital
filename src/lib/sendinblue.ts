@@ -102,7 +102,7 @@ export const sendEmail = async (params: SendEmailParams) => {
 
 export const makeAttachment = (name: string, content: any) => ({
   name,
-  content: Buffer.from(JSON.stringify(content, null, 4)).toString('base64'),
+  content: Buffer.from(content).toString('base64'),
 })
 
 const createContact = (email: string, attributes: TemplateParams) =>

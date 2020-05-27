@@ -4,9 +4,6 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
-import { EmailForm } from '../../components/EmailForm'
-import { setDate } from '../../lib/utils'
-import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -14,10 +11,7 @@ interface Props {
   postponeUserInput: PostponeUserInput
   setPostponeUserInput: (values: PostponeUserInput) => void
 }
-const Suhrn: NextPage<Props> = ({
-  postponeUserInput,
-  setPostponeUserInput,
-}: Props) => {
+const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -115,6 +109,10 @@ const Suhrn: NextPage<Props> = ({
         </tbody>
       </table>
 
+      {/*
+
+      TODO: odklad sa zatial nepouziva, a <EmailForm /> sa zmenil, tak nebudeme udrziavat nepouzivane stranky
+
       <div className="box">
         {postponeUserInput.email ? (
           <p>
@@ -148,6 +146,7 @@ const Suhrn: NextPage<Props> = ({
           />
         )}
       </div>
+      */}
 
       <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">

@@ -7,6 +7,7 @@ import { getRoutes } from '../lib/routes'
 import { setDate } from '../lib/utils'
 import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
+import { downloadPdf } from '../lib/api'
 
 const { previousRoute } = getRoutes('/stiahnut')
 
@@ -42,6 +43,18 @@ const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
           }}
         >
           Stiahnuť dáta (XML)
+        </button>
+        <p>&nbsp;</p>
+        <p>Môžete si stiahnuť aj PDF súbor.</p>
+        <button
+          type="submit"
+          className="btn-secondary govuk-button govuk-button--large"
+          onClick={async () => {
+            const pdf = await downloadPdf(taxForm)
+            fileDownload(pdf, 'danove_priznanie.pdf')
+          }}
+        >
+          Stiahnuť dáta (PDF)
         </button>
       </div>
 

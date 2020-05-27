@@ -50,7 +50,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r005_meno: firstName,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
-    r009_psc: `${input.r009_psc}`.replace(/\D/, ''),
+    r009_psc: `${input.r009_psc}`.replace(/\D/g, ''),
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
 
@@ -303,7 +303,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         obchMeno: input.r142_obchMeno,
         ulica: input.r142_ulica,
         cislo: input.r142_cislo,
-        psc: input.r142_psc,
+        psc: input.r142_psc.replace(/\D/g, ''),
         obec: input.r142_obec,
         suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
       }

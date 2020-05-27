@@ -4,9 +4,8 @@ import { NextPage } from 'next'
 import { TaxForm } from '../types/TaxForm'
 
 import { getRoutes } from '../lib/routes'
-import { formatCurrency, setDate } from '../lib/utils'
+import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
-import { convertToXML } from '../lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
 const { previousRoute, nextRoute } = getRoutes('/vysledky')
@@ -119,7 +118,8 @@ const Vysledky: NextPage<Props> = ({
         {taxFormUserInput.email ? (
           <p>
             Na váš email <strong>{taxFormUserInput.email}</strong> sme odoslali
-            XMl súbor potrebný pre odklad dane.
+            XML súbor potrebný pre odklad dane a tiež PDF verziu daňového
+            priznania.
             <br />
             {taxFormUserInput.newsletter && 'Pošleme vám aj newsletter.'}
           </p>
@@ -127,7 +127,7 @@ const Vysledky: NextPage<Props> = ({
           <EmailForm
             label="Pošleme vám tento výpočet dane na email?"
             hint="Bude sa vám hodiť pri úhrade daní"
-            attachment={convertToXML(setDate(taxForm))}
+            taxForm={taxForm}
             saveForm={(email, newsletter) => {
               setTaxFormUserInput({ email, newsletter })
             }}
