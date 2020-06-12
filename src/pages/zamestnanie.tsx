@@ -56,11 +56,21 @@ const Zamestnanie: NextPage<Props> = ({
                   name="r038"
                   type="number"
                   label="Úhrn príjmov od všetkých zamestnávateľov"
+                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
                 />
+                {/* TODO: Pridat input
+                  <Input
+                    name="r038"
+                    type="number"
+                    label="Úhrn príjmov plynúcich na základe dohôd o prácach vykonávaných mimo pracovného pomeru"
+                    hint={`Napríklad na základe Dohody o vykonaní práce. Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01a. Ak ste nemali takýto príjem, vyplňte 0.`}
+                  />
+                */}
                 <Input
                   name="r039"
                   type="number"
                   label="Úhrn povinného poistného"
+                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 02. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
                 />
               </>
             )}

@@ -55,7 +55,8 @@ const Kupele: NextPage<Props> = ({
             <ErrorSummary<SpaUserInput> errors={errors} touched={touched} />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Navstivile ste v minulom roku kupele?"
+                title="Návštivili ste v roku 2019 kúpele a máte doklad o zaplatení?"
+                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či "bločik"), tak si môžete uplatniť nezdaniteľnú časť základu dane na manžela/manželku a vaše deti.`}
                 name="kupele"
               />
               {values.kupele && (
@@ -67,7 +68,8 @@ const Kupele: NextPage<Props> = ({
                       className="govuk-!-margin-bottom-6"
                       name="r076a_kupele_danovnik"
                       type="text"
-                      label="Uhrady v kupeloch za vas"
+                      label="Aké sú vaše preukazáteľné výdavky za služby v liečebných kúpeľoch?"
+                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
                     />
                   )}
 
@@ -81,6 +83,7 @@ const Kupele: NextPage<Props> = ({
                       name="r033_partner_kupele_uhrady"
                       type="text"
                       label="Uhrady v kupeloch za partnera"
+                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
                     />
                   )}
                   {shouldShowChildren && (
@@ -106,7 +109,8 @@ const Kupele: NextPage<Props> = ({
                             className="govuk-!-margin-bottom-6"
                             name="r036_deti_kupele"
                             type="text"
-                            label="Uhrady v kupeloch za deti"
+                            label="Boli ste s deťmi v kúpeľoch a uplatňujete si preukázateľne výdavky?"
+                            hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur na každé dieťa."
                           />
                         </>
                       )}
