@@ -17,6 +17,7 @@ interface Props {
 
 const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false)
 
   return (
     <>
@@ -49,10 +50,14 @@ const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
         <button
           type="submit"
           className="btn-secondary govuk-button govuk-button--large"
+          style={{ cursor: isDownloadingPdf ? 'progress' : 'pointer' }}
           onClick={async () => {
+            setIsDownloadingPdf(true)
             const pdf = await downloadPdf(taxForm)
             fileDownload(pdf, 'danove_priznanie.pdf')
+            setIsDownloadingPdf(false)
           }}
+          disabled={isDownloadingPdf}
         >
           Stiahnuť dáta (PDF)
         </button>

@@ -154,15 +154,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // ***** PAGE 2
   tpl.nextPage()
 
-  // TODO: toto je zle: https://trello.com/c/aiPqc2Ta/65-iii-pilier-ide-do-riadku-30-je-to-v%C3%B4bec-spr%C3%A1vne
-  if (form.r029_poberal_dochodok) {
-    // r029_poberal_dochodok
-    tpl.write(FIRST_COLUMN + 440, 650, 'x')
-
-    // r030_vyska_dochodku
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 479, 615, form.r030_vyska_dochodku)
-  }
-
   if (form.r032_uplatnujem_na_partnera || form.r033_partner_kupele) {
     // r031_priezvisko_a_meno
     tpl.write(FIRST_COLUMN + 10, 563, form.r031_priezvisko_a_meno)
@@ -393,6 +384,15 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   // r074_znizenie_partner
   tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 448, form.r074_znizenie_partner)
+
+  // 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur
+  if (form.r075_platil_prispevky_na_dochodok) {
+    tpl.writeNumberToBoxes(
+      FIRST_COLUMN + 390,
+      423,
+      form.r075_zaplatene_prispevky_na_dochodok,
+    )
+  }
 
   // r076_kupele_spolu
   tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 386, form.r076_kupele_spolu)

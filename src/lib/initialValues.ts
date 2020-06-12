@@ -59,8 +59,8 @@ export const childrenUserInputInitialValues: ChildrenUserInput = {
 }
 
 export const pensionInitialValues: PensionUserInput = {
-  r029_poberal_dochodok: undefined,
-  r030_vyska_dochodku: '',
+  platil_prispevky_na_dochodok: undefined,
+  r075_zaplatene_prispevky_na_dochodok: '',
 }
 
 export const mortgageInitialValues: MortgageUserInput = {

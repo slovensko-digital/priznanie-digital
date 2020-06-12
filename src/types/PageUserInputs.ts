@@ -46,7 +46,7 @@ export type PersonalInformationPostponePage = Pick<
 
 export type PensionUserInput = Pick<
   TaxFormUserInput,
-  'r029_poberal_dochodok' | 'r030_vyska_dochodku'
+  'platil_prispevky_na_dochodok' | 'r075_zaplatene_prispevky_na_dochodok'
 >
 
 export type MortgageUserInput = Pick<

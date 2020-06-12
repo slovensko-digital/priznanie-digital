@@ -42,10 +42,9 @@ export interface TaxFormUserInput {
   r011_stat: string
 
   /** SECTION Dochodok */
-  /** Poberal (a) som na začiatku zdaňovacieho obdobia dôchodok (ky) uvedený (é) v § 11 ods. 6 zákona alebo mi bol tento (tieto) dôchodok (ky) priznaný (é) spätne k začiatku príslušného zdaňovacieho obdobia (vypĺňa sa, len ak daňovník bol poberateľom dôchodku uvedeného v § 11 ods. 6 zákona na začiatku zdaňovacieho obdobia alebo mu tento dôchodok bol priznaný spätne k začiatku príslušného zdaňovacieho obdobia)  */
-  r029_poberal_dochodok?: boolean
-  /** Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za zdaňovacie obdobie (v eurách) */
-  r030_vyska_dochodku?: string
+  /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
+  platil_prispevky_na_dochodok?: boolean
+  r075_zaplatene_prispevky_na_dochodok?: string
 
   /** SECTION  Partner*/
   r031_priezvisko_a_meno?: string

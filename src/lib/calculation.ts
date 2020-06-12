@@ -55,8 +55,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r011_stat: input.r011_stat,
 
     /** SECTION Dochodok */
-    r029_poberal_dochodok: input?.r029_poberal_dochodok ?? false,
-    r030_vyska_dochodku: parse(input?.r030_vyska_dochodku ?? '0'),
+    r075_platil_prispevky_na_dochodok:
+      input?.platil_prispevky_na_dochodok ?? false,
+    r075_zaplatene_prispevky_na_dochodok: Math.min(
+      180,
+      parse(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+    ),
 
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
@@ -136,12 +140,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r073() {
       return this.r072_pred_znizenim > 20507 // TODO test both cases here
-        ? Math.max(
-            0,
-            9064.094 -
-              (1 / 4) * (this.r072_pred_znizenim - this.r030_vyska_dochodku),
-          )
-        : Math.max(0, NEZDANITELNA_CAST_ZAKLADU - this.r030_vyska_dochodku)
+        ? Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim)
+        : Math.max(0, NEZDANITELNA_CAST_ZAKLADU)
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
@@ -174,9 +174,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r077_nezdanitelna_cast() {
       return Math.min(
-        this.r073 + this.r074_znizenie_partner + this.r076_kupele_spolu,
+        this.r073 +
+          this.r074_znizenie_partner +
+          this.r075_zaplatene_prispevky_na_dochodok +
+          this.r076_kupele_spolu,
         this.r072_pred_znizenim,
-      ) // TODO + tf.r075;
+      )
     },
     get r078_zaklad_dane_z_prijmov() {
       return Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0)

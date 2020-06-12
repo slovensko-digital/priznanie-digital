@@ -15,6 +15,7 @@ import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute } from '../../src/lib/routes'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
+import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -101,7 +102,7 @@ describe('Employment page', function () {
 
     // Should submit and next page should be parter
     next()
-    cy.url().should('include', '/partner')
+    assertUrl('/partner')
   })
 })
 
@@ -299,6 +300,43 @@ describe('Children page', function () {
   })
 })
 
+describe('Pension page', function () {
+  it('has working ui', function () {
+    cy.visit('/dochodok')
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click()
+    assertUrl('/deti')
+
+    //  Go back to our page
+    cy.visit('/dochodok')
+
+    // Shows error, when presses next without interaction
+    next()
+    getError().should('have.length', 1)
+
+    // When presses no, continues to next page
+    cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
+    next()
+    assertUrl('/hypoteka')
+
+    //  Go back to our page
+    cy.visit('/dochodok')
+
+    // When presses yes, additional fields appear
+    cy.get('[data-test=platil_prispevky_na_dochodok-input-yes]').click()
+
+    // All aditional fields should be required
+    next()
+    getError().should('have.length', 1)
+
+    typeToInput('r075_zaplatene_prispevky_na_dochodok', withPensionInput)
+
+    next()
+    assertUrl('/hypoteka')
+  })
+})
+
 describe('twoPercent page', function () {
   it('has working ui', function () {
     cy.visit('/dve-percenta')
@@ -331,7 +369,7 @@ describe('twoPercent page', function () {
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
-    cy.url().should('include', '/osobne-udaje')
+    assertUrl('/osobne-udaje')
   })
   it('with autoform', function () {
     cy.visit('/dve-percenta')
@@ -353,7 +391,7 @@ describe('twoPercent page', function () {
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
-    cy.url().should('include', '/osobne-udaje')
+    assertUrl('/osobne-udaje')
   })
   it('works with no', function () {
     cy.visit('/dve-percenta')
@@ -362,7 +400,7 @@ describe('twoPercent page', function () {
     next()
     getError().should('have.length', 0)
 
-    cy.url().should('include', '/osobne-udaje')
+    assertUrl('/osobne-udaje')
   })
 })
 
@@ -372,7 +410,7 @@ describe('Spa page', function () {
     getInput('kupele', '-no').click()
     next()
     getError().should('have.length', 0)
-    cy.url().should('include', '/dve-percenta')
+    assertUrl('/dve-percenta')
   })
   it('Links and errors', function () {
     cy.visit('/kupele')
@@ -431,7 +469,7 @@ describe('Spa page', function () {
     )
 
     next()
-    cy.get('[data-test=r029_poberal_dochodok-input-no]').click()
+    cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
     cy.get('[data-test=r037_uplatnuje_uroky-input-no]').click()
     next()

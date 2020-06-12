@@ -139,11 +139,11 @@ describe('Cases', function () {
           /**  SECTION Dochodok */
           assertUrl('/dochodok')
 
-          if (input.r029_poberal_dochodok) {
-            getInput('r029_poberal_dochodok', '-yes').click()
-            typeToInput('r030_vyska_dochodku', input)
+          if (input.platil_prispevky_na_dochodok) {
+            getInput('platil_prispevky_na_dochodok', '-yes').click()
+            typeToInput('r075_zaplatene_prispevky_na_dochodok', input)
           } else {
-            getInput('r029_poberal_dochodok', '-no').click()
+            getInput('platil_prispevky_na_dochodok', '-no').click()
           }
 
           next()

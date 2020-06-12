@@ -15,8 +15,8 @@ export const withPensionInput: TaxFormUserInput = {
   datum: '22.02.2020',
 
   /** Pension */
-  r029_poberal_dochodok: true,
-  r030_vyska_dochodku: '800',
+  platil_prispevky_na_dochodok: true,
+  r075_zaplatene_prispevky_na_dochodok: '800',
 
   hasChildren: false,
   children: [],
