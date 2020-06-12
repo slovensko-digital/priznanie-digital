@@ -152,6 +152,7 @@ export const Feedback: React.FC<Props> = ({
             data-test="feedback"
             onClick={(e) => {
               e.preventDefault()
+              setIsSubmittedSuccessfully(undefined)
               setIsOpen(true)
             }}
           >

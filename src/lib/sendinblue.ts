@@ -28,10 +28,9 @@ export interface TaxTemplateParams extends BaseTemplateParams {
 }
 
 export interface BaseTemplateParams {
-  firstname: string
-  lastname: string
+  firstName: string
+  lastName: string
   newsletter: boolean
-  form: string
 }
 
 export interface SendEmailAttachment {
@@ -105,40 +104,45 @@ export const makeAttachment = (name: string, content: any) => ({
   content: Buffer.from(content).toString('base64'),
 })
 
-const createContact = (email: string, attributes: TemplateParams) =>
+export interface Contact {
+  email: string
+  firstName: string
+  lastName: string
+  listIds: number[]
+}
+
+const mapContactAttributes = ({ firstName, lastName, listIds }: Contact) => ({
+  listIds,
+  attributes: {
+    firstName,
+    lastName,
+  },
+})
+
+const createContact = (contact: Contact) =>
   fetch(`${baseUrl}/contacts`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      email,
-      attributes,
+      email: contact.email,
+      ...mapContactAttributes(contact),
     }),
   })
 
-const updateContact = (email: string, attributes: TemplateParams) =>
-  fetch(`${baseUrl}/contacts/${email}`, {
+const updateContact = (contact: Contact) =>
+  fetch(`${baseUrl}/contacts/${contact.email}`, {
     method: 'PUT',
     headers,
-    body: JSON.stringify({ attributes }),
+    body: JSON.stringify(mapContactAttributes(contact)),
   })
 
-const getContact = (email: string) =>
-  fetch(`${baseUrl}/contacts/${email}`, { headers })
-
-export const createOrUpdateContact = async (
-  email: string,
-  params: TemplateParams,
-): Promise<Response> => {
-  const saveReponse = await createContact(email, params)
+export const createOrUpdateContact = async (contact: Contact) => {
+  const saveReponse = await createContact(contact)
   if (!saveReponse.ok) {
     const saveReponseJson = await saveReponse.json()
     if (saveReponseJson.code === 'duplicate_parameter') {
-      const savedContact = await (await getContact(email)).json()
-      const form = savedContact.attributes.FORM || ''
-      return await updateContact(email, {
-        ...params,
-        form: form.includes(params.form) ? form : `${form},${params.form}`,
-      })
+      const updateResponse = await updateContact(contact)
+      return updateResponse
     }
   }
   return saveReponse

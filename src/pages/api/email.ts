@@ -13,6 +13,7 @@ const templates = {
   tax: parseInt(process.env.sendinblue_tpl_tax, 10),
   postpone: parseInt(process.env.sendinblue_tpl_postpone, 10),
 }
+const contactListId = parseInt(process.env.sendinblue_list_id, 10)
 
 export default async (
   req: NextApiRequest,
@@ -20,13 +21,20 @@ export default async (
 ): Promise<void> => {
   const email = `${req.body.email}`
   const params = req.body.params as TemplateParams
+  const template = req.query.tpl ? `${req.query.tpl}` : 'tax'
+  const taxForm = req.body.taxForm
 
-  const attachmentXml = convertToXML(setDate(req.body.taxForm))
-  const attachmentPdf = buildPdf(req.body.taxForm)
+  if (!email || !params || !template || !taxForm) {
+    res.statusCode = 400
+    return res.send({ message: 'Invalid params' })
+  }
+
+  const attachmentXml = convertToXML(setDate(taxForm))
+  const attachmentPdf = buildPdf(taxForm)
 
   try {
     const sendEmailResponse = await sendEmail({
-      templateId: templates[params.form],
+      templateId: templates[template],
       to: email,
       params,
       attachment: [
@@ -38,11 +46,17 @@ export default async (
       ],
     })
 
-    if (sendEmailResponse.ok) {
-      const contactResponse = await createOrUpdateContact(email, params)
+    if (sendEmailResponse.ok && params.newsletter) {
+      const { firstName, lastName } = params
+      const contactResponse = await createOrUpdateContact({
+        email,
+        firstName,
+        lastName,
+        listIds: [contactListId],
+      })
       if (!contactResponse.ok) {
         res.statusCode = contactResponse.status
-        return res.send({ ...contactResponse })
+        return res.send(contactResponse)
       }
     }
 

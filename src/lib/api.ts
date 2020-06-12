@@ -28,12 +28,13 @@ export const getNgoByName = async (
   return fetch(`/api/ngo?name=${name}`).then((response) => response.json())
 }
 
-export const saveEmail = async (
+export const sendEmailTemplate = async (
   email: string,
   params: TemplateParams,
   taxForm: TaxForm,
+  template: 'tax' | 'postpone' = 'tax',
 ): Promise<SaveEmailResponse> => {
-  return fetch('/api/email', {
+  return fetch(`/api/email?tpl=${template}`, {
     method: 'POST',
     headers: {
       accept: 'application/json',

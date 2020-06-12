@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { Form, Formik } from 'formik'
 import classNames from 'classnames'
 import { CheckboxSmall, Input } from './FormComponents'
-import { saveEmail } from '../lib/api'
+import { sendEmailTemplate } from '../lib/api'
 import { EmailUserInput } from '../types/UserInput'
 import { TaxForm } from '../types/TaxForm'
 
@@ -33,7 +33,7 @@ export const EmailForm = ({
   saveForm,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
-    const { messageId, code, message } = await saveEmail(
+    const { messageId, code, message } = await sendEmailTemplate(
       email,
       { ...params, newsletter: !!newsletter } as any,
       taxForm,
