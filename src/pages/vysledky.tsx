@@ -132,9 +132,8 @@ const Vysledky: NextPage<Props> = ({
               setTaxFormUserInput({ email, newsletter })
             }}
             params={{
-              form: 'tax',
-              firstname: firstName,
-              lastname: lastNames.join(' '),
+              firstName,
+              lastName: lastNames.join(' '),
               summaryTable: summaryHtml,
             }}
           />
