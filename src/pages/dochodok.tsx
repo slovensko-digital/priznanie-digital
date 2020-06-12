@@ -44,12 +44,12 @@ const Dochodok: NextPage<Props> = ({
           <Form className="form" noValidate>
             <BooleanRadio
               title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
-              name="r029_poberal_dochodok"
+              name="platil_prispevky_na_dochodok"
             />
-            {values.r029_poberal_dochodok && (
+            {values.platil_prispevky_na_dochodok && (
               <>
                 <Input
-                  name="r030_vyska_dochodku"
+                  name="r075_zaplatene_prispevky_na_dochodok"
                   type="number"
                   label="Výška zaplatených príspevkov za rok 2019"
                   hint="Maximálne viete uplatniť príspevky za doplnkové dôchodkové sporenie za rok 2019 do výšky 180 eur."
@@ -69,15 +69,19 @@ const Dochodok: NextPage<Props> = ({
 export const validate = (values: PensionUserInput) => {
   const errors: Partial<FormErrors<PensionUserInput>> = {}
 
-  if (typeof values.r029_poberal_dochodok === 'undefined') {
-    errors.r029_poberal_dochodok = 'Vyznačte odpoveď'
+  if (typeof values.platil_prispevky_na_dochodok === 'undefined') {
+    errors.platil_prispevky_na_dochodok = 'Vyznačte odpoveď'
   }
 
-  if (values.r029_poberal_dochodok) {
-    if (!values.r030_vyska_dochodku) {
-      errors.r030_vyska_dochodku = 'Zadajte výšku zaplatených príspevkov'
-    } else if (!values.r030_vyska_dochodku.match(numberInputRegexp)) {
-      errors.r030_vyska_dochodku = 'Zadajte výšku príspevkov vo formáte 123,45'
+  if (values.platil_prispevky_na_dochodok) {
+    if (!values.r075_zaplatene_prispevky_na_dochodok) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Zadajte výšku zaplatených príspevkov'
+    } else if (
+      !values.r075_zaplatene_prispevky_na_dochodok.match(numberInputRegexp)
+    ) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Zadajte výšku príspevkov vo formáte 123,45'
     }
   }
 

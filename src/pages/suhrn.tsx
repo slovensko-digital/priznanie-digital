@@ -192,11 +192,11 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
         title="Príspevky na doplnkové dôchodkové poistenie (III. pilier)"
         href={'/dochodok'}
         rows={
-          taxFormUserInput.r029_poberal_dochodok
+          taxFormUserInput.platil_prispevky_na_dochodok
             ? [
                 {
                   title: 'Výška zaplatených príspevkov',
-                  value: taxFormUserInput.r030_vyska_dochodku,
+                  value: taxFormUserInput.r075_zaplatene_prispevky_na_dochodok,
                   currency: true,
                 },
               ]

@@ -25,8 +25,8 @@ export const completeInput: TaxFormUserInput = {
   r037_pocetMesiacov: '12',
 
   /** SECTION Pension */
-  r029_poberal_dochodok: true,
-  r030_vyska_dochodku: '800',
+  platil_prispevky_na_dochodok: true,
+  r075_zaplatene_prispevky_na_dochodok: '800',
 
   /** SECTION Partner */
   r031_priezvisko_a_meno: 'Fake Fake',
