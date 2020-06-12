@@ -18,7 +18,7 @@ const mapChild = (child: ChildInput): Child => {
 
   return {
     priezviskoMeno: child.priezviskoMeno,
-    rodneCislo: child.rodneCislo,
+    rodneCislo: child.rodneCislo.replace(/\D/g, ''),
     kupelnaStarostlivost: child.kupelnaStarostlivost,
     m00: child.wholeYear,
     m01: !child.wholeYear && monthFrom === 0,
@@ -60,7 +60,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
-    r031_rodne_cislo: input?.r031_rodne_cislo ?? '',
+    r031_rodne_cislo: input?.r031_rodne_cislo
+      ? input?.r031_rodne_cislo.replace(/\D/g, '')
+      : '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
     r032_partner_vlastne_prijmy: parse(
       input?.r032_partner_vlastne_prijmy ?? '0',

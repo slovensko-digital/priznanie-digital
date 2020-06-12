@@ -1,3 +1,5 @@
+import { rodnecislo } from 'rodnecislo'
+
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
   Object.keys(object)
@@ -62,10 +64,21 @@ export const formatIco = (newValue: string, previousValue = '') => {
   }
 }
 
-export const formatRodneCislo = (value: string, withSlash = true) =>
-  value
-    .replace(/\D/g, '')
-    .replace(/^(\d{6})(\d{4})$/, withSlash ? '$1 / $2' : '$1$2')
-
 export const translit = (value: string) =>
   value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+
+export const formatRodneCislo = (newValue: string, previousValue = '') => {
+  const formattedNewValue = newValue.replace(/\D/g, '')
+  if (`${newValue} ` === previousValue) {
+    return newValue.slice(0, -3)
+  } else {
+    return formattedNewValue.replace(/^(\d{6})/, '$1 / ')
+  }
+}
+
+export const validateRodneCislo = (value: string): boolean => {
+  return (
+    /^\d{6} \/ \d{3,4}$/.test(value) &&
+    rodnecislo(value.replace(' / ', '')).isValid()
+  )
+}

@@ -20,7 +20,7 @@ import {
 import { getRoutes } from '../lib/routes'
 import { makeEmptyChild } from '../lib/initialValues'
 import classnames from 'classnames'
-import { rodnecislo } from 'rodnecislo'
+import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 
 const { nextRoute, previousRoute } = getRoutes('/deti')
 
@@ -52,7 +52,7 @@ const Deti: NextPage<Props> = ({
           router.push(nextRoute())
         }}
       >
-        {({ values, setErrors, validateForm }) => (
+        {({ values, setErrors, validateForm, setFieldValue }) => (
           <Form className="form">
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
@@ -94,6 +94,7 @@ const Deti: NextPage<Props> = ({
                           savedValues={child}
                           index={index}
                           key={index}
+                          setFieldValue={setFieldValue}
                         />
                       </div>
                     ))}
@@ -130,8 +131,9 @@ const Deti: NextPage<Props> = ({
 interface ChildFormProps {
   index: number
   savedValues: ChildInput
+  setFieldValue: (name: string, value: string) => void
 }
-const ChildForm = ({ savedValues, index }: ChildFormProps) => {
+const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
   return (
     <>
       <Input
@@ -145,6 +147,14 @@ const ChildForm = ({ savedValues, index }: ChildFormProps) => {
         type="text"
         label="Rodné číslo"
         width="auto"
+        maxLength={13}
+        onChange={async (event) => {
+          const pscValue = formatRodneCislo(
+            event.currentTarget.value,
+            savedValues.rodneCislo,
+          )
+          setFieldValue(`children[${index}].rodneCislo`, pscValue)
+        }}
       />
       <div className="govuk-form-group">
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -207,8 +217,8 @@ export const validate = (values: ChildrenUserInput) => {
       }
       if (!childValues.rodneCislo) {
         childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
-      } else if (!rodnecislo(childValues.rodneCislo).isValid()) {
-        childErrors.rodneCislo = 'Zadajte rodné číslo (bez medzier)'
+      } else if (!validateRodneCislo(childValues.rodneCislo)) {
+        childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
       } else if (
         values.children
           .slice(0, index)

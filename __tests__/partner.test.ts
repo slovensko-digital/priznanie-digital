@@ -36,17 +36,17 @@ describe('partner', () => {
         input: {
           r032_uplatnujem_na_partnera: true,
           r031_priezvisko_a_meno: 'Jenny Bravo',
-          r031_rodne_cislo: '020314/8286',
+          r031_rodne_cislo: '0203148286',
           r032_partner_vlastne_prijmy: '500',
           r032_partner_pocet_mesiacov: '1',
         },
-        expected: [],
+        expected: ['r031_rodne_cislo'],
       },
       {
         input: {
           r032_uplatnujem_na_partnera: true,
           r031_priezvisko_a_meno: 'Jenny Bravo',
-          r031_rodne_cislo: '0203148286',
+          r031_rodne_cislo: '020314 / 8286',
           r032_partner_vlastne_prijmy: '500',
           r032_partner_pocet_mesiacov: '1',
         },

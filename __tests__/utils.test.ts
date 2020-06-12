@@ -7,6 +7,8 @@ import {
   formatPsc,
   formatIco,
   translit,
+  formatRodneCislo,
+  validateRodneCislo,
 } from '../src/lib/utils'
 
 describe('utils', () => {
@@ -113,6 +115,52 @@ describe('utils', () => {
   describe('#translit', () => {
     it('should replace accented characters', () => {
       expect(translit('ľščťžýáíéúäôň-qwe123')).toBe('lsctzyaieuaon-qwe123')
+    })
+  })
+
+  describe('#formatRodneCislo', () => {
+    it('should add slash (with spaces) after first 6 digits', () => {
+      expect(formatRodneCislo('801010', '')).toBe('801010 / ')
+    })
+
+    it('should remove last number and slash (with spaces) when using backspace after slash (with spaces)', () => {
+      expect(formatRodneCislo('801010 /', '801010 / ')).toBe('80101')
+    })
+  })
+
+  describe('#validateRodneCislo', () => {
+    describe('for valid values', () => {
+      const validInputs = [
+        '111111 / 111',
+        '110124 / 041',
+        '110124 / 0415',
+        '110124 / 0426',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return true for value "${value}"`, () => {
+          expect(validateRodneCislo(value)).toBe(true)
+        })
+      })
+    })
+
+    describe('for invalid values', () => {
+      const validInputs = [
+        '950215453',
+        '9502154530',
+        '950215/4530',
+        '950215 4530',
+        '950215 / 453',
+        '110124 / 0422',
+        '521111 / 1114',
+        '950215 / 45301',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return false for value "${value}"`, () => {
+          expect(validateRodneCislo(value)).toBe(false)
+        })
+      })
     })
   })
 })
