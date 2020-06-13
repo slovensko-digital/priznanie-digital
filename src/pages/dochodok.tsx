@@ -52,6 +52,7 @@ const Dochodok: NextPage<Props> = ({
                   name="r030_vyska_dochodku"
                   type="number"
                   label="Výška zaplatených príspevkov za rok 2019"
+                  hint="Maximálne viete uplatniť príspevky za doplnkové dôchodkové sporenie za rok 2019 do výšky 180 eur."
                 />
               </>
             )}
