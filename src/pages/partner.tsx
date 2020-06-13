@@ -3,13 +3,16 @@ import Link from 'next/link'
 import { Form } from 'formik'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { rodnecislo } from 'rodnecislo'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { getRoutes } from '../lib/routes'
-import { numberInputRegexp } from '../lib/utils'
+import {
+  formatRodneCislo,
+  numberInputRegexp,
+  validateRodneCislo,
+} from '../lib/utils'
 
 const { nextRoute, previousRoute } = getRoutes('/partner')
 
@@ -74,7 +77,7 @@ const Partner: NextPage<Props> = ({
           router.push(nextRoute())
         }}
       >
-        {({ values, errors, touched }) => (
+        {({ values, errors, touched, setFieldValue }) => (
           <Form className="form" noValidate>
             <BooleanRadio
               title="Uplatňujete si daňový bonus na manželku/manžela?"
@@ -95,6 +98,14 @@ const Partner: NextPage<Props> = ({
                   name="r031_rodne_cislo"
                   type="text"
                   label="Rodné číslo"
+                  maxLength={13}
+                  onChange={async (event) => {
+                    const pscValue = formatRodneCislo(
+                      event.currentTarget.value,
+                      values.r031_rodne_cislo,
+                    )
+                    setFieldValue('r031_rodne_cislo', pscValue)
+                  }}
                 />
                 <Input
                   name="r032_partner_vlastne_prijmy"
@@ -143,8 +154,8 @@ export const validate = (values: PartnerUserInput) => {
     }
     if (!values.r031_rodne_cislo) {
       errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
-    } else if (!rodnecislo(values.r031_rodne_cislo).isValid()) {
-      errors.r031_rodne_cislo = 'Zadajte rodné číslo (bez medzier)'
+    } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
+      errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
     }
 
     if (!values.r032_partner_vlastne_prijmy) {

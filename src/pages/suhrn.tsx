@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { getRoutes } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency, formatRodneCislo } from '../lib/utils'
+import { formatCurrency } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { TaxForm } from '../types/TaxForm'
@@ -148,7 +148,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                 },
                 {
                   title: 'Rodné číslo',
-                  value: formatRodneCislo(taxFormUserInput.r031_rodne_cislo),
+                  value: taxFormUserInput.r031_rodne_cislo,
                 },
                 {
                   title: 'Vlastné príjmy manželky / menžela',
@@ -177,7 +177,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
                   {
                     title: 'Rodné číslo',
-                    value: formatRodneCislo(child.rodneCislo),
+                    value: child.rodneCislo,
                   },
                 ])
                 .reduce((result, value) => [...result, ...value], [])
