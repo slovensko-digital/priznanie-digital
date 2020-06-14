@@ -73,6 +73,11 @@ export const Input = <Name extends keyof UserInput>({
         {label}
       </label>
       <span className="govuk-hint">{hint}</span>
+      {meta.error ? (
+        <span id={props.name} data-test="error" className="govuk-error-message">
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
       <input
         id={props.name}
         className={classnames('govuk-input', {
@@ -84,15 +89,6 @@ export const Input = <Name extends keyof UserInput>({
         {...props}
         type="text"
       />
-      {meta.error ? (
-        <span
-          id={props.name}
-          data-test="error"
-          className="govuk-error-message govuk-!-margin-top-2 govuk-!-margin-bottom-0"
-        >
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
-        </span>
-      ) : null}
     </div>
   )
 }
@@ -112,12 +108,22 @@ export const BooleanRadio = <Name extends keyof UserInput>({
   const [field, meta, helpers] = useField(props.name)
 
   return (
-    <div className="govuk-form-group">
+    <div
+      className={classnames([
+        'govuk-form-group',
+        meta.error && 'govuk-form-group--error',
+      ])}
+    >
       <fieldset className="govuk-fieldset">
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
         {hint ? <span className="govuk-hint">{hint}</span> : null}
+        {meta.error ? (
+          <span data-test="error" className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          </span>
+        ) : null}
         <div className="govuk-radios">
           <div className="govuk-radios__item">
             <input
@@ -164,14 +170,6 @@ export const BooleanRadio = <Name extends keyof UserInput>({
             </label>
           </div>
         </div>
-        {meta.error ? (
-          <span
-            data-test="error"
-            className="govuk-error-message govuk-!-margin-top-3"
-          >
-            <span className="govuk-visually-hidden">Error:</span> {meta.error}
-          </span>
-        ) : null}
       </fieldset>
     </div>
   )
@@ -197,6 +195,11 @@ export const Checkbox = <Name extends keyof UserInput>({
           <h1 className="govuk-fieldset__heading">{title}</h1>
         </legend>
         {hint ? <span className="govuk-hint">{hint}</span> : null}
+        {meta.error ? (
+          <span id={props.name} className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          </span>
+        ) : null}
         <div className="govuk-checkboxes">
           <div className="govuk-checkboxes__item">
             <input
@@ -213,11 +216,6 @@ export const Checkbox = <Name extends keyof UserInput>({
               {label ?? 'Ano'}
             </label>
           </div>
-          {meta.error ? (
-            <span id={props.name} className="govuk-error-message">
-              <span className="govuk-visually-hidden">Error:</span> {meta.error}
-            </span>
-          ) : null}
         </div>
       </fieldset>
     </div>
@@ -240,6 +238,11 @@ export const CheckboxSmall = ({
   const [field, meta] = useField(name)
   return (
     <div className={classnames(['govuk-checkboxes__item', className])}>
+      {meta.error ? (
+        <span id={name} className="govuk-error-message">
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
       <input
         {...field}
         {...props}
@@ -253,11 +256,6 @@ export const CheckboxSmall = ({
       <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
         {label}
       </label>
-      {meta.error ? (
-        <span id={name} className="govuk-error-message">
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
-        </span>
-      ) : null}
     </div>
   )
 }
@@ -293,6 +291,11 @@ export const Select = ({
       <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>
         {label}
       </label>
+      {meta.error ? (
+        <span id={name} data-test="error" className="govuk-error-message">
+          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+        </span>
+      ) : null}
       <select
         className="govuk-select"
         style={{ width: '100%' }}
@@ -309,15 +312,6 @@ export const Select = ({
           </option>
         ))}
       </select>
-      {meta.error ? (
-        <span
-          id={name}
-          data-test="error"
-          className="govuk-error-message govuk-!-margin-top-2 govuk-!-margin-bottom-0"
-        >
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
-        </span>
-      ) : null}
     </div>
   )
 }
