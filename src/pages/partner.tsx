@@ -62,6 +62,27 @@ const Partner: NextPage<Props> = ({
     </React.Fragment>
   )
 
+  const r032hint = (
+    <>
+      <p className="govuk-hint">
+        Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň jednu z týchto
+        podmienok:
+      </p>
+      <ol>
+        <li>
+          staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije v
+          domácnosti;
+        </li>
+        <li>v roku 2019 poberal/-a peňažný príspevok na opatrovanie;</li>
+        <li>bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;</li>
+        <li>
+          je občanom so zdravotným postihnutím alebo s ťažkým zdravotným
+          postihnutím (držiteľom prekazu ŤZP).
+        </li>
+      </ol>
+    </>
+  )
+
   return (
     <>
       <Link href={previousRoute()}>
@@ -80,8 +101,9 @@ const Partner: NextPage<Props> = ({
         {({ values, errors, touched, setFieldValue }) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Uplatňujete si daňový bonus na manželku/manžela?"
+              title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
+              hint={r032hint}
             />
             {values.r032_uplatnujem_na_partnera && (
               <>

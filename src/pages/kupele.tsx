@@ -55,8 +55,8 @@ const Kupele: NextPage<Props> = ({
             <ErrorSummary<SpaUserInput> errors={errors} touched={touched} />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Návštivili ste v roku 2019 kúpele a máte doklad o zaplatení?"
-                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či "bločik"), tak si môžete uplatniť nezdaniteľnú časť základu dane na manžela/manželku a vaše deti.`}
+                title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
+                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či "bločik"), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
                 name="kupele"
               />
               {values.kupele && (
@@ -75,14 +75,14 @@ const Kupele: NextPage<Props> = ({
 
                   <CheckboxSmall
                     name="r033_partner_kupele"
-                    label="Na manzela/manzelku"
+                    label="Na manžela/manželku"
                   />
                   {values.r033_partner_kupele && (
                     <Input
                       className="govuk-!-margin-bottom-6"
                       name="r033_partner_kupele_uhrady"
                       type="text"
-                      label="Uhrady v kupeloch za partnera"
+                      label="Úhrady v kúpeľoch za partnera"
                       hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
                     />
                   )}

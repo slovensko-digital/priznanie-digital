@@ -62,11 +62,11 @@ const PrijmyAVydavky: NextPage<Props> = ({
                   name="priloha3_r11_socialne"
                   type="number"
                   label="Sociálne poistenie"
-                  hint="Celkové uhradené poistné v roku 2019. Uvedťe všetky platby zaplatetné v 2019 - napr. aj nedoplatky za predchádzajúci rok."
+                  hint="Celkové uhradené poistné v roku 2019. Uveďte všetky platby zaplatené v 2019 - napr. aj nedoplatky za predchádzajúci rok."
                 />
                 <Input
                   name="priloha3_r13_zdravotne"
-                  hint="Celkové uhradené poistné v roku 2019. Uvedťe všetky platby zaplatetné v 2019 - napr. aj nedoplatky za predchádzajúci rok."
+                  hint="Celkové uhradené poistné v roku 2019. Uveďte všetky platby zaplatené v 2019 - napr. aj nedoplatky za predchádzajúci rok."
                   type="number"
                   label="Zdravotné poistenie"
                 />
