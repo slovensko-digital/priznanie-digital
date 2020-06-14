@@ -83,7 +83,7 @@ const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
             'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
-        Pokračovať na navody.digital
+        Prejst na návod na podanie daňového priznania
       </button>
     </>
   )
