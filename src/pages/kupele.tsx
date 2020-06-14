@@ -61,7 +61,9 @@ const Kupele: NextPage<Props> = ({
               />
               {values.kupele && (
                 <>
-                  <h2>Na koho si uplatnujete znizenie dane?</h2>
+                  <h2 className="govuk-heading-l">
+                    Na koho si uplatnujete znizenie dane?
+                  </h2>
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
                     <Input
