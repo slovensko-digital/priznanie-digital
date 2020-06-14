@@ -23,6 +23,13 @@ describe('dochodok', () => {
       {
         input: {
           platil_prispevky_na_dochodok: true,
+          r075_zaplatene_prispevky_na_dochodok: '180,01',
+        },
+        expected: ['r075_zaplatene_prispevky_na_dochodok'],
+      },
+      {
+        input: {
+          platil_prispevky_na_dochodok: true,
           r075_zaplatene_prispevky_na_dochodok: '10',
         },
         expected: [],

@@ -8,6 +8,7 @@ import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getRoutes } from '../lib/routes'
 import { numberInputRegexp } from '../lib/utils'
+import { parse } from '../lib/calculation'
 
 const { nextRoute, previousRoute } = getRoutes('/dochodok')
 
@@ -43,7 +44,7 @@ const Dochodok: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
+              title="Platili ste v roku 2019 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
               name="platil_prispevky_na_dochodok"
             />
             {values.platil_prispevky_na_dochodok && (
@@ -52,7 +53,7 @@ const Dochodok: NextPage<Props> = ({
                   name="r075_zaplatene_prispevky_na_dochodok"
                   type="number"
                   label="Výška zaplatených príspevkov za rok 2019"
-                  hint="Maximálne viete uplatniť príspevky za doplnkové dôchodkové sporenie za rok 2019 do výšky 180 eur."
+                  hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
                 />
               </>
             )}
@@ -82,6 +83,9 @@ export const validate = (values: PensionUserInput) => {
     ) {
       errors.r075_zaplatene_prispevky_na_dochodok =
         'Zadajte výšku príspevkov vo formáte 123,45'
+    } else if (parse(values.r075_zaplatene_prispevky_na_dochodok) > 180) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Výška príspevkov nesmie presiahnuť 180,00 eur'
     }
   }
 
