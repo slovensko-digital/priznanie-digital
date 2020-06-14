@@ -61,7 +61,6 @@ const Hypoteka: NextPage<Props> = ({
                   name="r037_pocetMesiacov"
                   type="number"
                   label="Počet mesiacov"
-                  placeholder="Počet mesiacov"
                 />
               </>
             )}

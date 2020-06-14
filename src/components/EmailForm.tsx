@@ -53,13 +53,7 @@ export const EmailForm = ({
     >
       {({ isSubmitting }) => (
         <Form>
-          <Input
-            name="email"
-            type="email"
-            label={label}
-            hint={hint}
-            placeholder="váš email"
-          />
+          <Input name="email" type="email" label={label} hint={hint} />
           <CheckboxSmall
             name="newsletter"
             label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"

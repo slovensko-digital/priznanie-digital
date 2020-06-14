@@ -168,7 +168,6 @@ export const EligiblePartnerForm = ({
       min={1}
       max={12}
       label="Počet mesiacov, kedy manžel/manželka spĺňal/a podmienky?"
-      placeholder="Počet mesiacov"
       hint="Pozor, ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
     />
     {/* <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
