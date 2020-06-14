@@ -52,7 +52,6 @@ export const Input = <Name extends keyof UserInput>({
         pattern: numberInputRegexp,
         inputMode: 'numeric' as 'numeric',
         spellCheck: false,
-        placeholder: 'Suma v EUR, napríklad 123,45',
       }
     }
     return {}
