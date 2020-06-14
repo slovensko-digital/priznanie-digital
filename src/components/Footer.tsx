@@ -37,7 +37,7 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
                 <div className="sdn-footer__contact-content">
                   <strong>Slovensko.Digital</strong>
                   <br />
-                  Staré grunty 12, 841 04 Bratislava
+                  Staré grunty 18, 841 04 Bratislava
                   <br />
                   IČO: 50158635
                   <br />

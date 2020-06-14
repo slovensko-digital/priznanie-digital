@@ -29,60 +29,6 @@ const Partner: NextPage<Props> = ({
   useEffect(() => {
     router.prefetch(nextRoute())
   })
-  const r032hint = (
-    <React.Fragment>
-      <p className="govuk-hint">
-        Vlastným príjmom manželky (manžela) je teda príjem manželky (manžela)
-        znížený o zaplatené poistné a príspevky, ktoré manželka (manžel) bol v
-        príslušnom zdaňovacom období z toho príjmu zaplatiť.
-      </p>
-      <p className="govuk-hint">
-        Do vlastného príjmu manželky (manžela) sa nezahŕňa:
-      </p>
-      <ul>
-        <li>zamestnanecká prémia,</li>
-        <li>daňový bonus na deti,</li>
-        <li>zvýšenie dôchodku pre bezvládnosť,</li>
-        <li>
-          štátne sociálne dávky (patrí sem: príspevok pri narodení dieťaťa,
-          príspevok na viac súčasne narodených detí, príspevok na pohreb,
-          rodičovský príspevok, prídavok na dieťa, príplatok k prídavku na
-          dieťa, vianočný príspevok dôchodcom, príplatok k dôchodku politických
-          väzňov, príspevok športovému reprezentantovi),
-        </li>
-        <li>
-          štipendiu poskytované študentov, ktorý sa sústavne pripravuje na
-          budúce povolanie.
-        </li>
-      </ul>
-      <p className="govuk-hint">
-        Z vyššie uvedeného vyplýva, že do vlastného príjmu manželky (manžela) sa
-        započítava materské, nemocenské dávky, či všetky druhy dôchodkov a pod.
-      </p>
-    </React.Fragment>
-  )
-
-  const r032hint = (
-    <>
-      <p className="govuk-hint">
-        Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň jednu z týchto
-        podmienok:
-      </p>
-      <ol>
-        <li>
-          staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije v
-          domácnosti;
-        </li>
-        <li>v roku 2019 poberal/-a peňažný príspevok na opatrovanie;</li>
-        <li>bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;</li>
-        <li>
-          je občanom so zdravotným postihnutím alebo s ťažkým zdravotným
-          postihnutím (držiteľom prekazu ŤZP).
-        </li>
-      </ol>
-    </>
-  )
-
   return (
     <>
       <Link href={previousRoute()}>
@@ -103,7 +49,6 @@ const Partner: NextPage<Props> = ({
             <BooleanRadio
               title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
-              hint={r032hint}
             />
             {values.r032_uplatnujem_na_partnera && (
               <>
@@ -133,7 +78,6 @@ const Partner: NextPage<Props> = ({
                   name="r032_partner_vlastne_prijmy"
                   type="number"
                   label="Vlastné príjmy manželky/manžela"
-                  hint={r032hint}
                 />
                 <Input
                   name="r032_partner_pocet_mesiacov"
