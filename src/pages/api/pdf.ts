@@ -386,7 +386,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 448, form.r074_znizenie_partner)
 
   // 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur
-  if (form.r075_platil_prispevky_na_dochodok) {
+  if (form.platil_prispevky_na_dochodok) {
     tpl.writeNumberToBoxes(
       FIRST_COLUMN + 390,
       423,
