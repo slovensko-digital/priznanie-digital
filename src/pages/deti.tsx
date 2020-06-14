@@ -17,7 +17,7 @@ import {
   monthNames,
   TaxFormUserInput,
 } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { makeEmptyChild } from '../lib/initialValues'
 import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
@@ -35,7 +35,8 @@ const Deti: NextPage<Props> = ({
   const router = useRouter()
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
 
   return (
     <>

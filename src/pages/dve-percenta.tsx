@@ -11,7 +11,7 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import styles from './osobne-udaje.module.css'
 import { formatIco, formatPsc } from '../lib/utils'
 import { getCity, getNgoByName } from '../lib/api'
@@ -50,7 +50,8 @@ const DvePercenta: NextPage<Props> = ({
   const router = useRouter()
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
   return (
     <>
       <Link href={previousRoute()}>

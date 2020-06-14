@@ -60,8 +60,13 @@ function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url)
 }
 
+Cypress.Cookies.defaults({
+  whitelist: ['you-shall'], // preserve the cookie between tests
+})
+
 describe('Employment page', function () {
   it('has working ui', function () {
+    cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
     cy.visit('/zamestnanie')
 
     // Back button should work and be the correct page
@@ -106,7 +111,7 @@ describe('Employment page', function () {
     assertUrl('/partner')
   })
 })
-describe.only('Partner page', function () {
+describe('Partner page', function () {
   it('has working ui', function () {
     cy.visit('/partner')
 

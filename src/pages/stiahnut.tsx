@@ -1,23 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import fileDownload from 'js-file-download'
 
 import { NextPage } from 'next'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { setDate } from '../lib/utils'
 import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
 import { downloadPdf } from '../lib/api'
+import { useRouter } from 'next/router'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
 const { previousRoute } = getRoutes('/stiahnut')
 
 interface Props {
   taxForm: TaxForm
+  taxFormUserInput: TaxFormUserInput
 }
 
-const Stiahnut: NextPage<Props> = ({ taxForm }: Props) => {
+const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
+  const router = useRouter()
+
   const [didDownload, setDidDownload] = useState<boolean>(false)
   const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false)
+
+  useEffect(() => {
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
 
   return (
     <>

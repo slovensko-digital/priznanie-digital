@@ -6,7 +6,7 @@ import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper } from '../components/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
 import { PartnerIncome } from '../components/PartnerIncome'
 import { validatePartnerIncome } from '../lib/validatePartnerIncome'
@@ -25,7 +25,8 @@ const Partner: NextPage<Props> = ({
   const router = useRouter()
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
 
   const r032Hint = (
     <>

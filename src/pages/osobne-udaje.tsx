@@ -12,7 +12,7 @@ import {
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getAutoformByPersonName, getCity } from '../lib/api'
 import { AutoformResponseBody } from '../types/api'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
 import { formatPsc } from '../lib/utils'
@@ -50,7 +50,8 @@ const OsobneUdaje: NextPage<Props> = ({
 
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
 
   return (
     <>
