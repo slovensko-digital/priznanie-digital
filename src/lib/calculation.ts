@@ -55,8 +55,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r011_stat: input.r011_stat,
 
     /** SECTION Dochodok */
-    r075_platil_prispevky_na_dochodok:
-      input?.platil_prispevky_na_dochodok ?? false,
+    platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
     r075_zaplatene_prispevky_na_dochodok: Math.min(
       180,
       parse(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
@@ -182,7 +181,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0)
+      // TODO: temporary hack, need proper solution: https://trello.com/c/cM1mBhVF/41-nespravne-vypocty-dp
+      const diff =
+        Math.round(
+          (this.r072_pred_znizenim - this.r077_nezdanitelna_cast) * 100,
+        ) / 100
+      return Math.max(diff, 0)
     },
     get r080_zaklad_dane_celkovo() {
       return floor(this.r078_zaklad_dane_z_prijmov, 2) // TODO + tf.r065 + tf.r071 + tf.r079)

@@ -5,20 +5,26 @@ describe('dochodok', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
-        input: { r029_poberal_dochodok: undefined },
-        expected: ['r029_poberal_dochodok'],
+        input: { platil_prispevky_na_dochodok: undefined },
+        expected: ['platil_prispevky_na_dochodok'],
       },
-      { input: { r029_poberal_dochodok: false }, expected: [] },
+      { input: { platil_prispevky_na_dochodok: false }, expected: [] },
       {
-        input: { r029_poberal_dochodok: true },
-        expected: ['r030_vyska_dochodku'],
-      },
-      {
-        input: { r029_poberal_dochodok: true, r030_vyska_dochodku: 'a' },
-        expected: ['r030_vyska_dochodku'],
+        input: { platil_prispevky_na_dochodok: true },
+        expected: ['r075_zaplatene_prispevky_na_dochodok'],
       },
       {
-        input: { r029_poberal_dochodok: true, r030_vyska_dochodku: '10' },
+        input: {
+          platil_prispevky_na_dochodok: true,
+          r075_zaplatene_prispevky_na_dochodok: 'a',
+        },
+        expected: ['r075_zaplatene_prispevky_na_dochodok'],
+      },
+      {
+        input: {
+          platil_prispevky_na_dochodok: true,
+          r075_zaplatene_prispevky_na_dochodok: '10',
+        },
         expected: [],
       },
     ])

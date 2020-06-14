@@ -16,7 +16,7 @@ export const withPensionInput: TaxFormUserInput = {
 
   /** Pension */
   platil_prispevky_na_dochodok: true,
-  r075_zaplatene_prispevky_na_dochodok: '800',
+  r075_zaplatene_prispevky_na_dochodok: '170',
 
   hasChildren: false,
   children: [],

@@ -93,13 +93,13 @@ const Vysledky: NextPage<Props> = ({
     {
       title:
         'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
-      value: 0, // TODO: calculate this value
-      key: 'danovy_bonus_na_dieta',
+      value: taxForm.r106,
+      key: 'danovy_bonus_na_dieta', // nemozme zmenit aby sa nemusel menit email template
     },
     {
       title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: taxForm.r030_vyska_dochodku,
-      key: 'r030_vyska_dochodku',
+      value: taxForm.r075_zaplatene_prispevky_na_dochodok,
+      key: 'r030_vyska_dochodku', // nemozme zmenit aby sa nemusel menit email template
     },
     {
       title: 'Úhrady za kúpele spolu',

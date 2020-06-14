@@ -39,7 +39,7 @@ export interface TaxForm {
 
   /** SECTION Dochodok */
   /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
-  r075_platil_prispevky_na_dochodok?: boolean
+  platil_prispevky_na_dochodok?: boolean
   r075_zaplatene_prispevky_na_dochodok?: number
 
   /** SECTION  Partner*/
