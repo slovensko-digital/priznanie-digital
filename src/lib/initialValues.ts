@@ -22,7 +22,10 @@ export const partnerUserInitialValues: PartnerUserInput = {
   r031_priezvisko_a_meno: '',
   r031_rodne_cislo: '',
   r032_uplatnujem_na_partnera: undefined,
+  partner_step: 0,
+  partner_podmienky: {},
   r032_partner_vlastne_prijmy: '',
+
   r032_partner_pocet_mesiacov: '',
 }
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
@@ -43,8 +46,10 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   r039: '',
 }
 
+let childCounter = 0
+
 export const makeEmptyChild = (): ChildInput => ({
-  id: Date.now(),
+  id: childCounter++,
   priezviskoMeno: '',
   rodneCislo: '',
   kupelnaStarostlivost: false,

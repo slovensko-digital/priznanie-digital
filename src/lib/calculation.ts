@@ -8,7 +8,7 @@ const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 
 export function parse(input: string) {
-  const cleanedInput = input === '' ? '0' : input.replace(',', '.')
+  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
 }
 

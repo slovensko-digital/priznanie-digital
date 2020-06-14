@@ -64,8 +64,9 @@ export const formatIco = (newValue: string, previousValue = '') => {
   }
 }
 
-export const translit = (value: string) =>
-  value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+export const translit = (value: string) => {
+  return value.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
+}
 
 export const formatRodneCislo = (newValue: string, previousValue = '') => {
   const formattedNewValue = newValue.replace(/\D/g, '')

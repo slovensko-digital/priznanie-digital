@@ -14,7 +14,7 @@ export const withPartnerInput: TaxFormUserInput = {
   r031_priezvisko_a_meno: 'Fake Fake',
   r031_rodne_cislo: '9609226286',
   r032_partner_pocet_mesiacov: '12',
-  r032_partner_vlastne_prijmy: '4000',
+  r032_partner_vlastne_prijmy: '3000',
   r032_uplatnujem_na_partnera: true,
   r033_partner_kupele: true,
   r033_partner_kupele_uhrady: '40',

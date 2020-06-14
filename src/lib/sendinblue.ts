@@ -141,8 +141,7 @@ export const createOrUpdateContact = async (contact: Contact) => {
   if (!saveReponse.ok) {
     const saveReponseJson = await saveReponse.json()
     if (saveReponseJson.code === 'duplicate_parameter') {
-      const updateResponse = await updateContact(contact)
-      return updateResponse
+      return updateContact(contact)
     }
   }
   return saveReponse
