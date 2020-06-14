@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { NextPage } from 'next'
 import { TaxForm } from '../types/TaxForm'
 
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { useRouter } from 'next/router'
 
 const { previousRoute, nextRoute } = getRoutes('/vysledky')
 
@@ -64,6 +65,13 @@ const Vysledky: NextPage<Props> = ({
   taxFormUserInput,
   setTaxFormUserInput,
 }: Props) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.prefetch(nextRoute())
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
+
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())

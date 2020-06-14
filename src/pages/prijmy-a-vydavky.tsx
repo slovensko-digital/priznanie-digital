@@ -25,7 +25,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
 
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+  }, [router])
 
   return (
     <>

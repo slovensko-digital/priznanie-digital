@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { formatCurrency } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
-import { TaxForm } from '../types/TaxForm'
 
 const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
@@ -68,7 +67,6 @@ const Summary = (props: SummaryProps) => (
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
-  taxForm: TaxForm
   setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
 }
 const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
@@ -76,7 +74,9 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
 
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
+
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())

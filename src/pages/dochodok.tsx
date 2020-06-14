@@ -6,7 +6,7 @@ import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp } from '../lib/utils'
 import { parse } from '../lib/calculation'
 
@@ -24,7 +24,8 @@ const Dochodok: NextPage<Props> = ({
   const router = useRouter()
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
   return (
     <>
       <Link href={previousRoute()}>
