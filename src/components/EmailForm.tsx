@@ -21,7 +21,7 @@ const getErrorMessage = (code: string, message: string) => {
 export interface EmailFormProps {
   label: string
   hint?: string
-  params: Record<string, string>
+  params: Record<string, any>
   taxForm: TaxForm
   saveForm: (email: string, newsletter: boolean) => void
 }
