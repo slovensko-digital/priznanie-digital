@@ -32,3 +32,7 @@ body {
 .govuk-table__cell--numeric {
   white-space: nowrap;
 }
+
+input:disabled {
+  cursor: not-allowed !important;
+}

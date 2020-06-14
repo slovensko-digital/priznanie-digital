@@ -891,6 +891,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 @media (min-width: 1160px) {
   .govuk-width-container {
+    max-width: 1100px;
     margin: 0 auto;
   }
   @supports (margin: max(calc(0px))) {

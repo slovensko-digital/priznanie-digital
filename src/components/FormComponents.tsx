@@ -100,11 +100,13 @@ export const Input = <Name extends keyof UserInput>({
 interface BooleanRadioProps<Name> {
   name: Name
   title: string
-  hint?: string
+  hint?: string | ReactNode
+  disabled?: boolean
 }
 export const BooleanRadio = <Name extends keyof UserInput>({
   title,
   hint,
+  disabled = false,
   ...props
 }: BooleanRadioProps<Name>) => {
   const [field, meta, helpers] = useField(props.name)
@@ -130,6 +132,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
                 helpers.setValue(true)
                 helpers.setError(undefined)
               }}
+              disabled={disabled}
             />
             <label
               className="govuk-label govuk-radios__label"
@@ -151,6 +154,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
                 helpers.setValue(false)
                 helpers.setError(undefined)
               }}
+              disabled={disabled}
             />
             <label
               className="govuk-label govuk-radios__label"
@@ -223,13 +227,14 @@ export const Checkbox = <Name extends keyof UserInput>({
 interface CheckboxSmallProps {
   name: string
   className?: string
-
+  disabled?: boolean
   label: string | React.ReactNode
 }
 export const CheckboxSmall = ({
   name,
   label,
   className,
+  disabled = false,
   ...props
 }: CheckboxSmallProps) => {
   const [field, meta] = useField(name)
@@ -243,6 +248,7 @@ export const CheckboxSmall = ({
         data-test={`${field.name}-input`}
         id={name}
         checked={field.value === true}
+        disabled={disabled}
       />
       <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
         {label}

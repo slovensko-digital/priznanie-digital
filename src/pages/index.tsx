@@ -28,16 +28,6 @@ export default () => (
         Finančnej správy.
       </p>
 
-      <p>
-        Peniaze, ktoré zaplatíte na daniach, putujú na množstvo užitočných veci.
-        Okrem toho, že vďaka nim môžu úrady platiť svojich zamestnancov,
-        zabezpečujú tieto prostriedky aj chod takých dôležitých služieb, ako je
-        napríklad polícia alebo hasiči. Dane pomáhajú tiež budovať nové cesty a
-        opravovať tie staré. A aby toho nebolo málo, je na nich závislá kultúra,
-        zdravotníctvo či ochrana národných parkov. Platiť dane je prospešné pre
-        všetkých.
-      </p>
-
       <Link href={nextRoute()}>
         <button
           type="button"

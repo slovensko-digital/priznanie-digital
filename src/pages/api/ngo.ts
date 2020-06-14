@@ -40,7 +40,7 @@ const formatNgoData = (rawArray: string[][]): CachedData => {
       [_pravnaForma, name, cin, streetAndNumber, municipality, postal_code],
       id,
     ) => {
-      const parsedStreet = streetAndNumber.match(/^(.*)\s([\d+\/]+)$/)
+      const parsedStreet = streetAndNumber.match(/^(.*)\s([\d+/]+)$/)
 
       return {
         id,

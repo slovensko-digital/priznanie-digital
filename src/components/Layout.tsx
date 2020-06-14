@@ -20,7 +20,7 @@ const Layout: React.FC<Props> = ({
   taxFormUserInput,
   postponeUserInput,
 }: Props) => (
-  <div className="container">
+  <div>
     <Head>
       <title>priznanie.digital</title>
       {process.env.BUILD_TIMESTAMP && (
@@ -72,17 +72,6 @@ const Layout: React.FC<Props> = ({
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     />
-    <style jsx>{`
-      .container {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-      }
-      .content-container {
-        flex-grow: 1;
-        width: 100%;
-      }
-    `}</style>
   </div>
 )
 

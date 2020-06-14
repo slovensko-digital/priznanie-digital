@@ -6,13 +6,10 @@ interface Props<Values> {
   touched: FormikTouched<Values>
 }
 
-export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
+export function ErrorSummary<Values>({ errors }: Props<Values>) {
   const errorEntries = Object.entries(errors)
 
-  /** Check if we have at least one error and touched intersection */
-  const shouldShowErrorSummary =
-    errorEntries.length !== 0 &&
-    Object.entries(errors).some(([error]) => Boolean(touched[error]))
+  const shouldShowErrorSummary = errorEntries.length !== 0
 
   return shouldShowErrorSummary ? (
     <div
@@ -29,11 +26,9 @@ export function ErrorSummary<Values>({ errors, touched }: Props<Values>) {
         <ul className="govuk-list govuk-error-summary__list">
           {errorEntries.map(([name, label]) => {
             return (
-              touched[name] && (
-                <li key={name}>
-                  <a href={`#${name}`}>{label}</a>
-                </li>
-              )
+              <li key={name}>
+                <a href={`#${name}`}>{label}</a>
+              </li>
             )
           })}
         </ul>
