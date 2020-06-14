@@ -7,7 +7,7 @@ const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 
-function parse(input: string) {
+export function parse(input: string) {
   const cleanedInput = input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
 }
