@@ -74,7 +74,7 @@ const OsobneUdaje: NextPage<Props> = ({
               touched={props.touched}
             />
             <Form className="form">
-              <h2>Údaje o daňovníkovi</h2>
+              <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>
                 Údaje môžete vyhladať a automaticky vyplniť podľa mena a
                 priezviska.
@@ -97,7 +97,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 />
               </div>
 
-              <h2>Adresa trvalého pobytu</h2>
+              <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}

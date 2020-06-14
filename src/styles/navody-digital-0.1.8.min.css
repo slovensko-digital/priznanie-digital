@@ -853,12 +853,10 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .govuk-main-wrapper {
   display: block;
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 @media (min-width: 40.0625em) {
   .govuk-main-wrapper {
-    padding-top: 40px;
     padding-bottom: 40px;
   }
 }

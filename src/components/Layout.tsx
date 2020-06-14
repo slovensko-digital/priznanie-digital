@@ -34,8 +34,8 @@ const Layout: React.FC<Props> = ({
     </Head>
     <Header />
 
-    <div className="govuk-width-container content-container">
-      <div className="govuk-phase-banner">
+    <div className="govuk-phase-banner">
+      <div className="govuk-width-container">
         <p className="govuk-phase-banner__content">
           <strong className="govuk-tag govuk-phase-banner__content__tag">
             BETA
@@ -48,17 +48,21 @@ const Layout: React.FC<Props> = ({
     </div>
 
     <div className="sdn-headline">
-      <div className="sdn-headline__container govuk-width-container">
-        <div className="sdn-headline__part">
-          <span className="sdn-headline__headline">{headline}</span>
+      <div className="govuk-width-container">
+        <div className="sdn-headline__container">
+          <div className="sdn-headline__part">
+            <span className="sdn-headline__headline">{headline}</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div className="govuk-width-container content-container">
-      <div className="govuk-grid-row">
-        <div className="govuk-grid-column-two-thirds">{children}</div>
-      </div>
+    <div className="govuk-width-container">
+      <main className="govuk-main-wrapper">
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">{children}</div>
+        </div>
+      </main>
     </div>
     <Debug
       taxFormUserInput={taxFormUserInput}

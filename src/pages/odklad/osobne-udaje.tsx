@@ -104,7 +104,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 fetchData={getAutoformByPersonName}
               />
 
-              <h2>Adresa trvalého pobytu</h2>
+              <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
                 <Input
                   name="ulica"

@@ -79,7 +79,7 @@ const DvePercenta: NextPage<Props> = ({
               />
               {props.values.XIIoddiel_uplatnujem2percenta && (
                 <>
-                  <h2>Údaje o prijímateľovi</h2>
+                  <h2 className="govuk-heading-l">Údaje o prijímateľovi</h2>
                   <p>
                     Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
                   </p>
@@ -108,7 +108,7 @@ const DvePercenta: NextPage<Props> = ({
                     />
                   </div>
 
-                  <h2>Sídlo</h2>
+                  <h2 className="govuk-heading-l">Sídlo</h2>
                   <div className={styles.inlineFieldContainer}>
                     <Input
                       className={styles.inlineField}
@@ -155,7 +155,7 @@ const DvePercenta: NextPage<Props> = ({
                     />
                   </div>
 
-                  <h2>Súhlas so zaslaním údajov</h2>
+                  <h2 className="govuk-heading-l">Súhlas so zaslaním údajov</h2>
                   <CheckboxSmall
                     name="XIIoddiel_suhlasZaslUdaje"
                     label="súhlasím so zaslaním údajov (meno, priezvisko a adresa trvalého pobytu) mnou určenému prijímateľovi podielu zaplatenej dane"

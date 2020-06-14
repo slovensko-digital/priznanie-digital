@@ -50,7 +50,9 @@ const PrijmyAVydavky: NextPage<Props> = ({
                 touched={touched}
               />
               <Form className="form" noValidate>
-                <h2>Príjmy a odvody do sociálnej a zdravotnej poisťovne</h2>
+                <h2 className="govuk-heading-l">
+                  Príjmy a odvody do sociálnej a zdravotnej poisťovne
+                </h2>
 
                 <Input
                   name="t1r10_prijmy"
