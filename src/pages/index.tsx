@@ -13,6 +13,7 @@ export default () => (
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Návod na vyplnenie daňového priznania pre SZČO
       </h1>
+
       <p>
         Daňové priznanie je jeden z najväčších byrokratických strašiakov
         podnikateľov. A pritom pri zadaní pár jednoduchých údajov si ho môže
@@ -25,6 +26,16 @@ export default () => (
         pomôžeme vyplniť daňové priznanie (k dani z príjmov fyzickej osoby, typ
         B) a tiež vás detailne prevedieme aj procesom podania na stránkach
         Finančnej správy.
+      </p>
+
+      <p>
+        Peniaze, ktoré zaplatíte na daniach, putujú na množstvo užitočných veci.
+        Okrem toho, že vďaka nim môžu úrady platiť svojich zamestnancov,
+        zabezpečujú tieto prostriedky aj chod takých dôležitých služieb, ako je
+        napríklad polícia alebo hasiči. Dane pomáhajú tiež budovať nové cesty a
+        opravovať tie staré. A aby toho nebolo málo, je na nich závislá kultúra,
+        zdravotníctvo či ochrana národných parkov. Platiť dane je prospešné pre
+        všetkých.
       </p>
 
       <Link href={nextRoute()}>

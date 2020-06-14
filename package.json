@@ -2,9 +2,7 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "12.16.1",
-    "npm": "*",
-    "yarn": "please-use-npm"
+    "node": "12.16.1"
   },
   "scripts": {
     "dev": "next dev",
