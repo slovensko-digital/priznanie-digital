@@ -1,3 +1,6 @@
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { NextRouter } from 'next/dist/next-server/lib/router/router'
+
 export type Route =
   | '/'
   | '/prijmy-a-vydavky'
@@ -65,5 +68,32 @@ export const getPostponeRoutes = (currentRoute: PostponeRoute) => {
     currentRoute,
     nextRoute: postponeRoutesOrder[currentRouteIndex + 1],
     previousRoute: postponeRoutesOrder[currentRouteIndex + -1],
+  }
+}
+
+export const validateRoute = (
+  router: NextRouter,
+  taxFormUserInput: TaxFormUserInput,
+) => {
+  if (!document.cookie.match(/you-shall=not-pass/)) {
+    const requirements = {
+      '/zamestnanie': 't1r10_prijmy',
+      '/partner': 'employed',
+      '/deti': 'r032_uplatnujem_na_partnera',
+      '/dochodok': 'hasChildren',
+      '/hypoteka': 'platil_prispevky_na_dochodok',
+      '/kupele': 'r037_uplatnuje_uroky',
+      '/dve-percenta': 'kupele',
+      '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
+      '/suhrn': 'meno_priezvisko',
+      '/vysledky': 'meno_priezvisko',
+      '/stiahnut': 'meno_priezvisko',
+    }
+
+    const value = taxFormUserInput[requirements[router.route]]
+
+    if (value === undefined || value === '') {
+      router.replace('/')
+    }
   }
 }

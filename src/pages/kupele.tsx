@@ -12,7 +12,7 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
+import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
 
 const { nextRoute, previousRoute } = getRoutes('/kupele')
@@ -29,7 +29,8 @@ const Kupele: NextPage<Props> = ({
   const router = useRouter()
   useEffect(() => {
     router.prefetch(nextRoute())
-  })
+    validateRoute(router, taxFormUserInput)
+  }, [router, taxFormUserInput])
 
   const shouldShowChildren = taxFormUserInput.children.some((child) =>
     Boolean(child.rodneCislo),
@@ -120,7 +121,11 @@ const Kupele: NextPage<Props> = ({
                   )}
 
                   <div className="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
-                    <a href="https://podpora.financnasprava.sk/886734-Zaplaten%C3%A9-%C3%BAhrady-s%C3%BAvisiace-s-k%C3%BApe%C4%BEnou-starostlivos%C5%A5ou">
+                    <a
+                      href="https://podpora.financnasprava.sk/886734-Zaplaten%C3%A9-%C3%BAhrady-s%C3%BAvisiace-s-k%C3%BApe%C4%BEnou-starostlivos%C5%A5ou"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Podrobnosti o podmienkach
                     </a>
                   </div>
