@@ -24,7 +24,7 @@ export interface PostponeTemplateParams extends BaseTemplateParams {
 }
 
 export interface TaxTemplateParams extends BaseTemplateParams {
-  summaryTable: string
+  summary: Record<string, string>
 }
 
 export interface BaseTemplateParams {
