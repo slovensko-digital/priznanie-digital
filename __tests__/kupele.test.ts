@@ -9,18 +9,22 @@ describe('hypoteka', () => {
         expected: ['kupele'],
       },
       {
-        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: 30 },
+        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '30' },
         expected: [],
       },
       {
-        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: 60 },
+        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '60' },
+        expected: ['r076a_kupele_danovnik'],
+      },
+      {
+        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '60,2' },
         expected: ['r076a_kupele_danovnik'],
       },
       {
         input: {
           kupele: true,
           danovnikInSpa: true,
-          r076a_kupele_danovnik: -10,
+          r076a_kupele_danovnik: '-10',
         },
         expected: ['r076a_kupele_danovnik'],
       },
@@ -28,7 +32,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           r033_partner_kupele: true,
-          r033_partner_kupele_uhrady: 30,
+          r033_partner_kupele_uhrady: '30',
         },
         expected: [],
       },
@@ -36,7 +40,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           r033_partner_kupele: true,
-          r033_partner_kupele_uhrady: 60,
+          r033_partner_kupele_uhrady: '60',
         },
         expected: ['r033_partner_kupele_uhrady'],
       },
@@ -44,7 +48,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           r033_partner_kupele: true,
-          r033_partner_kupele_uhrady: -10,
+          r033_partner_kupele_uhrady: '-10',
         },
         expected: ['r033_partner_kupele_uhrady'],
       },
@@ -52,7 +56,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           childrenInSpa: true,
-          r036_deti_kupele: 30,
+          r036_deti_kupele: '30',
           children: [{}],
         },
         expected: [],
@@ -61,7 +65,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           childrenInSpa: true,
-          r036_deti_kupele: 60,
+          r036_deti_kupele: '60',
           children: [{}],
         },
         expected: ['r036_deti_kupele'],
@@ -70,7 +74,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           childrenInSpa: true,
-          r036_deti_kupele: 60,
+          r036_deti_kupele: '60',
           children: [{}, {}],
         },
         expected: [],
@@ -79,7 +83,7 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           childrenInSpa: true,
-          r036_deti_kupele: -10,
+          r036_deti_kupele: '-10',
         },
         expected: ['r036_deti_kupele'],
       },
