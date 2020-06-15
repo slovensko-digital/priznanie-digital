@@ -65,6 +65,12 @@ const Kupele: NextPage<Props> = ({
                   <h2 className="govuk-heading-l">
                     Na koho si uplatňujete zníženie dane?
                   </h2>
+                  {(errors as any).noAnswer ? (
+                    <span data-test="error" className="govuk-error-message">
+                      <span className="govuk-visually-hidden">Error:</span>{' '}
+                      {(errors as any).noAnswer}
+                    </span>
+                  ) : null}
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
                     <Input
@@ -143,7 +149,7 @@ const Kupele: NextPage<Props> = ({
   )
 }
 
-type Errors = Partial<FormErrors<SpaUserInput>>
+type Errors = Partial<FormErrors<SpaUserInput>> & { noAnswer?: string }
 export const validate = (values: SpaUserInput): Errors => {
   const errors: Errors = {}
 
@@ -156,7 +162,7 @@ export const validate = (values: SpaUserInput): Errors => {
       !values.r033_partner_kupele &&
       !values.childrenInSpa
     ) {
-      errors.kupele = 'Vyznačte aspoň jednu z možností'
+      errors.noAnswer = 'Vyznačte aspoň jednu z možností'
     }
 
     if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
