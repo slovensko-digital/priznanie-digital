@@ -257,7 +257,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             currentSum += rateAprilToDecember
           }
 
-          return previousSum + currentSum
+          return round2decimal(previousSum + currentSum)
         }, 0),
       )
     },
