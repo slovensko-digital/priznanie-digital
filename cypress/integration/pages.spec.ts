@@ -589,9 +589,10 @@ describe.only('Spa page', function () {
     next()
 
     cy.get('[data-test=error]')
+    getInput('r076a_kupele_danovnik').clear()
     getInput('r076a_kupele_danovnik').type('-1')
 
-    // next()
+    next()
     cy.get('[data-test=error]')
 
     getInput('r033_partner_kupele').click()
