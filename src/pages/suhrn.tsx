@@ -203,7 +203,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
             : [{ title: 'Neplatil som' }]
         }
       />
-      <Summary
+      {/* <Summary
         title="Zaplatené úroky z hypotéky"
         href={'/hypoteka'}
         rows={
@@ -221,7 +221,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
               ]
             : [{ title: 'Neplatil som' }]
         }
-      />
+      /> */}
       <Summary
         title="Kúpele"
         href={'/kupele'}

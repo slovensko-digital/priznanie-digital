@@ -25,7 +25,7 @@ describe('calcIntergration', () => {
     'withPartner',
     'withEmployment',
     'withPension',
-    'withMortgage',
+    // 'withMortgage',
     'withChildren',
     'with2percent',
     'withSpa',
