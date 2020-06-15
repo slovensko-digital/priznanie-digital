@@ -186,13 +186,14 @@ export const validate = (values: SpaUserInput): Errors => {
     if (values.childrenInSpa && !values.r036_deti_kupele) {
       errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
     }
+
+    const maxChildrenAmount = (values.children?.length ?? 0) * 50
     if (
-      (values.childrenInSpa &&
-        Number(values.r036_deti_kupele) > 50) ||
-      Number(values.r036_deti_kupele) < 0
+      values.childrenInSpa &&
+      (Number(values.r036_deti_kupele) > maxChildrenAmount ||
+        Number(values.r036_deti_kupele) < 0)
     ) {
-      errors.r036_deti_kupele =
-        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
   }
   return errors

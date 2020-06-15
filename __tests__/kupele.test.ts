@@ -1,7 +1,7 @@
 import { validate } from '../src/pages/kupele'
 import { testValidation } from './utils/testValidation'
 
-describe.only('hypoteka', () => {
+describe('hypoteka', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
@@ -53,6 +53,7 @@ describe.only('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: 30,
+          children: [{}],
         },
         expected: [],
       },
@@ -61,8 +62,18 @@ describe.only('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: 60,
+          children: [{}],
         },
         expected: ['r036_deti_kupele'],
+      },
+      {
+        input: {
+          kupele: true,
+          childrenInSpa: true,
+          r036_deti_kupele: 60,
+          children: [{}, {}],
+        },
+        expected: [],
       },
       {
         input: {
