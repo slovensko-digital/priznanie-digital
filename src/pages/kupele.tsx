@@ -200,7 +200,7 @@ export const validate = (values: SpaUserInput): Errors => {
       (parse(values.r036_deti_kupele) > maxChildrenAmount ||
         parse(values.r036_deti_kupele) < 0)
     ) {
-      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+      errors.r036_deti_kupele = `Zadajte výšku úhrad kúpeľov ${maxChildrenAmount} eur alebo menej`
     }
   }
   return errors
