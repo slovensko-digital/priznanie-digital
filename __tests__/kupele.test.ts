@@ -1,7 +1,7 @@
 import { validate } from '../src/pages/kupele'
 import { testValidation } from './utils/testValidation'
 
-describe.only('hypoteka', () => {
+describe('hypoteka', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
