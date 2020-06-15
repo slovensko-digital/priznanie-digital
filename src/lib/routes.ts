@@ -8,7 +8,7 @@ export type Route =
   | '/partner'
   | '/deti'
   | '/dochodok'
-  // | '/hypoteka'
+  | '/hypoteka'
   | '/kupele'
   | '/dve-percenta'
   | '/osobne-udaje'
