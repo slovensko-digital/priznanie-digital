@@ -51,7 +51,7 @@ describe('Cases', function () {
     'completeDecimal',
     'withPartner',
     'withEmployment',
-    'withMortgage',
+    // 'withMortgage',
     'withPension',
     'withChildren',
     'with2percent',
@@ -159,18 +159,19 @@ describe('Cases', function () {
 
           next()
 
-          /**  SECTION Hypoteka */
-          assertUrl('/hypoteka')
+          // TODO Reanable with mortgage feature
+          // /**  SECTION Hypoteka */
+          // assertUrl('/hypoteka')
 
-          if (input.r037_uplatnuje_uroky) {
-            getInput('r037_uplatnuje_uroky', '-yes').click()
-            typeToInput('r037_zaplatene_uroky', input)
-            typeToInput('r037_pocetMesiacov', input)
-          } else {
-            getInput('r037_uplatnuje_uroky', '-no').click()
-          }
+          // if (input.r037_uplatnuje_uroky) {
+          //   getInput('r037_uplatnuje_uroky', '-yes').click()
+          //   typeToInput('r037_zaplatene_uroky', input)
+          //   typeToInput('r037_pocetMesiacov', input)
+          // } else {
+          //   getInput('r037_uplatnuje_uroky', '-no').click()
+          // }
 
-          next()
+          // next()
 
           /**  SECTION Kupele */
           assertUrl('/kupele')
