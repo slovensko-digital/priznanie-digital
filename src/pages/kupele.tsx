@@ -57,22 +57,28 @@ const Kupele: NextPage<Props> = ({
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
-                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či "bločik"), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
+                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či pokladničný blok), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
                 name="kupele"
               />
               {values.kupele && (
                 <>
                   <h2 className="govuk-heading-l">
-                    Na koho si uplatnujete znizenie dane?
+                    Na koho si uplatňujete zníženie dane?
                   </h2>
+                  {(errors as any).noAnswer ? (
+                    <span data-test="error" className="govuk-error-message">
+                      <span className="govuk-visually-hidden">Error:</span>{' '}
+                      {(errors as any).noAnswer}
+                    </span>
+                  ) : null}
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
                     <Input
                       className="govuk-!-margin-bottom-6"
                       name="r076a_kupele_danovnik"
                       type="text"
-                      label="Aké sú vaše preukazáteľné výdavky za služby v liečebných kúpeľoch?"
-                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
+                      label="Aké sú vaše výdavky za služby v kúpeľoch?"
+                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
                     />
                   )}
 
@@ -85,8 +91,8 @@ const Kupele: NextPage<Props> = ({
                       className="govuk-!-margin-bottom-6"
                       name="r033_partner_kupele_uhrady"
                       type="text"
-                      label="Úhrady v kúpeľoch za partnera"
-                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
+                      label="Aké sú partnerové výdavky za služby v kúpeľoch?"
+                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
                     />
                   )}
                   {shouldShowChildren && (
@@ -95,7 +101,7 @@ const Kupele: NextPage<Props> = ({
                       {values.childrenInSpa && (
                         <>
                           <p className="govuk-!-margin-bottom-3">
-                            Ktore z vasich deti navstivili kupele?
+                            Ktoré dieťa navštívilo kúpele?
                           </p>
                           {taxFormUserInput.children.map((child, index) => (
                             <div
@@ -112,8 +118,8 @@ const Kupele: NextPage<Props> = ({
                             className="govuk-!-margin-bottom-6"
                             name="r036_deti_kupele"
                             type="text"
-                            label="Boli ste s deťmi v kúpeľoch a uplatňujete si preukázateľne výdavky?"
-                            hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur na každé dieťa."
+                            label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
+                            hint="Maximálna výška úhrady za rok 2019 je 50 eur na každé dieťa"
                           />
                         </>
                       )}
@@ -143,7 +149,7 @@ const Kupele: NextPage<Props> = ({
   )
 }
 
-type Errors = Partial<FormErrors<SpaUserInput>>
+type Errors = Partial<FormErrors<SpaUserInput>> & { noAnswer?: string }
 export const validate = (values: SpaUserInput): Errors => {
   const errors: Errors = {}
 
@@ -156,20 +162,44 @@ export const validate = (values: SpaUserInput): Errors => {
       !values.r033_partner_kupele &&
       !values.childrenInSpa
     ) {
-      errors.kupele = 'Vyznačte aspon jednu z moznosti'
+      errors.noAnswer = 'Vyznačte aspoň jednu z možností'
     }
 
     if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
-      errors.r076a_kupele_danovnik = 'Zadajte vysku uhrad kupelov za vas'
+      errors.r076a_kupele_danovnik = 'Zadajte výšku úhrad kúpeľov za vás'
+    }
+    if (
+      (values.danovnikInSpa && Number(values.r076a_kupele_danovnik) > 50) ||
+      Number(values.r076a_kupele_danovnik) < 0
+    ) {
+      errors.r076a_kupele_danovnik =
+        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
 
     if (values.r033_partner_kupele && !values.r033_partner_kupele_uhrady) {
       errors.r033_partner_kupele_uhrady =
-        'Zadajte vysku uhrad kupelov za manzela/manzelku'
+        'Zadajte výšku úhrad kúpeľov za manžela/manželku'
+    }
+    if (
+      (values.r033_partner_kupele &&
+        Number(values.r033_partner_kupele_uhrady) > 50) ||
+      Number(values.r033_partner_kupele_uhrady) < 0
+    ) {
+      errors.r033_partner_kupele_uhrady =
+        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
 
     if (values.childrenInSpa && !values.r036_deti_kupele) {
-      errors.r036_deti_kupele = 'Zadajte vysku uhrad kupelov za deti'
+      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
+    }
+
+    const maxChildrenAmount = (values.children?.length ?? 0) * 50
+    if (
+      values.childrenInSpa &&
+      (Number(values.r036_deti_kupele) > maxChildrenAmount ||
+        Number(values.r036_deti_kupele) < 0)
+    ) {
+      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
   }
   return errors
