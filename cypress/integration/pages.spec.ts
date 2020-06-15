@@ -552,7 +552,7 @@ describe.only('Spa page', function () {
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')
   })
-  it('Spa UI', function () {
+  it.only('Spa UI', function () {
     cy.visit('/deti')
 
     getInput('hasChildren', '-yes').click()
@@ -584,7 +584,15 @@ describe.only('Spa page', function () {
 
     // Type to input
     getInput('danovnikInSpa').click()
-    getInput('r076a_kupele_danovnik')
+    getInput('r076a_kupele_danovnik').type('60')
+
+    next()
+
+    cy.get('[data-test=error]')
+    getInput('r076a_kupele_danovnik').type('-1')
+
+    // next()
+    cy.get('[data-test=error]')
 
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')

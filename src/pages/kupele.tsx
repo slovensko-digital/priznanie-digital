@@ -57,7 +57,7 @@ const Kupele: NextPage<Props> = ({
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
-                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či "bločik"), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
+                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či pokladničný blok), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
                 name="kupele"
               />
               {values.kupele && (
@@ -162,14 +162,38 @@ export const validate = (values: SpaUserInput): Errors => {
     if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
       errors.r076a_kupele_danovnik = 'Zadajte výšku úhrad kúpeľov za vás'
     }
+    if (
+      (values.danovnikInSpa && Number(values.r076a_kupele_danovnik) > 50) ||
+      Number(values.r076a_kupele_danovnik) < 0
+    ) {
+      errors.r076a_kupele_danovnik =
+        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+    }
 
     if (values.r033_partner_kupele && !values.r033_partner_kupele_uhrady) {
       errors.r033_partner_kupele_uhrady =
         'Zadajte výšku úhrad kúpeľov za manžela/manželku'
     }
+    if (
+      (values.r033_partner_kupele &&
+        Number(values.r033_partner_kupele_uhrady) > 50) ||
+      Number(values.r033_partner_kupele_uhrady) < 0
+    ) {
+      errors.r033_partner_kupele_uhrady =
+        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+    }
 
     if (values.childrenInSpa && !values.r036_deti_kupele) {
       errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
+    }
+
+    if (
+      (values.childrenInSpa &&
+        Number(values.r036_deti_kupele) > 50) ||
+      Number(values.r036_deti_kupele) < 0
+    ) {
+      errors.r036_deti_kupele =
+        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
   }
   return errors
