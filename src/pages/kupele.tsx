@@ -14,6 +14,7 @@ import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { parse } from '../lib/calculation'
 
 const { nextRoute, previousRoute } = getRoutes('/kupele')
 
@@ -169,8 +170,8 @@ export const validate = (values: SpaUserInput): Errors => {
       errors.r076a_kupele_danovnik = 'Zadajte výšku úhrad kúpeľov za vás'
     }
     if (
-      (values.danovnikInSpa && Number(values.r076a_kupele_danovnik) > 50) ||
-      Number(values.r076a_kupele_danovnik) < 0
+      (values.danovnikInSpa && parse(values.r076a_kupele_danovnik) > 50) ||
+      parse(values.r076a_kupele_danovnik) < 0
     ) {
       errors.r076a_kupele_danovnik =
         'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
@@ -182,8 +183,8 @@ export const validate = (values: SpaUserInput): Errors => {
     }
     if (
       (values.r033_partner_kupele &&
-        Number(values.r033_partner_kupele_uhrady) > 50) ||
-      Number(values.r033_partner_kupele_uhrady) < 0
+        parse(values.r033_partner_kupele_uhrady) > 50) ||
+      parse(values.r033_partner_kupele_uhrady) < 0
     ) {
       errors.r033_partner_kupele_uhrady =
         'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
@@ -196,8 +197,8 @@ export const validate = (values: SpaUserInput): Errors => {
     const maxChildrenAmount = (values.children?.length ?? 0) * 50
     if (
       values.childrenInSpa &&
-      (Number(values.r036_deti_kupele) > maxChildrenAmount ||
-        Number(values.r036_deti_kupele) < 0)
+      (parse(values.r036_deti_kupele) > maxChildrenAmount ||
+        parse(values.r036_deti_kupele) < 0)
     ) {
       errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
     }
