@@ -75,7 +75,7 @@ const DvePercenta: NextPage<Props> = ({
             />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Chcete poukazat 2 percenta?"
+                title="Chcete poukázať 2 % zaplatenej dane niektorej neziskovej organizácii?"
                 name="XIIoddiel_uplatnujem2percenta"
               />
               {props.values.XIIoddiel_uplatnujem2percenta && (
