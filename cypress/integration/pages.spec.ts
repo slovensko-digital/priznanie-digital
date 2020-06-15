@@ -510,7 +510,7 @@ describe('twoPercent page', function () {
   })
 })
 
-describe('Spa page', function () {
+describe.only('Spa page', function () {
   it('works with no', function () {
     cy.visit('/kupele')
     getInput('kupele', '-no').click()

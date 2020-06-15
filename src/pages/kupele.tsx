@@ -63,7 +63,7 @@ const Kupele: NextPage<Props> = ({
               {values.kupele && (
                 <>
                   <h2 className="govuk-heading-l">
-                    Na koho si uplatnujete znizenie dane?
+                    Na koho si uplatňujete zníženie dane?
                   </h2>
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
@@ -71,8 +71,8 @@ const Kupele: NextPage<Props> = ({
                       className="govuk-!-margin-bottom-6"
                       name="r076a_kupele_danovnik"
                       type="text"
-                      label="Aké sú vaše preukazáteľné výdavky za služby v liečebných kúpeľoch?"
-                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
+                      label="Aké sú vaše výdavky za služby v kúpeľoch?"
+                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
                     />
                   )}
 
@@ -85,8 +85,8 @@ const Kupele: NextPage<Props> = ({
                       className="govuk-!-margin-bottom-6"
                       name="r033_partner_kupele_uhrady"
                       type="text"
-                      label="Úhrady v kúpeľoch za partnera"
-                      hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur."
+                      label="Aké sú partnerové výdavky za služby v kúpeľoch?"
+                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
                     />
                   )}
                   {shouldShowChildren && (
@@ -95,7 +95,7 @@ const Kupele: NextPage<Props> = ({
                       {values.childrenInSpa && (
                         <>
                           <p className="govuk-!-margin-bottom-3">
-                            Ktore z vasich deti navstivili kupele?
+                            Ktoré dieťa navštívilo kúpele?
                           </p>
                           {taxFormUserInput.children.map((child, index) => (
                             <div
@@ -112,8 +112,8 @@ const Kupele: NextPage<Props> = ({
                             className="govuk-!-margin-bottom-6"
                             name="r036_deti_kupele"
                             type="text"
-                            label="Boli ste s deťmi v kúpeľoch a uplatňujete si preukázateľne výdavky?"
-                            hint="Maximálne viete uplatniť úhrady za rok 2019 do výšky 50 eur na každé dieťa."
+                            label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
+                            hint="Maximálna výška úhrady za rok 2019 je 50 eur na každé dieťa"
                           />
                         </>
                       )}
@@ -160,16 +160,16 @@ export const validate = (values: SpaUserInput): Errors => {
     }
 
     if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
-      errors.r076a_kupele_danovnik = 'Zadajte vysku uhrad kupelov za vas'
+      errors.r076a_kupele_danovnik = 'Zadajte výšku úhrad kúpeľov za vás'
     }
 
     if (values.r033_partner_kupele && !values.r033_partner_kupele_uhrady) {
       errors.r033_partner_kupele_uhrady =
-        'Zadajte vysku uhrad kupelov za manzela/manzelku'
+        'Zadajte výšku úhrad kúpeľov za manžela/manželku'
     }
 
     if (values.childrenInSpa && !values.r036_deti_kupele) {
-      errors.r036_deti_kupele = 'Zadajte vysku uhrad kupelov za deti'
+      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
     }
   }
   return errors
