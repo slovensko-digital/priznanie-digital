@@ -55,7 +55,7 @@ describe('Cases', function () {
     'withPension',
     'withChildren',
     'with2percent',
-    // 'withSpa', // TODO: pocita to zapornu dan, sorry jako
+    'withSpa',
   ].forEach((testCase) => {
     it(testCase, function (done) {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(

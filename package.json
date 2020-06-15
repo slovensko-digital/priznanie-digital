@@ -9,7 +9,7 @@
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "BUILD_TIMESTAMP=$(date +%s) next build",
     "start": "next start",
-    "test": "npm run test:noWatch --watch",
+    "test": "npm run test:noWatch -- --watch",
     "test:noWatch": "jest",
     "ci": "npm run lint && npm run test:noWatch --ci && WITH_DEBUG=true npm run build && npm run cy:ci",
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
