@@ -11,21 +11,21 @@ export default () => (
   <>
     <div className="govuk-grid-column-full">
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Návod na vyplnenie daňového priznania pre SZČO
+        Vyplnenie daňového priznania
       </h1>
 
-      <p>
-        Daňové priznanie je jeden z najväčších byrokratických strašiakov
-        podnikateľov. A pritom pri zadaní pár jednoduchých údajov si ho môže
-        vyplniť ktokoľvek za pár minút bez väčších problémov. Chceme takto
-        malými krokmi uľahčiť život státisicom živnostníkov.
-      </p>
+      <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
 
       <p>
-        Ak ste SZČO (živnostník) a uplatňujete si paušálne výdavky, tak vám
-        pomôžeme vyplniť daňové priznanie (k dani z príjmov fyzickej osoby, typ
-        B) a tiež vás detailne prevedieme aj procesom podania na stránkach
-        Finančnej správy.
+        Po zadaní základných údajov si môžete stiahnuť pripravené daňové
+        priznanie a následne vás prevedieme procesom podania daňového priznania
+        na stránkach Finančnej správy.
+      </p>
+
+      <p>Aplikácia je určená pre SZČO uplatňujúce si paušálne výdavky.</p>
+
+      <p>
+        Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
       </p>
 
       <Link href={nextRoute()}>

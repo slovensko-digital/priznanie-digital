@@ -170,7 +170,11 @@ const Vysledky: NextPage<Props> = ({
         )}
       </div>
       <Link href={nextRoute()}>
-        <button data-test="next" className="govuk-button" type="button">
+        <button
+          data-test="next"
+          className="govuk-button govuk-!-margin-top-3"
+          type="button"
+        >
           Pokračovať
         </button>
       </Link>

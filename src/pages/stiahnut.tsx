@@ -37,7 +37,7 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
       </Link>
       <div className="box">
         <h1 className="govuk-heading-l govuk-!-margin-top-3">
-          Dáta k podaniu daňového priznania sú pripravená
+          Dáta k podaniu daňového priznania sú pripravené
         </h1>
         <p>
           Stiahnite si súbor do počítača. Použijete ho neskôr na portáli
@@ -71,9 +71,8 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
           Stiahnuť dáta (PDF)
         </button>
       </div>
-
       {!didDownload && (
-        <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
+        <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-3">
           <span className="govuk-warning-text__icon" aria-hidden="true">
             !
           </span>
@@ -83,8 +82,14 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
         </div>
       )}
 
+      <p className="govuk-!-margin-top-6">
+        Ďalším krokom v procese je samotné podanie daňového priznania. Je
+        potrebné pripravený XML formulár nahrať na portál Finančnej správy.
+        Postup ako podať daňové priznanie nájdete na Návody.Digital.
+      </p>
+
       <button
-        className="govuk-button govuk-!-margin-top-9"
+        className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-top-3"
         disabled={!didDownload}
         type="button"
         onClick={() => {
@@ -92,7 +97,7 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
             'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
         }}
       >
-        Prejst na návod na podanie daňového priznania
+        Návod na podanie
       </button>
     </>
   )

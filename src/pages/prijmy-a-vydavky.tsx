@@ -58,7 +58,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
                   name="t1r10_prijmy"
                   type="number"
                   label="Príjmy"
-                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019"
+                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019."
                 />
                 <Input
                   name="priloha3_r11_socialne"

@@ -33,6 +33,12 @@ body {
   white-space: nowrap;
 }
 
-input:disabled {
+input:disabled, button:disabled {
   cursor: not-allowed !important;
+}
+
+.noscript {
+  background: yellow;
+  padding: 20px;
+  margin: 0;
 }
