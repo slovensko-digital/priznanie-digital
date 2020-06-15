@@ -59,7 +59,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   const headline = /^\/odklad\//.test(pathname)
     ? 'Odklad daňového priznania'
-    : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)'
+    : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
 
   return (
     <Layout

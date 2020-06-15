@@ -32,6 +32,16 @@ const Layout: React.FC<Props> = ({
         />
       )}
     </Head>
+
+    <noscript>
+      <p className="noscript">
+        Táto aplikácia vyžaduje povolený Javascript.{' '}
+        <a href="https://www.enable-javascript.com/sk/">
+          Tu sú inštrukcie, ako povoliť JavaScript v prehliadači.
+        </a>
+      </p>
+    </noscript>
+
     <Header />
 
     <div className="govuk-phase-banner">
