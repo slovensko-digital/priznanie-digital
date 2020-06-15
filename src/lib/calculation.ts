@@ -249,13 +249,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }, 0)
     },
     get r107() {
-      return this.r105_dan - this.r106
+      return Math.max(this.r105_dan - this.r106, 0)
     },
     get r108() {
       return 0 // TODO
     },
     get r109() {
       return Math.max(this.r106 - this.r108, 0)
+    },
+    get r110() {
+      return Math.max(this.r106 - this.r105_dan, 0)
     },
     /** TODO High income test case */
     get r112() {
@@ -272,7 +275,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Math.max(this.r112 - this.r114, 0)
     },
     get r125_dan_na_uhradu() {
-      return this.r105_dan + this.r114 - this.r112 - tf.r106
+      return Math.max(0, this.r105_dan + this.r114 - this.r112 - tf.r106)
       // // - tf.r106 +
       // tf.r108 +
       // tf.r110 -
