@@ -8,7 +8,7 @@ export type Route =
   | '/partner'
   | '/deti'
   | '/dochodok'
-  | '/hypoteka'
+  // | '/hypoteka'
   | '/kupele'
   | '/dve-percenta'
   | '/osobne-udaje'
@@ -23,7 +23,7 @@ const routesOrder: ReadonlyArray<Route> = [
   '/partner',
   '/deti',
   '/dochodok',
-  '/hypoteka',
+  // '/hypoteka',
   '/kupele',
   '/dve-percenta',
   '/osobne-udaje',
@@ -81,8 +81,10 @@ export const validateRoute = (
       '/partner': 'employed',
       '/deti': 'r032_uplatnujem_na_partnera',
       '/dochodok': 'hasChildren',
-      '/hypoteka': 'platil_prispevky_na_dochodok',
-      '/kupele': 'r037_uplatnuje_uroky',
+      // TODO reanable with mortgage feature
+      // '/hypoteka': 'platil_prispevky_na_dochodok',
+      // '/kupele': 'r037_uplatnuje_uroky',
+      '/kupele': 'platil_prispevky_na_dochodok',
       '/dve-percenta': 'kupele',
       '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
       '/suhrn': 'meno_priezvisko',

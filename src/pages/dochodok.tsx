@@ -36,7 +36,6 @@ const Dochodok: NextPage<Props> = ({
       <FormWrapper<PensionUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        // validationSchema={validationSchema}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
           router.push(nextRoute())

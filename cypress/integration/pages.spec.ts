@@ -424,7 +424,7 @@ describe('Pension page', function () {
     // When presses no, continues to next page
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
-    assertUrl('/hypoteka')
+    assertUrl('/kupele')
 
     //  Go back to our page
     cy.visit('/dochodok')
@@ -439,7 +439,7 @@ describe('Pension page', function () {
     typeToInput('r075_zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
-    assertUrl('/hypoteka')
+    assertUrl('/kupele')
   })
 })
 
@@ -523,7 +523,7 @@ describe('Spa page', function () {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/hypoteka')
+    assertUrl('/dochodok')
 
     //  Go back to our page
     cy.visit('/kupele')
@@ -577,8 +577,8 @@ describe('Spa page', function () {
     next()
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
-    cy.get('[data-test=r037_uplatnuje_uroky-input-no]').click()
-    next()
+    // cy.get('[data-test=r037_uplatnuje_uroky-input-no]').click()
+    // next()
 
     getInput('kupele', '-yes').click()
 
@@ -649,7 +649,7 @@ describe('Summary page', function () {
     '/partner',
     '/deti',
     '/dochodok',
-    '/hypoteka',
+    // '/hypoteka',
     '/kupele',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
