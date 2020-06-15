@@ -510,7 +510,7 @@ describe('twoPercent page', function () {
   })
 })
 
-describe.only('Spa page', function () {
+describe('Spa page', function () {
   it('works with no', function () {
     cy.visit('/kupele')
     getInput('kupele', '-no').click()
@@ -552,7 +552,7 @@ describe.only('Spa page', function () {
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')
   })
-  it.only('Spa UI', function () {
+  it('Spa UI', function () {
     cy.visit('/deti')
 
     getInput('hasChildren', '-yes').click()

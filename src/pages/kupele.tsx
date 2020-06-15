@@ -156,7 +156,7 @@ export const validate = (values: SpaUserInput): Errors => {
       !values.r033_partner_kupele &&
       !values.childrenInSpa
     ) {
-      errors.kupele = 'Vyznačte aspon jednu z moznosti'
+      errors.kupele = 'Vyznačte aspoň jednu z možností'
     }
 
     if (values.danovnikInSpa && !values.r076a_kupele_danovnik) {
@@ -186,7 +186,6 @@ export const validate = (values: SpaUserInput): Errors => {
     if (values.childrenInSpa && !values.r036_deti_kupele) {
       errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
     }
-
     if (
       (values.childrenInSpa &&
         Number(values.r036_deti_kupele) > 50) ||
