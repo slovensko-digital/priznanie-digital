@@ -195,11 +195,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      const diff =
-        Math.round(
-          (this.r072_pred_znizenim - this.r077_nezdanitelna_cast) * 100,
-        ) / 100
-      return round2decimal(Math.max(diff, 0))
+      return round2decimal(Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0))
     },
     get r080_zaklad_dane_celkovo() {
       return round2decimal(floor(this.r078_zaklad_dane_z_prijmov, 2)) // TODO + tf.r065 + tf.r071 + tf.r079)
