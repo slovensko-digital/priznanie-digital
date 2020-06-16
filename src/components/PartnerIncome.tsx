@@ -7,7 +7,7 @@ import {
   EligiblePartnerForm,
   HouseholdQuestion,
   IncomeQuestion,
-  NotElligible,
+  NotEligible,
   PreviousButton,
   SubmitButton,
 } from './PartnerIncomeQuestions'
@@ -44,7 +44,7 @@ export const PartnerIncome = (props: PartnerIncomeProps) => {
       if (validatePartnerIncome(values, currentStep)) {
         questions.push(NextQuestion)
       } else {
-        questions.push(NotElligible)
+        questions.push(NotEligible)
       }
     }
   }
