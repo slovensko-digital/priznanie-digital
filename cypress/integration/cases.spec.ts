@@ -30,11 +30,11 @@ function typeToInput<K extends keyof UserInput>(
   throw new Error(`Incorrect type of input: ${value}`)
 }
 
-function next() {
+const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
-function assertUrl(url: Route | PostponeRoute) {
+const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
 
@@ -44,7 +44,7 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-describe('Cases', function () {
+describe('Cases', () => {
   ;[
     'base',
     'complete',
@@ -58,7 +58,7 @@ describe('Cases', function () {
     'withSpa',
     'withBonus',
   ].forEach((testCase) => {
-    it(testCase, function (done) {
+    it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
         (inputModule) => {
           // Access named export
@@ -280,7 +280,7 @@ describe('Cases', function () {
           next()
 
           if (
-            typeof input.ziadamVratitDanovyBonusAleboPreplatok !== undefined
+            typeof input.ziadamVratitDanovyBonusAleboPreplatok !== 'undefined'
           ) {
             /** SECTION IBAN */
             assertUrl('/iban')
@@ -347,9 +347,9 @@ describe('Cases', function () {
   })
 })
 
-describe.skip('Postpone cases', function () {
+describe.skip('Postpone cases', () => {
   ;['basic', 'foreignIncome'].forEach((testCase) => {
-    it(testCase, function (done) {
+    it(testCase, (done) => {
       import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
         (inputModule) => {
           // Access named export
