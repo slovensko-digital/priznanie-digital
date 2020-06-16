@@ -9,6 +9,9 @@ import {
   translit,
   formatRodneCislo,
   validateRodneCislo,
+  formatIban,
+  validateIbanFormat,
+  validateIbanCountry,
 } from '../src/lib/utils'
 
 describe('utils', () => {
@@ -159,6 +162,85 @@ describe('utils', () => {
       validInputs.forEach((value) => {
         it(`should return false for value "${value}"`, () => {
           expect(validateRodneCislo(value)).toBe(false)
+        })
+      })
+    })
+  })
+
+  describe('#formatIban', () => {
+    describe('should add space after every 4 characters', () => {
+      expect(formatIban('SK6807200002891987426353')).toBe(
+        'SK68 0720 0002 8919 8742 6353',
+      )
+    })
+
+    describe('should allow non-numberic characters only in prefix', () => {
+      expect(formatIban('XX11YY33ZZ44ABCD1234-2-2-2-2 Q_W/E.R 12345678')).toBe(
+        'XX11 3344 1234 2222 1234 5678',
+      )
+    })
+
+    describe('should remove last number and space when using backspace', () => {
+      expect(formatIban('SK68 ', 'SK68 7')).toBe('SK68')
+    })
+  })
+
+  describe('#validateIbanFormat', () => {
+    describe('for valid values', () => {
+      const validInputs = [
+        'SK6807200002891987426353',
+        ' SK68 0720 0002   8919 8742 6353 ',
+        'CZ65 0800 0000 1920 0014 5399',
+        'DE89 3704 0044 0532 0130 00',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return true for value "${value}"`, () => {
+          expect(validateIbanFormat(value)).toBe(true)
+        })
+      })
+    })
+
+    describe('for invalid values', () => {
+      const validInputs = [
+        'SK680720000289198742635',
+        '6807200002891987426353',
+        'SK6807200002891987426350',
+        '1987426353/0720',
+        '19874263530720',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return false for value "${value}"`, () => {
+          expect(validateIbanFormat(value)).toBe(false)
+        })
+      })
+    })
+  })
+
+  describe('#validateIbanCountry', () => {
+    describe('for valid values', () => {
+      const validInputs = [
+        'SK6807200002891987426353',
+        ' SK68 0720 0002   8919 8742 6353 ',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return true for value "${value}"`, () => {
+          expect(validateIbanCountry(value)).toBe(true)
+        })
+      })
+    })
+
+    describe('for invalid values', () => {
+      const validInputs = [
+        'CZ65 0800 0000 1920 0014 5399',
+        'DE89370400440532013000',
+      ]
+
+      validInputs.forEach((value) => {
+        it(`should return false for value "${value}"`, () => {
+          expect(validateIbanCountry(value)).toBe(false)
         })
       })
     })

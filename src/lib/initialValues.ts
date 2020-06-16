@@ -99,7 +99,7 @@ export const spaInitialInput: SpaUserInput = {
 
 export const taxBonusUserInput: TaxBonusUserInput = {
   iban: '',
-  uplatnujeDanovyBonus: false,
+  ziadamVratitDanovyBonusAleboPreplatok: undefined,
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {

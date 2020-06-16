@@ -275,6 +275,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r110() {
       return round2decimal(Math.max(this.r106 - this.r105_dan, 0))
     },
+    get mozeZiadatVratitDanovyBonusAleboPreplatok() {
+      return this.r110 > 0
+    },
     /** TODO High income test case */
     get r112() {
       return round2decimal(Math.min(this.r037_zaplatene_uroky * 0.5, 400))
@@ -343,7 +346,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       input?.XIIoddiel_uplatnujem2percenta ?? false,
 
     /** SECTION Danovy bonus */
-    uplatnujeDanovyBonus: input?.uplatnujeDanovyBonus ?? false,
+    ziadamVratitDanovyBonusAleboPreplatok:
+      input?.ziadamVratitDanovyBonusAleboPreplatok ?? false,
     iban: input?.iban ?? '',
 
     datum: input.datum,

@@ -195,7 +195,8 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   datum: string
 
   /** SECTION Danovy bonus */
-  uplatnujeDanovyBonus: boolean
+  mozeZiadatVratitDanovyBonusAleboPreplatok: boolean
+  ziadamVratitDanovyBonusAleboPreplatok: boolean
   iban: string
 
   /** Helper properties from input, that are not part of taxForm */

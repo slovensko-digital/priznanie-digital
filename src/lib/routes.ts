@@ -14,6 +14,7 @@ export type Route =
   | '/osobne-udaje'
   | '/suhrn'
   | '/vysledky'
+  | '/iban'
   | '/stiahnut'
 
 const routesOrder: ReadonlyArray<Route> = [
@@ -29,21 +30,21 @@ const routesOrder: ReadonlyArray<Route> = [
   '/osobne-udaje',
   '/suhrn',
   '/vysledky',
+  '/iban',
   '/stiahnut',
 ]
+
+const isEditing = () =>
+  typeof window !== 'undefined' && window.location.search.includes('edit')
 
 export const getRoutes = (currentRoute: Route) => {
   const currentRouteIndex = routesOrder.indexOf(currentRoute)
   return {
     currentRoute,
     nextRoute: () =>
-      typeof window !== 'undefined' && window.location.search.includes('edit')
-        ? '/suhrn'
-        : routesOrder[currentRouteIndex + 1],
+      isEditing() ? '/suhrn' : routesOrder[currentRouteIndex + 1],
     previousRoute: () =>
-      typeof window !== 'undefined' && window.location.search.includes('edit')
-        ? '/suhrn'
-        : routesOrder[currentRouteIndex + -1],
+      isEditing() ? '/suhrn' : routesOrder[currentRouteIndex + -1],
   }
 }
 
