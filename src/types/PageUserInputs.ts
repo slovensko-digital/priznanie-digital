@@ -25,7 +25,7 @@ export type PartnerUserInput = Pick<
   | 'r032_partner_pocet_mesiacov'
   | 'r033_partner_kupele'
   | 'r033_partner_kupele_uhrady'
-  | 'partner_inelligible'
+  | 'partner_ineligible'
   | 'partner_step'
   | 'partner_spolocna_domacnost'
   | 'partner_bonus_uplatneny'

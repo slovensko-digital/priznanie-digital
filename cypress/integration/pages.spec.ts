@@ -149,14 +149,14 @@ describe('Partner page', function () {
       r032_partner_vlastne_prijmy: '4000',
     })
     next()
-    cy.get('[data-test=inelligible-message]').should('exist')
+    cy.get('[data-test=ineligible-message]').should('exist')
 
     // Go back and change answer, continue to see more fields
     cy.get('button').contains('Späť').click()
     cy.get('[data-test=r032_partner_vlastne_prijmy-input]').clear()
     typeToInput('r032_partner_vlastne_prijmy', withPartnerInput)
     next()
-    cy.get('[data-test=inelligible-message]').should('not.exist')
+    cy.get('[data-test=ineligible-message]').should('not.exist')
     getInput('partner_spolocna_domacnost', '-yes').should('exist')
 
     // Should show error if not filled in
@@ -166,30 +166,30 @@ describe('Partner page', function () {
     // Click radio, continue to see ineligible message
     cy.get('[data-test=partner_spolocna_domacnost-input-no]').click()
     next()
-    cy.get('[data-test=inelligible-message]').should('exist')
+    cy.get('[data-test=ineligible-message]').should('exist')
 
     // Go back and change answer, continue to see more fields
     cy.get('button').contains('Späť').click()
     cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
     next()
-    cy.get('[data-test=inelligible-message]').should('not.exist')
+    cy.get('[data-test=ineligible-message]').should('not.exist')
     getInput('partner_bonus_uplatneny', '-yes').should('exist')
 
     // Click radio, continue to see ineligible message
     cy.get('[data-test=partner_bonus_uplatneny-input-yes]').click()
     next()
-    cy.get('[data-test=inelligible-message]').should('exist')
+    cy.get('[data-test=ineligible-message]').should('exist')
 
     // Go back and change answer, continue to see more fields
     cy.get('button').contains('Späť').click()
     cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
     next()
-    cy.get('[data-test=inelligible-message]').should('not.exist')
+    cy.get('[data-test=ineligible-message]').should('not.exist')
     cy.get('[data-test="partner_podmienky.1-input"]').should('exist')
 
     // Continue to see ineligible message
     next()
-    cy.get('[data-test=inelligible-message]').should('exist')
+    cy.get('[data-test=ineligible-message]').should('exist')
 
     // Go back and change answer, continue to see more fields
     cy.get('button').contains('Späť').click()
