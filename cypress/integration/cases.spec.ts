@@ -46,16 +46,16 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', function () {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
-    // 'withSpa',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    // 'withMortgage',
+    'withPension',
+    'withChildren',
+    'with2percent',
+    'withSpa',
     'withBonus',
   ].forEach((testCase) => {
     it(testCase, function (done) {
@@ -278,6 +278,26 @@ describe('Cases', function () {
           )
 
           next()
+
+          if (
+            typeof input.ziadamVratitDanovyBonusAleboPreplatok !== undefined
+          ) {
+            /** SECTION IBAN */
+            assertUrl('/iban')
+            cy.contains(
+              'Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu',
+            )
+            cy.get('[data-test=ineligible-message]').should('not.exist')
+
+            if (input.ziadamVratitDanovyBonusAleboPreplatok) {
+              getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
+              typeToInput('iban', input)
+            } else {
+              getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
+            }
+
+            next()
+          }
 
           /** SECTION Download */
           assertUrl('/stiahnut')
