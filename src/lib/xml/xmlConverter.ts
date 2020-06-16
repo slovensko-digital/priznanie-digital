@@ -162,6 +162,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
+  if (taxForm.uplatnujeDanovyBonus) {
+    form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
+    form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
+    form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'
+    form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonus = '1'
+  }
+
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(

@@ -195,7 +195,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return round2decimal(Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0))
+      return round2decimal(
+        Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0),
+      )
     },
     get r080_zaklad_dane_celkovo() {
       return round2decimal(floor(this.r078_zaklad_dane_z_prijmov, 2)) // TODO + tf.r065 + tf.r071 + tf.r079)
@@ -339,6 +341,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     employed: input?.employed ?? false,
     XIIoddiel_uplatnujem2percenta:
       input?.XIIoddiel_uplatnujem2percenta ?? false,
+
+    /** SECTION Danovy bonus */
+    uplatnujeDanovyBonus: input?.uplatnujeDanovyBonus ?? false,
+    iban: input?.iban ?? '',
 
     datum: input.datum,
   }

@@ -103,6 +103,10 @@ export interface TaxFormUserInput {
   r076a_kupele_danovnik?: string
   danovnikInSpa?: boolean
 
+  /** SECTION Danovy bonus */
+  uplatnujeDanovyBonus?: boolean
+  iban?: string
+
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali test */
   datum: string
