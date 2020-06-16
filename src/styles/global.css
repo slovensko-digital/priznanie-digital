@@ -42,3 +42,7 @@ input:disabled, button:disabled {
   padding: 20px;
   margin: 0;
 }
+
+.sdn-footer__disclaimer {
+  color: #d0d0d0;
+}

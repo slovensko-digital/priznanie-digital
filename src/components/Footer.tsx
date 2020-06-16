@@ -2,6 +2,7 @@ import React from 'react'
 import { Feedback } from './Feedback'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+import { ExternalLink } from './ExternalLink'
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
@@ -26,10 +27,19 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
               <div className="sdn-footer__links">
                 <ul>
                   <li>
-                    <a href="#media">Pre médiá</a>
+                    <ExternalLink href="https://navody.digital/disclaimer">
+                      Podmienky používania
+                    </ExternalLink>
                   </li>
                   <li>
-                    <a href="#gdpr">Ochrana osobných údajov</a>
+                    <ExternalLink href="https://navody.digital/disclaimer">
+                      Ochrana osobných údajov
+                    </ExternalLink>
+                  </li>
+                  <li>
+                    <ExternalLink href="https://navody.digital/contact-info">
+                      Kontakt
+                    </ExternalLink>
                   </li>
                 </ul>
               </div>
@@ -41,26 +51,35 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
                   <br />
                   IČO: 50158635
                   <br />
-                  <a href="mailto:kontakt@slovensko.digital">
-                    kontakt@slovensko.digital
+                  <a href="mailto:navody@slovensko.digital">
+                    navody@slovensko.digital
                   </a>
                 </div>
               </div>
               <div className="sdn-footer__social">
-                <a
-                  href="#facebook"
-                  className="footer-icon footer-icon__facebook"
+                <ExternalLink
+                  href="https://www.facebook.com/slovensko.digital/"
+                  className="footer-icon footer-icon__facebook no-arrow"
                 >
                   <span>facebook</span>
-                </a>
-                <a href="#github" className="footer-icon footer-icon__github">
+                </ExternalLink>
+                <ExternalLink
+                  href="https://github.com/priznanie-digital/priznanie-digital"
+                  className="footer-icon footer-icon__github no-arrow"
+                >
                   <span>github</span>
-                </a>
-                <a href="#youtube" className="footer-icon footer-icon__youtube">
+                </ExternalLink>
+                <ExternalLink
+                  href="https://www.youtube.com/channel/UCbpnKa1XOIpQLYUQ2dz7Sng"
+                  className="footer-icon footer-icon__youtube no-arrow"
+                >
                   <span>youtube</span>
-                </a>
+                </ExternalLink>
               </div>
             </div>
+            <p className="sdn-footer__disclaimer govuk-!-font-size-14 govuk-!-margin-top-7">
+              Informácie zverejnené na stránke majú informatívny charakter.
+            </p>
           </div>
         </div>
       </footer>
