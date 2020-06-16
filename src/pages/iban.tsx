@@ -75,10 +75,6 @@ const Iban: NextPage<Props> = ({
             setFieldValue,
           }: FormikProps<TaxBonusUserInput>) => (
             <>
-              <ErrorSummary<TaxBonusUserInput>
-                errors={errors}
-                touched={touched}
-              />
               <Form className="form" noValidate>
                 <BooleanRadio
                   name="ziadamVratitDanovyBonusAleboPreplatok"
@@ -86,20 +82,26 @@ const Iban: NextPage<Props> = ({
                 />
 
                 {values.ziadamVratitDanovyBonusAleboPreplatok && (
-                  <Input
-                    name="iban"
-                    type="text"
-                    label="IBAN"
-                    hint="Účet na ktorý má byť vyplatený daňový bonus alebo rozdiel daňového bonusu musí byť vedený v banke na Slovensku pod vašim menom"
-                    maxLength={29}
-                    onChange={(event) => {
-                      const iban = formatIban(
-                        event.currentTarget.value,
-                        values.iban,
-                      )
-                      setFieldValue('iban', iban)
-                    }}
-                  />
+                  <>
+                    <ErrorSummary<TaxBonusUserInput>
+                      errors={errors}
+                      touched={touched}
+                    />
+                    <Input
+                      name="iban"
+                      type="text"
+                      label="IBAN"
+                      hint="Účet na ktorý má byť vyplatený daňový bonus alebo rozdiel daňového bonusu musí byť vedený v banke na Slovensku pod vašim menom"
+                      maxLength={29}
+                      onChange={(event) => {
+                        const iban = formatIban(
+                          event.currentTarget.value,
+                          values.iban,
+                        )
+                        setFieldValue('iban', iban)
+                      }}
+                    />
+                  </>
                 )}
 
                 <button data-test="next" className="govuk-button" type="submit">
@@ -119,8 +121,12 @@ export default Iban
 export const validate = (values: TaxBonusUserInput) => {
   const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
+  if (typeof values.ziadamVratitDanovyBonusAleboPreplatok === 'undefined') {
+    errors.ziadamVratitDanovyBonusAleboPreplatok = 'Vyznačte odpoveď'
+  }
+
   if (values.ziadamVratitDanovyBonusAleboPreplatok) {
-    if (values.iban === '') {
+    if (!values.iban || values.iban === '') {
       // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
       errors.iban = 'Zadajte váš IBAN'
     } else if (!validateIbanFormat(values.iban)) {

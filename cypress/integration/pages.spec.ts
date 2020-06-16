@@ -17,6 +17,7 @@ import { Route, PostponeRoute } from '../../src/lib/routes'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
+import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -58,6 +59,11 @@ function next() {
 const getError = () => cy.get('[data-test=error]')
 function assertUrl(url: Route | PostponeRoute) {
   cy.url().should('include', url)
+}
+
+const skipPage = () => {
+  cy.get('.govuk-label').contains('Nie').click()
+  next()
 }
 
 Cypress.Cookies.defaults({
@@ -626,12 +632,107 @@ describe('Results page', function () {
 
     //  Go back to our page
     cy.visit('/vysledky')
+
+    next()
+    assertUrl('/stiahnut')
   })
   it('has working ui', function () {
     cy.visit('/vysledky')
 
     cy.get('h1').contains('Výpočet dane za rok')
     cy.get('h2').contains('Stručný prehľad')
+  })
+})
+
+describe('IBAN page', function () {
+  it('has working navigation', function () {
+    cy.visit('/iban')
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click()
+    assertUrl('/vysledky')
+
+    //  Go back to our page
+    cy.visit('/iban')
+
+    next()
+    assertUrl('/stiahnut')
+  })
+  it('has working ui for ineligible applicants', function () {
+    cy.visit('/iban')
+    cy.get('[data-test=ineligible-message]').should('exist')
+  })
+  it('has working ui for eligible applicants', function () {
+    cy.visit('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '1000' })
+    typeToInput('priloha3_r11_socialne', withBonusInput)
+    typeToInput('priloha3_r13_zdravotne', withBonusInput)
+    next()
+
+    assertUrl('/zamestnanie')
+    skipPage()
+
+    assertUrl('/partner')
+    skipPage()
+
+    assertUrl('/deti')
+    getInput('hasChildren', '-yes').click()
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withBonusInput.children?.[0]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withBonusInput.children?.[0]?.rodneCislo ?? '',
+    )
+    next()
+
+    assertUrl('/dochodok')
+    skipPage()
+
+    // assertUrl('/hypoteka')
+    // skipPage()
+
+    assertUrl('/kupele')
+    skipPage()
+
+    assertUrl('/dve-percenta')
+    skipPage()
+
+    assertUrl('/osobne-udaje')
+    getInput('meno_priezvisko').type('Matej Ledni')
+    cy.contains('Matej Lednický').click()
+    next()
+
+    assertUrl('/suhrn')
+    next()
+
+    assertUrl('/vysledky')
+    cy.get('small').contains(
+      'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.',
+    )
+    next()
+
+    assertUrl('/iban')
+    cy.get('[data-test=ineligible-message]').should('not.exist')
+    next()
+
+    getError().should('have.length', 1)
+
+    getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
+    next()
+    getError().should('have.length', 0)
+    assertUrl('/stiahnut')
+
+    cy.get('.govuk-back-link').click()
+    getError().should('have.length', 0)
+    getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
+    getInput('iban').should('exist')
+    next()
+
+    getError().should('have.length', 1)
+
+    getInput('iban').type('SK6807200002891987426353')
+    next()
+    assertUrl('/stiahnut')
   })
 })
 
