@@ -90,6 +90,7 @@ export const validateRoute = (
       '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
       '/suhrn': 'meno_priezvisko',
       '/vysledky': 'meno_priezvisko',
+      '/iban': 'meno_priezvisko',
       '/stiahnut': 'meno_priezvisko',
     }
 
