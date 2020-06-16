@@ -2,14 +2,11 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { NextPage } from 'next'
 import { TaxForm } from '../types/TaxForm'
-
 import { getRoutes, validateRoute } from '../lib/routes'
 import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { useRouter } from 'next/router'
-
-const { previousRoute, nextRoute } = getRoutes('/vysledky')
 
 const buildSummaryParams = (rows: SummaryRow[]) => {
   return rows.reduce(
@@ -24,6 +21,7 @@ const buildSummaryParams = (rows: SummaryRow[]) => {
 interface SummaryRow {
   key: string
   title: string
+  description?: string
   value: number
   fontSize?: number
 }
@@ -34,13 +32,20 @@ const Summary = ({ rows }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {rows.map(({ key, title, value, fontSize }) => (
+        {rows.map(({ key, title, description, value, fontSize }) => (
           <tr
             className="govuk-table__row"
             style={fontSize ? { fontSize } : undefined}
             key={key}
           >
-            <td className="govuk-table__cell">{title}</td>
+            <td className="govuk-table__cell">
+              {title}
+              {description && (
+                <div className="govuk-!-margin-top-1">
+                  <small>{description}</small>
+                </div>
+              )}
+            </td>
             <td className="govuk-table__cell govuk-table__cell--numeric">
               {value > 0 ? (
                 <strong>{formatCurrency(value)}</strong>
@@ -67,14 +72,21 @@ const Vysledky: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter()
 
+  const { previousRoute } = getRoutes('/vysledky')
+  const { nextRoute } = getRoutes(
+    taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? '/vysledky' : '/iban',
+  )
+
   useEffect(() => {
     router.prefetch(nextRoute())
     validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
+  }, [router, taxFormUserInput, nextRoute])
 
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())
+
+  console.log(taxForm)
 
   const summaryRows = [
     { title: 'Príjmy', value: taxForm.t1r2_prijmy, key: 't1r2_prijmy' },
@@ -102,12 +114,12 @@ const Vysledky: NextPage<Props> = ({
       title:
         'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
       value: taxForm.r106,
-      key: 'danovy_bonus_na_dieta', // nemozme zmenit aby sa nemusel menit email template
+      key: 'r106',
     },
     {
       title: 'Príspevok na dôchodkové poistenie (III. pilier)',
       value: taxForm.r075_zaplatene_prispevky_na_dochodok,
-      key: 'r030_vyska_dochodku', // nemozme zmenit aby sa nemusel menit email template
+      key: 'r075_zaplatene_prispevky_na_dochodok',
     },
     {
       title: 'Úhrady za kúpele spolu',
@@ -121,8 +133,11 @@ const Vysledky: NextPage<Props> = ({
     },
     {
       title: 'Daňový preplatok',
-      value: taxForm.r126_danovy_preplatok,
-      key: 'r126_danovy_preplatok',
+      description: taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok
+        ? 'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.'
+        : '',
+      value: taxForm.r110,
+      key: 'r110',
     },
     {
       title: 'Daň na úhradu',

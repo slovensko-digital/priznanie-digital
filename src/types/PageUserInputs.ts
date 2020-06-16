@@ -85,8 +85,7 @@ export type SpaUserInput = Pick<
 
 export type TaxBonusUserInput = Pick<
   TaxFormUserInput,
-  | 'uplatnujeDanovyBonus'
-  | 'iban'
+  'ziadamVratitDanovyBonusAleboPreplatok' | 'iban'
 >
 
 export type IncomeSourceCountryUserInput = Pick<

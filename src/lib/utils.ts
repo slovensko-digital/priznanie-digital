@@ -1,4 +1,5 @@
 import { rodnecislo } from 'rodnecislo'
+import IBAN from 'iban'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -82,4 +83,23 @@ export const validateRodneCislo = (value: string): boolean => {
     /^\d{6} \/ \d{3,4}$/.test(value) &&
     rodnecislo(value.replace(' / ', '')).isValid()
   )
+}
+
+export const formatIban = (newValue: string, previousValue = '') => {
+  const prefix = newValue.trim().slice(0, 2)
+  const number = newValue.trim().slice(2).replace(/\D/g, '')
+  const formattedNewValue = `${prefix}${number}`
+  if (`${newValue} ` === previousValue) {
+    return newValue.slice(0, -2)
+  } else {
+    return IBAN.printFormat(formattedNewValue)
+  }
+}
+
+export const validateIbanFormat = (value: string): boolean => {
+  return IBAN.isValid(value.replace(/\s/g, ''))
+}
+
+export const validateIbanCountry = (value: string): boolean => {
+  return /^sk/i.test(value.trim())
 }

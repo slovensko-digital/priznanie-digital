@@ -9,15 +9,27 @@ describe('hypoteka', () => {
         expected: ['kupele'],
       },
       {
-        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '30' },
+        input: {
+          kupele: true,
+          danovnikInSpa: true,
+          r076a_kupele_danovnik: '30',
+        },
         expected: [],
       },
       {
-        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '60' },
+        input: {
+          kupele: true,
+          danovnikInSpa: true,
+          r076a_kupele_danovnik: '60',
+        },
         expected: ['r076a_kupele_danovnik'],
       },
       {
-        input: { kupele: true, danovnikInSpa: true, r076a_kupele_danovnik: '60,2' },
+        input: {
+          kupele: true,
+          danovnikInSpa: true,
+          r076a_kupele_danovnik: '60,2',
+        },
         expected: ['r076a_kupele_danovnik'],
       },
       {

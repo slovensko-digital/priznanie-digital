@@ -11,8 +11,6 @@ import { downloadPdf } from '../lib/api'
 import { useRouter } from 'next/router'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
-const { previousRoute } = getRoutes('/stiahnut')
-
 interface Props {
   taxForm: TaxForm
   taxFormUserInput: TaxFormUserInput
@@ -23,6 +21,10 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
 
   const [didDownload, setDidDownload] = useState<boolean>(false)
   const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false)
+
+  const { previousRoute } = getRoutes(
+    taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? '/stiahnut' : '/iban',
+  )
 
   useEffect(() => {
     validateRoute(router, taxFormUserInput)
