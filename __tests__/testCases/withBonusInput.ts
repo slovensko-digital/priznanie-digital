@@ -52,4 +52,8 @@ export const withBonusInput: TaxFormUserInput = {
   r036_deti_kupele: '60',
   danovnikInSpa: true,
   r076a_kupele_danovnik: '41',
+
+  /** SECTION Danovy bonus */
+  uplatnujeDanovyBonus: true,
+  iban: 'SK6807200002891987426353',
 }

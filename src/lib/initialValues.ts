@@ -8,6 +8,7 @@ import {
   MortgageUserInput,
   TwoPercentUserInput,
   SpaUserInput,
+  TaxBonusUserInput,
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
@@ -96,6 +97,11 @@ export const spaInitialInput: SpaUserInput = {
   children: [makeEmptyChild()],
 }
 
+export const taxBonusUserInput: TaxBonusUserInput = {
+  iban: '',
+  uplatnujeDanovyBonus: false,
+}
+
 export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...incomeAndExpenseInitialValues,
   ...partnerUserInitialValues,
@@ -106,6 +112,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...mortgageInitialValues,
   ...twoPercentInitialValues,
   ...spaInitialInput,
+  ...taxBonusUserInput,
   ...{ datum: '' },
 }
 
