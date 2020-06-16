@@ -52,12 +52,12 @@ function typeToInputPostpone<K extends keyof PostponeUserInput>(
   throw new Error(`Incorrect type of input: ${value}`)
 }
 
-function next() {
+const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
 const getError = () => cy.get('[data-test=error]')
-function assertUrl(url: Route | PostponeRoute) {
+const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
 
@@ -70,9 +70,27 @@ Cypress.Cookies.defaults({
   whitelist: ['you-shall'], // preserve the cookie between tests
 })
 
-describe('Employment page', function () {
-  it('has working ui', function () {
+describe('Cookie consent', () => {
+  it('has working ui', () => {
     cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+
+    // display cookie consent
+    cy.visit('/')
+    cy.get('.govuk-main-wrapper')
+    cy.get('.cc-message').should('exist')
+    cy.get('.cc-message').contains('Tento web používa súbory cookie')
+    cy.get('.cc-banner button').contains('OK').click()
+    cy.get('.cc-message').should('not.exist')
+
+    // do not display cookie consent on next visit
+    cy.visit('/')
+    cy.get('.govuk-main-wrapper')
+    cy.get('.cc-message').should('not.exist')
+  })
+})
+
+describe('Employment page', () => {
+  it('has working ui', () => {
     cy.visit('/zamestnanie')
 
     // Back button should work and be the correct page
@@ -117,8 +135,8 @@ describe('Employment page', function () {
     assertUrl('/partner')
   })
 })
-describe('Partner page', function () {
-  it('has working ui', function () {
+describe('Partner page', () => {
+  it('has working ui', () => {
     cy.visit('/partner')
 
     // Back button should work and be the correct page
@@ -138,7 +156,7 @@ describe('Partner page', function () {
     assertUrl('/deti')
   })
 
-  it('determines eligibility', function () {
+  it('determines eligibility', () => {
     cy.visit('/partner')
 
     // When presses yes, additional fields appears
@@ -218,8 +236,8 @@ describe('Partner page', function () {
   })
 })
 
-describe('osobne-udaje page', function () {
-  it('Back and next', function () {
+describe('osobne-udaje page', () => {
+  it('Back and next', () => {
     cy.visit('/osobne-udaje')
 
     // Back button should work and be the correct page
@@ -233,7 +251,7 @@ describe('osobne-udaje page', function () {
     next()
     getError()
   })
-  it('with autoform', function () {
+  it('with autoform', () => {
     cy.visit('/osobne-udaje')
 
     /** With autoform */
@@ -252,7 +270,7 @@ describe('osobne-udaje page', function () {
 
     next()
   })
-  it('with NACE', function () {
+  it('with NACE', () => {
     cy.visit('/osobne-udaje')
 
     /** With autoform */
@@ -265,13 +283,13 @@ describe('osobne-udaje page', function () {
       '01110 - Pestovanie obilnín (okrem ryže), strukovín a olejnatých semien',
     )
   })
-  it('with posta api', function () {
+  it('with posta api', () => {
     cy.visit('/osobne-udaje')
 
     typeToInput('r009_psc', baseInput)
     getInput('r010_obec').should('have.value', baseInput.r010_obec)
   })
-  it('Manual entry', function () {
+  it('Manual entry', () => {
     cy.visit('/osobne-udaje')
 
     /** With autoform */
@@ -288,22 +306,22 @@ describe('osobne-udaje page', function () {
   })
 })
 
-describe('Children page', function () {
-  it('has working navigation', function () {
+describe('Children page', () => {
+  it('has working navigation', () => {
     cy.visit('/deti')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/partner')
   })
-  it('has working validation for checkbox', function () {
+  it('has working validation for checkbox', () => {
     cy.visit('/deti')
 
     // Shows error, when presses next without interaction
     next()
     getError()
   })
-  it('has working validation for child form', function () {
+  it('has working validation for child form', () => {
     cy.visit('/deti')
 
     // When presses yes, additional fields appears
@@ -326,7 +344,7 @@ describe('Children page', function () {
     next()
     assertUrl('/dochodok')
   })
-  it('has working ui for adding children', function () {
+  it('has working ui for adding children', () => {
     cy.visit('/deti')
 
     // When presses yes, additional fields appears
@@ -376,7 +394,7 @@ describe('Children page', function () {
     next()
     assertUrl('/dochodok')
   })
-  it('has working validation for child form months', function () {
+  it('has working validation for child form months', () => {
     cy.visit('/deti')
 
     // When presses yes, additional fields appears
@@ -412,8 +430,8 @@ describe('Children page', function () {
   })
 })
 
-describe('Pension page', function () {
-  it('has working ui', function () {
+describe('Pension page', () => {
+  it('has working ui', () => {
     cy.visit('/dochodok')
 
     // Back button should work and be the correct page
@@ -449,8 +467,8 @@ describe('Pension page', function () {
   })
 })
 
-describe('twoPercent page', function () {
-  it('has working ui', function () {
+describe('twoPercent page', () => {
+  it('has working ui', () => {
     cy.visit('/dve-percenta')
 
     // Back button should work and be the correct page
@@ -483,7 +501,7 @@ describe('twoPercent page', function () {
     next()
     assertUrl('/osobne-udaje')
   })
-  it('with autoform', function () {
+  it('with autoform', () => {
     cy.visit('/dve-percenta')
 
     // When presses yes, additional fields appear
@@ -505,7 +523,7 @@ describe('twoPercent page', function () {
     next()
     assertUrl('/osobne-udaje')
   })
-  it('works with no', function () {
+  it('works with no', () => {
     cy.visit('/dve-percenta')
 
     cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
@@ -516,15 +534,15 @@ describe('twoPercent page', function () {
   })
 })
 
-describe('Spa page', function () {
-  it('works with no', function () {
+describe('Spa page', () => {
+  it('works with no', () => {
     cy.visit('/kupele')
     getInput('kupele', '-no').click()
     next()
     getError().should('have.length', 0)
     assertUrl('/dve-percenta')
   })
-  it('Links and errors', function () {
+  it('Links and errors', () => {
     cy.visit('/kupele')
 
     // Back button should work and be the correct page
@@ -546,7 +564,7 @@ describe('Spa page', function () {
     cy.get('.govuk-error-summary')
   })
 
-  it('works with both partner and user', function () {
+  it('works with both partner and user', () => {
     cy.visit('/kupele')
 
     getInput('kupele', '-yes').click()
@@ -558,7 +576,7 @@ describe('Spa page', function () {
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')
   })
-  it('Spa UI', function () {
+  it('Spa UI', () => {
     cy.visit('/deti')
 
     getInput('hasChildren', '-yes').click()
@@ -609,8 +627,8 @@ describe('Spa page', function () {
   })
 })
 
-describe('Feedback', function () {
-  it('has working ui', function () {
+describe('Feedback', () => {
+  it('has working ui', () => {
     cy.visit('/')
     cy.get('[data-test=feedback]').click()
 
@@ -622,8 +640,8 @@ describe('Feedback', function () {
   })
 })
 
-describe('Results page', function () {
-  it('has working navigation', function () {
+describe('Results page', () => {
+  it('has working navigation', () => {
     cy.visit('/vysledky')
 
     // Back button should work and be the correct page
@@ -636,7 +654,7 @@ describe('Results page', function () {
     next()
     assertUrl('/stiahnut')
   })
-  it('has working ui', function () {
+  it('has working ui', () => {
     cy.visit('/vysledky')
 
     cy.get('h1').contains('Výpočet dane za rok')
@@ -644,8 +662,8 @@ describe('Results page', function () {
   })
 })
 
-describe('IBAN page', function () {
-  it('has working navigation', function () {
+describe('IBAN page', () => {
+  it('has working navigation', () => {
     cy.visit('/iban')
 
     // Back button should work and be the correct page
@@ -658,11 +676,11 @@ describe('IBAN page', function () {
     next()
     assertUrl('/stiahnut')
   })
-  it('has working ui for ineligible applicants', function () {
+  it('has working ui for ineligible applicants', () => {
     cy.visit('/iban')
     cy.get('[data-test=ineligible-message]').should('exist')
   })
-  it('has working ui for eligible applicants', function () {
+  it('has working ui for eligible applicants', () => {
     cy.visit('/prijmy-a-vydavky')
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '1000' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
@@ -736,8 +754,8 @@ describe('IBAN page', function () {
   })
 })
 
-describe('Summary page', function () {
-  it('has working navigation', function () {
+describe('Summary page', () => {
+  it('has working navigation', () => {
     cy.visit('/suhrn')
 
     // Back button should work and be the correct page
@@ -747,7 +765,7 @@ describe('Summary page', function () {
     //  Go back to our page
     cy.visit('/vysledky')
   })
-  it('has working ui', function () {
+  it('has working ui', () => {
     cy.visit('/suhrn')
 
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
@@ -763,7 +781,7 @@ describe('Summary page', function () {
     '/kupele',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
-    it(`has working edit link to ${link}`, function () {
+    it(`has working edit link to ${link}`, () => {
       cy.visit('/suhrn')
       cy.get('h2 > a').eq(index).click()
       assertUrl(link)
@@ -775,8 +793,8 @@ describe('Summary page', function () {
   })
 })
 
-describe.skip('/odklad/osobne-udaje page', function () {
-  beforeEach('Navigate to test page', function () {
+describe.skip('/odklad/osobne-udaje page', () => {
+  beforeEach('Navigate to test page', () => {
     cy.visit('/')
 
     cy.contains('Odložiť daňové priznanie').click()
@@ -785,7 +803,7 @@ describe.skip('/odklad/osobne-udaje page', function () {
 
     next()
   })
-  it('Back and validation', function () {
+  it('Back and validation', () => {
     assertUrl('/odklad/osobne-udaje')
 
     // Back button should work and be the correct page
@@ -799,7 +817,7 @@ describe.skip('/odklad/osobne-udaje page', function () {
     next()
     getError()
   })
-  it('with autoform', function () {
+  it('with autoform', () => {
     assertUrl('/odklad/osobne-udaje')
 
     /** With autoform */
@@ -815,13 +833,13 @@ describe.skip('/odklad/osobne-udaje page', function () {
     getInputPostpone('obec').should('contain.value', 'Bratislava')
     getInputPostpone('stat').should('contain.value', 'Slovenská republika')
   })
-  it('with posta api', function () {
+  it('with posta api', () => {
     assertUrl('/odklad/osobne-udaje')
 
     typeToInputPostpone('psc', foreignIncomeInput)
     getInputPostpone('obec').should('have.value', foreignIncomeInput.obec)
   })
-  it('Manual entry', function () {
+  it('Manual entry', () => {
     assertUrl('/odklad/osobne-udaje')
 
     typeToInputPostpone('dic', foreignIncomeInput)
@@ -832,7 +850,7 @@ describe.skip('/odklad/osobne-udaje page', function () {
     typeToInputPostpone('psc', foreignIncomeInput)
     typeToInputPostpone('stat', foreignIncomeInput)
   })
-  it('Errors', function () {
+  it('Errors', () => {
     assertUrl('/odklad/osobne-udaje')
 
     getInputPostpone('dic').type('invalid')
@@ -842,8 +860,8 @@ describe.skip('/odklad/osobne-udaje page', function () {
   })
 })
 
-describe.skip('/odklad/suhrn page', function () {
-  beforeEach('Navigate to test page', function () {
+describe.skip('/odklad/suhrn page', () => {
+  beforeEach('Navigate to test page', () => {
     cy.visit('/')
 
     cy.contains('Odložiť daňové priznanie').click()
@@ -859,14 +877,14 @@ describe.skip('/odklad/suhrn page', function () {
 
     next()
   })
-  it('Back', function () {
+  it('Back', () => {
     assertUrl('/odklad/suhrn')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/odklad/osobne-udaje')
   })
-  it('Email', function () {
+  it('Email', () => {
     assertUrl('/odklad/suhrn')
 
     typeToInputPostpone('email', withEmailInput)
