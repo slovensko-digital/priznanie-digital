@@ -263,6 +263,7 @@ interface SelectProps {
   name: string
   options: string[]
   className?: string
+  hint?: string
   label: string | React.ReactNode
 
   /** boolean=true disables the <select> while keeping selected value
@@ -274,6 +275,7 @@ export const Select = ({
   options,
   label,
   className,
+  hint,
   disabled = false,
   ...props
 }: SelectProps) => {
@@ -290,6 +292,7 @@ export const Select = ({
       <label className="govuk-label govuk-!-font-weight-bold" htmlFor={name}>
         {label}
       </label>
+      <span className="govuk-hint">{hint}</span>
       {meta.error ? (
         <span id={name} data-test="error" className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {meta.error}

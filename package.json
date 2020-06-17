@@ -5,7 +5,7 @@
     "node": "12.16.1"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "BUILD_TIMESTAMP=$(date +%s) next build",
     "start": "next start",

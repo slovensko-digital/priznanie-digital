@@ -161,26 +161,6 @@ describe('Partner page', () => {
 
     // When presses yes, additional fields appears
     cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
-    getInput('r032_partner_vlastne_prijmy').should('exist')
-
-    // Should show error if field is empty
-    next()
-    getError().should('have.length', 1)
-
-    // Fill out input with incorrect value (too high), continue to see ineligible message
-    typeToInput('r032_partner_vlastne_prijmy', {
-      ...withPartnerInput,
-      r032_partner_vlastne_prijmy: '4000',
-    })
-    next()
-    cy.get('[data-test=ineligible-message]').should('exist')
-
-    // Go back and change answer, continue to see more fields
-    cy.get('button').contains('Späť').click()
-    cy.get('[data-test=r032_partner_vlastne_prijmy-input]').clear()
-    typeToInput('r032_partner_vlastne_prijmy', withPartnerInput)
-    next()
-    cy.get('[data-test=ineligible-message]').should('not.exist')
     getInput('partner_spolocna_domacnost', '-yes').should('exist')
 
     // Should show error if not filled in
@@ -219,6 +199,28 @@ describe('Partner page', () => {
     cy.get('button').contains('Späť').click()
     cy.get('[data-test="partner_podmienky.1-input"]').click()
     next()
+
+    getInput('r032_partner_vlastne_prijmy').should('exist')
+
+    // Should show error if field is empty
+    next()
+    getError().should('have.length', 1)
+
+    // Fill out input with incorrect value (too high), continue to see ineligible message
+    typeToInput('r032_partner_vlastne_prijmy', {
+      ...withPartnerInput,
+      r032_partner_vlastne_prijmy: '4000',
+    })
+    next()
+    cy.get('[data-test=ineligible-message]').should('exist')
+
+    // Go back and change answer, continue to see more fields
+    cy.get('button').contains('Späť').click()
+    cy.get('[data-test=r032_partner_vlastne_prijmy-input]').clear()
+    typeToInput('r032_partner_vlastne_prijmy', withPartnerInput)
+    next()
+    cy.get('[data-test=ineligible-message]').should('not.exist')
+
     getInput('r031_priezvisko_a_meno').should('exist')
     getInput('r031_rodne_cislo').should('exist')
     getInput('r032_partner_pocet_mesiacov').should('exist')
