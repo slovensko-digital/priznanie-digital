@@ -18,11 +18,14 @@ export default () => (
 
       <p>
         Po zadaní základných údajov si môžete stiahnuť pripravené daňové
-        priznanie a následne vás prevedieme procesom podania daňového priznania
-        na stránkach Finančnej správy.
+        priznanie a následne vás prevedieme procesom jeho podania na stránkach
+        Finančnej správy.
       </p>
 
-      <p>Aplikácia je určená pre SZČO uplatňujúce si paušálne výdavky.</p>
+      <p>
+        Aplikácia je určená na podanie riadneho a opravného daňového priznania
+        pre SZČO uplatňujúce si paušálne výdavky.
+      </p>
 
       <p>
         Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
