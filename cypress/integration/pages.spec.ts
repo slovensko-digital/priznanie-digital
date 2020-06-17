@@ -167,7 +167,7 @@ describe('Partner page', () => {
     // When presses no, can continue to next page
     cy.get('[data-test=r032_uplatnujem_na_partnera-input-no]').click()
     next()
-    assertUrl('/deti')
+    assertUrl('/dochodok')
   })
 
   it('determines eligibility', () => {
@@ -248,7 +248,7 @@ describe('Partner page', () => {
     typeToInput('r031_rodne_cislo', withPartnerInput)
     typeToInput('r032_partner_pocet_mesiacov', withPartnerInput)
     next()
-    assertUrl('/deti')
+    assertUrl('/dochodok')
   })
 })
 
@@ -333,6 +333,11 @@ describe('Children page', () => {
   it('has working ui for ineligible applicants', () => {
     cy.visit('/deti')
     cy.get('[data-test=ineligible-message]').should('exist')
+  })
+  it('has working navigation for ineligible applicants', () => {
+    cy.visit('/partner')
+    skipPage()
+    assertUrl('/dochodok')
   })
   it('has working validation', () => {
     navigateEligibleToChildrenPage()
@@ -469,7 +474,7 @@ describe('Pension page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/deti')
+    assertUrl('/partner')
 
     //  Go back to our page
     cy.visit('/dochodok')

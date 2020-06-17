@@ -11,23 +11,30 @@ import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
 import { PartnerIncome } from '../components/PartnerIncome'
 import { validatePartnerIncome } from '../lib/validatePartnerIncome'
 import { Details } from '../components/Details'
-
-const { nextRoute, previousRoute } = getRoutes('/partner')
+import { TaxForm } from '../types/TaxForm'
 
 interface Props {
   setTaxFormUserInput: (values: PartnerUserInput) => void
   taxFormUserInput: TaxFormUserInput
+  taxForm: TaxForm
 }
 
 const Partner: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
+  taxForm,
 }: Props) => {
   const router = useRouter()
+
+  const { previousRoute } = getRoutes('/partner')
+  const { nextRoute } = getRoutes(
+    taxForm.eligibleForChildrenBonus ? '/partner' : '/deti',
+  )
+
   useEffect(() => {
     router.prefetch(nextRoute())
     validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
+  }, [router, taxFormUserInput, nextRoute])
 
   return (
     <>

@@ -9,23 +9,30 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp } from '../lib/utils'
 import { parse } from '../lib/calculation'
-
-const { nextRoute, previousRoute } = getRoutes('/dochodok')
+import { TaxForm } from '../types/TaxForm'
 
 interface Props {
   setTaxFormUserInput: (values: PensionUserInput) => void
   taxFormUserInput: TaxFormUserInput
+  taxForm: TaxForm
 }
 
 const Dochodok: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
+  taxForm,
 }: Props) => {
   const router = useRouter()
+
+  const { previousRoute } = getRoutes(
+    taxForm.eligibleForChildrenBonus ? '/dochodok' : '/deti',
+  )
+  const { nextRoute } = getRoutes('/dochodok')
+
   useEffect(() => {
     router.prefetch(nextRoute())
     validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
+  }, [router, taxFormUserInput, nextRoute])
   return (
     <>
       <Link href={previousRoute()}>
