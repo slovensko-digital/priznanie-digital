@@ -3,59 +3,9 @@ import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerIncomeProps } from './PartnerIncome'
 import { ErrorSummary } from './ErrorSummary'
+import { Details } from './Details'
 
 export const IncomeQuestion = ({ errors, touched, disabled }) => {
-  const r032hint = (
-    <>
-      <p className="govuk-hint">
-        Vlastný príjem manželky/manžela je jej/jeho celkový ročný príjem mínus
-        poistné a príspevky, ktoré bola/bol v roku 2019 z toho príjmu
-        povinná/povinný zaplatiť.
-      </p>
-      <p className="govuk-hint">Do tohto príjmu patria napr.:</p>
-      <ul>
-        <li>materské,</li>
-        <li>príjem zo zamestnania (znížený o poistné),</li>
-        <li>príjmy z podnikania (v plnej výške),</li>
-        <li>podpora v nezamestnanosti,</li>
-        <li>sociálne dávky,</li>
-        <li>dávky a príspevky v hmotnej núdzi,</li>
-        <li>nemocenské a úrazové dávky,</li>
-        <li>peňažný príspevok na opatrovanie</li>
-        <li>dôchodok (invalidný, starobný, výsluhový, vdovský)</li>
-        <li>dávky z garančného poistenia,</li>
-        <li>príjmy z prenájmu,</li>
-        <li>úroky z vkladov,</li>
-        <li>výhry,</li>
-        <li>
-          podiel na zisku (dividenda) vyplácaný zo zisku obchodnej spoločnosti
-          alebo družstva
-        </li>
-        <li>príjmy z kapitálového majetku</li>
-        <li>ostatné príjmy</li>
-      </ul>
-      <p className="govuk-hint">
-        Do vlastného príjmu manželky/manžela nepatria:
-      </p>
-      <ul>
-        <li>zamestnanecká prémia,</li>
-        <li>daňový bonus na deti,</li>
-        <li>zvýšenie dôchodku pre bezvládnosť,</li>
-        <li>
-          štátne sociálne dávky (rodičovský príspevok, prídavok na dieťa,
-          príplatok k prídavku na dieťa, príspevok pri narodení dieťaťa, na viac
-          súčasne narodených detí, príspevok na pohreb, vianočný príspevok
-          dôchodcom, príplatok k dôchodku politických väzňov, príspevok
-          športovému reprezentantovi),
-        </li>
-        <li>
-          štipendium poskytované študentovi, ktorý sa sústavne pripravuje na
-          budúce povolanie.
-        </li>
-      </ul>
-    </>
-  )
-
   return (
     <>
       {!disabled && <ErrorSummary errors={errors} touched={touched} />}
@@ -63,9 +13,53 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
         name="r032_partner_vlastne_prijmy"
         type="number"
         label="Vlastné príjmy manželky/manžela"
-        hint={r032hint}
         disabled={disabled}
       />
+      <Details title="Ako vypočítať príjem?">
+        <>
+          <p className="govuk-hint">Do tohto príjmu patria napr.:</p>
+          <ul>
+            <li>materské,</li>
+            <li>príjem zo zamestnania (znížený o poistné),</li>
+            <li>príjmy z podnikania (v plnej výške),</li>
+            <li>podpora v nezamestnanosti,</li>
+            <li>sociálne dávky,</li>
+            <li>dávky a príspevky v hmotnej núdzi,</li>
+            <li>nemocenské a úrazové dávky,</li>
+            <li>peňažný príspevok na opatrovanie</li>
+            <li>dôchodok (invalidný, starobný, výsluhový, vdovský)</li>
+            <li>dávky z garančného poistenia,</li>
+            <li>príjmy z prenájmu,</li>
+            <li>úroky z vkladov,</li>
+            <li>výhry,</li>
+            <li>
+              podiel na zisku (dividenda) vyplácaný zo zisku obchodnej
+              spoločnosti alebo družstva
+            </li>
+            <li>príjmy z kapitálového majetku</li>
+            <li>ostatné príjmy</li>
+          </ul>
+          <p className="govuk-hint">
+            Do vlastného príjmu manželky/manžela nepatria:
+          </p>
+          <ul>
+            <li>zamestnanecká prémia,</li>
+            <li>daňový bonus na deti,</li>
+            <li>zvýšenie dôchodku pre bezvládnosť,</li>
+            <li>
+              štátne sociálne dávky (rodičovský príspevok, prídavok na dieťa,
+              príplatok k prídavku na dieťa, príspevok pri narodení dieťaťa, na
+              viac súčasne narodených detí, príspevok na pohreb, vianočný
+              príspevok dôchodcom, príplatok k dôchodku politických väzňov,
+              príspevok športovému reprezentantovi),
+            </li>
+            <li>
+              štipendium poskytované študentovi, ktorý sa sústavne pripravuje na
+              budúce povolanie.
+            </li>
+          </ul>
+        </>
+      </Details>
     </>
   )
 }
@@ -91,12 +85,12 @@ export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h1 className="govuk-fieldset__heading">
-        Spĺňa vaša manželka/manžel aspoň jednu z nasledovných podmienok?
+        Spĺňa vaša manželka/manžel aspoň jednu z podmienok?
       </h1>
     </legend>
     <CheckboxSmall
       name="partner_podmienky.1"
-      label="Stará sa o dieťa do dovŕšenia 3 roka, resp. 6 rokov života (dieťa, na ktoré sa poskytuje rodičovský príspevok podľa zákona č. 571/2009 Z. z. o rodičovskom príspevku a o zmene a doplnení niektorých zákonov v znení neskorších predpisov)"
+      label="Stará sa o dieťa do 3 rokov (resp. do 6 rokov s nepriaznivým zdravotným stavom), alebo poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
       disabled={disabled}
     />
     <CheckboxSmall
@@ -106,17 +100,12 @@ export const ConditionsQuestion = ({ disabled }) => (
     />
     <CheckboxSmall
       name="partner_podmienky.3"
-      label="Je evidovaná ako uchádzač o zamestnanie"
+      label="Je evidovaná/ý ako uchádzač o zamestnanie"
       disabled={disabled}
     />
     <CheckboxSmall
       name="partner_podmienky.4"
-      label="Sa považuje za občana so zdravotným postihnutím"
-      disabled={disabled}
-    />
-    <CheckboxSmall
-      name="partner_podmienky.5"
-      label="Sa považuje za občana s ťažkým zdravotným postihnutím"
+      label="Je zdravotne postihnutou osobou (invalidný/á) alebo osobou s ťažkým zdravotným postihnutím"
       disabled={disabled}
     />
   </div>
@@ -140,8 +129,9 @@ export const EligiblePartnerForm = ({
   setFieldValue,
 }: PartnerIncomeProps) => (
   <>
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">Super</h1>
-    <p>Máte nárok na uplatnenie daňového bonusu na manželku/manžela</p>
+    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      Máte nárok na uplatnenie daňového bonusu na manželku/manžela
+    </h1>
     <ErrorSummary errors={errors} touched={touched} />
     <Input
       name="r031_priezvisko_a_meno"
@@ -168,18 +158,8 @@ export const EligiblePartnerForm = ({
       min={1}
       max={12}
       label="Počet mesiacov, kedy manžel/manželka spĺňal/a podmienky?"
-      hint="Pozor, ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
+      hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
     />
-    {/* <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
-      {values.r033_partner_kupele && (
-        <>
-          <Input
-            name="r033_partner_kupele_uhrady"
-            type="number"
-            label="Partner kupele uhrady"
-          />
-        </>
-      )} */}
   </>
 )
 

@@ -37,7 +37,7 @@ export const PartnerIncome = (props: PartnerIncomeProps) => {
     scrollToElement(questionElements[step - 1].current)
   }
 
-  const questions: React.FC<any>[] = [IncomeQuestion]
+  const questions: React.FC<any>[] = [HouseholdQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
@@ -49,9 +49,9 @@ export const PartnerIncome = (props: PartnerIncomeProps) => {
     }
   }
 
-  addQuestionForStep(1, HouseholdQuestion)
-  addQuestionForStep(2, AppliedQuestion)
-  addQuestionForStep(3, ConditionsQuestion)
+  addQuestionForStep(1, AppliedQuestion)
+  addQuestionForStep(2, ConditionsQuestion)
+  addQuestionForStep(3, IncomeQuestion)
   addQuestionForStep(4, EligiblePartnerForm)
 
   return (

@@ -10,6 +10,7 @@ import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
 import { PartnerIncome } from '../components/PartnerIncome'
 import { validatePartnerIncome } from '../lib/validatePartnerIncome'
+import { Details } from '../components/Details'
 
 const { nextRoute, previousRoute } = getRoutes('/partner')
 
@@ -27,27 +28,6 @@ const Partner: NextPage<Props> = ({
     router.prefetch(nextRoute())
     validateRoute(router, taxFormUserInput)
   }, [router, taxFormUserInput])
-
-  const r032Hint = (
-    <>
-      <p className="govuk-hint">
-        Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň jednu z týchto
-        podmienok:
-      </p>
-      <ol>
-        <li>
-          staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije v
-          domácnosti;
-        </li>
-        <li>v roku 2019 poberal/-a peňažný príspevok na opatrovanie;</li>
-        <li>bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;</li>
-        <li>
-          je občanom so zdravotným postihnutím alebo s ťažkým zdravotným
-          postihnutím (držiteľom prekazu ŤZP).
-        </li>
-      </ol>
-    </>
-  )
 
   return (
     <>
@@ -78,8 +58,31 @@ const Partner: NextPage<Props> = ({
             <BooleanRadio
               title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
-              hint={r032Hint}
             />
+            <Details title="Kedy si môžem uplatniť zvýhodnenie?">
+              <>
+                <p>
+                  Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň
+                  jednu z týchto podmienok:
+                </p>
+                <ol>
+                  <li>
+                    staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije
+                    v domácnosti;
+                  </li>
+                  <li>
+                    v roku 2019 poberal/-a peňažný príspevok na opatrovanie;
+                  </li>
+                  <li>
+                    bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;
+                  </li>
+                  <li>
+                    je občanom so zdravotným postihnutím alebo s ťažkým
+                    zdravotným postihnutím (držiteľom prekazu ŤZP).
+                  </li>
+                </ol>
+              </>
+            </Details>
             {props.values.r032_uplatnujem_na_partnera ? (
               <PartnerIncome
                 {...props}
@@ -106,20 +109,20 @@ export const validate = (values: PartnerUserInput) => {
   }
 
   if (values.r032_uplatnujem_na_partnera) {
-    if (!values.r032_partner_vlastne_prijmy) {
-      errors.r032_partner_vlastne_prijmy =
-        'Zadajte vlastné príjmy manžela/manželky'
-    } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
-      errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
+    if (typeof values.partner_spolocna_domacnost === 'undefined') {
+      errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
     }
 
     if (values.partner_step === 1 && validatePartnerIncome(values, 1)) {
-      if (typeof values.partner_spolocna_domacnost === 'undefined') {
-        errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
-      }
-    } else if (values.partner_step === 2 && validatePartnerIncome(values, 2)) {
       if (typeof values.partner_bonus_uplatneny === 'undefined') {
         errors.partner_bonus_uplatneny = 'Vyznačte odpoveď'
+      }
+    } else if (values.partner_step === 3 && validatePartnerIncome(values, 3)) {
+      if (!values.r032_partner_vlastne_prijmy) {
+        errors.r032_partner_vlastne_prijmy =
+          'Zadajte vlastné príjmy manžela/manželky'
+      } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
+        errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
       }
     } else if (values.partner_step === 4 && validatePartnerIncome(values, 4)) {
       if (!values.r031_priezvisko_a_meno) {

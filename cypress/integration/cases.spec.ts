@@ -95,13 +95,13 @@ describe('Cases', () => {
 
           if (input.r032_uplatnujem_na_partnera) {
             getInput('r032_uplatnujem_na_partnera', '-yes').click()
-            typeToInput('r032_partner_vlastne_prijmy', input)
-            next()
             cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
             next()
             cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
             next()
             cy.get('[data-test="partner_podmienky.1-input"]').click()
+            next()
+            typeToInput('r032_partner_vlastne_prijmy', input)
             next()
             typeToInput('r031_priezvisko_a_meno', input)
             typeToInput('r031_rodne_cislo', input)
