@@ -59,64 +59,69 @@ const Deti: NextPage<Props> = ({
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="hasChildren"
             />
-            <p>
-              V prípade, že sa staráte o nezaopatrené dieťa do 16 rokov,
-              študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré
-              je dlhodobo choré, máte právo na zľavu na dani vo výške 21.56 €
-              mesačne. Ročný bonus na dieťa činí 258.72 €. Daňový bonus na dieťa
-              si môže uplatniť iba jeden z rodičov.
-            </p>
             {values.hasChildren && (
-              <FieldArray name="children">
-                {(arrayHelpers) => (
-                  <div className={styles.childrenInputGroup}>
-                    {values.children.map((child, index) => (
-                      <div key={child.id}>
-                        {values.children.length > 1 && (
-                          <h2
-                            className={classnames(
-                              'govuk-heading-m',
-                              'govuk-!-margin-top-3',
-                              styles.childHeadline,
-                            )}
-                          >
-                            {index + 1}. dieťa
-                            <button
-                              className="govuk-button btn-secondary btn-warning"
-                              type="button"
-                              onClick={() => arrayHelpers.remove(index)}
-                              data-test={`remove-child-${index}`}
+              <>
+                <p className="govuk-hint">
+                  V prípade, že sa staráte o nezaopatrené dieťa do 16 rokov,
+                  študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov,
+                  ktoré je dlhodobo choré, máte právo na zľavu na dani vo výške
+                  22,17 eur mesačne. Ročný bonus na dieťa činí 266,04 eur.
+                  Daňový bonus na dieťa do 6 rokov je dvojnásobný.
+                </p>
+                <p className="govuk-hint">
+                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
+                </p>
+                <FieldArray name="children">
+                  {(arrayHelpers) => (
+                    <div className={styles.childrenInputGroup}>
+                      {values.children.map((child, index) => (
+                        <div key={child.id}>
+                          {values.children.length > 1 && (
+                            <h2
+                              className={classnames(
+                                'govuk-heading-m',
+                                'govuk-!-margin-top-3',
+                                styles.childHeadline,
+                              )}
                             >
-                              Odstrániť {index + 1}. dieťa
-                            </button>
-                          </h2>
-                        )}
-                        <ChildForm
-                          savedValues={child}
-                          index={index}
-                          key={index}
-                          setFieldValue={setFieldValue}
-                        />
-                      </div>
-                    ))}
-                    <button
-                      className="btn-secondary govuk-button"
-                      type="button"
-                      onClick={async () => {
-                        const errors = await validateForm()
-                        setErrors(errors)
-                        const hasErrors = Object.keys(errors).length > 0
-                        if (!hasErrors) {
-                          arrayHelpers.push(makeEmptyChild())
-                        }
-                      }}
-                      data-test="add-child"
-                    >
-                      Pridať ďalšie dieťa
-                    </button>
-                  </div>
-                )}
-              </FieldArray>
+                              {index + 1}. dieťa
+                              <button
+                                className="govuk-button btn-secondary btn-warning"
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)}
+                                data-test={`remove-child-${index}`}
+                              >
+                                Odstrániť {index + 1}. dieťa
+                              </button>
+                            </h2>
+                          )}
+                          <ChildForm
+                            savedValues={child}
+                            index={index}
+                            key={index}
+                            setFieldValue={setFieldValue}
+                          />
+                        </div>
+                      ))}
+                      <button
+                        className="btn-secondary govuk-button"
+                        type="button"
+                        onClick={async () => {
+                          const errors = await validateForm()
+                          setErrors(errors)
+                          const hasErrors = Object.keys(errors).length > 0
+                          if (!hasErrors) {
+                            arrayHelpers.push(makeEmptyChild())
+                          }
+                        }}
+                        data-test="add-child"
+                      >
+                        Pridať ďalšie dieťa
+                      </button>
+                    </div>
+                  )}
+                </FieldArray>
+              </>
             )}
 
             <button className="govuk-button" type="submit">
@@ -160,7 +165,7 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
       <div className="govuk-form-group">
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
           <h1 className="govuk-fieldset__heading">
-            Daňový bonus podľa § 33 zákona uplatňujem v mesiacoch
+            Daňový bonus si uplatňujem v mesiacoch
           </h1>
         </legend>
         <div className="govuk-checkboxes">
