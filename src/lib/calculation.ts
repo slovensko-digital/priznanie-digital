@@ -6,6 +6,7 @@ import { Child, TaxForm } from '../types/TaxForm'
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
+const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
 export function parse(input: string) {
   const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
@@ -349,6 +350,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ziadamVratitDanovyBonusAleboPreplatok:
       input?.ziadamVratitDanovyBonusAleboPreplatok ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
+
+    get eligibleForChildrenBonus() {
+      return (
+        this.t1r10_prijmy >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA ||
+        this.r038 >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
+      )
+    },
 
     datum: input.datum,
   }

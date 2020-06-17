@@ -21,16 +21,19 @@ import { getRoutes, validateRoute } from '../lib/routes'
 import { makeEmptyChild } from '../lib/initialValues'
 import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
+import { TaxForm } from '../types/TaxForm'
 
 const { nextRoute, previousRoute } = getRoutes('/deti')
 
 interface Props {
   setTaxFormUserInput: (values: ChildrenUserInput) => void
   taxFormUserInput: TaxFormUserInput
+  taxForm: TaxForm
 }
 const Deti: NextPage<Props> = ({
   setTaxFormUserInput,
   taxFormUserInput,
+  taxForm,
 }: Props) => {
   const router = useRouter()
   useEffect(() => {
@@ -38,13 +41,35 @@ const Deti: NextPage<Props> = ({
     validateRoute(router, taxFormUserInput)
   }, [router, taxFormUserInput])
 
+  const previousPageLink = (
+    <Link href={previousRoute()}>
+      <a data-test="back" className="govuk-back-link">
+        Späť
+      </a>
+    </Link>
+  )
+
+  if (!taxForm.eligibleForChildrenBonus) {
+    return (
+      <>
+        {previousPageLink}
+        <h1 className="govuk-heading-l">
+          Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým
+          žijete v spoločnej domácnosti
+        </h1>
+        <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
+        <Link href={nextRoute()}>
+          <button className="govuk-button govuk-!-margin-top-4" type="button">
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
+  }
+
   return (
     <>
-      <Link href={previousRoute()}>
-        <a data-test="back" className="govuk-back-link">
-          Späť
-        </a>
-      </Link>
+      {previousPageLink}
       <FormWrapper<ChildrenUserInput>
         initialValues={taxFormUserInput}
         validate={validate}

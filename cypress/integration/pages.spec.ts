@@ -66,6 +66,20 @@ const skipPage = () => {
   next()
 }
 
+const navigateEligibleToChildrenPage = () => {
+  cy.visit('/prijmy-a-vydavky')
+  typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3120' })
+  typeToInput('priloha3_r11_socialne', withChildrenInput)
+  typeToInput('priloha3_r13_zdravotne', withChildrenInput)
+  next()
+
+  assertUrl('/zamestnanie')
+  skipPage()
+
+  assertUrl('/partner')
+  skipPage()
+}
+
 Cypress.Cookies.defaults({
   whitelist: ['you-shall'], // preserve the cookie between tests
 })
@@ -316,15 +330,16 @@ describe('Children page', () => {
     cy.get('[data-test=back]').click()
     assertUrl('/partner')
   })
-  it('has working validation for checkbox', () => {
+  it('has working ui for ineligible applicants', () => {
     cy.visit('/deti')
+    cy.get('[data-test=ineligible-message]').should('exist')
+  })
+  it('has working validation', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
 
-    // Shows error, when presses next without interaction
     next()
     getError()
-  })
-  it('has working validation for child form', () => {
-    cy.visit('/deti')
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
@@ -347,7 +362,22 @@ describe('Children page', () => {
     assertUrl('/dochodok')
   })
   it('has working ui for adding children', () => {
-    cy.visit('/deti')
+    cy.visit('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3119' })
+    typeToInput('priloha3_r11_socialne', withChildrenInput)
+    typeToInput('priloha3_r13_zdravotne', withChildrenInput)
+    next()
+
+    assertUrl('/zamestnanie')
+    getInput('employed', '-yes').click()
+    typeToInput('r038', { ...withChildrenInput, r038: '3120' }) // eligible via employment income
+    typeToInput('r039', { ...withChildrenInput, r039: '1000' })
+    next()
+
+    assertUrl('/partner')
+    skipPage()
+
+    assertUrl('/deti')
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
@@ -397,7 +427,8 @@ describe('Children page', () => {
     assertUrl('/dochodok')
   })
   it('has working validation for child form months', () => {
-    cy.visit('/deti')
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
@@ -579,7 +610,8 @@ describe('Spa page', () => {
     getInput('r033_partner_kupele_uhrady')
   })
   it('Spa UI', () => {
-    cy.visit('/deti')
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
 
     getInput('hasChildren', '-yes').click()
 
@@ -684,7 +716,7 @@ describe('IBAN page', () => {
   })
   it('has working ui for eligible applicants', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '1000' })
+    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3120' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
     next()

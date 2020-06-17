@@ -236,25 +236,32 @@ export const CheckboxSmall = ({
 }: CheckboxSmallProps) => {
   const [field, meta] = useField(name)
   return (
-    <div className={classnames(['govuk-checkboxes__item', className])}>
+    <div
+      className={classnames([
+        'govuk-form-group',
+        meta.error && 'govuk-form-group--error',
+      ])}
+    >
       {meta.error ? (
         <span id={name} className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {meta.error}
         </span>
       ) : null}
-      <input
-        {...field}
-        {...props}
-        className="govuk-checkboxes__input"
-        type="checkbox"
-        data-test={`${field.name}-input`}
-        id={name}
-        checked={field.value === true}
-        disabled={disabled}
-      />
-      <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
-        {label}
-      </label>
+      <div className={classnames(['govuk-checkboxes__item', className])}>
+        <input
+          {...field}
+          {...props}
+          className="govuk-checkboxes__input"
+          type="checkbox"
+          data-test={`${field.name}-input`}
+          id={name}
+          checked={field.value === true}
+          disabled={disabled}
+        />
+        <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
+          {label}
+        </label>
+      </div>
     </div>
   )
 }
