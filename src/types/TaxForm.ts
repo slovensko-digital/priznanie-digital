@@ -203,4 +203,5 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   children: boolean
   employed: boolean
   XIIoddiel_uplatnujem2percenta: boolean
+  eligibleForChildrenBonus: boolean
 }
