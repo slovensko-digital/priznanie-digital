@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { parseCookies, setCookie } from 'nookies'
 
+/**
+ * Displays GDPR cookie consent message.
+ *
+ * Does not read cookies server-side in getInitialProps() to benefit from NextJS static HTML export.
+ * https://nextjs.org/docs/advanced-features/static-html-export
+ *
+ * Hide the consent message by default to ensure server-side HTML is the same as client-side.
+ * Display the consent message only client-side if it was not closed yet.
+ */
 export const CookieBar = () => {
-  const [accepted, setAccepted] = useState(false)
-  const cookies = parseCookies()
+  const [accepted, setAccepted] = useState(true)
+  const { cookieConsent } = parseCookies()
 
-  if (accepted || cookies.cookieConsent === 'accepted') {
+  useEffect(() => {
+    setAccepted(cookieConsent === 'accepted')
+  }, [setAccepted, cookieConsent])
+
+  if (accepted) {
     return null
   }
 
