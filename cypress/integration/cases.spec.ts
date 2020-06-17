@@ -229,7 +229,15 @@ describe('Cases', () => {
           assertUrl('/osobne-udaje')
 
           typeToInput('r001_dic', input)
-          typeToInput('r003_nace', input)
+
+          const naceNumber = input.r003_nace.match(/^(\d+)/)
+          if (naceNumber) {
+            getInput('r003_nace').type(naceNumber[1])
+            cy.contains(input.r003_nace).click()
+          } else {
+            typeToInput('r003_nace', input)
+          }
+
           typeToInput('meno_priezvisko', input)
           typeToInput('r007_ulica', input)
           typeToInput('r008_cislo', input)
