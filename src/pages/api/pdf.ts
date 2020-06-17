@@ -521,8 +521,8 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r034 - viac ako 4 deti?
-  if (form.r034 && form.r034.length > 0) {
-    form.r034.forEach((child, index) => {
+  if (form.r034 && form.r034.length > 4) {
+    form.r034.slice(4).forEach((child, index) => {
       const rowSize = index * 31
 
       // priezviskoMeno
@@ -564,6 +564,23 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
         )
       }
     })
+  }
+
+  if (
+    form.mozeZiadatVratitDanovyBonusAleboPreplatok &&
+    form.ziadamVratitDanovyBonusAleboPreplatok
+  ) {
+    const today = new Date()
+    const day = `0${today.getDate()}`.slice(-2)
+    const month = `0${today.getMonth() + 1}`.slice(-2)
+    const year = `0${today.getFullYear()}`.slice(-2)
+
+    tpl.write(FIRST_COLUMN + 9, 222, 'x')
+    tpl.write(FIRST_COLUMN + 175, 154, 'x')
+    tpl.writeToBoxes(FIRST_COLUMN + 41, 127, form.iban)
+    tpl.writeToBoxes(FIRST_COLUMN + 41, 63, day)
+    tpl.writeToBoxes(FIRST_COLUMN + 77, 63, month)
+    tpl.writeToBoxes(FIRST_COLUMN + 140, 63, year)
   }
 
   // ***** PAGE 14-17

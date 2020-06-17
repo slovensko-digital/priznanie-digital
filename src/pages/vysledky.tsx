@@ -86,8 +86,6 @@ const Vysledky: NextPage<Props> = ({
     .split(' ')
     .map((v) => v.trim())
 
-  console.log(taxForm)
-
   const summaryRows = [
     { title: 'Príjmy', value: taxForm.t1r2_prijmy, key: 't1r2_prijmy' },
     {
