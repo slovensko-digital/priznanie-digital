@@ -1,44 +1,24 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper } from '../components/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
 import { PartnerIncome } from '../components/PartnerIncome'
 import { validatePartnerIncome } from '../lib/validatePartnerIncome'
 import { Details } from '../components/Details'
-import { TaxForm } from '../types/TaxForm'
+import { Page } from '../components/Page'
 
-interface Props {
-  setTaxFormUserInput: (values: PartnerUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-  taxForm: TaxForm
-}
-
-const Partner: NextPage<Props> = ({
+const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-  taxForm,
-}: Props) => {
-  const router = useRouter()
-
-  const { previousRoute } = getRoutes('/partner')
-  const { nextRoute } = getRoutes(
-    taxForm.eligibleForChildrenBonus ? '/partner' : '/deti',
-  )
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput, nextRoute])
-
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>
@@ -53,7 +33,7 @@ const Partner: NextPage<Props> = ({
             values.partner_step === 4
           ) {
             setTaxFormUserInput(values)
-            router.push(nextRoute())
+            router.push(nextRoute)
           } else {
             const setStep = (value) => setFieldValue('partner_step', value)
             setStep(values.partner_step + 1)

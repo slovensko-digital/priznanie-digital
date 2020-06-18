@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { FieldArray, Form } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import styles from './deti.module.css'
 import {
   BooleanRadio,
@@ -12,37 +10,22 @@ import {
   Select,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
-import {
-  ChildInput,
-  monthNames,
-  TaxFormUserInput,
-} from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
+import { ChildInput, monthNames } from '../types/TaxFormUserInput'
 import { makeEmptyChild } from '../lib/initialValues'
 import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
-import { TaxForm } from '../types/TaxForm'
+import { Page } from '../components/Page'
 
-const { nextRoute, previousRoute } = getRoutes('/deti')
-
-interface Props {
-  setTaxFormUserInput: (values: ChildrenUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-  taxForm: TaxForm
-}
-const Deti: NextPage<Props> = ({
+const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
   taxForm,
-}: Props) => {
-  const router = useRouter()
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   const previousPageLink = (
-    <Link href={previousRoute()}>
+    <Link href={previousRoute}>
       <a data-test="back" className="govuk-back-link">
         Späť
       </a>
@@ -58,7 +41,7 @@ const Deti: NextPage<Props> = ({
           žijete v spoločnej domácnosti
         </h1>
         <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
-        <Link href={nextRoute()}>
+        <Link href={nextRoute}>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
             Pokračovať
           </button>
@@ -75,7 +58,7 @@ const Deti: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {({ values, setErrors, validateForm, setFieldValue }) => (

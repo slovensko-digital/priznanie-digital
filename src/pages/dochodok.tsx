@@ -1,41 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { numberInputRegexp } from '../lib/utils'
 import { parse } from '../lib/calculation'
-import { TaxForm } from '../types/TaxForm'
+import { Page } from '../components/Page'
 
-interface Props {
-  setTaxFormUserInput: (values: PensionUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-  taxForm: TaxForm
-}
-
-const Dochodok: NextPage<Props> = ({
+const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-  taxForm,
-}: Props) => {
-  const router = useRouter()
-
-  const { previousRoute } = getRoutes(
-    taxForm.eligibleForChildrenBonus ? '/dochodok' : '/deti',
-  )
-  const { nextRoute } = getRoutes('/dochodok')
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput, nextRoute])
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -45,7 +26,7 @@ const Dochodok: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {({ values }) => (

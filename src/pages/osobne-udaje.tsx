@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { FormWrapper, Input } from '../components/FormComponents'
 import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
 } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { getAutoformByPersonName, getCity } from '../lib/api'
 import { AutoformResponseBody } from '../types/api'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
 import { formatPsc } from '../lib/utils'
 import { Nace } from '../components/Nace'
-
-const { nextRoute, previousRoute } = getRoutes('/osobne-udaje')
+import { Page } from '../components/Page'
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -38,24 +33,16 @@ const makeHandlePersonAutoform = ({
   }
 }
 
-interface Props {
-  setTaxFormUserInput: (values: PersonalInformationUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-}
-const OsobneUdaje: NextPage<Props> = ({
+const OsobneUdaje: Page<PersonalInformationUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -65,7 +52,7 @@ const OsobneUdaje: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {(props) => (

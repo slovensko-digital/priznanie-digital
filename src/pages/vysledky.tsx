@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { NextPage } from 'next'
-import { TaxForm } from '../types/TaxForm'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { useRouter } from 'next/router'
+import { Page } from '../components/Page'
 
 const buildSummaryParams = (rows: SummaryRow[]) => {
   return rows.reduce(
@@ -60,28 +57,13 @@ const Summary = ({ rows }: SummaryProps) => (
   </div>
 )
 
-interface Props {
-  taxForm: TaxForm
-  taxFormUserInput: TaxFormUserInput
-  setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
-}
-const Vysledky: NextPage<Props> = ({
+const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   taxForm,
   taxFormUserInput,
   setTaxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-
-  const { previousRoute } = getRoutes('/vysledky')
-  const { nextRoute } = getRoutes(
-    taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? '/vysledky' : '/iban',
-  )
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput, nextRoute])
-
+  previousRoute,
+  nextRoute,
+}) => {
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())
@@ -147,7 +129,7 @@ const Vysledky: NextPage<Props> = ({
 
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>
@@ -182,7 +164,7 @@ const Vysledky: NextPage<Props> = ({
           />
         )}
       </div>
-      <Link href={nextRoute()}>
+      <Link href={nextRoute}>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-3"

@@ -323,13 +323,6 @@ describe('osobne-udaje page', () => {
 })
 
 describe('Children page', () => {
-  it('has working navigation', () => {
-    cy.visit('/deti')
-
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/partner')
-  })
   it('has working ui for ineligible applicants', () => {
     cy.visit('/deti')
     cy.get('[data-test=ineligible-message]').should('exist')
@@ -702,19 +695,6 @@ describe('Results page', () => {
 })
 
 describe('IBAN page', () => {
-  it('has working navigation', () => {
-    cy.visit('/iban')
-
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/vysledky')
-
-    //  Go back to our page
-    cy.visit('/iban')
-
-    next()
-    assertUrl('/stiahnut')
-  })
   it('has working ui for ineligible applicants', () => {
     cy.visit('/iban')
     cy.get('[data-test=ineligible-message]').should('exist')

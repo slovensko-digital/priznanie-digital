@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { NextPage } from 'next'
-import { TaxForm } from '../types/TaxForm'
-import { getRoutes, validateRoute } from '../lib/routes'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { useRouter } from 'next/router'
 import { FormErrors, TaxBonusUserInput } from '../types/PageUserInputs'
 import { Form, FormikProps } from 'formik'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -14,29 +9,19 @@ import {
   validateIbanCountry,
   validateIbanFormat,
 } from '../lib/utils'
+import { Page } from '../components/Page'
 
-const { previousRoute, nextRoute } = getRoutes('/iban')
-
-interface Props {
-  taxForm: TaxForm
-  taxFormUserInput: TaxFormUserInput
-  setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
-}
-const Iban: NextPage<Props> = ({
+const Iban: Page<TaxBonusUserInput> = ({
   taxForm,
   taxFormUserInput,
   setTaxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>
@@ -49,7 +34,7 @@ const Iban: NextPage<Props> = ({
           <p data-test="ineligible-message">
             Toto sa vás netýka. Nemáte žiaden daňový bonus na vyplatenie.
           </p>
-          <Link href={nextRoute()}>
+          <Link href={nextRoute}>
             <button
               data-test="next"
               className="govuk-button govuk-!-margin-top-3"
@@ -65,7 +50,7 @@ const Iban: NextPage<Props> = ({
           validate={validate}
           onSubmit={(values) => {
             setTaxFormUserInput(values)
-            router.push(nextRoute())
+            router.push(nextRoute)
           }}
         >
           {({

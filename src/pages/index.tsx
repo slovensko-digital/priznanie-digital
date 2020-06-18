@@ -1,45 +1,37 @@
 import React from 'react'
 import Link from 'next/link'
-import { getRoutes } from '../lib/routes'
-// import { getPostponeRoutes } from '../lib/routes'
 
-const { nextRoute } = getRoutes('/')
-
-// const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/')
-
-export default () => (
+export default ({ nextRoute }) => (
   <>
-    <div className="govuk-grid-column-full">
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Vyplnenie daňového priznania
-      </h1>
+    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      Vyplnenie daňového priznania
+    </h1>
 
-      <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
+    <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
 
-      <p>
-        Po zadaní základných údajov si môžete stiahnuť pripravené daňové
-        priznanie a následne vás prevedieme procesom jeho podania na stránkach
-        Finančnej správy.
-      </p>
+    <p>
+      Po zadaní základných údajov si môžete stiahnuť pripravené daňové priznanie
+      a následne vás prevedieme procesom jeho podania na stránkach Finančnej
+      správy.
+    </p>
 
-      <p>
-        Aplikácia je určená na podanie riadneho a opravného daňového priznania
-        pre SZČO uplatňujúce si paušálne výdavky.
-      </p>
+    <p>
+      Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
+      SZČO uplatňujúce si paušálne výdavky.
+    </p>
 
-      <p>
-        Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
-      </p>
+    <p>
+      Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
+    </p>
 
-      <Link href={nextRoute()}>
-        <button
-          type="button"
-          className="govuk-button govuk-button--large govuk-button--start"
-        >
-          Pripraviť daňové priznanie
-        </button>
-      </Link>
-    </div>
+    <Link href={nextRoute}>
+      <button
+        type="button"
+        className="govuk-button govuk-button--large govuk-button--start"
+      >
+        Pripraviť daňové priznanie
+      </button>
+    </Link>
 
     {/* <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
       <span className="govuk-warning-text__icon" aria-hidden="true">

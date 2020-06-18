@@ -1,35 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { Form, FormikProps } from 'formik'
 import { FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes } from '../lib/routes'
 import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { Page } from '../components/Page'
 
-const { nextRoute, previousRoute } = getRoutes('/prijmy-a-vydavky')
-
-interface Props {
-  setTaxFormUserInput: (values: IncomeAndExpenseUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-}
-
-const PrijmyAVydavky: NextPage<Props> = ({
+const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
   taxFormUserInput,
   setTaxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-  }, [router])
-
+  router,
+  nextRoute,
+  previousRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>
@@ -39,7 +26,7 @@ const PrijmyAVydavky: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {

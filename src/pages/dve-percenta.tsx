@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import {
   BooleanRadio,
   CheckboxSmall,
@@ -10,16 +8,13 @@ import {
   Input,
 } from '../components/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
 import styles from './osobne-udaje.module.css'
 import { formatIco, formatPsc } from '../lib/utils'
 import { getCity, getNgoByName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
 import { AutoformResponseBody } from '../types/api'
-
-const { nextRoute, previousRoute } = getRoutes('/dve-percenta')
+import { Page } from '../components/Page'
 
 const makeHandleOrganisationAutoform = ({
   setValues,
@@ -38,23 +33,16 @@ const makeHandleOrganisationAutoform = ({
   }
 }
 
-interface Props {
-  setTaxFormUserInput: (values: TwoPercentUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-}
-
-const DvePercenta: NextPage<Props> = ({
+const DvePercenta: Page<TwoPercentUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -64,7 +52,7 @@ const DvePercenta: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {(props) => (
