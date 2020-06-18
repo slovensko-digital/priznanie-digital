@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik'
 import classNames from 'classnames'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+import { CheckboxSmall } from './FormComponents'
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
@@ -106,10 +107,10 @@ export const Feedback: React.FC<Props> = ({
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    {/* <CheckboxSmall
+                    <CheckboxSmall
                       name="agree"
                       label="Suhlasím s odoslaním dát ktoré som vyplnil (zatiaľ nie anonymne)"
-                    /> */}
+                    />
                     <button
                       type="submit"
                       data-test="submit"
