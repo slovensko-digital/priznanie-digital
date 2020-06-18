@@ -11,7 +11,7 @@
     "start": "next start",
     "test": "npm run test:noWatch -- --watch",
     "test:noWatch": "jest",
-    "ci": "npm run lint && npm run test:noWatch --ci && WITH_DEBUG=true npm run build && npm run cy:ci",
+    "ci": "npm run lint && npm run test:noWatch -- --ci && WITH_DEBUG=true npm run build && npm run cy:ci",
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",

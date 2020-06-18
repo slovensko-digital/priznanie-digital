@@ -1,7 +1,7 @@
 import floor from 'lodash.floor'
-import { rodnecislo } from 'rodnecislo'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
+import { getRodneCisloAgeAtYearAndMonth } from './utils'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -13,7 +13,7 @@ export function parse(input: string) {
   return Number(cleanedInput)
 }
 
-const round2decimal = (x: number) => Math.round(x * 100) / 100
+export const round2decimal = (x: number) => Math.round(x * 100) / 100
 
 const mapChild = (child: ChildInput): Child => {
   const monthFrom = parseInt(child.monthFrom, 10)
@@ -220,8 +220,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.r034.reduce((previousSum, currentChild) => {
           let currentSum = 0
           const rateJanuaryToMarch = 22.17
-          const age = rodnecislo(currentChild.rodneCislo).age() // TODO edge cases
-          const rateAprilToDecember = age > 6 ? 22.17 : 44.34
+          const rateYoungChild = 44.34
+          const rateOldChild = 22.17
+
+          const getRateAprilToDecember = (month: number) => {
+            const age = getRodneCisloAgeAtYearAndMonth(
+              currentChild.rodneCislo,
+              2019,
+              month,
+            )
+            return age < 6 ? rateYoungChild : rateOldChild
+          }
 
           if (currentChild.m00 || currentChild.m01) {
             currentSum += rateJanuaryToMarch
@@ -233,31 +242,31 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             currentSum += rateJanuaryToMarch
           }
           if (currentChild.m00 || currentChild.m04) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(4)
           }
           if (currentChild.m00 || currentChild.m05) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(5)
           }
           if (currentChild.m00 || currentChild.m06) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(6)
           }
           if (currentChild.m00 || currentChild.m07) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(7)
           }
           if (currentChild.m00 || currentChild.m08) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(8)
           }
           if (currentChild.m00 || currentChild.m09) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(9)
           }
           if (currentChild.m00 || currentChild.m10) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(10)
           }
           if (currentChild.m00 || currentChild.m11) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(11)
           }
           if (currentChild.m00 || currentChild.m12) {
-            currentSum += rateAprilToDecember
+            currentSum += getRateAprilToDecember(12)
           }
 
           return round2decimal(previousSum + currentSum)
