@@ -133,7 +133,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                     </div>
                     <CheckboxSmall
                       name="agree"
-                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil"
+                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil/a"
                     />
                     <button
                       type="submit"
