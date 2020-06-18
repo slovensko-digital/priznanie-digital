@@ -1,34 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, MortgageUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { numberInputRegexp } from '../lib/utils'
+import { Page } from '../components/Page'
 
-const { nextRoute, previousRoute } = getRoutes('/hypoteka')
-
-interface Props {
-  setTaxFormUserInput: (values: MortgageUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-}
-
-const Hypoteka: NextPage<Props> = ({
+const Hypoteka: Page<MortgageUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -38,7 +26,7 @@ const Hypoteka: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {({ values, errors, touched }) => (

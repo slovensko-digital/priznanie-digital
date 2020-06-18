@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { formatCurrency } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../components/Warning'
-
-const { nextRoute, previousRoute } = getRoutes('/suhrn')
+import { Page } from '../components/Page'
 
 interface SummaryRow {
   title: string
@@ -66,25 +62,18 @@ const Summary = (props: SummaryProps) => (
   </>
 )
 
-interface Props {
-  taxFormUserInput: TaxFormUserInput
-  setTaxFormUserInput: (input: Partial<TaxFormUserInput>) => void
-}
-const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
+const Suhrn: Page<TaxFormUserInput> = ({
+  taxFormUserInput,
+  previousRoute,
+  nextRoute,
+}) => {
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())
 
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>
@@ -284,7 +273,7 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
           { title: 'Obec', value: taxFormUserInput.r010_obec },
         ]}
       />
-      <Link href={nextRoute()}>
+      <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
           Pokračovať
         </button>

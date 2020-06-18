@@ -6,7 +6,7 @@ import '../styles/navody-digital-0.1.8.min.css'
 import '../styles/libs.css'
 /* eslint-enable import/no-unassigned-import */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { setLocale } from 'yup'
 import { calculate } from '../lib/calculation'
@@ -19,6 +19,8 @@ import {
 } from '../lib/initialValues'
 import { setDate } from '../lib/utils'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+import { getRoutes, Route, validateRoute } from '../lib/routes'
+import { Page } from '../components/Page'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -38,8 +40,18 @@ setLocale({
 })
 /* eslint-enable no-template-curly-in-string */
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
-  const [taxForm, setTaxForm] = useState<TaxForm | Record<string, unknown>>({})
+const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
+  return calculate(setDate(input))
+}
+
+interface MyAppProps extends AppProps {
+  Component: Page<Partial<TaxFormUserInput>>
+}
+
+const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+  const [taxForm, setTaxForm] = useState<TaxForm>(
+    taxFormUserInputToTaxForm(initTaxFormUserInputValues),
+  )
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
   )
@@ -50,14 +62,24 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput((prevUserInput) => {
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values }
-      setTaxForm(calculate(setDate(newUserInput)))
+      setTaxForm(taxFormUserInputToTaxForm(newUserInput))
       return newUserInput
     })
   }
 
-  const { pathname } = useRouter()
+  const router = useRouter()
 
-  const headline = /^\/odklad\//.test(pathname)
+  const { previousRoute, nextRoute } = getRoutes(
+    router.pathname as Route,
+    taxForm,
+  )
+
+  useEffect(() => {
+    router.prefetch(nextRoute())
+    validateRoute(router, taxForm, taxFormUserInput)
+  }, [router, nextRoute, taxForm, taxFormUserInput])
+
+  const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'
     : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
 
@@ -73,6 +95,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         setTaxFormUserInput={updateTaxFormUserInput}
         postponeUserInput={postponeUserInput}
         setPostponeUserInput={setPostponeUserInput}
+        router={router}
+        previousRoute={previousRoute()}
+        nextRoute={nextRoute()}
         {...pageProps}
       />
     </Layout>

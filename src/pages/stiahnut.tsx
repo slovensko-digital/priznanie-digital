@@ -1,39 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import fileDownload from 'js-file-download'
-
-import { NextPage } from 'next'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { setDate } from '../lib/utils'
-import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
 import { downloadPdf } from '../lib/api'
-import { useRouter } from 'next/router'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Warning } from '../components/Warning'
+import { Page } from '../components/Page'
 
-interface Props {
-  taxForm: TaxForm
-  taxFormUserInput: TaxFormUserInput
-}
-
-const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
-  const router = useRouter()
-
+const Stiahnut: Page<{}> = ({ taxForm, previousRoute }) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
   const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false)
 
-  const { previousRoute } = getRoutes(
-    taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? '/stiahnut' : '/iban',
-  )
-
-  useEffect(() => {
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
           Späť
         </a>

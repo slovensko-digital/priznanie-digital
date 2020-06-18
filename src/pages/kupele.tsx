@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 
 import {
   BooleanRadio,
@@ -11,35 +9,24 @@ import {
   CheckboxSmall,
 } from '../components/FormComponents'
 import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { getRoutes, validateRoute } from '../lib/routes'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { parse } from '../lib/calculation'
+import { Page } from '../components/Page'
 
-const { nextRoute, previousRoute } = getRoutes('/kupele')
-
-interface Props {
-  setTaxFormUserInput: (values: SpaUserInput) => void
-  taxFormUserInput: TaxFormUserInput
-}
-
-const Kupele: NextPage<Props> = ({
+const Kupele: Page<SpaUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter()
-  useEffect(() => {
-    router.prefetch(nextRoute())
-    validateRoute(router, taxFormUserInput)
-  }, [router, taxFormUserInput])
-
+  previousRoute,
+  nextRoute,
+  router,
+}) => {
   const shouldShowChildren = taxFormUserInput.children.some((child) =>
     Boolean(child.rodneCislo),
   )
 
   return (
     <>
-      <Link href={previousRoute()}>
+      <Link href={previousRoute}>
         <a data-test="back" className="govuk-back-link">
           Späť
         </a>
@@ -49,7 +36,7 @@ const Kupele: NextPage<Props> = ({
         validate={validate}
         onSubmit={(values) => {
           setTaxFormUserInput(values)
-          router.push(nextRoute())
+          router.push(nextRoute)
         }}
       >
         {({ values, errors, touched }) => (
