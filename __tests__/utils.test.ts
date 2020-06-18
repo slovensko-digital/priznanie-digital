@@ -12,6 +12,7 @@ import {
   formatIban,
   validateIbanFormat,
   validateIbanCountry,
+  getRodneCisloAgeAtYearAndMonth,
 } from '../src/lib/utils'
 
 describe('utils', () => {
@@ -163,6 +164,28 @@ describe('utils', () => {
         it(`should return false for value "${value}"`, () => {
           expect(validateRodneCislo(value)).toBe(false)
         })
+      })
+    })
+  })
+
+  describe('#getRodneCisloAgeAtYearAndMonth', () => {
+    const year = 2020
+    const month = 5
+    const inputs = [
+      { rc: '8007011234', age: 39, year, month },
+      { rc: '8006181234', age: 39, year, month },
+      { rc: '8005311234', age: 40, year, month },
+      { rc: '8057011234', age: 39, year, month },
+      { rc: '8056191234', age: 39, year, month },
+      { rc: '8055311234', age: 40, year, month },
+      { rc: '0527171234', age: 14, year, month },
+      { rc: '0526181234', age: 14, year, month },
+      { rc: '0522171234', age: 15, year, month },
+    ]
+
+    inputs.forEach(({ rc, age, year, month }) => {
+      it(`should return age "${age}" for value "${rc}"`, () => {
+        expect(getRodneCisloAgeAtYearAndMonth(rc, year, month)).toBe(age)
       })
     })
   })

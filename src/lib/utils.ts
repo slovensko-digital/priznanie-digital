@@ -84,6 +84,31 @@ export const validateRodneCislo = (value: string): boolean => {
     rodnecislo(value.replace(' / ', '')).isValid()
   )
 }
+// logic from https://github.com/kub1x/rodnecislo
+export const getRodneCisloAgeAtYearAndMonth = (
+  rodneCislo: string,
+  year: number,
+  month: number,
+): number => {
+  const rc = rodnecislo(rodneCislo)
+
+  const date = new Date(year, month, 1)
+  const dateYear = date.getFullYear()
+  const dateMonth = date.getMonth()
+  // const dateDay = date.getDate()
+
+  var age = dateYear - rc.year()
+
+  if (dateMonth > rc.month()) {
+    return age
+  }
+
+  if (dateMonth <= rc.month()) {
+    return --age // if birthday is on this month, return age - 1
+  }
+
+  return age
+}
 
 export const formatIban = (newValue: string, previousValue = '') => {
   const prefix = newValue.trim().slice(0, 2)
