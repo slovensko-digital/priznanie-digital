@@ -90,6 +90,17 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
         Postup ako podať daňové priznanie nájdete na Návody.Digital.
       </p>
 
+      <p>
+        Prosím, ešte raz si skontrolujte vyplnené údaje. Zodpovednosť za to, že
+        sú v daňovom priznaní správne, nesie každý daňovník za seba.
+      </p>
+
+      <p>
+        Ďakujeme, že ste využili našu aplikáciu.
+        <br />
+        Slovensko.Digital.
+      </p>
+
       <button
         className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-top-3"
         disabled={!didDownload}
