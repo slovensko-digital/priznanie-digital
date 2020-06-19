@@ -7,6 +7,7 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { formatCurrency } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
+import { Warning } from '../components/Warning'
 
 const { nextRoute, previousRoute } = getRoutes('/suhrn')
 
@@ -91,6 +92,12 @@ const Suhrn: NextPage<Props> = ({ taxFormUserInput }: Props) => {
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Súhrn a kontrola vyplnených údajov
       </h1>
+
+      <Warning>
+        Prosím, ešte raz si skontrolujte vyplnené údaje. Zodpovednosť za to, že
+        sú v daňovom priznaní správne, nesie každý daňovník za seba.
+      </Warning>
+
       <Summary
         title="Príjmy a odvody do sociálnej poisťovne"
         href={'/prijmy-a-vydavky'}
