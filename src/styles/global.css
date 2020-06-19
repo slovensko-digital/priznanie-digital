@@ -43,6 +43,12 @@ input:disabled, button:disabled {
   margin: 0;
 }
 
+.sdn-header__logo {
+  border: none;
+  width: 225px;
+  height: 29px;
+}
+
 .sdn-footer__disclaimer {
   color: #d0d0d0;
 }

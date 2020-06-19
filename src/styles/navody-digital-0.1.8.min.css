@@ -5203,7 +5203,7 @@ a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"])
   }
 }
 .sdn-header__link {
-  margin: 10px 0;
+  margin: 15px 0 5px 0;
   line-height: 20px;
   text-decoration: none;
 }
