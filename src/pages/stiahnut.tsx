@@ -10,6 +10,7 @@ import { convertToXML } from '../lib/xml/xmlConverter'
 import { downloadPdf } from '../lib/api'
 import { useRouter } from 'next/router'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { Warning } from '../components/Warning'
 
 interface Props {
   taxForm: TaxForm
@@ -74,31 +75,15 @@ const Stiahnut: NextPage<Props> = ({ taxForm, taxFormUserInput }: Props) => {
         </button>
       </div>
       {!didDownload && (
-        <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-3">
-          <span className="govuk-warning-text__icon" aria-hidden="true">
-            !
-          </span>
-          <strong className="govuk-warning-text__text">
-            Pred pokračovaním si stiahnite XML súbor
-          </strong>
-        </div>
+        <Warning className="govuk-!-margin-top-3">
+          Pred pokračovaním si stiahnite XML súbor
+        </Warning>
       )}
 
       <p className="govuk-!-margin-top-6">
         Ďalším krokom v procese je samotné podanie daňového priznania. Je
         potrebné pripravený XML formulár nahrať na portál Finančnej správy.
         Postup ako podať daňové priznanie nájdete na Návody.Digital.
-      </p>
-
-      <p>
-        Prosím, ešte raz si skontrolujte vyplnené údaje. Zodpovednosť za to, že
-        sú v daňovom priznaní správne, nesie každý daňovník za seba.
-      </p>
-
-      <p>
-        Ďakujeme, že ste využili našu aplikáciu.
-        <br />
-        Slovensko.Digital.
       </p>
 
       <button
