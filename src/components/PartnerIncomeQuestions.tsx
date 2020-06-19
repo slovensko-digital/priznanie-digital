@@ -17,7 +17,7 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
       />
       <Details title="Ako vypočítať príjem?">
         <>
-          <p className="govuk-hint">Do tohto príjmu patria napr.:</p>
+          <p>Do tohto príjmu patria napr.:</p>
           <ul>
             <li>materské,</li>
             <li>príjem zo zamestnania (znížený o poistné),</li>
@@ -39,9 +39,7 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
             <li>príjmy z kapitálového majetku</li>
             <li>ostatné príjmy</li>
           </ul>
-          <p className="govuk-hint">
-            Do vlastného príjmu manželky/manžela nepatria:
-          </p>
+          <p>Do vlastného príjmu manželky/manžela nepatria:</p>
           <ul>
             <li>zamestnanecká prémia,</li>
             <li>daňový bonus na deti,</li>
@@ -85,7 +83,7 @@ export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h1 className="govuk-fieldset__heading">
-        Spĺňa vaša manželka/manžel aspoň jednu z podmienok?
+        Spĺňa váš manžel/manželka aspoň jednu z podmienok?
       </h1>
     </legend>
     <CheckboxSmall
@@ -94,18 +92,13 @@ export const ConditionsQuestion = ({ disabled }) => (
       disabled={disabled}
     />
     <CheckboxSmall
-      name="partner_podmienky.2"
-      label="Poberá príspevok na opatrovanie podľa zákona č. 447/2008 Z. z. o peňažných príspevkoch na kompenzáciu ťažkého zdravotného postihnutia a o zmene a doplnení niektorých zákonov,"
-      disabled={disabled}
-    />
-    <CheckboxSmall
       name="partner_podmienky.3"
-      label="Je evidovaná/ý ako uchádzač o zamestnanie"
+      label="Je evidovaný/á ako uchádzač o zamestnanie"
       disabled={disabled}
     />
     <CheckboxSmall
       name="partner_podmienky.4"
-      label="Je zdravotne postihnutou osobou (invalidný/á) alebo osobou s ťažkým zdravotným postihnutím"
+      label="Je zdravotne postihnutou osobou (invalidný/á) alebo osobou s ťažkým zdravotným postihnutím (ŤZP)"
       disabled={disabled}
     />
   </div>
