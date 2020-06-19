@@ -3,16 +3,39 @@ import { Formik, Form } from 'formik'
 import classNames from 'classnames'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+import { CheckboxSmall } from './FormComponents'
+
+const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
+  return {
+    ...taxFormUserInput,
+    r001_dic: 'anon',
+    r003_nace: 'anon',
+    meno_priezvisko: 'anon',
+    r007_ulica: 'anon',
+    r008_cislo: 'anon',
+    r009_psc: 'anon',
+    r010_obec: 'anon',
+    r011_stat: 'anon',
+    r031_priezvisko_a_meno: 'anon',
+    r031_rodne_cislo: 'anon',
+    iban: 'anon',
+    email: 'anon',
+    children: taxFormUserInput.children.map((child) => {
+      return {
+        ...child,
+        rodneCislo: 'anon',
+        priezviskoMeno: 'anon',
+      }
+    }),
+  }
+}
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
   postponeUserInput: PostponeUserInput
 }
 
-export const Feedback: React.FC<Props> = ({
-  taxFormUserInput,
-  postponeUserInput,
-}: Props) => {
+export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
@@ -63,10 +86,12 @@ export const Feedback: React.FC<Props> = ({
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
-                      postponeUserInput: values.agree
-                        ? postponeUserInput
+                      taxFormUserInput: values.agree
+                        ? anonymizeTaxForm(taxFormUserInput)
                         : null,
+                      // postponeUserInput: values.agree
+                      //   ? postponeUserInput
+                      //   : null,
                       url: window.location.href,
                     }),
                   })
@@ -106,10 +131,10 @@ export const Feedback: React.FC<Props> = ({
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    {/* <CheckboxSmall
+                    <CheckboxSmall
                       name="agree"
-                      label="Suhlasím s odoslaním dát ktoré som vyplnil (zatiaľ nie anonymne)"
-                    /> */}
+                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil/a"
+                    />
                     <button
                       type="submit"
                       data-test="submit"

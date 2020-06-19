@@ -10,7 +10,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const attachment = []
   if (parsedBody.taxFormUserInput) {
     attachment.push(
-      makeAttachment('taxFormUserInput.json.txt', parsedBody.taxFormUserInput),
+      makeAttachment(
+        'taxFormUserInput.json.txt',
+        JSON.stringify(parsedBody.taxFormUserInput, null, 2),
+      ),
     )
   }
   if (parsedBody.postponeUserInput) {
