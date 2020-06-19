@@ -44,7 +44,7 @@ const Zamestnanie: NextPage<Props> = ({
         {({ values, errors, touched }) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Boli ste v roku 2019 zamestnaný/á v SR?"
+              title="Mali ste v roku 2019 príjmy zo zamestnania v SR?"
               name="employed"
             />
             {values.employed && (
