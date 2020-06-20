@@ -116,7 +116,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       description: taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok
         ? 'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.'
         : '',
-      value: taxForm.r110,
+      value: taxForm.r110 + taxForm.r126_danovy_preplatok,
       key: 'r110',
     },
     {
