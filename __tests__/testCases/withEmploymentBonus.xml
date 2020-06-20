@@ -543,7 +543,7 @@
     <danovyPreplatokBonus>
       <vyplatitDanovyBonus>1</vyplatitDanovyBonus>
       <vyplatitDanovyBonusUroky>0</vyplatitDanovyBonusUroky>
-      <vratitDanPreplatok>0</vratitDanPreplatok>
+      <vratitDanPreplatok>1</vratitDanPreplatok>
       <sposobPlatby>
         <poukazka>0</poukazka>
         <ucet>1</ucet>
