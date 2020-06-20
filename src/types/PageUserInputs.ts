@@ -8,7 +8,7 @@ export type IncomeAndExpenseUserInput = Pick<
 
 export type EmployedUserInput = Pick<
   TaxFormUserInput,
-  'employed' | 'r038' | 'r039'
+  'employed' | 'r038' | 'r039' | 'r108' | 'r120'
 >
 
 export type ChildrenUserInput = Pick<

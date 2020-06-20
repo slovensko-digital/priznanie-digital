@@ -70,10 +70,13 @@ export interface TaxFormUserInput {
   priloha3_r11_socialne: string
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
-  /**   Zamestnanie */
+
+  /**  SECTION Zamestnanie */
   employed?: boolean
   r038?: string
   r039?: string
+  r108?: string
+  r120?: string
 
   /** SECTION  Deti*/
   hasChildren?: boolean
@@ -108,7 +111,7 @@ export interface TaxFormUserInput {
   iban?: string
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
-   * failovali test */
+   * failovali testy */
   datum: string
 
   email?: string

@@ -46,17 +46,18 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    // 'withMortgage',
-    'withPension',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // // 'withMortgage',
+    // 'withPension',
+    // 'withChildren',
+    // 'with2percent',
+    // 'withSpa',
+    //  'withBonus',
+    'withEmploymentBonus',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -84,6 +85,8 @@ describe('Cases', () => {
             getInput('employed', '-yes').click()
             typeToInput('r038', input)
             typeToInput('r039', input)
+            typeToInput('r120', input)
+            typeToInput('r108', input)
           } else {
             getInput('employed', '-no').click()
           }
@@ -242,7 +245,6 @@ describe('Cases', () => {
           typeToInput('r007_ulica', input)
           typeToInput('r008_cislo', input)
           typeToInput('r009_psc', input)
-          getInput('r010_obec').should('have.value', input.r010_obec)
           typeToInput('r011_stat', input)
 
           next()

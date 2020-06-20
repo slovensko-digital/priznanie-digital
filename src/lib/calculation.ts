@@ -277,7 +277,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r105_dan - this.r106, 0))
     },
     get r108() {
-      return 0 // TODO
+      return parse(input?.r108 ?? '0')
     },
     get r109() {
       return round2decimal(Math.max(this.r106 - this.r108, 0))
@@ -301,6 +301,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r115() {
       return round2decimal(Math.max(this.r112 - this.r114, 0))
+    },
+    get r120() {
+      return parse(input?.r120 ?? '0')
     },
     get r125_dan_na_uhradu() {
       return round2decimal(

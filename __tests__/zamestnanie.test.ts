@@ -11,7 +11,7 @@ describe('zamestnanie', () => {
       { input: { employed: false }, expected: [] },
       {
         input: { employed: true },
-        expected: ['r038', 'r039'],
+        expected: ['r038', 'r039', 'r108', 'r120'],
       },
       {
         input: {
@@ -19,8 +19,10 @@ describe('zamestnanie', () => {
           r029_poberal_dochodok: true,
           r038: 'a',
           r039: '-1',
+          r108: 'a',
+          r120: '-1',
         },
-        expected: ['r038', 'r039'],
+        expected: ['r038', 'r039', 'r108', 'r120'],
       },
       {
         input: {
@@ -28,6 +30,8 @@ describe('zamestnanie', () => {
           r029_poberal_dochodok: true,
           r038: '10',
           r039: '20',
+          r108: '30',
+          r120: '40',
         },
         expected: [],
       },
