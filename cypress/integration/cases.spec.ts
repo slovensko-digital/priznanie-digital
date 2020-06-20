@@ -75,6 +75,9 @@ describe('Cases', () => {
           getInput('t1r10_prijmy').type(input.t1r10_prijmy)
           getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
           getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
+          if (input.r122) {
+            getInput('r122').type(input.r122)
+          }
 
           next()
 
