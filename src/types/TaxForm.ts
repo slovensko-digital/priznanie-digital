@@ -177,6 +177,8 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
 
   /** zrazena dan zo zamestnania */
   r120: number
+  /** Zaplatené preddavky */
+  r122: number
 
   r125_dan_na_uhradu: number
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus

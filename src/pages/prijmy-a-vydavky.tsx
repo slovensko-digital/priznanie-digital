@@ -59,6 +59,12 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   type="number"
                   label="Zdravotné poistenie"
                 />
+                <Input
+                  name="r122"
+                  hint="Celkové uhradené preddavky na daň z príjmov až do termínu na podanie priznania. (okrem preddavkov v roku 2019 sem pripočítajte aj preddavky zaplatené do 31.3.2020)."
+                  type="number"
+                  label="Zaplatené preddavky"
+                />
 
                 <button data-test="next" className="govuk-button" type="submit">
                   Pokračovať
@@ -103,6 +109,13 @@ export const validate = (values: IncomeAndExpenseUserInput) => {
     !values.priloha3_r13_zdravotne.match(numberInputRegexp)
   ) {
     errors.priloha3_r13_zdravotne =
+      'Zadajte sumu zdravotného poistenia vo formáte 123,45'
+  }
+  if (
+    values.r122 &&
+    !values.r122.match(numberInputRegexp)
+  ) {
+    errors.r122 =
       'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
 

@@ -70,6 +70,8 @@ export interface TaxFormUserInput {
   priloha3_r11_socialne: string
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
+  /** Zaplatené preddavky */
+  r122?: string
 
   /**  SECTION Zamestnanie */
   employed?: boolean

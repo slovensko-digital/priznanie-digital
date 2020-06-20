@@ -305,6 +305,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r120() {
       return parse(input?.r120 ?? '0')
     },
+    get r122() {
+      return parse(input?.r122 ?? '0')
+    },
     get r125_dan_na_uhradu() {
       return round2decimal(
         Math.max(0, this.r105_dan + this.r114 - this.r112 - tf.r106),
@@ -325,7 +328,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r126_danovy_preplatok() {
-      return round2decimal(Math.abs(Math.min(this.r125_dan_na_uhradu, 0)))
+      return round2decimal(
+        Math.abs(
+          this.r105_dan -
+            this.r106 +
+            this.r108 +
+            this.r110 -
+            this.r120 -
+            this.r122,
+        ),
+      )
     },
     get r141() {
       if (!input.XIIoddiel_uplatnujem2percenta) {

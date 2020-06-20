@@ -143,9 +143,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r110 = taxForm.r110 ? taxForm.r110.toFixed(2) : ''
   form.dokument.telo.r113 = taxForm.r113.toFixed(2)
   form.dokument.telo.r114 = ''
-  form.dokument.telo.r120 = taxForm.r120.toFixed(2)
+  form.dokument.telo.r120 = taxForm.r120 ? taxForm.r120.toFixed(2) : ''
+  form.dokument.telo.r122 = taxForm.r122 ? taxForm.r122.toFixed(2) : ''
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
+  form.dokument.telo.r126 = taxForm.r126_danovy_preplatok
+    ? taxForm.r126_danovy_preplatok.toFixed(2)
+    : ''
   /** SECTION 2 percent */
   form.dokument.telo.neuplatnujem = boolToString(
     !taxForm.XIIoddiel_uplatnujem2percenta,

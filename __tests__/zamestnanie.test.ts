@@ -11,7 +11,7 @@ describe('zamestnanie', () => {
       { input: { employed: false }, expected: [] },
       {
         input: { employed: true },
-        expected: ['r038', 'r039', 'r108', 'r120'],
+        expected: ['r038', 'r039', 'r120', 'r108'],
       },
       {
         input: {
@@ -22,7 +22,7 @@ describe('zamestnanie', () => {
           r108: 'a',
           r120: '-1',
         },
-        expected: ['r038', 'r039', 'r108', 'r120'],
+        expected: ['r038', 'r039', 'r120', 'r108'],
       },
       {
         input: {
