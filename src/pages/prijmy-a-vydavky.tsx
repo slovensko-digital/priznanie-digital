@@ -111,12 +111,12 @@ export const validate = (values: IncomeAndExpenseUserInput) => {
     errors.priloha3_r13_zdravotne =
       'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
-  if (
-    values.r122 &&
-    !values.r122.match(numberInputRegexp)
-  ) {
-    errors.r122 =
-      'Zadajte sumu zdravotného poistenia vo formáte 123,45'
+
+  if (!values.r122) {
+    errors.r122 = 'Zadajte vaše zaplatené preddavky'
+  }
+  if (values.r122 && !values.r122.match(numberInputRegexp)) {
+    errors.r122 = 'Zadajte vaše zaplatené preddavkyvo formáte 123,45'
   }
 
   return errors
