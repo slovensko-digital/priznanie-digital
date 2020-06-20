@@ -17,19 +17,20 @@ const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
 const stringify = (object: object) => JSON.stringify(object, null, 2)
-describe('calcIntergration', () => {
+describe.only('calcIntergration', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    'withPension',
-    // 'withMortgage',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
+    //  'base',
+    //  'complete',
+    //  'completeDecimal',
+    //  'withPartner',
+    //  'withEmployment',
+    //  'withPension',
+    //  // 'withMortgage',
+    //  'withChildren',
+    //  'with2percent',
+    //  'withSpa',
+    //  'withBonus',
+    'withEmploymentBonus',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
