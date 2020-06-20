@@ -46,17 +46,17 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
-    // 'withSpa',
-    //  'withBonus',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    // 'withMortgage',
+    'withPension',
+    'withChildren',
+    'with2percent',
+    'withSpa',
+    'withBonus',
     'withEmploymentBonus',
   ].forEach((testCase) => {
     it(testCase, (done) => {

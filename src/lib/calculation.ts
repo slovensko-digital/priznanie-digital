@@ -330,12 +330,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r126_danovy_preplatok() {
       return round2decimal(
         Math.abs(
-          this.r105_dan -
-            this.r106 +
-            this.r108 +
-            this.r110 -
-            this.r120 -
-            this.r122,
+          Math.min(
+            0,
+            this.r105_dan -
+              this.r106 +
+              this.r108 +
+              this.r110 -
+              this.r120 -
+              this.r122,
+          ),
         ),
       )
     },
