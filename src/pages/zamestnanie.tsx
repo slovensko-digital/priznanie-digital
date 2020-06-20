@@ -109,10 +109,10 @@ export const validate = (values: EmployedUserInput) => {
     } else if (!values.r120.match(numberInputRegexp)) {
       errors.r120 = 'Zadajte sumu povinného poistného vo formáte 123,45'
     }
-    if (!values.r039) {
-      errors.r039 = 'Zadajte údaje o daňovom bonuse na dieťa'
-    } else if (!values.r039.match(numberInputRegexp)) {
-      errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    if (!values.r108) {
+      errors.r108 = 'Zadajte údaje o daňovom bonuse na dieťa'
+    } else if (!values.r108.match(numberInputRegexp)) {
+      errors.r108 = 'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
 
