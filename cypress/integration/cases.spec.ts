@@ -23,7 +23,7 @@ function typeToInput<K extends keyof UserInput>(
   key: K,
   userInput: Partial<UserInput>,
 ) {
-  const value = userInput[key]
+  const value = userInput[key] ? userInput[key] : '0'
   if (typeof value === 'string') {
     return getInput(key).type(value)
   }
