@@ -14,7 +14,7 @@ branches:
     - master
 
 addons:
-  artifacts: true
+  artifacts: false
 
 jobs:
   include:

@@ -46,7 +46,7 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    'base',
+    // 'base',
     'complete',
     'completeDecimal',
     'withPartner',
