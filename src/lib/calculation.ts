@@ -227,7 +227,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             const age = getRodneCisloAgeAtYearAndMonth(
               currentChild.rodneCislo,
               2019,
-              month,
+              month - 1,
             )
             return age < 6 ? rateYoungChild : rateOldChild
           }
