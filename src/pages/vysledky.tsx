@@ -112,9 +112,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'r080_zaklad_dane_celkovo',
     },
     {
-      title: 'Daňový preplatok',
+      title: 'Daňový preplatok / daňový bonus na vyplatenie',
       description: taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok
-        ? 'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.'
+        ? 'O vyplatenie preplatku / bonusu môžete požiadať v ďalšom kroku.'
         : '',
       value: taxForm.r110 + taxForm.r126_danovy_preplatok,
       key: 'r110',

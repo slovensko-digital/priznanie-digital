@@ -76,7 +76,7 @@ const Iban: Page<TaxBonusUserInput> = ({
                       name="iban"
                       type="text"
                       label="IBAN"
-                      hint="Účet na ktorý má byť vyplatený daňový bonus alebo rozdiel daňového bonusu musí byť vedený v banke na Slovensku pod vašim menom"
+                      hint="Účet musí byť vedený v banke na Slovensku pod vašim menom."
                       maxLength={29}
                       onChange={(event) => {
                         const iban = formatIban(
