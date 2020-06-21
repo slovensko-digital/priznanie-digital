@@ -43,10 +43,12 @@ const formSuccessful = (stub) => () => {
 }
 
 const getError = () => cy.get('[data-test=error]')
-
+Cypress.Cookies.defaults({
+  whitelist: ['you-shall'], // preserve the cookie between tests
+})
 describe('Cases', () => {
   ;[
-    // 'base',
+    'base',
     'complete',
     'completeDecimal',
     'withPartner',
@@ -66,6 +68,7 @@ describe('Cases', () => {
           const input: TaxFormUserInput = inputModule[`${testCase}Input`]
 
           assert.exists(input, `${testCase}Input module not found`)
+          cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
 
           cy.visit('/')
 
