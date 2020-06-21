@@ -46,15 +46,15 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    // 'withMortgage',
-    'withPension',
-    'withChildren',
-    'with2percent',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // // 'withMortgage',
+    // 'withPension',
+    // 'withChildren',
+    // 'with2percent',
     'withSpa',
     'withBonus',
     'withEmploymentBonus',
@@ -234,14 +234,13 @@ describe('Cases', () => {
 
           typeToInput('r001_dic', input)
 
-          // const naceNumber = input.r003_nace.match(/^(\d+)/)
-          // if (naceNumber) {
-          //   getInput('r003_nace').type(naceNumber[1])
-          //   cy.contains(input.r003_nace).click()
-          // } else {
-          //   typeToInput('r003_nace', input)
-          // }
+          const naceNumber = input.r003_nace.match(/^(\d+)/)
+          if (naceNumber) {
+            getInput('r003_nace').type(naceNumber[1])
+            cy.contains(input.r003_nace).click()
+          } else {
             typeToInput('r003_nace', input)
+          }
 
           typeToInput('meno_priezvisko', input)
           typeToInput('r007_ulica', input)
