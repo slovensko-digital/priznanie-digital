@@ -43,9 +43,7 @@ const formSuccessful = (stub) => () => {
 }
 
 const getError = () => cy.get('[data-test=error]')
-Cypress.Cookies.defaults({
-  whitelist: ['you-shall'], // preserve the cookie between tests
-})
+
 describe('Cases', () => {
   ;[
     'base',
@@ -68,7 +66,6 @@ describe('Cases', () => {
           const input: TaxFormUserInput = inputModule[`${testCase}Input`]
 
           assert.exists(input, `${testCase}Input module not found`)
-          cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
 
           cy.visit('/')
 
@@ -237,13 +234,14 @@ describe('Cases', () => {
 
           typeToInput('r001_dic', input)
 
-          const naceNumber = input.r003_nace.match(/^(\d+)/)
-          if (naceNumber) {
-            getInput('r003_nace').type(naceNumber[1])
-            cy.contains(input.r003_nace).click()
-          } else {
+          // const naceNumber = input.r003_nace.match(/^(\d+)/)
+          // if (naceNumber) {
+          //   getInput('r003_nace').type(naceNumber[1])
+          //   cy.contains(input.r003_nace).click()
+          // } else {
+          //   typeToInput('r003_nace', input)
+          // }
             typeToInput('r003_nace', input)
-          }
 
           typeToInput('meno_priezvisko', input)
           typeToInput('r007_ulica', input)
