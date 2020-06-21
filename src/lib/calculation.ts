@@ -277,13 +277,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r105_dan - this.r106, 0))
     },
     get r108() {
-      return 0 // TODO
+      return parse(input?.r108 ?? '0')
     },
     get r109() {
       return round2decimal(Math.max(this.r106 - this.r108, 0))
     },
     get r110() {
-      return round2decimal(Math.max(this.r106 - this.r105_dan, 0))
+      return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
       return this.r110 > 0
@@ -301,6 +301,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r115() {
       return round2decimal(Math.max(this.r112 - this.r114, 0))
+    },
+    get r120() {
+      return parse(input?.r120 ?? '0')
+    },
+    get r122() {
+      return parse(input?.r122 ?? '0')
     },
     get r125_dan_na_uhradu() {
       return round2decimal(
@@ -322,7 +328,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r126_danovy_preplatok() {
-      return round2decimal(Math.abs(Math.min(this.r125_dan_na_uhradu, 0)))
+      return round2decimal(
+        Math.abs(
+          Math.min(
+            0,
+            this.r105_dan -
+              this.r106 +
+              this.r108 +
+              this.r110 -
+              this.r120 -
+              this.r122,
+          ),
+        ),
+      )
     },
     get r141() {
       if (!input.XIIoddiel_uplatnujem2percenta) {

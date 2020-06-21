@@ -61,6 +61,18 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   label="Úhrn povinného poistného"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 02. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
                 />
+                <Input
+                  name="r120"
+                  type="number"
+                  label="Úhrn preddavkov na daň"
+                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 04. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                />
+                <Input
+                  name="r108"
+                  type="number"
+                  label="Údaje o daňovom bonuse na dieťa"
+                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 14. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                />
               </>
             )}
             <button data-test="next" className="govuk-button" type="submit">
@@ -91,6 +103,16 @@ export const validate = (values: EmployedUserInput) => {
       errors.r039 = 'Zadajte úhrn povinného poistného'
     } else if (!values.r039.match(numberInputRegexp)) {
       errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    }
+    if (!values.r120) {
+      errors.r120 = 'Zadajte úhrn preddavkov na daň'
+    } else if (!values.r120.match(numberInputRegexp)) {
+      errors.r120 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    }
+    if (!values.r108) {
+      errors.r108 = 'Zadajte údaje o daňovom bonuse na dieťa'
+    } else if (!values.r108.match(numberInputRegexp)) {
+      errors.r108 = 'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
 

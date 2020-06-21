@@ -71,6 +71,8 @@ const navigateEligibleToChildrenPage = () => {
   typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3120' })
   typeToInput('priloha3_r11_socialne', withChildrenInput)
   typeToInput('priloha3_r13_zdravotne', withChildrenInput)
+  getInput('r122').type('0')
+
   next()
 
   assertUrl('/zamestnanie')
@@ -122,15 +124,17 @@ describe('Employment page', () => {
     cy.get('[data-test=employed-input-yes]').click()
 
     next()
-    getError().should('have.length', 2)
+    getError().should('have.length', 4)
 
     // Type to input
     typeToInput('r038', withEmploymentInput)
 
     next()
-    getError().should('have.length', 1)
+    getError().should('have.length', 3)
 
     typeToInput('r039', withEmploymentInput)
+    getInput('r120').type('0')
+    getInput('r108').type('0')
 
     // When presses no, the fields disappear
     cy.get('[data-test=employed-input-no]').click()
@@ -364,12 +368,16 @@ describe('Children page', () => {
     typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3119' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
+    getInput('r122').type('0')
+
     next()
 
     assertUrl('/zamestnanie')
     getInput('employed', '-yes').click()
     typeToInput('r038', { ...withChildrenInput, r038: '3120' }) // eligible via employment income
     typeToInput('r039', { ...withChildrenInput, r039: '1000' })
+    typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
+    typeToInput('r108', { ...withChildrenInput, r108: '0' })
     next()
 
     assertUrl('/partner')
@@ -704,6 +712,8 @@ describe('IBAN page', () => {
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3120' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
+    getInput('r122').type('0')
+
     next()
 
     assertUrl('/zamestnanie')

@@ -13,13 +13,16 @@ branches:
   only:
     - master
 
+addons:
+  artifacts: false
+
 jobs:
   include:
-    - stage: "Test"
+    - stage: 'Test'
       if: type = pull_request
       script:
         - npm run ci
-    - stage: "Deploy to Staging"
+    - stage: 'Deploy to Staging'
       if: type = push
       script:
         - eval "$(ssh-agent -s)"

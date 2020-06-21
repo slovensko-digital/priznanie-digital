@@ -106,6 +106,11 @@ const Suhrn: Page<TaxFormUserInput> = ({
             value: taxFormUserInput.priloha3_r13_zdravotne,
             currency: true,
           },
+          {
+            title: 'Zaplatené preddavky',
+            value: taxFormUserInput.r122,
+            currency: true,
+          },
         ]}
       />
       <Summary
@@ -122,6 +127,16 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 {
                   title: 'Úhrn povinného poistného',
                   value: taxFormUserInput.r039,
+                  currency: true,
+                },
+                {
+                  title: 'Úhrn preddavkov na daň',
+                  value: taxFormUserInput.r120,
+                  currency: true,
+                },
+                {
+                  title: 'Údaje o daňovom bonuse na dieťa',
+                  value: taxFormUserInput.r108,
                   currency: true,
                 },
               ]
