@@ -286,7 +286,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
-      return this.r110 > 0
+      const bonusPlusPreplatok = this.r110 + this.r126_danovy_preplatok
+      return bonusPlusPreplatok > 0
     },
     /** TODO High income test case */
     get r112() {

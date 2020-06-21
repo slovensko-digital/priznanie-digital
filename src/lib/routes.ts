@@ -23,6 +23,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     return taxForm.eligibleForChildrenBonus ? ['/deti'] : []
   }
   const getIbanRoute = (): Route[] => {
+    console.log('taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok', taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok)
     return taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? ['/iban'] : []
   }
 

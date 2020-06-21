@@ -754,7 +754,7 @@ describe('IBAN page', () => {
 
     assertUrl('/vysledky')
     cy.get('small').contains(
-      'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.',
+      'požiadať v ďalšom kroku',
     )
     next()
 
