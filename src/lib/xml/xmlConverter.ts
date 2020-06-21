@@ -28,6 +28,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.hlavicka.priezvisko = taxForm.r004_priezvisko
   form.dokument.hlavicka.meno = taxForm.r005_meno
+  form.dokument.hlavicka.titul = taxForm.r006_titul
+  form.dokument.hlavicka.titulZa = taxForm.r006_titul_za
   form.dokument.hlavicka.adresaTrvPobytu.ulica = taxForm.r007_ulica
   form.dokument.hlavicka.adresaTrvPobytu.cislo = taxForm.r008_cislo
   form.dokument.hlavicka.adresaTrvPobytu.psc = taxForm.r009_psc

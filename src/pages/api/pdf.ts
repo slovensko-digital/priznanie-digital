@@ -136,6 +136,12 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // r005_meno
   tpl.writeToBoxes(FIRST_COLUMN + 237, 548, form.r005_meno, 11)
 
+  // r006_titul
+  tpl.write(FIRST_COLUMN + 410, 548, form.r006_titul, 11)
+
+  // r006_titul_za
+  tpl.write(FIRST_COLUMN + 490, 548, form.r006_titul_za, 11)
+
   // r007_ulica
   tpl.writeToBoxes(FIRST_COLUMN, 502, form.r007_ulica, 28)
 

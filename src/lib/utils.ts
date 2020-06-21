@@ -128,3 +128,36 @@ export const validateIbanFormat = (value: string): boolean => {
 export const validateIbanCountry = (value: string): boolean => {
   return /^sk/i.test(value.trim())
 }
+
+export interface ParsedName {
+  first: string
+  last: string
+  title: string
+}
+
+export const parseFullName = (value: string): ParsedName => {
+  const parts = value.split(' ').map(v => v.trim())
+
+  let firstName
+  const lastNames = []
+  const titles = []
+  parts.forEach(value => {
+    const isTitle = /\.,?$/.test(value)
+    if (isTitle) {
+      if (firstName && titles.length > 0 && !titles.includes('/')) {
+        titles.push('/')
+      }
+      titles.push(value)
+    } else if (!firstName) {
+      firstName = value
+    } else {
+      lastNames.push(value)
+    }
+  })
+
+  return {
+    first: firstName,
+    last: lastNames.join(' '),
+    title: titles.join(' ')
+  }
+}

@@ -277,15 +277,18 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
-    getInput('meno_priezvisko').type('Július Ret')
+    getInput('meno_priezvisko').type('urban ayurveda')
 
-    cy.contains('Július Retzer').click()
+    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should('contain.value', 'Július Retzer')
-    getInput('r007_ulica').should('contain.value', 'Mierová')
-    getInput('r008_cislo').should('contain.value', '4')
-    getInput('r009_psc').should('contain.value', '821 05')
-    getInput('r010_obec').should('contain.value', 'Bratislava')
+    getInput('meno_priezvisko').should('contain.value', 'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA')
+    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
+    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+    getInput('r005_meno').should('contain.value', 'Pavel')
+    getInput('r007_ulica').should('contain.value', 'Národná')
+    getInput('r008_cislo').should('contain.value', '10')
+    getInput('r009_psc').should('contain.value', '010 01')
+    getInput('r010_obec').should('contain.value', 'Žilina')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
     next()
@@ -315,7 +318,8 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
-    typeToInput('meno_priezvisko', baseInput)
+    typeToInput('r005_meno', baseInput)
+    typeToInput('r004_priezvisko', baseInput)
     typeToInput('r007_ulica', baseInput)
     typeToInput('r008_cislo', baseInput)
     typeToInput('r009_psc', baseInput)

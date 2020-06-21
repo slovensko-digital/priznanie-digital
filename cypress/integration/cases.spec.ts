@@ -242,7 +242,8 @@ describe.skip('Cases', () => {
             typeToInput('r003_nace', input)
           }
 
-          typeToInput('meno_priezvisko', input)
+          typeToInput('r005_meno', input)
+          typeToInput('r004_priezvisko', input)
           typeToInput('r007_ulica', input)
           typeToInput('r008_cislo', input)
           typeToInput('r009_psc', input)

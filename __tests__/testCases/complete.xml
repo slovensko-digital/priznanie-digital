@@ -20,8 +20,8 @@
       </skNace>
       <priezvisko>Name</priezvisko>
       <meno>Fake</meno>
-      <titul/>
-      <titulZa/>
+      <titul>Ing.</titul>
+      <titulZa>PhD.</titulZa>
       <adresaTrvPobytu>
          <ulica>Mierova</ulica>
          <cislo>4</cislo>
