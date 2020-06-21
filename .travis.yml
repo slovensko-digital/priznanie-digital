@@ -35,3 +35,6 @@ jobs:
         - echo "ekosystem.staging.slovensko.digital $DEPLOY_HOST_KEY" > ~/.ssh/known_hosts
         - git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
         - git push staging master --force
+
+addons:
+  artifacts: true
