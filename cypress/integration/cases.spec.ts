@@ -44,7 +44,7 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-describe.skip('Cases', () => {
+describe('Cases', () => {
   ;[
     'base',
     'complete',
