@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { Details } from "../components/Details";
 
 export default ({ nextRoute }) => (
   <>
@@ -23,6 +24,15 @@ export default ({ nextRoute }) => (
     <p>
       Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
     </p>
+
+    <Details title="Tieto prípady zatiaľ nepodporujeme">
+      <ul>
+        <li>Iné príjmy ako zo živnosti</li>
+        <li>Príjem zo zahraničia</li>
+        <li>Daňový bonus na zaplatené úroky</li>
+        <li>Daňové straty</li>
+      </ul>
+    </Details>
 
     <Link href={nextRoute}>
       <button
