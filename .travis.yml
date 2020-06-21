@@ -13,13 +13,16 @@ branches:
   only:
     - master
 
+addons:
+  artifacts: true
+
 jobs:
   include:
-    - stage: "Test"
+    - stage: 'Test'
       if: type = pull_request
       script:
         - npm run ci
-    - stage: "Deploy to Staging"
+    - stage: 'Deploy to Staging'
       if: type = push
       script:
         - eval "$(ssh-agent -s)"
@@ -35,6 +38,3 @@ jobs:
         - echo "ekosystem.staging.slovensko.digital $DEPLOY_HOST_KEY" > ~/.ssh/known_hosts
         - git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
         - git push staging master --force
-
-addons:
-  artifacts: true
