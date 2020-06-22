@@ -281,7 +281,10 @@ describe('osobne-udaje page', () => {
 
     cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should('contain.value', 'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA')
+    getInput('meno_priezvisko').should(
+      'contain.value',
+      'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
+    )
     getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
     getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
     getInput('r005_meno').should('contain.value', 'Pavel')
@@ -757,9 +760,7 @@ describe('IBAN page', () => {
     next()
 
     assertUrl('/vysledky')
-    cy.get('small').contains(
-      'požiadať v ďalšom kroku',
-    )
+    cy.get('small').contains('požiadať v ďalšom kroku')
     next()
 
     assertUrl('/iban')

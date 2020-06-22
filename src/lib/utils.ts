@@ -136,12 +136,12 @@ export interface ParsedName {
 }
 
 export const parseFullName = (value: string): ParsedName => {
-  const parts = value.split(' ').map(v => v.trim())
+  const parts = value.split(' ').map((v) => v.trim())
 
   let firstName
   const lastNames = []
   const titles = []
-  parts.forEach(value => {
+  parts.forEach((value) => {
     const isTitle = /\.,?$/.test(value)
     if (isTitle) {
       if (firstName && titles.length > 0 && !titles.includes('/')) {
@@ -158,6 +158,6 @@ export const parseFullName = (value: string): ParsedName => {
   return {
     first: firstName,
     last: lastNames.join(' '),
-    title: titles.join(' ')
+    title: titles.join(' '),
   }
 }

@@ -40,7 +40,9 @@ const mapChild = (child: ChildInput): Child => {
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
-  const [titul, titulZa] = input.r006_titul ? input.r006_titul.split(' / ') : ['', '']
+  const [titul, titulZa] = input.r006_titul
+    ? input.r006_titul.split(' / ')
+    : ['', '']
 
   /** Combine default vaules with user input */
   const tf: TaxForm = {

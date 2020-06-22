@@ -83,8 +83,10 @@ const Suhrn: Page<TaxFormUserInput> = ({
       </h1>
 
       <Warning>
-        Prosím, ešte raz si skontrolujte vyplnené údaje. Zodpovednosť za to, že
-        sú v daňovom priznaní správne, nesie každý daňovník za seba.
+        <strong>
+          Prosím, ešte raz si skontrolujte vyplnené údaje. Zodpovednosť za to,
+          že sú v daňovom priznaní správne, nesie každý daňovník za seba.
+        </strong>
       </Warning>
 
       <Summary
