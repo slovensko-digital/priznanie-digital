@@ -11,7 +11,10 @@ import {
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
-import { makeEmptyChild } from '../lib/initialValues'
+import {
+  childrenUserInputInitialValues,
+  makeEmptyChild,
+} from '../lib/initialValues'
 import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 import { Page } from '../components/Page'
@@ -57,7 +60,13 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.hasChildren
+            ? values
+            : {
+                ...childrenUserInputInitialValues,
+                hasChildren: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >

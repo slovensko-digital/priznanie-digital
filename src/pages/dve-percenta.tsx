@@ -15,6 +15,7 @@ import { ErrorSummary } from '../components/ErrorSummary'
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
 import { AutoformResponseBody } from '../types/api'
 import { Page } from '../components/Page'
+import { twoPercentInitialValues } from '../lib/initialValues'
 
 const makeHandleOrganisationAutoform = ({
   setValues,
@@ -51,7 +52,13 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.XIIoddiel_uplatnujem2percenta
+            ? values
+            : {
+                ...twoPercentInitialValues,
+                XIIoddiel_uplatnujem2percenta: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >

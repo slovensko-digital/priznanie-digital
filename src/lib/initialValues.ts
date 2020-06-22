@@ -49,6 +49,8 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
   r038: '',
   r039: '',
+  r108: '',
+  r120: '',
 }
 
 let childCounter = 0
@@ -101,7 +103,7 @@ export const spaInitialInput: SpaUserInput = {
   children: [makeEmptyChild()],
 }
 
-export const taxBonusUserInput: TaxBonusUserInput = {
+export const taxBonusInitialInput: TaxBonusUserInput = {
   iban: '',
   ziadamVratitDanovyBonusAleboPreplatok: undefined,
 }
@@ -116,7 +118,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...mortgageInitialValues,
   ...twoPercentInitialValues,
   ...spaInitialInput,
-  ...taxBonusUserInput,
+  ...taxBonusInitialInput,
   ...{ datum: '' },
 }
 
