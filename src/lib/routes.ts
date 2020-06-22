@@ -23,7 +23,6 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     return taxForm.eligibleForChildrenBonus ? ['/deti'] : []
   }
   const getIbanRoute = (): Route[] => {
-    console.log('taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok', taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok)
     return taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? ['/iban'] : []
   }
 
@@ -116,10 +115,10 @@ export const validateRoute = (
       '/kupele': 'platil_prispevky_na_dochodok',
       '/dve-percenta': 'kupele',
       '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
-      '/suhrn': 'meno_priezvisko',
-      '/vysledky': 'meno_priezvisko',
-      '/iban': 'meno_priezvisko',
-      '/stiahnut': 'meno_priezvisko',
+      '/suhrn': 'r004_priezvisko',
+      '/vysledky': 'r004_priezvisko',
+      '/iban': 'r004_priezvisko',
+      '/stiahnut': 'r004_priezvisko',
     }
 
     if (requirements[router.route]) {

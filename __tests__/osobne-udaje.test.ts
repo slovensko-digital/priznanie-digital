@@ -7,7 +7,8 @@ describe('osobne-udaje', () => {
       {
         input: {
           r001_dic: '',
-          meno_priezvisko: '',
+          r004_priezvisko: '',
+          r005_meno: '',
           r007_ulica: '',
           r008_cislo: '',
           r009_psc: '',
@@ -16,7 +17,8 @@ describe('osobne-udaje', () => {
         },
         expected: [
           'r001_dic',
-          'meno_priezvisko',
+          'r005_meno',
+          'r004_priezvisko',
           'r007_ulica',
           'r008_cislo',
           'r009_psc',
@@ -27,7 +29,8 @@ describe('osobne-udaje', () => {
       {
         input: {
           r001_dic: 'foo',
-          meno_priezvisko: 'Johnny Bravo',
+          r005_meno: 'Johnny',
+          r004_priezvisko: 'Bravo',
           r007_ulica: 'Hollywood Blvd',
           r008_cislo: '9',
           r009_psc: 'foo',
@@ -39,7 +42,8 @@ describe('osobne-udaje', () => {
       {
         input: {
           r001_dic: '123123123',
-          meno_priezvisko: 'Johnny Bravo',
+          r005_meno: 'Johnny',
+          r004_priezvisko: 'Bravo',
           r007_ulica: 'Hollywood Blvd',
           r008_cislo: '9',
           r009_psc: '841 04',

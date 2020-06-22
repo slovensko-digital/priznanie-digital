@@ -36,12 +36,17 @@ describe('Basic use cases', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
       t1r10_prijmy: '20000',
-      meno_priezvisko: 'Johnny Mike Bravo',
+      meno_priezvisko: 'This is used only for autoform',
+      r005_meno: 'Johnny',
+      r004_priezvisko: 'Mike Bravo',
+      r006_titul: 'Ing. / PhD.'
     }
     const result = calculate(input as TaxFormUserInput)
     expect(result.r080_zaklad_dane_celkovo).toBe(4062.65)
     expect(result.r005_meno).toBe('Johnny')
     expect(result.r004_priezvisko).toBe('Mike Bravo')
+    expect(result.r006_titul).toBe('Ing.')
+    expect(result.r006_titul_za).toBe('PhD.')
   })
 
   test('Case 2', () => {

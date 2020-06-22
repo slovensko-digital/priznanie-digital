@@ -26,6 +26,10 @@ export interface TaxForm {
   r004_priezvisko: string
   /**   05 - Meno*/
   r005_meno: string
+  /** 06 - Titul pred menom*/
+  r006_titul: string
+  /** 06 - Titul za priezviskom*/
+  r006_titul_za: string
   /**   07 - Ulica*/
   r007_ulica: string
   /**   08 - Súpisné/orientačné číslo **/

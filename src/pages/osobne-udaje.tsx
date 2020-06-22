@@ -11,7 +11,7 @@ import { getAutoformByPersonName, getCity } from '../lib/api'
 import { AutoformResponseBody } from '../types/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
-import { formatPsc } from '../lib/utils'
+import { formatPsc, parseFullName } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
 
@@ -20,9 +20,14 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationUserInput>) => {
   return (person: AutoformResponseBody) => {
+    const {first, last, title} = parseFullName(person.name)
+
     setValues({
       ...values,
-      meno_priezvisko: person.name || '',
+      meno_priezvisko: person.name,
+      r004_priezvisko: last || '',
+      r005_meno: first || '',
+      r006_titul: title || '',
       r001_dic: person?.tin || values.r001_dic || '',
       r007_ulica: person.street || person.municipality || '',
       r008_cislo: person.street_number || '',
@@ -70,12 +75,38 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
 
               <FullNameAutoCompleteInput
                 name="meno_priezvisko"
-                label="Meno a priezvisko"
+                label="Zadajte meno, priezvisko alebo podnikateľský názov"
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
                 fetchData={getAutoformByPersonName}
               />
 
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  className={styles.inlineField}
+                  name="r006_titul"
+                  type="text"
+                  label="Titul"
+                />
+              </div>
+
+              <Input
+                className={styles.wideField}
+                name="r005_meno"
+                type="text"
+                label="Meno"
+                width="auto"
+              />
+
+              <Input
+                className={styles.wideField}
+                name="r004_priezvisko"
+                type="text"
+                label="Priezvisko"
+                width="auto"
+              />
+
               <Nace label="NACE" />
+
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
@@ -162,8 +193,12 @@ export const validate = (values: PersonalInformationUserInput) => {
     errors.r001_dic = 'DIČ môže mať maximálne 10 znakov'
   }
 
-  if (!values.meno_priezvisko) {
-    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
+  if (!values.r005_meno) {
+    errors.r005_meno = 'Zadajte vaše meno'
+  }
+
+  if (!values.r004_priezvisko) {
+    errors.r004_priezvisko = 'Zadajte vaše priezvisko'
   }
 
   if (!values.r007_ulica) {

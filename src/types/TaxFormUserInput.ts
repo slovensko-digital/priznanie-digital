@@ -28,8 +28,14 @@ export interface TaxFormUserInput {
   r001_dic: string
   /** 03 - SK NACE - Hlavná, prevažná činnosť*/
   r003_nace: string
-  /** Spoločné pole pre meno a priezvisko **/
-  meno_priezvisko: string
+  /** Cele meno a priezvisko*/
+  meno_priezvisko?: string
+  /** 04 - Priezvisko **/
+  r004_priezvisko: string
+  /** 05 - Meno **/
+  r005_meno: string
+  /** 06 - Titul (pred menom / za priezviskom)*/
+  r006_titul?: string
   /**   07 - Ulica*/
   r007_ulica: string
   /**   08 - Súpisné/orientačné číslo **/
