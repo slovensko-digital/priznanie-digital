@@ -33,7 +33,8 @@ body {
   white-space: nowrap;
 }
 
-input:disabled, button:disabled {
+input:disabled,
+button:disabled {
   cursor: not-allowed !important;
 }
 
