@@ -10,6 +10,7 @@ import {
   validateIbanFormat,
 } from '../lib/utils'
 import { Page } from '../components/Page'
+import { taxBonusInitialInput } from '../lib/initialValues'
 
 const Iban: Page<TaxBonusUserInput> = ({
   taxForm,
@@ -49,7 +50,13 @@ const Iban: Page<TaxBonusUserInput> = ({
           initialValues={taxFormUserInput}
           validate={validate}
           onSubmit={(values) => {
-            setTaxFormUserInput(values)
+            const userInput = values.ziadamVratitDanovyBonusAleboPreplatok
+              ? values
+              : {
+                  ...taxBonusInitialInput,
+                  ziadamVratitDanovyBonusAleboPreplatok: false,
+                }
+            setTaxFormUserInput(userInput)
             router.push(nextRoute)
           }}
         >

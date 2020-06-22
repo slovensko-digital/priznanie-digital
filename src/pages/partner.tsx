@@ -8,6 +8,7 @@ import { PartnerIncome } from '../components/PartnerIncome'
 import { validatePartnerIncome } from '../lib/validatePartnerIncome'
 import { Details } from '../components/Details'
 import { Page } from '../components/Page'
+import { partnerUserInitialValues } from '../lib/initialValues'
 
 const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
@@ -32,7 +33,22 @@ const Partner: Page<PartnerUserInput> = ({
             validatePartnerIncome(values, values.partner_step) === false ||
             values.partner_step === 4
           ) {
-            setTaxFormUserInput(values)
+            const userInput = values.r032_uplatnujem_na_partnera
+              ? values
+              : {
+                  ...partnerUserInitialValues,
+                  r032_uplatnujem_na_partnera: false,
+                }
+
+            if (!validatePartnerIncome(values, values.partner_step)) {
+              userInput.r032_partner_vlastne_prijmy = ''
+              userInput.r031_priezvisko_a_meno = ''
+              userInput.r031_rodne_cislo = ''
+              userInput.r032_partner_pocet_mesiacov = ''
+              userInput.r032_partner_pocet_mesiacov = ''
+            }
+
+            setTaxFormUserInput(userInput)
             router.push(nextRoute)
           } else {
             const setStep = (value) => setFieldValue('partner_step', value)

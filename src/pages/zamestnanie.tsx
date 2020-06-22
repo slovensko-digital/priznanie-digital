@@ -6,6 +6,7 @@ import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
+import { employmentUserInputInitialValues } from '../lib/initialValues'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,
@@ -25,7 +26,13 @@ const Zamestnanie: Page<EmployedUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.employed
+            ? values
+            : {
+                ...employmentUserInputInitialValues,
+                employed: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >
