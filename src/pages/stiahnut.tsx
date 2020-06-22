@@ -56,7 +56,7 @@ const Stiahnut: Page<{}> = ({ taxForm, previousRoute }) => {
       </div>
       {!didDownload && (
         <Warning className="govuk-!-margin-top-3">
-          Pred pokračovaním si stiahnite XML súbor
+          <strong>Pred pokračovaním si stiahnite XML súbor</strong>
         </Warning>
       )}
 

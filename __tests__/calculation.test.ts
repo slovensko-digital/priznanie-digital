@@ -39,7 +39,7 @@ describe('Basic use cases', () => {
       meno_priezvisko: 'This is used only for autoform',
       r005_meno: 'Johnny',
       r004_priezvisko: 'Mike Bravo',
-      r006_titul: 'Ing. / PhD.'
+      r006_titul: 'Ing. / PhD.',
     }
     const result = calculate(input as TaxFormUserInput)
     expect(result.r080_zaklad_dane_celkovo).toBe(4062.65)

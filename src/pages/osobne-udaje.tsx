@@ -20,7 +20,7 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationUserInput>) => {
   return (person: AutoformResponseBody) => {
-    const {first, last, title} = parseFullName(person.name)
+    const { first, last, title } = parseFullName(person.name)
 
     setValues({
       ...values,

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 export interface WarningProps {
   className?: string
-  children: ReactNode
+  children: string | ReactNode
 }
 
 export const Warning = ({ children, className }: WarningProps) => (
@@ -10,6 +10,6 @@ export const Warning = ({ children, className }: WarningProps) => (
     <span className="govuk-warning-text__icon" aria-hidden="true">
       !
     </span>
-    <strong className="govuk-warning-text__text">{children}</strong>
+    <div className="govuk-warning-text__text">{children}</div>
   </div>
 )

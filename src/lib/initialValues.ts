@@ -17,7 +17,7 @@ export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
   priloha3_r11_socialne: '',
   priloha3_r13_zdravotne: '',
-  r122: ''
+  r122: '',
 }
 
 export const partnerUserInitialValues: PartnerUserInput = {
