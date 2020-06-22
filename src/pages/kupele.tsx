@@ -40,6 +40,10 @@ const Kupele: Page<SpaUserInput> = ({
             ? values
             : {
                 ...spaInitialInput,
+                children: values.children.map((child) => ({
+                  ...child,
+                  kupelnaStarostlivost: false,
+                })),
                 kupele: false,
               }
           setTaxFormUserInput(userInput)
