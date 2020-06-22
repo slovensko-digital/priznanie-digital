@@ -4,7 +4,7 @@ import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
-import {round2decimal} from "../lib/calculation";
+import { round2decimal } from '../lib/calculation'
 
 const buildSummaryParams = (rows: SummaryRow[]) => {
   return rows.reduce(
