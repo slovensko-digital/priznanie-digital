@@ -111,8 +111,8 @@ describe('With partner', () => {
     }
     const result = calculate(input as TaxFormUserInput)
     expect(result.r080_zaklad_dane_celkovo).toBe(1075.3)
-    expect(result.r105_dan).toBe(204.3)
-    expect(result.r125_dan_na_uhradu).toBe(204.3)
+    expect(result.r105_dan).toBe(204.31)
+    expect(result.r125_dan_na_uhradu).toBe(204.31)
   })
 })
 

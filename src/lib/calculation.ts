@@ -209,9 +209,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(floor(this.r078_zaklad_dane_z_prijmov, 2)) // TODO + tf.r065 + tf.r071 + tf.r079)
     },
     get r081() {
+      if (this.r080_zaklad_dane_celkovo === 0) {
+        return 0
+      }
+      if (this.r080_zaklad_dane_celkovo > 36256.38) {
+        return (
+          round2decimal(36256.38 * DAN_Z_PRIJMU_SADZBA) +
+          round2decimal(
+            round2decimal(this.r080_zaklad_dane_celkovo - 36256.38) * 0.25,
+          )
+        )
+      }
       return round2decimal(
-        floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2),
-      ) // TODO high income
+        floor(
+          round2decimal(this.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA),
+          2,
+        ),
+      )
     },
     get r090() {
       return this.r081

@@ -3,6 +3,7 @@ import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 export const withHighIncomeInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
+  t1r10_prijmy: '59790',
   r005_meno: 'Fake',
   r004_priezvisko: 'Name',
   r001_dic: '233123123',
@@ -12,7 +13,6 @@ export const withHighIncomeInput: TaxFormUserInput = {
   r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
-  t1r10_prijmy: '90000',
   datum: '22.02.2020',
   hasChildren: false,
   children: [],
