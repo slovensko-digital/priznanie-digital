@@ -20,17 +20,17 @@ const stringify = (object: object) => JSON.stringify(object, null, 2)
 describe.only('calcIntergration', () => {
   ;[
     'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    'withPension',
-    // 'withMortgage',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
-    'withEmploymentBonus',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // 'withPension',
+    // // 'withMortgage',
+    // 'withChildren',
+    // 'with2percent',
+    // 'withSpa',
+    // 'withBonus',
+    // 'withEmploymentBonus',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(

@@ -45,21 +45,21 @@ export interface TaxForm {
   /** SECTION Dochodok */
   /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
   platil_prispevky_na_dochodok?: boolean
-  r075_zaplatene_prispevky_na_dochodok?: number
+  r075_zaplatene_prispevky_na_dochodok?: Decimal
 
   /** SECTION  Partner*/
   r031_priezvisko_a_meno?: string
   r031_rodne_cislo?: string
   r032_uplatnujem_na_partnera?: boolean
-  r032_partner_vlastne_prijmy?: number
+  r032_partner_vlastne_prijmy?: Decimal
   r032_partner_pocet_mesiacov?: number
   r033_partner_kupele?: boolean
   /**   max 50*/
-  r033_partner_kupele_uhrady?: number
+  r033_partner_kupele_uhrady?: Decimal
 
   /** SECTION  Mortage */
   r037_uplatnuje_uroky?: boolean
-  r037_zaplatene_uroky?: number
+  r037_zaplatene_uroky?: Decimal
   r037_pocetMesiacov?: number
 
   /** SECTION Prijmy a poistenie  */
@@ -123,12 +123,12 @@ export interface TaxForm {
    *   mesiacov)"*/
   r074_znizenie_partner: Decimal
   /**   Kupele spolu r.76a + r.76b*/
-  r076_kupele_spolu: number
+  r076_kupele_spolu: Decimal
   /**   Kupele danovik*/
-  r076a_kupele_danovnik: number
+  r076a_kupele_danovnik: Decimal
   /**   má byť rovné preukázateľne zaplateným úhradám na KS za manželku (max 50 €)
    *   a za každé označené dieťa (max 50 € za 1 dieťa) (50.00)*/
-  r076b_kupele_partner_a_deti: number
+  r076b_kupele_partner_a_deti: Decimal
   /**   Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72*/
   r077_nezdanitelna_cast: Decimal
   /**   Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)*/

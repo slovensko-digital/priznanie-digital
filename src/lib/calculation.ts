@@ -61,9 +61,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
-    r075_zaplatene_prispevky_na_dochodok: Math.min(
+    r075_zaplatene_prispevky_na_dochodok: Decimal.min(
       180,
-      parse(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+      new Decimal(parse(input?.r075_zaplatene_prispevky_na_dochodok ?? '0')),
     ),
 
     /** SECTION Partner */
@@ -72,14 +72,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ? input?.r031_rodne_cislo.replace(/\D/g, '')
       : '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
-    r032_partner_vlastne_prijmy: parse(
-      input?.r032_partner_vlastne_prijmy ?? '0',
+    r032_partner_vlastne_prijmy: new Decimal(
+      parse(input?.r032_partner_vlastne_prijmy ?? '0'),
     ),
     r032_partner_pocet_mesiacov: parse(
       input?.r032_partner_pocet_mesiacov ?? '0',
     ),
     r033_partner_kupele: input?.r033_partner_kupele ?? false,
-    r033_partner_kupele_uhrady: parse(input?.r033_partner_kupele_uhrady ?? '0'),
+    r033_partner_kupele_uhrady: new Decimal(
+      parse(input?.r033_partner_kupele_uhrady ?? '0'),
+    ),
 
     /** SECTION Children */
     r034: input.hasChildren ? input.children.map(mapChild) : [],
@@ -95,7 +97,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    r037_zaplatene_uroky: parse(input?.r037_zaplatene_uroky ?? '0'),
+    r037_zaplatene_uroky: new Decimal(
+      parse(input?.r037_zaplatene_uroky ?? '0'),
+    ),
     r037_pocetMesiacov: parse(input?.r037_pocetMesiacov ?? '0'),
 
     priloha3_r11_socialne: parse(input.priloha3_r11_socialne),
@@ -177,17 +181,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r076_kupele_spolu() {
-      return round2decimal(
-        this.r076a_kupele_danovnik + this.r076b_kupele_partner_a_deti,
-      )
+      return this.r076b_kupele_partner_a_deti.plus(this.r076a_kupele_danovnik)
     },
     get r076a_kupele_danovnik() {
-      return round2decimal(parse(input?.r076a_kupele_danovnik ?? '0'))
+      return new Decimal(parse(input?.r076a_kupele_danovnik ?? '0'))
     },
     get r076b_kupele_partner_a_deti() {
-      return round2decimal(
-        this.r033_partner_kupele_uhrady + this.r036_deti_kupele,
-      )
+      return this.r033_partner_kupele_uhrady.plus(this.r036_deti_kupele)
     },
     get r077_nezdanitelna_cast() {
       return Decimal.min(
@@ -306,7 +306,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     /** TODO High income test case */
     get r112() {
-      return Decimal.min(new Decimal(this.r037_zaplatene_uroky).times(0.5), 400)
+      return Decimal.min(this.r037_zaplatene_uroky.times(0.5), 400)
     },
     get r113() {
       return this.r107.minus(this.r112)
