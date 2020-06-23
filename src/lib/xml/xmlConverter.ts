@@ -3,9 +3,13 @@ import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
+import Decimal from 'decimal.js'
 
 const boolToString = (bool: boolean) => {
   return bool ? '1' : '0'
+}
+const decimalToString = (decimal: Decimal) => {
+  return decimal.equals(0) ? '' : decimal.toFixed(2)
 }
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
@@ -149,9 +153,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r122 = taxForm.r122 ? taxForm.r122.toFixed(2) : ''
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
-  form.dokument.telo.r126 = taxForm.r126_danovy_preplatok
-    ? taxForm.r126_danovy_preplatok.toFixed(2)
-    : ''
+  form.dokument.telo.r126 = decimalToString(taxForm.r126_danovy_preplatok)
+
   /** SECTION 2 percent */
   form.dokument.telo.neuplatnujem = boolToString(
     !taxForm.XIIoddiel_uplatnujem2percenta,
@@ -177,7 +180,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     if (taxForm.r110) {
       form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonus = '1'
     }
-    if (taxForm.r126_danovy_preplatok) {
+    if (taxForm.r126_danovy_preplatok.gt(0)) {
       form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
     }
   }

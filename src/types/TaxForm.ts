@@ -189,7 +189,7 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
    *   podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
    *   r125_dan_na_uhradu */
-  r126_danovy_preplatok: number
+  r126_danovy_preplatok: Decimal
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   r141: number
 

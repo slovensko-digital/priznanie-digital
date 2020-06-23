@@ -302,8 +302,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
-      const bonusPlusPreplatok = this.r110 + this.r126_danovy_preplatok
-      return bonusPlusPreplatok > 0
+      const bonusPlusPreplatok = this.r126_danovy_preplatok.plus(this.r110 )
+      return bonusPlusPreplatok.gt(0)
     },
     /** TODO High income test case */
     get r112() {
@@ -345,17 +345,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r126_danovy_preplatok() {
-      return round2decimal(
-        Math.abs(
-          Math.min(
-            0,
-            this.r105_dan -
-              this.r106 +
-              this.r108 +
-              this.r110 -
-              this.r120 -
-              this.r122,
-          ),
+      return Decimal.abs(
+        Decimal.min(
+          0,
+          new Decimal(this.r105_dan)
+            .minus(this.r106)
+            .plus(this.r108)
+            .plus(this.r110)
+            .minus(this.r120)
+            .minus(this.r122),
         ),
       )
     },
