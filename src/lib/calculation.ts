@@ -225,7 +225,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       // TODO high income
     },
     get r090() {
-      return this.r081.toNumber()
+      return this.r081
     },
 
     get r105_dan() {
@@ -290,7 +290,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r107() {
-      return round2decimal(Math.max(this.r105_dan - this.r106, 0))
+      return Decimal.max(this.r105_dan.minus(this.r106), 0)
     },
     get r108() {
       return parse(input?.r108 ?? '0')
@@ -299,10 +299,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r106 - this.r108, 0))
     },
     get r110() {
-      return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
+      return Decimal.max(new Decimal(this.r109).minus(this.r105_dan), 0)
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
-      const bonusPlusPreplatok = this.r126_danovy_preplatok.plus(this.r110 )
+      const bonusPlusPreplatok = this.r126_danovy_preplatok.plus(this.r110)
       return bonusPlusPreplatok.gt(0)
     },
     /** TODO High income test case */
@@ -310,7 +310,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.min(this.r037_zaplatene_uroky * 0.5, 400))
     },
     get r113() {
-      return round2decimal(this.r107 - this.r112)
+      return this.r107.minus(this.r112)
     },
     /** TODO */
     get r114() {
@@ -326,23 +326,24 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return parse(input?.r122 ?? '0')
     },
     get r125_dan_na_uhradu() {
-      return round2decimal(
-        Math.max(0, this.r105_dan + this.r114 - this.r112 - tf.r106),
-        // // - tf.r106 +
-        // tf.r108 +
-        // tf.r110 -
-        // // tf.r112 +
-        // // tf.r114 +
-        // tf.r116 +
-        // tf.r117 -
-        // tf.r118 -
-        // tf.r119 -
-        // tf.r120 -
-        // tf.r121 -
-        // tf.r122 -
-        // tf.r123 -
-        // tf.r124;
+      return Decimal.max(
+        0,
+        this.r105_dan.plus(this.r114).minus(this.r112).minus(tf.r106),
       )
+      // // - tf.r106 +
+      // tf.r108 +
+      // tf.r110 -
+      // // tf.r112 +
+      // // tf.r114 +
+      // tf.r116 +
+      // tf.r117 -
+      // tf.r118 -
+      // tf.r119 -
+      // tf.r120 -
+      // tf.r121 -
+      // tf.r122 -
+      // tf.r123 -
+      // tf.r124;
     },
     get r126_danovy_preplatok() {
       return Decimal.abs(
@@ -364,7 +365,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       // TODO do 3% as well
       const rate = 2
-      const NGOamount = floor((this.r113 / 100) * rate, 2)
+      const NGOamount = floor((this.r113.toNumber() / 100) * rate, 2)
 
       /** Min of 3 EUR is required */
       return round2decimal(NGOamount >= 3 ? NGOamount : 0)

@@ -142,11 +142,11 @@ export interface TaxForm {
    *   súčasne r.85>0. Ak r.82 = 0 a súčasne r. 85>0, potom r.90 je výsledkom r.81
    *   - r. 89. Inak ak r82<>0 a r85=0, potom r.90 je rovné r.84. Inak r. 90 =
    *   r.81.Zrkadlenie r081 TODO preverit */
-  r090: number
+  r090: Decimal
   /**   Daň (daňová povinnosť) zo základu dane z osobitného základu dane a z
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
-  r105_dan: number
+  r105_dan: Decimal
 
   /**
 Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
@@ -154,7 +154,7 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
-  r107: number
+  r107: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona priznaného a vyplateného zamestnávateľom   */
   r108: number
@@ -163,13 +163,13 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   r109: number
 
   /** Suma daňového bonusu podľa § 33 zákona na poukázanie správcom dane24) r. 109 - r. 105 >0 */
-  r110: number
+  r110: Decimal
 
   /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
   r112: number
   /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
    *   úroky(r. 107 - r. 112) zrkadli r107*/
-  r113: number
+  r113: Decimal
   /**   Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu
    *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
    *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
@@ -185,7 +185,7 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   /** Zaplatené preddavky */
   r122: number
 
-  r125_dan_na_uhradu: number
+  r125_dan_na_uhradu: Decimal
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
    *   podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
    *   r125_dan_na_uhradu */
