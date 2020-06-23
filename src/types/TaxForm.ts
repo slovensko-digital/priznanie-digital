@@ -1,4 +1,4 @@
-import Decimal from 'decimal.js';
+import Decimal from 'decimal.js'
 export interface Child {
   priezviskoMeno: string
   rodneCislo: string
@@ -137,7 +137,7 @@ export interface TaxForm {
   r080_zaklad_dane_celkovo: Decimal
   /**   Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na
    *   eurocenty nadol r080 * 0.19*/
-  r081: number
+  r081: Decimal
   /**   'r. 90': má byť výsledkom r.84 - r.89 ak platí, že r. 82 je rôzne od 0 a
    *   súčasne r.85>0. Ak r.82 = 0 a súčasne r. 85>0, potom r.90 je výsledkom r.81
    *   - r. 89. Inak ak r82<>0 a r85=0, potom r.90 je rovné r.84. Inak r. 90 =

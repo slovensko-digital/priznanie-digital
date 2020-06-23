@@ -1,7 +1,7 @@
 import floor from 'lodash.floor'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
-import { getRodneCisloAgeAtYearAndMonth } from './utils'
+import { getRodneCisloAgeAtYearAndMonth, floorDecimal } from './utils'
 import Decimal from 'decimal.js'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
@@ -219,12 +219,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       // ) // TODO + tf.r065 + tf.r071 + tf.r079)
     },
     get r081() {
-      return round2decimal(
-        floor(tf.r080_zaklad_dane_celkovo.toNumber() * DAN_Z_PRIJMU_SADZBA, 2),
-      ) // TODO high income
+      return floorDecimal(
+        tf.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
+      )
+      // TODO high income
     },
     get r090() {
-      return this.r081
+      return this.r081.toNumber()
     },
 
     get r105_dan() {

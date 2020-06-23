@@ -1,5 +1,6 @@
 import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
+import Decimal from 'decimal.js'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -160,4 +161,8 @@ export const parseFullName = (value: string): ParsedName => {
     last: lastNames.join(' '),
     title: titles.join(' '),
   }
+}
+
+export const floorDecimal = (decimal: Decimal) => {
+  return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
 }
