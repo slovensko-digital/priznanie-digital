@@ -162,7 +162,7 @@ export const parseFullName = (value: string): ParsedName => {
   }
 }
 
-export function parse(input: string) {
+export function parseInputNumber(input: string): number {
   const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
 }

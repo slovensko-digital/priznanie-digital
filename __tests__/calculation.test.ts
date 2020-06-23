@@ -1,5 +1,5 @@
 import { calculate, round2decimal } from '../src/lib/calculation'
-import { parse } from "../src/lib/utils"
+import { parseInputNumber } from "../src/lib/utils"
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 
@@ -17,7 +17,7 @@ describe('#parse', () => {
 
   inputs.forEach(({ input, output }) => {
     it(`for "${input}" should return "${output}"`, () => {
-      expect(parse(input)).toBe(output)
+      expect(parseInputNumber(input)).toBe(output)
     })
   })
 })

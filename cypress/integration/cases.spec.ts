@@ -46,18 +46,18 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
-    // 'withSpa',
-    // 'withBonus',
-    // 'withEmploymentBonus',
+    'base',
+    'complete',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    // 'withMortgage',
+    'withPension',
+    'withChildren',
+    'with2percent',
+    'withSpa',
+    'withBonus',
+    'withEmploymentBonus',
     'bugReport1',
   ].forEach((testCase) => {
     it(testCase, (done) => {
@@ -281,9 +281,7 @@ describe('Cases', () => {
           }
 
           if (input.employed) {
-            cy.get(`[data-test="r039"]`).contains(
-              input.r039,
-            )
+            cy.get(`[data-test="r039"]`).contains(input.r039)
           }
 
           next()
