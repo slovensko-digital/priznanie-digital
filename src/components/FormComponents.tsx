@@ -74,7 +74,7 @@ export const Input = <Name extends keyof UserInput>({
       <span className="govuk-hint">{hint}</span>
       {meta.error ? (
         <span id={props.name} data-test="error" className="govuk-error-message">
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
         </span>
       ) : null}
       <input
@@ -120,7 +120,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
         {hint ? <span className="govuk-hint">{hint}</span> : null}
         {meta.error ? (
           <span data-test="error" className="govuk-error-message">
-            <span className="govuk-visually-hidden">Error:</span> {meta.error}
+            <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
           </span>
         ) : null}
         <div className="govuk-radios">
@@ -196,7 +196,7 @@ export const Checkbox = <Name extends keyof UserInput>({
         {hint ? <span className="govuk-hint">{hint}</span> : null}
         {meta.error ? (
           <span id={props.name} className="govuk-error-message">
-            <span className="govuk-visually-hidden">Error:</span> {meta.error}
+            <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
           </span>
         ) : null}
         <div className="govuk-checkboxes">
@@ -244,7 +244,7 @@ export const CheckboxSmall = ({
     >
       {meta.error ? (
         <span id={name} className="govuk-error-message">
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
         </span>
       ) : null}
       <div className={classnames(['govuk-checkboxes__item', className])}>
@@ -302,7 +302,7 @@ export const Select = ({
       <span className="govuk-hint">{hint}</span>
       {meta.error ? (
         <span id={name} data-test="error" className="govuk-error-message">
-          <span className="govuk-visually-hidden">Error:</span> {meta.error}
+          <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
         </span>
       ) : null}
       <select

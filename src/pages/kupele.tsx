@@ -12,6 +12,7 @@ import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { parse } from '../lib/calculation'
 import { Page } from '../components/Page'
+import { spaInitialInput } from '../lib/initialValues'
 
 const Kupele: Page<SpaUserInput> = ({
   setTaxFormUserInput,
@@ -35,7 +36,17 @@ const Kupele: Page<SpaUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.kupele
+            ? values
+            : {
+                ...spaInitialInput,
+                children: values.children.map((child) => ({
+                  ...child,
+                  kupelnaStarostlivost: false,
+                })),
+                kupele: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >

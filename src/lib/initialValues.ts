@@ -17,6 +17,7 @@ export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
   priloha3_r11_socialne: '',
   priloha3_r13_zdravotne: '',
+  r122: '',
 }
 
 export const partnerUserInitialValues: PartnerUserInput = {
@@ -34,6 +35,9 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
   // r002_datum_narodenia: "",
   r003_nace: '',
   meno_priezvisko: '',
+  r005_meno: '',
+  r004_priezvisko: '',
+  r006_titul: '',
   r007_ulica: '',
   r008_cislo: '',
   r009_psc: '',
@@ -45,6 +49,8 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
   r038: '',
   r039: '',
+  r108: '',
+  r120: '',
 }
 
 let childCounter = 0
@@ -97,7 +103,7 @@ export const spaInitialInput: SpaUserInput = {
   children: [makeEmptyChild()],
 }
 
-export const taxBonusUserInput: TaxBonusUserInput = {
+export const taxBonusInitialInput: TaxBonusUserInput = {
   iban: '',
   ziadamVratitDanovyBonusAleboPreplatok: undefined,
 }
@@ -112,7 +118,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...mortgageInitialValues,
   ...twoPercentInitialValues,
   ...spaInitialInput,
-  ...taxBonusUserInput,
+  ...taxBonusInitialInput,
   ...{ datum: '' },
 }
 

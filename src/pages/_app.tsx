@@ -75,7 +75,10 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   )
 
   useEffect(() => {
-    router.prefetch(nextRoute())
+    const next = nextRoute()
+    if (next) {
+      router.prefetch(next)
+    }
     validateRoute(router, taxForm, taxFormUserInput)
   }, [router, nextRoute, taxForm, taxFormUserInput])
 

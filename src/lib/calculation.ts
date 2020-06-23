@@ -40,17 +40,19 @@ const mapChild = (child: ChildInput): Child => {
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
-  const [firstName, ...lastNames] = input.meno_priezvisko
-    .split(' ')
-    .map((v) => v.trim())
+  const [titul, titulZa] = input.r006_titul
+    ? input.r006_titul.split(' / ')
+    : ['', '']
 
   /** Combine default vaules with user input */
   const tf: TaxForm = {
     /** SECTION Osobne udaje */
     r001_dic: input.r001_dic,
     r003_nace: input.r003_nace,
-    r004_priezvisko: lastNames.join(' '),
-    r005_meno: firstName,
+    r004_priezvisko: input.r004_priezvisko,
+    r005_meno: input.r005_meno,
+    r006_titul: titul,
+    r006_titul_za: titulZa,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
     r009_psc: `${input.r009_psc}`.replace(/\D/g, ''),
@@ -227,7 +229,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             const age = getRodneCisloAgeAtYearAndMonth(
               currentChild.rodneCislo,
               2019,
-              month,
+              month - 1,
             )
             return age < 6 ? rateYoungChild : rateOldChild
           }
@@ -286,7 +288,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
-      return this.r110 > 0
+      const bonusPlusPreplatok = this.r110 + this.r126_danovy_preplatok
+      return bonusPlusPreplatok > 0
     },
     /** TODO High income test case */
     get r112() {

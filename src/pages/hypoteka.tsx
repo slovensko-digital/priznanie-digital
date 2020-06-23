@@ -6,6 +6,7 @@ import { FormErrors, MortgageUserInput } from '../types/PageUserInputs'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { numberInputRegexp } from '../lib/utils'
 import { Page } from '../components/Page'
+import { mortgageInitialValues } from '../lib/initialValues'
 
 const Hypoteka: Page<MortgageUserInput> = ({
   setTaxFormUserInput,
@@ -25,7 +26,13 @@ const Hypoteka: Page<MortgageUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.r037_uplatnuje_uroky
+            ? values
+            : {
+                ...mortgageInitialValues,
+                r037_uplatnuje_uroky: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >

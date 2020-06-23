@@ -36,12 +36,17 @@ describe('Basic use cases', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
       t1r10_prijmy: '20000',
-      meno_priezvisko: 'Johnny Mike Bravo',
+      meno_priezvisko: 'This is used only for autoform',
+      r005_meno: 'Johnny',
+      r004_priezvisko: 'Mike Bravo',
+      r006_titul: 'Ing. / PhD.',
     }
     const result = calculate(input as TaxFormUserInput)
     expect(result.r080_zaklad_dane_celkovo).toBe(4062.65)
     expect(result.r005_meno).toBe('Johnny')
     expect(result.r004_priezvisko).toBe('Mike Bravo')
+    expect(result.r006_titul).toBe('Ing.')
+    expect(result.r006_titul_za).toBe('PhD.')
   })
 
   test('Case 2', () => {
@@ -208,7 +213,7 @@ describe('With child (for tax year 2019)', () => {
 
       const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
       const part2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const part3 = 22.17 + 22.17 // jul - oktober (ved nad 6 rokov)
+      const part3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
       expect(result.r106).toBe(round2decimal(part1 + part2 + part3))
     })
 
@@ -253,7 +258,7 @@ describe('With child (for tax year 2019)', () => {
       // childTurning6InJul
       const childTurning6InJulPart1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
       const childTurning6InJulPart2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const childTurning6InJulPart3 = 22.17 + 22.17 // jul - oktober (ved nad 6 rokov)
+      const childTurning6InJulPart3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
       const childTurning6InJulSum = round2decimal(
         childTurning6InJulPart1 +
           childTurning6InJulPart2 +

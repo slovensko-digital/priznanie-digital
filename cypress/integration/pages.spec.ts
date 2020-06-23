@@ -86,10 +86,12 @@ Cypress.Cookies.defaults({
   whitelist: ['you-shall'], // preserve the cookie between tests
 })
 
+before(() => {
+  cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+})
+
 describe('Cookie consent', () => {
   it('has working ui', () => {
-    cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
-
     // display cookie consent
     cy.visit('/')
     cy.get('.govuk-main-wrapper')
@@ -151,6 +153,58 @@ describe('Employment page', () => {
     // Should submit and next page should be parter
     next()
     assertUrl('/partner')
+  })
+  it('should erase previous answers when answer is changed to "no"', () => {
+    cy.visit('/zamestnanie')
+
+    // fill out and submit the form
+    getInput('employed', '-yes').click()
+    typeToInput('r038', withEmploymentInput)
+    typeToInput('r039', withEmploymentInput)
+    getInput('r120').type('10')
+    getInput('r108').type('20')
+    next()
+
+    // go back
+    assertUrl('/partner')
+    cy.get('[data-test=back]').click()
+    assertUrl('/zamestnanie')
+
+    // form should preserve values when navigated back to it
+    getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
+    getInput('r039').should('have.value', withEmploymentInput?.r039?.toString())
+    getInput('r120').should('have.value', '10')
+    getInput('r108').should('have.value', '20')
+
+    // form should hide
+    getInput('employed', '-no').click()
+    getInput('r038').should('not.exist')
+    getInput('r039').should('not.exist')
+    getInput('r120').should('not.exist')
+    getInput('r108').should('not.exist')
+
+    // form should display and preserve values until it is submitted
+    getInput('employed', '-yes').click()
+    getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
+    getInput('r039').should('have.value', withEmploymentInput?.r039?.toString())
+    getInput('r120').should('have.value', '10')
+    getInput('r108').should('have.value', '20')
+
+    // submit form
+    getInput('employed', '-no').click()
+    next()
+
+    // go back
+    assertUrl('/partner')
+    cy.get('[data-test=back]').click()
+    assertUrl('/zamestnanie')
+
+    // form should no preserve answers because it was submitted with additional fields hidden
+    getInput('employed', '-yes').click()
+    getInput('r038').should('have.value', '')
+    getInput('r039').should('have.value', '')
+    getInput('r120').should('have.value', '')
+    getInput('r108').should('have.value', '')
   })
 })
 describe('Partner page', () => {
@@ -277,15 +331,21 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
-    getInput('meno_priezvisko').type('Július Ret')
+    getInput('meno_priezvisko').type('urban ayurveda')
 
-    cy.contains('Július Retzer').click()
+    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should('contain.value', 'Július Retzer')
-    getInput('r007_ulica').should('contain.value', 'Mierová')
-    getInput('r008_cislo').should('contain.value', '4')
-    getInput('r009_psc').should('contain.value', '821 05')
-    getInput('r010_obec').should('contain.value', 'Bratislava')
+    getInput('meno_priezvisko').should(
+      'contain.value',
+      'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
+    )
+    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
+    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+    getInput('r005_meno').should('contain.value', 'Pavel')
+    getInput('r007_ulica').should('contain.value', 'Národná')
+    getInput('r008_cislo').should('contain.value', '10')
+    getInput('r009_psc').should('contain.value', '010 01')
+    getInput('r010_obec').should('contain.value', 'Žilina')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
     next()
@@ -315,7 +375,8 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
-    typeToInput('meno_priezvisko', baseInput)
+    typeToInput('r005_meno', baseInput)
+    typeToInput('r004_priezvisko', baseInput)
     typeToInput('r007_ulica', baseInput)
     typeToInput('r008_cislo', baseInput)
     typeToInput('r009_psc', baseInput)
@@ -753,9 +814,7 @@ describe('IBAN page', () => {
     next()
 
     assertUrl('/vysledky')
-    cy.get('small').contains(
-      'O vyplatenie daňového bonusu môžete požiadať v ďalšom kroku.',
-    )
+    cy.get('small').contains('požiadať v ďalšom kroku')
     next()
 
     assertUrl('/iban')

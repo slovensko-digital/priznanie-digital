@@ -6,6 +6,7 @@ import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
 import { parse } from '../lib/calculation'
 import { Page } from '../components/Page'
+import { pensionInitialValues } from '../lib/initialValues'
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -25,7 +26,13 @@ const Dochodok: Page<PensionUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
+          const userInput = values.platil_prispevky_na_dochodok
+            ? values
+            : {
+                ...pensionInitialValues,
+                platil_prispevky_na_dochodok: false,
+              }
+          setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
       >

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { Warning } from '../components/Warning'
 
 export default ({ nextRoute }) => (
   <>
@@ -23,6 +24,20 @@ export default ({ nextRoute }) => (
     <p>
       Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
     </p>
+
+    <Warning>
+      <>
+        <p>
+          <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
+        </p>
+        <ul className="govuk-list govuk-list--bullet">
+          <li>Iné príjmy ako zo živnosti</li>
+          <li>Príjem zo zahraničia</li>
+          <li>Daňový bonus na zaplatené úroky</li>
+          <li>Daňové straty</li>
+        </ul>
+      </>
+    </Warning>
 
     <Link href={nextRoute}>
       <button
