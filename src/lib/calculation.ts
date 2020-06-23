@@ -102,10 +102,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r037_pocetMesiacov: parse(input?.r037_pocetMesiacov ?? '0'),
 
-    priloha3_r11_socialne: parse(input.priloha3_r11_socialne),
-    priloha3_r13_zdravotne: parse(input.priloha3_r13_zdravotne),
-    r038: parse(input?.r038 ?? '0'),
-    r039: parse(input?.r039 ?? '0'),
+    priloha3_r11_socialne: new Decimal(parse(input.priloha3_r11_socialne)),
+    priloha3_r13_zdravotne: new Decimal(parse(input.priloha3_r13_zdravotne)),
+    r038: new Decimal(parse(input?.r038 ?? '0')),
+    r039: new Decimal(parse(input?.r039 ?? '0')),
 
     /** SECTION Prijmy */
     t1r10_prijmy: new Decimal(parse(input.t1r10_prijmy)),
@@ -119,12 +119,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ).add(this.priloha3_r08_poistne)
     },
     get priloha3_r08_poistne() {
-      return round2decimal(
-        this.priloha3_r11_socialne + this.priloha3_r13_zdravotne,
-      )
+      return this.priloha3_r11_socialne
+        .plus(this.priloha3_r13_zdravotne)
     },
     get r040() {
-      return round2decimal(this.r038 - this.r039)
+      return this.r038.minus(this.r039)
     },
     get r041() {
       return this.t1r10_prijmy
@@ -396,7 +395,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get eligibleForChildrenBonus() {
       return (
         this.t1r10_prijmy.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA) ||
-        this.r038 >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
+        this.r038.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA)
       )
     },
 

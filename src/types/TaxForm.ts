@@ -66,9 +66,9 @@ export interface TaxForm {
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
   t1r10_prijmy: Decimal
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
-  priloha3_r11_socialne: number
+  priloha3_r11_socialne: Decimal
   /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
-  priloha3_r13_zdravotne: number
+  priloha3_r13_zdravotne: Decimal
 
   /**   Deti*/
   r034?: Child[]
@@ -81,15 +81,15 @@ export interface TaxForm {
 
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */
-  priloha3_r08_poistne: number
+  priloha3_r08_poistne: Decimal
 
   /** SECTION  Zamestnanie */
-  r038?: number
+  r038: Decimal
   /**   Uhrn poistneho*/
-  r039: number
+  r039: Decimal
 
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
-  r040: number
+  r040: Decimal
   /**   The same as t1r10_vydavky*/
   r041: Decimal
   /**   Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above*/
