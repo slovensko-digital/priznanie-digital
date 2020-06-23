@@ -161,3 +161,8 @@ export const parseFullName = (value: string): ParsedName => {
     title: titles.join(' '),
   }
 }
+
+export function parse(input: string) {
+  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
+  return Number(cleanedInput)
+}

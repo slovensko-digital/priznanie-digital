@@ -10,7 +10,7 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { parse } from '../lib/calculation'
+import { parse } from "../lib/utils"
 import { Page } from '../components/Page'
 import { spaInitialInput } from '../lib/initialValues'
 

@@ -46,18 +46,19 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    // 'withMortgage',
-    'withPension',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
-    'withEmploymentBonus',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // // 'withMortgage',
+    // 'withPension',
+    // 'withChildren',
+    // 'with2percent',
+    // 'withSpa',
+    // 'withBonus',
+    // 'withEmploymentBonus',
+    'bugReport1',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -277,6 +278,12 @@ describe('Cases', () => {
               cy.get(`[data-test="r036_deti_kupele"]`).contains(
                 input.r036_deti_kupele,
               )
+          }
+
+          if (input.employed) {
+            cy.get(`[data-test="r039"]`).contains(
+              input.r039,
+            )
           }
 
           next()

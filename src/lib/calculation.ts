@@ -1,17 +1,12 @@
 import floor from 'lodash.floor'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
-import { getRodneCisloAgeAtYearAndMonth } from './utils'
+import { getRodneCisloAgeAtYearAndMonth, parse } from './utils'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
-
-export function parse(input: string) {
-  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
-  return Number(cleanedInput)
-}
 
 export const round2decimal = (x: number) => Math.round(x * 100) / 100
 

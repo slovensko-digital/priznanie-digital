@@ -15,6 +15,8 @@ export const bugReport1Input: TaxFormUserInput = {
   r032_partner_pocet_mesiacov: '12',
   r001_dic: 'anon',
   r003_nace: 'anon',
+  r004_priezvisko: 'anon',
+  r005_meno: 'anon',
   meno_priezvisko: 'anon',
   r007_ulica: 'anon',
   r008_cislo: 'anon',

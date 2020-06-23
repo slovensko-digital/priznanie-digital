@@ -1,5 +1,5 @@
 import { PartnerUserInput } from '../types/PageUserInputs'
-import { parse } from './calculation'
+import { parse } from "./utils"
 
 const PARTNER_MAX_INCOME = 3937.35
 
