@@ -1,3 +1,4 @@
+import Decimal from 'decimal.js';
 export interface Child {
   priezviskoMeno: string
   rodneCislo: string
@@ -63,7 +64,7 @@ export interface TaxForm {
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
-  t1r10_prijmy: number
+  t1r10_prijmy: Decimal
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
   priloha3_r11_socialne: number
   /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
@@ -75,8 +76,8 @@ export interface TaxForm {
   r036_deti_kupele?: number
 
   /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
-  t1r10_vydavky: number
-  t1r2_prijmy: number
+  t1r10_vydavky: Decimal
+  t1r2_prijmy: Decimal
 
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
    *   vydavkyPoistPar6ods11_ods1a2 */

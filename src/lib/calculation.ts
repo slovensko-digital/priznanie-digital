@@ -2,6 +2,7 @@ import floor from 'lodash.floor'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
 import { getRodneCisloAgeAtYearAndMonth } from './utils'
+import Decimal from 'decimal.js'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -104,15 +105,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r039: parse(input?.r039 ?? '0'),
 
     /** SECTION Prijmy */
-    t1r10_prijmy: parse(input.t1r10_prijmy),
+    t1r10_prijmy: new Decimal(parse(input.t1r10_prijmy)),
     get t1r2_prijmy() {
       return this.t1r10_prijmy
     },
     get t1r10_vydavky() {
-      return round2decimal(
-        Math.min(this.t1r10_prijmy * 0.6, PAUSALNE_VYDAVKY_MAX) +
-          this.priloha3_r08_poistne,
-      )
+      return Decimal.min(
+        this.t1r10_prijmy.times(0.6),
+        PAUSALNE_VYDAVKY_MAX,
+      ).add(this.priloha3_r08_poistne)
     },
     get priloha3_r08_poistne() {
       return round2decimal(
@@ -123,10 +124,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(this.r038 - this.r039)
     },
     get r041() {
-      return this.t1r10_prijmy
+      return this.t1r10_prijmy.toNumber()
     },
     get r042() {
-      return this.t1r10_vydavky
+      return this.t1r10_vydavky.toNumber()
     },
     get r043() {
       return round2decimal(Math.abs(this.r041 - this.r042))
@@ -383,7 +384,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     get eligibleForChildrenBonus() {
       return (
-        this.t1r10_prijmy >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA ||
+        this.t1r10_prijmy.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA) ||
         this.r038 >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
       )
     },
