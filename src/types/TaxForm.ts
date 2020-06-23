@@ -93,7 +93,7 @@ export interface TaxForm {
   /**   The same as t1r10_vydavky*/
   r041: Decimal
   /**   Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above*/
-  r042: number
+  r042: Decimal
   /**   Základ dane (kladný rozdiel r. 41 a r. 42); výsledok hospodárenia (zisk)*/
   r043: Decimal
   /**  TODO  Strata (záporný rozdiel r. 41 a r. 42); výsledok hospodárenia (strata) */
@@ -121,7 +121,7 @@ export interface TaxForm {
    *   príjem,0)]*1/12*r.32 počet mesiacov). Ak r.72<=36 256.38, potom
    *   r.74=max(0,[ 3 937.35 –max(r.32 vlastný príjem,0)]*1/12*r.32 počet
    *   mesiacov)"*/
-  r074_znizenie_partner: number
+  r074_znizenie_partner: Decimal
   /**   Kupele spolu r.76a + r.76b*/
   r076_kupele_spolu: number
   /**   Kupele danovik*/

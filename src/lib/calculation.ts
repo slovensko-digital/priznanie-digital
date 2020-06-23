@@ -127,7 +127,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r10_prijmy
     },
     get r042() {
-      return this.t1r10_vydavky.toNumber()
+      return this.t1r10_vydavky
     },
     get r043() {
       return Decimal.abs(this.r041.minus(this.r042))
@@ -154,25 +154,28 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
-        const result =
-          this.r072_pred_znizenim.toNumber() > 36256.38
-            ? Math.max(
-                0,
-                (13001.438 -
-                  (1 / 4) * this.r072_pred_znizenim.toNumber() -
-                  Math.max(this.r032_partner_vlastne_prijmy, 0)) *
-                  (1 / 12) *
-                  this.r032_partner_pocet_mesiacov,
-              )
-            : Math.max(
-                0,
-                (3937.35 - Math.max(this.r032_partner_vlastne_prijmy, 0)) *
-                  (1 / 12) *
-                  this.r032_partner_pocet_mesiacov,
-              )
-        return round2decimal(result)
+        return this.r072_pred_znizenim.gt(36256.38)
+          ? Decimal.max(
+              0,
+              new Decimal(13001.438)
+                .minus(
+                  this.r072_pred_znizenim
+                    .times(1 / 4)
+                    .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
+                )
+                .times(1 / 12)
+                .times(this.r032_partner_pocet_mesiacov),
+            )
+          : Decimal.max(
+              0,
+              new Decimal(3937.35).minus(
+                Decimal.max(this.r032_partner_vlastne_prijmy, 0)
+                  .times(1 / 12)
+                  .times(this.r032_partner_pocet_mesiacov),
+              ),
+            )
       }
-      return 0
+      return new Decimal(0)
     },
     get r076_kupele_spolu() {
       return round2decimal(
@@ -191,7 +194,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(
         Math.min(
           this.r073.toNumber() +
-            this.r074_znizenie_partner +
+            this.r074_znizenie_partner.toNumber() +
             this.r075_zaplatene_prispevky_na_dochodok +
             this.r076_kupele_spolu,
           this.r072_pred_znizenim.toNumber(),
