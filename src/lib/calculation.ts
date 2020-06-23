@@ -306,7 +306,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     /** TODO High income test case */
     get r112() {
-      return round2decimal(Math.min(this.r037_zaplatene_uroky * 0.5, 400))
+      return Decimal.min(new Decimal(this.r037_zaplatene_uroky).times(0.5), 400)
     },
     get r113() {
       return this.r107.minus(this.r112)
@@ -316,7 +316,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r115() {
-      return Decimal.max(new Decimal(this.r112).minus(this.r114), 0)
+      return Decimal.max(this.r112.minus(this.r114), 0)
     },
     get r120() {
       return parse(input?.r120 ?? '0')
