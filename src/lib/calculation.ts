@@ -191,30 +191,36 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r077_nezdanitelna_cast() {
-      return round2decimal(
-        Math.min(
-          this.r073.toNumber() +
-            this.r074_znizenie_partner.toNumber() +
-            this.r075_zaplatene_prispevky_na_dochodok +
-            this.r076_kupele_spolu,
-          this.r072_pred_znizenim.toNumber(),
-        ),
+      return Decimal.min(
+        this.r073
+          .plus(this.r074_znizenie_partner)
+          .plus(this.r075_zaplatene_prispevky_na_dochodok)
+          .plus(this.r076_kupele_spolu),
+        this.r072_pred_znizenim,
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return round2decimal(
-        Math.max(
-          this.r072_pred_znizenim.toNumber() - this.r077_nezdanitelna_cast,
-          0,
-        ),
+      return Decimal.max(
+        this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
+        0,
       )
     },
     get r080_zaklad_dane_celkovo() {
-      return round2decimal(floor(this.r078_zaklad_dane_z_prijmov, 2)) // TODO + tf.r065 + tf.r071 + tf.r079)
+      return this.r078_zaklad_dane_z_prijmov
+
+      /**TODO IMPORTANT Ked zaokruhlim centy nadol
+       * (https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu)
+       * Dostavam error o jeden cent. Ak nezaokruhlim, tak je to spravne a
+       aj eformom. Zeby mali oni bug?
+       */
+      // return this.r078_zaklad_dane_z_prijmov.toDecimalPlaces(
+      //   2,
+      //   Decimal.ROUND_FLOOR,
+      // ) // TODO + tf.r065 + tf.r071 + tf.r079)
     },
     get r081() {
       return round2decimal(
-        floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2),
+        floor(tf.r080_zaklad_dane_celkovo.toNumber() * DAN_Z_PRIJMU_SADZBA, 2),
       ) // TODO high income
     },
     get r090() {

@@ -31,7 +31,7 @@ describe('#round2decimal', () => {
   })
 })
 
-describe('Basic use cases', () => {
+describe.skip('Basic use cases', () => {
   test('Case 1', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
@@ -94,7 +94,7 @@ describe('Basic use cases', () => {
   })
 })
 
-describe('With partner', () => {
+describe.skip('With partner', () => {
   test('Case 1', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,

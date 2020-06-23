@@ -130,11 +130,11 @@ export interface TaxForm {
    *   a za každé označené dieťa (max 50 € za 1 dieťa) (50.00)*/
   r076b_kupele_partner_a_deti: number
   /**   Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72*/
-  r077_nezdanitelna_cast: number
+  r077_nezdanitelna_cast: Decimal
   /**   Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)*/
-  r078_zaklad_dane_z_prijmov: number
+  r078_zaklad_dane_z_prijmov: Decimal
   /**   Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)*/
-  r080_zaklad_dane_celkovo: number
+  r080_zaklad_dane_celkovo: Decimal
   /**   Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na
    *   eurocenty nadol r080 * 0.19*/
   r081: number
