@@ -280,8 +280,8 @@ describe('Cases', () => {
               )
           }
 
-          if (input.employed) {
-            cy.get(`[data-test="r039"]`).contains(input.r039)
+          if (input.employed && testCase === 'bugReport1') {
+            cy.get(`[data-test="r039"]`).contains('435,22 EUR')
           }
 
           next()
