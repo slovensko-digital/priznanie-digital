@@ -9,7 +9,7 @@ const boolToString = (bool: boolean) => {
   return bool ? '1' : '0'
 }
 const decimalToString = (decimal: Decimal) => {
-  return decimal.equals(0) ? '' : decimal.toFixed(2)
+  return decimal.isZero ? '' : decimal.toFixed(2)
 }
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
@@ -147,7 +147,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r108 = taxForm.r108 ? taxForm.r108.toFixed(2) : ''
   form.dokument.telo.r109 = taxForm.r109 ? taxForm.r109.toFixed(2) : ''
   form.dokument.telo.r110 = decimalToString(taxForm.r110)
-  
+
   form.dokument.telo.r113 = taxForm.r113.toFixed(2)
   form.dokument.telo.r114 = ''
   form.dokument.telo.r120 = taxForm.r120 ? taxForm.r120.toFixed(2) : ''

@@ -1,4 +1,3 @@
-import floor from 'lodash.floor'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
 import { getRodneCisloAgeAtYearAndMonth, floorDecimal } from './utils'
@@ -360,15 +359,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r141() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
-        return 0
+        return new Decimal(0)
       }
 
       // TODO do 3% as well
       const rate = 2
-      const NGOamount = floor((this.r113.toNumber() / 100) * rate, 2)
+      const NGOamount = floorDecimal(this.r113.div(100).times(rate))
 
       /** Min of 3 EUR is required */
-      return round2decimal(NGOamount >= 3 ? NGOamount : 0)
+      return NGOamount.gte(3) ? NGOamount : new Decimal(0)
     },
     get r142() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
