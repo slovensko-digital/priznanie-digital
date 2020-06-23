@@ -91,31 +91,31 @@ export interface TaxForm {
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
   r040: number
   /**   The same as t1r10_vydavky*/
-  r041: number
+  r041: Decimal
   /**   Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above*/
   r042: number
   /**   Základ dane (kladný rozdiel r. 41 a r. 42); výsledok hospodárenia (zisk)*/
-  r043: number
+  r043: Decimal
   /**  TODO  Strata (záporný rozdiel r. 41 a r. 42); výsledok hospodárenia (strata) */
   // r044: number;
   /**   Základ dane (čiastkový základ dane) z príjmov (r. 43 + r. 44 + r. 45 - r.
    *   46) > 0*/
-  r047: number
+  r047: Decimal
   /**   Znížený čiastkový základ dane z príjmov o stratu z predchádzajúcich
    *   zdaňovacích období maximálne do sumy v r. 47 (r. 47 - r. 54) ASI zrkadlenie
    *   047 */
-  r055: number
+  r055: Decimal
   /**   Základ dane (čiastkový základ dane) z príjmov znížený o odpočet výdavkov
    *   (nákladov) na výskum a vývoj zaokrúhlený na eurocenty nadol (r. 55 - r. 56)
    *   Zrkadlenie 55*/
-  r057: number
+  r057: Decimal
   /**   Základ dane z príjmov pred znížením o nezdaniteľnú časť základu dane (r. 40
    *   + r. 57)*/
-  r072_pred_znizenim: number
+  r072_pred_znizenim: Decimal
   /**   Hardconuta value 3937.35 - nezdaniteľnú časť základu Ak r.72>20 507, potom
    *    r.73 má byť výsledkom max(0,9 064.094-(1/4)*r.72–r.30). Ak r72<=20 507,
    *    potom r.73 má byť výsledkom max(0,3 937.35–r.30). (2814.10)*/
-  r073: number
+  r073: Decimal
   /**   "Ak je vyplnene r.31 rodné číslo a r.32 počet mesiacov, potom ak r.72>36
    *   256.38 potom r.74=max(0,[13 001.438 –1/4*r.72–max(r.32 vlastný
    *   príjem,0)]*1/12*r.32 počet mesiacov). Ak r.72<=36 256.38, potom

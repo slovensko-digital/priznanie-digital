@@ -124,13 +124,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round2decimal(this.r038 - this.r039)
     },
     get r041() {
-      return this.t1r10_prijmy.toNumber()
+      return this.t1r10_prijmy
     },
     get r042() {
       return this.t1r10_vydavky.toNumber()
     },
     get r043() {
-      return round2decimal(Math.abs(this.r041 - this.r042))
+      return Decimal.abs(this.r041.minus(this.r042))
     },
     get r047() {
       return this.r043 // this.r044 + this.r045 - this.r046);
@@ -142,24 +142,24 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r055
     },
     get r072_pred_znizenim() {
-      return this.r057 + this.r040
+      return this.r057.add(this.r040)
     },
     get r073() {
-      const result =
-        this.r072_pred_znizenim > 20507 // TODO test both cases here
-          ? Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim)
-          : Math.max(0, NEZDANITELNA_CAST_ZAKLADU)
-
-      return round2decimal(result)
+      return this.r072_pred_znizenim.gt(20507) // TODO test both cases here
+        ? Decimal.max(
+            0,
+            new Decimal(9064.094).sub(this.r072_pred_znizenim.times(1 / 4)),
+          )
+        : Decimal.max(0, NEZDANITELNA_CAST_ZAKLADU)
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
         const result =
-          this.r072_pred_znizenim > 36256.38
+          this.r072_pred_znizenim.toNumber() > 36256.38
             ? Math.max(
                 0,
                 (13001.438 -
-                  (1 / 4) * this.r072_pred_znizenim -
+                  (1 / 4) * this.r072_pred_znizenim.toNumber() -
                   Math.max(this.r032_partner_vlastne_prijmy, 0)) *
                   (1 / 12) *
                   this.r032_partner_pocet_mesiacov,
@@ -190,17 +190,20 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r077_nezdanitelna_cast() {
       return round2decimal(
         Math.min(
-          this.r073 +
+          this.r073.toNumber() +
             this.r074_znizenie_partner +
             this.r075_zaplatene_prispevky_na_dochodok +
             this.r076_kupele_spolu,
-          this.r072_pred_znizenim,
+          this.r072_pred_znizenim.toNumber(),
         ),
       )
     },
     get r078_zaklad_dane_z_prijmov() {
       return round2decimal(
-        Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0),
+        Math.max(
+          this.r072_pred_znizenim.toNumber() - this.r077_nezdanitelna_cast,
+          0,
+        ),
       )
     },
     get r080_zaklad_dane_celkovo() {
