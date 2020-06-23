@@ -31,6 +31,7 @@ describe('calcIntergration', () => {
     'withSpa',
     'withBonus',
     'withEmploymentBonus',
+    'bugReport1',
   ].forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(

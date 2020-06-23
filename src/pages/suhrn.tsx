@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency } from '../lib/utils'
+import { formatCurrency, parseInputNumber } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../components/Warning'
@@ -47,7 +47,7 @@ const Summary = (props: SummaryProps) => (
                   className="govuk-table__cell govuk-!-width-one-half"
                   data-test={testId}
                 >
-                  {currency ? formatCurrency(parseFloat(value)) : value}
+                  {currency ? formatCurrency(parseInputNumber(value)) : value}
                 </td>
               </>
             ) : (
@@ -70,7 +70,6 @@ const Suhrn: Page<TaxFormUserInput> = ({
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())
-
   return (
     <>
       <Link href={previousRoute}>
@@ -130,6 +129,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   title: 'Úhrn povinného poistného',
                   value: taxFormUserInput.r039,
                   currency: true,
+                  testId: 'r039',
                 },
                 {
                   title: 'Úhrn preddavkov na daň',
