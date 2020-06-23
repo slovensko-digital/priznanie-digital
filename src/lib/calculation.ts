@@ -141,15 +141,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r055
     },
     get r072_pred_znizenim() {
-      return this.r057 + this.r040
+      return round2decimal(this.r057 + this.r040)
     },
     get r073() {
-      const result =
-        this.r072_pred_znizenim > 20507 // TODO test both cases here
-          ? Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim)
-          : Math.max(0, NEZDANITELNA_CAST_ZAKLADU)
-
-      return round2decimal(result)
+      if (this.r072_pred_znizenim >= 36256.37) {
+        return 0
+      }
+      if (this.r072_pred_znizenim > 20507) {
+        return round2decimal(
+          Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim),
+        )
+      }
+      return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
