@@ -157,10 +157,10 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   r107: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona priznaného a vyplateného zamestnávateľom   */
-  r108: number
+  r108: Decimal
 
   /** Rozdiel riadkov r. 106 - r. 108 > 0  */
-  r109: number
+  r109: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona na poukázanie správcom dane24) r. 109 - r. 105 >0 */
   r110: Decimal
@@ -176,9 +176,9 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
    *   124 (+)*/
 
   /** Suma daňového bonusu podľa § 33a zákona priznaného a vyplateného zamestnávateľom */
-  r114: number
+  r114: Decimal
   /** Rozdiel r. 112 - r. 114 > 0  */
-  r115: number
+  r115: Decimal
 
   /** zrazena dan zo zamestnania */
   r120: number

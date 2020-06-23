@@ -292,13 +292,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r105_dan.minus(this.r106), 0)
     },
     get r108() {
-      return parse(input?.r108 ?? '0')
+      return new Decimal(parse(input?.r108 ?? '0'))
     },
     get r109() {
-      return round2decimal(Math.max(this.r106 - this.r108, 0))
+      return Decimal.max(new Decimal(this.r106).minus(this.r108), 0)
     },
     get r110() {
-      return Decimal.max(new Decimal(this.r109).minus(this.r105_dan), 0)
+      return Decimal.max(this.r109.minus(this.r105_dan), 0)
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
       const bonusPlusPreplatok = this.r126_danovy_preplatok.plus(this.r110)
@@ -313,10 +313,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     /** TODO */
     get r114() {
-      return 0
+      return new Decimal(0)
     },
     get r115() {
-      return round2decimal(Math.max(this.r112 - this.r114, 0))
+      return Decimal.max(new Decimal(this.r112).minus(this.r114), 0)
     },
     get r120() {
       return parse(input?.r120 ?? '0')
