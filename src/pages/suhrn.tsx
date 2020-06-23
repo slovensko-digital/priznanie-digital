@@ -70,7 +70,6 @@ const Suhrn: Page<TaxFormUserInput> = ({
   const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
     .split(' ')
     .map((v) => v.trim())
-  debugger
   return (
     <>
       <Link href={previousRoute}>
