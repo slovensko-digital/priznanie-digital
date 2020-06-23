@@ -329,7 +329,7 @@ describe('utils', () => {
 
       validInputs.forEach(({ input, output }) => {
         it(`should floor "${input}" to "${output}"`, () => {
-          expect(floorDecimal(input).toNumber()).toEqual(output.toNumber())
+          expect(floorDecimal(input).equals(output)).toBeTruthy()
         })
       })
     })
