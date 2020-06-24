@@ -181,9 +181,9 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   r115: Decimal
 
   /** zrazena dan zo zamestnania */
-  r120: number
+  r120: Decimal
   /** Zaplatené preddavky */
-  r122: number
+  r122: Decimal
 
   r125_dan_na_uhradu: Decimal
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus

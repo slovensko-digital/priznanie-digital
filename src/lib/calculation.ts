@@ -315,10 +315,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r112.minus(this.r114), 0)
     },
     get r120() {
-      return parse(input?.r120 ?? '0')
+      return new Decimal(parse(input?.r120 ?? '0'))
     },
     get r122() {
-      return parse(input?.r122 ?? '0')
+      return new Decimal(parse(input?.r122 ?? '0'))
     },
     get r125_dan_na_uhradu() {
       return Decimal.max(
