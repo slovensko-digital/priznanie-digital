@@ -1,5 +1,5 @@
 import { calculate, round2decimal } from '../src/lib/calculation'
-import { parseInputNumber } from "../src/lib/utils"
+import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { sum } from '../src/lib/utils'
@@ -33,7 +33,7 @@ describe('#round2decimal', () => {
   })
 })
 
-describe.skip('Basic use cases', () => {
+describe('Basic use cases', () => {
   test('Case 1', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
@@ -96,7 +96,7 @@ describe.skip('Basic use cases', () => {
   })
 })
 
-describe.skip('With partner', () => {
+describe('With partner', () => {
   test('Case 1', () => {
     const input: TaxFormUserInput = {
       ...initTaxFormUserInputValues,
