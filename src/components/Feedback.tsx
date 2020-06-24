@@ -35,22 +35,21 @@ interface Props {
   postponeUserInput: PostponeUserInput
 }
 
-export const Feedback: React.FC<Props> = ({
-  taxFormUserInput,
-}: Props) => {
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false);
+export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
+  const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false)
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
-  );
+  )
 
   const usefulOnClick = () => {
-    fetch(
-      'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
-      { method: 'POST' },
-    );
-    setIsUsefulSubmitted(true);
-  };
+    /** TODO make actually do something */
+    // fetch(
+    //   'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
+    //   { method: 'POST' },
+    // );
+    setIsUsefulSubmitted(true)
+  }
 
   if (isFeedbackOpen) {
     return (
@@ -72,9 +71,9 @@ export const Feedback: React.FC<Props> = ({
           >
             <a
               href="#"
-              onClick={e => {
-                e.preventDefault();
-                setIsFeedbackOpen(false);
+              onClick={(e) => {
+                e.preventDefault()
+                setIsFeedbackOpen(false)
               }}
             >
               zatvoriť
@@ -234,9 +233,9 @@ export const Feedback: React.FC<Props> = ({
                 <a
                   href="#"
                   className="sdn-feedbackbar__link"
-                  onClick={e => {
-                    e.preventDefault();
-                    setIsFeedbackOpen(true);
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsFeedbackOpen(true)
                   }}
                 >
                   Nie
@@ -258,9 +257,9 @@ export const Feedback: React.FC<Props> = ({
             href="#"
             className="sdn-feedbackbar__link"
             data-test="feedback"
-            onClick={e => {
-              e.preventDefault();
-              setIsFeedbackOpen(true);
+            onClick={(e) => {
+              e.preventDefault()
+              setIsFeedbackOpen(true)
             }}
           >
             Napíšte nám
