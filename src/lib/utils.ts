@@ -166,3 +166,6 @@ export const parseFullName = (value: string): ParsedName => {
 export const floorDecimal = (decimal: Decimal) => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
 }
+
+export const sum = (...numbers): Decimal =>
+  numbers.reduce((sum, current) => sum.add(current), new Decimal(0))

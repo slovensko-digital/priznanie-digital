@@ -1,6 +1,7 @@
 import { calculate, parse, round2decimal } from '../src/lib/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
+import { sum } from '../src/lib/utils'
 
 describe('#parse', () => {
   const inputs = [
@@ -187,9 +188,9 @@ describe('With child (for tax year 2019)', () => {
         hasChildren: true,
         children: [childUnder6],
       })
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 // april - oktober (vek < 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const part2 = sum(44.34, 44.34, 44.34, 44.34, 44.34, 44.34, 44.34) // april - oktober (vek < 6 rokov)
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('Child turning 6 in 2019 (february)', () => {
@@ -199,9 +200,9 @@ describe('With child (for tax year 2019)', () => {
         children: [childTurning6InFeb],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 // april - september (vek > 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const part2 = sum(22.17, 22.17, 22.17, 22.17, 22.17, 22.17, 22.17) // april - september (vek > 6 rokov)
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('Child turning 6 in 2019 (july)', () => {
@@ -211,10 +212,10 @@ describe('With child (for tax year 2019)', () => {
         children: [childTurning6InJul],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const part2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const part3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2 + part3))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const part2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
+      const part3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
+      expect(result.r106.eq(sum(part1, part2, part3))).toBeTruthy()
     })
 
     test('Child over 6', () => {
@@ -224,9 +225,9 @@ describe('With child (for tax year 2019)', () => {
         children: [childOver6],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
       const part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('More children', () => {
@@ -242,42 +243,56 @@ describe('With child (for tax year 2019)', () => {
       })
 
       // childOver6
-      const childOver6Part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childOver6Part2 =
-        44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 // april - oktober (vek < 6 rokov)
-      const childOver6Sum = round2decimal(childOver6Part1 + childOver6Part2)
+      const childOver6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const childOver6Part2 = sum(
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+      ) // april - oktober (vek < 6 rokov)
+      const childOver6Sum = sum(childOver6Part1, childOver6Part2)
 
       // childTurning6InFeb
-      const childTurning6InFebPart1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childTurning6InFebPart2 =
-        22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 // april - september (vek > 6 rokov)
-      const childTurning6InFebPart2Sum = round2decimal(
-        childTurning6InFebPart1 + childTurning6InFebPart2,
+      const childTurning6InFebPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const childTurning6InFebPart2 = sum(
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+      ) // april - september (vek > 6 rokov)
+      const childTurning6InFebPart2Sum = sum(
+        childTurning6InFebPart1,
+        childTurning6InFebPart2,
       )
 
       // childTurning6InJul
-      const childTurning6InJulPart1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const childTurning6InJulPart2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const childTurning6InJulPart3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
-      const childTurning6InJulSum = round2decimal(
-        childTurning6InJulPart1 +
-          childTurning6InJulPart2 +
-          childTurning6InJulPart3,
+      const childTurning6InJulPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const childTurning6InJulPart2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
+      const childTurning6InJulPart3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
+      const childTurning6InJulSum = sum(
+        childTurning6InJulPart1,
+        childTurning6InJulPart2,
+        childTurning6InJulPart3,
       )
 
       // childUnder6
-      const childUnder6Part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
+      const childUnder6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
       const childUnder6Part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      const childUnder6Sum = round2decimal(childUnder6Part1 + childUnder6Part2)
-
-      expect(result.r106).toBe(
-        round2decimal(
-          childOver6Sum +
-            childTurning6InFebPart2Sum +
-            childTurning6InJulSum +
-            childUnder6Sum,
+      const childUnder6Sum = sum(childUnder6Part1, childUnder6Part2)
+      expect(
+        result.r106.eq(
+          childOver6Sum
+            .plus(childTurning6InFebPart2Sum)
+            .plus(childTurning6InJulSum)
+            .plus(childUnder6Sum),
         ),
-      )
+      ).toBeTruthy()
     })
   })
 })

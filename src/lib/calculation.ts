@@ -119,8 +119,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ).add(this.priloha3_r08_poistne)
     },
     get priloha3_r08_poistne() {
-      return this.priloha3_r11_socialne
-        .plus(this.priloha3_r13_zdravotne)
+      return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
     },
     get r040() {
       return this.r038.minus(this.r039)
@@ -230,62 +229,60 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r090
     },
     get r106() {
-      return round2decimal(
-        this.r034.reduce((previousSum, currentChild) => {
-          let currentSum = 0
-          const rateJanuaryToMarch = 22.17
-          const rateYoungChild = 44.34
-          const rateOldChild = 22.17
+      return this.r034.reduce((previousSum, currentChild) => {
+        let currentSum = new Decimal(0)
+        const rateJanuaryToMarch = new Decimal(22.17)
+        const rateYoungChild = new Decimal(44.34)
+        const rateOldChild = new Decimal(22.17)
 
-          const getRateAprilToDecember = (month: number) => {
-            const age = getRodneCisloAgeAtYearAndMonth(
-              currentChild.rodneCislo,
-              2019,
-              month - 1,
-            )
-            return age < 6 ? rateYoungChild : rateOldChild
-          }
+        const getRateAprilToDecember = (month: number) => {
+          const age = getRodneCisloAgeAtYearAndMonth(
+            currentChild.rodneCislo,
+            2019,
+            month - 1,
+          )
+          return age < 6 ? rateYoungChild : rateOldChild
+        }
 
-          if (currentChild.m00 || currentChild.m01) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m02) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m03) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m04) {
-            currentSum += getRateAprilToDecember(4)
-          }
-          if (currentChild.m00 || currentChild.m05) {
-            currentSum += getRateAprilToDecember(5)
-          }
-          if (currentChild.m00 || currentChild.m06) {
-            currentSum += getRateAprilToDecember(6)
-          }
-          if (currentChild.m00 || currentChild.m07) {
-            currentSum += getRateAprilToDecember(7)
-          }
-          if (currentChild.m00 || currentChild.m08) {
-            currentSum += getRateAprilToDecember(8)
-          }
-          if (currentChild.m00 || currentChild.m09) {
-            currentSum += getRateAprilToDecember(9)
-          }
-          if (currentChild.m00 || currentChild.m10) {
-            currentSum += getRateAprilToDecember(10)
-          }
-          if (currentChild.m00 || currentChild.m11) {
-            currentSum += getRateAprilToDecember(11)
-          }
-          if (currentChild.m00 || currentChild.m12) {
-            currentSum += getRateAprilToDecember(12)
-          }
+        if (currentChild.m00 || currentChild.m01) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m02) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m03) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m04) {
+          currentSum = currentSum.plus(getRateAprilToDecember(4))
+        }
+        if (currentChild.m00 || currentChild.m05) {
+          currentSum = currentSum.plus(getRateAprilToDecember(5))
+        }
+        if (currentChild.m00 || currentChild.m06) {
+          currentSum = currentSum.plus(getRateAprilToDecember(6))
+        }
+        if (currentChild.m00 || currentChild.m07) {
+          currentSum = currentSum.plus(getRateAprilToDecember(7))
+        }
+        if (currentChild.m00 || currentChild.m08) {
+          currentSum = currentSum.plus(getRateAprilToDecember(8))
+        }
+        if (currentChild.m00 || currentChild.m09) {
+          currentSum = currentSum.plus(getRateAprilToDecember(9))
+        }
+        if (currentChild.m00 || currentChild.m10) {
+          currentSum = currentSum.plus(getRateAprilToDecember(10))
+        }
+        if (currentChild.m00 || currentChild.m11) {
+          currentSum = currentSum.plus(getRateAprilToDecember(11))
+        }
+        if (currentChild.m00 || currentChild.m12) {
+          currentSum = currentSum.plus(getRateAprilToDecember(12))
+        }
 
-          return round2decimal(previousSum + currentSum)
-        }, 0),
-      )
+        return previousSum.plus(currentSum)
+      }, new Decimal(0))
     },
     get r107() {
       return Decimal.max(this.r105_dan.minus(this.r106), 0)
