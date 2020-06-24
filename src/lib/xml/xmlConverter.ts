@@ -146,8 +146,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r113 = taxForm.r113.toFixed(2)
   form.dokument.telo.r114 = ''
-  form.dokument.telo.r120 = taxForm.r120 ? taxForm.r120.toFixed(2) : ''
-  form.dokument.telo.r122 = taxForm.r122 ? taxForm.r122.toFixed(2) : ''
+  form.dokument.telo.r120 = decimalToString(taxForm.r120)
+
+  form.dokument.telo.r122 = decimalToString(taxForm.r122)
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
   form.dokument.telo.r126 = decimalToString(taxForm.r126_danovy_preplatok)
