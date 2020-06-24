@@ -10,7 +10,7 @@ import { sum } from './utils'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
-const DAN_Z_PRIJMU_SADZBA = 0.19
+const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
 const mapChild = (child: ChildInput): Child => {
@@ -174,14 +174,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                     .times(0.25)
                     .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
                 )
-                .times(1 / 12)
+                .times(new Decimal(1).div(12))
                 .times(this.r032_partner_pocet_mesiacov),
             )
           : Decimal.max(
               0,
               new Decimal(3937.35).minus(
                 Decimal.max(this.r032_partner_vlastne_prijmy, 0)
-                  .times(1 / 12)
+                  .times(new Decimal(1).div(12))
                   .times(this.r032_partner_pocet_mesiacov),
               ),
             )
