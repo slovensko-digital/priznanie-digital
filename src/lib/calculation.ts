@@ -62,9 +62,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
     r075_zaplatene_prispevky_na_dochodok: Decimal.min(
       180,
-      new Decimal(
-        parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
-      ),
+
+      parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
     ),
 
     /** SECTION Partner */
@@ -73,15 +72,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ? input?.r031_rodne_cislo.replace(/\D/g, '')
       : '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
-    r032_partner_vlastne_prijmy: new Decimal(
-      parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),
+    r032_partner_vlastne_prijmy: parseInputNumber(
+      input?.r032_partner_vlastne_prijmy ?? '0',
     ),
+
     r032_partner_pocet_mesiacov: parseInputNumber(
       input?.r032_partner_pocet_mesiacov ?? '0',
-    ),
+    ).toNumber(),
     r033_partner_kupele: input?.r033_partner_kupele ?? false,
-    r033_partner_kupele_uhrady: new Decimal(
-      parseInputNumber(input?.r033_partner_kupele_uhrady ?? '0'),
+    r033_partner_kupele_uhrady: parseInputNumber(
+      input?.r033_partner_kupele_uhrady ?? '0',
     ),
 
     /** SECTION Children */
@@ -92,29 +92,28 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         (this.r034?.length ?? 0) * maxAmountPerChild
 
       return Decimal.min(
-        new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),
+        parseInputNumber(input?.r036_deti_kupele ?? '0'),
         maxAmountChildrenTotal,
       )
     },
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    r037_zaplatene_uroky: new Decimal(
-      parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
-    ),
-    r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
+    r037_zaplatene_uroky: parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
 
-    priloha3_r11_socialne: new Decimal(
-      parseInputNumber(input.priloha3_r11_socialne),
-    ),
-    priloha3_r13_zdravotne: new Decimal(
-      parseInputNumber(input.priloha3_r13_zdravotne),
-    ),
-    r038: new Decimal(parseInputNumber(input?.r038 ?? '0')),
-    r039: new Decimal(parseInputNumber(input?.r039 ?? '0')),
+    r037_pocetMesiacov: parseInputNumber(
+      input?.r037_pocetMesiacov ?? '0',
+    ).toNumber(),
+
+    priloha3_r11_socialne: parseInputNumber(input.priloha3_r11_socialne),
+
+    priloha3_r13_zdravotne: parseInputNumber(input.priloha3_r13_zdravotne),
+
+    r038: parseInputNumber(input?.r038 ?? '0'),
+    r039: parseInputNumber(input?.r039 ?? '0'),
 
     /** SECTION Prijmy */
-    t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
+    t1r10_prijmy: parseInputNumber(input.t1r10_prijmy),
     get t1r2_prijmy() {
       return this.t1r10_prijmy
     },
@@ -188,7 +187,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r076b_kupele_partner_a_deti.plus(this.r076a_kupele_danovnik)
     },
     get r076a_kupele_danovnik() {
-      return new Decimal(parseInputNumber(input?.r076a_kupele_danovnik ?? '0'))
+      return parseInputNumber(input?.r076a_kupele_danovnik ?? '0')
     },
     get r076b_kupele_partner_a_deti() {
       return this.r033_partner_kupele_uhrady.plus(this.r036_deti_kupele)
@@ -294,7 +293,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r105_dan.minus(this.r106), 0)
     },
     get r108() {
-      return new Decimal(parseInputNumber(input?.r108 ?? '0'))
+      return parseInputNumber(input?.r108 ?? '0')
     },
     get r109() {
       return Decimal.max(new Decimal(this.r106).minus(this.r108), 0)
@@ -321,10 +320,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r112.minus(this.r114), 0)
     },
     get r120() {
-      return new Decimal(parseInputNumber(input?.r120 ?? '0'))
+      return parseInputNumber(input?.r120 ?? '0')
     },
     get r122() {
-      return new Decimal(parseInputNumber(input?.r122 ?? '0'))
+      return parseInputNumber(input?.r122 ?? '0')
     },
     get r125_dan_na_uhradu() {
       return Decimal.max(
