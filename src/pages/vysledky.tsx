@@ -72,7 +72,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   const summaryRows = [
     {
       title: 'Príjmy',
-      value: round2decimal(taxForm.t1r10_prijmy + taxForm.r038),
+      value: taxForm.t1r10_prijmy.plus(taxForm.r038),
       key: 't1r10_prijmy',
     },
     {
