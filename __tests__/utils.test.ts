@@ -320,11 +320,17 @@ describe('utils', () => {
       })
     })
   })
-  describe.only('#floorDecimal', () => {
+  describe('#floorDecimal', () => {
     describe('for valid values', () => {
       const validInputs = [
-        { input: new Decimal(916.487), output: new Decimal(916.48) },
-        { input: new Decimal(99.654), output: new Decimal(99.65) },
+        {
+          input: new Decimal(916.487),
+          output: new Decimal(916.48),
+        },
+        {
+          input: new Decimal(99.654),
+          output: new Decimal(99.65),
+        },
       ]
 
       validInputs.forEach(({ input, output }) => {

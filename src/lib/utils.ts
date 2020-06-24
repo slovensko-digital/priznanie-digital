@@ -163,6 +163,8 @@ export const parseFullName = (value: string): ParsedName => {
   }
 }
 
+/**  https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu
+ */
 export const floorDecimal = (decimal: Decimal) => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
 }
