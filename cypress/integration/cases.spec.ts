@@ -46,18 +46,18 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    // 'base',
+    'base',
     'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // // 'withMortgage',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
-    // 'withSpa',
-    // 'withBonus',
-    // 'withEmploymentBonus',
+    'completeDecimal',
+    'withPartner',
+    'withEmployment',
+    // 'withMortgage',
+    'withPension',
+    'withChildren',
+    'with2percent',
+    'withSpa',
+    'withBonus',
+    'withEmploymentBonus',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
