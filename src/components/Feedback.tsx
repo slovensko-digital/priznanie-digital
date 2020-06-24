@@ -3,8 +3,9 @@ import { Form } from 'formik'
 import classNames from 'classnames'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
-import { CheckboxSmall, FormWrapper } from './FormComponents'
+import { FormWrapper } from './FormComponents'
 import { ErrorSummary } from './ErrorSummary'
+
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {
     ...taxFormUserInput,
@@ -111,9 +112,8 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      taxFormUserInput: values.agree
-                        ? anonymizeTaxForm(taxFormUserInput)
-                        : null,
+                      taxFormUserInput: anonymizeTaxForm(taxFormUserInput),
+
                       // postponeUserInput: values.agree
                       //   ? postponeUserInput
                       //   : null,
@@ -183,10 +183,6 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    <CheckboxSmall
-                      name="agree"
-                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil/a"
-                    />
                     <button
                       type="submit"
                       data-test="submit"
