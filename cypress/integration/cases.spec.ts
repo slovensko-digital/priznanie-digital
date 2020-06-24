@@ -7,13 +7,14 @@
 
 import { UserInput } from '../../src/types/UserInput'
 import { convertToXML } from '../../src/lib/xml/xmlConverter'
-import { formatCurrency, setDate } from '../../src/lib/utils'
+import { formatCurrency, setDate, parseInputNumber } from '../../src/lib/utils'
 import { calculate } from '../../src/lib/calculation'
 import { Route, PostponeRoute } from '../../src/lib/routes'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
+import Decimal from 'decimal.js'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -292,7 +293,11 @@ describe('Cases', () => {
           cy.contains('Daň na úhradu')
 
           cy.get('.govuk-table__cell').contains(
-            formatCurrency(parseFloat(input.t1r10_prijmy)),
+            formatCurrency(
+              new Decimal(parseInputNumber(input.t1r10_prijmy))
+                .plus(parseInputNumber(input.r038))
+                .toNumber(),
+            ),
           )
 
           next()
