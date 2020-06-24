@@ -170,7 +170,7 @@ export const floorDecimal = (decimal: Decimal) => {
 export const sum = (...numbers): Decimal =>
   numbers.reduce((sum, current) => sum.add(current), new Decimal(0))
 
-export function parseInputNumber(input: string): Decimal {
+export function parseInputNumber(input: string): number {
   const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
-  return new Decimal(cleanedInput)
+  return Number(cleanedInput)
 }
