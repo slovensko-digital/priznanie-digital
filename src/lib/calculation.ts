@@ -153,7 +153,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r072_pred_znizenim.gt(20507) // TODO test both cases here
         ? Decimal.max(
             0,
-            new Decimal(9064.094).sub(this.r072_pred_znizenim.times(1 / 4)),
+            new Decimal(9064.094).sub(this.r072_pred_znizenim.times(0.25)),
           )
         : Decimal.max(0, NEZDANITELNA_CAST_ZAKLADU)
     },
@@ -165,7 +165,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
               new Decimal(13001.438)
                 .minus(
                   this.r072_pred_znizenim
-                    .times(1 / 4)
+                    .times(0.25)
                     .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
                 )
                 .times(1 / 12)
