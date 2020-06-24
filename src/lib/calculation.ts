@@ -230,8 +230,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             ),
         )
       }
-      return floorDecimal(this.r080_zaklad_dane_celkovo).times(
-        DAN_Z_PRIJMU_SADZBA,
+
+      return floorDecimal(
+        tf.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
       )
     },
     get r090() {
