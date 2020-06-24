@@ -352,6 +352,7 @@ describe('Cases', () => {
               cy.get(
                 '#form-buttons-load-dialog-confirm > .ui-button-text',
               ).click()
+              cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
               cy.get('#form-button-validate')
                 .click()
                 .should(formSuccessful(stub))
