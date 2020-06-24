@@ -62,7 +62,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
     r075_zaplatene_prispevky_na_dochodok: Decimal.min(
       180,
-      new Decimal(parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0')),
+      new Decimal(
+        parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+      ),
     ),
 
     /** SECTION Partner */
@@ -89,8 +91,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const maxAmountChildrenTotal =
         (this.r034?.length ?? 0) * maxAmountPerChild
 
-      return round2decimal(
-        Math.min(parseInputNumber(input?.r036_deti_kupele ?? '0'), maxAmountChildrenTotal),
+      return Decimal.min(
+        new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),
+        maxAmountChildrenTotal,
       )
     },
 
@@ -101,8 +104,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
 
-    priloha3_r11_socialne: new Decimal(parseInputNumber(input.priloha3_r11_socialne)),
-    priloha3_r13_zdravotne: new Decimal(parseInputNumber(input.priloha3_r13_zdravotne)),
+    priloha3_r11_socialne: new Decimal(
+      parseInputNumber(input.priloha3_r11_socialne),
+    ),
+    priloha3_r13_zdravotne: new Decimal(
+      parseInputNumber(input.priloha3_r13_zdravotne),
+    ),
     r038: new Decimal(parseInputNumber(input?.r038 ?? '0')),
     r039: new Decimal(parseInputNumber(input?.r039 ?? '0')),
 

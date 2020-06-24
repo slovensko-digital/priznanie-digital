@@ -301,7 +301,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   if (form.r034 && form.r034.some((child) => child.kupelnaStarostlivost)) {
     // r036_deti_kupele
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 303, form.r036_deti_kupele)
+    tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 303, form.r036_deti_kupele.toNumber())
   }
 
   if (form.r037_uplatnuje_uroky) {
