@@ -3,8 +3,7 @@ import Link from 'next/link'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
-import { numberInputRegexp } from '../lib/utils'
-import { parse } from '../lib/calculation'
+import { numberInputRegexp, parseInputNumber } from '../lib/utils'
 import { Page } from '../components/Page'
 import { pensionInitialValues } from '../lib/initialValues'
 
@@ -78,7 +77,7 @@ export const validate = (values: PensionUserInput) => {
     ) {
       errors.r075_zaplatene_prispevky_na_dochodok =
         'Zadajte výšku príspevkov vo formáte 123,45'
-    } else if (parse(values.r075_zaplatene_prispevky_na_dochodok) > 180) {
+    } else if (parseInputNumber(values.r075_zaplatene_prispevky_na_dochodok) > 180) {
       errors.r075_zaplatene_prispevky_na_dochodok =
         'Výška príspevkov nesmie presiahnuť 180,00 eur'
     }

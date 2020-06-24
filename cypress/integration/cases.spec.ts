@@ -58,6 +58,7 @@ describe('Cases', () => {
     'withSpa',
     'withBonus',
     'withEmploymentBonus',
+    'bugReport1',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -277,6 +278,10 @@ describe('Cases', () => {
               cy.get(`[data-test="r036_deti_kupele"]`).contains(
                 input.r036_deti_kupele,
               )
+          }
+
+          if (input.employed && testCase === 'bugReport1') {
+            cy.get(`[data-test="r039"]`).contains('435,22 EUR')
           }
 
           next()
