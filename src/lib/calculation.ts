@@ -220,12 +220,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r080_zaklad_dane_celkovo.gte(36256.38)) {
-        return new Decimal(36256.38)
-          .times(DAN_Z_PRIJMU_SADZBA)
-          .plus(this.r080_zaklad_dane_celkovo.minus(36256.38).times(0.25))
+        return floorDecimal(
+          new Decimal(36256.38)
+            .times(DAN_Z_PRIJMU_SADZBA)
+            .plus(
+              floorDecimal(this.r080_zaklad_dane_celkovo)
+                .minus(36256.38)
+                .times(0.25),
+            ),
+        )
       }
-      return floorDecimal(
-        this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
+      return floorDecimal(this.r080_zaklad_dane_celkovo).times(
+        DAN_Z_PRIJMU_SADZBA,
       )
     },
     get r090() {
