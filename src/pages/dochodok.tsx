@@ -1,29 +1,19 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Formik, Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { PensionUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { getRoutes } from '../lib/routes';
-import { numberInputRegexp } from '../lib/utils';
+import React from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
+import { numberInputRegexp, parseInputNumber } from '../lib/utils'
+import { Page } from '../components/Page'
+import { pensionInitialValues } from '../lib/initialValues'
 
-const { nextRoute, previousRoute } = getRoutes('/dochodok');
-
-interface Props {
-  setTaxFormUserInput: (values: PensionUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
-}
-
-const Dochodok: NextPage<Props> = ({
+const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter();
-  useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
       <Link href={previousRoute}>
@@ -31,27 +21,33 @@ const Dochodok: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PensionUserInput>
+      <FormWrapper<PensionUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        // validationSchema={validationSchema}
-        onSubmit={values => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+        onSubmit={(values) => {
+          const userInput = values.platil_prispevky_na_dochodok
+            ? values
+            : {
+                ...pensionInitialValues,
+                platil_prispevky_na_dochodok: false,
+              }
+          setTaxFormUserInput(userInput)
+          router.push(nextRoute)
         }}
       >
         {({ values }) => (
-          <Form className="form">
+          <Form className="form" noValidate>
             <BooleanRadio
-              title="Platili ste príspevky na doplnkové dôchodkové poistenie (III. pilier) v roku 2019?"
-              name="r029_poberal_dochodok"
+              title="Platili ste v roku 2019 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
+              name="platil_prispevky_na_dochodok"
             />
-            {values.r029_poberal_dochodok && (
+            {values.platil_prispevky_na_dochodok && (
               <>
                 <Input
-                  name="r030_vyska_dochodku"
+                  name="r075_zaplatene_prispevky_na_dochodok"
                   type="number"
-                  label="Vyska dochodku"
+                  label="Výška zaplatených príspevkov za rok 2019"
+                  hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
                 />
               </>
             )}
@@ -60,33 +56,34 @@ const Dochodok: NextPage<Props> = ({
             </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
-  );
-};
+  )
+}
 
-const validate = (values: PensionUserInput): any => {
-  const errors: any = {};
+export const validate = (values: PensionUserInput) => {
+  const errors: Partial<FormErrors<PensionUserInput>> = {}
 
-  if (
-    values.r029_poberal_dochodok &&
-    !values.r030_vyska_dochodku &&
-    !values.r030_vyska_dochodku.match(numberInputRegexp)
-  ) {
-    errors.r030_vyska_dochodku = 'Zadajte vysku dochodku';
+  if (typeof values.platil_prispevky_na_dochodok === 'undefined') {
+    errors.platil_prispevky_na_dochodok = 'Vyznačte odpoveď'
   }
 
-  return errors;
-};
+  if (values.platil_prispevky_na_dochodok) {
+    if (!values.r075_zaplatene_prispevky_na_dochodok) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Zadajte výšku zaplatených príspevkov'
+    } else if (
+      !values.r075_zaplatene_prispevky_na_dochodok.match(numberInputRegexp)
+    ) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Zadajte výšku príspevkov vo formáte 123,45'
+    } else if (parseInputNumber(values.r075_zaplatene_prispevky_na_dochodok) > 180) {
+      errors.r075_zaplatene_prispevky_na_dochodok =
+        'Výška príspevkov nesmie presiahnuť 180,00 eur'
+    }
+  }
 
-// const validationSchema = Yup.object().shape<PensionUserInput<number>>({
-//   r029_poberal_dochodok: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r030_vyska_dochodku: Yup.number().when('r029_poberal_dochodok', {
-//     is: true,
-//     then: Yup.number().required(),
-//   }),
-// });
+  return errors
+}
 
-export default Dochodok;
+export default Dochodok

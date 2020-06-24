@@ -1,16 +1,16 @@
 export interface PostponeUserInput {
   // rodne_cislo: string;
-  dic: string;
-  prijmy_zo_zahranicia: boolean;
+  dic: string
+  prijmy_zo_zahranicia?: boolean
 
-  meno_priezvisko: string;
-  ulica: string;
-  cislo: string;
-  psc: string;
-  obec: string;
-  stat: string;
-  datum: string;
+  meno_priezvisko: string
+  ulica: string
+  cislo: string
+  psc: string
+  obec: string
+  stat: string
+  datum: string
 
-  email?: string;
-  newsletter?: boolean;
+  email?: string
+  newsletter?: boolean
 }

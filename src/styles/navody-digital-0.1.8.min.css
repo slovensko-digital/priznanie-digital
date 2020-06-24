@@ -36,7 +36,8 @@ a:focus {
   color: #06070b;
 }
 @media print {
-  .govuk-link[href^="/"]:after,.govuk-link[href^="http://"]:after,.govuk-link[href^="https://"]:after,a[href^="/"]:after,a[href^="http://"]:after,a[href^="https://"]:after {
+  .govuk-link[href^="/"]:after,.govuk-link[href^="http://"]:after,.govuk-link[href^="https://"]:after,a[href^="/"]:after,a[href^="http://"]:after,a[href^="https://"]:after
+  {
     content: ' (' attr(href) ')';
     font-size: 90%;
     word-wrap: break-word;
@@ -644,7 +645,8 @@ p + .govuk-heading-s {
 .govuk-section-break--visible {
   border-bottom: 1px solid #bfc1c3;
 }
-a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
+a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after
+{
   content: '\00a0\00a0\00a0' !important;
   display: inline-block;
   margin-left: 3px;
@@ -655,12 +657,16 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   background-size: contain;
   text-decoration: none;
 }
-.sdn-footer a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
+/*
+.sdn-footer a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after
+{
   content: none !important;
 }
-.govuk-button[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after {
+.govuk-button[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"]):not(.no-arrow):after
+{
   background-image: url(/assets/images/icon-external-link-white.svg) !important;
 }
+*/
 @media (min-width: 40.0625em) {
   .govuk-grid-row-same-height {
     display: -webkit-box;
@@ -849,12 +855,10 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 .govuk-main-wrapper {
   display: block;
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 @media (min-width: 40.0625em) {
   .govuk-main-wrapper {
-    padding-top: 40px;
     padding-bottom: 40px;
   }
 }
@@ -889,6 +893,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
 }
 @media (min-width: 1160px) {
   .govuk-width-container {
+    max-width: 1100px;
     margin: 0 auto;
   }
   @supports (margin: max(calc(0px))) {
@@ -5198,7 +5203,7 @@ a[href*="//"]:not([href*="navody.digital"]):not([href^="#"]):not([href^="/"]):no
   }
 }
 .sdn-header__link {
-  margin: 10px 0;
+  margin: 15px 0 5px 0;
   line-height: 20px;
   text-decoration: none;
 }

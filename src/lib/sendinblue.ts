@@ -1,107 +1,148 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from 'isomorphic-unfetch'
 
-const baseUrl = 'https://api.sendinblue.com/v3';
-const token = process.env.sendinbluetoken;
+const baseUrl = 'https://api.sendinblue.com/v3'
+const token = process.env.sendinbluetoken
+const sender = {
+  name: 'priznanie.digital',
+  email: 'priznanie.digital@slovensko.digital',
+}
 
 if (!token) {
-  throw new Error(' process.env.sendinbluetoken is not defined');
+  throw new Error('process.env.sendinbluetoken is not defined')
 }
 
 const headers = {
   accept: 'application/json',
   'content-type': 'application/json',
   'api-key': token,
-};
-
-export interface EmailAttributes {
-  firstname: string;
-  lastname: string;
-  newsletter: boolean;
-  deadline: string;
-  form: string;
 }
 
-export interface SendEmailUsingTemplateParams {
-  templateId: number;
-  email: string;
-  attributes: EmailAttributes;
-  attachment?: SendEmailAttachment[];
-}
-export const sendEmailUsingTemplate = async ({
-  templateId,
-  email,
-  attributes,
-  attachment,
-}: SendEmailUsingTemplateParams) => {
-  // TODO this enpoint is deprecated, use https://developers.sendinblue.com/reference#sendtransacemail
-  const result = await fetch(`${baseUrl}/smtp/templates/${templateId}/send`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      emailTo: [email],
-      attributes,
-      attachment: attachment && attachment.length > 0 ? attachment : undefined,
-    }),
-  });
+export type TemplateParams = PostponeTemplateParams | TaxTemplateParams
 
-  if (result.status !== 201) {
-    throw {
-      message: `Error sending email to ${email}`,
-      response: await result.json(),
-    };
-  }
-  return result;
-};
+export interface PostponeTemplateParams extends BaseTemplateParams {
+  deadline?: string
+}
+
+export interface TaxTemplateParams extends BaseTemplateParams {
+  summary: Record<string, string>
+}
+
+export interface BaseTemplateParams {
+  firstName: string
+  lastName: string
+  newsletter: boolean
+}
 
 export interface SendEmailAttachment {
-  content: string;
-  name: string;
+  content: string
+  name: string
 }
-export interface SendEmailParams {
-  from: string;
-  to: string;
-  subject: string;
-  textContent: string;
-  attachment?: SendEmailAttachment[];
+export interface SendTextParams {
+  to: string
+  subject: string
+  textContent: string
+  attachment?: SendEmailAttachment[]
 }
-export const sendEmail = async ({
-  from,
-  to,
-  subject,
-  textContent,
-  attachment,
-}: SendEmailParams) => {
+export interface SendTemplateParams {
+  to: string
+  templateId: number
+  params: TemplateParams
+  attachment?: SendEmailAttachment[]
+}
+export type SendEmailParams = SendTextParams | SendTemplateParams
+
+const isTemplateParams = (
+  params: SendEmailParams,
+): params is SendTemplateParams => {
+  return (params as SendTemplateParams).templateId !== undefined
+}
+
+const buildEmailBody = (emailParams: SendEmailParams) => {
+  let body
+  if (isTemplateParams(emailParams)) {
+    const { templateId, params } = emailParams
+    body = {
+      params,
+      templateId,
+    }
+  } else {
+    const { subject, textContent } = emailParams
+    body = {
+      subject,
+      textContent,
+    }
+  }
+
+  const { to, attachment } = emailParams
+  return {
+    sender,
+    to: [{ email: to }],
+    attachment: attachment && attachment.length > 0 ? attachment : undefined,
+    ...body,
+  }
+}
+
+export const sendEmail = async (params: SendEmailParams) => {
   const result = await fetch(`${baseUrl}/smtp/email`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      sender: { email: from },
-      to: [{ email: to }],
-      subject,
-      textContent,
-      attachment: attachment && attachment.length > 0 ? attachment : undefined,
-    }),
-  });
+    body: JSON.stringify(buildEmailBody(params)),
+  })
 
   if (result.status !== 201) {
-    throw {
-      message: `Error sending email to ${to}`,
-      response: await result.json(),
-    };
+    const message = `Error sending email to ${params.to}`
+    console.error(message)
+    console.error(await result.json())
+    throw new Error(message)
   }
-};
+
+  return result
+}
 
 export const makeAttachment = (name: string, content: any) => ({
   name,
-  content: Buffer.from(JSON.stringify(content, null, 4)).toString('base64'),
-});
+  content: Buffer.from(content).toString('base64'),
+})
 
-export const saveEmailAddress = (email: string, attributes: EmailAttributes) =>
+export interface Contact {
+  email: string
+  firstName: string
+  lastName: string
+  listIds: number[]
+}
+
+const mapContactAttributes = ({ firstName, lastName, listIds }: Contact) => ({
+  listIds,
+  attributes: {
+    firstName,
+    lastName,
+  },
+})
+
+const createContact = (contact: Contact) =>
   fetch(`${baseUrl}/contacts`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      email,
-      attributes,
+      email: contact.email,
+      ...mapContactAttributes(contact),
     }),
-  });
+  })
+
+const updateContact = (contact: Contact) =>
+  fetch(`${baseUrl}/contacts/${contact.email}`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(mapContactAttributes(contact)),
+  })
+
+export const createOrUpdateContact = async (contact: Contact) => {
+  const saveReponse = await createContact(contact)
+  if (!saveReponse.ok) {
+    const saveReponseJson = await saveReponse.json()
+    if (saveReponseJson.code === 'duplicate_parameter') {
+      return updateContact(contact)
+    }
+  }
+  return saveReponse
+}

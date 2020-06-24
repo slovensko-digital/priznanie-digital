@@ -1,163 +1,157 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { Formik, Form } from 'formik';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { BooleanRadio, Input } from '../components/FormComponents';
-import { PartnerUserInput } from '../types/PageUserInputs';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { ErrorSummary } from '../components/ErrorSummary';
+import React from 'react'
+import Link from 'next/link'
+import { Form } from 'formik'
+import { BooleanRadio, FormWrapper } from '../components/FormComponents'
+import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
+import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
+import { PartnerIncome } from '../components/PartnerIncome'
+import { validatePartnerIncome } from '../lib/validatePartnerIncome'
+import { Details } from '../components/Details'
+import { Page } from '../components/Page'
+import { partnerUserInitialValues } from '../lib/initialValues'
 
-import { getRoutes } from '../lib/routes';
-import { numberInputRegexp } from '../lib/utils';
-
-const { nextRoute, previousRoute } = getRoutes('/partner');
-
-interface Props {
-  setTaxFormUserInput: (values: PartnerUserInput) => void;
-  taxFormUserInput: TaxFormUserInput;
-}
-
-const Partner: NextPage<Props> = ({
+const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-}: Props) => {
-  const router = useRouter();
-  useEffect(() => {
-    router.prefetch(nextRoute);
-  });
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
       <Link href={previousRoute}>
-        <a className="govuk-back-link">Späť</a>
+        <a className="govuk-back-link" data-test="back">
+          Späť
+        </a>
       </Link>
-      <Formik<PartnerUserInput>
+      <FormWrapper<PartnerUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
-        // validationSchema={validationSchema}
-        onSubmit={values => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+        onSubmit={(values, { setFieldValue }) => {
+          if (
+            values.r032_uplatnujem_na_partnera === false ||
+            validatePartnerIncome(values, values.partner_step) === false ||
+            values.partner_step === 4
+          ) {
+            const userInput = values.r032_uplatnujem_na_partnera
+              ? values
+              : {
+                  ...partnerUserInitialValues,
+                  r032_uplatnujem_na_partnera: false,
+                }
+
+            if (!validatePartnerIncome(values, values.partner_step)) {
+              userInput.r032_partner_vlastne_prijmy = ''
+              userInput.r031_priezvisko_a_meno = ''
+              userInput.r031_rodne_cislo = ''
+              userInput.r032_partner_pocet_mesiacov = ''
+              userInput.r032_partner_pocet_mesiacov = ''
+            }
+
+            setTaxFormUserInput(userInput)
+            router.push(nextRoute)
+          } else {
+            const setStep = (value) => setFieldValue('partner_step', value)
+            setStep(values.partner_step + 1)
+          }
         }}
       >
-        {({ values, errors, touched }) => (
-          <Form className="form">
+        {(props) => (
+          <Form className="form" noValidate>
             <BooleanRadio
-              title="Uplatňujete si daňový bonus na manželku/manžela?"
+              title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
             />
-            <ErrorSummary<PartnerUserInput> errors={errors} touched={touched} />
-            {values.r032_uplatnujem_na_partnera && (
+            <Details title="Kedy si môžem uplatniť zvýhodnenie?">
               <>
-                <Input
-                  name="r031_priezvisko_a_meno"
-                  type="text"
-                  label="Meno a priezvisko manželky/manžela"
-                />
-                <Input
-                  name="r031_rodne_cislo"
-                  type="text"
-                  label="Rodné číslo"
-                />
-                <Input
-                  name="r032_partner_vlastne_prijmy"
-                  type="number"
-                  label="Vlastné príjmy manželky/manžela"
-                />
-                <Input
-                  name="r032_partner_pocet_mesiacov"
-                  type="number"
-                  label="Počet mesiacov, kedy mala manželka príjem?"
-                />
-                {/* <Checkbox name="r033_partner_kupele" title="Partner kupele?" />
-                {values.r033_partner_kupele && (
-                  <>
-                    <Input
-                      name="r033_partner_kupele_uhrady"
-                      type="number"
-                      label="Partner kupele uhrady"
-                    />
-                  </>
-                )} */}
+                <p>
+                  Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň
+                  jednu z týchto podmienok:
+                </p>
+                <ol>
+                  <li>
+                    staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije
+                    v domácnosti;
+                  </li>
+                  <li>
+                    v roku 2019 poberal/-a peňažný príspevok na opatrovanie;
+                  </li>
+                  <li>
+                    bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;
+                  </li>
+                  <li>
+                    je občanom so zdravotným postihnutím alebo s ťažkým
+                    zdravotným postihnutím (držiteľom prekazu ŤZP).
+                  </li>
+                </ol>
               </>
+            </Details>
+            {props.values.r032_uplatnujem_na_partnera ? (
+              <PartnerIncome
+                {...props}
+                step={props.values.partner_step}
+                setStep={(value) => props.setFieldValue('partner_step', value)}
+              />
+            ) : (
+              <button className="govuk-button" type="submit">
+                Pokračovať
+              </button>
             )}
-            <button className="govuk-button" type="submit">
-              Pokračovať
-            </button>
           </Form>
         )}
-      </Formik>
+      </FormWrapper>
     </>
-  );
-};
+  )
+}
 
-const validate = (values: PartnerUserInput): any => {
-  const errors: any = {};
+export const validate = (values: PartnerUserInput) => {
+  const errors: Partial<FormErrors<PartnerUserInput>> = {}
+
+  if (typeof values.r032_uplatnujem_na_partnera === 'undefined') {
+    errors.r032_uplatnujem_na_partnera = 'Vyznačte odpoveď'
+  }
 
   if (values.r032_uplatnujem_na_partnera) {
-    if (!values.r031_priezvisko_a_meno) {
-      errors.r031_priezvisko_a_meno =
-        'Zadajte meno vasho/vasej manzela/manzelky.';
-    }
-    if (!values.r031_rodne_cislo) {
-      errors.r031_rodne_cislo = 'Zadajte rodne cislo manzela/manzelky';
+    if (typeof values.partner_spolocna_domacnost === 'undefined') {
+      errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
     }
 
-    if (
-      !values.r032_partner_vlastne_prijmy &&
-      !values.r032_partner_vlastne_prijmy.match(numberInputRegexp)
-    ) {
-      errors.r032_partner_vlastne_prijmy =
-        'Zadajte vlastne prijmy manzela/manzelky';
-    }
-    if (!values.r032_partner_pocet_mesiacov) {
-      errors.r032_partner_pocet_mesiacov =
-        'Zadajte pocet mesiacov, kedy mal/a manzel/manzelka prijem.';
+    if (values.partner_step === 1 && validatePartnerIncome(values, 1)) {
+      if (typeof values.partner_bonus_uplatneny === 'undefined') {
+        errors.partner_bonus_uplatneny = 'Vyznačte odpoveď'
+      }
+    } else if (values.partner_step === 3 && validatePartnerIncome(values, 3)) {
+      if (!values.r032_partner_vlastne_prijmy) {
+        errors.r032_partner_vlastne_prijmy =
+          'Zadajte vlastné príjmy manžela/manželky'
+      } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
+        errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
+      }
+    } else if (values.partner_step === 4 && validatePartnerIncome(values, 4)) {
+      if (!values.r031_priezvisko_a_meno) {
+        errors.r031_priezvisko_a_meno = 'Zadajte meno manžela/manželky.'
+      }
+      if (!values.r031_rodne_cislo) {
+        errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
+      } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
+        errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
+      }
+
+      if (!values.r032_partner_pocet_mesiacov) {
+        errors.r032_partner_pocet_mesiacov =
+          'Zadajte počet mesiacov, kedy mal/a manžel/manželka príjem.'
+      } else if (
+        !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
+        parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
+        parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
+      ) {
+        errors.r032_partner_pocet_mesiacov =
+          'Zadajte počet mesiacov - číslo od 0 do 12'
+      }
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
-// const validationSchema = Yup.object().shape<PartnerUserInput<number>>({
-//   r032_uplatnujem_na_partnera: Yup.boolean()
-//     .required()
-//     .nullable(),
-//   r031_priezvisko_a_meno: Yup.string().when('r032_uplatnujem_na_partnera', {
-//     is: true,
-//     then: Yup.string().required(),
-//   }),
-//   r031_rodne_cislo: Yup.string().when('r032_uplatnujem_na_partnera', {
-//     is: true,
-//     then: Yup.string()
-//       .required()
-//       .min(9)
-//       .max(11),
-//   }),
-//   r032_partner_vlastne_prijmy: Yup.number().when(
-//     'r032_uplatnujem_na_partnera',
-//     {
-//       is: true,
-//       then: Yup.number().required(),
-//     },
-//   ),
-//   r032_partner_pocet_mesiacov: Yup.number().when(
-//     'r032_uplatnujem_na_partnera',
-//     {
-//       is: true,
-//       then: Yup.number()
-//         .min(0)
-//         .max(12)
-//         .required(),
-//     },
-//   ),
-//   r033_partner_kupele_uhrady: Yup.number().when('r033_partner_kupele', {
-//     is: true,
-//     then: Yup.number()
-//       .max(50)
-//       .required(),
-//   }),
-//   r033_partner_kupele: Yup.boolean().required(),
-// });
-
-export default Partner;
+export default Partner

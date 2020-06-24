@@ -1,5 +1,5 @@
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 
 const Header: React.FC = () => {
   return (
@@ -11,7 +11,11 @@ const Header: React.FC = () => {
       <div className="sdn-header__container govuk-width-container ">
         <Link href="/">
           <a className="sdn-header__link">
-            <span className="sdn-header__product-name">priznanie.digital</span>
+            <img
+              className="sdn-header__logo"
+              src="/assets/images/priznanie_logo.png"
+              alt="priznanie.digital"
+            />
           </a>
         </Link>
         {/* TODO use later */}
@@ -40,7 +44,7 @@ const Header: React.FC = () => {
         </div> */}
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

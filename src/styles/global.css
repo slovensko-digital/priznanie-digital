@@ -18,7 +18,38 @@ body {
   margin-bottom: 0 !important;
 }
 
+.btn-secondary.btn-warning {
+  border: 2px solid #d4351c !important;
+  color: #d4351c !important;
+  background-color: white !important;
+}
+
+.btn-warning {
+  background-color: #d4351c !important;
+}
+
 /* Numeric fields can have spaces as thousand separator or between number and currency name. */
 .govuk-table__cell--numeric {
   white-space: nowrap;
+}
+
+input:disabled,
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+.noscript {
+  background: yellow;
+  padding: 20px;
+  margin: 0;
+}
+
+.sdn-header__logo {
+  border: none;
+  width: 225px;
+  height: 29px;
+}
+
+.sdn-footer__disclaimer {
+  color: #d0d0d0;
 }

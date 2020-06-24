@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
-import { NextPage } from 'next';
-import classnames from 'classnames';
-import { Input } from '../../components/FormComponents';
-import styles from '../osobne-udaje.module.css';
-import { PersonalInformationPostponePage } from '../../types/PageUserInputs';
-import { getCity } from '../../lib/api';
-import { AutoformResponseBody } from '../../types/api';
-import { getPostponeRoutes } from '../../lib/routes';
-import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { ErrorSummary } from '../../components/ErrorSummary';
-import { formatPsc } from '../../lib/utils';
+import React, { useEffect } from 'react'
+import { Form, FormikProps } from 'formik'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import classnames from 'classnames'
+import { FormWrapper, Input } from '../../components/FormComponents'
+import styles from '../osobne-udaje.module.css'
+import {
+  FormErrors,
+  PersonalInformationPostponePage,
+} from '../../types/PageUserInputs'
+import { getAutoformByPersonName, getCity } from '../../lib/api'
+import { AutoformResponseBody } from '../../types/api'
+import { getPostponeRoutes } from '../../lib/routes'
+import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { ErrorSummary } from '../../components/ErrorSummary'
+import { formatPsc } from '../../lib/utils'
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje');
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -25,33 +27,33 @@ const makeHandlePersonAutoform = ({
   return (person: AutoformResponseBody) => {
     setValues({
       ...values,
-      meno_priezvisko: person.name,
-      dic: person?.tin ?? values.dic,
-      ulica: person.street ?? person.municipality,
-      cislo: person.street_number,
+      meno_priezvisko: person.name || '',
+      dic: person?.tin || values.dic || '',
+      ulica: person.street || person.municipality || '',
+      cislo: person.street_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      obec: person.municipality,
-      stat: person.country,
-    });
-  };
-};
+      obec: person.municipality || '',
+      stat: person.country || '',
+    })
+  }
+}
 
 interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostponePage) => void;
-  postponeUserInput: PostponeUserInput;
+  setPostponeUserInput: (values: PersonalInformationPostponePage) => void
+  postponeUserInput: PostponeUserInput
 }
 const OsobneUdaje: NextPage<Props> = ({
   setPostponeUserInput,
   postponeUserInput,
 }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (postponeUserInput.prijmy_zo_zahranicia === undefined) {
-      router.replace(previousRoute);
+      router.replace(previousRoute)
     }
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
 
   return (
     <>
@@ -60,15 +62,15 @@ const OsobneUdaje: NextPage<Props> = ({
           Späť
         </a>
       </Link>
-      <Formik<PersonalInformationPostponePage>
+      <FormWrapper<PersonalInformationPostponePage>
         initialValues={postponeUserInput}
-        validationSchema={validationSchema}
-        onSubmit={values => {
-          setPostponeUserInput(values);
-          router.push(nextRoute);
+        validate={validate}
+        onSubmit={(values) => {
+          setPostponeUserInput(values)
+          router.push(nextRoute)
         }}
       >
-        {props => (
+        {(props) => (
           <>
             <ErrorSummary<PersonalInformationPostponePage>
               errors={props.errors}
@@ -96,10 +98,13 @@ const OsobneUdaje: NextPage<Props> = ({
               </p>
 
               <FullNameAutoCompleteInput
+                name="meno_priezvisko"
+                label="Meno a priezvisko"
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
+                fetchData={getAutoformByPersonName}
               />
 
-              <h2>Adresa trvalého pobytu</h2>
+              <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
                 <Input
                   name="ulica"
@@ -129,19 +134,19 @@ const OsobneUdaje: NextPage<Props> = ({
                   label="PSČ"
                   width={5}
                   maxLength={6}
-                  onChange={async event => {
+                  onChange={async (event) => {
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,
-                    );
-                    props.setFieldValue('psc', pscValue);
+                    )
+                    props.setFieldValue('psc', pscValue)
 
                     if (
                       pscValue.length === 6 &&
                       props.values.obec.length === 0
                     ) {
-                      const city = await getCity(pscValue);
-                      props.setFieldValue('obec', city);
+                      const city = await getCity(pscValue)
+                      props.setFieldValue('obec', city)
                     }
                   }}
                 />
@@ -170,29 +175,55 @@ const OsobneUdaje: NextPage<Props> = ({
             </Form>
           </>
         )}
-      </Formik>
+      </FormWrapper>
     </>
-  );
-};
-/** https://github.com/kub1x/rodnecislo */
-// const rodneCisloRegexp = /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[12]\d|3[01])\/?\d{3,4}$/;
+  )
+}
 
-const validationSchema = Yup.object().shape<PersonalInformationPostponePage>({
+export const validate = (values: PersonalInformationPostponePage) => {
+  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {}
+
+  if (!values.dic) {
+    errors.dic = 'Zadajte pridelené DIČ'
+  }
+
   /**
    * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
    */
-  dic: Yup.string()
-    .required('Zadajte pridelené DIČ')
-    .min(9, 'DIČ môže mať minimálne 9 znakov')
-    .max(10, 'DIČ môže mať maximálne 10 znakov'),
-  meno_priezvisko: Yup.string().required('Zadajte vaše meno a priezvisko'),
-  psc: Yup.string().required('Zadajte PSČ'),
-  // rodne_cislo: Yup.string()
-  //   .matches(rodneCisloRegexp, 'Zadajte valídne rodné číslo')
-  //   .required(),
-  obec: Yup.string().required('Zadajte obec'),
-  ulica: Yup.string().required('Zadajte ulicu'),
-  cislo: Yup.string().required('Zadajte číslo domu'),
-  stat: Yup.string().required('Zadajte štát'),
-});
-export default OsobneUdaje;
+  if (values.dic.length < 9) {
+    errors.dic = 'DIČ môže mať minimálne 9 znakov'
+  }
+  if (values.dic.length > 10) {
+    errors.dic = 'DIČ môže mať maximálne 10 znakov'
+  }
+
+  if (!values.meno_priezvisko) {
+    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
+  }
+
+  if (!values.ulica) {
+    errors.ulica = 'Zadajte ulicu'
+  }
+
+  if (!values.cislo) {
+    errors.cislo = 'Zadajte číslo domu'
+  }
+
+  const pscNumberFormat = /^\d{3} \d{2}$/
+  if (!values.psc) {
+    errors.psc = 'Zadajte PSČ'
+  } else if (!values.psc.match(pscNumberFormat)) {
+    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
+  }
+
+  if (!values.obec) {
+    errors.obec = 'Zadajte obec'
+  }
+
+  if (!values.stat) {
+    errors.stat = 'Zadajte štát'
+  }
+
+  return errors
+}
+export default OsobneUdaje

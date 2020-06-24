@@ -1,42 +1,54 @@
-import React from 'react';
-import Link from 'next/link';
-import { getRoutes, getPostponeRoutes } from '../lib/routes';
+import React from 'react'
+import Link from 'next/link'
+import { Warning } from '../components/Warning'
 
-const { nextRoute } = getRoutes('/');
-
-const { nextRoute: nextPostponeRoute } = getPostponeRoutes('/');
-
-export default () => (
+export default ({ nextRoute }) => (
   <>
-    <div className="govuk-grid-column-full">
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Návod na vyplnenie daňového priznania pre SZČO
-      </h1>
-      <p>
-        Daňové priznanie je jeden z najväčších byrokratických strašiakov
-        podnikateľov. A pritom pri zadaní pár jednoduchých údajov si ho môže
-        vyplniť ktokoľvek za pár minút bez väčších problémov. Chceme takto
-        malými krokmi uľahčiť život státisicom živnostníkov.
-      </p>
+    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      Vyplnenie daňového priznania
+    </h1>
 
-      <p>
-        Ak ste SZČO (živnostník) a uplatňujete si paušálne výdavky, tak vám
-        pomôžeme vyplniť daňové priznanie (k dani z príjmov fyzickej osoby, typ
-        B) a tiež vás detailne prevedieme aj procesom podania na stránkach
-        Finančnej správy.
-      </p>
+    <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
 
-      <Link href={nextRoute}>
-        <button
-          type="button"
-          className="govuk-button govuk-button--large govuk-button--start"
-        >
-          Pripraviť daňové priznanie
-        </button>
-      </Link>
-    </div>
+    <p>
+      Po zadaní základných údajov si môžete stiahnuť pripravené daňové priznanie
+      a následne vás prevedieme procesom jeho podania na stránkach Finančnej
+      správy.
+    </p>
 
-    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
+    <p>
+      Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
+      SZČO uplatňujúce si paušálne výdavky.
+    </p>
+
+    <p>
+      Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
+    </p>
+
+    <Warning>
+      <>
+        <p>
+          <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
+        </p>
+        <ul className="govuk-list govuk-list--bullet">
+          <li>Iné príjmy ako zo živnosti</li>
+          <li>Príjem zo zahraničia</li>
+          <li>Daňový bonus na zaplatené úroky</li>
+          <li>Daňové straty</li>
+        </ul>
+      </>
+    </Warning>
+
+    <Link href={nextRoute}>
+      <button
+        type="button"
+        className="govuk-button govuk-button--large govuk-button--start"
+      >
+        Pripraviť daňové priznanie
+      </button>
+    </Link>
+
+    {/* <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
       <span className="govuk-warning-text__icon" aria-hidden="true">
         !
       </span>
@@ -59,6 +71,6 @@ export default () => (
           Odložiť daňové priznanie
         </button>
       </Link>
-    </div>
+    </div> */}
   </>
-);
+)

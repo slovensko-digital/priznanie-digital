@@ -15,6 +15,10 @@
   margin-right: 16px;
 }
 
+.wideField {
+  width: 100%;
+}
+
 .flexGrow {
   flex-grow: 1;
 }

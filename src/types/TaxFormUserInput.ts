@@ -1,84 +1,127 @@
-export interface Child {
-  priezviskoMeno: string;
-  rodneCislo: string;
-  kupelnaStarostlivost: boolean;
-  m00: boolean;
-  m01: boolean;
-  m02: boolean;
-  m03: boolean;
-  m04: boolean;
-  m05: boolean;
-  m06: boolean;
-  m07: boolean;
-  m08: boolean;
-  m09: boolean;
-  m10: boolean;
-  m11: boolean;
-  m12: boolean;
+export const monthNames: string[] = [
+  'Január',
+  'Február',
+  'Marec',
+  'Apríl',
+  'Máj',
+  'Jún',
+  'Júl',
+  'August',
+  'September',
+  'Október',
+  'November',
+  'December',
+]
+
+export interface ChildInput {
+  id: number
+  priezviskoMeno: string
+  rodneCislo: string
+  kupelnaStarostlivost: boolean
+  wholeYear: boolean
+  monthFrom: string
+  monthTo: string
 }
 
-export interface TaxFormUserInputBase<T> {
+export interface TaxFormUserInput {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
-  r001_dic: string;
-  /** 03 - SK NACE - Hlavná, prevažná činnosť
-   *  TODO tu treba odkial natahat cinnosti do dropdownu, mozno to bude enum,
-   *  UX musi byt zvladnute */
-  r003_nace: string;
-  /** Spoločné pole pre meno a priezvisko **/
-  meno_priezvisko: string;
+  r001_dic: string
+  /** 03 - SK NACE - Hlavná, prevažná činnosť*/
+  r003_nace: string
+  /** Cele meno a priezvisko*/
+  meno_priezvisko?: string
+  /** 04 - Priezvisko **/
+  r004_priezvisko: string
+  /** 05 - Meno **/
+  r005_meno: string
+  /** 06 - Titul (pred menom / za priezviskom)*/
+  r006_titul?: string
   /**   07 - Ulica*/
-  r007_ulica: string;
+  r007_ulica: string
   /**   08 - Súpisné/orientačné číslo **/
-  r008_cislo: string;
+  r008_cislo: string
   /**   09 - PSČ **/
-  psc: string;
+  r009_psc: string
   /**   10 - Obec **/
-  r010_obec: string;
+  r010_obec: string
   /**   11 - Štát **/
-  r011_stat: string;
+  r011_stat: string
 
   /** SECTION Dochodok */
-  /** Poberal (a) som na začiatku zdaňovacieho obdobia dôchodok (ky) uvedený (é) v § 11 ods. 6 zákona alebo mi bol tento (tieto) dôchodok (ky) priznaný (é) spätne k začiatku príslušného zdaňovacieho obdobia (vypĺňa sa, len ak daňovník bol poberateľom dôchodku uvedeného v § 11 ods. 6 zákona na začiatku zdaňovacieho obdobia alebo mu tento dôchodok bol priznaný spätne k začiatku príslušného zdaňovacieho obdobia)  */
-  r029_poberal_dochodok?: boolean;
-  /** Úhrnná suma dôchodku (ov) uvedeného (ných) v § 11 ods. 6 zákona za zdaňovacie obdobie (v eurách) */
-  r030_vyska_dochodku?: T;
+  /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
+  platil_prispevky_na_dochodok?: boolean
+  r075_zaplatene_prispevky_na_dochodok?: string
 
   /** SECTION  Partner*/
-  r031_priezvisko_a_meno?: string;
-  r031_rodne_cislo?: string;
-  r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: T;
-  r032_partner_pocet_mesiacov?: T;
-  r033_partner_kupele?: boolean;
-  /**   max 50*/
-  r033_partner_kupele_uhrady?: T;
+  r031_priezvisko_a_meno?: string
+  r031_rodne_cislo?: string
+  r032_uplatnujem_na_partnera?: boolean
+  r032_partner_vlastne_prijmy?: string
+  r032_partner_pocet_mesiacov?: string
+  partner_ineligible?: boolean
+  partner_step?: number
+  partner_spolocna_domacnost?: boolean
+  partner_bonus_uplatneny?: boolean
+  partner_podmienky?: Record<string, boolean>
 
   /** SECTION  Mortage */
-  r037_uplatnuje_uroky?: boolean;
-  r037_zaplatene_uroky?: T;
-  r037_pocetMesiacov?: T;
+  r037_uplatnuje_uroky?: boolean
+  r037_zaplatene_uroky?: string
+  r037_pocetMesiacov?: string
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
-  t1r10_prijmy: T;
+  t1r10_prijmy: string
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
-  priloha3_r11_socialne: T;
+  priloha3_r11_socialne: string
   /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
-  priloha3_r13_zdravotne: T;
-  /**   Zamestnanie */
-  r038?: T;
-  r039?: T;
+  priloha3_r13_zdravotne: string
+  /** Zaplatené preddavky */
+  r122?: string
 
-  /**   Deti*/
-  r034?: Child[];
-  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí  */
-  r036?: T;
+  /**  SECTION Zamestnanie */
+  employed?: boolean
+  r038?: string
+  r039?: string
+  r108?: string
+  r120?: string
 
-  children?: boolean;
-  employed?: boolean;
+  /** SECTION  Deti*/
+  hasChildren?: boolean
+  children: ChildInput[]
+
+  /** SECTION  Dve percenta */
+  XIIoddiel_uplatnujem2percenta?: boolean
+  r142_ico?: string
+  r142_obchMeno?: string
+  r142_ulica?: string
+  r142_cislo?: string
+  r142_psc?: string
+  r142_obec?: string
+  XIIoddiel_suhlasZaslUdaje?: boolean
+
+  /** SECTION  Kupele */
+  kupele?: boolean
+  r033_partner_kupele?: boolean
+  /**   max 50*/
+  r033_partner_kupele_uhrady?: string
+  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované
+   * dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí
+   * */
+  r036_deti_kupele?: string
+  childrenInSpa?: boolean
+  /**   Kupele danovik*/
+  r076a_kupele_danovnik?: string
+  danovnikInSpa?: boolean
+
+  /** SECTION Danovy bonus */
+  ziadamVratitDanovyBonusAleboPreplatok?: boolean
+  iban?: string
+
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
-   * failovali test */
-  datum: string;
-}
+   * failovali testy */
+  datum: string
 
-export type TaxFormUserInput<T = string> = TaxFormUserInputBase<T>;
+  email?: string
+  newsletter?: boolean
+}

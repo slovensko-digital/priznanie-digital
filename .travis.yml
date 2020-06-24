@@ -6,24 +6,23 @@ node_js:
   - '12'
 
 cache:
-  directories:
-    - node_modules
-    - .next/cache
-    - ~/.nvm
-    - ~/.npm
-    - ~/.cache
+  npm: false
+  yarn: false
 
 branches:
   only:
     - master
 
+addons:
+  artifacts: false
+
 jobs:
   include:
-    - stage: "Test"
+    - stage: 'Test'
       if: type = pull_request
       script:
         - npm run ci
-    - stage: "Deploy to Staging"
+    - stage: 'Deploy to Staging'
       if: type = push
       script:
         - eval "$(ssh-agent -s)"

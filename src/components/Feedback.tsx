@@ -1,17 +1,42 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import classNames from 'classnames';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import React, { useState } from 'react'
+import { Form } from 'formik'
+import classNames from 'classnames'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { CheckboxSmall, FormWrapper } from './FormComponents'
+import { ErrorSummary } from './ErrorSummary'
+const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
+  return {
+    ...taxFormUserInput,
+    r001_dic: 'anon',
+    r003_nace: 'anon',
+    meno_priezvisko: 'anon',
+    r007_ulica: 'anon',
+    r008_cislo: 'anon',
+    r009_psc: 'anon',
+    r010_obec: 'anon',
+    r011_stat: 'anon',
+    r031_priezvisko_a_meno: 'anon',
+    r031_rodne_cislo: 'anon',
+    iban: 'anon',
+    email: 'anon',
+    children: taxFormUserInput.children.map((child) => {
+      return {
+        ...child,
+        rodneCislo: 'anon',
+        priezviskoMeno: 'anon',
+      }
+    }),
+  }
+}
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 export const Feedback: React.FC<Props> = ({
   taxFormUserInput,
-  postponeUserInput,
 }: Props) => {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false);
@@ -61,40 +86,73 @@ export const Feedback: React.FC<Props> = ({
             {isSubmittedSuccessfully === true ? (
               <p className="govuk-body">Ďakujeme za feedback</p>
             ) : (
-              <Formik
+              <FormWrapper
                 initialValues={{
                   whatWereYouDoing: '',
                   whatWentWrong: '',
                   agree: false,
                 }}
-                onSubmit={async values => {
+                validate={(values) => {
+                  const errors: any = {}
+
+                  if (!values.whatWereYouDoing) {
+                    errors.whatWereYouDoing =
+                      'Napíšte prosím čo ste robili keď nastala chyba'
+                  }
+
+                  if (!values.whatWentWrong) {
+                    errors.whatWentWrong = 'Napíšte prosím aká chyba nastala'
+                  }
+
+                  return errors
+                }}
+                onSubmit={async (values, { setErrors }) => {
                   const response = await fetch('/api/feedback', {
                     method: 'POST',
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      taxFormUserInput: values.agree ? taxFormUserInput : null, // TODO clean from USER INFO
-                      postponeUserInput: values.agree
-                        ? postponeUserInput
+                      taxFormUserInput: values.agree
+                        ? anonymizeTaxForm(taxFormUserInput)
                         : null,
+                      // postponeUserInput: values.agree
+                      //   ? postponeUserInput
+                      //   : null,
                       url: window.location.href,
                     }),
-                  });
+                  })
 
-                  setIsSubmittedSuccessfully(response.status === 200);
+                  const success = response.status === 200
+                  setIsSubmittedSuccessfully(success)
+
+                  if (!success) {
+                    setErrors({
+                      saving: 'Chyba pri odosielaní, skúste znovu',
+                    } as any)
+                  }
                 }}
               >
-                {formik => (
-                  <Form>
-                    {isSubmittedSuccessfully === false && (
-                      <span className="govuk-error-message">
-                        Chyba pri odosielaní, skúste znovu
-                      </span>
-                    )}
-                    <div className="govuk-form-group">
+                {(formik) => (
+                  <Form noValidate>
+                    <ErrorSummary
+                      errors={formik.errors}
+                      touched={formik.touched}
+                    />
+                    <div
+                      className={classNames('govuk-form-group', {
+                        'govuk-form-group--error':
+                          formik.errors.whatWereYouDoing,
+                      })}
+                    >
                       <label className="govuk-label" htmlFor="whatWereYouDoing">
                         Čo ste robili?
                       </label>
+                      {formik.errors.whatWereYouDoing && (
+                        <span data-test="error" className="govuk-error-message">
+                          <span className="govuk-visually-hidden">Chyba:</span>{' '}
+                          {formik.errors.whatWereYouDoing}
+                        </span>
+                      )}
                       <input
                         type="text"
                         name="whatWereYouDoing"
@@ -103,10 +161,20 @@ export const Feedback: React.FC<Props> = ({
                         {...formik.getFieldProps('whatWereYouDoing')}
                       />
                     </div>
-                    <div className="govuk-form-group">
+                    <div
+                      className={classNames('govuk-form-group', {
+                        'govuk-form-group--error': formik.errors.whatWentWrong,
+                      })}
+                    >
                       <label className="govuk-label" htmlFor="whatWentWrong">
                         Čo sa nepodarilo?
                       </label>
+                      {formik.errors.whatWentWrong && (
+                        <span data-test="error" className="govuk-error-message">
+                          <span className="govuk-visually-hidden">Chyba:</span>{' '}
+                          {formik.errors.whatWentWrong}
+                        </span>
+                      )}
                       <textarea
                         name="whatWentWrong"
                         data-test="whatWentWrong"
@@ -116,10 +184,10 @@ export const Feedback: React.FC<Props> = ({
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    {/* <CheckboxSmall
+                    <CheckboxSmall
                       name="agree"
-                      label="Suhlasím s odoslaním dát ktoré som vyplnil (zatiaľ nie anonymne)"
-                    /> */}
+                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil/a"
+                    />
                     <button
                       type="submit"
                       data-test="submit"
@@ -136,12 +204,12 @@ export const Feedback: React.FC<Props> = ({
                     <p className="govuk-body feedback-submitted-feedback govuk-!-padding-left-4 govuk-!-padding-top-2 govuk-!-display-inline-block" />
                   </Form>
                 )}
-              </Formik>
+              </FormWrapper>
             )}
           </div>
         </div>
       </div>
-    );
+    )
   }
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
@@ -200,5 +268,5 @@ export const Feedback: React.FC<Props> = ({
         </span>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,0 +1,1290 @@
+[
+  {
+    "code": "01110",
+    "label": "Pestovanie obilnín (okrem ryže), strukovín a olejnatých semien"
+  },
+  { "code": "01120", "label": "Pestovanie ryže" },
+  {
+    "code": "01130",
+    "label": "Pestovanie zeleniny a melónov, koreňovej a hľuzovej zeleniny"
+  },
+  { "code": "01140", "label": "Pestovanie cukrovej trstiny" },
+  { "code": "01150", "label": "Pestovanie tabaku" },
+  { "code": "01160", "label": "Pestovanie plodín na vlákno" },
+  { "code": "01190", "label": "Pestovanie ostatných netrvácnych plodín" },
+  { "code": "01210", "label": "Pestovanie hrozna" },
+  { "code": "01220", "label": "Pestovanie tropického a subtropického ovocia" },
+  { "code": "01230", "label": "Pestovanie citrusových plodov" },
+  { "code": "01240", "label": "Pestovanie jadrového a kôstkového ovocia" },
+  {
+    "code": "01250",
+    "label": "Pestovanie ostatného stromového a kríkového ovocia a orechov"
+  },
+  { "code": "01260", "label": "Pestovanie olejnatého ovocia" },
+  { "code": "01270", "label": "Pestovanie nápojových plodín" },
+  {
+    "code": "01280",
+    "label": "Pestovanie korenín, aromatických, liečivých a farmaceutických plodín"
+  },
+  { "code": "01290", "label": "Pestovanie ostatných trvácnych plodín" },
+  { "code": "01300", "label": "Rozmnožovanie rastlín" },
+  { "code": "01410", "label": "Chov dojníc" },
+  { "code": "01420", "label": "Chov ostatného dobytka a byvolov" },
+  { "code": "01430", "label": "Chov koní a ostatných koňovitých zvierat" },
+  { "code": "01440", "label": "Chov tiav a ťavovitých zvierat" },
+  { "code": "01450", "label": "Chov oviec a kôz" },
+  { "code": "01460", "label": "Chov ošípaných" },
+  { "code": "01470", "label": "Chov hydiny" },
+  { "code": "01491", "label": "Chov hospodárskych zvierat" },
+  { "code": "01492", "label": "Chov kožušinových zvierat" },
+  { "code": "01493", "label": "Chov domácich neúžitkových zvierat" },
+  { "code": "01494", "label": "Chov zveriny" },
+  { "code": "01495", "label": "Chov laboratórnych zvierat" },
+  { "code": "01499", "label": "Chov iných drobných hospodárskych zvierat" },
+  { "code": "01500", "label": "Zmiešané hospodárstvo" },
+  { "code": "01610", "label": "Služby súvisiace s pestovaním plodín" },
+  { "code": "01620", "label": "Služby súvisiace s chovom zvierat" },
+  { "code": "01630", "label": "Služby súvisiace so zberom úrody" },
+  { "code": "01640", "label": "Spracovanie semien na sadenie" },
+  { "code": "01700", "label": "Lov, odchyt a súvisiace služby" },
+  {
+    "code": "02100",
+    "label": "Lesné hospodárstvo a ostatné služby v lesníctve"
+  },
+  { "code": "02200", "label": "Ťažba dreva" },
+  { "code": "02300", "label": "Zber divorastúceho materiálu (okrem dreva)" },
+  { "code": "02401", "label": "Služby súvisiace s lesníctvom" },
+  { "code": "02402", "label": "Služby súvisiace s ťažbou dreva" },
+  { "code": "02409", "label": "Ostatné služby poskytované v lesníctve" },
+  { "code": "03110", "label": "Morský rybolov" },
+  { "code": "03120", "label": "Riečny rybolov" },
+  { "code": "03210", "label": "Morská akvakultúra" },
+  { "code": "03220", "label": "Riečna akvakultúra" },
+  { "code": "05100", "label": "Ťažba čierneho uhlia" },
+  { "code": "05200", "label": "Ťažba lignitu" },
+  { "code": "06100", "label": "Ťažba ropy" },
+  { "code": "06200", "label": "Ťažba zemného plynu" },
+  { "code": "07100", "label": "Dobývanie železných rúd" },
+  { "code": "07210", "label": "Dobývanie uránových a tóriových rúd" },
+  { "code": "07290", "label": "Dobývanie ostatných neželezných kovových rúd" },
+  {
+    "code": "08110",
+    "label": "Dobývanie dekoračného a stavebného kameňa, vápenca, sadrovca, kriedy a bridlice"
+  },
+  {
+    "code": "08120",
+    "label": "Prevádzka štrkovísk a pieskovísk; ťažba ílu a kaolínu"
+  },
+  { "code": "08910", "label": "Ťažba chemických a hnojivových minerálov" },
+  { "code": "08920", "label": "Ťažba rašeliny" },
+  { "code": "08930", "label": "Ťažba soli" },
+  { "code": "08990", "label": "Iná ťažba a dobývanie i. n." },
+  {
+    "code": "09100",
+    "label": "Pomocné činnosti pri ťažbe ropy a zemného plynu"
+  },
+  { "code": "09900", "label": "Pomocné činnosti pri iných ťažbách a dobývaní" },
+  { "code": "10110", "label": "Spracovanie a konzervovanie mäsa" },
+  { "code": "10120", "label": "Spracovanie a konzervovanie hydinového mäsa" },
+  {
+    "code": "10130",
+    "label": "Spracovanie mäsových a hydinových mäsových výrobkov"
+  },
+  {
+    "code": "10200",
+    "label": "Spracovanie a konzervovanie rýb, kôrovcov a mäkkýšov"
+  },
+  { "code": "10310", "label": "Spracovanie a konzervovanie zemiakov" },
+  { "code": "10320", "label": "Výroba ovocnej a zeleninovej šťavy" },
+  {
+    "code": "10390",
+    "label": "Iné spracovanie a konzervovanie ovocia a zeleniny"
+  },
+  { "code": "10410", "label": "Výroba olejov a tukov" },
+  { "code": "10420", "label": "Výroba margarínu a podobných jedlých tukov" },
+  { "code": "10510", "label": "Prevádzka mliekarní a výroba syrov" },
+  { "code": "10520", "label": "Výroba zmrzliny" },
+  { "code": "10610", "label": "Výroba mlynských výrobkov" },
+  { "code": "10620", "label": "Výroba škrobu a škrobových výrobkov" },
+  {
+    "code": "10710",
+    "label": "Výroba chleba; výroba čerstvého pečiva a koláčov"
+  },
+  {
+    "code": "10720",
+    "label": "Výroba suchárov a keksov; výroba trvanlivého pečiva a koláčov"
+  },
+  {
+    "code": "10730",
+    "label": "Výroba rezancov, cestovín, kuskusu a podobných múčnych výrobkov"
+  },
+  { "code": "10810", "label": "Výroba cukru" },
+  { "code": "10820", "label": "Výroba kakaa, čokolády a cukroviniek" },
+  { "code": "10830", "label": "Spracovanie čaju a kávy" },
+  { "code": "10840", "label": "Výroba korenín a chuťových prísad" },
+  { "code": "10850", "label": "Výroba pripravených pokrmov a jedla" },
+  {
+    "code": "10860",
+    "label": "Výroba a príprava homogenizovaných a diétnych potravín"
+  },
+  {
+    "code": "10890",
+    "label": "Výroba ostatných potravinárskych výrobkov i. n."
+  },
+  {
+    "code": "10910",
+    "label": "Výroba a príprava krmív pre hospodárske zvieratá"
+  },
+  { "code": "10920", "label": "Výroba a príprava krmív pre domáce zvieratá" },
+  { "code": "11010", "label": "Destilovanie, úprava a miešanie alkoholu" },
+  { "code": "11020", "label": "Výroba hroznového vína" },
+  { "code": "11030", "label": "Výroba jablčného vína a iného ovocného vína" },
+  {
+    "code": "11040",
+    "label": "Výroba iných nedestilovaných kvasených nápojov"
+  },
+  { "code": "11050", "label": "Výroba piva" },
+  { "code": "11060", "label": "Výroba sladu" },
+  {
+    "code": "11070",
+    "label": "Výroba nealkoholických nápojov; produkcia minerálnych vôd a iných fľaškových vôd"
+  },
+  { "code": "12000", "label": "Výroba tabakových výrobkov" },
+  { "code": "13100", "label": "Príprava a spriadanie textilných vlákien" },
+  { "code": "13200", "label": "Tkanie textilu" },
+  { "code": "13300", "label": "Konečná úprava textilu" },
+  { "code": "13910", "label": "Výroba pleteného a háčkovaného textilu" },
+  {
+    "code": "13921",
+    "label": "Výroba posteľnej bielizne a textilných výrobkov pre domácnosť"
+  },
+  { "code": "13922", "label": "Výroba bytových doplnkov okrem kobercov" },
+  {
+    "code": "13929",
+    "label": "Výroba ostatných textilných výrobkov okrem odevov"
+  },
+  { "code": "13930", "label": "Výroba kobercov a rohoží" },
+  { "code": "13940", "label": "Výroba povrazov, šnúr, motúzov a sieťovín" },
+  {
+    "code": "13950",
+    "label": "Výroba netkaného textilu a výrobkov z neho okrem odevov"
+  },
+  {
+    "code": "13960",
+    "label": "Výroba ostatného technického a pracovného textilu"
+  },
+  { "code": "13990", "label": "Výroba ostatného textilu i. n." },
+  { "code": "14110", "label": "Výroba kožených odevov" },
+  { "code": "14120", "label": "Výroba pracovných odevov" },
+  { "code": "14130", "label": "Výroba ostatného vrchného ošatenia" },
+  { "code": "14140", "label": "Výroba spodnej bielizne" },
+  { "code": "14190", "label": "Výroba ostatných odevov a doplnkov" },
+  { "code": "14200", "label": "Výroba kožušinových výrobkov" },
+  { "code": "14310", "label": "Výroba pletených a háčkovaných pančúch" },
+  {
+    "code": "14390",
+    "label": "Výroba ostatných pletených a háčkovaných odevov"
+  },
+  {
+    "code": "15110",
+    "label": "Činenie a apretovanie kože; úprava a farbenie kožušín"
+  },
+  {
+    "code": "15120",
+    "label": "Výroba kufrov, kabeliek a podobných výrobkov, sediel a popruhov"
+  },
+  { "code": "15200", "label": "Výroba obuvi" },
+  { "code": "16100", "label": "Pilovanie a hobľovanie dreva" },
+  { "code": "16210", "label": "Výroba dosiek a drevených panelov" },
+  { "code": "16220", "label": "Výroba podlahových parkiet" },
+  { "code": "16231", "label": "Výroba stavebnostolárska a tesárska" },
+  { "code": "16232", "label": "Výroba prvkov na montované stavby" },
+  {
+    "code": "16239",
+    "label": "Výroba ostatná stavebnostolárska a tesárska i. n."
+  },
+  { "code": "16240", "label": "Výroba drevených kontajnerov" },
+  {
+    "code": "16290",
+    "label": "Výroba ostatných výrobkov z dreva; výroba výrobkov z korku, slamy a prúteného materiálu"
+  },
+  { "code": "17110", "label": "Výroba celulózy" },
+  { "code": "17120", "label": "Výroba papiera a lepenky" },
+  {
+    "code": "17210",
+    "label": "Výroba vlnitého papiera a lepenky a škatúľ z papiera a lepenky"
+  },
+  {
+    "code": "17220",
+    "label": "Výroba výrobkov pre domácnosť, hygienické a toaletné výrobky"
+  },
+  { "code": "17230", "label": "Výroba papiernických potrieb" },
+  { "code": "17240", "label": "Výroba tapiet" },
+  { "code": "17290", "label": "Výroba ostatných výrobkov z papiera a lepenky" },
+  { "code": "18110", "label": "Tlač novín" },
+  { "code": "18120", "label": "Iná tlač" },
+  { "code": "18130", "label": "Služby pre tlač a médiá" },
+  {
+    "code": "18140",
+    "label": "Viazanie kníh a služby súvisiace s viazaním kníh"
+  },
+  { "code": "18200", "label": "Reprodukcia záznamových médií" },
+  { "code": "19100", "label": "Výroba produktov koksárenských pecí" },
+  { "code": "19200", "label": "Výroba rafinovaných ropných produktov" },
+  { "code": "20110", "label": "Výroba priemyselných plynov" },
+  { "code": "20120", "label": "Výroba farbív a pigmentov" },
+  {
+    "code": "20130",
+    "label": "Výroba ostatných základných anorganických chemikálií"
+  },
+  {
+    "code": "20140",
+    "label": "Výroba ostatných základných organických chemikálií"
+  },
+  {
+    "code": "20150",
+    "label": "Výroba priemyselných hnojív a dusíkatých zlúčenín"
+  },
+  { "code": "20160", "label": "Výroba plastov v primárnej forme" },
+  { "code": "20170", "label": "Výroba syntetického kaučuku v primárnej forme" },
+  {
+    "code": "20200",
+    "label": "Výroba pesticídov a iných agrochemických produktov"
+  },
+  {
+    "code": "20300",
+    "label": "Výroba farieb, lakov a podobných náterov, tlačiarenských farieb a tmelov"
+  },
+  {
+    "code": "20410",
+    "label": "Výroba mydla a pracích prostriedkov, čistiacich a leštiacich prípravkov"
+  },
+  { "code": "20420", "label": "Výroba parfumérskych a toaletných prípravkov" },
+  { "code": "20510", "label": "Výroba výbušnín" },
+  { "code": "20520", "label": "Výroba lepidiel" },
+  { "code": "20530", "label": "Výroba éterických olejov" },
+  { "code": "20590", "label": "Výroba ostatných chemických výrobkov i. n." },
+  { "code": "20600", "label": "Výroba umelých vlákien" },
+  { "code": "21100", "label": "Výroba základných farmaceutických výrobkov" },
+  { "code": "21200", "label": "Výroba farmaceutických prípravkov" },
+  {
+    "code": "22110",
+    "label": "Výroba gumených pneumatík a duší; protektorovanie a oprava pneumatík"
+  },
+  { "code": "22190", "label": "Výroba ostatných výrobkov z gumy" },
+  {
+    "code": "22210",
+    "label": "Výroba plastových dosiek, fólií, hadíc a profilov"
+  },
+  { "code": "22220", "label": "Výroba plastových obalov" },
+  { "code": "22230", "label": "Výroba výrobkov z plastu pre stavebníctvo" },
+  { "code": "22290", "label": "Výroba ostatných plastových výrobkov" },
+  { "code": "23110", "label": "Výroba plochého skla" },
+  { "code": "23120", "label": "Tvarovanie a spracovanie plochého skla" },
+  { "code": "23130", "label": "Výroba dutého skla" },
+  { "code": "23140", "label": "Výroba sklenených vlákien" },
+  {
+    "code": "23190",
+    "label": "Výroba a spracovanie ostatného skla vrátane technického skla"
+  },
+  { "code": "23200", "label": "Výroba žiaruvzdorných výrobkov" },
+  { "code": "23310", "label": "Výroba keramických obkladačiek a dlaždíc" },
+  {
+    "code": "23320",
+    "label": "Výroba tehál, obkladačiek a stavebných výrobkov z pálenej hliny"
+  },
+  {
+    "code": "23411",
+    "label": "Výroba keramického riadu a porcelánových predmetov pre domácnosť"
+  },
+  {
+    "code": "23419",
+    "label": "Výroba domácich a dekoratívnych keramických predmetov i. n."
+  },
+  { "code": "23420", "label": "Výroba keramického sanitárneho vybavenia" },
+  {
+    "code": "23430",
+    "label": "Výroba keramických izolátorov a izolačných doplnkov"
+  },
+  {
+    "code": "23440",
+    "label": "Výroba ostatných technických keramických výrobkov"
+  },
+  { "code": "23490", "label": "Výroba ostatných keramických výrobkov" },
+  { "code": "23510", "label": "Výroba cementu" },
+  { "code": "23520", "label": "Výroba vápna a sadry" },
+  { "code": "23610", "label": "Výroba betónových výrobkov na stavebné účely" },
+  { "code": "23620", "label": "Výroba sadrových výrobkov na stavebné účely" },
+  { "code": "23630", "label": "Výroba transportného betónu" },
+  { "code": "23640", "label": "Výroba malty" },
+  { "code": "23650", "label": "Výroba cementových vlákien" },
+  {
+    "code": "23690",
+    "label": "Výroba ostatných výrobkov z betónu, sadry a cementu"
+  },
+  { "code": "23700", "label": "Rezanie, tvarovanie a konečná úprava kameňa" },
+  { "code": "23910", "label": "Výroba brúsnych výrobkov" },
+  {
+    "code": "23990",
+    "label": "Výroba ostatných nekovových minerálnych výrobkov i. n."
+  },
+  { "code": "24100", "label": "Výroba surového železa a ocele a ferozliatin" },
+  {
+    "code": "24200",
+    "label": "Výroba rúr, rúrok, dutých profilov a súvisiaceho príslušenstva z ocele"
+  },
+  { "code": "24310", "label": "Ťahanie tyčí za studena" },
+  { "code": "24320", "label": "Valcovanie pásov za studena" },
+  { "code": "24330", "label": "Tvarovanie alebo skladanie za studena" },
+  { "code": "24340", "label": "Ťahanie drôtov za studena" },
+  { "code": "24410", "label": "Výroba drahých kovov" },
+  { "code": "24420", "label": "Výroba hliníka" },
+  { "code": "24430", "label": "Výroba olova, zinku a cínu" },
+  { "code": "24440", "label": "Výroba medi" },
+  { "code": "24450", "label": "Výroba ostatných neželezných kovov" },
+  { "code": "24460", "label": "Výroba jadrového paliva" },
+  { "code": "24510", "label": "Odlievanie železa" },
+  { "code": "24520", "label": "Odlievanie ocele" },
+  { "code": "24530", "label": "Odlievanie ľahkých kovov" },
+  { "code": "24540", "label": "Odlievanie ostatných neželezných kovov" },
+  { "code": "25110", "label": "Výroba kovových konštrukcií a ich častí" },
+  { "code": "25120", "label": "Výroba kovových dverí a okien" },
+  {
+    "code": "25210",
+    "label": "Výroba radiátorov ústredného kúrenia a bojlerov"
+  },
+  {
+    "code": "25290",
+    "label": "Výroba ostatných nádrží, zásobníkov a kontajnerov z kovu"
+  },
+  {
+    "code": "25300",
+    "label": "Výroba parných kotlov okrem kotlov ústredného kúrenia"
+  },
+  { "code": "25400", "label": "Výroba zbraní a munície" },
+  {
+    "code": "25500",
+    "label": "Kovanie, lisovanie, razenie a valcovanie kovov; prášková metalurgia"
+  },
+  { "code": "25610", "label": "Opracovanie a povrchová úprava kovov" },
+  { "code": "25620", "label": "Obrábanie" },
+  { "code": "25710", "label": "Výroba nožiarskych výrobkov" },
+  { "code": "25720", "label": "Výroba zámkov a pántov" },
+  { "code": "25730", "label": "Výroba náradia" },
+  {
+    "code": "25910",
+    "label": "Výroba oceľových zásobníkov a podobných kontajnerov"
+  },
+  { "code": "25920", "label": "Výroba obalov z ľahkých kovov" },
+  { "code": "25930", "label": "Výroba drôtených výrobkov, reťazí a pružín" },
+  { "code": "25940", "label": "Výroba upínadiel, strojných skrutiek" },
+  { "code": "25990", "label": "Výroba ostatných kovových výrobkov i. n." },
+  { "code": "26110", "label": "Výroba elektronických komponentov" },
+  { "code": "26120", "label": "Výroba montovaných elektronických dosiek" },
+  { "code": "26200", "label": "Výroba počítačov a periférnych zariadení" },
+  {
+    "code": "26301",
+    "label": "Výroba telefónnych zariadení a mobilných komunikačných zariadení"
+  },
+  { "code": "26302", "label": "Výroba vysielacích zariadení a vysielačov" },
+  { "code": "26309", "label": "Výroba ostatných komunikačných zariadení" },
+  { "code": "26400", "label": "Výroba spotrebnej elektroniky" },
+  {
+    "code": "26510",
+    "label": "Výroba nástrojov a zariadení na meranie, testovanie a navigovanie"
+  },
+  { "code": "26520", "label": "Výroba hodín a hodiniek" },
+  {
+    "code": "26600",
+    "label": "Výroba prístrojov na ožarovanie, elektromedicínskych a elektroterapeutických prístrojov"
+  },
+  {
+    "code": "26700",
+    "label": "Výroba optických nástrojov a fotografických prístrojov"
+  },
+  { "code": "26800", "label": "Výroba magnetických a optických médií" },
+  {
+    "code": "27110",
+    "label": "Výroba elektrických motorov, generátorov a transformátorov"
+  },
+  {
+    "code": "27120",
+    "label": "Výroba elektrických distribučných a kontrolných zariadení"
+  },
+  { "code": "27200", "label": "Výroba batérií a akumulátorov" },
+  { "code": "27310", "label": "Výroba optických káblov" },
+  {
+    "code": "27320",
+    "label": "Výroba ostatných elektronických a elektrických drôtov a káblov"
+  },
+  { "code": "27330", "label": "Výroba elektroinštalačných zariadení" },
+  { "code": "27400", "label": "Výroba elektrických svietidiel" },
+  { "code": "27510", "label": "Výroba elektrických zariadení pre domácnosti" },
+  {
+    "code": "27520",
+    "label": "Výroba neelektrických zariadení pre domácnosti"
+  },
+  { "code": "27900", "label": "Výroba ostatných elektrických zariadení" },
+  {
+    "code": "28110",
+    "label": "Výroba motorov a turbín okrem motorov pre lietadlá, autá a bicykle"
+  },
+  { "code": "28120", "label": "Výroba zariadení na kvapalný pohon" },
+  { "code": "28130", "label": "Výroba iných čerpadiel a kompresorov" },
+  { "code": "28140", "label": "Výroba iných kohútikov a ventilov" },
+  {
+    "code": "28150",
+    "label": "Výroba ložísk, ozubených kolies, prevodových a ovládacích prvkov"
+  },
+  { "code": "28210", "label": "Výroba rúr, pecí a horákov k peciam" },
+  { "code": "28220", "label": "Výroba dvíhacích a manipulačných zariadení" },
+  {
+    "code": "28230",
+    "label": "Výroba kancelárskych strojov a zariadení (okrem počítačov a periférnych zariadení)"
+  },
+  { "code": "28240", "label": "Výroba ručného náradia na mechanický pohon" },
+  {
+    "code": "28250",
+    "label": "Výroba chladiacich a ventilačných zariadení iných ako pre domácnosti"
+  },
+  {
+    "code": "28290",
+    "label": "Výroba ostatných strojov na všeobecné účely i. n."
+  },
+  {
+    "code": "28300",
+    "label": "Výroba strojov pre poľnohospodárstvo a lesníctvo"
+  },
+  { "code": "28410", "label": "Výroba strojov na obrábanie kovov" },
+  { "code": "28490", "label": "Výroba ostatných strojov na obrábanie" },
+  { "code": "28910", "label": "Výroba strojov pre metalurgiu" },
+  {
+    "code": "28920",
+    "label": "Výroba strojov pre baníctvo, ťažbu a stavebníctvo"
+  },
+  {
+    "code": "28930",
+    "label": "Výroba strojov na spracovanie potravín, nápojov a tabaku"
+  },
+  {
+    "code": "28940",
+    "label": "Výroba strojov pre textilný, odevný a kožiarsky priemysel"
+  },
+  { "code": "28950", "label": "Výroba strojov na výrobu papiera a lepenky" },
+  { "code": "28960", "label": "Výroba strojov na výrobu plastov a gumy" },
+  {
+    "code": "28990",
+    "label": "Výroba ostatných strojov na špeciálne účely i. n."
+  },
+  { "code": "29100", "label": "Výroba motorových vozidiel" },
+  {
+    "code": "29200",
+    "label": "Výroba karosérií pre motorové vozidlá; výroba návesov a prívesov"
+  },
+  {
+    "code": "29310",
+    "label": "Výroba elektrických a elektronických prístrojov pre motorové vozidlá"
+  },
+  {
+    "code": "29320",
+    "label": "Výroba ostatných dielov a príslušenstva pre motorové vozidlá"
+  },
+  { "code": "30110", "label": "Stavba lodí a plávajúcich konštrukcií" },
+  { "code": "30120", "label": "Stavba rekreačných a športových člnov" },
+  {
+    "code": "30200",
+    "label": "Výroba železničných lokomotív a vozového parku"
+  },
+  {
+    "code": "30300",
+    "label": "Výroba lietadiel a kozmických lodí a podobných zariadení"
+  },
+  { "code": "30400", "label": "Výroba vojenských bojových vozidiel" },
+  { "code": "30910", "label": "Výroba motocyklov" },
+  { "code": "30920", "label": "Výroba bicyklov a invalidných vozíkov" },
+  {
+    "code": "30990",
+    "label": "Výroba ostatných dopravných prostriedkov i. n."
+  },
+  {
+    "code": "31010",
+    "label": "Výroba kancelárskeho nábytku a nábytku do obchodov"
+  },
+  { "code": "31020", "label": "Výroba kuchynského nábytku" },
+  { "code": "31030", "label": "Výroba matracov" },
+  { "code": "31090", "label": "Výroba ostatného nábytku" },
+  { "code": "32110", "label": "Razenie mincí" },
+  { "code": "32120", "label": "Výroba šperkov a podobných predmetov" },
+  { "code": "32130", "label": "Výroba bižutérie a podobných predmetov" },
+  { "code": "32200", "label": "Výroba hudobných nástrojov" },
+  { "code": "32300", "label": "Výroba športových potrieb" },
+  { "code": "32400", "label": "Výroba hier a hračiek" },
+  {
+    "code": "32500",
+    "label": "Výroba lekárskych a dentálnych nástrojov a potrieb"
+  },
+  { "code": "32910", "label": "Výroba metiel a kief" },
+  { "code": "32990", "label": "Ostatná výroba i. n." },
+  { "code": "33110", "label": "Oprava kovových konštrukcií" },
+  { "code": "33120", "label": "Oprava strojov" },
+  { "code": "33130", "label": "Oprava elektronických a optických prístrojov" },
+  { "code": "33140", "label": "Oprava elektrických prístrojov" },
+  { "code": "33150", "label": "Oprava a údržba lodí a člnov" },
+  { "code": "33160", "label": "Oprava a údržba lietadiel a kozmických lodí" },
+  {
+    "code": "33170",
+    "label": "Oprava a údržba ostatných dopravných prostriedkov"
+  },
+  { "code": "33190", "label": "Oprava ostatných prístrojov" },
+  { "code": "33200", "label": "Inštalácia priemyselných strojov a prístrojov" },
+  { "code": "35110", "label": "Výroba elektriny" },
+  { "code": "35120", "label": "Prenos elektriny" },
+  { "code": "35130", "label": "Rozvod elektriny" },
+  { "code": "35140", "label": "Predaj elektriny" },
+  { "code": "35210", "label": "Výroba plynu" },
+  { "code": "35220", "label": "Rozvod plynných palív potrubím" },
+  { "code": "35230", "label": "Predaj plynu prepravovaného potrubím" },
+  { "code": "35300", "label": "Dodávka pary a rozvod studeného vzduchu" },
+  {
+    "code": "36001",
+    "label": "Zber, úprava a dodávka pitnej a úžitkovej vody"
+  },
+  { "code": "36009", "label": "Zber, úprava a dodávka ostatnej vody" },
+  { "code": "37000", "label": "Čistenie a odvod odpadových vôd" },
+  { "code": "38110", "label": "Zber iného ako nebezpečného odpadu" },
+  { "code": "38120", "label": "Zber nebezpečného odpadu" },
+  {
+    "code": "38210",
+    "label": "Spracúvanie a likvidácia iného ako nebezpečného odpadu"
+  },
+  { "code": "38220", "label": "Spracúvanie a likvidácia nebezpečného odpadu" },
+  { "code": "38310", "label": "Demontáž vrakov" },
+  { "code": "38320", "label": "Recyklácia triedených materiálov" },
+  {
+    "code": "39000",
+    "label": "Ozdravovacie činnosti a ostatné činnosti nakladania s odpadom"
+  },
+  { "code": "41100", "label": "Vypracovanie stavebných projektov" },
+  { "code": "41201", "label": "Výstavba obytných budov" },
+  { "code": "41202", "label": "Výstavba neobytných budov" },
+  { "code": "41209", "label": "Výstavba obytných a neobytných budov i. n." },
+  { "code": "42110", "label": "Výstavba ciest a diaľnic" },
+  { "code": "42120", "label": "Výstavba železníc a podzemných železníc" },
+  { "code": "42130", "label": "Výstavba mostov a tunelov" },
+  { "code": "42210", "label": "Výstavba rozvodov pre plyn a kvapaliny" },
+  {
+    "code": "42220",
+    "label": "Výstavba elektrických a telekomunikačných sietí"
+  },
+  { "code": "42910", "label": "Výstavba vodných diel" },
+  {
+    "code": "42990",
+    "label": "Výstavba ostatných inžinierskych stavieb i. n."
+  },
+  { "code": "43110", "label": "Demolácia" },
+  { "code": "43120", "label": "Zemné práce" },
+  { "code": "43130", "label": "Prieskumné vrty a vrtné práce" },
+  { "code": "43210", "label": "Elektrická inštalácia" },
+  {
+    "code": "43220",
+    "label": "Inštalácia kanalizačných, výhrevných a klimatizačných zariadení"
+  },
+  { "code": "43290", "label": "Ostatná stavebná inštalácia" },
+  { "code": "43310", "label": "Omietkarské práce" },
+  { "code": "43320", "label": "Stolárske práce" },
+  { "code": "43330", "label": "Obkladanie stien a kladenie dlážkových krytín" },
+  { "code": "43340", "label": "Maľovanie a zasklievanie" },
+  {
+    "code": "43390",
+    "label": "Ostatné stavebné kompletizačné a dokončovacie práce"
+  },
+  { "code": "43910", "label": "Pokrývačské práce" },
+  { "code": "43990", "label": "Ostatné špecializované stavebné práce i. n." },
+  {
+    "code": "45110",
+    "label": "Predaj automobilov a ľahkých motorových vozidiel"
+  },
+  { "code": "45190", "label": "Predaj ostatných motorových vozidiel" },
+  { "code": "45200", "label": "Oprava a údržba motorových vozidiel" },
+  {
+    "code": "45310",
+    "label": "Veľkoobchod s dielmi a príslušenstvom motorových vozidiel"
+  },
+  {
+    "code": "45320",
+    "label": "Maloobchod s dielmi a príslušenstvom motorových vozidiel"
+  },
+  {
+    "code": "45400",
+    "label": "Predaj, údržba a oprava motocyklov a ich dielov a príslušenstva"
+  },
+  {
+    "code": "46110",
+    "label": "Sprostredkovanie obchodu s poľnohospodárskymi surovinami, živými zvieratami, textilnými surovinami a polotovarmi"
+  },
+  {
+    "code": "46120",
+    "label": "Sprostredkovanie obchodu s palivami, rudami, kovmi a priemyselnými chemikáliami"
+  },
+  {
+    "code": "46130",
+    "label": "Sprostredkovanie obchodu s drevom a stavebným materiálom"
+  },
+  {
+    "code": "46140",
+    "label": "Sprostredkovanie obchodu so strojmi, priemyselnými zariadeniami, loďami a lietadlami"
+  },
+  {
+    "code": "46150",
+    "label": "Sprostredkovanie obchodu s nábytkom, tovarom pre domácnosť a železiarskym tovarom"
+  },
+  {
+    "code": "46160",
+    "label": "Sprostredkovanie obchodu s textilom, odevmi, kožušinami, obuvou a koženým tovarom"
+  },
+  {
+    "code": "46170",
+    "label": "Sprostredkovanie obchodu s potravinami, nápojmi a tabakom"
+  },
+  {
+    "code": "46180",
+    "label": "Špecializované sprostredkovanie obchodu s iným špecifickým tovarom"
+  },
+  { "code": "46190", "label": "Sprostredkovanie obchodu s rozličným tovarom" },
+  {
+    "code": "46210",
+    "label": "Veľkoobchod s obilím, nespracovaným tabakom, semenami a krmivom"
+  },
+  { "code": "46220", "label": "Veľkoobchod s kvetmi a rastlinami" },
+  { "code": "46230", "label": "Veľkoobchod so živými zvieratami" },
+  {
+    "code": "46240",
+    "label": "Veľkoobchod s kožou, kožušinou a opracovanou kožou"
+  },
+  { "code": "46310", "label": "Veľkoobchod s ovocím a zeleninou" },
+  { "code": "46320", "label": "Veľkoobchod s mäsom a mäsovými výrobkami" },
+  {
+    "code": "46330",
+    "label": "Veľkoobchod s mliečnymi produktmi, vajcami a jedlým olejom a tukom"
+  },
+  { "code": "46340", "label": "Veľkoobchod s nápojmi" },
+  { "code": "46350", "label": "Veľkoobchod s tabakovými výrobkami" },
+  {
+    "code": "46360",
+    "label": "Veľkoobchod s cukrom a čokoládou a cukrovinkami"
+  },
+  { "code": "46370", "label": "Veľkoobchod s kávou, čajom, kakaom a korením" },
+  {
+    "code": "46380",
+    "label": "Veľkoobchod s inými potravinami vrátane rýb, kôrovcov a mäkkýšov"
+  },
+  {
+    "code": "46390",
+    "label": "Nešpecializovaný veľkoobchod s potravinami, nápojmi a tabakom"
+  },
+  { "code": "46410", "label": "Veľkoobchod s textilom" },
+  { "code": "46420", "label": "Veľkoobchod s odevmi a obuvou" },
+  {
+    "code": "46430",
+    "label": "Veľkoobchod s elektrickými zariadeniami pre domácnosť"
+  },
+  {
+    "code": "46440",
+    "label": "Veľkoobchod s porcelánom a sklom a čistiacimi prostriedkami"
+  },
+  {
+    "code": "46450",
+    "label": "Veľkoobchod s parfumérskym a kozmetickým tovarom"
+  },
+  { "code": "46460", "label": "Veľkoobchod s farmaceutickým tovarom" },
+  {
+    "code": "46470",
+    "label": "Veľkoobchod s nábytkom, kobercami a svietidlami"
+  },
+  { "code": "46480", "label": "Veľkoobchod s hodinami a šperkmi" },
+  { "code": "46490", "label": "Veľkoobchod s ostatnými domácimi potrebami" },
+  {
+    "code": "46510",
+    "label": "Veľkoobchod s počítačmi, počítačovými periférnymi zariadeniami a softvérom"
+  },
+  {
+    "code": "46520",
+    "label": "Veľkoobchod s elektronickými a telekomunikačnými zariadeniami a ich dielmi"
+  },
+  {
+    "code": "46610",
+    "label": "Veľkoobchod s poľnohospodárskymi strojmi, zariadeniami a príslušenstvom"
+  },
+  { "code": "46620", "label": "Veľkoobchod s obrábacími strojmi" },
+  {
+    "code": "46630",
+    "label": "Veľkoobchod so strojmi pre baníctvo, stavebníctvo a stavebné inžinierstvo"
+  },
+  {
+    "code": "46640",
+    "label": "Veľkoobchod so strojmi pre textilný priemysel a so šijacími a pletacími strojmi"
+  },
+  { "code": "46650", "label": "Veľkoobchod s kancelárskym nábytkom" },
+  {
+    "code": "46660",
+    "label": "Veľkoobchod s ostatnými kancelárskymi strojmi a zariadeniami"
+  },
+  {
+    "code": "46690",
+    "label": "Veľkoobchod s ostatnými strojmi a zariadeniami"
+  },
+  {
+    "code": "46710",
+    "label": "Veľkoobchod s pevnými, kvapalnými a plynnými palivami a súvisiacimi produktmi"
+  },
+  { "code": "46720", "label": "Veľkoobchod s kovmi a kovovými rudami" },
+  {
+    "code": "46730",
+    "label": "Veľkoobchod s drevom, stavebným materiálom a sanitárnymi zariadeniami"
+  },
+  {
+    "code": "46740",
+    "label": "Veľkoobchod so železiarskym a inštalatérskym tovarom a vykurovacími zariadeniami a potrebami"
+  },
+  { "code": "46750", "label": "Veľkoobchod s chemickými výrobkami" },
+  { "code": "46760", "label": "Veľkoobchod s ostatnými medziproduktmi" },
+  { "code": "46770", "label": "Veľkoobchod s odpadom a šrotom" },
+  { "code": "46900", "label": "Nešpecializovaný veľkoobchod" },
+  {
+    "code": "47110",
+    "label": "Maloobchod v nešpecializovaných predajniach najmä s potravinami, nápojmi a tabakom"
+  },
+  {
+    "code": "47190",
+    "label": "Ostatný maloobchod v nešpecializovaných predajniach"
+  },
+  {
+    "code": "47210",
+    "label": "Maloobchod s ovocím a zeleninou v špecializovaných predajniach"
+  },
+  {
+    "code": "47220",
+    "label": "Maloobchod s mäsom a mäsovými výrobkami v špecializovaných predajniach"
+  },
+  {
+    "code": "47230",
+    "label": "Maloobchod s rybami, kôrovcami a mäkkýšmi v špecializovaných predajniach"
+  },
+  {
+    "code": "47240",
+    "label": "Maloobchod s chlebom, pečivom, cukrárskymi výrobkami v špecializovaných predajniach"
+  },
+  {
+    "code": "47250",
+    "label": "Maloobchod s nápojmi v špecializovaných predajniach"
+  },
+  {
+    "code": "47260",
+    "label": "Maloobchod s tabakovými výrobkami v špecializovaných predajniach"
+  },
+  {
+    "code": "47290",
+    "label": "Ostatný maloobchod s potravinami v špecializovaných predajniach"
+  },
+  {
+    "code": "47300",
+    "label": "Maloobchod s pohonnými látkami v špecializovaných predajniach"
+  },
+  {
+    "code": "47410",
+    "label": "Maloobchod s počítačmi, periférnymi jednotkami a softvérom v špecializovaných predajniach"
+  },
+  {
+    "code": "47420",
+    "label": "Maloobchod s telekomunikačnými prístrojmi v špecializovaných predajniach"
+  },
+  { "code": "47430", "label": "Maloobchod s audio" },
+  {
+    "code": "47510",
+    "label": "Maloobchod s textilom v špecializovaných predajniach"
+  },
+  {
+    "code": "47520",
+    "label": "Maloobchod so železiarskym tovarom, farbami a sklom v špecializovaných predajniach"
+  },
+  {
+    "code": "47530",
+    "label": "Maloobchod s kobercami, rohožami, podlahovými alebo nástennými krytinami v špecializovaných predajniach"
+  },
+  {
+    "code": "47540",
+    "label": "Maloobchod s elektrickými zariadeniami pre domácnosť v špecializovaných predajniach"
+  },
+  {
+    "code": "47590",
+    "label": "Maloobchod s nábytkom, svietidlami a inými domácimi potrebami v špecializovaných predajniach"
+  },
+  {
+    "code": "47610",
+    "label": "Maloobchod s knihami v špecializovaných predajniach"
+  },
+  {
+    "code": "47620",
+    "label": "Maloobchod s novinami a kancelárskymi potrebami v špecializovaných predajniach"
+  },
+  { "code": "47630", "label": "Maloobchod s audio" },
+  {
+    "code": "47640",
+    "label": "Maloobchod so športovými potrebami v špecializovaných predajniach"
+  },
+  {
+    "code": "47650",
+    "label": "Maloobchod s hračkami a hrami v špecializovaných predajniach"
+  },
+  {
+    "code": "47710",
+    "label": "Maloobchod s odevmi v špecializovaných predajniach"
+  },
+  {
+    "code": "47720",
+    "label": "Maloobchod s obuvou a koženými výrobkami v špecializovaných predajniach"
+  },
+  { "code": "47730", "label": "Lekárne" },
+  {
+    "code": "47740",
+    "label": "Maloobchod so zdravotníckymi a ortopedickými pomôckami v špecializovaných predajniach"
+  },
+  {
+    "code": "47750",
+    "label": "Maloobchod s kozmetickými a toaletnými výrobkami v špecializovaných predajniach"
+  },
+  {
+    "code": "47760",
+    "label": "Maloobchod s kvetmi, rastlinami, semenami, hnojivami, domácimi zvieratami a krmivom pre zvieratá v špecializovaných predajniach"
+  },
+  {
+    "code": "47770",
+    "label": "Maloobchod s hodinami a šperkmi v špecializovaných predajniach"
+  },
+  { "code": "47781", "label": "Maloobchod s palivami pre domácnosť" },
+  {
+    "code": "47789",
+    "label": "Ostatný maloobchod s novým tovarom v špecializovaných predajniach i. n."
+  },
+  { "code": "47790", "label": "Maloobchod s použitým tovarom v predajniach" },
+  {
+    "code": "47810",
+    "label": "Maloobchod v stánkoch a na trhoch s potravinami, nápojmi a tabakom"
+  },
+  {
+    "code": "47820",
+    "label": "Maloobchod v stánkoch a na trhoch s textilom, odevmi a obuvou"
+  },
+  {
+    "code": "47890",
+    "label": "Maloobchod v stánkoch a na trhoch s ostatným tovarom"
+  },
+  { "code": "47910", "label": "Zásielkový predaj alebo predaj cez internet" },
+  {
+    "code": "47990",
+    "label": "Ostatný maloobchod mimo predajní, stánkov a trhov"
+  },
+  { "code": "49100", "label": "Osobná železničná doprava, medzimestská" },
+  { "code": "49200", "label": "Nákladná železničná doprava" },
+  {
+    "code": "49310",
+    "label": "Mestská alebo prímestská osobná pozemná doprava"
+  },
+  { "code": "49320", "label": "Taxislužba" },
+  { "code": "49390", "label": "Ostatná osobná pozemná doprava i. n." },
+  { "code": "49410", "label": "Nákladná cestná doprava" },
+  { "code": "49420", "label": "Sťahovacie služby" },
+  { "code": "49501", "label": "Potrubná doprava plynu" },
+  { "code": "49502", "label": "Potrubná doprava ropy" },
+  { "code": "49509", "label": "Ostatná potrubná doprava" },
+  { "code": "50100", "label": "Námorná a pobrežná osobná vodná doprava" },
+  { "code": "50200", "label": "Námorná a pobrežná nákladná vodná doprava" },
+  { "code": "50300", "label": "Vnútrozemská osobná vodná doprava" },
+  { "code": "50400", "label": "Vnútrozemská nákladná vodná doprava" },
+  { "code": "51100", "label": "Osobná letecká doprava" },
+  { "code": "51210", "label": "Nákladná letecká doprava" },
+  { "code": "51220", "label": "Kozmická doprava" },
+  { "code": "52100", "label": "Skladovanie a uskladňovanie" },
+  { "code": "52210", "label": "Vedľajšie činnosti v pozemnej doprave" },
+  { "code": "52220", "label": "Vedľajšie činnosti vo vodnej doprave" },
+  { "code": "52230", "label": "Vedľajšie činnosti v leteckej doprave" },
+  { "code": "52240", "label": "Manipulácia s nákladom" },
+  { "code": "52290", "label": "Ostatné pomocné činnosti v doprave" },
+  {
+    "code": "53100",
+    "label": "Činnosti poskytovateľov univerzálnej poštovej služby"
+  },
+  { "code": "53200", "label": "Ostatné poštové služby a služby kuriérov" },
+  { "code": "55100", "label": "Hotelové a podobné ubytovanie" },
+  { "code": "55200", "label": "Turistické a iné krátkodobé ubytovanie" },
+  { "code": "55300", "label": "Autokempingy, táboriská a miesta pre karavány" },
+  { "code": "55901", "label": "Ubytovanie vo vysokoškolských internátoch" },
+  {
+    "code": "55909",
+    "label": "Ubytovanie v ubytovniach a ostatné dočasné ubytovanie"
+  },
+  { "code": "56101", "label": "Jedálne" },
+  { "code": "56102", "label": "Zariadenia školského stravovania" },
+  { "code": "56109", "label": "Ostatné účelové stravovanie" },
+  { "code": "56210", "label": "Dodávka jedál" },
+  { "code": "56290", "label": "Ostatné jedálenské služby" },
+  { "code": "56300", "label": "Služby pohostinstiev" },
+  { "code": "58110", "label": "Vydávanie kníh" },
+  { "code": "58120", "label": "Vydávanie adresárov a katalógov" },
+  { "code": "58130", "label": "Vydávanie novín" },
+  { "code": "58140", "label": "Vydávanie časopisov a periodík" },
+  { "code": "58190", "label": "Ostatné vydavateľské činnosti" },
+  { "code": "58210", "label": "Nakladateľstvo v oblasti počítačových hier" },
+  { "code": "58290", "label": "Ostatné nakladateľstvo v oblasti softvéru" },
+  {
+    "code": "59110",
+    "label": "Výroba filmov, videozáznamov a televíznych programov"
+  },
+  {
+    "code": "59120",
+    "label": "Podporné činnosti súvisiace s výrobou filmov, videozáznamov a televíznych programov"
+  },
+  {
+    "code": "59130",
+    "label": "Distribúcia filmov, videozáznamov a televíznych programov"
+  },
+  { "code": "59140", "label": "Premietanie filmov" },
+  { "code": "59200", "label": "Príprava a zverejňovanie zvukových nahrávok" },
+  { "code": "60100", "label": "Rozhlasové vysielanie" },
+  {
+    "code": "60200",
+    "label": "Vysielanie televízie a predplatené programy televízie"
+  },
+  { "code": "61100", "label": "Činnosti drôtových telekomunikácií" },
+  { "code": "61200", "label": "Činnosti bezdrôtových telekomunikácií" },
+  { "code": "61300", "label": "Satelitné telekomunikačné činnosti" },
+  { "code": "61900", "label": "Ostatné telekomunikačné činnosti" },
+  { "code": "62010", "label": "Počítačové programovanie" },
+  { "code": "62020", "label": "Poradenstvo týkajúce sa počítačov" },
+  {
+    "code": "62030",
+    "label": "Činnosti súvisiace s riadením počítačového príslušenstva"
+  },
+  {
+    "code": "62090",
+    "label": "Ostatné služby týkajúce sa informačných technológií a počítačov"
+  },
+  {
+    "code": "63110",
+    "label": "Spracovanie dát, poskytovanie serverového priestoru na internete a súvisiace služby"
+  },
+  { "code": "63120", "label": "Služby webového portálu" },
+  { "code": "63910", "label": "Činnosti spravodajských agentúr" },
+  { "code": "63990", "label": "Ostatné informačné služby i. n." },
+  { "code": "64110", "label": "Činnosti centrálnej banky" },
+  { "code": "64190", "label": "Ostatné peňažné sprostredkovanie" },
+  { "code": "64200", "label": "Činnosti holdingových spoločností" },
+  { "code": "64300", "label": "Trasty, fondy a podobné finančné subjekty" },
+  { "code": "64910", "label": "Finančný lízing" },
+  { "code": "64920", "label": "Ostatné poskytovanie úverov" },
+  {
+    "code": "64990",
+    "label": "Ostatné finančné služby okrem poistenia a dôchodkového zabezpečenia i. n."
+  },
+  { "code": "65110", "label": "Životné poistenie" },
+  { "code": "65120", "label": "Neživotné poistenie" },
+  { "code": "65200", "label": "Zaistenie" },
+  { "code": "65300", "label": "Dôchodkové zabezpečenie" },
+  { "code": "66110", "label": "Správa finančných trhov" },
+  {
+    "code": "66120",
+    "label": "Sprostredkovanie obchodu s komoditami a cennými papiermi"
+  },
+  {
+    "code": "66190",
+    "label": "Ostatné pomocné činnosti finančných služieb okrem poistenia a dôchodkového zabezpečenia"
+  },
+  { "code": "66210", "label": "Vyčíslenie rizík a náhrad škôd" },
+  { "code": "66220", "label": "Činnosti poisťovacích agentov a maklérov" },
+  {
+    "code": "66290",
+    "label": "Ostatné pomocné činnosti v poisťovníctve a dôchodkovom zabezpečení"
+  },
+  { "code": "66300", "label": "Činnosti investičných manažérov" },
+  { "code": "68100", "label": "Kúpa a predaj vlastných nehnuteľností" },
+  {
+    "code": "68200",
+    "label": "Prenájom a prevádzkovanie vlastných alebo prenajatých nehnuteľností"
+  },
+  { "code": "68310", "label": "Realitné kancelárie" },
+  {
+    "code": "68320",
+    "label": "Správa nehnuteľností na základe poplatkov alebo zmlúv"
+  },
+  { "code": "69100", "label": "Právne činnosti" },
+  {
+    "code": "69200",
+    "label": "Účtovnícke a audítorské činnosti, vedenie účtovných kníh; daňové poradenstvo"
+  },
+  { "code": "70100", "label": "Vedenie firiem" },
+  {
+    "code": "70210",
+    "label": "Služby v oblasti styku a komunikácie s verejnosťou"
+  },
+  {
+    "code": "70220",
+    "label": "Poradenské služby v oblasti podnikania a riadenia"
+  },
+  { "code": "71110", "label": "Architektonické činnosti" },
+  { "code": "71121", "label": "Inžinierske činnosti a poradenstvo" },
+  { "code": "71122", "label": "Geologický prieskum" },
+  { "code": "71123", "label": "Geodetické činnosti" },
+  {
+    "code": "71129",
+    "label": "Ostatné inžinierske činnosti a súvisiace technické poradenstvo"
+  },
+  { "code": "71200", "label": "Technické testovanie a analýzy" },
+  {
+    "code": "72110",
+    "label": "Výskum a experimentálny vývoj v oblasti biotechnológie"
+  },
+  {
+    "code": "72190",
+    "label": "Ostatný výskum a experimentálny vývoj v oblasti prírodných a technických vied"
+  },
+  {
+    "code": "72200",
+    "label": "Výskum a experimentálny vývoj v oblasti spoločenských a humanitných vied"
+  },
+  { "code": "73110", "label": "Reklamné agentúry" },
+  { "code": "73120", "label": "Predaj vysielacieho času" },
+  { "code": "73200", "label": "Prieskum trhu a verejnej mienky" },
+  { "code": "74100", "label": "Špecializované dizajnérske činnosti" },
+  { "code": "74200", "label": "Fotografické činnosti" },
+  { "code": "74300", "label": "Prekladateľské a tlmočnícke činnosti" },
+  {
+    "code": "74900",
+    "label": "Ostatné odborné, vedecké a technické činnosti i. n."
+  },
+  { "code": "75000", "label": "Veterinárne činnosti" },
+  {
+    "code": "77110",
+    "label": "Prenájom a lízing automobilov a ľahkých motorových vozidiel"
+  },
+  {
+    "code": "77120",
+    "label": "Prenájom a lízing nákladných automobilov a ostatných ťažkých vozidiel"
+  },
+  {
+    "code": "77210",
+    "label": "Prenájom a lízing rekreačných a športových potrieb"
+  },
+  { "code": "77220", "label": "Prenájom videopások a diskov" },
+  {
+    "code": "77290",
+    "label": "Prenájom a lízing ostatných osobných potrieb a potrieb pre domácnosť"
+  },
+  {
+    "code": "77310",
+    "label": "Prenájom a lízing poľnohospodárskych strojov a zariadení"
+  },
+  {
+    "code": "77320",
+    "label": "Prenájom a lízing stavbárskych strojov a zariadení"
+  },
+  {
+    "code": "77330",
+    "label": "Prenájom a lízing kancelárskych strojov a zariadení (vrátane počítačov)"
+  },
+  {
+    "code": "77340",
+    "label": "Prenájom a lízing vodných dopravných prostriedkov"
+  },
+  {
+    "code": "77350",
+    "label": "Prenájom a lízing leteckých dopravných prostriedkov"
+  },
+  {
+    "code": "77390",
+    "label": "Prenájom a lízing ostatných strojov, zariadení a iného hmotného majetku i. n."
+  },
+  {
+    "code": "77400",
+    "label": "Lízing duševného vlastníctva a podobných produktov okrem prác chránených autorskými právami"
+  },
+  {
+    "code": "78100",
+    "label": "Činnosti agentúr sprostredkujúcich zamestnania"
+  },
+  {
+    "code": "78200",
+    "label": "Činnosti agentúr sprostredkujúcich zamestnanie na dobu určitú"
+  },
+  { "code": "78300", "label": "Ostatné poskytovanie ľudských zdrojov" },
+  { "code": "79110", "label": "Činnosti cestovných agentúr" },
+  { "code": "79120", "label": "Činnosti cestovných kancelárií" },
+  {
+    "code": "79900",
+    "label": "Ostatné rezervačné služby a súvisiace činnosti"
+  },
+  { "code": "80100", "label": "Súkromné bezpečnostné služby" },
+  {
+    "code": "80200",
+    "label": "Služby spojené s prevádzkovaním bezpečnostných systémov"
+  },
+  { "code": "80300", "label": "Pátracie služby" },
+  { "code": "81100", "label": "Kombinované pomocné činnosti" },
+  { "code": "81210", "label": "Generálne čistenie budov" },
+  { "code": "81220", "label": "Ostatné priemyselné čistenie budov" },
+  { "code": "81290", "label": "Ostatné čistiace činnosti" },
+  { "code": "81300", "label": "Činnosti súvisiace s krajinnou úpravou" },
+  { "code": "82110", "label": "Kombinované administratívno" },
+  {
+    "code": "82190",
+    "label": "Kopírovanie, príprava dokumentov a ostatné špecializované pomocné administratívne činnosti"
+  },
+  {
+    "code": "82200",
+    "label": "Činnosti stredísk poskytujúcich služby prostredníctvom telefónu"
+  },
+  {
+    "code": "82300",
+    "label": "Organizovanie kongresov a podnikateľských výstav"
+  },
+  {
+    "code": "82910",
+    "label": "Činnosti inkasných agentúr a posúdenie úveruschopnosti"
+  },
+  { "code": "82920", "label": "Baliace činnosti" },
+  { "code": "82990", "label": "Ostatné pomocné obchodné činnosti i. n." },
+  { "code": "84110", "label": "Všeobecná verejná správa" },
+  {
+    "code": "84120",
+    "label": "Usmerňovanie činností zariadení poskytujúcich zdravotnícku starostlivosť, vzdelávanie, kultúrne a iné sociálne služby okrem sociál. zabezpečenia"
+  },
+  { "code": "84130", "label": "Podpora a usmerňovanie ekonomiky" },
+  { "code": "84210", "label": "Zahraničné veci" },
+  { "code": "84220", "label": "Obrana" },
+  { "code": "84230", "label": "Spravodlivosť a súdnictvo" },
+  { "code": "84240", "label": "Verejný poriadok a bezpečnosť" },
+  { "code": "84250", "label": "Protipožiarna ochrana" },
+  { "code": "84300", "label": "Povinné sociálne zabezpečenie" },
+  { "code": "85100", "label": "Predškolská výchova" },
+  { "code": "85200", "label": "Základné školstvo" },
+  { "code": "85310", "label": "Stredné všeobecnovzdelávacie školstvo" },
+  { "code": "85321", "label": "Stredné odborné školstvo" },
+  { "code": "85322", "label": "Odborné učilištia" },
+  { "code": "85329", "label": "Ostatné stredné technické a odborné školstvo" },
+  { "code": "85410", "label": "Pomaturitné neterciárne vzdelávanie" },
+  { "code": "85420", "label": "Terciárne vzdelávanie" },
+  { "code": "85510", "label": "Športová a rekreačná výchova" },
+  { "code": "85520", "label": "Umelecké vzdelávanie" },
+  {
+    "code": "85530",
+    "label": "Činnosti škôl pre výučbu vedenia dopravných prostriedkov"
+  },
+  { "code": "85590", "label": "Ostatné vzdelávanie i. n." },
+  { "code": "85600", "label": "Pomocné vzdelávacie činnosti" },
+  { "code": "86100", "label": "Činnosti nemocníc" },
+  { "code": "86210", "label": "Činnosti všeobecnej lekárskej praxe" },
+  { "code": "86220", "label": "Činnosti špeciálnej lekárskej praxe" },
+  { "code": "86230", "label": "Zubná lekárska prax" },
+  { "code": "86901", "label": "Služby zdravotníckych laboratórií" },
+  { "code": "86909", "label": "Ostatná zdravotná starostlivosť i. n." },
+  {
+    "code": "87100",
+    "label": "Ošetrovateľská služba v pobytových zariadeniach"
+  },
+  {
+    "code": "87200",
+    "label": "Starostlivosť o osoby s mentálnym postihnutím, duševne choré a drogovo závislé osoby v pobytových zariadeniach"
+  },
+  {
+    "code": "87300",
+    "label": "Starostlivosť o staršie osoby a osoby so zdravotným postihnutím v pobytových zariadeniach"
+  },
+  {
+    "code": "87900",
+    "label": "Ostatná starostlivosť v pobytových zariadeniach"
+  },
+  {
+    "code": "88100",
+    "label": "Sociálna práca bez ubytovania pre staršie osoby a osoby so zdravotným postihnutím"
+  },
+  { "code": "88910", "label": "Denná starostlivosť o deti" },
+  {
+    "code": "88990",
+    "label": "Ostatná sociálna starostlivosť bez ubytovania i. n."
+  },
+  { "code": "90010", "label": "Scénické umenie" },
+  {
+    "code": "90020",
+    "label": "Podporné činnosti súvisiace so scénickým umením"
+  },
+  { "code": "90030", "label": "Umelecká tvorba" },
+  { "code": "90040", "label": "Prevádzka kultúrnych zariadení" },
+  { "code": "91010", "label": "Činnosti knižníc a archívov" },
+  { "code": "91020", "label": "Činnosti múzeí" },
+  {
+    "code": "91030",
+    "label": "Prevádzkovanie historických pamiatok a budov a podobných turistických zaujímavostí"
+  },
+  {
+    "code": "91040",
+    "label": "Činnosti botanických a zoologických záhrad a prírodných rezervácií"
+  },
+  { "code": "92000", "label": "Činnosti herní a stávkových kancelárií" },
+  { "code": "93110", "label": "Prevádzka športových zariadení" },
+  { "code": "93120", "label": "Činnosti športových klubov" },
+  { "code": "93130", "label": "Fitnescentrá" },
+  { "code": "93190", "label": "Ostatné športové činnosti" },
+  { "code": "93210", "label": "Činnosti lunaparkov a zábavných parkov" },
+  {
+    "code": "93290",
+    "label": "Ostatné zábavné činnosti a voľnočasové aktivity"
+  },
+  {
+    "code": "94110",
+    "label": "Činnosti podnikateľských a zamestnávateľských členských organizácií"
+  },
+  { "code": "94120", "label": "Činnosti profesijných členských organizácií" },
+  { "code": "94200", "label": "Činnosti odborových organizácií" },
+  { "code": "94910", "label": "Činnosti cirkevných organizácií" },
+  { "code": "94920", "label": "Činnosti politických organizácií" },
+  { "code": "94991", "label": "Činnosti mládežníckych organizácií" },
+  { "code": "94992", "label": "Činnosti záujmových organizácií" },
+  { "code": "94999", "label": "Činnosti ostatných členských organizácií" },
+  { "code": "95110", "label": "Oprava počítačov a periférnych zariadení" },
+  { "code": "95120", "label": "Oprava komunikačných zariadení" },
+  { "code": "95210", "label": "Oprava spotrebnej elektroniky" },
+  {
+    "code": "95220",
+    "label": "Oprava domácich zariadení a zariadení pre dom a záhradu"
+  },
+  { "code": "95230", "label": "Oprava obuvi a koženého tovaru" },
+  { "code": "95240", "label": "Oprava nábytku a domácich zariadení" },
+  { "code": "95250", "label": "Oprava hodín, hodiniek a šperkov" },
+  {
+    "code": "95290",
+    "label": "Oprava iných osobných potrieb a potrieb pre domácnosti"
+  },
+  {
+    "code": "96010",
+    "label": "Pranie a chemické čistenie textilných a kožušinových výrobkov"
+  },
+  { "code": "96020", "label": "Kadernícke a kozmetické služby" },
+  { "code": "96030", "label": "Pohrebné a súvisiace služby" },
+  { "code": "96040", "label": "Služby týkajúce sa telesnej pohody" },
+  { "code": "96090", "label": "Ostatné osobné služby i. n." },
+  {
+    "code": "97000",
+    "label": "Činnosti domácností ako zamestnávateľov domáceho personálu"
+  },
+  {
+    "code": "98100",
+    "label": "Nediferencované činnosti v domácnostiach produkujúce tovary na vlastné použitie"
+  },
+  {
+    "code": "98200",
+    "label": "Nediferencované činnosti v domácnostiach produkujúce služby na vlastné použitie"
+  },
+  {
+    "code": "99000",
+    "label": "Činnosti extrateritoriálnych organizácií a združení"
+  }
+]

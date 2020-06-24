@@ -1,24 +1,26 @@
-import { AppProps } from 'next/app';
+import { AppProps } from 'next/app'
 
 /* eslint-disable import/no-unassigned-import */
-import '../styles/global.css';
-import '../styles/navody-digital-0.1.8.min.css';
-import '../styles/libs.css';
+import '../styles/global.css'
+import '../styles/navody-digital-0.1.8.min.css'
+import '../styles/libs.css'
 /* eslint-enable import/no-unassigned-import */
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { setLocale } from 'yup';
-import { calculate } from '../lib/calculation';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { TaxForm } from '../types/TaxForm';
-import Layout from '../components/Layout';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { setLocale } from 'yup'
+import { calculate } from '../lib/calculation'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { TaxForm } from '../types/TaxForm'
+import Layout from '../components/Layout'
 import {
   initialPostponeUserInput,
   initTaxFormUserInputValues,
-} from '../lib/initialValues';
-import { setDate } from '../lib/utils';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+} from '../lib/initialValues'
+import { setDate } from '../lib/utils'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { getRoutes, Route, validateRoute } from '../lib/routes'
+import { Page } from '../components/Page'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -35,31 +37,54 @@ setLocale({
     max: 'Môže mať maximálne ${max} znakov',
     length: 'Musí mať presne ${length} znakov',
   },
-});
+})
 /* eslint-enable no-template-curly-in-string */
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
-  const [taxForm, setTaxForm] = useState<TaxForm | Record<string, unknown>>({});
+const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
+  return calculate(setDate(input))
+}
+
+interface MyAppProps extends AppProps {
+  Component: Page<Partial<TaxFormUserInput>>
+}
+
+const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+  const [taxForm, setTaxForm] = useState<TaxForm>(
+    taxFormUserInputToTaxForm(initTaxFormUserInputValues),
+  )
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
     initTaxFormUserInputValues,
-  );
+  )
   const [postponeUserInput, setPostponeUserInput] = useState<PostponeUserInput>(
     initialPostponeUserInput,
-  );
+  )
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
-    setTaxFormUserInput(prevUserInput => {
-      const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values };
-      setTaxForm(calculate(setDate(newUserInput)));
-      return newUserInput;
-    });
-  };
+    setTaxFormUserInput((prevUserInput) => {
+      const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values }
+      setTaxForm(taxFormUserInputToTaxForm(newUserInput))
+      return newUserInput
+    })
+  }
 
-  const { pathname } = useRouter();
+  const router = useRouter()
 
-  const headline = /^\/odklad\//.test(pathname)
+  const { previousRoute, nextRoute } = getRoutes(
+    router.pathname as Route,
+    taxForm,
+  )
+
+  useEffect(() => {
+    const next = nextRoute()
+    if (next) {
+      router.prefetch(next)
+    }
+    validateRoute(router, taxForm, taxFormUserInput)
+  }, [router, nextRoute, taxForm, taxFormUserInput])
+
+  const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'
-    : 'Daňové priznanie pre živostníkov s paušálnymi výdavkami (DPFO typ B)';
+    : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
 
   return (
     <Layout
@@ -73,10 +98,13 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         setTaxFormUserInput={updateTaxFormUserInput}
         postponeUserInput={postponeUserInput}
         setPostponeUserInput={setPostponeUserInput}
+        router={router}
+        previousRoute={previousRoute()}
+        nextRoute={nextRoute()}
         {...pageProps}
       />
     </Layout>
-  );
-};
+  )
+}
 
-export default MyApp;
+export default MyApp

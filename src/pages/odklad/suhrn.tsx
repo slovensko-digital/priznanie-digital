@@ -1,38 +1,34 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { getPostponeRoutes } from '../../lib/routes';
-import { PostponeUserInput } from '../../types/PostponeUserInput';
-import { EmailForm } from '../../components/EmailForm';
+import React, { useEffect } from 'react'
+import Link from 'next/link'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { getPostponeRoutes } from '../../lib/routes'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn');
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
 interface Props {
-  postponeUserInput: PostponeUserInput;
-  setPostponeUserInput: (values: PostponeUserInput) => void;
+  postponeUserInput: PostponeUserInput
+  setPostponeUserInput: (values: PostponeUserInput) => void
 }
-const Suhrn: NextPage<Props> = ({
-  postponeUserInput,
-  setPostponeUserInput,
-}: Props) => {
-  const router = useRouter();
+const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
+  const router = useRouter()
 
   useEffect(() => {
     if (!postponeUserInput.meno_priezvisko) {
-      router.replace(previousRoute);
+      router.replace(previousRoute)
     }
-    router.prefetch(nextRoute);
-  });
+    router.prefetch(nextRoute)
+  })
   const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
     .split(' ')
-    .map(v => v.trim());
+    .map((v) => v.trim())
 
   return (
     <>
       <Link href={previousRoute}>
         <a className="govuk-back-link" data-test="back">
-          Naspat
+          Späť
         </a>
       </Link>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
@@ -61,7 +57,7 @@ const Suhrn: NextPage<Props> = ({
         </tbody>
       </table>
 
-      <h2>Údaje o daňovníkovi</h2>
+      <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">
@@ -87,7 +83,7 @@ const Suhrn: NextPage<Props> = ({
         </tbody>
       </table>
 
-      <h2>Adresa trvalého pobytu</h2>
+      <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">
@@ -113,15 +109,44 @@ const Suhrn: NextPage<Props> = ({
         </tbody>
       </table>
 
-      <EmailForm
-        postponeUserInput={postponeUserInput}
-        setPostponeUserInput={setPostponeUserInput}
-        formName="postpone"
-        applicantFullName={postponeUserInput.meno_priezvisko}
-        deadline={
-          postponeUserInput.prijmy_zo_zahranicia ? '2020-06-30' : '2020-09-30'
-        }
-      />
+      {/*
+
+      TODO: odklad sa zatial nepouziva, a <EmailForm /> sa zmenil, tak nebudeme udrziavat nepouzivane stranky
+
+      <div className="box">
+        {postponeUserInput.email ? (
+          <p>
+            Váš email <strong>{postponeUserInput.email}</strong> sme odoslali
+            XML súbor potrebný pre odklad dane.
+            <br />
+            Pošleme vám notifikáciu pred novým termínom{' '}
+            {postponeUserInput.prijmy_zo_zahranicia
+              ? '(30. jún 2020)'
+              : '(30. september 2020)'}
+            .
+            <br />
+            {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
+          </p>
+        ) : (
+          <EmailForm
+            label="Chcete dostať upozornenie o novom termíne podania?"
+            hint="Nechajte nám email a my vám včas pošleme notifikáciu"
+            attachment={convertPostponeToXML(setDate(postponeUserInput))}
+            saveForm={(email, newsletter) => {
+              setPostponeUserInput({ ...postponeUserInput, email, newsletter })
+            }}
+            params={{
+              form: 'postpone',
+              firstname: firstName,
+              lastname: lastNames.join(' '),
+              deadline: postponeUserInput.prijmy_zo_zahranicia
+                ? '30. jún 2020'
+                : '30. september 2020',
+            }}
+          />
+        )}
+      </div>
+      */}
 
       <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
@@ -129,7 +154,7 @@ const Suhrn: NextPage<Props> = ({
         </button>
       </Link>
     </>
-  );
-};
+  )
+}
 
-export default Suhrn;
+export default Suhrn

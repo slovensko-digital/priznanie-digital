@@ -1,42 +1,70 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
-  EmailAttributes,
   makeAttachment,
-  saveEmailAddress,
-  sendEmailUsingTemplate,
-} from '../../lib/sendinblue';
+  TemplateParams,
+  sendEmail,
+  createOrUpdateContact,
+} from '../../lib/sendinblue'
+import { convertToXML } from '../../lib/xml/xmlConverter'
+import { setDate } from '../../lib/utils'
+import { buildPdf } from './pdf'
 
-const TEMPLATE_WITHOUT_NEWSLETTER = 3;
-const TEMPLATE_WITH_NEWSLETTER = 4;
+const templates = {
+  tax: parseInt(process.env.sendinblue_tpl_tax, 10),
+  postpone: parseInt(process.env.sendinblue_tpl_postpone, 10),
+}
+const contactListId = parseInt(process.env.sendinblue_list_id, 10)
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const email = `${req.body.email}`;
-  const attributes = req.body.attributes as EmailAttributes;
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> => {
+  const email = `${req.body.email}`
+  const params = req.body.params as TemplateParams
+  const template = req.query.tpl ? `${req.query.tpl}` : 'tax'
+  const taxForm = req.body.taxForm
+
+  if (!email || !params || !template || !taxForm) {
+    res.statusCode = 400
+    return res.send({ message: 'Invalid params' })
+  }
+
+  const attachmentXml = convertToXML(setDate(taxForm))
+  const attachmentPdf = buildPdf(taxForm)
 
   try {
-    const sendEmailResponse = await sendEmailUsingTemplate({
-      templateId: attributes.newsletter
-        ? TEMPLATE_WITH_NEWSLETTER
-        : TEMPLATE_WITHOUT_NEWSLETTER,
-      email,
-      attributes,
+    const sendEmailResponse = await sendEmail({
+      templateId: templates[template],
+      to: email,
+      params,
       attachment: [
-        makeAttachment('odklad_danoveho_priznania.xml', req.body.file),
+        makeAttachment('danove_priznanie.xml', attachmentXml),
+        {
+          name: 'danove_priznanie.pdf',
+          content: attachmentPdf.toBuffer().toString('base64'),
+        },
       ],
-    });
+    })
 
-    if (sendEmailResponse.ok) {
-      const saveEmailResponse = await saveEmailAddress(email, attributes);
-      if (!saveEmailResponse.ok) {
-        res.statusCode = saveEmailResponse.status;
-        return res.send({ ...(await saveEmailResponse.json()) });
+    if (sendEmailResponse.ok && params.newsletter) {
+      const { firstName, lastName } = params
+      const contactResponse = await createOrUpdateContact({
+        email,
+        firstName,
+        lastName,
+        listIds: [contactListId],
+      })
+      if (!contactResponse.ok) {
+        res.statusCode = contactResponse.status
+        return res.send(contactResponse)
       }
     }
 
-    res.statusCode = sendEmailResponse.status;
-    res.send({ ...(await sendEmailResponse.json()) });
+    res.statusCode = sendEmailResponse.status
+    return res.send({ ...(await sendEmailResponse.json()) })
   } catch (error) {
-    res.statusCode = 500;
-    res.send(error);
+    console.error(error)
+    res.statusCode = 500
+    return res.send({ message: error.message })
   }
-};
+}

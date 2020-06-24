@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { defaults } = require('jest-config');
+const { defaults } = require('jest-config')
 
 module.exports = {
   collectCoverageFrom: [
@@ -8,16 +8,18 @@ module.exports = {
     '!**/*.d.ts',
     '!**/node_modules/**',
   ],
-  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/.next/',
-    '/__tests__/testCases',
+    '/__tests__/testCases/',
+    '/__tests__/utils/',
     '/cypress',
   ],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/ts-jest',
-    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+    '^.+\\.(js|jsx|ts)$': '<rootDir>/node_modules/ts-jest',
+    '^.+\\.tsx?$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.ts',
     '\\.xml$': 'jest-raw-loader',
     '\\.xsd$': 'jest-raw-loader',
   },
@@ -48,4 +50,4 @@ module.exports = {
       },
     },
   },
-};
+}

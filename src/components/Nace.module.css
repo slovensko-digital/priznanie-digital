@@ -1,0 +1,37 @@
+.autocompleteField::after {
+  content: '▼' !important;
+  position: absolute;
+  width: 30px;
+  height: 36px;
+  line-height: 36px;
+  right: 2px;
+  top: 35px;
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.7);
+  background: white;
+}
+.autocompleteFieldLoading {
+  position: relative;
+}
+.autocompleteFieldLoading input {
+  padding-right: 40px;
+}
+.autocompleteFieldLoading::after {
+  content: '' !important;
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  right: 5px;
+  top: 32px;
+  background: url('/assets/images/spinner.png') center center no-repeat !important;
+  pointer-events: none;
+}
+
+.absolute {
+  position: absolute;
+  z-index: 100;
+}
+
+.relative {
+  position: relative;
+}

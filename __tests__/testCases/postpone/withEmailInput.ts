@@ -1,4 +1,4 @@
-import { PostponeUserInput } from '../../../src/types/PostponeUserInput';
+import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
 
 export const withEmailInput: PostponeUserInput = {
   prijmy_zo_zahranicia: false,
@@ -13,4 +13,4 @@ export const withEmailInput: PostponeUserInput = {
   datum: '22.02.2020',
   email: 'seyed19111@sweatmail.com',
   newsletter: true,
-};
+}

@@ -1,0 +1,13 @@
+.summaryTitle {
+  line-height: 30px;
+  font-size: 26px;
+}
+.summaryTitle > span {
+  display: inline-block;
+  max-width: 80%;
+}
+.editLink {
+  font-size: 14px;
+  display: inline-block;
+  float: right;
+}

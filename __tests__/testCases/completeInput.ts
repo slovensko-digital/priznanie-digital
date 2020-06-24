@@ -1,14 +1,16 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput';
+import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 
 export const completeInput: TaxFormUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r001_dic: '233123123',
-  r003_nace: '123123',
-  meno_priezvisko: 'Fake Name',
+  r003_nace: '62010 - Počítačové programovanie',
+  r005_meno: 'Fake',
+  r004_priezvisko: 'Name',
+  r006_titul: 'Ing. / PhD.',
   r007_ulica: 'Mierova',
   r008_cislo: '4',
-  psc: '82105',
+  r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
@@ -25,54 +27,44 @@ export const completeInput: TaxFormUserInput = {
   r037_pocetMesiacov: '12',
 
   /** SECTION Pension */
-  r029_poberal_dochodok: true,
-  r030_vyska_dochodku: '800',
+  platil_prispevky_na_dochodok: true,
+  r075_zaplatene_prispevky_na_dochodok: '180',
 
   /** SECTION Partner */
   r031_priezvisko_a_meno: 'Fake Fake',
   r031_rodne_cislo: '9609226286',
   r032_partner_pocet_mesiacov: '12',
-  r032_partner_vlastne_prijmy: '4000',
+  r032_partner_vlastne_prijmy: '3000',
   r032_uplatnujem_na_partnera: true,
 
+  /** SECTION Spa */
+  r036_deti_kupele: '30',
+  r033_partner_kupele: true,
+  r033_partner_kupele_uhrady: '20',
+  r076a_kupele_danovnik: '20',
+  danovnikInSpa: true,
+  kupele: true,
+
   /** SECTION Children */
-  r034: [
+  children: [
     {
+      id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: false,
-      m00: false,
-      m01: false,
-      m02: false,
-      m03: false,
-      m04: false,
-      m05: false,
-      m06: false,
-      m07: true,
-      m08: true,
-      m09: true,
-      m10: true,
-      m11: true,
-      m12: true,
+      kupelnaStarostlivost: true,
+      wholeYear: false,
+      monthFrom: '6',
+      monthTo: '11',
     },
     {
+      id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: false,
-      m00: true,
-      m01: false,
-      m02: false,
-      m03: false,
-      m04: false,
-      m05: false,
-      m06: false,
-      m07: false,
-      m08: false,
-      m09: false,
-      m10: false,
-      m11: false,
-      m12: false,
+      kupelnaStarostlivost: true,
+      wholeYear: true,
+      monthFrom: '6',
+      monthTo: '11',
     },
   ],
-  children: true,
-};
+  hasChildren: true,
+}

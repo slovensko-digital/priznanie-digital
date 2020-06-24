@@ -1,17 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
-import { Debug } from './Debug';
-import { TaxFormUserInput } from '../types/TaxFormUserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
+import Head from 'next/head'
+import Header from './Header'
+import Footer from './Footer'
+import { CookieBar } from './CookieBar'
+import { Debug } from './Debug'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 interface Props {
-  headline: string;
-  children: React.ReactNode;
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  headline: string
+  children: React.ReactNode
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 const Layout: React.FC<Props> = ({
@@ -20,38 +21,54 @@ const Layout: React.FC<Props> = ({
   taxFormUserInput,
   postponeUserInput,
 }: Props) => (
-  <div className="container">
+  <div>
     <Head>
       <title>priznanie.digital</title>
       {process.env.BUILD_TIMESTAMP && (
         <meta
           name="version"
           content={new Date(
-            parseInt(process.env.BUILD_TIMESTAMP) * 1000,
+            parseInt(process.env.BUILD_TIMESTAMP, 10) * 1000,
           ).toISOString()}
         />
       )}
     </Head>
-    <Header />
-    <div className="sdn-headline">
-      <div className="sdn-headline__container govuk-width-container">
-        <div className="sdn-headline__part">
-          <span className="sdn-headline__headline">{headline}</span>
-        </div>
-      </div>
-    </div>
 
-    <div className="govuk-width-container content-container">
-      <div className="govuk-phase-banner">
+    <noscript>
+      <p className="noscript">
+        Táto aplikácia vyžaduje povolený Javascript.{' '}
+        <a href="https://www.enable-javascript.com/sk/">
+          Tu sú inštrukcie, ako povoliť JavaScript v prehliadači.
+        </a>
+      </p>
+    </noscript>
+
+    <Header />
+
+    <div className="govuk-phase-banner">
+      <div className="govuk-width-container">
         <p className="govuk-phase-banner__content">
           <strong className="govuk-tag govuk-phase-banner__content__tag">
-            Alpha
+            BETA
           </strong>
           <span className="govuk-phase-banner__text">
             Táto služba je vo vývoji.
           </span>
         </p>
       </div>
+    </div>
+
+    <div className="sdn-headline">
+      <div className="govuk-width-container">
+        <div className="sdn-headline__container">
+          <div className="sdn-headline__part">
+            <span className="sdn-headline__headline">{headline}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="govuk-width-container">
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">{children}</div>
@@ -66,18 +83,8 @@ const Layout: React.FC<Props> = ({
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     />
-    <style jsx>{`
-      .container {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-      }
-      .content-container {
-        flex-grow: 1;
-        width: 100%;
-      }
-    `}</style>
+    <CookieBar />
   </div>
-);
+)
 
-export default Layout;
+export default Layout

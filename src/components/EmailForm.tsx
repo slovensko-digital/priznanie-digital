@@ -1,76 +1,48 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
-import classNames from 'classnames';
-import styles from './EmailForm.module.css';
-import { CheckboxSmall, Input } from './FormComponents';
-import { saveEmail } from '../lib/api';
-import { EmailUserInput } from '../types/UserInput';
-import { PostponeUserInput } from '../types/PostponeUserInput';
-import { setDate } from '../lib/utils';
+import React from 'react'
+import * as Yup from 'yup'
+import { Form, Formik } from 'formik'
+import classNames from 'classnames'
+import { CheckboxSmall, Input } from './FormComponents'
+import { sendEmailTemplate } from '../lib/api'
+import { EmailUserInput } from '../types/UserInput'
+import { TaxForm } from '../types/TaxForm'
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
     case 'duplicate_parameter':
-      return 'Tento email už v databáze existuje';
+      return 'Tento email už v databáze existuje'
     case 'invalid_parameter':
-      return 'Nesprávny formát emailovej adresy';
+      return 'Nesprávny formát emailovej adresy'
     default:
-      return `Chyba: ${message}`;
+      return `Chyba: ${message}`
   }
-};
+}
 
 export interface EmailFormProps {
-  applicantFullName: string;
-  deadline: string;
-  formName: string;
-  postponeUserInput: PostponeUserInput;
-  setPostponeUserInput: (values: Partial<PostponeUserInput>) => void;
+  label: string
+  hint?: string
+  params: Record<string, any>
+  taxForm: TaxForm
+  saveForm: (email: string, newsletter: boolean) => void
 }
 export const EmailForm = ({
-  applicantFullName,
-  deadline,
-  formName,
-  postponeUserInput,
-  setPostponeUserInput,
+  label,
+  hint,
+  params,
+  taxForm,
+  saveForm,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
-    const [firstName, ...lastName] = applicantFullName.split(' ');
-    const { messageId, code, message } = await saveEmail(
+    const { messageId, code, message } = await sendEmailTemplate(
       email,
-      {
-        firstname: firstName,
-        lastname: lastName.join(' '),
-        newsletter: !!newsletter,
-        deadline,
-        form: formName,
-      },
-      setDate(postponeUserInput),
-    );
+      { ...params, newsletter: !!newsletter } as any,
+      taxForm,
+    )
     if (messageId) {
-      setPostponeUserInput({ ...postponeUserInput, email, newsletter });
+      saveForm(email, !!newsletter)
     } else {
-      setFieldError('email', getErrorMessage(code, message));
+      setFieldError('email', getErrorMessage(code, message))
     }
-  };
-
-  if (postponeUserInput.email) {
-    return (
-      <div className={styles.newsletterFormWrapper}>
-        <p className={styles.newsletterFormSuccess}>
-          Váš email <strong>{postponeUserInput.email}</strong> sme úspešne
-          zaregistrovali.
-          <br />
-          Pošleme vám notifikáciu pred novým termínom{' '}
-          {postponeUserInput.prijmy_zo_zahranicia
-            ? '(30. jún 2020)'
-            : '(30. september 2020)'}
-          .
-          <br />
-          {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
-        </p>
-      </div>
-    );
   }
 
   return (
@@ -80,13 +52,8 @@ export const EmailForm = ({
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form className="box">
-          <Input
-            name="email"
-            type="email"
-            label="Chcete dostať upozornenie o novom termíne podania?"
-            hint="Nechajte nám email a my vám včas pošleme notifikáciu"
-          />
+        <Form>
+          <Input name="email" type="email" label={label} hint={hint} />
           <CheckboxSmall
             name="newsletter"
             label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
@@ -111,12 +78,10 @@ export const EmailForm = ({
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
 const validationSchema = Yup.object().shape<EmailUserInput>({
-  email: Yup.string()
-    .required('Zadajte email')
-    .email('Nesprávny formát'),
+  email: Yup.string().required('Zadajte email').email('Nesprávny formát'),
   newsletter: Yup.boolean(),
-});
+})
