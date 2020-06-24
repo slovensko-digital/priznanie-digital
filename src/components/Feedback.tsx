@@ -38,19 +38,19 @@ interface Props {
 
 export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
-  const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false)
+  // const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false)
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
   )
 
-  const usefulOnClick = () => {
-    /** TODO make actually do something */
-    // fetch(
-    //   'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
-    //   { method: 'POST' },
-    // );
-    setIsUsefulSubmitted(true)
-  }
+  // const usefulOnClick = () => {
+  //   /** TODO make actually do something */
+  //   // fetch(
+  //   //   'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
+  //   //   { method: 'POST' },
+  //   // );
+  //   setIsUsefulSubmitted(true)
+  // }
 
   if (isFeedbackOpen) {
     return (
@@ -209,7 +209,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
       <div className="sdn-feedbackbar__useful">
-        {!isUsefulSubmitted ? (
+        {/* {!isUsefulSubmitted ? (
           <>
             <span className="sdn-feedbackbar__useful-question">
               Boli tieto informácie pre vás užitočné?
@@ -243,7 +243,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
           <div id="sdn-feedbackbar-thanks">
             <span>Ďakujeme za odozvu!&nbsp;</span>
           </div>
-        )}
+        )} */}
       </div>
 
       <div className="sdn-feedbackbar__foundbug">
