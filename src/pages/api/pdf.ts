@@ -178,7 +178,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.writeNumberToBoxes(
       FIRST_COLUMN + 404,
       538,
-      form.r032_partner_vlastne_prijmy,
+      form.r032_partner_vlastne_prijmy.toNumber(),
     )
 
     // r032_partner_pocet_mesiacov
@@ -197,7 +197,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.writeNumberToBoxes(
       FIRST_COLUMN + 487,
       513,
-      form.r033_partner_kupele_uhrady,
+      form.r033_partner_kupele_uhrady.toNumber(),
     )
   }
 
@@ -301,7 +301,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   if (form.r034 && form.r034.some((child) => child.kupelnaStarostlivost)) {
     // r036_deti_kupele
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 303, form.r036_deti_kupele)
+    tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 303, form.r036_deti_kupele.toNumber())
   }
 
   if (form.r037_uplatnuje_uroky) {
@@ -309,7 +309,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.write(FIRST_COLUMN + 21, 110, 'x')
 
     // r037_zaplatene_uroky
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 409, 108, form.r037_zaplatene_uroky)
+    tpl.writeNumberToBoxes(
+      FIRST_COLUMN + 409,
+      108,
+      form.r037_zaplatene_uroky.toNumber(),
+    )
 
     // r032_partner_pocet_mesiacov
     tpl.writeToBoxes(
@@ -323,25 +327,45 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r038 - Úhrn príjmov od všetkých zamestnávateľov
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r038)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r038.toNumber())
 
   // r039 - Úhrn povinného poistného
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r039)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r039.toNumber())
 
   // r040 - Základ dane (čiastkový základ dane)
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r040)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r040.toNumber())
 
   // t1r2_prijmy - r. 2
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 340, 483, form.t1r2_prijmy, true)
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 340,
+    483,
+    form.t1r2_prijmy.toNumber(),
+    true,
+  )
 
   // t1r10_vydavky - r. 2
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 496, 483, form.t1r10_vydavky, true)
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 496,
+    483,
+    form.t1r10_vydavky.toNumber(),
+    true,
+  )
 
   // t1r2_prijmy - spolu r. 1 až 9
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 340, 222, form.t1r2_prijmy, true)
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 340,
+    222,
+    form.t1r2_prijmy.toNumber(),
+    true,
+  )
 
   // t1r10_vydavky - spolu r. 1 až 9
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 496, 222, form.t1r10_vydavky, true)
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 496,
+    222,
+    form.t1r10_vydavky.toNumber(),
+    true,
+  )
 
   // ***** PAGE 4
   tpl.nextPage()
@@ -350,28 +374,32 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.write(FIRST_COLUMN + 12, 734, 'x')
 
   // priloha3_r08_poistne
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 708, form.priloha3_r08_poistne)
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 397,
+    708,
+    form.priloha3_r08_poistne.toNumber(),
+  )
 
   // r041
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r041)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r041.toNumber())
 
   // r042
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r042)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r042.toNumber())
 
   // ***** PAGE 5
   tpl.nextPage()
 
   // r043
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r043)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r043.toNumber())
 
   // r047
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r047)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r047.toNumber())
 
   // r055
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 400, form.r055)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 400, form.r055.toNumber())
 
   // r057
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 322, form.r057)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 322, form.r057.toNumber())
 
   // ***** PAGE 6
   tpl.nextPage()
@@ -383,93 +411,93 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r072_pred_znizenim
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 501, form.r072_pred_znizenim)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 501, form.r072_pred_znizenim.toNumber())
 
   // r073
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 473, form.r073)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 473, form.r073.toNumber())
 
   // r074_znizenie_partner
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 448, form.r074_znizenie_partner)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 448, form.r074_znizenie_partner.toNumber())
 
   // 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur
   if (form.platil_prispevky_na_dochodok) {
     tpl.writeNumberToBoxes(
       FIRST_COLUMN + 390,
       423,
-      form.r075_zaplatene_prispevky_na_dochodok,
+      form.r075_zaplatene_prispevky_na_dochodok.toNumber(),
     )
   }
 
   // r076_kupele_spolu
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 386, form.r076_kupele_spolu)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 386, form.r076_kupele_spolu.toNumber())
 
   // r076a_kupele_danovnik
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 358, form.r076a_kupele_danovnik)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 358, form.r076a_kupele_danovnik.toNumber())
 
   // r076b_kupele_partner_a_deti
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 390,
     332,
-    form.r076b_kupele_partner_a_deti,
+    form.r076b_kupele_partner_a_deti.toNumber(),
   )
 
   // r077_nezdanitelna_cast
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 308, form.r077_nezdanitelna_cast)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 308, form.r077_nezdanitelna_cast.toNumber())
 
   // r078_zaklad_dane_z_prijmov
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 390,
     282,
-    form.r078_zaklad_dane_z_prijmov,
+    form.r078_zaklad_dane_z_prijmov.toNumber(),
   )
 
   // r080_zaklad_dane_celkovo
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 232, form.r080_zaklad_dane_celkovo)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 232, form.r080_zaklad_dane_celkovo.toNumber())
 
   // r081
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 206, form.r081)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 206, form.r081.toNumber())
 
   // ***** PAGE 9
   tpl.nextPage()
 
   // r090
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 615, form.r090)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 615, form.r090.toNumber())
 
   // r105_dan
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 128, form.r105_dan)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 128, form.r105_dan.toNumber())
 
   // r106
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 94, form.r106)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 94, form.r106.toNumber())
 
   // r107
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 70, form.r107)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 70, form.r107.toNumber())
 
   // ***** PAGE 10
   tpl.nextPage()
 
   // r108
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 770, form.r108)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 770, form.r108.toNumber())
 
   // r109
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r109)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r109.toNumber())
 
   // r112
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r112)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r112.toNumber())
 
   // r113
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r113)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r113.toNumber())
 
   // r114
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r114)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r114.toNumber())
 
   // r115
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r115)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r115.toNumber())
 
   // r125_dan_na_uhradu
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 313, form.r125_dan_na_uhradu)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 313, form.r125_dan_na_uhradu.toNumber())
 
   // r126_danovy_preplatok
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 271, form.r126_danovy_preplatok)
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 271, form.r126_danovy_preplatok.toNumber())
 
   // ***** PAGE 11
   tpl.nextPage()
@@ -479,7 +507,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   if (form.XIIoddiel_uplatnujem2percenta) {
     // r141
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r141)
+    tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r141.toNumber())
 
     // r142 - ico
     tpl.writeToBoxes(FIRST_COLUMN, 665, form.r142 ? form.r142.ico : '')
