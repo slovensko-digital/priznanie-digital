@@ -6,8 +6,9 @@ import {
   parseInputNumber,
 } from './utils'
 import Decimal from 'decimal.js'
+import { sum } from './utils'
 
-const NEZDANITELNA_CAST_ZAKLADU = 3937.35
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
@@ -86,8 +87,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r034: input.hasChildren ? input.children.map(mapChild) : [],
     get r036_deti_kupele() {
       const maxAmountPerChild = 50
-      const maxAmountChildrenTotal =
-        new Decimal(this.r034?.length ?? 0).times(maxAmountPerChild)
+      const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
+        maxAmountPerChild,
+      )
 
       return Decimal.min(
         new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),
@@ -147,15 +149,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r055
     },
     get r072_pred_znizenim() {
-      return round2decimal(this.r057 + this.r040)
+      return sum(this.r057, this.r040)
     },
     get r073() {
-      if (this.r072_pred_znizenim >= 36256.37) {
-        return 0
+      if (this.r072_pred_znizenim.gte(36256.37)) {
+        return new Decimal(0)
       }
-      if (this.r072_pred_znizenim > 20507) {
-        return round2decimal(
-          Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim),
+      if (this.r072_pred_znizenim.gt(20507)) {
+        return Decimal.max(
+          0,
+          new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
         )
       }
       return NEZDANITELNA_CAST_ZAKLADU
@@ -213,22 +216,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r078_zaklad_dane_z_prijmov // + tf.r065 + tf.r071 + tf.r079
     },
     get r081() {
-      if (this.r080_zaklad_dane_celkovo === 0) {
-        return 0
+      if (this.r080_zaklad_dane_celkovo.isZero()) {
+        return new Decimal(0)
       }
-      if (this.r080_zaklad_dane_celkovo > 36256.38) {
-        return (
-          round2decimal(36256.38 * DAN_Z_PRIJMU_SADZBA) +
-          round2decimal(
-            round2decimal(this.r080_zaklad_dane_celkovo - 36256.38) * 0.25,
-          )
-        )
+      if (this.r080_zaklad_dane_celkovo.gte(36256.38)) {
+        return new Decimal(36256.38)
+          .times(DAN_Z_PRIJMU_SADZBA)
+          .plus(this.r080_zaklad_dane_celkovo.minus(36256.38).times(0.25))
       }
-      return round2decimal(
-        floor(
-          round2decimal(this.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA),
-          2,
-        ),
+      return floorDecimal(
+        this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
       )
     },
     get r090() {
