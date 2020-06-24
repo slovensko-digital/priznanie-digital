@@ -676,7 +676,7 @@ describe('Spa page', () => {
     getInput('r033_partner_kupele').click()
     getInput('r033_partner_kupele_uhrady')
   })
-  it('Spa UI', () => {
+  it('Spa UI with previously entered spouse and children', () => {
     navigateEligibleToChildrenPage()
     assertUrl('/deti')
 
@@ -725,6 +725,80 @@ describe('Spa page', () => {
 
     getInput('childrenInSpa').click()
     getInput('r036_deti_kupele')
+  })
+  it('Spa UI without previously entered spouse and children', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+    skipPage()
+
+    assertUrl('/dochodok')
+    skipPage()
+
+    // assertUrl('/hypoteka')
+    // skipPage()
+
+    getInput('kupele', '-yes').click()
+
+    // select at least one
+    next()
+    getError().should('have.length', 1)
+
+    // danovnik
+    getInput('danovnikInSpa').click()
+    getInput('r076a_kupele_danovnik').type('60')
+
+    next()
+    getError().should('have.length', 1)
+    getInput('r076a_kupele_danovnik').clear()
+    typeToInput('r076a_kupele_danovnik', withSpaInput)
+
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+
+    // partner
+    getInput('r033_partner_kupele').click()
+    next()
+    getError().should('have.length', 3)
+
+    typeToInput('r031_priezvisko_a_meno', withSpaInput)
+    typeToInput('r031_rodne_cislo', withSpaInput)
+    typeToInput('r033_partner_kupele_uhrady', withSpaInput)
+
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+
+    getInput('childrenInSpa').click()
+
+    next()
+    getError().should('have.length', 3)
+
+    // Enter child data
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[0]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[0].rodneCislo-input"]').type(
+      withSpaInput.children?.[0]?.rodneCislo ?? '',
+    )
+
+    cy.get('[data-test=add-child]').click()
+
+    cy.get('[data-test="children[1].priezviskoMeno-input"]').type(
+      withSpaInput.children?.[1]?.priezviskoMeno ?? '',
+    )
+    cy.get('[data-test="children[1].rodneCislo-input"]').type(
+      withSpaInput.children?.[1]?.rodneCislo ?? '',
+    )
+
+    getInput('r036_deti_kupele').type('101')
+    next()
+    getError().should('have.length', 1)
+
+    getInput('r036_deti_kupele').clear()
+    typeToInput('r036_deti_kupele', withSpaInput)
+    next()
+    assertUrl('/dve-percenta')
   })
 })
 

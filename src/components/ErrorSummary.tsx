@@ -24,13 +24,15 @@ export function ErrorSummary<Values>({ errors }: Props<Values>) {
       </h2>
       <div className="govuk-error-summary__body">
         <ul className="govuk-list govuk-error-summary__list">
-          {errorEntries.map(([name, label]) => {
-            return (
-              <li key={name}>
-                <a href={`#${name}`}>{label}</a>
-              </li>
-            )
-          })}
+          {errorEntries
+            .filter((values) => typeof values[1] === 'string')
+            .map(([name, label]) => {
+              return (
+                <li key={name}>
+                  <a href={`#${name}`}>{label}</a>
+                </li>
+              )
+            })}
         </ul>
       </div>
     </div>
