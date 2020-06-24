@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Form } from 'formik'
+import { FieldArray, Form } from 'formik'
 
 import {
   BooleanRadio,
@@ -10,9 +10,27 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, SpaUserInput } from '../types/PageUserInputs'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { parseInputNumber } from "../lib/utils"
+import {
+  formatRodneCislo,
+  parseInputNumber,
+  validateRodneCislo,
+} from '../lib/utils'
 import { Page } from '../components/Page'
-import { spaInitialInput } from '../lib/initialValues'
+import { makeEmptyChild, spaInitialInput } from '../lib/initialValues'
+import classnames from 'classnames'
+import styles from './deti.module.css'
+
+const KupeleError = ({ message }) => {
+  if (!message) {
+    return null
+  }
+
+  return (
+    <span data-test="error" className="govuk-error-message">
+      <span className="govuk-visually-hidden">Error:</span> {message}
+    </span>
+  )
+}
 
 const Kupele: Page<SpaUserInput> = ({
   setTaxFormUserInput,
@@ -36,21 +54,37 @@ const Kupele: Page<SpaUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          const userInput = values.kupele
-            ? values
-            : {
-                ...spaInitialInput,
-                children: values.children.map((child) => ({
-                  ...child,
-                  kupelnaStarostlivost: false,
-                })),
-                kupele: false,
-              }
-          setTaxFormUserInput(userInput)
+          if (values.kupele) {
+            // children not entered previously
+            if (!shouldShowChildren) {
+              values.children = values.children.map((child) => ({
+                ...child,
+                kupelnaStarostlivost: true,
+              }))
+            }
+            setTaxFormUserInput(values)
+          } else {
+            const userInput = {
+              ...spaInitialInput,
+              children: values.children.map((child) => ({
+                ...child,
+                kupelnaStarostlivost: false,
+              })),
+              kupele: false,
+            }
+            setTaxFormUserInput(userInput)
+          }
           router.push(nextRoute)
         }}
       >
-        {({ values, errors, touched }) => (
+        {({
+          values,
+          errors,
+          touched,
+          setFieldValue,
+          validateForm,
+          setErrors,
+        }) => (
           <>
             <ErrorSummary<SpaUserInput> errors={errors} touched={touched} />
             <Form className="form" noValidate>
@@ -64,12 +98,7 @@ const Kupele: Page<SpaUserInput> = ({
                   <h2 className="govuk-heading-l">
                     Na koho si uplatňujete zníženie dane?
                   </h2>
-                  {(errors as any).noAnswer ? (
-                    <span data-test="error" className="govuk-error-message">
-                      <span className="govuk-visually-hidden">Error:</span>{' '}
-                      {(errors as any).noAnswer}
-                    </span>
-                  ) : null}
+                  <KupeleError message={(errors as Errors).noAnswer} />
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
                     <Input
@@ -80,28 +109,52 @@ const Kupele: Page<SpaUserInput> = ({
                       hint="Maximálna výška úhrady za rok 2019 je 50 eur"
                     />
                   )}
-
                   <CheckboxSmall
                     name="r033_partner_kupele"
                     label="Na manžela/manželku"
                   />
                   {values.r033_partner_kupele && (
-                    <Input
-                      className="govuk-!-margin-bottom-6"
-                      name="r033_partner_kupele_uhrady"
-                      type="text"
-                      label="Aké sú partnerové výdavky za služby v kúpeľoch?"
-                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
-                    />
-                  )}
-                  {shouldShowChildren && (
                     <>
-                      <CheckboxSmall name="childrenInSpa" label="Na deti" />
-                      {values.childrenInSpa && (
+                      {!values.r032_uplatnujem_na_partnera && (
+                        <>
+                          <Input
+                            name="r031_priezvisko_a_meno"
+                            type="text"
+                            label="Meno a priezvisko manželky/manžela"
+                          />
+                          <Input
+                            name="r031_rodne_cislo"
+                            type="text"
+                            label="Rodné číslo"
+                            maxLength={13}
+                            onChange={async (event) => {
+                              const rodneCisloValue = formatRodneCislo(
+                                event.currentTarget.value,
+                                values.r031_rodne_cislo,
+                              )
+                              setFieldValue('r031_rodne_cislo', rodneCisloValue)
+                            }}
+                          />
+                        </>
+                      )}
+                      <Input
+                        className="govuk-!-margin-bottom-6"
+                        name="r033_partner_kupele_uhrady"
+                        type="text"
+                        label="Aké sú partnerove výdavky za služby v kúpeľoch?"
+                        hint="Maximálna výška úhrady za rok 2019 je 50 eur"
+                      />
+                    </>
+                  )}
+                  <CheckboxSmall name="childrenInSpa" label="Na svoje deti" />
+                  {values.childrenInSpa && (
+                    <>
+                      {shouldShowChildren ? (
                         <>
                           <p className="govuk-!-margin-bottom-3">
                             Ktoré dieťa navštívilo kúpele?
                           </p>
+                          <KupeleError message={(errors as Errors).noChild} />
                           {taxFormUserInput.children.map((child, index) => (
                             <div
                               key={child.id}
@@ -113,18 +166,95 @@ const Kupele: Page<SpaUserInput> = ({
                               />
                             </div>
                           ))}
-                          <Input
-                            className="govuk-!-margin-bottom-6"
-                            name="r036_deti_kupele"
-                            type="text"
-                            label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
-                            hint="Maximálna výška úhrady za rok 2019 je 50 eur na každé dieťa"
-                          />
                         </>
+                      ) : (
+                        <FieldArray name="children">
+                          {(arrayHelpers) => (
+                            <div className="govuk-!-margin-bottom-5">
+                              {values.children.map((child, index) => (
+                                <div key={child.id}>
+                                  {values.children.length > 1 && (
+                                    <h2
+                                      className={classnames(
+                                        'govuk-heading-m',
+                                        'govuk-!-margin-top-3',
+                                        styles.childHeadline,
+                                      )}
+                                    >
+                                      {index + 1}. dieťa
+                                      <button
+                                        className="govuk-button btn-secondary btn-warning"
+                                        type="button"
+                                        onClick={() =>
+                                          arrayHelpers.remove(index)
+                                        }
+                                        data-test={`remove-child-${index}`}
+                                      >
+                                        Odstrániť {index + 1}. dieťa
+                                      </button>
+                                    </h2>
+                                  )}
+                                  <Input
+                                    name={
+                                      `children[${index}].priezviskoMeno` as any
+                                    }
+                                    type="text"
+                                    label="Meno a priezvisko"
+                                    width="auto"
+                                  />
+                                  <Input
+                                    name={
+                                      `children[${index}].rodneCislo` as any
+                                    }
+                                    type="text"
+                                    label="Rodné číslo"
+                                    width="auto"
+                                    maxLength={13}
+                                    onChange={async (event) => {
+                                      const rodneCisloValue = formatRodneCislo(
+                                        event.currentTarget.value,
+                                        child.rodneCislo,
+                                      )
+                                      setFieldValue(
+                                        `children[${index}].rodneCislo`,
+                                        rodneCisloValue,
+                                      )
+                                    }}
+                                  />
+                                </div>
+                              ))}
+                              <button
+                                className="btn-secondary govuk-button"
+                                type="button"
+                                onClick={async () => {
+                                  const { children } = await validateForm()
+                                  setErrors({ children })
+                                  const hasErrors =
+                                    children && Object.keys(children).length > 0
+                                  if (!hasErrors) {
+                                    arrayHelpers.push({
+                                      ...makeEmptyChild(),
+                                      kupelnaStarostlivost: true,
+                                    })
+                                  }
+                                }}
+                                data-test="add-child"
+                              >
+                                Pridať ďalšie dieťa
+                              </button>
+                            </div>
+                          )}
+                        </FieldArray>
                       )}
+                      <Input
+                        className="govuk-!-margin-bottom-6"
+                        name="r036_deti_kupele"
+                        type="text"
+                        label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
+                        hint="Maximálna výška úhrady za rok 2019 je 50 eur na každé dieťa"
+                      />
                     </>
                   )}
-
                   <div className="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
                     <a
                       href="https://podpora.financnasprava.sk/886734-Zaplaten%C3%A9-%C3%BAhrady-s%C3%BAvisiace-s-k%C3%BApe%C4%BEnou-starostlivos%C5%A5ou"
@@ -148,7 +278,15 @@ const Kupele: Page<SpaUserInput> = ({
   )
 }
 
-type Errors = Partial<FormErrors<SpaUserInput>> & { noAnswer?: string }
+interface ChildFormErrors {
+  priezviskoMeno?: string
+  rodneCislo?: string
+}
+type Errors = Partial<FormErrors<SpaUserInput>> & {
+  noAnswer?: string
+  noChild?: string
+  children?: ChildFormErrors[]
+}
 export const validate = (values: SpaUserInput): Errors => {
   const errors: Errors = {}
 
@@ -168,37 +306,92 @@ export const validate = (values: SpaUserInput): Errors => {
       errors.r076a_kupele_danovnik = 'Zadajte výšku úhrad kúpeľov za vás'
     }
     if (
-      (values.danovnikInSpa && parseInputNumber(values.r076a_kupele_danovnik) > 50) ||
+      (values.danovnikInSpa &&
+        parseInputNumber(values.r076a_kupele_danovnik) > 50) ||
       parseInputNumber(values.r076a_kupele_danovnik) < 0
     ) {
       errors.r076a_kupele_danovnik =
-        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+        'Zadajte výšku úhrad kúpeľov, maximálne sumu 50 eur'
     }
 
-    if (values.r033_partner_kupele && !values.r033_partner_kupele_uhrady) {
-      errors.r033_partner_kupele_uhrady =
-        'Zadajte výšku úhrad kúpeľov za manžela/manželku'
-    }
-    if (
-      (values.r033_partner_kupele &&
-        parseInputNumber(values.r033_partner_kupele_uhrady) > 50) ||
-      parseInputNumber(values.r033_partner_kupele_uhrady) < 0
-    ) {
-      errors.r033_partner_kupele_uhrady =
-        'Zadajte výšku úhrad kúpeľov 50 eur alebo menej'
+    if (values.r033_partner_kupele) {
+      if (
+        !values.r031_priezvisko_a_meno ||
+        values.r031_priezvisko_a_meno.length === 0
+      ) {
+        errors.r031_priezvisko_a_meno =
+          'Zadajte meno a priezvisko manžela/manželky.'
+      }
+      if (!values.r031_rodne_cislo || values.r031_rodne_cislo.length === 0) {
+        errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
+      } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
+        errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
+      }
+
+      if (
+        !values.r033_partner_kupele_uhrady ||
+        values.r033_partner_kupele_uhrady.length === 0
+      ) {
+        errors.r033_partner_kupele_uhrady =
+          'Zadajte výšku úhrad kúpeľov za manžela/manželku'
+      }
+      if (
+        (values.r033_partner_kupele &&
+          parseInputNumber(values.r033_partner_kupele_uhrady) > 50) ||
+        parseInputNumber(values.r033_partner_kupele_uhrady) < 0
+      ) {
+        errors.r033_partner_kupele_uhrady =
+          'Zadajte výšku úhrad kúpeľov, maximálne sumu 50 eur'
+      }
     }
 
     if (values.childrenInSpa && !values.r036_deti_kupele) {
       errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
     }
 
-    const maxChildrenAmount = (values.children?.length ?? 0) * 50
-    if (
-      values.childrenInSpa &&
-      (parseInputNumber(values.r036_deti_kupele) > maxChildrenAmount ||
-        parseInputNumber(values.r036_deti_kupele) < 0)
-    ) {
-      errors.r036_deti_kupele = `Zadajte výšku úhrad kúpeľov ${maxChildrenAmount} eur alebo menej`
+    if (values.childrenInSpa) {
+      const maxChildrenAmount = (values.children?.length ?? 0) * 50
+
+      if (maxChildrenAmount === 0) {
+        errors.noChild = 'Vyznačte aspoň jedno z detí'
+      } else if (
+        parseInputNumber(values.r036_deti_kupele) > maxChildrenAmount ||
+        parseInputNumber(values.r036_deti_kupele) < 0
+      ) {
+        errors.r036_deti_kupele = `Zadajte výšku úhrad kúpeľov, maximálne sumu ${maxChildrenAmount} eur`
+      }
+
+      if (values.children) {
+        const childrenErrors = values.children.map((childValues, index) => {
+          const childErrors: ChildFormErrors = {}
+
+          if (
+            !childValues.priezviskoMeno ||
+            childValues.priezviskoMeno.length === 0
+          ) {
+            childErrors.priezviskoMeno = 'Zadajte meno a priezvisko dieťaťa'
+          }
+          if (!childValues.rodneCislo || childValues.rodneCislo.length === 0) {
+            childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
+          } else if (!validateRodneCislo(childValues.rodneCislo)) {
+            childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
+          } else if (
+            values.children
+              .slice(0, index)
+              .find((v) => v.rodneCislo === childValues.rodneCislo)
+          ) {
+            childErrors.rodneCislo = 'Každé dieťa môže byť zadané iba 1 krát'
+          }
+
+          return childErrors
+        })
+
+        if (
+          childrenErrors.filter((err) => Object.keys(err).length > 0).length > 0
+        ) {
+          errors.children = childrenErrors as any
+        }
+      }
     }
   }
   return errors

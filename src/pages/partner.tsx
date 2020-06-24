@@ -129,7 +129,8 @@ export const validate = (values: PartnerUserInput) => {
       }
     } else if (values.partner_step === 4 && validatePartnerIncome(values, 4)) {
       if (!values.r031_priezvisko_a_meno) {
-        errors.r031_priezvisko_a_meno = 'Zadajte meno manžela/manželky.'
+        errors.r031_priezvisko_a_meno =
+          'Zadajte meno a priezvisko manžela/manželky.'
       }
       if (!values.r031_rodne_cislo) {
         errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
