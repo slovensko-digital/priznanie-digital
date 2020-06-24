@@ -209,14 +209,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_z_prijmov
-
-      /**TODO IMPORTANT Ked zaokruhlim centy nadol
-       * (https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu)
-       * Dostavam error o jeden cent. Ak nezaokruhlim, tak je to spravne a
-       aj eformom. Zeby mali oni bug?
-       */
-      // return floorDecimal(this.r078_zaklad_dane_z_prijmov) // TODO + tf.r065 + tf.r071 + tf.r079)
+      return this.r078_zaklad_dane_z_prijmov // + tf.r065 + tf.r071 + tf.r079
     },
     get r081() {
       return floorDecimal(
