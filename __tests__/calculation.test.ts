@@ -3,6 +3,7 @@ import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { sum } from '../src/lib/utils'
+import Decimal from 'decimal.js'
 
 describe('#parse', () => {
   const inputs = [
@@ -161,7 +162,7 @@ describe('With child (for tax year 2019)', () => {
       })
 
       const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
+      const part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
       expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
@@ -218,14 +219,16 @@ describe('With child (for tax year 2019)', () => {
 
       // childUnder6
       const childUnder6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const childUnder6Part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
+      const childUnder6Part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
       const childUnder6Sum = sum(childUnder6Part1, childUnder6Part2)
       expect(
         result.r106.eq(
-          childOver6Sum
-            .plus(childTurning6InFebPart2Sum)
-            .plus(childTurning6InJulSum)
-            .plus(childUnder6Sum),
+          sum(
+            childOver6Sum,
+            childTurning6InFebPart2Sum,
+            childTurning6InJulSum,
+            childUnder6Sum,
+          ),
         ),
       ).toBeTruthy()
     })
