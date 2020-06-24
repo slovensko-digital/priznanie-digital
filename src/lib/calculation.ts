@@ -12,8 +12,6 @@ const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
-export const round2decimal = (x: number) => Math.round(x * 100) / 100
-
 const mapChild = (child: ChildInput): Child => {
   const monthFrom = parseInt(child.monthFrom, 10)
   const monthTo = parseInt(child.monthTo, 10)

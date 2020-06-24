@@ -1,4 +1,4 @@
-import { calculate, round2decimal } from '../src/lib/calculation'
+import { calculate } from '../src/lib/calculation'
 import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
@@ -21,16 +21,6 @@ describe('#parse', () => {
     it(`for "${input}" should return "${output}"`, () => {
       expect(parseInputNumber(input)).toBe(output)
     })
-  })
-})
-
-describe('#round2decimal', () => {
-  it('should round down the number to 2 decimals', () => {
-    expect(round2decimal(1.3333)).toBe(1.33)
-  })
-
-  it('should round up the number to 2 decimals down', () => {
-    expect(round2decimal(1.3351)).toBe(1.34)
   })
 })
 
