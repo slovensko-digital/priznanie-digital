@@ -1,5 +1,6 @@
 import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
+import Decimal from 'decimal.js'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -160,4 +161,18 @@ export const parseFullName = (value: string): ParsedName => {
     last: lastNames.join(' '),
     title: titles.join(' '),
   }
+}
+
+/**  https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu
+ */
+export const floorDecimal = (decimal: Decimal) => {
+  return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
+}
+
+export const sum = (...numbers): Decimal =>
+  numbers.reduce((sum, current) => sum.add(current), new Decimal(0))
+
+export function parseInputNumber(input: string): number {
+  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
+  return Number(cleanedInput)
 }

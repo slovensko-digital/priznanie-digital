@@ -1,16 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
-import { formatCurrency } from '../lib/utils'
+import { formatCurrency, sum } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
-import { round2decimal } from '../lib/calculation'
+import Decimal from 'decimal.js'
 
 const buildSummaryParams = (rows: SummaryRow[]) => {
   return rows.reduce(
     (obj, { key, value }) => ({
       ...obj,
-      [key]: value > 0 ? formatCurrency(value) : '0,00 EUR',
+      [key]: value.gt(0) ? formatCurrency(value.toNumber()) : '0,00 EUR',
     }),
     {},
   )
@@ -20,7 +20,7 @@ interface SummaryRow {
   key: string
   title: string
   description?: string
-  value: number
+  value: Decimal
   fontSize?: number
 }
 interface SummaryProps {
@@ -45,8 +45,8 @@ const Summary = ({ rows }: SummaryProps) => (
               )}
             </td>
             <td className="govuk-table__cell govuk-table__cell--numeric">
-              {value > 0 ? (
-                <strong>{formatCurrency(value)}</strong>
+              {value.gt(0) ? (
+                <strong>{formatCurrency(value.toNumber())}</strong>
               ) : (
                 <span>0,00 EUR</span>
               )}
@@ -121,7 +121,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       description: taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok
         ? 'O vyplatenie preplatku / bonusu môžete požiadať v ďalšom kroku.'
         : '',
-      value: round2decimal(taxForm.r110 + taxForm.r126_danovy_preplatok),
+      value: sum(taxForm.r110, taxForm.r126_danovy_preplatok),
       key: 'r110',
     },
     {

@@ -1,3 +1,4 @@
+import { floorDecimal } from '../src/lib/utils'
 import {
   sortObjectKeys,
   formatCurrency,
@@ -15,6 +16,7 @@ import {
   getRodneCisloAgeAtYearAndMonth,
   parseFullName,
 } from '../src/lib/utils'
+import Decimal from 'decimal.js'
 
 describe('utils', () => {
   describe('#sortObjectKeys', () => {
@@ -315,6 +317,26 @@ describe('utils', () => {
     inputs.forEach(({ input, first, last, title }) => {
       it(`should correctly parse "${input}"`, () => {
         expect(parseFullName(input)).toStrictEqual({ first, last, title })
+      })
+    })
+  })
+  describe('#floorDecimal', () => {
+    describe('for valid values', () => {
+      const validInputs = [
+        {
+          input: new Decimal(916.487),
+          output: new Decimal(916.48),
+        },
+        {
+          input: new Decimal(99.654),
+          output: new Decimal(99.65),
+        },
+      ]
+
+      validInputs.forEach(({ input, output }) => {
+        it(`should floor "${input}" to "${output}"`, () => {
+          expect(floorDecimal(input).equals(output)).toBeTruthy()
+        })
       })
     })
   })

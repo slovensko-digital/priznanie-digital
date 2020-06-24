@@ -3,9 +3,13 @@ import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
+import Decimal from 'decimal.js'
 
 const boolToString = (bool: boolean) => {
   return bool ? '1' : '0'
+}
+const decimalToString = (decimal: Decimal) => {
+  return decimal.equals(0) ? '' : decimal.toFixed(2)
 }
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
@@ -79,11 +83,12 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.r74 = taxForm.r074_znizenie_partner
       ? taxForm.r074_znizenie_partner.toFixed(2)
       : ''
-    form.dokument.telo.r76 = taxForm.r076_kupele_spolu.toFixed(2)
-    form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.toFixed(2)
-    form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik
-      ? taxForm.r076a_kupele_danovnik.toFixed(2)
-      : ''
+
+    form.dokument.telo.r76 = decimalToString(taxForm.r076_kupele_spolu)
+    form.dokument.telo.r76b = decimalToString(
+      taxForm.r076b_kupele_partner_a_deti,
+    )
+    form.dokument.telo.r76a = decimalToString(taxForm.r076a_kupele_danovnik)
   }
   /** SECTION Children */
   if (taxForm.children) {
@@ -125,33 +130,29 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r72 = taxForm.r072_pred_znizenim.toFixed(2)
   form.dokument.telo.r73 = taxForm.r073.toFixed(2)
-  form.dokument.telo.r76 = taxForm.r076_kupele_spolu
-    ? taxForm.r076_kupele_spolu.toFixed(2)
-    : ''
 
-  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti
-    ? taxForm.r076b_kupele_partner_a_deti.toFixed(2)
-    : ''
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2)
   form.dokument.telo.r78 = taxForm.r078_zaklad_dane_z_prijmov.toFixed(2)
   form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2)
   form.dokument.telo.r81 = taxForm.r081.toFixed(2)
   form.dokument.telo.r90 = taxForm.r090.toFixed(2)
   form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2)
-  form.dokument.telo.r106 = taxForm.r106 ? taxForm.r106.toFixed(2) : ''
+  form.dokument.telo.r106 = decimalToString(taxForm.r106)
+
   form.dokument.telo.r107 = taxForm.r107.toFixed(2)
-  form.dokument.telo.r108 = taxForm.r108 ? taxForm.r108.toFixed(2) : ''
-  form.dokument.telo.r109 = taxForm.r109 ? taxForm.r109.toFixed(2) : ''
-  form.dokument.telo.r110 = taxForm.r110 ? taxForm.r110.toFixed(2) : ''
+  form.dokument.telo.r108 = decimalToString(taxForm.r108)
+  form.dokument.telo.r109 = decimalToString(taxForm.r109)
+  form.dokument.telo.r110 = decimalToString(taxForm.r110)
+
   form.dokument.telo.r113 = taxForm.r113.toFixed(2)
   form.dokument.telo.r114 = ''
-  form.dokument.telo.r120 = taxForm.r120 ? taxForm.r120.toFixed(2) : ''
-  form.dokument.telo.r122 = taxForm.r122 ? taxForm.r122.toFixed(2) : ''
+  form.dokument.telo.r120 = decimalToString(taxForm.r120)
+
+  form.dokument.telo.r122 = decimalToString(taxForm.r122)
 
   form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
-  form.dokument.telo.r126 = taxForm.r126_danovy_preplatok
-    ? taxForm.r126_danovy_preplatok.toFixed(2)
-    : ''
+  form.dokument.telo.r126 = decimalToString(taxForm.r126_danovy_preplatok)
+
   /** SECTION 2 percent */
   form.dokument.telo.neuplatnujem = boolToString(
     !taxForm.XIIoddiel_uplatnujem2percenta,
@@ -177,7 +178,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     if (taxForm.r110) {
       form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonus = '1'
     }
-    if (taxForm.r126_danovy_preplatok) {
+    if (taxForm.r126_danovy_preplatok.gt(0)) {
       form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
     }
   }

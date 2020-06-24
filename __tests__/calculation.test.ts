@@ -1,6 +1,9 @@
-import { calculate, parse, round2decimal } from '../src/lib/calculation'
+import { calculate } from '../src/lib/calculation'
+import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
+import { sum } from '../src/lib/utils'
+import Decimal from 'decimal.js'
 
 describe('#parse', () => {
   const inputs = [
@@ -16,18 +19,8 @@ describe('#parse', () => {
 
   inputs.forEach(({ input, output }) => {
     it(`for "${input}" should return "${output}"`, () => {
-      expect(parse(input)).toBe(output)
+      expect(parseInputNumber(input)).toBe(output)
     })
-  })
-})
-
-describe('#round2decimal', () => {
-  it('should round down the number to 2 decimals', () => {
-    expect(round2decimal(1.3333)).toBe(1.33)
-  })
-
-  it('should round up the number to 2 decimals down', () => {
-    expect(round2decimal(1.3351)).toBe(1.34)
   })
 })
 
@@ -42,77 +35,11 @@ describe('Basic use cases', () => {
       r006_titul: 'Ing. / PhD.',
     }
     const result = calculate(input as TaxFormUserInput)
-    expect(result.r080_zaklad_dane_celkovo).toBe(4062.65)
+    expect(result.r080_zaklad_dane_celkovo.toNumber()).toBe(4062.65)
     expect(result.r005_meno).toBe('Johnny')
     expect(result.r004_priezvisko).toBe('Mike Bravo')
     expect(result.r006_titul).toBe('Ing.')
     expect(result.r006_titul_za).toBe('PhD.')
-  })
-
-  test('Case 2', () => {
-    const input: TaxFormUserInput = {
-      ...initTaxFormUserInputValues,
-
-      t1r10_prijmy: '20000',
-
-      priloha3_r11_socialne: '1000',
-      priloha3_r13_zdravotne: '1000',
-    }
-    const result = calculate(input as TaxFormUserInput)
-    expect(result.r080_zaklad_dane_celkovo).toBe(2062.65)
-    expect(result.r105_dan).toBe(391.9)
-  })
-  test('Case 3', () => {
-    const input: TaxFormUserInput = {
-      ...initTaxFormUserInputValues,
-      t1r10_prijmy: '30000',
-      priloha3_r11_socialne: '2000',
-      priloha3_r13_zdravotne: '2000',
-    }
-    const result = calculate(input as TaxFormUserInput)
-    expect(result.r105_dan).toBe(771.9)
-  })
-  test('Case 4 (high income)', () => {
-    const input: TaxFormUserInput = {
-      ...initTaxFormUserInputValues,
-      t1r10_prijmy: '45000',
-      priloha3_r11_socialne: '1000',
-      priloha3_r13_zdravotne: '1000',
-    }
-    const result = calculate(input as TaxFormUserInput)
-    expect(result.r105_dan).toBe(3740.32)
-  })
-  test('Case 5 (high income 2)', () => {
-    const input: TaxFormUserInput = {
-      ...initTaxFormUserInputValues,
-      t1r10_prijmy: '51000',
-      priloha3_r11_socialne: '1000',
-      priloha3_r13_zdravotne: '1320',
-    }
-    const result = calculate(input as TaxFormUserInput)
-    expect(result.r105_dan).toBe(5089.32)
-  })
-})
-
-describe('With partner', () => {
-  test('Case 1', () => {
-    const input: TaxFormUserInput = {
-      ...initTaxFormUserInputValues,
-      t1r10_prijmy: '20000',
-      r031_priezvisko_a_meno: 'Summer Smith',
-      r031_rodne_cislo: '1111111',
-      r032_uplatnujem_na_partnera: true,
-      r032_partner_vlastne_prijmy: '1000',
-      r032_partner_pocet_mesiacov: '12',
-      r033_partner_kupele: true,
-      r033_partner_kupele_uhrady: '50',
-      priloha3_r11_socialne: '0',
-      priloha3_r13_zdravotne: '0',
-    }
-    const result = calculate(input as TaxFormUserInput)
-    expect(result.r080_zaklad_dane_celkovo).toBe(1075.3)
-    expect(result.r105_dan).toBe(204.3)
-    expect(result.r125_dan_na_uhradu).toBe(204.3)
   })
 })
 
@@ -187,9 +114,9 @@ describe('With child (for tax year 2019)', () => {
         hasChildren: true,
         children: [childUnder6],
       })
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 // april - oktober (vek < 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const part2 = sum(44.34, 44.34, 44.34, 44.34, 44.34, 44.34, 44.34) // april - oktober (vek < 6 rokov)
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('Child turning 6 in 2019 (february)', () => {
@@ -199,9 +126,9 @@ describe('With child (for tax year 2019)', () => {
         children: [childTurning6InFeb],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 // april - september (vek > 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const part2 = sum(22.17, 22.17, 22.17, 22.17, 22.17, 22.17, 22.17) // april - september (vek > 6 rokov)
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('Child turning 6 in 2019 (july)', () => {
@@ -211,10 +138,10 @@ describe('With child (for tax year 2019)', () => {
         children: [childTurning6InJul],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const part2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const part3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
-      expect(result.r106).toBe(round2decimal(part1 + part2 + part3))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const part2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
+      const part3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
+      expect(result.r106.eq(sum(part1, part2, part3))).toBeTruthy()
     })
 
     test('Child over 6', () => {
@@ -224,9 +151,9 @@ describe('With child (for tax year 2019)', () => {
         children: [childOver6],
       })
 
-      const part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      expect(result.r106).toBe(round2decimal(part1 + part2))
+      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
+      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('More children', () => {
@@ -242,42 +169,58 @@ describe('With child (for tax year 2019)', () => {
       })
 
       // childOver6
-      const childOver6Part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childOver6Part2 =
-        44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 + 44.34 // april - oktober (vek < 6 rokov)
-      const childOver6Sum = round2decimal(childOver6Part1 + childOver6Part2)
+      const childOver6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const childOver6Part2 = sum(
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+        44.34,
+      ) // april - oktober (vek < 6 rokov)
+      const childOver6Sum = sum(childOver6Part1, childOver6Part2)
 
       // childTurning6InFeb
-      const childTurning6InFebPart1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childTurning6InFebPart2 =
-        22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 + 22.17 // april - september (vek > 6 rokov)
-      const childTurning6InFebPart2Sum = round2decimal(
-        childTurning6InFebPart1 + childTurning6InFebPart2,
+      const childTurning6InFebPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
+      const childTurning6InFebPart2 = sum(
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+        22.17,
+      ) // april - september (vek > 6 rokov)
+      const childTurning6InFebPart2Sum = sum(
+        childTurning6InFebPart1,
+        childTurning6InFebPart2,
       )
 
       // childTurning6InJul
-      const childTurning6InJulPart1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const childTurning6InJulPart2 = 44.34 + 44.34 + 44.34 + 44.34 // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const childTurning6InJulPart3 = 22.17 + 22.17 + 22.17 // august - oktober (ved nad 6 rokov)
-      const childTurning6InJulSum = round2decimal(
-        childTurning6InJulPart1 +
-          childTurning6InJulPart2 +
-          childTurning6InJulPart3,
+      const childTurning6InJulPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const childTurning6InJulPart2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
+      const childTurning6InJulPart3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
+      const childTurning6InJulSum = sum(
+        childTurning6InJulPart1,
+        childTurning6InJulPart2,
+        childTurning6InJulPart3,
       )
 
       // childUnder6
-      const childUnder6Part1 = 22.17 + 22.17 // februar, marec (suma pre januar - marec)
-      const childUnder6Part2 = 22.17 * 7 // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      const childUnder6Sum = round2decimal(childUnder6Part1 + childUnder6Part2)
-
-      expect(result.r106).toBe(
-        round2decimal(
-          childOver6Sum +
-            childTurning6InFebPart2Sum +
-            childTurning6InJulSum +
+      const childUnder6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
+      const childUnder6Part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
+      const childUnder6Sum = sum(childUnder6Part1, childUnder6Part2)
+      expect(
+        result.r106.eq(
+          sum(
+            childOver6Sum,
+            childTurning6InFebPart2Sum,
+            childTurning6InJulSum,
             childUnder6Sum,
+          ),
         ),
-      )
+      ).toBeTruthy()
     })
   })
 })

@@ -1,5 +1,5 @@
 import { PartnerUserInput } from '../types/PageUserInputs'
-import { parse } from './calculation'
+import { parseInputNumber } from "./utils"
 
 const PARTNER_MAX_INCOME = 3937.35
 
@@ -17,7 +17,7 @@ export const validatePartnerIncome = (
 
   const step4 =
     values.r032_partner_vlastne_prijmy !== '' &&
-    parse(values.r032_partner_vlastne_prijmy) <= PARTNER_MAX_INCOME
+    parseInputNumber(values.r032_partner_vlastne_prijmy) <= PARTNER_MAX_INCOME
 
   const steps = [step1, step2, step3, step4]
 

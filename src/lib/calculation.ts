@@ -1,19 +1,16 @@
-import floor from 'lodash.floor'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
-import { getRodneCisloAgeAtYearAndMonth } from './utils'
+import {
+  getRodneCisloAgeAtYearAndMonth,
+  floorDecimal,
+  parseInputNumber,
+} from './utils'
+import Decimal from 'decimal.js'
 
 const NEZDANITELNA_CAST_ZAKLADU = 3937.35
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = 0.19
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
-
-export function parse(input: string) {
-  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
-  return Number(cleanedInput)
-}
-
-export const round2decimal = (x: number) => Math.round(x * 100) / 100
 
 const mapChild = (child: ChildInput): Child => {
   const monthFrom = parseInt(child.monthFrom, 10)
@@ -61,9 +58,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
-    r075_zaplatene_prispevky_na_dochodok: Math.min(
+    r075_zaplatene_prispevky_na_dochodok: Decimal.min(
       180,
-      parse(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+      new Decimal(
+        parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+      ),
     ),
 
     /** SECTION Partner */
@@ -72,55 +71,62 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ? input?.r031_rodne_cislo.replace(/\D/g, '')
       : '',
     r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
-    r032_partner_vlastne_prijmy: parse(
-      input?.r032_partner_vlastne_prijmy ?? '0',
+    r032_partner_vlastne_prijmy: new Decimal(
+      parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),
     ),
-    r032_partner_pocet_mesiacov: parse(
+    r032_partner_pocet_mesiacov: parseInputNumber(
       input?.r032_partner_pocet_mesiacov ?? '0',
     ),
     r033_partner_kupele: input?.r033_partner_kupele ?? false,
-    r033_partner_kupele_uhrady: parse(input?.r033_partner_kupele_uhrady ?? '0'),
+    r033_partner_kupele_uhrady: new Decimal(
+      parseInputNumber(input?.r033_partner_kupele_uhrady ?? '0'),
+    ),
 
     /** SECTION Children */
     r034: input.hasChildren ? input.children.map(mapChild) : [],
     get r036_deti_kupele() {
       const maxAmountPerChild = 50
       const maxAmountChildrenTotal =
-        (this.r034?.length ?? 0) * maxAmountPerChild
+        new Decimal(this.r034?.length ?? 0).times(maxAmountPerChild)
 
-      return round2decimal(
-        Math.min(parse(input?.r036_deti_kupele ?? '0'), maxAmountChildrenTotal),
+      return Decimal.min(
+        new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),
+        maxAmountChildrenTotal,
       )
     },
 
     /** SECTION Mortgage */
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    r037_zaplatene_uroky: parse(input?.r037_zaplatene_uroky ?? '0'),
-    r037_pocetMesiacov: parse(input?.r037_pocetMesiacov ?? '0'),
+    r037_zaplatene_uroky: new Decimal(
+      parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
+    ),
+    r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
 
-    priloha3_r11_socialne: parse(input.priloha3_r11_socialne),
-    priloha3_r13_zdravotne: parse(input.priloha3_r13_zdravotne),
-    r038: parse(input?.r038 ?? '0'),
-    r039: parse(input?.r039 ?? '0'),
+    priloha3_r11_socialne: new Decimal(
+      parseInputNumber(input.priloha3_r11_socialne),
+    ),
+    priloha3_r13_zdravotne: new Decimal(
+      parseInputNumber(input.priloha3_r13_zdravotne),
+    ),
+    r038: new Decimal(parseInputNumber(input?.r038 ?? '0')),
+    r039: new Decimal(parseInputNumber(input?.r039 ?? '0')),
 
     /** SECTION Prijmy */
-    t1r10_prijmy: parse(input.t1r10_prijmy),
+    t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
     get t1r2_prijmy() {
       return this.t1r10_prijmy
     },
     get t1r10_vydavky() {
-      return round2decimal(
-        Math.min(this.t1r10_prijmy * 0.6, PAUSALNE_VYDAVKY_MAX) +
-          this.priloha3_r08_poistne,
-      )
+      return Decimal.min(
+        this.t1r10_prijmy.times(0.6),
+        PAUSALNE_VYDAVKY_MAX,
+      ).add(this.priloha3_r08_poistne)
     },
     get priloha3_r08_poistne() {
-      return round2decimal(
-        this.priloha3_r11_socialne + this.priloha3_r13_zdravotne,
-      )
+      return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
     },
     get r040() {
-      return round2decimal(this.r038 - this.r039)
+      return this.r038.minus(this.r039)
     },
     get r041() {
       return this.t1r10_prijmy
@@ -129,7 +135,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r10_vydavky
     },
     get r043() {
-      return round2decimal(Math.abs(this.r041 - this.r042))
+      return Decimal.abs(this.r041.minus(this.r042))
     },
     get r047() {
       return this.r043 // this.r044 + this.r045 - this.r046);
@@ -141,74 +147,73 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r055
     },
     get r072_pred_znizenim() {
-      return this.r057 + this.r040
+      return this.r057.add(this.r040)
     },
     get r073() {
-      const result =
-        this.r072_pred_znizenim > 20507 // TODO test both cases here
-          ? Math.max(0, 9064.094 - (1 / 4) * this.r072_pred_znizenim)
-          : Math.max(0, NEZDANITELNA_CAST_ZAKLADU)
-
-      return round2decimal(result)
+      return this.r072_pred_znizenim.gt(20507) // TODO test both cases here
+        ? Decimal.max(
+            0,
+            new Decimal(9064.094).sub(this.r072_pred_znizenim.times(0.25)),
+          )
+        : Decimal.max(0, NEZDANITELNA_CAST_ZAKLADU)
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
-        const result =
-          this.r072_pred_znizenim > 36256.38
-            ? Math.max(
-                0,
-                (13001.438 -
-                  (1 / 4) * this.r072_pred_znizenim -
-                  Math.max(this.r032_partner_vlastne_prijmy, 0)) *
-                  (1 / 12) *
-                  this.r032_partner_pocet_mesiacov,
-              )
-            : Math.max(
-                0,
-                (3937.35 - Math.max(this.r032_partner_vlastne_prijmy, 0)) *
-                  (1 / 12) *
-                  this.r032_partner_pocet_mesiacov,
-              )
-        return round2decimal(result)
+        return this.r072_pred_znizenim.gt(36256.38)
+          ? Decimal.max(
+              0,
+              new Decimal(13001.438)
+                .minus(
+                  this.r072_pred_znizenim
+                    .times(0.25)
+                    .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
+                )
+                .times(1 / 12)
+                .times(this.r032_partner_pocet_mesiacov),
+            )
+          : Decimal.max(
+              0,
+              new Decimal(3937.35).minus(
+                Decimal.max(this.r032_partner_vlastne_prijmy, 0)
+                  .times(1 / 12)
+                  .times(this.r032_partner_pocet_mesiacov),
+              ),
+            )
       }
-      return 0
+      return new Decimal(0)
     },
     get r076_kupele_spolu() {
-      return round2decimal(
-        this.r076a_kupele_danovnik + this.r076b_kupele_partner_a_deti,
-      )
+      return this.r076b_kupele_partner_a_deti.plus(this.r076a_kupele_danovnik)
     },
     get r076a_kupele_danovnik() {
-      return round2decimal(parse(input?.r076a_kupele_danovnik ?? '0'))
+      return new Decimal(parseInputNumber(input?.r076a_kupele_danovnik ?? '0'))
     },
     get r076b_kupele_partner_a_deti() {
-      return round2decimal(
-        this.r033_partner_kupele_uhrady + this.r036_deti_kupele,
-      )
+      return this.r033_partner_kupele_uhrady.plus(this.r036_deti_kupele)
     },
     get r077_nezdanitelna_cast() {
-      return round2decimal(
-        Math.min(
-          this.r073 +
-            this.r074_znizenie_partner +
-            this.r075_zaplatene_prispevky_na_dochodok +
-            this.r076_kupele_spolu,
-          this.r072_pred_znizenim,
-        ),
+      return Decimal.min(
+        this.r073
+          .plus(this.r074_znizenie_partner)
+          .plus(this.r075_zaplatene_prispevky_na_dochodok)
+          .plus(this.r076_kupele_spolu),
+        this.r072_pred_znizenim,
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return round2decimal(
-        Math.max(this.r072_pred_znizenim - this.r077_nezdanitelna_cast, 0),
+      return Decimal.max(
+        this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
+        0,
       )
     },
     get r080_zaklad_dane_celkovo() {
-      return round2decimal(floor(this.r078_zaklad_dane_z_prijmov, 2)) // TODO + tf.r065 + tf.r071 + tf.r079)
+      return this.r078_zaklad_dane_z_prijmov // + tf.r065 + tf.r071 + tf.r079
     },
     get r081() {
-      return round2decimal(
-        floor(tf.r080_zaklad_dane_celkovo * DAN_Z_PRIJMU_SADZBA, 2),
-      ) // TODO high income
+      return floorDecimal(
+        tf.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
+      )
+      // TODO high income
     },
     get r090() {
       return this.r081
@@ -218,144 +223,141 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r090
     },
     get r106() {
-      return round2decimal(
-        this.r034.reduce((previousSum, currentChild) => {
-          let currentSum = 0
-          const rateJanuaryToMarch = 22.17
-          const rateYoungChild = 44.34
-          const rateOldChild = 22.17
+      return this.r034.reduce((previousSum, currentChild) => {
+        let currentSum = new Decimal(0)
+        const rateJanuaryToMarch = new Decimal(22.17)
+        const rateYoungChild = new Decimal(44.34)
+        const rateOldChild = new Decimal(22.17)
 
-          const getRateAprilToDecember = (month: number) => {
-            const age = getRodneCisloAgeAtYearAndMonth(
-              currentChild.rodneCislo,
-              2019,
-              month - 1,
-            )
-            return age < 6 ? rateYoungChild : rateOldChild
-          }
+        const getRateAprilToDecember = (month: number) => {
+          const age = getRodneCisloAgeAtYearAndMonth(
+            currentChild.rodneCislo,
+            2019,
+            month - 1,
+          )
+          return age < 6 ? rateYoungChild : rateOldChild
+        }
 
-          if (currentChild.m00 || currentChild.m01) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m02) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m03) {
-            currentSum += rateJanuaryToMarch
-          }
-          if (currentChild.m00 || currentChild.m04) {
-            currentSum += getRateAprilToDecember(4)
-          }
-          if (currentChild.m00 || currentChild.m05) {
-            currentSum += getRateAprilToDecember(5)
-          }
-          if (currentChild.m00 || currentChild.m06) {
-            currentSum += getRateAprilToDecember(6)
-          }
-          if (currentChild.m00 || currentChild.m07) {
-            currentSum += getRateAprilToDecember(7)
-          }
-          if (currentChild.m00 || currentChild.m08) {
-            currentSum += getRateAprilToDecember(8)
-          }
-          if (currentChild.m00 || currentChild.m09) {
-            currentSum += getRateAprilToDecember(9)
-          }
-          if (currentChild.m00 || currentChild.m10) {
-            currentSum += getRateAprilToDecember(10)
-          }
-          if (currentChild.m00 || currentChild.m11) {
-            currentSum += getRateAprilToDecember(11)
-          }
-          if (currentChild.m00 || currentChild.m12) {
-            currentSum += getRateAprilToDecember(12)
-          }
+        if (currentChild.m00 || currentChild.m01) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m02) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m03) {
+          currentSum = currentSum.plus(rateJanuaryToMarch)
+        }
+        if (currentChild.m00 || currentChild.m04) {
+          currentSum = currentSum.plus(getRateAprilToDecember(4))
+        }
+        if (currentChild.m00 || currentChild.m05) {
+          currentSum = currentSum.plus(getRateAprilToDecember(5))
+        }
+        if (currentChild.m00 || currentChild.m06) {
+          currentSum = currentSum.plus(getRateAprilToDecember(6))
+        }
+        if (currentChild.m00 || currentChild.m07) {
+          currentSum = currentSum.plus(getRateAprilToDecember(7))
+        }
+        if (currentChild.m00 || currentChild.m08) {
+          currentSum = currentSum.plus(getRateAprilToDecember(8))
+        }
+        if (currentChild.m00 || currentChild.m09) {
+          currentSum = currentSum.plus(getRateAprilToDecember(9))
+        }
+        if (currentChild.m00 || currentChild.m10) {
+          currentSum = currentSum.plus(getRateAprilToDecember(10))
+        }
+        if (currentChild.m00 || currentChild.m11) {
+          currentSum = currentSum.plus(getRateAprilToDecember(11))
+        }
+        if (currentChild.m00 || currentChild.m12) {
+          currentSum = currentSum.plus(getRateAprilToDecember(12))
+        }
 
-          return round2decimal(previousSum + currentSum)
-        }, 0),
-      )
+        return previousSum.plus(currentSum)
+      }, new Decimal(0))
     },
     get r107() {
-      return round2decimal(Math.max(this.r105_dan - this.r106, 0))
+      return Decimal.max(this.r105_dan.minus(this.r106), 0)
     },
     get r108() {
-      return parse(input?.r108 ?? '0')
+      return new Decimal(parseInputNumber(input?.r108 ?? '0'))
     },
     get r109() {
-      return round2decimal(Math.max(this.r106 - this.r108, 0))
+      return Decimal.max(new Decimal(this.r106).minus(this.r108), 0)
     },
     get r110() {
-      return round2decimal(Math.max(this.r109 - this.r105_dan, 0))
+      return Decimal.max(this.r109.minus(this.r105_dan), 0)
     },
     get mozeZiadatVratitDanovyBonusAleboPreplatok() {
-      const bonusPlusPreplatok = this.r110 + this.r126_danovy_preplatok
-      return bonusPlusPreplatok > 0
+      const bonusPlusPreplatok = this.r126_danovy_preplatok.plus(this.r110)
+      return bonusPlusPreplatok.gt(0)
     },
     /** TODO High income test case */
     get r112() {
-      return round2decimal(Math.min(this.r037_zaplatene_uroky * 0.5, 400))
+      return Decimal.min(this.r037_zaplatene_uroky.times(0.5), 400)
     },
     get r113() {
-      return round2decimal(this.r107 - this.r112)
+      return this.r107.minus(this.r112)
     },
     /** TODO */
     get r114() {
-      return 0
+      return new Decimal(0)
     },
     get r115() {
-      return round2decimal(Math.max(this.r112 - this.r114, 0))
+      return Decimal.max(this.r112.minus(this.r114), 0)
     },
     get r120() {
-      return parse(input?.r120 ?? '0')
+      return new Decimal(parseInputNumber(input?.r120 ?? '0'))
     },
     get r122() {
-      return parse(input?.r122 ?? '0')
+      return new Decimal(parseInputNumber(input?.r122 ?? '0'))
     },
     get r125_dan_na_uhradu() {
-      return round2decimal(
-        Math.max(0, this.r105_dan + this.r114 - this.r112 - tf.r106),
-        // // - tf.r106 +
-        // tf.r108 +
-        // tf.r110 -
-        // // tf.r112 +
-        // // tf.r114 +
-        // tf.r116 +
-        // tf.r117 -
-        // tf.r118 -
-        // tf.r119 -
-        // tf.r120 -
-        // tf.r121 -
-        // tf.r122 -
-        // tf.r123 -
-        // tf.r124;
+      return Decimal.max(
+        0,
+        this.r105_dan.plus(this.r114).minus(this.r112).minus(tf.r106),
       )
+      // // - tf.r106 +
+      // tf.r108 +
+      // tf.r110 -
+      // // tf.r112 +
+      // // tf.r114 +
+      // tf.r116 +
+      // tf.r117 -
+      // tf.r118 -
+      // tf.r119 -
+      // tf.r120 -
+      // tf.r121 -
+      // tf.r122 -
+      // tf.r123 -
+      // tf.r124;
     },
     get r126_danovy_preplatok() {
-      return round2decimal(
-        Math.abs(
-          Math.min(
-            0,
-            this.r105_dan -
-              this.r106 +
-              this.r108 +
-              this.r110 -
-              this.r120 -
-              this.r122,
-          ),
+      return Decimal.abs(
+        Decimal.min(
+          0,
+          new Decimal(this.r105_dan)
+            .minus(this.r106)
+            .plus(this.r108)
+            .plus(this.r110)
+            .minus(this.r120)
+            .minus(this.r122),
         ),
       )
     },
     get r141() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
-        return 0
+        return new Decimal(0)
       }
 
       // TODO do 3% as well
       const rate = 2
-      const NGOamount = floor((this.r113 / 100) * rate, 2)
+      const NGOamount = floorDecimal(this.r113.div(100).times(rate))
 
       /** Min of 3 EUR is required */
-      return round2decimal(NGOamount >= 3 ? NGOamount : 0)
+      return NGOamount.gte(3) ? NGOamount : new Decimal(0)
     },
     get r142() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
@@ -383,8 +385,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     get eligibleForChildrenBonus() {
       return (
-        this.t1r10_prijmy >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA ||
-        this.r038 >= MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
+        this.t1r10_prijmy.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA) ||
+        this.r038.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA)
       )
     },
 
