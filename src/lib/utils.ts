@@ -1,6 +1,7 @@
 import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
 import Decimal from 'decimal.js'
+import Cookies from 'js-cookie'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -175,4 +176,23 @@ export const sum = (...numbers): Decimal =>
 export function parseInputNumber(input: string): number {
   const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
+}
+
+export const setCookie = (key: string, val: any) => {
+  return Cookies.set(key, JSON.stringify(val), {
+    expires: 7,
+  })
+}
+
+export const convertStringToObject = (values: any) => {
+  if (!values) return {}
+  if (typeof values === 'string') {
+    try {
+      return JSON.parse(values)
+    } catch {
+      return {}
+    }
+  }
+
+  return values
 }

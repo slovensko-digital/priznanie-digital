@@ -12,6 +12,7 @@ import {
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+import { convertStringToObject } from './utils'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
@@ -122,7 +123,16 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...{ datum: '' },
 }
 
-export const initialPostponeUserInput: PostponeUserInput = {
+export const getInitialTaxFormInputValues = (
+  cookieTaxFormUserInputValues: TaxFormUserInput,
+) => {
+  return {
+    ...initTaxFormUserInputValues,
+    ...convertStringToObject(cookieTaxFormUserInputValues),
+  }
+}
+
+const initialPostponeUserInput: PostponeUserInput = {
   prijmy_zo_zahranicia: undefined,
   dic: '',
   meno_priezvisko: '',
@@ -132,4 +142,13 @@ export const initialPostponeUserInput: PostponeUserInput = {
   cislo: '',
   stat: '',
   datum: '',
+}
+
+export const getInitialPostponeUserInput = (
+  cookiePostponeUserInput: PostponeUserInput,
+) => {
+  return {
+    ...initialPostponeUserInput,
+    ...convertStringToObject(cookiePostponeUserInput),
+  }
 }
