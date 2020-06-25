@@ -3,8 +3,9 @@ import { Form } from 'formik'
 import classNames from 'classnames'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
-import { CheckboxSmall, FormWrapper } from './FormComponents'
+import { FormWrapper } from './FormComponents'
 import { ErrorSummary } from './ErrorSummary'
+
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {
     ...taxFormUserInput,
@@ -36,11 +37,22 @@ interface Props {
 }
 
 export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
+  // const [isUsefulSubmitted, setIsUsefulSubmitted] = useState(false)
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
     undefined,
   )
-  if (isOpen) {
+
+  // const usefulOnClick = () => {
+  //   /** TODO make actually do something */
+  //   // fetch(
+  //   //   'https://navody.digital/spatna-vazba?current_path=priznanie-digital-info-test&amp;feedback_type=Useful',
+  //   //   { method: 'POST' },
+  //   // );
+  //   setIsUsefulSubmitted(true)
+  // }
+
+  if (isFeedbackOpen) {
     return (
       <div
         id="sdn-feedbackbar-form-foundbug"
@@ -62,7 +74,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
               href="#"
               onClick={(e) => {
                 e.preventDefault()
-                setIsOpen(false)
+                setIsFeedbackOpen(false)
               }}
             >
               zatvoriť
@@ -100,9 +112,8 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                     body: JSON.stringify({
                       whatWereYouDoing: values.whatWereYouDoing,
                       whatWentWrong: values.whatWentWrong,
-                      taxFormUserInput: values.agree
-                        ? anonymizeTaxForm(taxFormUserInput)
-                        : null,
+                      taxFormUserInput: anonymizeTaxForm(taxFormUserInput),
+
                       // postponeUserInput: values.agree
                       //   ? postponeUserInput
                       //   : null,
@@ -172,10 +183,6 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
                         {...formik.getFieldProps('whatWentWrong')}
                       />
                     </div>
-                    <CheckboxSmall
-                      name="agree"
-                      label="Suhlasím s odoslaním anonymných dát ktoré som vyplnil/a"
-                    />
                     <button
                       type="submit"
                       data-test="submit"
@@ -201,14 +208,44 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
   }
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
-      <div className="govuk-grid-column-one-third">
-        <img src="/assets/images/icon-lock.svg" alt="" className="icon" />
-        <span>Bezpečné SSL pripojenie</span>
+      <div className="sdn-feedbackbar__useful">
+        {/* {!isUsefulSubmitted ? (
+          <>
+            <span className="sdn-feedbackbar__useful-question">
+              Boli tieto informácie pre vás užitočné?
+            </span>
+            <span className="govuk-!-display-inline-block">
+              <span className="sdn-feedbackbar__yes">
+                <a
+                  className="sdn-feedbackbar__link"
+                  rel="nofollow"
+                  href="#"
+                  onClick={usefulOnClick}
+                >
+                  Áno
+                </a>
+              </span>
+              <span className="sdn-feedbackbar__no">
+                <a
+                  href="#"
+                  className="sdn-feedbackbar__link"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsFeedbackOpen(true)
+                  }}
+                >
+                  Nie
+                </a>
+              </span>
+            </span>
+          </>
+        ) : (
+          <div id="sdn-feedbackbar-thanks">
+            <span>Ďakujeme za odozvu!&nbsp;</span>
+          </div>
+        )} */}
       </div>
-      <div className="govuk-grid-column-one-third">
-        <img src="/assets/images/icon-correct.svg" alt="" className="icon" />
-        <span>Overené certifikovaným účtovníkom</span>
-      </div>
+
       <div className="sdn-feedbackbar__foundbug">
         <span>Našli ste na stránke chybu?&nbsp;</span>
         <span>
@@ -218,8 +255,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
             data-test="feedback"
             onClick={(e) => {
               e.preventDefault()
-              setIsSubmittedSuccessfully(undefined)
-              setIsOpen(true)
+              setIsFeedbackOpen(true)
             }}
           >
             Napíšte nám
