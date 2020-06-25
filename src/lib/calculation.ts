@@ -6,10 +6,11 @@ import {
   parseInputNumber,
 } from './utils'
 import Decimal from 'decimal.js'
+import { sum } from './utils'
 
-const NEZDANITELNA_CAST_ZAKLADU = 3937.35
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
-const DAN_Z_PRIJMU_SADZBA = 0.19
+const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
 const mapChild = (child: ChildInput): Child => {
@@ -148,15 +149,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r055
     },
     get r072_pred_znizenim() {
-      return this.r057.add(this.r040)
+      return sum(this.r057, this.r040)
     },
     get r073() {
-      return this.r072_pred_znizenim.gt(20507) // TODO test both cases here
-        ? Decimal.max(
-            0,
-            new Decimal(9064.094).sub(this.r072_pred_znizenim.times(0.25)),
-          )
-        : Decimal.max(0, NEZDANITELNA_CAST_ZAKLADU)
+      if (this.r072_pred_znizenim.gte(36256.37)) {
+        return new Decimal(0)
+      }
+      if (this.r072_pred_znizenim.gt(20507)) {
+        return Decimal.max(
+          0,
+          new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
+        )
+      }
+      return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
@@ -169,14 +174,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                     .times(0.25)
                     .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
                 )
-                .times(1 / 12)
+                .times(new Decimal(1).div(12))
                 .times(this.r032_partner_pocet_mesiacov),
             )
           : Decimal.max(
               0,
               new Decimal(3937.35).minus(
                 Decimal.max(this.r032_partner_vlastne_prijmy, 0)
-                  .times(1 / 12)
+                  .times(new Decimal(1).div(12))
                   .times(this.r032_partner_pocet_mesiacov),
               ),
             )
@@ -211,10 +216,24 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r078_zaklad_dane_z_prijmov // + tf.r065 + tf.r071 + tf.r079
     },
     get r081() {
+      if (this.r080_zaklad_dane_celkovo.isZero()) {
+        return new Decimal(0)
+      }
+      if (this.r080_zaklad_dane_celkovo.gte(36256.38)) {
+        return floorDecimal(
+          new Decimal(36256.38)
+            .times(DAN_Z_PRIJMU_SADZBA)
+            .plus(
+              floorDecimal(this.r080_zaklad_dane_celkovo)
+                .minus(36256.38)
+                .times(0.25),
+            ),
+        )
+      }
+
       return floorDecimal(
         tf.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
       )
-      // TODO high income
     },
     get r090() {
       return this.r081

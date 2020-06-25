@@ -59,6 +59,7 @@ describe('Cases', () => {
     'withSpa',
     'withBonus',
     'withEmploymentBonus',
+    'withHighIncome',
     'bugReport1',
   ].forEach((testCase) => {
     it(testCase, (done) => {

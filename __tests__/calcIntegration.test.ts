@@ -31,6 +31,7 @@ describe('calcIntergration', () => {
     'withSpa',
     'withBonus',
     'withEmploymentBonus',
+    'withHighIncome',
     'bugReport1',
   ].forEach((testCase) => {
     test(testCase, async () => {
