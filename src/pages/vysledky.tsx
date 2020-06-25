@@ -70,7 +70,11 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     .map((v) => v.trim())
 
   const summaryRows = [
-    { title: 'Príjmy', value: taxForm.t1r2_prijmy, key: 't1r2_prijmy' },
+    {
+      title: 'Príjmy',
+      value: taxForm.t1r10_prijmy.plus(taxForm.r038),
+      key: 't1r10_prijmy',
+    },
     {
       title: 'Zdravotné poistné',
       value: taxForm.priloha3_r13_zdravotne,

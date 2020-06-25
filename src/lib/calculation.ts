@@ -86,8 +86,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r034: input.hasChildren ? input.children.map(mapChild) : [],
     get r036_deti_kupele() {
       const maxAmountPerChild = 50
-      const maxAmountChildrenTotal =
-        new Decimal(this.r034?.length ?? 0).times(maxAmountPerChild)
+      const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
+        maxAmountPerChild,
+      )
 
       return Decimal.min(
         new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),

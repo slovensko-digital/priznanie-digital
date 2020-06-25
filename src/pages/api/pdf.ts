@@ -301,7 +301,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   if (form.r034 && form.r034.some((child) => child.kupelnaStarostlivost)) {
     // r036_deti_kupele
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 303, form.r036_deti_kupele.toNumber())
+    tpl.writeNumberToBoxes(
+      FIRST_COLUMN + 396,
+      303,
+      form.r036_deti_kupele.toNumber(),
+    )
   }
 
   if (form.r037_uplatnuje_uroky) {
@@ -411,13 +415,21 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r072_pred_znizenim
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 501, form.r072_pred_znizenim.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    501,
+    form.r072_pred_znizenim.toNumber(),
+  )
 
   // r073
   tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 473, form.r073.toNumber())
 
   // r074_znizenie_partner
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 448, form.r074_znizenie_partner.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    448,
+    form.r074_znizenie_partner.toNumber(),
+  )
 
   // 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur
   if (form.platil_prispevky_na_dochodok) {
@@ -429,10 +441,18 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   }
 
   // r076_kupele_spolu
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 386, form.r076_kupele_spolu.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    386,
+    form.r076_kupele_spolu.toNumber(),
+  )
 
   // r076a_kupele_danovnik
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 358, form.r076a_kupele_danovnik.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    358,
+    form.r076a_kupele_danovnik.toNumber(),
+  )
 
   // r076b_kupele_partner_a_deti
   tpl.writeNumberToBoxes(
@@ -442,7 +462,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   )
 
   // r077_nezdanitelna_cast
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 308, form.r077_nezdanitelna_cast.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    308,
+    form.r077_nezdanitelna_cast.toNumber(),
+  )
 
   // r078_zaklad_dane_z_prijmov
   tpl.writeNumberToBoxes(
@@ -452,7 +476,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   )
 
   // r080_zaklad_dane_celkovo
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 232, form.r080_zaklad_dane_celkovo.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 390,
+    232,
+    form.r080_zaklad_dane_celkovo.toNumber(),
+  )
 
   // r081
   tpl.writeNumberToBoxes(FIRST_COLUMN + 390, 206, form.r081.toNumber())
@@ -494,10 +522,18 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r115.toNumber())
 
   // r125_dan_na_uhradu
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 313, form.r125_dan_na_uhradu.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 396,
+    313,
+    form.r125_dan_na_uhradu.toNumber(),
+  )
 
   // r126_danovy_preplatok
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 271, form.r126_danovy_preplatok.toNumber())
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 396,
+    271,
+    form.r126_danovy_preplatok.toNumber(),
+  )
 
   // ***** PAGE 11
   tpl.nextPage()

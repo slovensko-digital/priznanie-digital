@@ -1,7 +1,7 @@
 import { validate } from '../src/pages/kupele'
 import { testValidation } from './utils/testValidation'
 
-describe('hypoteka', () => {
+describe('kupele', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
@@ -44,6 +44,8 @@ describe('hypoteka', () => {
         input: {
           kupele: true,
           r033_partner_kupele: true,
+          r031_priezvisko_a_meno: 'Fake Name',
+          r031_rodne_cislo: '020314 / 8286',
           r033_partner_kupele_uhrady: '30',
         },
         expected: [],
@@ -54,12 +56,18 @@ describe('hypoteka', () => {
           r033_partner_kupele: true,
           r033_partner_kupele_uhrady: '60',
         },
-        expected: ['r033_partner_kupele_uhrady'],
+        expected: [
+          'r031_priezvisko_a_meno',
+          'r031_rodne_cislo',
+          'r033_partner_kupele_uhrady',
+        ],
       },
       {
         input: {
           kupele: true,
           r033_partner_kupele: true,
+          r031_priezvisko_a_meno: 'Fake Name',
+          r031_rodne_cislo: '020314 / 8286',
           r033_partner_kupele_uhrady: '-10',
         },
         expected: ['r033_partner_kupele_uhrady'],
@@ -69,7 +77,13 @@ describe('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: '30',
-          children: [{}],
+          children: [
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: 'Fake Name',
+              rodneCislo: '020314 / 8286',
+            },
+          ],
         },
         expected: [],
       },
@@ -78,7 +92,13 @@ describe('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: '60',
-          children: [{}],
+          children: [
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: 'Fake Name',
+              rodneCislo: '020314 / 8286',
+            },
+          ],
         },
         expected: ['r036_deti_kupele'],
       },
@@ -87,7 +107,18 @@ describe('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: '60',
-          children: [{}, {}],
+          children: [
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: 'Fake Name',
+              rodneCislo: '020314 / 8286',
+            },
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: 'Fake Name',
+              rodneCislo: '985820 / 1903',
+            },
+          ],
         },
         expected: [],
       },
@@ -96,8 +127,30 @@ describe('hypoteka', () => {
           kupele: true,
           childrenInSpa: true,
           r036_deti_kupele: '-10',
+          children: [
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: 'Fake Name',
+              rodneCislo: '985820 / 1903',
+            },
+          ],
         },
         expected: ['r036_deti_kupele'],
+      },
+      {
+        input: {
+          kupele: true,
+          childrenInSpa: true,
+          r036_deti_kupele: '10',
+          children: [
+            {
+              kupelnaStarostlivost: true,
+              priezviskoMeno: '',
+              rodneCislo: '',
+            },
+          ],
+        },
+        expected: ['children'],
       },
     ])
   })
