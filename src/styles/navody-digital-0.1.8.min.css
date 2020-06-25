@@ -6234,11 +6234,11 @@ a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"])
     flex-direction: column;
   }
 }
-@media (max-width: 40.0525em) {
+/* @media (max-width: 40.0525em) {
   .sdn-feedbackbar__foundbug {
     margin-top: 10px;
   }
-}
+} */
 .sdn-feedbackbar__useful-question {
   margin-right: 15px;
 }
@@ -6305,9 +6305,9 @@ a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"])
 }
 @media (min-width: 40.0625em) {
   .sdn-feedbackbar__container {
-    padding-top: 25px;
+    /* padding-top: 25px; */
     padding-left: 30px;
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
     padding-right: 30px;
   }
 }
