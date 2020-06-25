@@ -84,6 +84,9 @@ export type SpaUserInput = Pick<
   | 'danovnikInSpa'
   | 'childrenInSpa'
   | 'children'
+  | 'r032_uplatnujem_na_partnera'
+  | 'r031_priezvisko_a_meno'
+  | 'r031_rodne_cislo'
 >
 
 export type TaxBonusUserInput = Pick<

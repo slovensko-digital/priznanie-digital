@@ -172,11 +172,11 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         width="auto"
         maxLength={13}
         onChange={async (event) => {
-          const pscValue = formatRodneCislo(
+          const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
             savedValues.rodneCislo,
           )
-          setFieldValue(`children[${index}].rodneCislo`, pscValue)
+          setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
       />
       <div className="govuk-form-group">
