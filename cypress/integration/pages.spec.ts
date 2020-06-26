@@ -88,6 +88,8 @@ Cypress.Cookies.defaults({
 
 before(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+  cy.window().its('sessionStorage').invoke('removeItem', 'taxFormUserInput')
+  cy.window().its('sessionStorage').invoke('removeItem', 'postponeUserInput')
 })
 
 describe('Cookie consent', () => {
@@ -844,7 +846,7 @@ describe('IBAN page', () => {
   })
   it('has working ui for eligible applicants', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3120' })
+    typeToInput('t1r10_prijmy', withBonusInput)
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
     getInput('r122').type('0')
@@ -1052,5 +1054,33 @@ describe.skip('/odklad/suhrn page', () => {
     typeToInputPostpone('email', withEmailInput)
     getInputPostpone('newsletter').click()
     cy.get('[data-test=send-email]').click()
+  })
+})
+
+describe('Remembering previous state', () => {
+  it('has working ui', () => {
+    cy.visit('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', withBonusInput)
+    typeToInput('priloha3_r11_socialne', withBonusInput)
+    typeToInput('priloha3_r13_zdravotne', withBonusInput)
+    getInput('r122').type('0')
+    next()
+    assertUrl('/zamestnanie')
+    cy.get('[data-test=back]').click()
+    assertUrl('/prijmy-a-vydavky')
+    cy.reload()
+    assertUrl('/prijmy-a-vydavky')
+    getInput('t1r10_prijmy').should(
+      'have.value',
+      withBonusInput?.t1r10_prijmy?.toString(),
+    )
+    getInput('priloha3_r11_socialne').should(
+      'have.value',
+      withBonusInput?.priloha3_r11_socialne?.toString(),
+    )
+    getInput('priloha3_r13_zdravotne').should(
+      'have.value',
+      withBonusInput?.priloha3_r13_zdravotne?.toString(),
+    )
   })
 })
