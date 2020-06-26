@@ -66,7 +66,6 @@ const OsobneUdaje: NextPage<Props> = ({
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={(values) => {
-          if (!values.ulica) values.ulica = values.obec
           setPostponeUserInput(values)
           router.push(nextRoute)
         }}

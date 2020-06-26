@@ -56,7 +56,6 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          if (!values.r007_ulica) values.r007_ulica = values.r010_obec
           setTaxFormUserInput(values)
           router.push(nextRoute)
         }}
