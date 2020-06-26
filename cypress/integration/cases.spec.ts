@@ -47,20 +47,21 @@ const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
   ;[
-    'base',
-    'complete',
-    'completeDecimal',
-    'withPartner',
-    'withEmployment',
-    // 'withMortgage',
-    'withPension',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
-    'withEmploymentBonus',
-    'withHighIncome',
-    'bugReport1',
+    // 'base',
+    // 'complete',
+    // 'completeDecimal',
+    // 'withPartner',
+    // 'withEmployment',
+    // // 'withMortgage',
+    // 'withPension',
+    // 'withChildren',
+    // 'with2percent',
+    // 'withSpa',
+    // 'withBonus',
+    // 'withEmploymentBonus',
+    // 'withHighIncome',
+    // 'bugReport1',
+    'bugReport2',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -261,24 +262,26 @@ describe('Cases', () => {
           cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
 
           cy.get('.govuk-table__cell').contains(
-            formatCurrency(parseFloat(input.t1r10_prijmy)),
+            formatCurrency(parseInputNumber(input.t1r10_prijmy)),
           )
           cy.get('.govuk-table__cell').contains(input.r001_dic)
 
           if (input.kupele) {
             if (input.danovnikInSpa) {
               cy.get(`[data-test="r076a_kupele_danovnik"]`).contains(
-                input.r076a_kupele_danovnik,
+                formatCurrency(parseInputNumber(input.r076a_kupele_danovnik)),
               )
             }
             if (input.r033_partner_kupele) {
               cy.get(`[data-test="r033_partner_kupele_uhrady"]`).contains(
-                input.r033_partner_kupele_uhrady,
+                formatCurrency(
+                  parseInputNumber(input.r033_partner_kupele_uhrady),
+                ),
               )
             }
             if (input.childrenInSpa)
               cy.get(`[data-test="r036_deti_kupele"]`).contains(
-                input.r036_deti_kupele,
+                formatCurrency(parseInputNumber(input.r036_deti_kupele)),
               )
           }
 
@@ -303,9 +306,7 @@ describe('Cases', () => {
 
           next()
 
-          if (
-            typeof input.ziadamVratitDanovyBonusAleboPreplatok !== 'undefined'
-          ) {
+          if (calculate(input).mozeZiadatVratitDanovyBonusAleboPreplatok) {
             /** SECTION IBAN */
             assertUrl('/iban')
             cy.contains(
