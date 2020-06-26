@@ -14,15 +14,7 @@ describe('odklad/osobne-udaje', () => {
           obec: '',
           stat: '',
         },
-        expected: [
-          'dic',
-          'meno_priezvisko',
-          'ulica',
-          'cislo',
-          'psc',
-          'obec',
-          'stat',
-        ],
+        expected: ['dic', 'meno_priezvisko', 'cislo', 'psc', 'obec', 'stat'],
       },
       {
         input: {

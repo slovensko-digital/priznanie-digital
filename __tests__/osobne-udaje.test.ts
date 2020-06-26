@@ -19,7 +19,6 @@ describe('osobne-udaje', () => {
           'r001_dic',
           'r005_meno',
           'r004_priezvisko',
-          'r007_ulica',
           'r008_cislo',
           'r009_psc',
           'r010_obec',
