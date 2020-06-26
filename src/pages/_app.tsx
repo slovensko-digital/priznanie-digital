@@ -1,5 +1,4 @@
-import { AppProps, AppContext } from 'next/app'
-import nextCookies from 'next-cookies'
+import { AppProps } from 'next/app'
 
 /* eslint-disable import/no-unassigned-import */
 import '../styles/global.css'
@@ -15,10 +14,10 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { TaxForm } from '../types/TaxForm'
 import Layout from '../components/Layout'
 import {
-  getInitialTaxFormInputValues,
-  getInitialPostponeUserInput,
+  initialPostponeUserInput,
+  initTaxFormUserInputValues,
 } from '../lib/initialValues'
-import { setDate, setCookie } from '../lib/utils'
+import { setDate } from '../lib/utils'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 import { getRoutes, Route, validateRoute } from '../lib/routes'
 import { Page } from '../components/Page'
@@ -47,39 +46,31 @@ const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
 
 interface MyAppProps extends AppProps {
   Component: Page<Partial<TaxFormUserInput>>
-  taxFormUserInputFromCookie: TaxFormUserInput | null
-  postponeUserInputFromCookie: PostponeUserInput | null
 }
 
-const MyApp = ({
-  Component,
-  pageProps,
-  taxFormUserInputFromCookie,
-  postponeUserInputFromCookie,
-}: MyAppProps) => {
+const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+  const [init, setInit] = useState(false)
   const [taxForm, setTaxForm] = useState<TaxForm>(
-    taxFormUserInputToTaxForm(
-      getInitialTaxFormInputValues(taxFormUserInputFromCookie),
-    ),
+    taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
   const [taxFormUserInput, setTaxFormUserInput] = useState<TaxFormUserInput>(
-    getInitialTaxFormInputValues(taxFormUserInputFromCookie),
+    initTaxFormUserInputValues,
   )
   const [postponeUserInput, setPostponeUserInput] = useState<PostponeUserInput>(
-    getInitialPostponeUserInput(postponeUserInputFromCookie),
+    initialPostponeUserInput,
   )
 
   const updateTaxFormUserInput = (values: Partial<TaxFormUserInput>): void => {
     setTaxFormUserInput((prevUserInput) => {
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values }
       setTaxForm(taxFormUserInputToTaxForm(newUserInput))
-      setCookie('taxFormUserInput', JSON.stringify(newUserInput))
+      localStorage.setItem('taxFormUserInput', JSON.stringify(newUserInput))
       return newUserInput
     })
   }
 
   const updatePostponeUserInput = (values: PostponeUserInput) => {
-    setCookie('postponeUserInput', JSON.stringify(values))
+    localStorage.setItem('postponeUserInput', JSON.stringify(values))
     return setPostponeUserInput(values)
   }
 
@@ -91,12 +82,27 @@ const MyApp = ({
   )
 
   useEffect(() => {
+    const taxFormUserInput = localStorage.getItem('taxFormUserInput')
+    const postponeUserInput = localStorage.getItem('postponeUserInput')
+    if (taxFormUserInput) {
+      try {
+        updateTaxFormUserInput(JSON.parse(taxFormUserInput))
+        updatePostponeUserInput(JSON.parse(postponeUserInput))
+      } catch (error) {
+        console.error('Failed to retrieve the state', error)
+      }
+    }
+    setInit(true)
+  }, [])
+
+  useEffect(() => {
+    if (!init) return
     const next = nextRoute()
     if (next) {
       router.prefetch(next)
     }
     validateRoute(router, taxForm, taxFormUserInput)
-  }, [router, nextRoute, taxForm, taxFormUserInput])
+  }, [router, nextRoute, taxForm, taxFormUserInput, init])
 
   useEffect(() => {
     const input = document.querySelector('main input, main select') as
@@ -133,14 +139,6 @@ const MyApp = ({
       />
     </Layout>
   )
-}
-
-MyApp.getInitialProps = ({ ctx }: AppContext) => {
-  const { taxFormUserInput, postponeUserInput } = nextCookies(ctx)
-  return {
-    taxFormUserInputFromCookie: taxFormUserInput,
-    postponeUserInputFromCookie: postponeUserInput,
-  }
 }
 
 export default MyApp

@@ -32,6 +32,7 @@ export const FormWrapper = <FormikInput extends FormikValues>({
     <Formik<FormikInput>
       validateOnChange={false}
       validateOnBlur={false}
+      enableReinitialize={true}
       {...formikProps}
       validate={validate}
     >
