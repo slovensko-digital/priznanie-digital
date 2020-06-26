@@ -56,6 +56,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
+          if (!values.r007_ulica) values.r007_ulica = values.r010_obec
           setTaxFormUserInput(values)
           router.push(nextRoute)
         }}
@@ -199,10 +200,6 @@ export const validate = (values: PersonalInformationUserInput) => {
 
   if (!values.r004_priezvisko) {
     errors.r004_priezvisko = 'Zadajte vaše priezvisko'
-  }
-
-  if (!values.r007_ulica) {
-    errors.r007_ulica = 'Zadajte ulicu'
   }
 
   if (!values.r008_cislo) {

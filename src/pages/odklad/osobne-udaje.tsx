@@ -66,6 +66,7 @@ const OsobneUdaje: NextPage<Props> = ({
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={(values) => {
+          if (!values.ulica) values.ulica = values.obec
           setPostponeUserInput(values)
           router.push(nextRoute)
         }}
@@ -199,10 +200,6 @@ export const validate = (values: PersonalInformationPostponePage) => {
 
   if (!values.meno_priezvisko) {
     errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
-  }
-
-  if (!values.ulica) {
-    errors.ulica = 'Zadajte ulicu'
   }
 
   if (!values.cislo) {
