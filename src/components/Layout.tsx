@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = ({
   taxFormUserInput,
   postponeUserInput,
 }: Props) => (
-  <div>
+  <div aria-live="polite">
     <Head>
       <title>priznanie.digital</title>
       {process.env.BUILD_TIMESTAMP && (
