@@ -84,13 +84,15 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
     const taxFormUserInput = localStorage.getItem('taxFormUserInput')
     const postponeUserInput = localStorage.getItem('postponeUserInput')
-    if (taxFormUserInput) {
-      try {
+    try {
+      if (taxFormUserInput) {
         updateTaxFormUserInput(JSON.parse(taxFormUserInput))
-        updatePostponeUserInput(JSON.parse(postponeUserInput))
-      } catch (error) {
-        console.error('Failed to retrieve the state', error)
       }
+      if (postponeUserInput) {
+        updatePostponeUserInput(JSON.parse(postponeUserInput))
+      }
+    } catch (error) {
+      console.error('Failed to retrieve the state', error)
     }
     setInit(true)
   }, [])
