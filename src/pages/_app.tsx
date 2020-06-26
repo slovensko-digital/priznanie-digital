@@ -64,7 +64,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     setTaxFormUserInput((prevUserInput) => {
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values }
       setTaxForm(taxFormUserInputToTaxForm(newUserInput))
-      localStorage.setItem('taxFormUserInput', JSON.stringify(newUserInput))
+      sessionStorage.setItem('taxFormUserInput', JSON.stringify(newUserInput))
       return newUserInput
     })
   }
@@ -82,8 +82,8 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   )
 
   useEffect(() => {
-    const taxFormUserInput = localStorage.getItem('taxFormUserInput')
-    const postponeUserInput = localStorage.getItem('postponeUserInput')
+    const taxFormUserInput = sessionStorage.getItem('taxFormUserInput')
+    const postponeUserInput = sessionStorage.getItem('postponeUserInput')
     try {
       if (taxFormUserInput) {
         updateTaxFormUserInput(JSON.parse(taxFormUserInput))
