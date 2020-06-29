@@ -24,7 +24,7 @@ export const formatDate = (date: Date): string => {
 original deadline. When the new eform is released and before going public we
 need to set the current date
 */
-export const setDate = <T>(input: T, date: Date = new Date(2020, 2, 31)) => {
+export const setDate = <T>(input: T, date: Date = new Date()) => {
   return {
     ...input,
     datum: formatDate(date),

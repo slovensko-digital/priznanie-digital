@@ -332,13 +332,13 @@ describe('Cases', () => {
           cy.get(`[data-test="taxFormUserInput"]`)
             .invoke('text')
             .then((output) => {
-              const now = new Date(2020, 1, 22)
+              const taxFormUserInput = JSON.parse(
+                output.toString(),
+              ) as TaxFormUserInput
 
-              const taxFormUserInput = setDate(
-                JSON.parse(output.toString()) as TaxFormUserInput,
-                now,
+              const xmlResult = convertToXML(
+                calculate(setDate(taxFormUserInput, new Date(2020, 1, 22))),
               )
-              const xmlResult = convertToXML(calculate(taxFormUserInput))
               /**  HACK END */
 
               /**  Validate our results with the FS form */
