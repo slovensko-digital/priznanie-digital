@@ -17,15 +17,28 @@ export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
 export const FormWrapper = <FormikInput extends FormikValues>({
   children,
   ...formikProps
-}: FormWrapperProps<FormikInput>) => (
-  <Formik<FormikInput>
-    validateOnChange={false}
-    validateOnBlur={false}
-    {...formikProps}
-  >
-    {children}
-  </Formik>
-)
+}: FormWrapperProps<FormikInput>) => {
+  const validate = (values: FormikInput) => {
+    if (!formikProps.validate) return {}
+    const errors = formikProps.validate(values)
+    const firstError = errors && Object.keys(errors)[0]
+    if (firstError) {
+      ;(document.querySelector(`#${firstError}`) as HTMLInputElement)?.focus()
+    }
+    return errors
+  }
+
+  return (
+    <Formik<FormikInput>
+      validateOnChange={false}
+      validateOnBlur={false}
+      {...formikProps}
+      validate={validate}
+    >
+      {children}
+    </Formik>
+  )
+}
 
 interface InputProps<Name> {
   name: Name
@@ -73,7 +86,11 @@ export const Input = <Name extends keyof UserInput>({
       </label>
       <span className="govuk-hint">{hint}</span>
       {meta.error ? (
-        <span id={props.name} data-test="error" className="govuk-error-message">
+        <span
+          id={`${props.name}-error`}
+          data-test="error"
+          className="govuk-error-message"
+        >
           <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
         </span>
       ) : null}
@@ -83,6 +100,10 @@ export const Input = <Name extends keyof UserInput>({
           [`govuk-input--width-${width}`]: width !== 'auto',
         })}
         data-test={`${field.name}-input`}
+        {...(meta.error && {
+          'aria-invalid': true,
+          'aria-describedby': `${props.name}-error`,
+        })}
         {...getNumberInputProps()}
         {...field}
         {...props}
