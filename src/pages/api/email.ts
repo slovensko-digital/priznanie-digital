@@ -32,7 +32,7 @@ export default async (
     return res.send({ message: 'Invalid params' })
   }
 
-  const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
+  const taxForm: TaxForm = calculate(setDate(taxFormUserInput, new Date()))
   const attachmentXml = convertToXML(taxForm)
   const attachmentPdf = buildPdf(taxForm)
 
