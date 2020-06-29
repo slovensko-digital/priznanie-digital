@@ -58,7 +58,6 @@ export interface TaxFormUserInput {
   r032_uplatnujem_na_partnera?: boolean
   r032_partner_vlastne_prijmy?: string
   r032_partner_pocet_mesiacov?: string
-  partner_ineligible?: boolean
   partner_step?: number
   partner_spolocna_domacnost?: boolean
   partner_bonus_uplatneny?: boolean
