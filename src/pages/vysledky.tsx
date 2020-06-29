@@ -157,7 +157,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
           <EmailForm
             label="Pošleme vám tento výpočet dane na email?"
             hint="Bude sa vám hodiť pri úhrade daní"
-            taxForm={taxForm}
+            taxFormUserInput={taxFormUserInput}
             saveForm={(email, newsletter) => {
               setTaxFormUserInput({ email, newsletter })
             }}

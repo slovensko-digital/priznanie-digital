@@ -5,7 +5,7 @@ import {
   SaveEmailResponse,
 } from '../types/api'
 import { TemplateParams } from './sendinblue'
-import { TaxForm } from '../types/TaxForm'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { translit } from './utils'
 
 export const getCity = async (zip: string) => {
@@ -31,7 +31,7 @@ export const getNgoByName = async (
 export const sendEmailTemplate = async (
   email: string,
   params: TemplateParams,
-  taxForm: TaxForm,
+  taxFormUserInput: TaxFormUserInput,
   template: 'tax' | 'postpone' = 'tax',
 ): Promise<SaveEmailResponse> => {
   return fetch(`/api/email?tpl=${template}`, {
@@ -40,7 +40,7 @@ export const sendEmailTemplate = async (
       accept: 'application/json',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ email, params, taxForm }),
+    body: JSON.stringify({ email, params, taxFormUserInput }),
   }).then((response) => response.json())
 }
 

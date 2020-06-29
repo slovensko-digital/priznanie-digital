@@ -8,6 +8,9 @@ import {
 import { convertToXML } from '../../lib/xml/xmlConverter'
 import { setDate } from '../../lib/utils'
 import { buildPdf } from './pdf'
+import { TaxForm } from '../../types/TaxForm'
+import { TaxFormUserInput } from '../../types/TaxFormUserInput'
+import { calculate } from '../../lib/calculation'
 
 const templates = {
   tax: parseInt(process.env.sendinblue_tpl_tax, 10),
@@ -22,14 +25,15 @@ export default async (
   const email = `${req.body.email}`
   const params = req.body.params as TemplateParams
   const template = req.query.tpl ? `${req.query.tpl}` : 'tax'
-  const taxForm = req.body.taxForm
+  const taxFormUserInput: TaxFormUserInput = req.body.taxFormUserInput
 
-  if (!email || !params || !template || !taxForm) {
+  if (!email || !params || !template || !taxFormUserInput) {
     res.statusCode = 400
     return res.send({ message: 'Invalid params' })
   }
 
-  const attachmentXml = convertToXML(setDate(taxForm))
+  const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
+  const attachmentXml = convertToXML(taxForm)
   const attachmentPdf = buildPdf(taxForm)
 
   try {
