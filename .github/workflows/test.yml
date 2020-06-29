@@ -1,0 +1,63 @@
+name: Github Test CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Github Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checks-out the repository
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      # Read node version form .nvmrc
+      # https://github.com/actions/setup-node/issues/32#issuecomment-525791142
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      - name: Use Node.js (.nvmrc)
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        id: restore-cache
+
+#      # Uncomment and place wherever you want to stop the job and open tmate.io session
+#      - name: Setup tmate session
+#        uses: mxschmitt/action-tmate@v2
+
+      - name: Install Dependencies
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit Tests
+        run: npm run test -- --ci
+
+      - name: Build
+        run: WITH_DEBUG=true npm run build
+
+      - name: Functional Tests
+        run: npm run cy:ci
+        env:
+          CI: yes
+          autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
