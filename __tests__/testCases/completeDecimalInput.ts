@@ -13,11 +13,14 @@ export const completeDecimalInput: TaxFormUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000.98',
+  r120: '100.25',
   datum: '22.02.2020',
 
   /** SECTION Employment */
   r038: '4000,43',
   r039: '1000,54',
+  r122: '80.50',
+  r108: '50.75',
   employed: true,
 
   /** SECTION Mortgage */
