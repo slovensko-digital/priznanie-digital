@@ -15,7 +15,7 @@ export default async (
   }
 
   const taxFormUserInput: TaxFormUserInput = JSON.parse(rawTaxFormUserInput)
-  const taxForm: TaxForm = calculate(setDate(taxFormUserInput, new Date()))
+  const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
 
   res.setHeader(
     'content-disposition',
