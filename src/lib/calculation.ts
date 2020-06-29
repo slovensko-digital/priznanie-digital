@@ -165,6 +165,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
+        debugger
         return this.r072_pred_znizenim.gt(36256.38)
           ? Decimal.max(
               0,
@@ -179,12 +180,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             )
           : Decimal.max(
               0,
-              new Decimal(3937.35).minus(
-                Decimal.max(this.r032_partner_vlastne_prijmy, 0)
-                  .times(new Decimal(1).div(12))
-                  .times(this.r032_partner_pocet_mesiacov),
-              ),
+              new Decimal(3937.35)
+                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
+                .times(new Decimal(1).div(12))
+                .times(this.r032_partner_pocet_mesiacov),
             )
+
+        //max(0,[ 3 937.35 –max(r.32 vlastný príjem,0)]*1/12*r.32 počet mesiacov).
       }
       return new Decimal(0)
     },
