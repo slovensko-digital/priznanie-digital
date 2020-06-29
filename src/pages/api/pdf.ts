@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import hummus from 'hummus'
-import { TaxForm } from '../../types/TaxForm'
 import streams from 'memory-streams'
+import { TaxForm } from '../../types/TaxForm'
+import { TaxFormUserInput } from '../../types/TaxFormUserInput'
+import { setDate } from '../../lib/utils'
+import { calculate } from '../../lib/calculation'
 
 const FIRST_COLUMN = 31.5
 const BOX_WIDTH = 14.4
@@ -670,11 +673,12 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  const form: TaxForm = req.body
-
-  if (!form) {
+  if (!req.body.taxFormUserInput) {
     return res.status(500).json({ error: 'invalid data' })
   }
+
+  const formInput: TaxFormUserInput = JSON.parse(req.body.taxFormUserInput)
+  const form: TaxForm = calculate(setDate(formInput))
 
   res.setHeader(
     'content-disposition',

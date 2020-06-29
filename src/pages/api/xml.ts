@@ -1,30 +1,26 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { convertToXML } from '../../lib/xml/xmlConverter'
-import { setDate, parseInputNumber } from '../../lib/utils'
+import { setDate } from '../../lib/utils'
+import { calculate } from '../../lib/calculation'
 import { TaxForm } from '../../types/TaxForm'
+import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 
 export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  if (!req.body) {
+  if (!req.body.taxFormUserInput) {
     return res.status(500).json({ error: 'invalid data' })
   }
 
-  const form: TaxForm = req.body
-  Object.keys(form).forEach((key) => {
-    const parsedNumber = parseInputNumber(form[key])
-    if (!isNaN(parsedNumber)) {
-      form[key] = parsedNumber
-    }
-  })
+  const formInput: TaxFormUserInput = JSON.parse(req.body.taxFormUserInput)
+  const form: TaxForm = calculate(setDate(formInput))
 
   res.setHeader(
     'content-disposition',
     'attachment; filename=danove_priznanie.xml',
   )
   res.writeHead(200, { 'Content-Type': 'text/xml' })
-
-  res.write(convertToXML(setDate(form)))
+  res.write(convertToXML(form))
   res.end()
 }

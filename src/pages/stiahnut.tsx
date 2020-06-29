@@ -31,9 +31,11 @@ const Stiahnut: Page<{}> = ({ taxForm, taxFormUserInput, previousRoute }) => {
           target="_blank"
           onSubmit={handleSubmit}
         >
-          {Object.keys(taxForm).map((key: string) => (
-            <input key={key} type="hidden" name={key} value={taxForm[key]} />
-          ))}
+          <input
+            type="hidden"
+            name="taxFormUserInput"
+            value={JSON.stringify(taxFormUserInput)}
+          />
           <button
             type="submit"
             className="btn-secondary govuk-button govuk-button--large"
@@ -49,9 +51,11 @@ const Stiahnut: Page<{}> = ({ taxForm, taxFormUserInput, previousRoute }) => {
           target="_blank"
           onSubmit={handleSubmit}
         >
-          {Object.keys(taxForm).map((key: string) => (
-            <input key={key} type="hidden" name={key} value={taxForm[key]} />
-          ))}
+          <input
+            type="hidden"
+            name="taxFormUserInput"
+            value={JSON.stringify(taxFormUserInput)}
+          />
           <button
             type="submit"
             className="btn-secondary govuk-button govuk-button--large"
