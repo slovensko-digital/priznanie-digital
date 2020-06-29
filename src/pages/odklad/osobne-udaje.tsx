@@ -201,10 +201,6 @@ export const validate = (values: PersonalInformationPostponePage) => {
     errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
   }
 
-  if (!values.ulica) {
-    errors.ulica = 'Zadajte ulicu'
-  }
-
   if (!values.cislo) {
     errors.cislo = 'Zadajte číslo domu'
   }
