@@ -179,11 +179,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             )
           : Decimal.max(
               0,
-              new Decimal(3937.35).minus(
-                Decimal.max(this.r032_partner_vlastne_prijmy, 0)
-                  .times(new Decimal(1).div(12))
-                  .times(this.r032_partner_pocet_mesiacov),
-              ),
+              new Decimal(3937.35)
+                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
+                .times(new Decimal(1).div(12))
+                .times(this.r032_partner_pocet_mesiacov),
             )
       }
       return new Decimal(0)
@@ -207,9 +206,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return Decimal.max(
-        this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
-        0,
+      return floorDecimal(
+        Decimal.max(
+          this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
+          0,
+        ),
       )
     },
     get r080_zaklad_dane_celkovo() {
