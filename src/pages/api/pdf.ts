@@ -350,19 +350,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     true,
   )
 
-  // t1r10_vydavky - r. 2
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 496,
-    483,
-    form.t1r10_vydavky.toNumber(),
-    true,
-  )
-
   // t1r2_prijmy - spolu r. 1 až 9
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 340,
     222,
-    form.t1r2_prijmy.toNumber(),
+    form.t1r10_prijmy.toNumber(),
     true,
   )
 
