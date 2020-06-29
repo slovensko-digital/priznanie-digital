@@ -51,14 +51,3 @@ export const getNace = async () => {
       return values.map((item) => ({ ...item, translit: translit(item.label) }))
     })
 }
-
-export const downloadPdf = async (taxForm: TaxForm) => {
-  return fetch('/api/pdf', {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({ taxForm }),
-  }).then((response) => response.blob())
-}

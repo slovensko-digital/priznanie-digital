@@ -670,12 +670,16 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  const form: TaxForm = req.body && req.body.taxForm
+  const form: TaxForm = req.body
 
   if (!form) {
     return res.status(500).json({ error: 'invalid data' })
   }
 
+  res.setHeader(
+    'content-disposition',
+    'attachment; filename=danove_priznanie.pdf',
+  )
   res.writeHead(200, { 'Content-Type': 'application/pdf' })
 
   buildPdf(form, res)
