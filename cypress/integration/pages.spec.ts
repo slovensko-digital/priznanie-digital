@@ -727,7 +727,22 @@ describe('Spa page', () => {
     getInput('r036_deti_kupele')
   })
   it('Spa UI without previously entered spouse and children', () => {
-    navigateEligibleToChildrenPage()
+    cy.visit('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', withSpaInput)
+    typeToInput('priloha3_r11_socialne', withSpaInput)
+    typeToInput('priloha3_r13_zdravotne', withSpaInput)
+    getInput('r122').type('0')
+    next()
+
+    assertUrl('/zamestnanie')
+    skipPage()
+
+    assertUrl('/partner')
+    cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    cy.get('[data-test=partner_spolocna_domacnost-input-no]').click()
+    next()
+    next()
+
     assertUrl('/deti')
     skipPage()
 
