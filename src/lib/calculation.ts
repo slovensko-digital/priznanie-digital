@@ -185,8 +185,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .times(new Decimal(1).div(12))
                 .times(this.r032_partner_pocet_mesiacov),
             )
-
-        //max(0,[ 3 937.35 –max(r.32 vlastný príjem,0)]*1/12*r.32 počet mesiacov).
       }
       return new Decimal(0)
     },
@@ -209,9 +207,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r078_zaklad_dane_z_prijmov() {
-      return Decimal.max(
-        this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
-        0,
+      return floorDecimal(
+        Decimal.max(
+          this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
+          0,
+        ),
       )
     },
     get r080_zaklad_dane_celkovo() {
