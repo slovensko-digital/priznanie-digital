@@ -165,7 +165,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
-        debugger
         return this.r072_pred_znizenim.gt(36256.38)
           ? Decimal.max(
               0,
