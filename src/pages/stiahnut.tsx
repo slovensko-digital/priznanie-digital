@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 
-const Stiahnut: Page<{}> = ({ taxForm, taxFormUserInput, previousRoute }) => {
+const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
 
   function handleSubmit() {
