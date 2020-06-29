@@ -43,6 +43,13 @@ const Kupele: Page<SpaUserInput> = ({
     Boolean(child.rodneCislo),
   )
 
+  const hasPartnerData =
+    taxFormUserInput.r032_uplatnujem_na_partnera &&
+    taxFormUserInput.r031_priezvisko_a_meno &&
+    taxFormUserInput.r031_priezvisko_a_meno.length > 0 &&
+    taxFormUserInput.r031_rodne_cislo &&
+    taxFormUserInput.r031_rodne_cislo.length > 0
+
   return (
     <>
       <Link href={previousRoute}>
@@ -115,7 +122,7 @@ const Kupele: Page<SpaUserInput> = ({
                   />
                   {values.r033_partner_kupele && (
                     <>
-                      {!values.r032_uplatnujem_na_partnera && (
+                      {!hasPartnerData && (
                         <>
                           <Input
                             name="r031_priezvisko_a_meno"
