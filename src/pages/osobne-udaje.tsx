@@ -201,10 +201,6 @@ export const validate = (values: PersonalInformationUserInput) => {
     errors.r004_priezvisko = 'Zadajte vaše priezvisko'
   }
 
-  if (!values.r007_ulica) {
-    errors.r007_ulica = 'Zadajte ulicu'
-  }
-
   if (!values.r008_cislo) {
     errors.r008_cislo = 'Zadajte číslo domu'
   }

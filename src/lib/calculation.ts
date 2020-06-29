@@ -337,24 +337,27 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(parseInputNumber(input?.r122 ?? '0'))
     },
     get r125_dan_na_uhradu() {
-      return Decimal.max(
+      const baseTax =
+        this.r105_dan.gt(17) || this.r106.gt(0) || this.r112.gt(0)
+          ? this.r105_dan
+          : new Decimal(0)
+      const tax = Decimal.max(
         0,
-        this.r105_dan.plus(this.r114).minus(this.r112).minus(tf.r106),
+        baseTax
+          .minus(this.r106)
+          .plus(this.r108)
+          .plus(this.r110)
+          .minus(this.r112)
+          .plus(this.r114)
+          .minus(this.r120)
+          .minus(this.r122),
       )
-      // // - tf.r106 +
-      // tf.r108 +
-      // tf.r110 -
-      // // tf.r112 +
-      // // tf.r114 +
-      // tf.r116 +
-      // tf.r117 -
-      // tf.r118 -
-      // tf.r119 -
-      // tf.r120 -
-      // tf.r121 -
-      // tf.r122 -
-      // tf.r123 -
-      // tf.r124;
+      return tax.gt(5) ? tax : new Decimal(0)
+      // 'r. 125': má byť výsledkom Max(0,r.105-r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124) ak platí, r.105>17.00 alebo r.105<=17.00 a zároveň je r.106>0 alebo r.112>0.
+      // Inak r.125=max(0,0–r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124).
+      // Ak daň na úhradu nepresiahne 5€, daň sa neplatí, v r.125 sa uvedie nula.
+
+      // vo vypocte chyba: +r.116+r.117-r.118-r.119-r.121-r.123-r.124 (asi ich netreba lebo sa nevyplnaju vo formulari, tj su rovne nula)
     },
     get r126_danovy_preplatok() {
       return Decimal.abs(

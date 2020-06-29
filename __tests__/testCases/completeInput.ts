@@ -14,11 +14,14 @@ export const completeInput: TaxFormUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
+  r120: '100',
   datum: '22.02.2020',
 
   /** SECTION Employment */
   r038: '4000',
   r039: '1000',
+  r122: '80',
+  r108: '50',
   employed: true,
 
   /** SECTION Mortgage */

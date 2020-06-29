@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { CheckboxSmall, Input } from './FormComponents'
 import { sendEmailTemplate } from '../lib/api'
 import { EmailUserInput } from '../types/UserInput'
-import { TaxForm } from '../types/TaxForm'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
 const getErrorMessage = (code: string, message: string) => {
   switch (code) {
@@ -22,21 +22,21 @@ export interface EmailFormProps {
   label: string
   hint?: string
   params: Record<string, any>
-  taxForm: TaxForm
+  taxFormUserInput: TaxFormUserInput
   saveForm: (email: string, newsletter: boolean) => void
 }
 export const EmailForm = ({
   label,
   hint,
   params,
-  taxForm,
+  taxFormUserInput,
   saveForm,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
     const { messageId, code, message } = await sendEmailTemplate(
       email,
       { ...params, newsletter: !!newsletter } as any,
-      taxForm,
+      taxFormUserInput,
     )
     if (messageId) {
       saveForm(email, !!newsletter)

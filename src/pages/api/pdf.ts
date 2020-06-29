@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import hummus from 'hummus'
-import { TaxForm } from '../../types/TaxForm'
 import streams from 'memory-streams'
+import { TaxForm } from '../../types/TaxForm'
+import { TaxFormUserInput } from '../../types/TaxFormUserInput'
+import { setDate } from '../../lib/utils'
+import { calculate } from '../../lib/calculation'
 
 const FIRST_COLUMN = 31.5
 const BOX_WIDTH = 14.4
@@ -670,15 +673,21 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  const form: TaxForm = req.body && req.body.taxForm
-
-  if (!form) {
+  const rawTaxFormUserInput = req.body.taxFormUserInput
+  if (!rawTaxFormUserInput) {
     return res.status(500).json({ error: 'invalid data' })
   }
 
+  const taxFormUserInput: TaxFormUserInput = JSON.parse(rawTaxFormUserInput)
+  const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
+
+  res.setHeader(
+    'content-disposition',
+    'attachment; filename=danove_priznanie.pdf',
+  )
   res.writeHead(200, { 'Content-Type': 'application/pdf' })
 
-  buildPdf(form, res)
+  buildPdf(taxForm, res)
 
   res.end()
 }

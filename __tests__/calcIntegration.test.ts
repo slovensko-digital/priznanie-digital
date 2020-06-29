@@ -10,6 +10,7 @@ import {
   convertPostponeToXML,
   convertPostponeToJson,
 } from '../src/lib/postpone/postponeConverter'
+import { setDate } from '../src/lib/utils'
 
 const WRITE_FILES = false
 
@@ -49,7 +50,7 @@ describe('calcIntergration', () => {
         throw new Error(`Could not load input: ${testCase}Input`)
       }
 
-      const taxForm = calculate(input)
+      const taxForm = calculate(setDate(input, new Date(2020, 1, 22)))
 
       const outputXml = convertToXML(taxForm)
 
