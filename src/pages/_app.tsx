@@ -83,6 +83,9 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   }, [router, nextRoute, taxForm, taxFormUserInput])
 
   useEffect(() => {
+    const defaultFocus = document.querySelector(
+      '[data-focus]',
+    ) as HTMLElement | null
     const input = document.querySelector('main input, main select') as
       | HTMLInputElement
       | HTMLSelectElement
@@ -91,7 +94,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
       'select, main a',
     ) as HTMLAnchorElement | null
 
-    ;(input || anchor)?.focus()
+    ;(defaultFocus || input || anchor)?.focus()
   }, [router])
 
   const headline = /^\/odklad\//.test(router.pathname)
