@@ -26,25 +26,25 @@ jobs:
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: |
-            ~/.npm
-            ./node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-        id: restore-cache
+#      - name: Cache node modules
+#        uses: actions/cache@v2
+#        env:
+#          cache-name: cache-node-modules
+#        with:
+#          path: |
+#            ~/.npm
+#            ./node_modules
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
+#        id: restore-cache
 
 #      # Uncomment and place wherever you want to stop the job and open tmate.io session
 #      - name: Setup tmate session
 #        uses: mxschmitt/action-tmate@v2
 
       - name: Install Dependencies
-        if: steps.restore-cache.outputs.cache-hit != 'true'
+#        if: steps.restore-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Lint
