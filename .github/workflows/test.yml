@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
+        with:
+          submodules: 'recursive'
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
@@ -53,6 +55,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
+        with:
+          submodules: 'recursive'
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
@@ -92,6 +96,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
+        with:
+          submodules: 'recursive'
 
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
