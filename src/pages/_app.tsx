@@ -84,7 +84,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const defaultFocus = document.querySelector(
-      '[autofocus]',
+      '[data-focus]',
     ) as HTMLElement | null
     const input = document.querySelector('main input, main select') as
       | HTMLInputElement
