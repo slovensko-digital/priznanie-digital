@@ -1,13 +1,16 @@
 os: linux
+dist: xenial
 
 language: node_js
 
 node_js:
   - '12'
 
+# now run build again with cache - this time cache exists
 cache:
-  npm: false
-  yarn: false
+  npm: true
+  directories:
+    - ~/.cache  # cache Cypress
 
 branches:
   only:
@@ -19,10 +22,22 @@ addons:
 jobs:
   include:
     - stage: 'Test'
+      name: 'Lint'
       if: type = pull_request
       script:
-        - npm run ci
-    - stage: 'Deploy to Staging'
+        - npm run lint
+        - npm run check:ts
+    - name: 'Unit Test'
+      if: type = pull_request
+      script:
+        - npm run test -- --ci
+    - name: 'Functional Tests'
+      if: type = pull_request
+      script:
+        - npm run build:debug
+        - npm run cy:ci
+    - stage: 'Deploy'
+      name: 'Deploy to Staging'
       if: type = push
       script:
         - eval "$(ssh-agent -s)"
