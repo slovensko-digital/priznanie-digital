@@ -77,7 +77,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           Späť
         </a>
       </Link>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3" data-focus>
+      <h1 className="govuk-heading-l govuk-!-margin-top-3" autofocus>
         Súhrn a kontrola vyplnených údajov
       </h1>
 

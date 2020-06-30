@@ -139,7 +139,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
           Späť
         </a>
       </Link>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3" data-focus>
+      <h1 className="govuk-heading-l govuk-!-margin-top-3" autofocus>
         Výpočet dane za rok 2019
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
