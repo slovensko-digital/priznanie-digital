@@ -6,7 +6,7 @@ on:
 
 jobs:
   lint:
-    name: Github Test
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
         run: npm run check:ts
 
   unit:
-    name: Github Test
+    name: Unit tests
     runs-on: ubuntu-latest
 
     steps:
@@ -80,7 +80,7 @@ jobs:
 
 
   functional:
-    name: Github Test
+    name: Functional tests
     runs-on: ubuntu-latest
 
     steps:
