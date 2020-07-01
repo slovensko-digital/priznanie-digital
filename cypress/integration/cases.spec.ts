@@ -62,6 +62,7 @@ describe('Cases', () => {
     'withHighIncome',
     'bugReport1',
     'bugReport2',
+    'withSpaNoPartnerNoChildren',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -194,6 +195,12 @@ describe('Cases', () => {
             if (input.r033_partner_kupele) {
               getInput('r033_partner_kupele').click()
               typeToInput('r033_partner_kupele_uhrady', input)
+
+              // partner not filled in previous steps
+              if (!input.r032_uplatnujem_na_partnera) {
+                typeToInput('r031_rodne_cislo', input)
+                typeToInput('r031_priezvisko_a_meno', input)
+              }
             }
             if (input.childrenInSpa) {
               getInput('childrenInSpa').click()
@@ -201,13 +208,30 @@ describe('Cases', () => {
               const childrenWithSpa = input.children.filter(
                 (child) => child.kupelnaStarostlivost,
               )
-              childrenWithSpa.forEach((child, index) => {
-                if (child.kupelnaStarostlivost) {
+
+              // children filled in previous steps
+              if (input.hasChildren) {
+                childrenWithSpa.forEach((child, index) => {
+                  if (child.kupelnaStarostlivost) {
+                    cy.get(
+                      `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
+                    ).click()
+                  }
+                })
+              } else {
+                childrenWithSpa.forEach((child, index) => {
                   cy.get(
-                    `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
-                  ).click()
-                }
-              })
+                    `[data-test="children[${index}].priezviskoMeno-input"]`,
+                  ).type(child.priezviskoMeno)
+                  cy.get(
+                    `[data-test="children[${index}].rodneCislo-input"]`,
+                  ).type(child.rodneCislo)
+
+                  if (index + 1 < input.children.length) {
+                    cy.get('[data-test="add-child"]').click()
+                  }
+                })
+              }
             }
           } else {
             getInput('kupele', '-no').click()

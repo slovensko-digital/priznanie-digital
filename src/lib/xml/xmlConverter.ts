@@ -62,11 +62,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Partner */
-  if (taxForm.r032_uplatnujem_na_partnera) {
+  if (taxForm.r031_priezvisko_a_meno && taxForm.r031_rodne_cislo) {
     form.dokument.telo.r31 = {
       priezviskoMeno: taxForm.r031_priezvisko_a_meno,
       rodneCislo: taxForm.r031_rodne_cislo,
     }
+  }
+
+  if (taxForm.r032_uplatnujem_na_partnera) {
     form.dokument.telo.r32 = {
       uplatnujemNCZDNaManzela: boolToString(
         taxForm.r032_uplatnujem_na_partnera,
@@ -74,24 +77,34 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       vlastnePrijmy: taxForm?.r032_partner_vlastne_prijmy.toFixed(2),
       pocetMesiacov: taxForm?.r032_partner_pocet_mesiacov.toString(),
     }
+  }
 
+  if (
+    boolToString(taxForm.r033_partner_kupele) &&
+    taxForm.r033_partner_kupele_uhrady.gt(0)
+  ) {
     form.dokument.telo.r33 = {
       uplatNCZDNaKupelStarostlivost: boolToString(taxForm.r033_partner_kupele),
       preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady.toFixed(2),
     }
-
-    form.dokument.telo.r74 = taxForm.r074_znizenie_partner
-      ? taxForm.r074_znizenie_partner.toFixed(2)
-      : ''
-
-    form.dokument.telo.r76 = decimalToString(taxForm.r076_kupele_spolu)
-    form.dokument.telo.r76b = decimalToString(
-      taxForm.r076b_kupele_partner_a_deti,
-    )
-    form.dokument.telo.r76a = decimalToString(taxForm.r076a_kupele_danovnik)
   }
+
+  form.dokument.telo.r74 = taxForm.r074_znizenie_partner.gt(0)
+    ? taxForm.r074_znizenie_partner.toFixed(2)
+    : ''
+
+  form.dokument.telo.r76 = taxForm.r076_kupele_spolu.gt(0)
+    ? decimalToString(taxForm.r076_kupele_spolu)
+    : ''
+  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.gt(0)
+    ? decimalToString(taxForm.r076b_kupele_partner_a_deti)
+    : ''
+  form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik.gt(0)
+    ? decimalToString(taxForm.r076a_kupele_danovnik)
+    : ''
+
   /** SECTION Children */
-  if (taxForm.children) {
+  if (taxForm.r034 && taxForm.r034.length > 0) {
     form.dokument.telo.r34.dieta = taxForm.r034.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
@@ -101,7 +114,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       )
     }) as Dieta[]
 
-    form.dokument.telo.r36 = taxForm.r036_deti_kupele.toFixed(2)
+    form.dokument.telo.r36 = taxForm.r036_deti_kupele.gt(0)
+      ? taxForm.r036_deti_kupele.toFixed(2)
+      : ''
   }
 
   /** SECTION Mortgage */
