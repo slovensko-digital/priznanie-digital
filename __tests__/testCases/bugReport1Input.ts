@@ -79,7 +79,6 @@ export const bugReport1Input: TaxFormUserInput = {
     r009_psc: '82105',
     r010_obec: 'Bratislava 3',
     r011_stat: 'Slovensko',
-    t1r10_prijmy: '25000',
     datum: '22.02.2020',
     r031_rodne_cislo: '9609226286',
     meno_priezvisko: 'Fake Name',
