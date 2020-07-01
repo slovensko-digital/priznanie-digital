@@ -45,6 +45,11 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
+beforeEach(() => {
+  cy.window().its('sessionStorage').invoke('removeItem', 'taxFormUserInput')
+  cy.window().its('sessionStorage').invoke('removeItem', 'postponeUserInput')
+})
+
 describe('Cases', () => {
   ;[
     'base',

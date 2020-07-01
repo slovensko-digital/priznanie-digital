@@ -88,6 +88,9 @@ Cypress.Cookies.defaults({
 
 before(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+})
+
+beforeEach(() => {
   cy.window().its('sessionStorage').invoke('removeItem', 'taxFormUserInput')
   cy.window().its('sessionStorage').invoke('removeItem', 'postponeUserInput')
 })
