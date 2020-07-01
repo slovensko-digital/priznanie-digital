@@ -6,7 +6,7 @@ import {
   parseInputNumber,
 } from './utils'
 import Decimal from 'decimal.js'
-import { sum, ceilDecimal } from './utils';
+import { sum, ceilDecimal } from './utils'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -156,10 +156,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(20507)) {
-        return ceilDecimal(Decimal.max(
-          0,
-          new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
-        ))
+        return ceilDecimal(
+          Decimal.max(
+            0,
+            new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
+          ),
+        )
       }
       return NEZDANITELNA_CAST_ZAKLADU
     },
