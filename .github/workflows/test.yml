@@ -98,7 +98,8 @@ jobs:
       fail-fast: false
       matrix:
         # run multiple copies of the current job in parallel
-        containers: [1, 2, 3]
+        # Cypress seems to run on all but one machines defined here
+        containers: [1, 2, 3, 4, 5]
 
     steps:
       - name: Checkout repository
