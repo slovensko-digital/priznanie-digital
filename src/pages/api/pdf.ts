@@ -504,8 +504,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r109.toNumber())
 
   // r110
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, 9999)
-  // tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r110.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r110.toNumber())
 
   // r112
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r112.toNumber())
