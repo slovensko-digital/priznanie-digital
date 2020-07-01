@@ -160,6 +160,7 @@ jobs:
 
   deploy:
     if: github.event_name == 'push'
+    needs: [lint, unit, functional]
     name: Deploy to priznanie.staging.slovensko.digital
     runs-on: ubuntu-latest
 
