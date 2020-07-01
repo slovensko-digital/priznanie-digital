@@ -177,8 +177,11 @@ export const validate = (values: TwoPercentUserInput): Errors => {
     errors.XIIoddiel_uplatnujem2percenta = 'Vyznačte odpoveď'
   }
   if (values.XIIoddiel_uplatnujem2percenta) {
+    const icoNumberFormat = /^\d{2} \d{3} (\d|\d{3})$/
     if (!values.r142_ico) {
       errors.r142_ico = 'Zadajte IČO'
+    } else if (!values.r142_ico.match(icoNumberFormat)) {
+      errors.r142_ico = 'Zadajte správne IČO'
     }
 
     if (!values.r142_obchMeno) {
@@ -202,11 +205,6 @@ export const validate = (values: TwoPercentUserInput): Errors => {
 
     if (!values.r142_obec) {
       errors.r142_obec = 'Zadajte obec'
-    }
-
-    if (!values.XIIoddiel_suhlasZaslUdaje) {
-      errors.XIIoddiel_suhlasZaslUdaje =
-        'Musíte súhlasiť so zaslaním údajov prijímateľovi'
     }
   }
   return errors

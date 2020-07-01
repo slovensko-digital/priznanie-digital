@@ -82,18 +82,6 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     validateRoute(router, taxForm, taxFormUserInput)
   }, [router, nextRoute, taxForm, taxFormUserInput])
 
-  useEffect(() => {
-    const input = document.querySelector('main input, main select') as
-      | HTMLInputElement
-      | HTMLSelectElement
-      | null
-    const anchor = document.querySelector(
-      'select, main a',
-    ) as HTMLAnchorElement | null
-
-    ;(input || anchor)?.focus()
-  }, [router])
-
   const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'
     : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
