@@ -15,7 +15,7 @@
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:ci": "start-server-and-test start http://localhost:3000/ cy:run",
+    "cy:ci": "start-server-and-test start http://localhost:3000/ cy:run --record --parallel",
     "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx --max-warnings=0",
     "check:ts": "tsc --noEmit"
   },

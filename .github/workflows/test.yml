@@ -131,3 +131,4 @@ jobs:
         env:
           CI: yes
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
