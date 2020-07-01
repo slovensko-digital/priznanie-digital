@@ -60,9 +60,10 @@ describe('Cases', () => {
     'withBonus',
     'withEmploymentBonus',
     'withHighIncome',
+    'withSpaNoPartnerNoChildren',
     'bugReport1',
     'bugReport2',
-    'withSpaNoPartnerNoChildren',
+    'bugReport3',
   ].forEach((testCase) => {
     it(testCase, (done) => {
       import(`../../__tests__/testCases/${testCase}Input.ts`).then(

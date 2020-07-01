@@ -1,4 +1,4 @@
-import { floorDecimal } from '../src/lib/utils'
+import { floorDecimal, ceilDecimal } from '../src/lib/utils'
 import {
   sortObjectKeys,
   formatCurrency,
@@ -336,6 +336,30 @@ describe('utils', () => {
       validInputs.forEach(({ input, output }) => {
         it(`should floor "${input}" to "${output}"`, () => {
           expect(floorDecimal(input).equals(output)).toBeTruthy()
+        })
+      })
+    })
+  })
+  describe('#ceilDecimal', () => {
+    describe('for valid values', () => {
+      const validInputs = [
+        {
+          input: new Decimal(2864.094),
+          output: new Decimal(2864.1),
+        },
+        {
+          input: new Decimal(2864.444),
+          output: new Decimal(2864.45),
+        },
+        {
+          input: new Decimal(2864.099),
+          output: new Decimal(2864.1),
+        },
+      ]
+
+      validInputs.forEach(({ input, output }) => {
+        it(`should floor "${input}" to "${output}"`, () => {
+          expect(ceilDecimal(input).toNumber()).toEqual(output.toNumber())
         })
       })
     })

@@ -60,38 +60,54 @@
          <rodneCislo>9609226286</rodneCislo>
       </r31>
       <r32>
-         <uplatnujemNCZDNaManzela>1</uplatnujemNCZDNaManzela>
-         <vlastnePrijmy>3500.00</vlastnePrijmy>
-         <pocetMesiacov>6</pocetMesiacov>
+         <uplatnujemNCZDNaManzela>0</uplatnujemNCZDNaManzela>
+         <vlastnePrijmy></vlastnePrijmy>
+         <pocetMesiacov></pocetMesiacov>
       </r32>
       <r33>
          <uplatNCZDNaKupelStarostlivost>1</uplatNCZDNaKupelStarostlivost>
-         <preukazZaplatUhrady>20.48</preukazZaplatUhrady>
+         <preukazZaplatUhrady>10.00</preukazZaplatUhrady>
       </r33>
       <r34>
          <dieta>
             <priezviskoMeno>anon</priezviskoMeno>
-            <rodneCislo>1607201167</rodneCislo>
+            <rodneCislo>9609226286</rodneCislo>
             <kupelnaStarostlivost>1</kupelnaStarostlivost>
-            <m00>0</m00>
-            <m01>1</m01>
-            <m02>1</m02>
-            <m03>1</m03>
-            <m04>1</m04>
-            <m05>1</m05>
-            <m06>1</m06>
-            <m07>1</m07>
+            <m00>1</m00>
+            <m01>0</m01>
+            <m02>0</m02>
+            <m03>0</m03>
+            <m04>0</m04>
+            <m05>0</m05>
+            <m06>0</m06>
+            <m07>0</m07>
             <m08>0</m08>
             <m09>0</m09>
             <m10>0</m10>
             <m11>0</m11>
             <m12>0</m12>
          </dieta>
-
-
+         <dieta>
+            <priezviskoMeno>anon</priezviskoMeno>
+            <rodneCislo>9510133853</rodneCislo>
+            <kupelnaStarostlivost>1</kupelnaStarostlivost>
+            <m00>1</m00>
+            <m01>0</m01>
+            <m02>0</m02>
+            <m03>0</m03>
+            <m04>0</m04>
+            <m05>0</m05>
+            <m06>0</m06>
+            <m07>0</m07>
+            <m08>0</m08>
+            <m09>0</m09>
+            <m10>0</m10>
+            <m11>0</m11>
+            <m12>0</m12>
+         </dieta>
       </r34>
       <r35udajeDalsieDeti>0</r35udajeDalsieDeti>
-      <r36>20.48</r36>
+      <r36>20.00</r36>
       <r37>
          <uplatDanBonusZaplatUroky>0</uplatDanBonusZaplatUroky>
          <zaplateneUroky></zaplateneUroky>
@@ -376,16 +392,16 @@
       <r71></r71>
       <r72>24800.00</r72>
       <r73>2864.10</r73>
-      <r74>218.68</r74>
+      <r74></r74>
       <r75>100.00</r75>
-      <r76>61.44</r76>
-      <r76a>20.48</r76a>
-      <r76b>40.96</r76b>
-      <r77>3244.22</r77>
-      <r78>21555.78</r78>
+      <r76>40.00</r76>
+      <r76a>10.00</r76a>
+      <r76b>30.00</r76b>
+      <r77>3004.10</r77>
+      <r78>21795.90</r78>
       <r79></r79>
-      <r80>21555.78</r80>
-      <r81>4095.59</r81>
+      <r80>21795.90</r80>
+      <r81>4141.22</r81>
       <r82></r82>
       <r83></r83>
       <r84></r84>
@@ -394,7 +410,7 @@
       <r87></r87>
       <r88></r88>
       <r89></r89>
-      <r90>4095.59</r90>
+      <r90>4141.22</r90>
       <r91></r91>
       <r92></r92>
       <r93></r93>
@@ -409,27 +425,27 @@
       <r102></r102>
       <r103></r103>
       <r104></r104>
-      <r105>4095.59</r105>
-      <r106>243.87</r106>
-      <r107>3851.72</r107>
-      <r108>22.17</r108>
-      <r109>221.70</r109>
+      <r105>4141.22</r105>
+      <r106>532.08</r106>
+      <r107>3609.14</r107>
+      <r108></r108>
+      <r109>532.08</r109>
       <r110></r110>
       <r111></r111>
       <r112></r112>
-      <r113>3851.72</r113>
+      <r113>3609.14</r113>
       <r114></r114>
       <r115></r115>
       <r116></r116>
       <r117></r117>
       <r118></r118>
       <r119></r119>
-      <r120>124.35</r120>
+      <r120>10.00</r120>
       <r121></r121>
-      <r122>1247.56</r122>
+      <r122>100.00</r122>
       <r123></r123>
       <r124></r124>
-      <r125>2501.98</r125>
+      <r125>3499.14</r125>
       <r126></r126>
       <r127></r127>
       <r128></r128>
