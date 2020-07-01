@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Lint
         run: npm run lint
@@ -81,7 +81,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Unit Tests
         run: npm run test -- --ci
@@ -121,7 +121,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: WITH_DEBUG=true npm run build
