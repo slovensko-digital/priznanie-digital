@@ -649,6 +649,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     const year = `0${today.getFullYear()}`.slice(-2)
 
     tpl.write(FIRST_COLUMN + 9, 222, 'x')
+    tpl.write(FIRST_COLUMN + 9, 181, 'x')
     tpl.write(FIRST_COLUMN + 175, 154, 'x')
     tpl.writeToBoxes(FIRST_COLUMN + 41, 127, form.iban)
     tpl.writeToBoxes(FIRST_COLUMN + 41, 63, day)
