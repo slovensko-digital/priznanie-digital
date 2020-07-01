@@ -137,9 +137,11 @@ jobs:
 
       # because of "record" and "parallel" parameters
       # these containers will load balance all found tests among themselves
+      # https://github.com/cypress-io/github-action
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          start: npm start
           record: true
           parallel: true
           group: 'Functional Tests'
