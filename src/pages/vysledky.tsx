@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { formatCurrency, sum } from '../lib/utils'
+import { formatCurrency } from '../lib/utils'
 import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
@@ -73,7 +73,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     {
       title: 'Príjmy',
       value: taxForm.t1r10_prijmy.plus(taxForm.r038),
-      key: 't1r10_prijmy',
+      key: 'prijmy',
     },
     {
       title: 'Zdravotné poistné',
@@ -121,8 +121,8 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       description: taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok
         ? 'O vyplatenie preplatku / bonusu môžete požiadať v ďalšom kroku.'
         : '',
-      value: sum(taxForm.r110, taxForm.r126_danovy_preplatok),
-      key: 'r110',
+      value: taxForm.r110.plus(taxForm.r126_danovy_preplatok),
+      key: 'na_vyplatenie',
     },
     {
       title: 'Daň na úhradu',
