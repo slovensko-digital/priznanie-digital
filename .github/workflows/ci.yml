@@ -157,37 +157,37 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # env vars for local server started via `npm start`
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
-
-  deploy:
-    if: github.event_name == 'push'
-    needs: [lint, unit, functional]
-    name: Deploy to priznanie.staging.slovensko.digital
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checks-out the repository
-        uses: actions/checkout@v2
-        # To deploy official HTML forms from Financial Administration checkout with submodules
-        # with:
-        #  submodules: 'recursive'
-
-      - name: Setup ssh
-        run: |
-          eval "$(ssh-agent -s)"
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo '-----BEGIN OPENSSH PRIVATE KEY-----' > ~/.ssh/deploy_pkey
-          echo ${{ secrets.DEPLOY_PKEY }} >> ~/.ssh/deploy_pkey
-          echo '-----END OPENSSH PRIVATE KEY-----' >> ~/.ssh/deploy_pkey
-          chmod 400 ~/.ssh/deploy_pkey
-          echo 'host ekosystem.staging.slovensko.digital' > ~/.ssh/config
-          echo '  HostName ekosystem.staging.slovensko.digital' >> ~/.ssh/config
-          echo '  IdentityFile ~/.ssh/deploy_pkey' >> ~/.ssh/config
-          echo "ekosystem.staging.slovensko.digital ${{ secrets.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
-
-      - name: Setup git
-        run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
-
-      - name: Deploy
-        run: git push staging master --force
-
+#
+#  deploy:
+#    if: github.event_name == 'push'
+#    needs: [lint, unit, functional]
+#    name: Deploy to priznanie.staging.slovensko.digital
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checks-out the repository
+#        uses: actions/checkout@v2
+#        # To deploy official HTML forms from Financial Administration checkout with submodules
+#        # with:
+#        #  submodules: 'recursive'
+#
+#      - name: Setup ssh
+#        run: |
+#          eval "$(ssh-agent -s)"
+#          mkdir -p ~/.ssh
+#          chmod 700 ~/.ssh
+#          echo '-----BEGIN OPENSSH PRIVATE KEY-----' > ~/.ssh/deploy_pkey
+#          echo ${{ secrets.DEPLOY_PKEY }} >> ~/.ssh/deploy_pkey
+#          echo '-----END OPENSSH PRIVATE KEY-----' >> ~/.ssh/deploy_pkey
+#          chmod 400 ~/.ssh/deploy_pkey
+#          echo 'host ekosystem.staging.slovensko.digital' > ~/.ssh/config
+#          echo '  HostName ekosystem.staging.slovensko.digital' >> ~/.ssh/config
+#          echo '  IdentityFile ~/.ssh/deploy_pkey' >> ~/.ssh/config
+#          echo "ekosystem.staging.slovensko.digital ${{ secrets.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
+#
+#      - name: Setup git
+#        run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
+#
+#      - name: Deploy
+#        run: git push staging master --force
+#
