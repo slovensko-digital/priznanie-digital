@@ -82,5 +82,7 @@ export const bugReport1Input: TaxFormUserInput = {
     datum: '22.02.2020',
     r031_rodne_cislo: '9609226286',
     meno_priezvisko: 'Fake Name',
+    r004_priezvisko: 'anon',
+    r005_meno: 'anon',
   },
 }

@@ -11,6 +11,8 @@ const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
     ...taxFormUserInput,
     r001_dic: 'anon',
     r003_nace: 'anon',
+    r004_priezvisko: 'anon',
+    r005_meno: 'anon',
     meno_priezvisko: 'anon',
     r007_ulica: 'anon',
     r008_cislo: 'anon',
