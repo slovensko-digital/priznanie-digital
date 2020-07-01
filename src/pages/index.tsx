@@ -31,7 +31,7 @@ export default ({ nextRoute }) => (
           <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
         </p>
         <ul className="govuk-list govuk-list--bullet">
-          <li>Iné príjmy ako zo živnosti</li>
+          <li>Iné príjmy ako zo živnosti a zamestnania</li>
           <li>Príjem zo zahraničia</li>
           <li>Daňový bonus na zaplatené úroky</li>
           <li>Daňové straty</li>
