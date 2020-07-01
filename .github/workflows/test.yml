@@ -90,6 +90,15 @@ jobs:
   functional:
     name: Functional tests
     runs-on: ubuntu-latest
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3, 4]
 
     steps:
       - name: Checkout repository
@@ -126,9 +135,24 @@ jobs:
       - name: Build
         run: WITH_DEBUG=true npm run build
 
-      - name: Functional Tests
-        run: npm run cy:ci
+      # because of "record" and "parallel" parameters
+      # these containers will load balance all found tests among themselves
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          group: 'Functional Tests'
         env:
-          CI: yes
-          autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
+          # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Functional Tests
+#        run: npm run cy:ci
+#        env:
+#          CI: yes
+#          autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
+#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
