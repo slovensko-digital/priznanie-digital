@@ -340,7 +340,7 @@ describe('utils', () => {
       })
     })
   })
-  describe.only('#ceilDecimal', () => {
+  describe('#ceilDecimal', () => {
     describe('for valid values', () => {
       const validInputs = [
         {
