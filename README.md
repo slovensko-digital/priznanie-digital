@@ -1,8 +1,6 @@
 # priznanie.digital - Návod na vyplnenie daňového priznania pre SZČO
 
-![Github Test CI](https://github.com/priznanie-digital/priznanie-digital/workflows/Github%20Test%20CI/badge.svg?branch=master)
-
-![Github Test CI](https://github.com/priznanie-digital/priznanie-digital/workflows/Github%Deploy%20CI/badge.svg?branch=master)
+![Github CI](https://github.com/priznanie-digital/priznanie-digital/workflows/Github%20%20CI/badge.svg?branch=master)
 
 Daňové priznanie je jeden z najväčších byrokratických strašiakov podnikateľov. A pritom pri zadaní pár jednoduchých údajov si
 ho môže vyplniť ktokoľvek za pár minút bez väčších problémov. Chceme takto malými krokmi uľahčiť život státisicom živnostníkov.
