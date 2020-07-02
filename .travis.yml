@@ -25,6 +25,7 @@ jobs:
         - npm run ci
     - stage: 'Deploy to Staging'
       if: type = push
+      if: branch = master
       script:
         - eval "$(ssh-agent -s)"
         - mkdir -p ~/.ssh
