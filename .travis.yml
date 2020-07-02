@@ -12,6 +12,7 @@ cache:
 branches:
   only:
     - master
+    - dev
 
 addons:
   artifacts: false
