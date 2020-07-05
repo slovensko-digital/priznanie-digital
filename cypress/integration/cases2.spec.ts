@@ -1,4 +1,4 @@
-import { exectueTestcase, executePostponeCase } from './executeCase'
+import { exectueTestcase } from './executeCase'
 
 describe('Cases', () => {
   ;[
