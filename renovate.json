@@ -7,17 +7,9 @@
    ],
    "packageRules":[
       {
-         "packagePatterns":[
-            "*",
-            "^eslint"
-         ],
-         "minor":{
-            "groupName":"all non-major dependencies",
-            "groupSlug":"all-minor-patch"
-         },
-         "packageNames":[
-            "babel-eslint"
-         ]
+        "groupName": "ESLint and Prettier",
+        "packageNames": ["eslint", "prettier"],
+        "packagePatterns": ["^eslint-config-", "^eslint-plugin-"]
       }
    ],
    "schedule":[
