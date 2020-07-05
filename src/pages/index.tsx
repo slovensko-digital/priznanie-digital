@@ -5,7 +5,7 @@ import { Warning } from '../components/Warning'
 export default ({ nextRoute }) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      Vyplnenie daňového priznania TEST DEPLOY
+      Vyplnenie daňového priznania
     </h1>
 
     <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
