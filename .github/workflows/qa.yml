@@ -1,4 +1,4 @@
-name: Github CI
+name: Quality Assurance
 
 on:
   push:
