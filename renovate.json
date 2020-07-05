@@ -8,6 +8,9 @@
       "automerge": true
     }
   ],
+  "schedule": [
+    "before 4am"
+  ],
   "prHourlyLimit": 3,
   "prConcurrentLimit": 8
 }
