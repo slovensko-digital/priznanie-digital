@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   push:
-    branches: [dh/github-actions]
+    branches: [dev]
 
 jobs:
   deploy:
@@ -36,4 +36,4 @@ jobs:
         run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
 
       - name: Deploy
-        run: git push staging dh/github-actions --force
+        run: git push staging master --force
