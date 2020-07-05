@@ -9,7 +9,7 @@
       {
         "groupName": "ESLint and Prettier",
         "packageNames": ["eslint", "prettier", "babel-eslint"],
-        "packagePatterns": ["^eslint"]
+        "packagePatterns": ["^eslint", "^@typescript-eslint"]
       }
    ],
    "schedule":[
