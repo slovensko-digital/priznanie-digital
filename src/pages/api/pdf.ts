@@ -105,7 +105,6 @@ class PdfTemplate {
 
 export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   const tpl = new PdfTemplate(res)
-
   tpl.dic = form.r001_dic ? `${form.r001_dic}` : ''
 
   // ***** PAGE 1
@@ -504,6 +503,9 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // r109
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r109.toNumber())
 
+  // r110
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r110.toNumber())
+
   // r112
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r112.toNumber())
 
@@ -515,6 +517,12 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
   // r115
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r115.toNumber())
+
+  // r120
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 450, form.r120.toNumber())
+
+  // r122
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 397, form.r122.toNumber())
 
   // r125_dan_na_uhradu
   tpl.writeNumberToBoxes(
@@ -641,6 +649,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     const year = `0${today.getFullYear()}`.slice(-2)
 
     tpl.write(FIRST_COLUMN + 9, 222, 'x')
+    tpl.write(FIRST_COLUMN + 9, 181, 'x')
     tpl.write(FIRST_COLUMN + 175, 154, 'x')
     tpl.writeToBoxes(FIRST_COLUMN + 41, 127, form.iban)
     tpl.writeToBoxes(FIRST_COLUMN + 41, 63, day)

@@ -6,14 +6,14 @@ import {
   parseInputNumber,
 } from './utils'
 import Decimal from 'decimal.js'
-import { sum } from './utils'
+import { sum, ceilDecimal } from './utils'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
-const mapChild = (child: ChildInput): Child => {
+const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
   const monthFrom = parseInt(child.monthFrom, 10)
   const monthTo = parseInt(child.monthTo, 10)
 
@@ -21,19 +21,19 @@ const mapChild = (child: ChildInput): Child => {
     priezviskoMeno: child.priezviskoMeno,
     rodneCislo: child.rodneCislo.replace(/\D/g, ''),
     kupelnaStarostlivost: child.kupelnaStarostlivost,
-    m00: child.wholeYear,
-    m01: !child.wholeYear && monthFrom === 0,
-    m02: !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
-    m03: !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
-    m04: !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
-    m05: !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
-    m06: !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
-    m07: !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
-    m08: !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
-    m09: !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
-    m10: !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
-    m11: !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
-    m12: !child.wholeYear && monthTo === 11,
+    m00: hasChildren && child.wholeYear,
+    m01: hasChildren && !child.wholeYear && monthFrom === 0,
+    m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
+    m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
+    m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
+    m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
+    m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
+    m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
+    m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
+    m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
+    m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
+    m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
+    m12: hasChildren && !child.wholeYear && monthTo === 11,
   }
 }
 
@@ -84,7 +84,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
 
     /** SECTION Children */
-    r034: input.hasChildren ? input.children.map(mapChild) : [],
+    r034: input.children.map(makeMapChild(input?.hasChildren)),
     get r036_deti_kupele() {
       const maxAmountPerChild = 50
       const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
@@ -156,9 +156,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(20507)) {
-        return Decimal.max(
-          0,
-          new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
+        return ceilDecimal(
+          Decimal.max(
+            0,
+            new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
+          ),
         )
       }
       return NEZDANITELNA_CAST_ZAKLADU

@@ -46,331 +46,355 @@ const formSuccessful = (stub) => () => {
 const getError = () => cy.get('[data-test=error]')
 
 describe('Cases', () => {
-  ;[
-    // 'base',
-    // 'complete',
-    // 'completeDecimal',
-    // 'withPartner',
-    // 'withEmployment',
-    // 'withMortgage',
-    'withPension',
-    'withChildren',
-    'with2percent',
-    'withSpa',
-    'withBonus',
-    // 'withEmploymentBonus',
-    // 'withHighIncome',
-    // 'bugReport1',
-    // 'bugReport2',
-  ].forEach((testCase) => {
-    it(testCase, (done) => {
-      import(`../../__tests__/testCases/${testCase}Input.ts`).then(
-        (inputModule) => {
-          // Access named export
-          const input: TaxFormUserInput = inputModule[`${testCase}Input`]
+  ;;[
+     // 'base',
+     // 'complete',
+     // 'completeDecimal',
+     // 'withPartner',
+     // 'withEmployment',
+     // 'withMortgage',
+     'withPension',
+     'withChildren',
+     'with2percent',
+     'withSpa',
+     'withBonus',
+     // 'withEmploymentBonus',
+     // 'withHighIncome',
+     // 'bugReport1',
+     // 'bugReport2',
+    //  'bugReport3',
+   ].forEach((testCase) => {
+     it(testCase, (done) => {
+       import(`../../__tests__/testCases/${testCase}Input.ts`).then(
+         (inputModule) => {
+           // Access named export
+           const input: TaxFormUserInput = inputModule[`${testCase}Input`]
 
-          assert.exists(input, `${testCase}Input module not found`)
+           assert.exists(input, `${testCase}Input module not found`)
 
-          cy.visit('/')
+           cy.visit('/')
 
-          cy.contains('Pripraviť daňové priznanie').click()
+           cy.contains('Pripraviť daňové priznanie').click()
 
-          /**  SECTION Prijmy a vydavky */
-          getInput('t1r10_prijmy').type(input.t1r10_prijmy)
-          getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
-          getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
-          getInput('r122').type(input.r122 ? input.r122 : '0')
+           /**  SECTION Prijmy a vydavky */
+           getInput('t1r10_prijmy').type(input.t1r10_prijmy)
+           getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
+           getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
+           getInput('r122').type(input.r122 ? input.r122 : '0')
 
-          next()
+           next()
 
-          /**  SECTION Zamestnanie */
-          assertUrl('/zamestnanie')
+           /**  SECTION Zamestnanie */
+           assertUrl('/zamestnanie')
 
-          if (input.employed) {
-            getInput('employed', '-yes').click()
-            typeToInput('r038', input)
-            typeToInput('r039', input)
-            typeToInput('r120', input)
-            typeToInput('r108', input)
-          } else {
-            getInput('employed', '-no').click()
-          }
+           if (input.employed) {
+             getInput('employed', '-yes').click()
+             typeToInput('r038', input)
+             typeToInput('r039', input)
+             typeToInput('r120', input)
+             typeToInput('r108', input)
+           } else {
+             getInput('employed', '-no').click()
+           }
 
-          next()
+           next()
 
-          /**  SECTION Partner */
-          assertUrl('/partner')
+           /**  SECTION Partner */
+           assertUrl('/partner')
 
-          if (input.r032_uplatnujem_na_partnera) {
-            getInput('r032_uplatnujem_na_partnera', '-yes').click()
-            cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
-            next()
-            cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
-            next()
-            cy.get('[data-test="partner_podmienky.1-input"]').click()
-            next()
-            typeToInput('r032_partner_vlastne_prijmy', input)
-            next()
-            typeToInput('r031_priezvisko_a_meno', input)
-            typeToInput('r031_rodne_cislo', input)
-            typeToInput('r032_partner_pocet_mesiacov', input)
-          } else {
-            getInput('r032_uplatnujem_na_partnera', '-no').click()
-          }
+           if (input.r032_uplatnujem_na_partnera) {
+             getInput('r032_uplatnujem_na_partnera', '-yes').click()
+             cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
+             next()
+             cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
+             next()
+             cy.get('[data-test="partner_podmienky.1-input"]').click()
+             next()
+             typeToInput('r032_partner_vlastne_prijmy', input)
+             next()
+             typeToInput('r031_priezvisko_a_meno', input)
+             typeToInput('r031_rodne_cislo', input)
+             typeToInput('r032_partner_pocet_mesiacov', input)
+           } else {
+             getInput('r032_uplatnujem_na_partnera', '-no').click()
+           }
 
-          next()
+           next()
 
-          /**  SECTION Kids */
-          assertUrl('/deti')
+           /**  SECTION Kids */
+           assertUrl('/deti')
 
-          if (input.hasChildren) {
-            getInput('hasChildren', '-yes').click()
-            input.children.forEach((child, index) => {
-              cy.get(
-                `[data-test="children[${index}].priezviskoMeno-input"]`,
-              ).type(child.priezviskoMeno)
-              cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
-                child.rodneCislo,
-              )
+           if (input.hasChildren) {
+             getInput('hasChildren', '-yes').click()
+             input.children.forEach((child, index) => {
+               cy.get(
+                 `[data-test="children[${index}].priezviskoMeno-input"]`,
+               ).type(child.priezviskoMeno)
+               cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
+                 child.rodneCislo,
+               )
 
-              if (child.wholeYear) {
-                cy.get(
-                  `[data-test="children[${index}].wholeYear-input"]`,
-                ).click()
-              } else {
-                cy.get(
-                  `[data-test="children[${index}].monthFrom-select"]`,
-                ).select(child.monthFrom)
-                cy.get(
-                  `[data-test="children[${index}].monthTo-select"]`,
-                ).select(child.monthTo)
-              }
+               if (child.wholeYear) {
+                 cy.get(
+                   `[data-test="children[${index}].wholeYear-input"]`,
+                 ).click()
+               } else {
+                 cy.get(
+                   `[data-test="children[${index}].monthFrom-select"]`,
+                 ).select(child.monthFrom)
+                 cy.get(
+                   `[data-test="children[${index}].monthTo-select"]`,
+                 ).select(child.monthTo)
+               }
 
-              if (index + 1 < input.children.length) {
-                cy.get('[data-test="add-child"]').click()
-              }
-            })
-          } else {
-            getInput('hasChildren', '-no').click()
-          }
+               if (index + 1 < input.children.length) {
+                 cy.get('[data-test="add-child"]').click()
+               }
+             })
+           } else {
+             getInput('hasChildren', '-no').click()
+           }
 
-          next()
+           next()
 
-          /**  SECTION Dochodok */
-          assertUrl('/dochodok')
+           /**  SECTION Dochodok */
+           assertUrl('/dochodok')
 
-          if (input.platil_prispevky_na_dochodok) {
-            getInput('platil_prispevky_na_dochodok', '-yes').click()
-            typeToInput('r075_zaplatene_prispevky_na_dochodok', input)
-          } else {
-            getInput('platil_prispevky_na_dochodok', '-no').click()
-          }
+           if (input.platil_prispevky_na_dochodok) {
+             getInput('platil_prispevky_na_dochodok', '-yes').click()
+             typeToInput('r075_zaplatene_prispevky_na_dochodok', input)
+           } else {
+             getInput('platil_prispevky_na_dochodok', '-no').click()
+           }
 
-          next()
+           next()
 
-          // TODO Reanable with mortgage feature
-          // /**  SECTION Hypoteka */
-          // assertUrl('/hypoteka')
+           // TODO Reanable with mortgage feature
+           // /**  SECTION Hypoteka */
+           // assertUrl('/hypoteka')
 
-          // if (input.r037_uplatnuje_uroky) {
-          //   getInput('r037_uplatnuje_uroky', '-yes').click()
-          //   typeToInput('r037_zaplatene_uroky', input)
-          //   typeToInput('r037_pocetMesiacov', input)
-          // } else {
-          //   getInput('r037_uplatnuje_uroky', '-no').click()
-          // }
+           // if (input.r037_uplatnuje_uroky) {
+           //   getInput('r037_uplatnuje_uroky', '-yes').click()
+           //   typeToInput('r037_zaplatene_uroky', input)
+           //   typeToInput('r037_pocetMesiacov', input)
+           // } else {
+           //   getInput('r037_uplatnuje_uroky', '-no').click()
+           // }
 
-          // next()
+           // next()
 
-          /**  SECTION Kupele */
-          assertUrl('/kupele')
+           /**  SECTION Kupele */
+           assertUrl('/kupele')
 
-          if (input.kupele) {
-            getInput('kupele', '-yes').click()
-            if (input.danovnikInSpa) {
-              getInput('danovnikInSpa').click()
-              typeToInput('r076a_kupele_danovnik', input)
-            }
-            if (input.r033_partner_kupele) {
-              getInput('r033_partner_kupele').click()
-              typeToInput('r033_partner_kupele_uhrady', input)
-            }
-            if (input.childrenInSpa) {
-              getInput('childrenInSpa').click()
-              typeToInput('r036_deti_kupele', input)
-              const childrenWithSpa = input.children.filter(
-                (child) => child.kupelnaStarostlivost,
-              )
-              childrenWithSpa.forEach((child, index) => {
-                if (child.kupelnaStarostlivost) {
-                  cy.get(
-                    `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
-                  ).click()
-                }
-              })
-            }
-          } else {
-            getInput('kupele', '-no').click()
-          }
+           if (input.kupele) {
+             getInput('kupele', '-yes').click()
+             if (input.danovnikInSpa) {
+               getInput('danovnikInSpa').click()
+               typeToInput('r076a_kupele_danovnik', input)
+             }
+             if (input.r033_partner_kupele) {
+               getInput('r033_partner_kupele').click()
+               typeToInput('r033_partner_kupele_uhrady', input)
 
-          next()
+               // partner not filled in previous steps
+               if (!input.r032_uplatnujem_na_partnera) {
+                 typeToInput('r031_rodne_cislo', input)
+                 typeToInput('r031_priezvisko_a_meno', input)
+               }
+             }
+             if (input.childrenInSpa) {
+               getInput('childrenInSpa').click()
+               typeToInput('r036_deti_kupele', input)
+               const childrenWithSpa = input.children.filter(
+                 (child) => child.kupelnaStarostlivost,
+               )
 
-          /**  SECTION Two percent */
-          assertUrl('/dve-percenta')
+               // children filled in previous steps
+               if (input.hasChildren) {
+                 childrenWithSpa.forEach((child, index) => {
+                   if (child.kupelnaStarostlivost) {
+                     cy.get(
+                       `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
+                     ).click()
+                   }
+                 })
+               } else {
+                 childrenWithSpa.forEach((child, index) => {
+                   cy.get(
+                     `[data-test="children[${index}].priezviskoMeno-input"]`,
+                   ).type(child.priezviskoMeno)
+                   cy.get(
+                     `[data-test="children[${index}].rodneCislo-input"]`,
+                   ).type(child.rodneCislo)
 
-          if (input.XIIoddiel_uplatnujem2percenta) {
-            getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
-            typeToInput('r142_obchMeno', with2percentInput)
-            typeToInput('r142_ico', with2percentInput)
-            typeToInput('r142_ulica', with2percentInput)
-            typeToInput('r142_cislo', with2percentInput)
-            typeToInput('r142_psc', with2percentInput)
-            typeToInput('r142_obec', with2percentInput)
-            cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-          } else {
-            getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
-          }
+                   if (index + 1 < input.children.length) {
+                     cy.get('[data-test="add-child"]').click()
+                   }
+                 })
+               }
+             }
+           } else {
+             getInput('kupele', '-no').click()
+           }
 
-          next()
+           next()
 
-          /**  SECTION Osobne udaje */
-          assertUrl('/osobne-udaje')
+           /**  SECTION Two percent */
+           assertUrl('/dve-percenta')
 
-          typeToInput('r001_dic', input)
+           if (input.XIIoddiel_uplatnujem2percenta) {
+             getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
+             typeToInput('r142_obchMeno', with2percentInput)
+             typeToInput('r142_ico', with2percentInput)
+             typeToInput('r142_ulica', with2percentInput)
+             typeToInput('r142_cislo', with2percentInput)
+             typeToInput('r142_psc', with2percentInput)
+             typeToInput('r142_obec', with2percentInput)
+             cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+           } else {
+             getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
+           }
 
-          const naceNumber = input.r003_nace.match(/^(\d+)/)
-          if (naceNumber) {
-            getInput('r003_nace').type(naceNumber[1])
-            cy.contains(input.r003_nace).click()
-          } else {
-            typeToInput('r003_nace', input)
-          }
+           next()
 
-          typeToInput('r005_meno', input)
-          typeToInput('r004_priezvisko', input)
-          typeToInput('r007_ulica', input)
-          typeToInput('r008_cislo', input)
-          typeToInput('r009_psc', input)
-          typeToInput('r010_obec', input)
-          typeToInput('r011_stat', input)
+           /**  SECTION Osobne udaje */
+           assertUrl('/osobne-udaje')
 
-          next()
+           typeToInput('r001_dic', input)
 
-          /**  SECTION Summary */
-          assertUrl('/suhrn')
+           const naceNumber = input.r003_nace.match(/^(\d+)/)
+           if (naceNumber) {
+             getInput('r003_nace').type(naceNumber[1])
+             cy.contains(input.r003_nace).click()
+           } else {
+             typeToInput('r003_nace', input)
+           }
 
-          cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
+           typeToInput('r005_meno', input)
+           typeToInput('r004_priezvisko', input)
+           typeToInput('r007_ulica', input)
+           typeToInput('r008_cislo', input)
+           typeToInput('r009_psc', input)
+           typeToInput('r010_obec', input)
+           typeToInput('r011_stat', input)
 
-          cy.get('.govuk-table__cell').contains(
-            formatCurrency(parseInputNumber(input.t1r10_prijmy)),
-          )
-          cy.get('.govuk-table__cell').contains(input.r001_dic)
+           next()
 
-          if (input.kupele) {
-            if (input.danovnikInSpa) {
-              cy.get(`[data-test="r076a_kupele_danovnik"]`).contains(
-                formatCurrency(parseInputNumber(input.r076a_kupele_danovnik)),
-              )
-            }
-            if (input.r033_partner_kupele) {
-              cy.get(`[data-test="r033_partner_kupele_uhrady"]`).contains(
-                formatCurrency(
-                  parseInputNumber(input.r033_partner_kupele_uhrady),
-                ),
-              )
-            }
-            if (input.childrenInSpa)
-              cy.get(`[data-test="r036_deti_kupele"]`).contains(
-                formatCurrency(parseInputNumber(input.r036_deti_kupele)),
-              )
-          }
+           /**  SECTION Summary */
+           assertUrl('/suhrn')
 
-          if (input.employed && testCase === 'bugReport1') {
-            cy.get(`[data-test="r039"]`).contains('435,22 EUR')
-          }
+           cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
 
-          next()
+           cy.get('.govuk-table__cell').contains(
+             formatCurrency(parseInputNumber(input.t1r10_prijmy)),
+           )
+           cy.get('.govuk-table__cell').contains(input.r001_dic)
 
-          /**  SECTION Results */
-          assertUrl('/vysledky')
+           if (input.kupele) {
+             if (input.danovnikInSpa) {
+               cy.get(`[data-test="r076a_kupele_danovnik"]`).contains(
+                 formatCurrency(parseInputNumber(input.r076a_kupele_danovnik)),
+               )
+             }
+             if (input.r033_partner_kupele) {
+               cy.get(`[data-test="r033_partner_kupele_uhrady"]`).contains(
+                 formatCurrency(
+                   parseInputNumber(input.r033_partner_kupele_uhrady),
+                 ),
+               )
+             }
+             if (input.childrenInSpa)
+               cy.get(`[data-test="r036_deti_kupele"]`).contains(
+                 formatCurrency(parseInputNumber(input.r036_deti_kupele)),
+               )
+           }
 
-          cy.contains('Daň na úhradu')
+           if (input.employed && testCase === 'bugReport1') {
+             cy.get(`[data-test="r039"]`).contains('435,22 EUR')
+           }
 
-          cy.get('.govuk-table__cell').contains(
-            formatCurrency(
-              new Decimal(parseInputNumber(input.t1r10_prijmy))
-                .plus(parseInputNumber(input.r038))
-                .toNumber(),
-            ),
-          )
+           next()
 
-          next()
+           /**  SECTION Results */
+           assertUrl('/vysledky')
 
-          if (calculate(input).mozeZiadatVratitDanovyBonusAleboPreplatok) {
-            /** SECTION IBAN */
-            assertUrl('/iban')
-            cy.contains(
-              'Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu',
-            )
-            cy.get('[data-test=ineligible-message]').should('not.exist')
+           cy.contains('Daň na úhradu')
 
-            if (input.ziadamVratitDanovyBonusAleboPreplatok) {
-              getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
-              typeToInput('iban', input)
-            } else {
-              getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
-            }
+           cy.get('.govuk-table__cell').contains(
+             formatCurrency(
+               new Decimal(parseInputNumber(input.t1r10_prijmy))
+                 .plus(parseInputNumber(input.r038))
+                 .toNumber(),
+             ),
+           )
 
-            next()
-          }
+           next()
 
-          /** SECTION Download */
-          assertUrl('/stiahnut')
+           if (calculate(input).mozeZiadatVratitDanovyBonusAleboPreplatok) {
+             /** SECTION IBAN */
+             assertUrl('/iban')
+             cy.contains(
+               'Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu',
+             )
+             cy.get('[data-test=ineligible-message]').should('not.exist')
 
-          cy.contains('Stiahnuť dáta')
+             if (input.ziadamVratitDanovyBonusAleboPreplatok) {
+               getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
+               typeToInput('iban', input)
+             } else {
+               getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
+             }
 
-          /**  HACK to work around file download, because cypress cannot do it */
-          cy.get(`[data-test="taxFormUserInput"]`)
-            .invoke('text')
-            .then((output) => {
-              const taxFormUserInput = JSON.parse(
-                output.toString(),
-              ) as TaxFormUserInput
+             next()
+           }
 
-              const xmlResult = convertToXML(
-                calculate(setDate(taxFormUserInput, new Date(2020, 1, 22))),
-              )
-              /**  HACK END */
+           /** SECTION Download */
+           assertUrl('/stiahnut')
 
-              /**  Validate our results with the FS form */
-              cy.visit('/form/form.451.html')
+           cy.contains('Stiahnuť dáta')
 
-              const stub = cy.stub()
-              cy.on('window:alert', stub)
+           /**  HACK to work around file download, because cypress cannot do it */
+           cy.get(`[data-test="taxFormUserInput"]`)
+             .invoke('text')
+             .then((output) => {
+               const taxFormUserInput = JSON.parse(
+                 output.toString(),
+               ) as TaxFormUserInput
 
-              cy.get('#form-button-load').click()
-              cy.get('#form-buttons-load-dialog > input').upload({
-                fileContent: xmlResult,
-                fileName: 'xmlResult.xml',
-                mimeType: 'application/xml',
-                encoding: 'utf-8',
-              })
+               const xmlResult = convertToXML(
+                 calculate(setDate(taxFormUserInput, new Date(2020, 1, 22))),
+               )
+               /**  HACK END */
 
-              cy.get(
-                '#form-buttons-load-dialog-confirm > .ui-button-text',
-              ).click()
-              cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
-              cy.get('#form-button-validate')
-                .click()
-                .should(formSuccessful(stub))
-              cy.get('#errorsContainer')
-                .should((el) => expect(el.text()).to.be.empty)
-                .then(() => done())
-            })
-        },
-      )
-    })
-  })
+               /**  Validate our results with the FS form */
+               cy.visit('/form/form.451.html')
+
+               const stub = cy.stub()
+               cy.on('window:alert', stub)
+
+               cy.get('#form-button-load').click()
+               cy.get('#form-buttons-load-dialog > input').upload({
+                 fileContent: xmlResult,
+                 fileName: 'xmlResult.xml',
+                 mimeType: 'application/xml',
+                 encoding: 'utf-8',
+               })
+
+               cy.get(
+                 '#form-buttons-load-dialog-confirm > .ui-button-text',
+               ).click()
+               cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
+               cy.get('#form-button-validate')
+                 .click()
+                 .should(formSuccessful(stub))
+               cy.get('#errorsContainer')
+                 .should((el) => expect(el.text()).to.be.empty)
+                 .then(() => done())
+             })
+         },
+       )
+     })
+   })
 })
 
 describe.skip('Postpone cases', () => {
