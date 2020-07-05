@@ -31,7 +31,7 @@ class MyDocument extends Document {
             property="og:description"
             content="Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)"
           />
-          <meta property="og:image" content="/assets/meta-img.png" />
+          <meta property="og:image" content="/assets/images/meta-img.png" />
 
           {/* <!-- Twitter --> */}
           <meta property="twitter:card" content="summary_large_image" />
@@ -44,7 +44,7 @@ class MyDocument extends Document {
             property="twitter:description"
             content="Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)"
           />
-          <meta property="twitter:image" content="/assets/meta-img.png" />
+          <meta property="twitter:image" content="/assets/images/meta-img.png" />
         </Head>
         <body>
           <Main />
