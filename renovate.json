@@ -8,7 +8,7 @@
    "packageRules":[
       {
         "groupName": "ESLint and Prettier",
-        "packageNames": ["eslint", "prettier"],
+        "packageNames": ["eslint", "prettier", "babel-eslint"],
         "packagePatterns": ["^eslint"]
       }
    ],
