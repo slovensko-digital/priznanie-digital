@@ -8,6 +8,6 @@
       "automerge": true
     }
   ],
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 5,
+  "prHourlyLimit": 3,
+  "prConcurrentLimit": 8
 }
