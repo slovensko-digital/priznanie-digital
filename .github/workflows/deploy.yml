@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checks-out the repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
         # To deploy official HTML forms from Financial Administration checkout with submodules
         # with:
