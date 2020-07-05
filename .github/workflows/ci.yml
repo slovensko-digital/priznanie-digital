@@ -158,7 +158,7 @@ jobs:
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
 
   deploy:
-    if: ${{ github.event_name == 'push' && github.ref === 'dev' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'dev' }}
     needs: [lint, unit, functional]
     name: Deploy to priznanie.staging.slovensko.digital
     runs-on: ubuntu-latest
