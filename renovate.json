@@ -8,7 +8,8 @@
    "packageRules":[
       {
          "packagePatterns":[
-            "*"
+            "*",
+            "^eslint"
          ],
          "minor":{
             "groupName":"all non-major dependencies",
@@ -17,9 +18,6 @@
          "packageNames":[
             "babel-eslint"
          ],
-         "packagePatterns":[
-            "^eslint"
-         ]
       }
    ],
    "schedule":[
