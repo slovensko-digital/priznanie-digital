@@ -10,15 +10,13 @@
         "groupName": "all non-major dependencies",
         "groupSlug": "all-minor-patch"
       }
-    },
-    {
+    }
+  ],
   "packageNames": [
     "babel-eslint"
   ],
   "packagePatterns": [
     "^eslint"
-  ]
-}
   ],
   "schedule": [
     "before 4am"
