@@ -158,7 +158,7 @@ jobs:
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
 
   deploy:
-    if: ${{ github.event_name == 'push' && github.ref == 'dev' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'dh/github-actions' }}
     needs: [lint, unit, functional]
     name: Deploy to priznanie.staging.slovensko.digital
     runs-on: ubuntu-latest
@@ -188,4 +188,4 @@ jobs:
         run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
 
       - name: Deploy
-        run: git push staging dev --force
+        run: git push staging dh/github-actions --force
