@@ -1,26 +1,30 @@
 {
-  "extends": ["config:base"],
-  "baseBranches": ["dev"],
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "*"
-      ],
-      "minor": {
-        "groupName": "all non-major dependencies",
-        "groupSlug": "all-minor-patch"
+   "extends":[
+      "config:base"
+   ],
+   "baseBranches":[
+      "dev"
+   ],
+   "packageRules":[
+      {
+         "packagePatterns":[
+            "*"
+         ],
+         "minor":{
+            "groupName":"all non-major dependencies",
+            "groupSlug":"all-minor-patch"
+         },
+         "packageNames":[
+            "babel-eslint"
+         ],
+         "packagePatterns":[
+            "^eslint"
+         ]
       }
-    }
-  ],
-  "packageNames": [
-    "babel-eslint"
-  ],
-  "packagePatterns": [
-    "^eslint"
-  ],
-  "schedule": [
-    "before 4am"
-  ],
-  "prHourlyLimit": 3,
-  "prConcurrentLimit": 8
+   ],
+   "schedule":[
+      "before 4am"
+   ],
+   "prHourlyLimit":3,
+   "prConcurrentLimit":8
 }
