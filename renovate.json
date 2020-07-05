@@ -19,7 +19,7 @@
     "^eslint"
   ]
 }
-  ]
+  ],
   "schedule": [
     "before 4am"
   ],
