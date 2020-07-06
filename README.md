@@ -1,5 +1,7 @@
 # priznanie.digital - Návod na vyplnenie daňového priznania pre SZČO
 
+![Github CI](https://github.com/priznanie-digital/priznanie-digital/workflows/Github%20%20CI/badge.svg?branch=master)
+
 Daňové priznanie je jeden z najväčších byrokratických strašiakov podnikateľov. A pritom pri zadaní pár jednoduchých údajov si
 ho môže vyplniť ktokoľvek za pár minút bez väčších problémov. Chceme takto malými krokmi uľahčiť život státisicom živnostníkov.
 Ak ste SZČO (živnostník) a uplatňujete si paušálne výdavky, tak vám pomôžeme vyplniť daňové priznanie (k dani z príjmov fyzickej osoby, typ B) a tiež vás detailne prevedieme aj procesom podania na stránkach Finančnej správy.
