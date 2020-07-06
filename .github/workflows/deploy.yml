@@ -40,7 +40,7 @@ jobs:
         if: github.ref == 'master'
         run: git push staging master:master --force
 
-        - name: Setup dev git
+      - name: Setup dev git
         if: github.ref == 'dev'
         run: git remote add dev dokku@ekosystem.staging.slovensko.digital:dev.priznanie
 
