@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   push:
-    branches: [dev]
+    branches: [dev, master]
 
 jobs:
   deploy:
@@ -32,8 +32,18 @@ jobs:
           echo '  IdentityFile ~/.ssh/deploy_pkey' >> ~/.ssh/config
           echo "ekosystem.staging.slovensko.digital ${{ secrets.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
 
-      - name: Setup git
+      - name: Setup staging git
+        if: github.ref == 'master'
         run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
 
-      - name: Deploy
-        run: git push staging dev:master --force
+      - name: Deploy staging
+        if: github.ref == 'master'
+        run: git push staging master:master --force
+
+      - name: Setup dev git
+        if: github.ref == 'dev'
+        run: git remote add dev dokku@ekosystem.staging.slovensko.digital:dev.priznanie
+
+      - name: Deploy dev
+        if: github.ref == 'dev'
+        run: git push dev dev:master --force
