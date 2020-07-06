@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to priznanie.staging.slovensko.digital
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -33,17 +33,17 @@ jobs:
           echo "ekosystem.staging.slovensko.digital ${{ secrets.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
 
       - name: Setup staging git
-        if: github.ref == 'master'
+        if: github.ref == 'refs/heads/master'
         run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
 
-      - name: Deploy staging
-        if: github.ref == 'master'
+      - name: Deploy to priznanie.staging.slovensko.digital
+        if: github.ref == 'refs/heads/master'
         run: git push staging master:master --force
 
       - name: Setup dev git
-        if: github.ref == 'dev'
+        if: github.ref == 'refs/heads/dev'
         run: git remote add dev dokku@ekosystem.staging.slovensko.digital:dev.priznanie
 
-      - name: Deploy dev
-        if: github.ref == 'dev'
+      - name: Deploy to dev.priznanie.staging.slovensko.digital
+        if: github.ref == 'refs/heads/dev'
         run: git push dev dev:master --force
