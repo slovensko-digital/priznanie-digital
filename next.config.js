@@ -1,15 +1,22 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
+
+let commitHash = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString()
 
 module.exports = {
+  env: {
+    commitHash,
+  },
   typescript: {
     ignoreDevErrors: true,
   },
-  webpack: webpackConfig => {
-    const config = {...webpackConfig};
-    config.plugins = config.plugins || [];
+  webpack: (webpackConfig) => {
+    const config = { ...webpackConfig }
+    config.plugins = config.plugins || []
 
     config.plugins = [
       ...config.plugins,
@@ -19,8 +26,8 @@ module.exports = {
         path: path.join(__dirname, '.env'),
         systemvars: true,
       }),
-    ];
+    ]
 
-    return config;
+    return config
   },
-};
+}
