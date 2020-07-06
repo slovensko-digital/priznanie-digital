@@ -6,8 +6,13 @@ import { Page } from '../components/Page'
 const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
 
-  function handleSubmit() {
+  function handleXmlSubmit() {
     setDidDownload(true)
+    gtag('event', 'download_xml')
+  }
+  function handlePdfSubmit() {
+    setDidDownload(true)
+    gtag('event', 'download_pdf')
   }
 
   return (
@@ -29,7 +34,7 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
           action="/api/xml"
           method="post"
           target="_blank"
-          onSubmit={handleSubmit}
+          onSubmit={handleXmlSubmit}
         >
           <input
             type="hidden"
@@ -49,7 +54,7 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
           action="/api/pdf"
           method="post"
           target="_blank"
-          onSubmit={handleSubmit}
+          onSubmit={handlePdfSubmit}
         >
           <input
             type="hidden"
