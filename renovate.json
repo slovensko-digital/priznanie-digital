@@ -1,0 +1,29 @@
+{
+   "extends":[
+      "config:base"
+   ],
+   "baseBranches":[
+      "dev"
+   ],
+   "packageRules":[
+      {
+        "groupName": "ESLint and Prettier",
+        "packageNames": ["eslint", "prettier", "babel-eslint"],
+        "packagePatterns": ["^eslint", "^@typescript-eslint"]
+      },
+      {
+        "groupName": "Types",
+        "packagePatterns": ["^@types/"]
+      },
+       {
+        "groupName": "Typescript",
+        "packageNames": ["typescript"],
+        "packagePatterns": ["^ts-"]
+      }
+   ],
+   "schedule":[
+      "before 4am"
+   ],
+   "prHourlyLimit":3,
+   "prConcurrentLimit":8
+}
