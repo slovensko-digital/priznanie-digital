@@ -24,7 +24,7 @@
     "classnames": "2.2.6",
     "decimal.js": "10.2.0",
     "dotenv": "8.2.0",
-    "dotenv-webpack": "1.7.0",
+    "dotenv-webpack": "1.8.0",
     "formik": "2.1.4",
     "fuse.js": "5.0.7-beta",
     "hummus": "1.0.108",
