@@ -24,6 +24,6 @@
    "schedule":[
       "before 4am"
    ],
-   "prHourlyLimit":3,
-   "prConcurrentLimit":8
+   "prHourlyLimit":2,
+   "prConcurrentLimit":4
 }
