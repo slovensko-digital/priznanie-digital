@@ -29,7 +29,6 @@
     "fuse.js": "5.0.7-beta",
     "hummus": "1.0.108",
     "iban": "0.0.14",
-    "isomorphic-unfetch": "3.0.0",
     "js-file-download": "0.4.12",
     "lodash.clonedeep": "4.5.0",
     "lodash.floor": "4.0.4",
