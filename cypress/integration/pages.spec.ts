@@ -948,6 +948,19 @@ describe('Summary page', () => {
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody do sociálnej poisťovne')
   })
+  it('displays correct first & last name', () => {
+    cy.visit('/osobne-udaje')
+
+    getInput('meno_priezvisko').type('Matej Ledni')
+    cy.contains('Matej Lednický').click()
+    getInput('meno_priezvisko').clear()
+    getInput('meno_priezvisko').type('Jozef Mrkva') // write different name into search input
+    next()
+
+    assertUrl('/suhrn')
+    cy.get('[data-test=r005_meno]').contains('Matej')
+    cy.get('[data-test=r004_priezvisko]').contains('Lednický')
+  })
   ;[
     '/prijmy-a-vydavky',
     '/zamestnanie',

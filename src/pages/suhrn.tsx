@@ -67,9 +67,6 @@ const Suhrn: Page<TaxFormUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  const [firstName, ...lastNames] = taxFormUserInput.meno_priezvisko
-    .split(' ')
-    .map((v) => v.trim())
   return (
     <>
       <Link href={previousRoute}>
@@ -274,8 +271,16 @@ const Suhrn: Page<TaxFormUserInput> = ({
         href={'/osobne-udaje'}
         rows={[
           { title: 'DIČ', value: taxFormUserInput.r001_dic },
-          { title: 'Meno', value: firstName },
-          { title: 'Priezvisko', value: lastNames.join(' ') },
+          {
+            title: 'Meno',
+            value: taxFormUserInput.r005_meno,
+            testId: 'r005_meno',
+          },
+          {
+            title: 'Priezvisko',
+            value: taxFormUserInput.r004_priezvisko,
+            testId: 'r004_priezvisko',
+          },
         ]}
       />
       <Summary
