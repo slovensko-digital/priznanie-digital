@@ -119,10 +119,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r10_prijmy
     },
     get t1r10_vydavky() {
-      return Decimal.min(
+      const vydavky = Decimal.min(
         this.t1r10_prijmy.times(0.6),
         PAUSALNE_VYDAVKY_MAX,
       ).add(this.priloha3_r08_poistne)
+      return Decimal.min(vydavky, this.t1r2_prijmy)
     },
     get priloha3_r08_poistne() {
       return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
@@ -152,7 +153,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return sum(this.r057, this.r040)
     },
     get r073() {
-      if (this.r072_pred_znizenim.gte(36256.37)) {
+      if (
+        this.r072_pred_znizenim.eq(0) ||
+        this.r072_pred_znizenim.gte(36256.37)
+      ) {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(20507)) {
