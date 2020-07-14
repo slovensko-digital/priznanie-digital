@@ -147,6 +147,7 @@ jobs:
           parallel: true
           group: 'Functional Tests'
         env:
+          PORT: 5000
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Recommended: pass the GitHub token lets this action correctly
