@@ -8,7 +8,7 @@
     "dev": "WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "BUILD_TIMESTAMP=$(date +%s) next build",
-    "start": "next start -p $PORT",
+    "start": "node node_modules/next/dist/bin/next start -p $PORT",
     "test:watch": "npm run test -- --watch",
     "test": "jest",
     "ci": "npm run lint && npm run test -- --ci && WITH_DEBUG=true npm run build && npm run cy:ci",
