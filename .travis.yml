@@ -36,5 +36,5 @@ jobs:
         - echo '  HostName ekosystem.staging.slovensko.digital' >> ~/.ssh/config
         - echo '  IdentityFile ~/.ssh/deploy_pkey' >> ~/.ssh/config
         - echo "ekosystem.staging.slovensko.digital $DEPLOY_HOST_KEY" > ~/.ssh/known_hosts
-        - git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
+        - git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie-digital
         - git push staging master --force
