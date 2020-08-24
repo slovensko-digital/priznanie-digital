@@ -34,7 +34,7 @@ jobs:
 
       - name: Setup staging git
         if: github.ref == 'refs/heads/master'
-        run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie
+        run: git remote add staging dokku@ekosystem.staging.slovensko.digital:priznanie-digital
 
       - name: Deploy to priznanie.staging.slovensko.digital
         if: github.ref == 'refs/heads/master'
