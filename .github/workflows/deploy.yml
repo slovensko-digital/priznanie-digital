@@ -39,11 +39,3 @@ jobs:
       - name: Deploy to priznanie.staging.slovensko.digital
         if: github.ref == 'refs/heads/master'
         run: git push staging master:master --force
-
-      - name: Setup dev git
-        if: github.ref == 'refs/heads/dev'
-        run: git remote add dev dokku@ekosystem.staging.slovensko.digital:dev.priznanie
-
-      - name: Deploy to dev.priznanie.staging.slovensko.digital
-        if: github.ref == 'refs/heads/dev'
-        run: git push dev dev:master --force
