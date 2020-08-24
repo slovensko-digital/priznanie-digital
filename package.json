@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "4.1.5",
-    "@testing-library/jest-dom": "5.11.0",
+    "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "9.4.0",
     "@types/classnames": "2.2.10",
     "@types/iban": "0.0.30",
