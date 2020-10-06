@@ -55,7 +55,7 @@ const Partner: Page<PartnerUserInput> = ({
         {(props) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
+              title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v roku 2019? "
               name="r032_uplatnujem_na_partnera"
             />
             <Details title="Kedy si môžem uplatniť zvýhodnenie?">
@@ -70,7 +70,7 @@ const Partner: Page<PartnerUserInput> = ({
                     v domácnosti;
                   </li>
                   <li>
-                    v roku 2019 poberal/-a peňažný príspevok na opatrovanie;
+                    poberal/-a peňažný príspevok na opatrovanie;
                   </li>
                   <li>
                     bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;
