@@ -73,7 +73,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ? input?.r031_rodne_cislo.replace(/\D/g, '')
       : '',
     get r032_uplatnujem_na_partnera() {
-      return validatePartnerIncome(input)
+      return input?.r032_uplatnujem_na_partnera && validatePartnerIncome(input)
     },
     r032_partner_vlastne_prijmy: new Decimal(
       parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),

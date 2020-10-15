@@ -11,9 +11,11 @@ export const validatePartnerIncome = (
 
   const step2 = values.partner_bonus_uplatneny === false
 
-  const step3 = Object.keys(values.partner_podmienky)
-    .map((key) => values.partner_podmienky[key])
-    .some((value) => value === true)
+  const step3 =
+    values.partner_podmienky &&
+    Object.keys(values.partner_podmienky)
+      .map((key) => values.partner_podmienky[key])
+      .some((value) => value === true)
 
   const step4 =
     values.r032_partner_vlastne_prijmy !== '' &&

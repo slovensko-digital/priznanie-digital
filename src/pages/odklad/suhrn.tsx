@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { BackLink } from '../../components/BackLink'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -26,11 +27,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
 
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Súhrn a kontrola vyplnených údajov
       </h1>

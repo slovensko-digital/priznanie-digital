@@ -39,6 +39,9 @@ export const completeInput: TaxFormUserInput = {
   r032_partner_pocet_mesiacov: '12',
   r032_partner_vlastne_prijmy: '3000',
   r032_uplatnujem_na_partnera: true,
+  partner_spolocna_domacnost: true,
+  partner_bonus_uplatneny: false,
+  partner_podmienky: { '1': true },
 
   /** SECTION Spa */
   r036_deti_kupele: '30',

@@ -5,6 +5,7 @@ import { EmailForm } from '../components/EmailForm'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
 import Decimal from 'decimal.js'
+import { BackLink } from '../components/BackLink'
 
 const buildSummaryParams = (rows: SummaryRow[]) => {
   return rows.reduce(
@@ -131,11 +132,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Výpočet dane za rok 2019
       </h1>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper } from '../components/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
@@ -9,6 +8,7 @@ import { validatePartnerIncome } from '../lib/validatePartnerIncome'
 import { Details } from '../components/Details'
 import { Page } from '../components/Page'
 import { partnerUserInitialValues } from '../lib/initialValues'
+import { BackLink } from '../components/BackLink'
 
 const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
@@ -19,11 +19,7 @@ const Partner: Page<PartnerUserInput> = ({
 }) => {
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <FormWrapper<PartnerUserInput>
         initialValues={taxFormUserInput}
         validate={validate}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import fileDownload from 'js-file-download'
 
 import { NextPage } from 'next'
@@ -8,6 +7,7 @@ import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 import { setDate } from '../../lib/utils'
+import { BackLink } from '../../components/BackLink'
 
 const { previousRoute } = getPostponeRoutes('/odklad/stiahnut')
 
@@ -27,11 +27,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
 
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <div className="box">
         <h1 className="govuk-heading-l govuk-!-margin-top-3">
           Žiadosť o odklad daňového priznania je pripravená

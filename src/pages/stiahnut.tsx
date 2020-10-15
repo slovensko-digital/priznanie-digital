@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
+import { BackLink } from '../components/BackLink'
 
 const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
@@ -17,11 +17,7 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
 
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <div className="box">
         <h1 className="govuk-heading-l govuk-!-margin-top-3">
           Dáta k podaniu daňového priznania sú pripravené
