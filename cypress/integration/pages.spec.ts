@@ -899,10 +899,6 @@ describe('IBAN page', () => {
     assertUrl('/suhrn')
     next()
 
-    assertUrl('/vysledky')
-    cy.get('small').contains('požiadať v ďalšom kroku')
-    next()
-
     assertUrl('/iban')
     cy.get('[data-test=ineligible-message]').should('not.exist')
     next()
@@ -912,8 +908,8 @@ describe('IBAN page', () => {
     getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
     next()
     getError().should('have.length', 0)
-    assertUrl('/stiahnut')
 
+    assertUrl('/vysledky')
     cy.get('.govuk-back-link').click()
     getError().should('have.length', 0)
     getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
@@ -924,7 +920,7 @@ describe('IBAN page', () => {
 
     getInput('iban').type('SK6807200002891987426353')
     next()
-    assertUrl('/stiahnut')
+    assertUrl('/vysledky')
   })
 })
 

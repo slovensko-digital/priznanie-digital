@@ -14,8 +14,8 @@ export type Route =
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
-  | '/vysledky'
   | '/iban'
+  | '/vysledky'
   | '/stiahnut'
 
 export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
@@ -37,8 +37,8 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/dve-percenta',
     '/osobne-udaje',
     '/suhrn',
-    '/vysledky',
     ...getIbanRoute(),
+    '/vysledky',
     '/stiahnut',
   ]
 }

@@ -7,5 +7,6 @@ describe('Cases', () => {
     'bugReport1',
     'bugReport2',
     'bugReport3',
+    'bugReport4',
   ].forEach(exectueTestcase)
 })

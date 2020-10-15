@@ -295,21 +295,6 @@ export const exectueTestcase = (testCase: string) => {
 
         next()
 
-        /**  SECTION Results */
-        assertUrl('/vysledky')
-
-        cy.contains('Daň na úhradu')
-
-        cy.get('.govuk-table__cell').contains(
-          formatCurrency(
-            new Decimal(parseInputNumber(input.t1r10_prijmy))
-              .plus(parseInputNumber(input.r038))
-              .toNumber(),
-          ),
-        )
-
-        next()
-
         if (calculate(input).mozeZiadatVratitDanovyBonusAleboPreplatok) {
           /** SECTION IBAN */
           assertUrl('/iban')
@@ -327,6 +312,21 @@ export const exectueTestcase = (testCase: string) => {
 
           next()
         }
+
+        /**  SECTION Results */
+        assertUrl('/vysledky')
+
+        cy.contains('Daň na úhradu')
+
+        cy.get('.govuk-table__cell').contains(
+          formatCurrency(
+            new Decimal(parseInputNumber(input.t1r10_prijmy))
+              .plus(parseInputNumber(input.r038))
+              .toNumber(),
+          ),
+        )
+
+        next()
 
         /** SECTION Download */
         assertUrl('/stiahnut')
