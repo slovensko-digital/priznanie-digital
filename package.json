@@ -5,9 +5,9 @@
     "node": "12.19.0"
   },
   "scripts": {
-    "dev": "WITH_DEBUG=true next dev",
+    "dev": "COMMIT=$(git rev-parse --short HEAD) WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
-    "build": "BUILD_TIMESTAMP=$(date +%s) next build",
+    "build": "COMMIT=$(git rev-parse --short HEAD) BUILD_TIMESTAMP=$(date +%s) next build",
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
     "test:watch": "npm run test -- --watch",
     "test": "jest",
