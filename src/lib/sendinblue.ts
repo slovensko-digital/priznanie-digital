@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-unfetch'
-
 const baseUrl = 'https://api.sendinblue.com/v3'
 const token = process.env.sendinbluetoken
 const sender = {

@@ -1,6 +1,4 @@
 import React from 'react'
-
-import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
 import { CookieBar } from './CookieBar'
@@ -22,18 +20,6 @@ const Layout: React.FC<Props> = ({
   postponeUserInput,
 }: Props) => (
   <div aria-live="polite">
-    <Head>
-      <title>priznanie.digital</title>
-      {process.env.BUILD_TIMESTAMP && (
-        <meta
-          name="version"
-          content={new Date(
-            parseInt(process.env.BUILD_TIMESTAMP, 10) * 1000,
-          ).toISOString()}
-        />
-      )}
-    </Head>
-
     <noscript>
       <p className="noscript">
         Táto aplikácia vyžaduje povolený Javascript.{' '}
@@ -75,15 +61,15 @@ const Layout: React.FC<Props> = ({
         </div>
       </main>
     </div>
-    <Debug
-      taxFormUserInput={taxFormUserInput}
-      postponeUserInput={postponeUserInput}
-    />
     <Footer
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     />
     <CookieBar />
+    <Debug
+      taxFormUserInput={taxFormUserInput}
+      postponeUserInput={postponeUserInput}
+    />
   </div>
 )
 
