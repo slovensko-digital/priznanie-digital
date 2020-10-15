@@ -1,6 +1,9 @@
 import React from 'react'
+import getConfig from 'next/config'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
+
+const { publicRuntimeConfig } = getConfig()
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
@@ -11,7 +14,7 @@ interface Props {
  * so it has to grab the data from the DOM
  */
 export const Debug = ({ taxFormUserInput, postponeUserInput }: Props) => {
-  if (process.env.WITH_DEBUG !== 'true') {
+  if (!publicRuntimeConfig.withDebug) {
     return null
   }
   return (

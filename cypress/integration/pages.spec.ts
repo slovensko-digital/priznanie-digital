@@ -83,7 +83,7 @@ const navigateEligibleToChildrenPage = () => {
 }
 
 Cypress.Cookies.defaults({
-  whitelist: ['you-shall'], // preserve the cookie between tests
+  preserve: ['you-shall'], // preserve the cookie between tests
 })
 
 before(() => {

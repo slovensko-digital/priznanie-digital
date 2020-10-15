@@ -1,6 +1,9 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import getConfig from 'next/config'
 import { GoogleAnalytics } from '../components/Analytics'
+
+const { publicRuntimeConfig } = getConfig()
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -51,6 +54,15 @@ class MyDocument extends Document {
             property="twitter:image"
             content="/assets/images/priznanie-share-image.png"
           />
+
+          {publicRuntimeConfig.buildTimestamp && (
+            <meta
+              name="version"
+              content={new Date(
+                parseInt(publicRuntimeConfig.buildTimestamp, 10) * 1000,
+              ).toISOString()}
+            />
+          )}
         </Head>
         <body>
           <Main />
