@@ -31,7 +31,7 @@ interface Nace {
   label: string
 }
 
-const formatNace = (nace: Fuse.FuseResultWithScore<Nace>) =>
+const formatNace = (nace: Fuse.FuseResult<Nace>) =>
   `${nace?.item?.code} - ${nace?.item?.label}`
 
 interface Props {
@@ -49,7 +49,7 @@ export const Nace: React.FC<Props> = ({
   const name = 'r003_nace'
   const [naceData, setNaceData] = useState<Nace[]>([])
   const [naceSearchResult, setNaceSearchResult] = useState<
-    Fuse.FuseResultWithScore<Nace>[]
+    Fuse.FuseResult<Nace>[]
   >([])
   const [isLoading, setIsLoading] = useState(false)
   const [field, meta, helpers] = useField(name)
@@ -128,7 +128,7 @@ export const Nace: React.FC<Props> = ({
 
       <span className="govuk-hint">{hint}</span>
 
-      <Autosuggest<Fuse.FuseResultWithScore<Nace>>
+      <Autosuggest<Fuse.FuseResult<Nace>>
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={formatNace}
