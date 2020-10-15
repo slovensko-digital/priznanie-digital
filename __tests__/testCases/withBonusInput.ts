@@ -55,6 +55,6 @@ export const withBonusInput: TaxFormUserInput = {
   r076a_kupele_danovnik: '41',
 
   /** SECTION Danovy bonus */
-  ziadamVratitDanovyBonusAleboPreplatok: true,
+  ziadamVyplatitDanovyBonus: true,
   iban: 'SK6807200002891987426353',
 }

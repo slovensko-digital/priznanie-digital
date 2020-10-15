@@ -105,7 +105,7 @@ export const spaInitialInput: SpaUserInput = {
 
 export const taxBonusInitialInput: TaxBonusUserInput = {
   iban: '',
-  ziadamVratitDanovyBonusAleboPreplatok: undefined,
+  ziadamVyplatitDanovyBonus: undefined,
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {

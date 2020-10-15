@@ -11,6 +11,7 @@ import {
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { taxBonusInitialInput } from '../lib/initialValues'
+import { TaxForm } from '../types/TaxForm'
 
 const Iban: Page<TaxBonusUserInput> = ({
   taxForm,
@@ -20,104 +21,131 @@ const Iban: Page<TaxBonusUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
+  console.log('previousRoute', previousRoute)
+  console.log('nextRoute', nextRoute)
+
+  if (
+    !taxForm.mozeZiadatVyplatitDanovyBonus &&
+    !taxForm.mozeZiadatVratitDanovyPreplatok
+  ) {
+    return (
+      <>
+        <p data-test="ineligible-message">
+          Nemáte nárok na vyplatenie daňového bonusu, rozdielu daňového bonusu
+          ani na vrátenie daňového preplatku
+        </p>
+        <Link href={nextRoute}>
+          <button
+            data-test="next"
+            className="govuk-button govuk-!-margin-top-3"
+            type="button"
+          >
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
+  }
+
   return (
-    <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
-      {!taxForm.mozeZiadatVratitDanovyBonusAleboPreplatok ? (
+    <FormWrapper<TaxBonusUserInput>
+      initialValues={taxFormUserInput}
+      validate={makeValidate(taxForm)}
+      onSubmit={(values) => {
+        const userInput =
+          values.ziadamVyplatitDanovyBonus || values.ziadamVratitDanovyPreplatok
+            ? values
+            : {
+                ...taxBonusInitialInput,
+                ziadamVyplatitDanovyBonus: false,
+                ziadamVratitDanovyPreplatok: false,
+              }
+        setTaxFormUserInput(userInput)
+        router.push(nextRoute)
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        setFieldValue,
+      }: FormikProps<TaxBonusUserInput>) => (
         <>
-          <h1 className="govuk-heading-l">
-            Vyplatenie daňového bonusu alebo rozdielu daňového bonusu
-          </h1>
-          <p data-test="ineligible-message">
-            Toto sa vás netýka. Nemáte žiaden daňový bonus na vyplatenie.
-          </p>
-          <Link href={nextRoute}>
-            <button
-              data-test="next"
-              className="govuk-button govuk-!-margin-top-3"
-              type="button"
-            >
+          <Link href={previousRoute}>
+            <a className="govuk-back-link" data-test="back">
+              Späť
+            </a>
+          </Link>
+          <Form className="form" noValidate>
+            <ErrorSummary<TaxBonusUserInput>
+              errors={errors}
+              touched={touched}
+            />
+
+            {taxForm.mozeZiadatVyplatitDanovyBonus && (
+              <BooleanRadio
+                name="ziadamVyplatitDanovyBonus"
+                title="Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu"
+              />
+            )}
+
+            {taxForm.mozeZiadatVratitDanovyPreplatok && (
+              <BooleanRadio
+                name="ziadamVratitDanovyPreplatok"
+                title="Žiadam o vrátenie daňového preplatku"
+              />
+            )}
+
+            {(values.ziadamVyplatitDanovyBonus ||
+              values.ziadamVratitDanovyPreplatok) && (
+              <Input
+                name="iban"
+                type="text"
+                label="IBAN"
+                hint="Účet musí byť vedený v banke na Slovensku pod vašim menom."
+                maxLength={29}
+                onChange={(event) => {
+                  const iban = formatIban(
+                    event.currentTarget.value,
+                    values.iban,
+                  )
+                  setFieldValue('iban', iban)
+                }}
+              />
+            )}
+
+            <button data-test="next" className="govuk-button" type="submit">
               Pokračovať
             </button>
-          </Link>
+          </Form>
         </>
-      ) : (
-        <FormWrapper<TaxBonusUserInput>
-          initialValues={taxFormUserInput}
-          validate={validate}
-          onSubmit={(values) => {
-            const userInput = values.ziadamVratitDanovyBonusAleboPreplatok
-              ? values
-              : {
-                  ...taxBonusInitialInput,
-                  ziadamVratitDanovyBonusAleboPreplatok: false,
-                }
-            setTaxFormUserInput(userInput)
-            router.push(nextRoute)
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            setFieldValue,
-          }: FormikProps<TaxBonusUserInput>) => (
-            <>
-              <Form className="form" noValidate>
-                <BooleanRadio
-                  name="ziadamVratitDanovyBonusAleboPreplatok"
-                  title="Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu"
-                />
-
-                {values.ziadamVratitDanovyBonusAleboPreplatok && (
-                  <>
-                    <ErrorSummary<TaxBonusUserInput>
-                      errors={errors}
-                      touched={touched}
-                    />
-                    <Input
-                      name="iban"
-                      type="text"
-                      label="IBAN"
-                      hint="Účet musí byť vedený v banke na Slovensku pod vašim menom."
-                      maxLength={29}
-                      onChange={(event) => {
-                        const iban = formatIban(
-                          event.currentTarget.value,
-                          values.iban,
-                        )
-                        setFieldValue('iban', iban)
-                      }}
-                    />
-                  </>
-                )}
-
-                <button data-test="next" className="govuk-button" type="submit">
-                  Pokračovať
-                </button>
-              </Form>
-            </>
-          )}
-        </FormWrapper>
       )}
-    </>
+    </FormWrapper>
   )
 }
 
 export default Iban
 
-export const validate = (values: TaxBonusUserInput) => {
+export const makeValidate = (taxForm: TaxForm) => (
+  values: TaxBonusUserInput,
+) => {
   const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
-  if (typeof values.ziadamVratitDanovyBonusAleboPreplatok === 'undefined') {
-    errors.ziadamVratitDanovyBonusAleboPreplatok = 'Vyznačte odpoveď'
+  if (
+    taxForm.mozeZiadatVyplatitDanovyBonus &&
+    typeof values.ziadamVyplatitDanovyBonus === 'undefined'
+  ) {
+    errors.ziadamVyplatitDanovyBonus = 'Vyznačte odpoveď na daňový bonus'
   }
 
-  if (values.ziadamVratitDanovyBonusAleboPreplatok) {
+  if (
+    taxForm.mozeZiadatVratitDanovyPreplatok &&
+    typeof values.ziadamVratitDanovyPreplatok === 'undefined'
+  ) {
+    errors.ziadamVratitDanovyPreplatok = 'Vyznačte odpoveď na daňový preplatok'
+  }
+
+  if (values.ziadamVyplatitDanovyBonus || values.ziadamVratitDanovyPreplatok) {
     if (!values.iban || values.iban === '') {
       // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
       errors.iban = 'Zadajte váš IBAN'

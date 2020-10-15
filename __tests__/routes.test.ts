@@ -43,7 +43,7 @@ describe('routes', () => {
       expect(
         getOrderedRoutes({
           eligibleForChildrenBonus: true,
-          mozeZiadatVratitDanovyBonusAleboPreplatok: true,
+          mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
         '/',
@@ -65,7 +65,7 @@ describe('routes', () => {
     it('shoudl return routes without children and with iban', () => {
       expect(
         getOrderedRoutes({
-          mozeZiadatVratitDanovyBonusAleboPreplatok: true,
+          mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
         '/',
@@ -108,7 +108,7 @@ describe('routes', () => {
 
         it('should be correct when eligible for refund', () => {
           const { nextRoute } = getRoutes('/suhrn', {
-            mozeZiadatVratitDanovyBonusAleboPreplatok: true,
+            mozeZiadatVyplatitDanovyBonus: true,
           } as TaxForm)
           expect(nextRoute()).toBe('/iban')
         })
@@ -138,7 +138,7 @@ describe('routes', () => {
 
         it('should be correct when eligible for refund', () => {
           const { previousRoute } = getRoutes('/vysledky', {
-            mozeZiadatVratitDanovyBonusAleboPreplatok: true,
+            mozeZiadatVyplatitDanovyBonus: true,
           } as TaxForm)
           expect(previousRoute()).toBe('/iban')
         })

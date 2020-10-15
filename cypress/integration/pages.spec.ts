@@ -905,14 +905,15 @@ describe('IBAN page', () => {
 
     getError().should('have.length', 1)
 
-    getInput('ziadamVratitDanovyBonusAleboPreplatok', '-no').click()
+    getInput('ziadamVyplatitDanovyBonus', '-no').click()
     next()
     getError().should('have.length', 0)
 
     assertUrl('/vysledky')
     cy.get('.govuk-back-link').click()
     getError().should('have.length', 0)
-    getInput('ziadamVratitDanovyBonusAleboPreplatok', '-yes').click()
+
+    getInput('ziadamVyplatitDanovyBonus', '-yes').click()
     getInput('iban').should('exist')
     next()
 

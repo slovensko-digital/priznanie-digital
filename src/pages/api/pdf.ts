@@ -639,17 +639,25 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     })
   }
 
-  if (
-    form.mozeZiadatVratitDanovyBonusAleboPreplatok &&
-    form.ziadamVratitDanovyBonusAleboPreplatok
-  ) {
+  const maDanovBonus =
+    form.mozeZiadatVyplatitDanovyBonus && form.ziadamVyplatitDanovyBonus
+  const maDanovyPreplatok =
+    form.mozeZiadatVratitDanovyPreplatok && form.ziadamVratitDanovyPreplatok
+
+  if (maDanovBonus || maDanovyPreplatok) {
     const today = new Date()
     const day = `0${today.getDate()}`.slice(-2)
     const month = `0${today.getMonth() + 1}`.slice(-2)
     const year = `0${today.getFullYear()}`.slice(-2)
 
-    tpl.write(FIRST_COLUMN + 9, 222, 'x')
-    tpl.write(FIRST_COLUMN + 9, 181, 'x')
+    if (form.ziadamVyplatitDanovyBonus) {
+      tpl.write(FIRST_COLUMN + 9, 222, 'x')
+    }
+
+    if (form.ziadamVratitDanovyPreplatok) {
+      tpl.write(FIRST_COLUMN + 9, 181, 'x')
+    }
+
     tpl.write(FIRST_COLUMN + 175, 154, 'x')
     tpl.writeToBoxes(FIRST_COLUMN + 41, 127, form.iban)
     tpl.writeToBoxes(FIRST_COLUMN + 41, 63, day)

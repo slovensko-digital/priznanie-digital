@@ -186,14 +186,21 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
-  if (taxForm.ziadamVratitDanovyBonusAleboPreplatok) {
+  const maDanovBonus =
+    taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
+  const maDanovyPreplatok =
+    taxForm.mozeZiadatVratitDanovyPreplatok &&
+    taxForm.ziadamVratitDanovyPreplatok
+
+  if (maDanovBonus || maDanovyPreplatok) {
     form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
     form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
     form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'
-    if (taxForm.r110.gt(0)) {
+
+    if (taxForm.ziadamVyplatitDanovyBonus) {
       form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonus = '1'
     }
-    if (taxForm.r126_danovy_preplatok.gt(0)) {
+    if (taxForm.ziadamVratitDanovyPreplatok) {
       form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
     }
   }
