@@ -36,8 +36,8 @@ const Summary = (props: SummaryProps) => (
     </h2>
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {props.rows.map(({ title, value, currency, testId }) => (
-          <tr className="govuk-table__row" key={title}>
+        {props.rows.map(({ title, value, currency, testId }, index) => (
+          <tr className="govuk-table__row" key={`${title}-${index}`}>
             {value ? (
               <>
                 <td className="govuk-table__cell govuk-!-width-one-half">

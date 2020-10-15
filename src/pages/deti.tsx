@@ -115,7 +115,6 @@ const Deti: Page<ChildrenUserInput> = ({
                           <ChildForm
                             savedValues={child}
                             index={index}
-                            key={index}
                             setFieldValue={setFieldValue}
                           />
                         </div>
