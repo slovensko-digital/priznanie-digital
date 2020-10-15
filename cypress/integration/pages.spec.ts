@@ -83,7 +83,7 @@ const navigateEligibleToChildrenPage = () => {
 }
 
 Cypress.Cookies.defaults({
-  whitelist: ['you-shall'], // preserve the cookie between tests
+  preserve: ['you-shall'], // preserve the cookie between tests
 })
 
 before(() => {
@@ -358,10 +358,7 @@ describe('osobne-udaje page', () => {
 
     cy.contains('ryže').click({ force: true })
 
-    getInput('r003_nace').should(
-      'have.value',
-      '01110 - Pestovanie obilnín (okrem ryže), strukovín a olejnatých semien',
-    )
+    getInput('r003_nace').should('have.value', '01120 - Pestovanie ryže')
   })
   it('with posta api', () => {
     cy.visit('/osobne-udaje')
