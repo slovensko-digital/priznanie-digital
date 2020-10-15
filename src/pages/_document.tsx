@@ -44,7 +44,10 @@ class MyDocument extends Document {
             property="twitter:description"
             content="Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)"
           />
-          <meta property="twitter:image" content="/assets/images/meta-img.png" />
+          <meta
+            property="twitter:image"
+            content="/assets/images/meta-img.png"
+          />
         </Head>
         <body>
           <Main />
