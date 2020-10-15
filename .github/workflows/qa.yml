@@ -2,7 +2,7 @@ name: Quality Assurance
 
 on:
   pull_request:
-    branches: [master, dev]
+    branches: [master]
 
 jobs:
   lint:
