@@ -79,8 +79,10 @@ export interface TaxForm {
   t1r10_vydavky: Decimal
   t1r2_prijmy: Decimal
 
-  /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona
-   *   vydavkyPoistPar6ods11_ods1a2 */
+  /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona */
+  vydavkyPoistPar6ods11_ods1a2: Decimal
+
+  /** Úhrn povinného poistného (§ 5 ods. 8 zákona) - za zamestnanie */
   priloha3_r08_poistne: Decimal
 
   /** SECTION  Zamestnanie */

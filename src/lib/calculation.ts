@@ -122,11 +122,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const vydavky = Decimal.min(
         this.t1r10_prijmy.times(0.6),
         PAUSALNE_VYDAVKY_MAX,
-      ).add(this.priloha3_r08_poistne)
+      ).add(this.vydavkyPoistPar6ods11_ods1a2)
       return Decimal.min(vydavky, this.t1r2_prijmy)
     },
-    get priloha3_r08_poistne() {
+    get vydavkyPoistPar6ods11_ods1a2() {
       return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
+    },
+    get priloha3_r08_poistne() {
+      return new Decimal(parseInputNumber(input.r039))
     },
     get r040() {
       return this.r038.minus(this.r039)
