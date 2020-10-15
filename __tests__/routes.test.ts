@@ -56,8 +56,8 @@ describe('routes', () => {
         '/dve-percenta',
         '/osobne-udaje',
         '/suhrn',
-        '/vysledky',
         '/iban',
+        '/vysledky',
         '/stiahnut',
       ])
     })
@@ -77,8 +77,8 @@ describe('routes', () => {
         '/dve-percenta',
         '/osobne-udaje',
         '/suhrn',
-        '/vysledky',
         '/iban',
+        '/vysledky',
         '/stiahnut',
       ])
     })
@@ -100,14 +100,14 @@ describe('routes', () => {
         })
       })
 
-      describe('for route /vysledky', () => {
+      describe('for route /suhrn', () => {
         it('should be correct when not eligible for refund', () => {
-          const { nextRoute } = getRoutes('/vysledky', {} as TaxForm)
-          expect(nextRoute()).toBe('/stiahnut')
+          const { nextRoute } = getRoutes('/suhrn', {} as TaxForm)
+          expect(nextRoute()).toBe('/vysledky')
         })
 
         it('should be correct when eligible for refund', () => {
-          const { nextRoute } = getRoutes('/vysledky', {
+          const { nextRoute } = getRoutes('/suhrn', {
             mozeZiadatVratitDanovyBonusAleboPreplatok: true,
           } as TaxForm)
           expect(nextRoute()).toBe('/iban')
@@ -130,14 +130,14 @@ describe('routes', () => {
         })
       })
 
-      describe('for route /stiahnut', () => {
+      describe('for route /vysledky', () => {
         it('should be correct when not eligible for refund', () => {
-          const { previousRoute } = getRoutes('/stiahnut', {} as TaxForm)
-          expect(previousRoute()).toBe('/vysledky')
+          const { previousRoute } = getRoutes('/vysledky', {} as TaxForm)
+          expect(previousRoute()).toBe('/suhrn')
         })
 
         it('should be correct when eligible for refund', () => {
-          const { previousRoute } = getRoutes('/stiahnut', {
+          const { previousRoute } = getRoutes('/vysledky', {
             mozeZiadatVratitDanovyBonusAleboPreplatok: true,
           } as TaxForm)
           expect(previousRoute()).toBe('/iban')
