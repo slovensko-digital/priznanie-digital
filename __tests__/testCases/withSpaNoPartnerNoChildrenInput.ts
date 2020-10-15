@@ -53,7 +53,4 @@ export const withSpaNoPartnerNoChildrenInput: TaxFormUserInput = {
   r036_deti_kupele: '60',
   danovnikInSpa: true,
   r076a_kupele_danovnik: '41',
-
-  /** SECTION Danovy bonus */
-  ziadamVratitDanovyBonusAleboPreplatok: false,
 }

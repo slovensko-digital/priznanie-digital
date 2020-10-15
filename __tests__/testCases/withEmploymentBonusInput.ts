@@ -40,6 +40,7 @@ export const withEmploymentBonusInput: TaxFormUserInput = {
     },
   ],
   datum: '22.02.2020',
-  ziadamVratitDanovyBonusAleboPreplatok: true,
+  ziadamVyplatitDanovyBonus: false,
+  ziadamVratitDanovyPreplatok: true,
   iban: 'SK6807200002891987426353',
 }

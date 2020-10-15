@@ -540,18 +540,18 @@
       <r143>3</r143>
       <datumVyhlasenia>22.02.2020</datumVyhlasenia>
       <danovyPreplatokBonus>
-         <vyplatitDanovyBonus>0</vyplatitDanovyBonus>
+         <vyplatitDanovyBonus>1</vyplatitDanovyBonus>
          <vyplatitDanovyBonusUroky>0</vyplatitDanovyBonusUroky>
          <vratitDanPreplatok>0</vratitDanPreplatok>
          <sposobPlatby>
             <poukazka>0</poukazka>
-            <ucet>0</ucet>
+            <ucet>1</ucet>
             <ucetZahranicie>0</ucetZahranicie>
          </sposobPlatby>
          <bankovyUcet>
-            <IBAN/>
+            <IBAN>SK6807200002891987426353</IBAN>
          </bankovyUcet>
-         <datum/>
+         <datum>22.02.2020</datum>
       </danovyPreplatokBonus>
       <prilPodielyNaZisku>
          <pr1/>
