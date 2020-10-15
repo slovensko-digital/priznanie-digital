@@ -52,7 +52,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r10.s1 = taxForm.t1r10_prijmy.toFixed(2)
   form.dokument.telo.tabulka1.t1r10.s2 = taxForm.t1r10_vydavky.toFixed(2)
 
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.priloha3_r08_poistne.toFixed(
+  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistPar6ods11_ods1a2.toFixed(
     2,
   )
   if (taxForm.platil_prispevky_na_dochodok) {

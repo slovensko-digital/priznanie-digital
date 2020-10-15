@@ -10,6 +10,19 @@ const FIRST_COLUMN = 31.5
 const BOX_WIDTH = 14.4
 const PDF_ASSETS_PATH = `${process.cwd()}/src/pdf-assets`
 
+const mapStateToShortcut = (state: string): string => {
+  switch (state) {
+    case 'Slovensko':
+    case 'Slovenská republika':
+      return 'SR'
+    case 'Česko':
+    case 'Česká republika':
+      return 'ČR'
+    default:
+      return state
+  }
+}
+
 class PdfTemplate {
   pdfWriter: any
   pageModifier: any
@@ -82,6 +95,15 @@ class PdfTemplate {
       )
   }
 
+  writeDate(x: number, y: number, date = new Date()) {
+    const day = `0${date.getDate()}`.slice(-2)
+    const month = `0${date.getMonth() + 1}`.slice(-2)
+    const year = `0${date.getFullYear()}`.slice(-2)
+    this.writeToBoxes(x, y, day)
+    this.writeToBoxes(x + 36, y, month)
+    this.writeToBoxes(x + 99, y, year)
+  }
+
   nextPage() {
     this.currentPage += 1
     if (this.currentPage > 0) {
@@ -120,10 +142,9 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeToBoxes(FIRST_COLUMN + 487, 690, '19')
 
   // r003_nace
-
   const nace = `${form.r003_nace}`.match(/^(\d+) - (.*)$/)
   const naceOne = nace ? nace[1].slice(0, 2) : ''
-  const naceTwo = nace ? nace[1].slice(2, 2) : ''
+  const naceTwo = nace ? nace[1].slice(2, 4) : ''
   const naceThree = nace ? nace[1].slice(4) : ''
 
   tpl.writeToBoxes(FIRST_COLUMN, 608, naceOne)
@@ -157,7 +178,12 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeToBoxes(FIRST_COLUMN + 79, 466, form.r010_obec, 20)
 
   // r011_stat
-  tpl.writeToBoxes(FIRST_COLUMN + 375, 466, form.r011_stat, 11)
+  tpl.writeToBoxes(
+    FIRST_COLUMN + 375,
+    466,
+    mapStateToShortcut(form.r011_stat),
+    11,
+  )
 
   // ***** PAGE 2
   tpl.nextPage()
@@ -639,17 +665,16 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     })
   }
 
+  // r143
+  tpl.write(FIRST_COLUMN + 102, 318, '3')
+  tpl.writeDate(FIRST_COLUMN + 141, 271)
+
   const maDanovBonus =
     form.mozeZiadatVyplatitDanovyBonus && form.ziadamVyplatitDanovyBonus
   const maDanovyPreplatok =
     form.mozeZiadatVratitDanovyPreplatok && form.ziadamVratitDanovyPreplatok
 
   if (maDanovBonus || maDanovyPreplatok) {
-    const today = new Date()
-    const day = `0${today.getDate()}`.slice(-2)
-    const month = `0${today.getMonth() + 1}`.slice(-2)
-    const year = `0${today.getFullYear()}`.slice(-2)
-
     if (form.ziadamVyplatitDanovyBonus) {
       tpl.write(FIRST_COLUMN + 9, 222, 'x')
     }
@@ -660,9 +685,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
 
     tpl.write(FIRST_COLUMN + 175, 154, 'x')
     tpl.writeToBoxes(FIRST_COLUMN + 41, 127, form.iban)
-    tpl.writeToBoxes(FIRST_COLUMN + 41, 63, day)
-    tpl.writeToBoxes(FIRST_COLUMN + 77, 63, month)
-    tpl.writeToBoxes(FIRST_COLUMN + 140, 63, year)
+    tpl.writeDate(FIRST_COLUMN + 41, 63)
   }
 
   // ***** PAGE 14-17
@@ -670,6 +693,29 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
   tpl.nextPage()
   tpl.nextPage()
+
+  // priloha3_r08_poistne
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 410,
+    405,
+    form.priloha3_r08_poistne.toNumber(),
+  )
+
+  // priloha3_r11_socialne
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 410,
+    329,
+    form.priloha3_r11_socialne.toNumber(),
+  )
+
+  // priloha3_r13_zdravotne
+  tpl.writeNumberToBoxes(
+    FIRST_COLUMN + 410,
+    277,
+    form.priloha3_r13_zdravotne.toNumber(),
+  )
+
+  tpl.writeDate(FIRST_COLUMN + 40, 119)
 
   tpl.commitPage()
 
