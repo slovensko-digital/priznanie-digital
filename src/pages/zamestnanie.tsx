@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
@@ -7,6 +6,7 @@ import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
 import { employmentUserInputInitialValues } from '../lib/initialValues'
+import { BackLink } from '../components/BackLink'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,
@@ -17,11 +17,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
 }) => {
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <FormWrapper<EmployedUserInput>
         initialValues={taxFormUserInput}
         validate={validate}

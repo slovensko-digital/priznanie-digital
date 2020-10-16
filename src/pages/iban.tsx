@@ -12,6 +12,7 @@ import {
 import { Page } from '../components/Page'
 import { taxBonusInitialInput } from '../lib/initialValues'
 import { TaxForm } from '../types/TaxForm'
+import { BackLink } from '../components/BackLink'
 
 const Iban: Page<TaxBonusUserInput> = ({
   taxForm,
@@ -71,11 +72,7 @@ const Iban: Page<TaxBonusUserInput> = ({
         setFieldValue,
       }: FormikProps<TaxBonusUserInput>) => (
         <>
-          <Link href={previousRoute}>
-            <a className="govuk-back-link" data-test="back">
-              Späť
-            </a>
-          </Link>
+          <BackLink href={previousRoute} />
           <Form className="form" noValidate>
             <ErrorSummary<TaxBonusUserInput>
               errors={errors}

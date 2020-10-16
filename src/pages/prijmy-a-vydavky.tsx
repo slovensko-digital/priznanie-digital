@@ -1,11 +1,11 @@
 import React from 'react'
-import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
 import { FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
+import { BackLink } from '../components/BackLink'
 
 const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
   taxFormUserInput,
@@ -16,11 +16,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
 }) => {
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <FormWrapper<IncomeAndExpenseUserInput>
         initialValues={taxFormUserInput}
         validate={validate}

@@ -6,6 +6,7 @@ import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
+import { BackLink } from '../components/BackLink'
 
 interface SummaryRow {
   title: string
@@ -69,11 +70,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
 }) => {
   return (
     <>
-      <Link href={previousRoute}>
-        <a className="govuk-back-link" data-test="back">
-          Späť
-        </a>
-      </Link>
+      <BackLink href={previousRoute} />
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Súhrn a kontrola vyplnených údajov
       </h1>

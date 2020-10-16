@@ -7,6 +7,7 @@ import {
 } from './utils'
 import Decimal from 'decimal.js'
 import { sum, ceilDecimal } from './utils'
+import { validatePartnerIncome } from './validatePartnerIncome'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -71,7 +72,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r031_rodne_cislo: input?.r031_rodne_cislo
       ? input?.r031_rodne_cislo.replace(/\D/g, '')
       : '',
-    r032_uplatnujem_na_partnera: input?.r032_uplatnujem_na_partnera ?? false,
+    get r032_uplatnujem_na_partnera() {
+      return input?.r032_uplatnujem_na_partnera && validatePartnerIncome(input)
+    },
     r032_partner_vlastne_prijmy: new Decimal(
       parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),
     ),
