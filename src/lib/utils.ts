@@ -179,3 +179,14 @@ export function parseInputNumber(input: string): number {
   const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
   return Number(cleanedInput)
 }
+
+export const parseStreetAndNumber = (streetAndNumber): [string, string] => {
+  const parsedStreet = streetAndNumber
+    .trim()
+    .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/)
+
+  const street = parsedStreet ? parsedStreet[1] : streetAndNumber.trim()
+  const number = parsedStreet ? parsedStreet[2] : ''
+
+  return [street, number]
+}

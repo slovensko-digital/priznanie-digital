@@ -30,6 +30,7 @@ const makeHandleOrganisationAutoform = ({
       r142_cislo: org.street_number || '',
       r142_psc: org.postal_code ? formatPsc(org.postal_code) : '',
       r142_obec: org.municipality || '',
+      r142_pravnaForma: org.legal_form ? `${org.legal_form}`.slice(0, 23) : '',
     })
   }
 }
@@ -101,6 +102,13 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                         )
                         props.setFieldValue('r142_ico', icoValue)
                       }}
+                    />
+                    <Input
+                      className={styles.inlineField}
+                      name="r142_pravnaForma"
+                      type="text"
+                      label="Právna forma"
+                      maxLength={23}
                     />
                   </div>
 

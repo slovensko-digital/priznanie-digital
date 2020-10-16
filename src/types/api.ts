@@ -27,6 +27,7 @@ export interface AutoformResponseBody {
   registration_office: string
   registration_number: string
   datahub_corporate_body: DatahubCorporateBody
+  legal_form?: string
 }
 
 interface Offices {

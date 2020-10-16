@@ -1,4 +1,8 @@
-import { floorDecimal, ceilDecimal } from '../src/lib/utils'
+import {
+  floorDecimal,
+  ceilDecimal,
+  parseStreetAndNumber,
+} from '../src/lib/utils'
 import {
   sortObjectKeys,
   formatCurrency,
@@ -361,6 +365,21 @@ describe('utils', () => {
         it(`should floor "${input}" to "${output}"`, () => {
           expect(ceilDecimal(input).toNumber()).toEqual(output.toNumber())
         })
+      })
+    })
+  })
+  describe('#parseStreetAndNumber', () => {
+    const scenarios = [
+      { input: '  A. Bernoláka 6 ', output: ['A. Bernoláka', '6'] },
+      { input: 'Hrušková 10009/44A', output: ['Hrušková', '10009/44A'] },
+      { input: 'Ševčenkova 902/25', output: ['Ševčenkova', '902/25'] },
+      { input: 'Bošániho 7', output: ['Bošániho', '7'] },
+      { input: 'Ulica bez čísla ', output: ['Ulica bez čísla', ''] },
+    ]
+
+    scenarios.forEach(({ input, output }) => {
+      it(`should return "${output}" for "${input}"`, () => {
+        expect(parseStreetAndNumber(input)).toEqual(output)
       })
     })
   })

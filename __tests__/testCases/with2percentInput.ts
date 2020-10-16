@@ -19,6 +19,7 @@ export const with2percentInput: TaxFormUserInput = {
   XIIoddiel_uplatnujem2percenta: true,
   r142_ico: '50158635',
   r142_obchMeno: 'Slovensko.Digital',
+  r142_pravnaForma: 'Občianske združenie',
   r142_ulica: 'Staré Grunty',
   r142_cislo: '205/18',
   r142_psc: '84104',
