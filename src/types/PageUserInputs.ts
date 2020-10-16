@@ -65,6 +65,7 @@ export type TwoPercentUserInput = Pick<
   TaxFormUserInput,
   | 'XIIoddiel_uplatnujem2percenta'
   | 'r142_ico'
+  | 'r142_pravnaForma'
   | 'r142_obchMeno'
   | 'r142_ulica'
   | 'r142_cislo'

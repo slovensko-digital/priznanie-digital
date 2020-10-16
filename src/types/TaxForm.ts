@@ -197,6 +197,7 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
 
   r142?: {
     ico: string
+    pravnaForma: string
     obchMeno: string
     ulica: string
     cislo: string

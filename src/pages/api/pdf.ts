@@ -575,7 +575,14 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r141.toNumber())
 
     // r142 - ico
-    tpl.writeToBoxes(FIRST_COLUMN, 665, form.r142 ? form.r142.ico : '')
+    tpl.writeToBoxes(FIRST_COLUMN, 664, form.r142 ? form.r142.ico : '')
+
+    // r142 - ico
+    tpl.writeToBoxes(
+      FIRST_COLUMN + 202,
+      664,
+      form.r142 ? form.r142.pravnaForma : '',
+    )
 
     // r142 - obchMeno
     const obchMeno = form.r142 ? form.r142.obchMeno : ''

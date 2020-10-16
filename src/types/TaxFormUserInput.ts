@@ -92,6 +92,7 @@ export interface TaxFormUserInput {
   /** SECTION  Dve percenta */
   XIIoddiel_uplatnujem2percenta?: boolean
   r142_ico?: string
+  r142_pravnaForma?: string
   r142_obchMeno?: string
   r142_ulica?: string
   r142_cislo?: string

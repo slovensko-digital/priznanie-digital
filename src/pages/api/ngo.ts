@@ -36,10 +36,12 @@ const parseDataFromHtml = (rawHtml) => {
 const formatNgoData = (rawArray: string[][]): CachedData => {
   return rawArray.map(
     (
-      [_pravnaForma, name, cin, streetAndNumber, municipality, postal_code],
+      [pravnaForma, name, cin, streetAndNumber, municipality, postal_code],
       id,
     ) => {
-      const parsedStreet = streetAndNumber.match(/^(.*)\s([\d+/]+)$/)
+      const parsedStreet = streetAndNumber
+        .trim()
+        .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/)
 
       return {
         id,
@@ -50,6 +52,7 @@ const formatNgoData = (rawArray: string[][]): CachedData => {
         formatted_address: `${streetAndNumber}, ${postal_code} ${municipality}`,
         postal_code,
         municipality,
+        legal_form: pravnaForma,
       }
     },
   )

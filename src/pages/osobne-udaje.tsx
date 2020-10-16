@@ -113,6 +113,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                   name="r001_dic"
                   type="text"
                   label="DIČ"
+                  hint="Ak nie je pridelené, uvádza sa rodné číslo"
                 />
               </div>
 

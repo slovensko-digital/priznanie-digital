@@ -589,6 +589,7 @@ describe('twoPercent page', () => {
     // Type to input
     typeToInput('r142_obchMeno', with2percentInput)
     typeToInput('r142_ico', with2percentInput)
+    typeToInput('r142_pravnaForma', with2percentInput)
     typeToInput('r142_ulica', with2percentInput)
     typeToInput('r142_cislo', with2percentInput)
     typeToInput('r142_psc', with2percentInput)
@@ -611,6 +612,7 @@ describe('twoPercent page', () => {
 
     getInput('r142_obchMeno').should('contain.value', 'starter, o.z.')
     getInput('r142_ico').should('contain.value', '50 825 909')
+    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
     getInput('r142_ulica').should('contain.value', 'Ševčenkova')
     getInput('r142_cislo').should('contain.value', '902/25')
     getInput('r142_psc').should('contain.value', '851 01')
