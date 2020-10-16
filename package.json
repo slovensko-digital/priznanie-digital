@@ -5,9 +5,9 @@
     "node": "12.19.0"
   },
   "scripts": {
-    "dev": "COMMIT=$(git rev-parse --short HEAD) WITH_DEBUG=true next dev",
+    "dev": "WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
-    "build": "COMMIT=$(git rev-parse --short HEAD) BUILD_TIMESTAMP=$(date +%s) next build",
+    "build": "next build",
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
     "test:watch": "npm run test -- --watch",
     "test": "jest",
@@ -18,7 +18,8 @@
     "cy:run:dashboard": "cypress run --record --parallel",
     "cy:ci": "PORT=3000 start-server-and-test start http://localhost:3000/ cy:run:dashboard",
     "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx --max-warnings=0",
-    "check:ts": "tsc --noEmit"
+    "check:ts": "tsc --noEmit",
+    "git-comit-hash": "echo {\\\"gitCommit\\\":\\\"$(git rev-parse --short HEAD)\\\"} > ./git-commit.json && git add ./git-commit.json"
   },
   "dependencies": {
     "classnames": "2.2.6",
@@ -87,7 +88,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run git-comit-hash"
     }
   },
   "lint-staged": {

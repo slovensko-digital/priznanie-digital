@@ -1,15 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import getConfig from 'next/config'
 import { GoogleAnalytics } from '../components/Analytics'
-
-const {
-  publicRuntimeConfig: { buildCommit, buildTimestamp },
-} = getConfig()
-
-const buildTimeHuman = buildTimestamp
-  ? new Date(parseInt(buildTimestamp, 10) * 1000).toISOString()
-  : ''
+import { getGitCommit } from '../lib/constants'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -60,13 +52,7 @@ class MyDocument extends Document {
             property="twitter:image"
             content="/assets/images/priznanie-share-image.png"
           />
-          {buildTimeHuman && (
-            <meta name="build:timestamp" content={buildTimestamp} />
-          )}
-          {buildTimeHuman && (
-            <meta name="build:time_human" content={buildTimeHuman} />
-          )}
-          <meta name="build:commit" content={buildCommit} />
+          <meta name="build:commit" content={getGitCommit()} />
         </Head>
         <body>
           <Main />
