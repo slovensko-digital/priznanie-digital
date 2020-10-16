@@ -175,6 +175,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r142) {
     form.dokument.telo.r141 = taxForm.r141.toFixed(2)
+    form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
     form.dokument.telo.r142 = {
       ...taxForm.r142,
       obchMeno: {

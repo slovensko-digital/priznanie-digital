@@ -43,7 +43,7 @@ export const FormWrapper = <FormikInput extends FormikValues>({
 interface InputProps<Name> {
   name: Name
   label: string
-  hint?: string | ReactNode
+  hint?: ReactNode
   className?: string
   type: 'text' | 'number' | 'email'
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
@@ -116,7 +116,7 @@ export const Input = <Name extends keyof UserInput>({
 interface BooleanRadioProps<Name> {
   name: Name
   title: string
-  hint?: string | ReactNode
+  hint?: ReactNode
   disabled?: boolean
 }
 export const BooleanRadio = <Name extends keyof UserInput>({
@@ -246,13 +246,15 @@ interface CheckboxSmallProps {
   name: string
   className?: string
   disabled?: boolean
-  label: string | React.ReactNode
+  label: ReactNode
+  hint?: ReactNode
 }
 export const CheckboxSmall = ({
   name,
   label,
   className,
   disabled = false,
+  hint,
   ...props
 }: CheckboxSmallProps) => {
   const [field, meta] = useField(name)
@@ -282,6 +284,11 @@ export const CheckboxSmall = ({
         <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
           {label}
         </label>
+        {hint ? (
+          <span className="govuk-hint" style={{ padding: '10px 0 0 15px' }}>
+            {hint}
+          </span>
+        ) : null}
       </div>
     </div>
   )
@@ -292,7 +299,7 @@ interface SelectProps {
   options: string[]
   className?: string
   hint?: string
-  label: string | React.ReactNode
+  label: ReactNode
 
   /** boolean=true disables the <select> while keeping selected value
    *  number value temporarily selects a value while field is disabled */

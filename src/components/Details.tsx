@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react'
 
 export interface DetailsProps {
   title: string
-  children: string | ReactNode
+  children: ReactNode
 }
 
 export const Details = ({ title, children }: DetailsProps) => {

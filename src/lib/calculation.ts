@@ -385,17 +385,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         ),
       )
     },
+    splnam3per: input?.splnam3per ?? false,
     get r141() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
         return new Decimal(0)
       }
 
-      // TODO do 3% as well
-      const rate = 2
-      const NGOamount = floorDecimal(this.r113.div(100).times(rate))
+      const rate = this.splnam3per ? 3 : 2
+      const NGOAmount = floorDecimal(this.r113.div(100).times(rate))
 
       /** Min of 3 EUR is required */
-      return NGOamount.gte(3) ? NGOamount : new Decimal(0)
+      return NGOAmount.gte(3) ? NGOAmount : new Decimal(0)
     },
     get r142() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
