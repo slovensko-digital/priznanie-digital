@@ -64,6 +64,7 @@ export type MortgageUserInput = Pick<
 export type TwoPercentUserInput = Pick<
   TaxFormUserInput,
   | 'XIIoddiel_uplatnujem2percenta'
+  | 'splnam3per'
   | 'r142_ico'
   | 'r142_pravnaForma'
   | 'r142_obchMeno'

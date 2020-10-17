@@ -71,11 +71,39 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
             />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Chcete poukázať 2 % zaplatenej dane niektorej neziskovej organizácii?"
+                title="Chcete poukázať 2% alebo 3% zaplatenej dane niektorej neziskovej organizácii?"
                 name="XIIoddiel_uplatnujem2percenta"
               />
               {props.values.XIIoddiel_uplatnujem2percenta && (
                 <>
+                  <CheckboxSmall
+                    name="splnam3per"
+                    label="spĺňam podmienky na poukázanie 3% z dane"
+                    hint={
+                      <>
+                        <p className="govuk-hint">
+                          Ak ste v predchádzajúcom roku odpracovali viac ako 40
+                          hodín dobrovoľníckej činnosti, môže vám organizácia,
+                          pre ktorú ste túto dobrovoľnícku činnosť vykonávali,
+                          vystaviť{' '}
+                          <strong>
+                            Potvrdenie o odpracovaní minimálne 40 hodín
+                            dobrovoľníckych aktivít
+                          </strong>
+                          .
+                        </p>
+                        <p className="govuk-hint">
+                          Svoje 3% dane možete darovať ktorejkoľvek príspevkovej
+                          organizácii. Nemusíte ich darovať organizácii, v
+                          ktorej ste daných 40 hodín odpracovali.
+                        </p>
+                        <p className="govuk-hint">
+                          Potvrdenie je nutné priložiť k daňovému priznaniu.
+                        </p>
+                      </>
+                    }
+                  />
+
                   <h2 className="govuk-heading-l">Údaje o prijímateľovi</h2>
                   <p>
                     Údaje môžete vyhladať a automaticky vyplniť podľa názvu.

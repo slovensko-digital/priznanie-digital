@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 export interface WarningProps {
   className?: string
-  children: string | ReactNode
+  children: ReactNode
 }
 
 export const Warning = ({ children, className }: WarningProps) => (

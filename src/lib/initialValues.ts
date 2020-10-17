@@ -83,6 +83,7 @@ export const mortgageInitialValues: MortgageUserInput = {
 
 export const twoPercentInitialValues: TwoPercentUserInput = {
   XIIoddiel_uplatnujem2percenta: undefined,
+  splnam3per: false,
   r142_ico: '',
   r142_pravnaForma: '',
   r142_obchMeno: '',
