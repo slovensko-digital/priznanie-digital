@@ -631,6 +631,21 @@ describe('twoPercent page', () => {
 
     assertUrl('/osobne-udaje')
   })
+  it('works with Slovensko.Digital pre-fill', () => {
+    cy.visit('/dve-percenta')
+    cy.get('[data-test=prefill-slovensko-digital]').click()
+
+    getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
+    getInput('r142_ico').should('contain.value', '50 158 635')
+    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
+    getInput('r142_ulica').should('contain.value', 'Staré Grunty')
+    getInput('r142_cislo').should('contain.value', '205/18')
+    getInput('r142_psc').should('contain.value', '841 04')
+    getInput('r142_obec').should('contain.value', 'Bratislava')
+
+    next()
+    assertUrl('/osobne-udaje')
+  })
 })
 
 describe('Spa page', () => {
