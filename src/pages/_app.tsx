@@ -69,6 +69,12 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
 
   const router = useRouter()
 
+  if (router.events) {
+    router.events.on('routeChangeComplete', () => {
+      window.scrollTo(0, 0)
+    })
+  }
+
   const { previousRoute, nextRoute } = getRoutes(
     router.pathname as Route,
     taxForm,
