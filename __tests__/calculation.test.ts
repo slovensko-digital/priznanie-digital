@@ -64,6 +64,7 @@ describe('With child (for tax year 2019)', () => {
       ...initTaxFormUserInputValues,
       hasChildren: true,
       children: [child],
+      t1r10_prijmy: '3120',
     })
     expect(result.r034[0].priezviskoMeno).toBe('Johnny Bravo')
     expect(result.r034[0].rodneCislo).toBe('1507011234')
@@ -88,6 +89,7 @@ describe('With child (for tax year 2019)', () => {
       ...initTaxFormUserInputValues,
       hasChildren: true,
       children: [{ ...child, wholeYear: true, kupelnaStarostlivost: false }],
+      t1r10_prijmy: '3120',
     })
     expect(result.r034[0].priezviskoMeno).toBe('Johnny Bravo')
     expect(result.r034[0].rodneCislo).toBe('1507011234')
@@ -113,6 +115,7 @@ describe('With child (for tax year 2019)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childUnder6],
+        t1r10_prijmy: '3120',
       })
       const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
       const part2 = sum(44.34, 44.34, 44.34, 44.34, 44.34, 44.34, 44.34) // april - oktober (vek < 6 rokov)
@@ -124,6 +127,7 @@ describe('With child (for tax year 2019)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childTurning6InFeb],
+        t1r10_prijmy: '3120',
       })
 
       const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
@@ -136,6 +140,7 @@ describe('With child (for tax year 2019)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childTurning6InJul],
+        t1r10_prijmy: '3120',
       })
 
       const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
@@ -149,6 +154,7 @@ describe('With child (for tax year 2019)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childOver6],
+        t1r10_prijmy: '3120',
       })
 
       const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
@@ -166,6 +172,7 @@ describe('With child (for tax year 2019)', () => {
           { ...childTurning6InJul },
           { ...childUnder6 },
         ],
+        t1r10_prijmy: '3120',
       })
 
       // childOver6
