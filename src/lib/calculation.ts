@@ -87,7 +87,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
 
     /** SECTION Children */
-    r034: input.children.map(makeMapChild(input?.hasChildren)),
+    get r034() {
+      if (!this.eligibleForChildrenBonus) {
+        return []
+      }
+      return input.children.map(makeMapChild(input?.hasChildren))
+    },
     get r036_deti_kupele() {
       const maxAmountPerChild = 50
       const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
@@ -256,6 +261,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r090
     },
     get r106() {
+      if (!this.eligibleForChildrenBonus) {
+        return new Decimal(0)
+      }
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = new Decimal(0)
         const rateJanuaryToMarch = new Decimal(22.17)
