@@ -24,7 +24,7 @@
   "dependencies": {
     "classnames": "2.2.6",
     "decimal.js": "10.2.0",
-    "formik": "2.1.5",
+    "formik": "2.2.0",
     "fuse.js": "5.2.3",
     "hummus": "1.0.108",
     "iban": "0.0.14",
