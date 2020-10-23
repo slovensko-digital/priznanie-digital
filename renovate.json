@@ -5,21 +5,32 @@
    "baseBranches":[
       "master"
    ],
+   "separateMinorPatch": true,
    "packageRules":[
+   {
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["patch"],
+      "labels": ["AUTOMERGE"],
+      "automerge": true
+    },
       {
         "groupName": "ESLint and Prettier",
         "packageNames": ["eslint", "prettier", "babel-eslint"],
-        "packagePatterns": ["^eslint", "^@typescript-eslint"]
+        "packagePatterns": ["^eslint", "^@typescript-eslint"],
+        "updateTypes": ["minor", "major"]
       },
       {
         "groupName": "Types",
-        "packagePatterns": ["^@types/"]
+        "packagePatterns": ["^@types/"],
+        "updateTypes": ["minor", "major"]
       },
        {
         "groupName": "Typescript",
         "packageNames": ["typescript"],
-        "packagePatterns": ["^ts-"]
-      }
+        "packagePatterns": ["^ts-"],
+        "updateTypes": ["minor", "major"]
+      },
+      
    ],
    "schedule":[
       "before 4am"
