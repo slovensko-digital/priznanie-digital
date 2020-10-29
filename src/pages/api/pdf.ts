@@ -571,11 +571,17 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   if (form.XIIoddiel_uplatnujem2percenta) {
+    // uplatnujem 3 percenta
+    if (form.splnam3per) {
+      tpl.write(FIRST_COLUMN + 157, 750, 'x')
+    }
+
     // r141
     tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r141.toNumber())
 
     // r142 - ico
-    tpl.writeToBoxes(FIRST_COLUMN, 664, form.r142 ? form.r142.ico : '')
+    const ico = form.r142 ? form.r142.ico : ''
+    tpl.writeToBoxes(FIRST_COLUMN, 664, ico.padStart(12))
 
     // r142 - ico
     tpl.writeToBoxes(

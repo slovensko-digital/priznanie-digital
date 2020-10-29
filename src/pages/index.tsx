@@ -35,6 +35,9 @@ export default ({ nextRoute }) => (
           <li>Príjem zo zahraničia</li>
           <li>Daňový bonus na zaplatené úroky</li>
           <li>Daňové straty</li>
+          <li>SZČO starobní dôchodcovia</li>
+          <li>Práca na dohodu</li>
+          <li>Záväzky a pohľadávky (tabuľka 1b)</li>
         </ul>
       </>
     </Warning>

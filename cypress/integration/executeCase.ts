@@ -13,7 +13,6 @@ import { Route, PostponeRoute } from '../../src/lib/routes'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter'
-import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 import Decimal from 'decimal.js'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
@@ -224,13 +223,22 @@ export const exectueTestcase = (testCase: string) => {
 
         if (input.XIIoddiel_uplatnujem2percenta) {
           getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
-          typeToInput('r142_obchMeno', with2percentInput)
-          typeToInput('r142_ico', with2percentInput)
-          typeToInput('r142_ulica', with2percentInput)
-          typeToInput('r142_cislo', with2percentInput)
-          typeToInput('r142_psc', with2percentInput)
-          typeToInput('r142_obec', with2percentInput)
-          cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+
+          if (input.splnam3per) {
+            getInput('splnam3per').click()
+          }
+
+          typeToInput('r142_obchMeno', input)
+          typeToInput('r142_ico', input)
+          typeToInput('r142_ulica', input)
+          typeToInput('r142_cislo', input)
+          typeToInput('r142_psc', input)
+          getInput('r142_obec').clear() // clear value from PSC autocomplete via Posta API
+          typeToInput('r142_obec', input)
+
+          if (input.XIIoddiel_suhlasZaslUdaje) {
+            cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+          }
         } else {
           getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
         }
@@ -255,6 +263,7 @@ export const exectueTestcase = (testCase: string) => {
         typeToInput('r007_ulica', input)
         typeToInput('r008_cislo', input)
         typeToInput('r009_psc', input)
+        getInput('r010_obec').clear() // clear value from PSC autocomplete via Posta API
         typeToInput('r010_obec', input)
         typeToInput('r011_stat', input)
 
