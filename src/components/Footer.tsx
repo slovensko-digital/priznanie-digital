@@ -32,7 +32,7 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
                     </ExternalLink>
                   </li>
                   <li>
-                    <ExternalLink href="https://navody.digital/disclaimer">
+                    <ExternalLink href="https://navody.digital/ochrana-osobnych-udajov">
                       Ochrana osobných údajov
                     </ExternalLink>
                   </li>
