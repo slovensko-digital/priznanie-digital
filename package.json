@@ -48,7 +48,7 @@
     "@types/iban": "0.0.30",
     "@types/jest": "25.2.3",
     "@types/lodash.clonedeep": "4.5.6",
-    "@types/node": "13.13.28",
+    "@types/node": "13.13.30",
     "@types/react-autosuggest": "9.3.14",
     "@types/xml2js": "0.4.5",
     "@types/yup": "0.29.8",
