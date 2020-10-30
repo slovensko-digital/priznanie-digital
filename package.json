@@ -51,7 +51,7 @@
     "@types/node": "13.13.30",
     "@types/react-autosuggest": "9.3.14",
     "@types/xml2js": "0.4.5",
-    "@types/yup": "0.29.8",
+    "@types/yup": "0.29.9",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "babel-eslint": "10.1.0",
