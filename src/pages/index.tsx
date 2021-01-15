@@ -1,8 +1,38 @@
 import React from 'react'
 import Link from 'next/link'
 import { Warning } from '../components/Warning'
+import { checkCookie } from '../lib/cookie'
 
-export default ({ nextRoute }) => (
+const PostponeButton = ({ nextPostponeRoute }) => (
+  <>
+    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
+      <span className="govuk-warning-text__icon" aria-hidden="true">
+        !
+      </span>
+      <strong className="govuk-warning-text__text">
+        <span className="govuk-warning-text__assistive">Upozornenie</span>
+        Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
+        <br />
+        Termín si viete predĺžiť až do 30.6. (ak ste mali príjmy len
+        zo&nbsp;Slovenska) alebo&nbsp;do&nbsp;30.9. (ak&nbsp;ste mali príjmy aj
+        zo zahraničia).
+      </strong>
+    </div>
+
+    <div className="govuk-grid-column-full">
+      <Link href={nextPostponeRoute}>
+        <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+        >
+          Odložiť daňové priznanie
+        </button>
+      </Link>
+    </div>
+  </>
+)
+
+const Index = ({ nextRoute, nextPostponeRoute }) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
@@ -51,29 +81,10 @@ export default ({ nextRoute }) => (
       </button>
     </Link>
 
-    {/* <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
-      <span className="govuk-warning-text__icon" aria-hidden="true">
-        !
-      </span>
-      <strong className="govuk-warning-text__text">
-        <span className="govuk-warning-text__assistive">Upozornenie</span>
-        Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
-        <br />
-        Termín si viete predĺžiť až do 30.6. (ak ste mali príjmy len
-        zo&nbsp;Slovenska) alebo&nbsp;do&nbsp;30.9. (ak&nbsp;ste mali príjmy aj
-        zo zahraničia).
-      </strong>
-    </div>
-
-    <div className="govuk-grid-column-full">
-      <Link href={nextPostponeRoute}>
-        <button
-          type="button"
-          className="btn-secondary govuk-button govuk-button--large"
-        >
-          Odložiť daňové priznanie
-        </button>
-      </Link>
-    </div> */}
+    {checkCookie('postpone', 'yes') && (
+      <PostponeButton nextPostponeRoute={nextPostponeRoute} />
+    )}
   </>
 )
+
+export default Index
