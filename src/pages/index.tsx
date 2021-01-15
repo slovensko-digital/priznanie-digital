@@ -1,42 +1,15 @@
 import React from 'react'
-import Link from 'next/link'
 import { Warning } from '../components/Warning'
-import { checkCookie } from '../lib/cookie'
 
-const PostponeButton = ({ nextPostponeRoute }) => (
-  <>
-    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
-      <span className="govuk-warning-text__icon" aria-hidden="true">
-        !
-      </span>
-      <strong className="govuk-warning-text__text">
-        <span className="govuk-warning-text__assistive">Upozornenie</span>
-        Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
-        <br />
-        Termín si viete predĺžiť až do 30.6. (ak ste mali príjmy len
-        zo&nbsp;Slovenska) alebo&nbsp;do&nbsp;30.9. (ak&nbsp;ste mali príjmy aj
-        zo zahraničia).
-      </strong>
-    </div>
-
-    <div className="govuk-grid-column-full">
-      <Link href={nextPostponeRoute}>
-        <button
-          type="button"
-          className="btn-secondary govuk-button govuk-button--large"
-        >
-          Odložiť daňové priznanie
-        </button>
-      </Link>
-    </div>
-  </>
-)
-
-const Index = ({ nextRoute, nextPostponeRoute }) => (
+const Index = () => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
+      <br />
+      (verzia pre rok 2019)
     </h1>
+
+    <Warning>Na verzii pre rok 2020 aktuálne pracujeme.</Warning>
 
     <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
 
@@ -72,18 +45,13 @@ const Index = ({ nextRoute, nextPostponeRoute }) => (
       </>
     </Warning>
 
-    <Link href={nextRoute}>
-      <button
-        type="button"
-        className="govuk-button govuk-button--large govuk-button--start"
-      >
-        Pripraviť daňové priznanie
-      </button>
-    </Link>
-
-    {checkCookie('postpone', 'yes') && (
-      <PostponeButton nextPostponeRoute={nextPostponeRoute} />
-    )}
+    <button
+      type="button"
+      className="govuk-button govuk-button--large govuk-button--start govuk-button--disabled"
+      disabled
+    >
+      Pripraviť daňové priznanie
+    </button>
   </>
 )
 

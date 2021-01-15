@@ -1,9 +1,14 @@
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { NextRouter } from 'next/dist/next-server/lib/router/router'
 import { TaxForm } from '../types/TaxForm'
+import { checkCookie } from './cookie'
+
+// route to home page, should be '/' when app is ready
+export type HomeRoute = '/domov'
+export const homeRoute: HomeRoute = '/domov'
 
 export type Route =
-  | '/'
+  | HomeRoute
   | '/prijmy-a-vydavky'
   | '/zamestnanie'
   | '/partner'
@@ -27,7 +32,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
   }
 
   return [
-    '/',
+    homeRoute,
     '/prijmy-a-vydavky',
     '/zamestnanie',
     '/partner',
@@ -55,7 +60,7 @@ export const getRoutes = (currentRoute: Route, taxForm: TaxForm) => {
       if (isEditing()) {
         return '/suhrn'
       } else if (currentRouteIndex < 0) {
-        return '/'
+        return homeRoute
       } else {
         return orderedRoutes[currentRouteIndex + 1]
       }
@@ -64,7 +69,7 @@ export const getRoutes = (currentRoute: Route, taxForm: TaxForm) => {
       if (isEditing()) {
         return '/suhrn'
       } else if (currentRouteIndex < 0) {
-        return '/'
+        return homeRoute
       } else {
         return orderedRoutes[currentRouteIndex - 1]
       }
@@ -73,14 +78,14 @@ export const getRoutes = (currentRoute: Route, taxForm: TaxForm) => {
 }
 
 export type PostponeRoute =
-  | '/'
+  | HomeRoute
   | '/odklad/prijmy-zo-zahranicia'
   | '/odklad/osobne-udaje'
   | '/odklad/suhrn'
   | '/odklad/stiahnut'
 
 const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
-  '/',
+  homeRoute,
   '/odklad/prijmy-zo-zahranicia',
   '/odklad/osobne-udaje',
   '/odklad/suhrn',
@@ -101,7 +106,7 @@ export const validateRoute = (
   taxForm: TaxForm,
   taxFormUserInput: TaxFormUserInput,
 ) => {
-  if (!document.cookie.match(/you-shall=not-pass/)) {
+  if (!checkCookie('you-shall', 'not-pass')) {
     const requirements = {
       '/zamestnanie': 't1r10_prijmy',
       '/partner': 'employed',
@@ -125,7 +130,7 @@ export const validateRoute = (
       const value = taxFormUserInput[requirements[router.route]]
 
       if (value === undefined || value === '') {
-        router.replace('/')
+        router.replace(homeRoute)
       }
     }
   }
