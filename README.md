@@ -71,7 +71,6 @@ npm run check:ts
 ## Feature flags
 
 - `you-shall=not-pass` allows direct access to any URL, you dont have to go through whole flow
-- `postpone=yes` displays the postpone flow on landing page
 
 Each feature flag is a cookie with value. You can set cookie in dev tools console (eg. `document.cookie='you-shall=not-pass'`) or browser extension ([Chrome](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)).
 

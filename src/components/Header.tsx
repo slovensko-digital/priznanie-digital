@@ -1,7 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Header: React.FC = () => {
+  const router = useRouter()
+  const isLandingPage = router.pathname === '/' || router.pathname === '/domov'
+
+  const logo = (
+    <a className="sdn-header__link">
+      <img
+        className="sdn-header__logo"
+        src="/assets/images/priznanie_logo.png"
+        alt="priznanie.digital"
+      />
+    </a>
+  )
+
   return (
     <header
       className="sdn-header sdn-header-1200 "
@@ -9,39 +23,7 @@ const Header: React.FC = () => {
       data-module="sdn-header"
     >
       <div className="sdn-header__container govuk-width-container ">
-        <Link href="/">
-          <a className="sdn-header__link">
-            <img
-              className="sdn-header__logo"
-              src="/assets/images/priznanie_logo.png"
-              alt="priznanie.digital"
-            />
-          </a>
-        </Link>
-        {/* TODO use later */}
-        {/* <div className="sdn-header__content">
-          <button
-            type="button"
-            className="sdn-header__menu-button sdn-header__menu-button js-header-toggle"
-            aria-controls="navigation"
-            aria-label="Show or hide Top Level Navigation"
-          >
-            Menu
-          </button>
-          <nav>
-            <ul
-              id="navigation"
-              className="sdn-header__navigation "
-              aria-label="Top Level Navigation"
-            >
-              <li>
-                <a className="sdn-header__link " href="#1">
-                  Časté otázky
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div> */}
+        {isLandingPage ? logo : <Link href="/domov">{logo}</Link>}
       </div>
     </header>
   )

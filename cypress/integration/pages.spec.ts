@@ -13,7 +13,7 @@ import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
-import { Route, PostponeRoute } from '../../src/lib/routes'
+import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
@@ -93,7 +93,7 @@ before(() => {
 describe('Cookie consent', () => {
   it('has working ui', () => {
     // display cookie consent
-    cy.visit('/')
+    cy.visit(homeRoute)
     cy.get('.govuk-main-wrapper')
     cy.get('.cc-message').should('exist')
     cy.get('.cc-message').contains('Tento web používa súbory cookie')
@@ -101,7 +101,7 @@ describe('Cookie consent', () => {
     cy.get('.cc-message').should('not.exist')
 
     // do not display cookie consent on next visit
-    cy.visit('/')
+    cy.visit(homeRoute)
     cy.get('.govuk-main-wrapper')
     cy.get('.cc-message').should('not.exist')
   })
@@ -833,7 +833,7 @@ describe('Spa page', () => {
 
 describe('Feedback', () => {
   it('has working ui', () => {
-    cy.visit('/')
+    cy.visit(homeRoute)
     cy.get('[data-test=feedback]').click()
 
     cy.get('[data-test=whatWereYouDoing]').type('Cypress tests')
@@ -996,7 +996,7 @@ describe('Summary page', () => {
 
 describe.skip('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
-    cy.visit('/')
+    cy.visit(homeRoute)
 
     cy.contains('Odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')
@@ -1063,7 +1063,7 @@ describe.skip('/odklad/osobne-udaje page', () => {
 
 describe.skip('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
-    cy.visit('/')
+    cy.visit(homeRoute)
 
     cy.contains('Odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')

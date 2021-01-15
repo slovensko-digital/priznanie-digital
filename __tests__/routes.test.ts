@@ -1,4 +1,9 @@
-import { getOrderedRoutes, getRoutes, validateRoute } from '../src/lib/routes'
+import {
+  getOrderedRoutes,
+  getRoutes,
+  validateRoute,
+  homeRoute,
+} from '../src/lib/routes'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { TaxForm } from '../src/types/TaxForm'
 
@@ -6,7 +11,7 @@ describe('routes', () => {
   describe('#getOrderedRoutes', () => {
     it('shoudl return routes without children and without iban', () => {
       expect(getOrderedRoutes({} as TaxForm)).toStrictEqual([
-        '/',
+        homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
@@ -24,7 +29,7 @@ describe('routes', () => {
       expect(
         getOrderedRoutes({ eligibleForChildrenBonus: true } as TaxForm),
       ).toStrictEqual([
-        '/',
+        homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
@@ -46,7 +51,7 @@ describe('routes', () => {
           mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
-        '/',
+        homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
@@ -68,7 +73,7 @@ describe('routes', () => {
           mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
-        '/',
+        homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
@@ -159,7 +164,7 @@ describe('routes', () => {
         {} as TaxForm,
         {} as TaxFormUserInput,
       )
-      expect(replace).toHaveBeenCalledWith('/')
+      expect(replace).toHaveBeenCalledWith(homeRoute)
     })
 
     it('should not redirect from route when form is filled out', () => {
