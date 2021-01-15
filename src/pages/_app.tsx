@@ -19,7 +19,13 @@ import {
 } from '../lib/initialValues'
 import { setDate } from '../lib/utils'
 import { PostponeUserInput } from '../types/PostponeUserInput'
-import { getRoutes, Route, validateRoute } from '../lib/routes'
+import {
+  getPostponeRoutes,
+  getRoutes,
+  PostponeRoute,
+  Route,
+  validateRoute,
+} from '../lib/routes'
 import { Page } from '../components/Page'
 
 /* eslint-disable no-template-curly-in-string */
@@ -80,6 +86,11 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     taxForm,
   )
 
+  const {
+    previousRoute: previousPostponeRoute,
+    nextRoute: nextPostponeRoute,
+  } = getPostponeRoutes(router.pathname as PostponeRoute)
+
   useEffect(() => {
     const next = nextRoute()
     if (next) {
@@ -107,6 +118,8 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
         router={router}
         previousRoute={previousRoute()}
         nextRoute={nextRoute()}
+        previousPostponeRoute={previousPostponeRoute}
+        nextPostponeRoute={nextPostponeRoute}
         {...pageProps}
       />
     </Layout>
