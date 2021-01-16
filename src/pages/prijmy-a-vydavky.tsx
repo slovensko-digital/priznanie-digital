@@ -41,13 +41,13 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   name="t1r10_prijmy"
                   type="number"
                   label="Príjmy"
-                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019."
+                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2019. Uvádzajte iba príjmy zo živnosti."
                 />
                 <Input
                   name="priloha3_r11_socialne"
                   type="number"
                   label="Sociálne poistenie"
-                  hint="Celkové uhradené poistné v roku 2019. Uveďte všetky platby zaplatené v 2019 - napr. aj nedoplatky za predchádzajúci rok."
+                  hint="Celkové uhradené poistné v roku 2019. Uveďte všetky platby zaplatené v 2019 - napr. aj nedoplatky za predchádzajúce roky."
                 />
                 <Input
                   name="priloha3_r13_zdravotne"
