@@ -131,7 +131,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
                 {
-                  title: 'Údaje o daňovom bonuse na dieťa',
+                  title: 'Údaje o zvýhodnení na manželku / manžela',
                   value: taxFormUserInput.r108,
                   currency: true,
                 },
@@ -144,7 +144,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title="Daňový bonus na manželku / manžela"
+        title="Zvýhodnenie na manželku / manžela"
         href={'/partner'}
         rows={
           taxFormUserInput.r032_uplatnujem_na_partnera
@@ -158,7 +158,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: taxFormUserInput.r031_rodne_cislo,
                 },
                 {
-                  title: 'Vlastné príjmy manželky / menžela',
+                  title: 'Vlastné príjmy manželky / manžela',
                   value: taxFormUserInput.r032_partner_vlastne_prijmy,
                   currency: true,
                 },
@@ -169,7 +169,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
               ]
             : [
                 {
-                  title: 'Neplatňujem si daňový bonus na manželku / manžela',
+                  title: 'Neplatňujem si zvýhodnenie na manželku / manžela',
                 },
               ]
         }
@@ -244,7 +244,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   testId: 'r076a_kupele_danovnik',
                 },
                 {
-                  title: 'Kúpelné úhrady za manžela/manželku',
+                  title: 'Kúpelné úhrady za manželku / manžela',
                   value: taxFormUserInput.r033_partner_kupele
                     ? taxFormUserInput.r033_partner_kupele_uhrady
                     : 'Neuplatňuje',

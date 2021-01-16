@@ -97,7 +97,7 @@ const Kupele: Page<SpaUserInput> = ({
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
-                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či pokladničný blok), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manžela/manželku a vaše deti.`}
+                hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či pokladničný blok), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manželku / manžela a vaše deti.`}
                 name="kupele"
               />
               {values.kupele && (
@@ -118,7 +118,7 @@ const Kupele: Page<SpaUserInput> = ({
                   )}
                   <CheckboxSmall
                     name="r033_partner_kupele"
-                    label="Na manžela/manželku"
+                    label="Na manželku / manžela"
                   />
                   {values.r033_partner_kupele && (
                     <>
@@ -127,7 +127,7 @@ const Kupele: Page<SpaUserInput> = ({
                           <Input
                             name="r031_priezvisko_a_meno"
                             type="text"
-                            label="Meno a priezvisko manželky/manžela"
+                            label="Meno a priezvisko manželky / manžela"
                           />
                           <Input
                             name="r031_rodne_cislo"
@@ -327,10 +327,10 @@ export const validate = (values: SpaUserInput): Errors => {
         values.r031_priezvisko_a_meno.length === 0
       ) {
         errors.r031_priezvisko_a_meno =
-          'Zadajte meno a priezvisko manžela/manželky.'
+          'Zadajte meno a priezvisko manželky / manžela.'
       }
       if (!values.r031_rodne_cislo || values.r031_rodne_cislo.length === 0) {
-        errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
+        errors.r031_rodne_cislo = 'Zadajte rodné číslo manželky / manžela'
       } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
         errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
       }
@@ -340,7 +340,7 @@ export const validate = (values: SpaUserInput): Errors => {
         values.r033_partner_kupele_uhrady.length === 0
       ) {
         errors.r033_partner_kupele_uhrady =
-          'Zadajte výšku úhrad kúpeľov za manžela/manželku'
+          'Zadajte výšku úhrad kúpeľov za manželky / manžela'
       }
       if (
         (values.r033_partner_kupele &&
