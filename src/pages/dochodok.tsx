@@ -6,6 +6,7 @@ import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp, parseInputNumber } from '../lib/utils'
 import { Page } from '../components/Page'
 import { pensionInitialValues } from '../lib/initialValues'
+import { ErrorSummary } from '../components/ErrorSummary'
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -35,8 +36,9 @@ const Dochodok: Page<PensionUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ values }) => (
+        {({ values, errors }) => (
           <Form className="form" noValidate>
+            <ErrorSummary<PensionUserInput> errors={errors} />
             <BooleanRadio
               title="Platili ste v roku 2019 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
               name="platil_prispevky_na_dochodok"

@@ -62,10 +62,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
       >
         {(props) => (
           <>
-            <ErrorSummary<PersonalInformationUserInput>
-              errors={props.errors}
-              touched={props.touched}
-            />
+            <ErrorSummary<PersonalInformationUserInput> errors={props.errors} />
             <Form className="form">
               <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>

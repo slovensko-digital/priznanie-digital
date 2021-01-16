@@ -25,13 +25,10 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ errors, touched }: FormikProps<IncomeAndExpenseUserInput>) => {
+        {({ errors }: FormikProps<IncomeAndExpenseUserInput>) => {
           return (
             <>
-              <ErrorSummary<IncomeAndExpenseUserInput>
-                errors={errors}
-                touched={touched}
-              />
+              <ErrorSummary<IncomeAndExpenseUserInput> errors={errors} />
               <Form className="form" noValidate>
                 <h2 className="govuk-heading-l">
                   Príjmy a odvody do sociálnej a zdravotnej poisťovne

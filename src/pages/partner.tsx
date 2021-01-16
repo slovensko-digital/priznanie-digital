@@ -9,6 +9,7 @@ import { Details } from '../components/Details'
 import { Page } from '../components/Page'
 import { partnerUserInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
+import { ErrorSummary } from '../components/ErrorSummary'
 
 const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
@@ -54,6 +55,7 @@ const Partner: Page<PartnerUserInput> = ({
       >
         {(props) => (
           <Form className="form" noValidate>
+            <ErrorSummary errors={props.errors} />
             <BooleanRadio
               title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
