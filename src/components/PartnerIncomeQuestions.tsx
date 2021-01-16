@@ -12,7 +12,7 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
       <Input
         name="r032_partner_vlastne_prijmy"
         type="number"
-        label="Vlastné príjmy manželky/manžela"
+        label="Vlastné príjmy manželky / manžela"
         disabled={disabled}
       />
       <Details title="Ako vypočítať príjem?">
@@ -39,7 +39,7 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
             <li>príjmy z kapitálového majetku</li>
             <li>ostatné príjmy</li>
           </ul>
-          <p>Do vlastného príjmu manželky/manžela nepatria:</p>
+          <p>Do vlastného príjmu manželky / manžela nepatria:</p>
           <ul>
             <li>zamestnanecká prémia,</li>
             <li>daňový bonus na deti,</li>
@@ -65,7 +65,7 @@ export const IncomeQuestion = ({ errors, touched, disabled }) => {
 export const HouseholdQuestion = ({ disabled }) => (
   <BooleanRadio
     name="partner_spolocna_domacnost"
-    title="Žije s vami manželka/manžel v spoločnej domácnosti?"
+    title="Žije s vami manželka / manžel v spoločnej domácnosti?"
     disabled={disabled}
   />
 )
@@ -73,9 +73,9 @@ export const HouseholdQuestion = ({ disabled }) => (
 export const AppliedQuestion = ({ disabled }) => (
   <BooleanRadio
     name="partner_bonus_uplatneny"
-    title="Uplatnili ste si daňový bonus inou cestou?"
-    hint="Daňový bonus na manželku/manžela si môžete uplatniť aj prostredníctvom zamestnávateľa pri ročnom zúčtovaní dane alebo vlastným daňovým priznaním."
+    title="Uplatnili ste si zvýhodnenie inou cestou?"
     disabled={disabled}
+    hint="Zvýhodnenie na manželku / manžela si môžete uplatniť aj prostredníctvom zamestnávateľa pri ročnom zúčtovaní dane alebo vlastným daňovým priznaním."
   />
 )
 
@@ -83,7 +83,7 @@ export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h1 className="govuk-fieldset__heading">
-        Spĺňa váš manžel/manželka aspoň jednu z podmienok?
+        Spĺňa va3a manželka / manžel aspoň jednu z podmienok?
       </h1>
     </legend>
     <CheckboxSmall
@@ -109,9 +109,7 @@ export const NotEligible = () => (
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Nemáte nárok na uplatnenie
     </h1>
-    <p>
-      Nespĺňate podmienky pre uplatnenie daňového bonusu na manželku/manžela
-    </p>
+    <p>Nespĺňate podmienky pre uplatnenie zvýhodnenia na manželku / manžela</p>
   </div>
 )
 
@@ -123,13 +121,13 @@ export const EligiblePartnerForm = ({
 }: PartnerIncomeProps) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      Máte nárok na uplatnenie daňového bonusu na manželku/manžela
+      Máte nárok na uplatnenie zvýhodnenia na manželku / manžela
     </h1>
     <ErrorSummary errors={errors} touched={touched} />
     <Input
       name="r031_priezvisko_a_meno"
       type="text"
-      label="Meno a priezvisko manželky/manžela"
+      label="Meno a priezvisko manželky / manžela"
     />
     <Input
       name="r031_rodne_cislo"
@@ -150,7 +148,7 @@ export const EligiblePartnerForm = ({
       type="number"
       min={1}
       max={12}
-      label="Počet mesiacov, kedy manžel/manželka spĺňal/a podmienky?"
+      label="Počet mesiacov, kedy manželka / manžel spĺňal/a podmienky?"
       hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
     />
   </>

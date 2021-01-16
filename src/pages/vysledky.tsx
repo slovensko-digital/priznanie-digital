@@ -92,7 +92,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'priloha3_r08_poistne',
     },
     {
-      title: 'Daňový bonus na manžela / manželku',
+      title: 'Zvýhodnenie na manželku / manžela',
       value: taxForm.r074_znizenie_partner,
       key: 'r074_znizenie_partner',
     },

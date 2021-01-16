@@ -55,14 +55,14 @@ const Partner: Page<PartnerUserInput> = ({
         {(props) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Uplatňujete si zvýhodnenie na manželku/manžela, ktorá/ý má nízke alebo žiadne príjmy? "
+              title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý má nízke alebo žiadne príjmy? "
               name="r032_uplatnujem_na_partnera"
             />
             <Details title="Kedy si môžem uplatniť zvýhodnenie?">
               <>
                 <p>
-                  Zvýhodnenie si môžete uplatniť, ak manžel/-ka spĺňa aspoň
-                  jednu z týchto podmienok:
+                  Zvýhodnenie si môžete uplatniť, ak manželka / manžel spĺňa
+                  aspoň jednu z týchto podmienok:
                 </p>
                 <ol>
                   <li>
@@ -119,24 +119,24 @@ export const validate = (values: PartnerUserInput) => {
     } else if (values.partner_step === 3 && validatePartnerIncome(values, 3)) {
       if (!values.r032_partner_vlastne_prijmy) {
         errors.r032_partner_vlastne_prijmy =
-          'Zadajte vlastné príjmy manžela/manželky'
+          'Zadajte vlastné príjmy manželky / manžela'
       } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
         errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
       }
     } else if (values.partner_step === 4 && validatePartnerIncome(values, 4)) {
       if (!values.r031_priezvisko_a_meno) {
         errors.r031_priezvisko_a_meno =
-          'Zadajte meno a priezvisko manžela/manželky.'
+          'Zadajte meno a priezvisko manželky / manžela.'
       }
       if (!values.r031_rodne_cislo) {
-        errors.r031_rodne_cislo = 'Zadajte rodné číslo manžela/manželky'
+        errors.r031_rodne_cislo = 'Zadajte rodné číslo manželky / manžela'
       } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
         errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
       }
 
       if (!values.r032_partner_pocet_mesiacov) {
         errors.r032_partner_pocet_mesiacov =
-          'Zadajte počet mesiacov, kedy mal/a manžel/manželka príjem.'
+          'Zadajte počet mesiacov, kedy mal/a manželka / manžel príjem.'
       } else if (
         !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
         parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
