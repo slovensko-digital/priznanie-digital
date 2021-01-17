@@ -46,7 +46,7 @@
     "@types/classnames": "2.2.11",
     "@types/gtag.js": "0.0.4",
     "@types/iban": "0.0.32",
-    "@types/jest": "25.2.3",
+    "@types/jest": "26.0.20",
     "@types/lodash.clonedeep": "4.5.6",
     "@types/node": "13.13.40",
     "@types/react-autosuggest": "9.3.14",
