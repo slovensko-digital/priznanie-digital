@@ -96,8 +96,8 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     if (next) {
       router.prefetch(next)
     }
-    validateRoute(router, taxForm, taxFormUserInput)
-  }, [router, nextRoute, taxForm, taxFormUserInput])
+    validateRoute(router, taxForm, taxFormUserInput, postponeUserInput)
+  }, [router, nextRoute, taxForm, taxFormUserInput, postponeUserInput])
 
   const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'

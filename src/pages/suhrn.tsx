@@ -290,6 +290,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           },
           { title: 'PSČ', value: taxFormUserInput.r009_psc },
           { title: 'Obec', value: taxFormUserInput.r010_obec },
+          { title: 'Štát', value: taxFormUserInput.r011_stat },
         ]}
       />
       <Link href={nextRoute}>

@@ -6,6 +6,7 @@ import {
 } from '../src/lib/routes'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { TaxForm } from '../src/types/TaxForm'
+import { PostponeUserInput } from '../src/types/PostponeUserInput'
 
 describe('routes', () => {
   describe('#getOrderedRoutes', () => {
@@ -163,6 +164,17 @@ describe('routes', () => {
         { route: '/partner', replace } as any,
         {} as TaxForm,
         {} as TaxFormUserInput,
+        {} as PostponeUserInput,
+      )
+      expect(replace).toHaveBeenCalledWith(homeRoute)
+    })
+
+    it('should redirect from route when form is empty', () => {
+      validateRoute(
+        { route: '/odklad/suhrn', replace } as any,
+        {} as TaxForm,
+        {} as TaxFormUserInput,
+        { priezvisko: '' } as PostponeUserInput,
       )
       expect(replace).toHaveBeenCalledWith(homeRoute)
     })
@@ -172,6 +184,17 @@ describe('routes', () => {
         { route: '/partner', replace } as any,
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
+        {} as PostponeUserInput,
+      )
+      expect(replace).toHaveBeenCalledTimes(0)
+    })
+
+    it('should not redirect from route when postpone form is filled out', () => {
+      validateRoute(
+        { route: '/odklad/osobne-udaje', replace } as any,
+        {} as TaxForm,
+        {} as TaxFormUserInput,
+        { prijmy_zo_zahranicia: false } as PostponeUserInput,
       )
       expect(replace).toHaveBeenCalledTimes(0)
     })

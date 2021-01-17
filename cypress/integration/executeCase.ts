@@ -436,9 +436,9 @@ const executePostponeCase = (testCase: string) => {
         next()
         assertUrl('/odklad/osobne-udaje')
 
-        typeToInput('meno_priezvisko', input)
+        typeToInput('meno', input)
+        typeToInput('priezvisko', input)
         typeToInput('dic', input)
-        // typeToInput('rodne_cislo', input); // TODO
         typeToInput('ulica', input)
         typeToInput('cislo', input)
         typeToInput('psc', input)
@@ -450,6 +450,8 @@ const executePostponeCase = (testCase: string) => {
 
         next()
         assertUrl('/odklad/stiahnut')
+
+        cy.contains('Stiahnuť žiadosť (XML)').then(() => done())
 
         // TODO: do not upload the XML, validation fails in 2021
         /**  HACK to work around file download, because cypress cannot do it */
@@ -486,8 +488,6 @@ const executePostponeCase = (testCase: string) => {
         //       .should((el) => expect(el.text()).to.be.empty)
         //       .then(() => done())
         //   })
-
-        done()
       },
     )
   })

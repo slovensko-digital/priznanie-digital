@@ -8,7 +8,6 @@ import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInp
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
-import { withEmailInput } from '../../__tests__/testCases/postpone/withEmailInput'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
 
@@ -997,7 +996,7 @@ describe('Summary page', () => {
   })
 })
 
-describe.skip('/odklad/osobne-udaje page', () => {
+describe('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(homeRoute)
 
@@ -1047,7 +1046,8 @@ describe.skip('/odklad/osobne-udaje page', () => {
     assertUrl('/odklad/osobne-udaje')
 
     typeToInputPostpone('dic', foreignIncomeInput)
-    typeToInputPostpone('meno_priezvisko', foreignIncomeInput)
+    typeToInputPostpone('meno', foreignIncomeInput)
+    typeToInputPostpone('priezvisko', foreignIncomeInput)
     typeToInputPostpone('ulica', foreignIncomeInput)
     typeToInputPostpone('cislo', foreignIncomeInput)
     typeToInputPostpone('obec', foreignIncomeInput)
@@ -1064,7 +1064,7 @@ describe.skip('/odklad/osobne-udaje page', () => {
   })
 })
 
-describe.skip('/odklad/suhrn page', () => {
+describe('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(homeRoute)
 
@@ -1088,11 +1088,11 @@ describe.skip('/odklad/suhrn page', () => {
     cy.get('[data-test=back]').click()
     assertUrl('/odklad/osobne-udaje')
   })
-  it('Email', () => {
-    assertUrl('/odklad/suhrn')
-
-    typeToInputPostpone('email', withEmailInput)
-    getInputPostpone('newsletter').click()
-    cy.get('[data-test=send-email]').click()
-  })
+  // it('Email', () => {
+  //   assertUrl('/odklad/suhrn')
+  //
+  //   typeToInputPostpone('email', withEmailInput)
+  //   getInputPostpone('newsletter').click()
+  //   cy.get('[data-test=send-email]').click()
+  // })
 })

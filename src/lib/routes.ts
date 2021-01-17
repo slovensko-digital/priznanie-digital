@@ -2,6 +2,7 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { NextRouter } from 'next/dist/next-server/lib/router/router'
 import { TaxForm } from '../types/TaxForm'
 import { checkCookie } from './cookie'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 
 // route to home page, should be '/' when app is ready
 export type HomeRoute = '/domov'
@@ -105,33 +106,47 @@ export const validateRoute = (
   router: NextRouter,
   taxForm: TaxForm,
   taxFormUserInput: TaxFormUserInput,
+  postponeUserInput: PostponeUserInput,
 ) => {
   if (!checkCookie('you-shall', 'not-pass')) {
-    const requirements = {
-      '/zamestnanie': 't1r10_prijmy',
-      '/partner': 'employed',
-      '/deti': 'r032_uplatnujem_na_partnera',
-      '/dochodok': taxForm.eligibleForChildrenBonus
-        ? 'hasChildren'
-        : 'r032_uplatnujem_na_partnera',
-      // TODO reanable with mortgage feature
-      // '/hypoteka': 'platil_prispevky_na_dochodok',
-      // '/kupele': 'r037_uplatnuje_uroky',
-      '/kupele': 'platil_prispevky_na_dochodok',
-      '/dve-percenta': 'kupele',
-      '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
-      '/suhrn': 'r004_priezvisko',
-      '/vysledky': 'r004_priezvisko',
-      '/iban': 'r004_priezvisko',
-      '/stiahnut': 'r004_priezvisko',
+    const isPostponeRoute = router.route.match(/\/odklad\//)
+
+    let requirement
+    let value
+
+    if (isPostponeRoute) {
+      const requirements = {
+        '/odklad/osobne-udaje': 'prijmy_zo_zahranicia',
+        '/odklad/suhrn': 'priezvisko',
+        '/odklad/stiahnut': 'priezvisko',
+      }
+      requirement = requirements[router.route]
+      value = postponeUserInput[requirement]
+    } else {
+      const requirements = {
+        '/zamestnanie': 't1r10_prijmy',
+        '/partner': 'employed',
+        '/deti': 'r032_uplatnujem_na_partnera',
+        '/dochodok': taxForm.eligibleForChildrenBonus
+          ? 'hasChildren'
+          : 'r032_uplatnujem_na_partnera',
+        // TODO reanable with mortgage feature
+        // '/hypoteka': 'platil_prispevky_na_dochodok',
+        // '/kupele': 'r037_uplatnuje_uroky',
+        '/kupele': 'platil_prispevky_na_dochodok',
+        '/dve-percenta': 'kupele',
+        '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
+        '/suhrn': 'r004_priezvisko',
+        '/vysledky': 'r004_priezvisko',
+        '/iban': 'r004_priezvisko',
+        '/stiahnut': 'r004_priezvisko',
+      }
+      requirement = requirements[router.route]
+      value = taxFormUserInput[requirement]
     }
 
-    if (requirements[router.route]) {
-      const value = taxFormUserInput[requirements[router.route]]
-
-      if (value === undefined || value === '') {
-        router.replace(homeRoute)
-      }
+    if (requirement && (value === undefined || value === '')) {
+      router.replace(homeRoute)
     }
   }
 }

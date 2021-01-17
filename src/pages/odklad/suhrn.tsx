@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { BackLink } from '../../components/BackLink'
@@ -13,18 +12,6 @@ interface Props {
   setPostponeUserInput: (values: PostponeUserInput) => void
 }
 const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!postponeUserInput.meno_priezvisko) {
-      router.replace(previousRoute)
-    }
-    router.prefetch(nextRoute)
-  })
-  const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
-    .split(' ')
-    .map((v) => v.trim())
-
   return (
     <>
       <BackLink href={previousRoute} />
@@ -66,7 +53,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
           <tr className="govuk-table__row">
             <td className="govuk-table__cell govuk-!-width-one-half">Meno</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {firstName}
+              {postponeUserInput.meno}
             </td>
           </tr>
           <tr className="govuk-table__row">
@@ -74,7 +61,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
               Priezvisko
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {lastNames.join(' ')}
+              {postponeUserInput.priezvisko}
             </td>
           </tr>
         </tbody>
@@ -101,6 +88,12 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
             <td className="govuk-table__cell govuk-!-width-one-half">Obec</td>
             <td className="govuk-table__cell govuk-!-width-one-half">
               {postponeUserInput.obec}
+            </td>
+          </tr>
+          <tr className="govuk-table__row">
+            <td className="govuk-table__cell govuk-!-width-one-half">Štát</td>
+            <td className="govuk-table__cell govuk-!-width-one-half">
+              {postponeUserInput.stat}
             </td>
           </tr>
         </tbody>
