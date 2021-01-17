@@ -107,8 +107,8 @@ export const validate = (values: PartnerUserInput) => {
         'Zadajte počet mesiacov, kedy mal/a manželka / manžel príjem.'
     } else if (
       !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
-      parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
-      parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
+      Number.parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
+      Number.parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
     ) {
       errors.r032_partner_pocet_mesiacov =
         'Zadajte počet mesiacov - číslo od 0 do 12'

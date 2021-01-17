@@ -13,10 +13,10 @@ import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 import { calculate } from '../../lib/calculation'
 
 const templates = {
-  tax: parseInt(process.env.sendinblue_tpl_tax, 10),
-  postpone: parseInt(process.env.sendinblue_tpl_postpone, 10),
+  tax: Number.parseInt(process.env.sendinblue_tpl_tax, 10),
+  postpone: Number.parseInt(process.env.sendinblue_tpl_postpone, 10),
 }
-const contactListId = parseInt(process.env.sendinblue_list_id, 10)
+const contactListId = Number.parseInt(process.env.sendinblue_list_id, 10)
 
 export default async (
   req: NextApiRequest,

@@ -254,7 +254,8 @@ export const validate = (values: ChildrenUserInput) => {
 
       if (
         !childValues.wholeYear &&
-        parseInt(childValues.monthFrom, 10) > parseInt(childValues.monthTo, 10)
+        Number.parseInt(childValues.monthFrom, 10) >
+          Number.parseInt(childValues.monthTo, 10)
       ) {
         childErrors.monthTo = `Musí byť ${
           monthNames[childValues.monthFrom]
