@@ -18,6 +18,11 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 
+// default timeout is 4 seconds, use 10 seconds foractions that take longer time (eg. autoform API request)
+const longTimeout = {
+  timeout: 10 * 1000,
+}
+
 function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
 }
@@ -334,7 +339,7 @@ describe('osobne-udaje page', () => {
     typeToInput('r003_nace', baseInput)
     getInput('meno_priezvisko').type('urban ayurveda')
 
-    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
+    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA', longTimeout).click() // use a name that needs to be parsed
 
     getInput('meno_priezvisko').should(
       'contain.value',
@@ -357,7 +362,7 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     getInput('r003_nace').type('ryža')
 
-    cy.contains('ryže').click({ force: true })
+    cy.contains('ryže', longTimeout).click({ force: true })
 
     getInput('r003_nace').should('have.value', '01120 - Pestovanie ryže')
   })
@@ -370,7 +375,7 @@ describe('osobne-udaje page', () => {
   it('Manual entry', () => {
     cy.visit('/osobne-udaje')
 
-    /** With autoform */
+    /** Without autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
     typeToInput('r005_meno', baseInput)
@@ -609,7 +614,7 @@ describe('twoPercent page', () => {
     /** With autoform */
     getInput('r142_obchMeno').type('starter')
 
-    cy.contains('starter, o.z.').click()
+    cy.contains('starter, o.z.', longTimeout).click()
 
     getInput('r142_obchMeno').should('contain.value', 'starter, o.z.')
     getInput('r142_ico').should('contain.value', '50 825 909')
@@ -1027,7 +1032,7 @@ describe('/odklad/osobne-udaje page', () => {
     typeToInputPostpone('dic', foreignIncomeInput)
     getInputPostpone('meno_priezvisko').type('Július Ret')
 
-    cy.contains('Július Retzer').click()
+    cy.contains('Július Retzer', longTimeout).click()
 
     getInputPostpone('meno_priezvisko').should('contain.value', 'Július Retzer')
     getInputPostpone('ulica').should('contain.value', 'Mierová')

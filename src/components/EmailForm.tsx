@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { Form, Formik } from 'formik'
 import classNames from 'classnames'
 import { CheckboxSmall, Input } from './FormComponents'
-import { sendEmailTemplate } from '../lib/api'
+import { sendTaxFormEmail } from '../lib/api'
 import { EmailUserInput } from '../types/UserInput'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 
@@ -21,19 +21,19 @@ const getErrorMessage = (code: string, message: string) => {
 export interface EmailFormProps {
   label: string
   hint?: string
-  params: Record<string, any>
-  taxFormUserInput: TaxFormUserInput
+  params?: Record<string, any>
+  taxFormUserInput?: TaxFormUserInput
   saveForm: (email: string, newsletter: boolean) => void
 }
 export const EmailForm = ({
   label,
   hint,
-  params,
-  taxFormUserInput,
+  params = {},
+  taxFormUserInput = {} as TaxFormUserInput,
   saveForm,
 }: EmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
-    const { messageId, code, message } = await sendEmailTemplate(
+    const { messageId, code, message } = await sendTaxFormEmail(
       email,
       { ...params, newsletter: !!newsletter } as any,
       taxFormUserInput,
@@ -48,6 +48,8 @@ export const EmailForm = ({
   return (
     <Formik<EmailUserInput>
       initialValues={{ email: '', newsletter: false }}
+      validateOnChange={false}
+      validateOnBlur={false}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -60,7 +62,13 @@ export const EmailForm = ({
           />
           <p>
             Oboznámil(a) som sa s informáciami v sekcii{' '}
-            <a href="#gdpr">Ochrana osobných údajov</a>
+            <a
+              href="https://navody.digital/ochrana-osobnych-udajov"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ochrana osobných údajov
+            </a>
           </p>
           <button
             type="submit"

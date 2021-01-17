@@ -4,18 +4,14 @@ import {
   TemplateParams,
   sendEmail,
   createOrUpdateContact,
-} from '../../lib/sendinblue'
-import { convertToXML } from '../../lib/xml/xmlConverter'
-import { setDate } from '../../lib/utils'
-import { buildPdf } from './pdf'
-import { TaxForm } from '../../types/TaxForm'
-import { TaxFormUserInput } from '../../types/TaxFormUserInput'
-import { calculate } from '../../lib/calculation'
+} from '../../../lib/sendinblue'
+import { convertToXML } from '../../../lib/xml/xmlConverter'
+import { setDate } from '../../../lib/utils'
+import { buildPdf } from '../pdf'
+import { TaxForm } from '../../../types/TaxForm'
+import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
+import { calculate } from '../../../lib/calculation'
 
-const templates = {
-  tax: Number.parseInt(process.env.sendinblue_tpl_tax, 10),
-  postpone: Number.parseInt(process.env.sendinblue_tpl_postpone, 10),
-}
 const contactListId = Number.parseInt(process.env.sendinblue_list_id, 10)
 
 export default async (
@@ -24,10 +20,10 @@ export default async (
 ): Promise<void> => {
   const email = `${req.body.email}`
   const params = req.body.params as TemplateParams
-  const template = req.query.tpl ? `${req.query.tpl}` : 'tax'
   const taxFormUserInput: TaxFormUserInput = req.body.taxFormUserInput
+  const templateId = Number.parseInt(process.env.sendinblue_tpl_tax, 10)
 
-  if (!email || !params || !template || !taxFormUserInput) {
+  if (!email || !params || !taxFormUserInput) {
     res.statusCode = 400
     return res.send({ message: 'Invalid params' })
   }
@@ -38,7 +34,7 @@ export default async (
 
   try {
     const sendEmailResponse = await sendEmail({
-      templateId: templates[template],
+      templateId,
       to: email,
       params,
       attachment: [
@@ -51,7 +47,7 @@ export default async (
     })
 
     if (sendEmailResponse.ok && params.newsletter) {
-      const { firstName, lastName } = params
+      const { firstName = '', lastName = '' } = params
       const contactResponse = await createOrUpdateContact({
         email,
         firstName,

@@ -1,58 +1,107 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Warning } from '../components/Warning'
+import { sendNotReadyEmail } from '../lib/api'
+import { Form, Formik } from 'formik'
+import { EmailUserInput } from '../types/UserInput'
+import { CheckboxSmall, Input } from '../components/FormComponents'
+import classNames from 'classnames'
+import * as Yup from 'yup'
 
-const Index = () => (
-  <>
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      Vyplnenie daňového priznania
-      <br />
-      (verzia pre rok 2019)
-    </h1>
+const NotReadyEmailForm = () => {
+  const [email, setEmail] = useState(null)
+  const [newsletter, setNewsletter] = useState(false)
 
-    <Warning>Na verzii pre rok 2020 aktuálne pracujeme.</Warning>
-
-    <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
-
-    <p>
-      Po zadaní základných údajov si môžete stiahnuť pripravené daňové priznanie
-      a následne vás prevedieme procesom jeho podania na stránkach Finančnej
-      správy.
-    </p>
-
-    <p>
-      Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
-      SZČO uplatňujúce si paušálne výdavky.
-    </p>
-
-    <p>
-      Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
-    </p>
-
-    <Warning>
-      <>
+  if (email) {
+    return (
+      <div className="box">
         <p>
-          <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
+          Budeme vás informovať na email <strong>{email}</strong>.
+          <br />
+          {newsletter && 'Pošleme vám aj newsletter.'}
         </p>
-        <ul className="govuk-list govuk-list--bullet">
-          <li>Iné príjmy ako zo živnosti a zamestnania</li>
-          <li>Príjem zo zahraničia</li>
-          <li>Daňový bonus na zaplatené úroky</li>
-          <li>Daňové straty</li>
-          <li>SZČO starobní dôchodcovia</li>
-          <li>Práca na dohodu</li>
-          <li>Záväzky a pohľadávky (tabuľka 1b)</li>
-        </ul>
-      </>
-    </Warning>
+      </div>
+    )
+  }
 
-    <button
-      type="button"
-      className="govuk-button govuk-button--large govuk-button--start govuk-button--disabled"
-      disabled
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().required('Zadajte email').email('Nesprávny formát'),
+    newsletter: Yup.boolean(),
+  })
+
+  const handleSubmit = async (values, { setFieldError }) => {
+    const { messageId, message } = await sendNotReadyEmail(
+      values.email,
+      values.newsletter,
+    )
+    if (messageId) {
+      setEmail(email)
+      setNewsletter(newsletter)
+    } else {
+      setFieldError('email', `Chyba: ${message}`)
+    }
+  }
+
+  return (
+    <Formik<EmailUserInput>
+      initialValues={{ email: '', newsletter: false }}
+      validateOnChange={false}
+      validateOnBlur={false}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     >
-      Pripraviť daňové priznanie
-    </button>
-  </>
-)
+      {({ isSubmitting }) => (
+        <div className="box">
+          <Form>
+            <Input
+              name="email"
+              type="email"
+              label="Zadajte email"
+              hint="Dáme vám vedieť keď bude verzia pre rok 2020 pripravená"
+            />
+            <CheckboxSmall
+              name="newsletter"
+              label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
+            />
+            <p>
+              Oboznámil(a) som sa s informáciami v sekcii{' '}
+              <a
+                href="https://navody.digital/ochrana-osobnych-udajov"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ochrana osobných údajov
+              </a>
+            </p>
+            <button
+              type="submit"
+              data-test="send-email"
+              className={classNames(
+                'btn-secondary',
+                'govuk-button',
+                'govuk-button--large',
+                { 'govuk-button--disabled': isSubmitting },
+              )}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Odosielam...' : 'Informujte ma'}
+            </button>
+          </Form>
+        </div>
+      )}
+    </Formik>
+  )
+}
+
+const Index = () => {
+  return (
+    <>
+      <Warning>Na verzii pre rok 2020 aktuálne pracujeme.</Warning>
+
+      <div className="govuk-clearfix" />
+
+      <NotReadyEmailForm />
+    </>
+  )
+}
 
 export default Index

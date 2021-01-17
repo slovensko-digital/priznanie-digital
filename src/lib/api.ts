@@ -27,20 +27,30 @@ export const getNgoByName = async (
   return fetch(`/api/ngo?name=${name}`).then((response) => response.json())
 }
 
-export const sendEmailTemplate = async (
-  email: string,
-  params: TemplateParams,
-  taxFormUserInput: TaxFormUserInput,
-  template: 'tax' | 'postpone' = 'tax',
-): Promise<SaveEmailResponse> => {
-  return fetch(`/api/email?tpl=${template}`, {
+const fetchPost = (path: string, body: any) => {
+  return fetch(path, {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ email, params, taxFormUserInput }),
+    body: JSON.stringify(body),
   }).then((response) => response.json())
+}
+
+export const sendTaxFormEmail = async (
+  email: string,
+  params: TemplateParams,
+  taxFormUserInput: TaxFormUserInput,
+): Promise<SaveEmailResponse> => {
+  return fetchPost('/api/email/tax', { email, params, taxFormUserInput })
+}
+
+export const sendNotReadyEmail = async (
+  email: string,
+  newsletter: boolean,
+): Promise<SaveEmailResponse> => {
+  return fetchPost('/api/email/not_ready', { email, params: { newsletter } })
 }
 
 export const getNace = async () => {
