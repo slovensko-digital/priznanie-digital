@@ -135,10 +135,7 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
               >
                 {(formik) => (
                   <Form noValidate>
-                    <ErrorSummary
-                      errors={formik.errors}
-                      touched={formik.touched}
-                    />
+                    <ErrorSummary errors={formik.errors} />
                     <div
                       className={classNames('govuk-form-group', {
                         'govuk-form-group--error':

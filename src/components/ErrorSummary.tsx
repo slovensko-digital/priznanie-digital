@@ -1,12 +1,24 @@
 import React from 'react'
-import { FormikErrors, FormikTouched } from 'formik'
+import { FormikErrors } from 'formik'
 
-interface Props<Values> {
-  errors: FormikErrors<Values>
-  touched: FormikTouched<Values>
+interface ErrorItemProps {
+  name: string
+  label: string
 }
 
-export function ErrorSummary<Values>({ errors }: Props<Values>) {
+const ErrorItem = ({ name, label }: ErrorItemProps) => {
+  return (
+    <li key={name}>
+      <a href={`#${name}`}>{label}</a>
+    </li>
+  )
+}
+
+interface ErrorSummaryProps<Values> {
+  errors: FormikErrors<Values>
+}
+
+export function ErrorSummary<Values>({ errors }: ErrorSummaryProps<Values>) {
   const errorEntries = Object.entries(errors)
 
   const shouldShowErrorSummary = errorEntries.length !== 0
@@ -24,15 +36,28 @@ export function ErrorSummary<Values>({ errors }: Props<Values>) {
       </h2>
       <div className="govuk-error-summary__body">
         <ul className="govuk-list govuk-error-summary__list">
-          {errorEntries
-            .filter((values) => typeof values[1] === 'string')
-            .map(([name, label]) => {
+          {errorEntries.map(([name, labelOrSubErrors]) => {
+            if (typeof labelOrSubErrors === 'string') {
               return (
-                <li key={name}>
-                  <a href={`#${name}`}>{label}</a>
-                </li>
+                <ErrorItem key={name} name={name} label={labelOrSubErrors} />
               )
-            })}
+            } else if (labelOrSubErrors) {
+              return (labelOrSubErrors as []).map((errorObject, index) => {
+                const errorObjectEntries = Object.entries(errorObject) as [
+                  string,
+                  string,
+                ][]
+                return errorObjectEntries.map(([subname, sublabel]) => (
+                  <ErrorItem
+                    key={`${name}[${index}].${subname}`}
+                    name={`${name}[${index}].${subname}`}
+                    label={sublabel}
+                  />
+                ))
+              })
+            }
+            return null
+          })}
         </ul>
       </div>
     </div>

@@ -84,16 +84,9 @@ const Kupele: Page<SpaUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          setFieldValue,
-          validateForm,
-          setErrors,
-        }) => (
+        {({ values, errors, setFieldValue, validateForm, setErrors }) => (
           <>
-            <ErrorSummary<SpaUserInput> errors={errors} touched={touched} />
+            <ErrorSummary<SpaUserInput> errors={errors} />
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
@@ -352,10 +345,6 @@ export const validate = (values: SpaUserInput): Errors => {
       }
     }
 
-    if (values.childrenInSpa && !values.r036_deti_kupele) {
-      errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
-    }
-
     if (values.childrenInSpa) {
       const maxChildrenAmount = (values.children?.length ?? 0) * 50
 
@@ -398,6 +387,10 @@ export const validate = (values: SpaUserInput): Errors => {
         ) {
           errors.children = childrenErrors as any
         }
+      }
+
+      if (!values.r036_deti_kupele) {
+        errors.r036_deti_kupele = 'Zadajte výšku úhrad kúpeľov za deti'
       }
     }
   }

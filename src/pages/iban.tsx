@@ -65,19 +65,11 @@ const Iban: Page<TaxBonusUserInput> = ({
         router.push(nextRoute)
       }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        setFieldValue,
-      }: FormikProps<TaxBonusUserInput>) => (
+      {({ values, errors, setFieldValue }: FormikProps<TaxBonusUserInput>) => (
         <>
           <BackLink href={previousRoute} />
           <Form className="form" noValidate>
-            <ErrorSummary<TaxBonusUserInput>
-              errors={errors}
-              touched={touched}
-            />
+            <ErrorSummary<TaxBonusUserInput> errors={errors} />
 
             {taxForm.mozeZiadatVyplatitDanovyBonus && (
               <BooleanRadio

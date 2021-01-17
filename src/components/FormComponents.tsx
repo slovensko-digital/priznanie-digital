@@ -129,6 +129,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
 
   return (
     <div
+      id={props.name}
       className={classnames([
         'govuk-form-group',
         meta.error && 'govuk-form-group--error',

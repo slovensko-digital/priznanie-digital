@@ -32,18 +32,15 @@ const Zamestnanie: Page<EmployedUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ values, errors, touched }) => (
+        {({ values, errors }) => (
           <Form className="form" noValidate>
+            <ErrorSummary<EmployedUserInput> errors={errors} />
             <BooleanRadio
               title="Mali ste v roku 2019 príjmy zo zamestnania v SR?"
               name="employed"
             />
             {values.employed && (
               <>
-                <ErrorSummary<EmployedUserInput>
-                  errors={errors}
-                  touched={touched}
-                />
                 <Input
                   name="r038"
                   type="number"

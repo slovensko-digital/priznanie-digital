@@ -36,7 +36,7 @@ const Hypoteka: Page<MortgageUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ values, errors, touched }) => (
+        {({ values, errors }) => (
           <Form className="form" noValidate>
             <BooleanRadio
               title="Platili ste úroky z hypotéky v roku 2019?"
@@ -44,10 +44,7 @@ const Hypoteka: Page<MortgageUserInput> = ({
             />
             {values.r037_uplatnuje_uroky && (
               <>
-                <ErrorSummary<MortgageUserInput>
-                  errors={errors}
-                  touched={touched}
-                />
+                <ErrorSummary<MortgageUserInput> errors={errors} />
                 <Input
                   name="r037_zaplatene_uroky"
                   type="number"

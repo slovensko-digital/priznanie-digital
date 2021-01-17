@@ -74,7 +74,6 @@ const OsobneUdaje: NextPage<Props> = ({
           <>
             <ErrorSummary<PersonalInformationPostponePage>
               errors={props.errors}
-              touched={props.touched}
             />
             <Form className="form">
               <h1 className="govuk-heading-l govuk-!-margin-top-3">

@@ -88,13 +88,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run git-comit-hash"
+      "pre-commit": "lint-staged && npm run check:ts && npm run git-comit-hash"
     }
   },
   "lint-staged": {
     "*.{js,ts,tsx,css,json,md}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
+    ],
+    "*.{js,ts,tsx}": [
+      "npm run lint"
     ]
   }
 }

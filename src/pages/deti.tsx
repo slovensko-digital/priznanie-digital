@@ -18,6 +18,7 @@ import {
 import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 import { Page } from '../components/Page'
+import { ErrorSummary } from '../components/ErrorSummary'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -70,8 +71,9 @@ const Deti: Page<ChildrenUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ values, setErrors, validateForm, setFieldValue }) => (
+        {({ values, errors, setErrors, validateForm, setFieldValue }) => (
           <Form className="form">
+            <ErrorSummary<ChildrenUserInput> errors={errors} />
             <BooleanRadio
               title="Máte dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým žijete v spoločnej domácnosti?"
               name="hasChildren"
@@ -88,6 +90,7 @@ const Deti: Page<ChildrenUserInput> = ({
                 <p className="govuk-hint">
                   Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                 </p>
+
                 <FieldArray name="children">
                   {(arrayHelpers) => (
                     <div className={styles.childrenInputGroup}>

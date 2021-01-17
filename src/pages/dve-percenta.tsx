@@ -91,10 +91,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
       >
         {(props) => (
           <>
-            <ErrorSummary<TwoPercentUserInput>
-              errors={props.errors}
-              touched={props.touched}
-            />
+            <ErrorSummary<TwoPercentUserInput> errors={props.errors} />
             <Form className="form" noValidate>
               <BooleanRadio
                 title="Chcete poukázať 2% alebo 3% zaplatenej dane niektorej neziskovej organizácii?"

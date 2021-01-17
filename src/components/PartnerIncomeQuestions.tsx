@@ -2,13 +2,11 @@ import React from 'react'
 import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerIncomeProps } from './PartnerIncome'
-import { ErrorSummary } from './ErrorSummary'
 import { Details } from './Details'
 
-export const IncomeQuestion = ({ errors, touched, disabled }) => {
+export const IncomeQuestion = ({ disabled }) => {
   return (
     <>
-      {!disabled && <ErrorSummary errors={errors} touched={touched} />}
       <Input
         name="r032_partner_vlastne_prijmy"
         type="number"
@@ -114,8 +112,6 @@ export const NotEligible = () => (
 )
 
 export const EligiblePartnerForm = ({
-  errors,
-  touched,
   values,
   setFieldValue,
 }: PartnerIncomeProps) => (
@@ -123,7 +119,6 @@ export const EligiblePartnerForm = ({
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Máte nárok na uplatnenie zvýhodnenia na manželku / manžela
     </h1>
-    <ErrorSummary errors={errors} touched={touched} />
     <Input
       name="r031_priezvisko_a_meno"
       type="text"
