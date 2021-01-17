@@ -1,7 +1,18 @@
 html,
-body {
+body,
+#__next,
+.main {
   padding: 0;
   margin: 0;
+  height: 100%;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+.main-content {
+  min-height: calc(100vh - 421px);
 }
 
 .icon {
@@ -48,6 +59,11 @@ button:disabled {
   border: none;
   width: 225px;
   height: 29px;
+}
+
+.sdn-footer {
+  height: 367px;
+  overflow: hidden;
 }
 
 .sdn-footer__disclaimer {

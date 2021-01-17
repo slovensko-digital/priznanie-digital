@@ -29,8 +29,8 @@ export const Debug = ({ taxFormUserInput, postponeUserInput }: Props) => {
         .debug {
           overflow: hidden;
           visibility: hidden;
-          width: 1px;
-          height: 1px;
+          width: 0px;
+          height: 0px;
         }
       `}</style>
     </div>
