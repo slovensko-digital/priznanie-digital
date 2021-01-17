@@ -14,7 +14,7 @@ describe('#parse', () => {
     { input: '10.521', output: 10.521 },
     { input: '5,3', output: 5.3 },
     { input: '2', output: 2 },
-    { input: 'foo', output: NaN },
+    { input: 'foo', output: Number.NaN },
   ]
 
   inputs.forEach(({ input, output }) => {
