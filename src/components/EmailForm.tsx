@@ -81,7 +81,7 @@ export const EmailForm = ({
   )
 }
 
-const validationSchema = Yup.object().shape<EmailUserInput>({
+const validationSchema = Yup.object().shape({
   email: Yup.string().required('Zadajte email').email('Nesprávny formát'),
   newsletter: Yup.boolean(),
 })
