@@ -1,8 +1,38 @@
 import React from 'react'
 import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
-import { PartnerIncomeProps } from './PartnerIncome'
+import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
+
+export const ApplyForBonusQuestion = ({ disabled }) => (
+  <>
+    <BooleanRadio
+      title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý má nízke alebo žiadne príjmy? "
+      name="r032_uplatnujem_na_partnera"
+      disabled={disabled}
+    />
+    <Details title="Kedy si môžem uplatniť zvýhodnenie?">
+      <>
+        <p>
+          Zvýhodnenie si môžete uplatniť, ak manželka / manžel spĺňa aspoň jednu
+          z týchto podmienok:
+        </p>
+        <ol>
+          <li>
+            staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije v
+            domácnosti;
+          </li>
+          <li>v roku 2019 poberal/-a peňažný príspevok na opatrovanie;</li>
+          <li>bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;</li>
+          <li>
+            je občanom so zdravotným postihnutím alebo s ťažkým zdravotným
+            postihnutím (držiteľom prekazu ŤZP).
+          </li>
+        </ol>
+      </>
+    </Details>
+  </>
+)
 
 export const IncomeQuestion = ({ disabled }) => {
   return (
@@ -68,7 +98,7 @@ export const HouseholdQuestion = ({ disabled }) => (
   />
 )
 
-export const AppliedQuestion = ({ disabled }) => (
+export const AlreadyAppliedQuestion = ({ disabled }) => (
   <BooleanRadio
     name="partner_bonus_uplatneny"
     title="Uplatnili ste si zvýhodnenie inou cestou?"
@@ -81,7 +111,7 @@ export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h1 className="govuk-fieldset__heading">
-        Spĺňa va3a manželka / manžel aspoň jednu z podmienok?
+        Spĺňa vaša manželka / manžel aspoň jednu z podmienok?
       </h1>
     </legend>
     <CheckboxSmall
@@ -114,7 +144,7 @@ export const NotEligible = () => (
 export const EligiblePartnerForm = ({
   values,
   setFieldValue,
-}: PartnerIncomeProps) => (
+}: PartnerBonusFormProps) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Máte nárok na uplatnenie zvýhodnenia na manželku / manžela
