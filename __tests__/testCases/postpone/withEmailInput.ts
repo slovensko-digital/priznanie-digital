@@ -3,7 +3,9 @@ import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
 export const withEmailInput: PostponeUserInput = {
   prijmy_zo_zahranicia: false,
   meno_priezvisko: 'Werner Heisenberg',
-  // rodne_cislo: '200310/0011',
+  titul: '',
+  meno: 'Werner',
+  priezvisko: 'Heisenberg',
   dic: '1231231232',
   psc: '82105',
   ulica: 'Mierová',

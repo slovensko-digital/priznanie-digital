@@ -48,7 +48,16 @@ export type PersonalInformationUserInput = Pick<
 
 export type PersonalInformationPostponePage = Pick<
   PostponeUserInput,
-  'dic' | 'meno_priezvisko' | 'ulica' | 'cislo' | 'psc' | 'obec' | 'stat'
+  | 'meno_priezvisko'
+  | 'titul'
+  | 'meno'
+  | 'priezvisko'
+  | 'dic'
+  | 'ulica'
+  | 'cislo'
+  | 'psc'
+  | 'obec'
+  | 'stat'
 >
 
 export type PensionUserInput = Pick<

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import fileDownload from 'js-file-download'
 
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
@@ -17,13 +16,6 @@ interface Props {
 
 const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
   const [didDownload, setDidDownload] = useState<boolean>(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!postponeUserInput.meno_priezvisko) {
-      router.replace(previousRoute)
-    }
-  })
 
   return (
     <>

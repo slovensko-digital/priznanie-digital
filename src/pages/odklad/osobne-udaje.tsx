@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import classnames from 'classnames'
 import { FormWrapper, Input } from '../../components/FormComponents'
 import styles from '../osobne-udaje.module.css'
 import {
@@ -16,7 +15,7 @@ import { getPostponeRoutes } from '../../lib/routes'
 import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
-import { formatPsc } from '../../lib/utils'
+import { formatPsc, parseFullName } from '../../lib/utils'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
@@ -25,9 +24,14 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
   return (person: AutoformResponseBody) => {
+    const { first, last, title } = parseFullName(person.name)
+
     setValues({
       ...values,
       meno_priezvisko: person.name || '',
+      priezvisko: last || '',
+      meno: first || '',
+      titul: title || '',
       dic: person?.tin || values.dic || '',
       ulica: person.street || person.municipality || '',
       cislo: person.street_number || '',
@@ -47,13 +51,6 @@ const OsobneUdaje: NextPage<Props> = ({
   postponeUserInput,
 }: Props) => {
   const router = useRouter()
-
-  useEffect(() => {
-    if (postponeUserInput.prijmy_zo_zahranicia === undefined) {
-      router.replace(previousRoute)
-    }
-    router.prefetch(nextRoute)
-  })
 
   return (
     <>
@@ -76,21 +73,7 @@ const OsobneUdaje: NextPage<Props> = ({
               errors={props.errors}
             />
             <Form className="form">
-              <h1 className="govuk-heading-l govuk-!-margin-top-3">
-                Údaje o daňovníkovi
-              </h1>
-
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  hint="Napríklad 1234567890"
-                  name="dic"
-                  type="text"
-                  label="DIČ"
-                  width={10}
-                />
-              </div>
-
+              <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>
                 Údaje môžete vyhladať a automaticky vyplniť podľa mena a
                 priezviska.
@@ -98,40 +81,67 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <FullNameAutoCompleteInput
                 name="meno_priezvisko"
-                label="Meno a priezvisko"
+                label="Zadajte meno, priezvisko alebo podnikateľský názov"
                 handlePersonAutoform={makeHandlePersonAutoform(props)}
                 fetchData={getAutoformByPersonName}
               />
 
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  className={styles.inlineField}
+                  name="titul"
+                  type="text"
+                  label="Titul"
+                />
+              </div>
+
+              <Input
+                className={styles.wideField}
+                name="meno"
+                type="text"
+                label="Meno"
+                width="auto"
+              />
+
+              <Input
+                className={styles.wideField}
+                name="priezvisko"
+                type="text"
+                label="Priezvisko"
+                width="auto"
+              />
+
+              <div className={styles.inlineFieldContainer}>
+                <Input
+                  className={styles.inlineField}
+                  name="dic"
+                  type="text"
+                  label="DIČ"
+                  hint="Ak nie je pridelené, uvádza sa rodné číslo"
+                />
+              </div>
+
               <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
               <div className={styles.inlineFieldContainer}>
                 <Input
+                  className={styles.inlineField}
                   name="ulica"
-                  hint="Napríklad Obchodná"
                   type="text"
                   label="Ulica"
-                  width="auto"
-                  className={classnames(
-                    styles.flexGrow,
-                    'govuk-!-margin-right-5',
-                  )}
                 />
                 <Input
+                  className={styles.inlineField}
                   name="cislo"
                   type="text"
-                  hint="Napríklad 9"
                   label="Súpisné/orientačné číslo"
-                  width="auto"
                 />
               </div>
               <div className={styles.inlineFieldContainer}>
                 <Input
-                  className="govuk-!-margin-right-5"
+                  className={styles.inlineField}
                   name="psc"
-                  hint="Napr. 811 06"
                   type="text"
                   label="PSČ"
-                  width={5}
                   maxLength={6}
                   onChange={async (event) => {
                     const pscValue = formatPsc(
@@ -151,22 +161,14 @@ const OsobneUdaje: NextPage<Props> = ({
                 />
 
                 <Input
+                  className={styles.inlineField}
                   name="obec"
                   type="text"
-                  hint="Napríklad Bratislava"
                   label="Obec"
-                  width="auto"
-                  className={styles.flexGrow}
                 />
               </div>
 
-              <Input
-                name="stat"
-                type="text"
-                label="Štát"
-                width={10}
-                hint="Napríklad Slovensko"
-              />
+              <Input name="stat" type="text" label="Štát" />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
@@ -196,8 +198,12 @@ export const validate = (values: PersonalInformationPostponePage) => {
     errors.dic = 'DIČ môže mať maximálne 10 znakov'
   }
 
-  if (!values.meno_priezvisko) {
-    errors.meno_priezvisko = 'Zadajte vaše meno a priezvisko'
+  if (!values.meno) {
+    errors.meno = 'Zadajte vaše meno'
+  }
+
+  if (!values.priezvisko) {
+    errors.priezvisko = 'Zadajte vaše priezvisko'
   }
 
   if (!values.cislo) {
@@ -221,4 +227,5 @@ export const validate = (values: PersonalInformationPostponePage) => {
 
   return errors
 }
+
 export default OsobneUdaje

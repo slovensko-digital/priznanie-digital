@@ -8,18 +8,22 @@ describe('odklad/osobne-udaje', () => {
         input: {
           dic: '',
           meno_priezvisko: '',
+          titul: '',
+          meno: '',
+          priezvisko: '',
           ulica: '',
           cislo: '',
           psc: '',
           obec: '',
           stat: '',
         },
-        expected: ['dic', 'meno_priezvisko', 'cislo', 'psc', 'obec', 'stat'],
+        expected: ['dic', 'meno', 'priezvisko', 'cislo', 'psc', 'obec', 'stat'],
       },
       {
         input: {
           dic: 'foo',
-          meno_priezvisko: 'Johnny Bravo',
+          meno: 'Johnny',
+          priezvisko: 'Bravo',
           ulica: 'Hollywood Blvd',
           cislo: '9',
           psc: 'foo',
@@ -31,7 +35,8 @@ describe('odklad/osobne-udaje', () => {
       {
         input: {
           dic: '123123123',
-          meno_priezvisko: 'Johnny Bravo',
+          meno: 'Johnny',
+          priezvisko: 'Bravo',
           ulica: 'Hollywood Blvd',
           cislo: '9',
           psc: '841 04',

@@ -9,16 +9,16 @@ export function convertPostponeToJson(
   postponeUserInput: PostponeUserInput,
 ): PostponeOutput {
   const form: PostponeOutput = cloneDeep(postponeBasis)
-  form.dokument.hlavicka.dic = postponeUserInput.dic
-  const [firstName, ...lastNames] = postponeUserInput.meno_priezvisko
-    .split(' ')
-    .map((v) => v.trim())
-  // const [beforeSlash, afterSlash] = postponeUserInput.rodne_cislo.split('/');
 
-  form.dokument.hlavicka.fyzickaOsoba.meno = firstName
-  form.dokument.hlavicka.fyzickaOsoba.priezvisko = lastNames.join(' ')
+  // TODO: rodne cislo sa zapisuje do DIC inputu, vieme ho identifikovat?
+  // const [beforeSlash, afterSlash] = postponeUserInput.dic.split('/')
   // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcPredLom = beforeSlash;
   // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcZaLom = afterSlash;
+
+  form.dokument.hlavicka.dic = postponeUserInput.dic
+
+  form.dokument.hlavicka.fyzickaOsoba.meno = postponeUserInput.meno
+  form.dokument.hlavicka.fyzickaOsoba.priezvisko = postponeUserInput.priezvisko
 
   form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc.replace(/\D/g, '')
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec
