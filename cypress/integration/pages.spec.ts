@@ -233,6 +233,8 @@ describe('Partner page', () => {
 
     // When presses yes, additional fields appears
     cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    next()
+
     getInput('partner_spolocna_domacnost', '-yes').should('exist')
 
     // Should show error if not filled in
@@ -753,6 +755,7 @@ describe('Spa page', () => {
 
     assertUrl('/partner')
     cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    next()
     cy.get('[data-test=partner_spolocna_domacnost-input-no]').click()
     next()
     next()

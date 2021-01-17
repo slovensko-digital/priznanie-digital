@@ -2,7 +2,8 @@ import { PartnerUserInput } from '../types/PageUserInputs'
 import React, { useEffect, useRef } from 'react'
 import { FormikProps } from 'formik'
 import {
-  AppliedQuestion,
+  AlreadyAppliedQuestion,
+  ApplyForBonusQuestion,
   ConditionsQuestion,
   EligiblePartnerForm,
   HouseholdQuestion,
@@ -10,38 +11,50 @@ import {
   NotEligible,
   PreviousButton,
   SubmitButton,
-} from './PartnerIncomeQuestions'
-import { validatePartnerIncome } from '../lib/validatePartnerIncome'
+} from './PartnerBonusFormSteps'
+import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
 
-const scrollToElement = (element) => {
+const scrollToElement = (element, smooth = true) => {
+  console.log(element)
   if (element && element.current) {
-    element.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    element.current.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'center',
+    })
   }
 }
 
-export interface PartnerIncomeProps extends FormikProps<PartnerUserInput> {
+export interface PartnerBonusFormProps extends FormikProps<PartnerUserInput> {
   step: number
   setStep: (step: number) => void
 }
 
-export const PartnerIncome = (props: PartnerIncomeProps) => {
+export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
   const { values, setStep, step } = props
-  const questionElements = [useRef(), useRef(), useRef(), useRef(), useRef()]
+  const questionElements = [
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+  ]
 
   useEffect(() => {
-    scrollToElement(questionElements[step])
+    setTimeout(() => {
+      scrollToElement(questionElements[step])
+    }, 25)
   }, [step, questionElements])
 
   const previousStep = () => {
     setStep(step - 1)
-    scrollToElement(questionElements[step - 1].current)
   }
 
-  const questions: React.FC<any>[] = [HouseholdQuestion]
+  const questions: React.FC<any>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
-      if (validatePartnerIncome(values, currentStep)) {
+      if (validatePartnerBonusForm(values, currentStep)) {
         questions.push(NextQuestion)
       } else {
         questions.push(NotEligible)
@@ -49,10 +62,11 @@ export const PartnerIncome = (props: PartnerIncomeProps) => {
     }
   }
 
-  addQuestionForStep(1, AppliedQuestion)
-  addQuestionForStep(2, ConditionsQuestion)
-  addQuestionForStep(3, IncomeQuestion)
-  addQuestionForStep(4, EligiblePartnerForm)
+  addQuestionForStep(1, HouseholdQuestion)
+  addQuestionForStep(2, AlreadyAppliedQuestion)
+  addQuestionForStep(3, ConditionsQuestion)
+  addQuestionForStep(4, IncomeQuestion)
+  addQuestionForStep(5, EligiblePartnerForm)
 
   return (
     <>

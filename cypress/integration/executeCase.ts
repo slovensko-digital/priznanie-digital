@@ -85,6 +85,7 @@ export const exectueTestcase = (testCase: string) => {
 
         if (input.r032_uplatnujem_na_partnera) {
           getInput('r032_uplatnujem_na_partnera', '-yes').click()
+          next()
           cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
           next()
           cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()

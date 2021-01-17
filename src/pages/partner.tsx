@@ -1,11 +1,10 @@
 import React from 'react'
 import { Form } from 'formik'
-import { BooleanRadio, FormWrapper } from '../components/FormComponents'
+import { FormWrapper } from '../components/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
-import { PartnerIncome } from '../components/PartnerIncome'
-import { validatePartnerIncome } from '../lib/validatePartnerIncome'
-import { Details } from '../components/Details'
+import { PartnerBonusForm } from '../components/PartnerBonusForm'
+import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
 import { Page } from '../components/Page'
 import { partnerUserInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
@@ -27,8 +26,8 @@ const Partner: Page<PartnerUserInput> = ({
         onSubmit={(values, { setFieldValue }) => {
           if (
             values.r032_uplatnujem_na_partnera === false ||
-            validatePartnerIncome(values, values.partner_step) === false ||
-            values.partner_step === 4
+            validatePartnerBonusForm(values, values.partner_step) === false ||
+            values.partner_step === 5
           ) {
             const userInput = values.r032_uplatnujem_na_partnera
               ? values
@@ -37,7 +36,7 @@ const Partner: Page<PartnerUserInput> = ({
                   r032_uplatnujem_na_partnera: false,
                 }
 
-            if (!validatePartnerIncome(values, values.partner_step)) {
+            if (!validatePartnerBonusForm(values, values.partner_step)) {
               userInput.r032_partner_vlastne_prijmy = ''
               userInput.r031_priezvisko_a_meno = ''
               userInput.r031_rodne_cislo = ''
@@ -48,53 +47,18 @@ const Partner: Page<PartnerUserInput> = ({
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
           } else {
-            const setStep = (value) => setFieldValue('partner_step', value)
-            setStep(values.partner_step + 1)
+            setFieldValue('partner_step', values.partner_step + 1)
           }
         }}
       >
         {(props) => (
           <Form className="form" noValidate>
             <ErrorSummary errors={props.errors} />
-            <BooleanRadio
-              title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý má nízke alebo žiadne príjmy? "
-              name="r032_uplatnujem_na_partnera"
+            <PartnerBonusForm
+              {...props}
+              step={props.values.partner_step}
+              setStep={(value) => props.setFieldValue('partner_step', value)}
             />
-            <Details title="Kedy si môžem uplatniť zvýhodnenie?">
-              <>
-                <p>
-                  Zvýhodnenie si môžete uplatniť, ak manželka / manžel spĺňa
-                  aspoň jednu z týchto podmienok:
-                </p>
-                <ol>
-                  <li>
-                    staral/-a sa o vyživované maloleté dieťa, ktoré s vami žije
-                    v domácnosti;
-                  </li>
-                  <li>
-                    v roku 2019 poberal/-a peňažný príspevok na opatrovanie;
-                  </li>
-                  <li>
-                    bol/-a na úrade práce v evidencii uchádzačov o zamestnanie;
-                  </li>
-                  <li>
-                    je občanom so zdravotným postihnutím alebo s ťažkým
-                    zdravotným postihnutím (držiteľom prekazu ŤZP).
-                  </li>
-                </ol>
-              </>
-            </Details>
-            {props.values.r032_uplatnujem_na_partnera ? (
-              <PartnerIncome
-                {...props}
-                step={props.values.partner_step}
-                setStep={(value) => props.setFieldValue('partner_step', value)}
-              />
-            ) : (
-              <button className="govuk-button" type="submit">
-                Pokračovať
-              </button>
-            )}
           </Form>
         )}
       </FormWrapper>
@@ -109,44 +73,45 @@ export const validate = (values: PartnerUserInput) => {
     errors.r032_uplatnujem_na_partnera = 'Vyznačte odpoveď'
   }
 
-  if (values.r032_uplatnujem_na_partnera) {
-    if (typeof values.partner_spolocna_domacnost === 'undefined') {
-      errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
+  if (
+    values.partner_step === 1 &&
+    typeof values.partner_spolocna_domacnost === 'undefined'
+  ) {
+    errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
+  }
+
+  if (values.partner_step === 2 && validatePartnerBonusForm(values, 2)) {
+    if (typeof values.partner_bonus_uplatneny === 'undefined') {
+      errors.partner_bonus_uplatneny = 'Vyznačte odpoveď'
+    }
+  } else if (values.partner_step === 4 && validatePartnerBonusForm(values, 4)) {
+    if (!values.r032_partner_vlastne_prijmy) {
+      errors.r032_partner_vlastne_prijmy =
+        'Zadajte vlastné príjmy manželky / manžela'
+    } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
+      errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
+    }
+  } else if (values.partner_step === 5 && validatePartnerBonusForm(values, 5)) {
+    if (!values.r031_priezvisko_a_meno) {
+      errors.r031_priezvisko_a_meno =
+        'Zadajte meno a priezvisko manželky / manžela.'
+    }
+    if (!values.r031_rodne_cislo) {
+      errors.r031_rodne_cislo = 'Zadajte rodné číslo manželky / manžela'
+    } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
+      errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
     }
 
-    if (values.partner_step === 1 && validatePartnerIncome(values, 1)) {
-      if (typeof values.partner_bonus_uplatneny === 'undefined') {
-        errors.partner_bonus_uplatneny = 'Vyznačte odpoveď'
-      }
-    } else if (values.partner_step === 3 && validatePartnerIncome(values, 3)) {
-      if (!values.r032_partner_vlastne_prijmy) {
-        errors.r032_partner_vlastne_prijmy =
-          'Zadajte vlastné príjmy manželky / manžela'
-      } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
-        errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
-      }
-    } else if (values.partner_step === 4 && validatePartnerIncome(values, 4)) {
-      if (!values.r031_priezvisko_a_meno) {
-        errors.r031_priezvisko_a_meno =
-          'Zadajte meno a priezvisko manželky / manžela.'
-      }
-      if (!values.r031_rodne_cislo) {
-        errors.r031_rodne_cislo = 'Zadajte rodné číslo manželky / manžela'
-      } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
-        errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
-      }
-
-      if (!values.r032_partner_pocet_mesiacov) {
-        errors.r032_partner_pocet_mesiacov =
-          'Zadajte počet mesiacov, kedy mal/a manželka / manžel príjem.'
-      } else if (
-        !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
-        parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
-        parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
-      ) {
-        errors.r032_partner_pocet_mesiacov =
-          'Zadajte počet mesiacov - číslo od 0 do 12'
-      }
+    if (!values.r032_partner_pocet_mesiacov) {
+      errors.r032_partner_pocet_mesiacov =
+        'Zadajte počet mesiacov, kedy mal/a manželka / manžel príjem.'
+    } else if (
+      !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
+      parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
+      parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
+    ) {
+      errors.r032_partner_pocet_mesiacov =
+        'Zadajte počet mesiacov - číslo od 0 do 12'
     }
   }
 
