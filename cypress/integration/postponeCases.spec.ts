@@ -1,5 +1,5 @@
-import { executePostponeCase } from './executeCase'
+import { executeAllPostponeCases } from './executeCase'
 
 describe('Postpone cases', () => {
-  ;['basic', 'foreignIncome'].forEach(executePostponeCase)
+  executeAllPostponeCases(['basic', 'foreignIncome'])
 })

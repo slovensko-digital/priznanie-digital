@@ -85,8 +85,8 @@ export const validate = (values: MortgageUserInput) => {
         'Zadajte počet mesiacov, kedy ste platili úroky'
     } else if (
       !values.r037_pocetMesiacov.match(/^\d+$/) ||
-      parseInt(values.r037_pocetMesiacov, 10) < 0 ||
-      parseInt(values.r037_pocetMesiacov, 10) > 12
+      Number.parseInt(values.r037_pocetMesiacov, 10) < 0 ||
+      Number.parseInt(values.r037_pocetMesiacov, 10) > 12
     ) {
       errors.r037_pocetMesiacov = 'Zadajte počet mesiacov - číslo od 0 do 12'
     }

@@ -15,8 +15,8 @@ const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
-  const monthFrom = parseInt(child.monthFrom, 10)
-  const monthTo = parseInt(child.monthTo, 10)
+  const monthFrom = Number.parseInt(child.monthFrom, 10)
+  const monthTo = Number.parseInt(child.monthTo, 10)
 
   return {
     priezviskoMeno: child.priezviskoMeno,
@@ -93,7 +93,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (!this.eligibleForChildrenBonus) {
         return []
       }
-      return input.children.map(makeMapChild(input?.hasChildren))
+      const mapChild = makeMapChild(input?.hasChildren)
+      return input.children.map((child) => mapChild(child))
     },
     get r036_deti_kupele() {
       const maxAmountPerChild = 50

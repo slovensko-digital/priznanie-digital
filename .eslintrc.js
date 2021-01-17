@@ -21,6 +21,8 @@ module.exports = {
   ],
   rules: {
     'jsx-a11y/anchor-is-valid': 0,
+    'unicorn/no-null': 0, // we use `null` in many places right now nad do not know implications of replacing it with `undefined`
+                          // reasoning for `undefined`: https://github.com/eslint/eslint/issues/6701
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/filename-case': [
       'error',
