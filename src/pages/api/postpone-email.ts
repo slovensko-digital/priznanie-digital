@@ -1,21 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
   makeAttachment,
-  TemplateParams,
   sendEmail,
   createOrUpdateContact,
+  PostponeTemplateParams,
 } from '../../lib/sendinblue'
-import { convertToXML } from '../../lib/xml/xmlConverter'
 import { setDate } from '../../lib/utils'
-import { buildPdf } from './pdf'
-import { TaxForm } from '../../types/TaxForm'
-import { TaxFormUserInput } from '../../types/TaxFormUserInput'
-import { calculate } from '../../lib/calculation'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 
-const templates = {
-  tax: Number.parseInt(process.env.sendinblue_tpl_tax, 10),
-  postpone: Number.parseInt(process.env.sendinblue_tpl_postpone, 10),
-}
 const contactListId = Number.parseInt(process.env.sendinblue_list_id, 10)
 
 export default async (
@@ -23,31 +16,23 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   const email = `${req.body.email}`
-  const params = req.body.params as TemplateParams
-  const template = req.query.tpl ? `${req.query.tpl}` : 'tax'
-  const taxFormUserInput: TaxFormUserInput = req.body.taxFormUserInput
+  const params = req.body.params as PostponeTemplateParams
+  const templateId = Number.parseInt(process.env.sendinblue_tpl_postpone, 10)
+  const postponeUserInput: PostponeUserInput = req.body.postponeUserInput
 
-  if (!email || !params || !template || !taxFormUserInput) {
+  if (!email || !params || !postponeUserInput) {
     res.statusCode = 400
     return res.send({ message: 'Invalid params' })
   }
 
-  const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
-  const attachmentXml = convertToXML(taxForm)
-  const attachmentPdf = buildPdf(taxForm)
+  const attachmentXml = convertPostponeToXML(setDate(postponeUserInput))
 
   try {
     const sendEmailResponse = await sendEmail({
-      templateId: templates[template],
+      templateId,
       to: email,
       params,
-      attachment: [
-        makeAttachment('danove_priznanie.xml', attachmentXml),
-        {
-          name: 'danove_priznanie.pdf',
-          content: attachmentPdf.toBuffer().toString('base64'),
-        },
-      ],
+      attachment: [makeAttachment('danove_priznanie.xml', attachmentXml)],
     })
 
     if (sendEmailResponse.ok && params.newsletter) {

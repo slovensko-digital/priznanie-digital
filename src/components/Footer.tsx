@@ -3,6 +3,7 @@ import { Feedback } from './Feedback'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 import { ExternalLink } from './ExternalLink'
+import { PrivacyPolicyLink } from './PrivacyPolicyLink'
 
 interface Props {
   taxFormUserInput: TaxFormUserInput
@@ -32,9 +33,7 @@ const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
                     </ExternalLink>
                   </li>
                   <li>
-                    <ExternalLink href="https://navody.digital/ochrana-osobnych-udajov">
-                      Ochrana osobných údajov
-                    </ExternalLink>
+                    <PrivacyPolicyLink />
                   </li>
                   <li>
                     <ExternalLink href="https://navody.digital/contact-info">

@@ -3,9 +3,9 @@ import * as Yup from 'yup'
 import { Form, Formik } from 'formik'
 import classNames from 'classnames'
 import { CheckboxSmall, Input } from './FormComponents'
-import { sendTaxEmail } from '../lib/api'
+import { sendPostponeEmail } from '../lib/api'
 import { EmailUserInput } from '../types/UserInput'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
 import { PrivacyPolicyLink } from './PrivacyPolicyLink'
 
 const getErrorMessage = (code: string, message: string) => {
@@ -19,21 +19,21 @@ const getErrorMessage = (code: string, message: string) => {
   }
 }
 
-export interface EmailFormProps {
+export interface PostponeEmailFormProps {
   params: Record<string, any>
-  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
   saveForm: (email: string, newsletter: boolean) => void
 }
-export const EmailForm = ({
+export const PostponeEmailForm = ({
   params,
-  taxFormUserInput,
+  postponeUserInput,
   saveForm,
-}: EmailFormProps) => {
+}: PostponeEmailFormProps) => {
   const handleSubmit = async ({ email, newsletter }, { setFieldError }) => {
-    const { messageId, code, message } = await sendTaxEmail(
+    const { messageId, code, message } = await sendPostponeEmail(
       email,
       { ...params, newsletter: !!newsletter } as any,
-      taxFormUserInput,
+      postponeUserInput,
     )
     if (messageId) {
       saveForm(email, !!newsletter)
@@ -55,8 +55,8 @@ export const EmailForm = ({
           <Input
             name="email"
             type="email"
-            label="Pošleme vám tento výpočet dane na email?"
-            hint="Bude sa vám hodiť pri úhrade daní"
+            label="Pošleme vám XML súbor pre odklad daňového priznania na email?"
+            hint="Nechajte nám email"
           />
           <CheckboxSmall
             name="newsletter"
