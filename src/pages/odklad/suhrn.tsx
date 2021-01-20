@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { BackLink } from '../../components/BackLink'
+import { PostponeEmailForm } from '../../components/PostponeEmailForm'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -11,7 +12,10 @@ interface Props {
   postponeUserInput: PostponeUserInput
   setPostponeUserInput: (values: PostponeUserInput) => void
 }
-const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
+const Suhrn: NextPage<Props> = ({
+  postponeUserInput,
+  setPostponeUserInput,
+}: Props) => {
   return (
     <>
       <BackLink href={previousRoute} />
@@ -99,36 +103,24 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </tbody>
       </table>
 
-      {/*
-
-      TODO: odklad sa zatial nepouziva, a <EmailForm /> sa zmenil, tak nebudeme udrziavat nepouzivane stranky
-
       <div className="box">
         {postponeUserInput.email ? (
           <p>
             Váš email <strong>{postponeUserInput.email}</strong> sme odoslali
             XML súbor potrebný pre odklad dane.
             <br />
-            Pošleme vám notifikáciu pred novým termínom{' '}
-            {postponeUserInput.prijmy_zo_zahranicia
-              ? '(30. jún 2020)'
-              : '(30. september 2020)'}
-            .
-            <br />
             {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
           </p>
         ) : (
-          <EmailForm
-            label="Chcete dostať upozornenie o novom termíne podania?"
-            hint="Nechajte nám email a my vám včas pošleme notifikáciu"
-            attachment={convertPostponeToXML(setDate(postponeUserInput))}
+          <PostponeEmailForm
+            postponeUserInput={postponeUserInput}
             saveForm={(email, newsletter) => {
               setPostponeUserInput({ ...postponeUserInput, email, newsletter })
             }}
             params={{
               form: 'postpone',
-              firstname: firstName,
-              lastname: lastNames.join(' '),
+              firstname: postponeUserInput.meno,
+              lastname: postponeUserInput.priezvisko,
               deadline: postponeUserInput.prijmy_zo_zahranicia
                 ? '30. jún 2020'
                 : '30. september 2020',
@@ -136,7 +128,6 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
           />
         )}
       </div>
-      */}
 
       <Link href={nextRoute}>
         <button className="govuk-button govuk-!-margin-top-4" type="button">
