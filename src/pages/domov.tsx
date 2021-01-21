@@ -2,36 +2,21 @@ import React from 'react'
 import Link from 'next/link'
 import { Warning } from '../components/Warning'
 
-const PostponeButton = ({ nextPostponeRoute }) => (
+const Home = ({ nextRoute, nextPostponeRoute }) => (
   <>
-    <div className="govuk-grid-column-full govuk-warning-text govuk-!-margin-top-9">
-      <span className="govuk-warning-text__icon" aria-hidden="true">
-        !
-      </span>
-      <strong className="govuk-warning-text__text">
-        <span className="govuk-warning-text__assistive">Upozornenie</span>
-        Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
-        <br />
-        Termín si viete predĺžiť až do 30.6. (ak ste mali príjmy len
-        zo&nbsp;Slovenska) alebo&nbsp;do&nbsp;30.9. (ak&nbsp;ste mali príjmy aj
-        zo zahraničia).
-      </strong>
+    <div className="govuk-grid-column-one-half">
+      <TaxFormSection nextRoute={nextRoute} />
     </div>
 
-    <div className="govuk-grid-column-full">
-      <Link href={nextPostponeRoute}>
-        <button
-          type="button"
-          className="btn-secondary govuk-button govuk-button--large"
-        >
-          Odložiť daňové priznanie
-        </button>
-      </Link>
+    <div className="govuk-grid-column-one-half">
+      <PostponeSection nextPostponeRoute={nextPostponeRoute} />
     </div>
   </>
 )
 
-const Home = ({ nextRoute, nextPostponeRoute }) => (
+export default Home
+
+const TaxFormSection = ({ nextRoute }) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
@@ -81,9 +66,34 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
         Pripraviť daňové priznanie
       </button>
     </Link>
-
-    <PostponeButton nextPostponeRoute={nextPostponeRoute} />
   </>
 )
 
-export default Home
+const PostponeSection = ({ nextPostponeRoute }) => (
+  <>
+    <h2 className="govuk-heading-l govuk-!-margin-top-3">
+      Odklad daňového priznania
+      <br />
+      &nbsp;
+    </h2>
+    <p>
+      <span className="govuk-warning-text__assistive">Upozornenie</span>
+      Riadny termín pre podanie daňového priznania a <br />
+      zaplatenie dane je 31.3.
+    </p>
+    <p>Termín si viete predĺžiť:</p>
+    <ul className="govuk-list govuk-list--bullet">
+      <li>do 30.6. ak ste mali príjmy len zo Slovenska, alebo</li>
+      <li>do 30.9. ak ste mali príjmy aj zo zahraničia</li>
+    </ul>
+
+    <Link href={nextPostponeRoute}>
+      <button
+        type="button"
+        className="btn-secondary govuk-button govuk-button--large"
+      >
+        Odložiť daňové priznanie
+      </button>
+    </Link>
+  </>
+)
