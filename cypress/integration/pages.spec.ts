@@ -1088,11 +1088,4 @@ describe('/odklad/suhrn page', () => {
     cy.get('[data-test=back]').click()
     assertUrl('/odklad/osobne-udaje')
   })
-  // it('Email', () => {
-  //   assertUrl('/odklad/suhrn')
-  //
-  //   typeToInputPostpone('email', withEmailInput)
-  //   getInputPostpone('newsletter').click()
-  //   cy.get('[data-test=send-email]').click()
-  // })
 })
