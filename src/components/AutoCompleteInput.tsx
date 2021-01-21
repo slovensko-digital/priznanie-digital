@@ -1,26 +1,30 @@
 import React, { useRef, useState } from 'react'
 import classNames from 'classnames'
 import { useField } from 'formik'
-import styles from './FullNameAutoCompleteInput.module.css'
+import styles from './AutoCompleteInput.module.css'
 import { Input } from './FormComponents'
-import { AutoformResponseBody } from '../types/api'
 import { UserInput } from '../types/UserInput'
 
-export interface FullNameAutoCompleteInput {
+export interface AutoCompleteData extends Record<string, any> {
+  id: number | string
+  value: string
+}
+
+export interface AutoCompleteInput {
   name: keyof UserInput
   label: string
-  handlePersonAutoform: (person: AutoformResponseBody) => void
-  fetchData: (name: string) => Promise<AutoformResponseBody[]>
+  fetchData: (value: string) => Promise<AutoCompleteData[]>
+  onSelect?: (data: AutoCompleteData) => void
+  minLength?: number
 }
-export const FullNameAutoCompleteInput = ({
+export const AutoCompleteInput = ({
   name,
   label,
-  handlePersonAutoform,
+  onSelect,
   fetchData,
-}: FullNameAutoCompleteInput) => {
-  const [autoformPersons, setAutoFormPersons] = useState<
-    AutoformResponseBody[]
-  >([])
+  minLength = 2,
+}: AutoCompleteInput) => {
+  const [autocompleteData, setAutocompleteData] = useState([])
   const autocompleteList = useRef(null)
   const [isLoadingAutoform, setIsLoadingAutoform] = useState<boolean>(false)
   const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false)
@@ -32,24 +36,30 @@ export const FullNameAutoCompleteInput = ({
     autocompleteBlurTimeout,
     setAutocompleteBlurTimeout,
   ] = useState<number>(null)
-  const [selectedPersonIndex, setSelectedPersonIndex] = useState<number>(-1)
-  const [field] = useField(name)
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1)
+  const field = useField(name)[0]
+  const fieldHelpers = useField(name)[2]
 
-  const handleAutoform = async (name: string) => {
-    if (name.length > 2) {
+  const onAutocompleteItemSelect = (item) => {
+    fieldHelpers.setValue(item.value)
+    onSelect && onSelect(item)
+  }
+
+  const handleUserInput = async (value: string) => {
+    if (value.length >= minLength) {
       setIsLoadingAutoform(true)
-      const personsData = await fetchData(name)
-      if (personsData) {
-        setAutoFormPersons(personsData)
+      const data = await fetchData(value)
+      if (data) {
+        setAutocompleteData(data)
       }
       setIsLoadingAutoform(false)
     }
   }
 
-  const debounceAutoform = (name: string) => {
+  const debounceUserInput = (value: string) => {
     clearTimeout(autocompleteDebounceTimeout)
     const timeout = window.setTimeout(() => {
-      handleAutoform(name)
+      handleUserInput(value)
     }, 500)
     setAutocompleteDebounceTimeout(timeout)
   }
@@ -58,6 +68,10 @@ export const FullNameAutoCompleteInput = ({
     clearTimeout(autocompleteBlurTimeout)
     await setShowAutocomplete(true)
     handleScroll()
+
+    if (autocompleteData.length === 0) {
+      handleUserInput('')
+    }
   }
 
   const handleAutocompleteInputBlur = (event) => {
@@ -69,15 +83,15 @@ export const FullNameAutoCompleteInput = ({
   }
 
   const getNextNavigationIndex = () => {
-    return selectedPersonIndex === autoformPersons.length - 1
+    return selectedItemIndex === autocompleteData.length - 1
       ? 0
-      : selectedPersonIndex + 1
+      : selectedItemIndex + 1
   }
 
   const getPreviousNavigationIndex = () => {
-    return selectedPersonIndex === 0
-      ? autoformPersons.length - 1
-      : selectedPersonIndex - 1
+    return selectedItemIndex === 0
+      ? autocompleteData.length - 1
+      : selectedItemIndex - 1
   }
 
   const handleScroll = () => {
@@ -106,18 +120,18 @@ export const FullNameAutoCompleteInput = ({
       await setShowAutocomplete(true)
       event.preventDefault()
     } else if (event.key === 'ArrowDown') {
-      await setSelectedPersonIndex(getNextNavigationIndex())
+      await setSelectedItemIndex(getNextNavigationIndex())
       handleScroll()
       event.preventDefault()
     } else if (event.key === 'ArrowUp') {
-      await setSelectedPersonIndex(getPreviousNavigationIndex())
+      await setSelectedItemIndex(getPreviousNavigationIndex())
       handleScroll()
       event.preventDefault()
     } else if (event.key === 'Escape') {
       setShowAutocomplete(false)
       event.preventDefault()
-    } else if (event.key === 'Enter' && selectedPersonIndex > -1) {
-      handlePersonAutoform(autoformPersons[selectedPersonIndex])
+    } else if (event.key === 'Enter' && selectedItemIndex > -1) {
+      onAutocompleteItemSelect(autocompleteData[selectedItemIndex])
       setShowAutocomplete(false)
       event.preventDefault()
     }
@@ -132,11 +146,11 @@ export const FullNameAutoCompleteInput = ({
           type="text"
           label={label}
           width="auto"
-          autoComplete="12iubu312b3"
+          autoComplete="off"
           className={isLoadingAutoform ? styles.autocompleteFieldLoading : ''}
-          onChange={(event) => {
-            field.onChange(event)
-            debounceAutoform(event.currentTarget.value)
+          onChange={({ currentTarget: { value } }) => {
+            fieldHelpers.setValue(value)
+            debounceUserInput(value)
           }}
           onClick={handleAutocompleteInputFocus}
           onFocus={handleAutocompleteInputFocus}
@@ -144,32 +158,31 @@ export const FullNameAutoCompleteInput = ({
           onKeyDown={handleArrowNavigation}
         />
       </div>
-      {showAutocomplete && autoformPersons.length > 0 && (
+      {showAutocomplete && autocompleteData.length > 0 && (
         <div className={styles.autocompleteWrapper}>
           <ul
             className="govuk-list govuk-list--number autocomplete__menu"
             style={{ position: 'absolute', zIndex: 100 }}
             ref={autocompleteList}
           >
-            {autoformPersons.map((person, index) => (
+            {autocompleteData.map((item, index) => (
               <li
-                key={person.id}
+                key={item.id}
                 className={classNames('autocomplete__option', {
-                  'autocomplete__option--focused':
-                    selectedPersonIndex === index,
+                  'autocomplete__option--focused': selectedItemIndex === index,
                 })}
                 onClick={() => {
-                  handlePersonAutoform(person)
-                  setSelectedPersonIndex(-1)
+                  onAutocompleteItemSelect(item)
+                  setSelectedItemIndex(-1)
                 }}
                 onMouseOver={() => {
-                  setSelectedPersonIndex(index)
+                  setSelectedItemIndex(index)
                 }}
                 onFocus={() => {
-                  setSelectedPersonIndex(index)
+                  setSelectedItemIndex(index)
                 }}
               >
-                {person.name} : {person.formatted_address}
+                {item.value}
               </li>
             ))}
           </ul>

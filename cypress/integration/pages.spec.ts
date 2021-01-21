@@ -357,7 +357,7 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     getInput('r003_nace').type('ryža')
 
-    cy.contains('ryže').click({ force: true })
+    cy.contains('01120').click({ force: true })
 
     getInput('r003_nace').should('have.value', '01120 - Pestovanie ryže')
   })
