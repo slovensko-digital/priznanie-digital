@@ -1,0 +1,271 @@
+﻿body {
+    background: url(../images/gradient.jpg) top repeat-x;
+    background-color: #9bc2da;
+    color: #646464;
+    font-family: tahoma, helvetica, arial, sans-serif;
+}
+
+.clear { clear: both; }
+
+.hidden, .hiddenSection {
+    display: none;
+    visibility: hidden;
+}
+
+.layoutMain {
+    margin: 0px auto;
+    padding: 5px 5px 5px 5px;
+    width: 900px;
+}
+
+.layoutRow { margin-bottom: 5px; }
+
+.caption { /*width: 100%; border-bottom: solid 1px black;*/ }
+
+.nocaption > .caption { border: 0px !important; }
+
+.nocaption > .caption span {
+    background: none !important;
+    display: none;
+}
+
+.caption .title { padding-left: 5px; }
+
+.columns {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.column {
+    border: none;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.cell { margin: 5px 0 5px 5px; }
+
+.textBox { width: 160px; }
+
+.date { width: 160px; }
+
+.time { width: 160px; }
+
+.datetime { width: 160px; }
+
+.checkBoxList span { display: block; }
+
+.radioButtonList span { display: block; }
+
+.radioButtonList input { width: 10px; }
+
+.comboBox { width: 166px; }
+
+.button { font-size: 0.55em !important; }
+
+.radioButtonLabel, .checkBoxLabel, .optionLabel {
+    font-size: 0.75em;
+    padding-left: 12px;
+}
+
+.fieldLabel {
+    float: left;
+    font-family: arial;
+    font-size: 0.75em;
+    line-height: 25px;
+    margin: 0px 18px 0px 0px;
+    padding: 0;
+    width: 190px;
+}
+
+.textArea { font-family: arial;  overflow:auto; }
+/* výnimka pre Firefox */
+
+@-moz-document url-prefix() { .textArea { font-size: 112%; } }
+
+.label {
+    float: left;
+    font-family: arial;
+    font-size: 0.75em;
+    margin: 0;
+    padding: 0;
+}
+
+.fieldContent {
+    float: left;
+    font-family: arial;
+    font-size: 0.75em;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: top;
+}
+
+.fieldInfo {
+    left: 0px;
+    position: relative;
+    top: 0px;
+}
+
+#repetitionCommands {
+    margin: 5px;
+    padding: 0px;
+}
+
+.addRemoveSection {
+    cursor: pointer;
+    font-family: arial;
+    font-size: 0.75em;
+}
+
+.removeSection { display: none; }
+
+fieldset {
+    border: 0;
+    margin-top: 5px;
+    padding: 0;
+}
+
+select.text {
+    margin-bottom: 12px;
+    padding: .4em;
+    width: 95%;
+}
+
+.errorsContainer {
+    border: 2px solid red !important;
+    display: none;
+    font-size: 0.75em;
+    margin: 0px auto;
+    padding: 5px;
+    width: 900px !important;
+}
+
+.errorsContainer li {
+    color: red;
+    list-style-type: none;
+    padding: 0px;
+}
+
+.errorsContainer li label { cursor: pointer; }
+
+input.error[type=text],
+textarea.error {
+    border: 1px solid red;
+    border-bottom: 6px solid red;
+}
+
+select.error { border: 1px solid red; }
+
+input.error[type=radio],
+input.error[type=checkbox] {
+    border: 1px solid red;
+    outline: 1px solid red;
+}
+
+em {
+    color: red;
+    font-size: 0.85em;
+    font-style: normal;
+    line-height: 16px;
+}
+
+.arrow {
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+}
+
+.infoIcon { float: left; }
+
+.tableFilter { padding-bottom: 4px; }
+
+.tableFilterText {
+    margin-right: 4px;
+    width: 160px;
+}
+
+table.display {
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+}
+
+table.display tr.even.row_selected td { background-color: #B0BED9; }
+
+table.display tr.odd.row_selected td { background-color: #9FAFD1; }
+
+table.display thead th span { float: right; }
+
+.dataTables_filter { padding: 10px 0 0 8px; }
+
+.dataTables_info {
+    float: left;
+    width: 60%;
+}
+
+.dataTables_paginate {
+    float: right;
+    text-align: right;
+    width: 44px;
+    width: 50px;
+}
+/* Main css end */
+/* jquery custom styles start */
+
+div.ui-datepicker { font-size: 0.83em; }
+
+.ui-dialog {
+    font-size: 0.7em;
+    padding: .3em;
+}
+/* jquery custom styles end */
+
+table.forms { margin: 0px 0px 5px 0px; }
+
+table.forms th { text-align: left; }
+
+.textleft { text-align: left; }
+
+.textcenter { text-align: center; }
+
+.textAreaOneRow {
+    height: 19px;
+    width: 806px;
+}
+
+.statusDialog img {
+    display: block;
+    margin: 15px auto;
+}
+
+.statusDialog .statusMessage { font-weight: bold; }
+
+.noscript {
+    color: Red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.headercorrection {
+    font-size: 0.75em;
+    margin: 0px;
+}
+
+.fieldVisualization {    
+    font-family: arial;
+    font-size: 0.75em;
+    margin: 0px;
+    padding: 0px; 
+}
+
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
