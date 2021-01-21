@@ -40,6 +40,7 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
           <button
             type="submit"
             className="btn-secondary govuk-button govuk-button--large"
+            data-test="download-xml"
           >
             Stiahnuť dáta (XML)
           </button>

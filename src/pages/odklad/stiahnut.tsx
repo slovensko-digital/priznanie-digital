@@ -36,6 +36,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
             fileDownload(xml, 'odklad_danoveho_priznania.xml')
             setDidDownload(true)
           }}
+          data-test="download-xml"
         >
           Stiahnuť žiadosť (XML)
         </button>
