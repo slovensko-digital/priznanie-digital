@@ -16,7 +16,7 @@ const options = {
   keys: ['code', 'label', 'translit'],
 }
 
-function useFuse<T>(data: T[]): Fuse<T, { includeScore: true }> {
+function useFuse<T>(data: T[]): Fuse<T> {
   const fuseRef = useRef(new Fuse(data, options))
 
   useEffect(() => {
