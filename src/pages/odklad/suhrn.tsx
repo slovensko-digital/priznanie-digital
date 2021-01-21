@@ -38,8 +38,8 @@ const Suhrn: NextPage<Props> = ({
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
               {postponeUserInput.prijmy_zo_zahranicia
-                ? '30. september 2020'
-                : '30. jún 2020'}
+                ? '30. september 2021'
+                : '30. jún 2021'}
             </td>
           </tr>
         </tbody>
@@ -106,7 +106,7 @@ const Suhrn: NextPage<Props> = ({
       <div className="box">
         {postponeUserInput.email ? (
           <p>
-            Váš email <strong>{postponeUserInput.email}</strong> sme odoslali
+            Na Váš email <strong>{postponeUserInput.email}</strong> sme odoslali
             XML súbor potrebný pre odklad dane.
             <br />
             {postponeUserInput.newsletter && ' Pošleme vám aj newsletter.'}
@@ -122,8 +122,8 @@ const Suhrn: NextPage<Props> = ({
               firstname: postponeUserInput.meno,
               lastname: postponeUserInput.priezvisko,
               deadline: postponeUserInput.prijmy_zo_zahranicia
-                ? '30. jún 2020'
-                : '30. september 2020',
+                ? '30. jún 2021'
+                : '30. september 2021',
             }}
           />
         )}

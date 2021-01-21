@@ -6,14 +6,16 @@
 /// <reference types="cypress" />
 
 import { UserInput } from '../../src/types/UserInput'
-import { convertToXML } from '../../src/lib/xml/xmlConverter'
-import { formatCurrency, setDate, parseInputNumber } from '../../src/lib/utils'
+import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
 import { calculate } from '../../src/lib/calculation'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 // import { convertPostponeToXML } from '../../src/lib/postpone/postponeConverter'
 import Decimal from 'decimal.js'
+import path from 'path'
+
+const downloadsFolder = 'cypress/downloads'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -371,42 +373,30 @@ const executeTestCase = (testCase: string) => {
 
         cy.contains('Stiahnuť dáta')
 
-        /**  HACK to work around file download, because cypress cannot do it */
-        cy.get(`[data-test="taxFormUserInput"]`)
-          .invoke('text')
-          .then((output) => {
-            const taxFormUserInput = JSON.parse(
-              output.toString(),
-            ) as TaxFormUserInput
+        cy.get('[data-test="download-xml"]').click()
+        const xmlFilename = path.join(downloadsFolder, 'danove_priznanie.xml')
+        cy.readFile(xmlFilename).then((xml) => {
+          /**  Validate our results with the FS form */
+          cy.visit('/form/form.451.html')
 
-            const xmlResult = convertToXML(
-              calculate(setDate(taxFormUserInput, new Date(2020, 1, 22))),
-            )
-            /**  HACK END */
+          const stub = cy.stub()
+          cy.on('window:alert', stub)
 
-            /**  Validate our results with the FS form */
-            cy.visit('/form/form.451.html')
-
-            const stub = cy.stub()
-            cy.on('window:alert', stub)
-
-            cy.get('#form-button-load').click()
-            cy.get('#form-buttons-load-dialog > input').upload({
-              fileContent: xmlResult,
-              fileName: 'xmlResult.xml',
-              mimeType: 'application/xml',
-              encoding: 'utf-8',
-            })
-
-            cy.get(
-              '#form-buttons-load-dialog-confirm > .ui-button-text',
-            ).click()
-            cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
-            cy.get('#form-button-validate').click().should(formSuccessful(stub))
-            cy.get('#errorsContainer')
-              .should((el) => expect(el.text()).to.be.empty)
-              .then(() => done())
+          cy.get('#form-button-load').click()
+          cy.get('#form-buttons-load-dialog > input').upload({
+            fileContent: xml,
+            fileName: 'xmlResult.xml',
+            mimeType: 'application/xml',
+            encoding: 'utf-8',
           })
+
+          cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
+          cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
+          cy.get('#form-button-validate').click().should(formSuccessful(stub))
+          cy.get('#errorsContainer')
+            .should((el) => expect(el.text()).to.be.empty)
+            .then(() => done())
+        })
       },
     )
   })
@@ -428,11 +418,18 @@ const executePostponeCase = (testCase: string) => {
 
         getError()
 
-        getInput('prijmy_zo_zahranicia', '-yes').click()
+        if (input.prijmy_zo_zahranicia) {
+          getInput('prijmy_zo_zahranicia', '-yes').click()
+          cy.contains(
+            'Nový termín pre podanie daňového priznania je 30. septembra 2021.',
+          )
+        } else {
+          getInput('prijmy_zo_zahranicia', '-no').click()
+          cy.contains(
+            'Nový termín pre podanie daňového priznania je 30. júna 2021.',
+          )
+        }
 
-        cy.contains(
-          'Nový termín pre podanie daňového priznania je 30. septembra 2020.',
-        )
         next()
         assertUrl('/odklad/osobne-udaje')
 
@@ -448,46 +445,41 @@ const executePostponeCase = (testCase: string) => {
         next()
         assertUrl('/odklad/suhrn')
 
+        if (input.email) {
+          typeToInput('email', input)
+          cy.get('button[data-test="send-email"]').click()
+          cy.contains(`Na Váš email ${input.email} sme odoslali`)
+        }
+
         next()
         assertUrl('/odklad/stiahnut')
 
-        cy.contains('Stiahnuť žiadosť (XML)').then(() => done())
+        cy.get('[data-test="download-xml"]').click()
+        const xmlFilename = path.join(
+          downloadsFolder,
+          'odklad_danoveho_priznania.xml',
+        )
+        cy.readFile(xmlFilename).then((xml) => {
+          /**  Validate our results with the FS form */
+          cy.visit('/form-odklad/form.510.html')
 
-        // TODO: do not upload the XML, validation fails in 2021
-        /**  HACK to work around file download, because cypress cannot do it */
-        // cy.get(`[data-test="postponeUserInput"]`)
-        //   .invoke('text')
-        //   .then((postponeUserInput) => {
-        //     const xml = convertPostponeToXML(
-        //       setDate(
-        //         JSON.parse(postponeUserInput.toString()) as PostponeUserInput,
-        //       ),
-        //     )
-        //
-        //     /**  HACK END */
-        //
-        //     /**  Validate our results with the FS form */
-        //     cy.visit('/form-odklad/form.401.html')
-        //
-        //     const stub = cy.stub()
-        //     cy.on('window:alert', stub)
-        //
-        //     cy.get('#form-button-load').click()
-        //     cy.get('#form-buttons-load-dialog > input').upload({
-        //       fileContent: xml,
-        //       fileName: 'xmlResult.xml',
-        //       mimeType: 'application/xml',
-        //       encoding: 'utf-8',
-        //     })
-        //
-        //     cy.get(
-        //       '#form-buttons-load-dialog-confirm > .ui-button-text',
-        //     ).click()
-        //     cy.get('#form-button-validate').click().should(formSuccessful(stub))
-        //     cy.get('#errorsContainer')
-        //       .should((el) => expect(el.text()).to.be.empty)
-        //       .then(() => done())
-        //   })
+          const stub = cy.stub()
+          cy.on('window:alert', stub)
+
+          cy.get('#form-button-load').click()
+          cy.get('#form-buttons-load-dialog > input').upload({
+            fileContent: xml,
+            fileName: 'xmlResult.xml',
+            mimeType: 'application/xml',
+            encoding: 'utf-8',
+          })
+
+          cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
+          cy.get('#form-button-validate').click().should(formSuccessful(stub))
+          cy.get('#errorsContainer')
+            .should((el) => expect(el.text()).to.be.empty)
+            .then(() => done())
+        })
       },
     )
   })

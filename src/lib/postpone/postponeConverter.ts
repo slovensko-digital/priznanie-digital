@@ -35,8 +35,8 @@ export function convertPostponeToJson(
     : '0'
 
   form.dokument.hlavicka.novaLehota.datumLehota = postponeUserInput.prijmy_zo_zahranicia
-    ? '30.09.2020'
-    : '30.06.2020'
+    ? '30.09.2021'
+    : '30.06.2021'
 
   form.dokument.hlavicka.vypracoval.dna = postponeUserInput.datum
 

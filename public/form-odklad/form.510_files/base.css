@@ -1,0 +1,104 @@
+img { border: 0; }
+
+p {
+    line-height: 1.3em;
+    margin: 1.3em 0;
+    padding: 0;
+    text-align: justify;
+}
+
+.block { display: block; }
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.menu { margin: 10px 0px 0px 180px }
+
+.horizontal_menu { padding: 0px 10px 0px 0px; }
+
+.horizontal_menu ul {
+    border: 0;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.horizontal_menu ul li {
+    border: 0;
+    float: left;
+    margin: 0;
+    padding: 0px 13px 10px 0px;
+}
+
+.horizontal_menu ul li a {
+    float: left;
+    font: bold 14px arial;
+    margin: 0;
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+.horizontal_menu ul li a:link { color: #828284; }
+
+.horizontal_menu ul li a:visited { color: #828284; }
+
+.horizontal_menu ul li a:hover { color: #6bb110; }
+
+.horizontal_menu ul li a.selected { color: #004478; }
+
+.vertical_menu {
+    float: left;
+    height: auto;
+    margin: 0px 0px 0px 10px;
+    width: 250px;
+}
+
+.vertical_menu ul {
+    border: 0;
+    list-style: url(../images/bullet.png) Inside;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.vertical_menu ul li {
+    border: 0;
+    margin: 0;
+    padding: 5px 0px 0px 0px;
+}
+
+.vertical_menu ul li a {
+    font: normal 13px arial;
+    margin: 0;
+    padding: 0px 0;
+    text-decoration: none;
+}
+
+.vertical_menu ul li a:link { color: #87afcb; }
+
+.vertical_menu ul li a:visited { color: #87afcb; }
+
+.vertical_menu ul li.Selected a {
+    color: #004478;
+    font-weight: bold;
+}
+
+.vertical_menu ul li a:hover {
+    color: #6bb110;
+    font-weight: bold;
+}
+
+.HelpIco {
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+}

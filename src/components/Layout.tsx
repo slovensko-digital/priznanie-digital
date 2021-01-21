@@ -2,7 +2,6 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { CookieBar } from './CookieBar'
-import { Debug } from './Debug'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 import { useRouter } from 'next/router'
@@ -77,11 +76,6 @@ const Layout: React.FC<Props> = ({
       />
 
       <CookieBar />
-
-      <Debug
-        taxFormUserInput={taxFormUserInput}
-        postponeUserInput={postponeUserInput}
-      />
     </div>
   )
 }
