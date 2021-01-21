@@ -48,7 +48,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Mali ste v roku 2019 príjem zo zahraničia?"
+              title="Mali ste v roku 2020 príjem zo zahraničia?"
               hint="Rozhodujúcim faktorom pre posúdenie príjmu zo živnosti je územie, na ktorom ste činnosť fyzicky vykonávali, nie štátna príslušnosť či adresa druhej strany a zároveň dátum, kedy vám bola odmena pripísaná na váš účet, nie dátum dodania alebo vystavenia faktúry."
               name="prijmy_zo_zahranicia"
             />
@@ -58,8 +58,8 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
                   Nový termín pre podanie daňového priznania je{' '}
                   <strong>
                     {values.prijmy_zo_zahranicia
-                      ? '30. septembra 2020'
-                      : '30. júna 2020'}
+                      ? '30. septembra 2021'
+                      : '30. júna 2021'}
                   </strong>
                   .
                 </p>
