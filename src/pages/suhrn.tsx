@@ -83,7 +83,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
       </Warning>
 
       <Summary
-        title="Príjmy a odvody do sociálnej poisťovne"
+        title="Príjmy a odvody SZČO"
         href={'/prijmy-a-vydavky'}
         rows={[
           {

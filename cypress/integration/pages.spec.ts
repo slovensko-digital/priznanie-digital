@@ -959,7 +959,7 @@ describe('Summary page', () => {
     cy.visit('/suhrn')
 
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
-    cy.get('h2').contains('Príjmy a odvody do sociálnej poisťovne')
+    cy.get('h2').contains('Príjmy a odvody')
   })
   it('displays correct first & last name', () => {
     cy.visit('/osobne-udaje')
