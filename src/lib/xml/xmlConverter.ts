@@ -126,8 +126,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
       pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
     }
-    form.dokument.telo.r112 = taxForm.r112.toFixed(2)
-    form.dokument.telo.r115 = taxForm.r115.toFixed(2)
+    form.dokument.telo.r112 = taxForm.r123.toFixed(2)
+    form.dokument.telo.r115 = taxForm.r126.toFixed(2)
   }
   /** SECTION Employed */
   if (taxForm.employed) {
@@ -147,42 +147,49 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r73 = taxForm.r073.toFixed(2)
 
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2)
-  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_z_prijmov.toFixed(2)
+  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_zo_zamestnania.toFixed(2)
   form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2)
   form.dokument.telo.r81 = taxForm.r081.toFixed(2)
   form.dokument.telo.r90 = taxForm.r090.toFixed(2)
-  form.dokument.telo.r105 = taxForm.r105_dan.toFixed(2)
-  form.dokument.telo.r106 = decimalToString(taxForm.r106)
+  form.dokument.telo.r91 = taxForm.r091.toFixed(2)
+  form.dokument.telo.r92 = taxForm.r092.toFixed(2)
+  form.dokument.telo.r94 = taxForm.r094.toFixed(2)
+  form.dokument.telo.r95 = taxForm.r095.toFixed(2)
+  form.dokument.telo.r96 = taxForm.r096.toFixed(2)
+  form.dokument.telo.r105 = taxForm.r105.toFixed(2)
+  form.dokument.telo.r106 = '0'
+  form.dokument.telo.r115 = '0'
+  form.dokument.telo.r116 = taxForm.r116_dan.toFixed(2)
+  form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
-  form.dokument.telo.r107 = taxForm.r107.toFixed(2)
-  form.dokument.telo.r108 = decimalToString(taxForm.r108)
-  form.dokument.telo.r109 = decimalToString(taxForm.r109)
-  form.dokument.telo.r110 = decimalToString(taxForm.r110)
-
-  form.dokument.telo.r113 = taxForm.r113.toFixed(2)
-  form.dokument.telo.r114 = ''
+  form.dokument.telo.r118 = taxForm.r118.toFixed(2)
+  form.dokument.telo.r119 = decimalToString(taxForm.r119)
   form.dokument.telo.r120 = decimalToString(taxForm.r120)
+  form.dokument.telo.r121 = decimalToString(taxForm.r121)
 
-  form.dokument.telo.r122 = decimalToString(taxForm.r122)
+  form.dokument.telo.r124 = taxForm.r124.toFixed(2)
+  form.dokument.telo.r131 = decimalToString(taxForm.r131)
 
-  form.dokument.telo.r125 = taxForm.r125_dan_na_uhradu.toFixed(2)
-  form.dokument.telo.r126 = decimalToString(taxForm.r126_danovy_preplatok)
+  form.dokument.telo.r133 = decimalToString(taxForm.r133)
+
+  form.dokument.telo.r135 = taxForm.r135_dan_na_uhradu.toFixed(2)
+  form.dokument.telo.r136 = decimalToString(taxForm.r136_danovy_preplatok)
 
   /** SECTION 2 percent */
   form.dokument.telo.neuplatnujem = boolToString(
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r142) {
-    form.dokument.telo.r141 = taxForm.r141.toFixed(2)
+  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
+    form.dokument.telo.r151 = taxForm.r151.toFixed(2)
     form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
-    form.dokument.telo.r142 = {
-      ...taxForm.r142,
+    form.dokument.telo.r152 = {
+      ...taxForm.r152,
       obchMeno: {
-        riadok: [taxForm.r142.obchMeno],
+        riadok: [taxForm.r152.obchMeno],
       },
-      psc: taxForm.r142.psc.replace(' ', ''),
-      suhlasZaslUdaje: boolToString(taxForm.r142.suhlasZaslUdaje),
+      psc: taxForm.r152.psc.replace(' ', ''),
+      suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
     }
   }
 

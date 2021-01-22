@@ -1,5 +1,7 @@
 import { OutputJson } from '../../types/OutputJson'
 
+const ZDANOVACIE_OBDOBIE__ROK = '2020'
+
 const sampleSchema: OutputJson = {
   dokument: {
     hlavicka: {
@@ -11,7 +13,7 @@ const sampleSchema: OutputJson = {
         ddp: '0',
       },
       zdanovacieObdobie: {
-        rok: '2019',
+        rok: ZDANOVACIE_OBDOBIE__ROK,
         datumDDP: '',
       },
       skNace: {
@@ -262,31 +264,43 @@ const sampleSchema: OutputJson = {
       r47: '',
       r48: '',
       r49: {
-        predchObdobie: {
-          rok: '',
-          strata: '',
+        rok: '2016',
+        udaje: {
+          r02: '',
+          r03: '',
+          r04: '',
+          r05: '',
         },
       },
       r50: {
-        predchObdobie: {
-          rok: '',
-          strata: '',
+        rok: '2017',
+        udaje: {
+          r02: '',
+          r03: '',
+          r04: '',
+          r05: '',
         },
       },
       r51: {
-        predchObdobie: {
-          rok: '',
-          strata: '',
+        rok: '2018',
+        udaje: {
+          r02: '',
+          r03: '',
+          r04: '',
+          r05: '',
         },
       },
       r52: {
-        predchObdobie: {
-          rok: '',
-          strata: '',
+        rok: '2019',
+        udaje: {
+          r02: '',
+          r03: '',
+          r04: '',
+          r05: '',
         },
       },
       r53: '',
-      r54: '',
+      // r54: '',
       r55: '',
       r56: '',
       r57: '',
@@ -495,12 +509,22 @@ const sampleSchema: OutputJson = {
       r136: '',
       r137: '',
       r138: '',
-      r139: '0',
+      r139: '',
       r140: '',
+      r141: '',
+      r142: '',
+      r143: '',
+      r144: '',
+      r145: '',
+      r146: '',
+      r147: '',
+      r148: '',
+      r149: '0',
+      r150: '',
       neuplatnujem: '0',
       splnam3per: '0',
-      r141: '',
-      r142: {
+      r151: '',
+      r152: {
         ico: '',
         pravnaForma: '',
         obchMeno: {
@@ -574,7 +598,7 @@ const sampleSchema: OutputJson = {
         rekreaciaSuma: '',
         zaznamy: '',
       },
-      r143: '3',
+      r153: '3',
       datumVyhlasenia: '',
       danovyPreplatokBonus: {
         vyplatitDanovyBonus: '0',
@@ -588,46 +612,6 @@ const sampleSchema: OutputJson = {
         bankovyUcet: { IBAN: '' },
         datum: '',
       },
-      // PrilPar30cOdpocetVydavkov: {
-      //   projektCislo: "",
-      //   pocetProjektov: "",
-      //   datumRealizacie: "",
-      //   r01: {
-      //     zdanObdobieOd: "",
-      //     zdanObdobieDo: "",
-      //     narok: "",
-      //     odpocitanaCast: "",
-      //   },
-      //   r02: {
-      //     zdanObdobieOd: "",
-      //     zdanObdobieDo: "",
-      //     narok: "",
-      //     odpocitanaCast: "",
-      //   },
-      //   r03: {
-      //     zdanObdobieOd: "",
-      //     zdanObdobieDo: "",
-      //     narok: "",
-      //     odpocitanaCast: "",
-      //   },
-      //   r04: {
-      //     zdanObdobieOd: "",
-      //     zdanObdobieDo: "",
-      //     narok: "",
-      //     odpocitanaCast: "",
-      //   },
-      //   r05: {
-      //     zdanObdobieOd: "",
-      //     zdanObdobieDo: "",
-      //     narok: "",
-      //     odpocitanaCast: "",
-      //   },
-      //   r06: "",
-      //   ciele: "",
-      //   r07: "",
-      //   r08: "",
-      //   r09: "",
-      // },
       prilPodielyNaZisku: {
         pr1: '',
         pr2: '',

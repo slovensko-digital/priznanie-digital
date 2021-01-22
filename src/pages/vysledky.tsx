@@ -99,7 +99,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     {
       title:
         'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
-      value: taxForm.r106,
+      value: taxForm.r117,
       key: 'r106',
     },
     {
@@ -119,12 +119,12 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
     {
       title: 'Daňový preplatok / daňový bonus na vyplatenie',
-      value: taxForm.r110.plus(taxForm.r126_danovy_preplatok),
+      value: taxForm.r121.plus(taxForm.r136_danovy_preplatok),
       key: 'na_vyplatenie',
     },
     {
       title: 'Daň na úhradu',
-      value: taxForm.r125_dan_na_uhradu,
+      value: taxForm.r135_dan_na_uhradu,
       key: 'r125_dan_na_uhradu',
       fontSize: 30,
     },

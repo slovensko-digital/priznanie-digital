@@ -29,7 +29,7 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t\t<k3>' + htmlEncode($('#cmbSKNACE3').val()).substring(4,5) + '</k3>');
 				stringBuilder.appendLine('\t\t<cinnost>' + htmlEncode($('#cmbSKNACE3 option:selected').text()).substr(8).replace(/&nbsp;/gi, ' ').replace(/\u00a0/g, ' ') + '</cinnost>');
 			stringBuilder.appendLine('\t</skNace>');
-			
+
 			// I. Oddiel
 			stringBuilder.appendLine('\t<priezvisko>' + htmlEncode($('#tbPriezvisko4').val()) + '</priezvisko>');
 			stringBuilder.appendLine('\t<meno>' + htmlEncode($('#tbMeno5').val()) + '</meno>');
@@ -51,7 +51,7 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t\t<psc>' + htmlEncode($('#tbPSC16').val()) + '</psc>');
 				stringBuilder.appendLine('\t\t<obec>' + htmlEncode($('#tbObec17').val()) + '</obec>');
 			stringBuilder.appendLine('\t</adresaObvPobytu>');
-			
+
 			// II. Oddiel
 			stringBuilder.appendLine('\t<zastupca>');
 				stringBuilder.appendLine('\t<priezvisko>' + htmlEncode($('#tbPriezvisko18').val()) + '</priezvisko>');
@@ -67,9 +67,9 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t<tel>' + htmlEncode($('#tbTelCislo27').val()) + '</tel>');
 				stringBuilder.appendLine('\t<email>' + htmlEncode($('#tbEmail28').val()) + '</email>');
 			stringBuilder.appendLine('\t</zastupca>');
-			
+
 		stringBuilder.appendLine('</hlavicka>');
-		
+
 		// III. Oddiel
 		stringBuilder.appendLine('<telo>');
 			stringBuilder.appendLine('\t<r29>' + (document.getElementById("cbr29").checked ? '1' : '0') + '</r29>');
@@ -87,10 +87,10 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t<uplatNCZDNaKupelStarostlivost>' + (document.getElementById("r33_1").checked ? '1' : '0') + '</uplatNCZDNaKupelStarostlivost>');
 				stringBuilder.appendLine('\t<preukazZaplatUhrady>' + htmlEncode($('#r33_2').val()) + '</preukazZaplatUhrady>');
 			stringBuilder.appendLine('\t</r33>');
-			
+
 			stringBuilder.appendLine('\t<r34>');
 			var repeatingCount = $('[id^=layoutRow29731]').length;
-				
+
 				var i = 1;
 	            for (; i <= repeatingCount; i++) {
 	                stringBuilder.appendLine('\t\t<dieta>');
@@ -115,21 +115,21 @@ function createxmlfinal() {
 			stringBuilder.appendLine('\t</r34>');
 			stringBuilder.appendLine('\t<r35udajeDalsieDeti>' + (document.getElementById("r35").checked ? '1' : '0') + '</r35udajeDalsieDeti>');
 			stringBuilder.appendLine('\t<r36>' + htmlEncode($('#r36').val()) + '</r36>');
-	            
-            
+
+
 			// IV. Oddiel
 			stringBuilder.appendLine('\t<r37>');
 				stringBuilder.appendLine('\t<uplatDanBonusZaplatUroky>' + (document.getElementById("r37_1").checked ? '1' : '0') + '</uplatDanBonusZaplatUroky>');
 				stringBuilder.appendLine('\t<zaplateneUroky>' + htmlEncode($('#r37_2').val()) + '</zaplateneUroky>');
 				stringBuilder.appendLine('\t<pocetMesiacov>' + htmlEncode($('#r37_3').val()) + '</pocetMesiacov>');
 			stringBuilder.appendLine('\t</r37>');
-			
+
 			// V. Oddiel
 			stringBuilder.appendLine('\t<r38>' + htmlEncode($('#r38').val()) + '</r38>');
 			stringBuilder.appendLine('\t<r38a>' + htmlEncode($('#r38a').val()) + '</r38a>');
 			stringBuilder.appendLine('\t<r39>' + htmlEncode($('#r39').val()) + '</r39>');
 			stringBuilder.appendLine('\t<r40>' + htmlEncode($('#r40').val()) + '</r40>');
-			
+
 			// VI. Oddiel
 			stringBuilder.appendLine('\t<tabulka1>');
 				stringBuilder.appendLine('\t\t<t1r1>');
@@ -228,7 +228,7 @@ function createxmlfinal() {
 					stringBuilder.appendLine('\t\t\t<s2>' + htmlEncode($('#t1bR2S2').val()) + '</s2>');
 				stringBuilder.appendLine('\t\t</t1r2>');
 			stringBuilder.appendLine('\t</tabulka1b>');
-						
+
 			stringBuilder.appendLine('\t<r41>' + htmlEncode($('#t41').val()) + '</r41>');
 			stringBuilder.appendLine('\t<r42>' + htmlEncode($('#t42').val()) + '</r42>');
 			stringBuilder.appendLine('\t<r43>' + htmlEncode($('#t43').val()) + '</r43>');
@@ -272,7 +272,7 @@ function createxmlfinal() {
                     stringBuilder.appendLine('\t\t\t<r04>' + htmlEncode($('#R4_52').val()) + '</r04>');
                     stringBuilder.appendLine('\t\t\t<r05>' + htmlEncode($('#R5_52').val()) + '</r05>');
                 stringBuilder.appendLine('\t\t</udaje>');
-			stringBuilder.appendLine('\t</r52>');		
+			stringBuilder.appendLine('\t</r52>');
 			stringBuilder.appendLine('\t<r53>' + htmlEncode($('#t53').val()) + '</r53>');
 			stringBuilder.appendLine('\t<r55>' + htmlEncode($('#t55').val()) + '</r55>');
 			stringBuilder.appendLine('\t<r56>' + htmlEncode($('#t56').val()) + '</r56>');
@@ -282,10 +282,10 @@ function createxmlfinal() {
 			stringBuilder.appendLine('\t<r60>' + htmlEncode($('#t60').val()) + '</r60>');
 			stringBuilder.appendLine('\t<r61>' + htmlEncode($('#t61').val()) + '</r61>');
 			stringBuilder.appendLine('\t<r62>' + htmlEncode($('#t62').val()) + '</r62>');
-			stringBuilder.appendLine('\t<r63>' + htmlEncode($('#t63').val()) + '</r63>');		
+			stringBuilder.appendLine('\t<r63>' + htmlEncode($('#t63').val()) + '</r63>');
 			stringBuilder.appendLine('\t<r64>' + htmlEncode($('#t64').val()) + '</r64>');
 			stringBuilder.appendLine('\t<r65>' + htmlEncode($('#t65').val()) + '</r65>');
-			
+
 			stringBuilder.appendLine('\t<tabulka2>');
 				stringBuilder.appendLine('\t\t<t2r1>');
 					stringBuilder.appendLine('\t\t\t<s1>' + htmlEncode($('#t2R1S1').val()) + '</s1>');
@@ -339,11 +339,11 @@ function createxmlfinal() {
 				//	stringBuilder.appendLine('\t\t\t<s1>' + htmlEncode($('#t2R13S1').val()) + '</s1>');
 				//stringBuilder.appendLine('\t\t</t2r13>');
 			stringBuilder.appendLine('\t</tabulka2>');
-			
+
 			stringBuilder.appendLine('\t<r66>' + htmlEncode($('#t66').val()) + '</r66>');
 			stringBuilder.appendLine('\t<r67>' + htmlEncode($('#t67').val()) + '</r67>');
 			stringBuilder.appendLine('\t<r68>' + htmlEncode($('#t68').val()) + '</r68>');
-			
+
 			// VIII. Oddiel
 			stringBuilder.appendLine('\t<tabulka3>');
 				stringBuilder.appendLine('\t\t<t3r1>');
@@ -422,7 +422,7 @@ function createxmlfinal() {
 					stringBuilder.appendLine('\t\t\t<s2>' + htmlEncode($('#t3R19S2').val()) + '</s2>');
 				stringBuilder.appendLine('\t\t</t3r19>');
 			stringBuilder.appendLine('\t</tabulka3>');
-			
+
 			stringBuilder.appendLine('\t<r69>' + htmlEncode($('#t69').val()) + '</r69>');
 			stringBuilder.appendLine('\t<r70>' + htmlEncode($('#t70').val()) + '</r70>');
 			stringBuilder.appendLine('\t<r71>' + htmlEncode($('#t71').val()) + '</r71>');
@@ -462,23 +462,23 @@ function createxmlfinal() {
 			stringBuilder.appendLine('\t<r103>' + htmlEncode($('#t103').val()) + '</r103>');
 			stringBuilder.appendLine('\t<r104>' + htmlEncode($('#t104').val()) + '</r104>');
 			stringBuilder.appendLine('\t<r105>' + htmlEncode($('#t105').val()) + '</r105>');
-			stringBuilder.appendLine('\t<r106>' + htmlEncode($('#t106').val()) + '</r106>');
-			stringBuilder.appendLine('\t<r107>' + htmlEncode($('#t107').val()) + '</r107>');
-			stringBuilder.appendLine('\t<r108>' + htmlEncode($('#t108').val()) + '</r108>');
-			stringBuilder.appendLine('\t<r109>' + htmlEncode($('#t109').val()) + '</r109>');
-			stringBuilder.appendLine('\t<r110>' + htmlEncode($('#t110').val()) + '</r110>');
+			stringBuilder.appendLine('\t<r117>' + htmlEncode($('#t106').val()) + '</r117>');
+			stringBuilder.appendLine('\t<r118>' + htmlEncode($('#t107').val()) + '</r118>');
+			stringBuilder.appendLine('\t<r119>' + htmlEncode($('#t108').val()) + '</r119>');
+			stringBuilder.appendLine('\t<r120>' + htmlEncode($('#t109').val()) + '</r120>');
+			stringBuilder.appendLine('\t<r121>' + htmlEncode($('#t110').val()) + '</r121>');
 			stringBuilder.appendLine('\t<r111>' + htmlEncode($('#t111').val()) + '</r111>');
-			stringBuilder.appendLine('\t<r112>' + htmlEncode($('#t112').val()) + '</r112>');
-			stringBuilder.appendLine('\t<r113>' + htmlEncode($('#t113').val()) + '</r113>');
-			stringBuilder.appendLine('\t<r114>' + htmlEncode($('#t114').val()) + '</r114>');
-			stringBuilder.appendLine('\t<r115>' + htmlEncode($('#t115').val()) + '</r115>');
+			stringBuilder.appendLine('\t<r123>' + htmlEncode($('#t112').val()) + '</r123>');
+			stringBuilder.appendLine('\t<r124>' + htmlEncode($('#t113').val()) + '</r124>');
+			stringBuilder.appendLine('\t<r125>' + htmlEncode($('#t114').val()) + '</r125>');
+			stringBuilder.appendLine('\t<r126>' + htmlEncode($('#t115').val()) + '</r126>');
 			stringBuilder.appendLine('\t<r116>' + htmlEncode($('#t116').val()) + '</r116>');
 			stringBuilder.appendLine('\t<r117>' + htmlEncode($('#t117').val()) + '</r117>');
 			stringBuilder.appendLine('\t<r118>' + htmlEncode($('#t118').val()) + '</r118>');
 			stringBuilder.appendLine('\t<r119>' + htmlEncode($('#t119').val()) + '</r119>');
-			stringBuilder.appendLine('\t<r120>' + htmlEncode($('#t120').val()) + '</r120>');
+			stringBuilder.appendLine('\t<r131>' + htmlEncode($('#t120').val()) + '</r131>');
 			stringBuilder.appendLine('\t<r121>' + htmlEncode($('#t121').val()) + '</r121>');
-			stringBuilder.appendLine('\t<r122>' + htmlEncode($('#t122').val()) + '</r122>');
+			stringBuilder.appendLine('\t<r133>' + htmlEncode($('#t122').val()) + '</r133>');
 			stringBuilder.appendLine('\t<r123>' + htmlEncode($('#t123').val()) + '</r123>');
 			stringBuilder.appendLine('\t<r124>' + htmlEncode($('#t124').val()) + '</r124>');
 			stringBuilder.appendLine('\t<r125>' + htmlEncode($('#t125').val()) + '</r125>');
@@ -510,7 +510,7 @@ function createxmlfinal() {
 			stringBuilder.appendLine('\t<neuplatnujem>' + (document.getElementById("cbNeuplatnujem").checked ? '1' : '0') + '</neuplatnujem>');
 			stringBuilder.appendLine('\t<splnam3per>' + (document.getElementById("cbSplnam3Per").checked?'1':'0') + '</splnam3per>');
 			stringBuilder.appendLine('\t<r151>' + htmlEncode($('#tbPodiel151').val()) + '</r151>');
-			
+
             stringBuilder.appendLine('\t<r152>');
             stringBuilder.appendLine('\t\t<ico>' + htmlEncode($('#tbico152').val()) + '</ico>');
 			stringBuilder.appendLine('\t\t<pravnaForma>' + htmlEncode($('#PravnaForma152').val()) + '</pravnaForma>');
@@ -528,8 +528,8 @@ function createxmlfinal() {
 			// XIV. Oddiel
 			stringBuilder.appendLine('\t<osobitneZaznamy>');
 				stringBuilder.appendLine('\t\t<uvadza>' + (document.getElementById("cbUvadza").checked?'1':'0') + '</uvadza>');
-				
-				
+
+
 			for (var i=0;i<20;i++)
 			{
 				if(i==0){
@@ -543,7 +543,7 @@ function createxmlfinal() {
 					stringBuilder.appendLine('\t\t\t<zTohoVydavky>' + htmlEncode($('#odd13zToho').val()) + '</zTohoVydavky>');
 				stringBuilder.appendLine('\t\t</udajeOprijmoch>');
 				}else{
-				if(!document.getElementById("layoutRow29632_Repeating_"+i)) break;		
+				if(!document.getElementById("layoutRow29632_Repeating_"+i)) break;
 				stringBuilder.appendLine('\t\t<udajeOprijmoch>');
 					stringBuilder.appendLine('\t\t\t<kodStatu>' + htmlEncode($('#odd13kod_Repeating_'+i).val()) + '</kodStatu>');
 					stringBuilder.appendLine('\t\t\t<druhPrimuPar>' + htmlEncode($('#odd13Par_Repeating_'+i).val()) + '</druhPrimuPar>');
@@ -562,7 +562,7 @@ function createxmlfinal() {
 
 			stringBuilder.appendLine('\t<r153>' + htmlEncode($('#t153').val()) + '</r153>');
 			stringBuilder.appendLine('\t<datumVyhlasenia>' + htmlEncode($('#dtpDatumSpravneUplne').val()) + '</datumVyhlasenia>');
-			
+
 			// XV. Oddiel
 			stringBuilder.appendLine('\t<danovyPreplatokBonus>');
 				stringBuilder.appendLine('\t\t<vyplatitDanovyBonus>' + (document.getElementById("cbVyplatit").checked?'1':'0') + '</vyplatitDanovyBonus>');
@@ -578,7 +578,7 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t\t</bankovyUcet>');
 				stringBuilder.appendLine('\t\t<datum>' + htmlEncode($('#dtpDatumDB').val()) + '</datum>');
 			stringBuilder.appendLine('\t</danovyPreplatokBonus>');
-			
+
 			var lr = $("[id^='layoutRow29745']");
 			var polePoli = new Array();
 			polePoli.push(lr.eq(0).find("[id^='DatumProjektu']").val());
@@ -611,7 +611,7 @@ function createxmlfinal() {
 					anoNie = true;
 				}
 			}
-			
+
 			if(anoNie == true || lr.length > 1){
 				lr.each(function(){
 					stringBuilder.appendLine('\t<prilPar30cOdpocetVydavkov>');
@@ -656,7 +656,7 @@ function createxmlfinal() {
 					stringBuilder.appendLine('\t</prilPar30cOdpocetVydavkov>');
 				});
 			}
-			
+
 			stringBuilder.appendLine('\t<prilPodielyNaZisku>');
 				stringBuilder.appendLine('\t\t<pr1>' + htmlEncode($('#tbPr2S1_01').val()) + '</pr1>');
 				stringBuilder.appendLine('\t\t<pr2>' + htmlEncode($('#tbPr2S1_02').val()) + '</pr2>');
@@ -728,9 +728,9 @@ function createxmlfinal() {
 				stringBuilder.appendLine('\t\t<priPrimoch6ods1a2VediemPU>' + (document.getElementById("chPriPrijmoch").checked ? '1' : '0') + '</priPrimoch6ods1a2VediemPU>');
 				stringBuilder.appendLine('\t\t<datum>' + htmlEncode($('#dtpDatumSoc').val()) + '</datum>');
 			stringBuilder.appendLine('\t</socZdravPoistenie>');
-			
+
 		stringBuilder.appendLine('</telo>');
-		
+
 	stringBuilder.appendLine('</dokument>');
 
 	return stringBuilder.string();
@@ -746,27 +746,27 @@ function getPageValue1Xml(page, element) {
 }
 
 function getPageValueCh1Xml(page, element) {
-    if (page == 1) { 
-        return $("#" + element).is(':checked') ? '1' : '0'; 
-    } else { 
-        var poradie = page - 1; 
-        return $("#" + element + "_Repeating_" + poradie).is(':checked') ? '1' : '0'; 
-    } 
-    /* 
-    if (page == 1) { 
-    return $("#" + element).is(':checked') ? '1' : '0'; 
-    } 
-    if (page == 2) { 
-    return $("#" + element + "1").is(':checked') ? '1' : '0'; 
-    } 
-    if (page == 3) { 
-    return $("#" + element + "3").is(':checked') ? '1' : '0'; 
-    } 
-    if (page > 3) { 
-    var pomocna = (page - 3) + page; 
-    return $("#" + element + pomocna).is(':checked') ? '1' : '0'; 
-    } 
-    */ 
+    if (page == 1) {
+        return $("#" + element).is(':checked') ? '1' : '0';
+    } else {
+        var poradie = page - 1;
+        return $("#" + element + "_Repeating_" + poradie).is(':checked') ? '1' : '0';
+    }
+    /*
+    if (page == 1) {
+    return $("#" + element).is(':checked') ? '1' : '0';
+    }
+    if (page == 2) {
+    return $("#" + element + "1").is(':checked') ? '1' : '0';
+    }
+    if (page == 3) {
+    return $("#" + element + "3").is(':checked') ? '1' : '0';
+    }
+    if (page > 3) {
+    var pomocna = (page - 3) + page;
+    return $("#" + element + pomocna).is(':checked') ? '1' : '0';
+    }
+    */
 }
 
 
@@ -786,11 +786,11 @@ function loadxmlfinal(text) {
 }
 
 function processHlavicka(hlavicka) {
-    
+
     for (var i = 0; i < hlavicka.childNodes.length; i++) {
         var aNode = hlavicka.childNodes[i];
         if(aNode.nodeName == "#text") continue;
-        
+
         switch(aNode.nodeName)
         {
         	case 'dic': $('#cmbDic1').val(getNodeValue(aNode)); break;
@@ -848,7 +848,7 @@ function processHlavicka(hlavicka) {
                     if (bNode.nodeName == "psc") $('#tbPSC16').val(getNodeValue(bNode));
                     if (bNode.nodeName == "obec") $('#tbObec17').val(getNodeValue(bNode));
                 }
-                break;  
+                break;
 
             case 'zastupca':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
@@ -857,7 +857,7 @@ function processHlavicka(hlavicka) {
                     if (bNode.nodeName == "meno") $('#tbMeno19').val(getNodeValue(bNode));
                     if (bNode.nodeName == "titul") $('#tbTitulPred20').val(getNodeValue(bNode));
                     if (bNode.nodeName == "titulZa") $('#tbTitulZa20').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "rodneCislo") { 
+                    if (bNode.nodeName == "rodneCislo") {
                         $('#t21_1RC').val(getNodeValue(bNode).substr(0,6));
                         $('#t21_2RC').val(getNodeValue(bNode).substr(6));
                     }
@@ -873,8 +873,8 @@ function processHlavicka(hlavicka) {
                     }
                     if (bNode.nodeName == "email") $('#tbEmail28').val(getNodeValue(bNode));
                 }
-                break;    
-                
+                break;
+
             default: break;
         } // end switch
     } // end for
@@ -922,9 +922,9 @@ function processTelo(telo) {
 
 		  case 'r34':
                 var dietaCount = 0;
-				
-				removeSections('layoutRow29731');			 				
-				
+
+				removeSections('layoutRow29731');
+
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
                     if (bNode.nodeName == "dieta") {
@@ -962,16 +962,16 @@ function processTelo(telo) {
                             if (cNode.nodeName == "m10") setPageValueCh1Xml(dietaCount, 'cbM10_1', getNodeValue(cNode));
                             if (cNode.nodeName == "m11") setPageValueCh1Xml(dietaCount, 'cbM11_1', getNodeValue(cNode));
        						if (cNode.nodeName == "m12") setPageValueCh1Xml(dietaCount, 'cbM12_1', getNodeValue(cNode));
-							
+
                         }
-                         
+
                     }
-					
-                }  
-				 
+
+                }
+
                 break;
 
-           case 'r35udajeDalsieDeti': document.getElementById("r35").checked = (getNodeValue(aNode) == '1' ? true : false); break; 
+           case 'r35udajeDalsieDeti': document.getElementById("r35").checked = (getNodeValue(aNode) == '1' ? true : false); break;
            case 'r36': $('#r36').val(getNodeValue(aNode)); break;
            case 'r37':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
@@ -985,7 +985,7 @@ function processTelo(telo) {
            case 'r38a': $('#r38a').val(getNodeValue(aNode)); break;
            case 'r39': $('#r39').val(getNodeValue(aNode)); break;
            case 'r40': $('#r40').val(getNodeValue(aNode)); break;
-           
+
            case 'tabulka1':
                for (var j = 0; j < aNode.childNodes.length; j++) {
                    var bNode = aNode.childNodes[j];
@@ -1173,8 +1173,8 @@ function processTelo(telo) {
                    }
                }
                break;
-               
-           
+
+
            case 'r41': $('#t41').val(getNodeValue(aNode)); break;
            case 'r42': $('#t42').val(getNodeValue(aNode)); break;
            case 'r43': $('#t43').val(getNodeValue(aNode)); break;
@@ -1183,28 +1183,28 @@ function processTelo(telo) {
            case 'r46': $('#t46').val(getNodeValue(aNode)); break;
            case 'r47': $('#t47').val(getNodeValue(aNode)); break;
            case 'r48': $('#t48').val(getNodeValue(aNode)); break;
-           case 'r49': 
+           case 'r49':
 				var udaje = aNode.getElementsByTagName('udaje')[0];
 				$("#R2_49").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
 				$("#R3_49").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
 				$("#R4_49").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
 				$("#R5_49").val(getElementsValXml(udaje.getElementsByTagName('r05')[0]));
 				break;
-           case 'r50': 
+           case 'r50':
                 var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_50").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
                 $("#R3_50").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
                 $("#R4_50").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
                 $("#R5_50").val(getElementsValXml(udaje.getElementsByTagName('r05')[0]));
 				break;
-		   case 'r51': 
+		   case 'r51':
                 var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_51").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
                 $("#R3_51").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
                 $("#R4_51").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
                 $("#R5_51").val(getElementsValXml(udaje.getElementsByTagName('r05')[0]));
 				break;
-		   case 'r52': 
+		   case 'r52':
                 var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_52").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
                 $("#R3_52").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
@@ -1223,7 +1223,7 @@ function processTelo(telo) {
            case 'r63': $('#t63').val(getNodeValue(aNode)); break;
            case 'r64': $('#t64').val(getNodeValue(aNode)); break;
            case 'r65': $('#t65').val(getNodeValue(aNode)); break;
-           
+
            case 'tabulka2':
                for (var j = 0; j < aNode.childNodes.length; j++) {
                    var bNode = aNode.childNodes[j];
@@ -1306,11 +1306,11 @@ function processTelo(telo) {
                    //}
                }
                break;
-           
+
            case 'r66': $('#t66').val(getNodeValue(aNode)); break;
            case 'r67': $('#t67').val(getNodeValue(aNode)); break;
            case 'r68': $('#t68').val(getNodeValue(aNode)); break;
-           
+
            case 'tabulka3':
                for (var j = 0; j < aNode.childNodes.length; j++) {
                    var bNode = aNode.childNodes[j];
@@ -1526,7 +1526,7 @@ function processTelo(telo) {
                        for (var k = 0; k < bNode.childNodes.length; k++) {
                            var cNode = bNode.childNodes[k];
                            //if (!cNode.firstChild) continue;
-                           if (cNode.nodeName == "riadok") 
+                           if (cNode.nodeName == "riadok")
                            {
                                $('#tbObchMeno152').val($('#tbObchMeno152').val() + getNodeValue(cNode));
 							}
@@ -1539,9 +1539,9 @@ function processTelo(telo) {
 				   if (bNode.nodeName == "suhlasZaslUdaje") document.getElementById("chbSuhlas").checked = (getNodeValue(bNode) == '1' ? true : false);
                }
                break;
-               
+
            case 'osobitneZaznamy':
-		   
+
 
 				var udajePocet = 0;
 				var l = 0;
@@ -1571,7 +1571,7 @@ function processTelo(telo) {
                         for (var k = 0; k < bNode.childNodes.length; k++) {
                             var cNode = bNode.childNodes[k];
                             if (!cNode.firstChild) continue;
-							
+
                             if (cNode.nodeName == "kodStatu"){
 								if(l>6)
 								{
@@ -1589,7 +1589,7 @@ function processTelo(telo) {
 							}
                         }
                     }
-                    
+
                     if (bNode.nodeName == "rekreaciaPar19ods2") $('#chbRekreacia').attr("checked",(getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "rekreaciaSuma") $('#valRekreacia').val(getNodeValue(bNode).replace(/%0A/g, '\n'));
                     if (bNode.nodeName == "zaznamy") $('#taZaznamy').val(getNodeValue(bNode).replace(/%0A/g, '\n'));
@@ -1597,14 +1597,14 @@ function processTelo(telo) {
                 }
                 }
 				break;
-                
-           case 'r153': $('#t153').val(getNodeValue(aNode)); break;              
-           case 'datumVyhlasenia': $('#dtpDatumSpravneUplne').val(upravdatum(getNodeValue(aNode))); break;              
+
+           case 'r153': $('#t153').val(getNodeValue(aNode)); break;
+           case 'datumVyhlasenia': $('#dtpDatumSpravneUplne').val(upravdatum(getNodeValue(aNode))); break;
 
            case 'danovyPreplatokBonus':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
-                     
+
                     if (bNode.nodeName == "vyplatitDanovyBonus") $("#cbVyplatit").attr("checked",(getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "vyplatitDanovyBonusUroky") $("#chBonus").attr("checked",(getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "vratitDanPreplatok") $("#cbVratenie").attr("checked",(getNodeValue(bNode) == '1' ? true : false)).change();
@@ -1626,7 +1626,7 @@ function processTelo(telo) {
                     if (bNode.nodeName == "datum") $('#dtpDatumDB').val(upravdatum(getNodeValue(bNode)));
                 }
                 break;
-				
+
 			/*case 'prilPar30cOdpocetVydavkov' :
 				$("#ProjektCislo").val(getElementsValXml(aNode.getElementsByTagName('projektCislo')[0]));
 				$("#PocetProjektov").val(getElementsValXml(aNode.getElementsByTagName('pocetProjektov')[0]));
@@ -1664,7 +1664,7 @@ function processTelo(telo) {
             case 'prilPodielyNaZisku':
         		for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
-                     
+
                     if (bNode.nodeName == "pr1") $('#tbPr2S1_01').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr2") $('#tbPr2S1_02').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr3") $('#tbPr2S1_03').val(getNodeValue(bNode));
@@ -1735,7 +1735,7 @@ function processTelo(telo) {
             case 'socZdravPoistenie':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
-                     
+
                     if (bNode.nodeName == "pr1") {
                         for (var k = 0; k < bNode.childNodes.length; k++) {
                             var cNode = bNode.childNodes[k];
@@ -1755,18 +1755,18 @@ function processTelo(telo) {
                     if (bNode.nodeName == "pr11") $('#tbPr3_11').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr12") $('#tbPr3_12').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr13") $('#tbPr3_13').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr14") $('#tbPr3_14').val(getNodeValue(bNode));	
+                    if (bNode.nodeName == "pr14") $('#tbPr3_14').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr15") $('#tbPr3_15').val(getNodeValue(bNode));
                     if (bNode.nodeName == "priPrimoch6ods1a2VediemPU") $("#chPriPrijmoch").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "datum") $('#dtpDatumSoc').val(upravdatum(getNodeValue(bNode)));
                 }
                 break;
-            	
+
             default: break;
         } // end switch
     }
 	var prilPar30cOdpocetVydavkov = telo.getElementsByTagName('prilPar30cOdpocetVydavkov');
-	
+
 	if(prilPar30cOdpocetVydavkov.length != 0){
 		for(var t = 0;t<prilPar30cOdpocetVydavkov.length;t++){
 			var thisLR = $("[id^='layoutRow29745']:last");
@@ -1777,7 +1777,7 @@ function processTelo(telo) {
 			}
 			var thisLR = $("[id^='layoutRow29745']:last");
 			var prilPar30cOdpocetVydavkovXML = prilPar30cOdpocetVydavkov[t];
-			
+
 			thisLR.find("[id^='ProjektCislo']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('projektCislo')[0]));
 			thisLR.find("[id^='PocetProjektov']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('pocetProjektov')[0]));
 			thisLR.find("[id^='DatumProjektu']").val(upravdatum(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('datumRealizacie')[0])));
@@ -1815,14 +1815,14 @@ function processTelo(telo) {
 			if ($('[id^=layoutRow29745]').length == prilPar30cOdpocetVydavkov.length)
 			    $("#Pri1r7").change();
 		}
-		
-		// Nastavenie obmedzeni datumov		
+
+		// Nastavenie obmedzeni datumov
 		var allLR = $("[id^='layoutRow29745']");
-		
+
 		allLR.each(function() {
 			var lr = $(this);
-			
-			
+
+
     var date1 = lr.find("[id^='DatumProjektu']");
     var date1Val = date1.val();
     date1.datepicker("option", "minDate", new Date(2000, 1 - 1, 1));
@@ -1893,36 +1893,36 @@ function processTelo(telo) {
 		$('#PocetProjektov').val(0);
 	}
 	//end for
-	
+
 }
 
 
 function upravdatum(datum)
 {
 	datum = datum.replace(/(\s*)/g, '');
-	  
+
 	if(datum.length>0) {
 		var part = datum.replace(/\,/g,'.').replace(/\//g,'.').split('.');
-		
+
 		if (part.length > 2) {
 			var dd = part[0];
 			if(dd.length==1) {
 				dd='0'+dd;
 			}
-			
+
 			var mm = part[1];
 			if(mm.length==1) {
 				mm='0'+mm;
 			}
-			
+
 			var yyyy = part[2];
 			datum = dd+'.'+mm+'.'+yyyy;
 		}
 	}
-	
+
 	if (datum.match(new RegExp(/^$|^(((([0])?[1-9])|([1-2][0-9])|([3][0]))[.]((([0])?[13-9])|([1][0-2]))[.]([0-9][0-9][0-9][0-9]))$|^([3][1][.]((([0])?[13578])|([1][02]))[.]([0-9][0-9][0-9][0-9]))$|^(((([0])?[1-9])|([1][0-9])|([2][0-8]))[.]([0])?[2][.]([0-9][0-9][0-9][0-9]))$|^([2][9][.]([0])?[2])[.][0-9][0-9][13579][26]$|^([2][9][.]([0])?[2])[.][0-9][0-9][02468][048]$/)))
 		return datum;
-	
+
 	return '';
 }
 
@@ -2124,7 +2124,7 @@ function createMainFdf() {
 		stringBuilder.appendLine('    << /V (' + ($('#cbM11_1' + suffix).is(':checked') ? 'X' : '') + ')/T (34-' + (i + 1) +'e11)>>');
 		stringBuilder.appendLine('    << /V (' + ($('#cbM12_1' + suffix).is(':checked') ? 'X' : '') + ')/T (34-' + (i + 1) +'e12)>>');
 	}
-	
+
 	stringBuilder.appendLine('    << /V (' + ($('#r35').is(':checked') ? 'X' : '') + ')/T (35)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#r36').val()) + ')/T (36)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#r36').val(), 2) + ')/T (36d)>>');
@@ -2259,7 +2259,7 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t47').val(), 2) + ')/T (47d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t48').val()) + ')/T (48)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t48').val(), 2) + ')/T (48d)>>');
-    
+
     for (var i = 49; i <= 52; i++) {
         stringBuilder.appendLine('    << /T (' + i + ')/Kids');
         stringBuilder.appendLine('        [');
@@ -2809,7 +2809,7 @@ function createMainFdf() {
     else
         stringBuilder.appendLine('    << /V (1)/T (0.ProjektCislo)>>');
 
-    
+
 
     var datumVal = lrAkt.find("[id='DatumProjektu']");
     vratFDFDatum(datumVal, "0.da", "0.db", "0.dc", stringBuilder);

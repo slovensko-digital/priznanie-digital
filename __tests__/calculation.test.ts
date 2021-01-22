@@ -3,7 +3,6 @@ import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { sum } from '../src/lib/utils'
-import Decimal from 'decimal.js'
 
 describe('#parse', () => {
   const inputs = [
@@ -35,7 +34,7 @@ describe('Basic use cases', () => {
       r006_titul: 'Ing. / PhD.',
     }
     const result = calculate(input as TaxFormUserInput)
-    expect(result.r080_zaklad_dane_celkovo.toNumber()).toBe(4062.65)
+    expect(result.r080_zaklad_dane_celkovo.toNumber()).toBe(0)
     expect(result.r005_meno).toBe('Johnny')
     expect(result.r004_priezvisko).toBe('Mike Bravo')
     expect(result.r006_titul).toBe('Ing.')
@@ -54,17 +53,17 @@ const child = {
 }
 
 const childUnder6 = { ...child, rodneCislo: '150701 / 1234' }
-const childTurning6InFeb = { ...child, rodneCislo: '130201 / 1234' }
-const childTurning6InJul = { ...child, rodneCislo: '130731 / 1234' }
+const childTurning6InFeb = { ...child, rodneCislo: '140201 / 1234' }
+const childTurning6InJul = { ...child, rodneCislo: '140731 / 1234' }
 const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
 
-describe('With child (for tax year 2019)', () => {
+describe('With child (for tax year 2020)', () => {
   test('should map child', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,
       hasChildren: true,
       children: [child],
-      t1r10_prijmy: '3120',
+      t1r10_prijmy: '3480',
     })
     expect(result.r034[0].priezviskoMeno).toBe('Johnny Bravo')
     expect(result.r034[0].rodneCislo).toBe('1507011234')
@@ -89,7 +88,7 @@ describe('With child (for tax year 2019)', () => {
       ...initTaxFormUserInputValues,
       hasChildren: true,
       children: [{ ...child, wholeYear: true, kupelnaStarostlivost: false }],
-      t1r10_prijmy: '3120',
+      t1r10_prijmy: '3480',
     })
     expect(result.r034[0].priezviskoMeno).toBe('Johnny Bravo')
     expect(result.r034[0].rodneCislo).toBe('1507011234')
@@ -109,44 +108,62 @@ describe('With child (for tax year 2019)', () => {
     expect(result.r034[0].m12).toBe(false)
   })
 
-  describe('children tax bonus (r106)', () => {
+  describe('children tax bonus (r117)', () => {
     test('Child under 6', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childUnder6],
-        t1r10_prijmy: '3120',
+        t1r10_prijmy: '3480',
       })
-      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = sum(44.34, 44.34, 44.34, 44.34, 44.34, 44.34, 44.34) // april - oktober (vek < 6 rokov)
-      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
+      const monthSums = sum(
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+      ) // kazdy mesiac ked vek < 6 rokov
+
+      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test('Child turning 6 in 2019 (february)', () => {
+    test('Child turning 6 in 2020 (february)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childTurning6InFeb],
-        t1r10_prijmy: '3120',
+        t1r10_prijmy: '3480',
       })
 
-      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const part2 = sum(22.17, 22.17, 22.17, 22.17, 22.17, 22.17, 22.17) // april - september (vek > 6 rokov)
-      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
+      const monthSums = sum(
+        45.44,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+      )
+      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test('Child turning 6 in 2019 (july)', () => {
+    test('Child turning 6 in 2020 (july)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childTurning6InJul],
-        t1r10_prijmy: '3120',
+        t1r10_prijmy: '3480',
       })
 
-      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const part2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const part3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
-      expect(result.r106.eq(sum(part1, part2, part3))).toBeTruthy()
+      const part1 = sum(45.44, 45.44, 45.44, 45.44, 45.44, 45.44) // februar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
+      const part2 = sum(22.72, 22.72, 22.72) // august - oktober (ved nad 6 rokov)
+      expect(result.r117.eq(sum(part1, part2))).toBeTruthy()
     })
 
     test('Child over 6', () => {
@@ -154,12 +171,21 @@ describe('With child (for tax year 2019)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childOver6],
-        t1r10_prijmy: '3120',
+        t1r10_prijmy: '3480',
       })
 
-      const part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      expect(result.r106.eq(sum(part1, part2))).toBeTruthy()
+      const monthSums = sum(
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+      ) // vek nad 6 rokov vratane mesiaca dovrsenia
+      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
     test('More children', () => {
@@ -172,57 +198,65 @@ describe('With child (for tax year 2019)', () => {
           { ...childTurning6InJul },
           { ...childUnder6 },
         ],
-        t1r10_prijmy: '3120',
+        t1r10_prijmy: '3480',
       })
 
       // childOver6
-      const childOver6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childOver6Part2 = sum(
-        44.34,
-        44.34,
-        44.34,
-        44.34,
-        44.34,
-        44.34,
-        44.34,
-      ) // april - oktober (vek < 6 rokov)
-      const childOver6Sum = sum(childOver6Part1, childOver6Part2)
+      const childOver6Sum = sum(
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+      )
 
       // childTurning6InFeb
-      const childTurning6InFebPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec, nezavisla od veku)
-      const childTurning6InFebPart2 = sum(
-        22.17,
-        22.17,
-        22.17,
-        22.17,
-        22.17,
-        22.17,
-        22.17,
-      ) // april - september (vek > 6 rokov)
-      const childTurning6InFebPart2Sum = sum(
-        childTurning6InFebPart1,
-        childTurning6InFebPart2,
+      const childTurning6InFebSum = sum(
+        45.44,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
+        22.72,
       )
 
       // childTurning6InJul
-      const childTurning6InJulPart1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const childTurning6InJulPart2 = sum(44.34, 44.34, 44.34, 44.34) // april - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const childTurning6InJulPart3 = sum(22.17, 22.17, 22.17) // august - oktober (ved nad 6 rokov)
       const childTurning6InJulSum = sum(
-        childTurning6InJulPart1,
-        childTurning6InJulPart2,
-        childTurning6InJulPart3,
-      )
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        22.72,
+        22.72,
+        22.72,
+      ) // januar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
 
       // childUnder6
-      const childUnder6Part1 = sum(22.17, 22.17) // februar, marec (suma pre januar - marec)
-      const childUnder6Part2 = new Decimal(22.17).times(7) // april - oktober (vek nad 6 rokov vratane mesiaca dovrsenia)
-      const childUnder6Sum = sum(childUnder6Part1, childUnder6Part2)
+      const childUnder6Sum = sum(
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+        45.44,
+      )
       expect(
-        result.r106.eq(
+        result.r117.eq(
           sum(
             childOver6Sum,
-            childTurning6InFebPart2Sum,
+            childTurning6InFebSum,
             childTurning6InJulSum,
             childUnder6Sum,
           ),
