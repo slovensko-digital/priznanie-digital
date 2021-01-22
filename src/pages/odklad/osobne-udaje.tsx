@@ -10,9 +10,11 @@ import {
   PersonalInformationPostponePage,
 } from '../../types/PageUserInputs'
 import { getAutoformByPersonName, getCity } from '../../lib/api'
-import { AutoformResponseBody } from '../../types/api'
 import { getPostponeRoutes } from '../../lib/routes'
-import { FullNameAutoCompleteInput } from '../../components/FullNameAutoCompleteInput'
+import {
+  AutoCompleteData,
+  AutoCompleteInput,
+} from '../../components/AutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc, parseFullName } from '../../lib/utils'
@@ -23,7 +25,7 @@ const makeHandlePersonAutoform = ({
   setValues,
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
-  return (person: AutoformResponseBody) => {
+  return (person: AutoCompleteData) => {
     const { first, last, title } = parseFullName(person.name)
 
     setValues({
@@ -79,11 +81,18 @@ const OsobneUdaje: NextPage<Props> = ({
                 priezviska.
               </p>
 
-              <FullNameAutoCompleteInput
+              <AutoCompleteInput
                 name="meno_priezvisko"
                 label="Zadajte meno, priezvisko alebo podnikateľský názov"
-                handlePersonAutoform={makeHandlePersonAutoform(props)}
-                fetchData={getAutoformByPersonName}
+                onSelect={makeHandlePersonAutoform(props)}
+                fetchData={async (name) => {
+                  const data = await getAutoformByPersonName(name)
+                  return data.map((item) => ({
+                    ...item,
+                    id: item.id,
+                    value: `${item.name} ${item.formatted_address}`,
+                  }))
+                }}
               />
 
               <div className={styles.inlineFieldContainer}>

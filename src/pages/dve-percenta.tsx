@@ -12,8 +12,11 @@ import styles from './osobne-udaje.module.css'
 import { formatIco, formatPsc } from '../lib/utils'
 import { getCity, getNgoByName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
-import { AutoformResponseBody } from '../types/api'
+import {
+  AutoCompleteData,
+  AutoCompleteInput,
+} from '../components/AutoCompleteInput'
+
 import { Page } from '../components/Page'
 import { twoPercentInitialValues } from '../lib/initialValues'
 import { Details } from '../components/Details'
@@ -23,7 +26,7 @@ const makeHandleOrganisationAutoform = ({
   setValues,
   values,
 }: FormikProps<TwoPercentUserInput>) => {
-  return (org: AutoformResponseBody) => {
+  return (org: AutoCompleteData) => {
     setValues({
       ...values,
       r142_obchMeno: org.name || '',
@@ -150,11 +153,18 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                     Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
                   </p>
 
-                  <FullNameAutoCompleteInput
+                  <AutoCompleteInput
                     name="r142_obchMeno"
                     label="Názov neziskovej organizácie alebo občianskeho združenia"
-                    handlePersonAutoform={makeHandleOrganisationAutoform(props)}
-                    fetchData={getNgoByName}
+                    onSelect={makeHandleOrganisationAutoform(props)}
+                    fetchData={async (name) => {
+                      const data = await getNgoByName(name)
+                      return data.map((item) => ({
+                        ...item,
+                        id: item.id,
+                        value: `${item.name} ${item.formatted_address}`,
+                      }))
+                    }}
                   />
 
                   <div className={styles.inlineFieldContainer}>

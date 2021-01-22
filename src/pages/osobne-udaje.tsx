@@ -8,9 +8,11 @@ import {
   FormErrors,
 } from '../types/PageUserInputs'
 import { getAutoformByPersonName, getCity } from '../lib/api'
-import { AutoformResponseBody } from '../types/api'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { FullNameAutoCompleteInput } from '../components/FullNameAutoCompleteInput'
+import {
+  AutoCompleteData,
+  AutoCompleteInput,
+} from '../components/AutoCompleteInput'
 import { formatPsc, parseFullName } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
@@ -19,7 +21,7 @@ const makeHandlePersonAutoform = ({
   setValues,
   values,
 }: FormikProps<PersonalInformationUserInput>) => {
-  return (person: AutoformResponseBody) => {
+  return (person: AutoCompleteData) => {
     const { first, last, title } = parseFullName(person.name)
 
     setValues({
@@ -70,11 +72,18 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 priezviska.
               </p>
 
-              <FullNameAutoCompleteInput
+              <AutoCompleteInput
                 name="meno_priezvisko"
                 label="Zadajte meno, priezvisko alebo podnikateľský názov"
-                handlePersonAutoform={makeHandlePersonAutoform(props)}
-                fetchData={getAutoformByPersonName}
+                onSelect={makeHandlePersonAutoform(props)}
+                fetchData={async (name) => {
+                  const data = await getAutoformByPersonName(name)
+                  return data.map((item) => ({
+                    ...item,
+                    id: item.id,
+                    value: `${item.name} ${item.formatted_address}`,
+                  }))
+                }}
               />
 
               <div className={styles.inlineFieldContainer}>
@@ -102,7 +111,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 width="auto"
               />
 
-              <Nace label="NACE" />
+              <Nace />
 
               <div className={styles.inlineFieldContainer}>
                 <Input
