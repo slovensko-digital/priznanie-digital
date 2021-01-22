@@ -1,15 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
+import styles from './domov.module.css'
 import { Warning } from '../components/Warning'
 
 const Home = ({ nextRoute, nextPostponeRoute }) => (
   <>
-    <div className="govuk-grid-column-one-half">
+    <div className="govuk-grid-column-two-thirds">
       <TaxFormSection nextRoute={nextRoute} />
     </div>
 
-    <div className="govuk-grid-column-one-half">
-      <PostponeSection nextPostponeRoute={nextPostponeRoute} />
+    <div className="govuk-grid-column-one-third">
+      <div className={styles.postponeBox}>
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
+      </div>
     </div>
   </>
 )
@@ -71,15 +74,11 @@ const TaxFormSection = ({ nextRoute }) => (
 
 const PostponeSection = ({ nextPostponeRoute }) => (
   <>
-    <h2 className="govuk-heading-l govuk-!-margin-top-3">
+    <h2 className="govuk-heading-m govuk-!-margin-top-3">
       Odklad daňového priznania
-      <br />
-      &nbsp;
     </h2>
     <p>
-      <span className="govuk-warning-text__assistive">Upozornenie</span>
-      Riadny termín pre podanie daňového priznania a <br />
-      zaplatenie dane je 31.3.
+      Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
     </p>
     <p>Termín si viete predĺžiť:</p>
     <ul className="govuk-list govuk-list--bullet">
