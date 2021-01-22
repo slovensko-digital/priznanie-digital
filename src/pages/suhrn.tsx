@@ -109,7 +109,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Summary
-        title="Zamestnanie v SR pre rok 2019"
+        title="Zamestnanie v SR pre rok 2020"
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
@@ -138,7 +138,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
               ]
             : [
                 {
-                  title: 'V roku 2019 som nebol zamestnaný',
+                  title: 'V roku 2020 som nebol zamestnaný',
                 },
               ]
         }

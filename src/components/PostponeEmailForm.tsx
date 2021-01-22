@@ -57,6 +57,7 @@ export const PostponeEmailForm = ({
             type="email"
             label="Pošleme vám XML súbor pre odklad daňového priznania na email?"
             hint="Nechajte nám email"
+            placeholder="váš email"
           />
           <CheckboxSmall
             name="newsletter"

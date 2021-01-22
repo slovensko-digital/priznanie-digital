@@ -57,6 +57,7 @@ export const EmailForm = ({
             type="email"
             label="Pošleme vám tento výpočet dane na email?"
             hint="Bude sa vám hodiť pri úhrade daní"
+            placeholder="váš email"
           />
           <CheckboxSmall
             name="newsletter"
