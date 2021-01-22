@@ -32,10 +32,18 @@ If you are not familiar with the process [see this guide](https://github.com/fir
 
 ## How to develop
 
-In your terminal, run the following command:
+You need [yarn](https://yarnpkg.com/) and [node 12](https://nodejs.org/en/).
+
+Install dependencies:
 
 ```bash
-npm run dev
+yarn
+```
+
+Run the application:
+
+```bash
+yarn dev
 ```
 
 Open http://localhost:3000/ in browser.
@@ -45,27 +53,27 @@ Open http://localhost:3000/ in browser.
 Unit tests via [jest](https://jestjs.io/):
 
 ```bash
-npm test
+yarn test
 ```
 
 Functional tests via [Cypress](https://www.cypress.io/):
 
 ```bash
-npm run cy:run
+yarn cy:run
 ```
 
 Run functional tests interactively:
 
 ```bash
-npm run cy:open
+yarn cy:open
 ```
 
 Before committing your code don't forget to format and check syntax:
 
 ```bash
-npm run prettier
-npm run lint
-npm run check:ts
+yarn prettier
+yarn lint
+yarn check:ts
 ```
 
 ## Feature flags
@@ -100,18 +108,18 @@ Tested via [Github Action - Quality Assurance](https://github.com/priznanie-digi
 
 - Lint and Typescript check:
   ```bash
-  npm run lint
-  npm run check:ts
+  yarn lint
+  yarn check:ts
   ```
 - Unit tests:
   ```bash
-  npm run test -- --ci
+  yarn test --ci
   ```
 - Functional tests:
   - build and start server:
   ```bash
-  WITH_DEBUG=true npm run build
-  npm start
+  WITH_DEBUG=true yarn build
+  yarn start
   ```
   - run functional tests via Cypress - [cypress-io/github-action](https://github.com/cypress-io/github-action)
   - runs in parallel and reports to [Cypress Dashboard](https://dashboard.cypress.io/projects/ivst8i)

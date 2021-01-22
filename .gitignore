@@ -25,7 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Ignore yarn.lock
-yarn.lock
+package-lock.json
 
 # ides
 .idea

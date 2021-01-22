@@ -28,9 +28,10 @@ export const FullNameAutoCompleteInput = ({
     autocompleteDebounceTimeout,
     setAutocompleteDebounceTimeout,
   ] = useState<number>(null)
-  const [autocompleteBlurTimeout, setAutocompleteBlurTimeout] = useState<
-    number
-  >(null)
+  const [
+    autocompleteBlurTimeout,
+    setAutocompleteBlurTimeout,
+  ] = useState<number>(null)
   const [selectedPersonIndex, setSelectedPersonIndex] = useState<number>(-1)
   const [field] = useField(name)
 
