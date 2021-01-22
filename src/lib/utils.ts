@@ -180,7 +180,7 @@ export function parseInputNumber(input: string): number {
   return Number(cleanedInput)
 }
 
-export const parseStreetAndNumber = (streetAndNumber): [string, string] => {
+export const parseStreetAndNumber = (streetAndNumber) => {
   const parsedStreet = streetAndNumber
     .trim()
     .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/)

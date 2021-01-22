@@ -41,17 +41,14 @@ export function ErrorSummary<Values>({ errors }: ErrorSummaryProps<Values>) {
               return (
                 <ErrorItem key={name} name={name} label={labelOrSubErrors} />
               )
-            } else if (labelOrSubErrors) {
-              return (labelOrSubErrors as []).map((errorObject, index) => {
-                const errorObjectEntries = Object.entries(errorObject) as [
-                  string,
-                  string,
-                ][]
+            } else if (Array.isArray(labelOrSubErrors)) {
+              return labelOrSubErrors.map((errorObject, index) => {
+                const errorObjectEntries = Object.entries(errorObject)
                 return errorObjectEntries.map(([subname, sublabel]) => (
                   <ErrorItem
                     key={`${name}[${index}].${subname}`}
                     name={`${name}[${index}].${subname}`}
-                    label={sublabel}
+                    label={`${sublabel}`}
                   />
                 ))
               })
