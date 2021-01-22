@@ -9,10 +9,21 @@ import Decimal from 'decimal.js'
 import { sum, ceilDecimal } from './utils'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(3937.35)
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
 const PAUSALNE_VYDAVKY_MAX = 20000
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100000)
+const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
-const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3120
+const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
+export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3480
+const MAX_ZAKLAD_DANE = 19506.56
+export const PARTNER_MAX_ODPOCET = 4035.84
+const CHILD_RATE_SIX_AND_YOUNGER = 45.44
+const CHILD_RATE_OVER_SIX = 22.72
+const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
+const KONSTANTA = 37163.36 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
+const MAX_SPA_PER_PERSON = 50
+const TAX_YEAR = 2020
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
   const monthFrom = Number.parseInt(child.monthFrom, 10)
@@ -44,7 +55,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     : ['', '']
 
   /** Combine default vaules with user input */
-  const tf: TaxForm = {
+  return {
     /** SECTION Osobne udaje */
     r001_dic: input.r001_dic,
     r003_nace: input.r003_nace,
@@ -97,7 +108,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
     get r036_deti_kupele() {
-      const maxAmountPerChild = 50
+      const maxAmountPerChild = MAX_SPA_PER_PERSON
       const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
         maxAmountPerChild,
       )
@@ -163,21 +174,28 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r057() {
       return this.r055
     },
+    // v r. 72 spočítate, koľko je súčet základov dane zo zamestnania (§ 5) a koľko je základ
+    // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 40 a 57
     get r072_pred_znizenim() {
       return sum(this.r057, this.r040)
     },
+    // v r.73 až 76 uvediete, aké nezdaniteľné časti si uplatní daňovník - to sú tie údaje z úvodu, ktoré vypĺňa,
+    // či mal kúpeľnú starostlivosť, či si platí DDP... v riadku 77 tieto nezdaniteľné časti na daňovníka spočítate,
+    // to je podstatný údaj, akú nezdaniteľnú časť si daňovník môže odpočítať
     get r073() {
       if (
         this.r072_pred_znizenim.eq(0) ||
-        this.r072_pred_znizenim.gte(36256.37)
+        this.r072_pred_znizenim.gte(KONSTANTA)
       ) {
         return new Decimal(0)
       }
-      if (this.r072_pred_znizenim.gt(20507)) {
+      if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
         return ceilDecimal(
           Decimal.max(
             0,
-            new Decimal(9064.094).minus(this.r072_pred_znizenim.times(0.25)),
+            new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
+              this.r072_pred_znizenim.times(0.25),
+            ),
           ),
         )
       }
@@ -185,7 +203,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
-        return this.r072_pred_znizenim.gt(36256.38)
+        return this.r072_pred_znizenim.gt(KONSTANTA)
           ? Decimal.max(
               0,
               new Decimal(13001.438)
@@ -199,7 +217,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             )
           : Decimal.max(
               0,
-              new Decimal(3937.35)
+              new Decimal(PARTNER_MAX_ODPOCET)
                 .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
                 .times(new Decimal(1).div(12))
                 .times(this.r032_partner_pocet_mesiacov),
@@ -225,156 +243,231 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.r072_pred_znizenim,
       )
     },
-    get r078_zaklad_dane_z_prijmov() {
+    // r. 78 - v tomto riadku idete vypočítať, aký bude mať daňovník základ dane po odpočítaní nezdaniteľnej časti -
+    // ale len zo zamestnania!!! tu je veľký rozdiel oproti minulým rokom, kedy bolo jedno, či je to základ dane zo
+    // zamestnania alebo podnikania, bralo sa to ako jedna hodnota. Od 2020 je to ale rozdiel. Treba pracovať samostatne
+    // so základom dane zo zamestnania (r. 40) a samostatne so základom dane z podnikania (r. 57).
+    //
+    // v riadku 78 teda idete spočítať, aký má základ dane zo zamestnania potom, ako sa mu zohľadní
+    // nezdaniteľná časť základu dane
+    //
+    // zoberiete teda hodnotu r. 40 mínus hodnotu na r. 77
+    //
+    // aj by vyšiel rozdiel záporný, na r. 78 bude suma 0,00. Znamená to, že ak má zo zamestnania základ dane,
+    // ktorý je menej ako nezdaniteľná časť, na akú má nárok - tak na r. 78 bude 0,00. A ten rozdiel, ktorý ostane,
+    // ten potom použije na zníženie základu dane z podnikania
+    //
+    // ak je r. 40 viac ako je r. 77, potom na r. 78 uvediete rozdiel r. 40 - . 77
+    get r078_zaklad_dane_zo_zamestnania() {
       return floorDecimal(
-        Decimal.max(
-          this.r072_pred_znizenim.minus(this.r077_nezdanitelna_cast),
-          0,
-        ),
+        Decimal.max(this.r040.minus(this.r077_nezdanitelna_cast), 0),
       )
     },
+    // r. 80 - tu uvediete vo vašom prípade sumu, ktorá je na r. 78. keďže nepočítate s inými typmi príjmov,
+    // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
+    // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_z_prijmov // + tf.r065 + tf.r071 + tf.r079
+      return this.r078_zaklad_dane_zo_zamestnania // + tf.r065 + tf.r071 + tf.r079
     },
+    // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
+    // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -
+    // vtedy je daň vypočítaná ako 19% z r. 80 alebo ak je základ dane na r. 80 viac ako 37 163,36 eur - tak počítate daň do
+    // sumy 37 163,36 x 19% a to, čo prevyšuje túto sumu, sa zdaní x 25% - teda klasický spôsob uplatnenia 19% alebo 25% sadzby
     get r081() {
       if (this.r080_zaklad_dane_celkovo.isZero()) {
         return new Decimal(0)
       }
-      if (this.r080_zaklad_dane_celkovo.gte(36256.38)) {
-        return floorDecimal(
-          new Decimal(36256.38)
-            .times(DAN_Z_PRIJMU_SADZBA)
-            .plus(
-              floorDecimal(this.r080_zaklad_dane_celkovo)
-                .minus(36256.38)
-                .times(0.25),
-            ),
+
+      if (this.r080_zaklad_dane_celkovo.lte(KONSTANTA)) {
+        return this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA)
+      } else {
+        const danZPrvejCasti = new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA)
+        const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
+        return danZPrvejCasti.plus(
+          toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
         )
       }
-
-      return floorDecimal(
-        tf.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA),
-      )
     },
+    // na r. 90 uvediete sumu dane, ktorú vypočítate na r. 81
     get r090() {
       return this.r081
     },
-
-    get r105_dan() {
-      return this.r090
+    // r. 91, kde napíšete hodnotu nezdaniteľnej časti, ktorá vám ostala na odpočítanie od základu dane z podnikania.
+    // Platí, že ak r. 78 = 0, tak potom na r. 91 je hodnota, ktorá je rozdielom r. 77 mínus r. 40
+    get r091() {
+      if (this.r078_zaklad_dane_zo_zamestnania.eq(0)) {
+        return floorDecimal(
+          Decimal.max(this.r077_nezdanitelna_cast.minus(this.r040), 0),
+        )
+      } else {
+        return new Decimal(0)
+      }
     },
-    get r106() {
+    // r. 92 - tu už idete vzorcom, kedy od základu dane z podnikania (r. 57) odpočítate sumu z r. 91
+    // tak dostanete základ dane z podnikania, z ktorého idete počítať výšku dane z podnikania
+    get r092() {
+      return this.r057.minus(this.r091)
+    },
+    // r. 94 je rovnaký ako r. 92
+    get r094() {
+      return this.r092
+    },
+    // tu pribudol r. 95 - je to riadok, ktorý bude určovať, akú sadzbu dane použije podnikateľ na výpočet dane
+    // z podnikania. na tomto riadku musí podnikateľ uviesť, aká je výška jeho zdaniteľných príjmov. vo vašom prípade
+    // by to mohla byť suma príjmov z podnikania, ktoré zadáva na začiatku. Ak je táto hodnota na r. 95 menšia alebo
+    // rovná ako 100 000 eur, potom sa daň z podnikania počíta sadzbou 15%. Teda hodnotu z r. 94 vynásobíte
+    // sadzbou 15% a máte daň z podnikania na r. 96. Ak je hodnota na r. 95 viac ako 100 000 eur, potom sa daň z
+    // podnikania počíta klasickým systémom 19% alebo 25% - v závislosti, či je základ dane na r. 94 viac alebo menej
+    // ako 37 163,36 eur - tu ste teda už v tom, čo bolo kedysi.
+    get r095() {
+      return this.t1r10_prijmy
+    },
+    // r. 96 - tu uvediete výšku dane z podnikania, ktorá sa vypočíta systémom, ako som popísala v r. 95. vychádza
+    // sa teda z r. 94, kedy sa r. 94 vynásobí buď sadzbou 15% alebo sa r. 94 vynásobí sadzbou 19%/25%. to,
+    // akú sadzbu použijete - na to vám dá odpoveď suma na r. 95
+    get r096() {
+      // má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r. 95<= 100 000.
+      if (this.r094.gt(0) && this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
+        return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
+
+        // Ak r.94> 0 a súčasne r.95 > 100 000, potom:
+      } else if (
+        this.r094.gt(0) &&
+        this.r095.gt(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)
+      ) {
+        // ak r.94 <= 37 163.36, tak r.96 = r.94 * 0.19
+        if (this.r094.lte(KONSTANTA)) {
+          return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
+
+          // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
+        } else {
+          return DAN_Z_PRIJMU_SADZBA_ZNIZENA.times(DAN_Z_PRIJMU_SADZBA).plus(
+            this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
+          )
+        }
+      }
+      return new Decimal(0)
+    },
+    // r. 105 bude rovnaká suma ako na r. 96, keďže vo vašich prípadoch nezohľadňujete príjmy zo zahraničia
+    get r105() {
+      return this.r096
+    },
+    // celé sa vám to spojí potom na r. 116, kde spočítavate r. 90 + r. 105 + r. 115,
+    // vo vašom prípade spočítate výšku dane zo  zamestnania a výšku dane z podnikania
+    get r116_dan() {
+      return this.r090.plus(this.r105)
+    },
+    get r117() {
       if (!this.eligibleForChildrenBonus) {
         return new Decimal(0)
       }
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = new Decimal(0)
-        const rateJanuaryToMarch = new Decimal(22.17)
-        const rateYoungChild = new Decimal(44.34)
-        const rateOldChild = new Decimal(22.17)
+        const rateYoungChild = new Decimal(CHILD_RATE_SIX_AND_YOUNGER)
+        const rateOldChild = new Decimal(CHILD_RATE_OVER_SIX)
 
-        const getRateAprilToDecember = (month: number) => {
+        const getRate = (month: number) => {
           const age = getRodneCisloAgeAtYearAndMonth(
             currentChild.rodneCislo,
-            2019,
+            TAX_YEAR,
             month - 1,
           )
           return age < 6 ? rateYoungChild : rateOldChild
         }
 
         if (currentChild.m00 || currentChild.m01) {
-          currentSum = currentSum.plus(rateJanuaryToMarch)
+          currentSum = currentSum.plus(getRate(1))
         }
         if (currentChild.m00 || currentChild.m02) {
-          currentSum = currentSum.plus(rateJanuaryToMarch)
+          currentSum = currentSum.plus(getRate(2))
         }
         if (currentChild.m00 || currentChild.m03) {
-          currentSum = currentSum.plus(rateJanuaryToMarch)
+          currentSum = currentSum.plus(getRate(3))
         }
         if (currentChild.m00 || currentChild.m04) {
-          currentSum = currentSum.plus(getRateAprilToDecember(4))
+          currentSum = currentSum.plus(getRate(4))
         }
         if (currentChild.m00 || currentChild.m05) {
-          currentSum = currentSum.plus(getRateAprilToDecember(5))
+          currentSum = currentSum.plus(getRate(5))
         }
         if (currentChild.m00 || currentChild.m06) {
-          currentSum = currentSum.plus(getRateAprilToDecember(6))
+          currentSum = currentSum.plus(getRate(6))
         }
         if (currentChild.m00 || currentChild.m07) {
-          currentSum = currentSum.plus(getRateAprilToDecember(7))
+          currentSum = currentSum.plus(getRate(7))
         }
         if (currentChild.m00 || currentChild.m08) {
-          currentSum = currentSum.plus(getRateAprilToDecember(8))
+          currentSum = currentSum.plus(getRate(8))
         }
         if (currentChild.m00 || currentChild.m09) {
-          currentSum = currentSum.plus(getRateAprilToDecember(9))
+          currentSum = currentSum.plus(getRate(9))
         }
         if (currentChild.m00 || currentChild.m10) {
-          currentSum = currentSum.plus(getRateAprilToDecember(10))
+          currentSum = currentSum.plus(getRate(10))
         }
         if (currentChild.m00 || currentChild.m11) {
-          currentSum = currentSum.plus(getRateAprilToDecember(11))
+          currentSum = currentSum.plus(getRate(11))
         }
         if (currentChild.m00 || currentChild.m12) {
-          currentSum = currentSum.plus(getRateAprilToDecember(12))
+          currentSum = currentSum.plus(getRate(12))
         }
 
         return previousSum.plus(currentSum)
       }, new Decimal(0))
     },
-    get r107() {
-      return Decimal.max(this.r105_dan.minus(this.r106), 0)
+    get r118() {
+      return Decimal.max(this.r116_dan.minus(this.r117), 0)
     },
-    get r108() {
+    get r119() {
       return new Decimal(parseInputNumber(input?.r108 ?? '0'))
     },
-    get r109() {
-      return Decimal.max(new Decimal(this.r106).minus(this.r108), 0)
+    get r120() {
+      return Decimal.max(new Decimal(this.r117).minus(this.r119), 0)
     },
-    get r110() {
-      return Decimal.max(this.r109.minus(this.r105_dan), 0)
+    get r121() {
+      return Decimal.max(this.r120.minus(this.r116_dan), 0)
     },
     get mozeZiadatVyplatitDanovyBonus() {
-      return this.r110.gt(0)
+      return this.r121.gt(0)
     },
     get mozeZiadatVratitDanovyPreplatok() {
-      return this.r126_danovy_preplatok.gt(0)
+      return this.r136_danovy_preplatok.gt(0)
     },
     /** TODO High income test case */
-    get r112() {
+    get r123() {
       return Decimal.min(this.r037_zaplatene_uroky.times(0.5), 400)
     },
-    get r113() {
-      return this.r107.minus(this.r112)
+    get r124() {
+      return this.r118.minus(this.r123)
     },
     /** TODO */
-    get r114() {
+    get r125() {
       return new Decimal(0)
     },
-    get r115() {
-      return Decimal.max(this.r112.minus(this.r114), 0)
+    get r126() {
+      return Decimal.max(this.r123.minus(this.r125), 0)
     },
-    get r120() {
+    get r131() {
       return new Decimal(parseInputNumber(input?.r120 ?? '0'))
     },
-    get r122() {
+    get r133() {
       return new Decimal(parseInputNumber(input?.r122 ?? '0'))
     },
-    get r125_dan_na_uhradu() {
+    get r135_dan_na_uhradu() {
       const baseTax =
-        this.r105_dan.gt(17) || this.r106.gt(0) || this.r112.gt(0)
-          ? this.r105_dan
+        this.r116_dan.gt(17) || this.r117.gt(0) || this.r123.gt(0)
+          ? this.r116_dan
           : new Decimal(0)
       const tax = Decimal.max(
         0,
         baseTax
-          .minus(this.r106)
-          .plus(this.r108)
-          .plus(this.r110)
-          .minus(this.r112)
-          .plus(this.r114)
-          .minus(this.r120)
-          .minus(this.r122),
+          .minus(this.r117)
+          .plus(this.r119)
+          .plus(this.r121)
+          .minus(this.r123)
+          .plus(this.r125)
+          .minus(this.r131)
+          .minus(this.r133),
       )
       return tax.gt(5) ? tax : new Decimal(0)
       // 'r. 125': má byť výsledkom Max(0,r.105-r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124) ak platí, r.105>17.00 alebo r.105<=17.00 a zároveň je r.106>0 alebo r.112>0.
@@ -383,32 +476,32 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       // vo vypocte chyba: +r.116+r.117-r.118-r.119-r.121-r.123-r.124 (asi ich netreba lebo sa nevyplnaju vo formulari, tj su rovne nula)
     },
-    get r126_danovy_preplatok() {
+    get r136_danovy_preplatok() {
       return Decimal.abs(
         Decimal.min(
           0,
-          new Decimal(this.r105_dan)
-            .minus(this.r106)
-            .plus(this.r108)
-            .plus(this.r110)
-            .minus(this.r120)
-            .minus(this.r122),
+          new Decimal(this.r116_dan)
+            .minus(this.r117)
+            .plus(this.r119)
+            .plus(this.r121)
+            .minus(this.r131)
+            .minus(this.r133),
         ),
       )
     },
     splnam3per: input?.splnam3per ?? false,
-    get r141() {
+    get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
         return new Decimal(0)
       }
 
       const rate = this.splnam3per ? 3 : 2
-      const NGOAmount = floorDecimal(this.r113.div(100).times(rate))
+      const NGOAmount = floorDecimal(this.r124.div(100).times(rate))
 
       /** Min of 3 EUR is required */
       return NGOAmount.gte(3) ? NGOAmount : new Decimal(0)
     },
-    get r142() {
+    get r152() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
         return undefined
       }
@@ -442,6 +535,4 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     datum: input.datum,
   }
-
-  return tf
 }

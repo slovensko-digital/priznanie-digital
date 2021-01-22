@@ -134,7 +134,7 @@ export interface TaxForm {
   /**   Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72*/
   r077_nezdanitelna_cast: Decimal
   /**   Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)*/
-  r078_zaklad_dane_z_prijmov: Decimal
+  r078_zaklad_dane_zo_zamestnania: Decimal
   /**   Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)*/
   r080_zaklad_dane_celkovo: Decimal
   /**   Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na
@@ -145,58 +145,64 @@ export interface TaxForm {
    *   - r. 89. Inak ak r82<>0 a r85=0, potom r.90 je rovné r.84. Inak r. 90 =
    *   r.81.Zrkadlenie r081 TODO preverit */
   r090: Decimal
+  r091: Decimal
+  r092: Decimal
+  r094: Decimal
+  r095: Decimal
+  r096: Decimal
+  r105: Decimal
   /**   Daň (daňová povinnosť) zo základu dane z osobitného základu dane a z
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
-  r105_dan: Decimal
+  r116_dan: Decimal
 
   /**
 Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
-  r106: Decimal
+  r117: Decimal
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
-  r107: Decimal
+  r118: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona priznaného a vyplateného zamestnávateľom   */
-  r108: Decimal
+  r119: Decimal
 
   /** Rozdiel riadkov r. 106 - r. 108 > 0  */
-  r109: Decimal
+  r120: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona na poukázanie správcom dane24) r. 109 - r. 105 >0 */
-  r110: Decimal
+  r121: Decimal
 
   /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
-  r112: Decimal
+  r123: Decimal
   /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
-   *   úroky(r. 107 - r. 112) zrkadli r107*/
-  r113: Decimal
+   *   úroky(r. 107 - r. 112) zrkadli r118*/
+  r124: Decimal
   /**   Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu
    *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
    *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
    *   124 (+)*/
 
   /** Suma daňového bonusu podľa § 33a zákona priznaného a vyplateného zamestnávateľom */
-  r114: Decimal
+  r125: Decimal
   /** Rozdiel r. 112 - r. 114 > 0  */
-  r115: Decimal
+  r126: Decimal
 
   /** zrazena dan zo zamestnania */
-  r120: Decimal
+  r131: Decimal
   /** Zaplatené preddavky */
-  r122: Decimal
+  r133: Decimal
 
-  r125_dan_na_uhradu: Decimal
+  r135_dan_na_uhradu: Decimal
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
-   *   podľa § 33 zákona Ak je r125_dan_na_uhradu, tak absolutna hodnota
-   *   r125_dan_na_uhradu */
-  r126_danovy_preplatok: Decimal
+   *   podľa § 33 zákona Ak je r135_dan_na_uhradu, tak absolutna hodnota
+   *   r135_dan_na_uhradu */
+  r136_danovy_preplatok: Decimal
   splnam3per: boolean
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  r141: Decimal
+  r151: Decimal
 
-  r142?: {
+  r152?: {
     ico: string
     pravnaForma: string
     obchMeno: string

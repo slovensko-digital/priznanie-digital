@@ -64,7 +64,7 @@ describe('calcIntergration', () => {
           `${__dirname}/testCases/${testCase}TaxForm.output.json`,
           stringify(taxForm),
         )
-        fs.writeFile(`${__dirname}/testCases/${testCase}.output.xml`, outputXml)
+        fs.writeFile(`${__dirname}/testCases/${testCase}.xml`, outputXml)
         fs.writeFile(
           `${__dirname}/testCases/${testCase}.output.json`,
           stringify(outputJson),

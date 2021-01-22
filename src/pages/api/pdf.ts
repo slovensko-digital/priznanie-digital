@@ -488,11 +488,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     form.r077_nezdanitelna_cast.toNumber(),
   )
 
-  // r078_zaklad_dane_z_prijmov
+  // r078_zaklad_dane_zo_zamestnania
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 390,
     282,
-    form.r078_zaklad_dane_z_prijmov.toNumber(),
+    form.r078_zaklad_dane_zo_zamestnania.toNumber(),
   )
 
   // r080_zaklad_dane_celkovo
@@ -511,57 +511,57 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // r090
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 615, form.r090.toNumber())
 
-  // r105_dan
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 128, form.r105_dan.toNumber())
+  // r116_dan
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 128, form.r116_dan.toNumber())
 
-  // r106
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 94, form.r106.toNumber())
+  // r117
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 94, form.r117.toNumber())
 
-  // r107
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 70, form.r107.toNumber())
+  // r118
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 70, form.r118.toNumber())
 
   // ***** PAGE 10
   tpl.nextPage()
 
-  // r108
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 770, form.r108.toNumber())
-
-  // r109
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r109.toNumber())
-
-  // r110
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r110.toNumber())
-
-  // r112
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r112.toNumber())
-
-  // r113
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r113.toNumber())
-
-  // r114
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r114.toNumber())
-
-  // r115
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r115.toNumber())
+  // r119
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 770, form.r119.toNumber())
 
   // r120
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 450, form.r120.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 745, form.r120.toNumber())
 
-  // r122
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 397, form.r122.toNumber())
+  // r121
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r121.toNumber())
 
-  // r125_dan_na_uhradu
+  // r123
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r123.toNumber())
+
+  // r124
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r124.toNumber())
+
+  // r125
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r125.toNumber())
+
+  // r126
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r126.toNumber())
+
+  // r131
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 450, form.r131.toNumber())
+
+  // r133
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 397, form.r133.toNumber())
+
+  // r135_dan_na_uhradu
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 396,
     313,
-    form.r125_dan_na_uhradu.toNumber(),
+    form.r135_dan_na_uhradu.toNumber(),
   )
 
-  // r126_danovy_preplatok
+  // r136_danovy_preplatok
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 396,
     271,
-    form.r126_danovy_preplatok.toNumber(),
+    form.r136_danovy_preplatok.toNumber(),
   )
 
   // ***** PAGE 11
@@ -576,54 +576,54 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
       tpl.write(FIRST_COLUMN + 157, 750, 'x')
     }
 
-    // r141
-    tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r141.toNumber())
+    // r151
+    tpl.writeNumberToBoxes(FIRST_COLUMN + 253, 720, form.r151.toNumber())
 
-    // r142 - ico
-    const ico = form.r142 ? form.r142.ico : ''
+    // r152 - ico
+    const ico = form.r152 ? form.r152.ico : ''
     tpl.writeToBoxes(FIRST_COLUMN, 664, ico.padStart(12))
 
-    // r142 - ico
+    // r152 - ico
     tpl.writeToBoxes(
       FIRST_COLUMN + 202,
       664,
-      form.r142 ? form.r142.pravnaForma : '',
+      form.r152 ? form.r152.pravnaForma : '',
     )
 
-    // r142 - obchMeno
-    const obchMeno = form.r142 ? form.r142.obchMeno : ''
+    // r152 - obchMeno
+    const obchMeno = form.r152 ? form.r152.obchMeno : ''
     tpl.writeToBoxes(FIRST_COLUMN, 628, obchMeno.slice(0, 37), 37)
     if (obchMeno.length > 37) {
       tpl.writeToBoxes(FIRST_COLUMN, 602, obchMeno.slice(37, 74), 37)
     }
 
-    // r142 - ulica
-    tpl.writeToBoxes(FIRST_COLUMN, 558, form.r142 ? form.r142.ulica : '', 28)
+    // r152 - ulica
+    tpl.writeToBoxes(FIRST_COLUMN, 558, form.r152 ? form.r152.ulica : '', 28)
 
-    // r142 - cislo
+    // r152 - cislo
     tpl.writeToBoxes(
       FIRST_COLUMN + 418,
       558,
-      form.r142 ? form.r142.cislo : '',
+      form.r152 ? form.r152.cislo : '',
       8,
     )
 
-    // r142 - psc
-    tpl.writeToBoxes(FIRST_COLUMN, 522, form.r142 ? form.r142.psc : '')
+    // r152 - psc
+    tpl.writeToBoxes(FIRST_COLUMN, 522, form.r152 ? form.r152.psc : '')
 
-    // r142 - obec
+    // r152 - obec
     tpl.writeToBoxes(
       FIRST_COLUMN + 87,
       522,
-      form.r142 ? form.r142.obec : '',
+      form.r152 ? form.r152.obec : '',
       31,
     )
 
-    // r142 - suhlasZaslUdaje
+    // r152 - suhlasZaslUdaje
     tpl.write(
       FIRST_COLUMN + 9,
       500,
-      form.r142 && form.r142.suhlasZaslUdaje ? 'x' : '',
+      form.r152 && form.r152.suhlasZaslUdaje ? 'x' : '',
     )
   } else {
     tpl.write(FIRST_COLUMN + 8, 750, 'x') // neuplatnujem

@@ -67,7 +67,10 @@ const skipPage = () => {
 
 const navigateEligibleToChildrenPage = () => {
   cy.visit('/prijmy-a-vydavky')
-  typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3120' })
+  typeToInput('t1r10_prijmy', {
+    ...withChildrenInput,
+    t1r10_prijmy: '3480',
+  })
   typeToInput('priloha3_r11_socialne', withChildrenInput)
   typeToInput('priloha3_r13_zdravotne', withChildrenInput)
   getInput('r122').type('0')
@@ -282,7 +285,7 @@ describe('Partner page', () => {
     // Fill out input with incorrect value (too high), continue to see ineligible message
     typeToInput('r032_partner_vlastne_prijmy', {
       ...withPartnerInput,
-      r032_partner_vlastne_prijmy: '4000',
+      r032_partner_vlastne_prijmy: '4036',
     })
     next()
     cy.get('[data-test=ineligible-message]').should('exist')
@@ -378,6 +381,7 @@ describe('osobne-udaje page', () => {
     typeToInput('r007_ulica', baseInput)
     typeToInput('r008_cislo', baseInput)
     typeToInput('r009_psc', baseInput)
+    getInput('r010_obec').clear() // clear value from PSC autocomplete via Posta API
     typeToInput('r010_obec', baseInput)
     typeToInput('r011_stat', baseInput)
 
@@ -424,7 +428,7 @@ describe('Children page', () => {
   })
   it('has working ui for adding children', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3119' })
+    typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
     getInput('r122').type('0')
@@ -433,7 +437,7 @@ describe('Children page', () => {
 
     assertUrl('/zamestnanie')
     getInput('employed', '-yes').click()
-    typeToInput('r038', { ...withChildrenInput, r038: '3120' }) // eligible via employment income
+    typeToInput('r038', { ...withChildrenInput, r038: '3480' }) // eligible via employment income
     typeToInput('r039', { ...withChildrenInput, r039: '1000' })
     typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
     typeToInput('r108', { ...withChildrenInput, r108: '0' })
@@ -875,7 +879,7 @@ describe('IBAN page', () => {
   })
   it('has working ui for eligible applicants', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3120' })
+    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
     getInput('r122').type('0')
