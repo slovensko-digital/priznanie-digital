@@ -5212,10 +5212,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-hummus@1.0.108:
-  version "1.0.108"
-  resolved "https://registry.yarnpkg.com/hummus/-/hummus-1.0.108.tgz#167e66f3966fa3a2f5985c420bb7f75f6cdd4658"
-  integrity sha512-R9/WJvfo0BLTqVLKee8UNBJMVjM5Qme2lJ6CkQDLmoisSrKzHsOd92b29/bp1S/GhVOEpkknyfVABWLB9J5iPg==
+hummus@1.0.110:
+  version "1.0.110"
+  resolved "https://registry.yarnpkg.com/hummus/-/hummus-1.0.110.tgz#7b5229d419ac6e8c908bcc60051c8a43f770b9ee"
+  integrity sha512-7qCmZFwTg3e/8Pk91J0aMnFiHF8B3Vptr++xBkZc4QEqna92W37r5G6ikbahWJLfQK2PKooXEjmls6gJoiJNBA==
   dependencies:
     node-pre-gyp "^0.10.0"
 
