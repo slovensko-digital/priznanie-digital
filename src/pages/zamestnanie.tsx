@@ -36,7 +36,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
           <Form className="form" noValidate>
             <ErrorSummary<EmployedUserInput> errors={errors} />
             <BooleanRadio
-              title="Mali ste v roku 2019 príjmy zo zamestnania v SR?"
+              title="Mali ste v roku 2020 príjmy zo zamestnania v SR?"
               name="employed"
             />
             {values.employed && (

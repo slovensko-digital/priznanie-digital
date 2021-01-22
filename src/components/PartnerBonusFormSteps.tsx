@@ -7,7 +7,7 @@ import { Details } from './Details'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v rok 2019?"
+      title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v rok 2020?"
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />

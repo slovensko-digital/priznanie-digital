@@ -134,7 +134,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     <>
       <BackLink href={previousRoute} />
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Výpočet dane za rok 2019
+        Výpočet dane za rok 2020
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />

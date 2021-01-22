@@ -89,7 +89,7 @@ const Kupele: Page<SpaUserInput> = ({
             <ErrorSummary<SpaUserInput> errors={errors} />
             <Form className="form" noValidate>
               <BooleanRadio
-                title="Navštívili ste v roku 2019 kúpele a máte doklad o zaplatení?"
+                title="Navštívili ste v roku 2020 kúpele a máte doklad o zaplatení?"
                 hint={`Ak máte preukázateľné výdavky z prírodných liečebných kúpeľov alebo kúpeľných liečební (faktúru či pokladničný blok), tak si môžete uplatniť nezdaniteľnú časť základu dane na seba, ale aj na manželku / manžela a vaše deti.`}
                 name="kupele"
               />
@@ -106,7 +106,7 @@ const Kupele: Page<SpaUserInput> = ({
                       name="r076a_kupele_danovnik"
                       type="text"
                       label="Aké sú vaše výdavky za služby v kúpeľoch?"
-                      hint="Maximálna výška úhrady za rok 2019 je 50 eur"
+                      hint="Maximálna výška úhrady za rok 2020 je 50 eur"
                     />
                   )}
                   <CheckboxSmall
@@ -142,7 +142,7 @@ const Kupele: Page<SpaUserInput> = ({
                         name="r033_partner_kupele_uhrady"
                         type="text"
                         label="Aké sú partnerove výdavky za služby v kúpeľoch?"
-                        hint="Maximálna výška úhrady za rok 2019 je 50 eur"
+                        hint="Maximálna výška úhrady za rok 2020 je 50 eur"
                       />
                     </>
                   )}
@@ -251,7 +251,7 @@ const Kupele: Page<SpaUserInput> = ({
                         name="r036_deti_kupele"
                         type="text"
                         label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
-                        hint="Maximálna výška úhrady za rok 2019 je 50 eur na každé dieťa"
+                        hint="Maximálna výška úhrady za rok 2020 je 50 eur na každé dieťa"
                       />
                     </>
                   )}

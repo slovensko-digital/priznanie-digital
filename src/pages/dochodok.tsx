@@ -40,7 +40,7 @@ const Dochodok: Page<PensionUserInput> = ({
           <Form className="form" noValidate>
             <ErrorSummary<PensionUserInput> errors={errors} />
             <BooleanRadio
-              title="Platili ste v roku 2019 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
+              title="Platili ste v roku 2020 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
               name="platil_prispevky_na_dochodok"
             />
             {values.platil_prispevky_na_dochodok && (
@@ -48,7 +48,7 @@ const Dochodok: Page<PensionUserInput> = ({
                 <Input
                   name="r075_zaplatene_prispevky_na_dochodok"
                   type="number"
-                  label="Výška zaplatených príspevkov za rok 2019"
+                  label="Výška zaplatených príspevkov za rok 2020"
                   hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
                 />
               </>
