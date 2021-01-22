@@ -31,7 +31,7 @@ jobs:
         with:
           path: |
             ~/.yarn
-            ./.next
+            ~/.cache/Cypress
             ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -74,7 +74,7 @@ jobs:
         with:
           path: |
             ~/.yarn
-            ./.next
+            ~/.cache/Cypress
             ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -124,7 +124,7 @@ jobs:
         with:
           path: |
             ~/.yarn
-            ./.next
+            ~/.cache/Cypress
             ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
