@@ -2,16 +2,16 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "12.19.1"
+    "node": "12.20.1"
   },
   "scripts": {
     "dev": "WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "yarn test -- --watch",
     "test": "jest",
-    "ci": "npm run lint && npm run test -- --ci && WITH_DEBUG=true npm run build && npm run cy:ci",
+    "ci": "yarn lint && yarn test -- --ci && WITH_DEBUG=true yarn build && yarn cy:ci",
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -54,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "babel-eslint": "10.1.0",
+    "babel-jest": "^26.6.3",
     "cypress": "^6.3.0",
     "cypress-file-upload": "5.0.1",
     "eslint": "6.8.0",
@@ -86,7 +87,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run check:ts && npm run git-comit-hash"
+      "pre-commit": "lint-staged && yarn check:ts && yarn git-comit-hash"
     }
   },
   "lint-staged": {
@@ -94,7 +95,7 @@
       "prettier --write"
     ],
     "*.{js,ts,tsx}": [
-      "npm run lint"
+      "yarn lint"
     ]
   }
 }
