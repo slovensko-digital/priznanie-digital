@@ -1,57 +1,39 @@
 import React from 'react'
 import { Warning } from '../components/Warning'
+import { ExternalLink } from '../components/ExternalLink'
+
+const navodyUrl =
+  'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
 
 const Index = () => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
       <br />
-      (verzia pre rok 2019)
+      (verzia pre rok 2020)
     </h1>
 
     <Warning>Na verzii pre rok 2020 aktuálne pracujeme.</Warning>
 
-    <p>Vyplňte si daňové priznanie rýchlo a jednoducho.</p>
-
     <p>
-      Po zadaní základných údajov si môžete stiahnuť pripravené daňové priznanie
-      a následne vás prevedieme procesom jeho podania na stránkach Finančnej
-      správy.
+      Viac informácii nájdete na{' '}
+      <ExternalLink href={navodyUrl}>navody.digital</ExternalLink>, kde nám
+      môžete zanechať svoj email a my sa postaráme, aby vám nič neuniklo.
     </p>
 
     <p>
-      Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
-      SZČO uplatňujúce si paušálne výdavky.
+      Dáme vám vedieť hneď, ako bude dostupná verzia aplikácie na tento rok.
+      Nebojte sa, všetko v pohode stíhate :)
     </p>
 
     <p>
-      Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
+      <ExternalLink
+        href={navodyUrl}
+        className="govuk-button govuk-button--large"
+      >
+        Viac informácí
+      </ExternalLink>
     </p>
-
-    <Warning>
-      <>
-        <p>
-          <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
-        </p>
-        <ul className="govuk-list govuk-list--bullet">
-          <li>Iné príjmy ako zo živnosti a zamestnania</li>
-          <li>Príjem zo zahraničia</li>
-          <li>Daňový bonus na zaplatené úroky</li>
-          <li>Daňové straty</li>
-          <li>SZČO starobní dôchodcovia</li>
-          <li>Práca na dohodu</li>
-          <li>Záväzky a pohľadávky (tabuľka 1b)</li>
-        </ul>
-      </>
-    </Warning>
-
-    <button
-      type="button"
-      className="govuk-button govuk-button--large govuk-button--start govuk-button--disabled"
-      disabled
-    >
-      Pripraviť daňové priznanie
-    </button>
   </>
 )
 
