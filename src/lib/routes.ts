@@ -8,6 +8,9 @@ import { PostponeUserInput } from '../types/PostponeUserInput'
 export type HomeRoute = '/domov'
 export const homeRoute: HomeRoute = '/domov'
 
+export type PostponeHomeRoute = '/'
+export const postponeHomeRoute: PostponeHomeRoute = '/'
+
 export type Route =
   | HomeRoute
   | '/prijmy-a-vydavky'
@@ -79,14 +82,14 @@ export const getRoutes = (currentRoute: Route, taxForm: TaxForm) => {
 }
 
 export type PostponeRoute =
-  | HomeRoute
+  | PostponeHomeRoute
   | '/odklad/prijmy-zo-zahranicia'
   | '/odklad/osobne-udaje'
   | '/odklad/suhrn'
   | '/odklad/stiahnut'
 
 const postponeRoutesOrder: ReadonlyArray<PostponeRoute> = [
-  homeRoute,
+  postponeHomeRoute,
   '/odklad/prijmy-zo-zahranicia',
   '/odklad/osobne-udaje',
   '/odklad/suhrn',
