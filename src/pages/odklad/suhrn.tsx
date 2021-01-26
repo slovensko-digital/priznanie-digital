@@ -122,8 +122,8 @@ const Suhrn: NextPage<Props> = ({
               firstname: postponeUserInput.meno,
               lastname: postponeUserInput.priezvisko,
               deadline: postponeUserInput.prijmy_zo_zahranicia
-                ? '30. jún 2021'
-                : '30. september 2021',
+                ? '30. september 2021'
+                : '30. jún 2021',
             }}
           />
         )}
