@@ -8,7 +8,12 @@
 import { UserInput } from '../../src/types/UserInput'
 import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
 import { calculate } from '../../src/lib/calculation'
-import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
+import {
+  Route,
+  PostponeRoute,
+  homeRoute,
+  postponeHomeRoute,
+} from '../../src/lib/routes'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import Decimal from 'decimal.js'
@@ -404,7 +409,7 @@ const executePostponeCase = (testCase: string) => {
         // Access named export
         const input: PostponeUserInput = inputModule[`${testCase}Input`]
 
-        cy.visit(homeRoute)
+        cy.visit(postponeHomeRoute)
 
         cy.contains('Odložiť daňové priznanie').click()
         assertUrl('/odklad/prijmy-zo-zahranicia')

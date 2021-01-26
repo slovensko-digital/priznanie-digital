@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = ({
   postponeUserInput,
 }: Props) => {
   const { route } = useRouter()
-  const isHomePage = route === homeRoute
+  const isHomePage = route === homeRoute || route === '/'
   const wrapperClassName = isHomePage ? '' : 'govuk-grid-column-two-thirds'
 
   return (
