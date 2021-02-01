@@ -59,7 +59,7 @@ const Stiahnut: NextPage<Props> = ({ postponeUserInput }: Props) => {
         type="button"
         onClick={() => {
           window.location.href =
-            'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
+            'https://navody.digital/zivotne-situacie/odklad-danoveho-priznania'
         }}
       >
         Pokračovať na navody.digital
