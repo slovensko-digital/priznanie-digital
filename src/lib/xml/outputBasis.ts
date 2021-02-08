@@ -598,7 +598,7 @@ const sampleSchema: OutputJson = {
         rekreaciaSuma: '',
         zaznamy: '',
       },
-      r153: '3',
+      r153: '0',
       datumVyhlasenia: '',
       danovyPreplatokBonus: {
         vyplatitDanovyBonus: '0',
