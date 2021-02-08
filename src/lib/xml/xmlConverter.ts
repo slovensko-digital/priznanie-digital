@@ -193,6 +193,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
+  form.dokument.telo.r153 = taxForm.employed ? '4' : '3'
+
   const maDanovBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
   const maDanovyPreplatok =
