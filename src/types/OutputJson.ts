@@ -239,40 +239,29 @@ export interface Tabulka1b {
   t1r2: T1r23
 }
 
-export interface PredchObdobie {
-  rok: string
-  strata: string
+export interface PredchObdobieUdaje {
+  udaje: {
+    r02: string
+    r03: string
+    r04: string
+    r05: string
+  }
 }
 
-export interface R49 {
-  predchObdobie: PredchObdobie
+export interface R49 extends PredchObdobieUdaje {
+  rok: '2016'
 }
 
-export interface PredchObdobie2 {
-  rok: string
-  strata: string
+export interface R50 extends PredchObdobieUdaje {
+  rok: '2017'
 }
 
-export interface R50 {
-  predchObdobie: PredchObdobie2
+export interface R51 extends PredchObdobieUdaje {
+  rok: '2018'
 }
 
-export interface PredchObdobie3 {
-  rok: string
-  strata: string
-}
-
-export interface R51 {
-  predchObdobie: PredchObdobie3
-}
-
-export interface PredchObdobie4 {
-  rok: string
-  strata: string
-}
-
-export interface R52 {
-  predchObdobie: PredchObdobie4
+export interface R52 extends PredchObdobieUdaje {
+  rok: '2019'
 }
 
 export interface T2r1 {
@@ -694,7 +683,7 @@ export interface Telo {
   r51: R51
   r52: R52
   r53: string
-  r54: string
+  // r54: string
   r55: string
   r56: string
   r57: string
@@ -785,12 +774,22 @@ export interface Telo {
   r138: string
   r139: string
   r140: string
+  r141: string
+  r142: string
+  r143: string
+  r144: string
+  r145: string
+  r146: string
+  r147: string
+  r148: string
+  r149: string
+  r150: string
   neuplatnujem: string
   splnam3per: string
-  r141: string
-  r142: R142
+  r151: string
+  r152: R142
   osobitneZaznamy: OsobitneZaznamy
-  r143: string
+  r153: string
   datumVyhlasenia: string
   danovyPreplatokBonus: DanovyPreplatokBonus
   prilPar30cOdpocetVydavkov?: PrilPar30cOdpocetVydavkov
