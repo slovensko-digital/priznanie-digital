@@ -39,7 +39,7 @@ const Hypoteka: Page<MortgageUserInput> = ({
         {({ values, errors }) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Platili ste úroky z hypotéky v roku 2019?"
+              title="Platili ste úroky z hypotéky v roku 2020?"
               name="r037_uplatnuje_uroky"
             />
             {values.r037_uplatnuje_uroky && (

@@ -75,13 +75,13 @@ const Deti: Page<ChildrenUserInput> = ({
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
             <BooleanRadio
-              title="Máte dieťa, s ktorým ste v roku 2019 žili v spoločnej domácnosti a malo do 16 rokov alebo študenta do 25 rokov?"
+              title="Máte dieťa, s ktorým ste v roku 2020 žili v spoločnej domácnosti a malo do 16 rokov alebo študenta do 25 rokov?"
               name="hasChildren"
             />
             {values.hasChildren && (
               <>
                 <p className="govuk-hint">
-                  V prípade, že ste sa v roku 2019 starali o nezaopatrené dieťa
+                  V prípade, že ste sa v roku 2020 starali o nezaopatrené dieťa
                   do 16 rokov, študenta do 25 rokov alebo o nezaopatrené dieťa
                   do 25 rokov, ktoré je dlhodobo choré, máte právo na zľavu na
                   dani vo výške 22,17 eur mesačne. Ročný bonus na dieťa činí
