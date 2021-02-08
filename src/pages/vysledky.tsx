@@ -142,8 +142,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         {taxFormUserInput.email ? (
           <p>
             Na váš email <strong>{taxFormUserInput.email}</strong> sme odoslali
-            XML súbor potrebný pre podanie daňového priznania a tiež PDF verziu
-            daňového priznania.
+            XML súbor potrebný pre podanie daňového priznania.
             <br />
             {taxFormUserInput.newsletter && 'Pošleme vám aj newsletter.'}
           </p>
