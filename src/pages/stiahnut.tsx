@@ -10,10 +10,6 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
     setDidDownload(true)
     gtag('event', 'download_xml')
   }
-  function handlePdfSubmit() {
-    setDidDownload(true)
-    gtag('event', 'download_pdf')
-  }
 
   return (
     <>
@@ -43,26 +39,6 @@ const Stiahnut: Page<{}> = ({ taxFormUserInput, previousRoute }) => {
             data-test="download-xml"
           >
             Stiahnuť dáta (XML)
-          </button>
-        </form>
-        <p>&nbsp;</p>
-        <p>Môžete si stiahnuť aj PDF súbor.</p>
-        <form
-          action="/api/pdf"
-          method="post"
-          target="_blank"
-          onSubmit={handlePdfSubmit}
-        >
-          <input
-            type="hidden"
-            name="taxFormUserInput"
-            value={JSON.stringify(taxFormUserInput)}
-          />
-          <button
-            type="submit"
-            className="btn-secondary govuk-button govuk-button--large"
-          >
-            Stiahnuť dáta (PDF)
           </button>
         </form>
       </div>

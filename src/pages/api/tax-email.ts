@@ -7,7 +7,6 @@ import {
 } from '../../lib/sendinblue'
 import { convertToXML } from '../../lib/xml/xmlConverter'
 import { setDate } from '../../lib/utils'
-import { buildPdf } from './pdf'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 import { calculate } from '../../lib/calculation'
@@ -30,20 +29,13 @@ export default async (
 
   const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
   const attachmentXml = convertToXML(taxForm)
-  const attachmentPdf = buildPdf(taxForm)
 
   try {
     const sendEmailResponse = await sendEmail({
       templateId,
       to: email,
       params,
-      attachment: [
-        makeAttachment('danove_priznanie.xml', attachmentXml),
-        {
-          name: 'danove_priznanie.pdf',
-          content: attachmentPdf.toBuffer().toString('base64'),
-        },
-      ],
+      attachment: [makeAttachment('danove_priznanie.xml', attachmentXml)],
     })
 
     if (sendEmailResponse.ok && params.newsletter) {
