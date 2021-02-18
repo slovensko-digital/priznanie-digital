@@ -1,6 +1,10 @@
-import { postponeHomeRoute, PostponeRoute, Route } from '../../src/lib/routes'
-import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
-import { PostponeUserInput } from '../../src/types/PostponeUserInput'
+import {
+  postponeHomeRoute,
+  PostponeRoute,
+  Route,
+} from '../../../src/lib/routes'
+import { foreignIncomeInput } from '../../../__tests__/testCases/postpone/foreignIncomeInput'
+import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
 
 function getInputPostpone<K extends keyof PostponeUserInput>(
   key: K,

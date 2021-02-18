@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Lint
         run: yarn lint
@@ -83,7 +83,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Unit Tests
         run: yarn test --ci
@@ -99,8 +99,7 @@ jobs:
       fail-fast: false
       matrix:
         # run multiple copies of the current job in parallel
-        # Cypress seems to run on all but one machines defined here
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
       - name: Checkout repository
@@ -133,7 +132,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: WITH_DEBUG=true yarn build

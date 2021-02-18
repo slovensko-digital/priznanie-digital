@@ -52,15 +52,7 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-export const executeAllTestCases = (testCases: string[]) => {
-  testCases.forEach((testCase) => executeTestCase(testCase))
-}
-
-export const executeAllPostponeCases = (testCases: string[]) => {
-  testCases.forEach((testCase) => executePostponeCase(testCase))
-}
-
-const executeTestCase = (testCase: string) => {
+export const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
       (inputModule) => {
@@ -402,7 +394,7 @@ const executeTestCase = (testCase: string) => {
   })
 }
 
-const executePostponeCase = (testCase: string) => {
+export const executePostponeCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
       (inputModule) => {
