@@ -22,9 +22,6 @@ const Iban: Page<TaxBonusUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  console.log('previousRoute', previousRoute)
-  console.log('nextRoute', nextRoute)
-
   if (
     !taxForm.mozeZiadatVyplatitDanovyBonus &&
     !taxForm.mozeZiadatVratitDanovyPreplatok

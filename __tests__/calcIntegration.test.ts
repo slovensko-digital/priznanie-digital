@@ -32,6 +32,7 @@ describe('calcIntergration', () => {
     'with3percent',
     'withSpa',
     'withBonus',
+    'withTaxReturn',
     'withEmploymentBonus',
     'withHighIncome',
     'withSpaNoPartnerNoChildren',
