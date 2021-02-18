@@ -15,7 +15,6 @@ import {
 import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
 
 const scrollToElement = (element, smooth = true) => {
-  console.log(element)
   if (element && element.current) {
     element.current.scrollIntoView({
       behavior: smooth ? 'smooth' : 'auto',
