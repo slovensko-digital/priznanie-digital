@@ -12,7 +12,7 @@ import {
 } from '../src/lib/postpone/postponeConverter'
 import { setDate } from '../src/lib/utils'
 
-const WRITE_FILES = false
+const WRITE_FILES = process.env.WRITE_FILES === 'yes'
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
