@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Lint
         run: yarn lint
@@ -83,7 +83,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Unit Tests
         run: yarn test --ci
@@ -133,7 +133,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: WITH_DEBUG=true yarn build

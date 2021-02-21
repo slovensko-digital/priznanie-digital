@@ -133,7 +133,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       parseInputNumber(input.priloha3_r13_zdravotne),
     ),
     r038: new Decimal(parseInputNumber(input?.r038 ?? '0')),
-    r039: new Decimal(parseInputNumber(input?.r039 ?? '0')),
+    r039: new Decimal(parseInputNumber(input?.r039_socialne ?? '0')).plus(
+      new Decimal(parseInputNumber(input?.r039_zdravotne ?? '0')),
+    ),
 
     /** SECTION Prijmy */
     t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
@@ -150,8 +152,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get vydavkyPoistPar6ods11_ods1a2() {
       return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
     },
-    get priloha3_r08_poistne() {
-      return new Decimal(parseInputNumber(input.r039))
+    get priloha3_r08_poistne_spolu() {
+      return this.r039
+    },
+    get priloha3_r09_socialne() {
+      return new Decimal(parseInputNumber(input.r039_socialne))
+    },
+    get priloha3_r10_zdravotne() {
+      return new Decimal(parseInputNumber(input.r039_zdravotne))
     },
     get r040() {
       return this.r038.minus(this.r039)

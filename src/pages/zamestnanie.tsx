@@ -56,10 +56,16 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   />
                 */}
                 <Input
-                  name="r039"
+                  name="r039_socialne"
                   type="number"
-                  label="Úhrn povinného poistného"
-                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 02. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                  label="Úhrn sociálneho poistného"
+                  hint={`Tento údaj nájdete v "Potvrdení" riadok 2a. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
+                />
+                <Input
+                  name="r039_zdravotne"
+                  type="number"
+                  label="Úhrn zdravotného poistného"
+                  hint={`Tento údaj nájdete v "Potvrdení" riadok 2b. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
                 />
                 <Input
                   name="r120"
@@ -99,16 +105,26 @@ export const validate = (values: EmployedUserInput) => {
       errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45'
     }
 
-    if (!values.r039) {
-      errors.r039 = 'Zadajte úhrn povinného poistného'
-    } else if (!values.r039.match(numberInputRegexp)) {
-      errors.r039 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    if (!values.r039_socialne) {
+      errors.r039_socialne = 'Zadajte úhrn zdravotného poistného'
+    } else if (!values.r039_socialne.match(numberInputRegexp)) {
+      errors.r039_socialne =
+        'Zadajte sumu zdravotného poistného vo formáte 123,45'
     }
+
+    if (!values.r039_zdravotne) {
+      errors.r039_zdravotne = 'Zadajte úhrn povinného poistného'
+    } else if (!values.r039_zdravotne.match(numberInputRegexp)) {
+      errors.r039_zdravotne =
+        'Zadajte sumu povinného poistného vo formáte 123,45'
+    }
+
     if (!values.r120) {
       errors.r120 = 'Zadajte úhrn preddavkov na daň'
     } else if (!values.r120.match(numberInputRegexp)) {
       errors.r120 = 'Zadajte sumu povinného poistného vo formáte 123,45'
     }
+
     if (!values.r108) {
       errors.r108 = 'Zadajte údaje o daňovom bonuse na dieťa'
     } else if (!values.r108.match(numberInputRegexp)) {

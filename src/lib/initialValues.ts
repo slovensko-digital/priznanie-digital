@@ -48,7 +48,8 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
   r038: '',
-  r039: '',
+  r039_socialne: '',
+  r039_zdravotne: '',
   r108: '',
   r120: '',
 }

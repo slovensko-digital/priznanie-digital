@@ -1,15 +1,10 @@
-/// <reference types="jest" />
-// import { xml2json } from 'xml-js';
 import { promises as fs } from 'fs'
 import { parseStringPromise } from 'xml2js'
-import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter'
+import { convertToXML } from '../src/lib/xml/xmlConverter'
 import { calculate } from '../src/lib/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
-import {
-  convertPostponeToXML,
-  convertPostponeToJson,
-} from '../src/lib/postpone/postponeConverter'
+import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'
 import { setDate } from '../src/lib/utils'
 
 const WRITE_FILES = process.env.WRITE_FILES === 'yes'
@@ -17,7 +12,6 @@ const WRITE_FILES = process.env.WRITE_FILES === 'yes'
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
-const stringify = (object: object) => JSON.stringify(object, null, 2)
 describe('calcIntergration', () => {
   ;[
     'base',
@@ -26,7 +20,6 @@ describe('calcIntergration', () => {
     'withPartner',
     'withEmployment',
     'withPension',
-    // 'withMortgage',
     'withChildren',
     'with2percent',
     'with3percent',
@@ -60,16 +53,7 @@ describe('calcIntergration', () => {
       const outputXml = convertToXML(taxForm)
 
       if (WRITE_FILES) {
-        const outputJson = convertToJson(taxForm)
-        fs.writeFile(
-          `${__dirname}/testCases/${testCase}TaxForm.output.json`,
-          stringify(taxForm),
-        )
         fs.writeFile(`${__dirname}/testCases/${testCase}.xml`, outputXml)
-        fs.writeFile(
-          `${__dirname}/testCases/${testCase}.output.json`,
-          stringify(outputJson),
-        )
       }
 
       const result = await comparable(outputXml)
@@ -96,11 +80,7 @@ describe('postpone', () => {
 
       if (WRITE_FILES) {
         fs.writeFile(
-          `${__dirname}/testCases/postpone/${testCase}.output.json`,
-          stringify(convertPostponeToJson(input)),
-        )
-        fs.writeFile(
-          `${__dirname}/testCases/postpone/${testCase}.output.xml`,
+          `${__dirname}/testCases/postpone/${testCase}.xml`,
           outputXml,
         )
       }

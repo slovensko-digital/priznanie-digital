@@ -216,7 +216,17 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
-  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
+  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.priloha3_r08_poistne_spolu.toFixed(
+    2,
+  )
+
+  form.dokument.telo.socZdravPoistenie.pr9 = taxForm.priloha3_r09_socialne.toFixed(
+    2,
+  )
+
+  form.dokument.telo.socZdravPoistenie.pr10 = taxForm.priloha3_r10_zdravotne.toFixed(
+    2,
+  )
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
     2,

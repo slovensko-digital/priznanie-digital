@@ -397,11 +397,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // Uplatňujem výdavky percentom z príjmov podľa § 6 ods. 10 zákona
   tpl.write(FIRST_COLUMN + 12, 734, 'x')
 
-  // priloha3_r08_poistne
+  // priloha3_r08_poistne_spolu
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 397,
     708,
-    form.priloha3_r08_poistne.toNumber(),
+    form.priloha3_r08_poistne_spolu.toNumber(),
   )
 
   // r041
@@ -707,11 +707,11 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
   tpl.nextPage()
 
-  // priloha3_r08_poistne
+  // priloha3_r08_poistne_spolu
   tpl.writeNumberToBoxes(
     FIRST_COLUMN + 410,
     405,
-    form.priloha3_r08_poistne.toNumber(),
+    form.priloha3_r08_poistne_spolu.toNumber(),
   )
 
   // priloha3_r11_socialne

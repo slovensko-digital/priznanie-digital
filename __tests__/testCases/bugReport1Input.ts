@@ -25,7 +25,8 @@ export const bugReport1Input: TaxFormUserInput = {
   r011_stat: 'anon',
   employed: true,
   r038: '3248,3',
-  r039: '435,22',
+  r039_socialne: '400',
+  r039_zdravotne: '35,22',
   hasChildren: true,
   children: [
     {

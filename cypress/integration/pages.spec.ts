@@ -108,15 +108,16 @@ describe('Employment page', () => {
     cy.get('[data-test=employed-input-yes]').click()
 
     next()
-    getError().should('have.length', 4)
+    getError().should('have.length', 5)
 
     // Type to input
     typeToInput('r038', withEmploymentInput)
 
     next()
-    getError().should('have.length', 3)
+    getError().should('have.length', 4)
 
-    typeToInput('r039', withEmploymentInput)
+    typeToInput('r039_socialne', withEmploymentInput)
+    typeToInput('r039_zdravotne', withEmploymentInput)
     getInput('r120').type('0')
     getInput('r108').type('0')
 
@@ -124,13 +125,21 @@ describe('Employment page', () => {
     cy.get('[data-test=employed-input-no]').click()
 
     getInput('r038').should('not.exist')
-    getInput('r039').should('not.exist')
+    getInput('r039_socialne').should('not.exist')
+    getInput('r039_zdravotne').should('not.exist')
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click()
 
     getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039').should('have.value', withEmploymentInput?.r039?.toString())
+    getInput('r039_socialne').should(
+      'have.value',
+      withEmploymentInput?.r039_socialne?.toString(),
+    )
+    getInput('r039_zdravotne').should(
+      'have.value',
+      withEmploymentInput?.r039_zdravotne?.toString(),
+    )
 
     // Should submit and next page should be parter
     next()
@@ -142,7 +151,8 @@ describe('Employment page', () => {
     // fill out and submit the form
     getInput('employed', '-yes').click()
     typeToInput('r038', withEmploymentInput)
-    typeToInput('r039', withEmploymentInput)
+    typeToInput('r039_socialne', withEmploymentInput)
+    typeToInput('r039_zdravotne', withEmploymentInput)
     getInput('r120').type('10')
     getInput('r108').type('20')
     next()
@@ -154,21 +164,36 @@ describe('Employment page', () => {
 
     // form should preserve values when navigated back to it
     getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039').should('have.value', withEmploymentInput?.r039?.toString())
+    getInput('r039_socialne').should(
+      'have.value',
+      withEmploymentInput?.r039_socialne?.toString(),
+    )
+    getInput('r039_zdravotne').should(
+      'have.value',
+      withEmploymentInput?.r039_zdravotne?.toString(),
+    )
     getInput('r120').should('have.value', '10')
     getInput('r108').should('have.value', '20')
 
     // form should hide
     getInput('employed', '-no').click()
     getInput('r038').should('not.exist')
-    getInput('r039').should('not.exist')
+    getInput('r039_socialne').should('not.exist')
+    getInput('r039_zdravotne').should('not.exist')
     getInput('r120').should('not.exist')
     getInput('r108').should('not.exist')
 
     // form should display and preserve values until it is submitted
     getInput('employed', '-yes').click()
     getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039').should('have.value', withEmploymentInput?.r039?.toString())
+    getInput('r039_socialne').should(
+      'have.value',
+      withEmploymentInput?.r039_socialne?.toString(),
+    )
+    getInput('r039_zdravotne').should(
+      'have.value',
+      withEmploymentInput?.r039_zdravotne?.toString(),
+    )
     getInput('r120').should('have.value', '10')
     getInput('r108').should('have.value', '20')
 
@@ -184,7 +209,8 @@ describe('Employment page', () => {
     // form should no preserve answers because it was submitted with additional fields hidden
     getInput('employed', '-yes').click()
     getInput('r038').should('have.value', '')
-    getInput('r039').should('have.value', '')
+    getInput('r039_socialne').should('have.value', '')
+    getInput('r039_zdravotne').should('have.value', '')
     getInput('r120').should('have.value', '')
     getInput('r108').should('have.value', '')
   })
@@ -418,7 +444,11 @@ describe('Children page', () => {
     assertUrl('/zamestnanie')
     getInput('employed', '-yes').click()
     typeToInput('r038', { ...withChildrenInput, r038: '3480' }) // eligible via employment income
-    typeToInput('r039', { ...withChildrenInput, r039: '1000' })
+    typeToInput('r039_socialne', { ...withChildrenInput, r039_socialne: '600' })
+    typeToInput('r039_zdravotne', {
+      ...withChildrenInput,
+      r039_zdravotne: '400',
+    })
     typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
     typeToInput('r108', { ...withChildrenInput, r108: '0' })
     next()

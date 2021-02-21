@@ -52,6 +52,9 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
+const toFormattedNumber = (input: string) =>
+  Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
+
 export const executeAllTestCases = (testCases: string[]) => {
   testCases.forEach((testCase) => executeTestCase(testCase))
 }
@@ -87,7 +90,8 @@ const executeTestCase = (testCase: string) => {
         if (input.employed) {
           getInput('employed', '-yes').click()
           typeToInput('r038', input)
-          typeToInput('r039', input)
+          typeToInput('r039_socialne', input)
+          typeToInput('r039_zdravotne', input)
           typeToInput('r120', input)
           typeToInput('r108', input)
         } else {
@@ -315,8 +319,13 @@ const executeTestCase = (testCase: string) => {
             )
         }
 
-        if (input.employed && testCase === 'bugReport1') {
-          cy.get(`[data-test="r039"]`).contains('435,22 EUR')
+        if (input.employed) {
+          cy.get(`[data-test="r039_socialne"]`).contains(
+            `${toFormattedNumber(input.r039_socialne)} EUR`,
+          )
+          cy.get(`[data-test="r039_zdravotne"]`).contains(
+            `${toFormattedNumber(input.r039_zdravotne)} EUR`,
+          )
         }
 
         next()

@@ -5,6 +5,7 @@
     "node": "14.15.4"
   },
   "scripts": {
+    "clean": "rm -rf ./.next && rm ./__tests__/**/*.output.*",
     "dev": "WITH_DEBUG=true next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
