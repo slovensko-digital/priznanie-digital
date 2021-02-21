@@ -83,7 +83,9 @@ export interface TaxForm {
   vydavkyPoistPar6ods11_ods1a2: Decimal
 
   /** Úhrn povinného poistného (§ 5 ods. 8 zákona) - za zamestnanie */
-  priloha3_r08_poistne: Decimal
+  priloha3_r08_poistne_spolu: Decimal
+  priloha3_r09_socialne: Decimal
+  priloha3_r10_zdravotne: Decimal
 
   /** SECTION  Zamestnanie */
   r038: Decimal

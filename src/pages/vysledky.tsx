@@ -88,7 +88,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
     {
       title: 'Zaplatené poistné spolu',
-      value: taxForm.priloha3_r08_poistne,
+      value: taxForm.priloha3_r08_poistne_spolu,
       key: 'priloha3_r08_poistne',
     },
     {

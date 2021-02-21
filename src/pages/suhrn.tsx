@@ -120,10 +120,16 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
                 {
-                  title: 'Úhrn povinného poistného',
-                  value: taxFormUserInput.r039,
+                  title: 'Úhrn sociálneho poistného',
+                  value: taxFormUserInput.r039_socialne,
                   currency: true,
-                  testId: 'r039',
+                  testId: 'r039_socialne',
+                },
+                {
+                  title: 'Úhrn zdravotného poistného',
+                  value: taxFormUserInput.r039_zdravotne,
+                  currency: true,
+                  testId: 'r039_zdravotne',
                 },
                 {
                   title: 'Úhrn preddavkov na daň',

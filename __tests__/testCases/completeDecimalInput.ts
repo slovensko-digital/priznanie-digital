@@ -18,7 +18,8 @@ export const completeDecimalInput: TaxFormUserInput = {
 
   /** SECTION Employment */
   r038: '4000,43',
-  r039: '1000,54',
+  r039_socialne: '650,32',
+  r039_zdravotne: '350,22',
   r122: '80.50',
   r108: '50.75',
   employed: true,

@@ -19,7 +19,8 @@ export const completeInput: TaxFormUserInput = {
 
   /** SECTION Employment */
   r038: '4000',
-  r039: '1000',
+  r039_socialne: '600',
+  r039_zdravotne: '400',
   r122: '80',
   r108: '50',
   employed: true,
