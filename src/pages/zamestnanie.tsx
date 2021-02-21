@@ -106,17 +106,17 @@ export const validate = (values: EmployedUserInput) => {
     }
 
     if (!values.r039_socialne) {
-      errors.r039_socialne = 'Zadajte úhrn zdravotného poistného'
+      errors.r039_socialne = 'Zadajte úhrn sociálneho poistného'
     } else if (!values.r039_socialne.match(numberInputRegexp)) {
       errors.r039_socialne =
-        'Zadajte sumu zdravotného poistného vo formáte 123,45'
+        'Zadajte sumu sociálneho poistného vo formáte 123,45'
     }
 
     if (!values.r039_zdravotne) {
-      errors.r039_zdravotne = 'Zadajte úhrn povinného poistného'
+      errors.r039_zdravotne = 'Zadajte úhrn zdravotného poistného'
     } else if (!values.r039_zdravotne.match(numberInputRegexp)) {
       errors.r039_zdravotne =
-        'Zadajte sumu povinného poistného vo formáte 123,45'
+        'Zadajte sumu zdravotného poistného vo formáte 123,45'
     }
 
     if (!values.r120) {
