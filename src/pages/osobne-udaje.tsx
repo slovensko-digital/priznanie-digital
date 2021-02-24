@@ -17,20 +17,27 @@ import { formatPsc, parseFullName } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
 
+const formatNace = (economicActivity) => {
+  const { code, name } = economicActivity || {}
+  if (code && name) {
+    return `${code} - ${name}`
+  }
+  return ''
+}
+
 const makeHandlePersonAutoform = ({
   setValues,
-  values,
 }: FormikProps<PersonalInformationUserInput>) => {
   return (person: AutoCompleteData) => {
     const { first, last, title } = parseFullName(person.name)
 
     setValues({
-      ...values,
       meno_priezvisko: person.name,
       r004_priezvisko: last || '',
       r005_meno: first || '',
       r006_titul: title || '',
-      r001_dic: person?.tin || values.r001_dic || '',
+      r001_dic: person?.tin || '',
+      r003_nace: formatNace(person.main_economic_activity),
       r007_ulica: person.street || person.municipality || '',
       r008_cislo: person.street_number || '',
       r009_psc: person.postal_code ? formatPsc(person.postal_code) : '',
@@ -188,16 +195,11 @@ export const validate = (values: PersonalInformationUserInput) => {
 
   if (!values.r001_dic) {
     errors.r001_dic = 'Zadajte pridelené DIČ'
-  }
-
-  /**
-   * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
-   */
-  if (values.r001_dic.length < 9) {
-    errors.r001_dic = 'DIČ môže mať minimálne 9 znakov'
-  }
-  if (values.r001_dic.length > 10) {
-    errors.r001_dic = 'DIČ môže mať maximálne 10 znakov'
+  } else if (values.r001_dic.length < 9 || values.r001_dic.length > 10) {
+    /**
+     * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+     */
+    errors.r001_dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
   }
 
   if (!values.r005_meno) {

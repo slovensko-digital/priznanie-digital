@@ -106,10 +106,10 @@ describe('/odklad/suhrn page', () => {
 
     next()
 
-    typeToInputPostpone('dic', foreignIncomeInput)
     getInputPostpone('meno_priezvisko').type('Július Ret')
-
     cy.contains('Július Retzer').click()
+
+    typeToInputPostpone('dic', foreignIncomeInput)
 
     next()
   })
