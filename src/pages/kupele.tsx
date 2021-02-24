@@ -101,20 +101,22 @@ const Kupele: Page<SpaUserInput> = ({
                   <KupeleError message={(errors as Errors).noAnswer} />
                   <CheckboxSmall name="danovnikInSpa" label="Na seba" />
                   {values.danovnikInSpa && (
-                    <Input
-                      className="govuk-!-margin-bottom-6"
-                      name="r076a_kupele_danovnik"
-                      type="text"
-                      label="Aké sú vaše výdavky za služby v kúpeľoch?"
-                      hint="Maximálna výška úhrady za rok 2020 je 50 eur"
-                    />
+                    <div className="govuk-checkboxes__conditional">
+                      <Input
+                        className="govuk-!-margin-bottom-6"
+                        name="r076a_kupele_danovnik"
+                        type="text"
+                        label="Aké sú vaše výdavky za služby v kúpeľoch?"
+                        hint="Maximálna výška úhrady za rok 2020 je 50 eur"
+                      />
+                    </div>
                   )}
                   <CheckboxSmall
                     name="r033_partner_kupele"
                     label="Na manželku / manžela"
                   />
                   {values.r033_partner_kupele && (
-                    <>
+                    <div className="govuk-checkboxes__conditional">
                       {!hasPartnerData && (
                         <>
                           <Input
@@ -144,11 +146,11 @@ const Kupele: Page<SpaUserInput> = ({
                         label="Aké sú partnerove výdavky za služby v kúpeľoch?"
                         hint="Maximálna výška úhrady za rok 2020 je 50 eur"
                       />
-                    </>
+                    </div>
                   )}
                   <CheckboxSmall name="childrenInSpa" label="Na svoje deti" />
                   {values.childrenInSpa && (
-                    <>
+                    <div className="govuk-checkboxes__conditional">
                       {shouldShowChildren ? (
                         <>
                           <p className="govuk-!-margin-bottom-3">
@@ -253,7 +255,7 @@ const Kupele: Page<SpaUserInput> = ({
                         label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
                         hint="Maximálna výška úhrady za rok 2020 je 50 eur na každé dieťa"
                       />
-                    </>
+                    </div>
                   )}
                   <div className="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
                     <a

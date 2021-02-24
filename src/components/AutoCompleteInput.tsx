@@ -64,13 +64,13 @@ export const AutoCompleteInput = ({
     setAutocompleteDebounceTimeout(timeout)
   }
 
-  const handleAutocompleteInputFocus = async () => {
+  const handleAutocompleteInputFocus = async ({ currentTarget: { value } }) => {
     clearTimeout(autocompleteBlurTimeout)
     await setShowAutocomplete(true)
     handleScroll()
 
     if (autocompleteData.length === 0) {
-      handleUserInput('')
+      handleUserInput(value)
     }
   }
 

@@ -34,7 +34,7 @@ const makeHandlePersonAutoform = ({
       priezvisko: last || '',
       meno: first || '',
       titul: title || '',
-      dic: person?.tin || values.dic || '',
+      dic: person?.tin || '',
       ulica: person.street || person.municipality || '',
       cislo: person.street_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
@@ -195,16 +195,11 @@ export const validate = (values: PersonalInformationPostponePage) => {
 
   if (!values.dic) {
     errors.dic = 'Zadajte pridelené DIČ'
-  }
-
-  /**
-   * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
-   */
-  if (values.dic.length < 9) {
-    errors.dic = 'DIČ môže mať minimálne 9 znakov'
-  }
-  if (values.dic.length > 10) {
-    errors.dic = 'DIČ môže mať maximálne 10 znakov'
+  } else if (values.dic.length < 9 || values.dic.length > 10) {
+    /**
+     * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
+     */
+    errors.dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
   }
 
   if (!values.meno) {
