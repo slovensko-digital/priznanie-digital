@@ -1,93 +1,153 @@
 import React from 'react'
-import { Warning } from '../components/Warning'
-import { ExternalLink } from '../components/ExternalLink'
-import styles from './domov.module.css'
 import Link from 'next/link'
+import styles from './index.module.css'
+import { Warning } from '../components/Warning'
 
-const Index = ({ nextPostponeRoute }) => (
+const IconCheck = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24"
+    viewBox="0 0 24 24"
+    width="24"
+  >
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+  </svg>
+)
+
+const IconNoDownload = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    enable-background="new 0 0 24 24"
+    height="24"
+    viewBox="0 0 24 24"
+    width="24"
+  >
+    <rect fill="none" height="24" width="24" />
+    <path d="M9,6.17V3h6v6h4l-3.59,3.59L9,6.17z M21.19,21.19L2.81,2.81L1.39,4.22L6.17,9H5l7,7l0.59-0.59L15.17,18H5v2h12.17l2.61,2.61 L21.19,21.19z" />
+  </svg>
+)
+
+const IconLock = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24"
+    viewBox="0 0 24 24"
+    width="24"
+  >
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+  </svg>
+)
+
+const Home = ({ nextRoute, nextPostponeRoute }) => (
   <>
     <div className="govuk-grid-column-two-thirds">
-      <PostponeSection nextPostponeRoute={nextPostponeRoute} />
+      <TaxFormSection nextRoute={nextRoute} />
     </div>
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <WorkInProgressSection />
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
       </div>
+
+      <ul className={styles.safeList}>
+        <li>
+          <IconLock />
+          <p>Bezpečné SSL pripojenie</p>
+        </li>
+        <li>
+          <IconCheck />
+          <p>Overené Slovenskou komorou daňových poradcov</p>
+        </li>
+        <li>
+          <IconNoDownload />
+          <p>Neukladáme žiadne dáta</p>
+        </li>
+      </ul>
     </div>
   </>
 )
 
-export default Index
+export default Home
 
-const PostponeSection = ({ nextPostponeRoute }) => (
+const TaxFormSection = ({ nextRoute }) => (
   <>
-    <h1 className="govuk-heading-l govuk-!-margin-top-8">
-      Odklad daňového priznania
+    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      Vyplnenie daňového priznania
+      <br />
+      (verzia pre rok 2020)
     </h1>
-    <p>Vyplňte si odklad daňového priznania rýchlo a jednoducho.</p>
-    <p>
-      Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.
+
+    <p className="govuk-body-l">
+      Vyplňte si daňové priznanie rýchlo a jednoducho.
     </p>
-    <p>Termín si viete predĺžiť:</p>
-    <ul className="govuk-list govuk-list--bullet">
-      <li>do 30.6. ak ste mali príjmy len zo Slovenska, alebo</li>
-      <li>do 30.9. ak ste mali príjmy aj zo zahraničia</li>
-    </ul>
+
     <p>
-      Po zadaní základných údajov si môžete stiahnuť pripravený odklad daňového
-      priznania a následne vás prevedieme procesom jeho podania na stránkach
-      Finančnej správy.
+      Po zadaní základných údajov si môžete stiahnuť pripravené daňové priznanie
+      a následne vás prevedieme procesom jeho podania na stránkach Finančnej
+      správy.
     </p>
+
     <p>
-      Aplikácia je určená na podanie riadneho a opravného odkladu daňového
-      priznania.
+      Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
+      SZČO uplatňujúce si paušálne výdavky.
     </p>
+
     <p>
       Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov.
     </p>
 
-    <Link href={nextPostponeRoute}>
-      <button type="button" className="govuk-button govuk-button--large">
-        Odložiť daňové priznanie
+    <Warning>
+      <>
+        <p>
+          <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
+        </p>
+        <ul className="govuk-list govuk-list--bullet">
+          <li>Iné príjmy ako zo živnosti a zamestnania</li>
+          <li>Príjem zo zahraničia</li>
+          <li>Daňový bonus na zaplatené úroky</li>
+          <li>Daňové straty</li>
+          <li>SZČO starobní dôchodcovia</li>
+          <li>Práca na dohodu</li>
+          <li>Záväzky a pohľadávky (tabuľka 1b)</li>
+        </ul>
+      </>
+    </Warning>
+
+    <Link href={nextRoute}>
+      <button
+        type="button"
+        className="govuk-button govuk-button--large govuk-button--start"
+      >
+        Pripraviť daňové priznanie
       </button>
     </Link>
   </>
 )
 
-const WorkInProgressSection = () => {
-  const navodyUrl =
-    'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania'
+const PostponeSection = ({ nextPostponeRoute }) => (
+  <>
+    <h2 className="govuk-heading-m govuk-!-margin-top-3">
+      Odklad daňového priznania za rok 2020
+    </h2>
+    <p>
+      Riadny termín pre podanie daňového priznania a zaplatenie dane je
+      31.3.2021
+    </p>
+    <p>Termín si viete predĺžiť:</p>
+    <ul className="govuk-list govuk-list--bullet">
+      <li>do 30.6.2021 ak ste mali príjmy len zo Slovenska, alebo</li>
+      <li>do 30.9.2021 ak ste mali príjmy aj zo zahraničia</li>
+    </ul>
 
-  return (
-    <>
-      <h2 className="govuk-heading-s govuk-!-margin-top-3">
-        Vyplnenie daňového priznania
-        <br />
-        (verzia pre rok 2020)
-      </h2>
-
-      <Warning>Na verzii aplikácie pre rok 2020 aktuálne pracujeme.</Warning>
-
-      <p>
-        Viac informácii nájdete na{' '}
-        <ExternalLink href={navodyUrl}>navody.digital</ExternalLink>, kde nám
-        môžete zanechať svoj email a my sa postaráme, aby vám nič neuniklo.
-      </p>
-
-      <p>
-        Dáme vám vedieť hneď, ako bude dostupná verzia aplikácie na tento rok.
-        Nebojte sa, všetko v pohode stíhate :)
-      </p>
-
-      <p>
-        <ExternalLink
-          href={navodyUrl}
-          className="btn-secondary govuk-button govuk-button--large"
-        >
-          Viac informácí
-        </ExternalLink>
-      </p>
-    </>
-  )
-}
+    <Link href={nextPostponeRoute}>
+      <button
+        type="button"
+        className="btn-secondary govuk-button govuk-button--large"
+      >
+        Odložiť daňové priznanie
+      </button>
+    </Link>
+  </>
+)
