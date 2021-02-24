@@ -165,13 +165,11 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         name={`children[${index}].priezviskoMeno` as any}
         type="text"
         label="Meno a priezvisko"
-        width="auto"
       />
       <Input
         name={`children[${index}].rodneCislo` as any}
         type="text"
         label="Rodné číslo"
-        width="auto"
         maxLength={13}
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
@@ -200,14 +198,12 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         <Select
           name={`children[${index}].monthFrom`}
           label="Od"
-          className={styles.inlineField}
           options={monthNames}
           disabled={savedValues.wholeYear ? 0 : false}
         />
         <Select
           name={`children[${index}].monthTo`}
           label="Do"
-          className={styles.inlineField}
           options={monthNames}
           disabled={savedValues.wholeYear ? 11 : false}
         />

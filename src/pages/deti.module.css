@@ -11,19 +11,18 @@
   display: flex;
   flex-direction: row;
 }
+.inlineFieldContainer > div:first-child {
+  margin-right: 16px;
+}
 @media only screen and (max-width: 600px) {
   .inlineFieldContainer {
     display: flex;
     flex-direction: column;
   }
+  .inlineFieldContainer > div:first-child {
+    margin-right: 0;
+  }
 }
-.inlineField {
-  width: 50%;
-}
-.inlineField:first-child {
-  margin-right: 16px;
-}
-
 .flexGrow {
   flex-grow: 1;
 }
