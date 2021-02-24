@@ -105,7 +105,7 @@ const Kupele: Page<SpaUserInput> = ({
                       <Input
                         className="govuk-!-margin-bottom-6"
                         name="r076a_kupele_danovnik"
-                        type="text"
+                        type="number"
                         label="Aké sú vaše výdavky za služby v kúpeľoch?"
                         hint="Maximálna výška úhrady za rok 2020 je 50 eur"
                       />
@@ -142,7 +142,7 @@ const Kupele: Page<SpaUserInput> = ({
                       <Input
                         className="govuk-!-margin-bottom-6"
                         name="r033_partner_kupele_uhrady"
-                        type="text"
+                        type="number"
                         label="Aké sú partnerove výdavky za služby v kúpeľoch?"
                         hint="Maximálna výška úhrady za rok 2020 je 50 eur"
                       />
@@ -202,7 +202,6 @@ const Kupele: Page<SpaUserInput> = ({
                                     }
                                     type="text"
                                     label="Meno a priezvisko"
-                                    width="auto"
                                   />
                                   <Input
                                     name={
@@ -210,7 +209,6 @@ const Kupele: Page<SpaUserInput> = ({
                                     }
                                     type="text"
                                     label="Rodné číslo"
-                                    width="auto"
                                     maxLength={13}
                                     onChange={async (event) => {
                                       const rodneCisloValue = formatRodneCislo(
@@ -251,7 +249,7 @@ const Kupele: Page<SpaUserInput> = ({
                       <Input
                         className="govuk-!-margin-bottom-6"
                         name="r036_deti_kupele"
-                        type="text"
+                        type="number"
                         label="Aké sú výdavky vašich detí za služby v kúpeľoch?"
                         hint="Maximálna výška úhrady za rok 2020 je 50 eur na každé dieťa"
                       />

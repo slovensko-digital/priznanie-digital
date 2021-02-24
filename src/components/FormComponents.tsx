@@ -52,12 +52,15 @@ interface InputProps<Name> {
 export const Input = <Name extends keyof UserInput>({
   label,
   hint,
-  width = 20,
+  width,
   className,
   type,
   ...props
 }: InputProps<Name> & React.HTMLProps<HTMLInputElement>) => {
   const [field, meta] = useField(props.name)
+
+  const defaultWidth = type === 'number' ? 5 : 20
+  const inputWidth = width ? width : defaultWidth
 
   const getNumberInputProps = () => {
     if (type === 'number') {
@@ -97,7 +100,7 @@ export const Input = <Name extends keyof UserInput>({
       <input
         id={props.name}
         className={classnames('govuk-input', {
-          [`govuk-input--width-${width}`]: width !== 'auto',
+          [`govuk-input--width-${inputWidth}`]: inputWidth !== 'auto',
         })}
         data-test={`${field.name}-input`}
         {...(meta.error && {
