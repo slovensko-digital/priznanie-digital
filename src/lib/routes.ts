@@ -5,8 +5,8 @@ import { checkCookie } from './cookie'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 // route to home page, should be '/' when app is ready
-export type HomeRoute = '/domov'
-export const homeRoute: HomeRoute = '/domov'
+export type HomeRoute = '/'
+export const homeRoute: HomeRoute = '/'
 
 export type PostponeHomeRoute = '/'
 export const postponeHomeRoute: PostponeHomeRoute = '/'

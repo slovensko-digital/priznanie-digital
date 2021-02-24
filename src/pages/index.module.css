@@ -1,0 +1,30 @@
+.postponeBox {
+  background: #f4f4f4;
+  margin-top: 30px;
+  padding: 10px 20px 30px 20px;
+}
+
+.safeList {
+  background: #f4f4f4;
+  padding: 10px 20px;
+  margin: 30px 0 0 0;
+  list-style: none;
+}
+
+.safeList li {
+  padding: 15px 10px 15px 44px;
+  position: relative;
+}
+
+.safeList svg {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  left: 0;
+  top: 16px;
+}
+
+.safeList p {
+  line-height: 28px;
+  margin: 0;
+}
