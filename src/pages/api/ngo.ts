@@ -1,15 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { AutoformResponseBody } from '../../types/api'
+import Fuse from 'fuse.js'
 
 const dataUrl =
   'https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.451.prijimatelia_2020.html'
-const limit = 20
 const maxCacheAgeInMinutes = 15
 
-type CachedData = Partial<AutoformResponseBody>[]
+type CachedData = Partial<AutoformResponseBody>
 
 interface Cache {
-  data: CachedData
+  data: Fuse<CachedData>
   time: number
 }
 
@@ -33,7 +33,7 @@ const parseDataFromHtml = (rawHtml) => {
   return JSON.parse(parsed[1])
 }
 
-const formatNgoData = (rawArray: string[][]): CachedData => {
+const formatNgoData = (rawArray: string[][]): CachedData[] => {
   return rawArray.map(
     (
       [pravnaForma, name, cin, streetAndNumber, municipality, postal_code],
@@ -58,7 +58,17 @@ const formatNgoData = (rawArray: string[][]): CachedData => {
   )
 }
 
-const getNgoData = async (): Promise<CachedData> => {
+const fuseOptions = {
+  shouldSort: true,
+  includeScore: true,
+  threshold: 0.4,
+  location: 30,
+  distance: 100,
+  minMatchCharLength: 2,
+  keys: ['name', 'municipality'],
+}
+
+const getNgoData = async (): Promise<Fuse<CachedData>> => {
   const cacheExpireTime = Date.now() - maxCacheAgeInMinutes * 60 * 1000
 
   if (!cache.time || cache.time < cacheExpireTime) {
@@ -66,24 +76,17 @@ const getNgoData = async (): Promise<CachedData> => {
     const rawArray = parseDataFromHtml(await response.text())
     const data = formatNgoData(rawArray)
     cache = {
-      data,
+      data: new Fuse(data, fuseOptions),
       time: Date.now(),
     }
   }
 
   return cache.data
 }
-
-const filterNgoData = (data: CachedData, search: string) => {
-  return data
-    .filter((item) => item.name.match(new RegExp(search, 'i')))
-    .slice(0, limit)
-}
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const name = encodeURI(`${req.query.name}`)
+  const name = decodeURIComponent(`${req.query.name}`)
 
-  let data: CachedData
+  let data: Fuse<CachedData>
   try {
     data = await getNgoData()
   } catch (error) {
@@ -92,7 +95,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json({ error: 'unable to fetch data from financnasprava.sk' })
   }
 
-  const filtered = filterNgoData(data, name)
+  const filtered = data
+    .search(name)
+    .map(({ item }) => item)
+    .slice(0, 20)
 
   res.statusCode = 200
   res.json(filtered)
