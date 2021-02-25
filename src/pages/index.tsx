@@ -115,6 +115,13 @@ const TaxFormSection = ({ nextRoute }) => (
       </>
     </Warning>
 
+    <p>
+      Použitím aplikácie súhlasíte so spracovaním vami poskytnutých údajov za
+      účelom vygenerovania daňového priznania (následne sa údaje vymažú). Vaše
+      údaje neukladáme, sú použité výlučne na spracovanie a vygenerovanie
+      daňového priznania.
+    </p>
+
     <Link href={nextRoute}>
       <button
         type="button"
