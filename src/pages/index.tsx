@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
+import { ExternalLink } from '../components/ExternalLink'
 
 const IconCheck = () => (
   <svg
@@ -58,7 +59,12 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
         </li>
         <li>
           <IconCheck />
-          <p>Overené Slovenskou komorou daňových poradcov</p>
+          <p>
+            Testované{' '}
+            <ExternalLink href="https://www.skdp.sk/">
+              Slovenskou komorou daňových poradcov
+            </ExternalLink>
+          </p>
         </li>
         <li>
           <IconNoDownload />
