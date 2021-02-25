@@ -32,7 +32,7 @@ describe('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 
-    cy.contains('Odložiť daňové priznanie').click()
+    cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')
     getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
 
@@ -100,7 +100,7 @@ describe('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 
-    cy.contains('Odložiť daňové priznanie').click()
+    cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')
     getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
 
