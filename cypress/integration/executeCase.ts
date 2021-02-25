@@ -74,7 +74,7 @@ const executeTestCase = (testCase: string) => {
 
         cy.visit(homeRoute)
 
-        cy.contains('Pripraviť daňové priznanie').click()
+        cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
 
         /**  SECTION Prijmy a vydavky */
         getInput('t1r10_prijmy').type(input.t1r10_prijmy)
@@ -420,7 +420,7 @@ const executePostponeCase = (testCase: string) => {
 
         cy.visit(postponeHomeRoute)
 
-        cy.contains('Odložiť daňové priznanie').click()
+        cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
         assertUrl('/odklad/prijmy-zo-zahranicia')
 
         next()

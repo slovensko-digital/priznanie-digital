@@ -18,7 +18,7 @@ const IconCheck = () => (
 const IconNoDownload = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    enable-background="new 0 0 24 24"
+    enableBackground="new 0 0 24 24"
     height="24"
     viewBox="0 0 24 24"
     width="24"
@@ -115,11 +115,10 @@ const TaxFormSection = ({ nextRoute }) => (
       </>
     </Warning>
 
-    <p>
-      Použitím aplikácie súhlasíte so spracovaním vami poskytnutých údajov za
-      účelom vygenerovania daňového priznania (následne sa údaje vymažú). Vaše
-      údaje neukladáme, sú použité výlučne na spracovanie a vygenerovanie
-      daňového priznania.
+    <p className="govuk-body-xs">
+      Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+      nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje neukladáme, sú
+      použité výlučne na spracovanie daňového priznania.
     </p>
 
     <Link href={nextRoute}>
@@ -127,7 +126,7 @@ const TaxFormSection = ({ nextRoute }) => (
         type="button"
         className="govuk-button govuk-button--large govuk-button--start"
       >
-        Pripraviť daňové priznanie
+        Súhlasím a chcem pripraviť daňové priznanie
       </button>
     </Link>
   </>
@@ -148,12 +147,18 @@ const PostponeSection = ({ nextPostponeRoute }) => (
       <li>do 30.9.2021 ak ste mali príjmy aj zo zahraničia</li>
     </ul>
 
+    <p className="govuk-body-xs">
+      Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+      nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+      neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+    </p>
+
     <Link href={nextPostponeRoute}>
       <button
         type="button"
         className="btn-secondary govuk-button govuk-button--large"
       >
-        Odložiť daňové priznanie
+        Súhlasím a chcem odložiť daňové priznanie
       </button>
     </Link>
   </>
