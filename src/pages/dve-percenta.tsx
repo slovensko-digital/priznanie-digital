@@ -241,7 +241,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                   <h2 className="govuk-heading-l">Súhlas so zaslaním údajov</h2>
                   <CheckboxSmall
                     name="XIIoddiel_suhlasZaslUdaje"
-                    label="súhlasím so zaslaním údajov (meno, priezvisko a adresa trvalého pobytu) mnou určenému prijímateľovi podielu zaplatenej dane"
+                    label="Želám si, aby prijímateľ 2% videl moje údaje (meno, priezvisko a adresa trvalého pobytu)"
                   />
                 </>
               )}
