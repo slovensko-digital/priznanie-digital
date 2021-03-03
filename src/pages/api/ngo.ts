@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { AutoformResponseBody } from '../../types/api'
 import Fuse from 'fuse.js'
+import ngos from '../../../public/ngos.json'
 
-const dataUrl =
-  'https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.451.prijimatelia_2020.html'
 const maxCacheAgeInMinutes = 15
 
 type CachedData = Partial<AutoformResponseBody>
@@ -18,38 +17,33 @@ let cache: Cache = {
   time: null,
 }
 
-const parseDataFromHtml = (rawHtml) => {
-  const start = rawHtml.indexOf(
-    '<script type="text/javascript" charset="UTF-8">',
-  )
-  const end = rawHtml.indexOf('</script>', start)
-  const script = rawHtml.slice(start, end)
-  const parsed = script.match(/var data = (.*]]);/)
-
-  if (!parsed) {
-    throw new Error('Error parsing data')
-  }
-
-  return JSON.parse(parsed[1])
-}
 
 const formatNgoData = (rawArray: string[][]): CachedData[] => {
+  // ["nazov_org","ICO_org","ulica_sidla_org","mesto_sidla_org","cislo_registra_sidla_org","referencne_cislo_sidla_org","PSC_org","pravna_forma_org","IBAN","banka"  ],
   return rawArray.map(
     (
-      [pravnaForma, name, cin, streetAndNumber, municipality, postal_code],
+      [
+        name,
+        cin,
+        street,
+        municipality,
+        streetNumber1,
+        streetNumber2,
+        postal_code,
+        pravnaForma,
+        _iban,
+        _bank,
+      ],
       id,
     ) => {
-      const parsedStreet = streetAndNumber
-        .trim()
-        .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/)
-
+      const streetNumber = [streetNumber1, streetNumber2].join('/')
       return {
         id,
         cin,
         name,
-        street: parsedStreet ? parsedStreet[1] : streetAndNumber,
-        street_number: parsedStreet ? parsedStreet[2] : '',
-        formatted_address: `${streetAndNumber}, ${postal_code} ${municipality}`,
+        street: street,
+        street_number: streetNumber,
+        formatted_address: `${street} ${streetNumber}, ${postal_code} ${municipality}`,
         postal_code,
         municipality,
         legal_form: pravnaForma,
@@ -72,8 +66,7 @@ const getNgoData = async (): Promise<Fuse<CachedData>> => {
   const cacheExpireTime = Date.now() - maxCacheAgeInMinutes * 60 * 1000
 
   if (!cache.time || cache.time < cacheExpireTime) {
-    const response = await fetch(dataUrl)
-    const rawArray = parseDataFromHtml(await response.text())
+    const rawArray = ngos
     const data = formatNgoData(rawArray)
     cache = {
       data: new Fuse(data, fuseOptions),
