@@ -3,7 +3,8 @@ import { Child, TaxForm } from '../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
-  parseInputNumber, calculatePercentage,
+  parseInputNumber,
+  calculatePercentage,
 } from './utils'
 import Decimal from 'decimal.js'
 import { sum, ceilDecimal } from './utils'
@@ -24,6 +25,7 @@ const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
 const KONSTANTA = 37163.36 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
 const MAX_SPA_PER_PERSON = 50
 const TAX_YEAR = 2020
+const MIN_2_PERC_DONATION_AMOUNT = 3
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
   const monthFrom = Number.parseInt(child.monthFrom, 10)
@@ -548,7 +550,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     get canDonateTwoPercentOfTax() {
       return (
-        calculatePercentage(this.r135_dan_na_uhradu, 2) >= 3
+        calculatePercentage(this.r135_dan_na_uhradu, 2) >= MIN_2_PERC_DONATION_AMOUNT
       )
     },
   }
