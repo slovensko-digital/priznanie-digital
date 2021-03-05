@@ -60,9 +60,9 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
         <li>
           <IconCheck />
           <p>
-            Testované{' '}
+            Testované členmi{' '}
             <ExternalLink href="https://www.skdp.sk/">
-              Slovenskou komorou daňových poradcov
+              Slovenskej komory daňových poradcov
             </ExternalLink>
           </p>
         </li>
