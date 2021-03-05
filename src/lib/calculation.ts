@@ -3,7 +3,7 @@ import { Child, TaxForm } from '../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
-  parseInputNumber,
+  parseInputNumber, calculatePercentage,
 } from './utils'
 import Decimal from 'decimal.js'
 import { sum, ceilDecimal } from './utils'
@@ -526,8 +526,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
-    XIIoddiel_uplatnujem2percenta:
-      input?.XIIoddiel_uplatnujem2percenta ?? false,
+    get XIIoddiel_uplatnujem2percenta() {
+      return (
+        this.canDonateTwoPercentOfTax ? (input?.XIIoddiel_uplatnujem2percenta ?? false) : false
+      )
+    },
 
     /** SECTION Danovy bonus */
     ziadamVyplatitDanovyBonus: input?.ziadamVyplatitDanovyBonus ?? false,
@@ -542,5 +545,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     datum: input.datum,
+
+    get canDonateTwoPercentOfTax() {
+      return (
+        calculatePercentage(this.r135_dan_na_uhradu, 2) >= 3
+      )
+    },
   }
 }
