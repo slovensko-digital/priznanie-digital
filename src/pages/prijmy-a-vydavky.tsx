@@ -109,7 +109,7 @@ export const validate = (values: IncomeAndExpenseUserInput) => {
     errors.r122 = 'Zadajte vaše zaplatené preddavky'
   }
   if (values.r122 && !values.r122.match(numberInputRegexp)) {
-    errors.r122 = 'Zadajte vaše zaplatené preddavkyvo formáte 123,45'
+    errors.r122 = 'Zadajte vaše zaplatené preddavky vo formáte 123,45'
   }
 
   return errors
