@@ -191,6 +191,6 @@ export const parseStreetAndNumber = (streetAndNumber) => {
   return [street, number]
 }
 
-export const calculatePercentage = (base, percentage) => {
-  return base.div(100).mul(percentage)
+export const percentage = (base, percent) => {
+  return floorDecimal(base.div(100).times(percent))
 }
