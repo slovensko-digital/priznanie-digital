@@ -31,6 +31,9 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
   const getChildRoute = (): Route[] => {
     return taxForm.eligibleForChildrenBonus ? ['/deti'] : []
   }
+  const getTwoPercentRoute = (): Route[] => {
+    return taxForm.canDonateTwoPercentOfTax ? ['/dve-percenta'] : []
+  }
   const getIbanRoute = (): Route[] => {
     const isIbanRequired =
       taxForm.mozeZiadatVyplatitDanovyBonus ||
@@ -46,7 +49,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     ...getChildRoute(),
     '/dochodok',
     '/kupele',
-    '/dve-percenta',
+    ...getTwoPercentRoute(),
     '/osobne-udaje',
     '/suhrn',
     ...getIbanRoute(),
@@ -141,7 +144,9 @@ export const validateRoute = (
         // '/kupele': 'r037_uplatnuje_uroky',
         '/kupele': 'platil_prispevky_na_dochodok',
         '/dve-percenta': 'kupele',
-        '/osobne-udaje': 'XIIoddiel_uplatnujem2percenta',
+        '/osobne-udaje': taxForm.XIIoddiel_uplatnujem2percenta
+          ? 'XIIoddiel_uplatnujem2percenta'
+          : 'platil_prispevky_na_dochodok',
         '/suhrn': 'r004_priezvisko',
         '/vysledky': 'r004_priezvisko',
         '/iban': 'r004_priezvisko',
