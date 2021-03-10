@@ -509,7 +509,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const NGOAmount = percentage(this.r124, rate)
 
       /** Min of 3 EUR is required */
-      return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION) ? NGOAmount : new Decimal(0)
+      return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION)
+        ? NGOAmount
+        : new Decimal(0)
     },
     get r152() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
@@ -529,9 +531,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
     get XIIoddiel_uplatnujem2percenta() {
-      return (
-        this.canDonateTwoPercentOfTax ? (input?.XIIoddiel_uplatnujem2percenta ?? false) : false
-      )
+      return this.canDonateTwoPercentOfTax
+        ? input?.XIIoddiel_uplatnujem2percenta ?? false
+        : false
     },
 
     /** SECTION Danovy bonus */
@@ -549,8 +551,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     datum: input.datum,
 
     get canDonateTwoPercentOfTax() {
-      return (
-        percentage(this.r135_dan_na_uhradu, 3).gte(MIN_2_PERCENT_CALCULATED_DONATION)
+      return percentage(this.r135_dan_na_uhradu, 3).gte(
+        MIN_2_PERCENT_CALCULATED_DONATION,
       )
     },
   }

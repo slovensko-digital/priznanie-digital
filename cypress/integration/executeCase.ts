@@ -14,10 +14,10 @@ import {
   homeRoute,
   postponeHomeRoute,
 } from '../../src/lib/routes'
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import Decimal from 'decimal.js'
 import path from 'path'
+import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 // path to download directory ./cypress/downloads from
 // directory ./cypress/fixtures (default for file upload)
@@ -68,7 +68,7 @@ const executeTestCase = (testCase: string) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
       (inputModule) => {
         // Access named export
-        const input: TaxFormUserInput = inputModule[`${testCase}Input`]
+        const input: E2eTestUserInput = inputModule[`${testCase}Input`]
 
         assert.exists(input, `${testCase}Input module not found`)
 
@@ -239,32 +239,34 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
-        /**  SECTION Two percent */
-        assertUrl('/dve-percenta')
+        if (input.expectNgoDonationPage) {
+          /**  SECTION Two percent */
+          assertUrl('/dve-percenta')
 
-        if (input.XIIoddiel_uplatnujem2percenta) {
-          getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
+          if (input.XIIoddiel_uplatnujem2percenta) {
+            getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
 
-          if (input.splnam3per) {
-            getInput('splnam3per').click()
+            if (input.splnam3per) {
+              getInput('splnam3per').click()
+            }
+
+            typeToInput('r142_obchMeno', input)
+            typeToInput('r142_ico', input)
+            typeToInput('r142_ulica', input)
+            typeToInput('r142_cislo', input)
+            typeToInput('r142_psc', input)
+            getInput('r142_obec').clear() // clear value from PSC autocomplete via Posta API
+            typeToInput('r142_obec', input)
+
+            if (input.XIIoddiel_suhlasZaslUdaje) {
+              cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+            }
+          } else {
+            getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
           }
 
-          typeToInput('r142_obchMeno', input)
-          typeToInput('r142_ico', input)
-          typeToInput('r142_ulica', input)
-          typeToInput('r142_cislo', input)
-          typeToInput('r142_psc', input)
-          getInput('r142_obec').clear() // clear value from PSC autocomplete via Posta API
-          typeToInput('r142_obec', input)
-
-          if (input.XIIoddiel_suhlasZaslUdaje) {
-            cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-          }
-        } else {
-          getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
+          next()
         }
-
-        next()
 
         /**  SECTION Osobne udaje */
         assertUrl('/osobne-udaje')

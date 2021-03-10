@@ -17,7 +17,6 @@ let cache: Cache = {
   time: null,
 }
 
-
 const formatNgoData = (rawArray: string[][]): CachedData[] => {
   // ["nazov_org","ICO_org","ulica_sidla_org","mesto_sidla_org","cislo_registra_sidla_org","referencne_cislo_sidla_org","PSC_org","pravna_forma_org","IBAN","banka"  ],
   return rawArray.map(
