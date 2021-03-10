@@ -65,7 +65,12 @@ export const Feedback: React.FC<Props> = ({ taxFormUserInput }: Props) => {
             <h3 className="govuk-heading-m">Nahlásenie chyby</h3>
             <p className="govuk-body">
               Pomocou tohto formuláru môžete nahlásiť chybu v návode, alebo na
-              stránke. Neuvádzajte prosím svoje osobné údaje.
+              stránke. Neuvádzajte prosím svoje osobné údaje, chyby sú nám
+              nahlasované anonymne.
+            </p>
+            <p>
+              Ak si želáte dostať odpoveď, informáciu o náprave, či zapracovaní
+              nahlásenej chyby, prosím uveďte do textu napr. svoj email.
             </p>
           </div>
           <div
