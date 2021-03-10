@@ -1,6 +1,6 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
+import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-export const bugReport2Input: TaxFormUserInput = {
+export const bugReport2Input: E2eTestUserInput = {
   t1r10_prijmy: '45000',
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
@@ -47,6 +47,7 @@ export const bugReport2Input: TaxFormUserInput = {
   r075_zaplatene_prispevky_na_dochodok: '100',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
+  expectNgoDonationPage: true,
   XIIoddiel_uplatnujem2percenta: false,
   r142_ico: '',
   r142_obchMeno: '',

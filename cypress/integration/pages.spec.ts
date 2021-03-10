@@ -326,7 +326,7 @@ describe('osobne-udaje page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/dve-percenta')
+    assertUrl('/kupele')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
@@ -583,13 +583,6 @@ describe('twoPercent page', () => {
   it('has working ui', () => {
     cy.visit('/dve-percenta')
 
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/kupele')
-
-    //  Go back to our page
-    cy.visit('/dve-percenta')
-
     // Shows error, when presses next without interaction
     next()
     getError().should('have.length', 1)
@@ -612,7 +605,7 @@ describe('twoPercent page', () => {
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
-    assertUrl('/osobne-udaje')
+    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('with autoform', () => {
     cy.visit('/dve-percenta')
@@ -623,19 +616,24 @@ describe('twoPercent page', () => {
     /** With autoform */
     getInput('r142_obchMeno').type('Lifestarter')
 
-    cy.contains('starter Ulica Ľudmily Podjavorinskej 2545/20, 91701 Trnava').click()
+    cy.contains(
+      'starter Ulica Ľudmily Podjavorinskej 2545/20, 91701 Trnava',
+    ).click()
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
     getInput('r142_ico').should('contain.value', '50 718 274')
     getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
-    getInput('r142_ulica').should('contain.value', 'Ulica Ľudmily Podjavorinskej')
+    getInput('r142_ulica').should(
+      'contain.value',
+      'Ulica Ľudmily Podjavorinskej',
+    )
     getInput('r142_cislo').should('contain.value', '2545/20')
     getInput('r142_psc').should('contain.value', '917 01')
     getInput('r142_obec').should('contain.value', 'Trnava')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
-    assertUrl('/osobne-udaje')
+    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('works with no', () => {
     cy.visit('/dve-percenta')
@@ -644,7 +642,7 @@ describe('twoPercent page', () => {
     next()
     getError().should('have.length', 0)
 
-    assertUrl('/osobne-udaje')
+    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('works with Slovensko.Digital pre-fill', () => {
     cy.visit('/dve-percenta')
@@ -659,7 +657,7 @@ describe('twoPercent page', () => {
     getInput('r142_obec').should('contain.value', 'Bratislava')
 
     next()
-    assertUrl('/osobne-udaje')
+    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
 })
 
@@ -669,7 +667,7 @@ describe('Spa page', () => {
     getInput('kupele', '-no').click()
     next()
     getError().should('have.length', 0)
-    assertUrl('/dve-percenta')
+    assertUrl('/osobne-udaje')
   })
   it('Links and errors', () => {
     cy.visit('/kupele')
@@ -919,9 +917,6 @@ describe('IBAN page', () => {
     // skipPage()
 
     assertUrl('/kupele')
-    skipPage()
-
-    assertUrl('/dve-percenta')
     skipPage()
 
     assertUrl('/osobne-udaje')

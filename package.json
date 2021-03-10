@@ -2,7 +2,7 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "14.15.4"
+    "node": "14"
   },
   "scripts": {
     "clean": "rm -rf ./.next && rm ./__tests__/**/*.output.*",

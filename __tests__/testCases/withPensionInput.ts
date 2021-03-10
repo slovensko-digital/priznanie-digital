@@ -1,6 +1,6 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
+import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-export const withPensionInput: TaxFormUserInput = {
+export const withPensionInput: E2eTestUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   t1r10_prijmy: '25000',
@@ -21,4 +21,6 @@ export const withPensionInput: TaxFormUserInput = {
 
   hasChildren: false,
   children: [],
+
+  expectNgoDonationPage: true,
 }

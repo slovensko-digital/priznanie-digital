@@ -1,6 +1,6 @@
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
+import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-export const withEmploymentBonusInput: TaxFormUserInput = {
+export const withEmploymentBonusInput: E2eTestUserInput = {
   priloha3_r11_socialne: '435.22',
   priloha3_r13_zdravotne: '217.33',
   r001_dic: '233123123',
@@ -44,4 +44,6 @@ export const withEmploymentBonusInput: TaxFormUserInput = {
   ziadamVyplatitDanovyBonus: false,
   ziadamVratitDanovyPreplatok: true,
   iban: 'SK6807200002891987426353',
+
+  expectNgoDonationPage: false,
 }
