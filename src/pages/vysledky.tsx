@@ -78,17 +78,21 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
     {
       title: 'Zdravotné poistné',
-      value: taxForm.priloha3_r13_zdravotne,
+      value: taxForm.priloha3_r13_zdravotne.plus(
+        taxForm.priloha3_r10_zdravotne,
+      ),
       key: 'priloha3_r13_zdravotne',
     },
     {
       title: 'Sociálne poistné',
-      value: taxForm.priloha3_r11_socialne,
+      value: taxForm.priloha3_r11_socialne.plus(taxForm.priloha3_r09_socialne),
       key: 'priloha3_r11_socialne',
     },
     {
       title: 'Zaplatené poistné spolu',
-      value: taxForm.priloha3_r08_poistne_spolu,
+      value: taxForm.vydavkyPoistPar6ods11_ods1a2.plus(
+        taxForm.priloha3_r08_poistne_spolu,
+      ),
       key: 'priloha3_r08_poistne',
     },
     {
