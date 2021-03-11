@@ -23,6 +23,7 @@
     "git-comit-hash": "echo {\\\"gitCommit\\\":\\\"$(git rev-parse --short HEAD)\\\"} > ./git-commit.json && git add ./git-commit.json"
   },
   "dependencies": {
+    "base64-js": "^1.5.1",
     "classnames": "2.2.6",
     "decimal.js": "10.2.1",
     "formik": "2.2.6",
