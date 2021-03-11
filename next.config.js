@@ -4,6 +4,7 @@ module.exports = {
   },
   publicRuntimeConfig: {
     withDebug: process.env.WITH_DEBUG === 'true',
+    navodyBaseUrl: process.env.NAVODY_BASE_URL
   },
   webpack: (webpackConfig) => {
     const config = { ...webpackConfig }

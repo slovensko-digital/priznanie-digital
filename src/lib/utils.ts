@@ -1,6 +1,7 @@
 import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
 import Decimal from 'decimal.js'
+import base64 from 'base64-js'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -193,4 +194,27 @@ export const parseStreetAndNumber = (streetAndNumber) => {
 
 export const percentage = (base, percent) => {
   return floorDecimal(base.div(100).times(percent))
+}
+
+const mapHelper = (arr, callback): any => {
+  const res = []
+  let kValue
+  let mappedValue
+
+  for (let k = 0, len = arr.length; k < len; k++) {
+    if (typeof arr === 'string' && !!arr.charAt(k)) {
+      kValue = arr.charAt(k)
+      mappedValue = callback(kValue, k, arr)
+      res[k] = mappedValue
+    } else if (typeof arr !== 'string' && k in arr) {
+      kValue = arr[k]
+      mappedValue = callback(kValue, k, arr)
+      res[k] = mappedValue
+    }
+  }
+  return res
+}
+
+export const toBase64 = (value: string): string => {
+  return base64.fromByteArray(mapHelper(value, (char) => char.charCodeAt(0)))
 }
