@@ -30,6 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       to: 'priznanie.digital@protonmail.com',
       subject: parsedBody.whatWereYouDoing,
       textContent: `${parsedBody.whatWentWrong}\n\n
+Email: ${parsedBody.email || '[neuvedený]'}
 URL: ${parsedBody.url}
 IP adresa: ${ipAddress}
 Dátum: ${new Date().toLocaleString()}`,

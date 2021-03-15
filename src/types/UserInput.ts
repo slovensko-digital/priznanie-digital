@@ -6,4 +6,14 @@ export interface EmailUserInput {
   newsletter: boolean
 }
 
-export type UserInput = TaxFormUserInput & PostponeUserInput & EmailUserInput
+export interface FeedbackFormInput {
+  whatWereYouDoing: string
+  whatWentWrong: string
+  email: string
+  saving?: string
+}
+
+export type UserInput = TaxFormUserInput &
+  PostponeUserInput &
+  EmailUserInput &
+  FeedbackFormInput

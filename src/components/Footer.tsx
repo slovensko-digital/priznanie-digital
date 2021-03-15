@@ -10,15 +10,12 @@ interface Props {
   postponeUserInput: PostponeUserInput
 }
 
-const Footer = ({ taxFormUserInput, postponeUserInput }: Props) => {
+const Footer = ({ taxFormUserInput }: Props) => {
   return (
     <>
       <div className="sdn-feedbackbar">
         <div className="govuk-width-container ">
-          <Feedback
-            taxFormUserInput={taxFormUserInput}
-            postponeUserInput={postponeUserInput}
-          />
+          <Feedback taxFormUserInput={taxFormUserInput} />
         </div>
       </div>
       <footer className="sdn-footer " role="contentinfo">

@@ -45,7 +45,7 @@ interface InputProps<Name> {
   label: string
   hint?: ReactNode
   className?: string
-  type: 'text' | 'number' | 'email'
+  type: 'text' | 'number' | 'email' | 'textarea'
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 
