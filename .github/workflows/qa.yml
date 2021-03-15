@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Test this
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Checkout repository
         uses: actions/checkout@master
         with:

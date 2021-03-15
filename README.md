@@ -1,5 +1,7 @@
 # [priznanie.digital](https://priznanie.digital/)
 
+halo
+
 ![Deployment](https://github.com/priznanie-digital/priznanie-digital/workflows/Deployment/badge.svg)
 
 Tax filing application for self employed professionals in Slovakia.
