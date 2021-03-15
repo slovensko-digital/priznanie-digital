@@ -15,8 +15,9 @@ import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
 import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
+import { UserInput } from '../../src/types/UserInput'
 
-function getInput<K extends keyof TaxFormUserInput>(key: K, suffix = '') {
+function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
 }
 
@@ -335,31 +336,33 @@ describe('osobne-udaje page', () => {
     next()
     getError()
   })
-  it('with autoform', () => {
-    cy.visit('/osobne-udaje')
+  if (Cypress.env('HAS_NO_SECRETS') !== 'true') {
+    it('with autoform', () => {
+      cy.visit('/osobne-udaje')
 
-    /** With autoform */
-    typeToInput('r001_dic', baseInput)
-    typeToInput('r003_nace', baseInput)
-    getInput('meno_priezvisko').type('urban ayurveda')
+      /** With autoform */
+      typeToInput('r001_dic', baseInput)
+      typeToInput('r003_nace', baseInput)
+      getInput('meno_priezvisko').type('urban ayurveda')
 
-    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
+      cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should(
-      'contain.value',
-      'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
-    )
-    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
-    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
-    getInput('r005_meno').should('contain.value', 'Pavel')
-    getInput('r007_ulica').should('contain.value', 'Národná')
-    getInput('r008_cislo').should('contain.value', '10')
-    getInput('r009_psc').should('contain.value', '010 01')
-    getInput('r010_obec').should('contain.value', 'Žilina')
-    getInput('r011_stat').should('contain.value', 'Slovenská republika')
+      getInput('meno_priezvisko').should(
+        'contain.value',
+        'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
+      )
+      getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
+      getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+      getInput('r005_meno').should('contain.value', 'Pavel')
+      getInput('r007_ulica').should('contain.value', 'Národná')
+      getInput('r008_cislo').should('contain.value', '10')
+      getInput('r009_psc').should('contain.value', '010 01')
+      getInput('r010_obec').should('contain.value', 'Žilina')
+      getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
-    next()
-  })
+      next()
+    })
+  }
   it('with NACE', () => {
     cy.visit('/osobne-udaje')
 
@@ -379,7 +382,6 @@ describe('osobne-udaje page', () => {
   it('Manual entry', () => {
     cy.visit('/osobne-udaje')
 
-    /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
     typeToInput('r005_meno', baseInput)
@@ -849,12 +851,18 @@ describe('Feedback', () => {
   it('has working ui', () => {
     cy.visit(homeRoute)
     cy.get('[data-test=feedback]').click()
-
-    cy.get('[data-test=whatWereYouDoing]').type('Cypress tests')
-    cy.get('[data-test=whatWentWrong]').type('Testing the spam')
     cy.get('[data-test=submit]').click()
-    /** Don't spam the mail */
-    // cy.get('[data-test=submit]').click();
+    getError().should('have.length', 2)
+
+    getInput('email').type('foo')
+    cy.get('[data-test=submit]').click()
+    getError().should('have.length', 3)
+
+    getInput('whatWereYouDoing').type('Cypress tests')
+    getInput('whatWentWrong').type('Testing the spam')
+    cy.get('[data-test=submit]').click()
+    getError().should('have.length', 1)
+    getError().contains('email')
   })
 })
 
@@ -920,8 +928,16 @@ describe('IBAN page', () => {
     skipPage()
 
     assertUrl('/osobne-udaje')
-    getInput('meno_priezvisko').type('Matej Ledni')
-    cy.contains('Matej Lednický').click()
+    typeToInput('r001_dic', withBonusInput)
+    typeToInput('r003_nace', withBonusInput)
+    typeToInput('r005_meno', withBonusInput)
+    typeToInput('r004_priezvisko', withBonusInput)
+    typeToInput('r007_ulica', withBonusInput)
+    typeToInput('r008_cislo', withBonusInput)
+    typeToInput('r009_psc', withBonusInput)
+    getInput('r010_obec').clear() // clear value from PSC autocomplete via Posta API
+    typeToInput('r010_obec', withBonusInput)
+    typeToInput('r011_stat', withBonusInput)
     next()
 
     assertUrl('/suhrn')
@@ -970,19 +986,21 @@ describe('Summary page', () => {
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody')
   })
-  it('displays correct first & last name', () => {
-    cy.visit('/osobne-udaje')
+  if (Cypress.env('HAS_NO_SECRETS') !== 'true') {
+    it('displays correct first & last name', () => {
+      cy.visit('/osobne-udaje')
 
-    getInput('meno_priezvisko').type('Matej Ledni')
-    cy.contains('Matej Lednický').click()
-    getInput('meno_priezvisko').clear()
-    getInput('meno_priezvisko').type('Jozef Mrkva') // write different name into search input
-    next()
+      getInput('meno_priezvisko').type('Matej Ledni')
+      cy.contains('Matej Lednický').click()
+      getInput('meno_priezvisko').clear()
+      getInput('meno_priezvisko').type('Jozef Mrkva') // write different name into search input
+      next()
 
-    assertUrl('/suhrn')
-    cy.get('[data-test=r005_meno]').contains('Matej')
-    cy.get('[data-test=r004_priezvisko]').contains('Lednický')
-  })
+      assertUrl('/suhrn')
+      cy.get('[data-test=r005_meno]').contains('Matej')
+      cy.get('[data-test=r004_priezvisko]').contains('Lednický')
+    })
+  }
   ;[
     '/prijmy-a-vydavky',
     '/zamestnanie',
