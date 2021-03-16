@@ -158,5 +158,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # env vars for local server started via `npm start`
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
-          # check if cypress can run tests that require secrets
-          CYPRESS_HAS_NO_SECRETS: ${{ secrets.AUTOFORMTOKEN == '' }}
