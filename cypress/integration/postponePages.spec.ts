@@ -52,27 +52,22 @@ describe('/odklad/osobne-udaje page', () => {
     next()
     cy.get('[data-test=error]')
   })
-  if (Cypress.env('HAS_NO_SECRETS') !== 'true') {
-    it('with autoform', () => {
-      assertUrl('/odklad/osobne-udaje')
+  it.skip('with autoform', () => {
+    assertUrl('/odklad/osobne-udaje')
 
-      /** With autoform */
-      typeToInputPostpone('dic', foreignIncomeInput)
-      getInputPostpone('meno_priezvisko').type('Július Ret')
+    /** With autoform */
+    typeToInputPostpone('dic', foreignIncomeInput)
+    getInputPostpone('meno_priezvisko').type('Július Ret')
 
-      cy.contains('Július Retzer').click()
+    cy.contains('Július Retzer').click()
 
-      getInputPostpone('meno_priezvisko').should(
-        'contain.value',
-        'Július Retzer',
-      )
-      getInputPostpone('ulica').should('contain.value', 'Mierová')
-      getInputPostpone('cislo').should('contain.value', '4')
-      getInputPostpone('psc').should('contain.value', '821 05')
-      getInputPostpone('obec').should('contain.value', 'Bratislava')
-      getInputPostpone('stat').should('contain.value', 'Slovenská republika')
-    })
-  }
+    getInputPostpone('meno_priezvisko').should('contain.value', 'Július Retzer')
+    getInputPostpone('ulica').should('contain.value', 'Mierová')
+    getInputPostpone('cislo').should('contain.value', '4')
+    getInputPostpone('psc').should('contain.value', '821 05')
+    getInputPostpone('obec').should('contain.value', 'Bratislava')
+    getInputPostpone('stat').should('contain.value', 'Slovenská republika')
+  })
   it('with posta api', () => {
     assertUrl('/odklad/osobne-udaje')
 
@@ -101,7 +96,7 @@ describe('/odklad/osobne-udaje page', () => {
   })
 })
 
-describe('/odklad/suhrn page', () => {
+describe.skip('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 

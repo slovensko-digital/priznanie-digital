@@ -336,33 +336,31 @@ describe('osobne-udaje page', () => {
     next()
     getError()
   })
-  if (Cypress.env('HAS_NO_SECRETS') !== 'true') {
-    it('with autoform', () => {
-      cy.visit('/osobne-udaje')
+  it.skip('with autoform', () => {
+    cy.visit('/osobne-udaje')
 
-      /** With autoform */
-      typeToInput('r001_dic', baseInput)
-      typeToInput('r003_nace', baseInput)
-      getInput('meno_priezvisko').type('urban ayurveda')
+    /** With autoform */
+    typeToInput('r001_dic', baseInput)
+    typeToInput('r003_nace', baseInput)
+    getInput('meno_priezvisko').type('urban ayurveda')
 
-      cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
+    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
 
-      getInput('meno_priezvisko').should(
-        'contain.value',
-        'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
-      )
-      getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
-      getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
-      getInput('r005_meno').should('contain.value', 'Pavel')
-      getInput('r007_ulica').should('contain.value', 'Národná')
-      getInput('r008_cislo').should('contain.value', '10')
-      getInput('r009_psc').should('contain.value', '010 01')
-      getInput('r010_obec').should('contain.value', 'Žilina')
-      getInput('r011_stat').should('contain.value', 'Slovenská republika')
+    getInput('meno_priezvisko').should(
+      'contain.value',
+      'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
+    )
+    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
+    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+    getInput('r005_meno').should('contain.value', 'Pavel')
+    getInput('r007_ulica').should('contain.value', 'Národná')
+    getInput('r008_cislo').should('contain.value', '10')
+    getInput('r009_psc').should('contain.value', '010 01')
+    getInput('r010_obec').should('contain.value', 'Žilina')
+    getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
-      next()
-    })
-  }
+    next()
+  })
   it('with NACE', () => {
     cy.visit('/osobne-udaje')
 
@@ -986,21 +984,19 @@ describe('Summary page', () => {
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody')
   })
-  if (Cypress.env('HAS_NO_SECRETS') !== 'true') {
-    it('displays correct first & last name', () => {
-      cy.visit('/osobne-udaje')
+  it.skip('displays correct first & last name', () => {
+    cy.visit('/osobne-udaje')
 
-      getInput('meno_priezvisko').type('Matej Ledni')
-      cy.contains('Matej Lednický').click()
-      getInput('meno_priezvisko').clear()
-      getInput('meno_priezvisko').type('Jozef Mrkva') // write different name into search input
-      next()
+    getInput('meno_priezvisko').type('Matej Ledni')
+    cy.contains('Matej Lednický').click()
+    getInput('meno_priezvisko').clear()
+    getInput('meno_priezvisko').type('Jozef Mrkva') // write different name into search input
+    next()
 
-      assertUrl('/suhrn')
-      cy.get('[data-test=r005_meno]').contains('Matej')
-      cy.get('[data-test=r004_priezvisko]').contains('Lednický')
-    })
-  }
+    assertUrl('/suhrn')
+    cy.get('[data-test=r005_meno]').contains('Matej')
+    cy.get('[data-test=r004_priezvisko]').contains('Lednický')
+  })
   ;[
     '/prijmy-a-vydavky',
     '/zamestnanie',
