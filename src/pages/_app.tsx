@@ -99,6 +99,16 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     validateRoute(router, taxForm, taxFormUserInput, postponeUserInput)
   }, [router, nextRoute, taxForm, taxFormUserInput, postponeUserInput])
 
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag('config', 'UA-69285708-14', { page_path: url })
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router])
+
   const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'
     : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
