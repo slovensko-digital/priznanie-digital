@@ -2,7 +2,7 @@ name: Quality Assurance
 
 on:
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   lint:
@@ -136,7 +136,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: WITH_DEBUG=true yarn build
+        run: yarn build
 
       # because of "record" and "parallel" parameters
       # these containers will load balance all found tests among themselves
@@ -158,3 +158,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # env vars for local server started via `npm start`
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
+          # navody.digital base url for redirect
+          NAVODY_BASE_URL: https://staging.navody.digital

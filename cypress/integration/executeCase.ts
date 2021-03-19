@@ -67,6 +67,8 @@ const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
       (inputModule) => {
+        cy.setCookie('you-shall', 'not-pass') // enable debug mode for redirect page
+
         // Access named export
         const input: E2eTestUserInput = inputModule[`${testCase}Input`]
 
@@ -386,12 +388,14 @@ const executeTestCase = (testCase: string) => {
         next()
 
         /** SECTION Download */
-        assertUrl('/stiahnut')
+        assertUrl('/pokracovat')
 
-        cy.contains('Stiahnuť dáta')
+        cy.contains('Presmerujeme Vás na Návody.Digital. Čakajte prosím.')
 
-        cy.get('[data-test="download-xml"]').click()
-        const filePath = path.join(downloadsFolder, 'danove_priznanie.xml')
+        cy.get('form[action$="/podania/nove"][method=post]')
+
+        cy.get('[data-test="debug-download"]').click()
+        const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
         cy.visit('/form/form.495.html')
@@ -417,6 +421,8 @@ const executePostponeCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
       (inputModule) => {
+        cy.setCookie('you-shall', 'not-pass') // enable debug mode for redirect page
+
         // Access named export
         const input: PostponeUserInput = inputModule[`${testCase}Input`]
 
@@ -463,13 +469,14 @@ const executePostponeCase = (testCase: string) => {
         }
 
         next()
-        assertUrl('/odklad/stiahnut')
+        assertUrl('/odklad/pokracovat')
 
-        cy.get('[data-test="download-xml"]').click()
-        const filePath = path.join(
-          downloadsFolder,
-          'odklad_danoveho_priznania.xml',
-        )
+        cy.contains('Presmerujeme Vás na Návody.Digital. Čakajte prosím.')
+
+        cy.get('form[action$="/podania/nove"][method=post]')
+
+        cy.get('[data-test="debug-download"]').click()
+        const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
         cy.visit('/form-odklad/form.510.html')

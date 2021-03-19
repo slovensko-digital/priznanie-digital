@@ -336,7 +336,7 @@ describe('osobne-udaje page', () => {
     next()
     getError()
   })
-  it.skip('with autoform', () => {
+  it('with autoform', () => {
     cy.visit('/osobne-udaje')
 
     /** With autoform */
@@ -876,7 +876,7 @@ describe('Results page', () => {
     cy.visit('/vysledky')
 
     next()
-    assertUrl('/stiahnut')
+    assertUrl('/pokracovat')
   })
   it('has working ui', () => {
     cy.visit('/vysledky')
@@ -984,7 +984,7 @@ describe('Summary page', () => {
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody')
   })
-  it.skip('displays correct first & last name', () => {
+  it('displays correct first & last name', () => {
     cy.visit('/osobne-udaje')
 
     getInput('meno_priezvisko').type('Matej Ledni')
