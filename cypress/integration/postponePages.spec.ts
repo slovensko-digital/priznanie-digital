@@ -52,7 +52,7 @@ describe('/odklad/osobne-udaje page', () => {
     next()
     cy.get('[data-test=error]')
   })
-  it('with autoform', () => {
+  it.skip('with autoform', () => {
     assertUrl('/odklad/osobne-udaje')
 
     /** With autoform */
