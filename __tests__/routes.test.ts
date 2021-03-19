@@ -21,7 +21,7 @@ describe('routes', () => {
         '/osobne-udaje',
         '/suhrn',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
 
@@ -39,7 +39,7 @@ describe('routes', () => {
         '/osobne-udaje',
         '/suhrn',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
 
@@ -57,7 +57,7 @@ describe('routes', () => {
         '/osobne-udaje',
         '/suhrn',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
 
@@ -79,7 +79,7 @@ describe('routes', () => {
         '/suhrn',
         '/iban',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
 
@@ -99,7 +99,7 @@ describe('routes', () => {
         '/suhrn',
         '/iban',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
 
@@ -121,7 +121,7 @@ describe('routes', () => {
         '/suhrn',
         '/iban',
         '/vysledky',
-        '/stiahnut',
+        '/pokracovat',
       ])
     })
   })

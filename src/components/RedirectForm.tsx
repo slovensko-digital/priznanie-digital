@@ -86,10 +86,11 @@ const Debug = ({ canContinue, download }) => (
     <br />
     {download && (
       <button
+        type="button"
         className="govuk-button"
         data-test="debug-download"
         onClick={() => {
-          fileDownload(download, 'debug.xml')
+          fileDownload(download, 'file.xml')
         }}
       >
         DEBUG: Stiahnuť XML
