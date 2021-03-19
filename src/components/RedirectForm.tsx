@@ -3,9 +3,8 @@ import getConfig from 'next/config'
 import fileDownload from 'js-file-download'
 import { ErrorSummary } from './ErrorSummary'
 import Link from 'next/link'
-const {
-  publicRuntimeConfig: { navodyBaseUrl, withDebug },
-} = getConfig()
+import { checkCookie } from '../lib/cookie'
+const { publicRuntimeConfig } = getConfig()
 
 export interface RedirectField {
   name: string
@@ -23,12 +22,14 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
   canContinue,
   debugDownload,
 }) => {
+  const withDebug = checkCookie('you-shall', 'not-pass')
+
   const form = useRef(null)
   useEffect(() => {
     if (!withDebug && form.current) {
       form.current.submit()
     }
-  }, [form])
+  }, [form, withDebug])
 
   if (!canContinue && !withDebug) {
     return (
@@ -45,7 +46,7 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
     )
   }
 
-  const action = `${navodyBaseUrl}/podania/nove`
+  const action = `${publicRuntimeConfig.navodyBaseUrl}/podania/nove`
   return (
     <>
       <p className="govuk-!-margin-top-6">
