@@ -67,6 +67,8 @@ const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
       (inputModule) => {
+        cy.setCookie('you-shall', 'not-pass') // enable debug mode for redirect page
+
         // Access named export
         const input: E2eTestUserInput = inputModule[`${testCase}Input`]
 
@@ -419,6 +421,8 @@ const executePostponeCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/postpone/${testCase}Input.ts`).then(
       (inputModule) => {
+        cy.setCookie('you-shall', 'not-pass') // enable debug mode for redirect page
+
         // Access named export
         const input: PostponeUserInput = inputModule[`${testCase}Input`]
 

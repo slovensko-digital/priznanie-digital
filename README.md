@@ -78,7 +78,7 @@ yarn check:ts
 
 ## Feature flags
 
-- `you-shall=not-pass` allows direct access to any URL, you dont have to go through whole flow
+- `you-shall=not-pass` allows direct access to any URL, you dont have to go through whole flow. Also enables debug mode for redirect at the end of the flow (see Navody.Digital Integration below).
 
 Each feature flag is a cookie with value. You can set cookie in dev tools console (eg. `document.cookie='you-shall=not-pass'`) or browser extension ([Chrome](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/)).
 
@@ -87,10 +87,7 @@ Each feature flag is a cookie with value. You can set cookie in dev tools consol
 Add `.env` file with env variables:
 
 - _autoformtoken_ (for [autocomplete api](https://ekosystem.slovensko.digital/sluzby/autoform))
-- _sendinbluetoken_ (for sending emails via 3rd party service [sendinblue](https://www.sendinblue.com/))
-- _sendinblue_tpl_postpone_ (template id for sending postpone form to email)
-- _sendinblue_tpl_tax_ (template id for sending tax form details to email)
-- _sendinblue_list_id_ (id of list to save users into if they opt into newsletter)
+- _sendinbluetoken_ (for sending feedback emails via 3rd party service [sendinblue](https://www.sendinblue.com/))
 
 ## Environments
 
@@ -101,6 +98,12 @@ Add `.env` file with env variables:
 
 - Github repository: https://github.com/priznanie-digital/priznanie-digital
 - Deployed to staging env via [Github Action - Deployment](https://github.com/priznanie-digital/priznanie-digital/actions?query=workflow%3ADeployment)
+
+## Navody.Digital Integration
+
+When the flow is complete we redirect to Navody.Digital. It takes care of sending emails and downloading files.
+
+To debug this integration set `you-shall=not-pass` cookie. Instead of automatic redirect you will be able to redirect manually (by clicking a button) or download the XML file. This approach is used also for functional tests.
 
 ## Pull request checks
 
@@ -118,7 +121,7 @@ Tested via [Github Action - Quality Assurance](https://github.com/priznanie-digi
 - Functional tests:
   - build and start server:
   ```bash
-  WITH_DEBUG=true yarn build
+  yarn build
   yarn start
   ```
   - run functional tests via Cypress - [cypress-io/github-action](https://github.com/cypress-io/github-action)
