@@ -1,18 +1,18 @@
 import React from 'react'
+import { googleTagManagerId } from '../lib/constants'
 
-export interface GoogleAnalyticsProps {
-  id: string
-}
-
-export const GoogleAnalytics = ({ id }: GoogleAnalyticsProps) => (
+export const GoogleAnalytics = () => (
   <>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${googleTagManagerId}`}
+    />
     <script
       dangerouslySetInnerHTML={{
         __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${id}');`,
+gtag('config', '${googleTagManagerId}');`,
       }}
     />
   </>

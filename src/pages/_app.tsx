@@ -27,6 +27,7 @@ import {
   validateRoute,
 } from '../lib/routes'
 import { Page } from '../components/Page'
+import { googleTagManagerId } from '../lib/constants'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -101,7 +102,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-      gtag('config', 'UA-69285708-14', { page_path: url })
+      gtag('config', googleTagManagerId, { page_path: url })
     }
     router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
