@@ -67,7 +67,6 @@ export const bugReport2Input: E2eTestUserInput = {
   datum: '',
   partner_spolocna_domacnost: true,
   partner_bonus_uplatneny: false,
-  email: 'anon',
   ...{
     r001_dic: '233123123',
     r003_nace: '62010 - Počítačové programovanie',

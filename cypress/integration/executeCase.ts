@@ -462,12 +462,6 @@ const executePostponeCase = (testCase: string) => {
         next()
         assertUrl('/odklad/suhrn')
 
-        if (input.email) {
-          typeToInput('email', input)
-          cy.get('button[data-test="send-email"]').click()
-          cy.contains(`Na Váš email ${input.email} sme odoslali`)
-        }
-
         next()
         assertUrl('/odklad/pokracovat')
 

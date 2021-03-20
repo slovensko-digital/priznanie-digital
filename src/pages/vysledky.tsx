@@ -4,10 +4,7 @@ import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
 import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
-import { CheckboxSmall, FormWrapper, Input } from '../components/FormComponents'
-import { FormErrors } from '../types/PageUserInputs'
-import { Form } from 'formik'
-import { EmailUserInput } from '../types/UserInput'
+import Link from 'next/link'
 
 interface SummaryRow {
   key: string
@@ -53,9 +50,6 @@ const Summary = ({ rows }: SummaryProps) => (
 
 const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   taxForm,
-  taxFormUserInput,
-  setTaxFormUserInput,
-  router,
   previousRoute,
   nextRoute,
 }) => {
@@ -131,53 +125,17 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
-      <FormWrapper<EmailUserInput>
-        initialValues={taxFormUserInput}
-        validate={validate}
-        onSubmit={(values) => {
-          setTaxFormUserInput(values)
-          router.push(nextRoute)
-        }}
-      >
-        {() => (
-          <Form className="form" noValidate>
-            <div className="box">
-              <Input
-                name="email"
-                type="email"
-                label="Pošleme vám tento výpočet dane na email?"
-                hint="Bude sa vám hodiť pri úhrade daní"
-                placeholder="váš email"
-              />
-              <CheckboxSmall
-                name="newsletter"
-                label="Mám záujem o zasielanie informačného newslettera s praktickými radami pre živnostníkov"
-              />
-            </div>
-            <button
-              data-test="next"
-              className="govuk-button govuk-!-margin-top-3"
-              type="submit"
-            >
-              Pokračovať
-            </button>
-          </Form>
-        )}
-      </FormWrapper>
+      <Link href={nextRoute}>
+        <button
+          data-test="next"
+          className="govuk-button govuk-!-margin-top-3"
+          type="submit"
+        >
+          Pokračovať
+        </button>
+      </Link>
     </>
   )
-}
-
-export const validate = (values: EmailUserInput) => {
-  const errors: Partial<FormErrors<EmailUserInput>> = {}
-
-  if (values.email && !values.email.match(/^.+@.+\.[a-z]+$/i)) {
-    errors.email = 'Nesprávny formát emailovej adresy'
-  } else if (values.newsletter && !values.email) {
-    errors.email = 'Zadajte emailovú adresu'
-  }
-
-  return errors
 }
 
 export default Vysledky

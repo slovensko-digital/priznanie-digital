@@ -301,7 +301,11 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Link href={nextRoute}>
-        <button className="govuk-button govuk-!-margin-top-4" type="button">
+        <button
+          data-test="next"
+          className="govuk-button govuk-!-margin-top-4"
+          type="button"
+        >
           Pokračovať
         </button>
       </Link>

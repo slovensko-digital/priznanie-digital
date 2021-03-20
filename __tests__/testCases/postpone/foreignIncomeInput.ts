@@ -14,5 +14,4 @@ export const foreignIncomeInput: PostponeUserInput = {
   obec: 'Bratislava 3',
   stat: 'Slovensko',
   datum: '22.02.2021',
-  newsletter: true,
 }
