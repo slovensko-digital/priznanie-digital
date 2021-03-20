@@ -30,31 +30,7 @@ const IconLock = () => (
 
 const Home = ({ nextRoute, nextPostponeRoute }) => (
   <>
-    <div className="govuk-grid-column-two-thirds">
-      <TaxFormSection nextRoute={nextRoute} />
-    </div>
-
-    <div className="govuk-grid-column-one-third">
-      <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
-      </div>
-
-      <ul className={styles.safeList}>
-        <li>
-          <IconLock />
-          <p>Bezpečné SSL pripojenie</p>
-        </li>
-        <li>
-          <IconCheck />
-          <p>
-            Testované členmi{' '}
-            <ExternalLink href="https://www.skdp.sk/">
-              Slovenskej komory daňových poradcov
-            </ExternalLink>
-          </p>
-        </li>
-      </ul>
-    </div>
+    <h1>Broken Homepage</h1>
   </>
 )
 
