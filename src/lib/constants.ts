@@ -6,3 +6,5 @@ export const getGitCommit = () => {
     return ''
   }
 }
+
+export const googleTagManagerId = 'UA-69285708-14'

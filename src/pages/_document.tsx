@@ -13,7 +13,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <GoogleAnalytics id="UA-69285708-14" />
+          <GoogleAnalytics />
           <link rel="icon" href="/favicon.ico" />
 
           {/* Primary Meta Tags */}
