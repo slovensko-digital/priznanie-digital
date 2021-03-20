@@ -13,11 +13,9 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
   const deadline = userInput.prijmy_zo_zahranicia
     ? '30. september 2021'
     : '30. jún 2021'
-  const newsletter = userInput.newsletter ? 'true' : 'false'
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
-    { name: 'submission[email]', value: userInput.email },
     {
       name: 'submission[callback_url]',
       value:
@@ -39,8 +37,8 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
       value: deadline,
     },
     {
-      name: 'submission[extra][params][newsletter]',
-      value: newsletter,
+      name: 'submission[subscription_types][]',
+      value: 'EmailMeSubmissionInstructionsEmail',
     },
     {
       name: 'submission[subscription_types][]',

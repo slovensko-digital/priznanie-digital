@@ -72,7 +72,6 @@ export const bugReport3Input: E2eTestUserInput = {
   danovnikInSpa: true,
   iban: 'anon',
   datum: '',
-  email: 'anon',
   ...{
     r001_dic: '233123123',
     r003_nace: '62010 - Počítačové programovanie',

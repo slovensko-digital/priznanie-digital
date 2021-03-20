@@ -58,8 +58,6 @@ export type PersonalInformationPostponePage = Pick<
   | 'psc'
   | 'obec'
   | 'stat'
-  | 'email'
-  | 'newsletter'
 >
 
 export type PensionUserInput = Pick<

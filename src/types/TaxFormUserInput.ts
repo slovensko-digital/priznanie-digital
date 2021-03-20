@@ -124,7 +124,4 @@ export interface TaxFormUserInput {
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali testy */
   datum: string
-
-  email?: string
-  newsletter?: boolean
 }

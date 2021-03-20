@@ -1,11 +1,6 @@
 import { TaxFormUserInput } from './TaxFormUserInput'
 import { PostponeUserInput } from './PostponeUserInput'
 
-export interface EmailUserInput {
-  email?: string
-  newsletter?: boolean
-}
-
 export interface FeedbackFormInput {
   whatWereYouDoing: string
   whatWentWrong: string
@@ -13,7 +8,4 @@ export interface FeedbackFormInput {
   saving?: string
 }
 
-export type UserInput = TaxFormUserInput &
-  PostponeUserInput &
-  EmailUserInput &
-  FeedbackFormInput
+export type UserInput = TaxFormUserInput & PostponeUserInput & FeedbackFormInput
