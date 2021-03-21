@@ -2,6 +2,7 @@ import {
   floorDecimal,
   ceilDecimal,
   parseStreetAndNumber,
+  encodeUnicodeCharacters,
 } from '../src/lib/utils'
 import {
   sortObjectKeys,
@@ -381,6 +382,24 @@ describe('utils', () => {
       it(`should return "${output}" for "${input}"`, () => {
         expect(parseStreetAndNumber(input)).toEqual(output)
       })
+    })
+  })
+
+  describe('encodeUnicodeCharacters', () => {
+    const scenarios = [
+      { input: 'ľščťžýáíé', output: 'Ä¾Å¡ÄÅ¥Å¾Ã½Ã¡Ã­Ã©' },
+      { input: 'Ján Mrkvička', output: 'JÃ¡n MrkviÄka' },
+      { input: 'No Changes Here 123', output: 'No Changes Here 123' },
+    ]
+
+    scenarios.forEach(({ input, output }) => {
+      it(`should return "${output}" for "${input}"`, () => {
+        expect(encodeUnicodeCharacters(input)).toEqual(output)
+      })
+    })
+
+    it('should process complete XML correctly', () => {
+      expect(encodeUnicodeCharacters(require('./fixtures/unicodeInput.xml'))).toEqual(require('./fixtures/unicodeOutput.xml'))
     })
   })
 })
