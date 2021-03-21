@@ -1,6 +1,7 @@
 import { postponeHomeRoute, PostponeRoute, Route } from '../../src/lib/routes'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
+import { visitPage } from '../support/utils'
 
 function getInputPostpone<K extends keyof PostponeUserInput>(
   key: K,
@@ -30,7 +31,7 @@ const next = () => {
 
 describe('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
-    cy.visit(postponeHomeRoute)
+    visitPage(postponeHomeRoute)
 
     cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')
@@ -98,7 +99,7 @@ describe('/odklad/osobne-udaje page', () => {
 
 describe('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
-    cy.visit(postponeHomeRoute)
+    visitPage(postponeHomeRoute)
 
     cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
     assertUrl('/odklad/prijmy-zo-zahranicia')

@@ -9,13 +9,14 @@ import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
-
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
 import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
+import { visitPage } from '../support/utils'
+import { completeInput } from '../../__tests__/testCases/completeInput'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -47,7 +48,7 @@ const skipPage = () => {
 }
 
 const navigateEligibleToChildrenPage = () => {
-  cy.visit('/prijmy-a-vydavky')
+  visitPage('/prijmy-a-vydavky')
   typeToInput('t1r10_prijmy', {
     ...withChildrenInput,
     t1r10_prijmy: '3480',
@@ -76,7 +77,7 @@ before(() => {
 describe('Cookie consent', () => {
   it('has working ui', () => {
     // display cookie consent
-    cy.visit(homeRoute)
+    visitPage(homeRoute)
     cy.get('.govuk-main-wrapper')
     cy.get('.cc-message').should('exist')
     cy.get('.cc-message').contains('Tento web používa súbory cookie')
@@ -84,22 +85,95 @@ describe('Cookie consent', () => {
     cy.get('.cc-message').should('not.exist')
 
     // do not display cookie consent on next visit
-    cy.visit(homeRoute)
+    visitPage(homeRoute)
     cy.get('.govuk-main-wrapper')
     cy.get('.cc-message').should('not.exist')
   })
 })
 
+describe('Session', () => {
+  it('is not saved when input are filled in', () => {
+    visitPage('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', completeInput)
+    typeToInput('priloha3_r11_socialne', completeInput)
+    typeToInput('priloha3_r13_zdravotne', completeInput)
+    typeToInput('r122', completeInput)
+
+    cy.reload()
+    getInput('t1r10_prijmy').should('have.value', '')
+    getInput('priloha3_r11_socialne').should('have.value', '')
+    getInput('priloha3_r13_zdravotne').should('have.value', '')
+    getInput('r122').should('have.value', '')
+  })
+
+  it('is saved and restored when form on page is submitted', () => {
+    visitPage('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', completeInput)
+    typeToInput('priloha3_r11_socialne', completeInput)
+    typeToInput('priloha3_r13_zdravotne', completeInput)
+    typeToInput('r122', completeInput)
+    next()
+
+    cy.visit('/prijmy-a-vydavky') // visit without clearing sessionStorage since we are testing session restore
+    cy.reload()
+    getInput('t1r10_prijmy').should('have.value', completeInput.t1r10_prijmy)
+    getInput('priloha3_r11_socialne').should(
+      'have.value',
+      completeInput.priloha3_r11_socialne,
+    )
+    getInput('priloha3_r13_zdravotne').should(
+      'have.value',
+      completeInput.priloha3_r13_zdravotne,
+    )
+    getInput('r122').should('have.value', completeInput.r122)
+  })
+
+  it('is cleared on homepage', () => {
+    visitPage('/prijmy-a-vydavky')
+    typeToInput('t1r10_prijmy', completeInput)
+    typeToInput('priloha3_r11_socialne', completeInput)
+    typeToInput('priloha3_r13_zdravotne', completeInput)
+    typeToInput('r122', completeInput)
+    next()
+
+    cy.visit('/prijmy-a-vydavky') // visit without clearing sessionStorage since we are testing session restore
+    cy.reload()
+    getInput('t1r10_prijmy').should('have.value', completeInput.t1r10_prijmy)
+    getInput('priloha3_r11_socialne').should(
+      'have.value',
+      completeInput.priloha3_r11_socialne,
+    )
+    getInput('priloha3_r13_zdravotne').should(
+      'have.value',
+      completeInput.priloha3_r13_zdravotne,
+    )
+    getInput('r122').should('have.value', completeInput.r122)
+
+    cy.visit('/')
+    cy.visit('/prijmy-a-vydavky')
+    getInput('t1r10_prijmy').should('have.value', '')
+    getInput('priloha3_r11_socialne').should('have.value', '')
+    getInput('priloha3_r13_zdravotne').should('have.value', '')
+    getInput('r122').should('have.value', '')
+
+    cy.reload()
+    getInput('t1r10_prijmy').should('have.value', '')
+    getInput('priloha3_r11_socialne').should('have.value', '')
+    getInput('priloha3_r13_zdravotne').should('have.value', '')
+    getInput('r122').should('have.value', '')
+  })
+})
+
 describe('Employment page', () => {
   it('has working ui', () => {
-    cy.visit('/zamestnanie')
+    visitPage('/zamestnanie')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/prijmy-a-vydavky')
 
     //  Go back to our page
-    cy.visit('/zamestnanie')
+    visitPage('/zamestnanie')
 
     // Shows error, when presses next without interaction
     next()
@@ -147,7 +221,7 @@ describe('Employment page', () => {
     assertUrl('/partner')
   })
   it('should erase previous answers when answer is changed to "no"', () => {
-    cy.visit('/zamestnanie')
+    visitPage('/zamestnanie')
 
     // fill out and submit the form
     getInput('employed', '-yes').click()
@@ -218,14 +292,14 @@ describe('Employment page', () => {
 })
 describe('Partner page', () => {
   it('has working ui', () => {
-    cy.visit('/partner')
+    visitPage('/partner')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/zamestnanie')
 
     //  Go back to our page
-    cy.visit('/partner')
+    visitPage('/partner')
 
     // Shows error, when presses next without interaction
     next()
@@ -238,7 +312,7 @@ describe('Partner page', () => {
   })
 
   it('determines eligibility', () => {
-    cy.visit('/partner')
+    visitPage('/partner')
 
     // When presses yes, additional fields appears
     cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
@@ -323,21 +397,21 @@ describe('Partner page', () => {
 
 describe('osobne-udaje page', () => {
   it('Back and next', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/kupele')
 
     //  Go back to our page
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     // Shows error, when presses next without interaction
     next()
     getError()
   })
   it('with autoform', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     /** With autoform */
     typeToInput('r001_dic', baseInput)
@@ -362,7 +436,7 @@ describe('osobne-udaje page', () => {
     next()
   })
   it('with NACE', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     /** With autoform */
     getInput('r003_nace').type('ryža')
@@ -372,13 +446,13 @@ describe('osobne-udaje page', () => {
     getInput('r003_nace').should('have.value', '01120 - Pestovanie ryže')
   })
   it('with posta api', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     typeToInput('r009_psc', baseInput)
     getInput('r010_obec').should('have.value', baseInput.r010_obec)
   })
   it('Manual entry', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
@@ -397,11 +471,11 @@ describe('osobne-udaje page', () => {
 
 describe('Children page', () => {
   it('has working ui for ineligible applicants', () => {
-    cy.visit('/deti')
+    visitPage('/deti')
     cy.get('[data-test=ineligible-message]').should('exist')
   })
   it('has working navigation for ineligible applicants', () => {
-    cy.visit('/partner')
+    visitPage('/partner')
     skipPage()
     assertUrl('/dochodok')
   })
@@ -433,7 +507,7 @@ describe('Children page', () => {
     assertUrl('/dochodok')
   })
   it('has working ui for adding children', () => {
-    cy.visit('/prijmy-a-vydavky')
+    visitPage('/prijmy-a-vydavky')
     typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
@@ -544,14 +618,14 @@ describe('Children page', () => {
 
 describe('Pension page', () => {
   it('has working ui', () => {
-    cy.visit('/dochodok')
+    visitPage('/dochodok')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/partner')
 
     //  Go back to our page
-    cy.visit('/dochodok')
+    visitPage('/dochodok')
 
     // Shows error, when presses next without interaction
     next()
@@ -563,7 +637,7 @@ describe('Pension page', () => {
     assertUrl('/kupele')
 
     //  Go back to our page
-    cy.visit('/dochodok')
+    visitPage('/dochodok')
 
     // When presses yes, additional fields appear
     cy.get('[data-test=platil_prispevky_na_dochodok-input-yes]').click()
@@ -581,7 +655,7 @@ describe('Pension page', () => {
 
 describe('twoPercent page', () => {
   it('has working ui', () => {
-    cy.visit('/dve-percenta')
+    visitPage('/dve-percenta')
 
     // Shows error, when presses next without interaction
     next()
@@ -608,7 +682,7 @@ describe('twoPercent page', () => {
     assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('with autoform', () => {
-    cy.visit('/dve-percenta')
+    visitPage('/dve-percenta')
 
     // When presses yes, additional fields appear
     cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
@@ -636,7 +710,7 @@ describe('twoPercent page', () => {
     assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('works with no', () => {
-    cy.visit('/dve-percenta')
+    visitPage('/dve-percenta')
 
     cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
     next()
@@ -645,7 +719,7 @@ describe('twoPercent page', () => {
     assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
   it('works with Slovensko.Digital pre-fill', () => {
-    cy.visit('/dve-percenta')
+    visitPage('/dve-percenta')
     cy.get('[data-test=prefill-slovensko-digital]').click()
 
     getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
@@ -663,21 +737,21 @@ describe('twoPercent page', () => {
 
 describe('Spa page', () => {
   it('works with no', () => {
-    cy.visit('/kupele')
+    visitPage('/kupele')
     getInput('kupele', '-no').click()
     next()
     getError().should('have.length', 0)
     assertUrl('/osobne-udaje')
   })
   it('Links and errors', () => {
-    cy.visit('/kupele')
+    visitPage('/kupele')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/dochodok')
 
     //  Go back to our page
-    cy.visit('/kupele')
+    visitPage('/kupele')
 
     // Shows error, when presses next without interaction
     next()
@@ -692,7 +766,7 @@ describe('Spa page', () => {
   })
 
   it('works with both partner and user', () => {
-    cy.visit('/kupele')
+    visitPage('/kupele')
 
     getInput('kupele', '-yes').click()
 
@@ -754,7 +828,7 @@ describe('Spa page', () => {
     getInput('r036_deti_kupele')
   })
   it('Spa UI without previously entered spouse and children', () => {
-    cy.visit('/prijmy-a-vydavky')
+    visitPage('/prijmy-a-vydavky')
     typeToInput('t1r10_prijmy', withSpaInput)
     typeToInput('priloha3_r11_socialne', withSpaInput)
     typeToInput('priloha3_r13_zdravotne', withSpaInput)
@@ -847,7 +921,7 @@ describe('Spa page', () => {
 
 describe('Feedback', () => {
   it('has working ui', () => {
-    cy.visit(homeRoute)
+    visitPage(homeRoute)
     cy.get('[data-test=feedback]').click()
     cy.get('[data-test=submit]').click()
     getError().should('have.length', 2)
@@ -866,20 +940,20 @@ describe('Feedback', () => {
 
 describe('Results page', () => {
   it('has working navigation', () => {
-    cy.visit('/vysledky')
+    visitPage('/vysledky')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/suhrn')
 
     //  Go back to our page
-    cy.visit('/vysledky')
+    visitPage('/vysledky')
 
     next()
     assertUrl('/pokracovat')
   })
   it('has working ui', () => {
-    cy.visit('/vysledky')
+    visitPage('/vysledky')
 
     cy.get('h1').contains('Výpočet dane za rok')
     cy.get('h2').contains('Stručný prehľad')
@@ -888,11 +962,11 @@ describe('Results page', () => {
 
 describe('IBAN page', () => {
   it('has working ui for ineligible applicants', () => {
-    cy.visit('/iban')
+    visitPage('/iban')
     cy.get('[data-test=ineligible-message]').should('exist')
   })
   it('has working ui for eligible applicants', () => {
-    cy.visit('/prijmy-a-vydavky')
+    visitPage('/prijmy-a-vydavky')
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
@@ -969,23 +1043,23 @@ describe('IBAN page', () => {
 
 describe('Summary page', () => {
   it('has working navigation', () => {
-    cy.visit('/suhrn')
+    visitPage('/suhrn')
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
     assertUrl('/osobne-udaje')
 
     //  Go back to our page
-    cy.visit('/vysledky')
+    visitPage('/vysledky')
   })
   it('has working ui', () => {
-    cy.visit('/suhrn')
+    visitPage('/suhrn')
 
     cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody')
   })
   it('displays correct first & last name', () => {
-    cy.visit('/osobne-udaje')
+    visitPage('/osobne-udaje')
 
     getInput('meno_priezvisko').type('Matej Ledni')
     cy.contains('Matej Lednický').click()
@@ -1008,13 +1082,13 @@ describe('Summary page', () => {
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, () => {
-      cy.visit('/suhrn')
+      visitPage('/suhrn')
       cy.get('h2 > a').eq(index).click()
       assertUrl(link)
 
       // Back button should navigate back to summary page
       cy.get('[data-test=back]').click()
-      cy.visit('/suhrn')
+      visitPage('/suhrn')
     })
   })
 })

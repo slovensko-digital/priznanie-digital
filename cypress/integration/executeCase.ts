@@ -18,6 +18,7 @@ import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import Decimal from 'decimal.js'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { visitPage } from '../support/utils'
 
 // path to download directory ./cypress/downloads from
 // directory ./cypress/fixtures (default for file upload)
@@ -74,7 +75,7 @@ const executeTestCase = (testCase: string) => {
 
         assert.exists(input, `${testCase}Input module not found`)
 
-        cy.visit(homeRoute)
+        visitPage(homeRoute)
 
         cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
@@ -398,7 +399,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.495.html')
+        visitPage('/form/form.495.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
@@ -426,7 +427,7 @@ const executePostponeCase = (testCase: string) => {
         // Access named export
         const input: PostponeUserInput = inputModule[`${testCase}Input`]
 
-        cy.visit(postponeHomeRoute)
+        visitPage(postponeHomeRoute)
 
         cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
         assertUrl('/odklad/prijmy-zo-zahranicia')
@@ -473,7 +474,7 @@ const executePostponeCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form-odklad/form.510.html')
+        visitPage('/form-odklad/form.510.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)

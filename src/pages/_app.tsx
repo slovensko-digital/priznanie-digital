@@ -22,12 +22,19 @@ import { PostponeUserInput } from '../types/PostponeUserInput'
 import {
   getPostponeRoutes,
   getRoutes,
+  homeRoute,
   PostponeRoute,
   Route,
   validateRoute,
 } from '../lib/routes'
 import { Page } from '../components/Page'
 import { googleTagManagerId } from '../lib/constants'
+import {
+  getPreservedPostponemUserInput,
+  getPreservedTaxFormUserInput,
+  preservePostponeUserInput,
+  preserveTaxFormUserInput,
+} from '../lib/session'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -70,6 +77,17 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     setTaxFormUserInput((prevUserInput) => {
       const newUserInput: TaxFormUserInput = { ...prevUserInput, ...values }
       setTaxForm(taxFormUserInputToTaxForm(newUserInput))
+      preserveTaxFormUserInput(newUserInput)
+      return newUserInput
+    })
+  }
+
+  const updatePostponeUserInput = (
+    values: Partial<PostponeUserInput>,
+  ): void => {
+    setPostponeUserInput((prevUserInput) => {
+      const newUserInput: PostponeUserInput = { ...prevUserInput, ...values }
+      preservePostponeUserInput(newUserInput)
       return newUserInput
     })
   }
@@ -91,6 +109,18 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     previousRoute: previousPostponeRoute,
     nextRoute: nextPostponeRoute,
   } = getPostponeRoutes(router.pathname as PostponeRoute)
+
+  useEffect(() => {
+    updateTaxFormUserInput(getPreservedTaxFormUserInput())
+    updatePostponeUserInput(getPreservedPostponemUserInput())
+  }, [])
+
+  useEffect(() => {
+    if (router.pathname === homeRoute) {
+      updateTaxFormUserInput(initTaxFormUserInputValues)
+      updatePostponeUserInput(initialPostponeUserInput)
+    }
+  }, [router.pathname])
 
   useEffect(() => {
     const next = nextRoute()
@@ -125,7 +155,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
         postponeUserInput={postponeUserInput}
-        setPostponeUserInput={setPostponeUserInput}
+        setPostponeUserInput={updatePostponeUserInput}
         router={router}
         previousRoute={previousRoute()}
         nextRoute={nextRoute()}
