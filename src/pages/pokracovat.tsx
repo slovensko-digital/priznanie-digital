@@ -12,13 +12,14 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
 
   const xmlFile = toBase64(buildXml(taxForm))
 
-  const formatResult = (input): string => { return input.gt(0) ? formatCurrency(input.toNumber()) : '0,00 EUR' }
-  // const summaryParams = Object.keys(taxForm.summary).map(key => (
-  //   {
-  //     name: `submission[extra][params][summary][${key}]`,
-  //     value: taxForm.summary[key].gt(0) ? formatCurrency(taxForm.summary[key].toNumber()) : '0,00 EUR'
-  //   }
-  // ))
+  const summaryParams = Object.keys(taxForm.summary).map(key => (
+    {
+      name: `submission[extra][params][summary][${key}]`,
+      value: taxForm.summary[key].gt(0)
+        ? formatCurrency(taxForm.summary[key].toNumber())
+        : '0,00 EUR'
+    }
+  ))
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
@@ -50,49 +51,7 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
     },
-    {
-      name: `submission[extra][params][summary][prijmy]`,
-      value: formatResult(taxForm.prijmy)
-    },
-    {
-      name: `submission[extra][params][summary][zdravotnePoistne]`,
-      value: formatResult(taxForm.zdravotnePoistne)
-    },
-    {
-      name: `submission[extra][params][summary][socialnePoistne]`,
-      value: formatResult(taxForm.socialnePoistne)
-    },
-    {
-      name: `submission[extra][params][summary][zaplatenePoistneSpolu]`,
-      value: formatResult(taxForm.zaplatenePoistneSpolu)
-    },
-    {
-      name: `submission[extra][params][summary][zvyhodnenieNaManz]`,
-      value: formatResult(taxForm.zvyhodnenieNaManz)
-    },
-    {
-      name: `submission[extra][params][summary][danovyBonusNaDieta]`,
-      value: formatResult(taxForm.danovyBonusNaDieta)
-    },    {
-      name: `submission[extra][params][summary][prispevokNaDochodkovePoistenie]`,
-      value: formatResult(taxForm.prispevokNaDochodkovePoistenie)
-    },
-    {
-      name: `submission[extra][params][summary][uhradyZaKupeleSpolu]`,
-      value: formatResult(taxForm.uhradyZaKupeleSpolu)
-    },
-    {
-      name: `submission[extra][params][summary][zakladDane]`,
-      value: formatResult(taxForm.zakladDane)
-    },
-    {
-      name: `submission[extra][params][summary][danovyPreplatok]`,
-      value: formatResult(taxForm.danovyPreplatok)
-    },
-    {
-      name: `submission[extra][params][summary][danNaUhradu]`,
-      value: formatResult(taxForm.danNaUhradu)
-    },
+    ...summaryParams
   ]
 }
 

@@ -225,17 +225,23 @@ export interface TaxForm {
   iban: string
 
   /** Summary values - all in one place - some duplicated **/
-  prijmy: Decimal
-  zdravotnePoistne: Decimal
-  socialnePoistne: Decimal
-  zaplatenePoistneSpolu: Decimal
-  zvyhodnenieNaManz: Decimal
-  danovyBonusNaDieta: Decimal
-  prispevokNaDochodkovePoistenie: Decimal
-  uhradyZaKupeleSpolu: Decimal
-  zakladDane: Decimal
-  danovyPreplatok: Decimal
-  danNaUhradu: Decimal
+  /* helpers */
+  _zdravotnePoistneSpolu: Decimal
+  _socialnePoistneSpolu: Decimal
+
+  summary: {
+    prijmy: Decimal
+    zdravotnePoistne: Decimal
+    socialnePoistne: Decimal
+    zaplatenePoistneSpolu: Decimal
+    zvyhodnenieNaManz: Decimal
+    danovyBonusNaDieta: Decimal
+    prispevokNaDochodkovePoistenie: Decimal
+    uhradyZaKupeleSpolu: Decimal
+    zakladDane: Decimal
+    danovyPreplatok: Decimal
+    danNaUhradu: Decimal
+  }
 
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
