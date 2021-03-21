@@ -36,10 +36,6 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     },
     {
       name: 'submission[subscription_types][]',
-      value: 'TaxReturnSubscription',
-    },
-    {
-      name: 'submission[subscription_types][]',
       value: 'SelfEmployedSubscription',
     },
     {

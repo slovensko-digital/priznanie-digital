@@ -399,7 +399,9 @@ describe('utils', () => {
     })
 
     it('should process complete XML correctly', () => {
-      expect(encodeUnicodeCharacters(require('./fixtures/unicodeInput.xml'))).toEqual(require('./fixtures/unicodeOutput.xml'))
+      expect(
+        encodeUnicodeCharacters(require('./fixtures/unicodeInput.xml')),
+      ).toEqual(require('./fixtures/unicodeOutput.xml'))
     })
   })
 })
