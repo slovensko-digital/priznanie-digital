@@ -216,9 +216,13 @@ const mapHelper = (arr, callback): any => {
 }
 
 export const encodeUnicodeCharacters = (input: string): string => {
-  return encodeURIComponent(input).replace(/%([\dA-F]{2})/g, (_, char) => String.fromCharCode(Number('0x' + char)))
+  return encodeURIComponent(input).replace(/%([\dA-F]{2})/g, (_, char) =>
+    String.fromCharCode(Number('0x' + char)),
+  )
 }
 
 export const toBase64 = (value: string): string => {
-  return base64.fromByteArray(mapHelper(encodeUnicodeCharacters(value), (char) => char.charCodeAt(0)))
+  return base64.fromByteArray(
+    mapHelper(encodeUnicodeCharacters(value), (char) => char.charCodeAt(0)),
+  )
 }
