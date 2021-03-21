@@ -555,5 +555,40 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
     },
+
+    /* Summary values - all in one place */
+    get prijmy() {
+      return this.t1r10_prijmy.plus(this.r038)
+    },
+    get zdravotnePoistne() {
+      return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
+    },
+    get socialnePoistne() {
+      return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
+    },
+    get zaplatenePoistneSpolu() {
+      return this.zdravotnePoistne.plus(this.socialnePoistne)
+    },
+    get zvyhodnenieNaManz() {
+      return this.r074_znizenie_partner
+    },
+    get danovyBonusNaDieta() {
+      return this.r117
+    },
+    get prispevokNaDochodkovePoistenie() {
+      return this.r075_zaplatene_prispevky_na_dochodok
+    },
+    get uhradyZaKupeleSpolu() {
+      return this.r076_kupele_spolu
+    },
+    get zakladDane() {
+      return this.r080_zaklad_dane_celkovo
+    },
+    get danovyPreplatok() {
+      return this.r121.plus(this.r136_danovy_preplatok)
+    },
+    get danNaUhradu() {
+      return this.r135_dan_na_uhradu
+    },
   }
 }
