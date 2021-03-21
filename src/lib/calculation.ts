@@ -559,27 +559,27 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** Summary values - all in one place **/
 
     /* helpers */
-    get _zdravotnePoistneSpolu() {
+    get _zdravotneSpolu() {
       return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
     },
-    get _socialnePoistneSpolu() {
+    get _socialneSpolu() {
       return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
     },
 
     get summary() {
       return {
         prijmy: this.t1r10_prijmy.plus(this.r038),
-        zdravotnePoistne: this._zdravotnePoistneSpolu,
-        socialnePoistne: this._socialnePoistneSpolu,
-        zaplatenePoistneSpolu: this._zdravotnePoistneSpolu.plus(this._socialnePoistneSpolu),
+        zdravotnePoistne: this._zdravotneSpolu,
+        socialnePoistne: this._socialneSpolu,
+        zaplatenePoistneSpolu: this._zdravotneSpolu.plus(this._socialneSpolu),
         zvyhodnenieNaManz: this.r074_znizenie_partner,
         danovyBonusNaDieta: this.r117,
-        prispevokNaDochodkovePoistenie: this.r075_zaplatene_prispevky_na_dochodok,
+        prispevokNaDochodkovePoist: this.r075_zaplatene_prispevky_na_dochodok,
         uhradyZaKupeleSpolu: this.r076_kupele_spolu,
         zakladDane: this.r080_zaklad_dane_celkovo,
         danovyPreplatok: this.r121.plus(this.r136_danovy_preplatok),
         danNaUhradu: this.r135_dan_na_uhradu,
       }
-    }
+    },
   }
 }

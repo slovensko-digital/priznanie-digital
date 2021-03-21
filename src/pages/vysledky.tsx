@@ -89,8 +89,8 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
     {
       title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: summary.prispevokNaDochodkovePoistenie,
-      key: 'prispevokNaDochodkovePoistenie',
+      value: summary.prispevokNaDochodkovePoist,
+      key: 'prispevokNaDochodkovePoist',
     },
     {
       title: 'Úhrady za kúpele spolu',

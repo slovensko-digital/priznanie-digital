@@ -1,25 +1,24 @@
 import React from 'react'
-import {Page} from '../components/Page'
-import {TaxForm} from '../types/TaxForm'
-import {convertToXML} from '../lib/xml/xmlConverter'
-import {RedirectField, RedirectForm} from '../components/RedirectForm'
-import {setDate, toBase64, formatCurrency} from '../lib/utils'
+import { Page } from '../components/Page'
+import { TaxForm } from '../types/TaxForm'
+import { convertToXML } from '../lib/xml/xmlConverter'
+import { RedirectField, RedirectForm } from '../components/RedirectForm'
+import { setDate, toBase64, formatCurrency } from '../lib/utils'
 
 const buildXml = (taxForm) => convertToXML(setDate(taxForm))
 
+const buildSummaryParams = (params) => {
+  return Object.keys(params).map((key) => ({
+    name: `submission[extra][params][summary][${key}]`,
+    value: params[key].gt(0)
+      ? formatCurrency(params[key].toNumber())
+      : '0,00 EUR',
+  }))
+}
+
 const buildFields = (taxForm: TaxForm): RedirectField[] => {
-  const fullName = `${taxForm.r005_meno}\u00A0${taxForm.r004_priezvisko}`
-
   const xmlFile = toBase64(buildXml(taxForm))
-
-  const summaryParams = Object.keys(taxForm.summary).map(key => (
-    {
-      name: `submission[extra][params][summary][${key}]`,
-      value: taxForm.summary[key].gt(0)
-        ? formatCurrency(taxForm.summary[key].toNumber())
-        : '0,00 EUR'
-    }
-  ))
+  const fullName = `${taxForm.r005_meno}\u00A0${taxForm.r004_priezvisko}`
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
@@ -51,11 +50,11 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
     },
-    ...summaryParams
+    ...buildSummaryParams(taxForm.summary),
   ]
 }
 
-const ContinuePage: Page<{}> = ({taxForm, taxFormUserInput}) => {
+const ContinuePage: Page<{}> = ({ taxForm, taxFormUserInput }) => {
   return (
     <RedirectForm
       fields={buildFields(taxForm)}

@@ -159,8 +159,7 @@ export interface TaxForm {
    *   r081*/
   r116_dan: Decimal
 
-  /**
-   Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
+  /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r117: Decimal
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
@@ -226,8 +225,8 @@ export interface TaxForm {
 
   /** Summary values - all in one place - some duplicated **/
   /* helpers */
-  _zdravotnePoistneSpolu: Decimal
-  _socialnePoistneSpolu: Decimal
+  _zdravotneSpolu: Decimal
+  _socialneSpolu: Decimal
 
   summary: {
     prijmy: Decimal
@@ -236,7 +235,7 @@ export interface TaxForm {
     zaplatenePoistneSpolu: Decimal
     zvyhodnenieNaManz: Decimal
     danovyBonusNaDieta: Decimal
-    prispevokNaDochodkovePoistenie: Decimal
+    prispevokNaDochodkovePoist: Decimal
     uhradyZaKupeleSpolu: Decimal
     zakladDane: Decimal
     danovyPreplatok: Decimal
