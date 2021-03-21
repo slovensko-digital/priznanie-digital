@@ -53,61 +53,63 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   previousRoute,
   nextRoute,
 }) => {
+  const summary = taxForm.summary
+
   const summaryRows = [
     {
       title: 'Príjmy',
-      value: taxForm.prijmy,
+      value: summary.prijmy,
       key: 'prijmy',
     },
     {
       title: 'Zdravotné poistné',
-      value: taxForm.zdravotnePoistne,
+      value: summary.zdravotnePoistne,
       key: 'zdravotnePoistne',
     },
     {
       title: 'Sociálne poistné',
-      value: taxForm.socialnePoistne,
+      value: summary.socialnePoistne,
       key: 'socialnePoistne',
     },
     {
       title: 'Zaplatené poistné spolu',
-      value: taxForm.zaplatenePoistneSpolu,
+      value: summary.zaplatenePoistneSpolu,
       key: 'zaplatenePoistneSpolu',
     },
     {
       title: 'Zvýhodnenie na manželku / manžela',
-      value: taxForm.zvyhodnenieNaManz,
+      value: summary.zvyhodnenieNaManz,
       key: 'zvyhodnenieNaManz',
     },
     {
       title:
         'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
-      value: taxForm.danovyBonusNaDieta,
+      value: summary.danovyBonusNaDieta,
       key: 'danovyBonusNaDieta',
     },
     {
       title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: taxForm.prispevokNaDochodkovePoistenie,
+      value: summary.prispevokNaDochodkovePoistenie,
       key: 'prispevokNaDochodkovePoistenie',
     },
     {
       title: 'Úhrady za kúpele spolu',
-      value: taxForm.uhradyZaKupeleSpolu,
+      value: summary.uhradyZaKupeleSpolu,
       key: 'uhradyZaKupeleSpolu',
     },
     {
       title: 'Základ dane',
-      value: taxForm.zakladDane,
+      value: summary.zakladDane,
       key: 'zakladDane',
     },
     {
       title: 'Daňový preplatok / daňový bonus na vyplatenie',
-      value: taxForm.danovyPreplatok,
+      value: summary.danovyPreplatok,
       key: 'danovyPreplatok',
     },
     {
       title: 'Daň na úhradu',
-      value: taxForm.danNaUhradu,
+      value: summary.danNaUhradu,
       key: 'danNaUhradu',
       fontSize: 30,
     },
