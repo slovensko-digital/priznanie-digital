@@ -4,10 +4,9 @@ import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
   parseInputNumber,
-  percentage,
+  percentage, ceilDecimal, sum,
 } from './utils'
 import Decimal from 'decimal.js'
-import { sum, ceilDecimal } from './utils'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
@@ -557,15 +556,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** Summary values - all in one place **/
-
-    /* helpers */
-    get _zdravotneSpolu() {
-      return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
-    },
-    get _socialneSpolu() {
-      return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
-    },
-
     get summary() {
       return {
         prijmy: this.t1r10_prijmy.plus(this.r038),
@@ -580,6 +570,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         danovyPreplatok: this.r121.plus(this.r136_danovy_preplatok),
         danNaUhradu: this.r135_dan_na_uhradu,
       }
+    },
+
+    /* helpers */
+    get _zdravotneSpolu() {
+      return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
+    },
+    get _socialneSpolu() {
+      return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
     },
   }
 }

@@ -224,10 +224,6 @@ export interface TaxForm {
   iban: string
 
   /** Summary values - all in one place - some duplicated **/
-  /* helpers */
-  _zdravotneSpolu: Decimal
-  _socialneSpolu: Decimal
-
   summary: {
     prijmy: Decimal
     zdravotnePoistne: Decimal
@@ -241,6 +237,9 @@ export interface TaxForm {
     danovyPreplatok: Decimal
     danNaUhradu: Decimal
   }
+  /* helpers */
+  _zdravotneSpolu: Decimal
+  _socialneSpolu: Decimal
 
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
@@ -248,4 +247,5 @@ export interface TaxForm {
   XIIoddiel_uplatnujem2percenta: boolean
   eligibleForChildrenBonus: boolean
   canDonateTwoPercentOfTax: boolean
+
 }
