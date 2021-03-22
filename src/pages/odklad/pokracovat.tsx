@@ -8,6 +8,8 @@ import { setDate, toBase64 } from '../../lib/utils'
 const buildXml = (userInput) => convertPostponeToXML(setDate(userInput))
 
 const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
+  const CALLBACK_PATH = '/zivotne-situacie/odklad-danoveho-priznania/krok/registrovat-sa-na-financnej-sprave'
+
   const fullName = `${userInput.meno} ${userInput.priezvisko}`
   const xmlFile = toBase64(buildXml(userInput))
   const deadline = userInput.prijmy_zo_zahranicia
@@ -18,10 +20,16 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
     {
       name: 'submission[callback_url]',
-      value:
-        'https://navody.digital/zivotne-situacie/odklad-danoveho-priznania/krok/registrovat-sa-na-financnej-sprave',
+      value: CALLBACK_PATH,
     },
-    { name: 'submission[recipient_name]', value: fullName },
+    {
+      name: 'submission[callback_step_path]',
+      value: CALLBACK_PATH,
+    },
+    {
+      name: 'submission[callback_step_status]',
+      value: 'not_started',
+    },
     {
       name: 'submission[attachments[]filename]',
       value: 'odklad-danoveho-priznania.xml',
