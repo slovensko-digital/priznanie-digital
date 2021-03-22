@@ -4,10 +4,9 @@ import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
   parseInputNumber,
-  percentage,
+  percentage, ceilDecimal, sum,
 } from './utils'
 import Decimal from 'decimal.js'
-import { sum, ceilDecimal } from './utils'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
@@ -554,6 +553,31 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return percentage(this.r135_dan_na_uhradu, 3).gte(
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
+    },
+
+    /** Summary values - all in one place **/
+    get summary() {
+      return {
+        prijmy: this.t1r10_prijmy.plus(this.r038),
+        zdravotnePoistne: this._zdravotneSpolu,
+        socialnePoistne: this._socialneSpolu,
+        zaplatenePoistneSpolu: this._zdravotneSpolu.plus(this._socialneSpolu),
+        zvyhodnenieNaManz: this.r074_znizenie_partner,
+        danovyBonusNaDieta: this.r117,
+        prispevokNaDochodkovePoist: this.r075_zaplatene_prispevky_na_dochodok,
+        uhradyZaKupeleSpolu: this.r076_kupele_spolu,
+        zakladDane: this.r080_zaklad_dane_celkovo,
+        danovyPreplatok: this.r121.plus(this.r136_danovy_preplatok),
+        danNaUhradu: this.r135_dan_na_uhradu,
+      }
+    },
+
+    /* helpers */
+    get _zdravotneSpolu() {
+      return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
+    },
+    get _socialneSpolu() {
+      return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
     },
   }
 }

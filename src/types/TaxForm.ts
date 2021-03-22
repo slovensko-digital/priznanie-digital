@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js'
+
 export interface Child {
   priezviskoMeno: string
   rodneCislo: string
@@ -158,8 +159,7 @@ export interface TaxForm {
    *   r081*/
   r116_dan: Decimal
 
-  /**
-Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
+  /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r117: Decimal
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
@@ -223,10 +223,29 @@ Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných det
   ziadamVratitDanovyPreplatok: boolean
   iban: string
 
+  /** Summary values - all in one place - some duplicated **/
+  summary: {
+    prijmy: Decimal
+    zdravotnePoistne: Decimal
+    socialnePoistne: Decimal
+    zaplatenePoistneSpolu: Decimal
+    zvyhodnenieNaManz: Decimal
+    danovyBonusNaDieta: Decimal
+    prispevokNaDochodkovePoist: Decimal
+    uhradyZaKupeleSpolu: Decimal
+    zakladDane: Decimal
+    danovyPreplatok: Decimal
+    danNaUhradu: Decimal
+  }
+  /* helpers */
+  _zdravotneSpolu: Decimal
+  _socialneSpolu: Decimal
+
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
   employed: boolean
   XIIoddiel_uplatnujem2percenta: boolean
   eligibleForChildrenBonus: boolean
   canDonateTwoPercentOfTax: boolean
+
 }

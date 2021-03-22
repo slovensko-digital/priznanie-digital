@@ -53,66 +53,64 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   previousRoute,
   nextRoute,
 }) => {
+  const summary = taxForm.summary
+
   const summaryRows = [
     {
       title: 'Príjmy',
-      value: taxForm.t1r10_prijmy.plus(taxForm.r038),
+      value: summary.prijmy,
       key: 'prijmy',
     },
     {
       title: 'Zdravotné poistné',
-      value: taxForm.priloha3_r13_zdravotne.plus(
-        taxForm.priloha3_r10_zdravotne,
-      ),
-      key: 'priloha3_r13_zdravotne',
+      value: summary.zdravotnePoistne,
+      key: 'zdravotnePoistne',
     },
     {
       title: 'Sociálne poistné',
-      value: taxForm.priloha3_r11_socialne.plus(taxForm.priloha3_r09_socialne),
-      key: 'priloha3_r11_socialne',
+      value: summary.socialnePoistne,
+      key: 'socialnePoistne',
     },
     {
       title: 'Zaplatené poistné spolu',
-      value: taxForm.vydavkyPoistPar6ods11_ods1a2.plus(
-        taxForm.priloha3_r08_poistne_spolu,
-      ),
-      key: 'priloha3_r08_poistne',
+      value: summary.zaplatenePoistneSpolu,
+      key: 'zaplatenePoistneSpolu',
     },
     {
       title: 'Zvýhodnenie na manželku / manžela',
-      value: taxForm.r074_znizenie_partner,
-      key: 'r074_znizenie_partner',
+      value: summary.zvyhodnenieNaManz,
+      key: 'zvyhodnenieNaManz',
     },
     {
       title:
         'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
-      value: taxForm.r117,
-      key: 'r106',
+      value: summary.danovyBonusNaDieta,
+      key: 'danovyBonusNaDieta',
     },
     {
       title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: taxForm.r075_zaplatene_prispevky_na_dochodok,
-      key: 'r075_zaplatene_prispevky_na_dochodok',
+      value: summary.prispevokNaDochodkovePoist,
+      key: 'prispevokNaDochodkovePoist',
     },
     {
       title: 'Úhrady za kúpele spolu',
-      value: taxForm.r076_kupele_spolu,
-      key: 'r076_kupele_spolu',
+      value: summary.uhradyZaKupeleSpolu,
+      key: 'uhradyZaKupeleSpolu',
     },
     {
       title: 'Základ dane',
-      value: taxForm.r080_zaklad_dane_celkovo,
-      key: 'r080_zaklad_dane_celkovo',
+      value: summary.zakladDane,
+      key: 'zakladDane',
     },
     {
       title: 'Daňový preplatok / daňový bonus na vyplatenie',
-      value: taxForm.r121.plus(taxForm.r136_danovy_preplatok),
-      key: 'na_vyplatenie',
+      value: summary.danovyPreplatok,
+      key: 'danovyPreplatok',
     },
     {
       title: 'Daň na úhradu',
-      value: taxForm.r135_dan_na_uhradu,
-      key: 'r125_dan_na_uhradu',
+      value: summary.danNaUhradu,
+      key: 'danNaUhradu',
       fontSize: 30,
     },
   ]
