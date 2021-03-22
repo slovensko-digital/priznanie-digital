@@ -17,6 +17,8 @@ const buildSummaryParams = (params) => {
 }
 
 const buildFields = (taxForm: TaxForm): RedirectField[] => {
+  const CALLBACK_PATH = '/zivotne-situacie/elektronicke-podanie-danoveho-priznania/krok/prihlasit-sa-na-financnu-spravu'
+
   const xmlFile = toBase64(buildXml(taxForm))
   const fullName = `${taxForm.r005_meno}\u00A0${taxForm.r004_priezvisko}`
 
@@ -24,10 +26,16 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
     {
       name: 'submission[callback_url]',
-      value:
-        '/zivotne-situacie/elektronicke-podanie-danoveho-priznania/krok/prihlasit-sa-na-financnu-spravu',
+      value: CALLBACK_PATH,
     },
-    { name: 'submission[recipient_name]', value: fullName },
+    {
+      name: 'submission[callback_step_path]',
+      value: CALLBACK_PATH,
+    },
+    {
+      name: 'submission[callback_step_status]',
+      value: 'not_started',
+    },
     {
       name: 'submission[attachments[]filename]',
       value: 'danove-priznanie.xml',
@@ -45,7 +53,7 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[subscription_types][]',
       value: 'NewsletterSubscription',
     },
-    { name: 'submission[extra][template_id', value: '166' },
+    { name: 'submission[extra][template_id]', value: '139' },
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
