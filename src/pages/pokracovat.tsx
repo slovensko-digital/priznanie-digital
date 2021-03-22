@@ -36,7 +36,6 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[callback_step_status]',
       value: 'not_started',
     },
-    { name: 'submission[recipient_name]', value: fullName },
     {
       name: 'submission[attachments[]filename]',
       value: 'danove-priznanie.xml',
@@ -54,7 +53,7 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[subscription_types][]',
       value: 'NewsletterSubscription',
     },
-    { name: 'submission[extra][template_id', value: '166' },
+    { name: 'submission[extra][template_id]', value: '139' },
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,

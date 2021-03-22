@@ -35,15 +35,6 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
       value: 'odklad-danoveho-priznania.xml',
     },
     { name: 'submission[attachments[]body_base64]', value: xmlFile },
-    { name: 'submission[extra][template_id', value: '166' },
-    {
-      name: 'submission[extra][params][recipient_name]',
-      value: fullName,
-    },
-    {
-      name: 'submission[extra][params][deadline]',
-      value: deadline,
-    },
     {
       name: 'submission[subscription_types][]',
       value: 'EmailMeSubmissionInstructionsEmail',
@@ -55,6 +46,15 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
     {
       name: 'submission[subscription_types][]',
       value: 'NewsletterSubscription',
+    },
+    { name: 'submission[extra][template_id]', value: '166' },
+    {
+      name: 'submission[extra][params][recipient_name]',
+      value: fullName,
+    },
+    {
+      name: 'submission[extra][params][deadline]',
+      value: deadline,
     },
   ]
 }
