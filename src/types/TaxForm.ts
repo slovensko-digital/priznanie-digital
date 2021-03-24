@@ -223,24 +223,6 @@ export interface TaxForm {
   ziadamVratitDanovyPreplatok: boolean
   iban: string
 
-  /** Summary values - all in one place - some duplicated **/
-  summary: {
-    prijmy: Decimal
-    zdravotnePoistne: Decimal
-    socialnePoistne: Decimal
-    zaplatenePoistneSpolu: Decimal
-    zvyhodnenieNaManz: Decimal
-    danovyBonusNaDieta: Decimal
-    prispevokNaDochodkovePoist: Decimal
-    uhradyZaKupeleSpolu: Decimal
-    zakladDane: Decimal
-    danovyPreplatok: Decimal
-    danNaUhradu: Decimal
-  }
-  /* helpers */
-  _zdravotneSpolu: Decimal
-  _socialneSpolu: Decimal
-
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
   employed: boolean

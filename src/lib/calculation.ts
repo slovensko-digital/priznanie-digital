@@ -8,6 +8,7 @@ import {
 } from './utils'
 import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
+import { Summary } from "../types/Summary";
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -554,30 +555,22 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
     },
-
-    /** Summary values - all in one place **/
-    get summary() {
-      return {
-        prijmy: this.t1r10_prijmy.plus(this.r038),
-        zdravotnePoistne: this._zdravotneSpolu,
-        socialnePoistne: this._socialneSpolu,
-        zaplatenePoistneSpolu: this._zdravotneSpolu.plus(this._socialneSpolu),
-        zvyhodnenieNaManz: this.r074_znizenie_partner,
-        danovyBonusNaDieta: this.r117,
-        prispevokNaDochodkovePoist: this.r075_zaplatene_prispevky_na_dochodok,
-        uhradyZaKupeleSpolu: this.r076_kupele_spolu,
-        zakladDane: this.r080_zaklad_dane_celkovo,
-        danovyPreplatok: this.r121.plus(this.r136_danovy_preplatok),
-        danNaUhradu: this.r135_dan_na_uhradu,
-      }
-    },
-
-    /* helpers */
-    get _zdravotneSpolu() {
-      return this.priloha3_r13_zdravotne.plus(this.priloha3_r10_zdravotne)
-    },
-    get _socialneSpolu() {
-      return this.priloha3_r11_socialne.plus(this.priloha3_r09_socialne)
-    },
   }
 }
+
+export function buildSummary(form: TaxForm): Summary {
+  return {
+    prijmy: form.t1r10_prijmy.plus(form.r038),
+    zdravotnePoistne: form.priloha3_r13_zdravotne.plus(form.priloha3_r10_zdravotne),
+    socialnePoistne: form.priloha3_r11_socialne.plus(form.priloha3_r09_socialne),
+    get zaplatenePoistneSpolu() { return this.zdravotnePoistne.plus(this.socialnePoistne) },
+    zvyhodnenieNaManz: form.r074_znizenie_partner,
+    danovyBonusNaDieta: form.r117,
+    prispevokNaDochodkovePoist: form.r075_zaplatene_prispevky_na_dochodok,
+    uhradyZaKupeleSpolu: form.r076_kupele_spolu,
+    zakladDane: form.r080_zaklad_dane_celkovo,
+    danovyPreplatok: form.r121.plus(form.r136_danovy_preplatok),
+    danNaUhradu: form.r135_dan_na_uhradu,
+  }
+}
+
