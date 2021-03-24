@@ -4,11 +4,13 @@ import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
   parseInputNumber,
-  percentage, ceilDecimal, sum,
+  percentage,
+  ceilDecimal,
+  sum,
 } from './utils'
 import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
-import { Summary } from "../types/Summary";
+import { Summary } from '../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
 const PAUSALNE_VYDAVKY_MAX = 20000
@@ -561,9 +563,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 export function buildSummary(form: TaxForm): Summary {
   return {
     prijmy: form.t1r10_prijmy.plus(form.r038),
-    zdravotnePoistne: form.priloha3_r13_zdravotne.plus(form.priloha3_r10_zdravotne),
-    socialnePoistne: form.priloha3_r11_socialne.plus(form.priloha3_r09_socialne),
-    get zaplatenePoistneSpolu() { return this.zdravotnePoistne.plus(this.socialnePoistne) },
+    zdravotnePoistne: form.priloha3_r13_zdravotne.plus(
+      form.priloha3_r10_zdravotne,
+    ),
+    socialnePoistne: form.priloha3_r11_socialne.plus(
+      form.priloha3_r09_socialne,
+    ),
+    get zaplatenePoistneSpolu() {
+      return this.zdravotnePoistne.plus(this.socialnePoistne)
+    },
     zvyhodnenieNaManz: form.r074_znizenie_partner,
     danovyBonusNaDieta: form.r117,
     prispevokNaDochodkovePoist: form.r075_zaplatene_prispevky_na_dochodok,
@@ -573,4 +581,3 @@ export function buildSummary(form: TaxForm): Summary {
     danNaUhradu: form.r135_dan_na_uhradu,
   }
 }
-
