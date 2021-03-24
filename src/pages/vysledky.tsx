@@ -5,6 +5,7 @@ import { Page } from '../components/Page'
 import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
+import { buildSummary } from '../lib/calculation'
 
 interface SummaryRow {
   key: string
@@ -53,7 +54,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   previousRoute,
   nextRoute,
 }) => {
-  const summary = taxForm.summary
+  const summary = buildSummary(taxForm)
 
   const summaryRows = [
     {

@@ -8,7 +8,8 @@ import { setDate, toBase64 } from '../../lib/utils'
 const buildXml = (userInput) => convertPostponeToXML(setDate(userInput))
 
 const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
-  const CALLBACK_PATH = '/zivotne-situacie/odklad-danoveho-priznania/krok/registrovat-sa-na-financnej-sprave'
+  const CALLBACK_PATH =
+    '/zivotne-situacie/odklad-danoveho-priznania/krok/registrovat-sa-na-financnej-sprave'
 
   const fullName = `${userInput.meno} ${userInput.priezvisko}`
   const xmlFile = toBase64(buildXml(userInput))

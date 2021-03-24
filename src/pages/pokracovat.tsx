@@ -4,23 +4,25 @@ import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
 import { RedirectField, RedirectForm } from '../components/RedirectForm'
 import { setDate, toBase64, formatCurrency } from '../lib/utils'
+import { buildSummary } from '../lib/calculation'
+import { Summary } from '../types/Summary'
 
 const buildXml = (taxForm) => convertToXML(setDate(taxForm))
 
-const buildSummaryParams = (params) => {
-  return Object.keys(params).map((key) => ({
+const buildSummaryFields = (obj: Summary) => {
+  return Object.keys(obj).map((key) => ({
     name: `submission[extra][params][summary][${key}]`,
-    value: params[key].gt(0)
-      ? formatCurrency(params[key].toNumber())
-      : '0,00 EUR',
+    value: obj[key].gt(0) ? formatCurrency(obj[key].toNumber()) : '0,00 EUR',
   }))
 }
 
 const buildFields = (taxForm: TaxForm): RedirectField[] => {
-  const CALLBACK_PATH = '/zivotne-situacie/elektronicke-podanie-danoveho-priznania/krok/prihlasit-sa-na-financnu-spravu'
+  const CALLBACK_PATH =
+    '/zivotne-situacie/elektronicke-podanie-danoveho-priznania/krok/prihlasit-sa-na-financnu-spravu'
 
   const xmlFile = toBase64(buildXml(taxForm))
   const fullName = `${taxForm.r005_meno}\u00A0${taxForm.r004_priezvisko}`
+  const summaryFields = buildSummaryFields(buildSummary(taxForm))
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
@@ -58,7 +60,7 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
     },
-    ...buildSummaryParams(taxForm.summary),
+    ...summaryFields,
   ]
 }
 
