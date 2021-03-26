@@ -49,7 +49,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
           <Form className="form">
             <BooleanRadio
               title="Mali ste v roku 2020 príjem zo zahraničia?"
-              hint="Rozhodujúcim faktorom pre posúdenie príjmu zo živnosti je územie, na ktorom ste činnosť fyzicky vykonávali, nie štátna príslušnosť či adresa druhej strany a zároveň dátum, kedy vám bola odmena pripísaná na váš účet, nie dátum dodania alebo vystavenia faktúry."
+              hint="Rozhodujúcim faktorom je, či príjmy boli v zahraničí podrobené zdaneniu podľa legislatívy toho konkrétneho štátu, bez ohľadu na výšku tam zaplatenej dane. Príklady zahraničných príjmov: príjem zo závislej činnosti vykonávanej v zahraničí, príjem z činnosti vykonávanej v zahraničí prostredníctvom stálej prevádzkarne, príjem z nakladania s nehnuteľnosťou umiestnenou v zahraničí, príjem charakteru úrokov alebo licenčných poplatkov vyplácaných zahraničnou spoločnosťou, predaj akcií, príjem z dividend, ..."
               name="prijmy_zo_zahranicia"
             />
             {values.prijmy_zo_zahranicia !== undefined && (
