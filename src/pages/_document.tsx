@@ -1,6 +1,9 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { GoogleAnalytics } from '../components/Analytics'
+import {
+  GoogleAnalytics,
+  GoogleAnalyticsNoScript,
+} from '../components/Analytics'
 import { getGitCommit } from '../lib/constants'
 
 class MyDocument extends Document {
@@ -55,6 +58,7 @@ class MyDocument extends Document {
           <meta name="build:commit" content={getGitCommit()} />
         </Head>
         <body>
+          <GoogleAnalyticsNoScript />
           <Main />
           <NextScript />
         </body>
