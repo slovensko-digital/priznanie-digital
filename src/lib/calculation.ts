@@ -218,7 +218,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return this.r072_pred_znizenim.gt(KONSTANTA)
           ? Decimal.max(
               0,
-              new Decimal(13001.438)
+              new Decimal(13326.68)
                 .minus(
                   this.r072_pred_znizenim
                     .times(0.25)
