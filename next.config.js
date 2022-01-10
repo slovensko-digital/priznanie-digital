@@ -13,14 +13,4 @@ module.exports = {
 
     return config
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination:
-          'https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania',
-        statusCode: 302,
-      },
-    ]
-  },
 }
