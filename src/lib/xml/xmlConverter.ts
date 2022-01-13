@@ -136,9 +136,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r73 = taxForm.r073.toFixed(2)
 
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2)
-  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_zo_zamestnania.toFixed(2)
-  form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2)
-  form.dokument.telo.r81 = taxForm.r081.toFixed(2)
+  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_zo_zamestnania.gt(0)
+    ? taxForm.r078_zaklad_dane_zo_zamestnania.toFixed(2)
+    : ''
+  form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.gt(0)
+    ? taxForm.r080_zaklad_dane_celkovo.toFixed(2)
+    : ''
+  form.dokument.telo.r81 = taxForm.r081.gt(0) ? taxForm.r081.toFixed(2) : ''
   form.dokument.telo.r90 = taxForm.r090.toFixed(2)
   form.dokument.telo.r91 = taxForm.r091.toFixed(2)
   form.dokument.telo.r92 = taxForm.r092.toFixed(2)
@@ -146,8 +150,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r95 = taxForm.r095.toFixed(2)
   form.dokument.telo.r96 = taxForm.r096.toFixed(2)
   form.dokument.telo.r105 = taxForm.r105.toFixed(2)
-  form.dokument.telo.r106 = '0'
-  form.dokument.telo.r115 = '0'
+  form.dokument.telo.r106 = '0.00'
+  form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = taxForm.r116_dan.toFixed(2)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
@@ -205,17 +209,21 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
-  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.priloha3_r08_poistne_spolu.toFixed(
-    2,
+  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.priloha3_r08_poistne_spolu.gt(
+    0,
   )
+    ? taxForm.priloha3_r08_poistne_spolu.toFixed(2)
+    : ''
 
-  form.dokument.telo.socZdravPoistenie.pr9 = taxForm.priloha3_r09_socialne.toFixed(
-    2,
-  )
+  form.dokument.telo.socZdravPoistenie.pr9 = taxForm.priloha3_r09_socialne.gt(0)
+    ? taxForm.priloha3_r09_socialne.toFixed(2)
+    : ''
 
-  form.dokument.telo.socZdravPoistenie.pr10 = taxForm.priloha3_r10_zdravotne.toFixed(
-    2,
+  form.dokument.telo.socZdravPoistenie.pr10 = taxForm.priloha3_r10_zdravotne.gt(
+    0,
   )
+    ? taxForm.priloha3_r10_zdravotne.toFixed(2)
+    : ''
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
     2,

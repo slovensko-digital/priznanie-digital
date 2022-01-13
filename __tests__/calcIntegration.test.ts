@@ -48,7 +48,7 @@ describe.only('calcIntergration', () => {
         throw new Error(`Could not load input: ${testCase}Input`)
       }
 
-      const taxForm = calculate(setDate(input, new Date(2022, 10, 1)))
+      const taxForm = calculate(setDate(input, new Date(2022, 0, 10)))
 
       const outputXml = convertToXML(taxForm)
 
