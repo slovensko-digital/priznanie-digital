@@ -1,6 +1,6 @@
 import { OutputJson } from '../../types/OutputJson'
 
-const ZDANOVACIE_OBDOBIE__ROK = '2020'
+const ZDANOVACIE_OBDOBIE__ROK = '2021'
 
 const sampleSchema: OutputJson = {
   dokument: {
@@ -69,15 +69,10 @@ const sampleSchema: OutputJson = {
         pocetMesiacov: '',
       },
       r33: {
-        uplatNCZDNaKupelStarostlivost: '0',
-        preukazZaplatUhrady: '',
-      },
-      r34: {
         dieta: [
           {
             priezviskoMeno: '',
             rodneCislo: '',
-            kupelnaStarostlivost: '0',
             m00: '0',
             m01: '0',
             m02: '0',
@@ -95,7 +90,6 @@ const sampleSchema: OutputJson = {
           {
             priezviskoMeno: '',
             rodneCislo: '',
-            kupelnaStarostlivost: '0',
             m00: '0',
             m01: '0',
             m02: '0',
@@ -113,7 +107,6 @@ const sampleSchema: OutputJson = {
           {
             priezviskoMeno: '',
             rodneCislo: '',
-            kupelnaStarostlivost: '0',
             m00: '0',
             m01: '0',
             m02: '0',
@@ -131,7 +124,57 @@ const sampleSchema: OutputJson = {
           {
             priezviskoMeno: '',
             rodneCislo: '',
-            kupelnaStarostlivost: '0',
+            m00: '0',
+            m01: '0',
+            m02: '0',
+            m03: '0',
+            m04: '0',
+            m05: '0',
+            m06: '0',
+            m07: '0',
+            m08: '0',
+            m09: '0',
+            m10: '0',
+            m11: '0',
+            m12: '0',
+          },
+          {
+            priezviskoMeno: '',
+            rodneCislo: '',
+            m00: '0',
+            m01: '0',
+            m02: '0',
+            m03: '0',
+            m04: '0',
+            m05: '0',
+            m06: '0',
+            m07: '0',
+            m08: '0',
+            m09: '0',
+            m10: '0',
+            m11: '0',
+            m12: '0',
+          },
+          {
+            priezviskoMeno: '',
+            rodneCislo: '',
+            m00: '0',
+            m01: '0',
+            m02: '0',
+            m03: '0',
+            m04: '0',
+            m05: '0',
+            m06: '0',
+            m07: '0',
+            m08: '0',
+            m09: '0',
+            m10: '0',
+            m11: '0',
+            m12: '0',
+          },
+          {
+            priezviskoMeno: '',
+            rodneCislo: '',
             m00: '0',
             m01: '0',
             m02: '0',
@@ -148,17 +191,16 @@ const sampleSchema: OutputJson = {
           },
         ],
       },
-      r35udajeDalsieDeti: '0',
-      r36: '',
-      r37: {
+      r34udajeDalsieDeti: '0',
+      r35: {
         uplatDanBonusZaplatUroky: '0',
         zaplateneUroky: '',
         pocetMesiacov: '',
       },
+      r36: '',
+      r36a: '',
+      r37: '',
       r38: '',
-      r38a: '',
-      r39: '',
-      r40: '',
       tabulka1: {
         t1r1: {
           s1: '',
@@ -213,6 +255,7 @@ const sampleSchema: OutputJson = {
           s2: '',
         },
       },
+      mikrodanovnikpar2w: '1',
       vydavkyPar6ods11_ods1a2: '0',
       vydavkyPar6ods11_ods3: '0',
       vydavkyPar6ods11_ods4: '0',
@@ -255,24 +298,15 @@ const sampleSchema: OutputJson = {
           s2: '',
         },
       },
+      r39: '',
+      r40: '',
       r41: '',
       r42: '',
       r43: '',
       r44: '',
       r45: '',
       r46: '',
-      r47: '',
-      r48: '',
-      r49: {
-        rok: '2016',
-        udaje: {
-          r02: '',
-          r03: '',
-          r04: '',
-          r05: '',
-        },
-      },
-      r50: {
+      r47: {
         rok: '2017',
         udaje: {
           r02: '',
@@ -281,7 +315,7 @@ const sampleSchema: OutputJson = {
           r05: '',
         },
       },
-      r51: {
+      r48: {
         rok: '2018',
         udaje: {
           r02: '',
@@ -290,17 +324,18 @@ const sampleSchema: OutputJson = {
           r05: '',
         },
       },
+      r49: '',
+      r50: '',
+      r51: '',
       r52: {
-        rok: '2019',
+        rok: '2020',
         udaje: {
           r02: '',
           r03: '',
-          r04: '',
-          r05: '',
         },
       },
       r53: '',
-      // r54: '',
+      r54: '',
       r55: '',
       r56: '',
       r57: '',
