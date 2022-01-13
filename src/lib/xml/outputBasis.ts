@@ -255,7 +255,7 @@ const sampleSchema: OutputJson = {
           s2: '',
         },
       },
-      mikrodanovnikpar2w: '1',
+      mikrodanovnikPar2w: '1',
       vydavkyPar6ods11_ods1a2: '0',
       vydavkyPar6ods11_ods3: '0',
       vydavkyPar6ods11_ods4: '0',
@@ -561,14 +561,7 @@ const sampleSchema: OutputJson = {
       r151: '',
       r152: {
         ico: '',
-        pravnaForma: '',
-        obchMeno: {
-          riadok: ['', ''],
-        },
-        ulica: '',
-        cislo: '',
-        psc: '',
-        obec: '',
+        obchMeno: '',
         suhlasZaslUdaje: '0',
       },
       osobitneZaznamy: {

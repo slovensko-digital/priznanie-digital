@@ -545,14 +545,7 @@
     <r151></r151>
     <r152>
     <ico></ico>
-    <obchMeno>
-      <riadok>
-        <![CDATA[]]>
-      </riadok>
-      <riadok>
-        <![CDATA[]]>
-      </riadok>
-    </obchMeno>
+      <obchMeno></obchMeno>
     <suhlasZaslUdaje>0</suhlasZaslUdaje>
   </r152>
   <osobitneZaznamy>
