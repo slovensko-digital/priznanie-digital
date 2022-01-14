@@ -12,7 +12,7 @@ import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 import { Summary } from '../types/Summary'
 
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4414.2)
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
 const PAUSALNE_VYDAVKY_MAX = 20000
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)

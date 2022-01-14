@@ -56,25 +56,20 @@ describe.only('calcIntergration', () => {
       const expected = await comparable(testCaseValidatedXML.toString())
 
       if (WRITE_FILES) {
-        // fs.writeFile(`${__dirname}/testCases/${testCase}.xml`, outputXml)
-        // fs.writeFile(
-        //   `${__dirname}/testCases/${testCase}-expected.json`,
-        //   expected,
-        // )
-        // fs.writeFile(`${__dirname}/testCases/${testCase}-result.json`, result)
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}-expected.json`,
+          JSON.stringify(expected, null, 2),
+        )
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}-result.json`,
+          JSON.stringify(result, null, 2),
+        )
+        fs.writeFile(
+          `${__dirname}/testCases/${testCase}-outputXml.json`,
+          JSON.stringify(outputXml, null, 2),
+        )
       }
-      fs.writeFile(
-        `${__dirname}/testCases/${testCase}-expected.json`,
-        JSON.stringify(expected, null, 2),
-      )
-      fs.writeFile(
-        `${__dirname}/testCases/${testCase}-result.json`,
-        JSON.stringify(result, null, 2),
-      )
-      fs.writeFile(
-        `${__dirname}/testCases/${testCase}-outputXml.json`,
-        JSON.stringify(outputXml, null, 2),
-      )
+
 
       return expect(result).toStrictEqual(expected)
     })
