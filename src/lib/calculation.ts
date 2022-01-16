@@ -25,7 +25,6 @@ const CHILD_RATE_SIX_AND_YOUNGER = 45.44
 const CHILD_RATE_OVER_SIX = 22.72
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
 const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const MAX_SPA_PER_PERSON = 50
 const TAX_YEAR = 2020
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
@@ -106,17 +105,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       const mapChild = makeMapChild(input?.hasChildren)
       return input.children.map((child) => mapChild(child))
-    },
-    get r036_deti_kupele() {
-      const maxAmountPerChild = MAX_SPA_PER_PERSON
-      const maxAmountChildrenTotal = new Decimal(this.r034?.length ?? 0).times(
-        maxAmountPerChild,
-      )
-
-      return Decimal.min(
-        new Decimal(parseInputNumber(input?.r036_deti_kupele ?? '0')),
-        maxAmountChildrenTotal,
-      )
     },
 
     /** SECTION Mortgage */

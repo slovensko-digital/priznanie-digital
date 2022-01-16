@@ -12,7 +12,7 @@ const WRITE_FILES = process.env.WRITE_FILES === 'yes'
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
-describe.only('calcIntergration', () => {
+describe('calcIntergration', () => {
   ;[
     'base',
     // 'complete',

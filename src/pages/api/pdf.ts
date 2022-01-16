@@ -188,7 +188,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // ***** PAGE 2
   tpl.nextPage()
 
-  if (form.r032_uplatnujem_na_partnera || form.r033_partner_kupele) {
+  if (form.r032_uplatnujem_na_partnera) {
     // r031_priezvisko_a_meno
     tpl.write(FIRST_COLUMN + 10, 563, form.r031_priezvisko_a_meno)
 
@@ -214,18 +214,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
       FIRST_COLUMN + 502,
       538,
       `${form.r032_partner_pocet_mesiacov}`.padStart(2, ' '),
-    )
-  }
-
-  if (form.r033_partner_kupele) {
-    // r033_partner_kupele
-    tpl.write(FIRST_COLUMN + 25, 515, 'x')
-
-    // r033_partner_kupele_uhrady
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 487,
-      513,
-      form.r033_partner_kupele_uhrady.toNumber(),
     )
   }
 
@@ -459,27 +447,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
       form.r075_zaplatene_prispevky_na_dochodok.toNumber(),
     )
   }
-
-  // r076_kupele_spolu
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    386,
-    form.r076_kupele_spolu.toNumber(),
-  )
-
-  // r076a_kupele_danovnik
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    358,
-    form.r076a_kupele_danovnik.toNumber(),
-  )
-
-  // r076b_kupele_partner_a_deti
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    332,
-    form.r076b_kupele_partner_a_deti.toNumber(),
-  )
 
   // r077_nezdanitelna_cast
   tpl.writeNumberToBoxes(
