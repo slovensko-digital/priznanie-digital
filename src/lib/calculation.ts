@@ -14,17 +14,17 @@ import { Summary } from '../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
 const PAUSALNE_VYDAVKY_MAX = 20000
-const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100000)
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3480
 const MAX_ZAKLAD_DANE = 19506.56
-export const PARTNER_MAX_ODPOCET = 4035.84
+export const PARTNER_MAX_ODPOCET = 4_124.74
 const CHILD_RATE_SIX_AND_YOUNGER = 45.44
 const CHILD_RATE_OVER_SIX = 22.72
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
-const KONSTANTA = 37163.36 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
+const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
 const MAX_SPA_PER_PERSON = 50
 const TAX_YEAR = 2020
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
@@ -97,10 +97,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r032_partner_pocet_mesiacov: parseInputNumber(
       input?.r032_partner_pocet_mesiacov ?? '0',
-    ),
-    r033_partner_kupele: input?.r033_partner_kupele ?? false,
-    r033_partner_kupele_uhrady: new Decimal(
-      parseInputNumber(input?.r033_partner_kupele_uhrady ?? '0'),
     ),
 
     /** SECTION Children */
@@ -237,21 +233,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return new Decimal(0)
     },
-    get r076_kupele_spolu() {
-      return this.r076b_kupele_partner_a_deti.plus(this.r076a_kupele_danovnik)
-    },
-    get r076a_kupele_danovnik() {
-      return new Decimal(parseInputNumber(input?.r076a_kupele_danovnik ?? '0'))
-    },
-    get r076b_kupele_partner_a_deti() {
-      return this.r033_partner_kupele_uhrady.plus(this.r036_deti_kupele)
-    },
     get r077_nezdanitelna_cast() {
       return Decimal.min(
         this.r073
           .plus(this.r074_znizenie_partner)
-          .plus(this.r075_zaplatene_prispevky_na_dochodok)
-          .plus(this.r076_kupele_spolu),
+          .plus(this.r075_zaplatene_prispevky_na_dochodok),
         this.r072_pred_znizenim,
       )
     },
@@ -341,7 +327,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       // má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r. 95<= 100 000.
       if (this.r094.gt(0) && this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
         return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
-
         // Ak r.94> 0 a súčasne r.95 > 100 000, potom:
       } else if (
         this.r094.gt(0) &&
@@ -358,6 +343,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           )
         }
       }
+
       return new Decimal(0)
     },
     // r. 105 bude rovnaká suma ako na r. 96, keďže vo vašich prípadoch nezohľadňujete príjmy zo zahraničia
@@ -575,7 +561,6 @@ export function buildSummary(form: TaxForm): Summary {
     zvyhodnenieNaManz: form.r074_znizenie_partner,
     danovyBonusNaDieta: form.r117,
     prispevokNaDochodkovePoist: form.r075_zaplatene_prispevky_na_dochodok,
-    uhradyZaKupeleSpolu: form.r076_kupele_spolu,
     zakladDane: form.r080_zaklad_dane_celkovo,
     danovyPreplatok: form.r121.plus(form.r136_danovy_preplatok),
     danNaUhradu: form.r135_dan_na_uhradu,

@@ -17,7 +17,7 @@ describe.only('calcIntergration', () => {
     'base',
     // 'complete',
     // 'completeDecimal',
-    // 'withPartner',
+    'withPartner',
     // 'withEmployment',
     // 'withPension',
     // 'withChildren',
@@ -55,7 +55,7 @@ describe.only('calcIntergration', () => {
       const result = await comparable(outputXml)
       const expected = await comparable(testCaseValidatedXML.toString())
 
-      if (WRITE_FILES) {
+      if (true) {
         fs.writeFile(
           `${__dirname}/testCases/${testCase}-expected.json`,
           JSON.stringify(expected, null, 2),
@@ -69,7 +69,6 @@ describe.only('calcIntergration', () => {
           JSON.stringify(outputXml, null, 2),
         )
       }
-
 
       return expect(result).toStrictEqual(expected)
     })
