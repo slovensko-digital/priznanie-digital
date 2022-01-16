@@ -28,7 +28,7 @@ const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
-describe('/odklad/osobne-udaje page', () => {
+describe.skip('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 
