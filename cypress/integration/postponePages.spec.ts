@@ -68,7 +68,9 @@ describe('/odklad/osobne-udaje page', () => {
     getInputPostpone('obec').should('contain.value', 'Bratislava')
     getInputPostpone('stat').should('contain.value', 'Slovenská republika')
   })
-  it('with posta api', () => {
+
+  /** Skip for now, not critical */
+  it.skip('with posta api', () => {
     assertUrl('/odklad/osobne-udaje')
 
     typeToInputPostpone('psc', foreignIncomeInput)
