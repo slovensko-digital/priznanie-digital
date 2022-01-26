@@ -20,8 +20,6 @@ export const withPartnerInput: E2eTestUserInput = {
   partner_spolocna_domacnost: true,
   partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
-  r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '40',
   t1r10_prijmy: '25000',
   datum: '19.02.2020',
   hasChildren: false,
