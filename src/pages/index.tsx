@@ -65,7 +65,7 @@ const TaxFormSection = ({ nextRoute }) => (
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
       <br />
-      (verzia pre rok 2020)
+      (verzia pre rok 2021)
     </h1>
 
     <p className="govuk-body-l">
@@ -124,16 +124,16 @@ const TaxFormSection = ({ nextRoute }) => (
 const PostponeSection = ({ nextPostponeRoute }) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
-      Odklad daňového priznania za rok 2020
+      Odklad daňového priznania za rok 2021
     </h2>
     <p>
       Riadny termín pre podanie daňového priznania a zaplatenie dane je
-      31.3.2021
+      31.3.2022
     </p>
     <p>Termín si viete predĺžiť:</p>
     <ul className="govuk-list govuk-list--bullet">
-      <li>do 30.6.2021 ak ste mali príjmy len zo Slovenska, alebo</li>
-      <li>do 30.9.2021 ak ste mali príjmy aj zo zahraničia</li>
+      <li>do 30.6.2022 ak ste mali príjmy len zo Slovenska, alebo</li>
+      <li>do 30.9.2022 ak ste mali príjmy aj zo zahraničia</li>
     </ul>
 
     <p className="govuk-body-xs">

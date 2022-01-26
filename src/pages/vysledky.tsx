@@ -94,11 +94,6 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'prispevokNaDochodkovePoist',
     },
     {
-      title: 'Úhrady za kúpele spolu',
-      value: summary.uhradyZaKupeleSpolu,
-      key: 'uhradyZaKupeleSpolu',
-    },
-    {
       title: 'Základ dane',
       value: summary.zakladDane,
       key: 'zakladDane',

@@ -113,7 +113,6 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'
     : 'Daňové priznanie pre živnostníkov s paušálnymi výdavkami (DPFO typ B)'
-
   return (
     <Layout
       headline={headline}

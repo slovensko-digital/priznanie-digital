@@ -76,15 +76,9 @@ export interface R32 {
   pocetMesiacov: string
 }
 
-export interface R33 {
-  uplatNCZDNaKupelStarostlivost: string
-  preukazZaplatUhrady: string
-}
-
 export interface Dieta {
   priezviskoMeno: string
   rodneCislo: string
-  kupelnaStarostlivost: string
   m00: string
   m01: string
   m02: string
@@ -100,11 +94,7 @@ export interface Dieta {
   m12: string
 }
 
-export interface R34 {
-  dieta: Dieta[]
-}
-
-export interface R37 {
+export interface R35 {
   uplatDanBonusZaplatUroky: string
   zaplateneUroky: string
   pocetMesiacov: string
@@ -239,29 +229,38 @@ export interface Tabulka1b {
   t1r2: T1r23
 }
 
-export interface PredchObdobieUdaje {
-  udaje: {
-    r02: string
-    r03: string
-    r04: string
-    r05: string
-  }
+export interface Udaje {
+  r02: string
+  r03: string
+  r04: string
+  r05: string
 }
 
-export interface R49 extends PredchObdobieUdaje {
-  rok: '2016'
+export interface R47 {
+  rok: string
+  udaje: Udaje
 }
 
-export interface R50 extends PredchObdobieUdaje {
-  rok: '2017'
+export interface Udaje2 {
+  r02: string
+  r03: string
+  r04: string
+  r05: string
 }
 
-export interface R51 extends PredchObdobieUdaje {
-  rok: '2018'
+export interface R48 {
+  rok: string
+  udaje: Udaje2
 }
 
-export interface R52 extends PredchObdobieUdaje {
-  rok: '2019'
+export interface Udaje3 {
+  r02: string
+  r03: string
+}
+
+export interface R52 {
+  rok: string
+  udaje: Udaje3
 }
 
 export interface T2r1 {
@@ -454,18 +453,9 @@ export interface Tabulka3 {
   t3r19: T3r19
 }
 
-export interface ObchMeno {
-  riadok: string[]
-}
-
-export interface R142 {
+export interface R152 {
   ico: string
-  pravnaForma: string
-  obchMeno: ObchMeno
-  ulica: string
-  cislo: string
-  psc: string
-  obec: string
+  obchMeno: string
   suhlasZaslUdaje: string
 }
 
@@ -504,57 +494,6 @@ export interface DanovyPreplatokBonus {
   sposobPlatby: SposobPlatby
   bankovyUcet: BankovyUcet
   datum: string
-}
-
-export interface R01 {
-  zdanObdobieOd: string
-  zdanObdobieDo: string
-  narok: string
-  odpocitanaCast: string
-}
-
-export interface R02 {
-  zdanObdobieOd: string
-  zdanObdobieDo: string
-  narok: string
-  odpocitanaCast: string
-}
-
-export interface R03 {
-  zdanObdobieOd: string
-  zdanObdobieDo: string
-  narok: string
-  odpocitanaCast: string
-}
-
-export interface R04 {
-  zdanObdobieOd: string
-  zdanObdobieDo: string
-  narok: string
-  odpocitanaCast: string
-}
-
-export interface R05 {
-  zdanObdobieOd: string
-  zdanObdobieDo: string
-  narok: string
-  odpocitanaCast: string
-}
-
-export interface PrilPar30cOdpocetVydavkov {
-  projektCislo: string
-  pocetProjektov: string
-  datumRealizacie: string
-  r01: R01
-  r02: R02
-  r03: R03
-  r04: R04
-  r05: R05
-  r06: string
-  ciele: string
-  r07: string
-  r08: string
-  r09: string
 }
 
 export interface Pr4 {
@@ -648,16 +587,15 @@ export interface Telo {
   r30: string
   r31: R31
   r32: R32
-  r33: R33
-  r34: R34
-  r35udajeDalsieDeti: string
+  r33:{ dieta: Dieta[]}
+  r34udajeDalsieDeti: string
+  r35: R35
   r36: string
-  r37: R37
+  r36a: string
+  r37: string
   r38: string
-  r38a: string
-  r39: string
-  r40: string
   tabulka1: Tabulka1
+  mikrodanovnikPar2w: string
   vydavkyPar6ods11_ods1a2: string
   vydavkyPar6ods11_ods3: string
   vydavkyPar6ods11_ods4: string
@@ -670,20 +608,22 @@ export interface Telo {
   ukoncujemUplatnovaniePar17ods17_ods3a4: string
   tabulka1a: Tabulka1a
   tabulka1b: Tabulka1b
+  r39: string
+  r40: string
   r41: string
   r42: string
   r43: string
   r44: string
   r45: string
   r46: string
-  r47: string
-  r48: string
-  r49: R49
-  r50: R50
-  r51: R51
+  r47: R47
+  r48: R48
+  r49: string
+  r50: string
+  r51: string
   r52: R52
   r53: string
-  // r54: string
+  r54: string
   r55: string
   r56: string
   r57: string
@@ -707,9 +647,6 @@ export interface Telo {
   r73: string
   r74: string
   r75: string
-  r76: string
-  r76a: string
-  r76b: string
   r77: string
   r78: string
   r79: string
@@ -787,12 +724,11 @@ export interface Telo {
   neuplatnujem: string
   splnam3per: string
   r151: string
-  r152: R142
+  r152: R152
   osobitneZaznamy: OsobitneZaznamy
   r153: string
   datumVyhlasenia: string
   danovyPreplatokBonus: DanovyPreplatokBonus
-  prilPar30cOdpocetVydavkov?: PrilPar30cOdpocetVydavkov
   prilPodielyNaZisku: PrilPodielyNaZisku
   socZdravPoistenie: SocZdravPoistenie
 }

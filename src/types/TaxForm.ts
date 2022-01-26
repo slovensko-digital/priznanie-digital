@@ -54,9 +54,6 @@ export interface TaxForm {
   r032_uplatnujem_na_partnera?: boolean
   r032_partner_vlastne_prijmy?: Decimal
   r032_partner_pocet_mesiacov?: number
-  r033_partner_kupele?: boolean
-  /**   max 50*/
-  r033_partner_kupele_uhrady?: Decimal
 
   /** SECTION  Mortage */
   r037_uplatnuje_uroky?: boolean
@@ -127,13 +124,6 @@ export interface TaxForm {
    *   r.74=max(0,[ 3 937.35 –max(r.32 vlastný príjem,0)]*1/12*r.32 počet
    *   mesiacov)"*/
   r074_znizenie_partner: Decimal
-  /**   Kupele spolu r.76a + r.76b*/
-  r076_kupele_spolu: Decimal
-  /**   Kupele danovik*/
-  r076a_kupele_danovnik: Decimal
-  /**   má byť rovné preukázateľne zaplateným úhradám na KS za manželku (max 50 €)
-   *   a za každé označené dieťa (max 50 € za 1 dieťa) (50.00)*/
-  r076b_kupele_partner_a_deti: Decimal
   /**   Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72*/
   r077_nezdanitelna_cast: Decimal
   /**   Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)*/

@@ -44,13 +44,12 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     ? '1'
     : '0'
 
-  form.dokument.telo.r33.uplatNCZDNaKupelStarostlivost = taxForm.r033_partner_kupele
-    ? '1'
-    : '0'
-
   form.dokument.telo.tabulka1.t1r2.s1 = taxForm.t1r2_prijmy.toFixed(2)
   form.dokument.telo.tabulka1.t1r10.s1 = taxForm.t1r10_prijmy.toFixed(2)
   form.dokument.telo.tabulka1.t1r10.s2 = taxForm.t1r10_vydavky.toFixed(2)
+
+  /** TODO Vypocitat riadne mikrodanovnika */
+  // form.dokument.telo.mikrodanovnikPar2w = '1'
 
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistPar6ods11_ods1a2.toFixed(
     2,
@@ -79,33 +78,23 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
-  if (
-    boolToString(taxForm.r033_partner_kupele) &&
-    taxForm.r033_partner_kupele_uhrady.gt(0)
-  ) {
-    form.dokument.telo.r33 = {
-      uplatNCZDNaKupelStarostlivost: boolToString(taxForm.r033_partner_kupele),
-      preukazZaplatUhrady: taxForm.r033_partner_kupele_uhrady.toFixed(2),
-    }
-  }
-
   form.dokument.telo.r74 = taxForm.r074_znizenie_partner.gt(0)
     ? taxForm.r074_znizenie_partner.toFixed(2)
     : ''
 
-  form.dokument.telo.r76 = taxForm.r076_kupele_spolu.gt(0)
-    ? decimalToString(taxForm.r076_kupele_spolu)
-    : ''
-  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.gt(0)
-    ? decimalToString(taxForm.r076b_kupele_partner_a_deti)
-    : ''
-  form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik.gt(0)
-    ? decimalToString(taxForm.r076a_kupele_danovnik)
-    : ''
+  // form.dokument.telo.r76 = taxForm.r076_kupele_spolu.gt(0)
+  //   ? decimalToString(taxForm.r076_kupele_spolu)
+  //   : ''
+  // form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.gt(0)
+  //   ? decimalToString(taxForm.r076b_kupele_partner_a_deti)
+  //   : ''
+  // form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik.gt(0)
+  //   ? decimalToString(taxForm.r076a_kupele_danovnik)
+  //   : ''
 
   /** SECTION Children */
   if (taxForm.r034 && taxForm.r034.length > 0) {
-    form.dokument.telo.r34.dieta = taxForm.r034.map((child) => {
+    form.dokument.telo.r33.dieta = taxForm.r034.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,
@@ -113,33 +102,29 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
-
-    form.dokument.telo.r36 = taxForm.r036_deti_kupele.gt(0)
-      ? taxForm.r036_deti_kupele.toFixed(2)
-      : ''
   }
 
   /** SECTION Mortgage */
-  if (taxForm.r037_uplatnuje_uroky) {
-    form.dokument.telo.r37 = {
-      uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
-      zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
-      pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
-    }
-    form.dokument.telo.r112 = taxForm.r123.toFixed(2)
-    form.dokument.telo.r115 = taxForm.r126.toFixed(2)
-  }
+  // if (taxForm.r037_uplatnuje_uroky) {
+  //   form.dokument.telo.r37 = {
+  //     uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
+  //     zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
+  //     pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
+  //   }
+  //   form.dokument.telo.r112 = taxForm.r123.toFixed(2)
+  //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
+  // }
   /** SECTION Employed */
-  if (taxForm.employed) {
-    form.dokument.telo.r38 = taxForm.r038.toFixed(2)
-    form.dokument.telo.r39 = taxForm.r039.toFixed(2)
-    form.dokument.telo.r40 = taxForm.r040.toFixed(2)
-    form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
-  }
-  form.dokument.telo.r41 = taxForm.r041.toFixed(2)
-  form.dokument.telo.r42 = taxForm.r042.toFixed(2)
-  form.dokument.telo.r43 = taxForm.r043.toFixed(2)
-  form.dokument.telo.r47 = taxForm.r047.toFixed(2)
+  // if (taxForm.employed) {
+  //   form.dokument.telo.r38 = taxForm.r038.toFixed(2)
+  //   form.dokument.telo.r39 = taxForm.r039.toFixed(2)
+  //   form.dokument.telo.r40 = taxForm.r040.toFixed(2)
+  //   form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
+  // }
+  form.dokument.telo.r39 = taxForm.r041.toFixed(2)
+  form.dokument.telo.r40 = taxForm.r042.toFixed(2)
+  form.dokument.telo.r41 = taxForm.r043.toFixed(2)
+  form.dokument.telo.r45 = taxForm.r047.toFixed(2)
   form.dokument.telo.r55 = taxForm.r055.toFixed(2)
   form.dokument.telo.r57 = taxForm.r057.toFixed(2)
 
@@ -147,9 +132,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r73 = taxForm.r073.toFixed(2)
 
   form.dokument.telo.r77 = taxForm.r077_nezdanitelna_cast.toFixed(2)
-  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_zo_zamestnania.toFixed(2)
-  form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.toFixed(2)
-  form.dokument.telo.r81 = taxForm.r081.toFixed(2)
+  form.dokument.telo.r78 = taxForm.r078_zaklad_dane_zo_zamestnania.gt(0)
+    ? taxForm.r078_zaklad_dane_zo_zamestnania.toFixed(2)
+    : ''
+  form.dokument.telo.r80 = taxForm.r080_zaklad_dane_celkovo.gt(0)
+    ? taxForm.r080_zaklad_dane_celkovo.toFixed(2)
+    : ''
+  form.dokument.telo.r81 = taxForm.r081.gt(0) ? taxForm.r081.toFixed(2) : ''
   form.dokument.telo.r90 = taxForm.r090.toFixed(2)
   form.dokument.telo.r91 = taxForm.r091.toFixed(2)
   form.dokument.telo.r92 = taxForm.r092.toFixed(2)
@@ -157,8 +146,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r95 = taxForm.r095.toFixed(2)
   form.dokument.telo.r96 = taxForm.r096.toFixed(2)
   form.dokument.telo.r105 = taxForm.r105.toFixed(2)
-  form.dokument.telo.r106 = '0'
-  form.dokument.telo.r115 = '0'
+  form.dokument.telo.r106 = '0.00'
+  form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = taxForm.r116_dan.toFixed(2)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
@@ -180,18 +169,18 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
-    form.dokument.telo.r151 = taxForm.r151.toFixed(2)
-    form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
-    form.dokument.telo.r152 = {
-      ...taxForm.r152,
-      obchMeno: {
-        riadok: [taxForm.r152.obchMeno],
-      },
-      psc: taxForm.r152.psc.replace(' ', ''),
-      suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
-    }
-  }
+  // if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
+  //   form.dokument.telo.r151 = taxForm.r151.toFixed(2)
+  //   form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
+  //   form.dokument.telo.r152 = {
+  //     ...taxForm.r152,
+  //     obchMeno: {
+  //       riadok: [taxForm.r152.obchMeno],
+  //     },
+  //     psc: taxForm.r152.psc.replace(' ', ''),
+  //     suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
+  //   }
+  // }
 
   form.dokument.telo.r153 = taxForm.employed ? '4' : '3'
 
@@ -216,17 +205,21 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
-  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.priloha3_r08_poistne_spolu.toFixed(
-    2,
+  form.dokument.telo.socZdravPoistenie.pr8 = taxForm.priloha3_r08_poistne_spolu.gt(
+    0,
   )
+    ? taxForm.priloha3_r08_poistne_spolu.toFixed(2)
+    : ''
 
-  form.dokument.telo.socZdravPoistenie.pr9 = taxForm.priloha3_r09_socialne.toFixed(
-    2,
-  )
+  form.dokument.telo.socZdravPoistenie.pr9 = taxForm.priloha3_r09_socialne.gt(0)
+    ? taxForm.priloha3_r09_socialne.toFixed(2)
+    : ''
 
-  form.dokument.telo.socZdravPoistenie.pr10 = taxForm.priloha3_r10_zdravotne.toFixed(
-    2,
+  form.dokument.telo.socZdravPoistenie.pr10 = taxForm.priloha3_r10_zdravotne.gt(
+    0,
   )
+    ? taxForm.priloha3_r10_zdravotne.toFixed(2)
+    : ''
 
   form.dokument.telo.socZdravPoistenie.pr11 = taxForm.priloha3_r11_socialne.toFixed(
     2,

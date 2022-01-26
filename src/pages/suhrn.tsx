@@ -237,40 +237,6 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       /> */}
       <Summary
-        title="Kúpele"
-        href={'/kupele'}
-        rows={
-          taxFormUserInput.kupele
-            ? [
-                {
-                  title: 'Kúpelné úhrady za seba',
-                  value: taxFormUserInput.danovnikInSpa
-                    ? taxFormUserInput.r076a_kupele_danovnik
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.danovnikInSpa),
-                  testId: 'r076a_kupele_danovnik',
-                },
-                {
-                  title: 'Kúpelné úhrady za manželku / manžela',
-                  value: taxFormUserInput.r033_partner_kupele
-                    ? taxFormUserInput.r033_partner_kupele_uhrady
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.r033_partner_kupele),
-                  testId: 'r033_partner_kupele_uhrady',
-                },
-                {
-                  title: 'Kúpelné úhrady za deti',
-                  value: taxFormUserInput.childrenInSpa
-                    ? taxFormUserInput.r036_deti_kupele
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.childrenInSpa),
-                  testId: 'r036_deti_kupele',
-                },
-              ]
-            : [{ title: 'Nenavštívil' }]
-        }
-      />
-      <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}
         rows={[

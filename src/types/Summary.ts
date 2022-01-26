@@ -8,7 +8,6 @@ export interface Summary {
   zvyhodnenieNaManz: Decimal
   danovyBonusNaDieta: Decimal
   prispevokNaDochodkovePoist: Decimal
-  uhradyZaKupeleSpolu: Decimal
   zakladDane: Decimal
   danovyPreplatok: Decimal
   danNaUhradu: Decimal
