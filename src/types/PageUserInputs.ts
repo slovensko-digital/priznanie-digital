@@ -23,8 +23,6 @@ export type PartnerUserInput = Pick<
   | 'r032_uplatnujem_na_partnera'
   | 'r032_partner_vlastne_prijmy'
   | 'r032_partner_pocet_mesiacov'
-  | 'r033_partner_kupele'
-  | 'r033_partner_kupele_uhrady'
   | 'partner_step'
   | 'partner_spolocna_domacnost'
   | 'partner_bonus_uplatneny'
@@ -82,21 +80,6 @@ export type TwoPercentUserInput = Pick<
   | 'r142_psc'
   | 'r142_obec'
   | 'XIIoddiel_suhlasZaslUdaje'
->
-
-export type SpaUserInput = Pick<
-  TaxFormUserInput,
-  | 'kupele'
-  | 'r036_deti_kupele'
-  | 'r033_partner_kupele'
-  | 'r033_partner_kupele_uhrady'
-  | 'r076a_kupele_danovnik'
-  | 'danovnikInSpa'
-  | 'childrenInSpa'
-  | 'children'
-  | 'r032_uplatnujem_na_partnera'
-  | 'r031_priezvisko_a_meno'
-  | 'r031_rodne_cislo'
 >
 
 export type TaxBonusUserInput = Pick<
