@@ -7,7 +7,8 @@ import { PostponeUserInput } from '../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'
 import { setDate } from '../src/lib/utils'
 
-const WRITE_FILES = process.env.WRITE_FILES === 'yes'
+// const WRITE_FILES = process.env.WRITE_FILES === 'yes'
+const WRITE_FILES = false
 
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
@@ -55,7 +56,7 @@ describe('calcIntergration', () => {
       const result = await comparable(outputXml)
       const expected = await comparable(testCaseValidatedXML.toString())
 
-      if (true) {
+      if (WRITE_FILES) {
         fs.writeFile(
           `${__dirname}/testCases/${testCase}-expected.json`,
           JSON.stringify(expected, null, 2),
