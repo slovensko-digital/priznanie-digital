@@ -44,14 +44,6 @@ export const completeInput: E2eTestUserInput = {
   partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
 
-  /** SECTION Spa */
-  r036_deti_kupele: '30',
-  r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '20',
-  r076a_kupele_danovnik: '20',
-  danovnikInSpa: true,
-  kupele: true,
-
   /** SECTION Children */
   children: [
     {

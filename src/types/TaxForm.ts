@@ -70,8 +70,6 @@ export interface TaxForm {
 
   /**   Deti*/
   r034?: Child[]
-  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každe */
-  r036_deti_kupele?: Decimal
 
   /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
   t1r10_vydavky: Decimal
