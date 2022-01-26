@@ -8,7 +8,6 @@ import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInp
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
-import { withSpaInput } from '../../__tests__/testCases/withSpaInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
