@@ -98,7 +98,7 @@ describe.skip('/odklad/osobne-udaje page', () => {
   })
 })
 
-describe('/odklad/suhrn page', () => {
+describe.skip('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 

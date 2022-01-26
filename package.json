@@ -10,6 +10,7 @@
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
+    "start:next": "next start",
     "test:watch": "yarn test -- --watch",
     "test": "jest",
     "ci": "yarn lint && yarn test -- --ci && yarn build && yarn cy:ci",
