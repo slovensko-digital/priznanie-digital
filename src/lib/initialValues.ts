@@ -7,7 +7,6 @@ import {
   PensionUserInput,
   MortgageUserInput,
   TwoPercentUserInput,
-  SpaUserInput,
   TaxBonusUserInput,
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
@@ -95,17 +94,6 @@ export const twoPercentInitialValues: TwoPercentUserInput = {
   XIIoddiel_suhlasZaslUdaje: false,
 }
 
-export const spaInitialInput: SpaUserInput = {
-  r033_partner_kupele: false,
-  r033_partner_kupele_uhrady: '',
-  kupele: undefined,
-  r036_deti_kupele: '',
-  r076a_kupele_danovnik: '',
-  childrenInSpa: false,
-  danovnikInSpa: false,
-  children: [makeEmptyChild()],
-}
-
 export const taxBonusInitialInput: TaxBonusUserInput = {
   iban: '',
   ziadamVyplatitDanovyBonus: undefined,
@@ -120,7 +108,6 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...pensionInitialValues,
   ...mortgageInitialValues,
   ...twoPercentInitialValues,
-  ...spaInitialInput,
   ...taxBonusInitialInput,
   ...{ datum: '' },
   ...{ email: '' },
