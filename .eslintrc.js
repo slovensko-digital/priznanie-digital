@@ -43,6 +43,5 @@ module.exports = {
     ],
     'sonarjs/no-duplicate-string': 0,
     'sonarjs/cognitive-complexity': 0,
-    'react/react-in-jsx-scope': 0,
   },
 }

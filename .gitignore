@@ -37,9 +37,3 @@ cypress/screenshots
 cypress/videos
 cypress/downloads
 
-
-# Sentry
-.sentryclirc
-
-# Sentry
-.sentryclirc
