@@ -18,9 +18,6 @@ import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import Decimal from 'decimal.js'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
-// path to download directory ./cypress/downloads from
-// directory ./cypress/fixtures (default for file upload)
-const downloadsFolder = '../downloads'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
