@@ -1,5 +1,5 @@
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { NextRouter } from 'next/dist/next-server/lib/router/router'
+import type { NextRouter } from 'next/router'
 import { TaxForm } from '../types/TaxForm'
 import { checkCookie } from './cookie'
 import { PostponeUserInput } from '../types/PostponeUserInput'
