@@ -368,7 +368,8 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('ulica', input)
         typeToInput('cislo', input)
         typeToInput('psc', input)
-        // getInput('obec').should('have.value', input.obec)
+        getInput('obec').clear()
+        typeToInput('obec', input)
         typeToInput('stat', input)
 
         next()
