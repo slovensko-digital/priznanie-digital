@@ -19,10 +19,6 @@ import Decimal from 'decimal.js'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-// path to download directory ./cypress/downloads from
-// directory ./cypress/fixtures (default for file upload)
-const downloadsFolder = '../downloads'
-
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
 }
@@ -311,7 +307,7 @@ const executeTestCase = (testCase: string) => {
         cy.get('form[action$="/podania/nove"][method=post]')
 
         cy.get('[data-test="debug-download"]').click()
-        const filePath = path.join(downloadsFolder, 'file.xml')
+        const filePath = path.join(__dirname, '../downloads/file.xml')
 
         /**  Validate our results with the FS form */
         cy.visit('/form/form.495.html')
@@ -320,7 +316,7 @@ const executeTestCase = (testCase: string) => {
         cy.on('window:alert', stub)
 
         cy.get('#form-button-load').click()
-        cy.get('#form-buttons-load-dialog > input').attachFile({ filePath })
+        cy.get('#form-buttons-load-dialog > input').selectFile(filePath)
 
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
         cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
@@ -372,7 +368,8 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('ulica', input)
         typeToInput('cislo', input)
         typeToInput('psc', input)
-        getInput('obec').should('have.value', input.obec)
+        getInput('obec').clear()
+        typeToInput('obec', input)
         typeToInput('stat', input)
 
         next()
@@ -386,7 +383,7 @@ const executePostponeCase = (testCase: string) => {
         cy.get('form[action$="/podania/nove"][method=post]')
 
         cy.get('[data-test="debug-download"]').click()
-        const filePath = path.join(downloadsFolder, 'file.xml')
+        const filePath = path.join(__dirname, '../downloads/file.xml')
 
         /**  Validate our results with the FS form */
         cy.visit('/form-odklad/form.510.html')
@@ -395,7 +392,7 @@ const executePostponeCase = (testCase: string) => {
         cy.on('window:alert', stub)
 
         cy.get('#form-button-load').click()
-        cy.get('#form-buttons-load-dialog > input').attachFile({ filePath })
+        cy.get('#form-buttons-load-dialog > input').selectFile(filePath)
 
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
         cy.get('#form-button-validate').click().should(formSuccessful(stub))

@@ -4,7 +4,7 @@ export const postponeBasis: PostponeOutput = {
   dokument: {
     hlavicka: {
       dic: '',
-      zaRok: '2020',
+      zaRok: '2021',
       dovodDoplnenia: '0',
       fyzickaOsoba: {
         priezvisko: '',
@@ -20,7 +20,7 @@ export const postponeBasis: PostponeOutput = {
       novaLehota: {
         predlzenie493a: '1',
         predlzenie493b: '0',
-        datumLehota: '30.06.2021',
+        datumLehota: '30.06.2022',
       },
       vypracoval: { dna: 'xxx' },
       podpis: '1',
