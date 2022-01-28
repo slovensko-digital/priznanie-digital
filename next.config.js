@@ -3,16 +3,8 @@ module.exports = {
     ignoreDevErrors: true,
   },
   publicRuntimeConfig: {
-    navodyBaseUrl: 'https://navody.staging.slovensko.digital',
-    // navodyBaseUrl: process.env.NAVODY_BASE_URL,
-  },
-  webpack: (webpackConfig) => {
-    const config = { ...webpackConfig }
-    config.plugins = config.plugins || []
-
-    config.plugins = [...config.plugins]
-
-    return config
+    // navodyBaseUrl: 'https://navody.staging.slovensko.digital',
+    navodyBaseUrl: process.env.NAVODY_BASE_URL,
   },
   /**
    * Redirect to navody.
