@@ -33,7 +33,14 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
     <div className="govuk-grid-column-two-thirds">
       <TaxFormSection nextRoute={nextRoute} />
     </div>
-
+    <button
+      type="button"
+      onClick={() => {
+        throw new Error('Sentry Frontend Error')
+      }}
+    >
+      Throw error
+    </button>
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
         <PostponeSection nextPostponeRoute={nextPostponeRoute} />

@@ -33,5 +33,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+,
+"src/pages/_error.js"
+]
 }
