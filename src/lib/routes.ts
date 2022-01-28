@@ -139,7 +139,7 @@ export const validateRoute = (
           : 'r032_uplatnujem_na_partnera',
         // TODO reanable with mortgage feature
         // '/hypoteka': 'platil_prispevky_na_dochodok',
-        '/dve-percenta': 'dochodok',
+        // '/dve-percenta': 'dochodok',
         '/osobne-udaje': taxForm.XIIoddiel_uplatnujem2percenta
           ? 'XIIoddiel_uplatnujem2percenta'
           : 'platil_prispevky_na_dochodok',

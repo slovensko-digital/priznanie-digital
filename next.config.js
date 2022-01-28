@@ -3,7 +3,8 @@ module.exports = {
     ignoreDevErrors: true,
   },
   publicRuntimeConfig: {
-    navodyBaseUrl: process.env.NAVODY_BASE_URL,
+    navodyBaseUrl: 'https://navody.staging.slovensko.digital',
+    // navodyBaseUrl: process.env.NAVODY_BASE_URL,
   },
   webpack: (webpackConfig) => {
     const config = { ...webpackConfig }
