@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { makeAttachment, sendEmail } from '../../lib/sendinblue'
-import { withSentry } from '@sentry/nextjs'
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const parsedBody = JSON.parse(req.body)
 
   const ipAddress =
@@ -42,5 +41,3 @@ Dátum: ${new Date().toLocaleString()}`,
     res.status(400).send({ sent: false })
   }
 }
-
-export default withSentry(handler)

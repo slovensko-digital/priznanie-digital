@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { AutoformResponseBody } from '../../types/api'
 import Fuse from 'fuse.js'
 import ngos from '../../../public/ngos.json'
-import { withSentry } from '@sentry/nextjs'
 
 const maxCacheAgeInMinutes = 15
 
@@ -76,7 +75,7 @@ const getNgoData = async (): Promise<Fuse<CachedData>> => {
 
   return cache.data
 }
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const name = decodeURIComponent(`${req.query.name}`)
 
   let data: Fuse<CachedData>
@@ -96,5 +95,3 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200
   res.json(filtered)
 }
-
-export default withSentry(handler)

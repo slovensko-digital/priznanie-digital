@@ -1,12 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { convertToXML } from '../../lib/xml/xmlConverter'
 import { setDate } from '../../lib/utils'
 import { calculate } from '../../lib/calculation'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
-import { withSentry } from '@sentry/nextjs'
 
-const handler = async (
+export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
@@ -26,5 +25,3 @@ const handler = async (
   res.write(convertToXML(taxForm))
   res.end()
 }
-
-export default withSentry(handler)
