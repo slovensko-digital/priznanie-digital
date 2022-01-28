@@ -5,6 +5,7 @@ import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 import { setDate } from '../../lib/utils'
 import { calculate } from '../../lib/calculation'
+import { withSentry } from '@sentry/nextjs'
 
 const FIRST_COLUMN = 31.5
 const BOX_WIDTH = 14.4
@@ -695,7 +696,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   return tpl.writer
 }
 
-export default async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
@@ -717,3 +718,5 @@ export default async (
 
   res.end()
 }
+
+export default withSentry(handler)
