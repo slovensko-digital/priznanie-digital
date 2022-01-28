@@ -63,13 +63,6 @@ export const bugReport3Input: E2eTestUserInput = {
   r142_psc: '',
   r142_obec: '',
   XIIoddiel_suhlasZaslUdaje: false,
-  r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '10',
-  kupele: true,
-  r036_deti_kupele: '20',
-  r076a_kupele_danovnik: '10',
-  childrenInSpa: true,
-  danovnikInSpa: true,
   iban: 'anon',
   datum: '',
   ...{

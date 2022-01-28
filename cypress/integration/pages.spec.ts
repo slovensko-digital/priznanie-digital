@@ -326,7 +326,7 @@ describe('osobne-udaje page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/kupele')
+    assertUrl('/dochodok')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
@@ -561,7 +561,7 @@ describe('Pension page', () => {
     // When presses no, continues to next page
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
-    assertUrl('/kupele')
+    assertUrl('/osobne-udaje')
 
     //  Go back to our page
     cy.visit('/dochodok')
@@ -576,7 +576,7 @@ describe('Pension page', () => {
     typeToInput('r075_zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
-    assertUrl('/kupele')
+    assertUrl('/osobne-udaje')
   })
 })
 
@@ -738,9 +738,6 @@ describe('IBAN page', () => {
 
     // assertUrl('/hypoteka')
     // skipPage()
-
-    assertUrl('/kupele')
-    skipPage()
 
     assertUrl('/osobne-udaje')
     typeToInput('r001_dic', withBonusInput)

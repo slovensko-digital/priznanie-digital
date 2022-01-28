@@ -52,8 +52,8 @@ const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-const toFormattedNumber = (input: string) =>
-  Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
+// const toFormattedNumber = (input: string) =>
+//   Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
 
 export const executeAllTestCases = (testCases: string[]) => {
   testCases.forEach((testCase) => executeTestCase(testCase))
@@ -185,62 +185,6 @@ const executeTestCase = (testCase: string) => {
 
         // next()
 
-        /**  SECTION Kupele */
-        assertUrl('/kupele')
-
-        if (input.kupele) {
-          getInput('kupele', '-yes').click()
-          if (input.danovnikInSpa) {
-            getInput('danovnikInSpa').click()
-            typeToInput('r076a_kupele_danovnik', input)
-          }
-          if (input.r033_partner_kupele) {
-            getInput('r033_partner_kupele').click()
-            typeToInput('r033_partner_kupele_uhrady', input)
-
-            // partner not filled in previous steps
-            if (!input.r032_uplatnujem_na_partnera) {
-              typeToInput('r031_rodne_cislo', input)
-              typeToInput('r031_priezvisko_a_meno', input)
-            }
-          }
-          if (input.childrenInSpa) {
-            getInput('childrenInSpa').click()
-            typeToInput('r036_deti_kupele', input)
-            const childrenWithSpa = input.children.filter(
-              (child) => child.kupelnaStarostlivost,
-            )
-
-            // children filled in previous steps
-            if (input.hasChildren) {
-              childrenWithSpa.forEach((child, index) => {
-                if (child.kupelnaStarostlivost) {
-                  cy.get(
-                    `[data-test="children[${index}].kupelnaStarostlivost-input"]`,
-                  ).click()
-                }
-              })
-            } else {
-              childrenWithSpa.forEach((child, index) => {
-                cy.get(
-                  `[data-test="children[${index}].priezviskoMeno-input"]`,
-                ).type(child.priezviskoMeno)
-                cy.get(
-                  `[data-test="children[${index}].rodneCislo-input"]`,
-                ).type(child.rodneCislo)
-
-                if (index + 1 < input.children.length) {
-                  cy.get('[data-test="add-child"]').click()
-                }
-              })
-            }
-          }
-        } else {
-          getInput('kupele', '-no').click()
-        }
-
-        next()
-
         if (input.expectNgoDonationPage) {
           /**  SECTION Two percent */
           assertUrl('/dve-percenta')
@@ -303,34 +247,6 @@ const executeTestCase = (testCase: string) => {
           formatCurrency(parseInputNumber(input.t1r10_prijmy)),
         )
         cy.get('.govuk-table__cell').contains(input.r001_dic)
-
-        if (input.kupele) {
-          if (input.danovnikInSpa) {
-            cy.get(`[data-test="r076a_kupele_danovnik"]`).contains(
-              formatCurrency(parseInputNumber(input.r076a_kupele_danovnik)),
-            )
-          }
-          if (input.r033_partner_kupele) {
-            cy.get(`[data-test="r033_partner_kupele_uhrady"]`).contains(
-              formatCurrency(
-                parseInputNumber(input.r033_partner_kupele_uhrady),
-              ),
-            )
-          }
-          if (input.childrenInSpa)
-            cy.get(`[data-test="r036_deti_kupele"]`).contains(
-              formatCurrency(parseInputNumber(input.r036_deti_kupele)),
-            )
-        }
-
-        if (input.employed) {
-          cy.get(`[data-test="r039_socialne"]`).contains(
-            `${toFormattedNumber(input.r039_socialne)} EUR`,
-          )
-          cy.get(`[data-test="r039_zdravotne"]`).contains(
-            `${toFormattedNumber(input.r039_zdravotne)} EUR`,
-          )
-        }
 
         next()
 

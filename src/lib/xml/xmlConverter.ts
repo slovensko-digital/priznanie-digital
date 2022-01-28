@@ -82,16 +82,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     ? taxForm.r074_znizenie_partner.toFixed(2)
     : ''
 
-  // form.dokument.telo.r76 = taxForm.r076_kupele_spolu.gt(0)
-  //   ? decimalToString(taxForm.r076_kupele_spolu)
-  //   : ''
-  // form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.gt(0)
-  //   ? decimalToString(taxForm.r076b_kupele_partner_a_deti)
-  //   : ''
-  // form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik.gt(0)
-  //   ? decimalToString(taxForm.r076a_kupele_danovnik)
-  //   : ''
-
   /** SECTION Children */
   if (taxForm.r034 && taxForm.r034.length > 0) {
     form.dokument.telo.r33.dieta = taxForm.r034.map((child) => {

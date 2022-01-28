@@ -315,15 +315,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.write(FIRST_COLUMN + 25, 324, 'x')
   }
 
-  if (form.r034 && form.r034.some((child) => child.kupelnaStarostlivost)) {
-    // r036_deti_kupele
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 396,
-      303,
-      form.r036_deti_kupele.toNumber(),
-    )
-  }
-
   if (form.r037_uplatnuje_uroky) {
     // r037_uplatnuje_uroky
     tpl.write(FIRST_COLUMN + 21, 110, 'x')
