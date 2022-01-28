@@ -14,7 +14,7 @@
 
 # production
 /build
-
+tsconfig.tsbuildinfo
 # misc
 .DS_Store
 .env*
@@ -36,3 +36,4 @@ __tests__/**/*.output.*
 cypress/screenshots
 cypress/videos
 cypress/downloads
+
