@@ -344,7 +344,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r037.toNumber())
 
   // r040 - Základ dane (čiastkový základ dane)
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r040.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r038.toNumber())
 
   // t1r2_prijmy - r. 2
   tpl.writeNumberToBoxes(
@@ -384,19 +384,19 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   )
 
   // r041
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r041.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r039.toNumber())
 
   // r042
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r042.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r040.toNumber())
 
   // ***** PAGE 5
   tpl.nextPage()
 
   // r043
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r043.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r041.toNumber())
 
   // r047
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r047.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r045.toNumber())
 
   // r055
   tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 400, form.r055.toNumber())

@@ -85,19 +85,19 @@ export interface TaxForm {
   priloha3_r09_socialne: Decimal
   priloha3_r10_zdravotne: Decimal
 
-  /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
-  r040: Decimal
+  /** Základ dane (čiastkový základ dane)  */
+  r038: Decimal
   /**   The same as t1r10_vydavky*/
-  r041: Decimal
+  r039: Decimal
   /**   Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above*/
-  r042: Decimal
+  r040: Decimal
   /**   Základ dane (kladný rozdiel r. 41 a r. 42); výsledok hospodárenia (zisk)*/
-  r043: Decimal
+  r041: Decimal
   /**  TODO  Strata (záporný rozdiel r. 41 a r. 42); výsledok hospodárenia (strata) */
-  // r044: number;
+  // r042: number;
   /**   Základ dane (čiastkový základ dane) z príjmov (r. 43 + r. 44 + r. 45 - r.
    *   46) > 0*/
-  r047: Decimal
+  r045: Decimal
   /**   Znížený čiastkový základ dane z príjmov o stratu z predchádzajúcich
    *   zdaňovacích období maximálne do sumy v r. 47 (r. 47 - r. 54) ASI zrkadlenie
    *   047 */

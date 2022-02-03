@@ -18,12 +18,12 @@ const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
-export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3480
-const MAX_ZAKLAD_DANE = 19506.56
+export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3_480
+const MAX_ZAKLAD_DANE = 19_936.22
 export const PARTNER_MAX_ODPOCET = 4_124.74
 const CHILD_RATE_SIX_AND_YOUNGER = 45.44
 const CHILD_RATE_OVER_SIX = 22.72
-const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
+const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
 const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
 const TAX_YEAR = 2020
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
@@ -163,31 +163,31 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
       )
     },
-    get r040() {
+    get r038() {
       return this.r036.minus(this.r037)
     },
-    get r041() {
+    get r039() {
       return this.t1r10_prijmy
     },
-    get r042() {
+    get r040() {
       return this.t1r10_vydavky
     },
-    get r043() {
-      return Decimal.abs(this.r041.minus(this.r042))
+    get r041() {
+      return Decimal.abs(this.r039.minus(this.r040))
     },
-    get r047() {
-      return this.r043 // this.r044 + this.r045 - this.r046);
+    get r045() {
+      return this.r041
     },
     get r055() {
-      return this.r047
+      return this.r045
     },
     get r057() {
       return this.r055
     },
     // v r. 72 spočítate, koľko je súčet základov dane zo zamestnania (§ 5) a koľko je základ
-    // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 40 a 57
+    // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 38 a 57
     get r072_pred_znizenim() {
-      return sum(this.r057, this.r040)
+      return sum(this.r057, this.r038)
     },
     // v r.73 až 76 uvediete, aké nezdaniteľné časti si uplatní daňovník - to sú tie údaje z úvodu, ktoré vypĺňa,
     // či mal kúpeľnú starostlivosť, či si platí DDP... v riadku 77 tieto nezdaniteľné časti na daňovníka spočítate,
@@ -260,7 +260,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // ak je r. 40 viac ako je r. 77, potom na r. 78 uvediete rozdiel r. 40 - . 77
     get r078_zaklad_dane_zo_zamestnania() {
       return floorDecimal(
-        Decimal.max(this.r040.minus(this.r077_nezdanitelna_cast), 0),
+        Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0),
       )
     },
     // r. 80 - tu uvediete vo vašom prípade sumu, ktorá je na r. 78. keďže nepočítate s inými typmi príjmov,
@@ -297,7 +297,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r091() {
       if (this.r078_zaklad_dane_zo_zamestnania.eq(0)) {
         return floorDecimal(
-          Decimal.max(this.r077_nezdanitelna_cast.minus(this.r040), 0),
+          Decimal.max(this.r077_nezdanitelna_cast.minus(this.r038), 0),
         )
       } else {
         return new Decimal(0)
