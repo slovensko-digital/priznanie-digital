@@ -72,6 +72,26 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r010_obec: input.r010_obec,
     r011_stat: input.r011_stat,
 
+    /** SECTION Prijmy */
+    t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
+    get t1r2_prijmy() {
+      return this.t1r10_prijmy
+    },
+    get t1r10_vydavky() {
+      const vydavky = Decimal.min(
+        this.t1r10_prijmy.times(0.6),
+        PAUSALNE_VYDAVKY_MAX,
+      ).add(this.vydavkyPoistPar6ods11_ods1a2)
+      return Decimal.min(vydavky, this.t1r2_prijmy)
+    },
+
+    priloha3_r11_socialne: new Decimal(
+      parseInputNumber(input.priloha3_r11_socialne),
+    ),
+    priloha3_r13_zdravotne: new Decimal(
+      parseInputNumber(input.priloha3_r13_zdravotne),
+    ),
+
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
     r075_zaplatene_prispevky_na_dochodok: Decimal.min(
@@ -107,19 +127,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
-    /** SECTION Mortgage */
+    /** SECTION Mortgage NAMES ARE WRONG TODO*/
     r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
     r037_zaplatene_uroky: new Decimal(
       parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
     ),
     r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
 
-    priloha3_r11_socialne: new Decimal(
-      parseInputNumber(input.priloha3_r11_socialne),
-    ),
-    priloha3_r13_zdravotne: new Decimal(
-      parseInputNumber(input.priloha3_r13_zdravotne),
-    ),
     r036: new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
     ),
@@ -133,18 +147,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ),
     ),
 
-    /** SECTION Prijmy */
-    t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
-    get t1r2_prijmy() {
-      return this.t1r10_prijmy
-    },
-    get t1r10_vydavky() {
-      const vydavky = Decimal.min(
-        this.t1r10_prijmy.times(0.6),
-        PAUSALNE_VYDAVKY_MAX,
-      ).add(this.vydavkyPoistPar6ods11_ods1a2)
-      return Decimal.min(vydavky, this.t1r2_prijmy)
-    },
     get vydavkyPoistPar6ods11_ods1a2() {
       return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
     },

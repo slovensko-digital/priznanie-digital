@@ -78,15 +78,12 @@ export interface TaxForm {
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona */
   vydavkyPoistPar6ods11_ods1a2: Decimal
 
-  /** Úhrn povinného poistného (§ 5 ods. 8 zákona) - za zamestnanie */
+  /** SECTION  Zamestnanie */
+  r036: Decimal
+  r037: Decimal
   priloha3_r08_poistne_spolu: Decimal
   priloha3_r09_socialne: Decimal
   priloha3_r10_zdravotne: Decimal
-
-  /** SECTION  Zamestnanie */
-  r036: Decimal
-  /**   Uhrn poistneho*/
-  r037: Decimal
 
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
   r040: Decimal
