@@ -125,7 +125,7 @@ describe('Employment page', () => {
       withEmploymentInput,
     )
     getInput('uhrnPreddavkovNaDan').type('0')
-    getInput('r108').type('0')
+    getInput('udajeODanovomBonuseNaDieta').type('0')
 
     // When presses no, the fields disappear
     cy.get('[data-test=employed-input-no]').click()
@@ -169,7 +169,7 @@ describe('Employment page', () => {
       withEmploymentInput,
     )
     getInput('uhrnPreddavkovNaDan').type('10')
-    getInput('r108').type('20')
+    getInput('udajeODanovomBonuseNaDieta').type('20')
     next()
 
     // go back
@@ -191,7 +191,7 @@ describe('Employment page', () => {
       withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
     )
     getInput('uhrnPreddavkovNaDan').should('have.value', '10')
-    getInput('r108').should('have.value', '20')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
 
     // form should hide
     getInput('employed', '-no').click()
@@ -199,7 +199,7 @@ describe('Employment page', () => {
     getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
     getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
     getInput('uhrnPreddavkovNaDan').should('not.exist')
-    getInput('r108').should('not.exist')
+    getInput('udajeODanovomBonuseNaDieta').should('not.exist')
 
     // form should display and preserve values until it is submitted
     getInput('employed', '-yes').click()
@@ -216,7 +216,7 @@ describe('Employment page', () => {
       withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
     )
     getInput('uhrnPreddavkovNaDan').should('have.value', '10')
-    getInput('r108').should('have.value', '20')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
 
     // submit form
     getInput('employed', '-no').click()
@@ -239,7 +239,7 @@ describe('Employment page', () => {
       '',
     )
     getInput('uhrnPreddavkovNaDan').should('have.value', '')
-    getInput('r108').should('have.value', '')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '')
   })
 })
 describe('Partner page', () => {
@@ -483,8 +483,14 @@ describe('Children page', () => {
       ...withChildrenInput,
       uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
     })
-    typeToInput('uhrnPreddavkovNaDan', { ...withChildrenInput, uhrnPreddavkovNaDan: '0' }) // eligible via employment income
-    typeToInput('r108', { ...withChildrenInput, r108: '0' })
+    typeToInput('uhrnPreddavkovNaDan', {
+      ...withChildrenInput,
+      uhrnPreddavkovNaDan: '0',
+    }) // eligible via employment income
+    typeToInput('udajeODanovomBonuseNaDieta', {
+      ...withChildrenInput,
+      udajeODanovomBonuseNaDieta: '0',
+    })
     next()
 
     assertUrl('/partner')

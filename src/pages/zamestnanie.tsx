@@ -74,7 +74,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 04. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
                 />
                 <Input
-                  name="r108"
+                  name="udajeODanovomBonuseNaDieta"
                   type="number"
                   label="Údaje o daňovom bonuse na dieťa"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 14. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
@@ -138,10 +138,12 @@ export const validate = (values: EmployedUserInput) => {
         'Zadajte sumu povinného poistného vo formáte 123,45'
     }
 
-    if (!values.r108) {
-      errors.r108 = 'Zadajte údaje o daňovom bonuse na dieťa'
-    } else if (!values.r108.match(numberInputRegexp)) {
-      errors.r108 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    if (!values.udajeODanovomBonuseNaDieta) {
+      errors.udajeODanovomBonuseNaDieta =
+        'Zadajte údaje o daňovom bonuse na dieťa'
+    } else if (!values.udajeODanovomBonuseNaDieta.match(numberInputRegexp)) {
+      errors.udajeODanovomBonuseNaDieta =
+        'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
 

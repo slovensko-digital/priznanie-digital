@@ -141,7 +141,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 },
                 {
                   title: 'Údaje o zvýhodnení na manželku / manžela',
-                  value: taxFormUserInput.r108,
+                  value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
                 },
               ]

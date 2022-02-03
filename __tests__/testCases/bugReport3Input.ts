@@ -27,7 +27,7 @@ export const bugReport3Input: E2eTestUserInput = {
   uhrnPrijmovOdVsetkychZamestnavatelov: '2000',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '150',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '50',
-  r108: '0',
+  udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '10',
   hasChildren: true,
   children: [

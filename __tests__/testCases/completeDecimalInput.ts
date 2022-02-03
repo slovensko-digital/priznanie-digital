@@ -21,7 +21,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '650,32',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '350,22',
   zaplatenePreddavky: '80.50',
-  r108: '50.75',
+  udajeODanovomBonuseNaDieta: '50.75',
   employed: true,
 
   /** SECTION Mortgage */

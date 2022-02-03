@@ -417,7 +417,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
     },
     get r119() {
-      return new Decimal(parseInputNumber(input?.r108 ?? '0'))
+      return new Decimal(
+        parseInputNumber(input?.udajeODanovomBonuseNaDieta ?? '0'),
+      )
     },
     get r120() {
       return Decimal.max(new Decimal(this.r117).minus(this.r119), 0)

@@ -80,7 +80,7 @@ export interface TaxFormUserInput {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie?: string
   uhrnPreddavkovNaDan?: string
-  r108?: string
+  udajeODanovomBonuseNaDieta?: string
 
   /** SECTION  Deti*/
   hasChildren?: boolean

@@ -22,7 +22,7 @@ export const completeInput: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
   zaplatenePreddavky: '80',
-  r108: '50',
+  udajeODanovomBonuseNaDieta: '50',
   employed: true,
 
   /** SECTION Mortgage */

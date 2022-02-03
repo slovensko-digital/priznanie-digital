@@ -16,7 +16,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   uhrnPrijmovOdVsetkychZamestnavatelov: '3248.30',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '305.12',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '130.10',
-  r108: '221.70',
+  udajeODanovomBonuseNaDieta: '221.70',
   uhrnPreddavkovNaDan: '78.20',
   employed: true,
   hasChildren: true,

@@ -29,7 +29,7 @@ export const bugReport2Input: E2eTestUserInput = {
   uhrnPrijmovOdVsetkychZamestnavatelov: '2000',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '150',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '50',
-  r108: '22.17',
+  udajeODanovomBonuseNaDieta: '22.17',
   uhrnPreddavkovNaDan: '124,35',
   hasChildren: true,
   children: [

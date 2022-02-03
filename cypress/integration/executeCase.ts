@@ -93,7 +93,7 @@ const executeTestCase = (testCase: string) => {
           typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', input)
           typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', input)
           typeToInput('uhrnPreddavkovNaDan', input)
-          typeToInput('r108', input)
+          typeToInput('udajeODanovomBonuseNaDieta', input)
         } else {
           getInput('employed', '-no').click()
         }
