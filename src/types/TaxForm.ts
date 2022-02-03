@@ -84,9 +84,9 @@ export interface TaxForm {
   priloha3_r10_zdravotne: Decimal
 
   /** SECTION  Zamestnanie */
-  r038: Decimal
+  r036: Decimal
   /**   Uhrn poistneho*/
-  r039: Decimal
+  r037: Decimal
 
   /** Základ dane (čiastkový základ dane) (r. 38 - r. 39)  */
   r040: Decimal

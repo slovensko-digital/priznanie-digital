@@ -120,10 +120,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     priloha3_r13_zdravotne: new Decimal(
       parseInputNumber(input.priloha3_r13_zdravotne),
     ),
-    r038: new Decimal(
+    r036: new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
     ),
-    r039: new Decimal(
+    r037: new Decimal(
       parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
     ).plus(
       new Decimal(
@@ -149,7 +149,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
     },
     get priloha3_r08_poistne_spolu() {
-      return this.r039
+      return this.r037
     },
     get priloha3_r09_socialne() {
       return new Decimal(
@@ -162,7 +162,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r040() {
-      return this.r038.minus(this.r039)
+      return this.r036.minus(this.r037)
     },
     get r041() {
       return this.t1r10_prijmy
@@ -534,7 +534,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get eligibleForChildrenBonus() {
       return (
         this.t1r10_prijmy.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA) ||
-        this.r038.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA)
+        this.r036.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA)
       )
     },
 
@@ -550,7 +550,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
 export function buildSummary(form: TaxForm): Summary {
   return {
-    prijmy: form.t1r10_prijmy.plus(form.r038),
+    prijmy: form.t1r10_prijmy.plus(form.r036),
     zdravotnePoistne: form.priloha3_r13_zdravotne.plus(
       form.priloha3_r10_zdravotne,
     ),

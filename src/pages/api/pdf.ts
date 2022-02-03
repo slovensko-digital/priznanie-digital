@@ -338,10 +338,10 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r038 - Úhrn príjmov od všetkých zamestnávateľov
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r038.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r036.toNumber())
 
   // r039 - Úhrn povinného poistného
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r039.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r037.toNumber())
 
   // r040 - Základ dane (čiastkový základ dane)
   tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r040.toNumber())
