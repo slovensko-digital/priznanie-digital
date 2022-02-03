@@ -19,6 +19,7 @@ import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -75,7 +76,7 @@ const Deti: Page<ChildrenUserInput> = ({
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
             <BooleanRadio
-              title="Máte dieťa, s ktorým ste v roku 2020 žili v spoločnej domácnosti a malo do 16 rokov alebo študenta do 25 rokov?"
+              title={`Máte dieťa, s ktorým ste v roku ${TAX_YEAR} žili v spoločnej domácnosti a malo do 16 rokov alebo študenta do 25 rokov?`}
               name="hasChildren"
             />
             {values.hasChildren && (

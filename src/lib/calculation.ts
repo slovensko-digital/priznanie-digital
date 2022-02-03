@@ -25,7 +25,7 @@ const CHILD_RATE_SIX_AND_YOUNGER = 45.44
 const CHILD_RATE_OVER_SIX = 22.72
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9290.84
 const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const TAX_YEAR = 2020
+export const TAX_YEAR = 2021
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
