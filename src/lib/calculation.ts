@@ -120,7 +120,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     priloha3_r13_zdravotne: new Decimal(
       parseInputNumber(input.priloha3_r13_zdravotne),
     ),
-    r038: new Decimal(parseInputNumber(input?.r038 ?? '0')),
+    r038: new Decimal(
+      parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
+    ),
     r039: new Decimal(parseInputNumber(input?.r039_socialne ?? '0')).plus(
       new Decimal(parseInputNumber(input?.r039_zdravotne ?? '0')),
     ),

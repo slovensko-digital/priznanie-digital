@@ -17,7 +17,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   datum: '22.02.2020',
 
   /** SECTION Employment */
-  r038: '4000,43',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '4000,43',
   r039_socialne: '650,32',
   r039_zdravotne: '350,22',
   r122: '80.50',

@@ -24,7 +24,7 @@ export const bugReport1Input: E2eTestUserInput = {
   r010_obec: 'anon',
   r011_stat: 'anon',
   employed: true,
-  r038: '3248,3',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '3248,3',
   r039_socialne: '400',
   r039_zdravotne: '35,22',
   hasChildren: true,

@@ -42,7 +42,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
             {values.employed && (
               <>
                 <Input
-                  name="r038"
+                  name="uhrnPrijmovOdVsetkychZamestnavatelov"
                   type="number"
                   label="Úhrn príjmov od všetkých zamestnávateľov"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
@@ -99,10 +99,14 @@ export const validate = (values: EmployedUserInput) => {
   }
 
   if (values.employed) {
-    if (!values.r038) {
-      errors.r038 = 'Zadajte úhrn príjmov od všetkých zamestnávateľov'
-    } else if (!values.r038.match(numberInputRegexp)) {
-      errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45'
+    if (!values.uhrnPrijmovOdVsetkychZamestnavatelov) {
+      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
+        'Zadajte úhrn príjmov od všetkých zamestnávateľov'
+    } else if (
+      !values.uhrnPrijmovOdVsetkychZamestnavatelov.match(numberInputRegexp)
+    ) {
+      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
+        'Zadajte sumu príjmov vo formáte 123,45'
     }
 
     if (!values.r039_socialne) {

@@ -18,7 +18,7 @@ export const completeInput: E2eTestUserInput = {
   datum: '22.02.2020',
 
   /** SECTION Employment */
-  r038: '4000',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
   r039_socialne: '600',
   r039_zdravotne: '400',
   r122: '80',

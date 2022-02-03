@@ -14,7 +14,7 @@ export const withEmploymentInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
-  r038: '4000',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
   r039_socialne: '700',
   r039_zdravotne: '300',
   employed: true,

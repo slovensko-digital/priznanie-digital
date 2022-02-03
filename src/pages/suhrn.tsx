@@ -117,7 +117,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
             ? [
                 {
                   title: 'Úhrn príjmov od všetkých zamestnávateľov',
-                  value: taxFormUserInput.r038,
+                  value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
                   currency: true,
                 },
                 {

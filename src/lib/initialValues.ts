@@ -46,7 +46,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
-  r038: '',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '',
   r039_socialne: '',
   r039_zdravotne: '',
   r108: '',

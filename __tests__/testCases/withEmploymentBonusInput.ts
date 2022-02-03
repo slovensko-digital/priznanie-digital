@@ -13,7 +13,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '5445',
-  r038: '3248.30',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '3248.30',
   r039_socialne: '305.12',
   r039_zdravotne: '130.10',
   r108: '221.70',
