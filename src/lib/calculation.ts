@@ -446,10 +446,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r123.minus(this.r125), 0)
     },
     get r131() {
-      return new Decimal(parseInputNumber(input?.r120 ?? '0'))
+      return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
     get r133() {
-      return new Decimal(parseInputNumber(input?.r122 ?? '0'))
+      return new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0'))
     },
     get r135_dan_na_uhradu() {
       const baseTax =

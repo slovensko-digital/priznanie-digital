@@ -14,14 +14,14 @@ export const completeInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
-  r120: '100',
+  uhrnPreddavkovNaDan: '100',
   datum: '22.02.2020',
 
   /** SECTION Employment */
   uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
-  r122: '80',
+  zaplatenePreddavky: '80',
   r108: '50',
   employed: true,
 

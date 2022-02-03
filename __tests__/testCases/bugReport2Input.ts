@@ -4,7 +4,7 @@ export const bugReport2Input: E2eTestUserInput = {
   t1r10_prijmy: '45000',
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
-  r122: '1247.56',
+  zaplatenePreddavky: '1247.56',
   r031_priezvisko_a_meno: 'anon',
   r031_rodne_cislo: 'anon',
   r032_uplatnujem_na_partnera: true,
@@ -30,7 +30,7 @@ export const bugReport2Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '150',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '50',
   r108: '22.17',
-  r120: '124,35',
+  uhrnPreddavkovNaDan: '124,35',
   hasChildren: true,
   children: [
     {

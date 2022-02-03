@@ -53,7 +53,7 @@ const navigateEligibleToChildrenPage = () => {
   })
   typeToInput('priloha3_r11_socialne', withChildrenInput)
   typeToInput('priloha3_r13_zdravotne', withChildrenInput)
-  getInput('r122').type('0')
+  getInput('zaplatenePreddavky').type('0')
 
   next()
 
@@ -124,7 +124,7 @@ describe('Employment page', () => {
       'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
       withEmploymentInput,
     )
-    getInput('r120').type('0')
+    getInput('uhrnPreddavkovNaDan').type('0')
     getInput('r108').type('0')
 
     // When presses no, the fields disappear
@@ -168,7 +168,7 @@ describe('Employment page', () => {
       'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
       withEmploymentInput,
     )
-    getInput('r120').type('10')
+    getInput('uhrnPreddavkovNaDan').type('10')
     getInput('r108').type('20')
     next()
 
@@ -190,7 +190,7 @@ describe('Employment page', () => {
       'have.value',
       withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
     )
-    getInput('r120').should('have.value', '10')
+    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
     getInput('r108').should('have.value', '20')
 
     // form should hide
@@ -198,7 +198,7 @@ describe('Employment page', () => {
     getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('not.exist')
     getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
     getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
-    getInput('r120').should('not.exist')
+    getInput('uhrnPreddavkovNaDan').should('not.exist')
     getInput('r108').should('not.exist')
 
     // form should display and preserve values until it is submitted
@@ -215,7 +215,7 @@ describe('Employment page', () => {
       'have.value',
       withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
     )
-    getInput('r120').should('have.value', '10')
+    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
     getInput('r108').should('have.value', '20')
 
     // submit form
@@ -238,7 +238,7 @@ describe('Employment page', () => {
       'have.value',
       '',
     )
-    getInput('r120').should('have.value', '')
+    getInput('uhrnPreddavkovNaDan').should('have.value', '')
     getInput('r108').should('have.value', '')
   })
 })
@@ -465,7 +465,7 @@ describe('Children page', () => {
     typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
-    getInput('r122').type('0')
+    getInput('zaplatenePreddavky').type('0')
 
     next()
 
@@ -483,7 +483,7 @@ describe('Children page', () => {
       ...withChildrenInput,
       uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
     })
-    typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
+    typeToInput('uhrnPreddavkovNaDan', { ...withChildrenInput, uhrnPreddavkovNaDan: '0' }) // eligible via employment income
     typeToInput('r108', { ...withChildrenInput, r108: '0' })
     next()
 
@@ -746,7 +746,7 @@ describe('IBAN page', () => {
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
-    getInput('r122').type('0')
+    getInput('zaplatenePreddavky').type('0')
 
     next()
 

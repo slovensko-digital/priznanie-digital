@@ -69,22 +69,18 @@ export interface TaxFormUserInput {
   r037_pocetMesiacov?: string
 
   /** SECTION Prijmy a poistenie  */
-  /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
   t1r10_prijmy: string
-  /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
   priloha3_r11_socialne: string
-  /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
-  /** Zaplatené preddavky */
-  r122?: string
+  zaplatenePreddavky?: string
 
   /**  SECTION Zamestnanie */
   employed?: boolean
   uhrnPrijmovOdVsetkychZamestnavatelov?: string
   uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie?: string
+  uhrnPreddavkovNaDan?: string
   r108?: string
-  r120?: string
 
   /** SECTION  Deti*/
   hasChildren?: boolean

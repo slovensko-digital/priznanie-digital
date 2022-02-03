@@ -78,7 +78,9 @@ const executeTestCase = (testCase: string) => {
         getInput('t1r10_prijmy').type(input.t1r10_prijmy)
         getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
         getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
-        getInput('r122').type(input.r122 ? input.r122 : '0')
+        getInput('zaplatenePreddavky').type(
+          input.zaplatenePreddavky ? input.zaplatenePreddavky : '0',
+        )
 
         next()
 
@@ -87,10 +89,10 @@ const executeTestCase = (testCase: string) => {
 
         if (input.employed) {
           getInput('employed', '-yes').click()
-          typeToInput('r038', input)
-          typeToInput('r039_socialne', input)
-          typeToInput('r039_zdravotne', input)
-          typeToInput('r120', input)
+          typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', input)
+          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', input)
+          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', input)
+          typeToInput('uhrnPreddavkovNaDan', input)
           typeToInput('r108', input)
         } else {
           getInput('employed', '-no').click()
@@ -292,7 +294,9 @@ const executeTestCase = (testCase: string) => {
         cy.get('.govuk-table__cell').contains(
           formatCurrency(
             new Decimal(parseInputNumber(input.t1r10_prijmy))
-              .plus(parseInputNumber(input.r038))
+              .plus(
+                parseInputNumber(input.uhrnPrijmovOdVsetkychZamestnavatelov),
+              )
               .toNumber(),
           ),
         )

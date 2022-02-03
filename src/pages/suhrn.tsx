@@ -104,7 +104,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           },
           {
             title: 'Zaplatené preddavky',
-            value: taxFormUserInput.r122,
+            value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
           },
         ]}
@@ -122,7 +122,8 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 },
                 {
                   title: 'Úhrn sociálneho poistného',
-                  value: taxFormUserInput.r039_socialne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
                   currency: true,
                   testId: 'r039_socialne',
                 },
@@ -135,7 +136,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 },
                 {
                   title: 'Úhrn preddavkov na daň',
-                  value: taxFormUserInput.r120,
+                  value: taxFormUserInput.uhrnPreddavkovNaDan,
                   currency: true,
                 },
                 {
