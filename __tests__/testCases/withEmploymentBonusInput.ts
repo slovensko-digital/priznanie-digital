@@ -14,7 +14,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '5445',
   uhrnPrijmovOdVsetkychZamestnavatelov: '3248.30',
-  r039_socialne: '305.12',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '305.12',
   r039_zdravotne: '130.10',
   r108: '221.70',
   r120: '78.20',

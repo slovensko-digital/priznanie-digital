@@ -25,7 +25,7 @@ export const bugReport3Input: E2eTestUserInput = {
   r011_stat: 'anon',
   employed: true,
   uhrnPrijmovOdVsetkychZamestnavatelov: '2000',
-  r039_socialne: '150',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '150',
   r039_zdravotne: '50',
   r108: '0',
   r120: '10',

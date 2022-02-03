@@ -15,7 +15,7 @@ export const withEmploymentInput: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
   uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
-  r039_socialne: '700',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '700',
   r039_zdravotne: '300',
   employed: true,
   hasChildren: false,

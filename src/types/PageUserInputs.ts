@@ -10,7 +10,7 @@ export type EmployedUserInput = Pick<
   TaxFormUserInput,
   | 'employed'
   | 'uhrnPrijmovOdVsetkychZamestnavatelov'
-  | 'r039_socialne'
+  | 'uhrnPovinnehoPoistnehoNaSocialnePoistenie'
   | 'r039_zdravotne'
   | 'r108'
   | 'r120'

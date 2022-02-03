@@ -81,7 +81,7 @@ export interface TaxFormUserInput {
   /**  SECTION Zamestnanie */
   employed?: boolean
   uhrnPrijmovOdVsetkychZamestnavatelov?: string
-  r039_socialne?: string
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
   r039_zdravotne?: string
   r108?: string
   r120?: string

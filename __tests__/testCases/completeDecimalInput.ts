@@ -18,7 +18,7 @@ export const completeDecimalInput: E2eTestUserInput = {
 
   /** SECTION Employment */
   uhrnPrijmovOdVsetkychZamestnavatelov: '4000,43',
-  r039_socialne: '650,32',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '650,32',
   r039_zdravotne: '350,22',
   r122: '80.50',
   r108: '50.75',

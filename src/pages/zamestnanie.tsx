@@ -56,7 +56,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   />
                 */}
                 <Input
-                  name="r039_socialne"
+                  name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
                   hint={`Tento údaj nájdete v "Potvrdení" riadok 2a. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
@@ -109,10 +109,13 @@ export const validate = (values: EmployedUserInput) => {
         'Zadajte sumu príjmov vo formáte 123,45'
     }
 
-    if (!values.r039_socialne) {
-      errors.r039_socialne = 'Zadajte úhrn sociálneho poistného'
-    } else if (!values.r039_socialne.match(numberInputRegexp)) {
-      errors.r039_socialne =
+    if (!values.uhrnPovinnehoPoistnehoNaSocialnePoistenie) {
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
+        'Zadajte úhrn sociálneho poistného'
+    } else if (
+      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenie.match(numberInputRegexp)
+    ) {
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
         'Zadajte sumu sociálneho poistného vo formáte 123,45'
     }
 
