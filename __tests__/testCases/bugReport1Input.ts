@@ -26,7 +26,7 @@ export const bugReport1Input: E2eTestUserInput = {
   employed: true,
   uhrnPrijmovOdVsetkychZamestnavatelov: '3248,3',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
-  r039_zdravotne: '35,22',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
   hasChildren: true,
   children: [
     {

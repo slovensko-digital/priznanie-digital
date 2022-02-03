@@ -11,7 +11,7 @@ export type EmployedUserInput = Pick<
   | 'employed'
   | 'uhrnPrijmovOdVsetkychZamestnavatelov'
   | 'uhrnPovinnehoPoistnehoNaSocialnePoistenie'
-  | 'r039_zdravotne'
+  | 'uhrnPovinnehoPoistnehoNaZdravotnePoistenie'
   | 'r108'
   | 'r120'
 >

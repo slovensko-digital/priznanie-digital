@@ -48,7 +48,7 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
   uhrnPrijmovOdVsetkychZamestnavatelov: '',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '',
-  r039_zdravotne: '',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
   r108: '',
   r120: '',
 }

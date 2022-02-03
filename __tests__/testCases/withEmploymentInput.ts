@@ -16,7 +16,7 @@ export const withEmploymentInput: E2eTestUserInput = {
   t1r10_prijmy: '25000',
   uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '700',
-  r039_zdravotne: '300',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '300',
   employed: true,
   hasChildren: false,
   children: [],

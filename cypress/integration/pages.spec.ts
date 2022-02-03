@@ -117,7 +117,10 @@ describe('Employment page', () => {
     getError().should('have.length', 4)
 
     typeToInput('r039_socialne', withEmploymentInput)
-    typeToInput('r039_zdravotne', withEmploymentInput)
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
+      withEmploymentInput,
+    )
     getInput('r120').type('0')
     getInput('r108').type('0')
 
@@ -126,7 +129,7 @@ describe('Employment page', () => {
 
     getInput('r038').should('not.exist')
     getInput('r039_socialne').should('not.exist')
-    getInput('r039_zdravotne').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click()
@@ -136,9 +139,9 @@ describe('Employment page', () => {
       'have.value',
       withEmploymentInput?.r039_socialne?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
     )
 
     // Should submit and next page should be parter
@@ -152,7 +155,10 @@ describe('Employment page', () => {
     getInput('employed', '-yes').click()
     typeToInput('r038', withEmploymentInput)
     typeToInput('r039_socialne', withEmploymentInput)
-    typeToInput('r039_zdravotne', withEmploymentInput)
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
+      withEmploymentInput,
+    )
     getInput('r120').type('10')
     getInput('r108').type('20')
     next()
@@ -168,9 +174,9 @@ describe('Employment page', () => {
       'have.value',
       withEmploymentInput?.r039_socialne?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
     )
     getInput('r120').should('have.value', '10')
     getInput('r108').should('have.value', '20')
@@ -179,7 +185,7 @@ describe('Employment page', () => {
     getInput('employed', '-no').click()
     getInput('r038').should('not.exist')
     getInput('r039_socialne').should('not.exist')
-    getInput('r039_zdravotne').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
     getInput('r120').should('not.exist')
     getInput('r108').should('not.exist')
 
@@ -190,9 +196,9 @@ describe('Employment page', () => {
       'have.value',
       withEmploymentInput?.r039_socialne?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
     )
     getInput('r120').should('have.value', '10')
     getInput('r108').should('have.value', '20')
@@ -210,7 +216,10 @@ describe('Employment page', () => {
     getInput('employed', '-yes').click()
     getInput('r038').should('have.value', '')
     getInput('r039_socialne').should('have.value', '')
-    getInput('r039_zdravotne').should('have.value', '')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
+      'have.value',
+      '',
+    )
     getInput('r120').should('have.value', '')
     getInput('r108').should('have.value', '')
   })
@@ -446,9 +455,9 @@ describe('Children page', () => {
     getInput('employed', '-yes').click()
     typeToInput('r038', { ...withChildrenInput, r038: '3480' }) // eligible via employment income
     typeToInput('r039_socialne', { ...withChildrenInput, r039_socialne: '600' })
-    typeToInput('r039_zdravotne', {
+    typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', {
       ...withChildrenInput,
-      r039_zdravotne: '400',
+      uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
     })
     typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
     typeToInput('r108', { ...withChildrenInput, r108: '0' })

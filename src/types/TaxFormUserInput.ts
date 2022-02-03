@@ -82,7 +82,7 @@ export interface TaxFormUserInput {
   employed?: boolean
   uhrnPrijmovOdVsetkychZamestnavatelov?: string
   uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
-  r039_zdravotne?: string
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie?: string
   r108?: string
   r120?: string
 

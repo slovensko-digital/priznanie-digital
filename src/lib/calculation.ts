@@ -125,7 +125,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r039: new Decimal(
       parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
-    ).plus(new Decimal(parseInputNumber(input?.r039_zdravotne ?? '0'))),
+    ).plus(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
+        ),
+      ),
+    ),
 
     /** SECTION Prijmy */
     t1r10_prijmy: new Decimal(parseInputNumber(input.t1r10_prijmy)),
@@ -151,7 +157,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get priloha3_r10_zdravotne() {
-      return new Decimal(parseInputNumber(input.r039_zdravotne))
+      return new Decimal(
+        parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
+      )
     },
     get r040() {
       return this.r038.minus(this.r039)

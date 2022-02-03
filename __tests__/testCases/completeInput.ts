@@ -20,7 +20,7 @@ export const completeInput: E2eTestUserInput = {
   /** SECTION Employment */
   uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
-  r039_zdravotne: '400',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
   r122: '80',
   r108: '50',
   employed: true,

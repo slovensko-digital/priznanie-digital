@@ -128,7 +128,8 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 },
                 {
                   title: 'Úhrn zdravotného poistného',
-                  value: taxFormUserInput.r039_zdravotne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
                   currency: true,
                   testId: 'r039_zdravotne',
                 },
