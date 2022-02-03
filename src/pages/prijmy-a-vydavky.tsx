@@ -53,7 +53,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   label="Zdravotné poistenie"
                 />
                 <Input
-                  name="r122"
+                  name="zaplatenePreddavky"
                   hint="Celkové uhradené preddavky na daň z príjmov až do termínu na podanie priznania. (okrem preddavkov v roku 2020 sem pripočítajte aj preddavky zaplatené do 31.3.2021)."
                   type="number"
                   label="Zaplatené preddavky"
@@ -105,11 +105,11 @@ export const validate = (values: IncomeAndExpenseUserInput) => {
       'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
 
-  if (!values.r122) {
-    errors.r122 = 'Zadajte vaše zaplatené preddavky'
+  if (!values.zaplatenePreddavky) {
+    errors.zaplatenePreddavky = 'Zadajte vaše zaplatené preddavky'
   }
-  if (values.r122 && !values.r122.match(numberInputRegexp)) {
-    errors.r122 = 'Zadajte vaše zaplatené preddavky vo formáte 123,45'
+  if (values.zaplatenePreddavky && !values.zaplatenePreddavky.match(numberInputRegexp)) {
+    errors.zaplatenePreddavky = 'Zadajte vaše zaplatené preddavky vo formáte 123,45'
   }
 
   return errors

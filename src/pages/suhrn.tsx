@@ -104,7 +104,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           },
           {
             title: 'Zaplatené preddavky',
-            value: taxFormUserInput.r122,
+            value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
           },
         ]}
@@ -117,29 +117,31 @@ const Suhrn: Page<TaxFormUserInput> = ({
             ? [
                 {
                   title: 'Úhrn príjmov od všetkých zamestnávateľov',
-                  value: taxFormUserInput.r038,
+                  value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
                   currency: true,
                 },
                 {
                   title: 'Úhrn sociálneho poistného',
-                  value: taxFormUserInput.r039_socialne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
                   currency: true,
                   testId: 'r039_socialne',
                 },
                 {
                   title: 'Úhrn zdravotného poistného',
-                  value: taxFormUserInput.r039_zdravotne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
                   currency: true,
                   testId: 'r039_zdravotne',
                 },
                 {
                   title: 'Úhrn preddavkov na daň',
-                  value: taxFormUserInput.r120,
+                  value: taxFormUserInput.uhrnPreddavkovNaDan,
                   currency: true,
                 },
                 {
                   title: 'Údaje o zvýhodnení na manželku / manžela',
-                  value: taxFormUserInput.r108,
+                  value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
                 },
               ]
@@ -210,7 +212,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
             ? [
                 {
                   title: 'Výška zaplatených príspevkov',
-                  value: taxFormUserInput.r075_zaplatene_prispevky_na_dochodok,
+                  value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
                   currency: true,
                 },
               ]

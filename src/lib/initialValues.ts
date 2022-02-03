@@ -16,7 +16,7 @@ export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
   t1r10_prijmy: '',
   priloha3_r11_socialne: '',
   priloha3_r13_zdravotne: '',
-  r122: '',
+  zaplatenePreddavky: '',
 }
 
 export const partnerUserInitialValues: PartnerUserInput = {
@@ -46,11 +46,11 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
-  r038: '',
-  r039_socialne: '',
-  r039_zdravotne: '',
-  r108: '',
-  r120: '',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
+  udajeODanovomBonuseNaDieta: '',
+  uhrnPreddavkovNaDan: '',
 }
 
 let childCounter = 0
@@ -72,7 +72,7 @@ export const childrenUserInputInitialValues: ChildrenUserInput = {
 
 export const pensionInitialValues: PensionUserInput = {
   platil_prispevky_na_dochodok: undefined,
-  r075_zaplatene_prispevky_na_dochodok: '',
+  zaplatene_prispevky_na_dochodok: '',
 }
 
 export const mortgageInitialValues: MortgageUserInput = {

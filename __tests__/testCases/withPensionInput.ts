@@ -17,7 +17,7 @@ export const withPensionInput: E2eTestUserInput = {
 
   /** Pension */
   platil_prispevky_na_dochodok: true,
-  r075_zaplatene_prispevky_na_dochodok: '170',
+  zaplatene_prispevky_na_dochodok: '170',
 
   hasChildren: false,
   children: [],

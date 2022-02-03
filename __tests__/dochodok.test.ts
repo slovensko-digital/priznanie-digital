@@ -11,26 +11,26 @@ describe('dochodok', () => {
       { input: { platil_prispevky_na_dochodok: false }, expected: [] },
       {
         input: { platil_prispevky_na_dochodok: true },
-        expected: ['r075_zaplatene_prispevky_na_dochodok'],
+        expected: ['zaplatene_prispevky_na_dochodok'],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          r075_zaplatene_prispevky_na_dochodok: 'a',
+          zaplatene_prispevky_na_dochodok: 'a',
         },
-        expected: ['r075_zaplatene_prispevky_na_dochodok'],
+        expected: ['zaplatene_prispevky_na_dochodok'],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          r075_zaplatene_prispevky_na_dochodok: '180,01',
+          zaplatene_prispevky_na_dochodok: '180,01',
         },
-        expected: ['r075_zaplatene_prispevky_na_dochodok'],
+        expected: ['zaplatene_prispevky_na_dochodok'],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          r075_zaplatene_prispevky_na_dochodok: '10',
+          zaplatene_prispevky_na_dochodok: '10',
         },
         expected: [],
       },

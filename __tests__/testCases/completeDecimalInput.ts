@@ -13,15 +13,15 @@ export const completeDecimalInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000.98',
-  r120: '100.25',
+  uhrnPreddavkovNaDan: '100.25',
   datum: '22.02.2020',
 
   /** SECTION Employment */
-  r038: '4000,43',
-  r039_socialne: '650,32',
-  r039_zdravotne: '350,22',
-  r122: '80.50',
-  r108: '50.75',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '4000,43',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '650,32',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '350,22',
+  zaplatenePreddavky: '80.50',
+  udajeODanovomBonuseNaDieta: '50.75',
   employed: true,
 
   /** SECTION Mortgage */
@@ -31,7 +31,7 @@ export const completeDecimalInput: E2eTestUserInput = {
 
   /** SECTION Pension */
   platil_prispevky_na_dochodok: true,
-  r075_zaplatene_prispevky_na_dochodok: '170,32',
+  zaplatene_prispevky_na_dochodok: '170,32',
 
   /** SECTION Partner */
   r031_priezvisko_a_meno: 'Fake Fake',

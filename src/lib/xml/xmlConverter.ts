@@ -111,10 +111,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   //   form.dokument.telo.r40 = taxForm.r040.toFixed(2)
   //   form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
   // }
-  form.dokument.telo.r39 = taxForm.r041.toFixed(2)
-  form.dokument.telo.r40 = taxForm.r042.toFixed(2)
-  form.dokument.telo.r41 = taxForm.r043.toFixed(2)
-  form.dokument.telo.r45 = taxForm.r047.toFixed(2)
+  form.dokument.telo.r39 = taxForm.r039.toFixed(2)
+  form.dokument.telo.r40 = taxForm.r040.toFixed(2)
+  form.dokument.telo.r41 = taxForm.r041.toFixed(2)
+  form.dokument.telo.r45 = taxForm.r045.toFixed(2)
   form.dokument.telo.r55 = taxForm.r055.toFixed(2)
   form.dokument.telo.r57 = taxForm.r057.toFixed(2)
 

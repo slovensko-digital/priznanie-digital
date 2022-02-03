@@ -24,9 +24,9 @@ export const bugReport1Input: E2eTestUserInput = {
   r010_obec: 'anon',
   r011_stat: 'anon',
   employed: true,
-  r038: '3248,3',
-  r039_socialne: '400',
-  r039_zdravotne: '35,22',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '3248,3',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
   hasChildren: true,
   children: [
     {
@@ -49,7 +49,7 @@ export const bugReport1Input: E2eTestUserInput = {
     },
   ],
   platil_prispevky_na_dochodok: false,
-  r075_zaplatene_prispevky_na_dochodok: '',
+  zaplatene_prispevky_na_dochodok: '',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
   expectNgoDonationPage: false,
