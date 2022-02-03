@@ -162,7 +162,7 @@ const executeTestCase = (testCase: string) => {
 
         if (input.platil_prispevky_na_dochodok) {
           getInput('platil_prispevky_na_dochodok', '-yes').click()
-          typeToInput('r075_zaplatene_prispevky_na_dochodok', input)
+          typeToInput('zaplatene_prispevky_na_dochodok', input)
         } else {
           getInput('platil_prispevky_na_dochodok', '-no').click()
         }

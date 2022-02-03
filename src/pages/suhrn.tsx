@@ -212,7 +212,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
             ? [
                 {
                   title: 'Výška zaplatených príspevkov',
-                  value: taxFormUserInput.r075_zaplatene_prispevky_na_dochodok,
+                  value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
                   currency: true,
                 },
               ]

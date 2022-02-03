@@ -77,7 +77,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r075_zaplatene_prispevky_na_dochodok: Decimal.min(
       180,
       new Decimal(
-        parseInputNumber(input?.r075_zaplatene_prispevky_na_dochodok ?? '0'),
+        parseInputNumber(input?.zaplatene_prispevky_na_dochodok ?? '0'),
       ),
     ),
 

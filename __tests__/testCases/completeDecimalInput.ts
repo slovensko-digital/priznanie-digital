@@ -31,7 +31,7 @@ export const completeDecimalInput: E2eTestUserInput = {
 
   /** SECTION Pension */
   platil_prispevky_na_dochodok: true,
-  r075_zaplatene_prispevky_na_dochodok: '170,32',
+  zaplatene_prispevky_na_dochodok: '170,32',
 
   /** SECTION Partner */
   r031_priezvisko_a_meno: 'Fake Fake',

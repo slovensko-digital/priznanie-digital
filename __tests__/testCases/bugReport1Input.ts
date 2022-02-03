@@ -49,7 +49,7 @@ export const bugReport1Input: E2eTestUserInput = {
     },
   ],
   platil_prispevky_na_dochodok: false,
-  r075_zaplatene_prispevky_na_dochodok: '',
+  zaplatene_prispevky_na_dochodok: '',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
   expectNgoDonationPage: false,

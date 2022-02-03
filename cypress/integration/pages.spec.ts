@@ -612,7 +612,7 @@ describe('Pension page', () => {
     next()
     getError().should('have.length', 1)
 
-    typeToInput('r075_zaplatene_prispevky_na_dochodok', withPensionInput)
+    typeToInput('zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
     assertUrl('/osobne-udaje')

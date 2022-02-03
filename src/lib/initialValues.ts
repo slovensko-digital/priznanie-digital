@@ -72,7 +72,7 @@ export const childrenUserInputInitialValues: ChildrenUserInput = {
 
 export const pensionInitialValues: PensionUserInput = {
   platil_prispevky_na_dochodok: undefined,
-  r075_zaplatene_prispevky_na_dochodok: '',
+  zaplatene_prispevky_na_dochodok: '',
 }
 
 export const mortgageInitialValues: MortgageUserInput = {
