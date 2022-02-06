@@ -632,16 +632,11 @@ describe('twoPercent page', () => {
 
     // All aditional fields should be required
     next()
-    getError().should('have.length', 6)
+    getError().should('have.length', 2)
 
     // Type to input
     typeToInput('r142_obchMeno', with2percentInput)
     typeToInput('r142_ico', with2percentInput)
-    typeToInput('r142_pravnaForma', with2percentInput)
-    typeToInput('r142_ulica', with2percentInput)
-    typeToInput('r142_cislo', with2percentInput)
-    typeToInput('r142_psc', with2percentInput)
-    typeToInput('r142_obec', with2percentInput)
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
@@ -662,14 +657,6 @@ describe('twoPercent page', () => {
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
     getInput('r142_ico').should('contain.value', '50 718 274')
-    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
-    getInput('r142_ulica').should(
-      'contain.value',
-      'Ulica Ľudmily Podjavorinskej',
-    )
-    getInput('r142_cislo').should('contain.value', '2545/20')
-    getInput('r142_psc').should('contain.value', '917 01')
-    getInput('r142_obec').should('contain.value', 'Trnava')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
@@ -690,11 +677,6 @@ describe('twoPercent page', () => {
 
     getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
     getInput('r142_ico').should('contain.value', '50 158 635')
-    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
-    getInput('r142_ulica').should('contain.value', 'Staré Grunty')
-    getInput('r142_cislo').should('contain.value', '205/18')
-    getInput('r142_psc').should('contain.value', '841 04')
-    getInput('r142_obec').should('contain.value', 'Bratislava')
 
     next()
     assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)

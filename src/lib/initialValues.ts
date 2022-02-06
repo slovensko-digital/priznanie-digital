@@ -85,12 +85,7 @@ export const twoPercentInitialValues: TwoPercentUserInput = {
   XIIoddiel_uplatnujem2percenta: undefined,
   splnam3per: false,
   r142_ico: '',
-  r142_pravnaForma: '',
   r142_obchMeno: '',
-  r142_ulica: '',
-  r142_cislo: '',
-  r142_psc: '',
-  r142_obec: '',
   XIIoddiel_suhlasZaslUdaje: false,
 }
 

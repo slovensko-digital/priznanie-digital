@@ -471,7 +471,9 @@
       <r151></r151>
       <r152>
          <ico />
-         <obchMeno />
+         <obchMeno>
+            <riadok />
+         </obchMeno>
          <suhlasZaslUdaje>0</suhlasZaslUdaje>
       </r152>
       <osobitneZaznamy>

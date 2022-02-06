@@ -538,17 +538,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return {
         ico: input.r142_ico.replace(/\D/g, ''),
-        pravnaForma: input.r142_pravnaForma,
         obchMeno: input.r142_obchMeno,
-        ulica: input.r142_ulica,
-        cislo: input.r142_cislo,
-        psc: input.r142_psc.replace(/\D/g, ''),
-        obec: input.r142_obec,
         suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
       }
     },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
+
     get XIIoddiel_uplatnujem2percenta() {
       return this.canDonateTwoPercentOfTax
         ? input?.XIIoddiel_uplatnujem2percenta ?? false

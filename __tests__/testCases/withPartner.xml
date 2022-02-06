@@ -660,11 +660,11 @@
     </splnam3per>
     <r151></r151>
     <r152>
-      <ico></ico>
-      <obchMeno></obchMeno>
-      <suhlasZaslUdaje>
-        0
-      </suhlasZaslUdaje>
+      <ico />
+      <obchMeno>
+        <riadok/>
+      </obchMeno>
+      <suhlasZaslUdaje>0</suhlasZaslUdaje>
     </r152>
     <osobitneZaznamy>
       <uvadza>

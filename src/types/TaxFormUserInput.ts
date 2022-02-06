@@ -89,12 +89,7 @@ export interface TaxFormUserInput {
   XIIoddiel_uplatnujem2percenta?: boolean
   splnam3per?: boolean
   r142_ico?: string
-  r142_pravnaForma?: string
   r142_obchMeno?: string
-  r142_ulica?: string
-  r142_cislo?: string
-  r142_psc?: string
-  r142_obec?: string
   XIIoddiel_suhlasZaslUdaje?: boolean
 
   /** SECTION Danovy bonus */

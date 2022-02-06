@@ -196,11 +196,6 @@ const executeTestCase = (testCase: string) => {
 
             typeToInput('r142_obchMeno', input)
             typeToInput('r142_ico', input)
-            typeToInput('r142_ulica', input)
-            typeToInput('r142_cislo', input)
-            typeToInput('r142_psc', input)
-            getInput('r142_obec').clear() // clear value from PSC autocomplete via Posta API
-            typeToInput('r142_obec', input)
 
             if (input.XIIoddiel_suhlasZaslUdaje) {
               cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
