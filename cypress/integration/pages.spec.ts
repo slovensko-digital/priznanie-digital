@@ -632,7 +632,7 @@ describe('twoPercent page', () => {
 
     // All aditional fields should be required
     next()
-    getError().should('have.length', 6)
+    getError().should('have.length', 2)
 
     // Type to input
     typeToInput('r142_obchMeno', with2percentInput)
