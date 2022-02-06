@@ -105,12 +105,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
   // }
   /** SECTION Employed */
-  // if (taxForm.employed) {
-  //   form.dokument.telo.r38 = taxForm.r038.toFixed(2)
-  //   form.dokument.telo.r39 = taxForm.r039.toFixed(2)
-  //   form.dokument.telo.r40 = taxForm.r040.toFixed(2)
-  //   form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
-  // }
+
+  if (taxForm.employed) {
+    form.dokument.telo.r36 = taxForm.r036.toFixed(2)
+    form.dokument.telo.r37 = taxForm.r037.toFixed(2)
+    form.dokument.telo.r38 = taxForm.r038.toFixed(2)
+    form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
+  }
+
   form.dokument.telo.r39 = taxForm.r039.toFixed(2)
   form.dokument.telo.r40 = taxForm.r040.toFixed(2)
   form.dokument.telo.r41 = taxForm.r041.toFixed(2)

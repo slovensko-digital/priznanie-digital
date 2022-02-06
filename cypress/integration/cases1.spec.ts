@@ -6,7 +6,7 @@ describe('Cases', () => {
     // 'complete',
     // 'completeDecimal',
     'withPartner',
-    // 'withEmployment',
+    'withEmployment',
     // 'withPension',
     // 'withMortgage',
   ])
