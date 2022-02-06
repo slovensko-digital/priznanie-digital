@@ -2,10 +2,10 @@ import { executeAllTestCases } from './executeCase'
 
 describe('Cases', () => {
   executeAllTestCases([
-    // 'base',
+    'base',
     // 'complete',
     // 'completeDecimal',
-    // 'withPartner',
+    'withPartner',
     'withEmployment',
     // 'withPension',
     // 'withMortgage',
