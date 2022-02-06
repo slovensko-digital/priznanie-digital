@@ -135,7 +135,7 @@ describe('With child (for tax year 2021)', () => {
       expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test.only('Child turning 6 in 2021 (february)', () => {
+    test('Child turning 6 in 2021 (february)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
@@ -204,7 +204,7 @@ describe('With child (for tax year 2021)', () => {
       expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test.only('More children', () => {
+    test('More children', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
