@@ -267,7 +267,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
     // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania // + tf.r065 + tf.r071 + tf.r079
+      return this.r078_zaklad_dane_zo_zamestnania
     },
     // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
     // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -
@@ -280,13 +280,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       if (this.r080_zaklad_dane_celkovo.lte(KONSTANTA)) {
         return this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA)
-      } else {
-        const danZPrvejCasti = new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA)
-        const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
-        return danZPrvejCasti.plus(
-          toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
-        )
       }
+
+      const danZPrvejCasti = new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA)
+      const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
+      return danZPrvejCasti.plus(
+        toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
+      )
     },
     // na r. 90 uvediete sumu dane, ktorú vypočítate na r. 81
     get r090() {
@@ -299,9 +299,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return floorDecimal(
           Decimal.max(this.r077_nezdanitelna_cast.minus(this.r038), 0),
         )
-      } else {
-        return new Decimal(0)
       }
+      return new Decimal(0)
     },
     // r. 92 - tu už idete vzorcom, kedy od základu dane z podnikania (r. 57) odpočítate sumu z r. 91
     // tak dostanete základ dane z podnikania, z ktorého idete počítať výšku dane z podnikania
@@ -325,6 +324,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // r. 96 - tu uvediete výšku dane z podnikania, ktorá sa vypočíta systémom, ako som popísala v r. 95. vychádza
     // sa teda z r. 94, kedy sa r. 94 vynásobí buď sadzbou 15% alebo sa r. 94 vynásobí sadzbou 19%/25%. to,
     // akú sadzbu použijete - na to vám dá odpoveď suma na r. 95
+    /** TODO rework */
     get r096() {
       // má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r. 95<= 100 000.
       if (this.r094.gt(0) && this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
@@ -436,6 +436,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r136_danovy_preplatok.gt(0)
     },
     /** TODO High income test case */
+    /** Only neccessary with mortgage */
     get r123() {
       return Decimal.min(this.r037_zaplatene_uroky.times(0.5), 400)
     },
@@ -460,6 +461,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.r116_dan.gt(17) || this.r117.gt(0) || this.r123.gt(0)
           ? this.r116_dan
           : new Decimal(0)
+
       const tax = Decimal.max(
         0,
         baseTax
