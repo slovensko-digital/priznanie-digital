@@ -3,7 +3,6 @@ import Decimal from 'decimal.js'
 export interface Child {
   priezviskoMeno: string
   rodneCislo: string
-  kupelnaStarostlivost: boolean
   m00: boolean
   m01: boolean
   m02: boolean

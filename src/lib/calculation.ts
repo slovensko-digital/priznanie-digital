@@ -21,11 +21,16 @@ const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3_480
 const MAX_ZAKLAD_DANE = 19_936.22
 export const PARTNER_MAX_ODPOCET = 4_124.74
-const CHILD_RATE_SIX_AND_YOUNGER = 45.44
-const CHILD_RATE_OVER_SIX = 22.72
+
+export const CHILD_RATE_SIX_AND_YOUNGER = 46.44
+export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 23.22
+export const CHILD_RATE_OVER_SIX_FROM_JULY = 39.47
+export const CHILD_RATE_FIFTEEN_AND_OLDER = 46.44
+
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
-const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const TAX_YEAR = 2020
+// NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
+const KONSTANTA = 37_981.94
+const TAX_YEAR = 2021
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
@@ -35,7 +40,6 @@ const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
   return {
     priezviskoMeno: child.priezviskoMeno,
     rodneCislo: child.rodneCislo.replace(/\D/g, ''),
-    kupelnaStarostlivost: child.kupelnaStarostlivost,
     m00: hasChildren && child.wholeYear,
     m01: hasChildren && !child.wholeYear && monthFrom === 0,
     m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
@@ -365,7 +369,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = new Decimal(0)
         const rateYoungChild = new Decimal(CHILD_RATE_SIX_AND_YOUNGER)
-        const rateOldChild = new Decimal(CHILD_RATE_OVER_SIX)
+        const rateOldChild = new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
 
         const getRate = (month: number) => {
           const age = getRodneCisloAgeAtYearAndMonth(
@@ -373,6 +377,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             TAX_YEAR,
             month - 1,
           )
+          // const isOverSix = age > 6
+
+          // if (isOverSix) {
+          //   return rateOldChild
+          // }
+
+          // return rateYoungChild
+
           return age < 6 ? rateYoungChild : rateOldChild
         }
 
@@ -413,6 +425,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           currentSum = currentSum.plus(getRate(12))
         }
 
+        // console.log(
+        //   '🚀 ~ file: calculation.ts ~ line 418 ~ returnthis.r034.reduce ~ currentSum',
+        //   currentSum,
+        // )
         return previousSum.plus(currentSum)
       }, new Decimal(0))
     },

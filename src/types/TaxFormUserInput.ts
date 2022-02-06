@@ -17,7 +17,6 @@ export interface ChildInput {
   id: number
   priezviskoMeno: string
   rodneCislo: string
-  kupelnaStarostlivost: boolean
   wholeYear: boolean
   monthFrom: string
   monthTo: string
