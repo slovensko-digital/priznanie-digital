@@ -7,6 +7,6 @@ describe('Cases', () => {
     'with2percent',
     'with3percent',
     'withBonus',
-    // 'withTaxReturn',
+    'withTaxReturn',
   ])
 })
