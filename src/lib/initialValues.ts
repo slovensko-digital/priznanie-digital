@@ -59,7 +59,7 @@ export const makeEmptyChild = (): ChildInput => ({
   id: childCounter++,
   priezviskoMeno: '',
   rodneCislo: '',
-  kupelnaStarostlivost: false,
+
   wholeYear: false,
   monthFrom: '0',
   monthTo: '11',

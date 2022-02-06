@@ -57,12 +57,13 @@ const child = {
   monthTo: '9',
 }
 
+/** The numbers need to be updated every year, for example 150701 => 160701 */
 const childUnder6 = { ...child, rodneCislo: '160701 / 1234' }
 const childTurning6InFeb = { ...child, rodneCislo: '150201 / 1234' }
 const childTurning6InJul = { ...child, rodneCislo: '150731 / 1234' }
 const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
 
-describe.only('With child (for tax year 2021)', () => {
+describe('With child (for tax year 2021)', () => {
   test('should map child', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,

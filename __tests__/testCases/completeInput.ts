@@ -50,7 +50,7 @@ export const completeInput: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: false,
       monthFrom: '6',
       monthTo: '11',
@@ -59,7 +59,7 @@ export const completeInput: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',

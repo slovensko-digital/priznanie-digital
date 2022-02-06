@@ -25,7 +25,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: false,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
@@ -34,7 +34,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: false,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
