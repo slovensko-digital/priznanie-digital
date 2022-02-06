@@ -13,28 +13,16 @@ const WRITE_FILES = false
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
+const testCases = [
+  'base',
+  // 'complete',
+  // 'completeDecimal',
+  'withPartner',
+  'withEmployment',
+]
+
 describe('calcIntergration', () => {
-  ;[
-    'base',
-    // 'complete',
-    // 'completeDecimal',
-    'withPartner',
-    // 'withEmployment',
-    // 'withPension',
-    // 'withChildren',
-    // 'with2percent',
-    // 'with3percent',
-    // 'withSpa',
-    // 'withBonus',
-    // 'withTaxReturn',
-    // 'withEmploymentBonus',
-    // 'withHighIncome',
-    // 'withSpaNoPartnerNoChildren',
-    // 'bugReport1',
-    // 'bugReport2',
-    // 'bugReport3',
-    // 'bugReport4',
-  ].forEach((testCase) => {
+  testCases.forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/${testCase}.xml`,

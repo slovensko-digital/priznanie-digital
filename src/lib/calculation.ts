@@ -134,6 +134,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
     r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
 
+    /** SECTION Employment */
     r036: new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
     ),
