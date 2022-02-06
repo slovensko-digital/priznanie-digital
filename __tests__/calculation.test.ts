@@ -1,5 +1,6 @@
 import {
   calculate,
+  CHILD_RATE_OVER_SIX_FROM_JULY,
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER,
   MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA,
@@ -133,7 +134,7 @@ describe.only('With child (for tax year 2021)', () => {
       expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test('Child turning 6 in 2021 (february)', () => {
+    test.only('Child turning 6 in 2021 (february)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
@@ -147,11 +148,12 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       )
+
       expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
@@ -172,9 +174,9 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_SIX_AND_YOUNGER,
       ) // februar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
       const part2 = sum(
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       ) // august - oktober (ved nad 6 rokov)
       expect(result.r117.eq(sum(part1, part2))).toBeTruthy()
     })
@@ -193,15 +195,15 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       ) // vek nad 6 rokov vratane mesiaca dovrsenia
       expect(result.r117.eq(sum(monthSums))).toBeTruthy()
     })
 
-    test('More children', () => {
+    test.only('More children', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
@@ -221,10 +223,10 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       )
 
       // childTurning6InFeb
@@ -234,10 +236,10 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       )
 
       // childTurning6InJul
@@ -248,9 +250,9 @@ describe.only('With child (for tax year 2021)', () => {
         CHILD_RATE_SIX_AND_YOUNGER,
         CHILD_RATE_SIX_AND_YOUNGER,
         CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_UNTIL_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_OVER_SIX_FROM_JULY,
       ) // januar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
 
       // childUnder6

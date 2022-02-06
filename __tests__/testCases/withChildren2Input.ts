@@ -1,6 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-export const withChildrenInput: E2eTestUserInput = {
+export const withChildren2Input: E2eTestUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r001_dic: '233123123',
@@ -19,20 +19,10 @@ export const withChildrenInput: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: false,
       wholeYear: false,
       monthFrom: '6',
       monthTo: '11',
     },
-    // {
-    //   id: 2,
-    //   priezviskoMeno: 'Summer Smith',
-    //   rodneCislo: '1057201167',
-    //   kupelnaStarostlivost: false,
-    //   wholeYear: true,
-    //   monthFrom: '6',
-    //   monthTo: '11',
-    // },
   ],
   hasChildren: true,
 
