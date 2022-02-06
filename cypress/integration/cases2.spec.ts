@@ -2,7 +2,8 @@ import { executeAllTestCases } from './executeCase'
 
 describe('Cases', () => {
   executeAllTestCases([
-    // 'withChildren',
+    'withChildren',
+    'withChildren2',
     // 'with2percent',
     // 'with3percent',
     // 'withSpa',

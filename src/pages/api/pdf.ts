@@ -238,11 +238,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
         rodneCislo ? rodneCislo[2] : '',
       )
 
-      if (child.kupelnaStarostlivost) {
-        // kupelnaStarostlivost
-        tpl.write(FIRST_COLUMN + 302, 429 - rowSize, 'x')
-      }
-
       // m00
       if (child.m00) {
         tpl.write(FIRST_COLUMN + 324, 429 - rowSize, 'x')
@@ -604,11 +599,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
         707 - rowSize,
         `rodné číslo: ${child.rodneCislo}`,
       )
-
-      if (child.kupelnaStarostlivost) {
-        // kupelnaStarostlivost
-        tpl.write(FIRST_COLUMN + 390, 707 - rowSize, 'kúpeľná starostlivosť: x')
-      }
 
       if (child.m00) {
         tpl.write(FIRST_COLUMN + 220, 694 - rowSize, 'daňový bonus 1 - 12')

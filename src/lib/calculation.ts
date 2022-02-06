@@ -21,11 +21,16 @@ const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3_480
 const MAX_ZAKLAD_DANE = 19_936.22
 export const PARTNER_MAX_ODPOCET = 4_124.74
-const CHILD_RATE_SIX_AND_YOUNGER = 45.44
-const CHILD_RATE_OVER_SIX = 22.72
+
+export const CHILD_RATE_SIX_AND_YOUNGER = 46.44
+export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 23.22
+export const CHILD_RATE_OVER_SIX_FROM_JULY = 39.47
+export const CHILD_RATE_FIFTEEN_AND_OLDER = 46.44
+
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
-const KONSTANTA = 37_981.94 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const TAX_YEAR = 2020
+// NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
+const KONSTANTA = 37_981.94
+const TAX_YEAR = 2021
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
@@ -35,7 +40,6 @@ const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
   return {
     priezviskoMeno: child.priezviskoMeno,
     rodneCislo: child.rodneCislo.replace(/\D/g, ''),
-    kupelnaStarostlivost: child.kupelnaStarostlivost,
     m00: hasChildren && child.wholeYear,
     m01: hasChildren && !child.wholeYear && monthFrom === 0,
     m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
@@ -364,8 +368,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = new Decimal(0)
-        const rateYoungChild = new Decimal(CHILD_RATE_SIX_AND_YOUNGER)
-        const rateOldChild = new Decimal(CHILD_RATE_OVER_SIX)
 
         const getRate = (month: number) => {
           const age = getRodneCisloAgeAtYearAndMonth(
@@ -373,44 +375,66 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             TAX_YEAR,
             month - 1,
           )
-          return age < 6 ? rateYoungChild : rateOldChild
+          const isUnderSix = age < 6
+
+          if (isUnderSix) {
+            return new Decimal(CHILD_RATE_SIX_AND_YOUNGER)
+          }
+
+          if (month <= 6) {
+            return new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
+          }
+
+          return new Decimal(CHILD_RATE_OVER_SIX_FROM_JULY)
         }
 
         if (currentChild.m00 || currentChild.m01) {
-          currentSum = currentSum.plus(getRate(1))
+          const rate = getRate(1)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m02) {
-          currentSum = currentSum.plus(getRate(2))
+          const rate = getRate(2)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m03) {
-          currentSum = currentSum.plus(getRate(3))
+          const rate = getRate(3)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m04) {
-          currentSum = currentSum.plus(getRate(4))
+          const rate = getRate(4)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m05) {
-          currentSum = currentSum.plus(getRate(5))
+          const rate = getRate(5)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m06) {
-          currentSum = currentSum.plus(getRate(6))
+          const rate = getRate(6)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m07) {
-          currentSum = currentSum.plus(getRate(7))
+          const rate = getRate(7)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m08) {
-          currentSum = currentSum.plus(getRate(8))
+          const rate = getRate(8)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m09) {
-          currentSum = currentSum.plus(getRate(9))
+          const rate = getRate(9)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m10) {
-          currentSum = currentSum.plus(getRate(10))
+          const rate = getRate(10)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m11) {
-          currentSum = currentSum.plus(getRate(11))
+          const rate = getRate(11)
+          currentSum = currentSum.plus(rate)
         }
         if (currentChild.m00 || currentChild.m12) {
-          currentSum = currentSum.plus(getRate(12))
+          const rate = getRate(12)
+          currentSum = currentSum.plus(rate)
         }
 
         return previousSum.plus(currentSum)
