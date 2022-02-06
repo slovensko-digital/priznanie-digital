@@ -26,5 +26,5 @@ export const withChildren2Input: E2eTestUserInput = {
   ],
   hasChildren: true,
 
-  expectNgoDonationPage: false,
+  expectNgoDonationPage: true,
 }
