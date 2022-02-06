@@ -19,7 +19,7 @@ const testCases = [
   // 'completeDecimal',
   'withPartner',
   'withEmployment',
-  // 'withPension',
+  'withPension',
   // 'withChildren',
   // 'with2percent',
   // 'with3percent',
