@@ -190,12 +190,7 @@ export interface TaxForm {
 
   r152?: {
     ico: string
-    pravnaForma: string
     obchMeno: string
-    ulica: string
-    cislo: string
-    psc: string
-    obec: string
     suhlasZaslUdaje: boolean
   }
   datum: string

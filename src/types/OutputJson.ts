@@ -455,7 +455,9 @@ export interface Tabulka3 {
 
 export interface R152 {
   ico: string
-  obchMeno: string
+  obchMeno: {
+    riadok: string[]
+  }
   suhlasZaslUdaje: string
 }
 

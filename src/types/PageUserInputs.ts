@@ -81,12 +81,7 @@ export type TwoPercentUserInput = Pick<
   | 'XIIoddiel_uplatnujem2percenta'
   | 'splnam3per'
   | 'r142_ico'
-  | 'r142_pravnaForma'
   | 'r142_obchMeno'
-  | 'r142_ulica'
-  | 'r142_cislo'
-  | 'r142_psc'
-  | 'r142_obec'
   | 'XIIoddiel_suhlasZaslUdaje'
 >
 

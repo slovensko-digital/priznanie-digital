@@ -536,41 +536,12 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     const ico = form.r152 ? form.r152.ico : ''
     tpl.writeToBoxes(FIRST_COLUMN, 664, ico.padStart(12))
 
-    // r152 - ico
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 202,
-      664,
-      form.r152 ? form.r152.pravnaForma : '',
-    )
-
     // r152 - obchMeno
     const obchMeno = form.r152 ? form.r152.obchMeno : ''
     tpl.writeToBoxes(FIRST_COLUMN, 628, obchMeno.slice(0, 37), 37)
     if (obchMeno.length > 37) {
       tpl.writeToBoxes(FIRST_COLUMN, 602, obchMeno.slice(37, 74), 37)
     }
-
-    // r152 - ulica
-    tpl.writeToBoxes(FIRST_COLUMN, 558, form.r152 ? form.r152.ulica : '', 28)
-
-    // r152 - cislo
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 418,
-      558,
-      form.r152 ? form.r152.cislo : '',
-      8,
-    )
-
-    // r152 - psc
-    tpl.writeToBoxes(FIRST_COLUMN, 522, form.r152 ? form.r152.psc : '')
-
-    // r152 - obec
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 87,
-      522,
-      form.r152 ? form.r152.obec : '',
-      31,
-    )
 
     // r152 - suhlasZaslUdaje
     tpl.write(

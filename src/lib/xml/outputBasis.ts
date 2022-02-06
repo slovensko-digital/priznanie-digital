@@ -473,7 +473,9 @@ const sampleSchema: OutputJson = {
       r151: '',
       r152: {
         ico: '',
-        obchMeno: '',
+        obchMeno: {
+          riadok: [''],
+        },
         suhlasZaslUdaje: '0',
       },
       osobitneZaznamy: {

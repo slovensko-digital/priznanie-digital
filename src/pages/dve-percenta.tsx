@@ -9,8 +9,8 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import styles from './osobne-udaje.module.css'
-import { formatIco, formatPsc } from '../lib/utils'
-import { getCity, getNgoByName } from '../lib/api'
+import { formatIco } from '../lib/utils'
+import { getNgoByName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
   AutoCompleteData,
@@ -31,11 +31,6 @@ const makeHandleOrganisationAutoform = ({
       ...values,
       r142_obchMeno: org.name || '',
       r142_ico: org.cin ? formatIco(org.cin) : '',
-      r142_ulica: org.street || org.municipality || '',
-      r142_cislo: org.street_number || '',
-      r142_psc: org.postal_code ? formatPsc(org.postal_code) : '',
-      r142_obec: org.municipality || '',
-      r142_pravnaForma: org.legal_form ? `${org.legal_form}`.slice(0, 23) : '',
     })
   }
 }
@@ -44,12 +39,7 @@ const makePrefillForm = (setValues, ref) => () => {
   setValues({
     XIIoddiel_uplatnujem2percenta: true,
     r142_ico: '50 158 635',
-    r142_pravnaForma: 'Občianske združenie',
     r142_obchMeno: 'Slovensko.Digital',
-    r142_ulica: 'Staré Grunty',
-    r142_cislo: '205/18',
-    r142_psc: '841 04',
-    r142_obec: 'Bratislava',
   })
 
   setTimeout(() => {
@@ -182,62 +172,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                         props.setFieldValue('r142_ico', icoValue)
                       }}
                     />
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_pravnaForma"
-                      type="text"
-                      label="Právna forma"
-                      maxLength={23}
-                    />
                   </div>
-
-                  <h2 className="govuk-heading-l">Sídlo</h2>
-                  <div className={styles.inlineFieldContainer}>
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_ulica"
-                      type="text"
-                      label="Ulica"
-                    />
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_cislo"
-                      type="text"
-                      label="Súpisné/orientačné číslo"
-                    />
-                  </div>
-                  <div className={styles.inlineFieldContainer}>
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_psc"
-                      type="text"
-                      label="PSČ"
-                      maxLength={6}
-                      onChange={async (event) => {
-                        const pscValue = formatPsc(
-                          event.currentTarget.value,
-                          props.values.r142_psc,
-                        )
-                        props.setFieldValue('r142_psc', pscValue)
-
-                        if (
-                          pscValue.length === 6 &&
-                          props.values.r142_obec.length === 0
-                        ) {
-                          const city = await getCity(pscValue)
-                          props.setFieldValue('r142_obec', city)
-                        }
-                      }}
-                    />
-
-                    <Input
-                      className={styles.inlineField}
-                      name="r142_obec"
-                      type="text"
-                      label="Obec"
-                    />
-                  </div>
-
                   <h2 className="govuk-heading-l">Súhlas so zaslaním údajov</h2>
                   <CheckboxSmall
                     name="XIIoddiel_suhlasZaslUdaje"
@@ -278,25 +213,6 @@ export const validate = (values: TwoPercentUserInput): Errors => {
 
     if (!values.r142_obchMeno) {
       errors.r142_obchMeno = 'Zadajte obchodne meno'
-    }
-
-    if (!values.r142_ulica) {
-      errors.r142_ulica = 'Zadajte ulicu'
-    }
-
-    if (!values.r142_cislo) {
-      errors.r142_cislo = 'Zadajte číslo domu'
-    }
-
-    const pscNumberFormat = /^\d{3} \d{2}$/
-    if (!values.r142_psc) {
-      errors.r142_psc = 'Zadajte PSČ'
-    } else if (!values.r142_psc.match(pscNumberFormat)) {
-      errors.r142_psc = 'PSČ môže obsahovať iba 5 čísel'
-    }
-
-    if (!values.r142_obec) {
-      errors.r142_obec = 'Zadajte obec'
     }
   }
   return errors
