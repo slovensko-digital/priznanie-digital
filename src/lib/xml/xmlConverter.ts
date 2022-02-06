@@ -105,16 +105,18 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
   // }
   /** SECTION Employed */
-  // if (taxForm.employed) {
-  //   form.dokument.telo.r38 = taxForm.r038.toFixed(2)
-  //   form.dokument.telo.r39 = taxForm.r039.toFixed(2)
-  //   form.dokument.telo.r40 = taxForm.r040.toFixed(2)
-  //   form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
-  // }
-  form.dokument.telo.r39 = taxForm.r041.toFixed(2)
-  form.dokument.telo.r40 = taxForm.r042.toFixed(2)
-  form.dokument.telo.r41 = taxForm.r043.toFixed(2)
-  form.dokument.telo.r45 = taxForm.r047.toFixed(2)
+
+  if (taxForm.employed) {
+    form.dokument.telo.r36 = taxForm.r036.toFixed(2)
+    form.dokument.telo.r37 = taxForm.r037.toFixed(2)
+    form.dokument.telo.r38 = taxForm.r038.toFixed(2)
+    form.dokument.telo.socZdravPoistenie.pr8 = taxForm.r039.toFixed(2)
+  }
+
+  form.dokument.telo.r39 = taxForm.r039.toFixed(2)
+  form.dokument.telo.r40 = taxForm.r040.toFixed(2)
+  form.dokument.telo.r41 = taxForm.r041.toFixed(2)
+  form.dokument.telo.r45 = taxForm.r045.toFixed(2)
   form.dokument.telo.r55 = taxForm.r055.toFixed(2)
   form.dokument.telo.r57 = taxForm.r057.toFixed(2)
 
@@ -159,18 +161,17 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  // if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
-  //   form.dokument.telo.r151 = taxForm.r151.toFixed(2)
-  //   form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
-  //   form.dokument.telo.r152 = {
-  //     ...taxForm.r152,
-  //     obchMeno: {
-  //       riadok: [taxForm.r152.obchMeno],
-  //     },
-  //     psc: taxForm.r152.psc.replace(' ', ''),
-  //     suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
-  //   }
-  // }
+  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
+    form.dokument.telo.r151 = taxForm.r151.toFixed(2)
+    form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
+    form.dokument.telo.r152 = {
+      ...taxForm.r152,
+      obchMeno: {
+        riadok: [taxForm.r152.obchMeno],
+      },
+      suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
+    }
+  }
 
   form.dokument.telo.r153 = taxForm.employed ? '4' : '3'
 

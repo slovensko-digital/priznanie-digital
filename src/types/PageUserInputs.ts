@@ -3,12 +3,20 @@ import { PostponeUserInput } from './PostponeUserInput'
 
 export type IncomeAndExpenseUserInput = Pick<
   TaxFormUserInput,
-  't1r10_prijmy' | 'priloha3_r11_socialne' | 'priloha3_r13_zdravotne' | 'r122'
+  | 't1r10_prijmy'
+  | 'priloha3_r11_socialne'
+  | 'priloha3_r13_zdravotne'
+  | 'zaplatenePreddavky'
 >
 
 export type EmployedUserInput = Pick<
   TaxFormUserInput,
-  'employed' | 'r038' | 'r039_socialne' | 'r039_zdravotne' | 'r108' | 'r120'
+  | 'employed'
+  | 'uhrnPrijmovOdVsetkychZamestnavatelov'
+  | 'uhrnPovinnehoPoistnehoNaSocialnePoistenie'
+  | 'uhrnPovinnehoPoistnehoNaZdravotnePoistenie'
+  | 'udajeODanovomBonuseNaDieta'
+  | 'uhrnPreddavkovNaDan'
 >
 
 export type ChildrenUserInput = Pick<
@@ -60,7 +68,7 @@ export type PersonalInformationPostponePage = Pick<
 
 export type PensionUserInput = Pick<
   TaxFormUserInput,
-  'platil_prispevky_na_dochodok' | 'r075_zaplatene_prispevky_na_dochodok'
+  'platil_prispevky_na_dochodok' | 'zaplatene_prispevky_na_dochodok'
 >
 
 export type MortgageUserInput = Pick<
@@ -73,12 +81,7 @@ export type TwoPercentUserInput = Pick<
   | 'XIIoddiel_uplatnujem2percenta'
   | 'splnam3per'
   | 'r142_ico'
-  | 'r142_pravnaForma'
   | 'r142_obchMeno'
-  | 'r142_ulica'
-  | 'r142_cislo'
-  | 'r142_psc'
-  | 'r142_obec'
   | 'XIIoddiel_suhlasZaslUdaje'
 >
 

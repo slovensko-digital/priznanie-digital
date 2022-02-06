@@ -46,7 +46,7 @@ const Dochodok: Page<PensionUserInput> = ({
             {values.platil_prispevky_na_dochodok && (
               <>
                 <Input
-                  name="r075_zaplatene_prispevky_na_dochodok"
+                  name="zaplatene_prispevky_na_dochodok"
                   type="number"
                   label="Výška zaplatených príspevkov za rok 2020"
                   hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
@@ -71,18 +71,16 @@ export const validate = (values: PensionUserInput) => {
   }
 
   if (values.platil_prispevky_na_dochodok) {
-    if (!values.r075_zaplatene_prispevky_na_dochodok) {
-      errors.r075_zaplatene_prispevky_na_dochodok =
+    if (!values.zaplatene_prispevky_na_dochodok) {
+      errors.zaplatene_prispevky_na_dochodok =
         'Zadajte výšku zaplatených príspevkov'
     } else if (
-      !values.r075_zaplatene_prispevky_na_dochodok.match(numberInputRegexp)
+      !values.zaplatene_prispevky_na_dochodok.match(numberInputRegexp)
     ) {
-      errors.r075_zaplatene_prispevky_na_dochodok =
+      errors.zaplatene_prispevky_na_dochodok =
         'Zadajte výšku príspevkov vo formáte 123,45'
-    } else if (
-      parseInputNumber(values.r075_zaplatene_prispevky_na_dochodok) > 180
-    ) {
-      errors.r075_zaplatene_prispevky_na_dochodok =
+    } else if (parseInputNumber(values.zaplatene_prispevky_na_dochodok) > 180) {
+      errors.zaplatene_prispevky_na_dochodok =
         'Výška príspevkov nesmie presiahnuť 180,00 eur'
     }
   }

@@ -53,7 +53,7 @@ const navigateEligibleToChildrenPage = () => {
   })
   typeToInput('priloha3_r11_socialne', withChildrenInput)
   typeToInput('priloha3_r13_zdravotne', withChildrenInput)
-  getInput('r122').type('0')
+  getInput('zaplatenePreddavky').type('0')
 
   next()
 
@@ -111,34 +111,43 @@ describe('Employment page', () => {
     getError().should('have.length', 5)
 
     // Type to input
-    typeToInput('r038', withEmploymentInput)
+    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', withEmploymentInput)
 
     next()
     getError().should('have.length', 4)
 
-    typeToInput('r039_socialne', withEmploymentInput)
-    typeToInput('r039_zdravotne', withEmploymentInput)
-    getInput('r120').type('0')
-    getInput('r108').type('0')
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
+      withEmploymentInput,
+    )
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
+      withEmploymentInput,
+    )
+    getInput('uhrnPreddavkovNaDan').type('0')
+    getInput('udajeODanovomBonuseNaDieta').type('0')
 
     // When presses no, the fields disappear
     cy.get('[data-test=employed-input-no]').click()
 
-    getInput('r038').should('not.exist')
-    getInput('r039_socialne').should('not.exist')
-    getInput('r039_zdravotne').should('not.exist')
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
 
     // When presses yes, additional fields appears
     cy.get('[data-test=employed-input-yes]').click()
 
-    getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039_socialne').should(
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
       'have.value',
-      withEmploymentInput?.r039_socialne?.toString(),
+      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
+    )
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
+      'have.value',
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
     )
 
     // Should submit and next page should be parter
@@ -150,11 +159,17 @@ describe('Employment page', () => {
 
     // fill out and submit the form
     getInput('employed', '-yes').click()
-    typeToInput('r038', withEmploymentInput)
-    typeToInput('r039_socialne', withEmploymentInput)
-    typeToInput('r039_zdravotne', withEmploymentInput)
-    getInput('r120').type('10')
-    getInput('r108').type('20')
+    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', withEmploymentInput)
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
+      withEmploymentInput,
+    )
+    typeToInput(
+      'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
+      withEmploymentInput,
+    )
+    getInput('uhrnPreddavkovNaDan').type('10')
+    getInput('udajeODanovomBonuseNaDieta').type('20')
     next()
 
     // go back
@@ -163,39 +178,45 @@ describe('Employment page', () => {
     assertUrl('/zamestnanie')
 
     // form should preserve values when navigated back to it
-    getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039_socialne').should(
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
       'have.value',
-      withEmploymentInput?.r039_socialne?.toString(),
+      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
     )
-    getInput('r120').should('have.value', '10')
-    getInput('r108').should('have.value', '20')
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
+      'have.value',
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
+    )
+    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
 
     // form should hide
     getInput('employed', '-no').click()
-    getInput('r038').should('not.exist')
-    getInput('r039_socialne').should('not.exist')
-    getInput('r039_zdravotne').should('not.exist')
-    getInput('r120').should('not.exist')
-    getInput('r108').should('not.exist')
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
+    getInput('uhrnPreddavkovNaDan').should('not.exist')
+    getInput('udajeODanovomBonuseNaDieta').should('not.exist')
 
     // form should display and preserve values until it is submitted
     getInput('employed', '-yes').click()
-    getInput('r038').should('have.value', withEmploymentInput?.r038?.toString())
-    getInput('r039_socialne').should(
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
       'have.value',
-      withEmploymentInput?.r039_socialne?.toString(),
+      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
     )
-    getInput('r039_zdravotne').should(
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
       'have.value',
-      withEmploymentInput?.r039_zdravotne?.toString(),
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
     )
-    getInput('r120').should('have.value', '10')
-    getInput('r108').should('have.value', '20')
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
+      'have.value',
+      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
+    )
+    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
 
     // submit form
     getInput('employed', '-no').click()
@@ -208,11 +229,17 @@ describe('Employment page', () => {
 
     // form should no preserve answers because it was submitted with additional fields hidden
     getInput('employed', '-yes').click()
-    getInput('r038').should('have.value', '')
-    getInput('r039_socialne').should('have.value', '')
-    getInput('r039_zdravotne').should('have.value', '')
-    getInput('r120').should('have.value', '')
-    getInput('r108').should('have.value', '')
+    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('have.value', '')
+    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
+      'have.value',
+      '',
+    )
+    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
+      'have.value',
+      '',
+    )
+    getInput('uhrnPreddavkovNaDan').should('have.value', '')
+    getInput('udajeODanovomBonuseNaDieta').should('have.value', '')
   })
 })
 describe('Partner page', () => {
@@ -438,20 +465,32 @@ describe('Children page', () => {
     typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
-    getInput('r122').type('0')
+    getInput('zaplatenePreddavky').type('0')
 
     next()
 
     assertUrl('/zamestnanie')
     getInput('employed', '-yes').click()
-    typeToInput('r038', { ...withChildrenInput, r038: '3480' }) // eligible via employment income
-    typeToInput('r039_socialne', { ...withChildrenInput, r039_socialne: '600' })
-    typeToInput('r039_zdravotne', {
+    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', {
       ...withChildrenInput,
-      r039_zdravotne: '400',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '3480',
+    }) // eligible via employment income
+    typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', {
+      ...withChildrenInput,
+      uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
     })
-    typeToInput('r120', { ...withChildrenInput, r120: '0' }) // eligible via employment income
-    typeToInput('r108', { ...withChildrenInput, r108: '0' })
+    typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', {
+      ...withChildrenInput,
+      uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
+    })
+    typeToInput('uhrnPreddavkovNaDan', {
+      ...withChildrenInput,
+      uhrnPreddavkovNaDan: '0',
+    }) // eligible via employment income
+    typeToInput('udajeODanovomBonuseNaDieta', {
+      ...withChildrenInput,
+      udajeODanovomBonuseNaDieta: '0',
+    })
     next()
 
     assertUrl('/partner')
@@ -573,7 +612,7 @@ describe('Pension page', () => {
     next()
     getError().should('have.length', 1)
 
-    typeToInput('r075_zaplatene_prispevky_na_dochodok', withPensionInput)
+    typeToInput('zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
     assertUrl('/osobne-udaje')
@@ -593,16 +632,11 @@ describe('twoPercent page', () => {
 
     // All aditional fields should be required
     next()
-    getError().should('have.length', 6)
+    getError().should('have.length', 2)
 
     // Type to input
     typeToInput('r142_obchMeno', with2percentInput)
     typeToInput('r142_ico', with2percentInput)
-    typeToInput('r142_pravnaForma', with2percentInput)
-    typeToInput('r142_ulica', with2percentInput)
-    typeToInput('r142_cislo', with2percentInput)
-    typeToInput('r142_psc', with2percentInput)
-    typeToInput('r142_obec', with2percentInput)
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
@@ -623,14 +657,6 @@ describe('twoPercent page', () => {
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
     getInput('r142_ico').should('contain.value', '50 718 274')
-    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
-    getInput('r142_ulica').should(
-      'contain.value',
-      'Ulica Ľudmily Podjavorinskej',
-    )
-    getInput('r142_cislo').should('contain.value', '2545/20')
-    getInput('r142_psc').should('contain.value', '917 01')
-    getInput('r142_obec').should('contain.value', 'Trnava')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()
@@ -651,11 +677,6 @@ describe('twoPercent page', () => {
 
     getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
     getInput('r142_ico').should('contain.value', '50 158 635')
-    getInput('r142_pravnaForma').should('contain.value', 'Občianske združenie')
-    getInput('r142_ulica').should('contain.value', 'Staré Grunty')
-    getInput('r142_cislo').should('contain.value', '205/18')
-    getInput('r142_psc').should('contain.value', '841 04')
-    getInput('r142_obec').should('contain.value', 'Bratislava')
 
     next()
     assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
@@ -713,7 +734,7 @@ describe('IBAN page', () => {
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3480' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
-    getInput('r122').type('0')
+    getInput('zaplatenePreddavky').type('0')
 
     next()
 
