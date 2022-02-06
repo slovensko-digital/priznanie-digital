@@ -23,7 +23,7 @@ const testCases = [
   'withChildren',
   'with2percent',
   'with3percent',
-  // 'withBonus',
+  'withBonus',
   // 'withTaxReturn',
   // 'withEmploymentBonus',
   // 'withHighIncome',
