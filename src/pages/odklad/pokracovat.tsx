@@ -4,6 +4,7 @@ import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 import { RedirectField, RedirectForm } from '../../components/RedirectForm'
 import { setDate, toBase64 } from '../../lib/utils'
+import { TAX_YEAR } from '../../lib/calculation'
 
 const buildXml = (userInput) => convertPostponeToXML(setDate(userInput))
 
@@ -14,8 +15,8 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
   const fullName = `${userInput.meno} ${userInput.priezvisko}`
   const xmlFile = toBase64(buildXml(userInput))
   const deadline = userInput.prijmy_zo_zahranicia
-    ? '30. september 2021'
-    : '30. jún 2021'
+    ? `30. september ${TAX_YEAR}`
+    : `30. jún ${TAX_YEAR}`
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
