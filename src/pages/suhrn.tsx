@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 interface SummaryRow {
   title: string
@@ -110,7 +111,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Summary
-        title="Zamestnanie v SR pre rok 2020"
+        title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
@@ -147,7 +148,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
               ]
             : [
                 {
-                  title: 'V roku 2020 som nebol zamestnaný',
+                  title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
                 },
               ]
         }

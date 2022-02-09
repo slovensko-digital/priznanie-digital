@@ -10,6 +10,7 @@ import {
   FormErrors,
   IncomeSourceCountryUserInput,
 } from '../../types/PageUserInputs'
+import { TAX_YEAR } from '../../lib/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
@@ -48,7 +49,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
         {({ values }) => (
           <Form className="form">
             <BooleanRadio
-              title="Mali ste v roku 2020 príjem zo zahraničia?"
+              title={`Mali ste v roku ${TAX_YEAR} príjem zo zahraničia?`}
               hint="Rozhodujúcim faktorom je, či príjmy boli v zahraničí podrobené zdaneniu podľa legislatívy toho konkrétneho štátu, bez ohľadu na výšku tam zaplatenej dane. Príklady zahraničných príjmov: príjem zo závislej činnosti vykonávanej v zahraničí, príjem z činnosti vykonávanej v zahraničí prostredníctvom stálej prevádzkarne, príjem z nakladania s nehnuteľnosťou umiestnenou v zahraničí, príjem charakteru úrokov alebo licenčných poplatkov vyplácaných zahraničnou spoločnosťou, predaj akcií, príjem z dividend, ..."
               name="prijmy_zo_zahranicia"
             />
