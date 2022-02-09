@@ -7,6 +7,7 @@ import { numberInputRegexp, parseInputNumber } from '../lib/utils'
 import { Page } from '../components/Page'
 import { pensionInitialValues } from '../lib/initialValues'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -40,7 +41,7 @@ const Dochodok: Page<PensionUserInput> = ({
           <Form className="form" noValidate>
             <ErrorSummary<PensionUserInput> errors={errors} />
             <BooleanRadio
-              title="Platili ste v roku 2020 príspevky na doplnkové dôchodkové poistenie (III. pilier)?	"
+              title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
               name="platil_prispevky_na_dochodok"
             />
             {values.platil_prispevky_na_dochodok && (
@@ -48,7 +49,7 @@ const Dochodok: Page<PensionUserInput> = ({
                 <Input
                   name="zaplatene_prispevky_na_dochodok"
                   type="number"
-                  label="Výška zaplatených príspevkov za rok 2020"
+                  label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
                   hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
                 />
               </>
