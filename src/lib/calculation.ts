@@ -30,7 +30,7 @@ export const CHILD_RATE_FIFTEEN_AND_OLDER = 46.44
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
 const KONSTANTA = 37_981.94
-const TAX_YEAR = 2021
+export const TAX_YEAR = 2021
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
 const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {

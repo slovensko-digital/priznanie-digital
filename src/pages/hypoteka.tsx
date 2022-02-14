@@ -7,6 +7,7 @@ import { ErrorSummary } from '../components/ErrorSummary'
 import { numberInputRegexp } from '../lib/utils'
 import { Page } from '../components/Page'
 import { mortgageInitialValues } from '../lib/initialValues'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Hypoteka: Page<MortgageUserInput> = ({
   setTaxFormUserInput,
@@ -39,7 +40,7 @@ const Hypoteka: Page<MortgageUserInput> = ({
         {({ values, errors }) => (
           <Form className="form" noValidate>
             <BooleanRadio
-              title="Platili ste úroky z hypotéky v roku 2020?"
+              title={`Platili ste úroky z hypotéky v roku ${TAX_YEAR}?`}
               name="r037_uplatnuje_uroky"
             />
             {values.r037_uplatnuje_uroky && (
