@@ -3,11 +3,12 @@ import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
+import { TAX_YEAR } from '../lib/calculation'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title="Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v rok 2020?"
+      title={`Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v rok ${TAX_YEAR}?`}
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />

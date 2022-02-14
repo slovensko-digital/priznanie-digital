@@ -7,6 +7,7 @@ import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
 import { employmentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,
@@ -36,7 +37,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
           <Form className="form" noValidate>
             <ErrorSummary<EmployedUserInput> errors={errors} />
             <BooleanRadio
-              title="Mali ste v roku 2020 príjmy zo zamestnania v SR?"
+              title={`Mali ste v roku ${TAX_YEAR} príjmy zo zamestnania v SR?`}
               name="employed"
             />
             {values.employed && (

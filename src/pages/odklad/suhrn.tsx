@@ -4,6 +4,7 @@ import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { BackLink } from '../../components/BackLink'
 import Link from 'next/link'
+import { TAX_YEAR } from '../../lib/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
@@ -34,8 +35,8 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
               {postponeUserInput.prijmy_zo_zahranicia
-                ? '30. september 2021'
-                : '30. jún 2021'}
+                ? `30. september ${TAX_YEAR}`
+                : `30. jún ${TAX_YEAR}`}
             </td>
           </tr>
         </tbody>

@@ -6,6 +6,7 @@ import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
+import { TAX_YEAR } from '../lib/calculation'
 
 interface SummaryRow {
   key: string
@@ -115,7 +116,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     <>
       <BackLink href={previousRoute} />
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Výpočet dane za rok 2020
+        {`Výpočet dane za rok ${TAX_YEAR}`}
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
