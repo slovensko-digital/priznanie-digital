@@ -49,7 +49,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r10.s2 = taxForm.t1r10_vydavky.toFixed(2)
 
   /** TODO Vypocitat riadne mikrodanovnika */
-  // form.dokument.telo.mikrodanovnikPar2w = '1'
+  form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
 
   form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = taxForm.vydavkyPoistPar6ods11_ods1a2.toFixed(
     2,

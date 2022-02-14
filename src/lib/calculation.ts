@@ -14,7 +14,7 @@ import { Summary } from '../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
 const PAUSALNE_VYDAVKY_MAX = 20000
-const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
@@ -331,27 +331,25 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // akú sadzbu použijete - na to vám dá odpoveď suma na r. 95
     /** TODO rework */
     get r096() {
+      if (this.r094.lte(0)) {
+        return new Decimal(0)
+      }
       // má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r. 95<= 100 000.
-      if (this.r094.gt(0) && this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
+      if (this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
         return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
         // Ak r.94> 0 a súčasne r.95 > 100 000, potom:
-      } else if (
-        this.r094.gt(0) &&
-        this.r095.gt(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)
-      ) {
-        // ak r.94 <= 37 163.36, tak r.96 = r.94 * 0.19
-        if (this.r094.lte(KONSTANTA)) {
-          return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
-
-          // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
-        } else {
-          return DAN_Z_PRIJMU_SADZBA_ZNIZENA.times(DAN_Z_PRIJMU_SADZBA).plus(
-            this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
-          )
-        }
       }
 
-      return new Decimal(0)
+      // ak r.94 <= 37 163.36, tak r.96 = r.94 * 0.19
+      if (this.r094.lte(KONSTANTA)) {
+        return this.r094.times(DAN_Z_PRIJMU_SADZBA)
+
+        // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
+      } else {
+        return DAN_Z_PRIJMU_SADZBA_ZNIZENA.times(DAN_Z_PRIJMU_SADZBA).plus(
+          this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
+        )
+      }
     },
     // r. 105 bude rovnaká suma ako na r. 96, keďže vo vašich prípadoch nezohľadňujete príjmy zo zahraničia
     get r105() {
@@ -569,6 +567,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return percentage(this.r135_dan_na_uhradu, 3).gte(
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
+    },
+    get mikrodanovnik() {
+      if (this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
+        return true
+      }
+      return false
     },
   }
 }
