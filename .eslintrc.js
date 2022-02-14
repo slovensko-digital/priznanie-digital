@@ -18,7 +18,6 @@ module.exports = {
     // "plugin:jest/recommended",
     'plugin:unicorn/recommended',
     'plugin:sonarjs/recommended',
-    'plugin:react/jsx-runtime',
   ],
   rules: {
     'jsx-a11y/anchor-is-valid': 0,
@@ -44,5 +43,6 @@ module.exports = {
     ],
     'sonarjs/no-duplicate-string': 0,
     'sonarjs/cognitive-complexity': 0,
+    'react/react-in-jsx-scope': 0,
   },
 }
