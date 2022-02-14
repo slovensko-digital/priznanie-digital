@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { ExternalLink } from '../components/ExternalLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 const IconCheck = () => (
   <svg
@@ -65,7 +66,7 @@ const TaxFormSection = ({ nextRoute }) => (
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Vyplnenie daňového priznania
       <br />
-      (verzia pre rok 2020)
+      {`(verzia pre rok ${TAX_YEAR})`}
     </h1>
 
     <p className="govuk-body-l">
@@ -124,16 +125,16 @@ const TaxFormSection = ({ nextRoute }) => (
 const PostponeSection = ({ nextPostponeRoute }) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
-      Odklad daňového priznania za rok 2020
+      {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
     <p>
-      Riadny termín pre podanie daňového priznania a zaplatenie dane je
-      31.3.2021
+      {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
+      31.3.${TAX_YEAR + 1}`}
     </p>
     <p>Termín si viete predĺžiť:</p>
     <ul className="govuk-list govuk-list--bullet">
-      <li>do 30.6.2021 ak ste mali príjmy len zo Slovenska, alebo</li>
-      <li>do 30.9.2021 ak ste mali príjmy aj zo zahraničia</li>
+      <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
+      <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
     </ul>
 
     <p className="govuk-body-xs">

@@ -189,7 +189,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // ***** PAGE 2
   tpl.nextPage()
 
-  if (form.r032_uplatnujem_na_partnera || form.r033_partner_kupele) {
+  if (form.r032_uplatnujem_na_partnera) {
     // r031_priezvisko_a_meno
     tpl.write(FIRST_COLUMN + 10, 563, form.r031_priezvisko_a_meno)
 
@@ -218,18 +218,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     )
   }
 
-  if (form.r033_partner_kupele) {
-    // r033_partner_kupele
-    tpl.write(FIRST_COLUMN + 25, 515, 'x')
-
-    // r033_partner_kupele_uhrady
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 487,
-      513,
-      form.r033_partner_kupele_uhrady.toNumber(),
-    )
-  }
-
   // r034 - deti
   if (form.r034) {
     form.r034.slice(0, 4).forEach((child, index) => {
@@ -250,11 +238,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
         432 - rowSize,
         rodneCislo ? rodneCislo[2] : '',
       )
-
-      if (child.kupelnaStarostlivost) {
-        // kupelnaStarostlivost
-        tpl.write(FIRST_COLUMN + 302, 429 - rowSize, 'x')
-      }
 
       // m00
       if (child.m00) {
@@ -328,15 +311,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.write(FIRST_COLUMN + 25, 324, 'x')
   }
 
-  if (form.r034 && form.r034.some((child) => child.kupelnaStarostlivost)) {
-    // r036_deti_kupele
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 396,
-      303,
-      form.r036_deti_kupele.toNumber(),
-    )
-  }
-
   if (form.r037_uplatnuje_uroky) {
     // r037_uplatnuje_uroky
     tpl.write(FIRST_COLUMN + 21, 110, 'x')
@@ -360,13 +334,13 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   tpl.nextPage()
 
   // r038 - Úhrn príjmov od všetkých zamestnávateľov
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r038.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 737, form.r036.toNumber())
 
   // r039 - Úhrn povinného poistného
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r039.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 686, form.r037.toNumber())
 
   // r040 - Základ dane (čiastkový základ dane)
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r040.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 397, 660, form.r038.toNumber())
 
   // t1r2_prijmy - r. 2
   tpl.writeNumberToBoxes(
@@ -406,19 +380,19 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   )
 
   // r041
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r041.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 110, form.r039.toNumber())
 
   // r042
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r042.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 395, 86, form.r040.toNumber())
 
   // ***** PAGE 5
   tpl.nextPage()
 
   // r043
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r043.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 770, form.r041.toNumber())
 
   // r047
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r047.toNumber())
+  tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 656, form.r045.toNumber())
 
   // r055
   tpl.writeNumberToBoxes(FIRST_COLUMN + 400, 400, form.r055.toNumber())
@@ -460,27 +434,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
       form.r075_zaplatene_prispevky_na_dochodok.toNumber(),
     )
   }
-
-  // r076_kupele_spolu
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    386,
-    form.r076_kupele_spolu.toNumber(),
-  )
-
-  // r076a_kupele_danovnik
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    358,
-    form.r076a_kupele_danovnik.toNumber(),
-  )
-
-  // r076b_kupele_partner_a_deti
-  tpl.writeNumberToBoxes(
-    FIRST_COLUMN + 390,
-    332,
-    form.r076b_kupele_partner_a_deti.toNumber(),
-  )
 
   // r077_nezdanitelna_cast
   tpl.writeNumberToBoxes(
@@ -584,41 +537,12 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     const ico = form.r152 ? form.r152.ico : ''
     tpl.writeToBoxes(FIRST_COLUMN, 664, ico.padStart(12))
 
-    // r152 - ico
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 202,
-      664,
-      form.r152 ? form.r152.pravnaForma : '',
-    )
-
     // r152 - obchMeno
     const obchMeno = form.r152 ? form.r152.obchMeno : ''
     tpl.writeToBoxes(FIRST_COLUMN, 628, obchMeno.slice(0, 37), 37)
     if (obchMeno.length > 37) {
       tpl.writeToBoxes(FIRST_COLUMN, 602, obchMeno.slice(37, 74), 37)
     }
-
-    // r152 - ulica
-    tpl.writeToBoxes(FIRST_COLUMN, 558, form.r152 ? form.r152.ulica : '', 28)
-
-    // r152 - cislo
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 418,
-      558,
-      form.r152 ? form.r152.cislo : '',
-      8,
-    )
-
-    // r152 - psc
-    tpl.writeToBoxes(FIRST_COLUMN, 522, form.r152 ? form.r152.psc : '')
-
-    // r152 - obec
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 87,
-      522,
-      form.r152 ? form.r152.obec : '',
-      31,
-    )
 
     // r152 - suhlasZaslUdaje
     tpl.write(
@@ -647,11 +571,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
         707 - rowSize,
         `rodné číslo: ${child.rodneCislo}`,
       )
-
-      if (child.kupelnaStarostlivost) {
-        // kupelnaStarostlivost
-        tpl.write(FIRST_COLUMN + 390, 707 - rowSize, 'kúpeľná starostlivosť: x')
-      }
 
       if (child.m00) {
         tpl.write(FIRST_COLUMN + 220, 694 - rowSize, 'daňový bonus 1 - 12')

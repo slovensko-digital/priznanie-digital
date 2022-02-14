@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 interface SummaryRow {
   title: string
@@ -104,48 +105,50 @@ const Suhrn: Page<TaxFormUserInput> = ({
           },
           {
             title: 'Zaplatené preddavky',
-            value: taxFormUserInput.r122,
+            value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
           },
         ]}
       />
       <Summary
-        title="Zamestnanie v SR pre rok 2020"
+        title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
             ? [
                 {
                   title: 'Úhrn príjmov od všetkých zamestnávateľov',
-                  value: taxFormUserInput.r038,
+                  value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
                   currency: true,
                 },
                 {
                   title: 'Úhrn sociálneho poistného',
-                  value: taxFormUserInput.r039_socialne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
                   currency: true,
                   testId: 'r039_socialne',
                 },
                 {
                   title: 'Úhrn zdravotného poistného',
-                  value: taxFormUserInput.r039_zdravotne,
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
                   currency: true,
                   testId: 'r039_zdravotne',
                 },
                 {
                   title: 'Úhrn preddavkov na daň',
-                  value: taxFormUserInput.r120,
+                  value: taxFormUserInput.uhrnPreddavkovNaDan,
                   currency: true,
                 },
                 {
                   title: 'Údaje o zvýhodnení na manželku / manžela',
-                  value: taxFormUserInput.r108,
+                  value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
                 },
               ]
             : [
                 {
-                  title: 'V roku 2020 som nebol zamestnaný',
+                  title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
                 },
               ]
         }
@@ -210,7 +213,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
             ? [
                 {
                   title: 'Výška zaplatených príspevkov',
-                  value: taxFormUserInput.r075_zaplatene_prispevky_na_dochodok,
+                  value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
                   currency: true,
                 },
               ]
@@ -236,40 +239,6 @@ const Suhrn: Page<TaxFormUserInput> = ({
             : [{ title: 'Neplatil som' }]
         }
       /> */}
-      <Summary
-        title="Kúpele"
-        href={'/kupele'}
-        rows={
-          taxFormUserInput.kupele
-            ? [
-                {
-                  title: 'Kúpelné úhrady za seba',
-                  value: taxFormUserInput.danovnikInSpa
-                    ? taxFormUserInput.r076a_kupele_danovnik
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.danovnikInSpa),
-                  testId: 'r076a_kupele_danovnik',
-                },
-                {
-                  title: 'Kúpelné úhrady za manželku / manžela',
-                  value: taxFormUserInput.r033_partner_kupele
-                    ? taxFormUserInput.r033_partner_kupele_uhrady
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.r033_partner_kupele),
-                  testId: 'r033_partner_kupele_uhrady',
-                },
-                {
-                  title: 'Kúpelné úhrady za deti',
-                  value: taxFormUserInput.childrenInSpa
-                    ? taxFormUserInput.r036_deti_kupele
-                    : 'Neuplatňuje',
-                  currency: Boolean(taxFormUserInput.childrenInSpa),
-                  testId: 'r036_deti_kupele',
-                },
-              ]
-            : [{ title: 'Nenavštívil' }]
-        }
-      />
       <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}

@@ -3,7 +3,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 export const withTaxReturnInput: E2eTestUserInput = {
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
-  r122: '5000',
+  zaplatenePreddavky: '5000',
   r005_meno: 'Fake',
   r004_priezvisko: 'Name',
   r001_dic: '233123123',

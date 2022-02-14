@@ -31,7 +31,7 @@ export const withBonusInput: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
@@ -40,22 +40,13 @@ export const withBonusInput: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
     },
   ],
   hasChildren: true,
-
-  /** SECTION SPA */
-  kupele: true,
-  r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '45',
-  childrenInSpa: true,
-  r036_deti_kupele: '60',
-  danovnikInSpa: true,
-  r076a_kupele_danovnik: '41',
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus: true,

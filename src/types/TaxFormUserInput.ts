@@ -17,7 +17,6 @@ export interface ChildInput {
   id: number
   priezviskoMeno: string
   rodneCislo: string
-  kupelnaStarostlivost: boolean
   wholeYear: boolean
   monthFrom: string
   monthTo: string
@@ -50,7 +49,7 @@ export interface TaxFormUserInput {
   /** SECTION Dochodok */
   /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
   platil_prispevky_na_dochodok?: boolean
-  r075_zaplatene_prispevky_na_dochodok?: string
+  zaplatene_prispevky_na_dochodok?: string
 
   /** SECTION  Partner*/
   r031_priezvisko_a_meno?: string
@@ -69,22 +68,18 @@ export interface TaxFormUserInput {
   r037_pocetMesiacov?: string
 
   /** SECTION Prijmy a poistenie  */
-  /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
   t1r10_prijmy: string
-  /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
   priloha3_r11_socialne: string
-  /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: string
-  /** Zaplatené preddavky */
-  r122?: string
+  zaplatenePreddavky?: string
 
   /**  SECTION Zamestnanie */
   employed?: boolean
-  r038?: string
-  r039_socialne?: string
-  r039_zdravotne?: string
-  r108?: string
-  r120?: string
+  uhrnPrijmovOdVsetkychZamestnavatelov?: string
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie?: string
+  uhrnPreddavkovNaDan?: string
+  udajeODanovomBonuseNaDieta?: string
 
   /** SECTION  Deti*/
   hasChildren?: boolean
@@ -94,27 +89,8 @@ export interface TaxFormUserInput {
   XIIoddiel_uplatnujem2percenta?: boolean
   splnam3per?: boolean
   r142_ico?: string
-  r142_pravnaForma?: string
   r142_obchMeno?: string
-  r142_ulica?: string
-  r142_cislo?: string
-  r142_psc?: string
-  r142_obec?: string
   XIIoddiel_suhlasZaslUdaje?: boolean
-
-  /** SECTION  Kupele */
-  kupele?: boolean
-  r033_partner_kupele?: boolean
-  /**   max 50*/
-  r033_partner_kupele_uhrady?: string
-  /** Preukázateľne zaplatené úhrady na kúpelnú starostlivosť za vyživované
-   * dieťa (deti) v úhrne najviac do výšky 50 eur za rok za každé z týchto detí
-   * */
-  r036_deti_kupele?: string
-  childrenInSpa?: boolean
-  /**   Kupele danovik*/
-  r076a_kupele_danovnik?: string
-  danovnikInSpa?: boolean
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus?: boolean

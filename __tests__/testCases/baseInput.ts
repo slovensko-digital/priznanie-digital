@@ -13,7 +13,7 @@ export const baseInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
-  datum: '22.02.2020',
+  datum: '22.02.2022',
   hasChildren: false,
   children: [],
   expectNgoDonationPage: true,

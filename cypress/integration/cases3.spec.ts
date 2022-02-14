@@ -5,8 +5,8 @@ describe('Cases', () => {
     'withEmploymentBonus',
     'withHighIncome',
     'bugReport1',
-    'bugReport2',
-    'bugReport3',
-    'bugReport4',
+    // 'bugReport2',
+    // 'bugReport3',
+    // 'bugReport4',
   ])
 })

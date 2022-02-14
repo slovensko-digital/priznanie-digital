@@ -24,7 +24,6 @@ import {
   decimalToString,
   roundDecimal,
 } from '../src/lib/utils'
-import * as methods from '../src/lib/utils'
 import Decimal from 'decimal.js'
 
 describe('utils', () => {
@@ -433,10 +432,9 @@ describe('utils', () => {
     })
 
     it('should return rounded number to 2 decimals', () => {
-      const roundSpy = jest.spyOn(methods, 'roundDecimal')
       const input = new Decimal(3)
-      decimalToString(input)
-      expect(roundSpy).toHaveBeenCalledWith(input)
+      const result = decimalToString(input)
+      expect(result).toBe('3.00')
     })
   })
 

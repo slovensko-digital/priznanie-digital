@@ -7,6 +7,7 @@ import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
 import { employmentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,
@@ -36,13 +37,13 @@ const Zamestnanie: Page<EmployedUserInput> = ({
           <Form className="form" noValidate>
             <ErrorSummary<EmployedUserInput> errors={errors} />
             <BooleanRadio
-              title="Mali ste v roku 2020 príjmy zo zamestnania v SR?"
+              title={`Mali ste v roku ${TAX_YEAR} príjmy zo zamestnania v SR?`}
               name="employed"
             />
             {values.employed && (
               <>
                 <Input
-                  name="r038"
+                  name="uhrnPrijmovOdVsetkychZamestnavatelov"
                   type="number"
                   label="Úhrn príjmov od všetkých zamestnávateľov"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
@@ -56,25 +57,25 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   />
                 */}
                 <Input
-                  name="r039_socialne"
+                  name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
                   hint={`Tento údaj nájdete v "Potvrdení" riadok 2a. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
                 />
                 <Input
-                  name="r039_zdravotne"
+                  name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
                   type="number"
                   label="Úhrn zdravotného poistného"
                   hint={`Tento údaj nájdete v "Potvrdení" riadok 2b. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
                 />
                 <Input
-                  name="r120"
+                  name="uhrnPreddavkovNaDan"
                   type="number"
                   label="Úhrn preddavkov na daň"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 04. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
                 />
                 <Input
-                  name="r108"
+                  name="udajeODanovomBonuseNaDieta"
                   type="number"
                   label="Údaje o daňovom bonuse na dieťa"
                   hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 14. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
@@ -99,36 +100,51 @@ export const validate = (values: EmployedUserInput) => {
   }
 
   if (values.employed) {
-    if (!values.r038) {
-      errors.r038 = 'Zadajte úhrn príjmov od všetkých zamestnávateľov'
-    } else if (!values.r038.match(numberInputRegexp)) {
-      errors.r038 = 'Zadajte sumu príjmov vo formáte 123,45'
+    if (!values.uhrnPrijmovOdVsetkychZamestnavatelov) {
+      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
+        'Zadajte úhrn príjmov od všetkých zamestnávateľov'
+    } else if (
+      !values.uhrnPrijmovOdVsetkychZamestnavatelov.match(numberInputRegexp)
+    ) {
+      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
+        'Zadajte sumu príjmov vo formáte 123,45'
     }
 
-    if (!values.r039_socialne) {
-      errors.r039_socialne = 'Zadajte úhrn sociálneho poistného'
-    } else if (!values.r039_socialne.match(numberInputRegexp)) {
-      errors.r039_socialne =
+    if (!values.uhrnPovinnehoPoistnehoNaSocialnePoistenie) {
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
+        'Zadajte úhrn sociálneho poistného'
+    } else if (
+      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenie.match(numberInputRegexp)
+    ) {
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
         'Zadajte sumu sociálneho poistného vo formáte 123,45'
     }
 
-    if (!values.r039_zdravotne) {
-      errors.r039_zdravotne = 'Zadajte úhrn zdravotného poistného'
-    } else if (!values.r039_zdravotne.match(numberInputRegexp)) {
-      errors.r039_zdravotne =
+    if (!values.uhrnPovinnehoPoistnehoNaZdravotnePoistenie) {
+      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenie =
+        'Zadajte úhrn zdravotného poistného'
+    } else if (
+      !values.uhrnPovinnehoPoistnehoNaZdravotnePoistenie.match(
+        numberInputRegexp,
+      )
+    ) {
+      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenie =
         'Zadajte sumu zdravotného poistného vo formáte 123,45'
     }
 
-    if (!values.r120) {
-      errors.r120 = 'Zadajte úhrn preddavkov na daň'
-    } else if (!values.r120.match(numberInputRegexp)) {
-      errors.r120 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    if (!values.uhrnPreddavkovNaDan) {
+      errors.uhrnPreddavkovNaDan = 'Zadajte úhrn preddavkov na daň'
+    } else if (!values.uhrnPreddavkovNaDan.match(numberInputRegexp)) {
+      errors.uhrnPreddavkovNaDan =
+        'Zadajte sumu povinného poistného vo formáte 123,45'
     }
 
-    if (!values.r108) {
-      errors.r108 = 'Zadajte údaje o daňovom bonuse na dieťa'
-    } else if (!values.r108.match(numberInputRegexp)) {
-      errors.r108 = 'Zadajte sumu povinného poistného vo formáte 123,45'
+    if (!values.udajeODanovomBonuseNaDieta) {
+      errors.udajeODanovomBonuseNaDieta =
+        'Zadajte údaje o daňovom bonuse na dieťa'
+    } else if (!values.udajeODanovomBonuseNaDieta.match(numberInputRegexp)) {
+      errors.udajeODanovomBonuseNaDieta =
+        'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
 

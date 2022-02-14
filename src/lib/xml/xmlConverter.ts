@@ -38,9 +38,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     ? '1'
     : '0'
 
-  form.dokument.telo.r33.uplatNCZDNaKupelStarostlivost = taxForm.r033_partner_kupele
-    ? '1'
-    : '0'
+   /** TODO Vypocitat riadne mikrodanovnika */
+   form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
 
   form.dokument.telo.tabulka1.t1r2.s1 = roundDecimal(taxForm.t1r2_prijmy)
   form.dokument.telo.tabulka1.t1r10.s1 = roundDecimal(taxForm.t1r10_prijmy)
@@ -73,33 +72,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
-  if (
-    boolToString(taxForm.r033_partner_kupele) &&
-    taxForm.r033_partner_kupele_uhrady.gt(0)
-  ) {
-    form.dokument.telo.r33 = {
-      uplatNCZDNaKupelStarostlivost: boolToString(taxForm.r033_partner_kupele),
-      preukazZaplatUhrady: roundDecimal(taxForm.r033_partner_kupele_uhrady),
-    }
-  }
-
-  form.dokument.telo.r74 = taxForm.r074_znizenie_partner.gt(0)
-    ? roundDecimal(taxForm.r074_znizenie_partner)
-    : ''
-
-  form.dokument.telo.r76 = taxForm.r076_kupele_spolu.gt(0)
-    ? decimalToString(taxForm.r076_kupele_spolu)
-    : ''
-  form.dokument.telo.r76b = taxForm.r076b_kupele_partner_a_deti.gt(0)
-    ? decimalToString(taxForm.r076b_kupele_partner_a_deti)
-    : ''
-  form.dokument.telo.r76a = taxForm.r076a_kupele_danovnik.gt(0)
-    ? decimalToString(taxForm.r076a_kupele_danovnik)
-    : ''
+  form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   /** SECTION Children */
   if (taxForm.r034 && taxForm.r034.length > 0) {
-    form.dokument.telo.r34.dieta = taxForm.r034.map((child) => {
+    form.dokument.telo.r33.dieta = taxForm.r034.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,
@@ -107,33 +84,31 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
-
-    form.dokument.telo.r36 = taxForm.r036_deti_kupele.gt(0)
-      ? roundDecimal(taxForm.r036_deti_kupele)
-      : ''
   }
 
   /** SECTION Mortgage */
-  if (taxForm.r037_uplatnuje_uroky) {
-    form.dokument.telo.r37 = {
-      uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
-      zaplateneUroky: roundDecimal(taxForm.r037_zaplatene_uroky),
-      pocetMesiacov: roundDecimal(new Decimal(taxForm.r037_pocetMesiacov), 0),
-    }
-    form.dokument.telo.r112 = roundDecimal(taxForm.r123)
-    form.dokument.telo.r115 = roundDecimal(taxForm.r126)
-  }
+  // if (taxForm.r037_uplatnuje_uroky) {
+  //   form.dokument.telo.r37 = {
+  //     uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
+  //     zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
+  //     pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
+  //   }
+  //   form.dokument.telo.r112 = taxForm.r123.toFixed(2)
+  //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
+  // }
   /** SECTION Employed */
+
   if (taxForm.employed) {
+    form.dokument.telo.r36 = roundDecimal(taxForm.r036)
+    form.dokument.telo.r37 = roundDecimal(taxForm.r037)
     form.dokument.telo.r38 = roundDecimal(taxForm.r038)
-    form.dokument.telo.r39 = roundDecimal(taxForm.r039)
-    form.dokument.telo.r40 = roundDecimal(taxForm.r040)
     form.dokument.telo.socZdravPoistenie.pr8 = roundDecimal(taxForm.r039)
   }
+
+  form.dokument.telo.r39 = roundDecimal(taxForm.r039)
+  form.dokument.telo.r40 = roundDecimal(taxForm.r040)
   form.dokument.telo.r41 = roundDecimal(taxForm.r041)
-  form.dokument.telo.r42 = roundDecimal(taxForm.r042)
-  form.dokument.telo.r43 = roundDecimal(taxForm.r043)
-  form.dokument.telo.r47 = roundDecimal(taxForm.r047)
+  form.dokument.telo.r45 = roundDecimal(taxForm.r045)
   form.dokument.telo.r55 = roundDecimal(taxForm.r055)
   form.dokument.telo.r57 = roundDecimal(taxForm.r057)
 
@@ -141,9 +116,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r73 = roundDecimal(taxForm.r073)
 
   form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = roundDecimal(taxForm.r078_zaklad_dane_zo_zamestnania)
-  form.dokument.telo.r80 = roundDecimal(taxForm.r080_zaklad_dane_celkovo)
-  form.dokument.telo.r81 = roundDecimal(taxForm.r081)
+  form.dokument.telo.r78 = decimalToString(taxForm.r078_zaklad_dane_zo_zamestnania)
+  form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
+  form.dokument.telo.r81 = decimalToString(taxForm.r081)
   form.dokument.telo.r90 = roundDecimal(taxForm.r090)
   form.dokument.telo.r91 = roundDecimal(taxForm.r091)
   form.dokument.telo.r92 = roundDecimal(taxForm.r092)
@@ -151,8 +126,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r95 = roundDecimal(taxForm.r095)
   form.dokument.telo.r96 = roundDecimal(taxForm.r096)
   form.dokument.telo.r105 = roundDecimal(taxForm.r105)
-  form.dokument.telo.r106 = '0'
-  form.dokument.telo.r115 = '0'
+  form.dokument.telo.r106 = '0.00'
+  form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = roundDecimal(taxForm.r116_dan)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
@@ -182,7 +157,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       obchMeno: {
         riadok: [taxForm.r152.obchMeno],
       },
-      psc: taxForm.r152.psc.replace(' ', ''),
       suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
     }
   }
@@ -210,17 +184,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
-  form.dokument.telo.socZdravPoistenie.pr8 = roundDecimal(
-    taxForm.priloha3_r08_poistne_spolu,
-  )
+  form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.priloha3_r08_poistne_spolu)
 
-  form.dokument.telo.socZdravPoistenie.pr9 = roundDecimal(
-    taxForm.priloha3_r09_socialne,
-  )
+  form.dokument.telo.socZdravPoistenie.pr9 = decimalToString(taxForm.priloha3_r09_socialne)
 
-  form.dokument.telo.socZdravPoistenie.pr10 = roundDecimal(
-    taxForm.priloha3_r10_zdravotne,
-  )
+  form.dokument.telo.socZdravPoistenie.pr10 = decimalToString(taxForm.priloha3_r10_zdravotne)
 
   form.dokument.telo.socZdravPoistenie.pr11 = roundDecimal(
     taxForm.priloha3_r11_socialne,

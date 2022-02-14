@@ -14,15 +14,15 @@ export const completeInput: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
-  r120: '100',
+  uhrnPreddavkovNaDan: '100',
   datum: '22.02.2020',
 
   /** SECTION Employment */
-  r038: '4000',
-  r039_socialne: '600',
-  r039_zdravotne: '400',
-  r122: '80',
-  r108: '50',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '4000',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
+  zaplatenePreddavky: '80',
+  udajeODanovomBonuseNaDieta: '50',
   employed: true,
 
   /** SECTION Mortgage */
@@ -32,7 +32,7 @@ export const completeInput: E2eTestUserInput = {
 
   /** SECTION Pension */
   platil_prispevky_na_dochodok: true,
-  r075_zaplatene_prispevky_na_dochodok: '180',
+  zaplatene_prispevky_na_dochodok: '180',
 
   /** SECTION Partner */
   r031_priezvisko_a_meno: 'Fake Fake',
@@ -44,21 +44,13 @@ export const completeInput: E2eTestUserInput = {
   partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
 
-  /** SECTION Spa */
-  r036_deti_kupele: '30',
-  r033_partner_kupele: true,
-  r033_partner_kupele_uhrady: '20',
-  r076a_kupele_danovnik: '20',
-  danovnikInSpa: true,
-  kupele: true,
-
   /** SECTION Children */
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: '1607201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: false,
       monthFrom: '6',
       monthTo: '11',
@@ -67,7 +59,7 @@ export const completeInput: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Summer Smith',
       rodneCislo: '1057201167',
-      kupelnaStarostlivost: true,
+
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',

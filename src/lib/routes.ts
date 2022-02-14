@@ -1,5 +1,5 @@
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { NextRouter } from 'next/dist/next-server/lib/router/router'
+import type { NextRouter } from 'next/router'
 import { TaxForm } from '../types/TaxForm'
 import { checkCookie } from './cookie'
 import { PostponeUserInput } from '../types/PostponeUserInput'
@@ -19,7 +19,6 @@ export type Route =
   | '/deti'
   | '/dochodok'
   | '/hypoteka'
-  | '/kupele'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -48,7 +47,6 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/partner',
     ...getChildRoute(),
     '/dochodok',
-    '/kupele',
     ...getTwoPercentRoute(),
     '/osobne-udaje',
     '/suhrn',
@@ -141,9 +139,7 @@ export const validateRoute = (
           : 'r032_uplatnujem_na_partnera',
         // TODO reanable with mortgage feature
         // '/hypoteka': 'platil_prispevky_na_dochodok',
-        // '/kupele': 'r037_uplatnuje_uroky',
-        '/kupele': 'platil_prispevky_na_dochodok',
-        '/dve-percenta': 'kupele',
+        // '/dve-percenta': 'dochodok',
         '/osobne-udaje': taxForm.XIIoddiel_uplatnujem2percenta
           ? 'XIIoddiel_uplatnujem2percenta'
           : 'platil_prispevky_na_dochodok',

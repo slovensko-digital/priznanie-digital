@@ -6,6 +6,7 @@ import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
   taxFormUserInput,
@@ -38,23 +39,23 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   name="t1r10_prijmy"
                   type="number"
                   label="Príjmy"
-                  hint="Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku 2020. Uvádzajte iba príjmy zo živnosti."
+                  hint={`Vaše celkové príjmy prijaté na účet (zaplatené faktúry) alebo v hotovosti (napr. cez pokladňu) v roku ${TAX_YEAR}. Uvádzajte iba príjmy zo živnosti.`}
                 />
                 <Input
                   name="priloha3_r11_socialne"
                   type="number"
                   label="Sociálne poistenie"
-                  hint="Celkové uhradené poistné v roku 2020. Uveďte všetky platby zaplatené v 2020 - napr. aj nedoplatky za predchádzajúce roky."
+                  hint={`Celkové uhradené poistné v roku ${TAX_YEAR}. Uveďte všetky platby zaplatené v ${TAX_YEAR} - napr. aj nedoplatky za predchádzajúce roky.`}
                 />
                 <Input
                   name="priloha3_r13_zdravotne"
-                  hint="Celkové uhradené poistné v roku 2020. Uveďte všetky platby zaplatené v 2020 - napr. aj nedoplatky za predchádzajúci rok."
+                  hint={`Celkové uhradené poistné v roku ${TAX_YEAR}. Uveďte všetky platby zaplatené v ${TAX_YEAR} - napr. aj nedoplatky za predchádzajúci rok.`}
                   type="number"
                   label="Zdravotné poistenie"
                 />
                 <Input
-                  name="r122"
-                  hint="Celkové uhradené preddavky na daň z príjmov až do termínu na podanie priznania. (okrem preddavkov v roku 2020 sem pripočítajte aj preddavky zaplatené do 31.3.2021)."
+                  name="zaplatenePreddavky"
+                  hint={`Celkové uhradené preddavky na daň z príjmov až do termínu na podanie priznania. (okrem preddavkov v roku ${TAX_YEAR} sem pripočítajte aj preddavky zaplatené do 31.3.${TAX_YEAR}).`}
                   type="number"
                   label="Zaplatené preddavky"
                 />
@@ -105,11 +106,11 @@ export const validate = (values: IncomeAndExpenseUserInput) => {
       'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
 
-  if (!values.r122) {
-    errors.r122 = 'Zadajte vaše zaplatené preddavky'
+  if (!values.zaplatenePreddavky) {
+    errors.zaplatenePreddavky = 'Zadajte vaše zaplatené preddavky'
   }
-  if (values.r122 && !values.r122.match(numberInputRegexp)) {
-    errors.r122 = 'Zadajte vaše zaplatené preddavky vo formáte 123,45'
+  if (values.zaplatenePreddavky && !values.zaplatenePreddavky.match(numberInputRegexp)) {
+    errors.zaplatenePreddavky = 'Zadajte vaše zaplatené preddavky vo formáte 123,45'
   }
 
   return errors
