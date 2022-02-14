@@ -27,6 +27,7 @@ import {
   validateRoute,
 } from '../lib/routes'
 import { Page } from '../components/Page'
+import { Plausible } from '../components/Plausible'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -108,6 +109,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     >
+      <Plausible />
       <Component
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}

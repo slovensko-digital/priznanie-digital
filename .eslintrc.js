@@ -18,6 +18,7 @@ module.exports = {
     // "plugin:jest/recommended",
     'plugin:unicorn/recommended',
     'plugin:sonarjs/recommended',
+    'plugin:react/jsx-runtime',
   ],
   rules: {
     'jsx-a11y/anchor-is-valid': 0,
