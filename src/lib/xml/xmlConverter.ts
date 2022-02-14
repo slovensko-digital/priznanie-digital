@@ -4,7 +4,6 @@ import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
 import { boolToString, decimalToString, roundDecimal } from '../utils'
-import Decimal from 'decimal.js'
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
