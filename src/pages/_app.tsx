@@ -27,7 +27,6 @@ import {
   validateRoute,
 } from '../lib/routes'
 import { Page } from '../components/Page'
-import { googleTagManagerId } from '../lib/constants'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
