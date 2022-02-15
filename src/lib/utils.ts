@@ -34,10 +34,11 @@ export const setDate = <T>(input: T, date: Date = new Date()) => {
 
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
-  return `${(value || 0)
-    .toFixed(2)
+  const roundNumber = roundDecimal(new Decimal(value || 0))
+  const formattedNumber = roundNumber
     .replace(findPlaceForThousandsDivider, ' ')
-    .replace('.', ',')} EUR`
+    .replace('.', ',')
+  return `${formattedNumber} EUR`
 }
 
 export const numberInputRegexp = '^[0-9]+([,\\.][0-9]{1,2})?$'
@@ -225,4 +226,16 @@ export const toBase64 = (value: string): string => {
   return base64.fromByteArray(
     mapHelper(encodeUnicodeCharacters(value), (char) => char.charCodeAt(0)),
   )
+}
+
+export const boolToString = (bool: boolean) => {
+  return bool ? '1' : '0'
+}
+
+export const decimalToString = (decimal: Decimal) => {
+  return decimal.equals(0) ? '' : roundDecimal(decimal)
+}
+
+export const roundDecimal = (input: Decimal, decimals = 2): string => {
+  return input.toFixed(decimals)
 }
