@@ -5,7 +5,7 @@ export function Plausible() {
     <Head>
       <script
         defer
-        data-domain="priznanie.staging.slovensko.digital"
+        data-domain="priznanie.digital"
         src="https://plausible.io/js/plausible.js"
       ></script>
     </Head>
