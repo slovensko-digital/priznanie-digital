@@ -3,7 +3,7 @@ import { executeAllTestCases } from './executeCase'
 describe('Cases', () => {
   executeAllTestCases([
     'complete',
-    // 'completeDecimal',
+    'completeDecimal',
     'bugReport1',
     // 'bugReport2',
     'bugReport3',
