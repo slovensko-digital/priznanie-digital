@@ -132,11 +132,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
-    r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    r037_zaplatene_uroky: new Decimal(
-      parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
-    ),
-    r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
+    // r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
+    // r037_zaplatene_uroky: new Decimal(
+    //   parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
+    // ),
+    // r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
 
     /** SECTION Employment */
     r036: new Decimal(
@@ -463,21 +463,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get mozeZiadatVratitDanovyPreplatok() {
       return this.r136_danovy_preplatok.gt(0)
     },
-    /** TODO High income test case */
-    /** Only neccessary with mortgage */
-    get r123() {
-      return Decimal.min(this.r037_zaplatene_uroky.times(0.5), 400)
-    },
     get r124() {
-      return this.r118.minus(this.r123)
+      return this.r118
     },
     /** TODO */
-    get r125() {
-      return new Decimal(0)
-    },
-    get r126() {
-      return Decimal.max(this.r123.minus(this.r125), 0)
-    },
+    // get r125() {
+    //   return new Decimal(0)
+    // },
+    // get r126() {
+    //   return Decimal.max(this.r123.minus(this.r125), 0)
+    // },
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
@@ -486,9 +481,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r135_dan_na_uhradu() {
       const baseTax =
-        this.r116_dan.gt(17) || this.r117.gt(0) || this.r123.gt(0)
-          ? this.r116_dan
-          : new Decimal(0)
+        this.r116_dan.gt(17) || this.r117.gt(0) ? this.r116_dan : new Decimal(0)
 
       const tax = Decimal.max(
         0,
@@ -496,8 +489,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           .minus(this.r117)
           .plus(this.r119)
           .plus(this.r121)
-          .minus(this.r123)
-          .plus(this.r125)
           .minus(this.r131)
           .minus(this.r133),
       )

@@ -29,7 +29,7 @@ const testCases = [
   // 'bugReport2',
   'bugReport3',
   'bugReport4',
-  // 'complete',
+  'complete',
   // 'completeDecimal',
 ]
 
@@ -50,7 +50,6 @@ describe('calcIntergration', () => {
       }
 
       const taxForm = calculate(setDate(input, new Date(2022, 0, 10)))
-
       const outputXml = convertToXML(taxForm)
 
       const result = await comparable(outputXml)

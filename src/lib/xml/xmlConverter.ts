@@ -37,8 +37,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     ? '1'
     : '0'
 
-   /** TODO Vypocitat riadne mikrodanovnika */
-   form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
+  /** TODO Vypocitat riadne mikrodanovnika */
+  form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
 
   form.dokument.telo.tabulka1.t1r2.s1 = roundDecimal(taxForm.t1r2_prijmy)
   form.dokument.telo.tabulka1.t1r10.s1 = roundDecimal(taxForm.t1r10_prijmy)
@@ -115,7 +115,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r73 = roundDecimal(taxForm.r073)
 
   form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = decimalToString(taxForm.r078_zaklad_dane_zo_zamestnania)
+  form.dokument.telo.r78 = decimalToString(
+    taxForm.r078_zaklad_dane_zo_zamestnania,
+  )
   form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
   form.dokument.telo.r81 = decimalToString(taxForm.r081)
   form.dokument.telo.r90 = roundDecimal(taxForm.r090)
@@ -183,11 +185,17 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
 
-  form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.priloha3_r08_poistne_spolu)
+  form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(
+    taxForm.priloha3_r08_poistne_spolu,
+  )
 
-  form.dokument.telo.socZdravPoistenie.pr9 = decimalToString(taxForm.priloha3_r09_socialne)
+  form.dokument.telo.socZdravPoistenie.pr9 = decimalToString(
+    taxForm.priloha3_r09_socialne,
+  )
 
-  form.dokument.telo.socZdravPoistenie.pr10 = decimalToString(taxForm.priloha3_r10_zdravotne)
+  form.dokument.telo.socZdravPoistenie.pr10 = decimalToString(
+    taxForm.priloha3_r10_zdravotne,
+  )
 
   form.dokument.telo.socZdravPoistenie.pr11 = roundDecimal(
     taxForm.priloha3_r11_socialne,

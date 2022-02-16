@@ -13,7 +13,7 @@ export const completeInput: E2eTestUserInput = {
   r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
-  t1r10_prijmy: '25000',
+  t1r10_prijmy: '34000',
   uhrnPreddavkovNaDan: '100',
   datum: '22.02.2020',
 
