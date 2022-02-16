@@ -27,7 +27,7 @@ const testCases = [
   'withHighIncome',
   'bugReport1',
   // 'bugReport2',
-  // 'bugReport3',
+  'bugReport3',
   // 'bugReport4',
   // 'complete',
   // 'completeDecimal',
