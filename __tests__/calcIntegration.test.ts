@@ -28,7 +28,7 @@ const testCases = [
   'bugReport1',
   // 'bugReport2',
   'bugReport3',
-  // 'bugReport4',
+  'bugReport4',
   // 'complete',
   // 'completeDecimal',
 ]
