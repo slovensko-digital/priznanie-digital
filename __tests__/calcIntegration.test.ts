@@ -30,7 +30,7 @@ const testCases = [
   'bugReport3',
   'bugReport4',
   'complete',
-  // 'completeDecimal',
+  'completeDecimal',
 ]
 
 describe('calcIntergration', () => {
