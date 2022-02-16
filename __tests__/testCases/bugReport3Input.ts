@@ -34,7 +34,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '9609226286',
+      rodneCislo: '9709220664',
 
       wholeYear: true,
       monthFrom: '0',
@@ -43,7 +43,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '9510133853',
+      rodneCislo: '9802164779',
 
       wholeYear: true,
       monthFrom: '0',

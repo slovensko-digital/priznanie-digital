@@ -25,7 +25,7 @@ export const PARTNER_MAX_ODPOCET = 4_124.74
 export const CHILD_RATE_SIX_AND_YOUNGER = 46.44
 export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 23.22
 export const CHILD_RATE_OVER_SIX_FROM_JULY = 39.47
-export const CHILD_RATE_FIFTEEN_AND_OLDER = 46.44
+const CHILD_RATE_FIFTEEN_AND_OLDER = 23.22
 
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
@@ -373,17 +373,22 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             TAX_YEAR,
             month - 1,
           )
-          const isUnderSix = age < 6
 
+          const isUnderSix = age < 6
           if (isUnderSix) {
             return new Decimal(CHILD_RATE_SIX_AND_YOUNGER)
           }
 
-          if (month <= 6) {
-            return new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
+          const isUnderFifteen = age < 15
+          if (isUnderFifteen) {
+            if (month <= 6) {
+              return new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
+            }
+
+            return new Decimal(CHILD_RATE_OVER_SIX_FROM_JULY)
           }
 
-          return new Decimal(CHILD_RATE_OVER_SIX_FROM_JULY)
+          return new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
         }
 
         if (currentChild.m00 || currentChild.m01) {
