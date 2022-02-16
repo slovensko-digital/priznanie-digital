@@ -221,6 +221,7 @@ const executeTestCase = (testCase: string) => {
         }
 
         typeToInput('r005_meno', input)
+        typeToInput('r006_titul', input)
         typeToInput('r004_priezvisko', input)
         typeToInput('r007_ulica', input)
         typeToInput('r008_cislo', input)
