@@ -7,7 +7,7 @@ import { setDate, toBase64, formatCurrency } from '../lib/utils'
 import { buildSummary } from '../lib/calculation'
 import { Summary } from '../types/Summary'
 
-const buildXml = (taxForm) => convertToXML(setDate(taxForm))
+const buildXml = (taxForm: TaxForm) => convertToXML(setDate(taxForm))
 
 const buildSummaryFields = (obj: Summary) => {
   return Object.keys(obj).map((key) => ({

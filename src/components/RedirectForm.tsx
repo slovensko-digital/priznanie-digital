@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-import getConfig from 'next/config'
 import fileDownload from 'js-file-download'
 import { ErrorSummary } from './ErrorSummary'
 import Link from 'next/link'
 import { checkCookie } from '../lib/cookie'
-const { publicRuntimeConfig } = getConfig()
 
 export interface RedirectField {
   name: string
@@ -46,7 +44,7 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
     )
   }
 
-  const action = `${publicRuntimeConfig.navodyBaseUrl}/podania/nove`
+  const action = `${process.env.NEXT_PUBLIC_navodyBaseUrl}/podania/nove`
   return (
     <>
       <p className="govuk-!-margin-top-6">
