@@ -311,25 +311,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.write(FIRST_COLUMN + 25, 324, 'x')
   }
 
-  if (form.r037_uplatnuje_uroky) {
-    // r037_uplatnuje_uroky
-    tpl.write(FIRST_COLUMN + 21, 110, 'x')
-
-    // r037_zaplatene_uroky
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 409,
-      108,
-      form.r037_zaplatene_uroky.toNumber(),
-    )
-
-    // r032_partner_pocet_mesiacov
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 504,
-      108,
-      `${form.r032_partner_pocet_mesiacov}`.padStart(2, ' '),
-    )
-  }
-
   // ***** PAGE 3
   tpl.nextPage()
 
@@ -486,17 +467,8 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // r121
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r121.toNumber())
 
-  // r123
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r123.toNumber())
-
   // r124
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r124.toNumber())
-
-  // r125
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r125.toNumber())
-
-  // r126
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r126.toNumber())
 
   // r131
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 450, form.r131.toNumber())
