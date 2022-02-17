@@ -69,13 +69,6 @@ describe.skip('/odklad/osobne-udaje page', () => {
     getInputPostpone('stat').should('contain.value', 'Slovenská republika')
   })
 
-  /** Skip for now, not critical */
-  it.skip('with posta api', () => {
-    assertUrl('/odklad/osobne-udaje')
-
-    typeToInputPostpone('psc', foreignIncomeInput)
-    getInputPostpone('obec').should('have.value', foreignIncomeInput.obec)
-  })
   it('Manual entry', () => {
     assertUrl('/odklad/osobne-udaje')
 
