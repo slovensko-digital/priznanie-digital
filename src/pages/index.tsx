@@ -133,7 +133,9 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     </p>
     <p>Termín si viete predĺžiť:</p>
     <ul className="govuk-list govuk-list--bullet">
-      <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
+      <li>{`do 30.6.${
+        TAX_YEAR + 1
+      } ak ste mali príjmy len zo Slovenska, alebo`}</li>
       <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
     </ul>
 

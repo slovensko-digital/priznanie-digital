@@ -26,17 +26,14 @@ export function convertPostponeToJson(
   form.dokument.hlavicka.sidlo.supisneOrientacneCislo = postponeUserInput.cislo
   form.dokument.hlavicka.sidlo.stat = postponeUserInput.stat
 
-  form.dokument.hlavicka.novaLehota.predlzenie493a = postponeUserInput.prijmy_zo_zahranicia
-    ? '0'
-    : '1'
+  form.dokument.hlavicka.novaLehota.predlzenie493a =
+    postponeUserInput.prijmy_zo_zahranicia ? '0' : '1'
 
-  form.dokument.hlavicka.novaLehota.predlzenie493b = postponeUserInput.prijmy_zo_zahranicia
-    ? '1'
-    : '0'
+  form.dokument.hlavicka.novaLehota.predlzenie493b =
+    postponeUserInput.prijmy_zo_zahranicia ? '1' : '0'
 
-  form.dokument.hlavicka.novaLehota.datumLehota = postponeUserInput.prijmy_zo_zahranicia
-    ? '30.09.2022'
-    : '30.06.2022'
+  form.dokument.hlavicka.novaLehota.datumLehota =
+    postponeUserInput.prijmy_zo_zahranicia ? '30.09.2022' : '30.06.2022'
 
   form.dokument.hlavicka.vypracoval.dna = postponeUserInput.datum
 
