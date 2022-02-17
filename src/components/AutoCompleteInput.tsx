@@ -28,14 +28,10 @@ export const AutoCompleteInput = ({
   const autocompleteList = useRef(null)
   const [isLoadingAutoform, setIsLoadingAutoform] = useState<boolean>(false)
   const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false)
-  const [
-    autocompleteDebounceTimeout,
-    setAutocompleteDebounceTimeout,
-  ] = useState<number>(null)
-  const [
-    autocompleteBlurTimeout,
-    setAutocompleteBlurTimeout,
-  ] = useState<number>(null)
+  const [autocompleteDebounceTimeout, setAutocompleteDebounceTimeout] =
+    useState<number>(null)
+  const [autocompleteBlurTimeout, setAutocompleteBlurTimeout] =
+    useState<number>(null)
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1)
   const field = useField(name)[0]
   const fieldHelpers = useField(name)[2]

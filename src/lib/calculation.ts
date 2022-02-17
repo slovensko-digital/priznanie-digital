@@ -14,10 +14,12 @@ import { Summary } from '../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
 const PAUSALNE_VYDAVKY_MAX = 20000
+
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
+
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3_480
 const MAX_ZAKLAD_DANE = 19_936.22
 export const PARTNER_MAX_ODPOCET = 4_124.74
@@ -33,28 +35,30 @@ const KONSTANTA = 37_981.94
 export const TAX_YEAR = 2021
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
-const makeMapChild = (hasChildren: boolean) => (child: ChildInput): Child => {
-  const monthFrom = Number.parseInt(child.monthFrom, 10)
-  const monthTo = Number.parseInt(child.monthTo, 10)
+const makeMapChild =
+  (hasChildren: boolean) =>
+  (child: ChildInput): Child => {
+    const monthFrom = Number.parseInt(child.monthFrom, 10)
+    const monthTo = Number.parseInt(child.monthTo, 10)
 
-  return {
-    priezviskoMeno: child.priezviskoMeno,
-    rodneCislo: child.rodneCislo.replace(/\D/g, ''),
-    m00: hasChildren && child.wholeYear,
-    m01: hasChildren && !child.wholeYear && monthFrom === 0,
-    m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
-    m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
-    m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
-    m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
-    m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
-    m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
-    m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
-    m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
-    m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
-    m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
-    m12: hasChildren && !child.wholeYear && monthTo === 11,
+    return {
+      priezviskoMeno: child.priezviskoMeno,
+      rodneCislo: child.rodneCislo.replace(/\D/g, ''),
+      m00: hasChildren && child.wholeYear,
+      m01: hasChildren && !child.wholeYear && monthFrom === 0,
+      m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
+      m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
+      m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
+      m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
+      m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
+      m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
+      m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
+      m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
+      m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
+      m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
+      m12: hasChildren && !child.wholeYear && monthTo === 11,
+    }
   }
-}
 
 export function calculate(input: TaxFormUserInput): TaxForm {
   const [titul, titulZa] = input.r006_titul

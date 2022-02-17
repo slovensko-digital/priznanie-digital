@@ -19,7 +19,7 @@ import classnames from 'classnames'
 import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
-import {TAX_YEAR} from '../lib/calculation'
+import { TAX_YEAR } from '../lib/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
