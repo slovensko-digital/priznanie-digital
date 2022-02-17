@@ -35,6 +35,7 @@ const formatNace = (nace: Fuse.FuseResult<Nace>) => ({
   value: `${nace?.item?.code} - ${nace?.item?.label}`,
 })
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const Nace: React.FC = () => {
   const [naceData, setNaceData] = useState<Nace[]>([])
   const [isLoading, setIsLoading] = useState(false)

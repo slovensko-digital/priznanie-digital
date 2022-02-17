@@ -30,6 +30,7 @@ export interface PartnerBonusFormProps extends FormikProps<PartnerUserInput> {
 
 export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
   const { values, setStep, step } = props
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const questionElements = [
     useRef(),
     useRef(),
