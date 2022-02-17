@@ -75,7 +75,7 @@ const getNgoData = async (): Promise<Fuse<CachedData>> => {
 
   return cache.data
 }
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const ngo = async (req: NextApiRequest, res: NextApiResponse) => {
   const name = decodeURIComponent(`${req.query.name}`)
 
   let data: Fuse<CachedData>
@@ -95,3 +95,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200
   res.json(filtered)
 }
+
+export default ngo

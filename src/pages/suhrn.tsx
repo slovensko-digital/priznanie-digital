@@ -269,7 +269,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           { title: 'Štát', value: taxFormUserInput.r011_stat },
         ]}
       />
-      <Link href={nextRoute}>
+      <Link href={nextRoute} passHref>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-4"

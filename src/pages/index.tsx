@@ -111,7 +111,7 @@ const TaxFormSection = ({ nextRoute }) => (
       použité výlučne na spracovanie daňového priznania.
     </p>
 
-    <Link href={nextRoute}>
+    <Link href={nextRoute} passHref>
       <button
         type="button"
         className="govuk-button govuk-button--large govuk-button--start"
@@ -145,7 +145,7 @@ const PostponeSection = ({ nextPostponeRoute }) => (
       neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
     </p>
 
-    <Link href={nextPostponeRoute}>
+    <Link href={nextPostponeRoute} passHref>
       <button
         type="button"
         className="btn-secondary govuk-button govuk-button--large"

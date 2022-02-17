@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { makeAttachment, sendEmail } from '../../lib/sendinblue'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const email = async (req: NextApiRequest, res: NextApiResponse) => {
   const parsedBody = JSON.parse(req.body)
 
   const ipAddress =
@@ -41,3 +41,5 @@ Dátum: ${new Date().toLocaleString()}`,
     res.status(400).send({ sent: false })
   }
 }
+
+export default email

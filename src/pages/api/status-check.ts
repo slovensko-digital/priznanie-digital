@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getGitCommit } from '../../lib/constants'
 
-export default async (_req: NextApiRequest, res: NextApiResponse) => {
+const statusCheck = async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     res.status(200).send({
       git_commit: getGitCommit(),
@@ -10,3 +10,5 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     res.status(500)
   }
 }
+
+export default statusCheck

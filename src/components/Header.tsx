@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
+import logoPath from '../../public/assets/images/priznanie_logo.png'
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -8,11 +10,7 @@ const Header: React.FC = () => {
 
   const logo = (
     <a className="sdn-header__link">
-      <img
-        className="sdn-header__logo"
-        src="/assets/images/priznanie_logo.png"
-        alt="priznanie.digital"
-      />
+      <Image className="" src={logoPath} alt="priznanie.digital" />
     </a>
   )
 

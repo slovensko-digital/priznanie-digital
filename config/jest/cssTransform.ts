@@ -1,4 +1,4 @@
-export default {
+const cssTransform = {
   process() {
     return 'module.exports = {};'
   },
@@ -6,3 +6,5 @@ export default {
     return 'cssTransform'
   },
 }
+
+export default cssTransform

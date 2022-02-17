@@ -10,7 +10,7 @@ if (!token) {
   throw new Error(' process.env.autoformtoken is not defined')
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const autoform = async (req: NextApiRequest, res: NextApiResponse) => {
   const name = encodeURI(`${req.query.name}`)
 
   const query = `name:${name}`
@@ -24,3 +24,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = response.status
   res.send(personsData)
 }
+
+export default autoform

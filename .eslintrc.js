@@ -5,19 +5,14 @@ module.exports = {
   env: {
     jest: true,
   },
-  plugins: [
-    'eslint-comments',
-    // 'jest',
-    'unicorn',
-    'promise',
-    'only-warn',
-  ],
+  plugins: ['eslint-comments', 'jest', 'unicorn', 'promise', 'only-warn'],
   extends: [
     'react-app',
-    'plugin:promise/recommended',
+    // 'plugin:promise/recommended',
     // "plugin:jest/recommended",
-    'plugin:unicorn/recommended',
-    'plugin:sonarjs/recommended',
+    // 'plugin:unicorn/recommended',
+    // 'plugin:sonarjs/recommended',
+    'plugin:@next/next/recommended',
   ],
   rules: {
     'jsx-a11y/anchor-is-valid': 0,

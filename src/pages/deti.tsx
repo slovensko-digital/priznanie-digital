@@ -46,7 +46,7 @@ const Deti: Page<ChildrenUserInput> = ({
           žijete v spoločnej domácnosti
         </h1>
         <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
-        <Link href={nextRoute}>
+        <Link href={nextRoute} passHref>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
             Pokračovať
           </button>

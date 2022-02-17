@@ -28,6 +28,7 @@ import {
 } from '../lib/routes'
 import { Page } from '../components/Page'
 import { Plausible } from '../components/Plausible'
+import Head from 'next/head'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -107,6 +108,9 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
       taxFormUserInput={taxFormUserInput}
       postponeUserInput={postponeUserInput}
     >
+      <Head>
+        <title>Elektronické daňové priznanie</title>
+      </Head>
       <Plausible />
       <Component
         taxForm={taxForm}

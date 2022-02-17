@@ -629,7 +629,7 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   return tpl.writer
 }
 
-export default async (
+const pdf = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
@@ -651,3 +651,5 @@ export default async (
 
   res.end()
 }
+
+export default pdf

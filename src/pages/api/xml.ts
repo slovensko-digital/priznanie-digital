@@ -5,7 +5,7 @@ import { calculate } from '../../lib/calculation'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 
-export default async (
+const xml = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
@@ -25,3 +25,5 @@ export default async (
   res.write(convertToXML(taxForm))
   res.end()
 }
+
+export default xml
