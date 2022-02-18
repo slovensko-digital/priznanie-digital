@@ -18,34 +18,21 @@ let cache: Cache = {
 }
 
 const formatNgoData = (rawArray: string[][]): CachedData[] => {
-  // ["nazov_org","ICO_org","ulica_sidla_org","mesto_sidla_org","cislo_registra_sidla_org","referencne_cislo_sidla_org","PSC_org","pravna_forma_org","IBAN","banka"  ],
+  // ["ICO_org","nazov_org","mesto_sidla_org"], 
   return rawArray.map(
     (
       [
-        name,
         cin,
-        street,
-        municipality,
-        streetNumber1,
-        streetNumber2,
-        postal_code,
-        pravnaForma,
-        _iban,
-        _bank,
+        name,
+        municipality,      
       ],
       id,
     ) => {
-      const streetNumber = [streetNumber1, streetNumber2].join('/')
       return {
         id,
         cin,
         name,
-        street: street,
-        street_number: streetNumber,
-        formatted_address: `${street} ${streetNumber}, ${postal_code} ${municipality}`,
-        postal_code,
         municipality,
-        legal_form: pravnaForma,
       }
     },
   )
