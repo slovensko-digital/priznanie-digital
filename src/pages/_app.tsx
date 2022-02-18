@@ -87,10 +87,8 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     taxForm,
   )
 
-  const {
-    previousRoute: previousPostponeRoute,
-    nextRoute: nextPostponeRoute,
-  } = getPostponeRoutes(router.pathname as PostponeRoute)
+  const { previousRoute: previousPostponeRoute, nextRoute: nextPostponeRoute } =
+    getPostponeRoutes(router.pathname as PostponeRoute)
 
   useEffect(() => {
     const next = nextRoute()

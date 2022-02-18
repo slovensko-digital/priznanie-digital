@@ -79,9 +79,8 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   taxFormUserInput,
   close,
 }) => {
-  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(
-    undefined,
-  )
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] =
+    useState(undefined)
 
   return (
     <div

@@ -55,9 +55,9 @@ export interface TaxForm {
   r032_partner_pocet_mesiacov?: number
 
   /** SECTION  Mortage */
-  r037_uplatnuje_uroky?: boolean
-  r037_zaplatene_uroky?: Decimal
-  r037_pocetMesiacov?: number
+  // r037_uplatnuje_uroky?: boolean
+  // r037_zaplatene_uroky?: Decimal
+  // r037_pocetMesiacov?: number
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
@@ -160,7 +160,7 @@ export interface TaxForm {
   r121: Decimal
 
   /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
-  r123: Decimal
+  // r123: Decimal
   /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
    *   úroky(r. 107 - r. 112) zrkadli r118*/
   r124: Decimal
@@ -168,11 +168,6 @@ export interface TaxForm {
    *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
    *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
    *   124 (+)*/
-
-  /** Suma daňového bonusu podľa § 33a zákona priznaného a vyplateného zamestnávateľom */
-  r125: Decimal
-  /** Rozdiel r. 112 - r. 114 > 0  */
-  r126: Decimal
 
   /** zrazena dan zo zamestnania */
   r131: Decimal

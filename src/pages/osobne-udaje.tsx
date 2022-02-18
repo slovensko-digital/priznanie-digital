@@ -7,7 +7,7 @@ import {
   PersonalInformationUserInput,
   FormErrors,
 } from '../types/PageUserInputs'
-import { getAutoformByPersonName, getCity } from '../lib/api'
+import { getAutoformByPersonName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
   AutoCompleteData,
@@ -158,14 +158,6 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                       props.values.r009_psc,
                     )
                     props.setFieldValue('r009_psc', pscValue)
-
-                    if (
-                      pscValue.length === 6 &&
-                      props.values.r010_obec.length === 0
-                    ) {
-                      const city = await getCity(pscValue)
-                      props.setFieldValue('r010_obec', city)
-                    }
                   }}
                 />
 
@@ -217,7 +209,7 @@ export const validate = (values: PersonalInformationUserInput) => {
   const pscNumberFormat = /^\d{3} \d{2}$/
   if (!values.r009_psc) {
     errors.r009_psc = 'Zadajte PSČ'
-  } else if (!values.r009_psc.match(pscNumberFormat)) {
+  } else if (!pscNumberFormat.test(values.r009_psc)) {
     errors.r009_psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 

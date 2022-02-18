@@ -3,8 +3,9 @@ import hummus from 'hummus'
 import streams from 'memory-streams'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
-import { setDate } from '../../lib/utils'
+import { roundDecimal, setDate } from '../../lib/utils'
 import { calculate } from '../../lib/calculation'
+import Decimal from 'decimal.js'
 
 const FIRST_COLUMN = 31.5
 const BOX_WIDTH = 14.4
@@ -76,7 +77,7 @@ class PdfTemplate {
 
   writeNumberToBoxes(x: number, y: number, number: number, smallGap = false) {
     const [whole, decimal] = number
-      ? `${number.toFixed(2)}`.split('.')
+      ? `${roundDecimal(new Decimal(number))}`.split('.')
       : ['', '']
     const gap = smallGap ? 9 : 15
     this.writeToBoxes(x - whole.length * BOX_WIDTH, y, whole)
@@ -310,25 +311,6 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
     tpl.write(FIRST_COLUMN + 25, 324, 'x')
   }
 
-  if (form.r037_uplatnuje_uroky) {
-    // r037_uplatnuje_uroky
-    tpl.write(FIRST_COLUMN + 21, 110, 'x')
-
-    // r037_zaplatene_uroky
-    tpl.writeNumberToBoxes(
-      FIRST_COLUMN + 409,
-      108,
-      form.r037_zaplatene_uroky.toNumber(),
-    )
-
-    // r032_partner_pocet_mesiacov
-    tpl.writeToBoxes(
-      FIRST_COLUMN + 504,
-      108,
-      `${form.r032_partner_pocet_mesiacov}`.padStart(2, ' '),
-    )
-  }
-
   // ***** PAGE 3
   tpl.nextPage()
 
@@ -485,17 +467,8 @@ export const buildPdf = (form: TaxForm, res?: NextApiResponse) => {
   // r121
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 719, form.r121.toNumber())
 
-  // r123
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 668, form.r123.toNumber())
-
   // r124
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 639, form.r124.toNumber())
-
-  // r125
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 610, form.r125.toNumber())
-
-  // r126
-  tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 584, form.r126.toNumber())
 
   // r131
   tpl.writeNumberToBoxes(FIRST_COLUMN + 396, 450, form.r131.toNumber())
