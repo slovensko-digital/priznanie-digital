@@ -28,7 +28,7 @@ const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
-describe.skip('/odklad/osobne-udaje page', () => {
+describe('/odklad/osobne-udaje page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 
@@ -57,25 +57,18 @@ describe.skip('/odklad/osobne-udaje page', () => {
 
     /** With autoform */
     typeToInputPostpone('dic', foreignIncomeInput)
-    getInputPostpone('meno_priezvisko').type('Július Ret')
+    getInputPostpone('meno_priezvisko').type('Julius Renc')
 
-    cy.contains('Július Retzer').click()
+    cy.contains('Július Renceš').click()
 
-    getInputPostpone('meno_priezvisko').should('contain.value', 'Július Retzer')
-    getInputPostpone('ulica').should('contain.value', 'Mierová')
-    getInputPostpone('cislo').should('contain.value', '4')
-    getInputPostpone('psc').should('contain.value', '821 05')
-    getInputPostpone('obec').should('contain.value', 'Bratislava')
+    getInputPostpone('meno_priezvisko').should('contain.value', 'Július Renceš')
+    getInputPostpone('ulica').should('contain.value', 'Benková Potôň')
+    getInputPostpone('cislo').should('contain.value', '343')
+    getInputPostpone('psc').should('contain.value', '930 36')
+    getInputPostpone('obec').should('contain.value', 'Horná Potôň')
     getInputPostpone('stat').should('contain.value', 'Slovenská republika')
   })
 
-  /** Skip for now, not critical */
-  it.skip('with posta api', () => {
-    assertUrl('/odklad/osobne-udaje')
-
-    typeToInputPostpone('psc', foreignIncomeInput)
-    getInputPostpone('obec').should('have.value', foreignIncomeInput.obec)
-  })
   it('Manual entry', () => {
     assertUrl('/odklad/osobne-udaje')
 
@@ -98,7 +91,7 @@ describe.skip('/odklad/osobne-udaje page', () => {
   })
 })
 
-describe.skip('/odklad/suhrn page', () => {
+describe('/odklad/suhrn page', () => {
   beforeEach('Navigate to test page', () => {
     cy.visit(postponeHomeRoute)
 
@@ -108,10 +101,8 @@ describe.skip('/odklad/suhrn page', () => {
 
     next()
 
-    getInputPostpone('meno_priezvisko').type('Július Ret')
-    cy.contains('Július Retzer').click()
-
-    typeToInputPostpone('dic', foreignIncomeInput)
+    getInputPostpone('meno_priezvisko').type('Julius Renc')
+    cy.contains('Július Renceš').click()
 
     next()
   })

@@ -263,7 +263,7 @@ describe('Partner page', () => {
     assertUrl('/dochodok')
   })
 
-  it.skip('determines eligibility', () => {
+  it('determines eligibility', () => {
     cy.visit('/partner')
 
     // When presses yes, additional fields appears
@@ -398,13 +398,6 @@ describe('osobne-udaje page', () => {
     getInput('r003_nace').should('have.value', '01120 - Pestovanie ryže')
   })
 
-  /** Skip for now, not critical */
-  it.skip('with posta api', () => {
-    cy.visit('/osobne-udaje')
-
-    typeToInput('r009_psc', baseInput)
-    getInput('r010_obec').should('have.value', baseInput.r010_obec)
-  })
   it('Manual entry', () => {
     cy.visit('/osobne-udaje')
 

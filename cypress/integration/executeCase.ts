@@ -221,11 +221,13 @@ const executeTestCase = (testCase: string) => {
         }
 
         typeToInput('r005_meno', input)
+        if (input.r006_titul) {
+          getInput('r006_titul').type(input.r006_titul)
+        }
         typeToInput('r004_priezvisko', input)
         typeToInput('r007_ulica', input)
         typeToInput('r008_cislo', input)
         typeToInput('r009_psc', input)
-        getInput('r010_obec').clear() // clear value from PSC autocomplete via Posta API
         typeToInput('r010_obec', input)
         typeToInput('r011_stat', input)
 
@@ -367,7 +369,6 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('ulica', input)
         typeToInput('cislo', input)
         typeToInput('psc', input)
-        getInput('obec').clear()
         typeToInput('obec', input)
         typeToInput('stat', input)
 

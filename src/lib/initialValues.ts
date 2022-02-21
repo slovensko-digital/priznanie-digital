@@ -29,20 +29,21 @@ export const partnerUserInitialValues: PartnerUserInput = {
 
   r032_partner_pocet_mesiacov: '',
 }
-export const personalInformationUserInputInitialValues: PersonalInformationUserInput = {
-  r001_dic: '',
-  // r002_datum_narodenia: "",
-  r003_nace: '',
-  meno_priezvisko: '',
-  r005_meno: '',
-  r004_priezvisko: '',
-  r006_titul: '',
-  r007_ulica: '',
-  r008_cislo: '',
-  r009_psc: '',
-  r010_obec: '',
-  r011_stat: '',
-}
+export const personalInformationUserInputInitialValues: PersonalInformationUserInput =
+  {
+    r001_dic: '',
+    // r002_datum_narodenia: "",
+    r003_nace: '',
+    meno_priezvisko: '',
+    r005_meno: '',
+    r004_priezvisko: '',
+    r006_titul: '',
+    r007_ulica: '',
+    r008_cislo: '',
+    r009_psc: '',
+    r010_obec: '',
+    r011_stat: '',
+  }
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
