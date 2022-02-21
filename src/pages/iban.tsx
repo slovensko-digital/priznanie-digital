@@ -112,35 +112,38 @@ const Iban: Page<TaxBonusUserInput> = ({
 
 export default Iban
 
-export const makeValidate = (taxForm: TaxForm) => (
-  values: TaxBonusUserInput,
-) => {
-  const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
+export const makeValidate =
+  (taxForm: TaxForm) => (values: TaxBonusUserInput) => {
+    const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
-  if (
-    taxForm.mozeZiadatVyplatitDanovyBonus &&
-    typeof values.ziadamVyplatitDanovyBonus === 'undefined'
-  ) {
-    errors.ziadamVyplatitDanovyBonus = 'Vyznačte odpoveď na daňový bonus'
-  }
-
-  if (
-    taxForm.mozeZiadatVratitDanovyPreplatok &&
-    typeof values.ziadamVratitDanovyPreplatok === 'undefined'
-  ) {
-    errors.ziadamVratitDanovyPreplatok = 'Vyznačte odpoveď na daňový preplatok'
-  }
-
-  if (values.ziadamVyplatitDanovyBonus || values.ziadamVratitDanovyPreplatok) {
-    if (!values.iban || values.iban === '') {
-      // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
-      errors.iban = 'Zadajte váš IBAN'
-    } else if (!validateIbanFormat(values.iban)) {
-      errors.iban = 'Zadajte váš IBAN v správnom formáte'
-    } else if (!validateIbanCountry(values.iban)) {
-      errors.iban = 'Zadajte slovenský IBAN'
+    if (
+      taxForm.mozeZiadatVyplatitDanovyBonus &&
+      typeof values.ziadamVyplatitDanovyBonus === 'undefined'
+    ) {
+      errors.ziadamVyplatitDanovyBonus = 'Vyznačte odpoveď na daňový bonus'
     }
-  }
 
-  return errors
-}
+    if (
+      taxForm.mozeZiadatVratitDanovyPreplatok &&
+      typeof values.ziadamVratitDanovyPreplatok === 'undefined'
+    ) {
+      errors.ziadamVratitDanovyPreplatok =
+        'Vyznačte odpoveď na daňový preplatok'
+    }
+
+    if (
+      values.ziadamVyplatitDanovyBonus ||
+      values.ziadamVratitDanovyPreplatok
+    ) {
+      if (!values.iban || values.iban === '') {
+        // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
+        errors.iban = 'Zadajte váš IBAN'
+      } else if (!validateIbanFormat(values.iban)) {
+        errors.iban = 'Zadajte váš IBAN v správnom formáte'
+      } else if (!validateIbanCountry(values.iban)) {
+        errors.iban = 'Zadajte slovenský IBAN'
+      }
+    }
+
+    return errors
+  }

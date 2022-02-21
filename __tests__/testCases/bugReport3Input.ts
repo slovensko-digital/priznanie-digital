@@ -34,7 +34,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '9609226286',
+      rodneCislo: '9709220664',
 
       wholeYear: true,
       monthFrom: '0',
@@ -43,7 +43,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '9510133853',
+      rodneCislo: '9802164779',
 
       wholeYear: true,
       monthFrom: '0',
@@ -70,8 +70,6 @@ export const bugReport3Input: E2eTestUserInput = {
     r010_obec: 'Bratislava 3',
     r011_stat: 'Slovensko',
     datum: '22.02.2020',
-    r031_rodne_cislo: '9609226286',
-    meno_priezvisko: 'Fake Name',
     r004_priezvisko: 'anon',
     r005_meno: 'anon',
   },

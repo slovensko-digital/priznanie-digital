@@ -15,8 +15,6 @@ const comparable = (xml: string) =>
 
 const testCases = [
   'base',
-  // 'complete',
-  // 'completeDecimal',
   'withPartner',
   'withEmployment',
   'withPension',
@@ -24,14 +22,15 @@ const testCases = [
   'with2percent',
   'with3percent',
   'withBonus',
-  // 'withTaxReturn',
-  // 'withEmploymentBonus',
-  // 'withHighIncome',
-  // 'withSpaNoPartnerNoChildren',
-  // 'bugReport1',
+  'withTaxReturn',
+  'withEmploymentBonus',
+  'withHighIncome',
+  'bugReport1',
   // 'bugReport2',
-  // 'bugReport3',
-  // 'bugReport4',
+  'bugReport3',
+  'bugReport4',
+  'complete',
+  'completeDecimal',
 ]
 
 describe('calcIntergration', () => {
@@ -51,7 +50,6 @@ describe('calcIntergration', () => {
       }
 
       const taxForm = calculate(setDate(input, new Date(2022, 0, 10)))
-
       const outputXml = convertToXML(taxForm)
 
       const result = await comparable(outputXml)

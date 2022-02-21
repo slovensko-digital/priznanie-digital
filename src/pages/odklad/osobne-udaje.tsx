@@ -9,7 +9,7 @@ import {
   FormErrors,
   PersonalInformationPostponePage,
 } from '../../types/PageUserInputs'
-import { getAutoformByPersonName, getCity } from '../../lib/api'
+import { getAutoformByPersonName } from '../../lib/api'
 import { getPostponeRoutes } from '../../lib/routes'
 import {
   AutoCompleteData,
@@ -158,14 +158,6 @@ const OsobneUdaje: NextPage<Props> = ({
                       props.values.psc,
                     )
                     props.setFieldValue('psc', pscValue)
-
-                    if (
-                      pscValue.length === 6 &&
-                      props.values.obec.length === 0
-                    ) {
-                      const city = await getCity(pscValue)
-                      props.setFieldValue('obec', city)
-                    }
                   }}
                 />
 
@@ -217,7 +209,7 @@ export const validate = (values: PersonalInformationPostponePage) => {
   const pscNumberFormat = /^\d{3} \d{2}$/
   if (!values.psc) {
     errors.psc = 'Zadajte PSČ'
-  } else if (!values.psc.match(pscNumberFormat)) {
+  } else if (!pscNumberFormat.test(values.psc)) {
     errors.psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 
