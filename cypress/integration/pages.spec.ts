@@ -645,7 +645,7 @@ describe('twoPercent page', () => {
     getInput('r142_obchMeno').type('Lifestarter')
 
     cy.contains(
-      'starter Ulica Ľudmily Podjavorinskej 2545/20, 91701 Trnava',
+      'starter Trnava',
     ).click()
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
