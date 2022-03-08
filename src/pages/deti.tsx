@@ -82,11 +82,17 @@ const Deti: Page<ChildrenUserInput> = ({
             {values.hasChildren && (
               <>
                 <p className="govuk-hint">
-                  {`V prípade, že ste sa v roku ${TAX_YEAR} starali o nezaopatrené dieťa
-                  do 16 rokov, študenta do 25 rokov alebo o nezaopatrené dieťa
-                  do 25 rokov, ktoré je dlhodobo choré, máte právo na zľavu na
-                  dani vo výške 22,17 eur mesačne. Ročný bonus na dieťa činí
-                  266,04 eur. Daňový bonus na dieťa do 6 rokov je dvojnásobný.`}
+                  V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
+                  dieťa do 16 rokov, študenta do 25 rokov alebo o nezaopatrené
+                  dieťa do 25 rokov, ktoré je dlhodobo choré, máte právo na
+                  zľavu na dani vo výške 22,17 eur mesačne. Ročný bonus na dieťa
+                  činí 266,04 eur. Daňový bonus na dieťa do 6 rokov je
+                  dvojnásobný.
+                </p>
+                <p className="govuk-hint">
+                  Ak sa Vám v roku 2021 narodilo dieťa a toto je prvé daňové
+                  priznanie, v ktorom naň žiadate daňový bonus, je potrebné
+                  zahrnúť rodný list dieťaťa do prílohy k daňovému priznaniu.
                 </p>
                 <p className="govuk-hint">
                   Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
@@ -262,9 +268,7 @@ export const validate = (values: ChildrenUserInput) => {
       return childErrors
     })
 
-    if (
-      childrenErrors.filter((err) => Object.keys(err).length > 0).length > 0
-    ) {
+    if (childrenErrors.some((err) => Object.keys(err).length > 0)) {
       errors.children = childrenErrors
     }
   }
