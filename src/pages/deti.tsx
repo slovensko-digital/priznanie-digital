@@ -16,10 +16,14 @@ import {
   makeEmptyChild,
 } from '../lib/initialValues'
 import classnames from 'classnames'
-import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
+import {
+  formatCurrency,
+  formatRodneCislo,
+  validateRodneCislo,
+} from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { TAX_YEAR } from '../lib/calculation'
+import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../lib/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -85,9 +89,11 @@ const Deti: Page<ChildrenUserInput> = ({
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
                   dieťa do 16 rokov, študenta do 25 rokov alebo o nezaopatrené
                   dieťa do 25 rokov, ktoré je dlhodobo choré, máte právo na
-                  zľavu na dani vo výške 22,17 eur mesačne. Ročný bonus na dieťa
-                  činí 266,04 eur. Daňový bonus na dieťa do 6 rokov je
-                  dvojnásobný.
+                  zľavu na dani vo výške{' '}
+                  {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)} eur mesačne.
+                  Ročný bonus na dieťa činí{' '}
+                  {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY * 12)}. Daňový
+                  bonus na dieťa do 6 rokov je dvojnásobný.
                 </p>
                 <p className="govuk-hint">
                   Ak sa Vám v roku 2021 narodilo dieťa a toto je prvé daňové
