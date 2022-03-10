@@ -72,7 +72,8 @@ before(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
 })
 
-describe('Cookie consent', () => {
+/** We don't use cookies for now */
+describe.skip('Cookie consent', () => {
   it('has working ui', () => {
     // display cookie consent
     cy.visit(homeRoute)
