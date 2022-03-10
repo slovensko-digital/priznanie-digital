@@ -75,7 +75,8 @@ const Layout: React.FC<Props> = ({
         postponeUserInput={postponeUserInput}
       />
 
-      <CookieBar />
+      {/* Disabled now, since we don't use user cookies. We will keep the code in case we need to enable it again */}
+      {/* <CookieBar /> */}
     </div>
   )
 }
