@@ -47,12 +47,7 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
         </li>
         <li>
           <IconCheck />
-          <p>
-            Testované členmi{' '}
-            <ExternalLink href="https://www.skdp.sk/">
-              Slovenskej komory daňových poradcov
-            </ExternalLink>
-          </p>
+          <p>Pripravené v spolupráci s daňovými poradcami</p>
         </li>
       </ul>
     </div>
@@ -101,6 +96,7 @@ const TaxFormSection = ({ nextRoute }) => (
           <li>SZČO starobní dôchodcovia</li>
           <li>Práca na dohodu</li>
           <li>Záväzky a pohľadávky (tabuľka 1b)</li>
+          <li>Príspevky z prvej pomoci</li>
         </ul>
       </>
     </Warning>
