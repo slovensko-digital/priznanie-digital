@@ -15,8 +15,8 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
   const fullName = `${userInput.meno} ${userInput.priezvisko}`
   const xmlFile = toBase64(buildXml(userInput))
   const deadline = userInput.prijmy_zo_zahranicia
-    ? `30. september ${TAX_YEAR}`
-    : `30. jún ${TAX_YEAR}`
+    ? `30. september ${TAX_YEAR + 1}`
+    : `30. jún ${TAX_YEAR + 1}`
 
   return [
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
