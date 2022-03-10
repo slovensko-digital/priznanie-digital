@@ -55,7 +55,10 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
       name: 'submission[subscription_types][]',
       value: 'NewsletterSubscription',
     },
-    { name: 'submission[extra][template_id]', value: '139' },
+    {
+      name: 'submission[extra][template_id]',
+      value: process.env.NEXT_PUBLIC_priznanieEmailTemplateId,
+    },
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,

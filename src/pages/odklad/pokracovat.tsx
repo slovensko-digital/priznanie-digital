@@ -49,7 +49,10 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
       name: 'submission[subscription_types][]',
       value: 'NewsletterSubscription',
     },
-    { name: 'submission[extra][template_id]', value: '166' },
+    {
+      name: 'submission[extra][template_id]',
+      value: process.env.NEXT_PUBLIC_odkladEmailTemplateId,
+    },
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
