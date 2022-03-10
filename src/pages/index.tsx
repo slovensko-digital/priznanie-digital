@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
-import { ExternalLink } from '../components/ExternalLink'
 import { TAX_YEAR } from '../lib/calculation'
 
 const IconCheck = () => (
