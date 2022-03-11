@@ -59,8 +59,8 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
                   Nový termín pre podanie daňového priznania je{' '}
                   <strong>
                     {values.prijmy_zo_zahranicia
-                      ? `30. septembra ${TAX_YEAR}`
-                      : `30. júna ${TAX_YEAR}`}
+                      ? `30. septembra ${TAX_YEAR + 1}`
+                      : `30. júna ${TAX_YEAR + 1}`}
                   </strong>
                   .
                 </p>
