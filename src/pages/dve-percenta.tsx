@@ -163,7 +163,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                       name="r142_ico"
                       type="text"
                       label="IČO"
-                      maxLength={10}
+                      maxLength={14}
                       onChange={async (event) => {
                         const icoValue = formatIco(
                           event.currentTarget.value,
