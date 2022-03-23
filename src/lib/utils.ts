@@ -54,20 +54,6 @@ export const formatPsc = (newValue: string, previousValue = '') => {
   return formattedNewValue.replace(/^(\d{3})/, '$1 ')
 }
 
-export const formatIco = (newValue: string, previousValue = '') => {
-  const formattedNewValue = newValue.replace(/\D/g, '')
-  // when deleting space using backspace, delete both space and the number before it
-  if (`${newValue} ` === previousValue) {
-    return newValue.slice(0, -1)
-  } else if (formattedNewValue.length < 5) {
-    // add one space after first 2 digits
-    return formattedNewValue.replace(/^(\d{2})/, '$1 ')
-  } else {
-    // add one space after next 3
-    return formattedNewValue.replace(/^(\d{2})\s*(\d{3})/, '$1 $2 ')
-  }
-}
-
 export const translit = (value: string) => {
   return value.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
 }

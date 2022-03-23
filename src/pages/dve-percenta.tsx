@@ -9,7 +9,6 @@ import {
 } from '../components/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import styles from './osobne-udaje.module.css'
-import { formatIco } from '../lib/utils'
 import { getNgoByName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
@@ -30,7 +29,7 @@ const makeHandleOrganisationAutoform = ({
     setValues({
       ...values,
       r142_obchMeno: org.name || '',
-      r142_ico: org.cin ? formatIco(org.cin) : '',
+      r142_ico: org.cin || '',
     })
   }
 }
@@ -163,13 +162,12 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                       name="r142_ico"
                       type="text"
                       label="IČO"
-                      maxLength={14}
+                      maxLength={12}
                       onChange={async (event) => {
-                        const icoValue = formatIco(
+                        props.setFieldValue(
+                          'r142_ico',
                           event.currentTarget.value,
-                          props.values.r142_ico,
                         )
-                        props.setFieldValue('r142_ico', icoValue)
                       }}
                     />
                   </div>
@@ -207,7 +205,7 @@ export const validate = (values: TwoPercentUserInput): Errors => {
     const icoNumberFormat = /^\d{2} \d{3} (\d|\d{3})$/
     if (!values.r142_ico) {
       errors.r142_ico = 'Zadajte IČO'
-    } else if (!values.r142_ico.match(icoNumberFormat)) {
+    } else if (!icoNumberFormat.test(values.r142_ico)) {
       errors.r142_ico = 'Zadajte správne IČO'
     }
 
