@@ -650,7 +650,7 @@ describe('twoPercent page', () => {
     ).click()
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
-    getInput('r142_ico').should('contain.value', '50 718 274')
+    getInput('r142_ico').should('contain.value', '50718274')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
     next()

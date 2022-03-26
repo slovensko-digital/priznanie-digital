@@ -19,7 +19,7 @@ describe('dve-percenta', () => {
           r142_ico: '1',
           r142_obchMeno: 'Fake, o.z.',
         },
-        expected: ['r142_ico'],
+        expected: [],
       },
       {
         input: {
@@ -27,7 +27,7 @@ describe('dve-percenta', () => {
           r142_ico: '12 345 67',
           r142_obchMeno: 'Fake, o.z.',
         },
-        expected: ['r142_ico'],
+        expected: [],
       },
       {
         input: {
