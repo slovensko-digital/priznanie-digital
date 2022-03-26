@@ -160,6 +160,10 @@ export const ceilDecimal = (decimal: Decimal) => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_CEIL)
 }
 
+export const round = (decimal: Decimal) => {
+  return decimal.toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+}
+
 export const sum = (...numbers): Decimal =>
   numbers.reduce((sum, current) => sum.add(current), new Decimal(0))
 

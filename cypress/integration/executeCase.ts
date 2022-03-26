@@ -215,7 +215,7 @@ const executeTestCase = (testCase: string) => {
         const naceNumber = input.r003_nace.match(/^(\d+)/)
         if (naceNumber) {
           getInput('r003_nace').type(naceNumber[1])
-          cy.contains(input.r003_nace).click()
+          // cy.contains(input.r003_nace).click()
         } else {
           typeToInput('r003_nace', input)
         }

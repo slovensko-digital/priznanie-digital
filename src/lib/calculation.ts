@@ -2,10 +2,10 @@ import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
-  floorDecimal,
+  round,
   parseInputNumber,
   percentage,
-  ceilDecimal,
+  // ceilDecimal,
   sum,
 } from './utils'
 import Decimal from 'decimal.js'
@@ -13,23 +13,23 @@ import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 import { Summary } from '../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
-const PAUSALNE_VYDAVKY_MAX = 20000
+const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 
-export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3_480
+export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3480
 const MAX_ZAKLAD_DANE = 19_936.22
-export const PARTNER_MAX_ODPOCET = 4_124.74
+export const PARTNER_MAX_ODPOCET = 4124.74
 
 export const CHILD_RATE_SIX_AND_YOUNGER = 46.44
 export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 23.22
 export const CHILD_RATE_OVER_SIX_FROM_JULY = 39.47
 const CHILD_RATE_FIFTEEN_AND_OLDER = 23.22
 
-const ZIVOTNE_MINIMUM_44_NASOBOK = 9_495.49
+const ZIVOTNE_MINIMUM_44_NASOBOK = 9495.49
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
 const KONSTANTA = 37_981.94
 export const TAX_YEAR = 2021
@@ -209,7 +209,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return ceilDecimal(
+        return round(
           Decimal.max(
             0,
             new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
@@ -221,28 +221,38 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
-      if (this.r032_uplatnujem_na_partnera) {
-        return this.r072_pred_znizenim.gt(KONSTANTA)
-          ? Decimal.max(
-              0,
-              new Decimal(13326.68)
-                .minus(
-                  this.r072_pred_znizenim
-                    .times(0.25)
-                    .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
-                )
-                .times(new Decimal(1).div(12))
-                .times(this.r032_partner_pocet_mesiacov),
-            )
-          : Decimal.max(
-              0,
-              new Decimal(PARTNER_MAX_ODPOCET)
-                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-                .times(new Decimal(1).div(12))
-                .times(this.r032_partner_pocet_mesiacov),
-            )
+      if (!this.r032_uplatnujem_na_partnera) {
+        return new Decimal(0)
       }
-      return new Decimal(0)
+
+      if (this.r072_pred_znizenim.gt(KONSTANTA)) {
+        const cislo = Decimal.max(
+          0,
+          new Decimal(13_326.68)
+            .minus(
+              this.r072_pred_znizenim
+                .times(0.25)
+                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
+            )
+            .times(new Decimal(1).div(12))
+            .times(this.r032_partner_pocet_mesiacov),
+        )
+        console.log(
+          '🚀 ~ file: calculation.ts ~ line 242 ~ getr074_znizenie_partner ~ cislo',
+          cislo,
+        )
+        return cislo
+      }
+
+      const vetva2 = Decimal.max(
+        0,
+        new Decimal(PARTNER_MAX_ODPOCET)
+          .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
+          .times(new Decimal(1).div(12))
+          .times(this.r032_partner_pocet_mesiacov),
+      )
+      console.log('vetva2', vetva2)
+      return vetva2
     },
     get r077_nezdanitelna_cast() {
       return Decimal.min(
@@ -268,9 +278,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     //
     // ak je r. 40 viac ako je r. 77, potom na r. 78 uvediete rozdiel r. 40 - . 77
     get r078_zaklad_dane_zo_zamestnania() {
-      return floorDecimal(
-        Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0),
-      )
+      return round(Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0))
     },
     // r. 80 - tu uvediete vo vašom prípade sumu, ktorá je na r. 78. keďže nepočítate s inými typmi príjmov,
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
@@ -305,7 +313,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // Platí, že ak r. 78 = 0, tak potom na r. 91 je hodnota, ktorá je rozdielom r. 77 mínus r. 40
     get r091() {
       if (this.r078_zaklad_dane_zo_zamestnania.eq(0)) {
-        return floorDecimal(
+        return round(
           Decimal.max(this.r077_nezdanitelna_cast.minus(this.r038), 0),
         )
       }
@@ -345,15 +353,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
 
       // ak r.94 <= 37 163.36, tak r.96 = r.94 * 0.19
-      if (this.r094.lte(KONSTANTA)) {
-        return this.r094.times(DAN_Z_PRIJMU_SADZBA)
-
-        // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
-      } else {
-        return new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA).plus(
-          this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
-        )
-      }
+      return this.r094.lte(KONSTANTA)
+        ? this.r094.times(DAN_Z_PRIJMU_SADZBA)
+        : new Decimal(KONSTANTA)
+            .times(DAN_Z_PRIJMU_SADZBA)
+            .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA))
     },
     // r. 105 bude rovnaká suma ako na r. 96, keďže vo vašich prípadoch nezohľadňujete príjmy zo zahraničia
     get r105() {
@@ -532,7 +536,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r152() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
-        return undefined
+        return
       }
       return {
         ico: input.r142_ico.replace(/\D/g, ''),
