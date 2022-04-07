@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
 import { parseStringPromise } from 'xml2js'
 import { convertToXML } from '../src/lib/xml/xmlConverter'
 import { calculate } from '../src/lib/calculation'
@@ -14,27 +14,27 @@ const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
 const testCases = [
-  // 'base',
-  // 'withPartner',
-  // 'withEmployment',
-  // 'withPension',
-  // 'withChildren',
-  // 'with2percent',
-  // 'with3percent',
-  // 'withBonus',
-  // 'withTaxReturn',
-  // 'withEmploymentBonus',
-  // 'withHighIncome',
-  // 'bugReport1',
+  'base',
+  'withPartner',
+  'withEmployment',
+  'withPension',
+  'withChildren',
+  'with2percent',
+  'with3percent',
+  'withBonus',
+  'withTaxReturn',
+  'withEmploymentBonus',
+  'withHighIncome',
+  'bugReport1',
   'bugReport2',
-  // 'bugReport3',
-  // 'bugReport4',
-  // 'complete',
-  // 'completeDecimal',
+  'bugReport3',
+  'bugReport4',
+  'complete',
+  'completeDecimal',
 ]
 
 describe('calcIntergration', () => {
-  testCases.forEach((testCase) => {
+  for (const testCase of testCases) {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/${testCase}.xml`,
@@ -72,11 +72,11 @@ describe('calcIntergration', () => {
 
       return expect(result).toStrictEqual(expected)
     })
-  })
+  }
 })
 
 describe('postpone', () => {
-  ;['basic', 'foreignIncome'].forEach((testCase) => {
+  for (const testCase of ['basic', 'foreignIncome']) {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(
         `${__dirname}/testCases/postpone/${testCase}.xml`,
@@ -101,5 +101,5 @@ describe('postpone', () => {
 
       return expect(result).toStrictEqual(expected)
     })
-  })
+  }
 })

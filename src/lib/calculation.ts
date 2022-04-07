@@ -7,6 +7,7 @@ import {
   percentage,
   // ceilDecimal,
   sum,
+  ceilDecimal,
 } from './utils'
 import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
@@ -209,7 +210,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return round(
+        return ceilDecimal(
           Decimal.max(
             0,
             new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
@@ -226,7 +227,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
 
       if (this.r072_pred_znizenim.gt(KONSTANTA)) {
-        const cislo = Decimal.max(
+        return Decimal.max(
           0,
           new Decimal(13_326.68)
             .minus(
@@ -237,22 +238,26 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             .times(new Decimal(1).div(12))
             .times(this.r032_partner_pocet_mesiacov),
         )
-        console.log(
-          '🚀 ~ file: calculation.ts ~ line 242 ~ getr074_znizenie_partner ~ cislo',
-          cislo,
-        )
-        return cislo
       }
 
-      const vetva2 = Decimal.max(
+      // Fixes bugReport2, but fails several other tests
+      return Decimal.max(
         0,
-        new Decimal(PARTNER_MAX_ODPOCET)
-          .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-          .times(new Decimal(1).div(12))
-          .times(this.r032_partner_pocet_mesiacov),
+        round(
+          new Decimal(PARTNER_MAX_ODPOCET)
+            .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
+            .times(new Decimal(1).div(12)),
+        ).times(this.r032_partner_pocet_mesiacov),
       )
-      console.log('vetva2', vetva2)
-      return vetva2
+
+      // Fails bugReport2 test case
+      // return Decimal.max(
+      //   0,
+      //   new Decimal(PARTNER_MAX_ODPOCET)
+      //     .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
+      //     .times(new Decimal(1).div(12))
+      //     .times(this.r032_partner_pocet_mesiacov),
+      // )
     },
     get r077_nezdanitelna_cast() {
       return Decimal.min(
