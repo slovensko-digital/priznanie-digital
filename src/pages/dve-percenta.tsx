@@ -202,11 +202,8 @@ export const validate = (values: TwoPercentUserInput): Errors => {
     errors.XIIoddiel_uplatnujem2percenta = 'Vyznačte odpoveď'
   }
   if (values.XIIoddiel_uplatnujem2percenta) {
-    const icoNumberFormat = /^\d{2} \d{3} (\d|\d{3})$/
     if (!values.r142_ico) {
       errors.r142_ico = 'Zadajte IČO'
-    } else if (!icoNumberFormat.test(values.r142_ico)) {
-      errors.r142_ico = 'Zadajte správne IČO'
     }
 
     if (!values.r142_obchMeno) {
