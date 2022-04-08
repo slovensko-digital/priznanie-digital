@@ -645,9 +645,7 @@ describe('twoPercent page', () => {
     /** With autoform */
     getInput('r142_obchMeno').type('Lifestarter')
 
-    cy.contains(
-      'starter Trnava',
-    ).click()
+    cy.contains('starter Trnava').click()
 
     getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
     getInput('r142_ico').should('contain.value', '50718274')

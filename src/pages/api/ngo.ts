@@ -19,21 +19,13 @@ let cache: Cache = {
 
 const formatNgoData = (rawArray: string[][]): CachedData[] => {
   // ["ICO_org","nazov_org","mesto_sidla_org" ],
-  return rawArray.map(
-    (
-      [
-        cin,
-        name,
-        municipality,
-      ],
-    ) => {
-      return {
-        cin,
-        name,
-        municipality,
-      }
-    },
-  )
+  return rawArray.map(([cin, name, municipality]) => {
+    return {
+      cin,
+      name,
+      municipality,
+    }
+  })
 }
 
 const fuseOptions = {

@@ -350,9 +350,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
         // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
       } else {
-        return new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA).plus(
-          this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
-        )
+        return new Decimal(KONSTANTA)
+          .times(DAN_Z_PRIJMU_SADZBA)
+          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA))
       }
     },
     // r. 105 bude rovnaká suma ako na r. 96, keďže vo vašich prípadoch nezohľadňujete príjmy zo zahraničia
