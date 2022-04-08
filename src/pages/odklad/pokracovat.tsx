@@ -1,10 +1,15 @@
 import React from 'react'
+import getConfig from 'next/config'
 import { Page } from '../../components/Page'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
 import { RedirectField, RedirectForm } from '../../components/RedirectForm'
 import { setDate, toBase64 } from '../../lib/utils'
 import { TAX_YEAR } from '../../lib/calculation'
+
+const {
+  publicRuntimeConfig: { odkladEmailTemplateId },
+} = getConfig()
 
 const buildXml = (userInput) => convertPostponeToXML(setDate(userInput))
 
@@ -51,7 +56,7 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
     },
     {
       name: 'submission[extra][template_id]',
-      value: process.env.NEXT_PUBLIC_odkladEmailTemplateId,
+      value: odkladEmailTemplateId,
     },
     {
       name: 'submission[extra][params][recipient_name]',
