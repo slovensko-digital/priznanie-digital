@@ -1,4 +1,5 @@
 import React from 'react'
+import getConfig from 'next/config'
 import { Page } from '../components/Page'
 import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
@@ -6,6 +7,10 @@ import { RedirectField, RedirectForm } from '../components/RedirectForm'
 import { setDate, toBase64, formatCurrency } from '../lib/utils'
 import { buildSummary } from '../lib/calculation'
 import { Summary } from '../types/Summary'
+
+const {
+  publicRuntimeConfig: { priznanieEmailTemplateId },
+} = getConfig()
 
 const buildXml = (taxForm: TaxForm) => convertToXML(setDate(taxForm))
 
@@ -57,7 +62,7 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     },
     {
       name: 'submission[extra][template_id]',
-      value: process.env.NEXT_PUBLIC_priznanieEmailTemplateId,
+      value: priznanieEmailTemplateId,
     },
     {
       name: 'submission[extra][params][recipient_name]',

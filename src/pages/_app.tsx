@@ -55,7 +55,7 @@ interface MyAppProps extends AppProps {
   Component: Page<Partial<TaxFormUserInput>>
 }
 
-const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: MyAppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm>(
     taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
@@ -124,5 +124,10 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     </Layout>
   )
 }
+
+// disable automatic static optimization to enable server-side rendering for all pages
+// this will make sure public runtime config is loaded from env vars during run time, not build time
+// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+MyApp.getInitialProps = () => ({})
 
 export default MyApp

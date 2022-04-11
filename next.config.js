@@ -1,4 +1,12 @@
 module.exports = {
+  // to load runtime env vars we need to pass them via public runtime config (and disable static optimization)
+  // this allows us to deploy one bundle into multiple envs
+  publicRuntimeConfig: {
+    navodyBaseUrl: process.env.NEXT_PUBLIC_navodyBaseUrl,
+    plausibleDomain: process.env.NEXT_PUBLIC_plausibleDomain,
+    odkladEmailTemplateId: process.env.NEXT_PUBLIC_odkladEmailTemplateId,
+    priznanieEmailTemplateId: process.env.NEXT_PUBLIC_priznanieEmailTemplateId,
+  },
   typescript: {
     ignoreDevErrors: true,
   },
