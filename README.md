@@ -130,4 +130,3 @@ Tested via [Github Action - Quality Assurance](https://github.com/priznanie-digi
 ## Talk to us
 
 You can [reach us on Slovensko.Digital slack](http://slack.slovensko.digital/), channel _#priznanie_digital_.
-
