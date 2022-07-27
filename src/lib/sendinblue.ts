@@ -21,6 +21,7 @@ export interface SendEmailAttachment {
 }
 export interface SendTextParams {
   to: string
+  replyTo: string
   subject: string
   textContent: string
   attachment?: SendEmailAttachment[]
@@ -30,11 +31,13 @@ export const sendEmail = async ({
   subject,
   textContent,
   to,
+  replyTo,
   attachment,
 }: SendTextParams) => {
   const body = {
     sender,
     to: [{ email: to }],
+    replyTo: { email: replyTo },
     attachment: attachment && attachment.length > 0 ? attachment : undefined,
     subject,
     textContent,

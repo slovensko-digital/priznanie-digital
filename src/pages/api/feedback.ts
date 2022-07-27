@@ -28,6 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await sendEmail({
       to: 'navody@slovensko.digital',
+      replyTo: `${parsedBody.email || 'noreply@slovensko.digital'}`,
       subject: parsedBody.whatWereYouDoing,
       textContent: `${parsedBody.whatWentWrong}\n\n
 Email: ${parsedBody.email || '[neuvedený]'}
