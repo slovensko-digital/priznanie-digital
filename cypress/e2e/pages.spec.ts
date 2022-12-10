@@ -64,11 +64,11 @@ const navigateEligibleToChildrenPage = () => {
   skipPage()
 }
 
-Cypress.Cookies.defaults({
-  preserve: ['you-shall'], // preserve the cookie between tests
-})
+// Cypress.Cookies.defaults({
+//   preserve: ['you-shall'], // preserve the cookie between tests
+// })
 
-before(() => {
+beforeEach(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
 })
 
