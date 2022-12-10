@@ -16,50 +16,50 @@ const Dochodok: Page<PensionUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  return <>
-    <Link href={previousRoute} data-test="back" className="govuk-back-link">
-      
+  return (
+    <>
+      <Link href={previousRoute} data-test="back" className="govuk-back-link">
         Späť
-      
-    </Link>
-    <FormWrapper<PensionUserInput>
-      initialValues={taxFormUserInput}
-      validate={validate}
-      onSubmit={(values) => {
-        const userInput = values.platil_prispevky_na_dochodok
-          ? values
-          : {
-              ...pensionInitialValues,
-              platil_prispevky_na_dochodok: false,
-            }
-        setTaxFormUserInput(userInput)
-        router.push(nextRoute)
-      }}
-    >
-      {({ values, errors }) => (
-        <Form className="form" noValidate>
-          <ErrorSummary<PensionUserInput> errors={errors} />
-          <BooleanRadio
-            title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
-            name="platil_prispevky_na_dochodok"
-          />
-          {values.platil_prispevky_na_dochodok && (
-            <>
-              <Input
-                name="zaplatene_prispevky_na_dochodok"
-                type="number"
-                label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
-                hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
-              />
-            </>
-          )}
-          <button data-test="next" className="govuk-button" type="submit">
-            Pokračovať
-          </button>
-        </Form>
-      )}
-    </FormWrapper>
-  </>;
+      </Link>
+      <FormWrapper<PensionUserInput>
+        initialValues={taxFormUserInput}
+        validate={validate}
+        onSubmit={(values) => {
+          const userInput = values.platil_prispevky_na_dochodok
+            ? values
+            : {
+                ...pensionInitialValues,
+                platil_prispevky_na_dochodok: false,
+              }
+          setTaxFormUserInput(userInput)
+          router.push(nextRoute)
+        }}
+      >
+        {({ values, errors }) => (
+          <Form className="form" noValidate>
+            <ErrorSummary<PensionUserInput> errors={errors} />
+            <BooleanRadio
+              title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
+              name="platil_prispevky_na_dochodok"
+            />
+            {values.platil_prispevky_na_dochodok && (
+              <>
+                <Input
+                  name="zaplatene_prispevky_na_dochodok"
+                  type="number"
+                  label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
+                  hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
+                />
+              </>
+            )}
+            <button data-test="next" className="govuk-button" type="submit">
+              Pokračovať
+            </button>
+          </Form>
+        )}
+      </FormWrapper>
+    </>
+  )
 }
 
 export const validate = (values: PensionUserInput) => {

@@ -7,8 +7,6 @@ export interface BackLinkProps {
 
 export const BackLink = ({ href }: BackLinkProps) => (
   <Link href={href} className="govuk-back-link" data-test="back">
-    
-      Späť
-    
+    Späť
   </Link>
 )

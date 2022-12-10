@@ -46,7 +46,7 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
           <button className="govuk-button">Začnite znovu</button>
         </Link>
       </div>
-    );
+    )
   }
 
   const action = `${navodyBaseUrl}/podania/nove`

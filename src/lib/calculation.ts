@@ -57,7 +57,7 @@ const makeMapChild =
       m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
       m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
       m12: hasChildren && !child.wholeYear && monthTo === 11,
-    };
+    }
   }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
@@ -538,7 +538,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         ico: input.r142_ico.replace(/\D/g, ''),
         obchMeno: input.r142_obchMeno,
         suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
-      };
+      }
     },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
@@ -574,7 +574,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return false
     },
-  };
+  }
 }
 
 export function buildSummary(form: TaxForm): Summary {

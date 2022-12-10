@@ -26,21 +26,23 @@ const Iban: Page<TaxBonusUserInput> = ({
     !taxForm.mozeZiadatVyplatitDanovyBonus &&
     !taxForm.mozeZiadatVratitDanovyPreplatok
   ) {
-    return <>
-      <p data-test="ineligible-message">
-        Nemáte nárok na vyplatenie daňového bonusu, rozdielu daňového bonusu
-        ani na vrátenie daňového preplatku
-      </p>
-      <Link href={nextRoute} legacyBehavior>
-        <button
-          data-test="next"
-          className="govuk-button govuk-!-margin-top-3"
-          type="button"
-        >
-          Pokračovať
-        </button>
-      </Link>
-    </>;
+    return (
+      <>
+        <p data-test="ineligible-message">
+          Nemáte nárok na vyplatenie daňového bonusu, rozdielu daňového bonusu
+          ani na vrátenie daňového preplatku
+        </p>
+        <Link href={nextRoute} legacyBehavior>
+          <button
+            data-test="next"
+            className="govuk-button govuk-!-margin-top-3"
+            type="button"
+          >
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
   }
 
   return (

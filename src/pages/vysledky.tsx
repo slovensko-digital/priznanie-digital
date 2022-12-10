@@ -112,23 +112,25 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
-  return <>
-    <BackLink href={previousRoute} />
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      {`Výpočet dane za rok ${TAX_YEAR}`}
-    </h1>
-    <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
-    <Summary rows={summaryRows} />
-    <Link href={nextRoute} legacyBehavior>
-      <button
-        data-test="next"
-        className="govuk-button govuk-!-margin-top-3"
-        type="submit"
-      >
-        Pokračovať
-      </button>
-    </Link>
-  </>;
+  return (
+    <>
+      <BackLink href={previousRoute} />
+      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+        {`Výpočet dane za rok ${TAX_YEAR}`}
+      </h1>
+      <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
+      <Summary rows={summaryRows} />
+      <Link href={nextRoute} legacyBehavior>
+        <button
+          data-test="next"
+          className="govuk-button govuk-!-margin-top-3"
+          type="submit"
+        >
+          Pokračovať
+        </button>
+      </Link>
+    </>
+  )
 }
 
 export default Vysledky
