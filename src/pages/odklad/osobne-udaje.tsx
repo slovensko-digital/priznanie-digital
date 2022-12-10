@@ -54,132 +54,130 @@ const OsobneUdaje: NextPage<Props> = ({
 }: Props) => {
   const router = useRouter()
 
-  return (
-    <>
-      <Link href={previousRoute}>
-        <a data-test="back" className="govuk-back-link">
-          Späť
-        </a>
-      </Link>
-      <FormWrapper<PersonalInformationPostponePage>
-        initialValues={postponeUserInput}
-        validate={validate}
-        onSubmit={(values) => {
-          setPostponeUserInput(values)
-          router.push(nextRoute)
-        }}
-      >
-        {(props) => (
-          <>
-            <ErrorSummary<PersonalInformationPostponePage>
-              errors={props.errors}
-            />
-            <Form className="form">
-              <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
-              <p>
-                Údaje môžete vyhladať a automaticky vyplniť podľa mena a
-                priezviska.
-              </p>
+  return <>
+    <Link href={previousRoute} data-test="back" className="govuk-back-link">
+      
+        Späť
+      
+    </Link>
+    <FormWrapper<PersonalInformationPostponePage>
+      initialValues={postponeUserInput}
+      validate={validate}
+      onSubmit={(values) => {
+        setPostponeUserInput(values)
+        router.push(nextRoute)
+      }}
+    >
+      {(props) => (
+        <>
+          <ErrorSummary<PersonalInformationPostponePage>
+            errors={props.errors}
+          />
+          <Form className="form">
+            <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
+            <p>
+              Údaje môžete vyhladať a automaticky vyplniť podľa mena a
+              priezviska.
+            </p>
 
-              <AutoCompleteInput
-                name="meno_priezvisko"
-                label="Zadajte meno, priezvisko alebo podnikateľský názov"
-                onSelect={makeHandlePersonAutoform(props)}
-                fetchData={async (name) => {
-                  const data = await getAutoformByPersonName(name)
-                  return data.map((item) => ({
-                    ...item,
-                    id: item.id,
-                    value: `${item.name} ${item.formatted_address}`,
-                  }))
+            <AutoCompleteInput
+              name="meno_priezvisko"
+              label="Zadajte meno, priezvisko alebo podnikateľský názov"
+              onSelect={makeHandlePersonAutoform(props)}
+              fetchData={async (name) => {
+                const data = await getAutoformByPersonName(name)
+                return data.map((item) => ({
+                  ...item,
+                  id: item.id,
+                  value: `${item.name} ${item.formatted_address}`,
+                }))
+              }}
+            />
+
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="titul"
+                type="text"
+                label="Titul"
+              />
+            </div>
+
+            <Input
+              className={styles.wideField}
+              name="meno"
+              type="text"
+              label="Meno"
+              width="auto"
+            />
+
+            <Input
+              className={styles.wideField}
+              name="priezvisko"
+              type="text"
+              label="Priezvisko"
+              width="auto"
+            />
+
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="dic"
+                type="text"
+                label="DIČ"
+                hint="Ak nie je pridelené, uvádza sa rodné číslo"
+              />
+            </div>
+
+            <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="ulica"
+                type="text"
+                label="Ulica"
+              />
+              <Input
+                className={styles.inlineField}
+                name="cislo"
+                type="text"
+                label="Súpisné/orientačné číslo"
+              />
+            </div>
+            <div className={styles.inlineFieldContainer}>
+              <Input
+                className={styles.inlineField}
+                name="psc"
+                type="text"
+                label="PSČ"
+                maxLength={6}
+                onChange={async (event) => {
+                  const pscValue = formatPsc(
+                    event.currentTarget.value,
+                    props.values.psc,
+                  )
+                  props.setFieldValue('psc', pscValue)
                 }}
               />
 
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  name="titul"
-                  type="text"
-                  label="Titul"
-                />
-              </div>
-
               <Input
-                className={styles.wideField}
-                name="meno"
+                className={styles.inlineField}
+                name="obec"
                 type="text"
-                label="Meno"
-                width="auto"
+                label="Obec"
               />
+            </div>
 
-              <Input
-                className={styles.wideField}
-                name="priezvisko"
-                type="text"
-                label="Priezvisko"
-                width="auto"
-              />
+            <Input name="stat" type="text" label="Štát" />
 
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  name="dic"
-                  type="text"
-                  label="DIČ"
-                  hint="Ak nie je pridelené, uvádza sa rodné číslo"
-                />
-              </div>
-
-              <h2 className="govuk-heading-l">Adresa trvalého pobytu</h2>
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  name="ulica"
-                  type="text"
-                  label="Ulica"
-                />
-                <Input
-                  className={styles.inlineField}
-                  name="cislo"
-                  type="text"
-                  label="Súpisné/orientačné číslo"
-                />
-              </div>
-              <div className={styles.inlineFieldContainer}>
-                <Input
-                  className={styles.inlineField}
-                  name="psc"
-                  type="text"
-                  label="PSČ"
-                  maxLength={6}
-                  onChange={async (event) => {
-                    const pscValue = formatPsc(
-                      event.currentTarget.value,
-                      props.values.psc,
-                    )
-                    props.setFieldValue('psc', pscValue)
-                  }}
-                />
-
-                <Input
-                  className={styles.inlineField}
-                  name="obec"
-                  type="text"
-                  label="Obec"
-                />
-              </div>
-
-              <Input name="stat" type="text" label="Štát" />
-
-              <button className="govuk-button" type="submit">
-                Pokračovať
-              </button>
-            </Form>
-          </>
-        )}
-      </FormWrapper>
-    </>
-  )
+            <button className="govuk-button" type="submit">
+              Pokračovať
+            </button>
+          </Form>
+        </>
+      )}
+    </FormWrapper>
+  </>;
 }
 
 export const validate = (values: PersonalInformationPostponePage) => {

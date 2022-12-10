@@ -47,11 +47,11 @@ export const formatPsc = (newValue: string, previousValue = '') => {
   }
 
   // add space after first 3 digits
-  return formattedNewValue.replace(/^(\d{3})/, '$1 ')
+  return formattedNewValue.replace(/^(\d{3})/, '$1 ');
 }
 
 export const translit = (value: string) => {
-  return value.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
+  return value.normalize('NFD').replace(/[\u0300-\u036F]/g, '');
 }
 
 export const formatRodneCislo = (newValue: string, previousValue = '') => {
@@ -59,15 +59,13 @@ export const formatRodneCislo = (newValue: string, previousValue = '') => {
   if (`${newValue} ` === previousValue) {
     return newValue.slice(0, -3)
   } else {
-    return formattedNewValue.replace(/^(\d{6})/, '$1 / ')
+    return formattedNewValue.replace(/^(\d{6})/, '$1 / ');
   }
 }
 
 export const validateRodneCislo = (value: string): boolean => {
-  return (
-    /^\d{6} \/ \d{3,4}$/.test(value) &&
-    rodnecislo(value.replace(' / ', '')).isValid()
-  )
+  return /^\d{6} \/ \d{3,4}$/.test(value) &&
+  rodnecislo(value.replace(' / ', '')).isValid();
 }
 // logic from https://github.com/kub1x/rodnecislo
 export const getRodneCisloAgeAtYearAndMonth = (
@@ -107,11 +105,11 @@ export const formatIban = (newValue: string, previousValue = '') => {
 }
 
 export const validateIbanFormat = (value: string): boolean => {
-  return IBAN.isValid(value.replace(/\s/g, ''))
+  return IBAN.isValid(value.replace(/\s/g, ''));
 }
 
 export const validateIbanCountry = (value: string): boolean => {
-  return /^sk/i.test(value.trim())
+  return /^sk/i.test(value.trim());
 }
 
 export interface ParsedName {
@@ -201,7 +199,7 @@ const mapHelper = (arr, callback): any => {
 export const encodeUnicodeCharacters = (input: string): string => {
   return encodeURIComponent(input).replace(/%([\dA-F]{2})/g, (_, char) =>
     String.fromCharCode(Number('0x' + char)),
-  )
+  );
 }
 
 export const toBase64 = (value: string): string => {

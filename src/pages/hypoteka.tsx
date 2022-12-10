@@ -16,56 +16,54 @@ const Hypoteka: Page<MortgageUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  return (
-    <>
-      <Link href={previousRoute}>
-        <a data-test="back" className="govuk-back-link">
-          Späť
-        </a>
-      </Link>
-      <FormWrapper<MortgageUserInput>
-        initialValues={taxFormUserInput}
-        validate={validate}
-        onSubmit={(values) => {
-          const userInput = values.r037_uplatnuje_uroky
-            ? values
-            : {
-                ...mortgageInitialValues,
-                r037_uplatnuje_uroky: false,
-              }
-          setTaxFormUserInput(userInput)
-          router.push(nextRoute)
-        }}
-      >
-        {({ values, errors }) => (
-          <Form className="form" noValidate>
-            <BooleanRadio
-              title={`Platili ste úroky z hypotéky v roku ${TAX_YEAR}?`}
-              name="r037_uplatnuje_uroky"
-            />
-            {values.r037_uplatnuje_uroky && (
-              <>
-                <ErrorSummary<MortgageUserInput> errors={errors} />
-                <Input
-                  name="r037_zaplatene_uroky"
-                  type="number"
-                  label="Zaplatené úroky"
-                />
-                <Input
-                  name="r037_pocetMesiacov"
-                  type="number"
-                  label="Počet mesiacov"
-                />
-              </>
-            )}
-            <button data-test="next" className="govuk-button" type="submit">
-              Pokračovať
-            </button>
-          </Form>
-        )}
-      </FormWrapper>
-    </>
-  )
+  return <>
+    <Link href={previousRoute} data-test="back" className="govuk-back-link">
+      
+        Späť
+      
+    </Link>
+    <FormWrapper<MortgageUserInput>
+      initialValues={taxFormUserInput}
+      validate={validate}
+      onSubmit={(values) => {
+        const userInput = values.r037_uplatnuje_uroky
+          ? values
+          : {
+              ...mortgageInitialValues,
+              r037_uplatnuje_uroky: false,
+            }
+        setTaxFormUserInput(userInput)
+        router.push(nextRoute)
+      }}
+    >
+      {({ values, errors }) => (
+        <Form className="form" noValidate>
+          <BooleanRadio
+            title={`Platili ste úroky z hypotéky v roku ${TAX_YEAR}?`}
+            name="r037_uplatnuje_uroky"
+          />
+          {values.r037_uplatnuje_uroky && (
+            <>
+              <ErrorSummary<MortgageUserInput> errors={errors} />
+              <Input
+                name="r037_zaplatene_uroky"
+                type="number"
+                label="Zaplatené úroky"
+              />
+              <Input
+                name="r037_pocetMesiacov"
+                type="number"
+                label="Počet mesiacov"
+              />
+            </>
+          )}
+          <button data-test="next" className="govuk-button" type="submit">
+            Pokračovať
+          </button>
+        </Form>
+      )}
+    </FormWrapper>
+  </>;
 }
 
 export const validate = (values: MortgageUserInput) => {
