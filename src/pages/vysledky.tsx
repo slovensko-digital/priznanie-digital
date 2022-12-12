@@ -120,7 +120,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
-      <Link href={nextRoute}>
+      <Link href={nextRoute} legacyBehavior>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-3"

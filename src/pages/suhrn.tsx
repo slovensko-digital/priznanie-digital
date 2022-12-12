@@ -31,8 +31,8 @@ const Summary = (props: SummaryProps) => (
     >
       <span>{props.title}</span>
       {props.href && (
-        <Link href={`${props.href}?edit`}>
-          <a className={styles.editLink}>upraviť</a>
+        <Link href={`${props.href}?edit`} className={styles.editLink}>
+          upraviť
         </Link>
       )}
     </h2>
@@ -221,24 +221,24 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       {/* <Summary
-        title="Zaplatené úroky z hypotéky"
-        href={'/hypoteka'}
-        rows={
-          taxFormUserInput.r037_uplatnuje_uroky
-            ? [
-                {
-                  title: 'Zaplatené úroky',
-                  value: taxFormUserInput.r037_zaplatene_uroky,
-                  currency: true,
-                },
-                {
-                  title: 'Počet mesiacov',
-                  value: taxFormUserInput.r037_pocetMesiacov,
-                },
-              ]
-            : [{ title: 'Neplatil som' }]
-        }
-      /> */}
+      title="Zaplatené úroky z hypotéky"
+      href={'/hypoteka'}
+      rows={
+        taxFormUserInput.r037_uplatnuje_uroky
+          ? [
+              {
+                title: 'Zaplatené úroky',
+                value: taxFormUserInput.r037_zaplatene_uroky,
+                currency: true,
+              },
+              {
+                title: 'Počet mesiacov',
+                value: taxFormUserInput.r037_pocetMesiacov,
+              },
+            ]
+          : [{ title: 'Neplatil som' }]
+      }
+    /> */}
       <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}
@@ -269,7 +269,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           { title: 'Štát', value: taxFormUserInput.r011_stat },
         ]}
       />
-      <Link href={nextRoute}>
+      <Link href={nextRoute} legacyBehavior>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-4"

@@ -34,10 +34,8 @@ const Deti: Page<ChildrenUserInput> = ({
   nextRoute,
 }) => {
   const previousPageLink = (
-    <Link href={previousRoute}>
-      <a data-test="back" className="govuk-back-link">
-        Späť
-      </a>
+    <Link href={previousRoute} data-test="back" className="govuk-back-link">
+      Späť
     </Link>
   )
 
@@ -50,7 +48,7 @@ const Deti: Page<ChildrenUserInput> = ({
           žijete v spoločnej domácnosti
         </h1>
         <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
-        <Link href={nextRoute}>
+        <Link href={nextRoute} legacyBehavior>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
             Pokračovať
           </button>

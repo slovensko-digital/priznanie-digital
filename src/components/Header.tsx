@@ -23,7 +23,13 @@ const Header: React.FC = () => {
       data-module="sdn-header"
     >
       <div className="sdn-header__container govuk-width-container ">
-        {isLandingPage ? logo : <Link href="/">{logo}</Link>}
+        {isLandingPage ? (
+          logo
+        ) : (
+          <Link href="/" legacyBehavior>
+            {logo}
+          </Link>
+        )}
       </div>
     </header>
   )

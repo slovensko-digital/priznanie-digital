@@ -56,10 +56,8 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
 }) => {
   return (
     <>
-      <Link href={previousRoute}>
-        <a data-test="back" className="govuk-back-link">
-          Späť
-        </a>
+      <Link href={previousRoute} data-test="back" className="govuk-back-link">
+        Späť
       </Link>
       <FormWrapper<PersonalInformationUserInput>
         initialValues={taxFormUserInput}
