@@ -24,11 +24,7 @@
     "keyofStringsOnly": true,
     "incremental": true
   },
-  "exclude": [
-    "node_modules",
-    "cypress",
-    "public"
-  ],
+  "exclude": ["node_modules", "cypress", "public", "./cypress.config.ts"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
