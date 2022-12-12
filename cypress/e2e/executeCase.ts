@@ -308,7 +308,9 @@ const executeTestCase = (testCase: string) => {
         cy.get('form[action$="/podania/nove"][method=post]')
 
         cy.get('[data-test="debug-download"]').click()
-        const filePath = path.join(__dirname, '../downloads/file.xml')
+
+        const downloadsFolder = Cypress.config('downloadsFolder')
+        const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
         cy.visit('/form/form.495.html')
