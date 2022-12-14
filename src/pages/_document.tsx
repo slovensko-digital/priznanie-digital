@@ -15,7 +15,6 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
 
           {/* Primary Meta Tags */}
-          <title>Elektronické daňové priznanie</title>
           <meta name="title" content="Elektronické daňové priznanie" />
           <meta
             name="description"
