@@ -1,6 +1,12 @@
 import { validate } from '../src/pages/osobne-udaje'
 import { testValidation } from './utils/testValidation'
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {
+    autoformPublicToken: 'foobar',
+  },
+}))
+
 describe('osobne-udaje', () => {
   describe('#validate', () => {
     testValidation(validate, [
