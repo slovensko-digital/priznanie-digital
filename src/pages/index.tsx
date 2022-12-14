@@ -31,13 +31,13 @@ const IconLock = () => (
 const Home = ({ nextRoute, nextPostponeRoute }) => (
   <>
     <div className="govuk-grid-column-two-thirds">
-      <TaxFormSection nextRoute={nextRoute} />
+      <PostponeSection nextPostponeRoute={nextPostponeRoute} />
     </div>
 
     <div className="govuk-grid-column-one-third">
-      <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
-      </div>
+      {/* <div className={styles.postponeBox}>
+        <TaxFormSection nextRoute={nextRoute} />
+      </div> */}
 
       <ul className={styles.safeList}>
         <li>
@@ -143,7 +143,7 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     <Link href={nextPostponeRoute} legacyBehavior>
       <button
         type="button"
-        className="btn-secondary govuk-button govuk-button--large"
+        className="btn-primary govuk-button govuk-button--large"
       >
         Súhlasím a chcem odložiť daňové priznanie
       </button>
