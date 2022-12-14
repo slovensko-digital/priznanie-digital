@@ -63,7 +63,7 @@ const childTurning6InFeb = { ...child, rodneCislo: '150201 / 1234' }
 const childTurning6InJul = { ...child, rodneCislo: '150731 / 1234' }
 const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
 
-describe('With child (for tax year 2021)', () => {
+describe.skip('With child (for tax year 2021)', () => {
   test('should map child', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,
