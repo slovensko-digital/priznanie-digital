@@ -98,7 +98,7 @@ const MyApp = ({ Component, isDebug, pageProps }: MyAppProps) => {
     if (next) {
       router.prefetch(next)
     }
-    validateRoute(router, taxForm, taxFormUserInput, postponeUserInput)
+    validateRoute(router, taxForm, taxFormUserInput, postponeUserInput, isDebug)
   }, [router, nextRoute, taxForm, taxFormUserInput, postponeUserInput])
 
   const headline = /^\/odklad\//.test(router.pathname)

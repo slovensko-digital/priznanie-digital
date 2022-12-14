@@ -104,5 +104,5 @@ export interface TaxFormUserInput {
   /**
    * Value based on a cookie
    */
-  isDebug: boolean
+  isDebug?: boolean
 }

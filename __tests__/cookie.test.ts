@@ -31,5 +31,10 @@ describe('cookie', () => {
       global['document'] = undefined
       expect(checkCookie('foo', 'bar')).toBe(false)
     })
+
+    it('should return value from passed string', () => {
+      global['document'] = undefined
+      expect(checkCookie('foo', 'bar', 'foo=bar')).toBe(true)
+    })
   })
 })
