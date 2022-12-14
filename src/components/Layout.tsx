@@ -37,19 +37,6 @@ const Layout: React.FC<Props> = ({
       <div className="main-content">
         <Header />
 
-        <div className="govuk-phase-banner">
-          <div className="govuk-width-container">
-            <p className="govuk-phase-banner__content">
-              <strong className="govuk-tag govuk-phase-banner__content__tag">
-                BETA
-              </strong>
-              <span className="govuk-phase-banner__text">
-                Táto služba je vo vývoji.
-              </span>
-            </p>
-          </div>
-        </div>
-
         <div className="sdn-headline">
           <div className="govuk-width-container">
             <div className="sdn-headline__container">
