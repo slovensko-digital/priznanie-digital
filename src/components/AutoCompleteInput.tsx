@@ -10,7 +10,7 @@ export interface AutoCompleteData extends Record<string, any> {
   value: string
 }
 
-export interface AutoCompleteInput {
+export interface AutoCompleteInputProps {
   name: keyof UserInput
   label: string
   fetchData: (value: string) => Promise<AutoCompleteData[]>
@@ -23,7 +23,7 @@ export const AutoCompleteInput = ({
   onSelect,
   fetchData,
   minLength = 2,
-}: AutoCompleteInput) => {
+}: AutoCompleteInputProps) => {
   const [autocompleteData, setAutocompleteData] = useState([])
   const autocompleteList = useRef(null)
   const [isLoadingAutoform, setIsLoadingAutoform] = useState<boolean>(false)
