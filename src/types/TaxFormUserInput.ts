@@ -100,4 +100,9 @@ export interface TaxFormUserInput {
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by
    * failovali testy */
   datum: string
+
+  /**
+   * Value based on a cookie
+   */
+  isDebug?: boolean
 }

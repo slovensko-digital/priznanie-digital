@@ -1,7 +1,6 @@
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import type { NextRouter } from 'next/router'
 import { TaxForm } from '../types/TaxForm'
-import { checkCookie } from './cookie'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 // route to home page, should be '/' when app is ready
@@ -114,8 +113,9 @@ export const validateRoute = (
   taxForm: TaxForm,
   taxFormUserInput: TaxFormUserInput,
   postponeUserInput: PostponeUserInput,
+  isDebug: boolean = false,
 ) => {
-  if (!checkCookie('you-shall', 'not-pass')) {
+  if (!isDebug) {
     const isPostponeRoute = router.route.match(/\/odklad\//)
 
     let requirement
