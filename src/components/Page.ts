@@ -14,6 +14,7 @@ export interface PageProps<UserInput> {
   router: Router
   previousRoute: Route
   nextRoute: Route
+  isDebug: boolean
 }
 
 export type Page<UserInput> = NextPage<PageProps<UserInput>>

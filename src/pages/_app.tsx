@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app'
+import App, { AppProps } from 'next/app'
 
 /* eslint-disable import/no-unassigned-import */
 import '../styles/global.css'
@@ -28,7 +28,8 @@ import {
 } from '../lib/routes'
 import { Page } from '../components/Page'
 import { Plausible } from '../components/Plausible'
-import Head from "next/head";
+import Head from 'next/head'
+import { checkCookie } from '../lib/cookie'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -54,9 +55,10 @@ const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
 
 interface MyAppProps extends AppProps {
   Component: Page<Partial<TaxFormUserInput>>
+  isDebug: boolean
 }
 
-const MyApp = ({ Component, pageProps }: MyAppProps) => {
+const MyApp = ({ Component, isDebug, pageProps }: MyAppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm>(
     taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
@@ -113,6 +115,7 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
       </Head>
       <Plausible />
       <Component
+        isDebug={isDebug}
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
@@ -132,6 +135,16 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
 // disable automatic static optimization to enable server-side rendering for all pages
 // this will make sure public runtime config is loaded from env vars during run time, not build time
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
-MyApp.getInitialProps = () => ({})
+MyApp.getInitialProps = (context) => {
+  const props = App.getInitialProps(context)
+  return {
+    ...props,
+    isDebug: checkCookie(
+      'you-shall',
+      'not-pass',
+      context?.ctx?.req?.headers?.cookie,
+    ),
+  }
+}
 
 export default MyApp

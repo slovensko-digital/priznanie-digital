@@ -3,7 +3,6 @@ import getConfig from 'next/config'
 import fileDownload from 'js-file-download'
 import { ErrorSummary } from './ErrorSummary'
 import Link from 'next/link'
-import { checkCookie } from '../lib/cookie'
 
 const {
   publicRuntimeConfig: { navodyBaseUrl },
@@ -18,23 +17,23 @@ interface RedirectFormProps {
   fields: RedirectField[]
   canContinue: boolean
   debugDownload?: string
+  isDebug: boolean
 }
 
 export const RedirectForm: React.FC<RedirectFormProps> = ({
   fields,
   canContinue,
   debugDownload,
+  isDebug,
 }) => {
-  const withDebug = checkCookie('you-shall', 'not-pass')
-
   const form = useRef(null)
   useEffect(() => {
-    if (!withDebug && form.current) {
+    if (!isDebug && form.current) {
       form.current.submit()
     }
-  }, [form, withDebug])
+  }, [form, isDebug])
 
-  if (!canContinue && !withDebug) {
+  if (!canContinue && !isDebug) {
     return (
       <div className="govuk-!-margin-top-6">
         <ErrorSummary
@@ -65,7 +64,7 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
             size={100}
           />
         ))}
-        {withDebug && (
+        {isDebug && (
           <Debug canContinue={canContinue} download={debugDownload} />
         )}
       </form>

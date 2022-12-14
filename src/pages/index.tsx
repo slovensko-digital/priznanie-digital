@@ -3,7 +3,6 @@ import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { TAX_YEAR } from '../lib/calculation'
-import { checkCookie } from '../lib/cookie'
 
 const IconCheck = () => (
   <svg
@@ -29,10 +28,10 @@ const IconLock = () => (
   </svg>
 )
 
-const Home = ({ nextRoute, nextPostponeRoute }) => (
+const Home = ({ nextRoute, nextPostponeRoute, isDebug }) => (
   <>
     <div className="govuk-grid-column-two-thirds">
-      <TaxFormSection nextRoute={nextRoute} />
+      <TaxFormSection nextRoute={nextRoute} isDebug={isDebug} />
     </div>
 
     <div className="govuk-grid-column-one-third">
@@ -56,8 +55,7 @@ const Home = ({ nextRoute, nextPostponeRoute }) => (
 
 export default Home
 
-const TaxFormSection = ({ nextRoute }) => {
-  const withDebug = checkCookie('you-shall', 'not-pass')
+const TaxFormSection = ({ nextRoute, isDebug }) => {
   return (
     <>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
@@ -66,24 +64,28 @@ const TaxFormSection = ({ nextRoute }) => {
         {/* {`(verzia pre rok ${TAX_YEAR})`} */}
       </h1>
 
-      <Warning className='govuk-!-font-weight-bold'>Na verzii pre rok {TAX_YEAR} aktuálne pracujeme.</Warning>
+      <Warning className="govuk-!-font-weight-bold">
+        Na verzii pre rok {TAX_YEAR} aktuálne pracujeme.
+      </Warning>
       <p className="govuk-body-l">
         {/* Vyplňte si daňové priznanie rýchlo a jednoducho. */}
-        Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR+1} pripraviť rýchlo a jednoducho.
+        Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR + 1} pripraviť
+        rýchlo a jednoducho.
       </p>
 
       <p>
-        Po zadaní základných údajov bude možné stiahnuť si pripravené daňové priznanie a následne vás 
-        prevedieme aj procesom jeho podania na stránkach Finančnej správy.
+        Po zadaní základných údajov bude možné stiahnuť si pripravené daňové
+        priznanie a následne vás prevedieme aj procesom jeho podania na
+        stránkach Finančnej správy.
       </p>
 
       <p>
-        Aplikácia je určená na podanie riadneho a opravného daňového priznania pre
-        SZČO uplatňujúce si paušálne výdavky.
+        Aplikácia je určená na podanie riadneho a opravného daňového priznania
+        pre SZČO uplatňujúce si paušálne výdavky.
       </p>
 
       <p>
-        Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov, 
+        Projekt vznikol spoluprácou skupiny dobrovoľníkov a daňových poradcov,
         ktorí každý rok pracujú na aktualizácii návodu aj aplikácie.
       </p>
 
@@ -110,9 +112,8 @@ const TaxFormSection = ({ nextRoute }) => {
         nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje neukladáme, sú
         použité výlučne na spracovanie daňového priznania.
       </p> */}
-      
-      {
-        withDebug && 
+
+      {isDebug && (
         <Link href={nextRoute} legacyBehavior>
           <button
             type="button"
@@ -121,9 +122,12 @@ const TaxFormSection = ({ nextRoute }) => {
             Súhlasím a chcem pripraviť daňové priznanie
           </button>
         </Link>
-      }
+      )}
 
-      <Link href='https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania' legacyBehavior>
+      <Link
+        href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
+        legacyBehavior
+      >
         <button
           type="button"
           className="govuk-button govuk-button--large govuk-button--start"
