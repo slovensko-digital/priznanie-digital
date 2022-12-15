@@ -3,6 +3,7 @@ import cloneDeep from 'lodash.clonedeep'
 import { PostponeOutput } from './PostponeOutput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { postponeBasis } from './postponeBasis'
+import { TAX_YEAR } from '../calculation'
 
 // TODO remove fallbacks, they should be unncessary now
 export function convertPostponeToJson(
@@ -16,6 +17,7 @@ export function convertPostponeToJson(
   // form.dokument.hlavicka.fyzickaOsoba.rodneCislo.rcZaLom = afterSlash;
 
   form.dokument.hlavicka.dic = postponeUserInput.dic
+  form.dokument.hlavicka.zaRok = `${TAX_YEAR}`
 
   form.dokument.hlavicka.fyzickaOsoba.meno = postponeUserInput.meno
   form.dokument.hlavicka.fyzickaOsoba.priezvisko = postponeUserInput.priezvisko
@@ -33,7 +35,7 @@ export function convertPostponeToJson(
     postponeUserInput.prijmy_zo_zahranicia ? '1' : '0'
 
   form.dokument.hlavicka.novaLehota.datumLehota =
-    postponeUserInput.prijmy_zo_zahranicia ? '30.09.2022' : '30.06.2022'
+    postponeUserInput.prijmy_zo_zahranicia ? `30.09.${TAX_YEAR+1}` : `30.06.${TAX_YEAR+1}`
 
   form.dokument.hlavicka.vypracoval.dna = postponeUserInput.datum
 
