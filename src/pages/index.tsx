@@ -65,7 +65,7 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
       </h1>
 
       <Warning className="govuk-!-font-weight-bold">
-        Na verzii pre rok {TAX_YEAR} aktuálne pracujeme.
+        Na aktuálnej verzii pracujeme.
       </Warning>
       <p className="govuk-body-l">
         {/* Vyplňte si daňové priznanie rýchlo a jednoducho. */}
