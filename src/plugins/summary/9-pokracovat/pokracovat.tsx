@@ -1,12 +1,12 @@
 import React from 'react'
 import getConfig from 'next/config'
-import { Page } from '../../../components/Page'
-import { TaxForm } from '../../../types/TaxForm'
-import { convertToXML } from '../../../lib/xml/xmlConverter'
+import { Page } from '../../_shared/interfaces/Page'
+import { TaxForm } from '../../_shared/types/TaxForm'
+import { convertToXML } from './xml/xmlConverter'
 import { RedirectField, RedirectForm } from '../../_components/form/RedirectForm'
-import { setDate, toBase64, formatCurrency } from '../../../lib/utils'
-import { buildSummary } from '../calculation/calculation'
-import { Summary } from '../../../types/Summary'
+import { setDate, toBase64, formatCurrency } from '../../_shared/utils/utils'
+import { buildSummary } from '../../_shared/calculation/calculation'
+import { Summary } from './Summary.types'
 
 const {
   publicRuntimeConfig: { priznanieEmailTemplateId },

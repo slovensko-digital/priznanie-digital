@@ -1,9 +1,9 @@
 import xmljs from 'xml-js'
 import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
-import { TaxForm } from '../../types/TaxForm'
-import { OutputJson, Dieta } from '../../types/OutputJson'
-import { boolToString, decimalToString, roundDecimal } from '../utils'
+import { TaxForm } from '../../../_shared/types/TaxForm'
+import { OutputJson, Dieta } from './OutputJson'
+import { boolToString, decimalToString, roundDecimal } from '../../../_shared/utils/utils'
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)

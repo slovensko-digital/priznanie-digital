@@ -1,10 +1,10 @@
 import React from 'react'
 import { NextPage } from 'next'
 import { getPostponeRoutes } from '../../../lib/routes'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
+import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import { BackLink } from '../../_components/links/BackLink'
 import Link from 'next/link'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 

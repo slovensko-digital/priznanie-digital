@@ -1,4 +1,4 @@
-import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
+import { PostponeUserInput } from '../../../src/plugins/_shared/types/PostponeUserInput'
 
 export const foreignIncomeInput: PostponeUserInput = {
   prijmy_zo_zahranicia: true,

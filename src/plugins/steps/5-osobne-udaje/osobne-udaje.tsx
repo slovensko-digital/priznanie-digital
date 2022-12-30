@@ -6,16 +6,16 @@ import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
-} from '../../../types/PageUserInputs'
-import { getAutoformByPersonName } from '../../../lib/api'
+} from '../../_shared/types/PageUserInputs'
+import { getAutoformByPersonName } from '../../api/_utils/api'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../_components/form/AutoCompleteInput'
-import { formatPsc, parseFullName } from '../../../lib/utils'
-import { Nace } from '../../../components/Nace'
-import { Page } from '../../../components/Page'
+import { formatPsc, parseFullName } from '../../_shared/utils/utils'
+import { Nace } from './Nace'
+import { Page } from '../../_shared/interfaces/Page'
 
 const formatNace = (economicActivity) => {
   const { code, name } = economicActivity || {}

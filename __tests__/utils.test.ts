@@ -3,7 +3,7 @@ import {
   ceilDecimal,
   parseStreetAndNumber,
   encodeUnicodeCharacters,
-} from '../src/lib/utils'
+} from '../src/plugins/_shared/utils/utils'
 import {
   sortObjectKeys,
   formatCurrency,
@@ -22,7 +22,7 @@ import {
   boolToString,
   decimalToString,
   roundDecimal,
-} from '../src/lib/utils'
+} from '../src/plugins/_shared/utils/utils'
 import Decimal from 'decimal.js'
 
 describe('utils', () => {

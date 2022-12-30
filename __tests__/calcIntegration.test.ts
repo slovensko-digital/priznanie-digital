@@ -1,11 +1,11 @@
 import { promises as fs } from 'fs'
 import { parseStringPromise } from 'xml2js'
-import { convertToXML } from '../src/lib/xml/xmlConverter'
-import { calculate } from '../src/plugins/summary/calculation/calculation'
-import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
-import { PostponeUserInput } from '../src/types/PostponeUserInput'
-import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'
-import { setDate } from '../src/lib/utils'
+import { convertToXML } from '../src/plugins/summary/9-pokracovat/xml/xmlConverter'
+import { calculate } from '../src/plugins/_shared/calculation/calculation'
+import { TaxFormUserInput } from '../src/plugins/_shared/types/TaxFormUserInput'
+import { PostponeUserInput } from '../src/plugins/_shared/types/PostponeUserInput'
+import { convertPostponeToXML } from '../src/plugins/odklad/4-pokracovat/postpone/postponeConverter'
+import { setDate } from '../src/plugins/_shared/utils/utils'
 
 // const WRITE_FILES = process.env.WRITE_FILES === 'yes'
 const WRITE_FILES = false

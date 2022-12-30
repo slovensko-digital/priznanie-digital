@@ -1,6 +1,6 @@
 import getConfig from "next/config";
-import type { AutoformResponseBody } from '../types/api'
-import { translit } from './utils'
+import type { AutoformResponseBody } from './api.types'
+import { translit } from '../../_shared/utils/utils'
 
 const {
   publicRuntimeConfig: { autoformPublicToken },

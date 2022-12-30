@@ -1,4 +1,4 @@
-import { OutputJson } from '../../types/OutputJson'
+import { OutputJson } from './OutputJson'
 
 const ZDANOVACIE_OBDOBIE__ROK = '2021'
 

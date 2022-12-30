@@ -1,4 +1,4 @@
-import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { E2eTestUserInput } from '../../src/plugins/_shared/testing/E2eTestUserInput'
 
 export const withTaxReturnInput: E2eTestUserInput = {
   priloha3_r11_socialne: '1000',

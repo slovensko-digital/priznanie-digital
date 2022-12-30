@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
-import { formatCurrency, parseInputNumber } from '../../../lib/utils'
+import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
+import { formatCurrency, parseInputNumber } from '../../_shared/utils/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../../_components/form/Warning'
-import { Page } from '../../../components/Page'
+import { Page } from '../../_shared/interfaces/Page'
 import { BackLink } from '../../_components/links/BackLink'
-import { TAX_YEAR } from '../calculation/calculation'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 interface SummaryRow {
   title: string

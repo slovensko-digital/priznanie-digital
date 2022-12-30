@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { TaxForm } from '../types/TaxForm'
 import { PostponeUserInput } from '../types/PostponeUserInput'
-import { Route } from '../lib/routes'
+import { Route } from '../../../lib/routes'
 import { Router } from 'next/router'
 
 export interface PageProps<UserInput> {

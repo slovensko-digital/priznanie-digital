@@ -1,6 +1,15 @@
 
 # 30.12. roman
-- porozdelovat komponenty ktore patria len k jednotlivym pages
 - calculation
 - pozriet reuse v suboroch
-- doplnit dev tlacitka na predvyplnenie pocas vyvoja
+
+- dev vylepsenia
+    - doplnit dev tlacitka na predvyplnenie pocas vyvoja
+
+- neviem co to jex
+    - _document
+    - nace
+
+- later
+    - api
+    - globalne csska z libs.css dat do pluginov

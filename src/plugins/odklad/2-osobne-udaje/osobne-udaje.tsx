@@ -8,16 +8,16 @@ import styles from '../../steps/5-osobne-udaje/osobne-udaje.module.css'
 import {
   FormErrors,
   PersonalInformationPostponePage,
-} from '../../../types/PageUserInputs'
-import { getAutoformByPersonName } from '../../../lib/api'
+} from '../../_shared/types/PageUserInputs'
+import { getAutoformByPersonName } from '../../api/_utils/api'
 import { getPostponeRoutes } from '../../../lib/routes'
 import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../_components/form/AutoCompleteInput'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
+import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { formatPsc, parseFullName } from '../../../lib/utils'
+import { formatPsc, parseFullName } from '../../_shared/utils/utils'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 

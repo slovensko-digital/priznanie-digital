@@ -1,4 +1,4 @@
-import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { E2eTestUserInput } from '../../src/plugins/_shared/testing/E2eTestUserInput'
 
 export const bugReport2Input: E2eTestUserInput = {
   t1r10_prijmy: '45000',

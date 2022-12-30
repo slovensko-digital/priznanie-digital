@@ -1,4 +1,4 @@
-import { PartnerUserInput } from '../types/PageUserInputs'
+import { PartnerUserInput } from '../../_shared/types/PageUserInputs'
 import React, { useEffect, useRef } from 'react'
 import { FormikProps } from 'formik'
 import {
@@ -12,7 +12,7 @@ import {
   PreviousButton,
   SubmitButton,
 } from './PartnerBonusFormSteps'
-import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
+import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 
 const scrollToElement = (element, smooth = true) => {
   if (element && element.current) {

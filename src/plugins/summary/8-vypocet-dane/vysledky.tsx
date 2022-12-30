@@ -1,12 +1,12 @@
 import React from 'react'
-import { formatCurrency } from '../../../lib/utils'
-import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
-import { Page } from '../../../components/Page'
+import { formatCurrency } from '../../_shared/utils/utils'
+import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
+import { Page } from '../../_shared/interfaces/Page'
 import Decimal from 'decimal.js'
 import { BackLink } from '../../_components/links/BackLink'
 import Link from 'next/link'
-import { buildSummary } from '../calculation/calculation'
-import { TAX_YEAR } from '../calculation/calculation'
+import { buildSummary } from '../../_shared/calculation/calculation'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 interface SummaryRow {
   key: string

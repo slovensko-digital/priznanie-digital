@@ -4,9 +4,9 @@ import {
   validateRoute,
   homeRoute,
 } from '../src/lib/routes'
-import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
-import { TaxForm } from '../src/types/TaxForm'
-import { PostponeUserInput } from '../src/types/PostponeUserInput'
+import { TaxFormUserInput } from '../src/plugins/_shared/types/TaxFormUserInput'
+import { TaxForm } from '../src/plugins/_shared/types/TaxForm'
+import { PostponeUserInput } from '../src/plugins/_shared/types/PostponeUserInput'
 
 describe('routes', () => {
   describe('#getOrderedRoutes', () => {

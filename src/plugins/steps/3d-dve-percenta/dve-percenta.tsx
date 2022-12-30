@@ -7,17 +7,17 @@ import {
   FormWrapper,
   Input,
 } from '../../_components/form/FormComponents'
-import { FormErrors, TwoPercentUserInput } from '../../../types/PageUserInputs'
+import { FormErrors, TwoPercentUserInput } from '../../_shared/types/PageUserInputs'
 import styles from '../5-osobne-udaje/osobne-udaje.module.css'
-import { getNgoByName } from '../../../lib/api'
+import { getNgoByName } from '../../api/_utils/api'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../_components/form/AutoCompleteInput'
 
-import { Page } from '../../../components/Page'
-import { twoPercentInitialValues } from '../../../lib/initialValues'
+import { Page } from '../../_shared/interfaces/Page'
+import { twoPercentInitialValues } from '../../_shared/calculation/initialValues'
 import { Details } from '../../_components/form/Details'
 import classNames from 'classnames'
 

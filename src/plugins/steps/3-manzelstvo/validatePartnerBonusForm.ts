@@ -1,6 +1,6 @@
-import { PartnerUserInput } from '../types/PageUserInputs'
-import { parseInputNumber } from './utils'
-import { PARTNER_MAX_ODPOCET } from '../plugins/summary/calculation/calculation'
+import { PartnerUserInput } from '../../_shared/types/PageUserInputs'
+import { parseInputNumber } from '../../_shared/utils/utils'
+import { PARTNER_MAX_ODPOCET } from '../../_shared/calculation/calculation'
 
 export const validatePartnerBonusForm = (
   values: PartnerUserInput,

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../../_components/form/FormComponents'
-import { EmployedUserInput, FormErrors } from '../../../types/PageUserInputs'
-import { numberInputRegexp } from '../../../lib/utils'
+import { EmployedUserInput, FormErrors } from '../../_shared/types/PageUserInputs'
+import { numberInputRegexp } from '../../_shared/utils/utils'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { Page } from '../../../components/Page'
-import { employmentUserInputInitialValues } from '../../../lib/initialValues'
+import { Page } from '../../_shared/interfaces/Page'
+import { employmentUserInputInitialValues } from '../../_shared/calculation/initialValues'
 import { BackLink } from '../../_components/links/BackLink'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,

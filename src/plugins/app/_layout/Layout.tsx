@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from './Header'
 import Footer from '../footer/Footer'
-import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
+import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
+import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import { useRouter } from 'next/router'
 import { homeRoute } from '../../../lib/routes'
 

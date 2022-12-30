@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import Fuse from 'fuse.js'
-import { getNace } from '../lib/api'
+import { getNace } from '../../api/_utils/api'
 import styles from './Nace.module.css'
-import { AutoCompleteInput } from '../plugins/_components/form/AutoCompleteInput'
+import { AutoCompleteInput } from '../../_components/form/AutoCompleteInput'
 
 const options = {
   shouldSort: true,

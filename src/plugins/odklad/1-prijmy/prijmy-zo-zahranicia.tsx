@@ -5,12 +5,12 @@ import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import { BooleanRadio, FormWrapper } from '../../_components/form/FormComponents'
 import { getPostponeRoutes } from '../../../lib/routes'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
+import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import {
   FormErrors,
   IncomeSourceCountryUserInput,
-} from '../../../types/PageUserInputs'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+} from '../../_shared/types/PageUserInputs'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',

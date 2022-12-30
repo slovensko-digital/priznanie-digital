@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { AutoformResponseBody } from '../../types/api'
+import { AutoformResponseBody } from '../../plugins/api/_utils/api.types'
 import Fuse from 'fuse.js'
 import ngos from '../../../public/ngos.json'
 

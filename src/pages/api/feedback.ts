@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { makeAttachment, sendEmail } from '../../lib/sendinblue'
+import { makeAttachment, sendEmail } from '../../plugins/app/footer/sendinblue'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const parsedBody = JSON.parse(req.body)

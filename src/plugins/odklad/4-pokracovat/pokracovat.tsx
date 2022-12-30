@@ -1,11 +1,11 @@
 import React from 'react'
 import getConfig from 'next/config'
-import { Page } from '../../../components/Page'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
-import { convertPostponeToXML } from '../../../lib/postpone/postponeConverter'
+import { Page } from '../../_shared/interfaces/Page'
+import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
+import { convertPostponeToXML } from './postpone/postponeConverter'
 import { RedirectField, RedirectForm } from '../../_components/form/RedirectForm'
-import { setDate, toBase64 } from '../../../lib/utils'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+import { setDate, toBase64 } from '../../_shared/utils/utils'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const {
   publicRuntimeConfig: { odkladEmailTemplateId },

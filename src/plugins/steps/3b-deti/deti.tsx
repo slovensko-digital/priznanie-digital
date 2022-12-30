@@ -9,21 +9,21 @@ import {
   FormWrapper,
   Select,
 } from '../../_components/form/FormComponents'
-import { ChildrenUserInput } from '../../../types/PageUserInputs'
-import { ChildInput, monthNames } from '../../../types/TaxFormUserInput'
+import { ChildrenUserInput } from '../../_shared/types/PageUserInputs'
+import { ChildInput, monthNames } from '../../_shared/types/TaxFormUserInput'
 import {
   childrenUserInputInitialValues,
   makeEmptyChild,
-} from '../../../lib/initialValues'
+} from '../../_shared/calculation/initialValues'
 import classnames from 'classnames'
 import {
   formatCurrency,
   formatRodneCislo,
   validateRodneCislo,
-} from '../../../lib/utils'
-import { Page } from '../../../components/Page'
+} from '../../_shared/utils/utils'
+import { Page } from '../../_shared/interfaces/Page'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../../summary/calculation/calculation'
+import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,

@@ -1,4 +1,4 @@
-import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { E2eTestUserInput } from '../../src/plugins/_shared/testing/E2eTestUserInput'
 
 // https://trello.com/c/7nXCramK/146-testovanie-chyby-pau%C5%A1%C3%A1lne-v%C3%BDdavky-a-strata
 

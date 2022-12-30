@@ -2,12 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../../_components/form/FormComponents'
-import { FormErrors, MortgageUserInput } from '../../../types/PageUserInputs'
+import { FormErrors, MortgageUserInput } from '../../_shared/types/PageUserInputs'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { numberInputRegexp } from '../../../lib/utils'
-import { Page } from '../../../components/Page'
-import { mortgageInitialValues } from '../../../lib/initialValues'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+import { numberInputRegexp } from '../../_shared/utils/utils'
+import { Page } from '../../_shared/interfaces/Page'
+import { mortgageInitialValues } from '../../_shared/calculation/initialValues'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const Hypoteka: Page<MortgageUserInput> = ({
   setTaxFormUserInput,

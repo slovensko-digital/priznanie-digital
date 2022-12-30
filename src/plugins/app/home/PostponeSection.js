@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { TAX_YEAR } from '../../summary/calculation/calculation'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 export const PostponeSection = ({ nextPostponeRoute }) => (
     <>

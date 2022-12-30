@@ -1,9 +1,9 @@
 import React from 'react'
-import { BooleanRadio, CheckboxSmall, Input } from '../plugins/_components/form/FormComponents'
-import { formatRodneCislo } from '../lib/utils'
+import { BooleanRadio, CheckboxSmall, Input } from '../../_components/form/FormComponents'
+import { formatRodneCislo } from '../../_shared/utils/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
-import { Details } from '../plugins/_components/form/Details'
-import { TAX_YEAR } from '../plugins/summary/calculation/calculation'
+import { Details } from '../../_components/form/Details'
+import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
