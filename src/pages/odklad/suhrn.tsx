@@ -1,3 +1,3 @@
-import { Suhrn } from '../../plugins/odklad/3-suhrn/suhrn.tsx'
+import { Suhrn } from '../../plugins/odklad/3-suhrn/suhrn'
 
 export default Suhrn

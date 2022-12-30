@@ -5,15 +5,10 @@
 
 # plugins/
     main/
-        intro
+        home
         footer
         _layout
         404
-    odklad/
-        1-prijmy
-        2-osobne-udaje
-        3-suhrn
-        4-pokracovat
     steps/
         1-prijmy
         2-zamestnanie
@@ -29,9 +24,11 @@
         8-vypocet-dane
         9-pokracovat
         calculation
-    vendor/
-        postpone/
-        xml/
+    odklad/
+        1-prijmy
+        2-osobne-udaje
+        3-suhrn
+        4-pokracovat
     _components/
         form/
         links/

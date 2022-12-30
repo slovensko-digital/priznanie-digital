@@ -21,8 +21,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "keyofStringsOnly": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "./"
   },
   "exclude": ["node_modules", "cypress", "public", "./cypress.config.ts"],
   "include": [
