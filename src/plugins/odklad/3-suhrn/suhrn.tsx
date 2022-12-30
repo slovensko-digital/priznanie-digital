@@ -4,7 +4,7 @@ import { getPostponeRoutes } from '../../../lib/routes'
 import { PostponeUserInput } from '../../../types/PostponeUserInput'
 import { BackLink } from '../../_components/links/BackLink'
 import Link from 'next/link'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 

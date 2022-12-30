@@ -3,7 +3,7 @@ import { BooleanRadio, CheckboxSmall, Input } from '../plugins/_components/form/
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from '../plugins/_components/form/Details'
-import { TAX_YEAR } from '../lib/calculation'
+import { TAX_YEAR } from '../plugins/summary/calculation/calculation'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>

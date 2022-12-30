@@ -1,4 +1,4 @@
-import { makeValidate } from '../src/pages/iban'
+import { makeValidate } from '../src/plugins/summary/7-vratenie-preplatku/iban'
 import { testValidation } from './utils/testValidation'
 import { TaxForm } from '../src/types/TaxForm'
 

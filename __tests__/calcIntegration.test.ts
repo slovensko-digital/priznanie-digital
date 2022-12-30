@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import { parseStringPromise } from 'xml2js'
 import { convertToXML } from '../src/lib/xml/xmlConverter'
-import { calculate } from '../src/lib/calculation'
+import { calculate } from '../src/plugins/summary/calculation/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'

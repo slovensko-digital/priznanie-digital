@@ -7,7 +7,7 @@ import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import { numberInputRegexp } from '../../../lib/utils'
 import { Page } from '../../../components/Page'
 import { mortgageInitialValues } from '../../../lib/initialValues'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const Hypoteka: Page<MortgageUserInput> = ({
   setTaxFormUserInput,

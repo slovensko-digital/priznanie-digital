@@ -4,7 +4,7 @@ import {
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER,
   MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA,
-} from '../src/lib/calculation'
+} from '../src/plugins/summary/calculation/calculation'
 import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'

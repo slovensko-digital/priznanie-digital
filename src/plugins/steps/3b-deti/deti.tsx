@@ -23,7 +23,7 @@ import {
 } from '../../../lib/utils'
 import { Page } from '../../../components/Page'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../../../lib/calculation'
+import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../../summary/calculation/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,

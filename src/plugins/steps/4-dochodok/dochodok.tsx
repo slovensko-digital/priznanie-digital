@@ -7,7 +7,7 @@ import { numberInputRegexp, parseInputNumber } from '../../../lib/utils'
 import { Page } from '../../../components/Page'
 import { pensionInitialValues } from '../../../lib/initialValues'
 import { ErrorSummary } from '../../_components/form/ErrorSummary'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,

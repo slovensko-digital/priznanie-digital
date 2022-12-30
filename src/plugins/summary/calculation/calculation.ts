@@ -1,5 +1,5 @@
-import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
-import { Child, TaxForm } from '../types/TaxForm'
+import { ChildInput, TaxFormUserInput } from '../../../types/TaxFormUserInput'
+import { Child, TaxForm } from '../../../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
   floorDecimal,
@@ -7,10 +7,10 @@ import {
   percentage,
   ceilDecimal,
   sum,
-} from './utils'
+} from '../../../lib/utils'
 import Decimal from 'decimal.js'
-import { validatePartnerBonusForm } from './validatePartnerBonusForm'
-import { Summary } from '../types/Summary'
+import { validatePartnerBonusForm } from '../../../lib/validatePartnerBonusForm'
+import { Summary } from '../../../types/Summary'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4511.43)
 const PAUSALNE_VYDAVKY_MAX = 20_000

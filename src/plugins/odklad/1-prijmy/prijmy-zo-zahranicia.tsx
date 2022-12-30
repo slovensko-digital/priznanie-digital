@@ -10,7 +10,7 @@ import {
   FormErrors,
   IncomeSourceCountryUserInput,
 } from '../../../types/PageUserInputs'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',

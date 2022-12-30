@@ -7,7 +7,7 @@
 
 import { UserInput } from '../../src/types/UserInput'
 import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
-import { calculate, TAX_YEAR } from '../../src/lib/calculation'
+import { calculate, TAX_YEAR } from '../../src/plugins/summary/calculation/calculation'
 import {
   Route,
   PostponeRoute,

@@ -3,7 +3,7 @@ import cloneDeep from 'lodash.clonedeep'
 import { PostponeOutput } from './PostponeOutput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { postponeBasis } from './postponeBasis'
-import { TAX_YEAR } from '../calculation'
+import { TAX_YEAR } from '../../plugins/summary/calculation/calculation'
 
 // TODO remove fallbacks, they should be unncessary now
 export function convertPostponeToJson(

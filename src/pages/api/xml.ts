@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { convertToXML } from '../../lib/xml/xmlConverter'
 import { setDate } from '../../lib/utils'
-import { calculate } from '../../lib/calculation'
+import { calculate } from '../../plugins/summary/calculation/calculation'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
 

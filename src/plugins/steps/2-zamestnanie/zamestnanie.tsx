@@ -7,7 +7,7 @@ import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import { Page } from '../../../components/Page'
 import { employmentUserInputInitialValues } from '../../../lib/initialValues'
 import { BackLink } from '../../_components/links/BackLink'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,

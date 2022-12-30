@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Warning } from '../../_components/form/Warning'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 export const TaxFormSection = ({ nextRoute, isDebug }) => {
     return (

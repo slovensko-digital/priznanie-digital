@@ -5,7 +5,7 @@ import { PostponeUserInput } from '../../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../../lib/postpone/postponeConverter'
 import { RedirectField, RedirectForm } from '../../_components/form/RedirectForm'
 import { setDate, toBase64 } from '../../../lib/utils'
-import { TAX_YEAR } from '../../../lib/calculation'
+import { TAX_YEAR } from '../../summary/calculation/calculation'
 
 const {
   publicRuntimeConfig: { odkladEmailTemplateId },
