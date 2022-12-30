@@ -1,11 +1,11 @@
 import React from 'react'
 import { Form, FormikProps } from 'formik'
-import { FormWrapper, Input } from '../components/FormComponents'
+import { FormWrapper, Input } from '../plugins/_components/form/FormComponents'
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
-import { ErrorSummary } from '../components/ErrorSummary'
+import { ErrorSummary } from '../plugins/_components/form/ErrorSummary'
 import { Page } from '../components/Page'
-import { BackLink } from '../components/BackLink'
+import { BackLink } from '../plugins/_components/links/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 
 const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({

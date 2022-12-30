@@ -6,19 +6,19 @@ import {
   CheckboxSmall,
   FormWrapper,
   Input,
-} from '../components/FormComponents'
+} from '../plugins/_components/form/FormComponents'
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import styles from './osobne-udaje.module.css'
 import { getNgoByName } from '../lib/api'
-import { ErrorSummary } from '../components/ErrorSummary'
+import { ErrorSummary } from '../plugins/_components/form/ErrorSummary'
 import {
   AutoCompleteData,
   AutoCompleteInput,
-} from '../components/AutoCompleteInput'
+} from '../plugins/_components/form/AutoCompleteInput'
 
 import { Page } from '../components/Page'
 import { twoPercentInitialValues } from '../lib/initialValues'
-import { Details } from '../components/Details'
+import { Details } from '../plugins/_components/form/Details'
 import classNames from 'classnames'
 
 const makeHandleOrganisationAutoform = ({

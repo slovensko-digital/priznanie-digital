@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Form } from 'formik'
 import classNames from 'classnames'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { FormWrapper, Input } from './FormComponents'
-import { ErrorSummary } from './ErrorSummary'
-import { FeedbackFormInput } from '../types/UserInput'
+import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
+import { FeedbackFormInput } from '../../../types/UserInput'
+import { FormWrapper, Input } from '../../_components/form/FormComponents'
+import { ErrorSummary } from '../../_components/form/ErrorSummary'
 
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {

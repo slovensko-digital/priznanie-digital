@@ -1,8 +1,8 @@
 import React from 'react'
 import { Feedback } from './Feedback'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { PostponeUserInput } from '../types/PostponeUserInput'
-import { ExternalLink } from './ExternalLink'
+import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
+import { PostponeUserInput } from '../../../types/PostponeUserInput'
+import { ExternalLink } from '../../_components/links/ExternalLink'
 import { PrivacyPolicyLink } from './PrivacyPolicyLink'
 
 interface Props {

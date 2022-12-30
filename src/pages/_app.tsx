@@ -12,7 +12,7 @@ import { setLocale } from 'yup'
 import { calculate } from '../lib/calculation'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { TaxForm } from '../types/TaxForm'
-import Layout from '../components/Layout'
+import Layout from '../plugins/main/_layout/Layout'
 import {
   initialPostponeUserInput,
   initTaxFormUserInputValues,

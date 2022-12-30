@@ -1,10 +1,10 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { PostponeUserInput } from '../types/PostponeUserInput'
+import { TaxFormUserInput } from '../../../types/TaxFormUserInput'
+import { PostponeUserInput } from '../../../types/PostponeUserInput'
 import { useRouter } from 'next/router'
-import { homeRoute } from '../lib/routes'
+import { homeRoute } from '../../../lib/routes'
 
 interface Props {
   headline: string

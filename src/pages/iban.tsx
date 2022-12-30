@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import { FormErrors, TaxBonusUserInput } from '../types/PageUserInputs'
 import { Form, FormikProps } from 'formik'
-import { ErrorSummary } from '../components/ErrorSummary'
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { ErrorSummary } from '../plugins/_components/form/ErrorSummary'
+import { BooleanRadio, FormWrapper, Input } from '../plugins/_components/form/FormComponents'
 import {
   formatIban,
   validateIbanCountry,
@@ -12,7 +12,7 @@ import {
 import { Page } from '../components/Page'
 import { taxBonusInitialInput } from '../lib/initialValues'
 import { TaxForm } from '../types/TaxForm'
-import { BackLink } from '../components/BackLink'
+import { BackLink } from '../plugins/_components/links/BackLink'
 
 const Iban: Page<TaxBonusUserInput> = ({
   taxForm,

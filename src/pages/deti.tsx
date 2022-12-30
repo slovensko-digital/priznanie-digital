@@ -8,7 +8,7 @@ import {
   CheckboxSmall,
   FormWrapper,
   Select,
-} from '../components/FormComponents'
+} from '../plugins/_components/form/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
 import {
@@ -22,7 +22,7 @@ import {
   validateRodneCislo,
 } from '../lib/utils'
 import { Page } from '../components/Page'
-import { ErrorSummary } from '../components/ErrorSummary'
+import { ErrorSummary } from '../plugins/_components/form/ErrorSummary'
 import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../lib/calculation'
 
 const Deti: Page<ChildrenUserInput> = ({

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Form } from 'formik'
-import { FormWrapper } from '../components/FormComponents'
+import { FormWrapper } from '../plugins/_components/form/FormComponents'
 import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
 import { PartnerBonusForm } from '../components/PartnerBonusForm'
 import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
 import { Page } from '../components/Page'
 import { partnerUserInitialValues } from '../lib/initialValues'
-import { BackLink } from '../components/BackLink'
-import { ErrorSummary } from '../components/ErrorSummary'
+import { BackLink } from '../plugins/_components/links/BackLink'
+import { ErrorSummary } from '../plugins/_components/form/ErrorSummary'
 
 const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,

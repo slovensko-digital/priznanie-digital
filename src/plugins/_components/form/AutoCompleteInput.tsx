@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useField } from 'formik'
 import styles from './AutoCompleteInput.module.css'
 import { Input } from './FormComponents'
-import { UserInput } from '../types/UserInput'
+import { UserInput } from '../../../types/UserInput'
 
 export interface AutoCompleteData extends Record<string, any> {
   id: number | string
