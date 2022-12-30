@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Warning } from '../../_components/form/Warning'
+import { Warning } from '../../_shared/components/form/Warning'
 import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 export const TaxFormSection = ({ nextRoute, isDebug }) => {

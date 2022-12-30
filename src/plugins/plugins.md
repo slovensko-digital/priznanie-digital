@@ -4,6 +4,13 @@
 
 
 # plugins/
+    _shared/
+        ✔ calculation/
+        ✔ components/
+        ✔ interfaces/
+        ✔ types/
+        ✔ testing/
+        ✔ utils/
     main/
         ✔ home
         ✔ footer
@@ -19,18 +26,15 @@
         ✔ 4-dochodok
         ✔ 5-osobne-udaje
     summary/
-        6-suhrn
-        7-vratenie-preplatku
-        8-vypocet-dane
-        9-pokracovat
-        calculation
+        ✔ 6-suhrn
+        ✔ 7-vratenie-preplatku
+        ✔ 8-vypocet-dane
+        ✔ 9-pokracovat
     odklad/
         ✔ 1-prijmy
         ✔ 2-osobne-udaje
         ✔ 3-suhrn
         ✔ 4-pokracovat
-    _components/
-        ✔ form/
-        ✔ links/
-    zz_unknown/
+    api/
+        ✔ _utils/
 

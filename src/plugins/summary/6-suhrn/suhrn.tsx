@@ -4,9 +4,9 @@ import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
 import { formatCurrency, parseInputNumber } from '../../_shared/utils/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
-import { Warning } from '../../_components/form/Warning'
+import { Warning } from '../../_shared/components/form/Warning'
 import { Page } from '../../_shared/interfaces/Page'
-import { BackLink } from '../../_components/links/BackLink'
+import { BackLink } from '../../_shared/components/links/BackLink'
 import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 interface SummaryRow {

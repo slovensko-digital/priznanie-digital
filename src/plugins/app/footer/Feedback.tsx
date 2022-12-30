@@ -3,8 +3,8 @@ import { Form } from 'formik'
 import classNames from 'classnames'
 import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
 import { FeedbackFormInput } from '../../_shared/types/UserInput'
-import { FormWrapper, Input } from '../../_components/form/FormComponents'
-import { ErrorSummary } from '../../_components/form/ErrorSummary'
+import { FormWrapper, Input } from '../../_shared/components/form/FormComponents'
+import { ErrorSummary } from '../../_shared/components/form/ErrorSummary'
 
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {

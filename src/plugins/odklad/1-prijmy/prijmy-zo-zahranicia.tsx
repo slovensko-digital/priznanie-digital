@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Form } from 'formik'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { BooleanRadio, FormWrapper } from '../../_components/form/FormComponents'
+import { BooleanRadio, FormWrapper } from '../../_shared/components/form/FormComponents'
 import { getPostponeRoutes } from '../../../lib/routes'
 import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import {

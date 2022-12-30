@@ -7,8 +7,8 @@ import {
   FormikValues,
 } from 'formik'
 import classnames from 'classnames'
-import { UserInput } from '../../_shared/types/UserInput'
-import { numberInputRegexp } from '../../_shared/utils/utils'
+import { UserInput } from '../../types/UserInput'
+import { numberInputRegexp } from '../../utils/utils'
 
 export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
   children: (formikProps: FormikProps<FormikInput>) => ReactNode

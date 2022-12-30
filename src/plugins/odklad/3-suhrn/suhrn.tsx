@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import { getPostponeRoutes } from '../../../lib/routes'
 import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
-import { BackLink } from '../../_components/links/BackLink'
+import { BackLink } from '../../_shared/components/links/BackLink'
 import Link from 'next/link'
 import { TAX_YEAR } from '../../_shared/calculation/calculation'
 

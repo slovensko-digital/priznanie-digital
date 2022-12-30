@@ -3,7 +3,7 @@ import getConfig from 'next/config'
 import { Page } from '../../_shared/interfaces/Page'
 import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
 import { convertPostponeToXML } from './postpone/postponeConverter'
-import { RedirectField, RedirectForm } from '../../_components/form/RedirectForm'
+import { RedirectField, RedirectForm } from '../../_shared/components/form/RedirectForm'
 import { setDate, toBase64 } from '../../_shared/utils/utils'
 import { TAX_YEAR } from '../../_shared/calculation/calculation'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Feedback } from './Feedback'
 import { TaxFormUserInput } from '../../_shared/types/TaxFormUserInput'
 import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
-import { ExternalLink } from '../../_components/links/ExternalLink'
+import { ExternalLink } from '../../_shared/components/links/ExternalLink'
 import { PrivacyPolicyLink } from './PrivacyPolicyLink'
 
 interface Props {

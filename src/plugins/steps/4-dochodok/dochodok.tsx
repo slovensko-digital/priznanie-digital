@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { BooleanRadio, FormWrapper, Input } from '../../_components/form/FormComponents'
+import { BooleanRadio, FormWrapper, Input } from '../../_shared/components/form/FormComponents'
 import { FormErrors, PensionUserInput } from '../../_shared/types/PageUserInputs'
 import { numberInputRegexp, parseInputNumber } from '../../_shared/utils/utils'
 import { Page } from '../../_shared/interfaces/Page'
 import { pensionInitialValues } from '../../_shared/calculation/initialValues'
-import { ErrorSummary } from '../../_components/form/ErrorSummary'
+import { ErrorSummary } from '../../_shared/components/form/ErrorSummary'
 import { TAX_YEAR } from '../../_shared/calculation/calculation'
 
 const Dochodok: Page<PensionUserInput> = ({

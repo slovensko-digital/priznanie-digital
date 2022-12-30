@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import Fuse from 'fuse.js'
 import { getNace } from '../../api/_utils/api'
 import styles from './Nace.module.css'
-import { AutoCompleteInput } from '../../_components/form/AutoCompleteInput'
+import { AutoCompleteInput } from '../../_shared/components/form/AutoCompleteInput'
 
 const options = {
   shouldSort: true,

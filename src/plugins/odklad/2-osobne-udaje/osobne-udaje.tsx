@@ -3,7 +3,7 @@ import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { FormWrapper, Input } from '../../_components/form/FormComponents'
+import { FormWrapper, Input } from '../../_shared/components/form/FormComponents'
 import styles from '../../steps/5-osobne-udaje/osobne-udaje.module.css'
 import {
   FormErrors,
@@ -14,9 +14,9 @@ import { getPostponeRoutes } from '../../../lib/routes'
 import {
   AutoCompleteData,
   AutoCompleteInput,
-} from '../../_components/form/AutoCompleteInput'
+} from '../../_shared/components/form/AutoCompleteInput'
 import { PostponeUserInput } from '../../_shared/types/PostponeUserInput'
-import { ErrorSummary } from '../../_components/form/ErrorSummary'
+import { ErrorSummary } from '../../_shared/components/form/ErrorSummary'
 import { formatPsc, parseFullName } from '../../_shared/utils/utils'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')

@@ -1,18 +1,18 @@
 import React from 'react'
 import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
-import { FormWrapper, Input } from '../../_components/form/FormComponents'
+import { FormWrapper, Input } from '../../_shared/components/form/FormComponents'
 import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
 } from '../../_shared/types/PageUserInputs'
 import { getAutoformByPersonName } from '../../api/_utils/api'
-import { ErrorSummary } from '../../_components/form/ErrorSummary'
+import { ErrorSummary } from '../../_shared/components/form/ErrorSummary'
 import {
   AutoCompleteData,
   AutoCompleteInput,
-} from '../../_components/form/AutoCompleteInput'
+} from '../../_shared/components/form/AutoCompleteInput'
 import { formatPsc, parseFullName } from '../../_shared/utils/utils'
 import { Nace } from './Nace'
 import { Page } from '../../_shared/interfaces/Page'
