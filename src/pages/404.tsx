@@ -1,14 +1,4 @@
-import React from 'react'
+import Custom404 from '../plugins/main/404/Custom404'
 
-export default function Custom404() {
-  return (
-    <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Stránka, ktorú hľadáte tu nie je.
-      </h1>
-      <p>
-        Skontrolujte prosím či ste zadali správnu adresu alebo nás kontaktujte.
-      </p>
-    </>
-  )
-}
+export default Custom404
+
