@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import { FormWrapper, Input } from '../../_components/form/FormComponents'
-import styles from '../osobne-udaje.module.css'
+import styles from '../../../pages/osobne-udaje.module.css'
 import {
   FormErrors,
   PersonalInformationPostponePage,
