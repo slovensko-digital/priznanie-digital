@@ -1,4 +1,4 @@
-import { validate } from '../src/pages/dve-percenta'
+import { validate } from '../src/plugins/steps/3d-dve-percenta/dve-percenta'
 import { testValidation } from './utils/testValidation'
 
 jest.mock('next/config', () => () => ({

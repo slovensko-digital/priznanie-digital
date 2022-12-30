@@ -1,77 +1,75 @@
 import React from 'react'
 import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
 import { FormWrapper, Input } from '../../_components/form/FormComponents'
-import styles from '../../steps/5-osobne-udaje/osobne-udaje.module.css'
+import styles from './osobne-udaje.module.css'
 import {
+  PersonalInformationUserInput,
   FormErrors,
-  PersonalInformationPostponePage,
 } from '../../../types/PageUserInputs'
 import { getAutoformByPersonName } from '../../../lib/api'
-import { getPostponeRoutes } from '../../../lib/routes'
+import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../_components/form/AutoCompleteInput'
-import { PostponeUserInput } from '../../../types/PostponeUserInput'
-import { ErrorSummary } from '../../_components/form/ErrorSummary'
 import { formatPsc, parseFullName } from '../../../lib/utils'
+import { Nace } from '../../../components/Nace'
+import { Page } from '../../../components/Page'
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
+const formatNace = (economicActivity) => {
+  const { code, name } = economicActivity || {}
+  if (code && name) {
+    return `${code} - ${name}`
+  }
+  return ''
+}
 
 const makeHandlePersonAutoform = ({
   setValues,
-  values,
-}: FormikProps<PersonalInformationPostponePage>) => {
+}: FormikProps<PersonalInformationUserInput>) => {
   return (person: AutoCompleteData) => {
     const { first, last, title } = parseFullName(person.name)
 
     setValues({
-      ...values,
-      meno_priezvisko: person.name || '',
-      priezvisko: last || '',
-      meno: first || '',
-      titul: title || '',
-      dic: person?.tin || '',
-      ulica: person.street || person.municipality || '',
-      cislo: person.street_number || '',
-      psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      obec: person.municipality || '',
-      stat: person.country || '',
+      meno_priezvisko: person.name,
+      r004_priezvisko: last || '',
+      r005_meno: first || '',
+      r006_titul: title || '',
+      r001_dic: person?.tin || '',
+      r003_nace: formatNace(person.main_economic_activity),
+      r007_ulica: person.street || person.municipality || '',
+      r008_cislo: person.street_number || '',
+      r009_psc: person.postal_code ? formatPsc(person.postal_code) : '',
+      r010_obec: person.municipality || '',
+      r011_stat: person.country || '',
     })
   }
 }
 
-interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostponePage) => void
-  postponeUserInput: PostponeUserInput
-}
-const OsobneUdaje: NextPage<Props> = ({
-  setPostponeUserInput,
-  postponeUserInput,
-}: Props) => {
-  const router = useRouter()
-
+const OsobneUdaje: Page<PersonalInformationUserInput> = ({
+  setTaxFormUserInput,
+  taxFormUserInput,
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
       <Link href={previousRoute} data-test="back" className="govuk-back-link">
         Späť
       </Link>
-      <FormWrapper<PersonalInformationPostponePage>
-        initialValues={postponeUserInput}
+      <FormWrapper<PersonalInformationUserInput>
+        initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setPostponeUserInput(values)
+          setTaxFormUserInput(values)
           router.push(nextRoute)
         }}
       >
         {(props) => (
           <>
-            <ErrorSummary<PersonalInformationPostponePage>
-              errors={props.errors}
-            />
+            <ErrorSummary<PersonalInformationUserInput> errors={props.errors} />
             <Form className="form">
               <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>
@@ -96,7 +94,7 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="titul"
+                  name="r006_titul"
                   type="text"
                   label="Titul"
                 />
@@ -104,7 +102,7 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <Input
                 className={styles.wideField}
-                name="meno"
+                name="r005_meno"
                 type="text"
                 label="Meno"
                 width="auto"
@@ -112,16 +110,18 @@ const OsobneUdaje: NextPage<Props> = ({
 
               <Input
                 className={styles.wideField}
-                name="priezvisko"
+                name="r004_priezvisko"
                 type="text"
                 label="Priezvisko"
                 width="auto"
               />
 
+              <Nace />
+
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="dic"
+                  name="r001_dic"
                   type="text"
                   label="DIČ"
                   hint="Ak nie je pridelené, uvádza sa rodné číslo"
@@ -132,13 +132,13 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="ulica"
+                  name="r007_ulica"
                   type="text"
                   label="Ulica"
                 />
                 <Input
                   className={styles.inlineField}
-                  name="cislo"
+                  name="r008_cislo"
                   type="text"
                   label="Súpisné/orientačné číslo"
                 />
@@ -146,28 +146,28 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="psc"
+                  name="r009_psc"
                   type="text"
                   label="PSČ"
                   maxLength={6}
                   onChange={async (event) => {
                     const pscValue = formatPsc(
                       event.currentTarget.value,
-                      props.values.psc,
+                      props.values.r009_psc,
                     )
-                    props.setFieldValue('psc', pscValue)
+                    props.setFieldValue('r009_psc', pscValue)
                   }}
                 />
 
                 <Input
                   className={styles.inlineField}
-                  name="obec"
+                  name="r010_obec"
                   type="text"
                   label="Obec"
                 />
               </div>
 
-              <Input name="stat" type="text" label="Štát" />
+              <Input name="r011_stat" type="text" label="Štát" />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
@@ -180,43 +180,43 @@ const OsobneUdaje: NextPage<Props> = ({
   )
 }
 
-const validate = (values: PersonalInformationPostponePage) => {
-  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {}
+const validate = (values: PersonalInformationUserInput) => {
+  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {}
 
-  if (!values.dic) {
-    errors.dic = 'Zadajte pridelené DIČ'
-  } else if (values.dic.length < 9 || values.dic.length > 10) {
+  if (!values.r001_dic) {
+    errors.r001_dic = 'Zadajte pridelené DIČ'
+  } else if (values.r001_dic.length < 9 || values.r001_dic.length > 10) {
     /**
      * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
      */
-    errors.dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
+    errors.r001_dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
   }
 
-  if (!values.meno) {
-    errors.meno = 'Zadajte vaše meno'
+  if (!values.r005_meno) {
+    errors.r005_meno = 'Zadajte vaše meno'
   }
 
-  if (!values.priezvisko) {
-    errors.priezvisko = 'Zadajte vaše priezvisko'
+  if (!values.r004_priezvisko) {
+    errors.r004_priezvisko = 'Zadajte vaše priezvisko'
   }
 
-  if (!values.cislo) {
-    errors.cislo = 'Zadajte číslo domu'
+  if (!values.r008_cislo) {
+    errors.r008_cislo = 'Zadajte číslo domu'
   }
 
   const pscNumberFormat = /^\d{3} \d{2}$/
-  if (!values.psc) {
-    errors.psc = 'Zadajte PSČ'
-  } else if (!pscNumberFormat.test(values.psc)) {
-    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
+  if (!values.r009_psc) {
+    errors.r009_psc = 'Zadajte PSČ'
+  } else if (!pscNumberFormat.test(values.r009_psc)) {
+    errors.r009_psc = 'PSČ môže obsahovať iba 5 čísel'
   }
 
-  if (!values.obec) {
-    errors.obec = 'Zadajte obec'
+  if (!values.r010_obec) {
+    errors.r010_obec = 'Zadajte obec'
   }
 
-  if (!values.stat) {
-    errors.stat = 'Zadajte štát'
+  if (!values.r011_stat) {
+    errors.r011_stat = 'Zadajte štát'
   }
 
   return errors

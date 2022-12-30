@@ -110,9 +110,7 @@ const Iban: Page<TaxBonusUserInput> = ({
   )
 }
 
-export default Iban
-
-export const makeValidate =
+const makeValidate =
   (taxForm: TaxForm) => (values: TaxBonusUserInput) => {
     const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
@@ -147,3 +145,7 @@ export const makeValidate =
 
     return errors
   }
+
+export { Iban, makeValidate }
+export default Iban
+

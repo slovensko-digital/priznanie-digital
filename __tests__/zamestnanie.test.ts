@@ -1,4 +1,4 @@
-import { validate } from '../src/pages/zamestnanie'
+import { validate } from '../src/plugins/steps/2-zamestnanie/zamestnanie'
 import { testValidation } from './utils/testValidation'
 
 describe('zamestnanie', () => {

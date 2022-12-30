@@ -1,4 +1,4 @@
-import { validate } from '../src/pages/hypoteka'
+import { validate } from '../src/plugins/steps/3c-hypoteka/hypoteka'
 import { testValidation } from './utils/testValidation'
 
 describe('hypoteka', () => {
