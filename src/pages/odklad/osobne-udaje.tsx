@@ -39,7 +39,7 @@ const makeHandlePersonAutoform = ({
       cislo: person.street_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
       obec: person.municipality || '',
-      stat: person.country || '',
+      stat: person.country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
     })
   }
 }
