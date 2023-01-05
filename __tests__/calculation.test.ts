@@ -4,11 +4,11 @@ import {
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER,
   MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA,
-} from '../src/plugins/_shared/calculation/calculation'
-import { parseInputNumber } from '../src/plugins/_shared/utils/utils'
-import { TaxFormUserInput } from '../src/plugins/_shared/types/TaxFormUserInput'
-import { initTaxFormUserInputValues } from '../src/plugins/_shared/calculation/initialValues'
-import { sum } from '../src/plugins/_shared/utils/utils'
+} from '../src/features/_shared/calculation/calculation'
+import { parseInputNumber } from '../src/features/_shared/_utils/utils'
+import { TaxFormUserInput } from '../src/features/_shared/taxform/TaxFormUserInput'
+import { initTaxFormUserInputValues } from '../src/features/_shared/calculation/initialValues'
+import { sum } from '../src/features/_shared/_utils/utils'
 
 describe('#parse', () => {
   const inputs = [

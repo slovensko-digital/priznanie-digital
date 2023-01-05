@@ -1,4 +1,4 @@
-import { validate } from '../src/plugins/steps/3-manzelstvo/partner'
+import { validate } from '../src/features/steps/3-manzelstvo/partner'
 import { testValidation } from './utils/testValidation'
 
 describe('partner', () => {

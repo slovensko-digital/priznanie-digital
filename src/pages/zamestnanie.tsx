@@ -1,3 +1,3 @@
-import { Zamestnanie } from '../plugins/steps/2-zamestnanie/zamestnanie'
+import { Zamestnanie } from '../features/steps/2-zamestnanie/zamestnanie'
 
 export default Zamestnanie

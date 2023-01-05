@@ -1,4 +1,4 @@
-import { validate } from '../src/plugins/odklad/1-prijmy/prijmy-zo-zahranicia'
+import { validate } from '../src/features/odklad/1-prijmy/prijmy-zo-zahranicia'
 import { testValidation } from './utils/testValidation'
 
 describe('odklad/prijmy-zo-zahranicia', () => {

@@ -9,7 +9,7 @@ module.exports = {
     autoformPublicToken: '61e4225378747a32f0e65ddd106a6fc18f5f82e81d58a539d86178a09128e47342ddc5d47ffe4073'
   },
   typescript: {
-    ignoreDevErrors: true,
+    // ignoreDevErrors: true,
   },
   /**
    * Redirect to navody.

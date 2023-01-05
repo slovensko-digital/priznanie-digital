@@ -1,3 +1,3 @@
-import { Hypoteka } from '../plugins/steps/3c-hypoteka/hypoteka'
+import { Hypoteka } from '../features/steps/3c-hypoteka/hypoteka'
 
 export default Hypoteka

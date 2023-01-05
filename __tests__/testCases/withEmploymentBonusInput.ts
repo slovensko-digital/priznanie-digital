@@ -1,4 +1,4 @@
-import { E2eTestUserInput } from '../../src/plugins/_shared/testing/E2eTestUserInput'
+import { E2eTestUserInput } from '../../src/features/_shared/testing/E2eTestUserInput'
 
 export const withEmploymentBonusInput: E2eTestUserInput = {
   priloha3_r11_socialne: '435.22',

@@ -1,3 +1,3 @@
-import { Dochodok } from '../plugins/steps/4-dochodok/dochodok'
+import { Dochodok } from '../features/steps/4-dochodok/dochodok'
 
 export default Dochodok

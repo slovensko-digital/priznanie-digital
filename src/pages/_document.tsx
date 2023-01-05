@@ -1,6 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { getGitCommit } from '../plugins/api/_utils/constants'
+import { getGitCommit } from '../features/api/_utils/constants'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {

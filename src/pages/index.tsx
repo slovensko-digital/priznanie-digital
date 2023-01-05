@@ -1,3 +1,3 @@
-import { Home } from '../plugins/app/home/Home'
+import { Home } from '../features/app/home/Home'
 
 export default Home

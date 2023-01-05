@@ -1,4 +1,4 @@
-import { checkCookie } from '../src/plugins/app/app/checkCookie'
+import { checkCookie } from '../src/features/app/app/_utils/checkCookie'
 
 describe('cookie', () => {
   describe('#checkCookie', () => {

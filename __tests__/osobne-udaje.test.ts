@@ -1,4 +1,4 @@
-import { validate } from '../src/plugins/steps/5-osobne-udaje/osobne-udaje'
+import { validate } from '../src/features/steps/5-osobne-udaje/osobne-udaje'
 import { testValidation } from './utils/testValidation'
 
 jest.mock('next/config', () => () => ({

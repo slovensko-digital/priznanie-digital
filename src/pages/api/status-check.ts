@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getGitCommit } from '../../plugins/api/_utils/constants'
+import { getGitCommit } from '../../features/api/_utils/constants'
 
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {

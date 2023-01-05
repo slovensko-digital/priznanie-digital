@@ -1,6 +1,6 @@
-import { makeValidate } from '../src/plugins/summary/7-vratenie-preplatku/iban'
+import { makeValidate } from '../src/features/summary/7-vratenie-preplatku/iban'
 import { testValidation } from './utils/testValidation'
-import { TaxForm } from '../src/plugins/_shared/types/TaxForm'
+import { TaxForm } from '../src/features/_shared/taxform/TaxForm'
 
 describe('iban', () => {
   describe('#validate', () => {

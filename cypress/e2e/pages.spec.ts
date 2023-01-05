@@ -9,12 +9,12 @@ import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 
-import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
+import { TaxFormUserInput } from '../../src/features/_shared/taxform/TaxFormUserInput'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
 import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
-import { UserInput } from '../../src/types/UserInput'
+import { UserInput } from '../../src/features/_shared/forms/_types/UserInput'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)

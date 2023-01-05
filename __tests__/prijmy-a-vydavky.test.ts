@@ -1,4 +1,4 @@
-import { validate } from '../src/plugins/steps/1-prijmy/prijmy-a-vydavky'
+import { validate } from '../src/features/steps/1-prijmy/prijmy-a-vydavky'
 import { testValidation } from './utils/testValidation'
 
 describe('prijmy-a-vydavky', () => {

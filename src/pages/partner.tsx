@@ -1,3 +1,3 @@
-import { Partner } from '../plugins/steps/3-manzelstvo/partner'
+import { Partner } from '../features/steps/3-manzelstvo/partner'
 
 export default Partner

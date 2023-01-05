@@ -1,4 +1,4 @@
-import { validate } from '../src/plugins/steps/4-dochodok/dochodok'
+import { validate } from '../src/features/steps/4-dochodok/dochodok'
 import { testValidation } from './utils/testValidation'
 
 describe('dochodok', () => {

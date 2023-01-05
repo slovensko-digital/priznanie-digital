@@ -1,3 +1,3 @@
-import { Deti } from '../plugins/steps/3b-deti/deti'
+import { Deti } from '../features/steps/3b-deti/deti'
 
 export default Deti

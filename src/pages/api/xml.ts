@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { convertToXML } from '../../plugins/summary/9-pokracovat/xml/xmlConverter'
-import { setDate } from '../../plugins/_shared/utils/utils'
-import { calculate } from '../../plugins/_shared/calculation/calculation'
-import { TaxForm } from '../../plugins/_shared/types/TaxForm'
-import { TaxFormUserInput } from '../../plugins/_shared/types/TaxFormUserInput'
+import { convertToXML } from '../../features/summary/9-pokracovat/xml/xmlConverter'
+import { setDate } from '../../features/_shared/_utils/utils'
+import { calculate } from '../../features/_shared/calculation/calculation'
+import { TaxForm } from '../../features/_shared/taxform/TaxForm'
+import { TaxFormUserInput } from '../../features/_shared/taxform/TaxFormUserInput'
 
 export default async (
   req: NextApiRequest,

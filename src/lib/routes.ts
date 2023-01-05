@@ -1,7 +1,7 @@
-import { TaxFormUserInput } from '../plugins/_shared/types/TaxFormUserInput'
+import { TaxFormUserInput } from '../features/_shared/taxform/TaxFormUserInput'
 import type { NextRouter } from 'next/router'
-import { TaxForm } from '../plugins/_shared/types/TaxForm'
-import { PostponeUserInput } from '../plugins/_shared/types/PostponeUserInput'
+import { TaxForm } from '../features/_shared/taxform/TaxForm'
+import { PostponeUserInput } from '../features/_shared/pages/_types/PostponeUserInput'
 
 // route to home page, should be '/' when app is ready
 export type HomeRoute = '/'

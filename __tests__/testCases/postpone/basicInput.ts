@@ -1,4 +1,4 @@
-import { PostponeUserInput } from '../../../src/plugins/_shared/types/PostponeUserInput'
+import { PostponeUserInput } from '../../../src/features/_shared/pages/_types/PostponeUserInput'
 
 export const basicInput: PostponeUserInput = {
   prijmy_zo_zahranicia: false,

@@ -5,19 +5,19 @@
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
-import { UserInput } from '../../src/plugins/_shared/types/UserInput'
-import { formatCurrency, parseInputNumber } from '../../src/plugins/_shared/utils/utils'
-import { calculate, TAX_YEAR } from '../../src/plugins/_shared/calculation/calculation'
+import { UserInput } from '../../src/features/_shared/forms/_types/UserInput'
+import { formatCurrency, parseInputNumber } from '../../src/features/_shared/_utils/utils'
+import { calculate, TAX_YEAR } from '../../src/features/_shared/calculation/calculation'
 import {
   Route,
   PostponeRoute,
   homeRoute,
   postponeHomeRoute,
 } from '../../src/lib/routes'
-import { PostponeUserInput } from '../../src/plugins/_shared/types/PostponeUserInput'
+import { PostponeUserInput } from '../../src/features/_shared/pages/_types/PostponeUserInput'
 import Decimal from 'decimal.js'
 import path from 'path'
-import { E2eTestUserInput } from '../../src/plugins/_shared/testing/E2eTestUserInput'
+import { E2eTestUserInput } from '../../src/features/_shared/testing/E2eTestUserInput'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)

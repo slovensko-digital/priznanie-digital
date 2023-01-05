@@ -1,3 +1,3 @@
-import { OsobneUdaje } from '../plugins/steps/5-osobne-udaje/osobne-udaje'
+import { OsobneUdaje } from '../features/steps/5-osobne-udaje/osobne-udaje'
 
 export default OsobneUdaje
