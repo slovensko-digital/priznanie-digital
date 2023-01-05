@@ -1,9 +1,9 @@
 import React from 'react'
-import { Feedback } from './components/Feedback'
+import { Feedback } from './_components/Feedback'
 import { TaxFormUserInput } from '../../../_shared/taxform/TaxFormUserInput'
 import { PostponeUserInput } from '../../../_shared/pages/_types/PostponeUserInput'
 import { ExternalLink } from '../../../_shared/links/ExternalLink'
-import { PrivacyPolicyLink } from './components/PrivacyPolicyLink'
+import { PrivacyPolicyLink } from './_components/PrivacyPolicyLink'
 
 interface Props {
   taxFormUserInput: TaxFormUserInput

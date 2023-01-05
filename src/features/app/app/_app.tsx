@@ -6,7 +6,7 @@ import { setLocale } from 'yup'
 import { calculate } from '../../_shared/calculation/calculation'
 import { TaxFormUserInput } from '../../_shared/taxform/TaxFormUserInput'
 import { TaxForm } from '../../_shared/taxform/TaxForm'
-import Layout from '../_layout/Layout'
+import Layout from '../layout/Layout'
 import {
   initialPostponeUserInput,
   initTaxFormUserInputValues,
