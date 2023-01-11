@@ -3,7 +3,7 @@ import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { FormWrapper, Input } from '../../components/FormComponents'
+import { FormWrapper, Input, Select } from '../../components/FormComponents'
 import styles from '../osobne-udaje.module.css'
 import {
   FormErrors,
@@ -15,7 +15,7 @@ import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../components/AutoCompleteInput'
-import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { countries, PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc, parseFullName } from '../../lib/utils'
 
@@ -167,7 +167,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 />
               </div>
 
-              <Input name="stat" type="text" label="Štát" />
+              <Select name="stat" label="Štát" options={countries} optionAsValue />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
