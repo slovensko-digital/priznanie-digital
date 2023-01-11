@@ -7,7 +7,7 @@ var stringBuilder;
 function createxmlfinal() {
     stringBuilder = new $.StringBuilder();
     stringBuilder.appendLine('<?xml version="1.0" encoding="UTF-8"?>');
-    stringBuilder.appendLine('<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ozn493_2017.xsd">');
+    stringBuilder.appendLine('<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ozn493_2022.xsd">');
 
     ident = 1;
     stringBuilder.appendLine(AddSectionIdent('<hlavicka>'));
@@ -576,7 +576,7 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbOdd3Telefon').val()) + ')/T (vypracoval-tel)>>');
 
     stringBuilder.appendLine('    ] ');
-    stringBuilder.appendLine('    /F (form.510.OZN493-20-print-save.pdf)');
+    stringBuilder.appendLine('    /F (form.548.OZN493-22-print-save.pdf)');
     stringBuilder.appendLine('    /ID [ <0f1c0c5013770170f4042d0f9bbdc064><67bbe03ad822ab86734fd4c8c191afa2>]');
     stringBuilder.appendLine('  >> ');
     stringBuilder.appendLine('>> ');

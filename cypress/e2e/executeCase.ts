@@ -372,7 +372,7 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('cislo', input)
         typeToInput('psc', input)
         typeToInput('obec', input)
-        typeToInput('stat', input)
+        cy.get('[data-test="stat-select"]').select(input.stat)
 
         next()
         assertUrl('/odklad/suhrn')
@@ -386,12 +386,9 @@ const executePostponeCase = (testCase: string) => {
 
         cy.get('[data-test="debug-download"]').click()
         const filePath = path.join(__dirname, '../downloads/file.xml')
-        
-        // Disable postpone form checking until we get new updated form on 1.1.2023
-        cy.wait(10).then(() => done())
 
         /**  Validate our results with the FS form */
-        cy.visit('/form-odklad/form.510.html')
+        cy.visit('/form-odklad/form.548.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
