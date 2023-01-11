@@ -372,7 +372,7 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('cislo', input)
         typeToInput('psc', input)
         typeToInput('obec', input)
-        typeToInput('stat', input)
+        cy.get('[data-test="stat-select"]').select(input.stat)
 
         next()
         assertUrl('/odklad/suhrn')
