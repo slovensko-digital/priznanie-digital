@@ -66,7 +66,7 @@ describe('/odklad/osobne-udaje page', () => {
     getInputPostpone('cislo').should('contain.value', '343')
     getInputPostpone('psc').should('contain.value', '930 36')
     getInputPostpone('obec').should('contain.value', 'Horná Potôň')
-    getInputPostpone('stat').should('contain.value', 'Slovenská republika')
+    getInputPostpone('stat').should('contain.value', 'Slovensko')
   })
 
   it('Manual entry', () => {
