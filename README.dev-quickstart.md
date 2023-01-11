@@ -8,15 +8,16 @@
 
 
 # ako zacat
-- npm run dev
+- `yarn dev`
 
 
 # ako otestovat ci si nic nerozbil (CYPRESS ui e2e testy)
-- npm run cy:run
+- `yarn cy:run`
+- alebo `yarn cy:open` (viditelne)
 
 
 # ako otestovat ci si nic nerozbil (JEST unit testy)
-- npm run test
+- `yarn test`
 
 
 # dev faq
