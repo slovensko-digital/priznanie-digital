@@ -20,10 +20,8 @@
 
 
 # dev faq
-- nejde mi node, hadze chyby
-    skus node 16, nainstalujes cez nvm a potom by malo ist, s novsim su issues
 - ako to nainstalujem
-    git clone a npm i
+    git clone a yarn
 - je to niekde deploynute?
     ano, priznanie.digital
 - je niekde deploynuta dev verzia?

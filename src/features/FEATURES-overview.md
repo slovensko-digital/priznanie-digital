@@ -9,40 +9,10 @@
     - _utils/                               - ..utilitky ktore nemaju jasnu featuru, sa daju odlozit sem
 
 
-# features/
-    _shared/
-        _utils
-        calculation
-        forms
-        links
-        pages
-        styles
-        taxform
-        testing
-    app/
-        _layout
-        404
-        app
-        home
-    steps/
-        1-prijmy
-        2-zamestnanie
-        3-manzelstvo
-        3b-deti
-        3c-hypoteka
-        3d-dve-percenta
-        4-dochodok
-        5-osobne-udaje
-    summary/
-        6-suhrn
-        7-vratenie-preplatku
-        8-vypocet-dane
-        9-pokracovat
-    odklad/
-        1-prijmy
-        2-osobne-udaje
-        3-suhrn
-        4-pokracovat
-    api/
-        _utils
-
+# features/* namespaces
+    _shared/        - tu su zdielane utilitky a komponenty, ktore sa nedaju vnorit pod jednu feature alebo pod jediny namespace
+    app/            - tu su uvodne stranky, root component app, a univerzalne stranky nepatriace k nijakemu namespacu ale pre celu stranku
+    steps/          - tu su hlavne kroky danoveho priznania vramci vyplnania userom po ktorych sa dostane k sumaru
+    summary/        - tu su sumarne obrazovky pre uz vyplnene danove priznanie az po koniec celeho scenaria
+    odklad/         - tu su obrazovky pre scenario odkladu danoveho priznania
+    api/            - tu su utilitky ktore nie su univerzalne pre vsetko, ale su unikatne len pre api
