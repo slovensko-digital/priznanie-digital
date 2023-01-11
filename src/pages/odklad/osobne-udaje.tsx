@@ -15,9 +15,10 @@ import {
   AutoCompleteData,
   AutoCompleteInput,
 } from '../../components/AutoCompleteInput'
-import { countries, PostponeUserInput } from '../../types/PostponeUserInput'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc, parseFullName } from '../../lib/utils'
+import { countries } from '../../lib/postpone/countries'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
