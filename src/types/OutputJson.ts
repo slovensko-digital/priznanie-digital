@@ -591,6 +591,7 @@ export interface Telo {
   r32: R32
   r33: { dieta: Dieta[] }
   r34udajeDalsieDeti: string
+  r34a: string
   r35: R35
   r36: string
   r36a: string

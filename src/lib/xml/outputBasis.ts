@@ -106,6 +106,7 @@ const sampleSchema: OutputJson = {
         ],
       },
       r34udajeDalsieDeti: '0',
+      r34a: '',
       r35: {
         uplatDanBonusZaplatUroky: '0',
         zaplateneUroky: '',

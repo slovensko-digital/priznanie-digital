@@ -82,6 +82,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    form.dokument.telo.r34a = taxForm.r034a
   }
 
   /** SECTION Mortgage */
