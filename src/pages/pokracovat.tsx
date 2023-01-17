@@ -72,9 +72,10 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
   ]
 }
 
-const ContinuePage: Page<{}> = ({ taxForm, taxFormUserInput }) => {
+const ContinuePage: Page<{}> = ({ taxForm, taxFormUserInput, isDebug }) => {
   return (
     <RedirectForm
+      isDebug={isDebug}
       fields={buildFields(taxForm)}
       canContinue={!!taxFormUserInput.r004_priezvisko}
       debugDownload={buildXml(taxForm)}

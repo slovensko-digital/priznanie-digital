@@ -1,0 +1,76 @@
+﻿body {
+    background: #FFFFFF
+}
+
+input.warning[type=text],
+textarea.warning {
+    border: 1px solid orange;
+    border-bottom: 6px solid orange;
+}
+
+.layoutMain {
+    margin: 0px auto;
+    padding: 5px 5px 130px 5px;
+    width: 900px;
+}
+
+select.warning { border: 1px solid orange; }
+
+input.warning[type=radio],
+input.warning[type=checkbox] {
+    border: 1px solid orange;
+    outline: 1px solid orange;
+}
+.ui-widget-content {
+    background: #EEFEDB /*{bgColorContent}*/ /*url(../images/ui-bg_flat_75_ffffff_40x100.png)*/ /*{bgImgUrlContent}*/ 50% /*{bgContentXPos}*/ 50% /*{bgContentYPos}*/ repeat-x/*{bgContentRepeat}*/;
+   }
+   
+.ui-widget-header {
+     background: #C5E0B2 /*{bgColorHeader}*/ /*url(../images/ui-bg_highlight-soft_75_cccccc_1x100.png)*/ /*{bgImgUrlHeader}*/ 50% /*{bgHeaderXPos}*/ 50% /*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/;
+   }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: #C5E0B2 /*{bgColorDefault}*/ /*url(../images/ui-bg_glass_75_e6e6e6_1x400.png)*/ /*{bgImgUrlDefault}*/ 50% /*{bgDefaultXPos}*/ 50% /*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #D2E9C3 /*{bgColorHover}*/ /*url(../images/ui-bg_glass_75_dadada_1x400.png)*/ /*{bgImgUrlHover}*/ 50% /*{bgHoverXPos}*/ 50% /*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #373737/*{borderColorHighlight}*/;
+}
+
+.errorsContainerDiv{
+ width: 100%;	
+ position: fixed; 
+ bottom: 0px;
+ overflow: visible; 
+ z-index: +1;
+}
+
+.errorsContainer {
+    border: 1px solid red !important;
+    /*display: none;
+    font-size: 0.75em;
+    margin: 0px auto; 
+    padding: 5px;
+    width: 900px !important;*/
+  	position: relative; left: -8px;
+	z-index: 100;
+	background:#EEFEDB;
+	max-height: 120px;
+    overflow: auto; 
+}
+
+.errorsContainer li {
+ /*   color: red;
+    list-style-type: none;
+    padding: 0px; 	*/
+	margin:0px auto;
+}
+
+.errorsContainer li label.warning {
+    color: #B36F00;
+	/*color: orange;*/
+    list-style-type: none;
+    padding: 0px;
+}

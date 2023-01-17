@@ -7,7 +7,7 @@
 
 import { UserInput } from '../../src/types/UserInput'
 import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
-import { calculate } from '../../src/lib/calculation'
+import { calculate, TAX_YEAR } from '../../src/lib/calculation'
 import {
   Route,
   PostponeRoute,
@@ -353,12 +353,12 @@ const executePostponeCase = (testCase: string) => {
         if (input.prijmy_zo_zahranicia) {
           getInput('prijmy_zo_zahranicia', '-yes').click()
           cy.contains(
-            'Nový termín pre podanie daňového priznania je 30. septembra 2022.',
+            `Nový termín pre podanie daňového priznania je 30. septembra ${TAX_YEAR+1}.`,
           )
         } else {
           getInput('prijmy_zo_zahranicia', '-no').click()
           cy.contains(
-            'Nový termín pre podanie daňového priznania je 30. júna 2022.',
+            `Nový termín pre podanie daňového priznania je 30. júna ${TAX_YEAR+1}.`,
           )
         }
 
@@ -372,7 +372,7 @@ const executePostponeCase = (testCase: string) => {
         typeToInput('cislo', input)
         typeToInput('psc', input)
         typeToInput('obec', input)
-        typeToInput('stat', input)
+        cy.get('[data-test="stat-select"]').select(input.stat)
 
         next()
         assertUrl('/odklad/suhrn')
@@ -388,7 +388,7 @@ const executePostponeCase = (testCase: string) => {
         const filePath = path.join(__dirname, '../downloads/file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form-odklad/form.510.html')
+        cy.visit('/form-odklad/form.548.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)

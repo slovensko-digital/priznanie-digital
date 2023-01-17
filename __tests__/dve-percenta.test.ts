@@ -1,6 +1,12 @@
 import { validate } from '../src/pages/dve-percenta'
 import { testValidation } from './utils/testValidation'
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {
+    autoformPublicToken: 'foobar',
+  },
+}))
+
 describe('dve-percenta', () => {
   describe('#validate', () => {
     testValidation(validate, [

@@ -2,7 +2,7 @@
 <dokument>
    <hlavicka>
       <dic>1231231232</dic>
-      <zaRok>2021</zaRok>
+      <zaRok>2022</zaRok>
       <dovodDoplnenia>0</dovodDoplnenia>
       <fyzickaOsoba>
          <priezvisko>Heisenberg</priezvisko>
@@ -18,10 +18,10 @@
       <novaLehota>
          <predlzenie493a>0</predlzenie493a>
          <predlzenie493b>1</predlzenie493b>
-         <datumLehota>30.09.2022</datumLehota>
+         <datumLehota>30.09.2023</datumLehota>
       </novaLehota>
       <vypracoval>
-         <dna>01.01.2022</dna>
+         <dna>01.01.2023</dna>
       </vypracoval>
       <podpis>1</podpis>
    </hlavicka>

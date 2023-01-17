@@ -304,6 +304,7 @@ interface SelectProps {
   className?: string
   hint?: string
   label: ReactNode
+  optionAsValue?: boolean
 
   /** boolean=true disables the <select> while keeping selected value
    *  number value temporarily selects a value while field is disabled */
@@ -316,6 +317,7 @@ export const Select = ({
   className,
   hint,
   disabled = false,
+  optionAsValue = false,
   ...props
 }: SelectProps) => {
   const [field, meta] = useField(name)
@@ -348,7 +350,7 @@ export const Select = ({
         data-test={`${name}-select`}
       >
         {options.map((name, key) => (
-          <option key={key} value={key}>
+          <option key={key} value={optionAsValue ? name : key}>
             {name}
           </option>
         ))}

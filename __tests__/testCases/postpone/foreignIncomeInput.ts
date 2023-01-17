@@ -13,5 +13,5 @@ export const foreignIncomeInput: PostponeUserInput = {
   cislo: '4',
   obec: 'Bratislava 3',
   stat: 'Slovensko',
-  datum: '01.01.2022',
+  datum: '01.01.2023',
 }

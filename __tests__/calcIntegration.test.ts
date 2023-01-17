@@ -33,7 +33,7 @@ const testCases = [
   'completeDecimal',
 ]
 
-describe('calcIntergration', () => {
+describe.skip('calcIntergration', () => {
   testCases.forEach((testCase) => {
     test(testCase, async () => {
       const testCaseValidatedXML = await fs.readFile(

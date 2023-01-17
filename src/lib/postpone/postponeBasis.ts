@@ -4,7 +4,7 @@ export const postponeBasis: PostponeOutput = {
   dokument: {
     hlavicka: {
       dic: '',
-      zaRok: '2021',
+      zaRok: 'xxxx',
       dovodDoplnenia: '0',
       fyzickaOsoba: {
         priezvisko: '',
