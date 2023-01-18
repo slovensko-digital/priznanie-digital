@@ -3,7 +3,7 @@ import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { FormWrapper, Input } from '../../components/FormComponents'
+import { FormWrapper, Input, Select } from '../../components/FormComponents'
 import styles from '../osobne-udaje.module.css'
 import {
   FormErrors,
@@ -18,6 +18,7 @@ import {
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
 import { formatPsc, parseFullName } from '../../lib/utils'
+import { countries } from '../../lib/postpone/countries'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
@@ -39,7 +40,7 @@ const makeHandlePersonAutoform = ({
       cislo: person.street_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
       obec: person.municipality || '',
-      stat: person.country || '',
+      stat: person.country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
     })
   }
 }
@@ -167,7 +168,7 @@ const OsobneUdaje: NextPage<Props> = ({
                 />
               </div>
 
-              <Input name="stat" type="text" label="Štát" />
+              <Select name="stat" label="Štát" options={countries} optionAsValue />
 
               <button className="govuk-button" type="submit">
                 Pokračovať

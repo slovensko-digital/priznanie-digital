@@ -1,26 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0060)file:///Users/julius_retzer/Downloads/form.510/form.510.html -->
+<!-- saved from url=(0071)https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OZN493v20 - Oznámenie o predĺžení lehoty na podanie daňového priznania</title>
+	<title>OZN493v23 - Oznámenie o predĺžení lehoty na podanie daňového priznania</title>
 	
 	<meta name="language" content="sk-SK">
-		<script src="./form.510_files/jquery.min.js" type="text/javascript"></script>
-<script src="./form.510_files/jquery-ui.min.js" type="text/javascript"></script>
-<script src="./form.510_files/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="./form.510_files/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-<script src="./form.510_files/wrapper.js" type="text/javascript"></script>
-<script src="./form.510_files/ego.statusDialog.js" type="text/javascript"></script>
-<script src="./form.510_files/PFS_ego.js" type="text/javascript"></script>
-<script src="./form.510_files/PFS_jquery.validate.js" type="text/javascript"></script>
-<script src="./form.510_files/PFS_jquery.form.plugins.js" type="text/javascript"></script>
-<script src="./form.510_files/p_pfs.js" type="text/javascript"></script>
-<script src="./form.510_files/jquery.maskedinput.min.js" type="text/javascript"></script>
-<script src="./form.510_files/form.510.xmlfdf.js" type="text/javascript"></script>
-<link href="./form.510_files/jquery-ui.css" rel="stylesheet" type="text/css">
-<link href="./form.510_files/base.css" rel="stylesheet" type="text/css">
-<link href="./form.510_files/ego.css" rel="stylesheet" type="text/css">
-<link href="./form.510_files/p_pfs.css" rel="stylesheet" type="text/css">
+		<script src="./form.548_files/jquery.min.js" type="text/javascript"></script>
+<script src="./form.548_files/jquery-ui.min.js" type="text/javascript"></script>
+<script src="./form.548_files/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="./form.548_files/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="./form.548_files/wrapper.js" type="text/javascript"></script>
+<script src="./form.548_files/ego.statusDialog.js" type="text/javascript"></script>
+<script src="./form.548_files/PFS_ego.js" type="text/javascript"></script>
+<script src="./form.548_files/PFS_jquery.validate.js" type="text/javascript"></script>
+<script src="./form.548_files/PFS_jquery.form.plugins.js" type="text/javascript"></script>
+<script src="./form.548_files/p_pfs.js" type="text/javascript"></script>
+<script src="./form.548_files/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="./form.548_files/form.548.xmlfdf.js" type="text/javascript"></script>
+<link href="./form.548_files/jquery-ui.css" rel="stylesheet" type="text/css">
+<link href="./form.548_files/base.css" rel="stylesheet" type="text/css">
+<link href="./form.548_files/ego.css" rel="stylesheet" type="text/css">
+<link href="./form.548_files/p_pfs.css" rel="stylesheet" type="text/css">
 
 		<script type="text/javascript">
 		(function($, undefined) {
@@ -439,13 +439,16 @@ return 1
 		function GetExternalResourceIndex(resourcetype) {
   switch (resourcetype) {
     case 3:
-      return 'ozn493_2020.xsd';
+      return 'ozn493_2022.xsd';
       break;
     case 4:
-      return 'ozn493_2020Plaintext.xsl';
+      return 'ozn493_2022Plaintext.xsl';
       break;
     case 6:
       return 'PDF0';
+      break;
+    case 10:
+      return 'form.548.ro.xslt';
       break;
     default:
       return null;
@@ -455,13 +458,16 @@ return 1
 function GetExternalResource(resourcetype, index) {
   switch (resourcetype) {
     case 3:
-      if (index == null || index =='ozn493_2020.xsd') return 'form.510.sk.xsd';
+      if (index == null || index =='ozn493_2022.xsd') return 'form.548.sk.xsd';
       break;
     case 4:
-      if (index == null || index =='ozn493_2020Plaintext.xsl') return 'form.510.sb.xslt';
+      if (index == null || index =='ozn493_2022Plaintext.xsl') return 'form.548.sb.xslt';
       break;
     case 6:
-      if (index == null || index =='PDF0') return 'form.510.OZN493-20-print-save.pdf';
+      if (index == null || index =='PDF0') return 'form.548.OZN493-22-print-save.pdf';
+      break;
+    case 10:
+      if (index == null || index =='form.548.ro.xslt') return 'form.548.ro.xslt';
       break;
     default:
       return null;
@@ -476,17 +482,6 @@ function GetExternalResource(resourcetype, index) {
   if (key == 'dic') {
     $("#tbDic").val(value);
   }
-  if (key == 'rodneCislo1cast') {
-    $("#tbRodneCislo").val(value);
-  }
-  if (key == 'rodneCislo2cast') {
-    $("#tbRodneCislo_2").val(value);
-  }
-if (key == "datumNarodenia") {
-   if ($("#tbRodneCislo").val() == "" && $("#tbDic").val() == "") {
-      $("#dtpDatNarodenia").val(value);
-   }
-}
   if (key == 'meno') {
     if (druhSubjektu != 'PO')
         $("#tbOdd1Meno").val(value);
@@ -511,6 +506,17 @@ if (key == "datumNarodenia") {
     if (druhSubjektu != 'PO')
         $("#tbOdd1Priezvisko").val(value);
   }
+  if (key == 'rodneCislo1cast') {
+    $("#tbRodneCislo").val(value);
+  }
+  if (key == 'rodneCislo2cast') {
+    $("#tbRodneCislo_2").val(value);
+  }
+if (key == "datumNarodenia") {
+   if ($("#tbRodneCislo").val() == "" && $("#tbDic").val() == "") {
+      $("#dtpDatNarodenia").val(value);
+   }
+}
   if (key == 'obchodneMeno') {
     if (druhSubjektu != 'FO')
         $("#taOdd1ObchMeno").val(value);
@@ -555,12 +561,12 @@ if (key == "datumNarodenia") {
 function GetDefaultValue() {
   var retString = '';
   retString = retString + 'dic' + '¶'+ $("#tbDic").val() + '¶';
-  retString = retString + 'rodneCislo1cast' + '¶'+ $("#tbRodneCislo").val() + '¶';
-  retString = retString + 'rodneCislo2cast' + '¶'+ $("#tbRodneCislo_2").val() + '¶';
-  retString = retString + 'datumNarodenia' + '¶'+ $("#dtpDatNarodenia").val() + '¶';
   retString = retString + 'meno' + '¶'+ $("#tbOdd1Meno").val() + '¶';
   retString = retString + 'titul' + '¶'+ $("#tbOdd1TitulPred").val() + '¶';
   retString = retString + 'priezvisko' + '¶'+ $("#tbOdd1Priezvisko").val() + '¶';
+  retString = retString + 'rodneCislo1cast' + '¶'+ $("#tbRodneCislo").val() + '¶';
+  retString = retString + 'rodneCislo2cast' + '¶'+ $("#tbRodneCislo_2").val() + '¶';
+  retString = retString + 'datumNarodenia' + '¶'+ $("#dtpDatNarodenia").val() + '¶';
   retString = retString + 'obchodneMeno' + '¶'+ $("#taOdd1ObchMeno").val() + '¶';
   retString = retString + 'ulica' + '¶'+ $("#tbTPUlica").val() + '¶';
   retString = retString + 'cisloDomu' + '¶'+ $("#tdTPCislo").val() + '¶';
@@ -747,17 +753,17 @@ $( window ).load(function() {
 			return !iserr;
 		}
 		function hodnota_tbdic(element, sid) {
-			return hodnota(element, 'tbDic','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbDic','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbdic(sid) {
 			return hodnota_tbDic(null, sid);
 		}
 				
 			function vypocet_tbdic_C0(sid) {
-			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow31833','s');
-			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow31833','s');
-			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow31833','s');
-			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow31833','s');
+			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow36597','s');
+			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow36597','s');
+			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow36597','s');
+			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbdic))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_dtpdatnarodenia))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_ico))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -804,14 +810,14 @@ var retval = ("Musí byť vyplnený aspoň jeden z identifikátorov: DIČ, Rodn�
 			return !iserr;
 		}
 		function hodnota_dtpzdobdobieod(element, sid) {
-			return hodnota(element, 'dtpZdObdobieOd','n',sid,'layoutRow31833');
+			return hodnota(element, 'dtpZdObdobieOd','n',sid,'layoutRow36597');
 		}
 		function vypocet_dtpzdobdobieod(sid) {
 			return hodnota_dtpZdObdobieOd(null, sid);
 		}
 				
 			function vypocet_dtpzdobdobieod_C0(sid) {
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(inlinelimitdatumod('dtpZdObdobieOd',sid)))!=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -821,8 +827,8 @@ var retval = ("'Zdaňovacie obdobie PO - Od': Dátum musí byť vyšší alebo r
 			}
 				
 			function vypocet_dtpzdobdobieod_C1(sid) {
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_dtpzdobdobieod))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -832,11 +838,11 @@ var retval = ("'Zdaňovacie obdobie Od - Do': Musia byť vyplnené obidva dátum
 			}
 				
 			function vypocet_dtpzdobdobieod_C2(sid) {
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow31833','s');
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow36597','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))>Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*((t_taodd1obchmeno+t_ico)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_taodd1obchmeno+t_ico)))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -889,14 +895,14 @@ var retval = ("'Zdaňovacie obdobie Od - Do': Musí byť vyplnené, ak je vyplne
 			return !iserr;
 		}
 		function hodnota_dtpzdobdobiedo(element, sid) {
-			return hodnota(element, 'dtpZdObdobieDo','n',sid,'layoutRow31833');
+			return hodnota(element, 'dtpZdObdobieDo','n',sid,'layoutRow36597');
 		}
 		function vypocet_dtpzdobdobiedo(sid) {
 			return hodnota_dtpZdObdobieDo(null, sid);
 		}
 				
 			function vypocet_dtpzdobdobiedo_C0(sid) {
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(inlinelimitdatumdo('dtpZdObdobieDo',sid)))!=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -906,8 +912,8 @@ var retval = ("'Zdaňovacie obdobie PO - Do': Dátum musí byť vyšší alebo r
 			}
 				
 			function vypocet_dtpzdobdobiedo_C1(sid) {
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_dtpzdobdobieod))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -917,21 +923,21 @@ var retval = ("");
 			}
 				
 			function vypocet_dtpzdobdobiedo_C2(sid) {
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(inlineoddo('dtpZdObdobieDo',sid)))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
 			function vypocet_dtpzdobdobiedo_T2(sid) {
-var retval = ("Zdaňovacie obdobie Do musí byť väčšie  alebo rovné ako Zdaňovaci obdobie Od.");
+var retval = ("Zdaňovacie obdobie Do musí byť väčšie alebo rovné ako Zdaňovaci obdobie Od.");
 				return retval; //;
 			}
 				
 			function vypocet_dtpzdobdobiedo_C3(sid) {
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow31833','s');
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow36597','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))>Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*((t_taodd1obchmeno+t_ico)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_taodd1obchmeno+t_ico)))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_dtpzdobdobieod+t_dtpzdobdobiedo)))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -975,14 +981,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_tbodd1priezvisko(element, sid) {
-			return hodnota(element, 'tbOdd1Priezvisko','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1Priezvisko','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1priezvisko(sid) {
 			return hodnota_tbOdd1Priezvisko(null, sid);
 		}
 				
 			function vypocet_tbodd1priezvisko_C0(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbodd1priezvisko))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -992,20 +998,20 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1priezvisko_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
 			function vypocet_tbodd1priezvisko_T1(sid) {
-var retval = ("Musí byť vyplnené  Meno a Priezvisko alebo Obchodné meno (Názov). Nemôže byť súčasne vyplnené Priezvisko a Obchodné meno (Názov).");
+var retval = ("Musí byť vyplnené Meno a Priezvisko alebo Obchodné meno (Názov). Nemôže byť súčasne vyplnené Priezvisko a Obchodné meno (Názov).");
 				return retval; //;
 			}
 				
 			function vypocet_tbodd1priezvisko_C2(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1043,14 +1049,14 @@ var retval = ("Ak je vyplnené Meno, musí byť aj Priezvisko a naopak.");
 			return !iserr;
 		}
 		function hodnota_tbodd1priezvisko(element, sid) {
-			return hodnota(element, 'tbOdd1Priezvisko','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1Priezvisko','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1priezvisko(sid) {
 			return hodnota_tbOdd1Priezvisko(null, sid);
 		}
 				
 			function vypocet_tbodd1priezvisko_C0(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbodd1priezvisko))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1060,20 +1066,20 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1priezvisko_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
 			function vypocet_tbodd1priezvisko_T1(sid) {
-var retval = ("Musí byť vyplnené  Meno a Priezvisko alebo Obchodné meno (Názov). Nemôže byť súčasne vyplnené Priezvisko a Obchodné meno (Názov).");
+var retval = ("Musí byť vyplnené Meno a Priezvisko alebo Obchodné meno (Názov). Nemôže byť súčasne vyplnené Priezvisko a Obchodné meno (Názov).");
 				return retval; //;
 			}
 				
 			function vypocet_tbodd1priezvisko_C2(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1116,14 +1122,14 @@ var retval = ("Ak je vyplnené Meno, musí byť aj Priezvisko a naopak.");
 			return !iserr;
 		}
 		function hodnota_tbodd1meno(element, sid) {
-			return hodnota(element, 'tbOdd1Meno','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1Meno','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1meno(sid) {
 			return hodnota_tbOdd1Meno(null, sid);
 		}
 				
 			function vypocet_tbodd1meno_C0(sid) {
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbodd1meno))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1133,9 +1139,9 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1meno_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1145,8 +1151,8 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1meno_C2(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1183,14 +1189,14 @@ var retval = ("Ak je vyplnené Priezvisko, musí byť aj Meno a naopak.");
 			return !iserr;
 		}
 		function hodnota_tbodd1meno(element, sid) {
-			return hodnota(element, 'tbOdd1Meno','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1Meno','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1meno(sid) {
 			return hodnota_tbOdd1Meno(null, sid);
 		}
 				
 			function vypocet_tbodd1meno_C0(sid) {
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbodd1meno))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1200,9 +1206,9 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1meno_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1212,8 +1218,8 @@ var retval = ("");
 			}
 				
 			function vypocet_tbodd1meno_C2(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1239,7 +1245,7 @@ var retval = ("Ak je vyplnené Priezvisko, musí byť aj Meno a naopak.");
 			return !iserr;
 		}
 		function hodnota_tbodd1titulza(element, sid) {
-			return hodnota(element, 'tbOdd1TitulZa','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1TitulZa','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1titulza(sid) {
 			return hodnota_tbOdd1TitulZa(null, sid);
@@ -1262,7 +1268,7 @@ var retval = ("Ak je vyplnené Priezvisko, musí byť aj Meno a naopak.");
 			return !iserr;
 		}
 		function hodnota_tbodd1titulpred(element, sid) {
-			return hodnota(element, 'tbOdd1TitulPred','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd1TitulPred','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd1titulpred(sid) {
 			return hodnota_tbOdd1TitulPred(null, sid);
@@ -1298,14 +1304,14 @@ var retval = ("Ak je vyplnené Priezvisko, musí byť aj Meno a naopak.");
 			return !iserr;
 		}
 		function hodnota_taodd1obchmeno(element, sid) {
-			return hodnota(element, 'taOdd1ObchMeno','n',sid,'layoutRow31833');
+			return hodnota(element, 'taOdd1ObchMeno','n',sid,'layoutRow36597');
 		}
 		function vypocet_taodd1obchmeno(sid) {
 			return hodnota_taOdd1ObchMeno(null, sid);
 		}
 				
 			function vypocet_taodd1obchmeno_C0(sid) {
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_taodd1obchmeno))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1315,9 +1321,9 @@ var retval = ("");
 			}
 				
 			function vypocet_taodd1obchmeno_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1356,14 +1362,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_taodd1obchmeno(element, sid) {
-			return hodnota(element, 'taOdd1ObchMeno','n',sid,'layoutRow31833');
+			return hodnota(element, 'taOdd1ObchMeno','n',sid,'layoutRow36597');
 		}
 		function vypocet_taodd1obchmeno(sid) {
 			return hodnota_taOdd1ObchMeno(null, sid);
 		}
 				
 			function vypocet_taodd1obchmeno_C0(sid) {
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_taodd1obchmeno))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1373,9 +1379,9 @@ var retval = ("");
 			}
 				
 			function vypocet_taodd1obchmeno_C1(sid) {
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbodd1meno))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1meno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1418,14 +1424,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_tbtppsc(element, sid) {
-			return hodnota(element, 'tbTPPSC','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbTPPSC','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbtppsc(sid) {
 			return hodnota_tbTPPSC(null, sid);
 		}
 				
 			function vypocet_tbtppsc_C0(sid) {
-			var t_tbtppsc = hodnota(null, 'tbTPPSC','n',sid,'layoutRow31833','s');
+			var t_tbtppsc = hodnota(null, 'tbTPPSC','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbtppsc))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1435,7 +1441,7 @@ var retval = ("");
 			}
 				
 			function vypocet_tbtppsc_C1(sid) {
-			var t_tbtpstat = hodnota(null, 'tbTPStat','n',sid,'layoutRow31833','s');
+			var t_tbtpstat = hodnota(null, 'tbTPStat','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(inlinertppsc('tbTPPSC',sid)))==Math.round(100.0000000000001*(1)))&&(Math.round(100.0000000000001*(t_tbtpstat))>=Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1445,7 +1451,7 @@ var retval = ("PSČ pre Slovensko má 5 číslic");
 			}
 				
 			function vypocet_tbtppsc_C2(sid) {
-			var t_tbtppsc = hodnota(null, 'tbTPPSC','n',sid,'layoutRow31833','s');
+			var t_tbtppsc = hodnota(null, 'tbTPPSC','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(inlineslovensko('tbTPPSC',sid)))==Math.round(100.0000000000001*(1)))||Math.round(100.0000000000001*(t_tbtppsc))>Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1477,14 +1483,14 @@ var retval = (" '11 - PSČ' pre Slovensko musí byť vyplnené.");
 			return !iserr;
 		}
 		function hodnota_tbtpstat(element, sid) {
-			return hodnota(element, 'tbTPStat','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbTPStat','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbtpstat(sid) {
 			return hodnota_tbTPStat(null, sid);
 		}
 				
 			function vypocet_tbtpstat_C0(sid) {
-			var t_tbtpstat = hodnota(null, 'tbTPStat','n',sid,'layoutRow31833','s');
+			var t_tbtpstat = hodnota(null, 'tbTPStat','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_tbtpstat))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1517,14 +1523,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_cbpismb(element, sid) {
-			return hodnota(element, 'cbPismB','n',sid,'layoutRow31833');
+			return hodnota(element, 'cbPismB','n',sid,'layoutRow36597');
 		}
 		function vypocet_cbpismb(sid) {
 			return hodnota_cbPismB(null, sid);
 		}
 				
 			function vypocet_cbpismb_C0(sid) {
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = ((Math.round(100.0000000000001*(t_cbpismb))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1534,8 +1540,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpismb_C1(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*((t_zarok*t_dtpzdobdobieod)))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1545,8 +1551,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpismb_C2(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = (((Math.round(100.0000000000001*((t_cbpisma+t_cbpismb)))==Math.round(100.0000000000001*(1)))));
 				return retval;
 			}
@@ -1585,14 +1591,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_cbpismb(element, sid) {
-			return hodnota(element, 'cbPismB','n',sid,'layoutRow31833');
+			return hodnota(element, 'cbPismB','n',sid,'layoutRow36597');
 		}
 		function vypocet_cbpismb(sid) {
 			return hodnota_cbPismB(null, sid);
 		}
 				
 			function vypocet_cbpismb_C0(sid) {
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = ((Math.round(100.0000000000001*(t_cbpismb))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1602,8 +1608,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpismb_C1(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*((t_zarok*t_dtpzdobdobieod)))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1613,8 +1619,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpismb_C2(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = (((Math.round(100.0000000000001*((t_cbpisma+t_cbpismb)))==Math.round(100.0000000000001*(1)))));
 				return retval;
 			}
@@ -1647,14 +1653,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_cbpisma(element, sid) {
-			return hodnota(element, 'cbPismA','n',sid,'layoutRow31833');
+			return hodnota(element, 'cbPismA','n',sid,'layoutRow36597');
 		}
 		function vypocet_cbpisma(sid) {
 			return hodnota_cbPismA(null, sid);
 		}
 				
 			function vypocet_cbpisma_C0(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
 var retval = ((Math.round(100.0000000000001*(t_cbpisma))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1664,8 +1670,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpisma_C1(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*((t_zarok*t_dtpzdobdobieod)))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1675,8 +1681,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpisma_C2(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = (((Math.round(100.0000000000001*((t_cbpisma+t_cbpismb)))==Math.round(100.0000000000001*(1)))));
 				return retval;
 			}
@@ -1715,14 +1721,14 @@ var retval = ("Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákon
 			return !iserr;
 		}
 		function hodnota_cbpisma(element, sid) {
-			return hodnota(element, 'cbPismA','n',sid,'layoutRow31833');
+			return hodnota(element, 'cbPismA','n',sid,'layoutRow36597');
 		}
 		function vypocet_cbpisma(sid) {
 			return hodnota_cbPismA(null, sid);
 		}
 				
 			function vypocet_cbpisma_C0(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
 var retval = ((Math.round(100.0000000000001*(t_cbpisma))>=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1732,8 +1738,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpisma_C1(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*((t_zarok*t_dtpzdobdobieod)))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1743,8 +1749,8 @@ var retval = ("");
 			}
 				
 			function vypocet_cbpisma_C2(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = (((Math.round(100.0000000000001*((t_cbpisma+t_cbpismb)))==Math.round(100.0000000000001*(1)))));
 				return retval;
 			}
@@ -1793,14 +1799,14 @@ var retval = ("Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákon
 			return !iserr;
 		}
 		function hodnota_zarok(element, sid) {
-			return hodnota(element, 'zaRok','n',sid,'layoutRow31833');
+			return hodnota(element, 'zaRok','n',sid,'layoutRow36597');
 		}
 		function vypocet_zarok(sid) {
 			return hodnota_zaRok(null, sid);
 		}
 				
 			function vypocet_zarok_C0(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
 var retval = ((Math.round(100.0000000000001*(t_zarok))>=Math.round(100.0000000000001*(1))||Math.round(100.0000000000001*(t_zarok))==Math.round(100.0000000000001*(0))));
 				return retval;
 			}
@@ -1810,9 +1816,9 @@ var retval = ("'Zdaňovacie obdobie FO - Za rok': Musí byť rovné 2020 a vyš�
 			}
 				
 			function vypocet_zarok_C1(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_zarok))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobieod))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_zarok))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1822,15 +1828,15 @@ var retval = ("Nemôže byť súčasne vyplnený rok pre FO a ZO od-do pre PO.")
 			}
 				
 			function vypocet_zarok_C2(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
-			var t_tbodd1titulpred = hodnota(null, 'tbOdd1TitulPred','n',sid,'layoutRow31833','s');
-			var t_tbodd1titulza = hodnota(null, 'tbOdd1TitulZa','n',sid,'layoutRow31833','s');
-			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow31833','s');
-			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
+			var t_tbodd1titulpred = hodnota(null, 'tbOdd1TitulPred','n',sid,'layoutRow36597','s');
+			var t_tbodd1titulza = hodnota(null, 'tbOdd1TitulZa','n',sid,'layoutRow36597','s');
+			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow36597','s');
+			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobieod = hodnota(null, 'dtpZdObdobieOd','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno+t_tbodd1titulpred+t_tbodd1titulza+t_tbrodnecislo+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_dtpzdobdobieod))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_zarok))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno+t_tbodd1titulpred+t_tbodd1titulza+t_tbrodnecislo+t_dtpdatnarodenia)))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -1861,15 +1867,15 @@ var retval = ("'Zdaňovacie obdobie FO - Za rok': Musí byť vyplnené, ak je vy
 			return !iserr;
 		}
 		function hodnota_tbodd3dna(element, sid) {
-			return hodnota(element, 'tbOdd3Dna','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd3Dna','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd3dna(sid) {
 			return hodnota_tbOdd3Dna(null, sid);
 		}
 				
 			function vypocet_tbodd3dna_C0(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(inlinednazarok_zakonne('tbOdd3Dna',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(inlinednaobdobiedo_zakonne('tbOdd3Dna',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -1909,15 +1915,15 @@ var retval = ("Oznámenie o predĺžení lehoty na podanie DP môže byť podan�
 			return !iserr;
 		}
 		function hodnota_tbodd3dna(element, sid) {
-			return hodnota(element, 'tbOdd3Dna','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbOdd3Dna','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbodd3dna(sid) {
 			return hodnota_tbOdd3Dna(null, sid);
 		}
 				
 			function vypocet_tbodd3dna_C0(sid) {
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(inlinednazarok_zakonne('tbOdd3Dna',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(inlinednaobdobiedo_zakonne('tbOdd3Dna',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -1960,17 +1966,17 @@ var retval = ("Oznámenie o predĺžení lehoty na podanie DP môže byť podan�
 			return !iserr;
 		}
 		function hodnota_tdcislosk(element, sid) {
-			return hodnota(element, 'tdCisloSK','n',sid,'layoutRow31833');
+			return hodnota(element, 'tdCisloSK','n',sid,'layoutRow36597');
 		}
 		function vypocet_tdcislosk(sid) {
 			return hodnota_tdCisloSK(null, sid);
 		}
 				
 			function vypocet_tdcislosk_C0(sid) {
-			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow31833','s');
-			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow31833','s');
-			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow31833','s');
-			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow31833','s');
+			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow36597','s');
+			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow36597','s');
+			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow36597','s');
+			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbpscsk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbpscsk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2010,14 +2016,14 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_tbpscsk(element, sid) {
-			return hodnota(element, 'tbPSCSK','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbPSCSK','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbpscsk(sid) {
 			return hodnota_tbPSCSK(null, sid);
 		}
 				
 			function vypocet_tbpscsk_C0(sid) {
-			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow31833','s');
+			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbpscsk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(inliner16psc_w('tbPSCSK',sid)))==Math.round(100.0000000000001*(1)))||(Math.round(100.0000000000001*(t_tbpscsk))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2027,10 +2033,10 @@ var retval = (" PSČ má obsahovať 5 číslic.");
 			}
 				
 			function vypocet_tbpscsk_C1(sid) {
-			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow31833','s');
-			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow31833','s');
-			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow31833','s');
-			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow31833','s');
+			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow36597','s');
+			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow36597','s');
+			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow36597','s');
+			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbpscsk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbpscsk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2064,17 +2070,17 @@ var retval = ("Musí byť vyplnená adresa: '14 - Ulica', '15 - Súpisné/orient
 			return !iserr;
 		}
 		function hodnota_tbobecsk(element, sid) {
-			return hodnota(element, 'tbObecSK','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbObecSK','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbobecsk(sid) {
 			return hodnota_tbObecSK(null, sid);
 		}
 				
 			function vypocet_tbobecsk_C0(sid) {
-			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow31833','s');
-			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow31833','s');
-			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow31833','s');
-			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow31833','s');
+			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow36597','s');
+			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow36597','s');
+			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow36597','s');
+			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbpscsk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbpscsk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2108,17 +2114,17 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_tbulicask(element, sid) {
-			return hodnota(element, 'tbUlicaSK','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbUlicaSK','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbulicask(sid) {
 			return hodnota_tbUlicaSK(null, sid);
 		}
 				
 			function vypocet_tbulicask_C0(sid) {
-			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow31833','s');
-			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow31833','s');
-			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow31833','s');
-			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow31833','s');
+			var t_tbpscsk = hodnota(null, 'tbPSCSK','n',sid,'layoutRow36597','s');
+			var t_tbulicask = hodnota(null, 'tbUlicaSK','n',sid,'layoutRow36597','s');
+			var t_tdcislosk = hodnota(null, 'tdCisloSK','n',sid,'layoutRow36597','s');
+			var t_tbobecsk = hodnota(null, 'tbObecSK','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_tbpscsk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbpscsk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbulicask))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tdcislosk))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbobecsk))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2152,17 +2158,17 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_ico(element, sid) {
-			return hodnota(element, 'ico','n',sid,'layoutRow31833');
+			return hodnota(element, 'ico','n',sid,'layoutRow36597');
 		}
 		function vypocet_ico(sid) {
 			return hodnota_ico(null, sid);
 		}
 				
 			function vypocet_ico_C0(sid) {
-			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow31833','s');
-			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
+			var t_ico = hodnota(null, 'ico','n',sid,'layoutRow36597','s');
+			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_ico))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_ico))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1priezvisko))==Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_ico))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbodd1priezvisko))>Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
@@ -2205,7 +2211,7 @@ var retval = ("'08-IČO': Musí byť vyplnené, ak nie je vyplnené 01-DIČ a s�
 			return !iserr;
 		}
 		function hodnota_dtplehota(element, sid) {
-			return hodnota(element, 'dtpLehota','n',sid,'layoutRow31833');
+			return hodnota(element, 'dtpLehota','n',sid,'layoutRow36597');
 		}
 		function vypocet_dtplehota(sid) {
 			return hodnota_dtpLehota(null, sid);
@@ -2221,10 +2227,10 @@ var retval = ("'nová lehota': Dátum musí byť posledný deň kalendárneho me
 			}
 				
 			function vypocet_dtplehota_C1(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
 var retval = (((Math.round(100.0000000000001*(t_cbpisma))==Math.round(100.0000000000001*(1))&&((Math.round(100.0000000000001*(inlinelehotazarok('dtpLehota',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(inlinelehotaobdobiedo('dtpLehota',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0)))))||(Math.round(100.0000000000001*(t_cbpismb))==Math.round(100.0000000000001*(1))&&((Math.round(100.0000000000001*(inlinelehotazarok_b('dtpLehota',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(inlinelehotaobdobiedo_b('dtpLehota',sid)))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0)))))));
 				return retval;
 			}
@@ -2234,10 +2240,10 @@ var retval = ("'Nová lehota': môže byť predĺžená maximálne o "+(inlinele
 			}
 				
 			function vypocet_dtplehota_C2(sid) {
-			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow31833','b');
-			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow31833','b');
-			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow31833','s');
-			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow31833','s');
+			var t_cbpisma = hodnota(null, 'cbPismA','n',sid,'layoutRow36597','b');
+			var t_cbpismb = hodnota(null, 'cbPismB','n',sid,'layoutRow36597','b');
+			var t_zarok = hodnota(null, 'zaRok','n',sid,'layoutRow36597','s');
+			var t_dtpzdobdobiedo = hodnota(null, 'dtpZdObdobieDo','n',sid,'layoutRow36597','s');
 var retval = (((Math.round(100.0000000000001*(t_cbpisma))==Math.round(100.0000000000001*(1))||Math.round(100.0000000000001*(t_cbpismb))==Math.round(100.0000000000001*(1)))&&((Math.round(100.0000000000001*(inlinelehotazarok_zakonne('dtpLehota',sid)))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_zarok))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(inlinelehotaobdobiedo_zakonne('dtpLehota',sid)))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpzdobdobiedo))>Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -2272,20 +2278,20 @@ var retval = ("'Nová lehota':  musí byť vyššia ako je zákonná lehota na p
 			return !iserr;
 		}
 		function hodnota_tbrodnecislo(element, sid) {
-			return hodnota(element, 'tbRodneCislo','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbRodneCislo','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbrodnecislo(sid) {
 			return hodnota_tbRodneCislo(null, sid);
 		}
 				
 			function vypocet_tbrodnecislo_C0(sid) {
-			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow31833','s');
-			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow31833','s');
-			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow31833','s');
-			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow36597','s');
+			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow36597','s');
+			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow36597','s');
+			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -2320,20 +2326,20 @@ var retval = ("'05-Rodné číslo': musí byť vyplnené ak nie je vyplnené '01
 			return !iserr;
 		}
 		function hodnota_dtpdatnarodenia(element, sid) {
-			return hodnota(element, 'dtpDatNarodenia','n',sid,'layoutRow31833');
+			return hodnota(element, 'dtpDatNarodenia','n',sid,'layoutRow36597');
 		}
 		function vypocet_dtpdatnarodenia(sid) {
 			return hodnota_dtpDatNarodenia(null, sid);
 		}
 				
 			function vypocet_dtpdatnarodenia_C0(sid) {
-			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow31833','s');
-			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow31833','s');
-			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow31833','s');
-			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow36597','s');
+			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow36597','s');
+			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow36597','s');
+			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -2366,20 +2372,20 @@ var retval = ("");
 			return !iserr;
 		}
 		function hodnota_tbrodnecislo_2(element, sid) {
-			return hodnota(element, 'tbRodneCislo_2','n',sid,'layoutRow31833');
+			return hodnota(element, 'tbRodneCislo_2','n',sid,'layoutRow36597');
 		}
 		function vypocet_tbrodnecislo_2(sid) {
 			return hodnota_tbRodneCislo_2(null, sid);
 		}
 				
 			function vypocet_tbrodnecislo_2_C0(sid) {
-			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow31833','s');
-			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow31833','s');
-			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow31833','s');
-			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow31833','s');
-			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow31833','s');
-			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow31833','s');
-			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow31833','s');
+			var t_tbrodnecislo = hodnota(null, 'tbRodneCislo','n',sid,'layoutRow36597','s');
+			var t_tbrodnecislo_2 = hodnota(null, 'tbRodneCislo_2','n',sid,'layoutRow36597','s');
+			var t_tbdic = hodnota(null, 'tbDic','n',sid,'layoutRow36597','s');
+			var t_dtpdatnarodenia = hodnota(null, 'dtpDatNarodenia','n',sid,'layoutRow36597','s');
+			var t_taodd1obchmeno = hodnota(null, 'taOdd1ObchMeno','n',sid,'layoutRow36597','s');
+			var t_tbodd1priezvisko = hodnota(null, 'tbOdd1Priezvisko','n',sid,'layoutRow36597','s');
+			var t_tbodd1meno = hodnota(null, 'tbOdd1Meno','n',sid,'layoutRow36597','s');
 var retval = ((((Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbdic+t_dtpdatnarodenia)))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbrodnecislo))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbrodnecislo_2))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbdic))>=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_dtpdatnarodenia))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_taodd1obchmeno))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*((t_tbodd1priezvisko+t_tbodd1meno)))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
@@ -2410,32 +2416,6 @@ tbDicRegEx: true,
 customE: 'kontrola_tbDic' 
 },
 
-tbRodneCislo :
-{
-maxlength: 6,
-tbRodneCisloRegEx: true,
-customE: 'kontrola_tbRodneCislo' 
-},
-
-
-
-
-tbRodneCislo_2 :
-{
-maxlength: 4,
-tbRodneCislo_2RegEx: true,
-customE: 'kontrola_tbRodneCislo_2' 
-},
-
-
-
-dtpDatNarodenia :
-{
-customE: 'kontrola_dtpDatNarodenia' 
-},
-
-
-
 tbOdd1Meno :
 {
 maxlength: 40,
@@ -2464,6 +2444,32 @@ maxlength: 40,
 customE: 'kontrola_tbOdd1Priezvisko' ,
 customW: 'kontrola2_tbOdd1Priezvisko' 
 },
+
+
+tbRodneCislo :
+{
+maxlength: 6,
+tbRodneCisloRegEx: true,
+customE: 'kontrola_tbRodneCislo' 
+},
+
+
+
+
+tbRodneCislo_2 :
+{
+maxlength: 4,
+tbRodneCislo_2RegEx: true,
+customE: 'kontrola_tbRodneCislo_2' 
+},
+
+
+
+dtpDatNarodenia :
+{
+customE: 'kontrola_dtpDatNarodenia' 
+},
+
 
 
 taOdd1ObchMeno :
@@ -2513,8 +2519,6 @@ maxlength: 40
 tbTPStat :
 {
 required: true,
-date: false,
-maxlength: 37,
 customW: 'kontrola_tbTPStat' 
 },
 
@@ -2522,26 +2526,6 @@ lblTPStat :
 {
 required: true
 },
-
-
-cbPismB :
-{
-customE: 'kontrola_cbPismB' ,
-customW: 'kontrola2_cbPismB' 
-},
-
-cbPismA :
-{
-customE: 'kontrola_cbPismA' ,
-customW: 'kontrola2_cbPismA' 
-},
-
-dtpLehota :
-{
-required: true,
-customW: 'kontrola_dtpLehota' 
-},
-
 
 tbUlicaSK :
 {
@@ -2607,6 +2591,33 @@ customE: 'kontrola_dtpZdObdobieOd'
 dtpZdObdobieDo :
 {
 customE: 'kontrola_dtpZdObdobieDo' 
+},
+
+
+
+
+
+
+
+
+
+cbPismA :
+{
+customE: 'kontrola_cbPismA' ,
+customW: 'kontrola2_cbPismA' 
+},
+
+dtpLehota :
+{
+required: true,
+customW: 'kontrola_dtpLehota' 
+},
+
+
+cbPismB :
+{
+customE: 'kontrola_cbPismB' ,
+customW: 'kontrola2_cbPismB' 
 }
 			  	},
 				messages: {			
@@ -2620,32 +2631,6 @@ maxlength: "Maximálna dĺžka položky '01 - Daňové identifikačné číslo (
 tbDicRegEx: "Položka '01 - Daňové identifikačné číslo (DIČ)' má neplatný formát",
 customE: ""
 },
-
-tbRodneCislo :
-{
-maxlength: "Maximálna dĺžka položky '05 - Rodné číslo (pred lomkou)' musí byť: 6 ",
-tbRodneCisloRegEx: "Položka '05 - Rodné číslo (pred lomkou)' má neplatný formát",
-customE: ""
-},
-
-
-
-
-tbRodneCislo_2 :
-{
-maxlength: "Maximálna dĺžka položky '05 -Rodné číslo (za lomkou)' musí byť: 4 ",
-tbRodneCislo_2RegEx: "Položka '05 -Rodné číslo (za lomkou)' má neplatný formát",
-customE: ""
-},
-
-
-
-dtpDatNarodenia :
-{
-customE: ""
-},
-
-
 
 tbOdd1Meno :
 {
@@ -2675,6 +2660,32 @@ maxlength: "Maximálna dĺžka položky '02 - Priezvisko' musí byť: 40 ",
 customE: "",
 customW: ""
 },
+
+
+tbRodneCislo :
+{
+maxlength: "Maximálna dĺžka položky '05 - Rodné číslo (pred lomkou)' musí byť: 6 ",
+tbRodneCisloRegEx: "Položka '05 - Rodné číslo (pred lomkou)' má neplatný formát",
+customE: ""
+},
+
+
+
+
+tbRodneCislo_2 :
+{
+maxlength: "Maximálna dĺžka položky '05 -Rodné číslo (za lomkou)' musí byť: 4 ",
+tbRodneCislo_2RegEx: "Položka '05 -Rodné číslo (za lomkou)' má neplatný formát",
+customE: ""
+},
+
+
+
+dtpDatNarodenia :
+{
+customE: ""
+},
+
 
 
 taOdd1ObchMeno :
@@ -2724,7 +2735,6 @@ maxlength: "Maximálna dĺžka položky '12 - Obec' musí byť: 40 "
 tbTPStat :
 {
 required: "Položka '13 - Štát' musí byť vyplnená",
-maxlength: "Maximálna dĺžka položky '13 - Štát' musí byť: 37 ",
 customW: ""
 },
 
@@ -2732,26 +2742,6 @@ lblTPStat :
 {
 required: "Položka '13 - Štát' musí byť vyplnená"
 },
-
-
-cbPismB :
-{
-customE: "",
-customW: ""
-},
-
-cbPismA :
-{
-customE: "",
-customW: ""
-},
-
-dtpLehota :
-{
-required: "Položka 'nová lehota' musí byť vyplnená",
-customW: ""
-},
-
 
 tbUlicaSK :
 {
@@ -2817,6 +2807,33 @@ customE: ""
 dtpZdObdobieDo :
 {
 customE: ""
+},
+
+
+
+
+
+
+
+
+
+cbPismA :
+{
+customE: "",
+customW: ""
+},
+
+dtpLehota :
+{
+required: "Položka 'nová lehota' musí byť vyplnená",
+customW: ""
+},
+
+
+cbPismB :
+{
+customE: "",
+customW: ""
 }	  	
 			  	},
 				submitHandler: function(form) {
@@ -2830,21 +2847,23 @@ customE: ""
 		.bezOkrajaBezPozadiaHlavicky {border:0px;background:none;}
 .bezOkrajaBezPozadiaHlavicky > .caption {border:0px;background:none !important;}
 .dolava8px {position:relative;left:-8px;}
+.topMinus10px {position:relative; top:-10px}
+.topMinus20px {position:relative; top:-20px}
 .NadpisTucnyCentrovanyText {text-align:center;font-weight:bold;}
 .NadpisTucnyCentrovanyText span {font-size:2em !important;line-height:1.2em}
 .NadpisTucnyCentrovanyText .fieldLabel {margin: 5px 0 0 0; width:100%}
 .centrovanyText {text-align:center;}
 .centrovanyText span {font-size:0.75em !important;}
 .textJustify {text-align:justify;}
-.kratkyTextBox120pxTitul INPUT { width:120px; }
-.kratkyTextBox120pxTitul TEXTAREA { width:75px; height: 120px; }
-.mensiText span {font-size:0.65em !important;}
-.topPlus12px {position:relative; top:12px}
 .sirokyTextBox210pxx INPUT  {  width:210px;  }
 .sirokyTextBox210pxx TEXTAREA {  width:210px; height: 16px; }
+.kratkyTextBox120pxTitul INPUT { width:120px; }
+.kratkyTextBox120pxTitul TEXTAREA { width:75px; height: 120px; }
 .sirokyTextBox260pxPriezvisko INPUT  {  width:260px;  }
 .sirokyTextBox260pxPriezvisko TEXTAREA {  width:260px; height: 16px; }
 .dolava9px {position:relative;left:-9px;}
+.mensiText span {font-size:0.65em !important;}
+.topPlus12px {position:relative; top:12px}
 .TextArea811x70px TEXTAREA {  width:811px; height: 70px }
 .TextArea811x70px INPUT {  width:811px; height: 70px }
 .sirokyTextBox600px INPUT  {  width:600px;  }
@@ -2856,9 +2875,9 @@ customE: ""
 .kratkyTextBox87px TEXTAREA { width:87px; height: 16px; }
 .sirokyTextBox400px INPUT  {  width:400px;  }
 .sirokyTextBox400px TEXTAREA {  width:400px; height: 16px; }
-.kratkyTextBox250px { margin-left:0px; }
-.kratkyTextBox250px INPUT { width:250px; }
-.kratkyTextBox250px TEXTAREA { width:250px; height: 16px; }
+.sirokyComboBox260px { margin-left:0px; }
+.sirokyComboBox260px SPAN { margin-left:0px; }
+.sirokyComboBox260px SELECT { width:260px; }
 .topPlus20px {position:relative; top:20px}
 .topMinus5px {position:relative; top:-5px}
 .sirokyTextBox410px INPUT  {  width:410px;  }
@@ -2868,31 +2887,31 @@ customE: ""
 </head>
 <body>
 	<noscript><p class="noscript">Pre kompletnú funkčnosť aplikácie je potrebné povoliť JavaScript</p></noscript>
-	<div id="errorsContainerDiv" class="errorsContainerDiv"> <ul id="errorsContainer" class="errorsContainer"><li></li></ul> </div>
-	<form id="OznamenieOVykonaniUpravyZakladuDane176v16" action="file:///Users/julius_retzer/Downloads/form.510/form.510.html">
+	<div id="errorsContainerDiv" class="errorsContainerDiv"> <ul id="errorsContainer" class="errorsContainer" style="display: block;"><li></li><li></li></ul> </div>
+	<form id="OznamenieOVykonaniUpravyZakladuDane176v16" action="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html">
 		<div id="main" class="layoutMain ui-widget-content">	
 						 
-		<div id="layoutRow31832" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
+		<div id="layoutRow36596" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
 						<input type="hidden" name="sekciaNazov">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31832" class="columns">
+		<div id="layoutRowContentlayoutRow36596" class="columns">
 				
-				<div id="layoutColumn79605" class="column first">
+				<div id="layoutColumn90836" class="column first">
 											
-<div id="layoutCell130397" class="cell  NadpisTucnyCentrovanyText">		
+<div id="layoutCell147089" class="cell  NadpisTucnyCentrovanyText">		
 			
 		<span class="fieldLabel" title="">OZNÁMENIE </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130398" class="cell  centrovanyText">		
+<div id="layoutCell147090" class="cell  centrovanyText">		
 			
 		<span class="fieldLabel" title="" style="width:870px;">daňovníka o predĺžení lehoty na podanie daňového priznania </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130399" class="cell  centrovanyText">		
+<div id="layoutCell147091" class="cell  centrovanyText">		
 			
 		<span class="fieldLabel" title="" style="width:870px;">podľa § 49 ods. 3 písm. a) alebo b) zákona č. 595/2003 Z. z. o dani z príjmov v znení neskorších predpisov (ďalej len „zákon“) </span>	
 		<div class="clear"></div>
@@ -2903,17 +2922,17 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31834" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
+						<div id="layoutRow36598" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
 						<input type="hidden" name="sekciaNazovPodlaPar">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31834" class="columns">
+		<div id="layoutRowContentlayoutRow36598" class="columns">
 				
-				<div id="layoutColumn79607" class="column first">
+				<div id="layoutColumn90838" class="column first">
 											
-<div id="layoutCell130402" class="cell  textJustify">		
+<div id="layoutCell147094" class="cell  textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:880px;">Oznámenie o predĺžení lehoty na podanie daňového priznania k dani z príjmov fyzickej osoby alebo daňového priznania k dani z príjmov právnickej osoby (ďalej len „oznámenie“) podáva daňovník príslušnému správcovi dane do uplynutia lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona, tzn. do troch kalendárnych mesiacov po uplynutí zdaňovacieho obdobia. Táto lehota sa predlžuje najviac o tri celé kalendárne mesiace alebo najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí. Tento postup neuplatňuje daňovník v konkurze, daňovník v likvidácii a dedič, ktorý podáva daňové priznanie za zomrelého daňovníka.<sup>1)</sup> </span>	
+		<span class="fieldLabel" title="" style="width:880px;">Oznámenie o predĺžení lehoty na podanie daňového priznania k dani z príjmov fyzickej osoby alebo daňového priznania k dani z príjmov právnickej osoby (ďalej len „oznámenie“) podáva daňovník príslušnému správcovi dane do uplynutia lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona, tzn. do troch kalendárnych mesiacov po uplynutí zdaňovacieho obdobia. Táto lehota sa predlžuje najviac o tri celé kalendárne mesiace alebo najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú sumy príjmov priraditeľné podľa § 3 ods. 1 písm. h) zákona daňovníkovi podľa § 2 písm. d) prvého bodu zákona alebo zdaniteľné príjmy plynúce zo zdrojov v zahraničí. Tento postup neuplatňuje daňovník v konkurze, daňovník v likvidácii a dedič, ktorý podáva daňové priznanie za zomrelého daňovníka.<sup>1)</sup> </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -2922,15 +2941,15 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31835" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
+						<div id="layoutRow36599" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
 						<input type="hidden" name="sekciaDicZdObdobie">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31835" class="columns">
+		<div id="layoutRowContentlayoutRow36599" class="columns">
 				
-				<div id="layoutColumn79608" class="column first">
+				<div id="layoutColumn90839" class="column first">
 											
-<div id="layoutCell130404" class="cell ">		
+<div id="layoutCell147096" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="tbDic" style="width:200px;">01 - Daňové identifikačné číslo (DIČ) </label><span class="fieldContent"><input id="tbDic" name="tbDic" title="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8." type="text" class="textBox" maxlength="10" size="190" alt="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8." value=""></span>	
 		<div class="clear"></div>
@@ -2941,16 +2960,16 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<script type="text/javascript">$(document).ready(function () { initRepetitionSection(1, 1, 'layoutRow31835') })</script>
-						<div id="layoutRow31852" class="layoutRow ui-tabs ui-widget-content  " title="">
+						<script type="text/javascript">$(document).ready(function () { initRepetitionSection(1, 1, 'layoutRow36599') })</script>
+						<div id="layoutRow36616" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaZdanObdobie">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Za zdaňovacie obdobie 2)">Za zdaňovacie obdobie <sup>2)</sup></div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31852" class="columns">
+		<div id="layoutRowContentlayoutRow36616" class="columns">
 				
-				<div id="layoutColumn79649" class="column first" style="width:160px;">
+				<div id="layoutColumn90880" class="column first" style="width:160px;">
 											
-<div id="layoutCell130484" class="cell ">		
+<div id="layoutCell147176" class="cell ">		
 			
 		<span class="fieldLabel" title="">Fyzická osoba </span>	
 		<div class="clear"></div>
@@ -2958,19 +2977,19 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79647" class="column " style="width:301px;">
+				<div id="layoutColumn90878" class="column " style="width:301px;">
 											
-<div id="layoutCell130481" class="cell ">		
+<div id="layoutCell147173" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="zaRok" style="width:40px;">Za rok </label><span class="fieldContent"><select id="zaRok" name="zaRok" class="comboBox" title="Rok pre FO musí byť vyplnený, ak je vyplnený aspoň jeden z riadkov r. 2 až r. 6. Nemôže byť súčasne vyplnený  rok pre FO a ZO od-do pre PO. Oznámenie o predĺžení lehoty na podanie DP za rok 2020 môže byť podané najskôr 1.1.2021. Za rok 2021 najskôr 1.1.2022."><option value=""></option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option></select></span>	
+		<label class="fieldLabel" title="" for="zaRok" style="width:40px;">Za rok </label><span class="fieldContent"><select id="zaRok" name="zaRok" class="comboBox" title="Rok pre FO musí byť vyplnený, ak je vyplnený aspoň jeden z riadkov r. 2 až r. 6. Nemôže byť súčasne vyplnený  rok pre FO a ZO od-do pre PO. Oznámenie o predĺžení lehoty na podanie DP za rok 2020 môže byť podané najskôr 1.1.2021. Za rok 2021 najskôr 1.1.2022."><option value=""></option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option></select></span>	
 		<div class="clear"></div>
 </div>							
 						
 				</div>	
 				
-				<div id="layoutColumn79650" class="column " style="width:152px;">
+				<div id="layoutColumn90881" class="column " style="width:152px;">
 											
-<div id="layoutCell130485" class="cell ">		
+<div id="layoutCell147177" class="cell ">		
 			
 		<span class="fieldLabel" title="">Právnická osoba </span>	
 		<div class="clear"></div>
@@ -2978,15 +2997,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79648" class="column " style="width:250px;">
+				<div id="layoutColumn90879" class="column " style="width:250px;">
 											
-<div id="layoutCell130482" class="cell ">		
+<div id="layoutCell147174" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="dtpZdObdobieOd" style="width:28px;">od </label><span class="fieldContent"><input alt="Dátum Od musí byť vyšší alebo rovný ako 1.1.2016. Nemôže byť súčasne vyplnený rok pre FO a zdaňovacie obdobie od-do pre PO. Ak je vyplnený r. 7 až 8, tak musí byť vyplnené zdaňovacie obdobie od-do pre PO." id="dtpZdObdobieOd" name="dtpZdObdobieOd" title="Dátum Od musí byť vyšší alebo rovný ako 1.1.2016. Nemôže byť súčasne vyplnený rok pre FO a zdaňovacie obdobie od-do pre PO. Ak je vyplnený r. 7 až 8, tak musí byť vyplnené zdaňovacie obdobie od-do pre PO." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130483" class="cell ">		
+<div id="layoutCell147175" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="dtpZdObdobieDo" style="width:28px;">do </label><span class="fieldContent"><input alt="Dátum Do musí byť vyšší alebo rovný ako 1.1.2017. Nemôže byť súčasne vyplnený  rok pre FO a zdaňovacie obdobie od-do pre PO. Ak je vyplnený r. 7 až 8, tak musí byť vyplnené zdaňovacie obdobie od-do pre PO." id="dtpZdObdobieDo" name="dtpZdObdobieDo" title="Dátum Do musí byť vyšší alebo rovný ako 1.1.2017. Nemôže byť súčasne vyplnený  rok pre FO a zdaňovacie obdobie od-do pre PO. Ak je vyplnený r. 7 až 8, tak musí byť vyplnené zdaňovacie obdobie od-do pre PO." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
@@ -2997,25 +3016,25 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31848" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
+						<div id="layoutRow36612" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
 						<input type="hidden" name="sekciaDovod">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31848" class="columns">
+		<div id="layoutRowContentlayoutRow36612" class="columns">
 				
-				<div id="layoutColumn79641" class="column first">
+				<div id="layoutColumn90872" class="column first">
 											
-<div id="layoutCell130469" class="cell ">		
+<div id="layoutCell147161" class="cell ">		
 			 
-		<div id="layoutRow31847" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
+		<div id="layoutRow36611" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
 						<input type="hidden" name="sekciaDovod2">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31847" class="columns">
+		<div id="layoutRowContentlayoutRow36611" class="columns">
 				
-				<div id="layoutColumn79638" class="column first" style="width:40px;">
+				<div id="layoutColumn90869" class="column first" style="width:40px;">
 											
-<div id="layoutCell130465" class="cell ">		
+<div id="layoutCell147157" class="cell ">		
 			
 		<input id="cbDovod" name="cbDovod" title="Musí byť zaškrtnuté, ak daňový subjekt podáva oznámenie z dôvodu opravy údajov uvedených v predchádzajúcom oznámení" type="checkbox" class="checkBox" value="Oznámenie podávam z dôvodu opravy údajov uvedených v predchádzajúcom oznámení, ktoré bolo správcovi dane podané dňa:" alt="Musí byť zaškrtnuté, ak daňový subjekt podáva oznámenie z dôvodu opravy údajov uvedených v predchádzajúcom oznámení"><br>	
 		<div class="clear"></div>
@@ -3023,9 +3042,9 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79640" class="column " style="width:611px;">
+				<div id="layoutColumn90871" class="column " style="width:611px;">
 											
-<div id="layoutCell130467" class="cell  topMinus5px">		
+<div id="layoutCell147159" class="cell  topMinus5px">		
 			
 		<span class="fieldLabel" title="" style="width:500px;">Oznámenie podávam z dôvodu opravy údajov uvedených v predchádzajúcom oznámení <sup>3)</sup>, ktoré bolo správcovi dane podané dňa: </span>	
 		<div class="clear"></div>
@@ -3033,9 +3052,9 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79639" class="column " style="width:200px;">
+				<div id="layoutColumn90870" class="column " style="width:200px;">
 											
-<div id="layoutCell130466" class="cell  topPlus20px">		
+<div id="layoutCell147158" class="cell  topPlus20px">		
 			
 		<label class="fieldLabel" title="" for="dtpOznamDovodu" style="display: none">Dátum podania dôvodu opravy údajov uvedených v predchádzajúcom oznámení správcovi </label><span class="fieldContent"><input alt="" id="dtpOznamDovodu" name="dtpOznamDovodu" title="" type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
@@ -3055,41 +3074,41 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31838" class="layoutRow ui-tabs ui-widget-content  " title="">
+						<div id="layoutRow36602" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaOdd1">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="ÚDAJE O DAŇOVNÍKOVI">ÚDAJE O DAŇOVNÍKOVI</div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31838" class="columns">
+		<div id="layoutRowContentlayoutRow36602" class="columns">
 				
-				<div id="layoutColumn79621" class="column first">
+				<div id="layoutColumn90852" class="column first">
 											
-<div id="layoutCell130427" class="cell ">		
+<div id="layoutCell147119" class="cell ">		
 			 
-		<div id="layoutRow31837" class="layoutRow ui-tabs ui-widget-content  " title="">
+		<div id="layoutRow36601" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaOdd1FO">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Fyzická osoba">Fyzická osoba</div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31837" class="columns">
+		<div id="layoutRowContentlayoutRow36601" class="columns">
 				
-				<div id="layoutColumn79614" class="column first">
+				<div id="layoutColumn90845" class="column first">
 											
-<div id="layoutCell130415" class="cell ">		
+<div id="layoutCell147107" class="cell ">		
 			 
-		<div id="layoutRow31836" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
+		<div id="layoutRow36600" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
 						<input type="hidden" name="secpom_1">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31836" class="columns">
+		<div id="layoutRowContentlayoutRow36600" class="columns">
 				
-				<div id="layoutColumn79613" class="column first" style="width:290px;">
+				<div id="layoutColumn90844" class="column first" style="width:290px;">
 											
-<div id="layoutCell130414" class="cell  dolava9px">		
+<div id="layoutCell147106" class="cell  dolava9px">		
 			
 		<span class="fieldLabel" title="">02 - Priezvisko </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130413" class="cell  dolava9px sirokyTextBox260pxPriezvisko">		
+<div id="layoutCell147105" class="cell  sirokyTextBox260pxPriezvisko dolava9px">		
 			
 		<label class="fieldLabel" title="" for="tbOdd1Priezvisko" style="display: none">02 - Priezvisko </label><span class="fieldContent"><input id="tbOdd1Priezvisko" name="tbOdd1Priezvisko" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="380" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " value=""></span>	
 		<div class="clear"></div>
@@ -3097,15 +3116,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79609" class="column " style="width:249px;">
+				<div id="layoutColumn90840" class="column " style="width:249px;">
 											
-<div id="layoutCell130406" class="cell ">		
+<div id="layoutCell147098" class="cell ">		
 			
 		<span class="fieldLabel" title="">03 - Meno </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130405" class="cell  sirokyTextBox210pxx">		
+<div id="layoutCell147097" class="cell  sirokyTextBox210pxx">		
 			
 		<label class="fieldLabel" title="" for="tbOdd1Meno" style="display: none">03 - Meno </label><span class="fieldContent"><input id="tbOdd1Meno" name="tbOdd1Meno" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="257" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " value=""></span>	
 		<div class="clear"></div>
@@ -3113,15 +3132,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79610" class="column " style="width:132px;">
+				<div id="layoutColumn90841" class="column " style="width:132px;">
 											
-<div id="layoutCell130408" class="cell ">		
+<div id="layoutCell147100" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:280px;">04 - Titul (pred menom / za priezviskom) </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130407" class="cell  kratkyTextBox120pxTitul">		
+<div id="layoutCell147099" class="cell  kratkyTextBox120pxTitul">		
 			
 		<label class="fieldLabel" title="" for="tbOdd1TitulPred" style="display: none">04 - Titul (pred menom) </label><span class="fieldContent"><input id="tbOdd1TitulPred" name="tbOdd1TitulPred" title="" type="text" class="textBox" maxlength="20" size="210" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3129,15 +3148,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79611" class="column " style="width:10px;">
+				<div id="layoutColumn90842" class="column " style="width:10px;">
 											
-<div id="layoutCell130410" class="cell ">		
+<div id="layoutCell147102" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130409" class="cell ">		
+<div id="layoutCell147101" class="cell ">		
 			
 		<span class="fieldLabel" title="">/ </span>	
 		<div class="clear"></div>
@@ -3145,15 +3164,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79612" class="column " style="width:185px;">
+				<div id="layoutColumn90843" class="column " style="width:180px;">
 											
-<div id="layoutCell130412" class="cell ">		
+<div id="layoutCell147104" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130411" class="cell  kratkyTextBox120pxTitul">		
+<div id="layoutCell147103" class="cell  kratkyTextBox120pxTitul">		
 			
 		<label class="fieldLabel" title="" for="tbOdd1TitulZa" style="display: none">04 - Titul (za menom) </label><span class="fieldContent"><input id="tbOdd1TitulZa" name="tbOdd1TitulZa" title="" type="text" class="textBox" maxlength="20" size="25" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3170,15 +3189,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79615" class="column " style="width:130px;">
+				<div id="layoutColumn90846" class="column " style="width:130px;">
 											
-<div id="layoutCell130417" class="cell ">		
+<div id="layoutCell147109" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:120px;">05 - Rodné číslo </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130416" class="cell  kratkyTextBox120pxTitul">		
+<div id="layoutCell147108" class="cell  kratkyTextBox120pxTitul">		
 			
 		<label class="fieldLabel" title="" for="tbRodneCislo" style="display: none">05 - Rodné číslo (pred lomkou) </label><span class="fieldContent"><input id="tbRodneCislo" name="tbRodneCislo" title="Položka &#39;Rodné číslo&#39; pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." type="text" class="textBox" maxlength="6" size="190" alt="Položka &#39;Rodné číslo&#39; pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." value=""></span>	
 		<div class="clear"></div>
@@ -3186,15 +3205,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79616" class="column " style="width:9px;">
+				<div id="layoutColumn90847" class="column " style="width:9px;">
 											
-<div id="layoutCell130418" class="cell ">		
+<div id="layoutCell147110" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130419" class="cell ">		
+<div id="layoutCell147111" class="cell ">		
 			
 		<span class="fieldLabel" title="">/ </span>	
 		<div class="clear"></div>
@@ -3202,15 +3221,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79617" class="column " style="width:161px;">
+				<div id="layoutColumn90848" class="column " style="width:161px;">
 											
-<div id="layoutCell130421" class="cell ">		
+<div id="layoutCell147113" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130420" class="cell  kratkyTextBox120pxTitul">		
+<div id="layoutCell147112" class="cell  kratkyTextBox120pxTitul">		
 			
 		<label class="fieldLabel" title="" for="tbRodneCislo_2" style="display: none">05 -Rodné číslo (za lomkou) </label><span class="fieldContent"><input id="tbRodneCislo_2" name="tbRodneCislo_2" title="" type="text" class="textBox" maxlength="4" size="190" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3218,9 +3237,9 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79618" class="column " style="width:247px;">
+				<div id="layoutColumn90849" class="column " style="width:247px;">
 											
-<div id="layoutCell130422" class="cell  mensiText textJustify topPlus12px">		
+<div id="layoutCell147114" class="cell  mensiText textJustify topPlus12px">		
 			
 		<span class="fieldLabel" title="">vypĺňa sa, ak ide o daňovníka, <br>ktorý nemá pridelené DIČ </span>	
 		<div class="clear"></div>
@@ -3228,15 +3247,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79619" class="column " style="width:140px;">
+				<div id="layoutColumn90850" class="column " style="width:140px;">
 											
-<div id="layoutCell130424" class="cell ">		
+<div id="layoutCell147116" class="cell ">		
 			
 		<span class="fieldLabel" title="">06 - Dátum narodenia </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130423" class="cell  kratkyTextBox120pxTitul">		
+<div id="layoutCell147115" class="cell  kratkyTextBox120pxTitul">		
 			
 		<label class="fieldLabel" title="" for="dtpDatNarodenia" style="display: none">06 - Dátum narodenia </label><span class="fieldContent"><input alt="Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." id="dtpDatNarodenia" name="dtpDatNarodenia" title="Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
@@ -3244,9 +3263,9 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79620" class="column " style="width:191px;">
+				<div id="layoutColumn90851" class="column " style="width:185px;">
 											
-<div id="layoutCell130425" class="cell  mensiText textJustify topPlus12px">		
+<div id="layoutCell147117" class="cell  mensiText textJustify topPlus12px">		
 			
 		<span class="fieldLabel" title="">vypĺňa sa, ak ide o daňovníka,<br>ktorý nemá pridelené DIČ ani<br>rodné číslo v Slovenskej republike </span>	
 		<div class="clear"></div>
@@ -3261,23 +3280,23 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130428" class="cell ">		
+<div id="layoutCell147120" class="cell ">		
 			 
-		<div id="layoutRow31839" class="layoutRow ui-tabs ui-widget-content  " title="">
+		<div id="layoutRow36603" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaOdd1PO">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Právnická osoba">Právnická osoba</div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31839" class="columns">
+		<div id="layoutRowContentlayoutRow36603" class="columns">
 				
-				<div id="layoutColumn79622" class="column first">
+				<div id="layoutColumn90853" class="column first">
 											
-<div id="layoutCell130430" class="cell ">		
+<div id="layoutCell147122" class="cell ">		
 			
 		<span class="fieldLabel" title="">07 - Obchodné meno alebo názov </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130429" class="cell  TextArea811x70px">		
+<div id="layoutCell147121" class="cell  TextArea811x70px">		
 			
 		<label class="fieldLabel" title="" for="taOdd1ObchMeno" style="display: none">07 - Obchodné meno alebo názov </label><span class="fieldContent"><textarea id="taOdd1ObchMeno" name="taOdd1ObchMeno" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " class="textArea" cols="100" rows="2"></textarea></span>	
 		<div class="clear"></div>
@@ -3285,15 +3304,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79623" class="column " style="width:200px;">
+				<div id="layoutColumn90854" class="column " style="width:200px;">
 											
-<div id="layoutCell130432" class="cell ">		
+<div id="layoutCell147124" class="cell ">		
 			
 		<span class="fieldLabel" title="">08 - IČO </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130431" class="cell ">		
+<div id="layoutCell147123" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="ico" style="display: none">08 - IČO </label><span class="fieldContent"><input id="ico" name="ico" title="Položka &#39;IČO&#39; musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO" type="text" class="textBox" maxlength="12" size="190" alt="Položka &#39;IČO&#39; musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO" value=""></span>	
 		<div class="clear"></div>
@@ -3301,15 +3320,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79624" class="column " style="width:500px;">
+				<div id="layoutColumn90855" class="column " style="width:500px;">
 											
-<div id="layoutCell130434" class="cell ">		
+<div id="layoutCell147126" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130433" class="cell  mensiText textJustify">		
+<div id="layoutCell147125" class="cell  mensiText textJustify">		
 			
 		<span class="fieldLabel" title="" style="width:500px;">vypĺňa sa, ak ide o daňovníka, ktorý nemá pridelené DIČ </span>	
 		<div class="clear"></div>
@@ -3324,33 +3343,33 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130439" class="cell ">		
+<div id="layoutCell147131" class="cell ">		
 			 
-		<div id="layoutRow31841" class="layoutRow ui-tabs ui-widget-content  " title="">
+		<div id="layoutRow36605" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaTPAdresa">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Adresa trvalého pobytu (fyzická osoba) / Adresa sídla (právnická osoba) na území Slovenskej republiky alebo v zahraničí">Adresa trvalého pobytu (fyzická osoba) / Adresa sídla (právnická osoba) na území Slovenskej republiky alebo v zahraničí</div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31841" class="columns">
+		<div id="layoutRowContentlayoutRow36605" class="columns">
 				
-				<div id="layoutColumn79627" class="column first">
+				<div id="layoutColumn90858" class="column first">
 											
-<div id="layoutCell130440" class="cell ">		
+<div id="layoutCell147132" class="cell ">		
 			 
-		<div id="layoutRow31840" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
+		<div id="layoutRow36604" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
 						<input type="hidden" name="sekciaTPAdresa1">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31840" class="columns">
+		<div id="layoutRowContentlayoutRow36604" class="columns">
 				
-				<div id="layoutColumn79625" class="column first" style="width:649px;">
+				<div id="layoutColumn90856" class="column first" style="width:649px;">
 											
-<div id="layoutCell130436" class="cell ">		
+<div id="layoutCell147128" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130435" class="cell  sirokyTextBox600px">		
+<div id="layoutCell147127" class="cell  sirokyTextBox600px">		
 			
 		<label class="fieldLabel" title="" for="tbTPUlica" style="width:291px;">09 - Ulica </label><span class="fieldContent"><input id="tbTPUlica" name="tbTPUlica" title="" type="text" class="textBox" maxlength="60" size="669" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3358,15 +3377,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79626" class="column " style="width:185px;">
+				<div id="layoutColumn90857" class="column " style="width:185px;">
 											
-<div id="layoutCell130437" class="cell ">		
+<div id="layoutCell147129" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130438" class="cell ">		
+<div id="layoutCell147130" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="tdTPCislo" style="width:291px;">10 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdTPCislo" name="tdTPCislo" title="" type="text" class="textBox" maxlength="20" size="191" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3381,23 +3400,23 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130441" class="cell ">		
+<div id="layoutCell147133" class="cell ">		
 			 
-		<div id="layoutRow31842" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
+		<div id="layoutRow36606" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
 						<input type="hidden" name="sekciaTPAdresa2">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31842" class="columns">
+		<div id="layoutRowContentlayoutRow36606" class="columns">
 				
-				<div id="layoutColumn79628" class="column first" style="width:125px;">
+				<div id="layoutColumn90859" class="column first" style="width:120px;">
 											
-<div id="layoutCell130443" class="cell ">		
+<div id="layoutCell147135" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130442" class="cell  doprava5px kratkyTextBox87px">		
+<div id="layoutCell147134" class="cell  doprava5px kratkyTextBox87px">		
 			
 		<label class="fieldLabel" title="" for="tbTPPSC" style="width:291px;">11 - PSČ </label><span class="fieldContent"><input id="tbTPPSC" name="tbTPPSC" title="" type="text" class="textBox" maxlength="10" size="112" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3405,15 +3424,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79629" class="column " style="width:440px;">
+				<div id="layoutColumn90860" class="column " style="width:442px;">
 											
-<div id="layoutCell130445" class="cell ">		
+<div id="layoutCell147137" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130444" class="cell  sirokyTextBox400px">		
+<div id="layoutCell147136" class="cell  sirokyTextBox400px">		
 			
 		<label class="fieldLabel" title="" for="tbTPObec" style="width:291px;">12 - Obec <em>*</em></label><span class="fieldContent"><input id="tbTPObec" name="tbTPObec" title="Obec musí byť vyplnená." type="text" class="textBox" maxlength="40" size="480" alt="Obec musí byť vyplnená." value=""></span>	
 		<div class="clear"></div>
@@ -3421,17 +3440,17 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79630" class="column " style="width:260px;">
+				<div id="layoutColumn90861" class="column " style="width:260px;">
 											
-<div id="layoutCell130447" class="cell ">		
+<div id="layoutCell147139" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130446" class="cell  kratkyTextBox250px">		
+<div id="layoutCell147138" class="cell  sirokyComboBox260px">		
 			
-		<label class="fieldLabel" title="" for="tbTPStat" style="width:291px;">13 - Štát <em>*</em></label><span class="fieldContent"><input id="tbTPStat" name="tbTPStat" title="" type="text" class="textBox" maxlength="37" size="190" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbTPStat" style="width:291px;">13 - Štát <em>*</em></label><span class="fieldContent"><select id="tbTPStat" name="tbTPStat" class="comboBox" title=""><option value=""></option><option value="Andorra">AD - Andorra</option><option value="Spojené arabské emiráty">AE - Spojené arabské emiráty</option><option value="Afganistan">AF - Afganistan</option><option value="Antigua a Barbuda">AG - Antigua a Barbuda</option><option value="Anguilla">AI - Anguilla</option><option value="Albánsko">AL - Albánsko</option><option value="Arménsko">AM - Arménsko</option><option value="Angola">AO - Angola</option><option value="Antarktída">AQ - Antarktída</option><option value="Argentína">AR - Argentína</option><option value="Americká Samoa">AS - Americká Samoa</option><option value="Rakúsko">AT - Rakúsko</option><option value="Austrália">AU - Austrália</option><option value="Aruba">AW - Aruba</option><option value="Alandy">AX - Alandy</option><option value="Azerbajdžan">AZ - Azerbajdžan</option><option value="Bosna a Hercegovina">BA - Bosna a Hercegovina</option><option value="Barbados">BB - Barbados</option><option value="Bangladéš">BD - Bangladéš</option><option value="Belgicko">BE - Belgicko</option><option value="Burkina">BF - Burkina</option><option value="Bulharsko">BG - Bulharsko</option><option value="Bahrajn">BH - Bahrajn</option><option value="Burundi">BI - Burundi</option><option value="Benin">BJ - Benin</option><option value="Svätý Bartolomej">BL - Svätý Bartolomej</option><option value="Bermudy">BM - Bermudy</option><option value="Brunej">BN - Brunej</option><option value="Bolívia">BO - Bolívia</option><option value="Bonaire, Svätý Eustach a Saba">BQ - Bonaire, Svätý Eustach a Saba</option><option value="Brazília">BR - Brazília</option><option value="Bahamy">BS - Bahamy</option><option value="Bhután">BT - Bhután</option><option value="Bouvetov ostrov">BV - Bouvetov ostrov</option><option value="Botswana">BW - Botswana</option><option value="Bielorusko">BY - Bielorusko</option><option value="Belize">BZ - Belize</option><option value="Kanada">CA - Kanada</option><option value="Kokosové ostrovy">CC - Kokosové ostrovy</option><option value="Kongo (býv. Zair)">CD - Kongo (býv. Zair)</option><option value="Stredoafrická republika">CF - Stredoafrická republika</option><option value="Kongo">CG - Kongo</option><option value="Pobrežie Slonoviny">CI - Pobrežie Slonoviny</option><option value="Cookove ostrovy">CK - Cookove ostrovy</option><option value="Čile">CL - Čile</option><option value="Kamerun">CM - Kamerun</option><option value="Čína">CN - Čína</option><option value="Kolumbia">CO - Kolumbia</option><option value="Kostarika">CR - Kostarika</option><option value="Kuba">CU - Kuba</option><option value="Kapverdy">CV - Kapverdy</option><option value="Curaçao">CW - Curaçao</option><option value="Vianočný ostrov">CX - Vianočný ostrov</option><option value="Cyprus">CY - Cyprus</option><option value="Česko">CZ - Česko</option><option value="Nemecko">DE - Nemecko</option><option value="Džibutsko">DJ - Džibutsko</option><option value="Dánsko">DK - Dánsko</option><option value="Dominika">DM - Dominika</option><option value="Dominikánska republika">DO - Dominikánska republika</option><option value="Alžírsko">DZ - Alžírsko</option><option value="Ekvádor">EC - Ekvádor</option><option value="Estónsko">EE - Estónsko</option><option value="Egypt">EG - Egypt</option><option value="Západná Sahara">EH - Západná Sahara</option><option value="Eritrea">ER - Eritrea</option><option value="Španielsko">ES - Španielsko</option><option value="Etiópia">ET - Etiópia</option><option value="Fínsko">FI - Fínsko</option><option value="Fidži">FJ - Fidži</option><option value="Falklandy">FK - Falklandy</option><option value="Mikronézia">FM - Mikronézia</option><option value="Faerské ostrovy">FO - Faerské ostrovy</option><option value="Francúzsko">FR - Francúzsko</option><option value="Gabon">GA - Gabon</option><option value="Spojené kráľovstvo">GB - Spojené kráľovstvo</option><option value="Grenada">GD - Grenada</option><option value="Gruzínsko">GE - Gruzínsko</option><option value="Francúzska Guyana">GF - Francúzska Guyana</option><option value="Guernsey">GG - Guernsey</option><option value="Ghana">GH - Ghana</option><option value="Gibraltár">GI - Gibraltár</option><option value="Grónsko">GL - Grónsko</option><option value="Gambia">GM - Gambia</option><option value="Guinea">GN - Guinea</option><option value="Guadeloupe">GP - Guadeloupe</option><option value="Rovníková Guinea">GQ - Rovníková Guinea</option><option value="Grécko">GR - Grécko</option><option value="Južná Georgia a Južné Sandwichove ostrovy">GS - Južná Georgia a Južné Sandwichove ostrovy</option><option value="Guatemala">GT - Guatemala</option><option value="Guam">GU - Guam</option><option value="Guinea-Bissau">GW - Guinea-Bissau</option><option value="Guyana">GY - Guyana</option><option value="Hongkong">HK - Hongkong</option><option value="Heardov ostrov a Macdonaldove ostrovy">HM - Heardov ostrov a Macdonaldove ostrovy</option><option value="Honduras">HN - Honduras</option><option value="Chorvátsko">HR - Chorvátsko</option><option value="Haiti">HT - Haiti</option><option value="Maďarsko">HU - Maďarsko</option><option value="Švajčiarsko">CH - Švajčiarsko</option><option value="Indonézia">ID - Indonézia</option><option value="Írsko">IE - Írsko</option><option value="Izrael">IL - Izrael</option><option value="Man">IM - Man</option><option value="India">IN - India</option><option value="Britské indickooceánske územie">IO - Britské indickooceánske územie</option><option value="Irak">IQ - Irak</option><option value="Irán">IR - Irán</option><option value="Island">IS - Island</option><option value="Taliansko">IT - Taliansko</option><option value="Jersey">JE - Jersey</option><option value="Jamajka">JM - Jamajka</option><option value="Jordánsko">JO - Jordánsko</option><option value="Japonsko">JP - Japonsko</option><option value="Keňa">KE - Keňa</option><option value="Kirgizsko">KG - Kirgizsko</option><option value="Kambodža">KH - Kambodža</option><option value="Kiribati">KI - Kiribati</option><option value="Komory">KM - Komory</option><option value="Svätý Krištof a Nevis">KN - Svätý Krištof a Nevis</option><option value="Kórejská ľudovodemokratická republika">KP - Kórejská ľudovodemokratická republika</option><option value="Kórejská republika">KR - Kórejská republika</option><option value="Kuvajt">KW - Kuvajt</option><option value="Kajmanie ostrovy">KY - Kajmanie ostrovy</option><option value="Kazachstan">KZ - Kazachstan</option><option value="Laos">LA - Laos</option><option value="Libanon">LB - Libanon</option><option value="Svätá Lucia">LC - Svätá Lucia</option><option value="Lichtenštajnsko">LI - Lichtenštajnsko</option><option value="Srí Lanka">LK - Srí Lanka</option><option value="Libéria">LR - Libéria</option><option value="Lesotho">LS - Lesotho</option><option value="Litva">LT - Litva</option><option value="Luxembursko">LU - Luxembursko</option><option value="Lotyšsko">LV - Lotyšsko</option><option value="Líbya">LY - Líbya</option><option value="Maroko">MA - Maroko</option><option value="Monako">MC - Monako</option><option value="Moldavsko">MD - Moldavsko</option><option value="Čierna Hora">ME - Čierna Hora</option><option value="Svätý Martin (francúzska časť)">MF - Svätý Martin (francúzska časť)</option><option value="Madagaskar">MG - Madagaskar</option><option value="Marshallove ostrovy">MH - Marshallove ostrovy</option><option value="Macedónsko">MK - Macedónsko</option><option value="Mali">ML - Mali</option><option value="Mjanmarsko">MM - Mjanmarsko</option><option value="Mongolsko">MN - Mongolsko</option><option value="Macao">MO - Macao</option><option value="Severné Mariány">MP - Severné Mariány</option><option value="Martinik">MQ - Martinik</option><option value="Mauritánia">MR - Mauritánia</option><option value="Montserrat">MS - Montserrat</option><option value="Malta">MT - Malta</option><option value="Maurícius">MU - Maurícius</option><option value="Maldivy">MV - Maldivy</option><option value="Malawi">MW - Malawi</option><option value="Mexiko">MX - Mexiko</option><option value="Malajzia">MY - Malajzia</option><option value="Mozambik">MZ - Mozambik</option><option value="Namíbia">NA - Namíbia</option><option value="Nová Kaledónia">NC - Nová Kaledónia</option><option value="Niger">NE - Niger</option><option value="Norfolk">NF - Norfolk</option><option value="Nigéria">NG - Nigéria</option><option value="Nikaragua">NI - Nikaragua</option><option value="Holandsko">NL - Holandsko</option><option value="Nórsko">NO - Nórsko</option><option value="Nepál">NP - Nepál</option><option value="Nauru">NR - Nauru</option><option value="Niue">NU - Niue</option><option value="Nový Zéland">NZ - Nový Zéland</option><option value="Omán">OM - Omán</option><option value="Panama">PA - Panama</option><option value="Peru">PE - Peru</option><option value="Francúzska Polynézia">PF - Francúzska Polynézia</option><option value="Papua-Nová Guinea">PG - Papua-Nová Guinea</option><option value="Filipíny">PH - Filipíny</option><option value="Pakistan">PK - Pakistan</option><option value="Poľsko">PL - Poľsko</option><option value="Saint Pierre a Miquelon">PM - Saint Pierre a Miquelon</option><option value="Pitcairnove ostrovy">PN - Pitcairnove ostrovy</option><option value="Portoriko">PR - Portoriko</option><option value="Palestína">PS - Palestína</option><option value="Portugalsko">PT - Portugalsko</option><option value="Palau">PW - Palau</option><option value="Paraguaj">PY - Paraguaj</option><option value="Katar">QA - Katar</option><option value="Réunion">RE - Réunion</option><option value="Rumunsko">RO - Rumunsko</option><option value="Srbsko">RS - Srbsko</option><option value="Rusko">RU - Rusko</option><option value="Rwanda">RW - Rwanda</option><option value="Saudská Arábia">SA - Saudská Arábia</option><option value="Šalamúnove ostrovy">SB - Šalamúnove ostrovy</option><option value="Seychely">SC - Seychely</option><option value="Sudán">SD - Sudán</option><option value="Švédsko">SE - Švédsko</option><option value="Singapur">SG - Singapur</option><option value="Svätá Helena, Ascension">SH - Svätá Helena, Ascension</option><option value="Slovinsko">SI - Slovinsko</option><option value="Svalbard a Jan Mayen">SJ - Svalbard a Jan Mayen</option><option value="Slovensko">SK - Slovensko</option><option value="Sierra Leone">SL - Sierra Leone</option><option value="San Maríno">SM - San Maríno</option><option value="Senegal">SN - Senegal</option><option value="Somálsko">SO - Somálsko</option><option value="Surinam">SR - Surinam</option><option value="Južný Sudán">SS - Južný Sudán</option><option value="Svätý Tomáš a Princov ostrov">ST - Svätý Tomáš a Princov ostrov</option><option value="Salvádor">SV - Salvádor</option><option value="Svätý Martin (holandská časť)">SX - Svätý Martin (holandská časť)</option><option value="Sýria">SY - Sýria</option><option value="Svazijsko">SZ - Svazijsko</option><option value="Turks a Caicos">TC - Turks a Caicos</option><option value="Čad">TD - Čad</option><option value="Francúzske južné územia">TF - Francúzske južné územia</option><option value="Togo">TG - Togo</option><option value="Thajsko">TH - Thajsko</option><option value="Tadžikistan">TJ - Tadžikistan</option><option value="Tokelau">TK - Tokelau</option><option value="Východný Timor">TL - Východný Timor</option><option value="Turkménsko">TM - Turkménsko</option><option value="Tunisko">TN - Tunisko</option><option value="Tonga">TO - Tonga</option><option value="Turecko">TR - Turecko</option><option value="Trinidad a Tobago">TT - Trinidad a Tobago</option><option value="Tuvalu">TV - Tuvalu</option><option value="Taiwan">TW - Taiwan</option><option value="Tanzánia">TZ - Tanzánia</option><option value="Ukrajina">UA - Ukrajina</option><option value="Uganda">UG - Uganda</option><option value="Menšie odľahlé ostrovy USA">UM - Menšie odľahlé ostrovy USA</option><option value="Spojené štáty, USA">US - Spojené štáty, USA</option><option value="Uruguaj">UY - Uruguaj</option><option value="Uzbekistan">UZ - Uzbekistan</option><option value="Vatikán">VA - Vatikán</option><option value="Svätý Vincent a Grenadíny">VC - Svätý Vincent a Grenadíny</option><option value="Venezuela">VE - Venezuela</option><option value="Britské Panenské ostrovy">VG - Britské Panenské ostrovy</option><option value="Americké Panenské ostrovy">VI - Americké Panenské ostrovy</option><option value="Vietnam">VN - Vietnam</option><option value="Vanuatu">VU - Vanuatu</option><option value="Wallis a Futuna">WF - Wallis a Futuna</option><option value="Samoa">WS - Samoa</option><option value="Jemen">YE - Jemen</option><option value="Mayotte">YT - Mayotte</option><option value="Južná Afrika">ZA - Južná Afrika</option><option value="Zambia">ZM - Zambia</option><option value="Zimbabwe">ZW - Zimbabwe</option></select></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3453,33 +3472,33 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130458" class="cell ">		
+<div id="layoutCell147150" class="cell ">		
 			 
-		<div id="layoutRow31845" class="layoutRow ui-tabs ui-widget-content  " title="">
+		<div id="layoutRow36609" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaAdresaSK">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Adresa na území Slovenskej republiky 4)">Adresa na území Slovenskej republiky <sup>4)</sup></div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31845" class="columns">
+		<div id="layoutRowContentlayoutRow36609" class="columns">
 				
-				<div id="layoutColumn79635" class="column first">
+				<div id="layoutColumn90866" class="column first">
 											
-<div id="layoutCell130459" class="cell ">		
+<div id="layoutCell147151" class="cell ">		
 			 
-		<div id="layoutRow31844" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
+		<div id="layoutRow36608" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
 						<input type="hidden" name="sekciaAdresaSK1">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31844" class="columns">
+		<div id="layoutRowContentlayoutRow36608" class="columns">
 				
-				<div id="layoutColumn79633" class="column first" style="width:649px;">
+				<div id="layoutColumn90864" class="column first" style="width:649px;">
 											
-<div id="layoutCell130455" class="cell ">		
+<div id="layoutCell147147" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130454" class="cell  sirokyTextBox600px">		
+<div id="layoutCell147146" class="cell  sirokyTextBox600px">		
 			
 		<label class="fieldLabel" title="" for="tbUlicaSK" style="width:291px;">14 - Ulica </label><span class="fieldContent"><input id="tbUlicaSK" name="tbUlicaSK" title="" type="text" class="textBox" maxlength="60" size="669" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3487,15 +3506,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79634" class="column " style="width:185px;">
+				<div id="layoutColumn90865" class="column " style="width:185px;">
 											
-<div id="layoutCell130456" class="cell ">		
+<div id="layoutCell147148" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130457" class="cell ">		
+<div id="layoutCell147149" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="tdCisloSK" style="width:291px;">15 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdCisloSK" name="tdCisloSK" title="" type="text" class="textBox" maxlength="20" size="191" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3510,23 +3529,23 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130460" class="cell ">		
+<div id="layoutCell147152" class="cell ">		
 			 
-		<div id="layoutRow31846" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
+		<div id="layoutRow36610" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky dolava8px nocaption " title="">
 						<input type="hidden" name="sekciaAdresaSK2">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31846" class="columns">
+		<div id="layoutRowContentlayoutRow36610" class="columns">
 				
-				<div id="layoutColumn79636" class="column first" style="width:125px;">
+				<div id="layoutColumn90867" class="column first" style="width:120px;">
 											
-<div id="layoutCell130462" class="cell ">		
+<div id="layoutCell147154" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130461" class="cell  doprava5px kratkyTextBox87px">		
+<div id="layoutCell147153" class="cell  doprava5px kratkyTextBox87px">		
 			
 		<label class="fieldLabel" title="" for="tbPSCSK" style="width:291px;">16 - PSČ </label><span class="fieldContent"><input id="tbPSCSK" name="tbPSCSK" title="" type="text" class="textBox" maxlength="5" size="112" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3534,15 +3553,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79637" class="column " style="width:440px;">
+				<div id="layoutColumn90868" class="column " style="width:440px;">
 											
-<div id="layoutCell130464" class="cell ">		
+<div id="layoutCell147156" class="cell ">		
 			
 			
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130463" class="cell  sirokyTextBox400px">		
+<div id="layoutCell147155" class="cell  sirokyTextBox400px">		
 			
 		<label class="fieldLabel" title="" for="tbObecSK" style="width:291px;">17 - Obec </label><span class="fieldContent"><input id="tbObecSK" name="tbObecSK" title="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo." type="text" class="textBox" maxlength="40" size="480" alt="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo." value=""></span>	
 		<div class="clear"></div>
@@ -3566,47 +3585,115 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130448" class="cell ">		
+<div id="layoutCell147140" class="cell ">		
 			 
-		<div id="layoutRow31843" class="layoutRow ui-tabs ui-widget-content  " title="">
+		<div id="layoutRow36607" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaNovaLehota">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Nová (predĺžená) lehota na podanie daňového priznania k dani z príjmov 5)">Nová (predĺžená) lehota na podanie daňového priznania k dani z príjmov <sup>5)</sup></div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31843" class="columns">
+		<div id="layoutRowContentlayoutRow36607" class="columns">
 				
-				<div id="layoutColumn79631" class="column first" style="width:564px;">
+				<div id="layoutColumn90862" class="column first">
 											
-<div id="layoutCell130449" class="cell  mensiText">		
+<div id="layoutCell147188" class="cell ">		
+			 
+		<div id="layoutRow36620" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
+						<input type="hidden" name="POM1">
+					<div class="caption ui-widget-header">		
+				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
+		<div id="layoutRowContentlayoutRow36620" class="columns">
+				
+				<div id="layoutColumn90885" class="column first">
+											
+<div id="layoutCell147141" class="cell  mensiText">		
 			
 		<span class="fieldLabel" title="" style="width:850px;">Daňovník vyznačí, podľa ktorého ustanovenia zákona si predlžuje lehotu na podanie daňového priznania a uvedie novú (predĺženú) lehotu. </span>	
-		<div class="clear"></div>
-</div>							
-											
-<div id="layoutCell130451" class="cell ">		
-			
-		<input id="cbPismA" name="cbPismA" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. a) zákona (najviac o tri celé kalendárne mesiace)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><label for="cbPismA" class="checkBoxLabel">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. a) zákona</b> (najviac o tri celé kalendárne mesiace)</label><br>	
-		<div class="clear"></div>
-</div>							
-											
-<div id="layoutCell130450" class="cell ">		
-			
-		<input id="cbPismB" name="cbPismB" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. b) zákona (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><label for="cbPismB" class="checkBoxLabel">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. b) zákona</b> (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí)</label><br>	
 		<div class="clear"></div>
 </div>							
 						
 				</div>	
 				
-				<div id="layoutColumn79632" class="column " style="width:300px;">
+			<div class="clear"></div>
+		</div>
+			</div>	
+					
+		<div class="clear"></div>
+</div>							
 											
-<div id="layoutCell130453" class="cell ">		
+<div id="layoutCell147184" class="cell ">		
+			 
+		<div id="layoutRow36618" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky topMinus10px nocaption " title="">
+						<input type="hidden" name="POM2">
+					<div class="caption ui-widget-header">		
+				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
+		<div id="layoutRowContentlayoutRow36618" class="columns">
+				
+				<div id="layoutColumn90883" class="column first" style="width:40px;">
+											
+<div id="layoutCell147143" class="cell ">		
+			
+		<input id="cbPismA" name="cbPismA" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. a) zákona(najviac o tri celé kalendárne mesiace)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><br>	
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+				<div id="layoutColumn90863" class="column " style="width:480px;">
+											
+<div id="layoutCell147189" class="cell ">		
+			
+		<span class="fieldLabel" title="" style="width:450px;">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. a) zákona</b> <br>(najviac o tri celé kalendárne mesiace) </span>	
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+				<div id="layoutColumn90886" class="column " style="width:320px;">
+											
+<div id="layoutCell147186" class="cell ">		
 			
 		<span class="fieldLabel" title="">&nbsp; </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130452" class="cell  topPlus12px">		
+<div id="layoutCell147144" class="cell  topMinus5px">		
 			
-		<label class="fieldLabel" title="" for="dtpLehota" style="width:70px;">nová lehota <em>*</em></label><span class="fieldContent"><input alt="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." id="dtpLehota" name="dtpLehota" title="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
+		<label class="fieldLabel" title="" for="dtpLehota" style="width:100px;">nová lehota <em>*</em></label><span class="fieldContent"><input alt="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." id="dtpLehota" name="dtpLehota" title="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+			<div class="clear"></div>
+		</div>
+			</div>	
+					
+		<div class="clear"></div>
+</div>							
+											
+<div id="layoutCell147185" class="cell ">		
+			 
+		<div id="layoutRow36619" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky topMinus20px nocaption " title="">
+						<input type="hidden" name="POM3">
+					<div class="caption ui-widget-header">		
+				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
+		<div id="layoutRowContentlayoutRow36619" class="columns">
+				
+				<div id="layoutColumn90884" class="column first" style="width:40px;">
+											
+<div id="layoutCell147142" class="cell ">		
+			
+		<input id="cbPismB" name="cbPismB" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. b) zákona (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú sumy príjmov priraditeľné podľa § 3 ods. 1 písm. h) zákona daňovníkovi podľa § 2 písm. d) prvého bodu zákona alebo zdaniteľné príjmy plynúce zo zdrojov v zahraničí)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><br>	
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+				<div id="layoutColumn90887" class="column " style="width:480px;">
+											
+<div id="layoutCell147190" class="cell ">		
+			
+		<span class="fieldLabel" title="" style="width:800px;">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. b) zákona</b> <br>(najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú sumy príjmov priraditeľné podľa § 3 ods. 1 písm. h) zákona daňovníkovi podľa § 2 písm. d) prvého bodu zákona alebo zdaniteľné príjmy plynúce zo zdrojov v zahraničí) </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3624,31 +3711,40 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31850" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
+					
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+			<div class="clear"></div>
+		</div>
+			</div>	
+						<div id="layoutRow36614" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
 						<input type="hidden" name="sekciaVypracoval">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31850" class="columns">
+		<div id="layoutRowContentlayoutRow36614" class="columns">
 				
-				<div id="layoutColumn79645" class="column first">
+				<div id="layoutColumn90876" class="column first">
 											
-<div id="layoutCell130477" class="cell ">		
+<div id="layoutCell147169" class="cell ">		
 			 
-		<div id="layoutRow31849" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
+		<div id="layoutRow36613" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
 						<input type="hidden" name="sekciaOdd3Vypracoval">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31849" class="columns">
+		<div id="layoutRowContentlayoutRow36613" class="columns">
 				
-				<div id="layoutColumn79642" class="column first" style="width:452px;">
+				<div id="layoutColumn90873" class="column first" style="width:452px;">
 											
-<div id="layoutCell130471" class="cell ">		
+<div id="layoutCell147163" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:210px;">Vypracoval </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130470" class="cell  sirokyTextBox410px">		
+<div id="layoutCell147162" class="cell  sirokyTextBox410px">		
 			
 		<label class="fieldLabel" title="" for="tbOdd3Vypracoval" style="display: none">Vypracoval </label><span class="fieldContent"><input id="tbOdd3Vypracoval" name="tbOdd3Vypracoval" title="" type="text" class="textBox" maxlength="50" size="190" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3656,15 +3752,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79643" class="column " style="width:202px;">
+				<div id="layoutColumn90874" class="column " style="width:202px;">
 											
-<div id="layoutCell130472" class="cell ">		
+<div id="layoutCell147164" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:210px;">Dňa </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130473" class="cell ">		
+<div id="layoutCell147165" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="tbOdd3Dna" style="display: none">Dňa </label><span class="fieldContent"><input alt="" id="tbOdd3Dna" name="tbOdd3Dna" title="" type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
@@ -3672,15 +3768,15 @@ customE: ""
 						
 				</div>	
 				
-				<div id="layoutColumn79644" class="column " style="width:200px;">
+				<div id="layoutColumn90875" class="column " style="width:200px;">
 											
-<div id="layoutCell130474" class="cell ">		
+<div id="layoutCell147166" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:200px;">Telefónne číslo </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130475" class="cell ">		
+<div id="layoutCell147167" class="cell ">		
 			
 		<label class="fieldLabel" title="" for="tbOdd3Telefon" style="display: none">Telefónne číslo </label><span class="fieldContent"><input id="tbOdd3Telefon" name="tbOdd3Telefon" title="" type="text" class="textBox" maxlength="13" size="190" alt="" value=""></span>	
 		<div class="clear"></div>
@@ -3695,17 +3791,17 @@ customE: ""
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130478" class="cell ">		
+<div id="layoutCell147170" class="cell ">		
 			 
-		<div id="layoutRow31851" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
+		<div id="layoutRow36615" class="layoutRow ui-tabs ui-widget-content  bezOkrajaBezPozadiaHlavicky nocaption " title="">
 						<input type="hidden" name="sekciaOdd3Vyhlasenie">
 					<div class="caption ui-widget-header">		
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31851" class="columns">
+		<div id="layoutRowContentlayoutRow36615" class="columns">
 				
-				<div id="layoutColumn79646" class="column first" style="width:600px;">
+				<div id="layoutColumn90877" class="column first" style="width:600px;">
 											
-<div id="layoutCell130479" class="cell ">		
+<div id="layoutCell147171" class="cell ">		
 			
 		<span class="fieldLabel" title="" style="width:419px;"><b>Vyhlasujem, že všetky údaje uvedené v oznámení sú správne a úplné.</b> </span>	
 		<div class="clear"></div>
@@ -3725,39 +3821,39 @@ customE: ""
 			<div class="clear"></div>
 		</div>
 			</div>	
-						<div id="layoutRow31853" class="layoutRow ui-tabs ui-widget-content  " title="">
+						<div id="layoutRow36617" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="sekciaVysvetlivky">
 					<div class="caption ui-widget-header">		
 				<div class="headercorrection" title="Vysvetlivky k vyplneniu oznámenia:">Vysvetlivky k vyplneniu oznámenia:</div><span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
-		<div id="layoutRowContentlayoutRow31853" class="columns">
+		<div id="layoutRowContentlayoutRow36617" class="columns">
 				
-				<div id="layoutColumn79651" class="column first">
+				<div id="layoutColumn90882" class="column first">
 											
-<div id="layoutCell130487" class="cell  mensiText textJustify">		
+<div id="layoutCell147179" class="cell  mensiText textJustify">		
 			
 		<span class="fieldLabel" title="" style="width:850px;">1) Daňovníkovi v konkurze alebo daňovníkovi v likvidácii môže správca dane predĺžiť lehotu na podanie daňového priznania k dani z príjmov len na základe žiadosti podanej najneskôr 15 dní pred uplynutím lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona  [žiadosť správcu (konkurz vyhlásený podľa druhej časti zákona č. 7/2005 Z. z. o konkurze a reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení neskorších predpisov), žiadosť daňovníka v konkurze (konkurz vyhlásený podľa štvrtej časti zákona č. 7/2005 Z. z. o konkurze a reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení neskorších predpisov) alebo žiadosť daňovníka v likvidácii].<br>Ak má povinnosť podať daňové priznanie k dani z príjmov fyzickej osoby dedič podľa § 49 ods. 4 a 5 zákona, správca dane môže lehotu na jeho podanie predĺžiť len na základe žiadosti dediča podanej najneskôr 15 dní pred uplynutím lehoty na podanie daňového priznania podľa § 49 ods. 4 a 5 zákona. </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130488" class="cell  mensiText textJustify">		
+<div id="layoutCell147180" class="cell  mensiText textJustify">		
 			
 		<span class="fieldLabel" title="" style="width:850px;">2) Uvedie sa zdaňovacie obdobie, kalendárny rok u fyzickej osoby alebo kalendárny rok, hospodársky rok alebo iné zdaňovacie obdobie u právnickej osoby, za ktoré sa predlžuje lehota na podanie daňového priznania na základe oznámenia daňovníka. </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130489" class="cell  mensiText textJustify">		
+<div id="layoutCell147181" class="cell  mensiText textJustify">		
 			
 		<span class="fieldLabel" title="" style="width:850px;">3) Ak daňovník zistí, že v podanom oznámení uviedol nesprávne alebo neúplné údaje, podá nové oznámenie, v ktorom uvedie správne údaje. Ak sa daňovník rozhodne, že daňové priznanie podá v inej (predĺženej) lehote, do uplynutia lehoty podľa § 49 ods. 2 zákona môže podať nové oznámenie, v ktorom uvedie novú (predĺženú) lehotu. Skutočnosť, že oznámenie podáva z týchto dôvodov, vyznačí krížikom a uvedie dátum podania predchádzajúceho oznámenia. </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130490" class="cell  mensiText textJustify">		
+<div id="layoutCell147182" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">4) Vypĺňa sa, len ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo. Fyzická osoba uvedie adresu pobytu na území Slovenskej republiky, kde sa v zdaňovacom období obvykle zdržiavala. Právnická osoba uvedie umiestnenie stálej prevádzkarne alebo organizačnej zložky. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">4) Vypĺňa sa, len ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo. Fyzická osoba uvedie adresu bydliska alebo adresu pobytu na území Slovenskej republiky, kde sa v zdaňovacom období obvykle zdržiavala. Právnická osoba uvedie umiestnenie stálej prevádzkarne alebo organizačnej zložky. </span>	
 		<div class="clear"></div>
 </div>							
 											
-<div id="layoutCell130491" class="cell  mensiText textJustify">		
+<div id="layoutCell147183" class="cell  mensiText textJustify">		
 			
 		<span class="fieldLabel" title="" style="width:850px;">5) Daňovník uvedie novú (predĺženú) lehotu, ktorou je koniec kalendárneho mesiaca, v ktorej podá daňové priznanie a v ktorej je aj daň splatná, napr. 30.04., 31.05. alebo 30.06., resp. ak súčasťou jeho príjmov sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí aj 31.07., 31.08. alebo 30.09. </span>	
 		<div class="clear"></div>
@@ -3791,7 +3887,7 @@ customE: ""
 	</form>
 
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
-			<img id="statusLoader" src="./form.510_files/ajax-loader.png" alt="Čakajte prosím">
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
+			<img id="statusLoader" src="./form.548_files/ajax-loader.png" alt="Čakajte prosím">
 			<p id="statusMessage" class="statusMessage"></p>
-		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1643407298810.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all" onclick="DP_jQuery_1643407298810.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, +1, &#39;M&#39;);" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">Január</span>&nbsp;<span class="ui-datepicker-year">2022</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">1</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">2</a></td></tr><tr><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">3</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">4</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">5</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">6</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">7</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">8</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">9</a></td></tr><tr><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">10</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">11</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">12</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">13</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">14</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">15</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">16</a></td></tr><tr><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">17</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">18</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">19</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">20</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">21</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">22</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">23</a></td></tr><tr><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">24</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">25</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">26</a></td><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">27</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">28</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">29</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">30</a></td></tr><tr><td class=" " onclick="DP_jQuery_1643407298810.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2022, this);return false;"><a class="ui-state-default" href="file:///Users/julius_retzer/Downloads/form.510/form.510.html#">31</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></body></html>
+		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1672744129980.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all" onclick="DP_jQuery_1672744129980.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, +1, &#39;M&#39;);" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">Január</span>&nbsp;<span class="ui-datepicker-year">2023</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">1</a></td></tr><tr><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">2</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">3</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">4</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">5</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">6</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">7</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">8</a></td></tr><tr><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">9</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">10</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">11</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">12</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">13</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">14</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">15</a></td></tr><tr><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">16</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">17</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">18</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">19</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">20</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">21</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">22</a></td></tr><tr><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">23</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">24</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">25</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">26</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">27</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">28</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">29</a></td></tr><tr><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">30</a></td><td class=" " onclick="DP_jQuery_1672744129980.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,0,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.548.html#">31</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div id="delugesiphon-modal-gabdloknkpdefdpkkibplcfnkngbidim"></div></body></html>
