@@ -135,6 +135,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
+    get r034a() {
+      return ''
+    }
+
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
     // r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
     // r037_zaplatene_uroky: new Decimal(
