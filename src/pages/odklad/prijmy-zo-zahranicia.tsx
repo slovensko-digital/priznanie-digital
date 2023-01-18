@@ -11,6 +11,7 @@ import {
   IncomeSourceCountryUserInput,
 } from '../../types/PageUserInputs'
 import { TAX_YEAR } from '../../lib/calculation'
+import { Details } from '../../components/Details'
 
 const { nextRoute, previousRoute } = getPostponeRoutes(
   '/odklad/prijmy-zo-zahranicia',
@@ -22,6 +23,51 @@ interface Props {
   >
   postponeUserInput: PostponeUserInput
 }
+
+const hint = (
+  <>
+    <p>
+      Rozhodujúcim faktorom je, či ide o <strong>zdaniteľné príjmy</strong>{' '}
+      (t.j. príjmy, ktoré sú predmetom dane a zároveň nie sú oslobodené v zmysle
+      zákona o dani z príjmov ani medzinárodnej zmluvy),{' '}
+      <strong>ktoré vám plynú zo zdrojov v zahraničí</strong>.
+    </p>
+    <Details title="Najčastejšie možné príklady zdaniteľných príjmov zo zdrojov v zahraničí:">
+      <p className="govuk-hint">
+        <strong>Aktívne príjmy</strong> (z činnosti), pri ktorých je{' '}
+        <strong>rozhodujúce ich vykonávanie mimo územia SR</strong>, napr.:
+        <ul>
+          <li>príjem zo závislej činnosti vykonávaný v zahraničí,</li>
+          <li>
+            príjem z činnosti vykonávanej v zahraničí prostredníctvom stálej
+            prevádzkarne.
+          </li>
+        </ul>
+      </p>
+      <p className="govuk-hint">
+        <strong>Pasívne príjmy</strong> (z nakladania s majetkom), pri ktorých
+        je <strong>rozhodujúce</strong>, že{' '}
+        <strong>príjem vypláca zahraničná osoba</strong> (fyzická alebo
+        právnická osoba, ktorá nie je rezidentom SR){' '}
+        <strong>
+          alebo ide o príjem z nakladania s nehnuteľnosťou umiestnenou mimo SR
+        </strong>
+        , napr.:
+        <ul>
+          <li>príjem z prenájmu nehnuteľnosti umiestnenej v zahraničí,</li>
+          <li>
+            príjem charakteru úrokov, licenčných poplatkov vyplácaných
+            zahraničnou spoločnosťou,
+          </li>
+          <li>
+            príjem z predaja akcií, príjem z dividend vyplácaných zahraničnou
+            spoločnosťou.
+          </li>
+        </ul>
+      </p>
+    </Details>
+  </>
+)
 
 const PrijmyZoZahranicia: NextPage<Props> = ({
   setPostponeUserInput,
@@ -48,7 +94,7 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
           <Form className="form">
             <BooleanRadio
               title={`Mali ste v roku ${TAX_YEAR} príjem zo zahraničia?`}
-              hint="Rozhodujúcim faktorom je, či príjmy boli v zahraničí podrobené zdaneniu podľa legislatívy toho konkrétneho štátu, bez ohľadu na výšku tam zaplatenej dane. Príklady zahraničných príjmov: príjem zo závislej činnosti vykonávanej v zahraničí, príjem z činnosti vykonávanej v zahraničí prostredníctvom stálej prevádzkarne, príjem z nakladania s nehnuteľnosťou umiestnenou v zahraničí, príjem charakteru úrokov alebo licenčných poplatkov vyplácaných zahraničnou spoločnosťou, predaj akcií, príjem z dividend, ..."
+              hint={hint}
               name="prijmy_zo_zahranicia"
             />
             {values.prijmy_zo_zahranicia !== undefined && (
