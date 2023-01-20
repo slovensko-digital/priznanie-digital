@@ -83,7 +83,6 @@ Each feature flag is a cookie with value. You can set cookie in dev tools consol
 
 Add `.env` file with env variables:
 
-- _autoformtoken_ (for [autocomplete api](https://ekosystem.slovensko.digital/sluzby/autoform))
 - _sendinbluetoken_ (for sending feedback emails via 3rd party service [sendinblue](https://www.sendinblue.com/))
 
 ## Environments
