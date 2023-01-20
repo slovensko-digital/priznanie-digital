@@ -28,14 +28,14 @@ export const setDate = <T>(input: T, date: Date = new Date()) => {
   }
 }
 
-export const getStreetNumber = ({reg_number, building_number}) => {
-  if (reg_number && building_number){
+export const getStreetNumber = ({reg_number, building_number}: {reg_number: number, building_number: string}): string => {
+  if (reg_number !== null && building_number !== null){
     return `${reg_number}/${building_number}`
   }
-  if (!reg_number && building_number){
+  if (reg_number === null && building_number !== null){
     return building_number
   }
-  if (reg_number && !building_number) {
+  if (reg_number !== null && building_number === null){
     return `${reg_number}`
   }
   return null

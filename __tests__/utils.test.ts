@@ -89,6 +89,13 @@ describe('utils', () => {
         },
         output: '477/32',
       },
+      {
+        input: {
+          reg_number: 0,
+          building_number: '32',
+        },
+        output: '0/32',
+      },
     ]
 
     scenarios.forEach(({ input, output }) => {
