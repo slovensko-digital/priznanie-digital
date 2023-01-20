@@ -10,12 +10,12 @@ import {
 import { getAutoformByPersonName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
-  AutoCompleteData,
   AutoCompleteInput,
 } from '../components/AutoCompleteInput'
 import { formatPsc, parseFullName } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
+import { AutoFormSubject } from '../types/api'
 
 const formatNace = (economicActivity) => {
   const { code, name } = economicActivity || {}
@@ -28,7 +28,7 @@ const formatNace = (economicActivity) => {
 const makeHandlePersonAutoform = ({
   setValues,
 }: FormikProps<PersonalInformationUserInput>) => {
-  return (person: AutoCompleteData) => {
+  return (person: AutoFormSubject) => {
     const { first, last, title } = parseFullName(person.name)
 
     setValues({

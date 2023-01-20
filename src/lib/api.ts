@@ -1,5 +1,5 @@
-import getConfig from "next/config";
-import type { AutoformResponseBody } from '../types/api'
+import getConfig from 'next/config'
+import type { AutoFormSubject } from '../types/api'
 import { translit } from './utils'
 
 const {
@@ -8,7 +8,7 @@ const {
 
 export const getAutoformByPersonName = async (
   name: string,
-): Promise<AutoformResponseBody[]> => {
+): Promise<AutoFormSubject[]> => {
   const baseUrl =
     'https://autoform.ekosystem.slovensko.digital/api/corporate_bodies'
   const limit = 20
@@ -16,7 +16,6 @@ export const getAutoformByPersonName = async (
   const query = `name:${encodeURI(name)}`
 
   try {
-
     const response = await fetch(
       `${baseUrl}/search?q=${query}&limit=${limit}&access_token=${autoformPublicToken}&filter=active`,
     )

@@ -4,17 +4,13 @@ import { useField } from 'formik'
 import styles from './AutoCompleteInput.module.css'
 import { Input } from './FormComponents'
 import { UserInput } from '../types/UserInput'
-
-export interface AutoCompleteData extends Record<string, any> {
-  id: number | string
-  value: string
-}
+import { AutoFormSubject } from '../types/api'
 
 export interface AutoCompleteInputProps {
   name: keyof UserInput
   label: string
-  fetchData: (value: string) => Promise<AutoCompleteData[]>
-  onSelect?: (data: AutoCompleteData) => void
+  fetchData: (value: string) => Promise<AutoFormSubject[]>
+  onSelect?: (data: AutoFormSubject) => void
   minLength?: number
 }
 export const AutoCompleteInput = ({
