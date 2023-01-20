@@ -120,6 +120,9 @@ export interface ParsedName {
   title: string
 }
 
+/**
+ * @deprecated AutoForm vracia udaje uz rozparsovane 
+ */
 export const parseFullName = (value: string): ParsedName => {
   const parts = value.split(' ').map((v) => v.trim())
 
