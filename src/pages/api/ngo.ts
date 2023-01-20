@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { AutoformResponseBody } from '../../types/api'
+import { AutoFormSubject } from '../../types/api'
 import Fuse from 'fuse.js'
 import ngos from '../../../public/ngos.json'
 
 const maxCacheAgeInMinutes = 15
 
-type CachedData = Partial<AutoformResponseBody>
+type CachedData = Partial<AutoFormSubject>
 
 interface Cache {
   data: Fuse<CachedData>
