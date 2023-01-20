@@ -12,13 +12,13 @@ import {
 import { getAutoformByPersonName } from '../../lib/api'
 import { getPostponeRoutes } from '../../lib/routes'
 import {
-  AutoCompleteData,
   AutoCompleteInput,
 } from '../../components/AutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
-import { formatPsc, parseFullName } from '../../lib/utils'
+import { formatPsc } from '../../lib/utils'
 import { countries } from '../../lib/postpone/countries'
+import { AutoFormSubject } from '../../types/api'
 
 const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
 
@@ -26,18 +26,18 @@ const makeHandlePersonAutoform = ({
   setValues,
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
-  return (person: AutoCompleteData) => {
-    const { first, last, title } = parseFullName(person.name)
+  return (subject: AutoFormSubject) => {
+    const person = subject.statutory[0]
 
     setValues({
       ...values,
-      meno_priezvisko: person.name || '',
-      priezvisko: last || '',
-      meno: first || '',
-      titul: title || '',
-      dic: person?.tin || '',
+      meno_priezvisko: subject.name || '',
+      priezvisko: person.last_name || '',
+      meno: person.first_name || '',
+      titul: person.prefixes || '',
+      dic: `${subject.tin}` || '',
       ulica: person.street || person.municipality || '',
-      cislo: person.street_number || '',
+      cislo: person.building_number || '',
       psc: person.postal_code ? formatPsc(person.postal_code) : '',
       obec: person.municipality || '',
       stat: person.country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
@@ -88,7 +88,6 @@ const OsobneUdaje: NextPage<Props> = ({
                   const data = await getAutoformByPersonName(name)
                   return data.map((item) => ({
                     ...item,
-                    id: item.id,
                     value: `${item.name} ${item.formatted_address}`,
                   }))
                 }}
