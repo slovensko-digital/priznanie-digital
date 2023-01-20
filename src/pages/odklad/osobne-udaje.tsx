@@ -11,12 +11,10 @@ import {
 } from '../../types/PageUserInputs'
 import { getAutoformByPersonName } from '../../lib/api'
 import { getPostponeRoutes } from '../../lib/routes'
-import {
-  AutoCompleteInput,
-} from '../../components/AutoCompleteInput'
+import { AutoCompleteInput } from '../../components/AutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
-import { formatPsc } from '../../lib/utils'
+import { formatPsc, getStreetNumber } from '../../lib/utils'
 import { countries } from '../../lib/postpone/countries'
 import { AutoFormSubject } from '../../types/api'
 
@@ -27,20 +25,30 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
   return (subject: AutoFormSubject) => {
-    const person = subject.statutory[0]
+    const {
+      first_name,
+      last_name,
+      prefixes,
+      street,
+      reg_number,
+      building_number,
+      municipality,
+      postal_code,
+      country,
+    } = subject.statutory[0]
 
     setValues({
       ...values,
       meno_priezvisko: subject.name || '',
-      priezvisko: person.last_name || '',
-      meno: person.first_name || '',
-      titul: person.prefixes || '',
+      priezvisko: last_name || '',
+      meno: first_name || '',
+      titul: prefixes || '',
       dic: `${subject.tin}` || '',
-      ulica: person.street || person.municipality || '',
-      cislo: person.building_number || '',
-      psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      obec: person.municipality || '',
-      stat: person.country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
+      ulica: street || municipality || '',
+      cislo: getStreetNumber({ reg_number, building_number }) || '',
+      psc: postal_code ? formatPsc(postal_code) : '',
+      obec: municipality || '',
+      stat: country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
     })
   }
 }
