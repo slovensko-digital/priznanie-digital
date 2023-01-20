@@ -11,12 +11,10 @@ import {
 } from '../../types/PageUserInputs'
 import { getAutoformByPersonName } from '../../lib/api'
 import { getPostponeRoutes } from '../../lib/routes'
-import {
-  AutoCompleteInput,
-} from '../../components/AutoCompleteInput'
+import { AutoCompleteInput } from '../../components/AutoCompleteInput'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { ErrorSummary } from '../../components/ErrorSummary'
-import { formatPsc } from '../../lib/utils'
+import { formatPsc, getStreetNumber } from '../../lib/utils'
 import { countries } from '../../lib/postpone/countries'
 import { AutoFormSubject } from '../../types/api'
 

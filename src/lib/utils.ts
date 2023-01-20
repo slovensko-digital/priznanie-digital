@@ -28,6 +28,19 @@ export const setDate = <T>(input: T, date: Date = new Date()) => {
   }
 }
 
+export const getStreetNumber = ({reg_number, building_number}) => {
+  if (reg_number && building_number){
+    return `${reg_number}/${building_number}`
+  }
+  if (!reg_number && building_number){
+    return building_number
+  }
+  if (reg_number && !building_number) {
+    return `${reg_number}`
+  }
+  return null
+}
+
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
   const roundNumber = roundDecimal(new Decimal(value || 0))

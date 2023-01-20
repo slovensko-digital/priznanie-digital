@@ -3,6 +3,7 @@ import {
   ceilDecimal,
   parseStreetAndNumber,
   encodeUnicodeCharacters,
+  getStreetNumber,
 } from '../src/lib/utils'
 import {
   sortObjectKeys,
@@ -55,6 +56,45 @@ describe('utils', () => {
     it('should format date case 2', () => {
       const date = new Date(2020, 10, 22)
       expect(formatDate(date)).toBe('22.11.2020')
+    })
+  })
+
+  describe('#getStreetNumber', () => {
+    const scenarios = [
+      {
+        input: {
+          reg_number: 712,
+          building_number: '5H',
+        },
+        output: '712/5H',
+      },
+      {
+        input: {
+          reg_number: 453,
+          building_number: null,
+        },
+        output: '453',
+      },
+      {
+        input: {
+          reg_number: null,
+          building_number: '4',
+        },
+        output: '4',
+      },
+      {
+        input: {
+          reg_number: null,
+          building_number: '477/32',
+        },
+        output: '477/32',
+      },
+    ]
+
+    scenarios.forEach(({ input, output }) => {
+      it(`should format to ${output}`, () => {
+        expect(getStreetNumber(input)).toBe(output)
+      })
     })
   })
 
