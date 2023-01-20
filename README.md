@@ -84,6 +84,7 @@ Each feature flag is a cookie with value. You can set cookie in dev tools consol
 Add `.env` file with env variables:
 
 - _sendinbluetoken_ (for sending feedback emails via 3rd party service [sendinblue](https://www.sendinblue.com/))
+- _NEXT_PUBLIC_navodyBaseUrl_ (redirect to instructions for next steps after generating xmls)
 
 ## Environments
 
