@@ -37,6 +37,11 @@ Install dependencies:
 yarn
 ```
 
+Create environment variables:
+```bash
+cp .env.example .env
+```
+
 Run the application:
 
 ```bash
