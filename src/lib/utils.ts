@@ -28,6 +28,19 @@ export const setDate = <T>(input: T, date: Date = new Date()) => {
   }
 }
 
+export const getStreetNumber = ({reg_number, building_number}: {reg_number: number, building_number: string}): string => {
+  if (reg_number !== null && building_number !== null){
+    return `${reg_number}/${building_number}`
+  }
+  if (reg_number === null && building_number !== null){
+    return building_number
+  }
+  if (reg_number !== null && building_number === null){
+    return `${reg_number}`
+  }
+  return null
+}
+
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
   const roundNumber = roundDecimal(new Decimal(value || 0))
@@ -120,6 +133,9 @@ export interface ParsedName {
   title: string
 }
 
+/**
+ * @deprecated AutoForm vracia udaje uz rozparsovane 
+ */
 export const parseFullName = (value: string): ParsedName => {
   const parts = value.split(' ').map((v) => v.trim())
 
