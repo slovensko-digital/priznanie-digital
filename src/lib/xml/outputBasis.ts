@@ -1,6 +1,5 @@
 import { OutputJson } from '../../types/OutputJson'
-
-const ZDANOVACIE_OBDOBIE__ROK = '2021'
+import { TAX_YEAR } from '../calculation'
 
 const sampleSchema: OutputJson = {
   dokument: {
@@ -13,7 +12,7 @@ const sampleSchema: OutputJson = {
         ddp: '0',
       },
       zdanovacieObdobie: {
-        rok: ZDANOVACIE_OBDOBIE__ROK,
+        rok: (TAX_YEAR).toString(),
         datumDDP: '',
       },
       skNace: {
