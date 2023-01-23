@@ -21,6 +21,8 @@ export function convertPostponeToJson(
 
   form.dokument.hlavicka.fyzickaOsoba.meno = postponeUserInput.meno
   form.dokument.hlavicka.fyzickaOsoba.priezvisko = postponeUserInput.priezvisko
+  form.dokument.hlavicka.fyzickaOsoba.titulPred = postponeUserInput.titul_pred
+  form.dokument.hlavicka.fyzickaOsoba.titulZa = postponeUserInput.titul_za
 
   form.dokument.hlavicka.sidlo.psc = postponeUserInput.psc.replace(/\D/g, '')
   form.dokument.hlavicka.sidlo.obec = postponeUserInput.obec

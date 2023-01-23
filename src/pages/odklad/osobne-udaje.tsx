@@ -29,6 +29,7 @@ const makeHandlePersonAutoform = ({
       first_name,
       last_name,
       prefixes,
+      postfixes,
       street,
       reg_number,
       building_number,
@@ -42,7 +43,8 @@ const makeHandlePersonAutoform = ({
       meno_priezvisko: subject.name || '',
       priezvisko: last_name || '',
       meno: first_name || '',
-      titul: prefixes || '',
+      titul_pred: prefixes || '',
+      titul_za: postfixes || '',
       dic: `${subject.tin}` || '',
       ulica: street || municipality || '',
       cislo: getStreetNumber({ reg_number, building_number }) || '',
@@ -104,9 +106,15 @@ const OsobneUdaje: NextPage<Props> = ({
               <div className={styles.inlineFieldContainer}>
                 <Input
                   className={styles.inlineField}
-                  name="titul"
+                  name="titul_pred"
                   type="text"
-                  label="Titul"
+                  label="Titul pred menom"
+                />
+                <Input
+                  className={styles.inlineField}
+                  name="titul_za"
+                  type="text"
+                  label="Titul za menom"
                 />
               </div>
 

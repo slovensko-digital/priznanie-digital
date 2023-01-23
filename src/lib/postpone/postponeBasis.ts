@@ -9,6 +9,8 @@ export const postponeBasis: PostponeOutput = {
       fyzickaOsoba: {
         priezvisko: '',
         meno: '',
+        titulPred: '',
+        titulZa: '',
       },
       sidlo: {
         psc: '',
