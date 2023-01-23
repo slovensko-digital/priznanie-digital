@@ -3,7 +3,8 @@ import { PostponeUserInput } from '../../../src/types/PostponeUserInput'
 export const foreignIncomeInput: PostponeUserInput = {
   prijmy_zo_zahranicia: true,
   meno_priezvisko: '',
-  titul: '',
+  titul_pred: 'Ing.',
+  titul_za: 'PhD.',
   meno: 'Werner',
   priezvisko: 'Heisenberg',
   // rodne_cislo: '200310/0011',
