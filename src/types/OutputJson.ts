@@ -243,24 +243,22 @@ export interface R47 {
 
 export interface Udaje2 {
   r02: string
-  r03: string
-  r04: string
   r05: string
-}
-
-export interface R48 {
-  rok: string
-  udaje: Udaje2
 }
 
 export interface Udaje3 {
   r02: string
   r03: string
+  r04: string
 }
 
-export interface R52 {
+export interface R50 {
   rok: string
   udaje: Udaje3
+}
+export interface R51 {
+  rok: string
+  udaje: Udaje2
 }
 
 export interface T2r1 {
@@ -620,11 +618,11 @@ export interface Telo {
   r45: string
   r46: string
   r47: R47
-  r48: R48
+  r48: string
   r49: string
-  r50: string
-  r51: string
-  r52: R52
+  r50: R50
+  r51: R51
+  r52: string
   r53: string
   r54: string
   r55: string
