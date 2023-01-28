@@ -4,6 +4,7 @@
 */
 export const countries: string[] = [
   '',
+  'Slovensko',
   'Andorra',
   'Spojené arabské emiráty',
   'Afganistan',
@@ -205,7 +206,6 @@ export const countries: string[] = [
   'Svätá Helena, Ascension',
   'Slovinsko',
   'Svalbard a Jan Mayen',
-  'Slovensko',
   'Sierra Leone',
   'San Maríno',
   'Senegal',

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { TAX_YEAR } from '../lib/calculation'
+import { ExternalLink } from '../components/ExternalLink'
 
 const IconCheck = () => (
   <svg
@@ -46,7 +47,12 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug }) => (
         </li>
         <li>
           <IconCheck />
-          <p>Pripravené v spolupráci s daňovými poradcami</p>
+          <p>
+            Pripravené v spolupráci s daňovými poradcami z {' '}
+            <ExternalLink href='https://www.linkedin.com/company/avenias/'>
+              AVENIAS Tax & Legal
+            </ExternalLink>
+          </p>
         </li>
       </ul>
     </div>
