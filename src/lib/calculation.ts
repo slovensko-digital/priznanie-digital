@@ -30,7 +30,10 @@ export const CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY = 47.14
 export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 43.6
 const CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY = 23.57
 
+// not used for now but should be required for updated calc for 2022
+// @ts-expect-error
 const CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY = 70
+// @ts-expect-error
 const CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY = 40
 
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
