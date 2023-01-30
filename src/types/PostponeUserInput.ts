@@ -4,7 +4,8 @@ export interface PostponeUserInput {
   prijmy_zo_zahranicia?: boolean
 
   meno_priezvisko: string
-  titul: string
+  titul_pred: string
+  titul_za: string
   meno: string
   priezvisko: string
   ulica: string

@@ -55,7 +55,8 @@ export type PersonalInformationUserInput = Pick<
 export type PersonalInformationPostponePage = Pick<
   PostponeUserInput,
   | 'meno_priezvisko'
-  | 'titul'
+  | 'titul_pred'
+  | 'titul_za'
   | 'meno'
   | 'priezvisko'
   | 'dic'

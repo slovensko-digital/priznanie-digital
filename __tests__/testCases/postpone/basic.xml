@@ -7,6 +7,8 @@
       <fyzickaOsoba>
          <priezvisko>Heisenberg</priezvisko>
          <meno>Werner</meno>
+         <titulPred>Ing.</titulPred>
+         <titulZa>PhD.</titulZa>
       </fyzickaOsoba>
       <sidlo>
          <psc>82105</psc>

@@ -8,6 +8,8 @@ interface Dokument {
 interface FyzickaOsoba {
   priezvisko: string
   meno: string
+  titulPred: string
+  titulZa: string
   // rodneCislo: RodneCislo;
 }
 
