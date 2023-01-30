@@ -69,6 +69,7 @@ export interface TaxForm {
 
   /**   Deti*/
   r034?: Child[]
+  r034a: string
 
   /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
   t1r10_vydavky: Decimal
