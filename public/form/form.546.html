@@ -7758,160 +7758,207 @@ var t36 = Number($("#r36").val());
             var year = 2022;
             var sadzba = 3876;
 
-
+            function getRetValue() {
+                if ((t41 > 0 || t42 > 0) && (t39 == 0 && t40 == 0)) {
+                    if (t36 >= sadzba || t45 > 0) {
                         return cislo();
-            
-            function cislo() {
-var validChildren = [];
-            $("[id^='layoutRow36155']").each(function () {
-                var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
-                var result = DietaInfo($(element), 2022);
-if (result != null) {
-    result.months = [];
-    var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
-    $(this).find("[id^='cbM']").each(function () {
-        var checked = (allAreChecked || $(this).is(":checked"));
-        if (checked && result.months.length != 0) {
-            var month = result.months.length;
-            var rozdiel = DateDiffInYears(result.datum, new Date(2022, month - 2, 31));
-            if (rozdiel == -1 && result._monthBirth == month) {
-                result.months.push(checked)
-            }
-            else if (0 <= rozdiel && rozdiel < 6) {
-                result.months.push(checked)
-            }
-            else if (0 <= rozdiel && rozdiel <= 25) {
-                if (rozdiel >= 25 && result._monthBirth < month) {
-                    result.months.push(false)
-                } else {
-                    result.months.push(checked);
-                }
-            }
-            else {
-                result.months.push(false)
-            }
-        } else {
-            result.months.push(checked);
-        }
-    });
-    validChildren.push(result);
-}
-
-            });
-
-            function areMonthsDifferent(indexOfFirstMonth) {
-                for (var i = 0; i < validChildren.length; i++) {
-                    if (validChildren[i].months[indexOfFirstMonth] != validChildren[i].months[indexOfFirstMonth + 1]) {
-                        return true;
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return cislo();
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return cislo();
+                    } else {
+                        return 0;
                     }
                 }
-                return false;
+                else {
+                    if ((t36 >= sadzba) || (t95 >= sadzba && t45 > 0)) {
+                        return cislo();
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return cislo();
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return cislo();
+                    } else {
+                        return 0;
+                    }
+                }
             }
 
-            monthGroups = [[]];
-            for (var i = 7; i <= 12; i++) {
-                monthGroups[monthGroups.length - 1].push(i);
-                if (i < 12 && areMonthsDifferent(i)) {
-                    monthGroups.push([]);
+            function getRetValue2() {
+                if ((t41 > 0 || t42 > 0) && (t39 == 0 && t40 == 0)) {
+                    if (t36 >= sadzba || t45 > 0) {
+                        return true;
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return true;
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
-   }
-   var resultDB1 = 0;
-            var resultDB2 = 0;
-            for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
-                var partialResultDB1 = 0;
-                var partialResultDB2 = 0;
-                for (var monthIndex = 0; monthIndex < monthGroups[groupIndex].length; monthIndex++) {
-                    var numberOfChilds = 0;
-                    for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
-      var month = monthGroups[groupIndex][monthIndex];
-                        if (validChildren[childIndex].months[month]) {
-                            numberOfChilds += 1;
-                            var date = new Date(validChildren[childIndex].datum)
+                else {
+                    if ((t36 >= sadzba) || (t95 >= sadzba && t45 > 0)) {
+                        return true;
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return true;
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
 
-                            var numberOfDays = 30;
-                            switch (month) {
-                                case 1:
-                                case 2:
-                                case 4:
-                                case 6:
-                                case 8:
-                                case 9:
-                                case 11:
-                                    numberOfDays = 31
-                                    break;
-                                case 3:
-                                    numberOfDays = 28
-                                    break;
+            function cislo() {
+                var validChildren = [];
+                $("[id^='layoutRow36155']").each(function () {
+                    var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
+                    var result = DietaInfo($(element), 2022);
+                    if (result != null) {
+                        result.months = [];
+                        var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
+                        $(this).find("[id^='cbM']").each(function () {
+                            var checked = (allAreChecked || $(this).is(":checked"));
+                            if (checked && result.months.length != 0) {
+                                var month = result.months.length;
+                                var rozdiel = DateDiffInYears(result.datum, new Date(2022, month - 2, 31));
+                                if (rozdiel == -1 && result._monthBirth == month) {
+                                    result.months.push(checked)
+                                }
+                                else if (0 <= rozdiel && rozdiel < 6) {
+                                    result.months.push(checked)
+                                }
+                                else if (0 <= rozdiel && rozdiel <= 25) {
+                                    if (rozdiel >= 25 && result._monthBirth < month) {
+                                        result.months.push(false)
+                                    } else {
+                                        result.months.push(checked);
+                                    }
+                                }
+                                else {
+                                    result.months.push(false)
+                                }
+                            } else {
+                                result.months.push(checked);
                             }
+                        });
+                        validChildren.push(result);
+                    }
 
-                            var rozdiel = DateDiffInYears(date, new Date(2022, month - 2, numberOfDays));
-                            if (rozdiel < 6) {
-        partialResultDB1 += 47.14;
-        partialResultDB2 += 70;
-                            }
-                            else if (rozdiel < 15) {
-                                partialResultDB1 += 43.60;
-                                partialResultDB2 += 70;
-                            }
-       else if (rozdiel < 25) {
-        partialResultDB1 += 23.57;
-        partialResultDB2 += 40;
+                });
+
+                function areMonthsDifferent(indexOfFirstMonth) {
+                    for (var i = 0; i < validChildren.length; i++) {
+                        if (validChildren[i].months[indexOfFirstMonth] != validChildren[i].months[indexOfFirstMonth + 1]) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                monthGroups = [[]];
+                for (var i = 7; i <= 12; i++) {
+                    monthGroups[monthGroups.length - 1].push(i);
+                    if (i < 12 && areMonthsDifferent(i)) {
+                        monthGroups.push([]);
+                    }
+                }
+                var resultDB1 = 0;
+                var resultDB2 = 0;
+                for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
+                    var partialResultDB1 = 0;
+                    var partialResultDB2 = 0;
+                    for (var monthIndex = 0; monthIndex < monthGroups[groupIndex].length; monthIndex++) {
+                        var numberOfChilds = 0;
+                        for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                            var month = monthGroups[groupIndex][monthIndex];
+                            if (validChildren[childIndex].months[month]) {
+                                numberOfChilds += 1;
+                                var date = new Date(validChildren[childIndex].datum)
+
+                                var numberOfDays = 30;
+                                switch (month) {
+                                    case 1:
+                                    case 2:
+                                    case 4:
+                                    case 6:
+                                    case 8:
+                                    case 9:
+                                    case 11:
+                                        numberOfDays = 31
+                                        break;
+                                    case 3:
+                                        numberOfDays = 28
+                                        break;
+                                }
+
+                                var rozdiel = DateDiffInYears(date, new Date(2022, month - 2, numberOfDays));
+                                if (rozdiel < 6) {
+                                    partialResultDB1 += 47.14;
+                                    partialResultDB2 += 70;
+                                }
+                                else if (rozdiel < 15) {
+                                    partialResultDB1 += 43.60;
+                                    partialResultDB2 += 70;
+                                }
+                                else if (rozdiel < 25) {
+                                    partialResultDB1 += 23.57;
+                                    partialResultDB2 += 40;
+                                }
                             }
                         }
                     }
-                }
-               var limit1 = Number($("#r38").val());
-                var limit2 = Number($("#t45").val());
-                var limit = limit1 + limit2;
-                var date = $("#r34aDatumZavCin").val();
 
-                if (date) {
-                    var dateElements = date.split('.');
-                    limit = (new Date(dateElements[2], dateElements[1] - 1, dateElements[0]) > new Date(2022, 5, 30)) ? limit : limit / 2;
-                }
-                else {
-                   limit = limit / 2;
+                    var limit1 = Number($("#r38").val());
+                    var limit2 = Number($("#t45").val());
+                    var limit = limit1 + limit2;
+                    var date = $("#r34aDatumZavCin").val();
+
+                    if (date) {
+                        var dateElements = date.split('.');
+                        limit = (new Date(dateElements[2], dateElements[1] - 1, dateElements[0]) > new Date(2022, 5, 30)) ? limit : limit / 2;
+                    }
+                    else {
+                        limit = limit / 2;
+                    }
+
+                    switch (numberOfChilds) {
+                        case 0:
+                            break;
+                        case 1:
+                            limit = limit * 0.20;
+                            break;
+                        case 2:
+                            limit = limit * 0.27;
+                            break;
+                        case 3:
+                            limit = limit * 0.34;
+                            break;
+                        case 4:
+                            limit = limit * 0.41;
+                            break;
+                        case 5:
+                            limit = limit * 0.48;
+                            break;
+                        default:
+                            limit = limit * 0.55;
+                    }
+
+
+                    if (monthGroups[groupIndex].length != 6) {
+                        var pom = (Big(Number(limit) || 0).round(2, 1)) / 6;
+                        pom = Big(Number(pom) || 0).round(2, 1);
+                        limit = (pom) * monthGroups[groupIndex].length;
+                    }
+
+                    partialResultDB2 = (partialResultDB2 > limit.toFixed(2)) ? limit.toFixed(2) : partialResultDB2;
+
+                    resultDB1 += partialResultDB1;
+                    resultDB2 += Number(partialResultDB2);
                 }
 
-                switch (numberOfChilds) {
-                    case 0:
-                        break;
-                    case 1:
-                        limit = limit * 0.20;
-                        break;
-                    case 2:
-                        limit = limit * 0.27;
-                        break;
-                    case 3:
-                        limit = limit * 0.34;
-                        break;
-                    case 4:
-                        limit = limit * 0.41;
-                        break;
-                    case 5:
-                        limit = limit * 0.48;
-                        break;
-                    default:
-                        limit = limit * 0.55;
-                }
-
-                
-  if (monthGroups[groupIndex].length != 6) {
-  var pom = (Big(Number(limit) || 0).round(2, 1)) / 6;
-  pom = Big(Number(pom) || 0).round(2, 1);
-  limit = (pom) * monthGroups[groupIndex].length;
-    }   
-    
-    partialResultDB2 = (partialResultDB2 > limit.toFixed(2)) ? limit.toFixed(2) : partialResultDB2;
-
-    resultDB1 += partialResultDB1;
-                resultDB2 += Number(partialResultDB2);
-    
-            }
-                
                 resultDB1 = Big(Number(resultDB1) || 0).round(2, 1);
-                return (resultDB1 > resultDB2) ? resultDB1.toFixed(2) : resultDB2.toFixed(2);
-    }
+                return (getRetValue2() && resultDB1 > resultDB2) ? resultDB1.toFixed(2) : resultDB2.toFixed(2);
+            }
     function DietaInfo(dieta, rok) {
         var year = rok;
         var parent = dieta.closest(".layoutRow");
@@ -8081,7 +8128,7 @@ switch (value) {
 
 
         if (!$("#cbNerezident").attr("checked")) {
-            return getRetValue();
+            return cislo();
         } else {
             if (((t41 > 0 || t42 > 0) && (t39 == 0 && t40 == 0)))
                 return cislo();
@@ -8164,114 +8211,141 @@ var t36 = Number($("#r36").val());
             var year = 2022;
             var sadzba = 3876;
 
-
+         
                         return cislo();
-            
-            function cislo() {
-var validChildren = [];
-            $("[id^='layoutRow36155']").each(function () {
-                var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
-                var result = DietaInfo($(element), 2022);
-if (result != null) {
-    result.months = [];
-    var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
-    $(this).find("[id^='cbM']").each(function () {
-        var checked = (allAreChecked || $(this).is(":checked"));
-        if (checked && result.months.length != 0) {
-            var month = result.months.length;
-            var rozdiel = DateDiffInYears(result.datum, new Date(2022, month - 2, 31));
-            if (rozdiel == -1 && result._monthBirth == month) {
-                result.months.push(checked)
-            }
-            else if (0 <= rozdiel && rozdiel < 6) {
-                result.months.push(checked)
-            }
-            else if (0 <= rozdiel && rozdiel <= 25) {
-                if (rozdiel >= 25 && result._monthBirth < month) {
-                    result.months.push(false)
-                } else {
-                    result.months.push(checked);
-                }
-            }
-            else {
-                result.months.push(false)
-            }
-        } else {
-            result.months.push(checked);
-        }
-    });
-    validChildren.push(result);
-}
+                 
 
-            });
-
-            function areMonthsDifferent(indexOfFirstMonth) {
-                for (var i = 0; i < validChildren.length; i++) {
-                    if (validChildren[i].months[indexOfFirstMonth] != validChildren[i].months[indexOfFirstMonth + 1]) {
+            function getRetValue2() {
+                if ((t41 > 0 || t42 > 0) && (t39 == 0 && t40 == 0)) {
+                    if (t36 >= sadzba || t45 > 0) {
                         return true;
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return true;
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return true;
+                    } else {
+                        return false;
                     }
                 }
-                return false;
+                else {
+                    if ((t36 >= sadzba) || (t95 >= sadzba && t45 > 0)) {
+                        return true;
+                    } else if (t119 > 0 && t45 > 0 && t36 > 0) {
+                        return true;
+                    } else if (t119 > 0 && t36 > 0 && t36 < sadzba) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
 
-            monthGroups = [[]];
-            for (var i = 7; i <= 12; i++) {
-                monthGroups[monthGroups.length - 1].push(i);
-                if (i < 12 && areMonthsDifferent(i)) {
-                    monthGroups.push([]);
+            function cislo() {
+                var validChildren = [];
+                $("[id^='layoutRow36155']").each(function () {
+                    var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
+                    var result = DietaInfo($(element), 2022);
+                    if (result != null) {
+                        result.months = [];
+                        var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
+                        $(this).find("[id^='cbM']").each(function () {
+                            var checked = (allAreChecked || $(this).is(":checked"));
+                            if (checked && result.months.length != 0) {
+                                var month = result.months.length;
+                                var rozdiel = DateDiffInYears(result.datum, new Date(2022, month - 2, 31));
+                                if (rozdiel == -1 && result._monthBirth == month) {
+                                    result.months.push(checked)
+                                }
+                                else if (0 <= rozdiel && rozdiel < 6) {
+                                    result.months.push(checked)
+                                }
+                                else if (0 <= rozdiel && rozdiel <= 25) {
+                                    if (rozdiel >= 25 && result._monthBirth < month) {
+                                        result.months.push(false)
+                                    } else {
+                                        result.months.push(checked);
+                                    }
+                                }
+                                else {
+                                    result.months.push(false)
+                                }
+                            } else {
+                                result.months.push(checked);
+                            }
+                        });
+                        validChildren.push(result);
+                    }
+
+                });
+
+                function areMonthsDifferent(indexOfFirstMonth) {
+                    for (var i = 0; i < validChildren.length; i++) {
+                        if (validChildren[i].months[indexOfFirstMonth] != validChildren[i].months[indexOfFirstMonth + 1]) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
-   }
-   var resultDB1 = 0;
-            var resultDB2 = 0;
-            for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
-                var partialResultDB1 = 0;
-                var partialResultDB2 = 0;
-                for (var monthIndex = 0; monthIndex < monthGroups[groupIndex].length; monthIndex++) {
-                    var numberOfChilds = 0;
-                    for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
-      var month = monthGroups[groupIndex][monthIndex];
-                        if (validChildren[childIndex].months[month]) {
-                            numberOfChilds += 1;
-                            var date = new Date(validChildren[childIndex].datum)
 
-                            var numberOfDays = 30;
-                            switch (month) {
-                                case 1:
-                                case 2:
-                                case 4:
-                                case 6:
-                                case 8:
-                                case 9:
-                                case 11:
-                                    numberOfDays = 31
-                                    break;
-                                case 3:
-                                    numberOfDays = 28
-                                    break;
-                            }
+                monthGroups = [[]];
+                for (var i = 7; i <= 12; i++) {
+                    monthGroups[monthGroups.length - 1].push(i);
+                    if (i < 12 && areMonthsDifferent(i)) {
+                        monthGroups.push([]);
+                    }
+                }
+                var resultDB1 = 0;
+                var resultDB2 = 0;
+                for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
+                    var partialResultDB1 = 0;
+                    var partialResultDB2 = 0;
+                    for (var monthIndex = 0; monthIndex < monthGroups[groupIndex].length; monthIndex++) {
+                        var numberOfChilds = 0;
+                        for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                            var month = monthGroups[groupIndex][monthIndex];
+                            if (validChildren[childIndex].months[month]) {
+                                numberOfChilds += 1;
+                                var date = new Date(validChildren[childIndex].datum)
 
-                            var rozdiel = DateDiffInYears(date, new Date(2022, month - 2, numberOfDays));
-                            if (rozdiel < 6) {
-        partialResultDB1 += 47.14;
-        partialResultDB2 += 70;
-                            }
-                            else if (rozdiel < 15) {
-                                partialResultDB1 += 43.60;
-                                partialResultDB2 += 70;
-                            }
-       else if (rozdiel < 25) {
-        partialResultDB1 += 23.57;
-        partialResultDB2 += 40;
+                                var numberOfDays = 30;
+                                switch (month) {
+                                    case 1:
+                                    case 2:
+                                    case 4:
+                                    case 6:
+                                    case 8:
+                                    case 9:
+                                    case 11:
+                                        numberOfDays = 31
+                                        break;
+                                    case 3:
+                                        numberOfDays = 28
+                                        break;
+                                }
+
+                                var rozdiel = DateDiffInYears(date, new Date(2022, month - 2, numberOfDays));
+                                if (rozdiel < 6) {
+                                    partialResultDB1 += 47.14;
+                                    partialResultDB2 += 70;
+                                }
+                                else if (rozdiel < 15) {
+                                    partialResultDB1 += 43.60;
+                                    partialResultDB2 += 70;
+                                }
+                                else if (rozdiel < 25) {
+                                    partialResultDB1 += 23.57;
+                                    partialResultDB2 += 40;
+                                }
                             }
                         }
                     }
+
+                    resultDB2 += Number(partialResultDB2);
                 }
 
-                resultDB2 += Number(partialResultDB2);
     
-       }   
                 return (resultDB2);
-    }
+            }
     function DietaInfo(dieta, rok) {
         var year = rok;
         var parent = dieta.closest(".layoutRow");
@@ -8438,7 +8512,6 @@ switch (value) {
             }
             return diff;
         }
-
 
 }
 
@@ -69483,4 +69556,4 @@ prostriedkov) v inom formáte ako IBAN, uvádza v XIII. oddiele číslo účtu, 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
 			<img id="statusLoader" src="./form.546_files/ajax-loader.png" alt="Čakajte prosím">
 			<p id="statusMessage" class="statusMessage"></p>
-		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1673549748186.datepicker._adjustDate(&#39;#Pri1r5DatumDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">December</span>&nbsp;<span class="ui-datepicker-year">2022</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">1</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">2</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">3</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">4</a></td></tr><tr><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">5</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">6</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">7</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">8</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">9</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">10</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">11</a></td></tr><tr><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">12</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">13</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">14</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">15</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">16</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">17</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">18</a></td></tr><tr><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">19</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">20</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">21</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">22</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">23</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">24</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">25</a></td></tr><tr><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">26</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">27</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">28</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">29</a></td><td class=" " onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">30</a></td><td class=" ui-datepicker-week-end ui-datepicker-days-cell-over  ui-datepicker-current-day" onclick="DP_jQuery_1673549748186.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">31</a></td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div id="delugesiphon-modal-gabdloknkpdefdpkkibplcfnkngbidim"></div></body></html>
+		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1674643628515.datepicker._adjustDate(&#39;#Pri1r5DatumDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">December</span>&nbsp;<span class="ui-datepicker-year">2022</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">1</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">2</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">3</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">4</a></td></tr><tr><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">5</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">6</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">7</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">8</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">9</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">10</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">11</a></td></tr><tr><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">12</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">13</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">14</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">15</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">16</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">17</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">18</a></td></tr><tr><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">19</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">20</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">21</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">22</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">23</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">24</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">25</a></td></tr><tr><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">26</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">27</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">28</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">29</a></td><td class=" " onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">30</a></td><td class=" ui-datepicker-week-end ui-datepicker-days-cell-over  ui-datepicker-current-day" onclick="DP_jQuery_1674643628515.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2022, this);return false;"><a class="ui-state-default ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.546.html#">31</a></td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></body></html>

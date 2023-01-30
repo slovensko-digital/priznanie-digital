@@ -140,7 +140,6 @@ const OsobneUdaje: NextPage<Props> = ({
                   name="dic"
                   type="text"
                   label="DIČ"
-                  hint="Ak nie je pridelené, uvádza sa rodné číslo"
                 />
               </div>
 

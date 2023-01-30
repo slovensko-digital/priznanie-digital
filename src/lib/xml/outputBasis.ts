@@ -106,6 +106,7 @@ const sampleSchema: OutputJson = {
         ],
       },
       r34udajeDalsieDeti: '0',
+      r34a: '',
       r35: {
         uplatDanBonusZaplatUroky: '0',
         zaplateneUroky: '',
@@ -221,15 +222,6 @@ const sampleSchema: OutputJson = {
       r45: '',
       r46: '',
       r47: {
-        rok: '2017',
-        udaje: {
-          r02: '',
-          r03: '',
-          r04: '',
-          r05: '',
-        },
-      },
-      r48: {
         rok: '2018',
         udaje: {
           r02: '',
@@ -238,16 +230,24 @@ const sampleSchema: OutputJson = {
           r05: '',
         },
       },
+      r48: '',
       r49: '',
-      r50: '',
-      r51: '',
-      r52: {
+      r50: {
         rok: '2020',
         udaje: {
           r02: '',
           r03: '',
+          r04: '',
         },
       },
+      r51: {
+        rok: '2021',
+        udaje: {
+          r02: '',
+          r05: '',
+        },
+      },
+      r52: '',
       r53: '',
       r54: '',
       r55: '',
