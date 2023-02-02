@@ -133,36 +133,6 @@ export interface ParsedName {
   title: string
 }
 
-/**
- * @deprecated AutoForm vracia udaje uz rozparsovane 
- */
-export const parseFullName = (value: string): ParsedName => {
-  const parts = value.split(' ').map((v) => v.trim())
-
-  let firstName
-  const lastNames = []
-  const titles = []
-  parts.forEach((value) => {
-    const isTitle = /\.,?$/.test(value)
-    if (isTitle) {
-      if (firstName && titles.length > 0 && !titles.includes('/')) {
-        titles.push('/')
-      }
-      titles.push(value)
-    } else if (!firstName) {
-      firstName = value
-    } else {
-      lastNames.push(value)
-    }
-  })
-
-  return {
-    first: firstName,
-    last: lastNames.join(' '),
-    title: titles.join(' '),
-  }
-}
-
 /**  https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu
  */
 export const floorDecimal = (decimal: Decimal) => {
