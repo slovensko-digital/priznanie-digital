@@ -1,24 +1,24 @@
 import React from 'react'
-import { Form, FormikProps } from 'formik'
+import {Form, FormikProps} from 'formik'
 import Link from 'next/link'
-import { FormWrapper, Input } from '../components/FormComponents'
+import {FormWrapper, Input} from '../components/FormComponents'
 import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
 } from '../types/PageUserInputs'
-import { getAutoformByPersonName } from '../lib/api'
-import { ErrorSummary } from '../components/ErrorSummary'
+import {getAutoformByPersonName} from '../lib/api'
+import {ErrorSummary} from '../components/ErrorSummary'
 import {
   AutoCompleteInput,
 } from '../components/AutoCompleteInput'
-import { formatPsc, getStreetNumber} from '../lib/utils'
-import { Nace } from '../components/Nace'
-import { Page } from '../components/Page'
-import { AutoFormSubject } from '../types/api'
+import {formatPsc, getStreetNumber} from '../lib/utils'
+import {Nace} from '../components/Nace'
+import {Page} from '../components/Page'
+import {AutoFormSubject} from '../types/api'
 
 const formatNace = (economicActivity) => {
-  const { code, name } = economicActivity || {}
+  const {code, name} = economicActivity || {}
   if (code && name) {
     return `${code} - ${name}`
   }
@@ -26,13 +26,14 @@ const formatNace = (economicActivity) => {
 }
 
 const makeHandlePersonAutoform = ({
-  setValues,
-}: FormikProps<PersonalInformationUserInput>) => {
+                                    setValues,
+                                  }: FormikProps<PersonalInformationUserInput>) => {
   return (subject: AutoFormSubject) => {
     const {
       first_name,
       last_name,
       prefixes,
+      postfixes,
       street,
       reg_number,
       building_number,
@@ -45,11 +46,11 @@ const makeHandlePersonAutoform = ({
       meno_priezvisko: subject.name,
       r004_priezvisko: last_name || '',
       r005_meno: first_name || '',
-      r006_titul: prefixes || '',
+      r006_titul: prefixes + " / " + postfixes || '',
       r001_dic: `${subject.tin}` || '',
       r003_nace: formatNace(subject.main_economic_activity),
       r007_ulica: street || municipality || '',
-      r008_cislo: getStreetNumber({ reg_number, building_number }) || '',
+      r008_cislo: getStreetNumber({reg_number, building_number}) || '',
       r009_psc: postal_code ? formatPsc(postal_code) : '',
       r010_obec: municipality || '',
       r011_stat: country || '',
@@ -58,12 +59,12 @@ const makeHandlePersonAutoform = ({
 }
 
 const OsobneUdaje: Page<PersonalInformationUserInput> = ({
-  setTaxFormUserInput,
-  taxFormUserInput,
-  router,
-  previousRoute,
-  nextRoute,
-}) => {
+                                                           setTaxFormUserInput,
+                                                           taxFormUserInput,
+                                                           router,
+                                                           previousRoute,
+                                                           nextRoute,
+                                                         }) => {
   return (
     <>
       <Link href={previousRoute} data-test="back" className="govuk-back-link">
@@ -79,7 +80,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
       >
         {(props) => (
           <>
-            <ErrorSummary<PersonalInformationUserInput> errors={props.errors} />
+            <ErrorSummary<PersonalInformationUserInput> errors={props.errors}/>
             <Form className="form">
               <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>
@@ -126,7 +127,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 width="auto"
               />
 
-              <Nace />
+              <Nace/>
 
               <div className={styles.inlineFieldContainer}>
                 <Input
@@ -177,7 +178,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 />
               </div>
 
-              <Input name="r011_stat" type="text" label="Štát" />
+              <Input name="r011_stat" type="text" label="Štát"/>
 
               <button className="govuk-button" type="submit">
                 Pokračovať
