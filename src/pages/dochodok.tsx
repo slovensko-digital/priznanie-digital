@@ -8,6 +8,7 @@ import { Page } from '../components/Page'
 import { pensionInitialValues } from '../lib/initialValues'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { TAX_YEAR } from '../lib/calculation'
+import {Details} from "../components/Details";
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -42,13 +43,24 @@ const Dochodok: Page<PensionUserInput> = ({
               title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
               name="platil_prispevky_na_dochodok"
             />
+            <Details title={"Nezdaniteľnú časť základu dane na príspevky na doplnkové dôchodkové poistenie je možné uplatniť iba u daňovníka, ktorý spĺňa nasledovné podmienky:"}>
+              <ul>
+                <li>
+                  príspevky na doplnkové dôchodkové sporenie zaplatil na základe účastníckej zmluvy uzatvorenej po 31.12.2013, alebo na základe zmeny účastníckej zmluvy, ktorej súčasťou je zrušenie dávkového plánu
+                </li>
+                <br/>
+                <li>
+                  daňovník  nemá uzatvorenú inú účastnícku zmluvu podľa zákona o doplnkovom dôchodkovom sporení, ktorá nespĺňa podmienky stanovené novelou zákona o doplnkovom dôchodkom sporení
+                </li>
+              </ul>
+            </Details>
             {values.platil_prispevky_na_dochodok && (
               <>
                 <Input
                   name="zaplatene_prispevky_na_dochodok"
                   type="number"
                   label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
-                  hint="Maximálne si viete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
+                  hint="Maximálne si môžete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
                 />
               </>
             )}
