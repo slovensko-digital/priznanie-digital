@@ -41,7 +41,7 @@ export const IncomeQuestion = ({ disabled }) => {
       <Input
         name="r032_partner_vlastne_prijmy"
         type="number"
-        label={"Vlastné príjmy manželky / manžela za zdaňovacie obdobie " + TAX_YEAR}
+        label={`Vlastné príjmy manželky / manžela za zdaňovacie obdobie ${TAX_YEAR}`}
         disabled={disabled}
       />
       <Details title="Ako vypočítať vlastný príjem?">
