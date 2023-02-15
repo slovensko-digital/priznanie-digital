@@ -49,7 +49,7 @@ const navigateEligibleToChildrenPage = () => {
   cy.visit('/prijmy-a-vydavky')
   typeToInput('t1r10_prijmy', {
     ...withChildrenInput,
-    t1r10_prijmy: '3480',
+    t1r10_prijmy: '3876',
   })
   typeToInput('priloha3_r11_socialne', withChildrenInput)
   typeToInput('priloha3_r13_zdravotne', withChildrenInput)
@@ -452,7 +452,7 @@ describe('Children page', () => {
   })
   it('has working ui for adding children', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3480' })
+    typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3876' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
     getInput('zaplatenePreddavky').type('0')
@@ -463,7 +463,7 @@ describe('Children page', () => {
     getInput('employed', '-yes').click()
     typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', {
       ...withChildrenInput,
-      uhrnPrijmovOdVsetkychZamestnavatelov: '3480',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '3876',
     }) // eligible via employment income
     typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', {
       ...withChildrenInput,
@@ -719,7 +719,7 @@ describe('IBAN page', () => {
   })
   it('has working ui for eligible applicants', () => {
     cy.visit('/prijmy-a-vydavky')
-    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3480' })
+    typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '3876' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
     getInput('zaplatenePreddavky').type('0')
