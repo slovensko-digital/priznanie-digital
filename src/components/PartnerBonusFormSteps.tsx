@@ -8,7 +8,7 @@ import { TAX_YEAR } from '../lib/calculation'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={"Chcete si uplatniť zvýhodnenie na   manželku / manžela?"}
+      title={"Chcete si uplatniť zvýhodnenie na manželku / manžela?"}
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />
