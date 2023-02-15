@@ -8,7 +8,7 @@ import { Page } from '../components/Page'
 import { pensionInitialValues } from '../lib/initialValues'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { TAX_YEAR } from '../lib/calculation'
-import {Details} from "../components/Details";
+import { Details } from "../components/Details";
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
