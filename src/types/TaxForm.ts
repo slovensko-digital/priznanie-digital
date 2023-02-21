@@ -146,6 +146,15 @@ export interface TaxForm {
 
   /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r117: Decimal
+  
+  /**
+   * Nárok na daňový bonus nárok za január až jún 2022
+   */  
+  r117a: Decimal
+  /**
+   * Nárok na daňový bonus nárok za júl až december 2022
+   */
+  r117b: Decimal
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
