@@ -8,7 +8,7 @@ import { TAX_YEAR } from '../lib/calculation'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={`Uplatňujete si zvýhodnenie na manželku / manžela, ktorá/ý mal/a nízke alebo žiadne príjmy v rok ${TAX_YEAR}?`}
+      title={"Chcete si uplatniť zvýhodnenie na manželku / manžela?"}
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />
@@ -41,12 +41,12 @@ export const IncomeQuestion = ({ disabled }) => {
       <Input
         name="r032_partner_vlastne_prijmy"
         type="number"
-        label="Vlastné príjmy manželky / manžela"
+        label={`Vlastné príjmy manželky / manžela za zdaňovacie obdobie ${TAX_YEAR}`}
         disabled={disabled}
       />
-      <Details title="Ako vypočítať príjem?">
+      <Details title="Ako vypočítať vlastný príjem?">
         <>
-          <p>Do tohto príjmu patria napr.:</p>
+          <p>Do vlastného príjmu manželky / manžela patria napr.:</p>
           <ul>
             <li>materské,</li>
             <li>príjem zo zamestnania (znížený o poistné),</li>
@@ -68,6 +68,7 @@ export const IncomeQuestion = ({ disabled }) => {
             <li>príjmy z kapitálového majetku</li>
             <li>ostatné príjmy</li>
           </ul>
+          <p>Vlastný príjem manželky (manžela) sa znižuje o zaplatené poistné a príspevky na zdravotné a sociálne poistenie, ktoré bola manželka (manžel) povinná zaplatiť.</p>
           <p>Do vlastného príjmu manželky / manžela nepatria:</p>
           <ul>
             <li>zamestnanecká prémia,</li>
@@ -117,17 +118,22 @@ export const ConditionsQuestion = ({ disabled }) => (
     </legend>
     <CheckboxSmall
       name="partner_podmienky.1"
-      label="Stará sa o dieťa do 3 rokov (resp. do 6 rokov s nepriaznivým zdravotným stavom), alebo poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
+      label="Staral/a sa o dieťa do 3 rokov (resp. do 6 rokov s nepriaznivým zdravotným stavom), alebo poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
+      disabled={disabled}
+    />
+    <CheckboxSmall
+      name="partner_podmienky.2"
+      label="Poberal/a príspevok na opatrovanie ťažko zdravotne postihnutého"
       disabled={disabled}
     />
     <CheckboxSmall
       name="partner_podmienky.3"
-      label="Je evidovaný/á ako uchádzač o zamestnanie"
+      label="Bol/a evidovaný/á ako uchádzač o zamestnanie"
       disabled={disabled}
     />
     <CheckboxSmall
       name="partner_podmienky.4"
-      label="Je zdravotne postihnutou osobou (invalidný/á) alebo osobou s ťažkým zdravotným postihnutím (ŤZP)"
+      label="Považuje sa za občana so zdravotným postihnutím alebo s ťažkým zdravotným postihnutím"
       disabled={disabled}
     />
   </div>
@@ -174,7 +180,7 @@ export const EligiblePartnerForm = ({
       type="number"
       min={1}
       max={12}
-      label="Počet mesiacov, kedy manželka / manžel spĺňal/a podmienky?"
+      label="Počet mesiacov, v ktorých manželka / manžel spĺňal/a podmienky?"
       hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
     />
   </>

@@ -3245,7 +3245,7 @@ function createpotvrdenie() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t68').val()) + ')/T (r68)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t80').val()) + ')/T (r80)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t94').val()) + ')/T (r94)>>');
-	var sucet = Number($('#tbPr2_07').val()) + Number($('#tbPr2_25').val()) + Number($('#tbPr2_35').val());
+	var sucet = Number($('#tbPr2_07').val()) + Number($('#tbPr2_25').val()) + Number($('#tbPr2_29').val()) + Number($('#tbPr2_32').val());
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf(sucet ? sucet.toFixed(2) : sucet) + ')/T (r07)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t116').val()) + ')/T (r116)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t135').val()) + ')/T (r135)>>');
