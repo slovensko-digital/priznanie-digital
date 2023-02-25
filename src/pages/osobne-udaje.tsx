@@ -46,7 +46,7 @@ const makeHandlePersonAutoform = ({
       meno_priezvisko: subject.name,
       r004_priezvisko: last_name || '',
       r005_meno: first_name || '',
-      r006_titul: prefixes + " / " + postfixes || '',
+      r006_titul: `${prefixes} / ${postfixes}` || '',
       r001_dic: `${subject.tin}` || '',
       r003_nace: formatNace(subject.main_economic_activity),
       r007_ulica: street || municipality || '',
