@@ -1,24 +1,24 @@
 import React from 'react'
-import {Form, FormikProps} from 'formik'
+import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
-import {FormWrapper, Input} from '../components/FormComponents'
+import { FormWrapper, Input } from '../components/FormComponents'
 import styles from './osobne-udaje.module.css'
 import {
   PersonalInformationUserInput,
   FormErrors,
 } from '../types/PageUserInputs'
-import {getAutoformByPersonName} from '../lib/api'
-import {ErrorSummary} from '../components/ErrorSummary'
+import { getAutoformByPersonName } from '../lib/api'
+import { ErrorSummary } from '../components/ErrorSummary'
 import {
   AutoCompleteInput,
 } from '../components/AutoCompleteInput'
-import {formatPsc, getStreetNumber} from '../lib/utils'
-import {Nace} from '../components/Nace'
-import {Page} from '../components/Page'
-import {AutoFormSubject} from '../types/api'
+import { formatPsc, getStreetNumber } from '../lib/utils'
+import { Nace } from '../components/Nace'
+import { Page } from '../components/Page'
+import { AutoFormSubject } from '../types/api'
 
 const formatNace = (economicActivity) => {
-  const {code, name} = economicActivity || {}
+  const { code, name } = economicActivity || {}
   if (code && name) {
     return `${code} - ${name}`
   }
@@ -26,8 +26,9 @@ const formatNace = (economicActivity) => {
 }
 
 const makeHandlePersonAutoform = ({
-                                    setValues,
-                                  }: FormikProps<PersonalInformationUserInput>) => {
+  setValues,
+}:
+FormikProps<PersonalInformationUserInput>) => {
   return (subject: AutoFormSubject) => {
     const {
       first_name,
@@ -59,12 +60,12 @@ const makeHandlePersonAutoform = ({
 }
 
 const OsobneUdaje: Page<PersonalInformationUserInput> = ({
-                                                           setTaxFormUserInput,
-                                                           taxFormUserInput,
-                                                           router,
-                                                           previousRoute,
-                                                           nextRoute,
-                                                         }) => {
+  setTaxFormUserInput,
+  taxFormUserInput,
+  router,
+  previousRoute,
+  nextRoute,
+}) => {
   return (
     <>
       <Link href={previousRoute} data-test="back" className="govuk-back-link">
