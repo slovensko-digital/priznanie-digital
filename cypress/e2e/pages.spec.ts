@@ -374,12 +374,12 @@ describe('osobne-udaje page', () => {
       'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
     )
     getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
-    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+    getInput('r004_priezvisko').should('contain.value', 'Urban')
     getInput('r005_meno').should('contain.value', 'Pavel')
-    getInput('r007_ulica').should('contain.value', 'Národná')
-    getInput('r008_cislo').should('contain.value', '10')
-    getInput('r009_psc').should('contain.value', '010 01')
-    getInput('r010_obec').should('contain.value', 'Žilina')
+    getInput('r007_ulica').should('contain.value', 'Clementisova')
+    getInput('r008_cislo').should('contain.value', '1350/45')
+    getInput('r009_psc').should('contain.value', '024 01')
+    getInput('r010_obec').should('contain.value', 'Kysucké Nové Mesto')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
     next()
