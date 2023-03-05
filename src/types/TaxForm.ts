@@ -214,4 +214,10 @@ export interface TaxForm {
   XIIoddiel_uplatnujem2percenta: boolean
   eligibleForChildrenBonus: boolean
   canDonateTwoPercentOfTax: boolean
+
+  /** 
+   * Pre druhu polovicu roka 2022 sa pouzivaju dva vypocty bonusu na dieta.
+   * Danovnik si moze uplatnit sumu podla vypoctu ktory je pre neho vyhodnejsi 
+  */
+  staryVypocetBonusovNaDieta: Decimal
 }
