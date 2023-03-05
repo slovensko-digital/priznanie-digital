@@ -156,7 +156,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     get r034a() {
-      return ''
+      return input.r034a
     },
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
