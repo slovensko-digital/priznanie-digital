@@ -679,7 +679,7 @@ const getRate = (month: number, child) => {
       return new Decimal(CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY)
     } else {
       return isUnderFifteen
-        ? new Decimal(CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY)
+        ? new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
         : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY)
     }
   } else {
