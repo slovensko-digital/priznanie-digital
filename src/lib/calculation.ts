@@ -425,7 +425,57 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r117b() {
       const zakladDane = this.r038.plus(this.r045)
       const polovicaZakladuDane = zakladDane.times(0.5)
-      const novyVypocet = polovicaZakladuDane.times(0.01)
+
+      const zakladPreBonus =
+       this.r034a && this.r034a.length > 0 ? zakladDane : polovicaZakladuDane
+
+      const novyVypocet = [
+        Months.July,
+        Months.August,
+        Months.September,
+        Months.October,
+        Months.November,
+        Months.December,
+      ].reduce((previusSum, currentMonth) => {
+        const pocetDeti = getPocetDetivMesiaci(this.r034, currentMonth)
+        const percentLimit = getPercentualnyLimitNaDeti(pocetDeti)
+        const mesacnyLimit = zakladPreBonus.dividedBy(6).times(percentLimit)
+
+        const skutocnyVysledok = this.r034.reduce((previousSum, currentChild) => {
+          let currentSum = new Decimal(0)
+  
+          if (currentMonth === Months.July && (currentChild.m07 || currentChild.m00)) {
+            const rate = getRate(Months.July, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+          if (currentMonth === Months.August && (currentChild.m08 || currentChild.m00)) {
+            const rate = getRate(Months.August, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+          if (currentMonth === Months.September && (currentChild.m09 || currentChild.m00)) {
+            const rate = getRate(Months.September, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+          if (currentMonth === Months.October && (currentChild.m10 || currentChild.m00)) {
+            const rate = getRate(Months.October, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+          if (currentMonth === Months.November && (currentChild.m11 || currentChild.m00)) {
+            const rate = getRate(Months.November, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+          if (currentMonth === Months.December && (currentChild.m12 || currentChild.m00)) {
+            const rate = getRate(Months.December, currentChild)
+            currentSum = currentSum.plus(rate)
+          }
+  
+          return previousSum.plus(currentSum)
+        }, new Decimal(0))
+
+        const vysledok = Decimal.min(mesacnyLimit, skutocnyVysledok)
+
+        return previusSum.add(vysledok)
+      }, new Decimal(0))
 
       const staryVypocet = this.staryVypocetBonusovNaDieta
 
@@ -559,10 +609,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return false
     },
 
-    get staryVypocetBonusovNaDieta() { 
+    get staryVypocetBonusovNaDieta() {
       return this.r034.reduce((previousSum, currentChild) => {
         let currentSum = new Decimal(0)
-    
+
         if (currentChild.m00 || currentChild.m07) {
           const rate = getOldRate(Months.July, currentChild)
           currentSum = currentSum.plus(rate)
@@ -587,10 +637,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           const rate = getOldRate(Months.December, currentChild)
           currentSum = currentSum.plus(rate)
         }
-    
+
         return previousSum.plus(currentSum)
       }, new Decimal(0))
-    }
+    },
   }
 }
 
@@ -652,6 +702,74 @@ const getOldRate = (month: number, child) => {
   if (isUnderSix) {
     return new Decimal(CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY)
   }
-  return isUnderFifteen ? new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY) : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY);
+  return isUnderFifteen
+    ? new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
+    : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY)
+}
 
+const getPocetDetivMesiaci = (deti: TaxForm['r034'], month: Months): number => {
+  return deti.reduce((acc, dieta) => {
+    if (dieta.m00) {
+      acc += 1
+    } else {
+      if (month === Months.January && dieta.m01) {
+        acc += 1
+      }
+      if (month === Months.February && dieta.m02) {
+        acc += 1
+      }
+      if (month === Months.March && dieta.m03) {
+        acc += 1
+      }
+      if (month === Months.April && dieta.m04) {
+        acc += 1
+      }
+      if (month === Months.May && dieta.m05) {
+        acc += 1
+      }
+      if (month === Months.June && dieta.m06) {
+        acc += 1
+      }
+      if (month === Months.July && dieta.m07) {
+        acc += 1
+      }
+      if (month === Months.August && dieta.m08) {
+        acc += 1
+      }
+      if (month === Months.September && dieta.m09) {
+        acc += 1
+      }
+      if (month === Months.October && dieta.m10) {
+        acc += 1
+      }
+      if (month === Months.November && dieta.m11) {
+        acc += 1
+      }
+      if (month === Months.December && dieta.m12) {
+        acc += 1
+      }
+    }
+    return acc
+  }, 0)
+}
+
+const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
+  switch (pocetDeti) {
+    case 1: {
+      return new Decimal(0.2)
+    }
+    case 2: {
+      return new Decimal(0.27)
+    }
+    case 3: {
+      return new Decimal(0.34)
+    }
+    case 4: {
+      return new Decimal(0.41)
+    }
+    case 5: {
+      return new Decimal(0.48)
+    }
+    default: return pocetDeti >= 6 ? new Decimal(0.55) : new Decimal(0);
+  }
 }
