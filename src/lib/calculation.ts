@@ -423,7 +423,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }, new Decimal(0))
     },
     get r117b() {
-      return new Decimal(9)
+      const zakladDane = this.r038.plus(this.r045)
+      const polovicaZakladuDane = zakladDane.times(0.5)
+      const novyVypocet = polovicaZakladuDane.times(0.01)
+
+      const staryVypocet = this.staryVypocetBonusovNaDieta
+
+      return Decimal.max(novyVypocet, staryVypocet)
     },
     get r118() {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
@@ -552,6 +558,39 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return false
     },
+
+    get staryVypocetBonusovNaDieta() { 
+      return this.r034.reduce((previousSum, currentChild) => {
+        let currentSum = new Decimal(0)
+    
+        if (currentChild.m00 || currentChild.m07) {
+          const rate = getOldRate(Months.July, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+        if (currentChild.m00 || currentChild.m08) {
+          const rate = getOldRate(Months.August, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+        if (currentChild.m00 || currentChild.m09) {
+          const rate = getOldRate(Months.September, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+        if (currentChild.m00 || currentChild.m10) {
+          const rate = getOldRate(Months.October, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+        if (currentChild.m00 || currentChild.m11) {
+          const rate = getOldRate(Months.November, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+        if (currentChild.m00 || currentChild.m12) {
+          const rate = getOldRate(Months.December, currentChild)
+          currentSum = currentSum.plus(rate)
+        }
+    
+        return previousSum.plus(currentSum)
+      }, new Decimal(0))
+    }
   }
 }
 
