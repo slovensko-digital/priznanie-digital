@@ -24,6 +24,7 @@ import {
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../lib/calculation'
+import { Details } from '../components/Details'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -156,16 +157,53 @@ const Deti: Page<ChildrenUserInput> = ({
                     V prípade, že ste sa v roku {TAX_YEAR} starali o
                     nezaopatrené dieťa do 16 rokov, študenta do 25 rokov alebo o
                     nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    máte právo na zľavu na dani vo výške{' '}
-                    {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)} eur
-                    mesačne. Ročný bonus na dieťa činí{' '}
-                    {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY * 12)}.
-                    Daňový bonus na dieťa do 6 rokov je dvojnásobný.
+                    máte právo na zľavu na dani.
                   </p>
+                  <Details title="Aká je výška daňového bonusu?">
+                    <p className="govuk-hint">
+                      <b>
+                        Daňový bonus na vyživované dieťa od 1.1.2022 do
+                        30.6.2022:
+                      </b>
+                      <ul>
+                        <li>
+                          na dieťa do 6 rokov veku sumu 47,14 EUR mesačne.
+                        </li>
+                        <li>
+                          na dieťa nad 6 rokov veku do 15 rokov veku sumu 43,60
+                          EUR mesačne.
+                        </li>
+                        <li>
+                          na dieťa nad 15 rokov veku sumu 23,57 EUR mesačne.
+                        </li>
+                      </ul>
+                      <b>
+                        Daňový bonus na vyživované dieťa od 1.7.2022 do
+                        31.12.2022:
+                      </b>
+                      <ul>
+                        <li>na dieťa do 16 rokov veku sumu 70 EUR mesačne.</li>
+                        <li>na dieťa nad 15 rokov veku sumu 40 EUR mesačne.</li>
+                      </ul>
+                      <p className="govuk-hint">
+                        Nárok na daňový bonus v 2. polroku je ale možné uplatniť
+                        najviac do výšky ustanoveného percenta z polovice
+                        základu dane v rozmedzí od 20 % v prípade daňového
+                        bonusu na 1 dieťa až do 55 % v prípade daňového bonusu
+                        na 6 a viac detí.
+                      </p>
+                      <p className="govuk-hint">
+                        Daňovník, ktorý začal vykonávať závislú činnosť, z
+                        ktorej dosahuje príjmy od 1.7.2022, môže uplatniť daňový
+                        bonus najviac do výšky čiastkového základu dane z príjmov.
+                      </p>
+                    </p>
+                  </Details>
                   <p className="govuk-hint">
-                    Ak sa Vám v roku 2021 narodilo dieťa a toto je prvé daňové
-                    priznanie, v ktorom naň žiadate daňový bonus, je potrebné
-                    zahrnúť rodný list dieťaťa do prílohy k daňovému priznaniu.
+                    Ak si uplatňujete daňový bonus na dieťa po prvýkrát alebo
+                    ide o dieťa narodené v priebehu roka 2022, je potrebné
+                    zahrnúť kópiu rodného listu dieťaťa do príloh k daňovému
+                    priznaniu.
                   </p>
                   <p className="govuk-hint">
                     Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
