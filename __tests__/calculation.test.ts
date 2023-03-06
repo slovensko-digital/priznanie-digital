@@ -1,9 +1,9 @@
 import {
   calculate,
-  CHILD_RATE_OVER_SIX_FROM_JULY,
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
-  CHILD_RATE_SIX_AND_YOUNGER,
-  MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA,
+  CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+  CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+  MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
 } from '../src/lib/calculation'
 import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
