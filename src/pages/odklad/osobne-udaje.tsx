@@ -25,8 +25,8 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
   return (subject: AutoFormSubject) => {
-    const {
-      first_name,
+
+    let first_name,
       last_name,
       prefixes,
       postfixes,
@@ -35,8 +35,21 @@ const makeHandlePersonAutoform = ({
       building_number,
       municipality,
       postal_code,
-      country,
-    } = subject.statutory[0]
+      country;
+
+    if (subject.statutory.length > 0) {
+      ({ first_name,
+       last_name,
+       prefixes,
+       postfixes,
+       street,
+       reg_number,
+       building_number,
+       municipality,
+       postal_code,
+       country
+      } = subject.statutory[0])
+    }
 
     setValues({
       ...values,

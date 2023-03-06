@@ -19,7 +19,6 @@ import {
   validateIbanFormat,
   validateIbanCountry,
   getRodneCisloAgeAtYearAndMonth,
-  parseFullName,
   boolToString,
   decimalToString,
   roundDecimal,
@@ -316,54 +315,6 @@ describe('utils', () => {
     })
   })
 
-  describe('#parseFullName', () => {
-    const inputs = [
-      { input: 'Ján Novák', first: 'Ján', last: 'Novák', title: '' },
-      { input: 'Ing. Ján Novák', first: 'Ján', last: 'Novák', title: 'Ing.' },
-      {
-        input: 'Ing. Mgr. Ján Novák',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. Mgr.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD.',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. / PhD.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD., Phd.',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. / PhD., Phd.',
-      },
-      {
-        input: 'PhDR. Jana Nováková Zelená PhD.',
-        first: 'Jana',
-        last: 'Nováková Zelená',
-        title: 'PhDR. / PhD.',
-      },
-      {
-        input: 'Ing. Ján Novák - FOOBAR',
-        first: 'Ján',
-        last: 'Novák - FOOBAR',
-        title: 'Ing.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD. - FOOBAR',
-        first: 'Ján',
-        last: 'Novák - FOOBAR',
-        title: 'Ing. / PhD.',
-      },
-    ]
-
-    inputs.forEach(({ input, first, last, title }) => {
-      it(`should correctly parse "${input}"`, () => {
-        expect(parseFullName(input)).toStrictEqual({ first, last, title })
-      })
-    })
-  })
   describe('#floorDecimal', () => {
     describe('for valid values', () => {
       const validInputs = [
