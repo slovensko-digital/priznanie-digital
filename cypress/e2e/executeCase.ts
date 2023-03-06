@@ -353,12 +353,16 @@ const executePostponeCase = (testCase: string) => {
         if (input.prijmy_zo_zahranicia) {
           getInput('prijmy_zo_zahranicia', '-yes').click()
           cy.contains(
-            `Nový termín pre podanie daňového priznania je 30. septembra ${TAX_YEAR+1}.`,
+            `Nový termín pre podanie daňového priznania je 30. septembra ${
+              TAX_YEAR + 1
+            }.`,
           )
         } else {
           getInput('prijmy_zo_zahranicia', '-no').click()
           cy.contains(
-            `Nový termín pre podanie daňového priznania je 30. júna ${TAX_YEAR+1}.`,
+            `Nový termín pre podanie daňového priznania je 30. júna ${
+              TAX_YEAR + 1
+            }.`,
           )
         }
 

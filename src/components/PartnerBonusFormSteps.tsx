@@ -8,7 +8,7 @@ import { TAX_YEAR } from '../lib/calculation'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={"Chcete si uplatniť zvýhodnenie na manželku / manžela?"}
+      title={'Chcete si uplatniť zvýhodnenie na manželku / manžela?'}
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />
@@ -68,7 +68,11 @@ export const IncomeQuestion = ({ disabled }) => {
             <li>príjmy z kapitálového majetku</li>
             <li>ostatné príjmy</li>
           </ul>
-          <p>Vlastný príjem manželky (manžela) sa znižuje o zaplatené poistné a príspevky na zdravotné a sociálne poistenie, ktoré bola manželka (manžel) povinná zaplatiť.</p>
+          <p>
+            Vlastný príjem manželky (manžela) sa znižuje o zaplatené poistné a
+            príspevky na zdravotné a sociálne poistenie, ktoré bola manželka
+            (manžel) povinná zaplatiť.
+          </p>
           <p>Do vlastného príjmu manželky / manžela nepatria:</p>
           <ul>
             <li>zamestnanecká prémia,</li>

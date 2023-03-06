@@ -35,7 +35,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
               {postponeUserInput.prijmy_zo_zahranicia
-                ? `30. september ${TAX_YEAR+1}`
+                ? `30. september ${TAX_YEAR + 1}`
                 : `30. jún ${TAX_YEAR + 1}`}
             </td>
           </tr>
