@@ -23,7 +23,13 @@ import {
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
-import { CHILD_RATE_OVER_SIX_UNTIL_JULY, TAX_YEAR } from '../lib/calculation'
+import {
+  CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY,
+  CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+  CHILD_RATE_OVER_SIX_UNTIL_JULY,
+  CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+  TAX_YEAR,
+} from '../lib/calculation'
 import { Details } from '../components/Details'
 
 const Deti: Page<ChildrenUserInput> = ({
@@ -167,14 +173,23 @@ const Deti: Page<ChildrenUserInput> = ({
                       </b>
                       <ul>
                         <li>
-                          na dieťa do 6 rokov veku sumu 47,14 EUR mesačne.
+                          na dieťa do 6 rokov veku sumu{' '}
+                          {formatCurrency(
+                            CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+                          )}{' '}
+                          mesačne.
                         </li>
                         <li>
-                          na dieťa nad 6 rokov veku do 15 rokov veku sumu 43,60
-                          EUR mesačne.
+                          na dieťa nad 6 rokov veku do 15 rokov veku sumu{' '}
+                          {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)}{' '}
+                          mesačne.
                         </li>
                         <li>
-                          na dieťa nad 15 rokov veku sumu 23,57 EUR mesačne.
+                          na dieťa nad 15 rokov veku sumu{' '}
+                          {formatCurrency(
+                            CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+                          )}{' '}
+                          mesačne.
                         </li>
                       </ul>
                       <b>
@@ -182,8 +197,20 @@ const Deti: Page<ChildrenUserInput> = ({
                         31.12.2022:
                       </b>
                       <ul>
-                        <li>na dieťa do 16 rokov veku sumu 70 EUR mesačne.</li>
-                        <li>na dieťa nad 15 rokov veku sumu 40 EUR mesačne.</li>
+                        <li>
+                          na dieťa do 16 rokov veku sumu{' '}
+                          {formatCurrency(
+                            CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+                          )}{' '}
+                          mesačne.
+                        </li>
+                        <li>
+                          na dieťa nad 15 rokov veku sumu{' '}
+                          {formatCurrency(
+                            CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY,
+                          )}{' '}
+                          mesačne.
+                        </li>
                       </ul>
                       <p className="govuk-hint">
                         Nárok na daňový bonus v 2. polroku je ale možné uplatniť
@@ -195,7 +222,8 @@ const Deti: Page<ChildrenUserInput> = ({
                       <p className="govuk-hint">
                         Daňovník, ktorý začal vykonávať závislú činnosť, z
                         ktorej dosahuje príjmy od 1.7.2022, môže uplatniť daňový
-                        bonus najviac do výšky čiastkového základu dane z príjmov.
+                        bonus najviac do výšky čiastkového základu dane z
+                        príjmov.
                       </p>
                     </p>
                   </Details>
