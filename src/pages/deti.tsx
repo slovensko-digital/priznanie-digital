@@ -64,11 +64,17 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          const userInput = values.hasChildren
+          let userInput = values.hasChildren
             ? values
             : {
                 ...childrenUserInputInitialValues,
                 hasChildren: false,
+              }
+          userInput = values.prijmyPredJul22
+            ? userInput
+            : {
+                ...userInput,
+                r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
               }
           setTaxFormUserInput(userInput)
           router.push(nextRoute)
@@ -78,11 +84,75 @@ const Deti: Page<ChildrenUserInput> = ({
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
             <BooleanRadio
-              title={`Máte dieťa, s ktorým ste v roku ${TAX_YEAR} žili v spoločnej domácnosti a malo do 16 rokov alebo študenta do 25 rokov?`}
+              title={`Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas roku ${TAX_YEAR} žili v spoločnej domácnosti?`}
               name="hasChildren"
             />
             {values.hasChildren && (
+              <BooleanRadio
+                title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
+                name="prijmyPredJul22"
+              />
+            )}
+            {values.hasChildren && values.prijmyPredJul22 === false && (
               <>
+                <div className="govuk-form-group">
+                  <fieldset
+                    className="govuk-fieldset"
+                    role="group"
+                    aria-describedby="zaciatok-prijmov-hint"
+                  >
+                    <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
+                      <h1 className="govuk-fieldset__heading">
+                        Uveďte presný dátum
+                      </h1>
+                    </legend>
+                    <div id="zaciatok-prijmov-hint" className="govuk-hint">
+                      Dátum od kedy ste v roku {TAX_YEAR} začali vykonávať
+                      závislú činnosť alebo podnikateľskú alebo inú samostatnú
+                      zárobkovú činnosť, z ktorej ste dosiahli zdaniteľné prímy
+                      uvedené v daňovom priznaní.
+                      <br />
+                      Napríklad 27 8 2022
+                    </div>
+                    <div className="govuk-date-input" id="zaciatok-prijmov">
+                      <div className="govuk-date-input__item">
+                        <div className="govuk-form-group">
+                          <Input
+                            name="zaciatokPrijmovDen"
+                            label="Deň"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div className="govuk-date-input__item">
+                        <div className="govuk-form-group">
+                          <Input
+                            name="zaciatokPrijmovMesiac"
+                            label="Mesiac"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div className="govuk-date-input__item">
+                        <div className="govuk-form-group">
+                          <Input
+                            name="zaciatokPrijmovRok"
+                            type="number"
+                            label="Rok"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </>
+            )}
+            {values.hasChildren && [true, false].includes(values.prijmyPredJul22) && (
+              <>
+                <h1 className="govuk-heading-l">
+                  Informácie o deťoch
+                </h1>
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
                   dieťa do 16 rokov, študenta do 25 rokov alebo o nezaopatrené
