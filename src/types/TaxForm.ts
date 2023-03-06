@@ -146,10 +146,10 @@ export interface TaxForm {
 
   /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r117: Decimal
-  
+
   /**
    * Nárok na daňový bonus nárok za január až jún 2022
-   */  
+   */
   r117a: Decimal
   /**
    * Nárok na daňový bonus nárok za júl až december 2022
@@ -215,9 +215,9 @@ export interface TaxForm {
   eligibleForChildrenBonus: boolean
   canDonateTwoPercentOfTax: boolean
 
-  /** 
+  /**
    * Pre druhu polovicu roka 2022 sa pouzivaju dva vypocty bonusu na dieta.
-   * Danovnik si moze uplatnit sumu podla vypoctu ktory je pre neho vyhodnejsi 
-  */
+   * Danovnik si moze uplatnit sumu podla vypoctu ktory je pre neho vyhodnejsi
+   */
   staryVypocetBonusovNaDieta: Decimal
 }

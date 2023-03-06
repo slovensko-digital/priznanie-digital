@@ -12,7 +12,7 @@ const sampleSchema: OutputJson = {
         ddp: '0',
       },
       zdanovacieObdobie: {
-        rok: (TAX_YEAR).toString(),
+        rok: TAX_YEAR.toString(),
         datumDDP: '',
       },
       skNace: {

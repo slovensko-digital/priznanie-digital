@@ -25,7 +25,6 @@ const makeHandlePersonAutoform = ({
   values,
 }: FormikProps<PersonalInformationPostponePage>) => {
   return (subject: AutoFormSubject) => {
-
     let first_name,
       last_name,
       prefixes,
@@ -35,19 +34,20 @@ const makeHandlePersonAutoform = ({
       building_number,
       municipality,
       postal_code,
-      country;
+      country
 
     if (subject.statutory.length > 0) {
-      ({ first_name,
-       last_name,
-       prefixes,
-       postfixes,
-       street,
-       reg_number,
-       building_number,
-       municipality,
-       postal_code,
-       country
+      ;({
+        first_name,
+        last_name,
+        prefixes,
+        postfixes,
+        street,
+        reg_number,
+        building_number,
+        municipality,
+        postal_code,
+        country,
       } = subject.statutory[0])
     }
 
@@ -195,7 +195,12 @@ const OsobneUdaje: NextPage<Props> = ({
                 />
               </div>
 
-              <Select name="stat" label="Štát" options={countries} optionAsValue />
+              <Select
+                name="stat"
+                label="Štát"
+                options={countries}
+                optionAsValue
+              />
 
               <button className="govuk-button" type="submit">
                 Pokračovať

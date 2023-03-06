@@ -9,9 +9,7 @@ import {
 } from '../types/PageUserInputs'
 import { getAutoformByPersonName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
-import {
-  AutoCompleteInput,
-} from '../components/AutoCompleteInput'
+import { AutoCompleteInput } from '../components/AutoCompleteInput'
 import { formatPsc, getStreetNumber } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
@@ -27,10 +25,8 @@ const formatNace = (economicActivity) => {
 
 const makeHandlePersonAutoform = ({
   setValues,
-}:
-FormikProps<PersonalInformationUserInput>) => {
+}: FormikProps<PersonalInformationUserInput>) => {
   return (subject: AutoFormSubject) => {
-
     let first_name,
       last_name,
       prefixes,
@@ -40,10 +36,11 @@ FormikProps<PersonalInformationUserInput>) => {
       building_number,
       municipality,
       postal_code,
-      country;
+      country
 
     if (subject.statutory.length > 0) {
-      ({ first_name,
+      ;({
+        first_name,
         last_name,
         prefixes,
         postfixes,
@@ -52,8 +49,8 @@ FormikProps<PersonalInformationUserInput>) => {
         building_number,
         municipality,
         postal_code,
-        country
-       } = subject.statutory[0])
+        country,
+      } = subject.statutory[0])
     }
 
     setValues({
@@ -65,7 +62,7 @@ FormikProps<PersonalInformationUserInput>) => {
       r001_dic: `${subject.tin}` || '',
       r003_nace: formatNace(subject.main_economic_activity),
       r007_ulica: street || municipality || '',
-      r008_cislo: getStreetNumber({reg_number, building_number}) || '',
+      r008_cislo: getStreetNumber({ reg_number, building_number }) || '',
       r009_psc: postal_code ? formatPsc(postal_code) : '',
       r010_obec: municipality || '',
       r011_stat: country || '',
@@ -95,7 +92,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
       >
         {(props) => (
           <>
-            <ErrorSummary<PersonalInformationUserInput> errors={props.errors}/>
+            <ErrorSummary<PersonalInformationUserInput> errors={props.errors} />
             <Form className="form">
               <h2 className="govuk-heading-l">Údaje o daňovníkovi</h2>
               <p>
@@ -148,7 +145,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 width="auto"
               />
 
-              <Nace/>
+              <Nace />
 
               <div className={styles.inlineFieldContainer}>
                 <Input
@@ -199,7 +196,7 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 />
               </div>
 
-              <Input name="r011_stat" type="text" label="Štát"/>
+              <Input name="r011_stat" type="text" label="Štát" />
 
               <button className="govuk-button" type="submit">
                 Pokračovať
