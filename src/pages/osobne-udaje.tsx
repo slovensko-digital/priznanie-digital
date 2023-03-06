@@ -60,7 +60,8 @@ FormikProps<PersonalInformationUserInput>) => {
       meno_priezvisko: subject.name,
       r004_priezvisko: last_name || '',
       r005_meno: first_name || '',
-      r006_titul: `${prefixes} / ${postfixes}, ${postfixes}` || '',
+      r006_titul: prefixes || '',
+      r006_titul_za: postfixes || '',
       r001_dic: `${subject.tin}` || '',
       r003_nace: formatNace(subject.main_economic_activity),
       r007_ulica: street || municipality || '',
@@ -121,7 +122,13 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                   className={styles.inlineField}
                   name="r006_titul"
                   type="text"
-                  label="Titul"
+                  label="Titul pred menom"
+                />
+                <Input
+                  className={styles.inlineField}
+                  name="r006_titul_za"
+                  type="text"
+                  label="Titul za menom"
                 />
               </div>
 

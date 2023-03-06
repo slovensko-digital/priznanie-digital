@@ -77,9 +77,6 @@ const makeMapChild =
   }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
-  const [titul, titulZa] = input.r006_titul
-    ? input.r006_titul.split(' / ')
-    : ['', '']
 
   /** Combine default vaules with user input */
   return {
@@ -88,8 +85,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r003_nace: input.r003_nace,
     r004_priezvisko: input.r004_priezvisko,
     r005_meno: input.r005_meno,
-    r006_titul: titul,
-    r006_titul_za: titulZa,
+    r006_titul: input.r006_titul,
+    r006_titul_za: input.r006_titul_za,
     r007_ulica: input.r007_ulica,
     r008_cislo: input.r008_cislo,
     r009_psc: `${input.r009_psc}`.replace(/\D/g, ''),
