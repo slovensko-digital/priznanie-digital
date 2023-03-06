@@ -53,17 +53,17 @@ const child = {
   priezviskoMeno: 'Johnny Bravo',
   rodneCislo: '150701 / 1234',
   wholeYear: false,
-  monthFrom: '1',
-  monthTo: '9',
+  monthFrom: '1', // February
+  monthTo: '9', // October
 }
 
 /** The numbers need to be updated every year, for example 150701 => 160701 */
-const childUnder6 = { ...child, rodneCislo: '160701 / 1234' }
-const childTurning6InFeb = { ...child, rodneCislo: '150201 / 1234' }
-const childTurning6InJul = { ...child, rodneCislo: '150731 / 1234' }
+const childUnder6 = { ...child, rodneCislo: '200501 / 9753' }
+const childTurning6InFeb = { ...child, rodneCislo: '160215 / 0011' }
+const childTurning6InJul = { ...child, rodneCislo: '160731 / 0012' }
 const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
 
-describe.skip('With child (for tax year 2021)', () => {
+describe('With child (for tax year 2022)', () => {
   test('should map child', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,
