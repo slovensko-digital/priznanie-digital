@@ -77,7 +77,6 @@ const makeMapChild =
   }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
-
   /** Combine default vaules with user input */
   return {
     /** SECTION Osobne udaje */
@@ -424,7 +423,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const polovicaZakladuDane = zakladDane.times(0.5)
 
       const zakladPreBonus =
-       this.r034a && this.r034a.length > 0 ? zakladDane : polovicaZakladuDane
+        this.r034a && this.r034a.length > 0 ? zakladDane : polovicaZakladuDane
 
       const novyVypocet = [
         Months.July,
@@ -438,36 +437,57 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         const percentLimit = getPercentualnyLimitNaDeti(pocetDeti)
         const mesacnyLimit = zakladPreBonus.dividedBy(6).times(percentLimit)
 
-        const skutocnyVysledok = this.r034.reduce((previousSum, currentChild) => {
-          let currentSum = new Decimal(0)
-  
-          if (currentMonth === Months.July && (currentChild.m07 || currentChild.m00)) {
-            const rate = getRate(Months.July, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-          if (currentMonth === Months.August && (currentChild.m08 || currentChild.m00)) {
-            const rate = getRate(Months.August, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-          if (currentMonth === Months.September && (currentChild.m09 || currentChild.m00)) {
-            const rate = getRate(Months.September, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-          if (currentMonth === Months.October && (currentChild.m10 || currentChild.m00)) {
-            const rate = getRate(Months.October, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-          if (currentMonth === Months.November && (currentChild.m11 || currentChild.m00)) {
-            const rate = getRate(Months.November, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-          if (currentMonth === Months.December && (currentChild.m12 || currentChild.m00)) {
-            const rate = getRate(Months.December, currentChild)
-            currentSum = currentSum.plus(rate)
-          }
-  
-          return previousSum.plus(currentSum)
-        }, new Decimal(0))
+        const skutocnyVysledok = this.r034.reduce(
+          (previousSum, currentChild) => {
+            let currentSum = new Decimal(0)
+
+            if (
+              currentMonth === Months.July &&
+              (currentChild.m07 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.July, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.August &&
+              (currentChild.m08 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.August, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.September &&
+              (currentChild.m09 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.September, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.October &&
+              (currentChild.m10 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.October, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.November &&
+              (currentChild.m11 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.November, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.December &&
+              (currentChild.m12 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.December, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+
+            return previousSum.plus(currentSum)
+          },
+          new Decimal(0),
+        )
 
         const vysledok = Decimal.min(mesacnyLimit, skutocnyVysledok)
 
@@ -767,6 +787,7 @@ const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
     case 5: {
       return new Decimal(0.48)
     }
-    default: return pocetDeti >= 6 ? new Decimal(0.55) : new Decimal(0);
+    default:
+      return pocetDeti >= 6 ? new Decimal(0.55) : new Decimal(0)
   }
 }

@@ -148,81 +148,80 @@ const Deti: Page<ChildrenUserInput> = ({
                 </div>
               </>
             )}
-            {values.hasChildren && [true, false].includes(values.prijmyPredJul22) && (
-              <>
-                <h1 className="govuk-heading-l">
-                  Informácie o deťoch
-                </h1>
-                <p className="govuk-hint">
-                  V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
-                  dieťa do 16 rokov, študenta do 25 rokov alebo o nezaopatrené
-                  dieťa do 25 rokov, ktoré je dlhodobo choré, máte právo na
-                  zľavu na dani vo výške{' '}
-                  {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)} eur mesačne.
-                  Ročný bonus na dieťa činí{' '}
-                  {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY * 12)}. Daňový
-                  bonus na dieťa do 6 rokov je dvojnásobný.
-                </p>
-                <p className="govuk-hint">
-                  Ak sa Vám v roku 2021 narodilo dieťa a toto je prvé daňové
-                  priznanie, v ktorom naň žiadate daňový bonus, je potrebné
-                  zahrnúť rodný list dieťaťa do prílohy k daňovému priznaniu.
-                </p>
-                <p className="govuk-hint">
-                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
-                </p>
+            {values.hasChildren &&
+              [true, false].includes(values.prijmyPredJul22) && (
+                <>
+                  <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+                  <p className="govuk-hint">
+                    V prípade, že ste sa v roku {TAX_YEAR} starali o
+                    nezaopatrené dieťa do 16 rokov, študenta do 25 rokov alebo o
+                    nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
+                    máte právo na zľavu na dani vo výške{' '}
+                    {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)} eur
+                    mesačne. Ročný bonus na dieťa činí{' '}
+                    {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY * 12)}.
+                    Daňový bonus na dieťa do 6 rokov je dvojnásobný.
+                  </p>
+                  <p className="govuk-hint">
+                    Ak sa Vám v roku 2021 narodilo dieťa a toto je prvé daňové
+                    priznanie, v ktorom naň žiadate daňový bonus, je potrebné
+                    zahrnúť rodný list dieťaťa do prílohy k daňovému priznaniu.
+                  </p>
+                  <p className="govuk-hint">
+                    Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
+                  </p>
 
-                <FieldArray name="children">
-                  {(arrayHelpers) => (
-                    <div className={styles.childrenInputGroup}>
-                      {values.children.map((child, index) => (
-                        <div key={child.id}>
-                          {values.children.length > 1 && (
-                            <h2
-                              className={classnames(
-                                'govuk-heading-m',
-                                'govuk-!-margin-top-3',
-                                styles.childHeadline,
-                              )}
-                            >
-                              {index + 1}. dieťa
-                              <button
-                                className="govuk-button btn-secondary btn-warning"
-                                type="button"
-                                onClick={() => arrayHelpers.remove(index)}
-                                data-test={`remove-child-${index}`}
+                  <FieldArray name="children">
+                    {(arrayHelpers) => (
+                      <div className={styles.childrenInputGroup}>
+                        {values.children.map((child, index) => (
+                          <div key={child.id}>
+                            {values.children.length > 1 && (
+                              <h2
+                                className={classnames(
+                                  'govuk-heading-m',
+                                  'govuk-!-margin-top-3',
+                                  styles.childHeadline,
+                                )}
                               >
-                                Odstrániť {index + 1}. dieťa
-                              </button>
-                            </h2>
-                          )}
-                          <ChildForm
-                            savedValues={child}
-                            index={index}
-                            setFieldValue={setFieldValue}
-                          />
-                        </div>
-                      ))}
-                      <button
-                        className="btn-secondary govuk-button"
-                        type="button"
-                        onClick={async () => {
-                          const errors = await validateForm()
-                          setErrors(errors)
-                          const hasErrors = Object.keys(errors).length > 0
-                          if (!hasErrors) {
-                            arrayHelpers.push(makeEmptyChild())
-                          }
-                        }}
-                        data-test="add-child"
-                      >
-                        Pridať ďalšie dieťa
-                      </button>
-                    </div>
-                  )}
-                </FieldArray>
-              </>
-            )}
+                                {index + 1}. dieťa
+                                <button
+                                  className="govuk-button btn-secondary btn-warning"
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                  data-test={`remove-child-${index}`}
+                                >
+                                  Odstrániť {index + 1}. dieťa
+                                </button>
+                              </h2>
+                            )}
+                            <ChildForm
+                              savedValues={child}
+                              index={index}
+                              setFieldValue={setFieldValue}
+                            />
+                          </div>
+                        ))}
+                        <button
+                          className="btn-secondary govuk-button"
+                          type="button"
+                          onClick={async () => {
+                            const errors = await validateForm()
+                            setErrors(errors)
+                            const hasErrors = Object.keys(errors).length > 0
+                            if (!hasErrors) {
+                              arrayHelpers.push(makeEmptyChild())
+                            }
+                          }}
+                          data-test="add-child"
+                        >
+                          Pridať ďalšie dieťa
+                        </button>
+                      </div>
+                    )}
+                  </FieldArray>
+                </>
+              )}
 
             <button className="govuk-button" type="submit">
               Pokračovať

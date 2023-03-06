@@ -48,8 +48,8 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug }) => (
         <li>
           <IconCheck />
           <p>
-            Pripravené v spolupráci s daňovými poradcami z {' '}
-            <ExternalLink href='https://www.linkedin.com/company/avenias/'>
+            Pripravené v spolupráci s daňovými poradcami z{' '}
+            <ExternalLink href="https://www.linkedin.com/company/avenias/">
               AVENIAS Tax & Legal
             </ExternalLink>
           </p>
