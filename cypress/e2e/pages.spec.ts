@@ -373,7 +373,8 @@ describe('osobne-udaje page', () => {
       'contain.value',
       'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
     )
-    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
+    getInput('r006_titul').should('contain.value', 'PhDr.')
+    getInput('r006_titul_za').should('contain.value', 'PhD.')
     getInput('r004_priezvisko').should('contain.value', 'Urban')
     getInput('r005_meno').should('contain.value', 'Pavel')
     getInput('r007_ulica').should('contain.value', 'Clementisova')
