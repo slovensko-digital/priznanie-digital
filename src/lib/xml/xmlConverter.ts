@@ -113,6 +113,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r72 = roundDecimal(taxForm.r072_pred_znizenim)
   form.dokument.telo.r73 = roundDecimal(taxForm.r073)
+  form.dokument.telo.r74 = roundDecimal(taxForm.r074_znizenie_partner)
 
   form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
   form.dokument.telo.r78 = decimalToString(
