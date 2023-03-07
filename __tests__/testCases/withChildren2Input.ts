@@ -12,7 +12,7 @@ export const withChildren2Input: E2eTestUserInput = {
   r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
-  t1r10_prijmy: '25000',
+  t1r10_prijmy: '27000',
   datum: '22.02.2020',
   children: [
     {

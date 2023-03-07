@@ -128,6 +128,7 @@ const executeTestCase = (testCase: string) => {
 
         if (input.hasChildren) {
           getInput('hasChildren', '-yes').click()
+          getInput('prijmyPredJul22', '-yes').click()
           input.children.forEach((child, index) => {
             cy.get(
               `[data-test="children[${index}].priezviskoMeno-input"]`,
@@ -223,6 +224,7 @@ const executeTestCase = (testCase: string) => {
         typeToInput('r005_meno', input)
         if (input.r006_titul) {
           getInput('r006_titul').type(input.r006_titul)
+          getInput('r006_titul_za').type(input.r006_titul_za)
         }
         typeToInput('r004_priezvisko', input)
         typeToInput('r007_ulica', input)
@@ -313,7 +315,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.495.html')
+        cy.visit('/form/form.546.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
