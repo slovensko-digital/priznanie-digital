@@ -25,6 +25,10 @@ export const withChildren2Input: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
 
   expectNgoDonationPage: true,
 }

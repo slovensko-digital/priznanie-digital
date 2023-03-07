@@ -17,6 +17,10 @@ export const withTaxReturnInput: E2eTestUserInput = {
   datum: '22.02.2020',
   hasChildren: false,
   children: [],
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
 
   /** SECTION Danovy preplatok */
   ziadamVratitDanovyPreplatok: true,

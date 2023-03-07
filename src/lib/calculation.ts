@@ -36,7 +36,7 @@ const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
 export const TAX_YEAR = 2022
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
-enum Months {
+export enum Months {
   January = 1,
   February,
   March,
