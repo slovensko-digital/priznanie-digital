@@ -3,7 +3,7 @@ import {
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
   CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
-  MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA
+  MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA,
 } from '../src/lib/calculation'
 import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
@@ -122,21 +122,17 @@ describe('With child (for tax year 2022)', () => {
         t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
       })
       const monthSums = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
       ) // kazdy mesiac ked vek < 6 rokov
 
-      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
+      expect(result.r117a).toEqual(monthSums)
     })
 
-    test('Child turning 6 in 2021 (february)', () => {
+    test('Child turning 6 in 2022 (february)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
@@ -145,21 +141,17 @@ describe('With child (for tax year 2022)', () => {
       })
 
       const monthSums = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
       )
 
-      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
+      expect(result.r117a).toEqual(monthSums)
     })
 
-    test('Child turning 6 in 2021 (july)', () => {
+    test('Child turning 6 in 2022 (july)', () => {
       const result = calculate({
         ...initTaxFormUserInputValues,
         hasChildren: true,
@@ -168,19 +160,13 @@ describe('With child (for tax year 2022)', () => {
       })
 
       const part1 = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-      ) // februar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-      const part2 = sum(
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-      ) // august - oktober (ved nad 6 rokov)
-      expect(result.r117.eq(sum(part1, part2))).toBeTruthy()
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+      ) // februar - jul (vek do 6 rokov vratane mesiaca dovrsenia) ale jul uz patri do druhej polovice roka
+      expect(result.r117a).toEqual(part1)
     })
 
     test('Child over 6', () => {
@@ -188,7 +174,7 @@ describe('With child (for tax year 2022)', () => {
         ...initTaxFormUserInputValues,
         hasChildren: true,
         children: [childOver6],
-        t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
+        t1r10_prijmy: (15_000).toString(),
       })
 
       const monthSums = sum(
@@ -197,12 +183,12 @@ describe('With child (for tax year 2022)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
       ) // vek nad 6 rokov vratane mesiaca dovrsenia
-      expect(result.r117.eq(sum(monthSums))).toBeTruthy()
+      expect(result.r117).toEqual(monthSums)
     })
 
     test('More children', () => {
@@ -215,7 +201,7 @@ describe('With child (for tax year 2022)', () => {
           { ...childTurning6InJul },
           { ...childUnder6 },
         ],
-        t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
+        t1r10_prijmy: (25_000).toString(),
       })
 
       // childOver6
@@ -225,60 +211,58 @@ describe('With child (for tax year 2022)', () => {
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
       )
 
       // childTurning6InFeb
       const childTurning6InFebSum = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
         CHILD_RATE_OVER_SIX_UNTIL_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
       )
 
       // childTurning6InJul
       const childTurning6InJulSum = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
-        CHILD_RATE_OVER_SIX_FROM_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
       ) // januar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
 
       // childUnder6
       const childUnder6Sum = sum(
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
-        CHILD_RATE_SIX_AND_YOUNGER,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
+        CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
       )
-      expect(
-        result.r117.eq(
-          sum(
-            childOver6Sum,
-            childTurning6InFebSum,
-            childTurning6InJulSum,
-            childUnder6Sum,
-          ),
+      expect(result.r117).toEqual(
+        sum(
+          childOver6Sum,
+          childTurning6InFebSum,
+          childTurning6InJulSum,
+          childUnder6Sum,
         ),
-      ).toBeTruthy()
+      )
     })
   })
 })
