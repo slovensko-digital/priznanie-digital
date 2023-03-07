@@ -30,6 +30,10 @@ export const bugReport3Input: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '10',
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   children: [
     {
       id: 1,
