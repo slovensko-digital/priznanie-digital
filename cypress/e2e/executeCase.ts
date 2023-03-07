@@ -224,6 +224,7 @@ const executeTestCase = (testCase: string) => {
         typeToInput('r005_meno', input)
         if (input.r006_titul) {
           getInput('r006_titul').type(input.r006_titul)
+          getInput('r006_titul_za').type(input.r006_titul_za)
         }
         typeToInput('r004_priezvisko', input)
         typeToInput('r007_ulica', input)
