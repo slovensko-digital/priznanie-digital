@@ -1,12 +1,12 @@
 import { executeAllTestCases } from './executeCase'
 
-describe.skip('Cases', () => {
+describe('Cases', () => {
   executeAllTestCases([
     'base',
     'withPartner',
     'withEmployment',
     'withPension',
     'withChildren',
-    'withChildren2',
+    // 'withChildren2',
   ])
 })
