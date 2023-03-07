@@ -128,6 +128,7 @@ const executeTestCase = (testCase: string) => {
 
         if (input.hasChildren) {
           getInput('hasChildren', '-yes').click()
+          getInput('prijmyPredJul22', '-yes').click()
           input.children.forEach((child, index) => {
             cy.get(
               `[data-test="children[${index}].priezviskoMeno-input"]`,
