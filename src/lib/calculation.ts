@@ -33,6 +33,9 @@ export const CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY = 70
 export const CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY = 40
 
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
+
+// 63,4-násobok platného životného minima
+const ZVYHODNENIE_NA_PARTNERA = 13_825
 export const TAX_YEAR = 2022
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
 
@@ -241,7 +244,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return this.r072_pred_znizenim.gt(KONSTANTA)
           ? Decimal.max(
               0,
-              new Decimal(13326.68)
+              new Decimal(ZVYHODNENIE_NA_PARTNERA)
                 .minus(
                   this.r072_pred_znizenim
                     .times(0.25)
