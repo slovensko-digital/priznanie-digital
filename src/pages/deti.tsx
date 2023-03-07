@@ -98,6 +98,7 @@ const Deti: Page<ChildrenUserInput> = ({
               <BooleanRadio
                 title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
                 name="prijmyPredJul22"
+                hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
               />
             )}
             {values.hasChildren && values.prijmyPredJul22 === false && (
