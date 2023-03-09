@@ -67,16 +67,16 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Vyplnenie daňového priznania
         <br />
-        {/* {`(verzia pre rok ${TAX_YEAR})`} */}
+        {`(verzia pre rok ${TAX_YEAR})`}
       </h1>
 
-      <Warning className="govuk-!-font-weight-bold">
+      {/* <Warning className="govuk-!-font-weight-bold">
         Na aktuálnej verzii pracujeme.
-      </Warning>
+      </Warning> */}
       <p className="govuk-body-l">
-        {/* Vyplňte si daňové priznanie rýchlo a jednoducho. */}
-        Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR + 1} pripraviť
-        rýchlo a jednoducho.
+        Vyplňte si daňové priznanie rýchlo a jednoducho.
+        {/* Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR + 1} pripraviť
+        rýchlo a jednoducho. */}
       </p>
 
       <p>
@@ -95,7 +95,7 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
         ktorí každý rok pracujú na aktualizácii návodu aj aplikácie.
       </p>
 
-      {/* <Warning>
+      <Warning>
         <>
           <p>
             <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
@@ -111,13 +111,13 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
             <li>Príspevky z prvej pomoci</li>
           </ul>
         </>
-      </Warning> */}
+      </Warning>
 
-      {/* <p className="govuk-body-xs">
+      <p className="govuk-body-xs">
         Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
         nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje neukladáme, sú
         použité výlučne na spracovanie daňového priznania.
-      </p> */}
+      </p>
 
       {isDebug && (
         <Link href={nextRoute} legacyBehavior>
