@@ -24,4 +24,8 @@ module.exports = {
   //     },
   //   ]
   // },
+
+  // this is needed to make the app work in Docker container according to
+  // https://github.com/vercel/next.js/tree/canary/examples/with-docker
+  output: 'standalone'
 }
