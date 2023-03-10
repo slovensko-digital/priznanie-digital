@@ -242,25 +242,37 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
-        return this.r072_pred_znizenim.gt(KONSTANTA)
-          ? Decimal.max(
-              0,
-              new Decimal(ZVYHODNENIE_NA_PARTNERA)
-                .minus(
-                  this.r072_pred_znizenim
-                    .times(0.25)
-                    .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
-                )
-                .times(new Decimal(1).div(12))
-                .times(this.r032_partner_pocet_mesiacov),
+        if (this.r072_pred_znizenim.gt(KONSTANTA)) {
+          return Decimal.max(
+            0,
+            new Decimal(ZVYHODNENIE_NA_PARTNERA)
+              .minus(
+                this.r072_pred_znizenim
+                  .times(0.25)
+                  .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
+              )
+              .times(new Decimal(1).div(12))
+              .times(this.r032_partner_pocet_mesiacov),
+          )
+        } else {
+          if (this.r032_partner_pocet_mesiacov === 12) {
+            return round(
+              new Decimal(PARTNER_MAX_ODPOCET).minus(
+                Decimal.max(this.r032_partner_vlastne_prijmy, 0),
+              ),
             )
-          : Decimal.max(
-              0,
-              round(new Decimal(PARTNER_MAX_ODPOCET)
+          } else {
+            const mesacne = round(
+              new Decimal(PARTNER_MAX_ODPOCET)
                 .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-                .times(new Decimal(1).div(12)))
-                .times(this.r032_partner_pocet_mesiacov),
+                .div(12),
             )
+            return Decimal.max(
+              0,
+              round(mesacne.times(this.r032_partner_pocet_mesiacov)),
+            )
+          }
+        }
       }
       return new Decimal(0)
     },
