@@ -196,7 +196,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title="Dieťa do 16 rokov alebo študent do 25 rokov, v spoločnej domácnosti"
+        title="Dieťa do 16 rokov alebo študent do 25 rokov, v&nbsp;spoločnej domácnosti"
         href={'/deti'}
         rows={
           taxFormUserInput.hasChildren
