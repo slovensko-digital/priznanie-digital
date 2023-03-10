@@ -133,7 +133,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
         </Link>
       )}
 
-      {(isDebug || isLive !== true) && (
+      {!isLive && (
         <Link
           href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
           legacyBehavior
