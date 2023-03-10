@@ -129,6 +129,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             name="zaciatokPrijmovDen"
                             label="Deň"
                             type="number"
+                            width={2}
                           />
                         </div>
                       </div>
@@ -138,6 +139,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             name="zaciatokPrijmovMesiac"
                             label="Mesiac"
                             type="number"
+                            width={2}
                           />
                         </div>
                       </div>
@@ -147,6 +149,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             name="zaciatokPrijmovRok"
                             type="number"
                             label="Rok"
+                            width={4}
                             disabled
                           />
                         </div>
@@ -318,6 +321,7 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         type="text"
         label="Rodné číslo"
         maxLength={13}
+        width={10}
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
