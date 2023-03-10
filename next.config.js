@@ -2,6 +2,7 @@ module.exports = {
   // to load runtime env vars we need to pass them via public runtime config (and disable static optimization)
   // this allows us to deploy one bundle into multiple envs
   publicRuntimeConfig: {
+    isLive: process.env.NEXT_PUBLIC_isLive === "true" || false,
     navodyBaseUrl: process.env.NEXT_PUBLIC_navodyBaseUrl,
     priznanieStepUrl: process.env.NEXT_PUBLIC_priznanieStepUrl,
     odkladStepUrl: process.env.NEXT_PUBLIC_odkladStepUrl,
