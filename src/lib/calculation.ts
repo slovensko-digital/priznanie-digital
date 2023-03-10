@@ -256,9 +256,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             )
           : Decimal.max(
               0,
-              new Decimal(PARTNER_MAX_ODPOCET)
+              round(new Decimal(PARTNER_MAX_ODPOCET)
                 .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-                .times(new Decimal(1).div(12))
+                .times(new Decimal(1).div(12)))
                 .times(this.r032_partner_pocet_mesiacov),
             )
       }
