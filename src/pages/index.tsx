@@ -78,7 +78,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       <p className="govuk-body-l">
         {isLive
           ? `Vyplňte si daňové priznanie rýchlo a jednoducho.`
-          : `Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR + 1} pripraviť
+          : `Daňové priznanie si tak budete môcť aj v roku ${TAX_YEAR + 1} pripraviť
         rýchlo a jednoducho.`}
       </p>
 
