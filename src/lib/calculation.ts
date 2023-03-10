@@ -7,6 +7,7 @@ import {
   percentage,
   ceilDecimal,
   sum,
+  round,
 } from './utils'
 import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
@@ -324,7 +325,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // Platí, že ak r. 78 = 0, tak potom na r. 91 je hodnota, ktorá je rozdielom r. 77 mínus r. 40
     get r091() {
       if (this.r078_zaklad_dane_zo_zamestnania.eq(0)) {
-        return floorDecimal(
+        return round(
           Decimal.max(this.r077_nezdanitelna_cast.minus(this.r038), 0),
         )
       }
