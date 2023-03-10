@@ -450,7 +450,7 @@ describe('utils', () => {
     })
   })
 
-  describe.only('#round', () => {
+  describe('#round', () => {
     const scenarios = [
       { input: new Decimal(123.45), output: '123.45' },
       { input: new Decimal(123.4509), output: '123.45' },
