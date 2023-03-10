@@ -87,9 +87,9 @@ export interface TaxFormUserInput {
   hasChildren?: boolean
   children: ChildInput[]
   prijmyPredJul22: boolean
-  zaciatokPrijmovDen: number
-  zaciatokPrijmovMesiac: number
-  zaciatokPrijmovRok: number
+  zaciatokPrijmovDen: string
+  zaciatokPrijmovMesiac: string
+  zaciatokPrijmovRok: string
   r034a?: string
 
   /** SECTION  Dve percenta */
