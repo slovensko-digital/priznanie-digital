@@ -1,6 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-export const bugReport2Input: E2eTestUserInput = {
+export const bugReport2aInput: E2eTestUserInput = {
   t1r10_prijmy: '45000',
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
@@ -40,7 +40,7 @@ export const bugReport2Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '1607201167',
+      rodneCislo: '160712 / 0009',
 
       wholeYear: false,
       monthFrom: '0',
@@ -69,7 +69,7 @@ export const bugReport2Input: E2eTestUserInput = {
     r010_obec: 'Bratislava 3',
     r011_stat: 'Slovensko',
     datum: '22.02.2020',
-    r031_rodne_cislo: '9609226286',
+    r031_rodne_cislo: '955928 / 5241',
     meno_priezvisko: 'Fake Name',
     r004_priezvisko: 'anon',
     r005_meno: 'anon',
