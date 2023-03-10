@@ -128,17 +128,19 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
         </button>
       </Link>
 
-      {/* <Link
-        href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
-        legacyBehavior
-      >
-        <button
-          type="button"
-          className="govuk-button govuk-button--large govuk-button--start"
+      {isDebug && (
+        <Link
+          href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
+          legacyBehavior
         >
-          Informujte ma keď bude aplikácia pripravená
-        </button>
-      </Link> */}
+          <button
+            type="button"
+            className="govuk-button govuk-button--large govuk-button--start"
+          >
+            Informujte ma keď bude aplikácia pripravená
+          </button>
+        </Link>
+      )}
     </>
   )
 }
