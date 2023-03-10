@@ -119,18 +119,16 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
         použité výlučne na spracovanie daňového priznania.
       </p>
 
-      {isDebug && (
-        <Link href={nextRoute} legacyBehavior>
-          <button
-            type="button"
-            className="govuk-button govuk-button--large govuk-button--start btn-secondary govuk-!-margin-bottom-3"
-          >
-            Súhlasím a chcem pripraviť daňové priznanie
-          </button>
-        </Link>
-      )}
+      <Link href={nextRoute} legacyBehavior>
+        <button
+          type="button"
+          className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-bottom-3"
+        >
+          Súhlasím a chcem pripraviť daňové priznanie
+        </button>
+      </Link>
 
-      <Link
+      {/* <Link
         href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
         legacyBehavior
       >
@@ -140,7 +138,7 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
         >
           Informujte ma keď bude aplikácia pripravená
         </button>
-      </Link>
+      </Link> */}
     </>
   )
 }
