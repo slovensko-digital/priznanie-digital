@@ -243,17 +243,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera) {
         if (this.r072_pred_znizenim.gt(KONSTANTA)) {
-          return Decimal.max(
-            0,
-            new Decimal(ZVYHODNENIE_NA_PARTNERA)
-              .minus(
-                this.r072_pred_znizenim
-                  .times(0.25)
-                  .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0)),
-              )
-              .times(new Decimal(1).div(12))
-              .times(this.r032_partner_pocet_mesiacov),
+          const zaklad = new Decimal(ZVYHODNENIE_NA_PARTNERA).minus(
+            this.r072_pred_znizenim.times(0.25),
           )
+          const zakladZinzenyOPartnerovPrijem = zaklad.minus(
+            Decimal.max(this.r032_partner_vlastne_prijmy, 0),
+          )
+          if (this.r032_partner_pocet_mesiacov === 12) {
+            return Decimal.max(0, round(zakladZinzenyOPartnerovPrijem))
+          } else {
+            const mesacne = round(zakladZinzenyOPartnerovPrijem.div(12))
+            return Decimal.max(0, mesacne.times(this.r032_partner_pocet_mesiacov))
+          }
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {
             return round(
