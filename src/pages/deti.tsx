@@ -382,7 +382,7 @@ export const validate = (values: ChildrenUserInput) => {
     errors.zaciatokPrijmovMesiac = 'Zadajte Mesiac v správnom tvare'
   }
   if ((date.getMonth() + 1) < 7){
-    errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť neskôr ako 7'
+    errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť 7 alebo neskôr'
   }
   if (values.hasChildren) {
     const childrenErrors = values.children.map((childValues, index) => {
