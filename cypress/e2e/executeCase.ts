@@ -18,7 +18,6 @@ import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import Decimal from 'decimal.js'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
-import {withChildrenInput} from "../../__tests__/testCases/withChildrenInput";
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -129,11 +128,14 @@ const executeTestCase = (testCase: string) => {
 
         if (input.hasChildren) {
           getInput('hasChildren', '-yes').click()
-          getInput('prijmyPredJul22', '-no').click()
 
-          typeToInput('zaciatokPrijmovDen', withChildrenInput)
-          typeToInput('zaciatokPrijmovMesiac', withChildrenInput)
-          getInput('zaciatokPrijmovRok').should("have.value", "2022")
+          if (input.prijmyPredJul22) {
+            getInput('prijmyPredJul22', '-yes').click()
+          } else {
+            getInput('prijmyPredJul22', '-no').click()
+            typeToInput('zaciatokPrijmovDen', input)
+            typeToInput('zaciatokPrijmovMesiac', input)
+          }
 
           input.children.forEach((child, index) => {
             cy.get(
