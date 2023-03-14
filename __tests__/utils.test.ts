@@ -4,6 +4,7 @@ import {
   parseStreetAndNumber,
   encodeUnicodeCharacters,
   getStreetNumber,
+  round,
 } from '../src/lib/utils'
 import {
   sortObjectKeys,
@@ -424,7 +425,7 @@ describe('utils', () => {
       { input: new Decimal(123.451), output: '123.45' },
       { input: new Decimal(123.454), output: '123.45' },
       { input: new Decimal(123.455), output: '123.46' },
-      { input: new Decimal(123.454449), output: '123.46' },
+      { input: new Decimal(123.454449), output: '123.45' },
       { input: new Decimal(123.459), output: '123.46' },
       { input: new Decimal(123.46), output: '123.46' },
       { input: new Decimal(123.461), output: '123.46' },
@@ -436,7 +437,7 @@ describe('utils', () => {
 
     scenarios.forEach(({ input, output }) => {
       it(`should round ${input} to ${output}`, () => {
-        expect(roundDecimal(new Decimal(123.455))).toBe('123.46')
+        expect(roundDecimal(input)).toBe(output)
       })
     })
 
@@ -446,6 +447,30 @@ describe('utils', () => {
 
     it('should roundDecimal to 0 decimal places', () => {
       expect(roundDecimal(new Decimal(10.9), 0)).toBe('11')
+    })
+  })
+
+  describe('#round', () => {
+    const scenarios = [
+      { input: new Decimal(123.45), output: '123.45' },
+      { input: new Decimal(123.4509), output: '123.45' },
+      { input: new Decimal(123.451), output: '123.45' },
+      { input: new Decimal(123.454), output: '123.45' },
+      { input: new Decimal(123.455), output: '123.46' },
+      { input: new Decimal(123.454449), output: '123.45' },
+      { input: new Decimal(123.459), output: '123.46' },
+      { input: new Decimal(123.46), output: '123.46' },
+      { input: new Decimal(123.461), output: '123.46' },
+      { input: new Decimal(123.464), output: '123.46' },
+      { input: new Decimal(123.465), output: '123.47' },
+      { input: new Decimal(123.466), output: '123.47' },
+      { input: new Decimal(123.469), output: '123.47' },
+    ]
+
+    scenarios.forEach(({ input, output }) => {
+      it(`should round ${input} to ${output}`, () => {
+        expect(round(input).valueOf()).toBe(output)
+      })
     })
   })
 })

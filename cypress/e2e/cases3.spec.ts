@@ -5,7 +5,8 @@ describe('Cases', () => {
     'complete',
     'completeDecimal',
     'bugReport1',
-    // 'bugReport2',
+    'bugReport2a',
+    'bugReport2b',
     'bugReport3',
     'bugReport4',
   ])

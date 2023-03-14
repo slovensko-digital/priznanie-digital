@@ -14,6 +14,7 @@ interface SummaryRow {
   value?: string
   currency?: boolean
   testId?: string
+  allignRight?: boolean
 }
 interface SummaryProps {
   title: string
@@ -38,7 +39,7 @@ const Summary = (props: SummaryProps) => (
     </h2>
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {props.rows.map(({ title, value, currency, testId }, index) => (
+        {props.rows.map(({ title, value, currency, testId, allignRight }, index) => (
           <tr className="govuk-table__row" key={`${title}-${index}`}>
             {value ? (
               <>
@@ -47,6 +48,7 @@ const Summary = (props: SummaryProps) => (
                 </td>
                 <td
                   className="govuk-table__cell govuk-!-width-one-half"
+                  style={{textAlign: allignRight ? 'end' : 'start'}}
                   data-test={testId}
                 >
                   {currency ? formatCurrency(parseInputNumber(value)) : value}
@@ -92,21 +94,25 @@ const Suhrn: Page<TaxFormUserInput> = ({
             title: 'Príjmy',
             value: taxFormUserInput.t1r10_prijmy,
             currency: true,
+            allignRight: true
           },
           {
             title: 'Sociálne poistenie',
             value: taxFormUserInput.priloha3_r11_socialne,
             currency: true,
+            allignRight: true
           },
           {
             title: 'Zdravotné poistenie',
             value: taxFormUserInput.priloha3_r13_zdravotne,
             currency: true,
+            allignRight: true
           },
           {
             title: 'Zaplatené preddavky',
             value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
+            allignRight: true
           },
         ]}
       />
@@ -120,12 +126,14 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   title: 'Úhrn príjmov od všetkých zamestnávateľov',
                   value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
                   currency: true,
+                  allignRight: true,
                 },
                 {
                   title: 'Úhrn sociálneho poistného',
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
                   currency: true,
+                  allignRight: true,
                   testId: 'r039_socialne',
                 },
                 {
@@ -133,17 +141,20 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
                   currency: true,
+                  allignRight: true,
                   testId: 'r039_zdravotne',
                 },
                 {
                   title: 'Úhrn preddavkov na daň',
                   value: taxFormUserInput.uhrnPreddavkovNaDan,
                   currency: true,
+                  allignRight: true,
                 },
                 {
-                  title: 'Údaje o zvýhodnení na manželku / manžela',
+                  title: 'Údaje o daňovom bonuse na dieťa',
                   value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
+                  allignRight: true,
                 },
               ]
             : [
@@ -185,7 +196,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title="Dieťa do 16 rokov alebo študent do 25 rokov, v spoločnej domácnosti"
+        title="Dieťa do 16 rokov alebo študent do 25 rokov, v&nbsp;spoločnej domácnosti"
         href={'/deti'}
         rows={
           taxFormUserInput.hasChildren

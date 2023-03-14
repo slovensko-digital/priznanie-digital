@@ -29,10 +29,10 @@ const IconLock = () => (
   </svg>
 )
 
-const Home = ({ nextRoute, nextPostponeRoute, isDebug }) => (
+const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive }) => (
   <>
     <div className="govuk-grid-column-two-thirds">
-      <TaxFormSection nextRoute={nextRoute} isDebug={isDebug} />
+      <TaxFormSection nextRoute={nextRoute} isDebug={isDebug} isLive={isLive} />
     </div>
 
     <div className="govuk-grid-column-one-third">
@@ -61,22 +61,25 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug }) => (
 
 export default Home
 
-const TaxFormSection = ({ nextRoute, isDebug }) => {
+const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   return (
     <>
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Vyplnenie daňového priznania
         <br />
-        {/* {`(verzia pre rok ${TAX_YEAR})`} */}
+        {`(verzia pre rok ${TAX_YEAR})`}
       </h1>
 
-      <Warning className="govuk-!-font-weight-bold">
-        Na aktuálnej verzii pracujeme.
-      </Warning>
+      {!isLive && (
+        <Warning className="govuk-!-font-weight-bold">
+          Na aktuálnej verzii pracujeme.
+        </Warning>
+      )}
       <p className="govuk-body-l">
-        {/* Vyplňte si daňové priznanie rýchlo a jednoducho. */}
-        Daňové priznanie si tak budete môcť aj v roku {TAX_YEAR + 1} pripraviť
-        rýchlo a jednoducho.
+        {isLive
+          ? `Vyplňte si daňové priznanie rýchlo a jednoducho.`
+          : `Daňové priznanie si tak budete môcť aj v roku ${TAX_YEAR + 1} pripraviť
+        rýchlo a jednoducho.`}
       </p>
 
       <p>
@@ -95,7 +98,7 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
         ktorí každý rok pracujú na aktualizácii návodu aj aplikácie.
       </p>
 
-      {/* <Warning>
+      <Warning>
         <>
           <p>
             <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
@@ -111,36 +114,38 @@ const TaxFormSection = ({ nextRoute, isDebug }) => {
             <li>Príspevky z prvej pomoci</li>
           </ul>
         </>
-      </Warning> */}
+      </Warning>
 
-      {/* <p className="govuk-body-xs">
-        Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-        nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje neukladáme, sú
-        použité výlučne na spracovanie daňového priznania.
-      </p> */}
+      <p className="govuk-body-xs">
+        Používaním tejto služby súhlasíte so spracovaním osobných údajov v
+        rozsahu nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje
+        neukladáme, sú použité výlučne na spracovanie daňového priznania.
+      </p>
 
-      {isDebug && (
+      {(isLive || isDebug) && (
         <Link href={nextRoute} legacyBehavior>
           <button
             type="button"
-            className="govuk-button govuk-button--large govuk-button--start btn-secondary govuk-!-margin-bottom-3"
+            className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-bottom-3"
           >
             Súhlasím a chcem pripraviť daňové priznanie
           </button>
         </Link>
       )}
 
-      <Link
-        href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
-        legacyBehavior
-      >
-        <button
-          type="button"
-          className="govuk-button govuk-button--large govuk-button--start"
+      {!isLive && (
+        <Link
+          href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
+          legacyBehavior
         >
-          Informujte ma keď bude aplikácia pripravená
-        </button>
-      </Link>
+          <button
+            type="button"
+            className="govuk-button govuk-button--large govuk-button--start"
+          >
+            Informujte ma keď bude aplikácia pripravená
+          </button>
+        </Link>
+      )}
     </>
   )
 }
