@@ -72,7 +72,7 @@ export const childrenUserInputInitialValues: ChildrenUserInput = {
   prijmyPredJul22: undefined,
   zaciatokPrijmovDen: undefined,
   zaciatokPrijmovMesiac: undefined,
-  zaciatokPrijmovRok: "2022",
+  zaciatokPrijmovRok: '2022',
 }
 
 export const pensionInitialValues: PensionUserInput = {
