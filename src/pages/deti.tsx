@@ -378,7 +378,7 @@ interface ChildrenFormErrors {
 export const validate = (values: ChildrenUserInput) => {
   const errors: ChildrenFormErrors = {}
 
-  if(!values.prijmyPredJul22) {
+  if(values.prijmyPredJul22 === false && values.hasChildren) {
     const date = new Date(`${values.zaciatokPrijmovRok}-${values.zaciatokPrijmovMesiac}-${values.zaciatokPrijmovDen}`);
     if (date.getDate() !== Number.parseInt(values.zaciatokPrijmovDen, 10)) {
       errors.zaciatokPrijmovDen = 'Zadajte deň v správnom tvare'
