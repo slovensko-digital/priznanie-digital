@@ -135,6 +135,7 @@ const executeTestCase = (testCase: string) => {
             typeToInput('zaciatokPrijmovDen', input)
             typeToInput('zaciatokPrijmovMesiac', input)
           }
+          
           input.children.forEach((child, index) => {
             cy.get(
               `[data-test="children[${index}].priezviskoMeno-input"]`,
