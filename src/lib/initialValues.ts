@@ -69,9 +69,9 @@ export const makeEmptyChild = (): ChildInput => ({
 export const childrenUserInputInitialValues: ChildrenUserInput = {
   hasChildren: undefined,
   children: [makeEmptyChild()],
-  prijmyPredJul22: null,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
+  prijmyPredJul22: undefined,
+  zaciatokPrijmovDen: undefined,
+  zaciatokPrijmovMesiac: undefined,
   zaciatokPrijmovRok: '2022',
 }
 
