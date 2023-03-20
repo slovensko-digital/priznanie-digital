@@ -371,15 +371,29 @@ interface ChildFormErrors {
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
+  zaciatokPrijmovDen?: string,
+  zaciatokPrijmovMesiac?: string,
 }
 
 export const validate = (values: ChildrenUserInput) => {
   const errors: ChildrenFormErrors = {}
 
+  if (values.prijmyPredJul22 === false && values.hasChildren) {
+    const date = new Date(`${values.zaciatokPrijmovRok}-${values.zaciatokPrijmovMesiac}-${values.zaciatokPrijmovDen}`);
+    if (date.getDate() !== Number.parseInt(values.zaciatokPrijmovDen, 10)) {
+      errors.zaciatokPrijmovDen = 'Zadajte deň v správnom tvare'
+    }
+    if ((date.getMonth() + 1) !== Number.parseInt(values.zaciatokPrijmovMesiac, 10)) {
+      errors.zaciatokPrijmovMesiac = 'Zadajte mesiac v správnom tvare'
+    }
+    if ((date.getMonth() + 1) < 7){
+      errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť 7 alebo viac'
+    }
+  }
+
   if (typeof values.hasChildren === 'undefined') {
     errors.hasChildren = 'Vyznačte odpoveď'
   }
-
   if (values.hasChildren) {
     const childrenErrors = values.children.map((childValues, index) => {
       const childErrors: ChildFormErrors = {}
