@@ -34,22 +34,25 @@ const makeHandleOrganisationAutoform = ({
   }
 }
 
-const makePrefillForm = (setValues, ref) => () => {
-  setValues({
-    XIIoddiel_uplatnujem2percenta: true,
-    r142_ico: '50 158 635',
-    r142_obchMeno: 'Slovensko.Digital',
-  })
+const makePrefillForm =
+  ({ setValues, values }: FormikProps<TwoPercentUserInput>, ref) =>
+  () => {
+    setValues({
+      ...values,
+      XIIoddiel_uplatnujem2percenta: true,
+      r142_ico: '50 158 635',
+      r142_obchMeno: 'Slovensko.Digital',
+    })
 
-  setTimeout(() => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth' })
-      setTimeout(() => {
-        ref.current.focus()
-      }, 750)
-    }
-  }, 250)
-}
+    setTimeout(() => {
+      if (ref.current) {
+        ref.current.scrollIntoView({ behavior: 'smooth' })
+        setTimeout(() => {
+          ref.current.focus()
+        }, 750)
+      }
+    }, 250)
+  }
 
 const DvePercenta: Page<TwoPercentUserInput> = ({
   setTaxFormUserInput,
@@ -103,7 +106,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                       props.values.XIIoddiel_uplatnujem2percenta,
                   })}
                   type="button"
-                  onClick={makePrefillForm(props.setValues, submitButtonRef)}
+                  onClick={makePrefillForm(props, submitButtonRef)}
                 >
                   Podporiť Slovensko.Digital
                 </button>
