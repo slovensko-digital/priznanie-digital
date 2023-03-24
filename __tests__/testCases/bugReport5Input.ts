@@ -13,7 +13,7 @@ export const bugReport5Input: E2eTestUserInput = {
   "r032_partner_vlastne_prijmy": "",
   "r032_partner_pocet_mesiacov": "",
   "r001_dic": "233123123",
-  "r003_nace": "anon",
+  "r003_nace": "62010 - Počítačové programovanie",
   "meno_priezvisko": "anon",
   "r005_meno": "Fake",
   "r004_priezvisko": "Name",
