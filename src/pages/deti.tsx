@@ -31,6 +31,10 @@ import {
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
+import RadioConditional from "../components/radio/RadioConditional";
+import Fieldset from "../components/fieldset/Fieldset";
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -95,69 +99,69 @@ const Deti: Page<ChildrenUserInput> = ({
               name="hasChildren"
             />
             {values.hasChildren && (
-              <BooleanRadio
-                title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
-                name="prijmyPredJul22"
-                hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
-              />
-            )}
-            {values.hasChildren && values.prijmyPredJul22 === false && (
-              <>
-                <div className="govuk-form-group">
-                  <fieldset
-                    className="govuk-fieldset"
-                    role="group"
-                    aria-describedby="zaciatok-prijmov-hint"
-                  >
-                    <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-                      <h1 className="govuk-fieldset__heading">
-                        Uveďte presný dátum
-                      </h1>
-                    </legend>
-                    <div id="zaciatok-prijmov-hint" className="govuk-hint">
-                      Dátum od kedy ste v roku {TAX_YEAR} začali vykonávať
-                      závislú činnosť alebo podnikateľskú alebo inú samostatnú
-                      zárobkovú činnosť, z ktorej ste dosiahli zdaniteľné prímy
-                      uvedené v daňovom priznaní.
-                      <br />
-                      Napríklad 27 8 2022
+              <Fieldset title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
+                        hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
+                        error={errors.prijmyPredJul22}
+              >
+                <RadioGroup value={String(values.prijmyPredJul22)} onChange={(value) => {
+                  setFieldValue('prijmyPredJul22', value === 'true')
+                }}>
+                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true"/>
+
+                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false"/>
+                  <RadioConditional forValue="false">
+                    <div className="govuk-form-group">
+                      <fieldset
+                        className="govuk-fieldset"
+                        role="group"
+                        aria-describedby="zaciatok-prijmov-hint"
+                      >
+                        <div id="zaciatok-prijmov-hint" className="govuk-hint">
+                          Dátum od kedy ste v roku {TAX_YEAR} začali vykonávať
+                          závislú činnosť alebo podnikateľskú alebo inú samostatnú
+                          zárobkovú činnosť, z ktorej ste dosiahli zdaniteľné prímy
+                          uvedené v daňovom priznaní.
+                          <br />
+                          Napríklad 27 8 2022
+                        </div>
+                        <div className="govuk-date-input" id="zaciatok-prijmov">
+                          <div className="govuk-date-input__item">
+                            <div className="govuk-form-group">
+                              <Input
+                                name="zaciatokPrijmovDen"
+                                label="Deň"
+                                type="number"
+                                width={2}
+                              />
+                            </div>
+                          </div>
+                          <div className="govuk-date-input__item">
+                            <div className="govuk-form-group">
+                              <Input
+                                name="zaciatokPrijmovMesiac"
+                                label="Mesiac"
+                                type="number"
+                                width={2}
+                              />
+                            </div>
+                          </div>
+                          <div className="govuk-date-input__item">
+                            <div className="govuk-form-group">
+                              <Input
+                                name="zaciatokPrijmovRok"
+                                type="number"
+                                label="Rok"
+                                width={4}
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
                     </div>
-                    <div className="govuk-date-input" id="zaciatok-prijmov">
-                      <div className="govuk-date-input__item">
-                        <div className="govuk-form-group">
-                          <Input
-                            name="zaciatokPrijmovDen"
-                            label="Deň"
-                            type="number"
-                            width={2}
-                          />
-                        </div>
-                      </div>
-                      <div className="govuk-date-input__item">
-                        <div className="govuk-form-group">
-                          <Input
-                            name="zaciatokPrijmovMesiac"
-                            label="Mesiac"
-                            type="number"
-                            width={2}
-                          />
-                        </div>
-                      </div>
-                      <div className="govuk-date-input__item">
-                        <div className="govuk-form-group">
-                          <Input
-                            name="zaciatokPrijmovRok"
-                            type="number"
-                            label="Rok"
-                            width={4}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                </div>
-              </>
+                  </RadioConditional>
+                </RadioGroup>
+              </Fieldset>
             )}
             {values.hasChildren &&
               [true, false].includes(values.prijmyPredJul22) && (
