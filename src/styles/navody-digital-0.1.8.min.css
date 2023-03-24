@@ -2994,16 +2994,46 @@ a[href*="//"]:not([href*="priznanie.digital"]):not([href^="#"]):not([href^="/"])
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.25;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-  padding: 35px;
-  border: 5px solid rgba(0, 0, 0, 0);
-  text-align: center;
+  border-color: #6f777b;
+  border-left-style: solid;
+
+  padding: em(15, 19);
+  margin-bottom: em(15, 19);
+  :first-child {
+    margin-top: 0;
+  }
+
+  :only-child,
+  :last-child {
+    margin-bottom: 0;
+  }
 }
+
+.govuk-panel-border-narrow {
+  border-left-width: 5px;
+  padding-left: 35px;
+}
+
+.form-group .panel-border-narrow {
+  float: left;
+  width: 100%;
+  padding-bottom: 0;
+}
+
+.form-group .panel-border-narrow:first-child {
+  margin-top: 10px;
+}
+
+.form-group .panel-border-narrow:last-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.inline .panel-border-narrow, .inline .panel-border-narrow:last-child {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 @media print {
   .govuk-panel {
     font-family: sans-serif;

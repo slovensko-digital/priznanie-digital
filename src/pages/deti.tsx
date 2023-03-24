@@ -105,15 +105,10 @@ const Deti: Page<ChildrenUserInput> = ({
               <>
                 <div className="govuk-form-group">
                   <fieldset
-                    className="govuk-fieldset"
+                    className="govuk-fieldset govuk-panel govuk-panel-border-narrow"
                     role="group"
                     aria-describedby="zaciatok-prijmov-hint"
                   >
-                    <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-                      <h1 className="govuk-fieldset__heading">
-                        Uveďte presný dátum
-                      </h1>
-                    </legend>
                     <div id="zaciatok-prijmov-hint" className="govuk-hint">
                       Dátum od kedy ste v roku {TAX_YEAR} začali vykonávať
                       závislú činnosť alebo podnikateľskú alebo inú samostatnú
