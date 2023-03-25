@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { FieldArray, Form } from 'formik'
 import styles from './deti.module.css'
@@ -19,7 +19,11 @@ import classnames from 'classnames'
 import {
   formatCurrency,
   formatRodneCislo,
+  getBirthMonth,
   validateRodneCislo,
+  validateRodneCisloDieta,
+  validateDatumDo,
+  validateDatumOd,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -309,6 +313,15 @@ interface ChildFormProps {
   setFieldValue: (name: string, value: string) => void
 }
 const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
+  const monthNamesUntil = (!validateDatumDo(savedValues.rodneCislo, Number.parseInt(savedValues.monthTo, 10))) ? monthNames.slice(0, getBirthMonth(savedValues.rodneCislo)) : monthNames
+  const monthNamesFrom = (!validateDatumOd(savedValues.rodneCislo, Number.parseInt(savedValues.monthFrom, 10))) ? monthNames.slice(getBirthMonth(savedValues.rodneCislo), 12) : monthNames
+  const monthNamesUntilFrom = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
+  const differentMonths = (monthNames.length > monthNamesUntilFrom.length) ? true : false
+  useEffect(() => {
+    if (differentMonths){
+      setFieldValue(`children[${index}].wholeYear`, undefined)
+    }
+  }, [differentMonths]);
   return (
     <>
       <Input
@@ -340,22 +353,24 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
           <CheckboxSmall
             name={`children[${index}].wholeYear`}
             label="Za celý kalendárny rok"
+            disabled={differentMonths}
           />
         </div>
       </div>
+      {differentMonths && <p className="govuk-hint">Daňový bonus si môžete uplatniť iba v mesiacoch {monthNamesUntilFrom[0]} až {monthNamesUntilFrom.slice(-1)}</p>}
       <div
         className={classnames('govuk-form-group', styles.inlineFieldContainer)}
       >
         <Select
           name={`children[${index}].monthFrom`}
           label="Od"
-          options={monthNames}
+          options={monthNamesUntilFrom}
           disabled={savedValues.wholeYear ? 0 : false}
         />
         <Select
           name={`children[${index}].monthTo`}
           label="Do"
-          options={monthNames}
+          options={monthNamesUntilFrom}
           disabled={savedValues.wholeYear ? 11 : false}
         />
       </div>
@@ -405,6 +420,8 @@ export const validate = (values: ChildrenUserInput) => {
         childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
       } else if (!validateRodneCislo(childValues.rodneCislo)) {
         childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
+      } else if (!validateRodneCisloDieta(childValues.rodneCislo)) {
+        childErrors.rodneCislo = 'Dieťa so zadaným rodným číslom malo minulý rok viac ako 25 rokov.'
       } else if (
         values.children
           .slice(0, index)

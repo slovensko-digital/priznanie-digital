@@ -2,6 +2,7 @@ import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
 import Decimal from 'decimal.js'
 import base64 from 'base64-js'
+import { TAX_YEAR } from './calculation'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -88,6 +89,30 @@ export const validateRodneCislo = (value: string): boolean => {
     rodnecislo(value.replace(' / ', '')).isValid()
   )
 }
+
+export const validateRodneCisloDieta = (value: string): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(value.replace(' / ', ''), TAX_YEAR, 1) <= 25
+  )
+}
+
+export const validateDatumDo = (value: string, month: number): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(value.replace(' / ', ''), TAX_YEAR, month) <= 25
+  )
+}
+export const validateDatumOd = (value: string, month: number): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(value.replace(' / ', ''), TAX_YEAR, month) >= 0
+  )
+}
+
+export const getBirthMonth = (value: string): number => {
+  return (
+    rodnecislo(value.replace(' / ', '')).month()
+  )
+}
+
 // logic from https://github.com/kub1x/rodnecislo
 export const getRodneCisloAgeAtYearAndMonth = (
   rodneCislo: string,

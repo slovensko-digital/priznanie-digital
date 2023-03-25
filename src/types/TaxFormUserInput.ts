@@ -20,6 +20,7 @@ export interface ChildInput {
   wholeYear: boolean
   monthFrom: string
   monthTo: string
+  monthNamesUntil: string []
 }
 
 export interface TaxFormUserInput {
