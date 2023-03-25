@@ -43,12 +43,12 @@ const Summary = (props: SummaryProps) => (
           <tr className="govuk-table__row" key={`${title}-${index}`}>
             {value ? (
               <>
-                <td className="govuk-table__cell">
+                <td className={allignRight ? "govuk-table__cell" : "govuk-table__cell govuk-!-width-one-half"}>
                   {title}
                 </td>
                 <td
                   className="govuk-table__cell"
-                  style={{ textAlign: allignRight ? 'end' : 'start' }}
+                  style={{ textAlign: allignRight ? 'end' : 'start', whiteSpace: 'nowrap' }}
                   data-test={testId}
                 >
                   {currency ? formatCurrency(parseInputNumber(value)) : value}
