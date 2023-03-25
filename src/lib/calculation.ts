@@ -233,7 +233,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           Decimal.max(
             0,
             new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
-              this.r072_pred_znizenim.times(0.25),
+              round(this.r072_pred_znizenim.times(0.25)),
             ),
           ),
         )
