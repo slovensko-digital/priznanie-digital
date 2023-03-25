@@ -8,6 +8,7 @@ import {
   CheckboxSmall,
   FormWrapper,
   Select,
+  optionWithValue,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -82,15 +83,15 @@ const Deti: Page<ChildrenUserInput> = ({
           let userInput = values.hasChildren
             ? values
             : {
-                ...childrenUserInputInitialValues,
-                hasChildren: false,
-              }
+              ...childrenUserInputInitialValues,
+              hasChildren: false,
+            }
           userInput = values.prijmyPredJul22
             ? userInput
             : {
-                ...userInput,
-                r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
-              }
+              ...userInput,
+              r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
+            }
           setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
@@ -104,15 +105,15 @@ const Deti: Page<ChildrenUserInput> = ({
             />
             {values.hasChildren && (
               <Fieldset title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
-                        hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
-                        error={errors.prijmyPredJul22}
+                hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
+                error={errors.prijmyPredJul22}
               >
                 <RadioGroup value={String(values.prijmyPredJul22)} onChange={(value) => {
                   setFieldValue('prijmyPredJul22', value === 'true')
                 }}>
-                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true"/>
+                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true" />
 
-                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false"/>
+                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false" />
                   <RadioConditional forValue="false">
                     <div className="govuk-form-group">
                       <fieldset
@@ -322,7 +323,7 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
   const monthNamesUntilFrom = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
   const differentMonths = (monthNames.length > monthNamesUntilFrom.length) ? true : false
   useEffect(() => {
-    if (differentMonths){
+    if (differentMonths) {
       setFieldValue(`children[${index}].wholeYear`, undefined)
     }
   }, [differentMonths]);
@@ -368,13 +369,13 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         <Select
           name={`children[${index}].monthFrom`}
           label="Od"
-          options={monthNamesUntilFrom}
+          optionsWithValue={monthKeyValues(monthNamesUntilFrom)}
           disabled={savedValues.wholeYear ? 0 : false}
         />
         <Select
           name={`children[${index}].monthTo`}
           label="Do"
-          options={monthNamesUntilFrom}
+          optionsWithValue={monthKeyValues(monthNamesUntilFrom)}
           disabled={savedValues.wholeYear ? 11 : false}
         />
       </div>
@@ -405,7 +406,7 @@ export const validate = (values: ChildrenUserInput) => {
     if ((date.getMonth() + 1) !== Number.parseInt(values.zaciatokPrijmovMesiac, 10)) {
       errors.zaciatokPrijmovMesiac = 'Zadajte mesiac v správnom tvare'
     }
-    if ((date.getMonth() + 1) < 7){
+    if ((date.getMonth() + 1) < 7) {
       errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť 7 alebo viac'
     }
   }
@@ -437,11 +438,10 @@ export const validate = (values: ChildrenUserInput) => {
       if (
         !childValues.wholeYear &&
         Number.parseInt(childValues.monthFrom, 10) >
-          Number.parseInt(childValues.monthTo, 10)
+        Number.parseInt(childValues.monthTo, 10)
       ) {
-        childErrors.monthTo = `Musí byť ${
-          monthNames[childValues.monthFrom]
-        } alebo neskôr`
+        childErrors.monthTo = `Musí byť ${monthNames[childValues.monthFrom]
+          } alebo neskôr`
       }
 
       return childErrors

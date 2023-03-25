@@ -298,9 +298,15 @@ export const CheckboxSmall = ({
   )
 }
 
+export interface optionWithValue {
+  name: string
+  value: string | number
+}
+
 interface SelectProps {
   name: string
-  options: string[]
+  options?: string[]
+  optionsWithValue?: optionWithValue[]
   className?: string
   hint?: string
   label: ReactNode
@@ -313,6 +319,7 @@ interface SelectProps {
 export const Select = ({
   name,
   options,
+  optionsWithValue,
   label,
   className,
   hint,
@@ -349,11 +356,20 @@ export const Select = ({
         value={typeof disabled === 'number' ? disabled : field.value}
         data-test={`${name}-select`}
       >
-        {options.map((name, key) => (
-          <option key={key} value={optionAsValue ? name : key}>
-            {name}
-          </option>
-        ))}
+        {
+          options && options.length && options.map((name, key) => (
+            <option key={key} value={optionAsValue ? name : key}>
+              {name}
+            </option>
+          ))
+        }
+        {
+          optionsWithValue && optionsWithValue.length && optionsWithValue.map(({ name, value }) => (
+            <option key={value} value={value}>
+              {name}
+            </option>
+          ))
+        }
       </select>
     </div>
   )
