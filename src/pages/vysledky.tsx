@@ -104,6 +104,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       title: 'Daňový preplatok / daňový bonus na vyplatenie',
       value: summary.danovyPreplatok,
       key: 'danovyPreplatok',
+      testId: 'r136_danovy_preplatok',
     },
     {
       title: 'Daň na úhradu',
