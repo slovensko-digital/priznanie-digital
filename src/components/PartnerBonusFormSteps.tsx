@@ -158,7 +158,7 @@ export const EligiblePartnerForm = ({
 }: PartnerBonusFormProps) => (
   <>
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      Máte nárok na uplatnenie zvýhodnenia na manželku / manžela
+      Vybrané údaje o manželke / manželovi
     </h1>
     <Input
       name="r031_priezvisko_a_meno"

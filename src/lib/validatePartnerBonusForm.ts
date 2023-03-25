@@ -20,7 +20,7 @@ export const validatePartnerBonusForm = (
 
   const step5 =
     values.r032_partner_vlastne_prijmy !== '' &&
-    parseInputNumber(values.r032_partner_vlastne_prijmy) <= PARTNER_MAX_ODPOCET
+    parseInputNumber(values.r032_partner_vlastne_prijmy) < PARTNER_MAX_ODPOCET
 
   const steps = [step1, step2, step3, step4, step5]
 

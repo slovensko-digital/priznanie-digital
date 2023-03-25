@@ -9,8 +9,10 @@ import { buildSummary } from '../lib/calculation'
 import { Summary } from '../types/Summary'
 
 const {
-  publicRuntimeConfig: { priznanieEmailTemplateId, priznanieStepUrl },
+  publicRuntimeConfig: { priznanieEmailTemplateId, navodyBaseUrl, priznanieStepUrl },
 } = getConfig()
+
+const action_url = `${navodyBaseUrl}${priznanieStepUrl}`
 
 const buildXml = (taxForm: TaxForm) => convertToXML(setDate(taxForm))
 
@@ -64,6 +66,10 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
+    },
+    {
+      name: 'submission[extra][params][action_url]',
+      value: action_url,
     },
     ...summaryFields,
   ]
