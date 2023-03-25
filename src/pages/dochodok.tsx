@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Form } from 'formik'
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
+import { FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
 import { numberInputRegexp, parseInputNumber } from '../lib/utils'
 import { Page } from '../components/Page'
@@ -9,6 +9,10 @@ import { pensionInitialValues } from '../lib/initialValues'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { TAX_YEAR } from '../lib/calculation'
 import { Details } from '../components/Details'
+import Fieldset from "../components/fieldset/Fieldset";
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
+import RadioConditional from "../components/radio/RadioConditional";
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -36,13 +40,28 @@ const Dochodok: Page<PensionUserInput> = ({
           router.push(nextRoute)
         }}
       >
-        {({ values, errors }) => (
+        {({ values, errors, setFieldValue }) => (
           <Form className="form" noValidate>
             <ErrorSummary<PensionUserInput> errors={errors} />
-            <BooleanRadio
-              title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
-              name="platil_prispevky_na_dochodok"
-            />
+            <Fieldset title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
+                      error={errors.platil_prispevky_na_dochodok}
+            >
+              <RadioGroup value={String(values.platil_prispevky_na_dochodok)} onChange={(value) => {
+                setFieldValue('platil_prispevky_na_dochodok', value === 'true')
+              }}>
+                <Radio name="platil_prispevky_na_dochodok-input-yes" label="Áno" value="true"/>
+                <RadioConditional forValue="true">
+                  <Input
+                    name="zaplatene_prispevky_na_dochodok"
+                    type="number"
+                    label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
+                    hint="Maximálne si môžete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
+                  />
+                </RadioConditional>
+
+                <Radio name="platil_prispevky_na_dochodok-input-no" label="Nie" value="false"/>
+              </RadioGroup>
+            </Fieldset>
             <Details
               title={
                 'Nezdaniteľnú časť základu dane na príspevky na doplnkové dôchodkové poistenie je možné uplatniť iba u daňovníka, ktorý spĺňa nasledovné podmienky:'
@@ -63,16 +82,6 @@ const Dochodok: Page<PensionUserInput> = ({
                 </li>
               </ul>
             </Details>
-            {values.platil_prispevky_na_dochodok && (
-              <>
-                <Input
-                  name="zaplatene_prispevky_na_dochodok"
-                  type="number"
-                  label={`Výška zaplatených príspevkov za rok ${TAX_YEAR}`}
-                  hint="Maximálne si môžete uplatniť príspevky na doplnkové dôchodkové sporenie do výšky 180 eur."
-                />
-              </>
-            )}
             <button data-test="next" className="govuk-button" type="submit">
               Pokračovať
             </button>
