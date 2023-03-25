@@ -24,12 +24,12 @@ const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
     r031_rodne_cislo: 'anon',
     iban: 'anon',
     email: 'anon',
-    children: taxFormUserInput.children.map(annoymizeChild),
+    children: taxFormUserInput.children.map(anoymizeChild),
   }
 }
 
-const annoymizeChild = (child: ChildInput) => {
-  const rCislo = rodnecislo(child.rodneCislo)
+export const anoymizeChild = (child: ChildInput) => {
+  const rCislo = rodnecislo(child.rodneCislo.replace(' / ', ''))
   return {
     ...child,
     rodneCislo: 'anon',
