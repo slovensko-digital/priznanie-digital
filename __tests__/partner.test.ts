@@ -82,7 +82,7 @@ describe('partner', () => {
       {
         input: {
           r032_uplatnujem_na_partnera: true,
-          r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET,
+          r032_partner_vlastne_prijmy: `${PARTNER_MAX_ODPOCET}`,
           partner_spolocna_domacnost: true,
           partner_bonus_uplatneny: false,
           partner_podmienky: { 1: true },
