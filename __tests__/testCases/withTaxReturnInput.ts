@@ -27,4 +27,7 @@ export const withTaxReturnInput: E2eTestUserInput = {
   iban: 'SK6807200002891987426353',
 
   expectNgoDonationValue: true,
+
+  percent2: '142,88',
+  percent3: '214,32'
 }
