@@ -1,5 +1,6 @@
 import { validate } from '../src/pages/partner'
 import { testValidation } from './utils/testValidation'
+import { PARTNER_MAX_ODPOCET } from '../src/lib/calculation'
 
 describe('partner', () => {
   describe('#validate', () => {
@@ -77,6 +78,18 @@ describe('partner', () => {
           partner_step: 4,
         },
         expected: [],
+      },
+      {
+        input: {
+          r032_uplatnujem_na_partnera: true,
+          r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET,
+          partner_spolocna_domacnost: true,
+          partner_bonus_uplatneny: false,
+          partner_podmienky: { 1: true },
+          partner_step: 5,
+        },
+        expected: [
+        ],
       },
       {
         input: {
