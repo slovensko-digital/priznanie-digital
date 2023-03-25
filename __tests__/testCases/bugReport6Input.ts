@@ -63,7 +63,6 @@ export const bugReport6Input: E2eTestUserInput = {
   "iban": "SK6807200002891987426353",
   "ziadamVyplatitDanovyBonus": true,
   "datum": "",
-  "email": "anon",
   "partner_spolocna_domacnost": true,
   "partner_bonus_uplatneny": false,
   "r006_titul_za": "",
