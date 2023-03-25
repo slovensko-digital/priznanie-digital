@@ -14,7 +14,7 @@ interface SummaryRow {
   description?: string
   value: Decimal
   fontSize?: number
-  testId: string
+  testId?: string
 }
 interface SummaryProps {
   rows: SummaryRow[]
