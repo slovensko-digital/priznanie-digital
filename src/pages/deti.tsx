@@ -7,8 +7,7 @@ import {
   Input,
   CheckboxSmall,
   FormWrapper,
-  Select,
-  optionWithValue,
+  Select
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
