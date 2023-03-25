@@ -21,4 +21,7 @@ export const baseInput: E2eTestUserInput = {
   zaciatokPrijmovMesiac: null,
   zaciatokPrijmovRok: null,
   expectNgoDonationValue: true,
+
+  percent2: '10,26',
+  percent3: '15,39',
 }

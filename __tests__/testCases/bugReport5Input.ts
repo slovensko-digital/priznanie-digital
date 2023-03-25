@@ -57,5 +57,8 @@ export const bugReport5Input: E2eTestUserInput = {
   "iban": "anon",
   "datum": "",
   "r034a": "null.null.2022",
-  "r006_titul_za": ""
+  "r006_titul_za": "",
+
+  "percent2": '77,57',
+  "percent3": '116,35',
 }

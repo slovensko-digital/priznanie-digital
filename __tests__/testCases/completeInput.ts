@@ -73,4 +73,7 @@ export const completeInput: E2eTestUserInput = {
   zaciatokPrijmovRok: null,
 
   expectNgoDonationValue: true,
+
+  percent2: '5,13',
+  percent3: '7,70',
 }

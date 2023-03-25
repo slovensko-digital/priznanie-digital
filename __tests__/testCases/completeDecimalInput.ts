@@ -72,4 +72,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   zaciatokPrijmovRok: null,
 
   expectNgoDonationValue: true,
+
+  percent2: '8,16',
+  percent3: '12,24',
 }

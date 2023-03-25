@@ -31,4 +31,7 @@ export const withChildren2Input: E2eTestUserInput = {
   zaciatokPrijmovRok: null,
 
   expectNgoDonationValue: true,
+
+  percent2: '4,26',
+  percent3: '6,39',
 }
