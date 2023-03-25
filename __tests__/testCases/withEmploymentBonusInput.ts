@@ -49,5 +49,5 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   ziadamVratitDanovyPreplatok: true,
   iban: 'SK6807200002891987426353',
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

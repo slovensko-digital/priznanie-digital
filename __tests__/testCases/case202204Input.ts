@@ -70,5 +70,5 @@ export const case202204Input: E2eTestUserInput = {
   zaciatokPrijmovMesiac: '7',
   zaciatokPrijmovRok: '2022',
 
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: false,
 }

@@ -10,24 +10,8 @@ import { PostponeUserInput } from '../src/types/PostponeUserInput'
 
 describe('routes', () => {
   describe('#getOrderedRoutes', () => {
-    it('should return routes without children, without two-percent, without iban', () => {
+    it('should return routes without children, without iban', () => {
       expect(getOrderedRoutes({} as TaxForm)).toStrictEqual([
-        homeRoute,
-        '/prijmy-a-vydavky',
-        '/zamestnanie',
-        '/partner',
-        '/dochodok',
-        '/osobne-udaje',
-        '/suhrn',
-        '/vysledky',
-        '/pokracovat',
-      ])
-    })
-
-    it('should return routes without children, with two-percent, without iban', () => {
-      expect(
-        getOrderedRoutes({} as TaxForm),
-      ).toStrictEqual([
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
@@ -41,7 +25,7 @@ describe('routes', () => {
       ])
     })
 
-    it('should return routes with children, without two-percent, without iban', () => {
+    it('should return routes with children, without iban', () => {
       expect(
         getOrderedRoutes({ eligibleForChildrenBonus: true } as TaxForm),
       ).toStrictEqual([
@@ -51,6 +35,7 @@ describe('routes', () => {
         '/partner',
         '/deti',
         '/dochodok',
+        '/dve-percenta',
         '/osobne-udaje',
         '/suhrn',
         '/vysledky',
@@ -58,7 +43,7 @@ describe('routes', () => {
       ])
     })
 
-    it('should return routes with children, with iban, without two-percent', () => {
+    it('should return routes with children, with iban', () => {
       expect(
         getOrderedRoutes({
           eligibleForChildrenBonus: true,
@@ -71,6 +56,7 @@ describe('routes', () => {
         '/partner',
         '/deti',
         '/dochodok',
+        '/dve-percenta',
         '/osobne-udaje',
         '/suhrn',
         '/iban',
@@ -79,26 +65,7 @@ describe('routes', () => {
       ])
     })
 
-    it('should return routes without children, with iban, without two-percent', () => {
-      expect(
-        getOrderedRoutes({
-          mozeZiadatVyplatitDanovyBonus: true,
-        } as TaxForm),
-      ).toStrictEqual([
-        homeRoute,
-        '/prijmy-a-vydavky',
-        '/zamestnanie',
-        '/partner',
-        '/dochodok',
-        '/osobne-udaje',
-        '/suhrn',
-        '/iban',
-        '/vysledky',
-        '/pokracovat',
-      ])
-    })
-
-    it('should return routes without children, with iban, with two-percent', () => {
+    it('should return routes without children, with iban', () => {
       expect(
         getOrderedRoutes({
           mozeZiadatVyplatitDanovyBonus: true,

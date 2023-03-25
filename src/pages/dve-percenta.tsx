@@ -67,8 +67,8 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
   const calculatedTax = calculate(taxFormUserInput)
 
   const uplatnenie2PercentHint = donateOnly3Percent(calculatedTax) ? 
-    `Môžete darovať len 3% (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})` :
-    `Môžete darovať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}`
+    `Bohužiaľ, nespĺňate podmienky pre darovanie 2%, avšak spĺňate podmienky pre darovanie 3% zaplatenej dane (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})` :
+    `Spĺňate podmienky a môžete poukázať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}`
 
   const previousPageLink = (
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
@@ -83,8 +83,9 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
         <h1 className="govuk-heading-l">
           Poukázanie 2% alebo 3% zaplatenej dane neziskovej organizácii
         </h1>
-        <p data-test="ineligible-message">Podiel zaplatenej dane je menší ako {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.<br/>
-          {formatCurrency(calculatedTax.suma_2_percenta.toNumber())} respektíve {formatCurrency(calculatedTax.suma_3_percenta.toNumber())} pre 2% a 3%.
+        <p data-test="ineligible-message">
+          Táto suma musí byť minimálne {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.<br/>
+          Bohužiaľ, nespĺňate podmienky pre darovanie 2% ani 3% zaplatenej dane
         </p>
         <Link href={nextRoute} legacyBehavior>
           <button className="govuk-button govuk-!-margin-top-4" type="button">

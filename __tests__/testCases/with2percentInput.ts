@@ -20,7 +20,7 @@ export const with2percentInput: E2eTestUserInput = {
   zaciatokPrijmovMesiac: null,
   zaciatokPrijmovRok: null,
   children: [],
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
   XIIoddiel_uplatnujem2percenta: true,
   r142_ico: '50158635',
   r142_obchMeno: 'Slovensko.Digital',
