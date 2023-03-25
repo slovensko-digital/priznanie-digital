@@ -51,6 +51,8 @@ export const bugReport6Input: E2eTestUserInput = {
     }
   ],
   "prijmyPredJul22": true,
+  "zaciatokPrijmovDen": null,
+  "zaciatokPrijmovMesiac": null,
   "zaciatokPrijmovRok": "2022",
   "platil_prispevky_na_dochodok": false,
   "zaplatene_prispevky_na_dochodok": "",
