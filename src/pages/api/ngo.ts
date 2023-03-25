@@ -31,11 +31,10 @@ const formatNgoData = (rawArray: string[][]): CachedData[] => {
 const fuseOptions = {
   shouldSort: true,
   includeScore: true,
-  threshold: 0.4,
-  location: 30,
-  distance: 100,
-  minMatchCharLength: 2,
-  keys: ['name', 'municipality'],
+  threshold: 0.6,
+  ignoreLocation: true,
+  minMatchCharLength: 3,
+  keys: ['cin', 'name', 'municipality'],
 }
 
 const getNgoData = async (): Promise<Fuse<CachedData>> => {
@@ -53,7 +52,7 @@ const getNgoData = async (): Promise<Fuse<CachedData>> => {
   return cache.data
 }
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const name = decodeURIComponent(`${req.query.name}`)
+  const searchString = decodeURIComponent(`${req.query.name}`)
 
   let data: Fuse<CachedData>
   try {
@@ -64,11 +63,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json({ error: 'unable to fetch data from financnasprava.sk' })
   }
 
-  const filtered = data
-    .search(name)
-    .map(({ item }) => item)
-    .slice(0, 20)
+  const results = data.search(searchString).map(({ item }) => item).slice(0, 20)
 
   res.statusCode = 200
-  res.json(filtered)
+  res.json(results)
 }
