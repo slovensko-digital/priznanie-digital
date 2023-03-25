@@ -10,6 +10,8 @@ import {
 import { FormErrors, TwoPercentUserInput } from '../types/PageUserInputs'
 import styles from './osobne-udaje.module.css'
 import { getNgoByName } from '../lib/api'
+import { formatCurrency } from '../lib/utils'
+import { calculate, donateOnly3Percent, MIN_2_PERCENT_CALCULATED_DONATION } from '../lib/calculation'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
   AutoCompleteData,
@@ -62,12 +64,40 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
   nextRoute,
 }) => {
   const submitButtonRef = useRef(null)
+  const calculatedTax = calculate(taxFormUserInput)
+
+  const uplatnenie2PercentHint = donateOnly3Percent(calculatedTax) ? 
+    `Môžete darovať len 3% (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})` :
+    `Môžete darovať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}`
+
+  const previousPageLink = (
+    <Link href={previousRoute} data-test="back" className="govuk-back-link">
+      Späť
+    </Link>
+  )
+
+  if (!calculatedTax.canDonateTwoPercentOfTax) {
+    return (
+      <>
+        {previousPageLink}
+        <h1 className="govuk-heading-l">
+          Poukázanie 2% alebo 3% zaplatenej dane neziskovej organizácii
+        </h1>
+        <p data-test="ineligible-message">Podiel zaplatenej dane je menší ako {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.<br/>
+          {formatCurrency(calculatedTax.suma_2_percenta.toNumber())} respektíve {formatCurrency(calculatedTax.suma_3_percenta.toNumber())} pre 2% a 3%.
+        </p>
+        <Link href={nextRoute} legacyBehavior>
+          <button className="govuk-button govuk-!-margin-top-4" type="button">
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
+  }
 
   return (
     <>
-      <Link href={previousRoute} data-test="back" className="govuk-back-link">
-        Späť
-      </Link>
+      {previousPageLink}
       <FormWrapper<TwoPercentUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
@@ -89,6 +119,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
               <BooleanRadio
                 title="Chcete poukázať 2% alebo 3% zaplatenej dane niektorej neziskovej organizácii?"
                 name="XIIoddiel_uplatnujem2percenta"
+                hint={uplatnenie2PercentHint}
               />
               <div className="box govuk-!-margin-bottom-5">
                 <p>
@@ -115,7 +146,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                 <>
                   <CheckboxSmall
                     name="splnam3per"
-                    label="spĺňam podmienky na poukázanie 3% z dane"
+                    label={`spĺňam podmienky na poukázanie 3% z dane (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})`}
                   />
                   <Details title="Kto môže poukázať 3% z dane?">
                     <p className="govuk-hint">

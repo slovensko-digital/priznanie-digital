@@ -29,9 +29,6 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
   const getChildRoute = (): Route[] => {
     return taxForm.eligibleForChildrenBonus ? ['/deti'] : []
   }
-  const getTwoPercentRoute = (): Route[] => {
-    return taxForm.canDonateTwoPercentOfTax ? ['/dve-percenta'] : []
-  }
   const getIbanRoute = (): Route[] => {
     const isIbanRequired =
       taxForm.mozeZiadatVyplatitDanovyBonus ||
@@ -46,7 +43,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/partner',
     ...getChildRoute(),
     '/dochodok',
-    ...getTwoPercentRoute(),
+    '/dve-percenta',
     '/osobne-udaje',
     '/suhrn',
     ...getIbanRoute(),

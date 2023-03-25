@@ -190,6 +190,10 @@ export interface TaxForm {
    *   r135_dan_na_uhradu */
   r136_danovy_preplatok: Decimal
   splnam3per: boolean
+  /** 2 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
+  suma_2_percenta: Decimal
+  /** 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
+  suma_3_percenta: Decimal
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   r151: Decimal
 

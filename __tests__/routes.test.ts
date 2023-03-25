@@ -26,7 +26,7 @@ describe('routes', () => {
 
     it('should return routes without children, with two-percent, without iban', () => {
       expect(
-        getOrderedRoutes({ canDonateTwoPercentOfTax: true } as TaxForm),
+        getOrderedRoutes({} as TaxForm),
       ).toStrictEqual([
         homeRoute,
         '/prijmy-a-vydavky',
@@ -101,7 +101,6 @@ describe('routes', () => {
     it('should return routes without children, with iban, with two-percent', () => {
       expect(
         getOrderedRoutes({
-          canDonateTwoPercentOfTax: true,
           mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
