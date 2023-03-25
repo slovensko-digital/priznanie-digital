@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Form } from 'formik'
 import classNames from 'classnames'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { FormWrapper, Input } from './FormComponents'
 import { ErrorSummary } from './ErrorSummary'
 import { FeedbackFormInput } from '../types/UserInput'
+import { rodnecislo } from 'rodnecislo'
 
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {
@@ -23,13 +24,18 @@ const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
     r031_rodne_cislo: 'anon',
     iban: 'anon',
     email: 'anon',
-    children: taxFormUserInput.children.map((child) => {
-      return {
-        ...child,
-        rodneCislo: 'anon',
-        priezviskoMeno: 'anon',
-      }
-    }),
+    children: taxFormUserInput.children.map(anoymizeChild),
+  }
+}
+
+export const anoymizeChild = (child: ChildInput) => {
+  const rCislo = rodnecislo(child.rodneCislo.replace(' / ', ''))
+  return {
+    ...child,
+    rodneCislo: 'anon',
+    rokNarodenia: rCislo.year(),
+    mesiacNarodenia: rCislo.month() + 1,
+    priezviskoMeno: 'anon',
   }
 }
 
