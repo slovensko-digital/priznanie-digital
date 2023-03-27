@@ -184,7 +184,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                       return data.map((item) => ({
                         ...item,
                         id: item.id,
-                        value: `${item.name} ${item.municipality}`,
+                        value: `${item.name}, ${item.municipality}`,
                       }))
                     }}
                   />
