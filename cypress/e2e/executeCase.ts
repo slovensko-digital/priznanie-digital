@@ -307,6 +307,10 @@ const executeTestCase = (testCase: string) => {
           ),
         )
 
+        cy.get('[data-test="r136_danovy_preplatok"]').contains(
+          formatCurrency(taxForm.r136_danovy_preplatok)
+        )
+
         next()
 
         /** SECTION Download */

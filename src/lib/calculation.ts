@@ -696,7 +696,7 @@ export function buildSummary(form: TaxForm): Summary {
     danovyBonusNaDieta: form.r117,
     prispevokNaDochodkovePoist: form.r075_zaplatene_prispevky_na_dochodok,
     zakladDane: form.r080_zaklad_dane_celkovo,
-    danovyPreplatok: form.r121.plus(form.r136_danovy_preplatok),
+    danovyPreplatok: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
   }
 }
