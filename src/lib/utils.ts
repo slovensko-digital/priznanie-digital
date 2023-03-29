@@ -126,6 +126,10 @@ export const getRodneCisloAgeAtYearAndMonth = (
     return age
   }
 
+  if (dateMonth == rc.month() && dateYear == rc.year()){
+    return 0
+  }
+
   if (dateMonth <= rc.month()) {
     return age - 1 // if birthday is on this month, return age - 1
   }
