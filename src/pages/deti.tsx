@@ -32,6 +32,7 @@ import {
   CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
+  monthToKeyValue,
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
@@ -316,17 +317,23 @@ interface ChildFormProps {
   savedValues: ChildInput
   setFieldValue: (name: string, value: string | boolean) => void
 }
-const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
-  const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(savedValues.rodneCislo, month))
-  const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(savedValues.rodneCislo, month))
+const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValue }: ChildFormProps) => {
+  const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(rodneCislo, month))
+  const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(rodneCislo, month))
   const monthOptions = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
   const bonusInPartOfYear = monthOptions.length < 12
 
   useEffect(() => {
     if (bonusInPartOfYear) {
       setFieldValue(`children[${index}].wholeYear`, false)
+      if (monthOptions.length) {
+        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
+        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length-1]).value.toString()
+        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
+        setFieldValue(`children[${index}].monthTo`, toMonthValue)
+      }
     }
-  }, [bonusInPartOfYear, savedValues.rodneCislo])
+  }, [bonusInPartOfYear, rodneCislo, monthOptions])
 
   return (
     <>
@@ -344,7 +351,7 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
-            savedValues.rodneCislo,
+            rodneCislo,
           )
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
@@ -376,13 +383,13 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
             name={`children[${index}].monthFrom`}
             label="Od"
             optionsWithValue={monthKeyValues(monthOptions)}
-            disabled={savedValues.wholeYear ? 0 : false}
+            disabled={wholeYear ? 0 : false}
           />
           <Select
             name={`children[${index}].monthTo`}
             label="Do"
             optionsWithValue={monthKeyValues(monthOptions)}
-            disabled={savedValues.wholeYear ? 11 : false}
+            disabled={wholeYear ? 11 : false}
           />
         </div>
       }
