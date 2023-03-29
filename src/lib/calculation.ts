@@ -40,6 +40,7 @@ const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
 const ZVYHODNENIE_NA_PARTNERA = 13_825
 export const TAX_YEAR = 2022
 const MIN_2_PERCENT_CALCULATED_DONATION = 3
+export const MAX_CHILD_AGE_BONUS = 25
 
 export enum Months {
   January = 1,
@@ -810,82 +811,84 @@ const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
   }
 }
 
+export const monthToKeyValue = (month: string) => {
+  if (month == 'Január') {
+    return {
+      name: month,
+      value: 0
+    }
+  }
+  if (month == 'Február') {
+    return {
+      name: month,
+      value: 1
+    }
+  }
+  if (month == 'Marec') {
+    return {
+      name: month,
+      value: 2
+    }
+  }
+  if (month == 'Apríl') {
+    return {
+      name: month,
+      value: 3
+    }
+  }
+  if (month == 'Máj') {
+    return {
+      name: month,
+      value: 4
+    }
+  }
+  if (month == 'Jún') {
+    return {
+      name: month,
+      value: 5
+    }
+  }
+  if (month == 'Júl') {
+    return {
+      name: month,
+      value: 6
+    }
+  }
+  if (month == 'August') {
+    return {
+      name: month,
+      value: 7
+    }
+  }
+  if (month == 'September') {
+    return {
+      name: month,
+      value: 8
+    }
+  }
+
+  if (month == 'Október') {
+    return {
+      name: month,
+      value: 9
+    }
+  }
+
+  if (month == 'November') {
+    return {
+      name: month,
+      value: 10
+    }
+  }
+
+  if (month == 'December') {
+    return {
+      name: month,
+      value: 11
+    }
+  }
+}
+
 export const monthKeyValues = (months: string[]): optionWithValue[] => {
-  return months.map((month) => {
-    if (month == 'Január') {
-      return {
-        name: month,
-        value: 0
-      }
-    }
-    if (month == 'Február') {
-      return {
-        name: month,
-        value: 1
-      }
-    }
-    if (month == 'Marec') {
-      return {
-        name: month,
-        value: 2
-      }
-    }
-    if (month == 'Apríl') {
-      return {
-        name: month,
-        value: 3
-      }
-    }
-    if (month == 'Máj') {
-      return {
-        name: month,
-        value: 4
-      }
-    }
-    if (month == 'Jún') {
-      return {
-        name: month,
-        value: 5
-      }
-    }
-    if (month == 'Júl') {
-      return {
-        name: month,
-        value: 6
-      }
-    }
-    if (month == 'August') {
-      return {
-        name: month,
-        value: 7
-      }
-    }
-    if (month == 'September') {
-      return {
-        name: month,
-        value: 8
-      }
-    }
-
-    if (month == 'Október') {
-      return {
-        name: month,
-        value: 9
-      }
-    }
-
-    if (month == 'November') {
-      return {
-        name: month,
-        value: 10
-      }
-    }
-
-    if (month == 'December') {
-      return {
-        name: month,
-        value: 11
-      }
-    }
-  })
+  return months.map(monthToKeyValue)
 }

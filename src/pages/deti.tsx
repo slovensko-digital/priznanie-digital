@@ -19,11 +19,9 @@ import classnames from 'classnames'
 import {
   formatCurrency,
   formatRodneCislo,
-  getBirthMonth,
   validateRodneCislo,
-  validateRodneCisloDieta,
-  validateDatumDo,
-  validateDatumOd,
+  maxChildAgeBonusMonth,
+  minChildAgeBonusMonth,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -32,6 +30,7 @@ import {
   CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+  MAX_CHILD_AGE_BONUS,
   monthKeyValues,
   TAX_YEAR,
 } from '../lib/calculation'
@@ -315,18 +314,20 @@ const Deti: Page<ChildrenUserInput> = ({
 interface ChildFormProps {
   index: number
   savedValues: ChildInput
-  setFieldValue: (name: string, value: string) => void
+  setFieldValue: (name: string, value: string | boolean) => void
 }
 const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
-  const monthNamesUntil = (!validateDatumDo(savedValues.rodneCislo, Number.parseInt(savedValues.monthTo, 10))) ? monthNames.slice(0, getBirthMonth(savedValues.rodneCislo)) : monthNames
-  const monthNamesFrom = (!validateDatumOd(savedValues.rodneCislo, Number.parseInt(savedValues.monthFrom, 10))) ? monthNames.slice(getBirthMonth(savedValues.rodneCislo), 12) : monthNames
-  const monthNamesUntilFrom = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
-  const differentMonths = (monthNames.length > monthNamesUntilFrom.length) ? true : false
+  const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(savedValues.rodneCislo, month))
+  const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(savedValues.rodneCislo, month))
+  const monthOptions = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
+  const bonusInPartOfYear = monthOptions.length < 12
+
   useEffect(() => {
-    if (differentMonths) {
-      setFieldValue(`children[${index}].wholeYear`, undefined)
+    if (bonusInPartOfYear) {
+      setFieldValue(`children[${index}].wholeYear`, false)
     }
-  }, [differentMonths]);
+  }, [bonusInPartOfYear, savedValues.rodneCislo])
+
   return (
     <>
       <Input
@@ -348,37 +349,43 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
       />
-      <div className="govuk-form-group">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
-          <h1 className="govuk-fieldset__heading">
-            Daňový bonus si uplatňujem v mesiacoch
-          </h1>
-        </legend>
-        <div className="govuk-checkboxes">
-          <CheckboxSmall
-            name={`children[${index}].wholeYear`}
-            label="Za celý kalendárny rok"
-            disabled={differentMonths}
+      {
+        monthOptions.length > 0 &&
+        <div className="govuk-form-group">
+          <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <h1 className="govuk-fieldset__heading">
+              Daňový bonus si uplatňujem v mesiacoch
+            </h1>
+          </legend>
+          <div className="govuk-checkboxes">
+            <CheckboxSmall
+              name={`children[${index}].wholeYear`}
+              label="Za celý kalendárny rok"
+              disabled={bonusInPartOfYear}
+            />
+          </div>
+        </div>
+      }
+      {bonusInPartOfYear && monthOptions.length > 0 && <p className="govuk-hint">Daňový bonus si môžete uplatniť iba v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>}
+      {
+        monthOptions.length > 0 &&
+        <div
+          className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+        >
+          <Select
+            name={`children[${index}].monthFrom`}
+            label="Od"
+            optionsWithValue={monthKeyValues(monthOptions)}
+            disabled={savedValues.wholeYear ? 0 : false}
+          />
+          <Select
+            name={`children[${index}].monthTo`}
+            label="Do"
+            optionsWithValue={monthKeyValues(monthOptions)}
+            disabled={savedValues.wholeYear ? 11 : false}
           />
         </div>
-      </div>
-      {differentMonths && <p className="govuk-hint">Daňový bonus si môžete uplatniť iba v mesiacoch {monthNamesUntilFrom[0]} až {monthNamesUntilFrom.slice(-1)}</p>}
-      <div
-        className={classnames('govuk-form-group', styles.inlineFieldContainer)}
-      >
-        <Select
-          name={`children[${index}].monthFrom`}
-          label="Od"
-          optionsWithValue={monthKeyValues(monthNamesUntilFrom)}
-          disabled={savedValues.wholeYear ? 0 : false}
-        />
-        <Select
-          name={`children[${index}].monthTo`}
-          label="Do"
-          optionsWithValue={monthKeyValues(monthNamesUntilFrom)}
-          disabled={savedValues.wholeYear ? 11 : false}
-        />
-      </div>
+      }
     </>
   )
 }
@@ -425,8 +432,8 @@ export const validate = (values: ChildrenUserInput) => {
         childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
       } else if (!validateRodneCislo(childValues.rodneCislo)) {
         childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
-      } else if (!validateRodneCisloDieta(childValues.rodneCislo)) {
-        childErrors.rodneCislo = 'Dieťa so zadaným rodným číslom malo minulý rok viac ako 25 rokov.'
+      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, 'Január',)) {
+        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} rok viac ako ${MAX_CHILD_AGE_BONUS} rokov.`
       } else if (
         values.children
           .slice(0, index)
