@@ -15,6 +15,7 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
+import { MAX_CHILD_AGE_BONUS, TAX_YEAR } from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -549,6 +550,9 @@ describe('Children page', () => {
 
     getInput('prijmyPredJul22', '-yes').click()
 
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+
     // Enter invalid months (November - April)
     cy.get('[data-test="children[0].monthFrom-select"]').select('10')
     cy.get('[data-test="children[0].monthTo-select"]').select('3')
@@ -557,7 +561,7 @@ describe('Children page', () => {
     next()
 
     // Should have error for invalid months
-    getError().should('have.length', 3)
+    getError().should('have.length', 2)
 
     // Enter valid months (November - April)
     cy.get('[data-test="children[0].monthFrom-select"]').select('3')
@@ -567,15 +571,57 @@ describe('Children page', () => {
     next()
 
     // Should not have error for invalid months
-    getError().should('have.length', 2)
+    getError().should('have.length', 1)
+  })
 
-    // Check checkbox for whole year
-    cy.get('[data-test="children[0].wholeYear-input"]').click()
+  it('has working validation for too old kid', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
 
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9105010013')
     next()
+    getError().contains(`Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`)
+  })
 
-    // Should not have error for invalid months
-    getError().should('have.length', 2)
+  it('has working range limit for kid born in tax year', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2209080016')
+    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch September až December')
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 4)
+    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 4)
+  })
+
+  it('has working range limit for kid bonus ending in tax year', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9609070009')
+    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch Január až September')
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 9)
+    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 9)
   })
 })
 
