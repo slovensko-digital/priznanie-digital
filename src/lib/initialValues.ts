@@ -13,10 +13,10 @@ import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
-  t1r10_prijmy: '',
-  priloha3_r11_socialne: '',
-  priloha3_r13_zdravotne: '',
-  zaplatenePreddavky: '',
+  t1r10_prijmy: '33000',
+  priloha3_r11_socialne: '1000',
+  priloha3_r13_zdravotne: '1000',
+  zaplatenePreddavky: '0',
 }
 
 export const partnerUserInitialValues: PartnerUserInput = {
