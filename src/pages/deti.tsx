@@ -324,14 +324,20 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
   const bonusInPartOfYear = monthOptions.length < 12
 
   useEffect(() => {
-    if (bonusInPartOfYear) {
-      setFieldValue(`children[${index}].wholeYear`, false)
+    if (validateRodneCislo(rodneCislo)) {
+      if (bonusInPartOfYear) {
+        setFieldValue(`children[${index}].wholeYear`, false)
+      } else {
+        setFieldValue(`children[${index}].wholeYear`, true)
+      }
       if (monthOptions.length) {
         const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
-        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length-1]).value.toString()
+        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length - 1]).value.toString()
         setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
         setFieldValue(`children[${index}].monthTo`, toMonthValue)
       }
+    } else {
+      setFieldValue(`children[${index}].wholeYear`, true)
     }
   }, [bonusInPartOfYear, rodneCislo])
 
@@ -356,43 +362,36 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
       />
-      {
-        monthOptions.length > 0 &&
-        <div className="govuk-form-group">
+      <RadioGroup value={wholeYear ? 'wholeYear' : 'partYear'} onChange={(value) => {
+        setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
+      }}>
+        <Radio name={`children${index}-bonus-interval-input-wholeyear`} label="Za celý kalendárny rok" value="wholeYear" disabled={!validateRodneCislo(rodneCislo) || bonusInPartOfYear} />
+        <Radio name={`children${index}-bonus-interval-input-partyear`} label="V niektorých mesiacoch" value="partYear" disabled={!validateRodneCislo(rodneCislo) || monthOptions.length === 0} />
+        <RadioConditional forValue="partYear">
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
             <h1 className="govuk-fieldset__heading">
               Daňový bonus si uplatňujem v mesiacoch
             </h1>
           </legend>
-          <div className="govuk-checkboxes">
-            <CheckboxSmall
-              name={`children[${index}].wholeYear`}
-              label="Za celý kalendárny rok"
-              disabled={bonusInPartOfYear}
+          <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
+          <div
+            className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+          >
+            <Select
+              name={`children[${index}].monthFrom`}
+              label="Od"
+              optionsWithValue={monthKeyValues(monthOptions)}
+              disabled={wholeYear ? 0 : false}
+            />
+            <Select
+              name={`children[${index}].monthTo`}
+              label="Do"
+              optionsWithValue={monthKeyValues(monthOptions)}
+              disabled={wholeYear ? 11 : false}
             />
           </div>
-        </div>
-      }
-      {bonusInPartOfYear && monthOptions.length > 0 && <p className="govuk-hint">Daňový bonus si môžete uplatniť iba v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>}
-      {
-        monthOptions.length > 0 &&
-        <div
-          className={classnames('govuk-form-group', styles.inlineFieldContainer)}
-        >
-          <Select
-            name={`children[${index}].monthFrom`}
-            label="Od"
-            optionsWithValue={monthKeyValues(monthOptions)}
-            disabled={wholeYear ? 0 : false}
-          />
-          <Select
-            name={`children[${index}].monthTo`}
-            label="Do"
-            optionsWithValue={monthKeyValues(monthOptions)}
-            disabled={wholeYear ? 11 : false}
-          />
-        </div>
-      }
+        </RadioConditional>
+      </RadioGroup>
     </>
   )
 }
