@@ -323,7 +323,7 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
   const bonusInPartOfYear = monthOptions.length < 12
 
   useEffect(() => {
-    if (validateRodneCislo(rodneCislo)) {
+    if (validateRodneCislo(rodneCislo) && maxChildAgeBonusMonth(rodneCislo, 'Január')) {
       if (bonusInPartOfYear) {
         setFieldValue(`children[${index}].wholeYear`, false)
       } else {
@@ -437,8 +437,8 @@ export const validate = (values: ChildrenUserInput) => {
         childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
       } else if (!validateRodneCislo(childValues.rodneCislo)) {
         childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
-      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, 'Január',)) {
-        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} rok viac ako ${MAX_CHILD_AGE_BONUS} rokov.`
+      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, 'Január')) {
+        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`
       } else if (
         values.children
           .slice(0, index)
