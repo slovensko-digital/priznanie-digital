@@ -219,15 +219,17 @@ describe('utils', () => {
     const year = 2020
     const month = 5
     const inputs = [
-      { rc: '8007011234', age: 39, year, month },
-      { rc: '8006181234', age: 39, year, month },
-      { rc: '8005311234', age: 40, year, month },
-      { rc: '8057011234', age: 39, year, month },
-      { rc: '8056191234', age: 39, year, month },
-      { rc: '8055311234', age: 40, year, month },
-      { rc: '0527171234', age: 14, year, month },
-      { rc: '0526181234', age: 14, year, month },
-      { rc: '0522171234', age: 15, year, month },
+      { rc: '8007010011', age: 39, year, month },
+      { rc: '8006180017', age: 39, year, month },
+      { rc: '8005310016', age: 40, year, month },
+      { rc: '8057010016', age: 39, year, month },
+      { rc: '8056190010', age: 39, year, month },
+      { rc: '8055310010', age: 40, year, month },
+      { rc: '0557170009', age: 14, year, month },
+      { rc: '0556180009', age: 14, year, month },
+      { rc: '0555180010', age: 15, year, month },
+      { rc: '0552180013', age: 15, year, month },
+      { rc: '2055180017', age: 0, year, month },
     ]
 
     inputs.forEach(({ rc, age, year, month }) => {

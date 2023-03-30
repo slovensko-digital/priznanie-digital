@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { FieldArray, Form } from 'formik'
 import styles from './deti.module.css'
 import {
   BooleanRadio,
   Input,
-  CheckboxSmall,
   FormWrapper,
-  Select,
+  Select
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -20,6 +19,8 @@ import {
   formatCurrency,
   formatRodneCislo,
   validateRodneCislo,
+  maxChildAgeBonusMonth,
+  minChildAgeBonusMonth,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -28,6 +29,9 @@ import {
   CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
   CHILD_RATE_OVER_SIX_UNTIL_JULY,
   CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+  MAX_CHILD_AGE_BONUS,
+  monthKeyValues,
+  monthToKeyValue,
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
@@ -78,15 +82,15 @@ const Deti: Page<ChildrenUserInput> = ({
           let userInput = values.hasChildren
             ? values
             : {
-                ...childrenUserInputInitialValues,
-                hasChildren: false,
-              }
+              ...childrenUserInputInitialValues,
+              hasChildren: false,
+            }
           userInput = values.prijmyPredJul22
             ? userInput
             : {
-                ...userInput,
-                r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
-              }
+              ...userInput,
+              r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
+            }
           setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
@@ -100,15 +104,15 @@ const Deti: Page<ChildrenUserInput> = ({
             />
             {values.hasChildren && (
               <Fieldset title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
-                        hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
-                        error={errors.prijmyPredJul22}
+                hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
+                error={errors.prijmyPredJul22}
               >
                 <RadioGroup value={String(values.prijmyPredJul22)} onChange={(value) => {
                   setFieldValue('prijmyPredJul22', value === 'true')
                 }}>
-                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true"/>
+                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true" />
 
-                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false"/>
+                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false" />
                   <RadioConditional forValue="false">
                     <div className="govuk-form-group">
                       <fieldset
@@ -310,9 +314,32 @@ const Deti: Page<ChildrenUserInput> = ({
 interface ChildFormProps {
   index: number
   savedValues: ChildInput
-  setFieldValue: (name: string, value: string) => void
+  setFieldValue: (name: string, value: string | boolean) => void
 }
-const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
+const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValue }: ChildFormProps) => {
+  const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(rodneCislo, month))
+  const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(rodneCislo, month))
+  const monthOptions = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
+  const bonusInPartOfYear = monthOptions.length < 12
+
+  useEffect(() => {
+    if (validateRodneCislo(rodneCislo) && maxChildAgeBonusMonth(rodneCislo, 'Január')) {
+      if (bonusInPartOfYear) {
+        setFieldValue(`children[${index}].wholeYear`, false)
+      } else {
+        setFieldValue(`children[${index}].wholeYear`, true)
+      }
+      if (monthOptions.length) {
+        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
+        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length - 1]).value.toString()
+        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
+        setFieldValue(`children[${index}].monthTo`, toMonthValue)
+      }
+    } else {
+      setFieldValue(`children[${index}].wholeYear`, true)
+    }
+  }, [bonusInPartOfYear, rodneCislo])
+
   return (
     <>
       <Input
@@ -329,40 +356,41 @@ const ChildForm = ({ savedValues, index, setFieldValue }: ChildFormProps) => {
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
-            savedValues.rodneCislo,
+            rodneCislo,
           )
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
       />
-      <div className="govuk-form-group">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
-          <h1 className="govuk-fieldset__heading">
-            Daňový bonus si uplatňujem v mesiacoch
-          </h1>
-        </legend>
-        <div className="govuk-checkboxes">
-          <CheckboxSmall
-            name={`children[${index}].wholeYear`}
-            label="Za celý kalendárny rok"
-          />
-        </div>
-      </div>
-      <div
-        className={classnames('govuk-form-group', styles.inlineFieldContainer)}
-      >
-        <Select
-          name={`children[${index}].monthFrom`}
-          label="Od"
-          options={monthNames}
-          disabled={savedValues.wholeYear ? 0 : false}
-        />
-        <Select
-          name={`children[${index}].monthTo`}
-          label="Do"
-          options={monthNames}
-          disabled={savedValues.wholeYear ? 11 : false}
-        />
-      </div>
+      <RadioGroup value={wholeYear ? 'wholeYear' : 'partYear'} onChange={(value) => {
+        setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
+      }}>
+        <Radio name={`children[${index}]-bonus-interval-input-wholeyear`} label="Za celý kalendárny rok" value="wholeYear" disabled={!validateRodneCislo(rodneCislo) || bonusInPartOfYear} />
+        <Radio name={`children[${index}]-bonus-interval-input-partyear`} label="V niektorých mesiacoch" value="partYear" disabled={!validateRodneCislo(rodneCislo) || monthOptions.length === 0} />
+        <RadioConditional forValue="partYear">
+          <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <h1 className="govuk-fieldset__heading">
+              Daňový bonus si uplatňujem v mesiacoch
+            </h1>
+          </legend>
+          <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
+          <div
+            className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+          >
+            <Select
+              name={`children[${index}].monthFrom`}
+              label="Od"
+              optionsWithValue={monthKeyValues(monthOptions)}
+              disabled={wholeYear ? 0 : false}
+            />
+            <Select
+              name={`children[${index}].monthTo`}
+              label="Do"
+              optionsWithValue={monthKeyValues(monthOptions)}
+              disabled={wholeYear ? 11 : false}
+            />
+          </div>
+        </RadioConditional>
+      </RadioGroup>
     </>
   )
 }
@@ -390,7 +418,7 @@ export const validate = (values: ChildrenUserInput) => {
     if ((date.getMonth() + 1) !== Number.parseInt(values.zaciatokPrijmovMesiac, 10)) {
       errors.zaciatokPrijmovMesiac = 'Zadajte mesiac v správnom tvare'
     }
-    if ((date.getMonth() + 1) < 7){
+    if ((date.getMonth() + 1) < 7) {
       errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť 7 alebo viac'
     }
   }
@@ -409,6 +437,8 @@ export const validate = (values: ChildrenUserInput) => {
         childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
       } else if (!validateRodneCislo(childValues.rodneCislo)) {
         childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
+      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, 'Január')) {
+        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`
       } else if (
         values.children
           .slice(0, index)
@@ -420,11 +450,10 @@ export const validate = (values: ChildrenUserInput) => {
       if (
         !childValues.wholeYear &&
         Number.parseInt(childValues.monthFrom, 10) >
-          Number.parseInt(childValues.monthTo, 10)
+        Number.parseInt(childValues.monthTo, 10)
       ) {
-        childErrors.monthTo = `Musí byť ${
-          monthNames[childValues.monthFrom]
-        } alebo neskôr`
+        childErrors.monthTo = `Musí byť ${monthNames[childValues.monthFrom]
+          } alebo neskôr`
       }
 
       return childErrors

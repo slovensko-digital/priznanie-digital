@@ -2,6 +2,7 @@ import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
 import Decimal from 'decimal.js'
 import base64 from 'base64-js'
+import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from './calculation'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -88,6 +89,24 @@ export const validateRodneCislo = (value: string): boolean => {
     rodnecislo(value.replace(' / ', '')).isValid()
   )
 }
+
+export const maxChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) <= MAX_CHILD_AGE_BONUS
+  )
+}
+export const minChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) >= 0
+  )
+}
+
+export const getBirthMonth = (value: string): number => {
+  return (
+    rodnecislo(value.replace(' / ', '')).month()
+  )
+}
+
 // logic from https://github.com/kub1x/rodnecislo
 export const getRodneCisloAgeAtYearAndMonth = (
   rodneCislo: string,
@@ -105,6 +124,10 @@ export const getRodneCisloAgeAtYearAndMonth = (
 
   if (dateMonth > rc.month()) {
     return age
+  }
+
+  if (dateMonth == rc.month() && dateYear == rc.year()){
+    return 0
   }
 
   if (dateMonth <= rc.month()) {
