@@ -5,7 +5,6 @@ import styles from './deti.module.css'
 import {
   BooleanRadio,
   Input,
-  CheckboxSmall,
   FormWrapper,
   Select
 } from '../components/FormComponents'
