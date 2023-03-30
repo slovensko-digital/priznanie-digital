@@ -333,7 +333,7 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
         setFieldValue(`children[${index}].monthTo`, toMonthValue)
       }
     }
-  }, [bonusInPartOfYear, rodneCislo, monthOptions])
+  }, [bonusInPartOfYear, rodneCislo])
 
   return (
     <>
