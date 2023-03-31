@@ -194,12 +194,12 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {
-          // cy.get('.govuk-hint').contains(input.percent2)
+          cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.XIIoddiel_uplatnujem2percenta) {
             getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
 
-            cy.get('label[for="splnam3pers"]').contains(input.percent3)
+            cy.get('label[for="splnam3per"]').contains(input.percent3)
 
             if (input.splnam3per) {
               getInput('splnam3per').click()

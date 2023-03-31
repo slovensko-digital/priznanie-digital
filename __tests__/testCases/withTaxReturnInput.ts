@@ -28,6 +28,6 @@ export const withTaxReturnInput: E2eTestUserInput = {
 
   expectNgoDonationValue: true,
 
-  percent2: '142,88',
-  percent3: '214,32'
+  percent2: '10,26',
+  percent3: '15,39'
 }

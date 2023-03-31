@@ -27,5 +27,5 @@ export const with2percentInput: E2eTestUserInput = {
   XIIoddiel_suhlasZaslUdaje: true,
 
   percent2: '10,26',
-  percent3: '15, 39'
+  percent3: '15,39'
 }
