@@ -145,8 +145,9 @@ const executeTestCase = (testCase: string) => {
             )
 
             if (child.wholeYear) {
-              cy.get(`[data-test="children[${index}].wholeYear-input"]`).click()
+              cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
             } else {
+              cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
               cy.get(
                 `[data-test="children[${index}].monthFrom-select"]`,
               ).select(child.monthFrom)

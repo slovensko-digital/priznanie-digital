@@ -61,7 +61,7 @@ export const makeEmptyChild = (): ChildInput => ({
   priezviskoMeno: '',
   rodneCislo: '',
 
-  wholeYear: false,
+  wholeYear: true,
   monthFrom: '0',
   monthTo: '11',
 })
