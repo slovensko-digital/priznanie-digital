@@ -31,9 +31,9 @@ const next = () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-// beforeEach(() => {
-//   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
-// })
+beforeEach(() => {
+  cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+})
 
 describe('twoPercent page', () => {
   it('has working ui', () => {
