@@ -162,11 +162,15 @@ export interface ParsedName {
   title: string
 }
 
-/**  https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu
+/**
+ * @deprecated The method should not be used see issue https://github.com/slovensko-digital/priznanie-digital/issues/773
  */
 export const floorDecimal = (decimal: Decimal) => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
 }
+/**
+ * @deprecated The method should not be used see issue https://github.com/slovensko-digital/priznanie-digital/issues/773
+ */
 export const ceilDecimal = (decimal: Decimal) => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_CEIL)
 }
