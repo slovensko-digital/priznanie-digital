@@ -71,5 +71,8 @@ export const completeDecimalInput: E2eTestUserInput = {
   zaciatokPrijmovMesiac: null,
   zaciatokPrijmovRok: null,
 
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  percent2: '8,16',
+  percent3: '12,24',
 }

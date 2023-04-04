@@ -41,7 +41,7 @@ export const bugReport2bInput: E2eTestUserInput = {
   zaplatene_prispevky_na_dochodok: '0',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
   XIIoddiel_uplatnujem2percenta: false,
   r142_ico: '',
   r142_obchMeno: '',
@@ -64,4 +64,7 @@ export const bugReport2bInput: E2eTestUserInput = {
     r004_priezvisko: 'anon',
     r005_meno: 'anon',
   },
+
+  percent2: '9,08',
+  percent3: '13,61',
 }

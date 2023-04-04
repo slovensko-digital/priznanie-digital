@@ -56,5 +56,5 @@ export const withBonusInput: E2eTestUserInput = {
   ziadamVyplatitDanovyBonus: true,
   iban: 'SK6807200002891987426353',
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

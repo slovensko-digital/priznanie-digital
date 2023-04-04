@@ -24,5 +24,8 @@ export const withEmploymentInput: E2eTestUserInput = {
   zaciatokPrijmovMesiac: null,
   zaciatokPrijmovRok: null,
   datum: '22.02.2022',
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  percent2: '19,26',
+  percent3: '28,89',
 }

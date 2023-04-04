@@ -38,5 +38,5 @@ export const withChildrenInput: E2eTestUserInput = {
   zaciatokPrijmovMesiac: "7",
   zaciatokPrijmovRok: "2022",
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

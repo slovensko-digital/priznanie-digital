@@ -25,4 +25,9 @@ export const withTaxReturnInput: E2eTestUserInput = {
   /** SECTION Danovy preplatok */
   ziadamVratitDanovyPreplatok: true,
   iban: 'SK6807200002891987426353',
+
+  expectNgoDonationValue: true,
+
+  percent2: '10,26',
+  percent3: '15,39'
 }

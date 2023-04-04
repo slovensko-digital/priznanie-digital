@@ -39,7 +39,7 @@ const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = 13_825
 export const TAX_YEAR = 2022
-const MIN_2_PERCENT_CALCULATED_DONATION = 3
+export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
 
 export enum Months {
@@ -587,13 +587,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     splnam3per: input?.splnam3per ?? false,
+    get suma_2_percenta() {
+      return percentage(this.r124, 2)
+    },
+    get suma_3_percenta() {
+      return percentage(this.r124, 3)
+    },
     get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
         return new Decimal(0)
       }
 
-      const rate = this.splnam3per ? 3 : 2
-      const NGOAmount = percentage(this.r124, rate)
+      const NGOAmount = this.splnam3per ? this.suma_3_percenta : this.suma_2_percenta
 
       /** Min of 3 EUR is required */
       return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION)
@@ -634,10 +639,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     datum: input.datum,
 
     get canDonateTwoPercentOfTax() {
-      return percentage(this.r135_dan_na_uhradu, 3).gte(
+      return percentage(this.r124, 3).gte(
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
     },
+
     get mikrodanovnik() {
       if (this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
         return true
@@ -891,4 +897,8 @@ export const monthToKeyValue = (month: string) => {
 
 export const monthKeyValues = (months: string[]): optionWithValue[] => {
   return months.map(monthToKeyValue)
+}
+
+export const donateOnly3Percent = (form: TaxForm): boolean => {
+  return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }

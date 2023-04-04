@@ -70,5 +70,9 @@ export const case202201Input: E2eTestUserInput = {
   zaciatokPrijmovMesiac: null,
   zaciatokPrijmovRok: null,
 
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  /** SECTION Two Percent */
+  percent2: '19,61',
+  percent3: '29,42',
 }

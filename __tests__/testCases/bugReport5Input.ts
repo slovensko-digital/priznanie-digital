@@ -48,7 +48,7 @@ export const bugReport5Input: E2eTestUserInput = {
   "zaplatene_prispevky_na_dochodok": "180",
   "r037_pocetMesiacov": "",
   "r037_zaplatene_uroky": "",
-  "expectNgoDonationPage": true,
+  "expectNgoDonationValue": true,
   "XIIoddiel_uplatnujem2percenta": true,
   "splnam3per": false,
   "r142_ico": "53335082",
@@ -57,5 +57,8 @@ export const bugReport5Input: E2eTestUserInput = {
   "iban": "anon",
   "datum": "",
   "r034a": "null.null.2022",
-  "r006_titul_za": ""
+  "r006_titul_za": "",
+
+  "percent2": '77,57',
+  "percent3": '116,35',
 }

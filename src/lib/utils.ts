@@ -199,7 +199,7 @@ export const parseStreetAndNumber = (streetAndNumber) => {
 }
 
 export const percentage = (base: Decimal, percent: number) => {
-  return floorDecimal(base.div(100).times(percent))
+  return round(base.div(100).times(percent))
 }
 
 const mapHelper = (arr, callback): any => {

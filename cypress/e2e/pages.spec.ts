@@ -7,7 +7,6 @@
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput'
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
-import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
@@ -351,7 +350,7 @@ describe('osobne-udaje page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/dochodok')
+    assertUrl('/dve-percenta')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
@@ -643,6 +642,7 @@ describe('Pension page', () => {
     // When presses no, continues to next page
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
+    next()
     assertUrl('/osobne-udaje')
 
     //  Go back to our page
@@ -658,69 +658,8 @@ describe('Pension page', () => {
     typeToInput('zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
+    next()
     assertUrl('/osobne-udaje')
-  })
-})
-
-describe('twoPercent page', () => {
-  it('has working ui', () => {
-    cy.visit('/dve-percenta')
-
-    // Shows error, when presses next without interaction
-    next()
-    getError().should('have.length', 1)
-
-    // When presses yes, additional fields appear
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
-
-    // All aditional fields should be required
-    next()
-    getError().should('have.length', 2)
-
-    // Type to input
-    typeToInput('r142_obchMeno', with2percentInput)
-    typeToInput('r142_ico', with2percentInput)
-    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('with autoform', () => {
-    cy.visit('/dve-percenta')
-
-    // When presses yes, additional fields appear
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
-
-    /** With autoform */
-    getInput('r142_obchMeno').type('Lifestarter')
-
-    cy.contains('Lifestarter, Trnava').click()
-
-    getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
-    getInput('r142_ico').should('contain.value', '50718274')
-    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('works with no', () => {
-    cy.visit('/dve-percenta')
-
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
-    next()
-    getError().should('have.length', 0)
-
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('works with Slovensko.Digital pre-fill', () => {
-    cy.visit('/dve-percenta')
-    cy.get('[data-test=prefill-slovensko-digital]').click()
-
-    getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
-    getInput('r142_ico').should('contain.value', '50 158 635')
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
 })
 
@@ -799,6 +738,9 @@ describe('IBAN page', () => {
 
     assertUrl('/dochodok')
     skipPage()
+
+    assertUrl('/dve-percenta')
+    next()
 
     // assertUrl('/hypoteka')
     // skipPage()
