@@ -84,8 +84,8 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
           Poukázanie 2% alebo 3% zaplatenej dane neziskovej organizácii
         </h1>
         <p data-test="ineligible-message">
-          Táto suma musí byť minimálne {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.<br/>
-          Bohužiaľ, nespĺňate podmienky pre darovanie 2% ani 3% zaplatenej dane
+          Ľutujeme, nespĺňate podmienky na poukázanie čiastky dane, nakoľko by táto čiastka neprekočila {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.
+          Dôvodom je nepostačujúca výska zaplatenej dane.
         </p>
         <Link href={nextRoute} legacyBehavior>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
