@@ -67,7 +67,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
   const calculatedTax = calculate(taxFormUserInput)
 
   const uplatnenie2PercentHint = donateOnly3Percent(calculatedTax) ? 
-    `Bohužiaľ, nespĺňate podmienky pre darovanie 2%, avšak spĺňate podmienky pre darovanie 3% zaplatenej dane (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})` :
+    `Nanešťastie, nespĺňate podmienky pre darovanie 2%, avšak spĺňate podmienky pre darovanie 3% zaplatenej dane (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})` :
     `Spĺňate podmienky a môžete poukázať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}`
 
   const previousPageLink = (
