@@ -155,11 +155,7 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
-    <p>
-      {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
-      31.3.${TAX_YEAR + 1}`}
-    </p>
-    <p>Termín si viete predĺžiť:</p>
+    <PostponeText/>
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${
         TAX_YEAR + 1
@@ -174,12 +170,52 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     </p>
 
     <Link href={nextPostponeRoute} legacyBehavior>
+      <PostponeButton/>
+    </Link>
+  </>
+)
+const now = new Date();
+const PostponeText = () => (
+  <>
+    {(now.getMonth() > 2) && (
+      <>
+        <p>
+          {`Riadny termín pre podanie daňového priznania a zaplatenie dane bol do
+      31.3.${TAX_YEAR + 1}`}
+        </p>
+        <p>Termín ste si mohli predĺžiť:</p>
+      </>)}
+    {(now.getMonth() < 3) && (
+      <>
+        <p>
+          {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
+  31.3.${TAX_YEAR + 1}`}
+        </p>
+        <p>Termín si viete predĺžiť:</p>
+      </>)}
+  </>
+)
+
+const PostponeButton = () => (
+  <>
+  {(now.getMonth() > 2) && (
+      <>
+      <button
+        type="button"
+        className="btn-warning govuk-button govuk-button--large"
+        disabled
+      >
+        Termín na podanie odkladu DP vypršal
+      </button>
+      </>)}
+    {(now.getMonth() < 3) && (
+      <>
       <button
         type="button"
         className="btn-secondary govuk-button govuk-button--large"
       >
         Súhlasím a chcem odložiť daňové priznanie
       </button>
-    </Link>
+      </>)}
   </>
 )
