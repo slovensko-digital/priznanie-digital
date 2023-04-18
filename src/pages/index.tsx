@@ -37,7 +37,7 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive }) => (
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} />
       </div>
 
       <ul className={styles.safeList}>
@@ -150,12 +150,12 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({ nextPostponeRoute }) => (
+const PostponeSection = ({ nextPostponeRoute, now}) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
-    <PostponeText/>
+    <PostponeText now={now}/>
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${
         TAX_YEAR + 1
@@ -170,12 +170,11 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     </p>
 
     <Link href={nextPostponeRoute} legacyBehavior>
-      <PostponeButton/>
+      <PostponeButton now={now}/>
     </Link>
   </>
 )
-const now = new Date();
-const PostponeText = () => (
+const PostponeText = ({ now }) => (
   <>
     {(now.getMonth() > 2) && (
       <>
@@ -196,7 +195,7 @@ const PostponeText = () => (
   </>
 )
 
-const PostponeButton = () => (
+const PostponeButton = ({ now }) => (
   <>
   {(now.getMonth() > 2) && (
       <>
