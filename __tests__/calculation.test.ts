@@ -10,6 +10,7 @@ import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { sum } from '../src/lib/utils'
 
+
 describe('#parse', () => {
   const inputs = [
     { input: null, output: 0 },
