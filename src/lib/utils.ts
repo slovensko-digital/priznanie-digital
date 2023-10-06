@@ -162,19 +162,6 @@ export interface ParsedName {
   title: string
 }
 
-/**
- * @deprecated The method should not be used see issue https://github.com/slovensko-digital/priznanie-digital/issues/773
- */
-export const floorDecimal = (decimal: Decimal) => {
-  return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
-}
-/**
- * @deprecated The method should not be used see issue https://github.com/slovensko-digital/priznanie-digital/issues/773
- */
-export const ceilDecimal = (decimal: Decimal) => {
-  return decimal.toDecimalPlaces(2, Decimal.ROUND_CEIL)
-}
-
 export const round = (decimal: Decimal): Decimal => {
   return decimal.toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
 }
