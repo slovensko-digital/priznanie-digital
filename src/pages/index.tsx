@@ -4,6 +4,12 @@ import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { TAX_YEAR } from '../lib/calculation'
 import { ExternalLink } from '../components/ExternalLink'
+import dayjs from 'dayjs'
+
+const now = dayjs(new Date())
+const postponeDueDateText = `${TAX_YEAR + 1}-03-31`
+const postponeDueDate = dayjs(postponeDueDateText).endOf('month')
+const isBeforePostponeDueDate: boolean = now.isBefore(postponeDueDate)
 
 const IconCheck = () => (
   <svg
@@ -156,10 +162,17 @@ const PostponeSection = ({ nextPostponeRoute }) => (
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
     <p>
-      {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
-      31.3.${TAX_YEAR + 1}`}
+      {isBeforePostponeDueDate 
+        ? `Riadny termín pre podanie daňového priznania a zaplatenie dane je 31.3.${TAX_YEAR + 1}`
+        : `Riadny termín pre podanie daňového priznania a zaplatenie dane bol do 31.3.${TAX_YEAR + 1}`
+      }
     </p>
-    <p>Termín si viete predĺžiť:</p>
+    <p>
+      {isBeforePostponeDueDate 
+        ? `Termín si viete predĺžiť:` 
+        : `Termín ste si mohli predĺžiť:`
+      }
+    </p>
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${
         TAX_YEAR + 1
@@ -167,19 +180,30 @@ const PostponeSection = ({ nextPostponeRoute }) => (
       <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
     </ul>
 
-    <p className="govuk-body-xs">
-      Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-      nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
-      neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
-    </p>
+    {isBeforePostponeDueDate && 
+      <p className="govuk-body-xs">
+        Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+        nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+        neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+      </p>
+    }
 
-    <Link href={nextPostponeRoute} legacyBehavior>
-      <button
-        type="button"
-        className="btn-secondary govuk-button govuk-button--large"
-      >
-        Súhlasím a chcem odložiť daňové priznanie
-      </button>
-    </Link>
+    {isBeforePostponeDueDate
+      ? <Link href={nextPostponeRoute} legacyBehavior>
+          <button
+            type="button"
+            className="btn-secondary govuk-button govuk-button--large"
+          >
+            Súhlasím a chcem odložiť daňové priznanie
+          </button>
+        </Link>
+      : <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+          disabled
+        >
+          Termín na podanie odkladu DP vypršal
+        </button>
+    }
   </>
 )
