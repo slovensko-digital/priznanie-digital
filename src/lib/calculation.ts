@@ -158,7 +158,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     get r034a() {
-      return input.r034a
+      if (input.hasChildren && !input.prijmyPredJul22) {
+          return `${input.zaciatokPrijmovDen}.${input.zaciatokPrijmovMesiac}.${input.zaciatokPrijmovRok}`
+      }
+      return ''
     },
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
