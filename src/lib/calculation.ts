@@ -2,10 +2,8 @@ import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
-  floorDecimal,
   parseInputNumber,
   percentage,
-  ceilDecimal,
   sum,
   round,
 } from './utils'
@@ -231,7 +229,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return ceilDecimal(
+        return round(
           Decimal.max(
             0,
             new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
@@ -303,7 +301,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     //
     // ak je r. 40 viac ako je r. 77, potom na r. 78 uvediete rozdiel r. 40 - . 77
     get r078_zaklad_dane_zo_zamestnania() {
-      return floorDecimal(
+      return round(
         Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0),
       )
     },

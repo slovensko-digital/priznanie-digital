@@ -1,6 +1,4 @@
 import {
-  floorDecimal,
-  ceilDecimal,
   parseStreetAndNumber,
   encodeUnicodeCharacters,
   getStreetNumber,
@@ -318,50 +316,6 @@ describe('utils', () => {
     })
   })
 
-  describe('#floorDecimal', () => {
-    describe('for valid values', () => {
-      const validInputs = [
-        {
-          input: new Decimal(916.487),
-          output: new Decimal(916.48),
-        },
-        {
-          input: new Decimal(99.654),
-          output: new Decimal(99.65),
-        },
-      ]
-
-      validInputs.forEach(({ input, output }) => {
-        it(`should floor "${input}" to "${output}"`, () => {
-          expect(floorDecimal(input).equals(output)).toBeTruthy()
-        })
-      })
-    })
-  })
-  describe('#ceilDecimal', () => {
-    describe('for valid values', () => {
-      const validInputs = [
-        {
-          input: new Decimal(2864.094),
-          output: new Decimal(2864.1),
-        },
-        {
-          input: new Decimal(2864.444),
-          output: new Decimal(2864.45),
-        },
-        {
-          input: new Decimal(2864.099),
-          output: new Decimal(2864.1),
-        },
-      ]
-
-      validInputs.forEach(({ input, output }) => {
-        it(`should floor "${input}" to "${output}"`, () => {
-          expect(ceilDecimal(input).toNumber()).toEqual(output.toNumber())
-        })
-      })
-    })
-  })
   describe('#parseStreetAndNumber', () => {
     const scenarios = [
       { input: '  A. Bernoláka 6 ', output: ['A. Bernoláka', '6'] },
