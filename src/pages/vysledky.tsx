@@ -8,7 +8,12 @@ import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
 import { countPreddavky } from '../lib/calculation'
-import { TAX_YEAR } from '../lib/calculation'
+import {
+  TAX_YEAR,
+  SPODNA_ZADZBA_PRE_PREDDAVKY,
+  VRCHNA_ZADZBA_PRE_PREDDAVKY,
+} from '../lib/calculation'
+
 
 interface SummaryRow {
   key: string
@@ -116,7 +121,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
-  if (Number(summary.danNaUhradu) > 16600 && Number(summary.zaplatenePreddavky) == 0) {
+  if (Number(summary.danNaUhradu) > VRCHNA_ZADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />
@@ -141,7 +146,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         </Link>
       </>
     )
-  } else if (Number(summary.danNaUhradu) > 5000 && Number(summary.zaplatenePreddavky) == 0) {
+  } else if (Number(summary.danNaUhradu) > SPODNA_ZADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />
