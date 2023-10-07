@@ -127,7 +127,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý mesiac.
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý mesiac. Výpočet má informatívny charakter.
           </p>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
@@ -152,7 +152,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý kvartál.
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý kvartál. Výpočet má informatívny charakter.
           </p>
       </Warning>
         <Link href={nextRoute} legacyBehavior>

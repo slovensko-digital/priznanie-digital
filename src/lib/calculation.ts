@@ -703,7 +703,6 @@ export function buildSummary(form: TaxForm): Summary {
     danovyPreplatok: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
     zaplatenePreddavky: form.r133,
-    preddavkyNaDan: form.r135_dan_na_uhradu,
   }
 }
 
