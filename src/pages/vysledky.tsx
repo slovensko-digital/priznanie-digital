@@ -2,6 +2,7 @@ import React from 'react'
 import { formatCurrency } from '../lib/utils'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
+import { Warning } from '../components/Warning'
 import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
@@ -114,6 +115,59 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
+  if (Number(summary.danNaUhradu) > 16600) {
+    return (
+      <>
+        <BackLink href={previousRoute} />
+        <h1 className="govuk-heading-l govuk-!-margin-top-3">
+          {`Výpočet dane za rok ${TAX_YEAR}`}
+        </h1>
+        <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
+        <Summary rows={summaryRows} />
+        <Warning>
+          <p>
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť.
+          </p>
+      </Warning>
+        <Link href={nextRoute} legacyBehavior>
+          <button
+            data-test="next"
+            className="govuk-button govuk-!-margin-top-3"
+            type="submit"
+          >
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
+  }
+  else if (Number(summary.danNaUhradu) > 5000) {
+    return (
+      <>
+        <BackLink href={previousRoute} />
+        <h1 className="govuk-heading-l govuk-!-margin-top-3">
+          {`Výpočet dane za rok ${TAX_YEAR}`}
+        </h1>
+        <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
+        <Summary rows={summaryRows} />
+        <Warning>
+          <p>
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt.
+          </p>
+      </Warning>
+        <Link href={nextRoute} legacyBehavior>
+          <button
+            data-test="next"
+            className="govuk-button govuk-!-margin-top-3"
+            type="submit"
+          >
+            Pokračovať
+          </button>
+        </Link>
+      </>
+    )
+  }
+
   return (
     <>
       <BackLink href={previousRoute} />
@@ -122,6 +176,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
+
       <Link href={nextRoute} legacyBehavior>
         <button
           data-test="next"
