@@ -39,14 +39,15 @@ const Zamestnanie: Page<EmployedUserInput> = ({
             <BooleanRadio
               title={`Mali ste v roku ${TAX_YEAR} príjmy zo zamestnania v SR?`}
               name="employed"
-            />
-            {values.employed && (
+                 />
+            {values.employed && ( 
               <>
+              <h3 className="govuk-heading-m">Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výsledné.</h3>
                 <Input
                   name="uhrnPrijmovOdVsetkychZamestnavatelov"
                   type="number"
-                  label="Úhrn príjmov od všetkých zamestnávateľov"
-                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                  label="Úhrn vyplatených zdaniteľných príjmov"
+                  hint={`Tento údaj nájdete v riadku 01.`}
                 />
                 {/* TODO: Pridat input
                   <Input
@@ -60,25 +61,25 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
-                  hint={`Tento údaj nájdete v "Potvrdení" riadok 02a. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
+                  hint={`Tento údaj nájdete v riadok 02a.`}
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
                   type="number"
                   label="Úhrn zdravotného poistného"
-                  hint={`Tento údaj nájdete v "Potvrdení" riadok 02b. Uveďte výslednú sumu od všetkých zamestnávateľov.`}
+                  hint={`Tento údaj nájdete v riadok 02b.`}
                 />
                 <Input
                   name="uhrnPreddavkovNaDan"
                   type="number"
                   label="Úhrn preddavkov na daň"
-                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 04. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                  hint={`Tento údaj nájdete v riadku 04.`}
                 />
                 <Input
                   name="udajeODanovomBonuseNaDieta"
                   type="number"
                   label="Údaje o daňovom bonuse na dieťa"
-                  hint={`Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 14. Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výslednú.`}
+                  hint={`Tento údaj nájdete v riadku 13 v časti "Úhrnná suma priznaného a vyplateného daňového bonusu".`}
                 />
               </>
             )}
