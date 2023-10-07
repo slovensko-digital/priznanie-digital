@@ -6,6 +6,7 @@ import {
   percentage,
   sum,
   round,
+  roundDecimal,
 } from './utils'
 import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
@@ -902,10 +903,11 @@ export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }
 
-export const countPreddavky = (form: TaxForm): number => {
+export const countPreddavky = (form: TaxForm): Number => {
+  const r055Decimal = new Decimal(form.r055)
   if (Number(form.r135_dan_na_uhradu) > 16000) {
-    return (Number(form.r055) * 0.19 / 12)
+    return Number(round((r055Decimal.mul(DAN_Z_PRIJMU_SADZBA)).div(12)))
   } else if (Number(form.r135_dan_na_uhradu) > 5000) {
-    return (Number(form.r055) * 0.19 / 4)
+    return Number(round((r055Decimal.mul(DAN_Z_PRIJMU_SADZBA)).div(4)))
   }
 }
