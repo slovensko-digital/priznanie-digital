@@ -85,12 +85,6 @@ const Deti: Page<ChildrenUserInput> = ({
               ...childrenUserInputInitialValues,
               hasChildren: false,
             }
-          userInput = values.prijmyPredJul22
-            ? userInput
-            : {
-              ...userInput,
-              r034a: `${values.zaciatokPrijmovDen}.${values.zaciatokPrijmovMesiac}.${values.zaciatokPrijmovRok}`,
-            }
           setTaxFormUserInput(userInput)
           router.push(nextRoute)
         }}
