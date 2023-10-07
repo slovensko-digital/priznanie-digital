@@ -11,4 +11,5 @@ export interface Summary {
   zakladDane: Decimal
   danovyPreplatok: Decimal
   danNaUhradu: Decimal
+  zaplatenePreddavky: Decimal
 }

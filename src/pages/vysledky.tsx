@@ -115,7 +115,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
-  if (Number(summary.danNaUhradu) > 16600) {
+  if (Number(summary.danNaUhradu) > 16600 && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />
@@ -140,8 +140,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         </Link>
       </>
     )
-  }
-  else if (Number(summary.danNaUhradu) > 5000) {
+  } else if (Number(summary.danNaUhradu) > 5000 && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />

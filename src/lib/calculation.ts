@@ -702,6 +702,8 @@ export function buildSummary(form: TaxForm): Summary {
     zakladDane: form.r080_zaklad_dane_celkovo,
     danovyPreplatok: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
+    zaplatenePreddavky: form.r133,
+    preddavkyNaDan: form.r135_dan_na_uhradu,
   }
 }
 
