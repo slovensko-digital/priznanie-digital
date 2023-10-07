@@ -2,6 +2,9 @@ import { postponeHomeRoute, PostponeRoute, Route } from '../../src/lib/routes'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 
+const date = new Date
+const month = date.getMonth() + 1;
+
 function getInputPostpone<K extends keyof PostponeUserInput>(
   key: K,
   suffix = '',
@@ -28,89 +31,93 @@ const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
-describe('/odklad/osobne-udaje page', () => {
-  beforeEach('Navigate to test page', () => {
-    cy.visit(postponeHomeRoute)
+// button sa mimo zdanovacieho obdobia Jan-Sept neda pouzit
+// teda nie je kliknutelny a tieto testy budu padat
+if (month >= 1 && month < 10) {
+  describe('/odklad/osobne-udaje page', () => {
+    beforeEach('Navigate to test page', () => {
+      cy.visit(postponeHomeRoute)
 
-    cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
-    assertUrl('/odklad/prijmy-zo-zahranicia')
-    getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
+      cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
+      assertUrl('/odklad/prijmy-zo-zahranicia')
+      getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
 
-    next()
+      next()
+    })
+    it('Back and validation', () => {
+      assertUrl('/odklad/osobne-udaje')
+
+      // Back button should work and be the correct page
+      cy.get('[data-test=back]').click()
+      assertUrl('/odklad/prijmy-zo-zahranicia')
+
+      //  Go back to our page
+      next()
+
+      // Shows error, when presses next without interaction
+      next()
+      cy.get('[data-test=error]')
+    })
+    it('with autoform', () => {
+      assertUrl('/odklad/osobne-udaje')
+
+      /** With autoform */
+      typeToInputPostpone('dic', foreignIncomeInput)
+      getInputPostpone('meno_priezvisko').type('Julius Renc')
+
+      cy.contains('Július Renceš').click()
+
+      getInputPostpone('meno_priezvisko').should('contain.value', 'Július Renceš')
+      getInputPostpone('ulica').should('contain.value', 'Benková Potôň')
+      getInputPostpone('cislo').should('contain.value', '343')
+      getInputPostpone('psc').should('contain.value', '930 36')
+      getInputPostpone('obec').should('contain.value', 'Horná Potôň')
+      cy.get(`[data-test="stat-select"]`).should('contain.value', 'Slovensko')
+    })
+
+    it('Manual entry', () => {
+      assertUrl('/odklad/osobne-udaje')
+
+      typeToInputPostpone('dic', foreignIncomeInput)
+      typeToInputPostpone('meno', foreignIncomeInput)
+      typeToInputPostpone('priezvisko', foreignIncomeInput)
+      typeToInputPostpone('ulica', foreignIncomeInput)
+      typeToInputPostpone('cislo', foreignIncomeInput)
+      typeToInputPostpone('obec', foreignIncomeInput)
+      typeToInputPostpone('psc', foreignIncomeInput)
+      cy.get('[data-test="stat-select"]').select(foreignIncomeInput.stat)
+    })
+    it('Errors', () => {
+      assertUrl('/odklad/osobne-udaje')
+
+      getInputPostpone('dic').type('invalid')
+
+      next()
+      cy.get('.govuk-error-summary')
+    })
   })
-  it('Back and validation', () => {
-    assertUrl('/odklad/osobne-udaje')
 
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/odklad/prijmy-zo-zahranicia')
+  describe('/odklad/suhrn page', () => {
+    beforeEach('Navigate to test page', () => {
+      cy.visit(postponeHomeRoute)
 
-    //  Go back to our page
-    next()
+      cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
+      assertUrl('/odklad/prijmy-zo-zahranicia')
+      getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
 
-    // Shows error, when presses next without interaction
-    next()
-    cy.get('[data-test=error]')
+      next()
+
+      getInputPostpone('meno_priezvisko').type('Julius Renc')
+      cy.contains('Július Renceš').click()
+
+      next()
+    })
+    it('Back', () => {
+      assertUrl('/odklad/suhrn')
+
+      // Back button should work and be the correct page
+      cy.get('[data-test=back]').click()
+      assertUrl('/odklad/osobne-udaje')
+    })
   })
-  it('with autoform', () => {
-    assertUrl('/odklad/osobne-udaje')
-
-    /** With autoform */
-    typeToInputPostpone('dic', foreignIncomeInput)
-    getInputPostpone('meno_priezvisko').type('Julius Renc')
-
-    cy.contains('Július Renceš').click()
-
-    getInputPostpone('meno_priezvisko').should('contain.value', 'Július Renceš')
-    getInputPostpone('ulica').should('contain.value', 'Benková Potôň')
-    getInputPostpone('cislo').should('contain.value', '343')
-    getInputPostpone('psc').should('contain.value', '930 36')
-    getInputPostpone('obec').should('contain.value', 'Horná Potôň')
-    cy.get(`[data-test="stat-select"]`).should('contain.value', 'Slovensko')
-  })
-
-  it('Manual entry', () => {
-    assertUrl('/odklad/osobne-udaje')
-
-    typeToInputPostpone('dic', foreignIncomeInput)
-    typeToInputPostpone('meno', foreignIncomeInput)
-    typeToInputPostpone('priezvisko', foreignIncomeInput)
-    typeToInputPostpone('ulica', foreignIncomeInput)
-    typeToInputPostpone('cislo', foreignIncomeInput)
-    typeToInputPostpone('obec', foreignIncomeInput)
-    typeToInputPostpone('psc', foreignIncomeInput)
-    cy.get('[data-test="stat-select"]').select(foreignIncomeInput.stat)
-  })
-  it('Errors', () => {
-    assertUrl('/odklad/osobne-udaje')
-
-    getInputPostpone('dic').type('invalid')
-
-    next()
-    cy.get('.govuk-error-summary')
-  })
-})
-
-describe('/odklad/suhrn page', () => {
-  beforeEach('Navigate to test page', () => {
-    cy.visit(postponeHomeRoute)
-
-    cy.contains('Súhlasím a chcem odložiť daňové priznanie').click()
-    assertUrl('/odklad/prijmy-zo-zahranicia')
-    getInputPostpone('prijmy_zo_zahranicia', '-yes').click()
-
-    next()
-
-    getInputPostpone('meno_priezvisko').type('Julius Renc')
-    cy.contains('Július Renceš').click()
-
-    next()
-  })
-  it('Back', () => {
-    assertUrl('/odklad/suhrn')
-
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/odklad/osobne-udaje')
-  })
-})
+}
