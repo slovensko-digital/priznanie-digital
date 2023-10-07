@@ -7,6 +7,7 @@ import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
+import { countPreddavky } from '../lib/calculation'
 import { TAX_YEAR } from '../lib/calculation'
 
 interface SummaryRow {
@@ -126,7 +127,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť.
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý mesiac.
           </p>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
@@ -151,7 +152,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt.
+          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý kvartál.
           </p>
       </Warning>
         <Link href={nextRoute} legacyBehavior>

@@ -902,3 +902,11 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }
+
+export const countPreddavky = (form: TaxForm): number => {
+  if (Number(form.r135_dan_na_uhradu) > 16000) {
+    return (Number(form.r055) * 0.19 / 12)
+  } else if (Number(form.r135_dan_na_uhradu) > 5000) {
+    return (Number(form.r055) * 0.19 / 4)
+  }
+}
