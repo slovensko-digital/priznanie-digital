@@ -201,7 +201,7 @@ const PostponeButton = ({ now }) => (
       <>
       <button
         type="button"
-        className="btn-warning govuk-button govuk-button--large"
+        className="btn-secondary govuk-button govuk-button--large govuk-button--disabled"
         disabled
       >
         Termín na podanie odkladu DP vypršal
