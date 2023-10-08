@@ -24,7 +24,6 @@ export type ChildrenUserInput = Pick<
   | 'hasChildren'
   | 'children'
   | 'prijmyPredJul22'
-  | 'r034a'
   | 'zaciatokPrijmovDen'
   | 'zaciatokPrijmovMesiac'
   | 'zaciatokPrijmovRok'
