@@ -131,9 +131,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
         <Summary rows={summaryRows} />
         <Warning>
-          <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať mesačné preddavky na daň. Finančná správa by ťa mala na tento fakt upozorniť. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý mesiac. Výpočet má informatívny charakter.
-          </p>
+          <strong>
+          Predpokladané mesačné preddavky na další rok budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+          </strong>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
           <button
@@ -156,9 +156,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
         <Summary rows={summaryRows} />
         <Warning>
-          <p>
-          Tvoja daň presiahla limit platcu preddavkov na daň. Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>. Od dalšieho roka môžeš očakávať kvartálne preddavky na daň. Finančná správa by ťa mala upozorniť na tento fakt. Očakávaj preddavky približne {countPreddavky(taxForm)} € každý kvartál. Výpočet má informatívny charakter.
-          </p>
+          <strong>
+          Predpokladané kvartálne preddavky na další rok budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+          </strong>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
           <button
