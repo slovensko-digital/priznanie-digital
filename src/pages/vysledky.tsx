@@ -132,7 +132,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <strong>
-          Predpokladané mesačné preddavky na další rok budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+          Predpokladané mesačné preddavky na rok {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
           </strong>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
@@ -157,7 +157,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Summary rows={summaryRows} />
         <Warning>
           <strong>
-          Predpokladané kvartálne preddavky na další rok budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+          Predpokladané kvartálne preddavky na rok {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
           </strong>
       </Warning>
         <Link href={nextRoute} legacyBehavior>
