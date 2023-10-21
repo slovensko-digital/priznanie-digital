@@ -33,6 +33,7 @@ const next = () => {
 
 // button sa mimo zdanovacieho obdobia Jan-Sept neda pouzit
 // teda nie je kliknutelny a tieto testy budu padat
+// ale vyuzitie funkcionality je len do 31.3.2023
 if (month >= 1 && month < 4) {
   describe('/odklad/osobne-udaje page', () => {
     beforeEach('Navigate to test page', () => {
