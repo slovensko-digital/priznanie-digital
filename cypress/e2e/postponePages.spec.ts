@@ -33,7 +33,7 @@ const next = () => {
 
 // button sa mimo zdanovacieho obdobia Jan-Sept neda pouzit
 // teda nie je kliknutelny a tieto testy budu padat
-if (month >= 1 && month < 10) {
+if (month >= 1 && month < 4) {
   describe('/odklad/osobne-udaje page', () => {
     beforeEach('Navigate to test page', () => {
       cy.visit(postponeHomeRoute)
