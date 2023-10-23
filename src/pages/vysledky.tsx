@@ -10,8 +10,8 @@ import { buildSummary } from '../lib/calculation'
 import { countPreddavky } from '../lib/calculation'
 import {
   TAX_YEAR,
-  SPODNA_ZADZBA_PRE_PREDDAVKY,
-  VRCHNA_ZADZBA_PRE_PREDDAVKY,
+  SPODNA_SADZBA_PRE_PREDDAVKY,
+  VRCHNA_SADZBA_PRE_PREDDAVKY,
 } from '../lib/calculation'
 
 
@@ -121,7 +121,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
-  if (Number(summary.danNaUhradu) > VRCHNA_ZADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
+  if (Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />
@@ -146,7 +146,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         </Link>
       </>
     )
-  } else if (Number(summary.danNaUhradu) > SPODNA_ZADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
+  } else if (Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
     return (
       <>
         <BackLink href={previousRoute} />
