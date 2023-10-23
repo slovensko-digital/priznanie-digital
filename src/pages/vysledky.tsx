@@ -121,57 +121,11 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
-  if (Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
-    return (
-      <>
-        <BackLink href={previousRoute} />
-        <h1 className="govuk-heading-l govuk-!-margin-top-3">
-          {`Výpočet dane za rok ${TAX_YEAR}`}
-        </h1>
-        <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
-        <Summary rows={summaryRows} />
-        <Warning>
-          <strong>
-          Predpokladané mesačné preddavky na rok {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
-          </strong>
-      </Warning>
-        <Link href={nextRoute} legacyBehavior>
-          <button
-            data-test="next"
-            className="govuk-button govuk-!-margin-top-3"
-            type="submit"
-          >
-            Pokračovať
-          </button>
-        </Link>
-      </>
-    )
-  } else if (Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY && Number(summary.zaplatenePreddavky) == 0) {
-    return (
-      <>
-        <BackLink href={previousRoute} />
-        <h1 className="govuk-heading-l govuk-!-margin-top-3">
-          {`Výpočet dane za rok ${TAX_YEAR}`}
-        </h1>
-        <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
-        <Summary rows={summaryRows} />
-        <Warning>
-          <strong>
-          Predpokladané kvartálne preddavky na rok {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštív web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
-          </strong>
-      </Warning>
-        <Link href={nextRoute} legacyBehavior>
-          <button
-            data-test="next"
-            className="govuk-button govuk-!-margin-top-3"
-            type="submit"
-          >
-            Pokračovať
-          </button>
-        </Link>
-      </>
-    )
-  }
+  const monthlyPrepayment = Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY
+
+  const quarterlyPrepayment = Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY
+
+  const prePayments = monthlyPrepayment || quarterlyPrepayment
 
   return (
     <>
@@ -181,6 +135,15 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
+
+      {
+        prePayments &&
+        <Warning>
+            <strong>
+              Predpokladané {monthlyPrepayment ? 'mesačné' : 'kvartálne'} preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+            </strong>
+        </Warning>
+      }
 
       <Link href={nextRoute} legacyBehavior>
         <button
