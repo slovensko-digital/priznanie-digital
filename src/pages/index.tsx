@@ -37,7 +37,7 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive }) => (
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} />
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} />
       </div>
 
       <ul className={styles.safeList}>
@@ -150,16 +150,12 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({ nextPostponeRoute }) => (
+const PostponeSection = ({ nextPostponeRoute, now}) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
-    <p>
-      {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
-      31.3.${TAX_YEAR + 1}`}
-    </p>
-    <p>Termín si viete predĺžiť:</p>
+    <PostponeText now={now}/>
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${
         TAX_YEAR + 1
@@ -174,12 +170,51 @@ const PostponeSection = ({ nextPostponeRoute }) => (
     </p>
 
     <Link href={nextPostponeRoute} legacyBehavior>
+      <PostponeButton now={now}/>
+    </Link>
+  </>
+)
+const PostponeText = ({ now }) => (
+  <>
+    {(now.getMonth() > 2) && (
+      <>
+        <p>
+          {`Riadny termín pre podanie daňového priznania a zaplatenie dane bol do
+      31.3.${TAX_YEAR + 1}`}
+        </p>
+        <p>Termín ste si mohli predĺžiť:</p>
+      </>)}
+    {(now.getMonth() < 3) && (
+      <>
+        <p>
+          {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
+  31.3.${TAX_YEAR + 1}`}
+        </p>
+        <p>Termín si viete predĺžiť:</p>
+      </>)}
+  </>
+)
+
+const PostponeButton = ({ now }) => (
+  <>
+  {(now.getMonth() > 2) && (
+      <>
+      <button
+        type="button"
+        className="btn-secondary govuk-button govuk-button--large govuk-button--disabled"
+        disabled
+      >
+        Termín na podanie odkladu DP vypršal
+      </button>
+      </>)}
+    {(now.getMonth() < 3) && (
+      <>
       <button
         type="button"
         className="btn-secondary govuk-button govuk-button--large"
       >
         Súhlasím a chcem odložiť daňové priznanie
       </button>
-    </Link>
+      </>)}
   </>
 )
