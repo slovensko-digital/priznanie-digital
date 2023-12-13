@@ -38,3 +38,7 @@ cypress/screenshots
 cypress/videos
 cypress/downloads
 
+.yarn/
+
+# backup files
+*.sw?

@@ -19,6 +19,13 @@ export const withEmploymentInput: E2eTestUserInput = {
   employed: true,
   hasChildren: false,
   children: [],
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   datum: '22.02.2022',
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  percent2: '19,26',
+  percent3: '28,89',
 }

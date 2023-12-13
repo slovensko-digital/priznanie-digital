@@ -16,5 +16,12 @@ export const baseInput: E2eTestUserInput = {
   datum: '22.02.2022',
   hasChildren: false,
   children: [],
-  expectNgoDonationPage: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
+  expectNgoDonationValue: true,
+
+  percent2: '10,26',
+  percent3: '15,39',
 }

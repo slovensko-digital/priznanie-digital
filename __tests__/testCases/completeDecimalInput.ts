@@ -66,6 +66,13 @@ export const completeDecimalInput: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
 
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  percent2: '8,16',
+  percent3: '12,24',
 }

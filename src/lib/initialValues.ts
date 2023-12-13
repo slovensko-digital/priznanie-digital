@@ -61,7 +61,7 @@ export const makeEmptyChild = (): ChildInput => ({
   priezviskoMeno: '',
   rodneCislo: '',
 
-  wholeYear: false,
+  wholeYear: true,
   monthFrom: '0',
   monthTo: '11',
 })
@@ -69,6 +69,10 @@ export const makeEmptyChild = (): ChildInput => ({
 export const childrenUserInputInitialValues: ChildrenUserInput = {
   hasChildren: undefined,
   children: [makeEmptyChild()],
+  prijmyPredJul22: undefined,
+  zaciatokPrijmovDen: undefined,
+  zaciatokPrijmovMesiac: undefined,
+  zaciatokPrijmovRok: '2022',
 }
 
 export const pensionInitialValues: PensionUserInput = {

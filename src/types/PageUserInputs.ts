@@ -21,7 +21,12 @@ export type EmployedUserInput = Pick<
 
 export type ChildrenUserInput = Pick<
   TaxFormUserInput,
-  'hasChildren' | 'children'
+  | 'hasChildren'
+  | 'children'
+  | 'prijmyPredJul22'
+  | 'zaciatokPrijmovDen'
+  | 'zaciatokPrijmovMesiac'
+  | 'zaciatokPrijmovRok'
 >
 
 export type PartnerUserInput = Pick<
@@ -45,6 +50,7 @@ export type PersonalInformationUserInput = Pick<
   | 'r005_meno'
   | 'r004_priezvisko'
   | 'r006_titul'
+  | 'r006_titul_za'
   | 'r007_ulica'
   | 'r008_cislo'
   | 'r009_psc'

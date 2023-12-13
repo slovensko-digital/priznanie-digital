@@ -7,7 +7,6 @@
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput'
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
-import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
 
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { Route, PostponeRoute, homeRoute } from '../../src/lib/routes'
@@ -15,6 +14,7 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
+import { MAX_CHILD_AGE_BONUS, TAX_YEAR } from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -350,7 +350,7 @@ describe('osobne-udaje page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/dochodok')
+    assertUrl('/dve-percenta')
 
     //  Go back to our page
     cy.visit('/osobne-udaje')
@@ -373,13 +373,14 @@ describe('osobne-udaje page', () => {
       'contain.value',
       'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
     )
-    getInput('r006_titul').should('contain.value', 'PhDr. / PhD., PhD.')
-    getInput('r004_priezvisko').should('contain.value', 'Urban, - AYURVÉDA')
+    getInput('r006_titul').should('contain.value', 'PhDr.')
+    getInput('r006_titul_za').should('contain.value', 'PhD.')
+    getInput('r004_priezvisko').should('contain.value', 'Urban')
     getInput('r005_meno').should('contain.value', 'Pavel')
-    getInput('r007_ulica').should('contain.value', 'Národná')
-    getInput('r008_cislo').should('contain.value', '10')
-    getInput('r009_psc').should('contain.value', '010 01')
-    getInput('r010_obec').should('contain.value', 'Žilina')
+    getInput('r007_ulica').should('contain.value', 'Clementisova')
+    getInput('r008_cislo').should('contain.value', '1350/45')
+    getInput('r009_psc').should('contain.value', '024 01')
+    getInput('r010_obec').should('contain.value', 'Kysucké Nové Mesto')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
     next()
@@ -432,6 +433,8 @@ describe('Children page', () => {
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
 
     // Try to add 2nd child
     next()
@@ -491,6 +494,8 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
+    getInput('prijmyPredJul22', '-yes').click()
+
     // Try to add 2nd child
     cy.get('[data-test="add-child"]').click()
 
@@ -542,6 +547,11 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+
     // Enter invalid months (November - April)
     cy.get('[data-test="children[0].monthFrom-select"]').select('10')
     cy.get('[data-test="children[0].monthTo-select"]').select('3')
@@ -550,7 +560,7 @@ describe('Children page', () => {
     next()
 
     // Should have error for invalid months
-    getError().should('have.length', 3)
+    getError().should('have.length', 2)
 
     // Enter valid months (November - April)
     cy.get('[data-test="children[0].monthFrom-select"]').select('3')
@@ -560,15 +570,57 @@ describe('Children page', () => {
     next()
 
     // Should not have error for invalid months
-    getError().should('have.length', 2)
+    getError().should('have.length', 1)
+  })
 
-    // Check checkbox for whole year
-    cy.get('[data-test="children[0].wholeYear-input"]').click()
+  it('has working validation for too old kid', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
 
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9105010013')
     next()
+    getError().contains(`Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`)
+  })
 
-    // Should not have error for invalid months
-    getError().should('have.length', 2)
+  it('has working range limit for kid born in tax year', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2209080016')
+    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch September až December')
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 4)
+    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 4)
+  })
+
+  it('has working range limit for kid bonus ending in tax year', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    // When presses yes, additional fields appears
+    getInput('hasChildren', '-yes').click()
+
+    getInput('prijmyPredJul22', '-yes').click()
+
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9609070009')
+    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch Január až September')
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 9)
+    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 9)
   })
 })
 
@@ -590,6 +642,7 @@ describe('Pension page', () => {
     // When presses no, continues to next page
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
+    next()
     assertUrl('/osobne-udaje')
 
     //  Go back to our page
@@ -605,69 +658,8 @@ describe('Pension page', () => {
     typeToInput('zaplatene_prispevky_na_dochodok', withPensionInput)
 
     next()
+    next()
     assertUrl('/osobne-udaje')
-  })
-})
-
-describe('twoPercent page', () => {
-  it('has working ui', () => {
-    cy.visit('/dve-percenta')
-
-    // Shows error, when presses next without interaction
-    next()
-    getError().should('have.length', 1)
-
-    // When presses yes, additional fields appear
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
-
-    // All aditional fields should be required
-    next()
-    getError().should('have.length', 2)
-
-    // Type to input
-    typeToInput('r142_obchMeno', with2percentInput)
-    typeToInput('r142_ico', with2percentInput)
-    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('with autoform', () => {
-    cy.visit('/dve-percenta')
-
-    // When presses yes, additional fields appear
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
-
-    /** With autoform */
-    getInput('r142_obchMeno').type('Lifestarter')
-
-    cy.contains('starter Trnava').click()
-
-    getInput('r142_obchMeno').should('contain.value', 'Lifestarter')
-    getInput('r142_ico').should('contain.value', '50718274')
-    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('works with no', () => {
-    cy.visit('/dve-percenta')
-
-    cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
-    next()
-    getError().should('have.length', 0)
-
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
-  })
-  it('works with Slovensko.Digital pre-fill', () => {
-    cy.visit('/dve-percenta')
-    cy.get('[data-test=prefill-slovensko-digital]').click()
-
-    getInput('r142_obchMeno').should('contain.value', 'Slovensko.Digital')
-    getInput('r142_ico').should('contain.value', '50 158 635')
-
-    next()
-    assertUrl(homeRoute) // TODO: goes to home route because user should not be here (not eligible to donate to NGO)
   })
 })
 
@@ -734,6 +726,8 @@ describe('IBAN page', () => {
 
     assertUrl('/deti')
     getInput('hasChildren', '-yes').click()
+    getInput('prijmyPredJul22', '-yes').click()
+
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
       withBonusInput.children?.[0]?.priezviskoMeno ?? '',
     )
@@ -744,6 +738,9 @@ describe('IBAN page', () => {
 
     assertUrl('/dochodok')
     skipPage()
+
+    assertUrl('/dve-percenta')
+    next()
 
     // assertUrl('/hypoteka')
     // skipPage()

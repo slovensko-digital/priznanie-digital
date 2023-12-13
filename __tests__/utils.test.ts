@@ -1,9 +1,8 @@
 import {
-  floorDecimal,
-  ceilDecimal,
   parseStreetAndNumber,
   encodeUnicodeCharacters,
   getStreetNumber,
+  round,
 } from '../src/lib/utils'
 import {
   sortObjectKeys,
@@ -19,7 +18,6 @@ import {
   validateIbanFormat,
   validateIbanCountry,
   getRodneCisloAgeAtYearAndMonth,
-  parseFullName,
   boolToString,
   decimalToString,
   roundDecimal,
@@ -219,15 +217,17 @@ describe('utils', () => {
     const year = 2020
     const month = 5
     const inputs = [
-      { rc: '8007011234', age: 39, year, month },
-      { rc: '8006181234', age: 39, year, month },
-      { rc: '8005311234', age: 40, year, month },
-      { rc: '8057011234', age: 39, year, month },
-      { rc: '8056191234', age: 39, year, month },
-      { rc: '8055311234', age: 40, year, month },
-      { rc: '0527171234', age: 14, year, month },
-      { rc: '0526181234', age: 14, year, month },
-      { rc: '0522171234', age: 15, year, month },
+      { rc: '8007010011', age: 39, year, month },
+      { rc: '8006180017', age: 39, year, month },
+      { rc: '8005310016', age: 40, year, month },
+      { rc: '8057010016', age: 39, year, month },
+      { rc: '8056190010', age: 39, year, month },
+      { rc: '8055310010', age: 40, year, month },
+      { rc: '0557170009', age: 14, year, month },
+      { rc: '0556180009', age: 14, year, month },
+      { rc: '0555180010', age: 15, year, month },
+      { rc: '0552180013', age: 15, year, month },
+      { rc: '2055180017', age: 0, year, month },
     ]
 
     inputs.forEach(({ rc, age, year, month }) => {
@@ -316,98 +316,6 @@ describe('utils', () => {
     })
   })
 
-  describe('#parseFullName', () => {
-    const inputs = [
-      { input: 'Ján Novák', first: 'Ján', last: 'Novák', title: '' },
-      { input: 'Ing. Ján Novák', first: 'Ján', last: 'Novák', title: 'Ing.' },
-      {
-        input: 'Ing. Mgr. Ján Novák',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. Mgr.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD.',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. / PhD.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD., Phd.',
-        first: 'Ján',
-        last: 'Novák',
-        title: 'Ing. / PhD., Phd.',
-      },
-      {
-        input: 'PhDR. Jana Nováková Zelená PhD.',
-        first: 'Jana',
-        last: 'Nováková Zelená',
-        title: 'PhDR. / PhD.',
-      },
-      {
-        input: 'Ing. Ján Novák - FOOBAR',
-        first: 'Ján',
-        last: 'Novák - FOOBAR',
-        title: 'Ing.',
-      },
-      {
-        input: 'Ing. Ján Novák PhD. - FOOBAR',
-        first: 'Ján',
-        last: 'Novák - FOOBAR',
-        title: 'Ing. / PhD.',
-      },
-    ]
-
-    inputs.forEach(({ input, first, last, title }) => {
-      it(`should correctly parse "${input}"`, () => {
-        expect(parseFullName(input)).toStrictEqual({ first, last, title })
-      })
-    })
-  })
-  describe('#floorDecimal', () => {
-    describe('for valid values', () => {
-      const validInputs = [
-        {
-          input: new Decimal(916.487),
-          output: new Decimal(916.48),
-        },
-        {
-          input: new Decimal(99.654),
-          output: new Decimal(99.65),
-        },
-      ]
-
-      validInputs.forEach(({ input, output }) => {
-        it(`should floor "${input}" to "${output}"`, () => {
-          expect(floorDecimal(input).equals(output)).toBeTruthy()
-        })
-      })
-    })
-  })
-  describe('#ceilDecimal', () => {
-    describe('for valid values', () => {
-      const validInputs = [
-        {
-          input: new Decimal(2864.094),
-          output: new Decimal(2864.1),
-        },
-        {
-          input: new Decimal(2864.444),
-          output: new Decimal(2864.45),
-        },
-        {
-          input: new Decimal(2864.099),
-          output: new Decimal(2864.1),
-        },
-      ]
-
-      validInputs.forEach(({ input, output }) => {
-        it(`should floor "${input}" to "${output}"`, () => {
-          expect(ceilDecimal(input).toNumber()).toEqual(output.toNumber())
-        })
-      })
-    })
-  })
   describe('#parseStreetAndNumber', () => {
     const scenarios = [
       { input: '  A. Bernoláka 6 ', output: ['A. Bernoláka', '6'] },
@@ -473,7 +381,7 @@ describe('utils', () => {
       { input: new Decimal(123.451), output: '123.45' },
       { input: new Decimal(123.454), output: '123.45' },
       { input: new Decimal(123.455), output: '123.46' },
-      { input: new Decimal(123.454449), output: '123.46' },
+      { input: new Decimal(123.454449), output: '123.45' },
       { input: new Decimal(123.459), output: '123.46' },
       { input: new Decimal(123.46), output: '123.46' },
       { input: new Decimal(123.461), output: '123.46' },
@@ -485,7 +393,7 @@ describe('utils', () => {
 
     scenarios.forEach(({ input, output }) => {
       it(`should round ${input} to ${output}`, () => {
-        expect(roundDecimal(new Decimal(123.455))).toBe('123.46')
+        expect(roundDecimal(input)).toBe(output)
       })
     })
 
@@ -495,6 +403,30 @@ describe('utils', () => {
 
     it('should roundDecimal to 0 decimal places', () => {
       expect(roundDecimal(new Decimal(10.9), 0)).toBe('11')
+    })
+  })
+
+  describe('#round', () => {
+    const scenarios = [
+      { input: new Decimal(123.45), output: '123.45' },
+      { input: new Decimal(123.4509), output: '123.45' },
+      { input: new Decimal(123.451), output: '123.45' },
+      { input: new Decimal(123.454), output: '123.45' },
+      { input: new Decimal(123.455), output: '123.46' },
+      { input: new Decimal(123.454449), output: '123.45' },
+      { input: new Decimal(123.459), output: '123.46' },
+      { input: new Decimal(123.46), output: '123.46' },
+      { input: new Decimal(123.461), output: '123.46' },
+      { input: new Decimal(123.464), output: '123.46' },
+      { input: new Decimal(123.465), output: '123.47' },
+      { input: new Decimal(123.466), output: '123.47' },
+      { input: new Decimal(123.469), output: '123.47' },
+    ]
+
+    scenarios.forEach(({ input, output }) => {
+      it(`should round ${input} to ${output}`, () => {
+        expect(round(input).valueOf()).toBe(output)
+      })
     })
   })
 })

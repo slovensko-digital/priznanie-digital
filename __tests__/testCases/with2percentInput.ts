@@ -15,10 +15,17 @@ export const with2percentInput: E2eTestUserInput = {
   t1r10_prijmy: '25000',
   datum: '22.02.2020',
   hasChildren: false,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   children: [],
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
   XIIoddiel_uplatnujem2percenta: true,
   r142_ico: '50158635',
   r142_obchMeno: 'Slovensko.Digital',
   XIIoddiel_suhlasZaslUdaje: true,
+
+  percent2: '10,26',
+  percent3: '15,39'
 }

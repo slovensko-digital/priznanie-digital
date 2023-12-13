@@ -28,6 +28,10 @@ export const bugReport1Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   children: [
     {
       id: 1,
@@ -52,7 +56,7 @@ export const bugReport1Input: E2eTestUserInput = {
   zaplatene_prispevky_na_dochodok: '',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
   r142_ico: '',
   r142_obchMeno: '',
   XIIoddiel_suhlasZaslUdaje: false,

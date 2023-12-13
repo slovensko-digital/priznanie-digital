@@ -8,15 +8,14 @@ import { setDate, toBase64 } from '../../lib/utils'
 import { TAX_YEAR } from '../../lib/calculation'
 
 const {
-  publicRuntimeConfig: { odkladEmailTemplateId },
+  publicRuntimeConfig: { odkladEmailTemplateId, navodyBaseUrl, odkladStepUrl },
 } = getConfig()
 
 const buildXml = (userInput) => convertPostponeToXML(setDate(userInput))
 
-const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
-  const CALLBACK_PATH =
-    '/zivotne-situacie/odklad-danoveho-priznania/krok/registrovat-sa-na-financnej-sprave'
+const callback_action = `${navodyBaseUrl}${odkladStepUrl}`
 
+const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
   const fullName = `${userInput.meno} ${userInput.priezvisko}`
   const xmlFile = toBase64(buildXml(userInput))
   const deadline = userInput.prijmy_zo_zahranicia
@@ -27,11 +26,11 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
     {
       name: 'submission[callback_url]',
-      value: CALLBACK_PATH,
+      value: odkladStepUrl,
     },
     {
       name: 'submission[callback_step_path]',
-      value: CALLBACK_PATH,
+      value: odkladStepUrl,
     },
     {
       name: 'submission[callback_step_status]',
@@ -65,6 +64,10 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
     {
       name: 'submission[extra][params][deadline]',
       value: deadline,
+    },
+    {
+      name: 'submission[extra][params][callback_action]',
+      value: callback_action,
     },
   ]
 }

@@ -9,8 +9,10 @@ import { buildSummary } from '../lib/calculation'
 import { Summary } from '../types/Summary'
 
 const {
-  publicRuntimeConfig: { priznanieEmailTemplateId },
+  publicRuntimeConfig: { priznanieEmailTemplateId, navodyBaseUrl, priznanieStepUrl },
 } = getConfig()
+
+const action_url = `${navodyBaseUrl}${priznanieStepUrl}`
 
 const buildXml = (taxForm: TaxForm) => convertToXML(setDate(taxForm))
 
@@ -22,9 +24,6 @@ const buildSummaryFields = (obj: Summary) => {
 }
 
 const buildFields = (taxForm: TaxForm): RedirectField[] => {
-  const CALLBACK_PATH =
-    '/zivotne-situacie/elektronicke-podanie-danoveho-priznania/krok/prihlasit-sa-na-financnu-spravu'
-
   const xmlFile = toBase64(buildXml(taxForm))
   const fullName = `${taxForm.r005_meno}\u00A0${taxForm.r004_priezvisko}`
   const summaryFields = buildSummaryFields(buildSummary(taxForm))
@@ -33,11 +32,11 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     { name: 'submission[type]', value: 'EmailMeSubmissionInstructionsEmail' },
     {
       name: 'submission[callback_url]',
-      value: CALLBACK_PATH,
+      value: priznanieStepUrl,
     },
     {
       name: 'submission[callback_step_path]',
-      value: CALLBACK_PATH,
+      value: priznanieStepUrl,
     },
     {
       name: 'submission[callback_step_status]',
@@ -67,6 +66,10 @@ const buildFields = (taxForm: TaxForm): RedirectField[] => {
     {
       name: 'submission[extra][params][recipient_name]',
       value: fullName,
+    },
+    {
+      name: 'submission[extra][params][action_url]',
+      value: action_url,
     },
     ...summaryFields,
   ]

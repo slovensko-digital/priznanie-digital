@@ -128,6 +128,14 @@ const executeTestCase = (testCase: string) => {
 
         if (input.hasChildren) {
           getInput('hasChildren', '-yes').click()
+          if (input.prijmyPredJul22) {
+            getInput('prijmyPredJul22', '-yes').click()
+          } else {
+            getInput('prijmyPredJul22', '-no').click()
+            typeToInput('zaciatokPrijmovDen', input)
+            typeToInput('zaciatokPrijmovMesiac', input)
+          }
+          
           input.children.forEach((child, index) => {
             cy.get(
               `[data-test="children[${index}].priezviskoMeno-input"]`,
@@ -137,8 +145,9 @@ const executeTestCase = (testCase: string) => {
             )
 
             if (child.wholeYear) {
-              cy.get(`[data-test="children[${index}].wholeYear-input"]`).click()
+              cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
             } else {
+              cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
               cy.get(
                 `[data-test="children[${index}].monthFrom-select"]`,
               ).select(child.monthFrom)
@@ -183,12 +192,15 @@ const executeTestCase = (testCase: string) => {
 
         // next()
 
-        if (input.expectNgoDonationPage) {
-          /**  SECTION Two percent */
-          assertUrl('/dve-percenta')
+        /**  SECTION Two percent */
+        assertUrl('/dve-percenta')
+        if (input.expectNgoDonationValue) {
+          cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.XIIoddiel_uplatnujem2percenta) {
             getInput('XIIoddiel_uplatnujem2percenta', '-yes').click()
+
+            cy.get('label[for="splnam3per"]').contains(input.percent3)
 
             if (input.splnam3per) {
               getInput('splnam3per').click()
@@ -203,9 +215,9 @@ const executeTestCase = (testCase: string) => {
           } else {
             getInput('XIIoddiel_uplatnujem2percenta', '-no').click()
           }
-
-          next()
         }
+
+        next()
 
         /**  SECTION Osobne udaje */
         assertUrl('/osobne-udaje')
@@ -223,6 +235,7 @@ const executeTestCase = (testCase: string) => {
         typeToInput('r005_meno', input)
         if (input.r006_titul) {
           getInput('r006_titul').type(input.r006_titul)
+          getInput('r006_titul_za').type(input.r006_titul_za)
         }
         typeToInput('r004_priezvisko', input)
         typeToInput('r007_ulica', input)
@@ -298,6 +311,10 @@ const executeTestCase = (testCase: string) => {
           ),
         )
 
+        cy.get('[data-test="r136_danovy_preplatok"]').contains(
+          formatCurrency(taxForm.r136_danovy_preplatok)
+        )
+
         next()
 
         /** SECTION Download */
@@ -313,7 +330,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.495.html')
+        cy.visit('/form/form.546.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
@@ -353,12 +370,16 @@ const executePostponeCase = (testCase: string) => {
         if (input.prijmy_zo_zahranicia) {
           getInput('prijmy_zo_zahranicia', '-yes').click()
           cy.contains(
-            `Nový termín pre podanie daňového priznania je 30. septembra ${TAX_YEAR+1}.`,
+            `Nový termín pre podanie daňového priznania je 30. septembra ${
+              TAX_YEAR + 1
+            }.`,
           )
         } else {
           getInput('prijmy_zo_zahranicia', '-no').click()
           cy.contains(
-            `Nový termín pre podanie daňového priznania je 30. júna ${TAX_YEAR+1}.`,
+            `Nový termín pre podanie daňového priznania je 30. júna ${
+              TAX_YEAR + 1
+            }.`,
           )
         }
 

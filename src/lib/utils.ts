@@ -2,6 +2,7 @@ import { rodnecislo } from 'rodnecislo'
 import IBAN from 'iban'
 import Decimal from 'decimal.js'
 import base64 from 'base64-js'
+import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from './calculation'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -28,14 +29,20 @@ export const setDate = <T>(input: T, date: Date = new Date()) => {
   }
 }
 
-export const getStreetNumber = ({reg_number, building_number}: {reg_number: number, building_number: string}): string => {
-  if (reg_number !== null && building_number !== null){
+export const getStreetNumber = ({
+  reg_number,
+  building_number,
+}: {
+  reg_number: number
+  building_number: string
+}): string => {
+  if (reg_number !== null && building_number !== null) {
     return `${reg_number}/${building_number}`
   }
-  if (reg_number === null && building_number !== null){
+  if (reg_number === null && building_number !== null) {
     return building_number
   }
-  if (reg_number !== null && building_number === null){
+  if (reg_number !== null && building_number === null) {
     return `${reg_number}`
   }
   return null
@@ -82,6 +89,24 @@ export const validateRodneCislo = (value: string): boolean => {
     rodnecislo(value.replace(' / ', '')).isValid()
   )
 }
+
+export const maxChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) <= MAX_CHILD_AGE_BONUS
+  )
+}
+export const minChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+  return (
+    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) >= 0
+  )
+}
+
+export const getBirthMonth = (value: string): number => {
+  return (
+    rodnecislo(value.replace(' / ', '')).month()
+  )
+}
+
 // logic from https://github.com/kub1x/rodnecislo
 export const getRodneCisloAgeAtYearAndMonth = (
   rodneCislo: string,
@@ -99,6 +124,10 @@ export const getRodneCisloAgeAtYearAndMonth = (
 
   if (dateMonth > rc.month()) {
     return age
+  }
+
+  if (dateMonth == rc.month() && dateYear == rc.year()){
+    return 0
   }
 
   if (dateMonth <= rc.month()) {
@@ -133,43 +162,8 @@ export interface ParsedName {
   title: string
 }
 
-/**
- * @deprecated AutoForm vracia udaje uz rozparsovane 
- */
-export const parseFullName = (value: string): ParsedName => {
-  const parts = value.split(' ').map((v) => v.trim())
-
-  let firstName
-  const lastNames = []
-  const titles = []
-  parts.forEach((value) => {
-    const isTitle = /\.,?$/.test(value)
-    if (isTitle) {
-      if (firstName && titles.length > 0 && !titles.includes('/')) {
-        titles.push('/')
-      }
-      titles.push(value)
-    } else if (!firstName) {
-      firstName = value
-    } else {
-      lastNames.push(value)
-    }
-  })
-
-  return {
-    first: firstName,
-    last: lastNames.join(' '),
-    title: titles.join(' '),
-  }
-}
-
-/**  https://podpora.financnasprava.sk/840887-Zaokr%C3%BAh%C4%BEovanie-platieb-zo-a-do-%C5%A1t%C3%A1tneho-rozpo%C4%8Dtu
- */
-export const floorDecimal = (decimal: Decimal) => {
-  return decimal.toDecimalPlaces(2, Decimal.ROUND_FLOOR)
-}
-export const ceilDecimal = (decimal: Decimal) => {
-  return decimal.toDecimalPlaces(2, Decimal.ROUND_CEIL)
+export const round = (decimal: Decimal): Decimal => {
+  return decimal.toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
 }
 
 export const sum = (...numbers): Decimal =>
@@ -192,7 +186,7 @@ export const parseStreetAndNumber = (streetAndNumber) => {
 }
 
 export const percentage = (base: Decimal, percent: number) => {
-  return floorDecimal(base.div(100).times(percent))
+  return round(base.div(100).times(percent))
 }
 
 const mapHelper = (arr, callback): any => {

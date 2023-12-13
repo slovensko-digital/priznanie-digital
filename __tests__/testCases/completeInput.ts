@@ -7,7 +7,8 @@ export const completeInput: E2eTestUserInput = {
   r003_nace: '62010 - Počítačové programovanie',
   r005_meno: 'Fake',
   r004_priezvisko: 'Name',
-  r006_titul: 'Ing. / PhD.',
+  r006_titul: 'Ing.',
+  r006_titul_za: 'PhD.',
   r007_ulica: 'Mierova',
   r008_cislo: '4',
   r009_psc: '82105',
@@ -66,6 +67,13 @@ export const completeInput: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
 
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
+
+  percent2: '5,13',
+  percent3: '7,70',
 }

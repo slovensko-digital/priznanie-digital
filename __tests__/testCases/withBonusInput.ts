@@ -47,10 +47,14 @@ export const withBonusInput: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus: true,
   iban: 'SK6807200002891987426353',
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

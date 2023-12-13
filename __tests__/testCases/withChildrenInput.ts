@@ -33,6 +33,10 @@ export const withChildrenInput: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: "1",
+  zaciatokPrijmovMesiac: "7",
+  zaciatokPrijmovRok: "2022",
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

@@ -20,6 +20,10 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   uhrnPreddavkovNaDan: '78.20',
   employed: true,
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   children: [
     {
       id: 1,
@@ -45,5 +49,5 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   ziadamVratitDanovyPreplatok: true,
   iban: 'SK6807200002891987426353',
 
-  expectNgoDonationPage: false,
+  expectNgoDonationValue: false,
 }

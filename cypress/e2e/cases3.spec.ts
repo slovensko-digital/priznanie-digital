@@ -1,12 +1,15 @@
 import { executeAllTestCases } from './executeCase'
 
-describe.skip('Cases', () => {
+describe('Cases', () => {
   executeAllTestCases([
     'complete',
     'completeDecimal',
     'bugReport1',
-    // 'bugReport2',
+    'bugReport2a',
+    'bugReport2b',
     'bugReport3',
     'bugReport4',
+    'bugReport5',
+    'bugReport6',
   ])
 })

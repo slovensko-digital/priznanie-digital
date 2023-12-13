@@ -2,7 +2,7 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "scripts": {
     "clean": "rm -rf ./.next && rm ./__tests__/**/*.output.*",
@@ -38,7 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rodnecislo": "1.6.0",
-    "webpack": "^5.69.1",
+    "webpack": "^5.76.0",
     "xml-js": "1.6.11",
     "yup": "0.32.11"
   },

@@ -16,5 +16,12 @@ export const withHighIncomeInput: E2eTestUserInput = {
   datum: '22.02.2020',
   hasChildren: false,
   children: [],
-  expectNgoDonationPage: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
+  expectNgoDonationValue: true,
+
+  percent2: '142,88',
+  percent3: '214,32'
 }

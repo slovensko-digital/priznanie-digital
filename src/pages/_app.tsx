@@ -30,6 +30,7 @@ import { Page } from '../components/Page'
 import { Plausible } from '../components/Plausible'
 import Head from 'next/head'
 import { checkCookie } from '../lib/cookie'
+import getConfig from 'next/config'
 
 /* eslint-disable no-template-curly-in-string */
 setLocale({
@@ -56,9 +57,10 @@ const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
 interface MyAppProps extends AppProps {
   Component: Page<Partial<TaxFormUserInput>>
   isDebug: boolean
+  isLive: boolean
 }
 
-const MyApp = ({ Component, isDebug, pageProps }: MyAppProps) => {
+const MyApp = ({ Component, isDebug, isLive, pageProps }: MyAppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm>(
     taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
@@ -116,6 +118,7 @@ const MyApp = ({ Component, isDebug, pageProps }: MyAppProps) => {
       <Plausible />
       <Component
         isDebug={isDebug}
+        isLive={isLive}
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
@@ -137,6 +140,9 @@ const MyApp = ({ Component, isDebug, pageProps }: MyAppProps) => {
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
 MyApp.getInitialProps = (context) => {
   const props = App.getInitialProps(context)
+  const {
+    publicRuntimeConfig: { isLive },
+  } = getConfig()
   return {
     ...props,
     isDebug: checkCookie(
@@ -144,6 +150,7 @@ MyApp.getInitialProps = (context) => {
       'not-pass',
       context?.ctx?.req?.headers?.cookie,
     ),
+    isLive
   }
 }
 

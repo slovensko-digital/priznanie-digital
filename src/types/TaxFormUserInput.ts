@@ -33,8 +33,10 @@ export interface TaxFormUserInput {
   r004_priezvisko: string
   /** 05 - Meno **/
   r005_meno: string
-  /** 06 - Titul (pred menom / za priezviskom)*/
+  /** 06 - Titul pred menom*/
   r006_titul?: string
+  /** 06 - Titul za menom*/
+  r006_titul_za?: string
   /**   07 - Ulica*/
   r007_ulica: string
   /**   08 - Súpisné/orientačné číslo **/
@@ -84,6 +86,11 @@ export interface TaxFormUserInput {
   /** SECTION  Deti*/
   hasChildren?: boolean
   children: ChildInput[]
+  prijmyPredJul22: boolean
+  zaciatokPrijmovDen: string
+  zaciatokPrijmovMesiac: string
+  zaciatokPrijmovRok: string
+  r034a?: string
 
   /** SECTION  Dve percenta */
   XIIoddiel_uplatnujem2percenta?: boolean

@@ -9,10 +9,8 @@ import {
 } from '../types/PageUserInputs'
 import { getAutoformByPersonName } from '../lib/api'
 import { ErrorSummary } from '../components/ErrorSummary'
-import {
-  AutoCompleteInput,
-} from '../components/AutoCompleteInput'
-import { formatPsc, parseFullName } from '../lib/utils'
+import { AutoCompleteInput } from '../components/AutoCompleteInput'
+import { formatPsc, getStreetNumber } from '../lib/utils'
 import { Nace } from '../components/Nace'
 import { Page } from '../components/Page'
 import { AutoFormSubject } from '../types/api'
@@ -28,21 +26,46 @@ const formatNace = (economicActivity) => {
 const makeHandlePersonAutoform = ({
   setValues,
 }: FormikProps<PersonalInformationUserInput>) => {
-  return (person: AutoFormSubject) => {
-    const { first, last, title } = parseFullName(person.name)
+  return (subject: AutoFormSubject) => {
+    let first_name,
+      last_name,
+      prefixes,
+      postfixes,
+      street,
+      reg_number,
+      building_number,
+      municipality,
+      postal_code,
+      country
+
+    if (subject.statutory.length > 0) {
+      ;({
+        first_name,
+        last_name,
+        prefixes,
+        postfixes,
+        street,
+        reg_number,
+        building_number,
+        municipality,
+        postal_code,
+        country,
+      } = subject.statutory[0])
+    }
 
     setValues({
-      meno_priezvisko: person.name,
-      r004_priezvisko: last || '',
-      r005_meno: first || '',
-      r006_titul: title || '',
-      r001_dic: person?.tin || '',
-      r003_nace: formatNace(person.main_economic_activity),
-      r007_ulica: person.street || person.municipality || '',
-      r008_cislo: person.street_number || '',
-      r009_psc: person.postal_code ? formatPsc(person.postal_code) : '',
-      r010_obec: person.municipality || '',
-      r011_stat: person.country || '',
+      meno_priezvisko: subject.name,
+      r004_priezvisko: last_name || '',
+      r005_meno: first_name || '',
+      r006_titul: prefixes || '',
+      r006_titul_za: postfixes || '',
+      r001_dic: `${subject.tin}` || '',
+      r003_nace: formatNace(subject.main_economic_activity),
+      r007_ulica: street || municipality || '',
+      r008_cislo: getStreetNumber({ reg_number, building_number }) || '',
+      r009_psc: postal_code ? formatPsc(postal_code) : '',
+      r010_obec: municipality || '',
+      r011_stat: country || '',
     })
   }
 }
@@ -96,7 +119,13 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                   className={styles.inlineField}
                   name="r006_titul"
                   type="text"
-                  label="Titul"
+                  label="Titul pred menom"
+                />
+                <Input
+                  className={styles.inlineField}
+                  name="r006_titul_za"
+                  type="text"
+                  label="Titul za menom"
                 />
               </div>
 

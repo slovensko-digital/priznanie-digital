@@ -30,11 +30,15 @@ export const bugReport3Input: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '10',
   hasChildren: true,
+  prijmyPredJul22: true,
+  zaciatokPrijmovDen: null,
+  zaciatokPrijmovMesiac: null,
+  zaciatokPrijmovRok: null,
   children: [
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '9709220664',
+      rodneCislo: '9902050499',
 
       wholeYear: true,
       monthFrom: '0',
@@ -54,7 +58,7 @@ export const bugReport3Input: E2eTestUserInput = {
   zaplatene_prispevky_na_dochodok: '100',
   r037_pocetMesiacov: '',
   r037_zaplatene_uroky: '',
-  expectNgoDonationPage: true,
+  expectNgoDonationValue: true,
   XIIoddiel_uplatnujem2percenta: false,
   r142_ico: '',
   r142_obchMeno: '',
@@ -73,4 +77,7 @@ export const bugReport3Input: E2eTestUserInput = {
     r004_priezvisko: 'anon',
     r005_meno: 'anon',
   },
+
+  percent2: '48,53',
+  percent3: '72,79',
 }
