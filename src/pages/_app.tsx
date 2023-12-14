@@ -39,7 +39,7 @@ setLocale({
     required: 'Toto pole musí byť vyplnené',
   },
   number: {
-    min: 'Môže mať hodnotu najmenej  ${min}',
+    min: 'Môže mať hodnotu najmenej ${min}',
     max: 'Môže mať hodnotu najviac ${max}',
   },
   string: {
