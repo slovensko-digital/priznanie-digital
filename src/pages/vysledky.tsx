@@ -2,11 +2,18 @@ import React from 'react'
 import { formatCurrency } from '../lib/utils'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'
+import { Warning } from '../components/Warning'
 import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
-import { TAX_YEAR } from '../lib/calculation'
+import { countPreddavky } from '../lib/calculation'
+import {
+  TAX_YEAR,
+  SPODNA_SADZBA_PRE_PREDDAVKY,
+  VRCHNA_SADZBA_PRE_PREDDAVKY,
+} from '../lib/calculation'
+
 
 interface SummaryRow {
   key: string
@@ -114,6 +121,12 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
   ]
 
+  const monthlyPrepayment = Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY
+
+  const quarterlyPrepayment = Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY
+
+  const prePayments = monthlyPrepayment || quarterlyPrepayment
+
   return (
     <>
       <BackLink href={previousRoute} />
@@ -122,6 +135,16 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       </h1>
       <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
       <Summary rows={summaryRows} />
+
+      {
+        prePayments &&
+        <Warning>
+            <strong>
+              Predpokladané {monthlyPrepayment ? 'mesačné' : 'kvartálne'} preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+            </strong>
+        </Warning>
+      }
+
       <Link href={nextRoute} legacyBehavior>
         <button
           data-test="next"

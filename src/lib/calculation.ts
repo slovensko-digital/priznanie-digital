@@ -34,6 +34,12 @@ export const CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY = 40
 
 const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
 
+export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
+export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
+
+const POCET_KVARTALOV = 4
+const POCET_MESIACOV = 12
+
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = 13_825
 export const TAX_YEAR = 2022
@@ -705,6 +711,7 @@ export function buildSummary(form: TaxForm): Summary {
     zakladDane: form.r080_zaklad_dane_celkovo,
     danovyPreplatok: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
+    zaplatenePreddavky: form.r133,
   }
 }
 
@@ -902,4 +909,12 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
+}
+
+export const countPreddavky = (form: TaxForm): Number => {
+  if (Number(form.r135_dan_na_uhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
+    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_MESIACOV))))
+  } else if (Number(form.r135_dan_na_uhradu) > SPODNA_SADZBA_PRE_PREDDAVKY) {
+    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_KVARTALOV))))
+  }
 }
