@@ -21,10 +21,6 @@ export const withPensionInput: E2eTestUserInput = {
 
   hasChildren: false,
   children: [],
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
 
   expectNgoDonationValue: true,
 

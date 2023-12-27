@@ -28,10 +28,6 @@ export const bugReport1Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
   hasChildren: true,
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
   children: [
     {
       id: 1,
