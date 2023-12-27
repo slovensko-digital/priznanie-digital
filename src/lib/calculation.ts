@@ -42,7 +42,7 @@ const POCET_MESIACOV = 12
 
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = 13_825
-export const TAX_YEAR = 2022
+export const TAX_YEAR = 2023
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
 

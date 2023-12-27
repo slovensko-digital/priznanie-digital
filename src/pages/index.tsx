@@ -29,7 +29,7 @@ const IconLock = () => (
   </svg>
 )
 
-const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive }) => (
+const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive, isPostponeLive }) => (
   <>
     <div className="govuk-grid-column-two-thirds">
       <TaxFormSection nextRoute={nextRoute} isDebug={isDebug} isLive={isLive} />
@@ -37,7 +37,7 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive }) => (
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} />
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} isPostponeLive={isPostponeLive} />
       </div>
 
       <ul className={styles.safeList}>
@@ -150,28 +150,29 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({ nextPostponeRoute, now}) => (
+const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
     <PostponeText now={now}/>
     <ul className="govuk-list govuk-list--bullet">
-      <li>{`do 30.6.${
-        TAX_YEAR + 1
-      } ak ste mali príjmy len zo Slovenska, alebo`}</li>
+      <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
       <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
     </ul>
 
-    <p className="govuk-body-xs">
-      Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-      nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
-      neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
-    </p>
-
-    <Link href={nextPostponeRoute} legacyBehavior>
-      <PostponeButton now={now}/>
-    </Link>
+    {
+      isPostponeLive && (
+        <>
+          <p className="govuk-body-xs">
+            Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+            nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+            neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+          </p>
+          <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
+        </>
+      )
+    }
   </>
 )
 const PostponeText = ({ now }) => (
@@ -195,10 +196,11 @@ const PostponeText = ({ now }) => (
   </>
 )
 
-const PostponeButton = ({ now }) => (
-  <>
-  {(now.getMonth() > 2) && (
-      <>
+const PostponeButton = ({ now, nextPostponeRoute }) => {
+  const isPostponeTime = now.getMonth() < 3
+
+  if (!isPostponeTime) {
+    return (
       <button
         type="button"
         className="btn-secondary govuk-button govuk-button--large govuk-button--disabled"
@@ -206,15 +208,19 @@ const PostponeButton = ({ now }) => (
       >
         Termín na podanie odkladu DP vypršal
       </button>
-      </>)}
-    {(now.getMonth() < 3) && (
-      <>
-      <button
-        type="button"
-        className="btn-secondary govuk-button govuk-button--large"
-      >
-        Súhlasím a chcem odložiť daňové priznanie
-      </button>
-      </>)}
-  </>
-)
+    )
+  }
+
+  if (isPostponeTime) {
+    return (
+      <Link href={nextPostponeRoute} legacyBehavior>
+        <button
+          type="button"
+          className="btn-secondary govuk-button govuk-button--large"
+        >
+          Súhlasím a chcem odložiť daňové priznanie
+        </button>
+      </Link>
+    )
+  }
+}
