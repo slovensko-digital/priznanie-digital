@@ -689,8 +689,6 @@ export interface Telo {
   r115: string
   r116: string
   r117: string
-  r117a: string
-  r117b: string
   r118: string
   r119: string
   r120: string

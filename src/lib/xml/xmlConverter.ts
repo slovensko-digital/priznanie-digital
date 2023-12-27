@@ -132,8 +132,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = roundDecimal(taxForm.r116_dan)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
-  form.dokument.telo.r117a = decimalToString(taxForm.r117a)
-  form.dokument.telo.r117b = decimalToString(taxForm.r117b)
 
   form.dokument.telo.r118 = roundDecimal(taxForm.r118)
   form.dokument.telo.r119 = decimalToString(taxForm.r119)

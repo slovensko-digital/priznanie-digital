@@ -404,48 +404,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (!this.eligibleForChildrenBonus) {
         return new Decimal(0)
       }
-      return new Decimal(this.r117a).plus(this.r117b)
-    },
-    get r117a() {
-      return this.r034.reduce((previousSum, currentChild) => {
-        let currentSum = new Decimal(0)
-
-        if (currentChild.m00 || currentChild.m01) {
-          const rate = getRate(Months.January, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m02) {
-          const rate = getRate(Months.February, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m03) {
-          const rate = getRate(Months.March, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m04) {
-          const rate = getRate(Months.April, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m05) {
-          const rate = getRate(Months.May, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m06) {
-          const rate = getRate(Months.June, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-
-        return previousSum.plus(currentSum)
-      }, new Decimal(0))
-    },
-    get r117b() {
       const zakladDane = this.r038.plus(this.r045)
       const polovicaZakladuDane = zakladDane.times(0.5)
 
       const zakladPreBonus =
         this.r034a && this.r034a.length > 0 ? zakladDane : polovicaZakladuDane
 
-      const novyVypocet = [
+      return [
+        Months.January,
+        Months.February,
+        Months.March,
+        Months.April,
+        Months.May,
+        Months.June,
         Months.July,
         Months.August,
         Months.September,
@@ -460,7 +431,48 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         const skutocnyVysledok = this.r034.reduce(
           (previousSum, currentChild) => {
             let currentSum = new Decimal(0)
-
+            if (
+              currentMonth === Months.January &&
+              (currentChild.m01 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.January, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.February &&
+              (currentChild.m02 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.February, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.March &&
+              (currentChild.m03 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.March, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.April &&
+              (currentChild.m04 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.April, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.May &&
+              (currentChild.m05 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.May, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
+            if (
+              currentMonth === Months.June &&
+              (currentChild.m06 || currentChild.m00)
+            ) {
+              const rate = getRate(Months.June, currentChild)
+              currentSum = currentSum.plus(rate)
+            }
             if (
               currentMonth === Months.July &&
               (currentChild.m07 || currentChild.m00)
@@ -513,10 +525,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
         return previusSum.add(vysledok)
       }, new Decimal(0))
-
-      const staryVypocet = this.staryVypocetBonusovNaDieta
-
-      return Decimal.max(novyVypocet, staryVypocet)
     },
     get r118() {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
@@ -651,39 +659,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return false
     },
-
-    get staryVypocetBonusovNaDieta() {
-      return this.r034.reduce((previousSum, currentChild) => {
-        let currentSum = new Decimal(0)
-
-        if (currentChild.m00 || currentChild.m07) {
-          const rate = getOldRate(Months.July, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m08) {
-          const rate = getOldRate(Months.August, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m09) {
-          const rate = getOldRate(Months.September, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m10) {
-          const rate = getOldRate(Months.October, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m11) {
-          const rate = getOldRate(Months.November, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-        if (currentChild.m00 || currentChild.m12) {
-          const rate = getOldRate(Months.December, currentChild)
-          currentSum = currentSum.plus(rate)
-        }
-
-        return previousSum.plus(currentSum)
-      }, new Decimal(0))
-    },
   }
 }
 
@@ -716,39 +691,9 @@ const getRate = (month: number, child) => {
     month - 1,
   )
 
-  const isUnderSix = age < 6
-  const isUnderFifteen = age < 15
-  if (month <= Months.June) {
-    if (isUnderSix) {
-      return new Decimal(CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY)
-    } else {
-      return isUnderFifteen
-        ? new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
-        : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY)
-    }
-  } else {
-    return isUnderFifteen
-      ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY)
-      : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY)
-  }
-}
-
-const getOldRate = (month: number, child) => {
-  const age = getRodneCisloAgeAtYearAndMonth(
-    child.rodneCislo,
-    TAX_YEAR,
-    month - 1,
-  )
-
-  const isUnderSix = age < 6
-  const isUnderFifteen = age < 15
-
-  if (isUnderSix) {
-    return new Decimal(CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY)
-  }
-  return isUnderFifteen
-    ? new Decimal(CHILD_RATE_OVER_SIX_UNTIL_JULY)
-    : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY)
+  return age < 18
+      ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
+      : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
 }
 
 const getPocetDetivMesiaci = (deti: TaxForm['r034'], month: Months): number => {
