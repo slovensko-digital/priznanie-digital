@@ -12,9 +12,9 @@ import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 import { Summary } from '../types/Summary'
 import { optionWithValue } from '../components/FormComponents'
 
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4579.26)
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const KONSTANTA = 38_553.01
+const KONSTANTA = 41_445.42 //TODO 2023 41 445,46 je nejaká konštanta, ktorá sa používa na výpočet dane
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
@@ -23,16 +23,13 @@ const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
-const MAX_ZAKLAD_DANE = 20_235.97
-export const PARTNER_MAX_ODPOCET = 4186.75
+const MAX_ZAKLAD_DANE = 21_754.18
+export const PARTNER_MAX_ODPOCET = 4500.86
 
-export const CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY = 47.14
-export const CHILD_RATE_OVER_SIX_UNTIL_JULY = 43.6
-export const CHILD_RATE_FIFTEEN_AND_OLDER_UNTIL_JULY = 23.57
-export const CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY = 70
-export const CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY = 40
+export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 50
+export const CHILD_RATE_EIGHTEEN_AND_OLDER = 140
 
-const ZIVOTNE_MINIMUM_44_NASOBOK = 9638.25
+const ZIVOTNE_MINIMUM_44_NASOBOK = 10_314.48
 
 export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
 export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
@@ -41,7 +38,7 @@ const POCET_KVARTALOV = 4
 const POCET_MESIACOV = 12
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = 13_825
+const ZVYHODNENIE_NA_PARTNERA = 14_862.228
 export const TAX_YEAR = 2023
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
@@ -158,9 +155,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     get r034a() {
-      if (input.hasChildren && !input.prijmyPredJul22) {
-          return `${input.zaciatokPrijmovDen}.${input.zaciatokPrijmovMesiac}.${input.zaciatokPrijmovRok}`
-      }
       return ''
     },
 
