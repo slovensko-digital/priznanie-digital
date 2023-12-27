@@ -155,7 +155,7 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
-    <PostponeText now={now} />
+    <PostponeText now={now}/>
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
       <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
@@ -163,17 +163,16 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
 
     {
       isPostponeLive && (
-        <p className="govuk-body-xs">
-          Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-          nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
-          neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
-        </p>
+        <>
+          <p className="govuk-body-xs">
+            Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+            nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+            neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+          </p>
+          <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
+        </>
       )
     }
-
-    {isPostponeLive && (
-      <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
-    )}
   </>
 )
 const PostponeText = ({ now }) => (
