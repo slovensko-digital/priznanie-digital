@@ -58,9 +58,10 @@ interface MyAppProps extends AppProps {
   Component: Page<Partial<TaxFormUserInput>>
   isDebug: boolean
   isLive: boolean
+  isPostponeLive: boolean
 }
 
-const MyApp = ({ Component, isDebug, isLive, pageProps }: MyAppProps) => {
+const MyApp = ({ Component, isDebug, isLive, isPostponeLive, pageProps }: MyAppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm>(
     taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
@@ -119,6 +120,7 @@ const MyApp = ({ Component, isDebug, isLive, pageProps }: MyAppProps) => {
       <Component
         isDebug={isDebug}
         isLive={isLive}
+        isPostponeLive={isPostponeLive}
         taxForm={taxForm}
         taxFormUserInput={taxFormUserInput}
         setTaxFormUserInput={updateTaxFormUserInput}
@@ -141,7 +143,7 @@ const MyApp = ({ Component, isDebug, isLive, pageProps }: MyAppProps) => {
 MyApp.getInitialProps = (context) => {
   const props = App.getInitialProps(context)
   const {
-    publicRuntimeConfig: { isLive },
+    publicRuntimeConfig: { isLive, isPostponeLive },
   } = getConfig()
   return {
     ...props,
@@ -150,7 +152,8 @@ MyApp.getInitialProps = (context) => {
       'not-pass',
       context?.ctx?.req?.headers?.cookie,
     ),
-    isLive
+    isLive,
+    isPostponeLive
   }
 }
 

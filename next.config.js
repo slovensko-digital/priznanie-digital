@@ -3,6 +3,7 @@ module.exports = {
   // this allows us to deploy one bundle into multiple envs
   publicRuntimeConfig: {
     isLive: process.env.NEXT_PUBLIC_isLive === "true" || false,
+    isPostponeLive: process.env.NEXT_PUBLIC_isPostponeLive === "true" || false,
     navodyBaseUrl: process.env.NEXT_PUBLIC_navodyBaseUrl,
     priznanieStepUrl: process.env.NEXT_PUBLIC_priznanieStepUrl,
     odkladStepUrl: process.env.NEXT_PUBLIC_odkladStepUrl,
