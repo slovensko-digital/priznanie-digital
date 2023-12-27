@@ -434,8 +434,6 @@ const sampleSchema: OutputJson = {
       r115: '',
       r116: '',
       r117: '',
-      r117a: '',
-      r117b: '',
       r118: '',
       r119: '',
       r120: '',

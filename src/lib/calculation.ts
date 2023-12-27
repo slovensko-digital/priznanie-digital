@@ -14,7 +14,7 @@ import { optionWithValue } from '../components/FormComponents'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const KONSTANTA = 41_445.42 //TODO 2023 41 445,46 je nejaká konštanta, ktorá sa používa na výpočet dane
+const KONSTANTA = 41_445.42 // TODO 2023 41 445,46 je nejaká konštanta, ktorá sa používa na výpočet dane
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)

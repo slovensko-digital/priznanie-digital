@@ -5,7 +5,7 @@ import {
 import { parseInputNumber } from '../src/lib/utils'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
-import { sum } from '../src/lib/utils'
+// import { sum } from '../src/lib/utils'
 
 describe('#parse', () => {
   const inputs = [
@@ -56,10 +56,10 @@ const child = {
 }
 
 /** The numbers need to be updated every year, for example 150701 => 160701 */
-const childUnder6 = { ...child, rodneCislo: '200501 / 9753' }
-const childTurning6InFeb = { ...child, rodneCislo: '160215 / 0011' }
-const childTurning6InJul = { ...child, rodneCislo: '160731 / 0012' }
-const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
+// const childUnder6 = { ...child, rodneCislo: '200501 / 9753' }
+// const childTurning6InFeb = { ...child, rodneCislo: '160215 / 0011' }
+// const childTurning6InJul = { ...child, rodneCislo: '160731 / 0012' }
+// const childOver6 = { ...child, rodneCislo: '100101 / 1234' }
 
 describe('With child (for tax year 2022)', () => {
   test('should map child', () => {
@@ -110,6 +110,7 @@ describe('With child (for tax year 2022)', () => {
     expect(result.r034[0].m12).toBe(false)
   })
 
+  // TODO 2023
   describe.skip('children tax bonus (r117)', () => {
     // test('Child under 6', () => {
     //   const result = calculate({
