@@ -14,5 +14,5 @@ export const basicInput: PostponeUserInput = {
   cislo: '4',
   obec: 'Bratislava 3',
   stat: 'Slovensko',
-  datum: '01.01.2023',
+  datum: '01.01.2024',
 }
