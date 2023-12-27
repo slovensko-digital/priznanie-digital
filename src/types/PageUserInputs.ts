@@ -23,10 +23,6 @@ export type ChildrenUserInput = Pick<
   TaxFormUserInput,
   | 'hasChildren'
   | 'children'
-  | 'prijmyPredJul22'
-  | 'zaciatokPrijmovDen'
-  | 'zaciatokPrijmovMesiac'
-  | 'zaciatokPrijmovRok'
 >
 
 export type PartnerUserInput = Pick<
