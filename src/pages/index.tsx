@@ -135,7 +135,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
 
       {!isLive && (
         <Link
-          href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania"
+          href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania-2023#new_subscription_notification_group"
           legacyBehavior
         >
           <button
