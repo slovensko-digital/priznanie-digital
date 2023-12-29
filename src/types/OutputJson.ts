@@ -98,6 +98,7 @@ export interface R35 {
   uplatDanBonusZaplatUroky: string
   zaplateneUroky: string
   pocetMesiacov: string
+  datumZacatiaUroceniaUveru: string
 }
 
 export interface T1r1 {
@@ -233,28 +234,26 @@ export interface Udaje {
   r02: string
   r03: string
   r04: string
-  r05: string
 }
 
-export interface R47 {
+export interface R4 {
   rok: string
   udaje: Udaje
 }
 
 export interface Udaje2 {
   r02: string
-  r05: string
+  r03: string
 }
 
-export interface Udaje3 {
-  r02: string
-  r03: string
-  r04: string
+interface R49 {
+  rok: string
+  udaje: Udaje
 }
 
 export interface R50 {
   rok: string
-  udaje: Udaje3
+  udaje: Udaje
 }
 export interface R51 {
   rok: string
@@ -496,6 +495,52 @@ export interface DanovyPreplatokBonus {
   datum: string
 }
 
+interface PrilPar30cOdpocetVydavkovRiadok {
+  zdanObdobieOd: string
+  zdanObdobieDo: string
+  narok: string
+  odpocitanaCast: string
+}
+
+interface PrilPar30cOdpocetVydavkov {
+  projektCislo: string
+  pocetProjektov: string
+  datumRealizacie: string
+  r01: PrilPar30cOdpocetVydavkovRiadok
+  r02: PrilPar30cOdpocetVydavkovRiadok
+  r03: PrilPar30cOdpocetVydavkovRiadok
+  r04: PrilPar30cOdpocetVydavkovRiadok
+  r05: PrilPar30cOdpocetVydavkovRiadok
+  r06: string
+  ciele: string
+  r07: string
+  r08: string
+  r09: string
+}
+
+interface Pril1bPar30eVydavkyInvesticieRiadok {
+  s01Od: string
+  s01Do: string
+  s02: string
+  s03: string
+  s04: string
+}
+
+interface Pril1bPar30eVydavkyInvesticie {
+  r01: Pril1bPar30eVydavkyInvesticieRiadok
+  r02: Pril1bPar30eVydavkyInvesticieRiadok
+  r03: Pril1bPar30eVydavkyInvesticieRiadok
+  r04: Pril1bPar30eVydavkyInvesticieRiadok
+  r05: Pril1bPar30eVydavkyInvesticieRiadok
+  r06: Pril1bPar30eVydavkyInvesticieRiadok
+  r07: Pril1bPar30eVydavkyInvesticieRiadok
+  r08: Pril1bPar30eVydavkyInvesticieRiadok
+  r09: Pril1bPar30eVydavkyInvesticieRiadok
+  r10: Pril1bPar30eVydavkyInvesticieRiadok
+  r11: string
+  r12: string
+}
+
 export interface Pr4 {
   s1: string
   s2: string
@@ -582,13 +627,36 @@ export interface SocZdravPoistenie {
   datum: string
 }
 
+interface R34 {
+  priezviskoMeno: string
+  rodneCislo: string
+  m00: string
+  m01: string
+  m02: string
+  m03: string
+  m04: string
+  m05: string
+  m06: string
+  m07: string
+  m08: string
+  m09: string
+  m10: string
+  m11: string
+  m12: string
+  druhaOsobaPodalaDPvSR: string
+  dokladRocZuct: string
+  dokladVyskaDane: string
+}
+
 export interface Telo {
   r29: string
   r30: string
   r31: R31
   r32: R32
   r33: { dieta: Dieta[] }
-  r34udajeDalsieDeti: string
+  r33a: string
+  uplatnujemPar33Ods8: string
+  r34: R34
   r34a: string
   r35: R35
   r36: string
@@ -617,12 +685,13 @@ export interface Telo {
   r44: string
   r45: string
   r46: string
-  r47: R47
+  r47: string
   r48: string
-  r49: string
+  r49: R49
   r50: R50
   r51: R51
   r52: string
+  r52a: string
   r53: string
   r54: string
   r55: string
@@ -730,6 +799,8 @@ export interface Telo {
   r153: string
   datumVyhlasenia: string
   danovyPreplatokBonus: DanovyPreplatokBonus
+  prilPar30cOdpocetVydavkov: PrilPar30cOdpocetVydavkov
+  pril1bPar30eVydavkyInvesticie: Pril1bPar30eVydavkyInvesticie
   prilPodielyNaZisku: PrilPodielyNaZisku
   socZdravPoistenie: SocZdravPoistenie
 }
