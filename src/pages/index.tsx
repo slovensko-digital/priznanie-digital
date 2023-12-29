@@ -175,9 +175,10 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
     }
   </>
 )
-const PostponeText = ({ now }) => (
+
+const PostponeText = ({ now }: { now: Date}) => (
   <>
-    {(now.getMonth() > 2) && (
+    {((now.getMonth() > 2) && (now.getFullYear() == TAX_YEAR+1)) && (
       <>
         <p>
           {`Riadny termín pre podanie daňového priznania a zaplatenie dane bol do
@@ -185,7 +186,7 @@ const PostponeText = ({ now }) => (
         </p>
         <p>Termín ste si mohli predĺžiť:</p>
       </>)}
-    {(now.getMonth() < 3) && (
+    {(now.getMonth() < 3 || now.getFullYear() == TAX_YEAR) && (
       <>
         <p>
           {`Riadny termín pre podanie daňového priznania a zaplatenie dane je
