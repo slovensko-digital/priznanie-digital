@@ -65,10 +65,6 @@ export const case202201Input: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
 
   expectNgoDonationValue: true,
 

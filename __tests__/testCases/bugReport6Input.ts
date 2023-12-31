@@ -50,10 +50,6 @@ export const bugReport6Input: E2eTestUserInput = {
       "monthTo": "11"
     }
   ],
-  "prijmyPredJul22": true,
-  "zaciatokPrijmovDen": null,
-  "zaciatokPrijmovMesiac": null,
-  "zaciatokPrijmovRok": "2022",
   "platil_prispevky_na_dochodok": false,
   "zaplatene_prispevky_na_dochodok": "",
   "r037_pocetMesiacov": "",

@@ -47,10 +47,6 @@ export const withBonusInput: E2eTestUserInput = {
     },
   ],
   hasChildren: true,
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus: true,

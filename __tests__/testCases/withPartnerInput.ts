@@ -24,10 +24,6 @@ export const withPartnerInput: E2eTestUserInput = {
   datum: '19.02.2020',
   hasChildren: false,
   children: [],
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
   expectNgoDonationValue: true,
 
   percent2: '6,70',

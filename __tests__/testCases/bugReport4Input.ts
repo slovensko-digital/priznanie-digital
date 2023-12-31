@@ -17,9 +17,5 @@ export const bugReport4Input: E2eTestUserInput = {
   t1r10_prijmy: '20000',
   datum: '22.02.2020',
   hasChildren: false,
-  prijmyPredJul22: true,
-  zaciatokPrijmovDen: null,
-  zaciatokPrijmovMesiac: null,
-  zaciatokPrijmovRok: null,
   children: [],
 }

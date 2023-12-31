@@ -25,10 +25,8 @@ import {
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
-  CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY,
-  CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
-  CHILD_RATE_OVER_SIX_UNTIL_JULY,
-  CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+  CHILD_RATE_EIGHTEEN_AND_OLDER,
+  CHILD_RATE_EIGHTEEN_AND_YOUNGER,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
   monthToKeyValue,
@@ -38,7 +36,6 @@ import { Details } from '../components/Details'
 import RadioGroup from "../components/radio/RadioGroup";
 import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
-import Fieldset from "../components/fieldset/Fieldset";
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -59,7 +56,7 @@ const Deti: Page<ChildrenUserInput> = ({
       <>
         {previousPageLink}
         <h1 className="govuk-heading-l">
-          Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov, s ktorým
+          Daňový bonus na dieťa do 18 rokov alebo študenta do 25 rokov, s ktorým
           žijete v spoločnej domácnosti
         </h1>
         <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
@@ -97,148 +94,37 @@ const Deti: Page<ChildrenUserInput> = ({
               name="hasChildren"
             />
             {values.hasChildren && (
-              <Fieldset title={`Boli zdaniteľné príjmy, ktoré uvádzate, aspoň z časti dosiahnuté z výkonu činnosti už pred 1.7.${TAX_YEAR}?`}
-                hint="Zdaniteľné príjmy, ktoré uvádzate v daňovom priznaní zo závislej činnosti alebo podnikateľskej alebo inej samostatnej zárobkovej činnosti."
-                error={errors.prijmyPredJul22}
-              >
-                <RadioGroup value={String(values.prijmyPredJul22)} onChange={(value) => {
-                  setFieldValue('prijmyPredJul22', value === 'true')
-                }}>
-                  <Radio name="prijmyPredJul22-input-yes" label="Áno" value="true" />
-
-                  <Radio name="prijmyPredJul22-input-no" label="Nie" value="false" />
-                  <RadioConditional forValue="false">
-                    <div className="govuk-form-group">
-                      <fieldset
-                        className="govuk-fieldset"
-                        role="group"
-                        aria-describedby="zaciatok-prijmov-hint"
-                      >
-                        <div id="zaciatok-prijmov-hint" className="govuk-hint">
-                          Dátum od kedy ste v roku {TAX_YEAR} začali vykonávať
-                          závislú činnosť alebo podnikateľskú alebo inú samostatnú
-                          zárobkovú činnosť, z ktorej ste dosiahli zdaniteľné prímy
-                          uvedené v daňovom priznaní.
-                          <br />
-                          Napríklad 27 8 2022
-                        </div>
-                        <div className="govuk-date-input" id="zaciatok-prijmov">
-                          <div className="govuk-date-input__item">
-                            <div className="govuk-form-group">
-                              <Input
-                                name="zaciatokPrijmovDen"
-                                label="Deň"
-                                type="number"
-                                width={2}
-                              />
-                            </div>
-                          </div>
-                          <div className="govuk-date-input__item">
-                            <div className="govuk-form-group">
-                              <Input
-                                name="zaciatokPrijmovMesiac"
-                                label="Mesiac"
-                                type="number"
-                                width={2}
-                              />
-                            </div>
-                          </div>
-                          <div className="govuk-date-input__item">
-                            <div className="govuk-form-group">
-                              <Input
-                                name="zaciatokPrijmovRok"
-                                type="number"
-                                label="Rok"
-                                width={4}
-                                disabled
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
-                    </div>
-                  </RadioConditional>
-                </RadioGroup>
-              </Fieldset>
-            )}
-            {values.hasChildren &&
-              [true, false].includes(values.prijmyPredJul22) && (
                 <>
                   <h1 className="govuk-heading-l">Informácie o deťoch</h1>
                   <p className="govuk-hint">
                     V prípade, že ste sa v roku {TAX_YEAR} starali o
-                    nezaopatrené dieťa do 16 rokov, študenta do 25 rokov alebo o
+                    nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
                     nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
                     máte právo na zľavu na dani.
                   </p>
                   <Details title="Aká je výška daňového bonusu?">
                     <p className="govuk-hint">
                       <b>
-                        Daňový bonus na vyživované dieťa od 1.1.2022 do
-                        30.6.2022:
+                        Daňový bonus na vyživované dieťa:
                       </b>
                       <ul>
                         <li>
-                          na dieťa do 6 rokov veku sumu{' '}
+                          do 18 rokov veku sumou{' '}
                           {formatCurrency(
-                            CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+                            CHILD_RATE_EIGHTEEN_AND_YOUNGER,
                           )}{' '}
                           mesačne.
                         </li>
                         <li>
-                          na dieťa nad 6 rokov veku do 15 rokov veku sumu{' '}
-                          {formatCurrency(CHILD_RATE_OVER_SIX_UNTIL_JULY)}{' '}
-                          mesačne.
-                        </li>
-                        <li>
-                          na dieťa nad 15 rokov veku sumu{' '}
+                          nad 18 rokov veku sumou{' '}
                           {formatCurrency(
-                            CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
+                            CHILD_RATE_EIGHTEEN_AND_OLDER,
                           )}{' '}
                           mesačne.
                         </li>
                       </ul>
-                      <b>
-                        Daňový bonus na vyživované dieťa od 1.7.2022 do
-                        31.12.2022:
-                      </b>
-                      <ul>
-                        <li>
-                          na dieťa do 16 rokov veku sumu{' '}
-                          {formatCurrency(
-                            CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                        <li>
-                          na dieťa nad 15 rokov veku sumu{' '}
-                          {formatCurrency(
-                            CHILD_RATE_FIFTEEN_AND_OLDER_FROM_JULY,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                      </ul>
-                      <p className="govuk-hint">
-                        Nárok na daňový bonus v 2. polroku je ale možné uplatniť
-                        najviac do výšky ustanoveného percenta z polovice
-                        základu dane v rozmedzí od 20 % v prípade daňového
-                        bonusu na 1 dieťa až do 55 % v prípade daňového bonusu
-                        na 6 a viac detí.
-                      </p>
-                      <p className="govuk-hint">
-                        Daňovník, ktorý začal vykonávať závislú činnosť, z
-                        ktorej dosahuje príjmy od 1.7.2022, môže uplatniť daňový
-                        bonus najviac do výšky čiastkového základu dane z
-                        príjmov.
-                      </p>
                     </p>
                   </Details>
-                  <p className="govuk-hint">
-                    Ak si uplatňujete daňový bonus na dieťa po prvýkrát alebo
-                    ide o dieťa narodené v priebehu roka 2022, je potrebné
-                    zahrnúť kópiu rodného listu dieťaťa do príloh k daňovému
-                    priznaniu.
-                  </p>
                   <p className="govuk-hint">
                     Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                   </p>
@@ -403,19 +289,6 @@ interface ChildrenFormErrors {
 
 export const validate = (values: ChildrenUserInput) => {
   const errors: ChildrenFormErrors = {}
-
-  if (values.prijmyPredJul22 === false && values.hasChildren) {
-    const date = new Date(`${values.zaciatokPrijmovRok}-${values.zaciatokPrijmovMesiac}-${values.zaciatokPrijmovDen}`);
-    if (date.getDate() !== Number.parseInt(values.zaciatokPrijmovDen, 10)) {
-      errors.zaciatokPrijmovDen = 'Zadajte deň v správnom tvare'
-    }
-    if ((date.getMonth() + 1) !== Number.parseInt(values.zaciatokPrijmovMesiac, 10)) {
-      errors.zaciatokPrijmovMesiac = 'Zadajte mesiac v správnom tvare'
-    }
-    if ((date.getMonth() + 1) < 7) {
-      errors.zaciatokPrijmovMesiac = 'Zadaný mesiac musí byť 7 alebo viac'
-    }
-  }
 
   if (typeof values.hasChildren === 'undefined') {
     errors.hasChildren = 'Vyznačte odpoveď'

@@ -434,8 +434,6 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    getInput('prijmyPredJul22', '-yes').click()
-
     // Try to add 2nd child
     next()
 
@@ -494,8 +492,6 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    getInput('prijmyPredJul22', '-yes').click()
-
     // Try to add 2nd child
     cy.get('[data-test="add-child"]').click()
 
@@ -547,8 +543,6 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    getInput('prijmyPredJul22', '-yes').click()
-
     cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
     cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
 
@@ -580,8 +574,6 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    getInput('prijmyPredJul22', '-yes').click()
-
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
 
     cy.get('[data-test="children[0].rodneCislo-input"]').type('9105010013')
@@ -595,8 +587,6 @@ describe('Children page', () => {
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
-
-    getInput('prijmyPredJul22', '-yes').click()
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
 
@@ -612,8 +602,6 @@ describe('Children page', () => {
 
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
-
-    getInput('prijmyPredJul22', '-yes').click()
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
 
@@ -726,7 +714,6 @@ describe('IBAN page', () => {
 
     assertUrl('/deti')
     getInput('hasChildren', '-yes').click()
-    getInput('prijmyPredJul22', '-yes').click()
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type(
       withBonusInput.children?.[0]?.priezviskoMeno ?? '',

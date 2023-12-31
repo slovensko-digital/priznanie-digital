@@ -40,10 +40,6 @@ export const bugReport5Input: E2eTestUserInput = {
       "monthTo": "11"
     }
   ],
-  "prijmyPredJul22": null,
-  "zaciatokPrijmovDen": null,
-  "zaciatokPrijmovMesiac": null,
-  "zaciatokPrijmovRok": "2022",
   "platil_prispevky_na_dochodok": true,
   "zaplatene_prispevky_na_dochodok": "180",
   "r037_pocetMesiacov": "",
@@ -56,7 +52,6 @@ export const bugReport5Input: E2eTestUserInput = {
   "XIIoddiel_suhlasZaslUdaje": true,
   "iban": "anon",
   "datum": "",
-  "r034a": "null.null.2022",
   "r006_titul_za": "",
 
   "percent2": '77,57',

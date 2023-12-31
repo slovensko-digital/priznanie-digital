@@ -85,7 +85,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t</r32>');
 
     stringBuilder.appendLine('\t<r33>');
-    var repeatingCount = $('[id^=layoutRow36155]').length;
+    var repeatingCount = $('[id^=layoutRow37924]').length;
 
     var i = 1;
     for (; i <= repeatingCount; i++) {
@@ -107,12 +107,34 @@ function createxmlfinal() {
         stringBuilder.appendLine('\t\t\t<m12>' + getPageValueCh1Xml(i, 'cbM12_1') + '</m12>');
         stringBuilder.appendLine('\t\t</dieta>');
     }
+
     stringBuilder.appendLine('\t</r33>');
-    stringBuilder.appendLine('\t<r34udajeDalsieDeti>' + (document.getElementById("r34").checked ? '1' : '0') + '</r34udajeDalsieDeti>');
-    stringBuilder.appendLine('\t<r34a>' + htmlEncode($('#r34aDatumZavCin').val()) + '</r34a>');
 
 
+    stringBuilder.appendLine('\t<r33a>' + (document.getElementById("r33a").checked ? '1' : '0') + '</r33a>');
+    stringBuilder.appendLine('\t<uplatnujemPar33Ods8>' + (document.getElementById("cb34_Uplatnujem").checked ? '1' : '0') + '</uplatnujemPar33Ods8>');
 
+    stringBuilder.appendLine('\t<r34>');
+    stringBuilder.appendLine('\t\t<priezviskoMeno>' + htmlEncode($('#r34Priezvisko_1').val()) + '</priezviskoMeno>');
+    stringBuilder.appendLine('\t\t<rodneCislo>' + htmlEncode($('#r34RodCislo_2a').val()) + htmlEncode($('#r34RodCislo_2b').val()) + '</rodneCislo>');
+    stringBuilder.appendLine('\t\t<m00>' + (document.getElementById("cbM00_1_OO").checked ? '1' : '0') + '</m00>');
+    stringBuilder.appendLine('\t\t<m01>' + (document.getElementById("cbM01_1_OO").checked ? '1' : '0') + '</m01>');
+    stringBuilder.appendLine('\t\t<m02>' + (document.getElementById("cbM02_1_OO").checked ? '1' : '0') + '</m02>');
+    stringBuilder.appendLine('\t\t<m03>' + (document.getElementById("cbM03_1_OO").checked ? '1' : '0') + '</m03>');
+    stringBuilder.appendLine('\t\t<m04>' + (document.getElementById("cbM04_1_OO").checked ? '1' : '0') + '</m04>');
+    stringBuilder.appendLine('\t\t<m05>' + (document.getElementById("cbM05_1_OO").checked ? '1' : '0') + '</m05>');
+    stringBuilder.appendLine('\t\t<m06>' + (document.getElementById("cbM06_1_OO").checked ? '1' : '0') + '</m06>');
+    stringBuilder.appendLine('\t\t<m07>' + (document.getElementById("cbM07_1_OO").checked ? '1' : '0') + '</m07>');
+    stringBuilder.appendLine('\t\t<m08>' + (document.getElementById("cbM08_1_OO").checked ? '1' : '0') + '</m08>');
+    stringBuilder.appendLine('\t\t<m09>' + (document.getElementById("cbM09_1_OO").checked ? '1' : '0') + '</m09>');
+    stringBuilder.appendLine('\t\t<m10>' + (document.getElementById("cbM10_1_OO").checked ? '1' : '0') + '</m10>');
+    stringBuilder.appendLine('\t\t<m11>' + (document.getElementById("cbM11_1_OO").checked ? '1' : '0') + '</m11>');
+    stringBuilder.appendLine('\t\t<m12>' + (document.getElementById("cbM12_1_OO").checked ? '1' : '0') + '</m12>');
+    stringBuilder.appendLine('\t\t<druhaOsobaPodalaDPvSR>' + (document.getElementById("cb34_Oznamujem").checked ? '1' : '0') + '</druhaOsobaPodalaDPvSR>');
+    stringBuilder.appendLine('\t\t<dokladRocZuct>' + (document.getElementById("cbVykonane_RZP").checked ? '1' : '0') + '</dokladRocZuct>');
+    stringBuilder.appendLine('\t\t<dokladVyskaDane>' + (document.getElementById("cbPreukazujuce_ZDP").checked ? '1' : '0') + '</dokladVyskaDane>');
+    stringBuilder.appendLine('\t</r34>');
+    stringBuilder.appendLine('\t<r34a>' + htmlEncode($('#r34aZakladDane').val()) + '</r34a>');
 
 
     // IV. Oddiel
@@ -120,6 +142,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t<uplatDanBonusZaplatUroky>' + (document.getElementById("r35_1").checked ? '1' : '0') + '</uplatDanBonusZaplatUroky>');
     stringBuilder.appendLine('\t<zaplateneUroky>' + htmlEncode($('#r35_2').val()) + '</zaplateneUroky>');
     stringBuilder.appendLine('\t<pocetMesiacov>' + htmlEncode($('#r35_3').val()) + '</pocetMesiacov>');
+    stringBuilder.appendLine('\t<datumZacatiaUroceniaUveru>' + htmlEncode($('#r35Datum').val()) + '</datumZacatiaUroceniaUveru>');
     stringBuilder.appendLine('\t</r35>');
 
     // V. Oddiel
@@ -236,20 +259,20 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t<r44>' + htmlEncode($('#t44').val()) + '</r44>');
     stringBuilder.appendLine('\t<r45>' + htmlEncode($('#t45').val()) + '</r45>');
     stringBuilder.appendLine('\t<r46>' + htmlEncode($('#t46').val()) + '</r46>');
-    stringBuilder.appendLine('\t<r47>');
-    stringBuilder.appendLine('\t\t<rok>2018</rok>');
-    stringBuilder.appendLine('\t\t<udaje>');
-    stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_47').val()) + '</r02>');
-    stringBuilder.appendLine('\t\t\t<r03>' + htmlEncode($('#R3_47').val()) + '</r03>');
-    stringBuilder.appendLine('\t\t\t<r04>' + htmlEncode($('#R4_47').val()) + '</r04>');
-    stringBuilder.appendLine('\t\t\t<r05>' + htmlEncode($('#R5_47').val()) + '</r05>');
-    stringBuilder.appendLine('\t\t</udaje>');
-    stringBuilder.appendLine('\t</r47>');
+    stringBuilder.appendLine('\t<r47>' + htmlEncode($('#t47').val()) + '</r47>');
     stringBuilder.appendLine('\t<r48>' + htmlEncode($('#t48').val()) + '</r48>');
-    stringBuilder.appendLine('\t<r49>' + htmlEncode($('#t49').val()) + '</r49>');
+
+    stringBuilder.appendLine('\t<r49>');
+    stringBuilder.appendLine('\t\t<rok>2020</rok>');
+    stringBuilder.appendLine('\t\t<udaje>');
+    stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_49').val()) + '</r02>');
+    stringBuilder.appendLine('\t\t\t<r03>' + htmlEncode($('#R3_49').val()) + '</r03>');
+    stringBuilder.appendLine('\t\t\t<r04>' + htmlEncode($('#R4_49').val()) + '</r04>');
+    stringBuilder.appendLine('\t\t</udaje>');
+    stringBuilder.appendLine('\t</r49>');
 
     stringBuilder.appendLine('\t<r50>');
-    stringBuilder.appendLine('\t\t<rok>2020</rok>');
+    stringBuilder.appendLine('\t\t<rok>2021</rok>');
     stringBuilder.appendLine('\t\t<udaje>');
     stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_50').val()) + '</r02>');
     stringBuilder.appendLine('\t\t\t<r03>' + htmlEncode($('#R3_50').val()) + '</r03>');
@@ -258,14 +281,15 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t</r50>');
 
     stringBuilder.appendLine('\t<r51>');
-    stringBuilder.appendLine('\t\t<rok>2021</rok>');
+    stringBuilder.appendLine('\t\t<rok>2022</rok>');
     stringBuilder.appendLine('\t\t<udaje>');
     stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_51').val()) + '</r02>');
-    stringBuilder.appendLine('\t\t\t<r05>' + htmlEncode($('#R5_51').val()) + '</r05>');
+    stringBuilder.appendLine('\t\t\t<r03>' + htmlEncode($('#R3_51').val()) + '</r03>');
     stringBuilder.appendLine('\t\t</udaje>');
     stringBuilder.appendLine('\t</r51>');
 
     stringBuilder.appendLine('\t<r52>' + htmlEncode($('#t52').val()) + '</r52>');
+    stringBuilder.appendLine('\t<r52a>' + htmlEncode($('#t52a').val()) + '</r52a>');
     stringBuilder.appendLine('\t<r53>' + htmlEncode($('#t53').val()) + '</r53>');
     stringBuilder.appendLine('\t<r54>' + htmlEncode($('#t54').val()) + '</r54>');
     stringBuilder.appendLine('\t<r55>' + htmlEncode($('#t55').val()) + '</r55>');
@@ -465,9 +489,8 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t<r114>' + htmlEncode($('#t114').val()) + '</r114>');
     stringBuilder.appendLine('\t<r115>' + htmlEncode($('#t115').val()) + '</r115>');
     stringBuilder.appendLine('\t<r116>' + htmlEncode($('#t116').val()) + '</r116>');
+    stringBuilder.appendLine('\t<r116a>' + htmlEncode($('#t116a').val()) + '</r116a>');
     stringBuilder.appendLine('\t<r117>' + htmlEncode($('#t117').val()) + '</r117>');
-    stringBuilder.appendLine('\t<r117a>' + htmlEncode($('#t117a').val()) + '</r117a>');
-    stringBuilder.appendLine('\t<r117b>' + htmlEncode($('#t117b').val()) + '</r117b>');
     stringBuilder.appendLine('\t<r118>' + htmlEncode($('#t118').val()) + '</r118>');
     stringBuilder.appendLine('\t<r119>' + htmlEncode($('#t119').val()) + '</r119>');
     stringBuilder.appendLine('\t<r120>' + htmlEncode($('#t120').val()) + '</r120>');
@@ -531,7 +554,7 @@ function createxmlfinal() {
             stringBuilder.appendLine('\t\t\t<zTohoVydavky>' + htmlEncode($('#odd13zToho').val()) + '</zTohoVydavky>');
             stringBuilder.appendLine('\t\t</udajeOprijmoch>');
         } else {
-            if (!document.getElementById("layoutRow36049_Repeating_" + i)) break;
+            if (!document.getElementById("layoutRow37816_Repeating_" + i)) break;
             stringBuilder.appendLine('\t\t<udajeOprijmoch>');
             stringBuilder.appendLine('\t\t\t<kodStatu>' + htmlEncode($('#odd13kod_Repeating_' + i).val()) + '</kodStatu>');
             stringBuilder.appendLine('\t\t\t<druhPrimuPar>' + htmlEncode($('#odd13Par_Repeating_' + i).val()) + '</druhPrimuPar>');
@@ -567,7 +590,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<datum>' + htmlEncode($('#dtpDatumDB').val()) + '</datum>');
     stringBuilder.appendLine('\t</danovyPreplatokBonus>');
 
-    var lr = $("[id^='layoutRow36167']");
+    var lr = $("[id^='layoutRow37937']");
     var polePoli = new Array();
     polePoli.push(lr.eq(0).find("[id^='DatumProjektu']").val());
     polePoli.push(lr.eq(0).find("[id^='Pri1r1DatumOd']").val());
@@ -652,7 +675,7 @@ function createxmlfinal() {
         } else {
             stringBuilder.appendLine('\t\t<r' + z + '>');
         }
-                                                              
+
         stringBuilder.appendLine('\t\t\t<s01Od>' + htmlEncode($('#Pri1br' + z + 'DatumOd').val()) + '</s01Od>');
         stringBuilder.appendLine('\t\t\t<s01Do>' + htmlEncode($('#Pri1br' + z + 'DatumDo').val()) + '</s01Do>');
         stringBuilder.appendLine('\t\t\t<s02>' + htmlEncode($('#Pri1br' + z + 'Stlpec2').val()) + '</s02>');
@@ -716,13 +739,6 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<pr26>' + htmlEncode($('#tbPr2_26').val()) + '</pr26>');
     stringBuilder.appendLine('\t\t<pr27>' + htmlEncode($('#tbPr2_27').val()) + '</pr27>');
     stringBuilder.appendLine('\t\t<pr28>' + htmlEncode($('#tbPr2_28').val()) + '</pr28>');
-    stringBuilder.appendLine('\t\t<pr29>' + htmlEncode($('#tbPr2_29').val()) + '</pr29>');
-    stringBuilder.appendLine('\t\t<pr30>' + htmlEncode($('#tbPr2_30').val()) + '</pr30>');
-    stringBuilder.appendLine('\t\t<pr31>' + htmlEncode($('#tbPr2_31').val()) + '</pr31>');
-    stringBuilder.appendLine('\t\t<pr32>' + htmlEncode($('#tbPr2_32').val()) + '</pr32>');
-    stringBuilder.appendLine('\t\t<pr33>' + htmlEncode($('#tbPr2_33').val()) + '</pr33>');
-    stringBuilder.appendLine('\t\t<pr34>' + htmlEncode($('#tbPr2_34').val()) + '</pr34>');
-    stringBuilder.appendLine('\t\t<pr35>' + htmlEncode($('#tbPr2_35').val()) + '</pr35>');
 
     stringBuilder.appendLine('\t</prilPodielyNaZisku>');
 
@@ -931,10 +947,10 @@ function processTelo(telo) {
                 }
                 break;
 
-            case 'r33':
+            case 'r33': //opakovacie polia
                 var dietaCount = 0;
 
-                removeSections('layoutRow36155');
+                removeSections('layoutRow37924');
 
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
@@ -942,7 +958,7 @@ function processTelo(telo) {
                         dietaCount++;
                         if (dietaCount > 4)
                             if (j != 0) {
-                                var addButton = $('div[id^=layoutRow36155]').last().find('#addSectionlayoutRow36155');//34277 neexistuje
+                                var addButton = $('div[id^=layoutRow37924]').last().find('#addSectionlayoutRow37924');//34277 neexistuje
                                 addSection(4, 20, addButton);
                             }
                         for (var k = 0; k < bNode.childNodes.length; k++) {
@@ -978,19 +994,56 @@ function processTelo(telo) {
                 }
 
                 break;
-            case 'r34udajeDalsieDeti': document.getElementById("r34").checked = (getNodeValue(aNode) == '1' ? true : false); break;
-            case 'r34a':
-                $('#r34aDatumZavCin').val(upravdatum(getNodeValue(aNode)));
+
+
+            case 'r33a': document.getElementById("r33a").checked = (getNodeValue(aNode) == '1' ? true : false); break; //checkbox
+            case 'uplatnujemPar33Ods8': document.getElementById("cb34_Uplatnujem").checked = (getNodeValue(aNode) == '1' ? true : false); break; //checkbox
+            case 'r34':
+
+                for (var j = 0; j < aNode.childNodes.length; j++) {
+                    var bNode = aNode.childNodes[j];
+                    if (bNode.nodeName == "priezviskoMeno") $('#r34Priezvisko_1').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "rodneCislo") {
+                        $('#r34RodCislo_2a').val(getNodeValue(bNode).substr(0, 6));
+                        $('#r34RodCislo_2b').val(getNodeValue(bNode).substr(6));
+                    }
+                    if (bNode.nodeName == "m00") document.getElementById("cbM00_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m01") document.getElementById("cbM01_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m02") document.getElementById("cbM02_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m03") document.getElementById("cbM03_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m04") document.getElementById("cbM04_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m05") document.getElementById("cbM05_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m06") document.getElementById("cbM06_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m07") document.getElementById("cbM07_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m08") document.getElementById("cbM08_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m09") document.getElementById("cbM09_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m10") document.getElementById("cbM10_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m11") document.getElementById("cbM11_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "m12") document.getElementById("cbM12_1_OO").checked = (getNodeValue(bNode) == '1' ? true : false);
+
+                    if (bNode.nodeName == "druhaOsobaPodalaDPvSR") document.getElementById("cb34_Oznamujem").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "dokladRocZuct") document.getElementById("cbVykonane_RZP").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "dokladVyskaDane") document.getElementById("cbPreukazujuce_ZDP").checked = (getNodeValue(bNode) == '1' ? true : false);//checkbox
+
+                }
                 break;
+
+            case 'r34a': $('#r34aZakladDane').val(getNodeValue(aNode)); break; 
+
+
+            //case 'r34a':
+            //    $('#r34aDatumZavCin').val(upravdatum(getNodeValue(aNode))); //datumove pole
+            //    break;
             case 'r35':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
                     if (bNode.nodeName == "uplatDanBonusZaplatUroky") document.getElementById("r35_1").checked = (getNodeValue(bNode) == '1' ? true : false);
                     if (bNode.nodeName == "zaplateneUroky") $('#r35_2').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pocetMesiacov") $('#r35_3').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "datumZacatiaUroceniaUveru") $('#r35Datum').val(getNodeValue(bNode));
                 }
                 break;
-            case 'r36': $('#r36').val(getNodeValue(aNode)); break;
+            case 'r36': $('#r36').val(getNodeValue(aNode)); break; //pole
             case 'r36a': $('#r36a').val(getNodeValue(aNode)); break;
             case 'r37': $('#r37').val(getNodeValue(aNode)); break;
             case 'r38': $('#r38').val(getNodeValue(aNode)); break;
@@ -1160,15 +1213,14 @@ function processTelo(telo) {
             case 'r44': $('#t44').val(getNodeValue(aNode)); break;
             case 'r45': $('#t45').val(getNodeValue(aNode)); break;
             case 'r46': $('#t46').val(getNodeValue(aNode)); break;
-            case 'r47':
-                var udaje = aNode.getElementsByTagName('udaje')[0];
-                $("#R2_47").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
-                $("#R3_47").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
-                $("#R4_47").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
-                $("#R5_47").val(getElementsValXml(udaje.getElementsByTagName('r05')[0]));
-                break;
+            case 'r47': $('#t47').val(getNodeValue(aNode)); break;
             case 'r48': $('#t48').val(getNodeValue(aNode)); break;
-            case 'r49': $('#t49').val(getNodeValue(aNode)); break;
+            case 'r49':
+                var udaje = aNode.getElementsByTagName('udaje')[0];
+                $("#R2_49").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
+                $("#R3_49").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
+                $("#R4_49").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
+                break;
             case 'r50':
                 var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_50").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
@@ -1177,9 +1229,10 @@ function processTelo(telo) {
                 break;
             case 'r51': var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_51").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
-                $("#R5_51").val(getElementsValXml(udaje.getElementsByTagName('r05')[0]));
+                $("#R3_51").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
                 break;
             case 'r52': $('#t52').val(getNodeValue(aNode)); break;
+            case 'r52a': $('#t52a').val(getNodeValue(aNode)); break;
             case 'r53': $('#t53').val(getNodeValue(aNode)); break;
             case 'r54': $('#t54').val(getNodeValue(aNode)); break;
             case 'r55': $('#t55').val(getNodeValue(aNode)); break;
@@ -1447,9 +1500,8 @@ function processTelo(telo) {
             case 'r114': $('#t114').val(getNodeValue(aNode)); break;
             case 'r115': $('#t115').val(getNodeValue(aNode)); break;
             case 'r116': $('#t116').val(getNodeValue(aNode)); break;
+            case 'r116a': $('#t116a').val(getNodeValue(aNode)); break;
             case 'r117': $('#t117').val(getNodeValue(aNode)); break;
-            case 'r117a': $('#t117a').val(getNodeValue(aNode)); break;
-            case 'r117b': $('#t117b').val(getNodeValue(aNode)); break;
             case 'r118': $('#t118').val(getNodeValue(aNode)); break;
             case 'r119': $('#t119').val(getNodeValue(aNode)); break;
             case 'r120': $('#t120').val(getNodeValue(aNode)); break;
@@ -1535,7 +1587,7 @@ function processTelo(telo) {
 
                                     if (cNode.nodeName == "kodStatu") {
                                         if (l > 6) {
-                                            var addButton = $('div[id^=layoutRow36049]').last().find('#addSectionlayoutRow36049');
+                                            var addButton = $('div[id^=layoutRow37816]').last().find('#addSectionlayoutRow37816');
                                             addSection(6, 20, addButton);
                                         }
                                         $('#odd13kod_Repeating_' + (l - 1)).val(getNodeValue(cNode));
@@ -1689,13 +1741,6 @@ function processTelo(telo) {
                     if (bNode.nodeName == "pr26") $('#tbPr2_26').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr27") $('#tbPr2_27').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr28") $('#tbPr2_28').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr29") $('#tbPr2_29').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr30") $('#tbPr2_30').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr31") $('#tbPr2_31').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr32") $('#tbPr2_32').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr33") $('#tbPr2_33').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr34") $('#tbPr2_34').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr35") $('#tbPr2_35').val(getNodeValue(bNode));
                 }
                 break;
 
@@ -1770,13 +1815,13 @@ break;*/
 
     if (prilPar30cOdpocetVydavkov.length != 0) {
         for (var t = 0; t < prilPar30cOdpocetVydavkov.length; t++) {
-            var thisLR = $("[id^='layoutRow36167']:last");//takéto id pre layoutRow vo formulári aktuálne neexistuje (20221206, zz)
+            var thisLR = $("[id^='layoutRow37937']:last");//takéto id pre layoutRow vo formulári aktuálne neexistuje (20221206, zz)
             if (t != 0) {
-                addSection(1, 999, thisLR.find("[id^='addSectionlayoutRow36167']"));
-                var policko = $("[id^='layoutRow36167']:last").find("[id^='Pri1r7']").attr("disabled", true);
+                addSection(1, 999, thisLR.find("[id^='addSectionlayoutRow37937']"));
+                var policko = $("[id^='layoutRow37937']:last").find("[id^='Pri1r7']").attr("disabled", true);
                 policko.attr("disabled", true);
             }
-            var thisLR = $("[id^='layoutRow36167']:last");
+            var thisLR = $("[id^='layoutRow37937']:last");
             var prilPar30cOdpocetVydavkovXML = prilPar30cOdpocetVydavkov[t];
 
             thisLR.find("[id^='ProjektCislo']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('projektCislo')[0]));
@@ -1813,13 +1858,13 @@ break;*/
             thisLR.find("[id^='Pri1r8']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('r08')[0]));
             thisLR.find("[id^='Pri1r9']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('r09')[0]));
 
-            if ($('[id^=layoutRow36167]').length == prilPar30cOdpocetVydavkov.length)
+            if ($('[id^=layoutRow37937]').length == prilPar30cOdpocetVydavkov.length)
                 $("#Pri1r7").change();
         }
 
 
         // Nastavenie obmedzeni datumov		
-        var allLR = $("[id^='layoutRow29745']");
+        var allLR = $("[id^='layoutRow37937']");
 
         allLR.each(function () {
             var lr = $(this);
@@ -1896,74 +1941,74 @@ break;*/
     }
     //end for
 
-        //zmena 20221206, zz: task293429
-        var pril1bPar30eVydavkyInvesticie = telo.getElementsByTagName('pril1bPar30eVydavkyInvesticie');
-        if (pril1bPar30eVydavkyInvesticie.length != 0) {
-            pril1bPar30eVydavkyInvesticie = pril1bPar30eVydavkyInvesticie[0];
-            var r01 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r01')[0];
-            $("[id^='Pri1br1DatumOd']").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br1DatumDo']").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br1Stlpec2']").val(getElementsValXml(r01.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br1Stlpec3']").val(getElementsValXml(r01.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br1Stlpec4']").val(getElementsValXml(r01.getElementsByTagName('s04')[0]));
-            var r02 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r02')[0];
-            $("[id^='Pri1br2DatumOd']").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br2DatumDo']").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br2Stlpec2']").val(getElementsValXml(r02.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br2Stlpec3']").val(getElementsValXml(r02.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br2Stlpec4']").val(getElementsValXml(r02.getElementsByTagName('s04')[0]));
-            var r03 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r03')[0];
-            $("[id^='Pri1br3DatumOd']").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br3DatumDo']").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br3Stlpec2']").val(getElementsValXml(r03.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br3Stlpec3']").val(getElementsValXml(r03.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br3Stlpec4']").val(getElementsValXml(r03.getElementsByTagName('s04')[0]));
-            var r04 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r04')[0];
-            $("[id^='Pri1br4DatumOd']").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br4DatumDo']").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br4Stlpec2']").val(getElementsValXml(r04.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br4Stlpec3']").val(getElementsValXml(r04.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br4Stlpec4']").val(getElementsValXml(r04.getElementsByTagName('s04')[0]));
-            var r05 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r05')[0];
-            $("[id^='Pri1br5DatumOd']").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br5DatumDo']").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br5Stlpec2']").val(getElementsValXml(r05.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br5Stlpec3']").val(getElementsValXml(r05.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br5Stlpec4']").val(getElementsValXml(r05.getElementsByTagName('s04')[0]));
-            var r06 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r06')[0];
-            $("[id^='Pri1br6DatumOd']").val(getElementsValXml(r06.getElementsByTagName('s01Od')[0]));
-            $("[id^='Pri1br6DatumDo']").val(getElementsValXml(r06.getElementsByTagName('s01Do')[0]));
-            $("[id^='Pri1br6Stlpec2']").val(getElementsValXml(r06.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br6Stlpec3']").val(getElementsValXml(r06.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br6Stlpec4']").val(getElementsValXml(r06.getElementsByTagName('s04')[0]));
-            var r07 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r07')[0];
-            $("[id^='Pri1br7DatumOd']").val(upravdatum(getElementsValXml(r07.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br7DatumDo']").val(upravdatum(getElementsValXml(r07.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br7Stlpec2']").val(getElementsValXml(r07.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br7Stlpec3']").val(getElementsValXml(r07.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br7Stlpec4']").val(getElementsValXml(r07.getElementsByTagName('s04')[0]));
-            var r08 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r08')[0];
-            $("[id^='Pri1br8DatumOd']").val(upravdatum(getElementsValXml(r08.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br8DatumDo']").val(upravdatum(getElementsValXml(r08.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br8Stlpec2']").val(getElementsValXml(r08.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br8Stlpec3']").val(getElementsValXml(r08.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br8Stlpec4']").val(getElementsValXml(r08.getElementsByTagName('s04')[0]));
-            var r09 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r09')[0];
-            $("[id^='Pri1br9DatumOd']").val(upravdatum(getElementsValXml(r09.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br9DatumDo']").val(upravdatum(getElementsValXml(r09.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br9Stlpec2']").val(getElementsValXml(r09.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br9Stlpec3']").val(getElementsValXml(r09.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br9Stlpec4']").val(getElementsValXml(r09.getElementsByTagName('s04')[0]));
-            var r10 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r10')[0];
-            $("[id^='Pri1br10DatumOd']").val(upravdatum(getElementsValXml(r10.getElementsByTagName('s01Od')[0])));
-            $("[id^='Pri1br10DatumDo']").val(upravdatum(getElementsValXml(r10.getElementsByTagName('s01Do')[0])));
-            $("[id^='Pri1br10Stlpec2']").val(getElementsValXml(r10.getElementsByTagName('s02')[0]));
-            $("[id^='Pri1br10Stlpec3']").val(getElementsValXml(r10.getElementsByTagName('s03')[0]));
-            $("[id^='Pri1br10Stlpec4']").val(getElementsValXml(r10.getElementsByTagName('s04')[0]));
-            
-			$("[id^='Pri1br11Spolu']").val(getElementsValXml(pril1bPar30eVydavkyInvesticie.getElementsByTagName('r11')[0]));
-            $("[id^='Pri1br12Plan']").val(getElementsValXml(pril1bPar30eVydavkyInvesticie.getElementsByTagName('r12')[0]));
-        }
+    //zmena 20221206, zz: task293429
+    var pril1bPar30eVydavkyInvesticie = telo.getElementsByTagName('pril1bPar30eVydavkyInvesticie');
+    if (pril1bPar30eVydavkyInvesticie.length != 0) {
+        pril1bPar30eVydavkyInvesticie = pril1bPar30eVydavkyInvesticie[0];
+        var r01 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r01')[0];
+        $("[id^='Pri1br1DatumOd']").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br1DatumDo']").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br1Stlpec2']").val(getElementsValXml(r01.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br1Stlpec3']").val(getElementsValXml(r01.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br1Stlpec4']").val(getElementsValXml(r01.getElementsByTagName('s04')[0]));
+        var r02 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r02')[0];
+        $("[id^='Pri1br2DatumOd']").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br2DatumDo']").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br2Stlpec2']").val(getElementsValXml(r02.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br2Stlpec3']").val(getElementsValXml(r02.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br2Stlpec4']").val(getElementsValXml(r02.getElementsByTagName('s04')[0]));
+        var r03 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r03')[0];
+        $("[id^='Pri1br3DatumOd']").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br3DatumDo']").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br3Stlpec2']").val(getElementsValXml(r03.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br3Stlpec3']").val(getElementsValXml(r03.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br3Stlpec4']").val(getElementsValXml(r03.getElementsByTagName('s04')[0]));
+        var r04 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r04')[0];
+        $("[id^='Pri1br4DatumOd']").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br4DatumDo']").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br4Stlpec2']").val(getElementsValXml(r04.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br4Stlpec3']").val(getElementsValXml(r04.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br4Stlpec4']").val(getElementsValXml(r04.getElementsByTagName('s04')[0]));
+        var r05 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r05')[0];
+        $("[id^='Pri1br5DatumOd']").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br5DatumDo']").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br5Stlpec2']").val(getElementsValXml(r05.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br5Stlpec3']").val(getElementsValXml(r05.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br5Stlpec4']").val(getElementsValXml(r05.getElementsByTagName('s04')[0]));
+        var r06 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r06')[0];
+        $("[id^='Pri1br6DatumOd']").val(getElementsValXml(r06.getElementsByTagName('s01Od')[0]));
+        $("[id^='Pri1br6DatumDo']").val(getElementsValXml(r06.getElementsByTagName('s01Do')[0]));
+        $("[id^='Pri1br6Stlpec2']").val(getElementsValXml(r06.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br6Stlpec3']").val(getElementsValXml(r06.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br6Stlpec4']").val(getElementsValXml(r06.getElementsByTagName('s04')[0]));
+        var r07 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r07')[0];
+        $("[id^='Pri1br7DatumOd']").val(upravdatum(getElementsValXml(r07.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br7DatumDo']").val(upravdatum(getElementsValXml(r07.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br7Stlpec2']").val(getElementsValXml(r07.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br7Stlpec3']").val(getElementsValXml(r07.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br7Stlpec4']").val(getElementsValXml(r07.getElementsByTagName('s04')[0]));
+        var r08 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r08')[0];
+        $("[id^='Pri1br8DatumOd']").val(upravdatum(getElementsValXml(r08.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br8DatumDo']").val(upravdatum(getElementsValXml(r08.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br8Stlpec2']").val(getElementsValXml(r08.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br8Stlpec3']").val(getElementsValXml(r08.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br8Stlpec4']").val(getElementsValXml(r08.getElementsByTagName('s04')[0]));
+        var r09 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r09')[0];
+        $("[id^='Pri1br9DatumOd']").val(upravdatum(getElementsValXml(r09.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br9DatumDo']").val(upravdatum(getElementsValXml(r09.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br9Stlpec2']").val(getElementsValXml(r09.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br9Stlpec3']").val(getElementsValXml(r09.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br9Stlpec4']").val(getElementsValXml(r09.getElementsByTagName('s04')[0]));
+        var r10 = pril1bPar30eVydavkyInvesticie.getElementsByTagName('r10')[0];
+        $("[id^='Pri1br10DatumOd']").val(upravdatum(getElementsValXml(r10.getElementsByTagName('s01Od')[0])));
+        $("[id^='Pri1br10DatumDo']").val(upravdatum(getElementsValXml(r10.getElementsByTagName('s01Do')[0])));
+        $("[id^='Pri1br10Stlpec2']").val(getElementsValXml(r10.getElementsByTagName('s02')[0]));
+        $("[id^='Pri1br10Stlpec3']").val(getElementsValXml(r10.getElementsByTagName('s03')[0]));
+        $("[id^='Pri1br10Stlpec4']").val(getElementsValXml(r10.getElementsByTagName('s04')[0]));
+
+        $("[id^='Pri1br11Spolu']").val(getElementsValXml(pril1bPar30eVydavkyInvesticie.getElementsByTagName('r11')[0]));
+        $("[id^='Pri1br12Plan']").val(getElementsValXml(pril1bPar30eVydavkyInvesticie.getElementsByTagName('r12')[0]));
+    }
 
 }
 
@@ -2041,7 +2086,7 @@ function createfdf(segment, index) {
 function createNfdf() {
     var fdfObsah = new Array();
     var pocetvsetkychsekcii = 1;
-    var pocetvsetkychsekcii = $("[id^='layoutRow36167_']").length;
+    var pocetvsetkychsekcii = $("[id^='layoutRow37937_']").length;
     var pocetsekciinastranu = 1;
     var pocetmaxstran = 10;
     var davka = 0;
@@ -2167,8 +2212,8 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r31_2a').val()) + ')/T (31b)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r31_2b').val()) + ')/T (31c)>>');
     stringBuilder.appendLine('    << /V (' + ($('#r32_1').is(':checked') ? 'X' : '') + ')/T (32a)>>');
-	
-	if (!!$('#r32_2').val()) {
+
+    if (!!$('#r32_2').val()) {
         stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r32_2').val().split(".")[0]) + ')/T (32b)>>');
     } else {
         stringBuilder.appendLine('    << /V ()/T (32b)>>');
@@ -2178,7 +2223,7 @@ function createMainFdf() {
     } else {
         stringBuilder.appendLine('    << /V ()/T (32c)>>');
     }
-	
+
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r32_3').val()) + ')/T (32d)>>');
 
     for (i = 0; i < 4; i++) {
@@ -2201,23 +2246,53 @@ function createMainFdf() {
         stringBuilder.appendLine('    << /V (' + ($('#cbM12_1' + suffix).is(':checked') ? 'X' : '') + ')/T (33-' + (i + 1) + 'e12)>>');
     }
 
-    stringBuilder.appendLine('    << /V (' + ($('#r34').is(':checked') ? 'X' : '') + ')/T (34)>>');
-     if (!!$('#r34aDatumZavCin').val()) {
-        stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r34aDatumZavCin').val().split(".")[0]) + ')/T (34a1)>>');
-    } else {
-        stringBuilder.appendLine('    << /V ()/T (34a1)>>');
-    }
-    if (!!$('#r34aDatumZavCin').val()) {
-        stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r34aDatumZavCin').val().split(".")[1]) + ')/T (34a2)>>');
-    } else {
-        stringBuilder.appendLine('    << /V ()/T (34a2)>>');
-    }
-          
+    stringBuilder.appendLine('    << /V (' + ($('#r33a').is(':checked') ? 'X' : '') + ')/T (33a)>>');
+
+    stringBuilder.appendLine('    << /V (' + ($('#cb34_Uplatnujem').is(':checked') ? 'X' : '') + ')/T (34-0)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r34Priezvisko_1').val()) + ')/T (34-1a)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r34RodCislo_2a').val()) + ')/T (34-1b)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r34RodCislo_2b').val()) + ')/T (34-1c)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM00_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e00)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM01_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e01)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM02_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e02)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM03_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e03)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM04_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e04)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM05_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e05)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM06_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e06)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM07_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e07)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM08_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e08)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM09_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e09)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM10_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e10)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM11_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e11)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbM12_1_OO').is(':checked') ? 'X' : '') + ')/T (34-1e12)>>');
+
+    stringBuilder.appendLine('    << /V (' + ($('#cb34_Oznamujem').is(':checked') ? 'X' : '') + ')/T (34-2)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbVykonane_RZP').is(':checked') ? 'X' : '') + ')/T (34-3)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbPreukazujuce_ZDP').is(':checked') ? 'X' : '') + ')/T (34-4)>>');
+
+    stringBuilder.appendLine('    << /V (' + celacast($('#r34aZakladDane').val()) + ')/T (34a)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#r34aZakladDane').val(), 2) + ')/T (34ad)>>');
+
     //IV oddiel
     stringBuilder.appendLine('    << /V (' + ($('#r35_1').is(':checked') ? 'X' : '') + ')/T (35a)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#r35_2').val()) + ')/T (35b)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#r35_2').val(), 2) + ')/T (35c)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r35_3').val()) + ')/T (35d)>>');
+    if (!!$('#r35Datum').val()) {
+        stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r35Datum').val().split(".")[0]) + ')/T (35e)>>');
+    } else {
+        stringBuilder.appendLine('    << /V ()/T (35e)>>');
+    }
+    if (!!$('#r35Datum').val()) {
+        stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r35Datum').val().split(".")[1]) + ')/T (35f)>>');
+    } else {
+        stringBuilder.appendLine('    << /V ()/T (35f)>>');
+    }
+    if (!!$('#r35Datum').val()) {
+        stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#r35Datum').val().split(".")[2].substr(2, 2)) + ')/T (35g)>>');
+    } else {
+        stringBuilder.appendLine('    << /V ()/T (35g)>>');
+    }
     //V oddiel
     stringBuilder.appendLine('    << /V (' + celacast($('#r36').val()) + ')/T (36)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#r36').val(), 2) + ')/T (36d)>>');
@@ -2345,22 +2420,19 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t45').val(), 2) + ')/T (45d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t46').val()) + ')/T (46)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t46').val(), 2) + ')/T (46d)>>');
-
-    for (var i = 47; i <= 47; i++) {    
-        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (47-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (47-2d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (47-3)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (47-3d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (47-4)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (47-4d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R5_' + i).val()) + ')/T (47-5)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R5_' + i).val(), 2) + ')/T (47-5d)>>');
-    }
+    stringBuilder.appendLine('    << /V (' + celacast($('#t47').val()) + ')/T (47)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t47').val(), 2) + ')/T (47d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t48').val()) + ')/T (48)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t48').val(), 2) + ')/T (48d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#t49').val()) + ')/T (49)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t49').val(), 2) + ')/T (49d)>>');
-   
+    for (var i = 49; i <= 49; i++) {
+        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (49-2)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (49-2d)>>');
+        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (49-3)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (49-3d)>>');
+        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (49-4)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (49-4d)>>');
+    }
+
     for (var i = 50; i <= 50; i++) {
         stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (50-2)>>');
         stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (50-2d)>>');
@@ -2369,15 +2441,17 @@ function createMainFdf() {
         stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (50-4)>>');
         stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (50-4d)>>');
     }
-    
-    for (var i = 51; i <= 51; i++) {        
+
+    for (var i = 51; i <= 51; i++) {
         stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (51-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (51-2d)>>');   
-        stringBuilder.appendLine('          << /V (' + celacast($('#R5_' + i).val()) + ')/T (51-5)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R5_' + i).val(), 2) + ')/T (51-5d)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (51-2d)>>');
+        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (51-3)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (51-3d)>>');
     }
     stringBuilder.appendLine('    << /V (' + celacast($('#t52').val()) + ')/T (52)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t52').val(), 2) + ')/T (52d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#t52a').val()) + ')/T (52a)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t52a').val(), 2) + ')/T (52ad)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t53').val()) + ')/T (53)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t53').val(), 2) + ')/T (53d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t54').val()) + ')/T (54)>>');
@@ -2635,12 +2709,10 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t115').val(), 2) + ')/T (115d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t116').val()) + ')/T (116)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t116').val(), 2) + ')/T (116d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#t116a').val()) + ')/T (116a)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t116a').val(), 2) + ')/T (116ad)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t117').val()) + ')/T (117)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t117').val(), 2) + ')/T (117d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#t117a').val()) + ')/T (117a)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t117a').val(), 2) + ')/T (117ad)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#t117b').val()) + ')/T (117b)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t117b').val(), 2) + ')/T (117bd)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t118').val()) + ')/T (118)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t118').val(), 2) + ')/T (118d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t119').val()) + ')/T (119)>>');
@@ -2800,7 +2872,7 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#valRekreacia').val(), 2) + ')/T (vyskad)>>');
 
     stringBuilder.appendLine('    << /V (');
-    var polesekcii1 = $("[id^='layoutRow36049']");
+    var polesekcii1 = $("[id^='layoutRow37816']");
     if (polesekcii1.length > 6) {
         stringBuilder.appendLine(prepisznakyFdf('Ďalšie záznamy:'));
         for (var i = 6; i < polesekcii1.length; i++) {
@@ -2819,8 +2891,7 @@ function createMainFdf() {
         stringBuilder.appendLine(prepisznakyFdf('\nĎalšie vyživované deti:'));
         for (var i = 4; i < polesekcii2.length; i++) {
             var line = prepisznakyFdf('Priezvisko a meno: ' + $('#r33Priezvisko_1_Repeating_' + i).val() + ', Rodné číslo: ' + $('#r33RodCislo_2a_Repeating_' + i).val() + ' / ' +
-                $('#r33RodCislo_2b_Repeating_' + i).val() + ', Kúpeľná starostlivosť: ' + ($('#r33Ks_Repeating_' + i).is(':checked') ? 'áno' : 'nie') +
-                ', Mesiace: ' +
+                $('#r33RodCislo_2b_Repeating_' + i).val() + ', Mesiace: ' +
                 ($('#cbM00_1_Repeating_' + i).is(':checked') ? '1 - 12, ' : '') +
                 ($('#cbM01_1_Repeating_' + i).is(':checked') ? '1, ' : '') +
                 ($('#cbM02_1_Repeating_' + i).is(':checked') ? '2, ' : '') +
@@ -2888,9 +2959,9 @@ function createMainFdf() {
         stringBuilder.appendLine('    << /V ()/T (XIVdatum3)>>');
     }
 
-    var lr = $("[id^='layoutRow36167']");
+    var lr = $("[id^='layoutRow37937']");
     var pocetFdfStran = lr.length;
-    var lrAkt = $("#layoutRow36167");
+    var lrAkt = $("#layoutRow37937");
     var isProjectEmpty = emptyProject(lrAkt);
 
     if (isProjectEmpty)
@@ -2999,72 +3070,72 @@ function createMainFdf() {
     //Priloha 1b
     stringBuilder.appendLine('    << /T (0)/Kids');
     stringBuilder.appendLine('        [');
-    
+
     for (var z = 1; z <= 10; z++) {
-    if (z == 10){
-        stringBuilder.appendLine('    << /T (a)/Kids');
-    }else{
-        stringBuilder.appendLine('    << /T (' + z + ')/Kids');
+        if (z == 10) {
+            stringBuilder.appendLine('    << /T (a)/Kids');
+        } else {
+            stringBuilder.appendLine('    << /T (' + z + ')/Kids');
+        }
+
+        stringBuilder.appendLine('        [');
+
+        if (!!$('#Pri1br' + z + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[0]) + ')/T (1a)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1a)>>');
+        }
+        if (!!$('#Pri1br' + z + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[1]) + ')/T (1b)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1b)>>');
+        }
+        if (!!$('#Pri1br' + z + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[2].substr(2, 2)) + ')/T (1c)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1c)>>');
+        }
+
+        if (!!$('#Pri1br' + z + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[0]) + ')/T (1d)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1d)>>');
+        }
+        if (!!$('#Pri1br' + z + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[1]) + ')/T (1e)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1e)>>');
+        }
+        if (!!$('#Pri1br' + z + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[2].substr(2, 2)) + ')/T (1f)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (1f)>>');
+        }
+
+        stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec2').val()) + ')/T (2)>> ');
+        stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec2').val()) + ')/T (2d)>> ');
+        stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec3').val()) + ')/T (3)>> ');
+        stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec3').val()) + ')/T (3d)>> ');
+        stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec4').val()) + ')/T (4)>> ');
+        stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec4').val()) + ')/T (4d)>> ');
+
+        stringBuilder.appendLine('    ]>>');
     }
-      
-      stringBuilder.appendLine('        [');
-      
-      if (!!$('#Pri1br' + z + 'DatumOd').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[0]) + ')/T (1a)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1a)>>');
-      }
-      if (!!$('#Pri1br' + z + 'DatumOd').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[1]) + ')/T (1b)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1b)>>');
-      }
-      if (!!$('#Pri1br' + z + 'DatumOd').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumOd').val().split(".")[2].substr(2, 2)) + ')/T (1c)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1c)>>');
-      }
-      
-      if (!!$('#Pri1br' + z + 'DatumDo').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[0]) + ')/T (1d)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1d)>>');
-      }
-      if (!!$('#Pri1br' + z + 'DatumDo').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[1]) + ')/T (1e)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1e)>>');
-      }
-      if (!!$('#Pri1br' + z + 'DatumDo').val()) {
-          stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1br' + z + 'DatumDo').val().split(".")[2].substr(2, 2)) + ')/T (1f)>>');
-      } else {
-          stringBuilder.appendLine('    << /V ()/T (1f)>>');
-      }
-      
-      stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec2').val()) + ')/T (2)>> ');
-      stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec2').val()) + ')/T (2d)>> ');
-      stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec3').val()) + ')/T (3)>> ');
-      stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec3').val()) + ')/T (3d)>> ');
-      stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br' + z + 'Stlpec4').val()) + ')/T (4)>> ');
-      stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br' + z + 'Stlpec4').val()) + ')/T (4d)>> ');         
-      
-      stringBuilder.appendLine('    ]>>');
-    }
-    
+
     stringBuilder.appendLine('    << /T (b)/Kids');
     stringBuilder.appendLine('        [');
     stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br11Spolu').val()) + ')/T (4)>> ');
     stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br11Spolu').val()) + ')/T (4d)>> ');
     stringBuilder.appendLine('    ]>>');
-    
-     stringBuilder.appendLine('    << /T (c)/Kids');
+
+    stringBuilder.appendLine('    << /T (c)/Kids');
     stringBuilder.appendLine('        [');
     stringBuilder.appendLine('      << /V (' + celacast($('#Pri1br12Plan').val()) + ')/T (4)>> ');
     stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1br12Plan').val()) + ')/T (4d)>> ');
     stringBuilder.appendLine('    ]>>');
-    
-    
-    
+
+
+
     stringBuilder.appendLine('    ]>>');
 
 
@@ -3137,17 +3208,6 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_28').val()) + ')/T (ozd28)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_28').val(), 2) + ')/T (ozd28d)>>');
 
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_29').val()) + ')/T (ozd29)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_29').val(), 2) + ')/T (ozd29d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_31').val()) + ')/T (ozd31)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_31').val(), 2) + ')/T (ozd31d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_32').val()) + ')/T (ozd32)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_32').val(), 2) + ')/T (ozd32d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_34').val()) + ')/T (ozd34)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_34').val(), 2) + ')/T (ozd34d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2_35').val()) + ')/T (ozd35)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_35').val(), 2) + ')/T (ozd35d)>>');
-
     // Priloha 3
     stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3S1').val()) + ')/T (szp01-1)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3S1').val(), 2) + ')/T (szp01-1d)>>');
@@ -3203,7 +3263,7 @@ function createMainFdf() {
     }
 
     stringBuilder.appendLine(' ]');
-    stringBuilder.appendLine(' /F (form.546.DPFOB-22-print-save.pdf)');
+    stringBuilder.appendLine(' /F (form.572.DPFOB-23-print-save.pdf)');
     stringBuilder.appendLine(' /ID [ <f09672f5777c7363de522b1b240fe891><e243d0a3dc18e99c15162168ae4276d6>]');
     stringBuilder.appendLine(' >>');
     stringBuilder.appendLine('>>');
@@ -3245,13 +3305,13 @@ function createpotvrdenie() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t68').val()) + ')/T (r68)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t80').val()) + ')/T (r80)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t94').val()) + ')/T (r94)>>');
-	var sucet = Number($('#tbPr2_07').val()) + Number($('#tbPr2_25').val()) + Number($('#tbPr2_29').val()) + Number($('#tbPr2_32').val());
+    var sucet = Number($('#tbPr2_07').val()) + Number($('#tbPr2_25').val());
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf(sucet ? sucet.toFixed(2) : sucet) + ')/T (r07)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t116').val()) + ')/T (r116)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t135').val()) + ')/T (r135)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t136').val()) + ')/T (r136)>>');
     stringBuilder.appendLine(' ]');
-    stringBuilder.appendLine(' /F (form.546.DPFOB-22-potvrdenie-print-save.pdf)');
+    stringBuilder.appendLine(' /F (form.572.DPFOB-23-potvrdenie-print-save.pdf)');
     stringBuilder.appendLine(' /ID [ <b310ccfdb26d1b632b562cd598a3cb97><50178e60984b848bcecd3e9e265bf14a>]');
     stringBuilder.appendLine(' >>');
     stringBuilder.appendLine('>>');
@@ -3259,7 +3319,7 @@ function createpotvrdenie() {
     stringBuilder.appendLine('trailer');
     stringBuilder.appendLine('<< /Root 1 0 R >>');
     stringBuilder.appendLine('%%EOF');
-	return stringBuilder.string();
+    return stringBuilder.string();
 }
 
 function createopakovaneNfdf(davka, zaciatoksekcii, koniecsekcii, pocetsekciinastranu, pocetmaxstran) {
@@ -3273,12 +3333,12 @@ function createopakovaneNfdf(davka, zaciatoksekcii, koniecsekcii, pocetsekciinas
     stringBuilder.appendLine('    [');
     stringBuilder.appendLine('    << /V(' + prepisznakyFdf('Tlačivo vytlačené z Portálu FS', false) + ')/T (print)>>');
 
-    var lr = $("[id^='layoutRow36167_']");
+    var lr = $("[id^='layoutRow37937_']");
     var pocetFdfStran = lr.length + 1;
     var boolJePlne = false;
 
     if (pocetFdfStran == 1 && davka == 1) {
-        var pomSekciaNaKOntrolu = $("[id='layoutRow36167_Repeating_1']");
+        var pomSekciaNaKOntrolu = $("[id='layoutRow37937_Repeating_1']");
         var arrayPoli = new Array();
 
         arrayPoli.push(pomSekciaNaKOntrolu.find("[id^='Pri1r1DatumOd']").val());
@@ -3416,7 +3476,7 @@ function createopakovaneNfdf(davka, zaciatoksekcii, koniecsekcii, pocetsekciinas
     }
 
     stringBuilder.appendLine('    ]');
-    stringBuilder.appendLine('    /F (form.546.DPFOB-22-priloha10-print-save.pdf)');
+    stringBuilder.appendLine('    /F (form.572.DPFOB-23-priloha10-print-save.pdf)');
     stringBuilder.appendLine('    /ID [ <ddc3355b1fd2420733ea3739a242e02a><25cb8633995744a5a35366d96be3d877>]');
     stringBuilder.appendLine('  >> ');
     stringBuilder.appendLine('>> ');
@@ -3479,3 +3539,63 @@ function emptyProject(layoutRow) {
 
     return isEmptyProject;
 }
+
+var iban_data = new Array(
+    new Country("Andorra", "AD", "0  4n 4n", "0  12   0 "),
+    new Country("Albania", "AL", "0  8n 0 ", "0  16   0 "),
+    new Country("Austria", "AT", "0  5n 0 ", "0  11n  0 "),
+    new Country("Bosnia and Herzegovina",
+        "BA", "0  3n 3n", "0   8n  2n"),
+    new Country("Belgium", "BE", "0  3n 0 ", "0   7n  2n"),
+    new Country("Bulgaria", "BG", "0  4a 4n", "2n  8   0 "),
+    new Country("Switzerland", "CH", "0  5n 0 ", "0  12   0 "),
+    new Country("Cyprus", "CY", "0  3n 5n", "0  16   0 "),
+    new Country("Czech Republic", "CZ", "0  4n 0 ", "0  16n  0 "),
+    new Country("Germany", "DE", "0  8n 0 ", "0  10n  0 "),
+    new Country("Denmark", "DK", "0  4n 0 ", "0   9n  1n"),
+    new Country("Estonia", "EE", "0  2n 0 ", "2n 11n  1n"),
+    new Country("Spain", "ES", "0  4n 4n", "2n 10n  0 "),
+    new Country("Finland", "FI", "0  6n 0 ", "0   7n  1n"),
+    new Country("Faroe Islands", "FO", "0  4n 0 ", "0   9n  1n"),
+    new Country("France", "FR", "0  5n 5n", "0  11   2n"),
+    new Country("United Kingdom", "GB", "0  4a 6n", "0   8n  0 "),
+    new Country("Georgia", "GE", "0  2a 0 ", "0  16n  0 "),
+    new Country("Gibraltar", "GI", "0  4a 0 ", "0  15   0 "),
+    new Country("Greenland", "GL", "0  4n 0 ", "0   9n  1n"),
+    new Country("Greece", "GR", "0  3n 4n", "0  16   0 "),
+    new Country("Croatia", "HR", "0  7n 0 ", "0  10n  0 "),
+    new Country("Hungary", "HU", "0  3n 4n", "1n 15n  1n"),
+    new Country("Ireland", "IE", "0  4a 6n", "0   8n  0 "),
+    new Country("Israel", "IL", "0  3n 3n", "0  13n  0 "),
+    new Country("Iceland", "IS", "0  4n 0 ", "2n 16n  0 "),
+    new Country("Italy", "IT", "1a 5n 5n", "0  12   0 "),
+    new Country("Kuwait", "KW", "0  4a 0 ", "0  22   0 "),
+    new Country("Kazakhstan", "KZ", "0  3n 0 ", "0  13   0 "),
+    new Country("Lebanon", "LB", "0  4n 0 ", "0  20   0 "),
+    new Country("Liechtenstein", "LI", "0  5n 0 ", "0  12   0 "),
+    new Country("Lithuania", "LT", "0  5n 0 ", "0  11n  0 "),
+    new Country("Luxembourg", "LU", "0  3n 0 ", "0  13   0 "),
+    new Country("Latvia", "LV", "0  4a 0 ", "0  13   0 "),
+    new Country("Monaco", "MC", "0  5n 5n", "0  11   2n"),
+    new Country("Montenegro", "ME", "0  3n 0 ", "0  13n  2n"),
+    new Country("Macedonia, Former Yugoslav Republic of",
+        "MK", "0  3n 0 ", "0  10   2n"),
+    new Country("Mauritania", "MR", "0  5n 5n", "0  11n  2n"),
+    new Country("Malta", "MT", "0  4a 5n", "0  18   0 "),
+    new Country("Mauritius", "MU", "0  4a 4n", "0  15n  3a"),
+    new Country("Netherlands", "NL", "0  4a 0 ", "0  10n  0 "),
+    new Country("Norway", "NO", "0  4n 0 ", "0   6n  1n"),
+    new Country("Poland", "PL", "0  8n 0 ", "0  16n  0 "),
+    new Country("Portugal", "PT", "0  4n 4n", "0  11n  2n"),
+    new Country("Romania", "RO", "0  4a 0 ", "0  16   0 "),
+    new Country("Serbia", "RS", "0  3n 0 ", "0  13n  2n"),
+    new Country("Saudi Arabia", "SA", "0  2n 0 ", "0  18   0 "),
+    new Country("Sweden", "SE", "0  3n 0 ", "0  16n  1n"),
+    new Country("Slovenia", "SI", "0  5n 0 ", "0   8n  2n"),
+    new Country("Slovak Republic",
+        "SK", "0  4n 0 ", "0  16n  0 "),
+    new Country("San Marino", "SM", "1a 5n 5n", "0  12   0 "),
+    new Country("Tunisia", "TN", "0  2n 3n", "0  13n  2n"),
+    new Country("Turkey", "TR", "0  5n 0 ", "1  16   0 "),
+    new Country("Ukraine", "UA", "0 6n 0", "0 19 0"));
+

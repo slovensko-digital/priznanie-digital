@@ -91,14 +91,7 @@ describe('twoPercent page', () => {
     /**  SECTION Kids */
     if (input.hasChildren) {
       getInput('hasChildren', '-yes').click()
-      if (input.prijmyPredJul22) {
-        getInput('prijmyPredJul22', '-yes').click()
-      } else {
-        getInput('prijmyPredJul22', '-no').click()
-        typeToInput('zaciatokPrijmovDen', input)
-        typeToInput('zaciatokPrijmovMesiac', input)
-      }
-      
+
       input.children.forEach((child, index) => {
         cy.get(
           `[data-test="children[${index}].priezviskoMeno-input"]`,
@@ -214,14 +207,7 @@ describe('twoPercent page', () => {
     /**  SECTION Kids */
     if (input.hasChildren) {
       getInput('hasChildren', '-yes').click()
-      if (input.prijmyPredJul22) {
-        getInput('prijmyPredJul22', '-yes').click()
-      } else {
-        getInput('prijmyPredJul22', '-no').click()
-        typeToInput('zaciatokPrijmovDen', input)
-        typeToInput('zaciatokPrijmovMesiac', input)
-      }
-      
+
       input.children.forEach((child, index) => {
         cy.get(
           `[data-test="children[${index}].priezviskoMeno-input"]`,
@@ -331,14 +317,7 @@ describe('twoPercent page', () => {
     /**  SECTION Kids */
     if (input.hasChildren) {
       getInput('hasChildren', '-yes').click()
-      if (input.prijmyPredJul22) {
-        getInput('prijmyPredJul22', '-yes').click()
-      } else {
-        getInput('prijmyPredJul22', '-no').click()
-        typeToInput('zaciatokPrijmovDen', input)
-        typeToInput('zaciatokPrijmovMesiac', input)
-      }
-      
+
       input.children.forEach((child, index) => {
         cy.get(
           `[data-test="children[${index}].priezviskoMeno-input"]`,
@@ -439,14 +418,7 @@ describe('twoPercent page', () => {
     /**  SECTION Kids */
     if (input.hasChildren) {
       getInput('hasChildren', '-yes').click()
-      if (input.prijmyPredJul22) {
-        getInput('prijmyPredJul22', '-yes').click()
-      } else {
-        getInput('prijmyPredJul22', '-no').click()
-        typeToInput('zaciatokPrijmovDen', input)
-        typeToInput('zaciatokPrijmovMesiac', input)
-      }
-      
+
       input.children.forEach((child, index) => {
         cy.get(
           `[data-test="children[${index}].priezviskoMeno-input"]`,
