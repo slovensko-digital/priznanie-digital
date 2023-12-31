@@ -590,7 +590,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('2209080016')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2309083139')
     cy.contains('Daňový bonus si môžete uplatniť v mesiacoch September až December')
     cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 4)
     cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 4)
@@ -605,7 +605,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('9609070009')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9709077708')
     cy.contains('Daňový bonus si môžete uplatniť v mesiacoch Január až September')
     cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 9)
     cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 9)
