@@ -323,7 +323,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.546.html')
+        cy.visit('/form/form.572.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
