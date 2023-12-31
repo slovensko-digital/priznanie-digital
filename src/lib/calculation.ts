@@ -29,7 +29,7 @@ export const PARTNER_MAX_ODPOCET = 4500.86
 export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 140
 export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
-const ZIVOTNE_MINIMUM_44_NASOBOK = 10_314.48
+const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
 
 export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
 export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
@@ -239,7 +239,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return round(
           Decimal.max(
             0,
-            new Decimal(ZIVOTNE_MINIMUM_44_NASOBOK).minus(
+            new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(
               round(this.r072_pred_znizenim.times(0.25)),
             ),
           ),

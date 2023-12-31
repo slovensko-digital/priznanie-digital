@@ -34,7 +34,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '9902050499',
+      rodneCislo: '000205/6901',
 
       wholeYear: true,
       monthFrom: '0',
@@ -43,7 +43,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '9802164779',
+      rodneCislo: '990216/8452',
 
       wholeYear: true,
       monthFrom: '0',
@@ -74,6 +74,6 @@ export const bugReport3Input: E2eTestUserInput = {
     r005_meno: 'anon',
   },
 
-  percent2: '48,53',
+  percent2: '37,62',
   percent3: '72,79',
 }
