@@ -70,6 +70,6 @@ export const completeInput: E2eTestUserInput = {
 
   expectNgoDonationValue: true,
 
-  percent2: '5,13',
+  percent2: '7,19',
   percent3: '7,70',
 }
