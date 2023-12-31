@@ -26,8 +26,8 @@ export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
 const MAX_ZAKLAD_DANE = 21_754.18
 export const PARTNER_MAX_ODPOCET = 4500.86
 
-export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 50
-export const CHILD_RATE_EIGHTEEN_AND_OLDER = 140
+export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 140
+export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
 const ZIVOTNE_MINIMUM_44_NASOBOK = 10_314.48
 
@@ -409,9 +409,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       const zakladDane = this.r038.plus(this.r045)
-      // const polovicaZakladuDane = zakladDane.times(0.5)
-
-      const zakladPreBonus = zakladDane
 
       return [
         Months.January,
@@ -429,7 +426,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ].reduce((previusSum, currentMonth) => {
         const pocetDeti = getPocetDetivMesiaci(this.r033, currentMonth)
         const percentLimit = getPercentualnyLimitNaDeti(pocetDeti)
-        const mesacnyLimit = zakladPreBonus.dividedBy(6).times(percentLimit)
+        const mesacnyLimit = zakladDane.dividedBy(12).times(percentLimit)
 
         const skutocnyVysledok = this.r033.reduce(
           (previousSum, currentChild) => {
