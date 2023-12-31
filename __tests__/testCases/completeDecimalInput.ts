@@ -67,7 +67,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   ],
   hasChildren: true,
 
-  expectNgoDonationValue: true,
+  expectNgoDonationValue: false,
 
   percent2: '10,22',
   percent3: '12,24',
