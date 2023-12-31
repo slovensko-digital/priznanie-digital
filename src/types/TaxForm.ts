@@ -18,6 +18,27 @@ export interface Child {
   m12: boolean
 }
 
+interface Partner {
+  priezviskoMeno: string
+  rodneCislo: string
+  m00: string
+  m01: string
+  m02: string
+  m03: string
+  m04: string
+  m05: string
+  m06: string
+  m07: string
+  m08: string
+  m09: string
+  m10: string
+  m11: string
+  m12: string
+  druhaOsobaPodalaDPvSR: string
+  dokladRocZuct: string
+  dokladVyskaDane: string
+}
+
 export interface TaxForm {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
@@ -68,8 +89,9 @@ export interface TaxForm {
   priloha3_r13_zdravotne: Decimal
 
   /**   Deti*/
-  r034?: Child[]
-  r034a: string
+  r033?: Child[]
+  r034: Partner
+  r034a: Decimal
 
   /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
   t1r10_vydavky: Decimal

@@ -33,9 +33,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.hlavicka.adresaTrvPobytu.obec = taxForm.r010_obec
   form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat
 
-  form.dokument.telo.r32.uplatnujemNCZDNaManzela =
-    taxForm.r032_uplatnujem_na_partnera ? '1' : '0'
-
   /** TODO Vypocitat riadne mikrodanovnika */
   form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
 
@@ -73,8 +70,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   /** SECTION Children */
-  if (taxForm.r034 && taxForm.r034.length > 0) {
-    form.dokument.telo.r33.dieta = taxForm.r034.map((child) => {
+  if (taxForm.r033 && taxForm.r033.length > 0) {
+    form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
           key,
@@ -82,8 +79,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
-    form.dokument.telo.r34a = taxForm.r034a
   }
+  form.dokument.telo.r34a = decimalToString(taxForm.r034a)
 
   /** SECTION Mortgage */
   // if (taxForm.r037_uplatnuje_uroky) {

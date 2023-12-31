@@ -146,7 +146,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ),
 
     /** SECTION Children */
-    get r034() {
+    get r033() {
       if (!this.eligibleForChildrenBonus) {
         return []
       }
@@ -154,8 +154,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
+    get r034() {
+      return null
+    },
+
     get r034a() {
-      return ''
+      return new Decimal(0)
     },
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
@@ -405,10 +409,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
       const zakladDane = this.r038.plus(this.r045)
-      const polovicaZakladuDane = zakladDane.times(0.5)
+      // const polovicaZakladuDane = zakladDane.times(0.5)
 
-      const zakladPreBonus =
-        this.r034a && this.r034a.length > 0 ? zakladDane : polovicaZakladuDane
+      const zakladPreBonus = zakladDane
 
       return [
         Months.January,
@@ -424,11 +427,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         Months.November,
         Months.December,
       ].reduce((previusSum, currentMonth) => {
-        const pocetDeti = getPocetDetivMesiaci(this.r034, currentMonth)
+        const pocetDeti = getPocetDetivMesiaci(this.r033, currentMonth)
         const percentLimit = getPercentualnyLimitNaDeti(pocetDeti)
         const mesacnyLimit = zakladPreBonus.dividedBy(6).times(percentLimit)
 
-        const skutocnyVysledok = this.r034.reduce(
+        const skutocnyVysledok = this.r033.reduce(
           (previousSum, currentChild) => {
             let currentSum = new Decimal(0)
             if (
@@ -696,7 +699,7 @@ const getRate = (month: number, child) => {
       : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
 }
 
-const getPocetDetivMesiaci = (deti: TaxForm['r034'], month: Months): number => {
+const getPocetDetivMesiaci = (deti: TaxForm['r033'], month: Months): number => {
   return deti.reduce((acc, dieta) => {
     if (dieta.m00) {
       acc += 1
