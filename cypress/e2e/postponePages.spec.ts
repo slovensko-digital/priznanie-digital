@@ -31,6 +31,9 @@ const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
+beforeEach(() => {
+  cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+})
 // button is not usable outside scope of first three months
 // when postpone for tax report is availible
 if (month >= 1 && month < 4) {
