@@ -37,7 +37,7 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive, isPostponeLive })
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} isPostponeLive={isPostponeLive} />
+        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} isPostponeLive={isPostponeLive} isDebug={isDebug} />
       </div>
 
       <ul className={styles.safeList}>
@@ -150,7 +150,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
+const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) => (
   <>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
@@ -162,7 +162,7 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive }) => (
     </ul>
 
     {
-      isPostponeLive && (
+      (isPostponeLive || isDebug) && (
         <>
           <p className="govuk-body-xs">
             Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
