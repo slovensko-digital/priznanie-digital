@@ -147,9 +147,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Children */
     get r033() {
-      if (!this.eligibleForChildrenBonus) {
-        return []
-      }
       const mapChild = makeMapChild(input?.hasChildren)
       return input.children.map((child) => mapChild(child))
     },
@@ -405,10 +402,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(this.r090.plus(this.r105))
     },
     get r117() {
-      if (!this.eligibleForChildrenBonus) {
-        return new Decimal(0)
-      }
-
       const months = [
         Months.January,
         Months.February,
@@ -584,13 +577,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ziadamVyplatitDanovyBonus: input?.ziadamVyplatitDanovyBonus ?? false,
     ziadamVratitDanovyPreplatok: input?.ziadamVratitDanovyPreplatok ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
-
-    get eligibleForChildrenBonus() {
-      return (
-        this.t1r10_prijmy.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA) ||
-        this.r036.gte(MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA)
-      )
-    },
 
     datum: input.datum,
 

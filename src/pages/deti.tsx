@@ -40,7 +40,6 @@ import RadioConditional from "../components/radio/RadioConditional";
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
-  taxForm,
   router,
   previousRoute,
   nextRoute,
@@ -50,24 +49,6 @@ const Deti: Page<ChildrenUserInput> = ({
       Späť
     </Link>
   )
-
-  if (!taxForm.eligibleForChildrenBonus) {
-    return (
-      <>
-        {previousPageLink}
-        <h1 className="govuk-heading-l">
-          Daňový bonus na dieťa do 18 rokov alebo študenta do 25 rokov, s ktorým
-          žijete v spoločnej domácnosti
-        </h1>
-        <p data-test="ineligible-message">Nemáte nárok na daňový bonus.</p>
-        <Link href={nextRoute} legacyBehavior>
-          <button className="govuk-button govuk-!-margin-top-4" type="button">
-            Pokračovať
-          </button>
-        </Link>
-      </>
-    )
-  }
 
   return (
     <>
