@@ -466,7 +466,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           limit = pom.times(pocetMesiacovVSkupine).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
         }
 
-        const vysledok = partialSum > limit ? limit : partialSum
+        const vysledok = partialSum.greaterThan(limit) ? limit : partialSum
 
         danovyBonus = danovyBonus.plus(vysledok)
       }
