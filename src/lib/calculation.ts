@@ -402,7 +402,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // celé sa vám to spojí potom na r. 116, kde spočítavate r. 90 + r. 105 + r. 115,
     // vo vašom prípade spočítate výšku dane zo  zamestnania a výšku dane z podnikania
     get r116_dan() {
-      return this.r090.plus(this.r105)
+      return round(this.r090.plus(this.r105))
     },
     get r117() {
       if (!this.eligibleForChildrenBonus) {
