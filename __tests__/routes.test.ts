@@ -16,6 +16,7 @@ describe('routes', () => {
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
+        '/deti',
         '/dochodok',
         '/dve-percenta',
         '/osobne-udaje',
@@ -74,6 +75,7 @@ describe('routes', () => {
         '/prijmy-a-vydavky',
         '/zamestnanie',
         '/partner',
+        '/deti',
         '/dochodok',
         '/dve-percenta',
         '/osobne-udaje',
@@ -88,10 +90,6 @@ describe('routes', () => {
   describe('#getRoutes', () => {
     describe('nextRoute', () => {
       describe('for route /partner', () => {
-        it('should be correct when not eligible for children bonus', () => {
-          const { nextRoute } = getRoutes('/partner', {} as TaxForm)
-          expect(nextRoute()).toBe('/dochodok')
-        })
 
         it('should be correct when eligible for children bonus', () => {
           const { nextRoute } = getRoutes('/partner', {} as TaxForm)
@@ -116,11 +114,6 @@ describe('routes', () => {
 
     describe('previousRoute', () => {
       describe('for route /dochodok', () => {
-        it('should be correct when not eligible for children bonus', () => {
-          const { previousRoute } = getRoutes('/dochodok', {} as TaxForm)
-          expect(previousRoute()).toBe('/partner')
-        })
-
         it('should be correct when eligible for children bonus', () => {
           const { previousRoute } = getRoutes('/dochodok', {} as TaxForm)
           expect(previousRoute()).toBe('/deti')
