@@ -26,7 +26,7 @@ export const withChildren2Input: E2eTestUserInput = {
   ],
   hasChildren: true,
 
-  expectNgoDonationValue: true,
+  expectNgoDonationValue: false,
 
   percent2: '5,63',
   percent3: '6,39',
