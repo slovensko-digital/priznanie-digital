@@ -26,9 +26,6 @@ export type Route =
   | '/pokracovat'
 
 export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
-  const getChildRoute = (): Route[] => {
-    return taxForm.eligibleForChildrenBonus ? ['/deti'] : []
-  }
   const getIbanRoute = (): Route[] => {
     const isIbanRequired =
       taxForm.mozeZiadatVyplatitDanovyBonus ||
@@ -41,7 +38,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/prijmy-a-vydavky',
     '/zamestnanie',
     '/partner',
-    ...getChildRoute(),
+    '/deti',
     '/dochodok',
     '/dve-percenta',
     '/osobne-udaje',
@@ -131,9 +128,7 @@ export const validateRoute = (
         '/zamestnanie': 't1r10_prijmy',
         '/partner': 'employed',
         '/deti': 'r032_uplatnujem_na_partnera',
-        '/dochodok': taxForm.eligibleForChildrenBonus
-          ? 'hasChildren'
-          : 'r032_uplatnujem_na_partnera',
+        '/dochodok': 'hasChildren',
         // TODO reanable with mortgage feature
         // '/hypoteka': 'platil_prispevky_na_dochodok',
         // '/dve-percenta': 'dochodok',

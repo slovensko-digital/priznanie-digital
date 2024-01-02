@@ -27,7 +27,7 @@ describe('routes', () => {
 
     it('should return routes with children, without iban', () => {
       expect(
-        getOrderedRoutes({ eligibleForChildrenBonus: true } as TaxForm),
+        getOrderedRoutes({} as TaxForm),
       ).toStrictEqual([
         homeRoute,
         '/prijmy-a-vydavky',
@@ -46,7 +46,6 @@ describe('routes', () => {
     it('should return routes with children, with iban', () => {
       expect(
         getOrderedRoutes({
-          eligibleForChildrenBonus: true,
           mozeZiadatVyplatitDanovyBonus: true,
         } as TaxForm),
       ).toStrictEqual([
@@ -95,9 +94,7 @@ describe('routes', () => {
         })
 
         it('should be correct when eligible for children bonus', () => {
-          const { nextRoute } = getRoutes('/partner', {
-            eligibleForChildrenBonus: true,
-          } as TaxForm)
+          const { nextRoute } = getRoutes('/partner', {} as TaxForm)
           expect(nextRoute()).toBe('/deti')
         })
       })
@@ -125,9 +122,7 @@ describe('routes', () => {
         })
 
         it('should be correct when eligible for children bonus', () => {
-          const { previousRoute } = getRoutes('/dochodok', {
-            eligibleForChildrenBonus: true,
-          } as TaxForm)
+          const { previousRoute } = getRoutes('/dochodok', {} as TaxForm)
           expect(previousRoute()).toBe('/deti')
         })
       })
