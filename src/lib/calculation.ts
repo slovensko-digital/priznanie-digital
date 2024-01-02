@@ -60,28 +60,28 @@ export enum Months {
 
 const makeMapChild =
   (hasChildren: boolean) =>
-  (child: ChildInput): Child => {
-    const monthFrom = Number.parseInt(child.monthFrom, 10)
-    const monthTo = Number.parseInt(child.monthTo, 10)
+    (child: ChildInput): Child => {
+      const monthFrom = Number.parseInt(child.monthFrom, 10)
+      const monthTo = Number.parseInt(child.monthTo, 10)
 
-    return {
-      priezviskoMeno: child.priezviskoMeno,
-      rodneCislo: child.rodneCislo.replace(/\D/g, ''),
-      m00: hasChildren && child.wholeYear,
-      m01: hasChildren && !child.wholeYear && monthFrom === 0,
-      m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
-      m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
-      m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
-      m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
-      m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
-      m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
-      m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
-      m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
-      m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
-      m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
-      m12: hasChildren && !child.wholeYear && monthTo === 11,
+      return {
+        priezviskoMeno: child.priezviskoMeno,
+        rodneCislo: child.rodneCislo.replace(/\D/g, ''),
+        m00: hasChildren && child.wholeYear,
+        m01: hasChildren && !child.wholeYear && monthFrom === 0,
+        m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
+        m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
+        m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
+        m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
+        m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
+        m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
+        m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
+        m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
+        m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
+        m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
+        m12: hasChildren && !child.wholeYear && monthTo === 11,
+      }
     }
-  }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
   /** Combine default vaules with user input */
@@ -408,9 +408,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (!this.eligibleForChildrenBonus) {
         return new Decimal(0)
       }
-      const zakladDane = this.r038.plus(this.r045)
 
-      return [
+      const months = [
         Months.January,
         Months.February,
         Months.March,
@@ -423,108 +422,56 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         Months.October,
         Months.November,
         Months.December,
-      ].reduce((previusSum, currentMonth) => {
-        const pocetDeti = getPocetDetivMesiaci(this.r033, currentMonth)
-        const percentLimit = getPercentualnyLimitNaDeti(pocetDeti)
-        const mesacnyLimit = zakladDane.dividedBy(12).times(percentLimit)
+      ].map((month) => ({
+        count: getPocetDetivMesiaci(this.r033, month),
+        month: month
+      }))
 
-        const skutocnyVysledok = this.r033.reduce(
-          (previousSum, currentChild) => {
-            let currentSum = new Decimal(0)
-            if (
-              currentMonth === Months.January &&
-              (currentChild.m01 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.January, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.February &&
-              (currentChild.m02 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.February, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.March &&
-              (currentChild.m03 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.March, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.April &&
-              (currentChild.m04 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.April, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.May &&
-              (currentChild.m05 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.May, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.June &&
-              (currentChild.m06 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.June, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.July &&
-              (currentChild.m07 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.July, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.August &&
-              (currentChild.m08 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.August, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.September &&
-              (currentChild.m09 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.September, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.October &&
-              (currentChild.m10 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.October, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.November &&
-              (currentChild.m11 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.November, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
-            if (
-              currentMonth === Months.December &&
-              (currentChild.m12 || currentChild.m00)
-            ) {
-              const rate = getRate(Months.December, currentChild)
-              currentSum = currentSum.plus(rate)
-            }
+      const monthGroups = []
+      let lastChangeIndex = 0
 
-            return previousSum.plus(currentSum)
-          },
-          new Decimal(0),
-        )
+      for (let index = 1; index < months.length; index++) {
+        const currentElement = months[index];
+        const previousElement = months[index - 1];
 
-        const vysledok = Decimal.min(mesacnyLimit, skutocnyVysledok)
+        if (currentElement.count !== previousElement.count) {
+          monthGroups.push(months.slice(lastChangeIndex, index))
+          lastChangeIndex = index
+        }
 
-        return previusSum.add(vysledok)
-      }, new Decimal(0))
+        if (index === months.length - 1) {
+          monthGroups.push(months.slice(lastChangeIndex, index + 1))
+        }
+      }
+      let danovyBonus = new Decimal(0);
+
+      for (const monthGroup of monthGroups) {
+        const pocetMesiacovVSkupine = monthGroup.length
+        let partialSum = new Decimal(0);
+        for (const month of monthGroup) {
+          for (const child of this.r033) {
+            const rate = getRate(month.month, child)
+            partialSum = partialSum.plus(rate)
+          }
+        }
+
+        let zakladDane = this.r038.plus(this.r045)
+
+        zakladDane = zakladDane.toDecimalPlaces(2, Decimal.ROUND_UP)
+        const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)
+        let limit = zakladDane.times(percentLimit).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+
+        if (pocetMesiacovVSkupine !== 12) {
+          const pom = limit.div(12).toDecimalPlaces(2)
+          limit = pom.times(pocetMesiacovVSkupine).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+        }
+
+        const vysledok = partialSum > limit ? limit : partialSum
+
+        danovyBonus = danovyBonus.plus(vysledok)
+      }
+
+      return danovyBonus
     },
     get r118() {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
@@ -684,16 +631,91 @@ export function buildSummary(form: TaxForm): Summary {
   }
 }
 
-const getRate = (month: number, child) => {
+const getRate = (month: Months, child: Child) => {
   const age = getRodneCisloAgeAtYearAndMonth(
     child.rodneCislo,
     TAX_YEAR,
     month - 1,
   )
 
-  return age < 18
-      ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-      : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+  const rate = age < 18
+  ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
+  : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+
+  if (
+    month === Months.January &&
+    (child.m01 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.February &&
+    (child.m02 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.March &&
+    (child.m03 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.April &&
+    (child.m04 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.May &&
+    (child.m05 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.June &&
+    (child.m06 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.July &&
+    (child.m07 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.August &&
+    (child.m08 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.September &&
+    (child.m09 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.October &&
+    (child.m10 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.November &&
+    (child.m11 || child.m00)
+  ) {
+    return rate
+  }
+  if (
+    month === Months.December &&
+    (child.m12 || child.m00)
+  ) {
+    return rate
+  }
+
+  return new Decimal(0)
 }
 
 const getPocetDetivMesiaci = (deti: TaxForm['r033'], month: Months): number => {
