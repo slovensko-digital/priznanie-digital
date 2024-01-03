@@ -39,10 +39,12 @@ import RadioConditional from "../components/radio/RadioConditional";
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
+  taxForm,
   taxFormUserInput,
   router,
   previousRoute,
   nextRoute,
+  isDebug
 }) => {
   const previousPageLink = (
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
@@ -161,7 +163,14 @@ const Deti: Page<ChildrenUserInput> = ({
                   </FieldArray>
                 </>
               )}
-
+            {
+              isDebug && (
+                <div>
+                  <h2>Debug</h2>
+                  <pre>{JSON.stringify(taxForm.danovyBonusNaDieta, null, 2)}</pre>
+                </div>
+              )
+            }
             <button className="govuk-button" type="submit">
               Pokračovať
             </button>
