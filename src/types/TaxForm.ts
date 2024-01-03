@@ -229,5 +229,9 @@ export interface TaxForm {
   children: boolean
   employed: boolean
   XIIoddiel_uplatnujem2percenta: boolean
+  danovyBonusNaDieta: {
+    danovyBonus: Decimal
+    nevyuzityDanovyBonus: Decimal
+  }
   canDonateTwoPercentOfTax: boolean
 }

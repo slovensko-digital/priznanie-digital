@@ -401,7 +401,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r116_dan() {
       return round(this.r090.plus(this.r105))
     },
-    get r117() {
+    get danovyBonusNaDieta() {
       const months = [
         Months.January,
         Months.February,
@@ -436,7 +436,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           monthGroups.push(months.slice(lastChangeIndex, index + 1))
         }
       }
-      let danovyBonus = new Decimal(0);
+      let danovyBonus = new Decimal(0)
+      let nevyuzityDanovyBonus = new Decimal(0)
 
       for (const monthGroup of monthGroups) {
         const pocetMesiacovVSkupine = monthGroup.length
@@ -459,12 +460,21 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           limit = pom.times(pocetMesiacovVSkupine).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
         }
 
-        const vysledok = partialSum.greaterThan(limit) ? limit : partialSum
+        let vysledok = new Decimal(0)
+        if (partialSum.greaterThan(limit)) {
+          vysledok = limit
+          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(partialSum.minus(limit))
+        } else {
+          vysledok = partialSum
+        }
 
         danovyBonus = danovyBonus.plus(vysledok)
       }
 
-      return danovyBonus
+      return {danovyBonus, nevyuzityDanovyBonus}
+    },
+    get r117() {
+      return this.danovyBonusNaDieta.danovyBonus
     },
     get r118() {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
