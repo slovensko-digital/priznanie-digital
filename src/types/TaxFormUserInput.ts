@@ -83,6 +83,12 @@ export interface TaxFormUserInput {
   uhrnPreddavkovNaDan?: string
   udajeODanovomBonuseNaDieta?: string
 
+  /** SECTION Prenajom */
+  rent?: boolean
+  vyskaPrijmovZPrenajmu?: string
+  prijemZPrenajmuOslobodenieDane?: boolean
+  vyskaOslobodenia?: boolean
+
   /** SECTION  Deti*/
   hasChildren?: boolean
   children: ChildInput[]

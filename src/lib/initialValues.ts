@@ -8,6 +8,7 @@ import {
   MortgageUserInput,
   TwoPercentUserInput,
   TaxBonusUserInput,
+  RentUserInput,
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
@@ -52,6 +53,13 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
   udajeODanovomBonuseNaDieta: '',
   uhrnPreddavkovNaDan: '',
+}
+
+export const rentUserInputInitialValues: RentUserInput = {
+  rent: undefined
+  vyskaPrijmovZPrenajmu: ''
+  prijemZPrenajmuOslobodenieDane: ''
+  vyskaOslobodenia: ''
 }
 
 let childCounter = 0

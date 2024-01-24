@@ -18,6 +18,7 @@ export type Route =
   | '/deti'
   | '/dochodok'
   | '/hypoteka'
+  | '/prenajom'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -40,6 +41,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/partner',
     '/deti',
     '/dochodok',
+    '/prenajom',
     '/dve-percenta',
     '/osobne-udaje',
     '/suhrn',
@@ -131,6 +133,7 @@ export const validateRoute = (
         '/dochodok': 'hasChildren',
         // TODO reanable with mortgage feature
         // '/hypoteka': 'platil_prispevky_na_dochodok',
+        '/prenajom': 'rent',
         // '/dve-percenta': 'dochodok',
         '/osobne-udaje': taxForm.XIIoddiel_uplatnujem2percenta
           ? 'XIIoddiel_uplatnujem2percenta'

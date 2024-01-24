@@ -251,6 +251,19 @@ const Suhrn: Page<TaxFormUserInput> = ({
       }
     /> */}
       <Summary
+        title={`Prenajom pre rok ${TAX_YEAR}`}
+        href={'/prenajom'}
+        rows={[
+                {
+                  title: 'Výška príjmov z prenájmu nehnuteľností',
+                  value: taxFormUserInput.vyskaPrijmovZPrenajmu,
+                  currency: true,
+                  allignRight: true,
+                }
+              ]
+        }
+      />
+      <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}
         rows={[

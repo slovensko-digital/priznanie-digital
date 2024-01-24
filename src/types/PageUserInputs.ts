@@ -19,6 +19,14 @@ export type EmployedUserInput = Pick<
   | 'uhrnPreddavkovNaDan'
 >
 
+export type RentUserInput = Pick<
+  TaxFormUserInput,
+  | 'rent'
+  | 'vyskaPrijmovZPrenajmu'
+  | 'prijemZPrenajmuOslobodenieDane'
+  | 'vyskaOslobodenia'
+>
+
 export type ChildrenUserInput = Pick<
   TaxFormUserInput,
   | 'hasChildren'

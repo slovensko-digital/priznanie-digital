@@ -107,6 +107,8 @@ export interface TaxForm {
   priloha3_r09_socialne: Decimal
   priloha3_r10_zdravotne: Decimal
 
+  /** SECTION Prenajom */
+
   /** Základ dane (čiastkový základ dane)  */
   r038: Decimal
   /**   The same as t1r10_vydavky*/
