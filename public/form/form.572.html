@@ -1058,7 +1058,7 @@ $.validator.addMethod
 function(value, element)
 {
 if ($(element).hasClass('disableValidators')) { return true; }
-return value.match(new RegExp(/^$|^-[0-9]{1,4}(\.[0-9]{1,2}0*)?$|^[0-9]{1,4}(\.[0-9]{1,2}0*)?$/));
+return value.match(new RegExp(/^$|^-[0-9]{1,5}(\.[0-9]{1,2}0*)?$|^[0-9]{1,5}(\.[0-9]{1,2}0*)?$/));
 }
 );
 
@@ -1078,7 +1078,7 @@ $.validator.addMethod
 function(value, element)
 {
 if ($(element).hasClass('disableValidators')) { return true; }
-return value.match(new RegExp(/^$|^-[0-9]{1,4}(\.[0-9]{1,2}0*)?$|^[0-9]{1,4}(\.[0-9]{1,2}0*)?$/));
+return value.match(new RegExp(/^$|^-[0-9]{1,5}(\.[0-9]{1,2}0*)?$|^[0-9]{1,5}(\.[0-9]{1,2}0*)?$/));
 }
 );
 
@@ -1088,7 +1088,7 @@ $.validator.addMethod
 function(value, element)
 {
 if ($(element).hasClass('disableValidators')) { return true; }
-return value.match(new RegExp(/^$|^-[0-9]{1,4}(\.[0-9]{1,2}0*)?$|^[0-9]{1,4}(\.[0-9]{1,2}0*)?$/));
+return value.match(new RegExp(/^$|^-[0-9]{1,5}(\.[0-9]{1,2}0*)?$|^[0-9]{1,5}(\.[0-9]{1,2}0*)?$/));
 }
 );
 
@@ -1098,7 +1098,7 @@ $.validator.addMethod
 function(value, element)
 {
 if ($(element).hasClass('disableValidators')) { return true; }
-return value.match(new RegExp(/^$|^-[0-9]{1,4}(\.[0-9]{1,2}0*)?$|^[0-9]{1,4}(\.[0-9]{1,2}0*)?$/));
+return value.match(new RegExp(/^$|^-[0-9]{1,5}(\.[0-9]{1,2}0*)?$|^[0-9]{1,5}(\.[0-9]{1,2}0*)?$/));
 }
 );
 
@@ -1108,7 +1108,7 @@ $.validator.addMethod
 function(value, element)
 {
 if ($(element).hasClass('disableValidators')) { return true; }
-return value.match(new RegExp(/^$|^-[0-9]{1,4}(\.[0-9]{1,2}0*)?$|^[0-9]{1,4}(\.[0-9]{1,2}0*)?$/));
+return value.match(new RegExp(/^$|^-[0-9]{1,5}(\.[0-9]{1,2}0*)?$|^[0-9]{1,5}(\.[0-9]{1,2}0*)?$/));
 }
 );
 
@@ -6265,8 +6265,10 @@ function inliner123(element,sid) {
                 var datumUrUveruMesiac = datumUrUveru.getFullYear();
                 var result;
                 if (pocetMesiacov.lt(12) && datumUrUveruMesiac == 2018) { //pocet mesiacov < 12
+                    var medziZaokr = r35.times(0.5);
+                    medziZaokr = zaokruhliBigJS(2, medziZaokr).div(12);
                     result = Math.min(
-                        zaokruhliBigJS(2, r35.times(0.5).div(12)).times(pocetMesiacov),
+                        zaokruhliBigJS(2, medziZaokr).times(pocetMesiacov),
                         zaokruhliBigJS(2, Big(400).div(12)).times(pocetMesiacov));
                 }
                 else if (pocetMesiacov.lt(12) && datumUrUveruMesiac == 2023) {
@@ -8885,8 +8887,10 @@ function inliner123text(element,sid) {
                 var r146 = Big(Number($("#t146").val()) || 0);
                 var result;
                 if (pocetMesiacov.lt(12) && datumUrUveruMesiac == 2018) { //pocet mesiacov < 12
+                    var medziZaokr = r35.times(0.5);
+                    medziZaokr = zaokruhliBigJS(2, medziZaokr).div(12);
                     result = Math.min(
-                        zaokruhliBigJS(2, r35.times(0.5).div(12)).times(pocetMesiacov),
+                        zaokruhliBigJS(2, medziZaokr).times(pocetMesiacov),
                         zaokruhliBigJS(2, Big(400).div(12)).times(pocetMesiacov));
                     if (!r146.eq(result) || r146.toString() === "") {
                         return "'r.123': DB na zaplatené úroky si môžete uplatniť len vo výške pomernej časti sumy  50% zo sumy na r. 35 za mesiace uvedené na r. 35, najviac do výšky pomernej časti zo sumy 400 € za mesiace uvedené na r. 35 (" + zaokruhliBigJS(2, result).toFixed(2) + ")";
@@ -9494,6 +9498,10 @@ aktualnyDatum = $("#Pri1br1DatumOd").val();
 */
 }
 
+function inliner4_50(element,sid) {
+return 0;
+}
+
 
 		function GetExternalResourceIndex(resourcetype) {
   switch (resourcetype) {
@@ -9510,7 +9518,7 @@ aktualnyDatum = $("#Pri1br1DatumOd").val();
       return 'form.572.ro.xslt';
       break;
     case 11:
-      return 'DPFOBv23-poucenie.zip';
+      return 'DPFOBv23-poucenie.zip'+'|r.123.pdf';
       break;
     case 13:
       return 'form.572.dpfob.png';
@@ -9538,6 +9546,7 @@ function GetExternalResource(resourcetype, index) {
       break;
     case 11:
       if (index == null || index =='DPFOBv23-poucenie.zip') return 'form.572.DPFOBv23-poucenie.zip';
+      if (index == null || index =='r.123.pdf') return 'form.572.r.123.pdf';
       break;
     case 13:
       if (index == null || index =='form.572.dpfob.png') return 'form.572.dpfob.png';
@@ -14991,6 +15000,8 @@ var retval = ("'Preukázateľne zaplatené poistné': ak je v poli vyplnený úd
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cmbSKNACE3'));
+				validatorObject.element(document.getElementById('t41'));
+				validatorObject.element(document.getElementById('t42'));
 				validatorObject.element(document.getElementById('t74'));
 				validatorObject.element(document.getElementById('t95'));
 				validatorObject.element(document.getElementById('t116'));
@@ -15075,6 +15086,8 @@ var retval = ("'r.39': má byť rovný r. 10 stĺ. 1 tab. 1 ("+(zaokruhli_matmj(
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cmbSKNACE3'));
 				validatorObject.element(document.getElementById('t39'));
+				validatorObject.element(document.getElementById('t41'));
+				validatorObject.element(document.getElementById('t42'));
 				validatorObject.element(document.getElementById('t74'));
 				validatorObject.element(document.getElementById('t116'));
 				validatorObject.element(document.getElementById('t117'));
@@ -15167,7 +15180,9 @@ var retval = ("'r.40': má byť rovný r. 10 stĺ. 2 tab. 1 ("+(zaokruhli_matmj(
 			return hodnota(element, 't41','n',sid,'layoutRow37641');
 		}
 		function vypocet_t41(sid) {
-			var retval = ((inline41('t41',sid)));
+						var t_t39 = hodnota(null, 't39','n',sid,'layoutRow37641','d12.2');
+			var t_t40 = hodnota(null, 't40','n',sid,'layoutRow37641','d12.2');
+var retval = (((Math.round(100.0000000000001*(t_t39))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t40))>Math.round(100.0000000000001*(0)))*inline41('t41',sid)));
 			return retval;
 		}
 				
@@ -15195,6 +15210,18 @@ var retval = ("");
 			}
 				
 			function vypocet_t41_C2(sid) {
+			var t_t41 = hodnota(null, 't41','n',sid,'layoutRow37641','d12.2');
+			var t_t39 = hodnota(null, 't39','n',sid,'layoutRow37641','d12.2');
+			var t_t40 = hodnota(null, 't40','n',sid,'layoutRow37641','d12.2');
+var retval = ((Math.round(100.0000000000001*(t_t41))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_t39))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t40))>Math.round(100.0000000000001*(0)))*inline41('t41',sid)))));
+				return retval;
+			}
+			function vypocet_t41_T2(sid) {
+var retval = ("'r. 41': ak r39 = 0 a súčasne r40 = 0 potom r41>= 0. Ak je vyplnený r4 stĺ.1/2 a bez vyplnenia r.1 až r.3 a r.5 až r.9 tab.1 a r.39 >= 0 alebo r.40 >= 0, potom nemusí platiť, že r41 = r39 – r40. Ak sa vypĺňa tabuľka 1, potom r41= Max(0, r39 – r40) = ("+(inline41('t41',sid))+").");
+				return retval; //;
+			}
+				
+			function vypocet_t41_C3(sid) {
 			var t_t1r1s1 = hodnota(null, 't1R1S1','n',sid,'layoutRow37641','d12.2');
 			var t_t1r1s2 = hodnota(null, 't1R1S2','n',sid,'layoutRow37641','d12.2');
 			var t_t1r2s1 = hodnota(null, 't1R2S1','n',sid,'layoutRow37641','d12.2');
@@ -15214,18 +15241,8 @@ var retval = ("");
 var retval = (((Math.round(100.0000000000001*(inlineprazdnet1r4s('t41',sid)))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t1r1s1+t_t1r1s2+t_t1r2s1+t_t1r2s2+t_t1r3s1+t_t1r3s2+t_t1r5s1+t_t1r5s2+t_t1r6s1+t_t1r6s2+t_t1r7s1+t_t1r7s2+t_t1r8s1+t_t1r8s2))==Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_t41))==Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t42))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
-			function vypocet_t41_T2(sid) {
-var retval = ("w'r. 41 ': Ak je v tab. 1 vyplnený len r. 4 potom môžu byť r. 41 a r. 42 vyplnené súčasne.");
-				return retval; //;
-			}
-				
-			function vypocet_t41_C3(sid) {
-			var t_t41 = hodnota(null, 't41','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_t41))==Math.round(100.0000000000001*(inline41('t41',sid)))));
-				return retval;
-			}
 			function vypocet_t41_T3(sid) {
-var retval = ("'r. 41': ak r39 = 0 a súčasne r40 = 0 potom r41>= 0. Ak je vyplnený r4 stĺ.1/2 a bez vyplnenia r.1 až r.3 a r.5 až r.9 tab.1 a r.39 >= 0 alebo r.40 >= 0, potom nemusí platiť, že r41 = r39 – r40. Ak sa vypĺňa tabuľka 1, potom r41= Max(0, r39 – r40) = ("+(inline41('t41',sid))+").");
+var retval = ("w'r. 41 ': Ak je v tab. 1 vyplnený len r. 4 potom môžu byť r. 41 a r. 42 vyplnené súčasne.");
 				return retval; //;
 			}
 		function kontrola_t42(element, sid, dblclick) {		
@@ -15284,7 +15301,9 @@ var retval = ("'r. 41': ak r39 = 0 a súčasne r40 = 0 potom r41>= 0. Ak je vypl
 			return hodnota(element, 't42','n',sid,'layoutRow37641');
 		}
 		function vypocet_t42(sid) {
-			var retval = ((inline42('t42',sid)));
+						var t_t39 = hodnota(null, 't39','n',sid,'layoutRow37641','d12.2');
+			var t_t40 = hodnota(null, 't40','n',sid,'layoutRow37641','d12.2');
+var retval = (((Math.round(100.0000000000001*(t_t39))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t40))>Math.round(100.0000000000001*(0)))*inline42('t42',sid)));
 			return retval;
 		}
 				
@@ -15312,6 +15331,18 @@ var retval = ("'r. 42': má byť >=0");
 			}
 				
 			function vypocet_t42_C2(sid) {
+			var t_t42 = hodnota(null, 't42','n',sid,'layoutRow37641','d12.2');
+			var t_t39 = hodnota(null, 't39','n',sid,'layoutRow37641','d12.2');
+			var t_t40 = hodnota(null, 't40','n',sid,'layoutRow37641','d12.2');
+var retval = ((Math.round(100.0000000000001*(t_t42))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_t39))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t40))>Math.round(100.0000000000001*(0)))*inline42('t42',sid)))));
+				return retval;
+			}
+			function vypocet_t42_T2(sid) {
+var retval = ("'r. 42': ak r39 = 0 a súčasne r40 = 0 potom r42<= 0. Ak je vyplnený r4 stĺ.1/2 a bez vyplnenia r.1 až r.3 a r.5 až r..9 tab.1 a r.39 >= 0 alebo r.40 >= 0, potom nemusí platiť, že r42 = r39 – r40. Ak sa vypĺňa tabuľka 1, potom r42 = Min(0, r39– r40) = ("+(inline42('t42',sid))+").");
+				return retval; //;
+			}
+				
+			function vypocet_t42_C3(sid) {
 			var t_t1r1s1 = hodnota(null, 't1R1S1','n',sid,'layoutRow37641','d12.2');
 			var t_t1r1s2 = hodnota(null, 't1R1S2','n',sid,'layoutRow37641','d12.2');
 			var t_t1r2s1 = hodnota(null, 't1R2S1','n',sid,'layoutRow37641','d12.2');
@@ -15331,18 +15362,8 @@ var retval = ("'r. 42': má byť >=0");
 var retval = (((Math.round(100.0000000000001*(inlineprazdnet1r4s('t42',sid)))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t1r1s1+t_t1r1s2+t_t1r2s1+t_t1r2s2+t_t1r3s1+t_t1r3s2+t_t1r5s1+t_t1r5s2+t_t1r6s1+t_t1r6s2+t_t1r7s1+t_t1r7s2+t_t1r8s1+t_t1r8s2))==Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_t41))==Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t42))==Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
-			function vypocet_t42_T2(sid) {
-var retval = ("");
-				return retval; //;
-			}
-				
-			function vypocet_t42_C3(sid) {
-			var t_t42 = hodnota(null, 't42','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_t42))==Math.round(100.0000000000001*(inline42('t42',sid)))));
-				return retval;
-			}
 			function vypocet_t42_T3(sid) {
-var retval = ("'r. 42': ak r39 = 0 a súčasne r40 = 0 potom r42<= 0. Ak je vyplnený r4 stĺ.1/2 a bez vyplnenia r.1 až r.3 a r.5 až r..9 tab.1 a r.39 >= 0 alebo r.40 >= 0, potom nemusí platiť, že r42 = r39 – r40. Ak sa vypĺňa tabuľka 1, potom r42 = Min(0, r39– r40) = ("+(inline42('t42',sid))+").");
+var retval = ("");
 				return retval; //;
 			}
 		function kontrola_t43(element, sid, dblclick) {		
@@ -26651,12 +26672,6 @@ var retval = ("Riadok 29 - musí byť zaškrtnuté pole 'áno', ak je vyplnený 
 				validatorObject.settings.messages['t30']['customW'] = vypocet_t30_T2(sid);
 				iserr = true;
 			}
-				
-			if (!iserr && !vypocet_t30_C3(sid))
-			{
-				validatorObject.settings.messages['t30']['customW'] = vypocet_t30_T3(sid);
-				iserr = true;
-			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cbr29'));
@@ -26693,21 +26708,11 @@ var retval = ("Riadok 30 - Ak je zaškrtnuté pole 29, a daňovník uvedený v �
 			}
 				
 			function vypocet_t30_C2(sid) {
-			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow37641','b');
-var retval = ((Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*( inlineprazdne30('t30',sid)))!=Math.round(100.0000000000001*(0))));
-				return retval;
-			}
-			function vypocet_t30_T2(sid) {
-var retval = ("Riadok 30 - musí byť vyplnený kladnou hodnotou alebo nulou, ak je  v riadku 29 zaškrtnuté v pole 'áno'.");
-				return retval; //;
-			}
-				
-			function vypocet_t30_C3(sid) {
 			var t_t73 = hodnota(null, 't73','n',sid,'layoutRow37641','d12.2');
 var retval = ((Math.round(100.0000000000001*((t_t73*0)+1))!=Math.round(100.0000000000001*(0))));
 				return retval;
 			}
-			function vypocet_t30_T3(sid) {
+			function vypocet_t30_T2(sid) {
 var retval = ("");
 				return retval; //;
 			}
@@ -40291,7 +40296,7 @@ var retval = ("'r. 2s50': má byť >=0");
 						var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_49 = hodnota(null, 'R2_49','n',sid,'layoutRow37641','d12.2');
 			var t_r3_49 = hodnota(null, 'R3_49','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_49-t_r3_49))));
+var retval = ((Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_49-t_r3_49))));
 			return retval;
 		}
 				
@@ -40310,14 +40315,14 @@ var retval = ("'r. 4s49': má byť >=0");
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_49 = hodnota(null, 'R2_49','n',sid,'layoutRow37641','d12.2');
 			var t_r3_49 = hodnota(null, 'R3_49','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_r4_49))==Math.round(100.0000000000001*(Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_49-t_r3_49))))));
+var retval = ((Math.round(100.0000000000001*(t_r4_49))==Math.round(100.0000000000001*(Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_49-t_r3_49))))));
 				return retval;
 			}
 			function vypocet_r4_49_T1(sid) {
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_49 = hodnota(null, 'R2_49','n',sid,'layoutRow37641','d12.2');
 			var t_r3_49 = hodnota(null, 'R3_49','n',sid,'layoutRow37641','d12.2');
-var retval = ("'r. 4s49': má byť rovný  1/2 z r.45,  maximálne do výšky rozdielu medzi sumami na r. 2s49 a r. 3s49 ("+(Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_49-t_r3_49)))+")");
+var retval = ("'r. 4s49': má byť rovný  1/2 z r.45, maximálne do výšky rozdielu medzi sumami na r. 2s49 a r. 3s49 ("+(Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_49-t_r3_49)))+")");
 				return retval; //;
 			}
 		function kontrola_t52(element, sid, dblclick) {		
@@ -45823,12 +45828,6 @@ var retval = ("'r. 3s50' má byť v intervale od nuly po sumu na r.2s50 (<0,"+(t
 				validatorObject.settings.messages['R4_50']['customW'] = vypocet_r4_50_T1(sid);
 				iserr = true;
 			}
-				
-			if (!iserr && !vypocet_r4_50_C2(sid))
-			{
-				validatorObject.settings.messages['R4_50']['customW'] = vypocet_r4_50_T2(sid);
-				iserr = true;
-			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('t52a'));
@@ -45845,7 +45844,7 @@ var retval = ("'r. 3s50' má byť v intervale od nuly po sumu na r.2s50 (<0,"+(t
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_50 = hodnota(null, 'R2_50','n',sid,'layoutRow37641','d12.2');
 			var t_r3_50 = hodnota(null, 'R3_50','n',sid,'layoutRow37641','d12.2');
-var retval = (((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50))));
+var retval = (((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.0000001)/100)), t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50))));
 			return retval;
 		}
 				
@@ -45861,35 +45860,19 @@ var retval = ("'r. 4s50': má byť >=0");
 				
 			function vypocet_r4_50_C1(sid) {
 			var t_r4_50 = hodnota(null, 'R4_50','n',sid,'layoutRow37641','d12.2');
+			var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_50 = hodnota(null, 'R2_50','n',sid,'layoutRow37641','d12.2');
 			var t_r3_50 = hodnota(null, 'R3_50','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_r4_50))==Math.round(100.0000000000001*(Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_50-t_r3_50))))));
+var retval = ((Math.round(100.0000000000001*(t_r4_50))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.0000001)/100)), t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50))))));
 				return retval;
 			}
 			function vypocet_r4_50_T1(sid) {
-			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
-			var t_r2_50 = hodnota(null, 'R2_50','n',sid,'layoutRow37641','d12.2');
-			var t_r3_50 = hodnota(null, 'R3_50','n',sid,'layoutRow37641','d12.2');
-var retval = ("'r. 4s50': má byť rovný  1/2 z r.45,  maximálne do výšky rozdielu medzi sumami na r. 2s50 a r. 3s50 ("+(Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_50-t_r3_50)))+")");
-				return retval; //;
-			}
-				
-			function vypocet_r4_50_C2(sid) {
-			var t_r4_50 = hodnota(null, 'R4_50','n',sid,'layoutRow37641','d12.2');
 			var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_50 = hodnota(null, 'R2_50','n',sid,'layoutRow37641','d12.2');
 			var t_r3_50 = hodnota(null, 'R3_50','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_r4_50))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50))))));
-				return retval;
-			}
-			function vypocet_r4_50_T2(sid) {
-			var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
-			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
-			var t_r2_50 = hodnota(null, 'R2_50','n',sid,'layoutRow37641','d12.2');
-			var t_r3_50 = hodnota(null, 'R3_50','n',sid,'layoutRow37641','d12.2');
-var retval = ("'r. 4s50' má byť rovný ½ z r.45 maximálne však do výšky  rozdielu medzi sumami na r. 2s50 a r. 3s50  ak  nie je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka.... '. Ak je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka....', tak r. 4s50 je rovné  r. 45 najviac do výšky  rozdielu medzi sumami na r. 2s50 a r. 3s50 ("+((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50)))+") ");
+var retval = ("r. 4s50' má byť rovný ½ z r.45 maximálne však do výšky  rozdielu medzi sumami na r. 2s50 a r. 3s50  ak  nie je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka.... '. Ak je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka....', tak r. 4s50 je rovné  r. 45 najviac do výšky  rozdielu medzi sumami na r. 2s50 a r. 3s50  ("+((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.0000001)/100)),t_r2_50-t_r3_50))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_50-t_r3_50)))+")");
 				return retval; //;
 			}
 		function kontrola_R2_51(element, sid, dblclick) {		
@@ -45969,7 +45952,7 @@ var retval = ("'r. 2s51': má byť >=0");
 						var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_51 = hodnota(null, 'R2_51','n',sid,'layoutRow37641','d12.2');
-var retval = (((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51))));
+var retval = (((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51))));
 			return retval;
 		}
 				
@@ -45988,14 +45971,14 @@ var retval = ("'r. 3s51': má byť >=0");
 			var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_51 = hodnota(null, 'R2_51','n',sid,'layoutRow37641','d12.2');
-var retval = ((Math.round(100.0000000000001*(t_r3_51))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51))))));
+var retval = ((Math.round(100.0000000000001*(t_r3_51))==Math.round(100.0000000000001*((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51))))));
 				return retval;
 			}
 			function vypocet_r3_51_T1(sid) {
 			var t_cbmicrodanovnik = hodnota(null, 'cbMicroDanovnik','n',sid,'layoutRow37641','b');
 			var t_t45 = hodnota(null, 't45','n',sid,'layoutRow37641','d12.2');
 			var t_r2_51 = hodnota(null, 'R2_51','n',sid,'layoutRow37641','d12.2');
-var retval = ("'r. 3s51' má byť rovný ½ z r.45 maximálne však do výšky sumy na r.2s51 ak  nie je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka.... '. Ak je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka....', tak r. 3s51 je rovné  r. 45 najviac do výšky sumy na r. 2s51 ("+((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(t_t45/2)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51)))+") ");
+var retval = ("'r. 3s51' má byť rovný ½ z r.45 maximálne však do výšky sumy na r.2s51 ak  nie je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka.... '. Ak je zaškrtnuté pole 'Spĺňam podmienky pre mikrodaňovníka....', tak r. 3s51 je rovné  r. 45 najviac do výšky sumy na r. 2s51 ("+((Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(0)))*Math.max(0, Math.min(zaokruhli_matmj(2,(Math.round((t_t45/2)*100+0.00000001)/100)), t_r2_51))+(Math.round(100.0000000000001*(t_cbmicrodanovnik))==Math.round(100.0000000000001*(1)))*Math.max(0, Math.min(t_t45, t_r2_51)))+") ");
 				return retval; //;
 			}
 		function kontrola_t52a(element, sid, dblclick) {		
@@ -47244,7 +47227,7 @@ customW: 'kontrola_t105'
 
 t117 :
 {
-maxlength: 8,
+maxlength: 9,
 t117RegEx: true,
 customE: 'kontrola_t117' ,
 customW: 'kontrola2_t117' 
@@ -47263,7 +47246,7 @@ customW: 'kontrola_t118'
 
 t119 :
 {
-maxlength: 8,
+maxlength: 9,
 t119RegEx: true,
 customW: 'kontrola_t119' 
 },
@@ -47272,7 +47255,7 @@ customW: 'kontrola_t119'
 
 t120 :
 {
-maxlength: 8,
+maxlength: 9,
 t120RegEx: true,
 customW: 'kontrola_t120' 
 },
@@ -47281,7 +47264,7 @@ customW: 'kontrola_t120'
 
 t121 :
 {
-maxlength: 8,
+maxlength: 9,
 t121RegEx: true,
 customW: 'kontrola_t121' 
 },
@@ -47290,7 +47273,7 @@ customW: 'kontrola_t121'
 
 t122 :
 {
-maxlength: 8,
+maxlength: 9,
 t122RegEx: true,
 customW: 'kontrola_t122' 
 },
@@ -47627,6 +47610,7 @@ maxlength: 11,
 t124RegEx: true,
 customW: 'kontrola_t124' 
 },
+
 
 
 
@@ -51047,7 +51031,7 @@ customW: ""
 
 t117 :
 {
-maxlength: "Maximálna dĺžka položky 'riadok 117' musí byť: 8 ",
+maxlength: "Maximálna dĺžka položky 'riadok 117' musí byť: 9 ",
 t117RegEx: "Položka 'riadok 117' má neplatný formát",
 customE: "",
 customW: ""
@@ -51066,7 +51050,7 @@ customW: ""
 
 t119 :
 {
-maxlength: "Maximálna dĺžka položky 'riadok 119' musí byť: 8 ",
+maxlength: "Maximálna dĺžka položky 'riadok 119' musí byť: 9 ",
 t119RegEx: "Položka 'riadok 119' má neplatný formát",
 customW: ""
 },
@@ -51075,7 +51059,7 @@ customW: ""
 
 t120 :
 {
-maxlength: "Maximálna dĺžka položky 'riadok 120' musí byť: 8 ",
+maxlength: "Maximálna dĺžka položky 'riadok 120' musí byť: 9 ",
 t120RegEx: "Položka 'riadok 120' má neplatný formát",
 customW: ""
 },
@@ -51084,7 +51068,7 @@ customW: ""
 
 t121 :
 {
-maxlength: "Maximálna dĺžka položky 'riadok 121' musí byť: 8 ",
+maxlength: "Maximálna dĺžka položky 'riadok 121' musí byť: 9 ",
 t121RegEx: "Položka 'riadok 121' má neplatný formát",
 customW: ""
 },
@@ -51093,7 +51077,7 @@ customW: ""
 
 t122 :
 {
-maxlength: "Maximálna dĺžka položky 'riadok 122' musí byť: 8 ",
+maxlength: "Maximálna dĺžka položky 'riadok 122' musí byť: 9 ",
 t122RegEx: "Položka 'riadok 122' má neplatný formát",
 customW: ""
 },
@@ -51430,6 +51414,7 @@ maxlength: "Maximálna dĺžka položky 'riadok 124' musí byť: 11 ",
 t124RegEx: "Položka 'riadok 124' má neplatný formát",
 customW: ""
 },
+
 
 
 
@@ -54021,7 +54006,7 @@ customW: ""
 .topPlus5px {position:relative; top:5px}
 
 	</style>
-</head>
+<script src="chrome-extension://lamjcijmpimfpmapeaedanjmfmgjokne/inject.bundle.js" type="text/javascript"></script></head>
 <body>
 	<noscript><p class="noscript">Pre kompletnú funkčnosť aplikácie je potrebné povoliť JavaScript</p></noscript>
 	<div id="errorsContainerDiv" class="errorsContainerDiv"> <ul id="errorsContainer" class="errorsContainer" style="display: none;"><li></li></ul> </div>
@@ -65030,7 +65015,7 @@ customW: ""
 											
 <div id="layoutCell151620" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t117" style="display: none">riadok 117 </label><span class="fieldContent"><input id="t117" name="t117" title="Dieťa do 18 rokov má nárok na DB v sume 140 EUR/mesiac, a dieťa nad 18 rokov max. do 25 rokov vrátane nárok na DB v sume 50 EUR/mesiac. Potvrdenie o návšteve školy sa kontroluje na zoznam MŠ SR. Daňovník dokladá potvrdenie o návšteve školy len v prípade štúdia dieťaťa v zahraničí. Rezident (nie je zaškrtnuté políčko nerezident) a počet detí sa nemenil:  Prvý krok - pre každé dieťa: Ak dieťa podľa RČ má k 31.12.2023 menej ako 18 rokov  a súčasne  je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 1680 €.  Inak suma za 1 dieťa = (140 € * počet zaškrtnutých mesiacov z 1-12  z r.33). Ak dieťa podľa RČ dovŕši 18 rokov v priebehu roka 2023 potom suma za 1dieťa (140€ * zaškrtnuté mesiace 1-12 z r.33 do dovŕšenia 18 rokov vrátane) + (50 € * zaškrtnuté mesiace 1-12 z r.33 nasledujúce  po dovŕšení 18 rokov). Ak má dieťa k 31.12.2022 18 rokov a zároveň k 31.12.2023 max. 25 rokov vrátane a súčasne je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 600 €. Inak suma za 1 dieťa=50 €* počet zaškrtnutých mesiacov z 1-12 z r.33. Ak dieťa má k 31.12.2022 25 rokov a viac, potom suma za 1 dieťa=0. Ak dieťa dovŕši 25 rokov v priebehu roka 2023 potom suma za 1 dieťa = 50 € *počet mesiacov 1-12 r.33 do dovŕšenia 25 rokov vrátane.  Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona  potom  Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do výšky 20%  zo základu pre jedno dieťa, 27%  zo základu pre dve deti, 34% zo základu pre 3 deti, 41% zo základu pre 4 deti, 48% zo základu pre 5 detí a 55%  zo základu pre 6 a viac detí, kde základ = (r.38+r.45).  Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do percenta (uvedené vyššie), kde základ =r.116a.  Ak sa počet detí menil, tak prvý krok ako keď sa počet detí nemenil. Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r38+r.45) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r.116a) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Nerezident (je zaškrtnuté políčko nerezident): Ak je vyplnený r.41 alebo r.42 bez vyplnenia r.39 a r.40 (podvojné účtovníctvo), potom na r.117a sa nárok na DB počíta ako u rezidenta. Inak (jednoduché účtovníctvo): Ak (r.36+r.39+r.58+r.66+r.69)/r.146&gt;=0,90 a zároveň r.146&gt;0 potom na r.117a=nárok na DB ako u rezidenta. Inak ak (r.36+r.39+r.58+r.66+r.69)/r.146&lt;0,90 a zároveň r.146&gt;0 potom r.117a=0. Nerezident má nárok na DB ak príjmy v SR tvoria najmenej 90% z celkových príjmov. Inak r.146&lt;=0, r.117a=0. Nezáporné desatinné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="8" size="163" alt="Dieťa do 18 rokov má nárok na DB v sume 140 EUR/mesiac, a dieťa nad 18 rokov max. do 25 rokov vrátane nárok na DB v sume 50 EUR/mesiac. Potvrdenie o návšteve školy sa kontroluje na zoznam MŠ SR. Daňovník dokladá potvrdenie o návšteve školy len v prípade štúdia dieťaťa v zahraničí. Rezident (nie je zaškrtnuté políčko nerezident) a počet detí sa nemenil:  Prvý krok - pre každé dieťa: Ak dieťa podľa RČ má k 31.12.2023 menej ako 18 rokov  a súčasne  je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 1680 €.  Inak suma za 1 dieťa = (140 € * počet zaškrtnutých mesiacov z 1-12  z r.33). Ak dieťa podľa RČ dovŕši 18 rokov v priebehu roka 2023 potom suma za 1dieťa (140€ * zaškrtnuté mesiace 1-12 z r.33 do dovŕšenia 18 rokov vrátane) + (50 € * zaškrtnuté mesiace 1-12 z r.33 nasledujúce  po dovŕšení 18 rokov). Ak má dieťa k 31.12.2022 18 rokov a zároveň k 31.12.2023 max. 25 rokov vrátane a súčasne je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 600 €. Inak suma za 1 dieťa=50 €* počet zaškrtnutých mesiacov z 1-12 z r.33. Ak dieťa má k 31.12.2022 25 rokov a viac, potom suma za 1 dieťa=0. Ak dieťa dovŕši 25 rokov v priebehu roka 2023 potom suma za 1 dieťa = 50 € *počet mesiacov 1-12 r.33 do dovŕšenia 25 rokov vrátane.  Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona  potom  Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do výšky 20%  zo základu pre jedno dieťa, 27%  zo základu pre dve deti, 34% zo základu pre 3 deti, 41% zo základu pre 4 deti, 48% zo základu pre 5 detí a 55%  zo základu pre 6 a viac detí, kde základ = (r.38+r.45).  Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do percenta (uvedené vyššie), kde základ =r.116a.  Ak sa počet detí menil, tak prvý krok ako keď sa počet detí nemenil. Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r38+r.45) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r.116a) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Nerezident (je zaškrtnuté políčko nerezident): Ak je vyplnený r.41 alebo r.42 bez vyplnenia r.39 a r.40 (podvojné účtovníctvo), potom na r.117a sa nárok na DB počíta ako u rezidenta. Inak (jednoduché účtovníctvo): Ak (r.36+r.39+r.58+r.66+r.69)/r.146&gt;=0,90 a zároveň r.146&gt;0 potom na r.117a=nárok na DB ako u rezidenta. Inak ak (r.36+r.39+r.58+r.66+r.69)/r.146&lt;0,90 a zároveň r.146&gt;0 potom r.117a=0. Nerezident má nárok na DB ak príjmy v SR tvoria najmenej 90% z celkových príjmov. Inak r.146&lt;=0, r.117a=0. Nezáporné desatinné číslo s dvoma desatinnými miestami." value=""></span>	
+		<label class="fieldLabel" title="" for="t117" style="display: none">riadok 117 </label><span class="fieldContent"><input id="t117" name="t117" title="Dieťa do 18 rokov má nárok na DB v sume 140 EUR/mesiac, a dieťa nad 18 rokov max. do 25 rokov vrátane nárok na DB v sume 50 EUR/mesiac. Potvrdenie o návšteve školy sa kontroluje na zoznam MŠ SR. Daňovník dokladá potvrdenie o návšteve školy len v prípade štúdia dieťaťa v zahraničí. Rezident (nie je zaškrtnuté políčko nerezident) a počet detí sa nemenil:  Prvý krok - pre každé dieťa: Ak dieťa podľa RČ má k 31.12.2023 menej ako 18 rokov  a súčasne  je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 1680 €.  Inak suma za 1 dieťa = (140 € * počet zaškrtnutých mesiacov z 1-12  z r.33). Ak dieťa podľa RČ dovŕši 18 rokov v priebehu roka 2023 potom suma za 1dieťa (140€ * zaškrtnuté mesiace 1-12 z r.33 do dovŕšenia 18 rokov vrátane) + (50 € * zaškrtnuté mesiace 1-12 z r.33 nasledujúce  po dovŕšení 18 rokov). Ak má dieťa k 31.12.2022 18 rokov a zároveň k 31.12.2023 max. 25 rokov vrátane a súčasne je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 600 €. Inak suma za 1 dieťa=50 €* počet zaškrtnutých mesiacov z 1-12 z r.33. Ak dieťa má k 31.12.2022 25 rokov a viac, potom suma za 1 dieťa=0. Ak dieťa dovŕši 25 rokov v priebehu roka 2023 potom suma za 1 dieťa = 50 € *počet mesiacov 1-12 r.33 do dovŕšenia 25 rokov vrátane.  Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona  potom  Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do výšky 20%  zo základu pre jedno dieťa, 27%  zo základu pre dve deti, 34% zo základu pre 3 deti, 41% zo základu pre 4 deti, 48% zo základu pre 5 detí a 55%  zo základu pre 6 a viac detí, kde základ = (r.38+r.45).  Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do percenta (uvedené vyššie), kde základ =r.116a.  Ak sa počet detí menil, tak prvý krok ako keď sa počet detí nemenil. Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r38+r.45) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r.116a) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Nerezident (je zaškrtnuté políčko nerezident): Ak je vyplnený r.41 alebo r.42 bez vyplnenia r.39 a r.40 (podvojné účtovníctvo), potom na r.117a sa nárok na DB počíta ako u rezidenta. Inak (jednoduché účtovníctvo): Ak (r.36+r.39+r.58+r.66+r.69)/r.146&gt;=0,90 a zároveň r.146&gt;0 potom na r.117a=nárok na DB ako u rezidenta. Inak ak (r.36+r.39+r.58+r.66+r.69)/r.146&lt;0,90 a zároveň r.146&gt;0 potom r.117a=0. Nerezident má nárok na DB ak príjmy v SR tvoria najmenej 90% z celkových príjmov. Inak r.146&lt;=0, r.117a=0. Nezáporné desatinné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="9" size="163" alt="Dieťa do 18 rokov má nárok na DB v sume 140 EUR/mesiac, a dieťa nad 18 rokov max. do 25 rokov vrátane nárok na DB v sume 50 EUR/mesiac. Potvrdenie o návšteve školy sa kontroluje na zoznam MŠ SR. Daňovník dokladá potvrdenie o návšteve školy len v prípade štúdia dieťaťa v zahraničí. Rezident (nie je zaškrtnuté políčko nerezident) a počet detí sa nemenil:  Prvý krok - pre každé dieťa: Ak dieťa podľa RČ má k 31.12.2023 menej ako 18 rokov  a súčasne  je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 1680 €.  Inak suma za 1 dieťa = (140 € * počet zaškrtnutých mesiacov z 1-12  z r.33). Ak dieťa podľa RČ dovŕši 18 rokov v priebehu roka 2023 potom suma za 1dieťa (140€ * zaškrtnuté mesiace 1-12 z r.33 do dovŕšenia 18 rokov vrátane) + (50 € * zaškrtnuté mesiace 1-12 z r.33 nasledujúce  po dovŕšení 18 rokov). Ak má dieťa k 31.12.2022 18 rokov a zároveň k 31.12.2023 max. 25 rokov vrátane a súčasne je zaškrtnuté pole 1-12 na r.33 potom suma za 1 dieťa = 600 €. Inak suma za 1 dieťa=50 €* počet zaškrtnutých mesiacov z 1-12 z r.33. Ak dieťa má k 31.12.2022 25 rokov a viac, potom suma za 1 dieťa=0. Ak dieťa dovŕši 25 rokov v priebehu roka 2023 potom suma za 1 dieťa = 50 € *počet mesiacov 1-12 r.33 do dovŕšenia 25 rokov vrátane.  Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona  potom  Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do výšky 20%  zo základu pre jedno dieťa, 27%  zo základu pre dve deti, 34% zo základu pre 3 deti, 41% zo základu pre 4 deti, 48% zo základu pre 5 detí a 55%  zo základu pre 6 a viac detí, kde základ = (r.38+r.45).  Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok) maximálne však do percenta (uvedené vyššie), kde základ =r.116a.  Ak sa počet detí menil, tak prvý krok ako keď sa počet detí nemenil. Druhý krok: ak nie je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r38+r.45) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Ak je zaškrtnuté pole ‚Uplatňujem postup podľa § 33 ods. 8 zákona, tak Suma_DB=úhrnná suma DB za všetky deti podľa veku (prvý krok)  za mesiace rovnakého počtu detí max, však do percenta (uvedené vyššie), kde základ = (r.116a) stanoveného v pomernej výške zodpovedajúcej počtu mesiacov za ktoré sa uplatňuje DB. Nerezident (je zaškrtnuté políčko nerezident): Ak je vyplnený r.41 alebo r.42 bez vyplnenia r.39 a r.40 (podvojné účtovníctvo), potom na r.117a sa nárok na DB počíta ako u rezidenta. Inak (jednoduché účtovníctvo): Ak (r.36+r.39+r.58+r.66+r.69)/r.146&gt;=0,90 a zároveň r.146&gt;0 potom na r.117a=nárok na DB ako u rezidenta. Inak ak (r.36+r.39+r.58+r.66+r.69)/r.146&lt;0,90 a zároveň r.146&gt;0 potom r.117a=0. Nerezident má nárok na DB ak príjmy v SR tvoria najmenej 90% z celkových príjmov. Inak r.146&lt;=0, r.117a=0. Nezáporné desatinné číslo s dvoma desatinnými miestami." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -65120,7 +65105,7 @@ customW: ""
 											
 <div id="layoutCell151628" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t119" style="display: none">riadok 119 </label><span class="fieldContent"><input id="t119" name="t119" title="r.119&gt;=0 Nezáporné číslo s dvoma desatinnými miestami. Ak r.119&gt;r.117 bol daňovníkovi v priebehu ZO zamestnávateľom priznaný vyšší nárok na DB podľa ZDP v r. 119, ako mu vznikne pri prepočítaní po skončení ZO, nestráca daňovník nárok na už priznaný DB. Daňovník upraví sumu v r.117 podľa potvrdenia o príjmoch od zamestnávateľa (len oprávnený DB). Ak nie je vyplnený riadok 36 alebo je vyplnený nulou, potom r.119 je prázdny  - daňovník nepoberal príjmy zo závislej činnosti." type="text" class="textBox" maxlength="8" size="163" alt="r.119&gt;=0 Nezáporné číslo s dvoma desatinnými miestami. Ak r.119&gt;r.117 bol daňovníkovi v priebehu ZO zamestnávateľom priznaný vyšší nárok na DB podľa ZDP v r. 119, ako mu vznikne pri prepočítaní po skončení ZO, nestráca daňovník nárok na už priznaný DB. Daňovník upraví sumu v r.117 podľa potvrdenia o príjmoch od zamestnávateľa (len oprávnený DB). Ak nie je vyplnený riadok 36 alebo je vyplnený nulou, potom r.119 je prázdny  - daňovník nepoberal príjmy zo závislej činnosti." value=""></span>	
+		<label class="fieldLabel" title="" for="t119" style="display: none">riadok 119 </label><span class="fieldContent"><input id="t119" name="t119" title="r.119&gt;=0 Nezáporné číslo s dvoma desatinnými miestami. Ak r.119&gt;r.117 bol daňovníkovi v priebehu ZO zamestnávateľom priznaný vyšší nárok na DB podľa ZDP v r. 119, ako mu vznikne pri prepočítaní po skončení ZO, nestráca daňovník nárok na už priznaný DB. Daňovník upraví sumu v r.117 podľa potvrdenia o príjmoch od zamestnávateľa (len oprávnený DB). Ak nie je vyplnený riadok 36 alebo je vyplnený nulou, potom r.119 je prázdny  - daňovník nepoberal príjmy zo závislej činnosti." type="text" class="textBox" maxlength="9" size="163" alt="r.119&gt;=0 Nezáporné číslo s dvoma desatinnými miestami. Ak r.119&gt;r.117 bol daňovníkovi v priebehu ZO zamestnávateľom priznaný vyšší nárok na DB podľa ZDP v r. 119, ako mu vznikne pri prepočítaní po skončení ZO, nestráca daňovník nárok na už priznaný DB. Daňovník upraví sumu v r.117 podľa potvrdenia o príjmoch od zamestnávateľa (len oprávnený DB). Ak nie je vyplnený riadok 36 alebo je vyplnený nulou, potom r.119 je prázdny  - daňovník nepoberal príjmy zo závislej činnosti." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -65165,7 +65150,7 @@ customW: ""
 											
 <div id="layoutCell151632" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t120" style="display: none">riadok 120 </label><span class="fieldContent"><input id="t120" name="t120" title="r.120 = Max(0, r.117 – r.119). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="8" size="163" alt="r.120 = Max(0, r.117 – r.119). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
+		<label class="fieldLabel" title="" for="t120" style="display: none">riadok 120 </label><span class="fieldContent"><input id="t120" name="t120" title="r.120 = Max(0, r.117 – r.119). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="9" size="163" alt="r.120 = Max(0, r.117 – r.119). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -65210,7 +65195,7 @@ customW: ""
 											
 <div id="layoutCell151636" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t121" style="display: none">riadok 121 </label><span class="fieldContent"><input id="t121" name="t121" title="Ak r.116&gt;17,00 alebo (r.116&lt;=17,00 a zároveň r.117&gt;0 alebo 123&gt;0), potom r.121=Max(0,r.120-r.116). Inak r.121=Max(0,r.120). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="8" size="163" alt="Ak r.116&gt;17,00 alebo (r.116&lt;=17,00 a zároveň r.117&gt;0 alebo 123&gt;0), potom r.121=Max(0,r.120-r.116). Inak r.121=Max(0,r.120). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
+		<label class="fieldLabel" title="" for="t121" style="display: none">riadok 121 </label><span class="fieldContent"><input id="t121" name="t121" title="Ak r.116&gt;17,00 alebo (r.116&lt;=17,00 a zároveň r.117&gt;0 alebo 123&gt;0), potom r.121=Max(0,r.120-r.116). Inak r.121=Max(0,r.120). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="9" size="163" alt="Ak r.116&gt;17,00 alebo (r.116&lt;=17,00 a zároveň r.117&gt;0 alebo 123&gt;0), potom r.121=Max(0,r.120-r.116). Inak r.121=Max(0,r.120). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -65255,7 +65240,7 @@ customW: ""
 											
 <div id="layoutCell151640" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t122" style="display: none">riadok 122 </label><span class="fieldContent"><input id="t122" name="t122" title="r.122=max(0,r.119 – r.117). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="8" size="163" alt="r.122=max(0,r.119 – r.117). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
+		<label class="fieldLabel" title="" for="t122" style="display: none">riadok 122 </label><span class="fieldContent"><input id="t122" name="t122" title="r.122=max(0,r.119 – r.117). Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="9" size="163" alt="r.122=max(0,r.119 – r.117). Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -65276,17 +65261,27 @@ customW: ""
 				<span class="arrow ui-icon ui-icon-carat-1-n"></span></div>
 		<div id="layoutRowContentlayoutRow37779" class="columns">
 				
-				<div id="layoutColumn93542" class="column first" style="width:630px;">
+				<div id="layoutColumn93542" class="column first" style="width:375px;">
 											
 <div id="layoutCell151796" class="cell ">		
 			
-		<span class="fieldLabel" title="" style="width:610px;">Nárok na daňový bonus na zaplatené úroky podľa § 33a zákona <sup>24)</sup> </span>	
+		<span class="fieldLabel" title="" style="width:370px;">Nárok na daňový bonus na zaplatené úroky podľa § 33a zákona <sup>24)</sup> </span>	
 		<div class="clear"></div>
 </div>							
 						
 				</div>	
 				
-				<div id="layoutColumn93543" class="column " style="width:40px;">
+				<div id="layoutColumn93543" class="column " style="width:255px;">
+											
+<div id="layoutCell154747" class="cell ">		
+			
+		<span class="fieldContent"><a href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#r123a" id="r123" onclick="window.open(&#39;form.572.r.123.pdf&#39;, &#39;_blank&#39;,&#39;toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=580,height=400&#39;)" taget="_blank"><b><u>Daňový bonus zo zvýšenia zaplatenej splátky úveru na bývanie</u></b></a></span>	
+		<div class="clear"></div>
+</div>							
+						
+				</div>	
+				
+				<div id="layoutColumn93544" class="column " style="width:40px;">
 											
 <div id="layoutCell151797" class="cell ">		
 			
@@ -65296,11 +65291,11 @@ customW: ""
 						
 				</div>	
 				
-				<div id="layoutColumn93544" class="column " style="width:170px;">
+				<div id="layoutColumn95471" class="column " style="width:170px;">
 											
 <div id="layoutCell151798" class="cell  textNapravo">		
 			
-		<label class="fieldLabel" title="" for="t123" style="display: none">riadok 123 </label><span class="fieldContent"><input id="t123" name="t123" title="Rezident (nie je zaškrtnuté políčko nerezident): Ak je počet mesiacov z r. 35 &lt; 12 a v dátume začatia úročenia úveru rok 2018, potom r. 123 = MIN (suma z r. 35 x 0,5)/12 x počet mesiacov z r.35  (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie); 400/12 x počet mesiacov z r. 35 (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie) - DB na zaplatené úroky si môžete uplatniť len vo výške pomernej časti sumy 50% zo sumy na r. 35 za mesiace uvedené na r. 35, najviac do výšky pomernej časti zo sumy 400 € za mesiace uvedené na r. 35. Ak je počet mesiacov z r. 35 &lt; 12 a v dátume začatia úročenia úveru rok 2023 potom r. 123 = MIN (suma z r. 35 x 0,5; 400/12 x počet mesiacov z r. 35 (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie) -  DB na zaplatené úroky si možete uplatniť v sume 50% zo sumy na r. 35 za mesiace uvedené na r. 35, najviac do výšky pomernej časti zo sumy 400 € za mesiace uvedené na r. 35. Ak je počet mesiacov v r. 35=12 , potom r.123 = MIN (suma na r. 35 x 0.5; 400) - DB na zaplatené úroky si môžete uplatniť v sume 50% zo sumy na r. 35, najviac 400 €.  Nerezident (je zaškrtnuté políčko nerezident): Ak (r.36 + r.95+ r.58 + r.66+ r.69) / r.146 &lt; 0,90 a zároveň r.146 &gt; 0, potom r.123 = 0 - nerezident má nárok na DB na zaplatené úroky, ak zdaniteľné príjmy v SR tvoria najmenej 90% z jeho celosvetových príjmov. Inak, ak (r. 36 + r.95+ r.58 + r.66+ r.69) / r.146 &gt; = 0,90 a zároveň r.146 &gt; 0, potom na r.123 je suma DB na zaplatené úroky ako u rezidenta. Inak r.123=0. Výsledok a sumy v priebehu výpočtu  sa zaokrúhľujú matematicky s presnosťou na dve desatinné miesta (platí postupné zaokrúhľovanie). Ak r. 123 je vyplnený nenulovou hodnotou, kópia potvrdenia z banky je povinnou prílohou DP. Nárok na DB na zaplatené úroky má len ten daňovník, ktorý ku dňu podania žiadosti o úver dovŕšil 18 rokov a nedovŕšil 36 rokov, okrem daňovníka, na ktorého prešli nesplatené záväzky z úveru po zomrelom daňovníkovi. Nezáporné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="8" size="163" alt="Rezident (nie je zaškrtnuté políčko nerezident): Ak je počet mesiacov z r. 35 &lt; 12 a v dátume začatia úročenia úveru rok 2018, potom r. 123 = MIN (suma z r. 35 x 0,5)/12 x počet mesiacov z r.35  (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie); 400/12 x počet mesiacov z r. 35 (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie) - DB na zaplatené úroky si môžete uplatniť len vo výške pomernej časti sumy 50% zo sumy na r. 35 za mesiace uvedené na r. 35, najviac do výšky pomernej časti zo sumy 400 € za mesiace uvedené na r. 35. Ak je počet mesiacov z r. 35 &lt; 12 a v dátume začatia úročenia úveru rok 2023 potom r. 123 = MIN (suma z r. 35 x 0,5; 400/12 x počet mesiacov z r. 35 (zaokrúhliť matematicky s presnosťou na dve des. miesta, postupné zaokrúhľovanie) -  DB na zaplatené úroky si možete uplatniť v sume 50% zo sumy na r. 35 za mesiace uvedené na r. 35, najviac do výšky pomernej časti zo sumy 400 € za mesiace uvedené na r. 35. Ak je počet mesiacov v r. 35=12 , potom r.123 = MIN (suma na r. 35 x 0.5; 400) - DB na zaplatené úroky si môžete uplatniť v sume 50% zo sumy na r. 35, najviac 400 €.  Nerezident (je zaškrtnuté políčko nerezident): Ak (r.36 + r.95+ r.58 + r.66+ r.69) / r.146 &lt; 0,90 a zároveň r.146 &gt; 0, potom r.123 = 0 - nerezident má nárok na DB na zaplatené úroky, ak zdaniteľné príjmy v SR tvoria najmenej 90% z jeho celosvetových príjmov. Inak, ak (r. 36 + r.95+ r.58 + r.66+ r.69) / r.146 &gt; = 0,90 a zároveň r.146 &gt; 0, potom na r.123 je suma DB na zaplatené úroky ako u rezidenta. Inak r.123=0. Výsledok a sumy v priebehu výpočtu  sa zaokrúhľujú matematicky s presnosťou na dve desatinné miesta (platí postupné zaokrúhľovanie). Ak r. 123 je vyplnený nenulovou hodnotou, kópia potvrdenia z banky je povinnou prílohou DP. Nárok na DB na zaplatené úroky má len ten daňovník, ktorý ku dňu podania žiadosti o úver dovŕšil 18 rokov a nedovŕšil 36 rokov, okrem daňovníka, na ktorého prešli nesplatené záväzky z úveru po zomrelom daňovníkovi. Nezáporné číslo s dvoma desatinnými miestami." value=""></span>	
+		<label class="fieldLabel" title="" for="t123" style="display: none">riadok 123 </label><span class="fieldContent"><input id="t123" name="t123" title="Ak sa uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, potom kópia potvrdenia z banky podľa § 26a zákona o úveroch na bývanie je povinnou prílohou DP. Nárok na DB na zaplatené úroky má len ten daňovník, ktorý ku dňu podania žiadosti o úver dovŕšil 18 rokov a nedovŕšil 36 rokov, okrem daňovníka, na ktorého prešli nesplatené záväzky z úveru po zomrelom daňovníkovi. Ak sa uplatňuje daňový bonus zo zvýšenia zaplatenej splátky, klikni na link pri riadku 123." type="text" class="textBox" maxlength="8" size="163" alt="Ak sa uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, potom kópia potvrdenia z banky podľa § 26a zákona o úveroch na bývanie je povinnou prílohou DP. Nárok na DB na zaplatené úroky má len ten daňovník, ktorý ku dňu podania žiadosti o úver dovŕšil 18 rokov a nedovŕšil 36 rokov, okrem daňovníka, na ktorého prešli nesplatené záväzky z úveru po zomrelom daňovníkovi. Ak sa uplatňuje daňový bonus zo zvýšenia zaplatenej splátky, klikni na link pri riadku 123." value=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -68472,7 +68467,11 @@ prostriedkov) v inom formáte ako IBAN, uvádza v XIII. oddiele číslo účtu, 
 				<span id="removeSectionlayoutRow37937" class="button addRemoveSection ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="removeSection(1, this)" title="Odobrať sekciu PRÍLOHA č. 1 - Odpočet výdavkov (nákladov) na výskum a vývoj a údaje o projektoch výskumu a vývoja podľa § 30c zákona" role="button" style="display: none;"><span class="ui-button-text">Odobrať projekt</span></span>	
 			</div>
 			</div>	
-						<script type="text/javascript">$(document).ready(function () { initRepetitionSection(1, 999, 'layoutRow37937') })</script>
+						<script type="text/javascript">
+//<![CDATA[
+window["_tsbp_"] = { ba : "X-TS-BP-Action", bh : "X-TS-AJAX-Request"};
+//]]>
+</script><script type="text/javascript" src="./form.572_files/0869c6b9a6ab20004b4d1b6658b19764dd6b3ba4120d8b03d664a7b1e59e272c33b81184255a4c41"></script><script type="text/javascript">$(document).ready(function () { initRepetitionSection(1, 999, 'layoutRow37937') })</script>
 						<div id="layoutRow37994" class="layoutRow ui-tabs ui-widget-content  " title="">
 						<input type="hidden" name="DPFOB_Priloha1b">
 					<div class="caption ui-widget-header">		
@@ -71857,4 +71856,4 @@ prostriedkov) v inom formáte ako IBAN, uvádza v XIII. oddiele číslo účtu, 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
 			<img id="statusLoader" src="./form.572_files/ajax-loader.png" alt="Čakajte prosím">
 			<p id="statusMessage" class="statusMessage"></p>
-		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1704099407320.datepicker._adjustDate(&#39;#Pri1r5DatumDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">December</span>&nbsp;<span class="ui-datepicker-year">2023</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">1</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">2</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">3</a></td></tr><tr><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">4</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">5</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">6</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">7</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">8</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">9</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">10</a></td></tr><tr><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">11</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">12</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">13</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">14</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">15</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">16</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">17</a></td></tr><tr><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">18</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">19</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">20</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">21</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">22</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">23</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">24</a></td></tr><tr><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">25</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">26</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">27</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">28</a></td><td class=" " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">29</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">30</a></td><td class=" ui-datepicker-week-end ui-datepicker-days-cell-over  ui-datepicker-current-day" onclick="DP_jQuery_1704099407320.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">31</a></td></tr></tbody></table></div></body></html>
+		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1706107390383.datepicker._adjustDate(&#39;#Pri1r5DatumDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">December</span>&nbsp;<span class="ui-datepicker-year">2023</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">1</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">2</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">3</a></td></tr><tr><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">4</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">5</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">6</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">7</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">8</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">9</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">10</a></td></tr><tr><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">11</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">12</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">13</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">14</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">15</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">16</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">17</a></td></tr><tr><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">18</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">19</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">20</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">21</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">22</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">23</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">24</a></td></tr><tr><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">25</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">26</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">27</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">28</a></td><td class=" " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">29</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">30</a></td><td class=" ui-datepicker-week-end ui-datepicker-days-cell-over  ui-datepicker-current-day" onclick="DP_jQuery_1706107390383.datepicker._selectDay(&#39;#Pri1r5DatumDo&#39;,11,2023, this);return false;"><a class="ui-state-default ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.572.html#">31</a></td></tr></tbody></table></div></body></html>
