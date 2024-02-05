@@ -6,8 +6,7 @@ import {
   BooleanRadio,
   Input,
   FormWrapper,
-  Select,
-  CheckboxSmall
+  Select
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -47,8 +46,7 @@ const Deti: Page<ChildrenUserInput> = ({
   taxFormUserInput,
   router,
   previousRoute,
-  nextRoute,
-  isDebug
+  nextRoute
 }) => {
   const previousPageLink = (
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
