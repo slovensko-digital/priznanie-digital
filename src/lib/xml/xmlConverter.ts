@@ -79,8 +79,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    if (taxForm.partner_bonus_na_deti) {
+      form.dokument.telo.uplatnujemPar33Ods8 = boolToString(taxForm.partner_bonus_na_deti)
+      form.dokument.telo.r34a = decimalToString(taxForm.r034a)
+    }
   }
-  form.dokument.telo.r34a = decimalToString(taxForm.r034a)
 
   /** SECTION Mortgage */
   // if (taxForm.r037_uplatnuje_uroky) {

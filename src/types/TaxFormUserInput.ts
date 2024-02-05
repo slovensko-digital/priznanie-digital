@@ -85,6 +85,11 @@ export interface TaxFormUserInput {
 
   /** SECTION  Deti*/
   hasChildren?: boolean
+  partner_bonus_na_deti: boolean
+  r034_priezvisko_a_meno: string
+  r034_rodne_cislo: string
+  r034a: string
+  partner_bonus_na_deti_typ_prijmu: "1" | "2" | "3" | "4" | "0"
   children: ChildInput[]
 
   /** SECTION  Dve percenta */

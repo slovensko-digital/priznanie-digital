@@ -6,7 +6,8 @@ import {
   BooleanRadio,
   Input,
   FormWrapper,
-  Select
+  Select,
+  CheckboxSmall
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -21,10 +22,12 @@ import {
   validateRodneCislo,
   maxChildAgeBonusMonth,
   minChildAgeBonusMonth,
+  numberInputRegexp,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
+  calculate,
   CHILD_RATE_EIGHTEEN_AND_OLDER,
   CHILD_RATE_EIGHTEEN_AND_YOUNGER,
   MAX_CHILD_AGE_BONUS,
@@ -36,6 +39,7 @@ import { Details } from '../components/Details'
 import RadioGroup from "../components/radio/RadioGroup";
 import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
+import Decimal from 'decimal.js'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -59,14 +63,28 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
+          debugger
           let userInput = values.hasChildren
             ? values
             : {
               ...childrenUserInputInitialValues,
               hasChildren: false,
             }
+          const { danovyBonusNaDieta } = calculate({...taxFormUserInput, ...userInput})
           setTaxFormUserInput(userInput)
-          router.push(nextRoute)
+          if (values.hasChildren) {
+            if (danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))) {
+              router.push(nextRoute)
+            } else {
+              if (values.partner_bonus_na_deti === false) {
+                router.push(nextRoute)
+              } else {
+                // router.push(nextRoute)
+              }
+            }
+          } else {
+            router.push(nextRoute)
+          }
         }}
       >
         {({ values, errors, setErrors, validateForm, setFieldValue }) => (
@@ -161,16 +179,66 @@ const Deti: Page<ChildrenUserInput> = ({
                       </div>
                     )}
                   </FieldArray>
+
+                  {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
+                    <>
+                      <p>
+                        Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevzužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
+                      </p>
+                      <BooleanRadio
+                        title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
+                        name="partner_bonus_na_deti"
+                      />
+
+                      {values.partner_bonus_na_deti && (
+                        <>
+                          <h1 className="govuk-heading-l govuk-!-margin-top-3">
+                            Údaje o oprávnenej osobe
+                          </h1>
+                          <Input
+                            name="r034_priezvisko_a_meno"
+                            type="text"
+                            label="Meno a priezvisko manželky / manžela"
+                          />
+                          <Input
+                            name="r034_rodne_cislo"
+                            type="text"
+                            label="Rodné číslo"
+                            maxLength={13}
+                            onChange={async (event) => {
+                              const rodneCislo = formatRodneCislo(
+                                event.currentTarget.value,
+                                values.r034_rodne_cislo,
+                              )
+                              setFieldValue('r034_rodne_cislo', rodneCislo)
+                            }}
+                          />
+
+                          <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
+                          <Select
+                            name='partner_bonus_na_deti_typ_prijmu'
+                            label="Vyberte spôsob vysporiadania príjmov"
+                            optionsWithValue={[
+                              {name: '', value: "0"},
+                              {name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1"},
+                              {name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2"},
+                              {name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3"},
+                              {name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4"}
+                            ]}
+                          />
+
+                          <Input
+                            name="r034a"
+                            type="number"
+                            label="Prijem"
+                            hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
                 </>
               )}
-            {
-              isDebug && (
-                <div>
-                  <h2>Debug</h2>
-                  <pre>{JSON.stringify(taxForm.danovyBonusNaDieta, null, 2)}</pre>
-                </div>
-              )
-            }
             <button className="govuk-button" type="submit">
               Pokračovať
             </button>
@@ -179,6 +247,21 @@ const Deti: Page<ChildrenUserInput> = ({
       </FormWrapper>
     </>
   )
+}
+
+const getIncomeHint = (value: string): string => {
+  switch (value) {
+    case "0":
+      return ''
+    case "1":
+      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ A riadok 39'
+    case "2":
+      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ B riadok 72'
+    case "3":
+      return 'Ročné zúčtovanie preddavkov na daň riadok 3'
+    default:
+      break;
+  }
 }
 
 interface ChildFormProps {
@@ -273,8 +356,10 @@ interface ChildFormErrors {
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
-  zaciatokPrijmovDen?: string,
-  zaciatokPrijmovMesiac?: string,
+  partner_bonus_na_deti_typ_prijmu?: string
+  r034_priezvisko_a_meno?: string
+  r034_rodne_cislo?: string
+  r034a?: string
 }
 
 export const validate = (values: ChildrenUserInput) => {
@@ -318,6 +403,29 @@ export const validate = (values: ChildrenUserInput) => {
 
     if (childrenErrors.some((err) => Object.keys(err).length > 0)) {
       errors.children = childrenErrors
+    }
+
+    if(values.partner_bonus_na_deti) {
+      if (!["1", "2", "3", "4"].includes(values.partner_bonus_na_deti_typ_prijmu)) {
+        errors.partner_bonus_na_deti_typ_prijmu = 'Vyberte jednu z možností spôsobu vysporiadania príjmov'
+      }
+
+      if (!values.r034_priezvisko_a_meno) {
+        errors.r034_priezvisko_a_meno = 'Zadajte meno a priezvisko'
+      }
+
+      if(!values.r034_rodne_cislo) {
+        errors.r034_rodne_cislo = 'Zadajte rodné číslo'
+      } else if (!validateRodneCislo(values.r034_rodne_cislo)) {
+        errors.r034_rodne_cislo = 'Zadané rodné číslo nie je správne'
+      }
+
+      if (!values.r034a) {
+        errors.r034a =
+          'Zadajte vlastné príjmy manželky / manžela'
+      } else if (!values.r034a.match(numberInputRegexp)) {
+        errors.r034a = 'Zadajte príjmy vo formáte 123,45'
+      }
     }
   }
 
