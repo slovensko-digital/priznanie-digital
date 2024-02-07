@@ -153,11 +153,21 @@ const executeTestCase = (testCase: string) => {
               cy.get('[data-test="add-child"]').click()
             }
           })
+          next()
+          cy.url().then(url => {
+            if (input.partner_bonus_na_deti) {
+              
+            } else {
+              if (!url.includes('/dochodok')) {
+                getInput('partner_bonus_na_deti', '-no').click()
+                next()
+              }
+            }
+          });
         } else {
           getInput('hasChildren', '-no').click()
+          next()
         }
-
-        next()
 
         /**  SECTION Dochodok */
         assertUrl('/dochodok')
