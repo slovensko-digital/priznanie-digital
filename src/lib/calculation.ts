@@ -538,6 +538,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r121() {
       return Decimal.max(this.r120.minus(this.r116_dan), 0)
     },
+    get r122() {
+      return Decimal.max(this.r119.minus(this.r117), 0)
+    },
     get mozeZiadatVyplatitDanovyBonus() {
       return this.r121.gt(0)
     },
