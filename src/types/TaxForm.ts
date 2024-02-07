@@ -21,22 +21,22 @@ export interface Child {
 interface Partner {
   priezviskoMeno: string
   rodneCislo: string
-  m00: string
-  m01: string
-  m02: string
-  m03: string
-  m04: string
-  m05: string
-  m06: string
-  m07: string
-  m08: string
-  m09: string
-  m10: string
-  m11: string
-  m12: string
-  druhaOsobaPodalaDPvSR: string
-  dokladRocZuct: string
-  dokladVyskaDane: string
+  m00: boolean
+  m01: boolean
+  m02: boolean
+  m03: boolean
+  m04: boolean
+  m05: boolean
+  m06: boolean
+  m07: boolean
+  m08: boolean
+  m09: boolean
+  m10: boolean
+  m11: boolean
+  m12: boolean
+  druhaOsobaPodalaDPvSR: boolean
+  dokladRocZuct: boolean
+  dokladVyskaDane: boolean
 }
 
 export interface TaxForm {
