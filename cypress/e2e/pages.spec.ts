@@ -440,6 +440,9 @@ describe('Children page', () => {
     )
 
     next()
+    getInput('partner_bonus_na_deti', '-no').click()
+
+    next()
     assertUrl('/dochodok')
   })
   it('has working ui for adding children', () => {
@@ -524,6 +527,8 @@ describe('Children page', () => {
     // Remove 2rd child
     cy.get('[data-test="remove-child-2"]').click()
 
+    next()
+    getInput('partner_bonus_na_deti', '-no').click()
     next()
     assertUrl('/dochodok')
   })
