@@ -11,6 +11,7 @@ import Decimal from 'decimal.js'
 import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 import { Summary } from '../types/Summary'
 import { optionWithValue } from '../components/FormComponents'
+import { ChildrenUserInput } from '../types/PageUserInputs'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
@@ -83,6 +84,34 @@ const makeMapChild =
       }
     }
 
+const mapPartnerChildBonus = (input: ChildrenUserInput) => {
+  const wholeYear = input.partner_bonus_na_deti_od === '0' && input.partner_bonus_na_deti_do === '11'
+  const monthFrom = Number.parseInt(input.partner_bonus_na_deti_od, 10)
+  const monthTo = Number.parseInt(input.partner_bonus_na_deti_do, 10)
+
+  return {
+    priezviskoMeno: input.r034_priezvisko_a_meno,
+    rodneCislo: input.r034_rodne_cislo ? input.r034_rodne_cislo.replace(/\D/g, '') : '',
+    m00: wholeYear,
+    m01: !wholeYear && monthFrom === 0,
+    m02: !wholeYear && monthFrom <= 1 && monthTo >= 1,
+    m03: !wholeYear && monthFrom <= 2 && monthTo >= 2,
+    m04: !wholeYear && monthFrom <= 3 && monthTo >= 3,
+    m05: !wholeYear && monthFrom <= 4 && monthTo >= 4,
+    m06: !wholeYear && monthFrom <= 5 && monthTo >= 5,
+    m07: !wholeYear && monthFrom <= 6 && monthTo >= 6,
+    m08: !wholeYear && monthFrom <= 7 && monthTo >= 7,
+    m09: !wholeYear && monthFrom <= 8 && monthTo >= 8,
+    m10: !wholeYear && monthFrom <= 9 && monthTo >= 9,
+    m11: !wholeYear && monthFrom <= 10 && monthTo >= 10,
+    m12: !wholeYear && monthTo === 11,
+    druhaOsobaPodalaDPvSR: input.partner_bonus_na_deti_typ_prijmu === '1' || input.partner_bonus_na_deti_typ_prijmu === '2',
+    dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
+    dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
+    pocetMesiacov: monthTo - monthFrom + 1
+  }
+}
+
 export function calculate(input: TaxFormUserInput): TaxForm {
   /** Combine default vaules with user input */
   return {
@@ -151,13 +180,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
-    get r034() {
-      return null
+    get partner_bonus_na_deti() {
+      return input.partner_bonus_na_deti
     },
 
-    get r034a() {
-      return new Decimal(0)
+    get r034() {
+      return mapPartnerChildBonus(input)
     },
+
+    r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
     // r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
@@ -401,6 +432,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r116_dan() {
       return round(this.r090.plus(this.r105))
     },
+    get r116a(){
+      if (this.partner_bonus_na_deti) {
+        if (this.r034.pocetMesiacov === 12) {
+          return this.r034a.plus(this.r038).plus(this.r045)
+        } else {
+          const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
+          return this.r038.plus(this.r045).plus(partner)
+        }
+      } else {
+        return new Decimal(0)
+      }
+    },
     get danovyBonusNaDieta() {
       const months = [
         Months.January,
@@ -449,7 +492,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           }
         }
 
-        let zakladDane = this.r038.plus(this.r045)
+        let zakladDane
+        if (this.partner_bonus_na_deti){
+          zakladDane = this.r116a
+        } else {
+          zakladDane = this.r038.plus(this.r045)
+        }
 
         zakladDane = zakladDane.toDecimalPlaces(2, Decimal.ROUND_UP)
         const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)

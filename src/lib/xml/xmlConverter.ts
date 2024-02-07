@@ -79,8 +79,28 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    if (taxForm.partner_bonus_na_deti) {
+      form.dokument.telo.uplatnujemPar33Ods8 = boolToString(taxForm.partner_bonus_na_deti)
+      form.dokument.telo.r34a = decimalToString(taxForm.r034a)
+      form.dokument.telo.r34.priezviskoMeno = taxForm.r034.priezviskoMeno
+      form.dokument.telo.r34.rodneCislo = taxForm.r034.rodneCislo
+      form.dokument.telo.r34.m00 = boolToString(taxForm.r034.m00)
+      form.dokument.telo.r34.m01 = boolToString(taxForm.r034.m01)
+      form.dokument.telo.r34.m02 = boolToString(taxForm.r034.m02)
+      form.dokument.telo.r34.m03 = boolToString(taxForm.r034.m03)
+      form.dokument.telo.r34.m04 = boolToString(taxForm.r034.m04)
+      form.dokument.telo.r34.m05 = boolToString(taxForm.r034.m05)
+      form.dokument.telo.r34.m06 = boolToString(taxForm.r034.m06)
+      form.dokument.telo.r34.m07 = boolToString(taxForm.r034.m07)
+      form.dokument.telo.r34.m08 = boolToString(taxForm.r034.m08)
+      form.dokument.telo.r34.m09 = boolToString(taxForm.r034.m09)
+      form.dokument.telo.r34.m10 = boolToString(taxForm.r034.m10)
+      form.dokument.telo.r34.m11 = boolToString(taxForm.r034.m11)
+      form.dokument.telo.r34.dokladRocZuct = boolToString(taxForm.r034.dokladRocZuct)
+      form.dokument.telo.r34.dokladVyskaDane = boolToString(taxForm.r034.dokladVyskaDane)
+      form.dokument.telo.r34.druhaOsobaPodalaDPvSR = boolToString(taxForm.r034.druhaOsobaPodalaDPvSR)
+    }
   }
-  form.dokument.telo.r34a = decimalToString(taxForm.r034a)
 
   /** SECTION Mortgage */
   // if (taxForm.r037_uplatnuje_uroky) {
@@ -128,6 +148,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r106 = '0.00'
   form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = roundDecimal(taxForm.r116_dan)
+  form.dokument.telo.r116a = decimalToString(taxForm.r116a)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
   form.dokument.telo.r118 = roundDecimal(taxForm.r118)
