@@ -37,6 +37,7 @@ interface Partner {
   druhaOsobaPodalaDPvSR: boolean
   dokladRocZuct: boolean
   dokladVyskaDane: boolean
+  pocetMesiacov: number
 }
 
 export interface TaxForm {
@@ -166,6 +167,7 @@ export interface TaxForm {
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
   r116_dan: Decimal
+  r116a: Decimal
 
   /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
   r117: Decimal

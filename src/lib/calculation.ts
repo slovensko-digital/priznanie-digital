@@ -108,6 +108,7 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
     druhaOsobaPodalaDPvSR: input.partner_bonus_na_deti_typ_prijmu === '1' || input.partner_bonus_na_deti_typ_prijmu === '2',
     dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
+    pocetMesiacov: monthTo - monthFrom + 1
   }
 }
 
@@ -430,6 +431,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // vo vašom prípade spočítate výšku dane zo  zamestnania a výšku dane z podnikania
     get r116_dan() {
       return round(this.r090.plus(this.r105))
+    },
+    get r116a(){
+      if (this.r034.pocetMesiacov === 12) {
+        return this.r034a.plus(this.r038).plus(this.r045)
+      } else {
+        const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
+        return this.r038.plus(this.r045).plus(partner)
+      }
     },
     get danovyBonusNaDieta() {
       const months = [
