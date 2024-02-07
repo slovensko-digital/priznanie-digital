@@ -488,7 +488,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           }
         }
 
-        let zakladDane = this.r038.plus(this.r045)
+        let zakladDane
+        if (this.partner_bonus_na_deti){
+          zakladDane = this.r116a
+        } else {
+          zakladDane = this.r038.plus(this.r045)
+        }
 
         zakladDane = zakladDane.toDecimalPlaces(2, Decimal.ROUND_UP)
         const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)
