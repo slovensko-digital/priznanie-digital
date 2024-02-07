@@ -61,7 +61,6 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          debugger
           let userInput = values.hasChildren
             ? values
             : {
