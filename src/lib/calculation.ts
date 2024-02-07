@@ -433,11 +433,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(this.r090.plus(this.r105))
     },
     get r116a(){
-      if (this.r034.pocetMesiacov === 12) {
-        return this.r034a.plus(this.r038).plus(this.r045)
+      if (this.partner_bonus_na_deti) {
+        if (this.r034.pocetMesiacov === 12) {
+          return this.r034a.plus(this.r038).plus(this.r045)
+        } else {
+          const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
+          return this.r038.plus(this.r045).plus(partner)
+        }
       } else {
-        const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
-        return this.r038.plus(this.r045).plus(partner)
+        return new Decimal(0)
       }
     },
     get danovyBonusNaDieta() {
