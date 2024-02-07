@@ -76,8 +76,11 @@ const Deti: Page<ChildrenUserInput> = ({
             } else {
               if (values.partner_bonus_na_deti === false) {
                 router.push(nextRoute)
-              } else {
-                // router.push(nextRoute)
+              } else if (values.partner_bonus_na_deti === true) {
+                const errors = validate(values)
+                if (Object.keys(errors).length === 0) {
+                  router.push(nextRoute)
+                }
               }
             }
           } else {
@@ -212,6 +215,21 @@ const Deti: Page<ChildrenUserInput> = ({
                             }}
                           />
 
+                          <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
+                            <div
+                              className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+                            >
+                              <Select
+                                name={`partner_bonus_na_deti_od`}
+                                label="Od"
+                                optionsWithValue={[...monthKeyValues(monthNames), {name: '', value: ''}]}
+                              />
+                              <Select
+                                name={`partner_bonus_na_deti_do`}
+                                label="Do"
+                                optionsWithValue={[...monthKeyValues(monthNames), {name: '', value: ''}]}
+                              />
+                            </div>
                           <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
                           <Select
                             name='partner_bonus_na_deti_typ_prijmu'
@@ -354,6 +372,8 @@ interface ChildFormErrors {
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
+  partner_bonus_na_deti_od?: string
+  partner_bonus_na_deti_do?: string
   partner_bonus_na_deti_typ_prijmu?: string
   r034_priezvisko_a_meno?: string
   r034_rodne_cislo?: string
@@ -406,6 +426,14 @@ export const validate = (values: ChildrenUserInput) => {
     if(values.partner_bonus_na_deti) {
       if (!["1", "2", "3", "4"].includes(values.partner_bonus_na_deti_typ_prijmu)) {
         errors.partner_bonus_na_deti_typ_prijmu = 'Vyberte jednu z možností spôsobu vysporiadania príjmov'
+      }
+
+      if (values.partner_bonus_na_deti_od === "") {
+        errors.partner_bonus_na_deti_od = 'Zadajte začiatok'
+      }
+
+      if (values.partner_bonus_na_deti_do === "") {
+        errors.partner_bonus_na_deti_do = 'Zadajte koniec'
       }
 
       if (!values.r034_priezvisko_a_meno) {

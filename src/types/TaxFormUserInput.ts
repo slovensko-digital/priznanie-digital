@@ -90,6 +90,8 @@ export interface TaxFormUserInput {
   r034_rodne_cislo?: string
   r034a?: string
   partner_bonus_na_deti_typ_prijmu?: "1" | "2" | "3" | "4" | "0"
+  partner_bonus_na_deti_od?: string
+  partner_bonus_na_deti_do?: string
   children: ChildInput[]
 
   /** SECTION  Dve percenta */
