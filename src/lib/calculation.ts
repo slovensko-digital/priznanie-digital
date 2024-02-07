@@ -91,7 +91,7 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
 
   return {
     priezviskoMeno: input.r034_priezvisko_a_meno,
-    rodneCislo: input.r034_rodne_cislo.replace(/\D/g, ''),
+    rodneCislo: input.r034_rodne_cislo ? input.r034_rodne_cislo.replace(/\D/g, '') : '',
     m00: wholeYear,
     m01: !wholeYear && monthFrom === 0,
     m02: !wholeYear && monthFrom <= 1 && monthTo >= 1,
