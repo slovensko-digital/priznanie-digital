@@ -329,6 +329,9 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
         }}
       />
+      <h3 className="govuk-heading-s">
+        Daňový bonus si uplatňujem
+      </h3>
       <RadioGroup value={wholeYear ? 'wholeYear' : 'partYear'} onChange={(value) => {
         setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
       }}>
@@ -336,9 +339,6 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
         <Radio name={`children[${index}]-bonus-interval-input-partyear`} label="V niektorých mesiacoch" value="partYear" disabled={!validateRodneCislo(rodneCislo) || monthOptions.length === 0} />
         <RadioConditional forValue="partYear">
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <h1 className="govuk-fieldset__heading">
-              Daňový bonus si uplatňujem v mesiacoch
-            </h1>
           </legend>
           <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
           <div
