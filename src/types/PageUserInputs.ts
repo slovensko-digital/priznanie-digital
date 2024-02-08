@@ -25,6 +25,9 @@ export type RentUserInput = Pick<
   | 'vyskaPrijmovZPrenajmu'
   | 'prijemZPrenajmuOslobodenieDane'
   | 'vyskaOslobodenia'
+  | 'vydavkySpojeneSPrenajmom'
+  | 'vydavkyUplatnenieTyp'
+  | 'rent_step'
 >
 
 export type ChildrenUserInput = Pick<

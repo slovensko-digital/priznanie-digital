@@ -87,7 +87,11 @@ export interface TaxFormUserInput {
   rent?: boolean
   vyskaPrijmovZPrenajmu?: string
   prijemZPrenajmuOslobodenieDane?: boolean
-  vyskaOslobodenia?: boolean
+  vyskaOslobodenia?: string
+  prijemZPrenajmuVyskaOslobodenia?: string
+  vydavkySpojeneSPrenajmom?: string
+  vydavkyUplatnenieTyp?: string
+  rent_step?: number
 
   /** SECTION  Deti*/
   hasChildren?: boolean
