@@ -15,7 +15,7 @@ import { ChildrenUserInput } from '../types/PageUserInputs'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const KONSTANTA = 41_445.42 // TODO 2023 41 445,46 je nejaká konštanta, ktorá sa používa na výpočet dane
+const KONSTANTA = 41_445.46
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
@@ -358,12 +358,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r080_zaklad_dane_celkovo.lte(KONSTANTA)) {
         return this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA)
       }
-
-      const danZPrvejCasti = new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA)
+      const danZPrvejCasti = round(new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA))
       const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
-      return danZPrvejCasti.plus(
-        toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
-      )
+      return round(danZPrvejCasti.plus(
+        round(toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)),
+      ))
     },
     // na r. 90 uvediete sumu dane, ktorú vypočítate na r. 81
     get r090() {
@@ -379,44 +378,39 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
       return new Decimal(0)
     },
-    // r. 92 - tu už idete vzorcom, kedy od základu dane z podnikania (r. 57) odpočítate sumu z r. 91
-    // tak dostanete základ dane z podnikania, z ktorého idete počítať výšku dane z podnikania
     get r092() {
       return this.r057.minus(this.r091)
     },
-    // r. 94 je rovnaký ako r. 92
     get r094() {
       return this.r092
     },
-    // tu pribudol r. 95 - je to riadok, ktorý bude určovať, akú sadzbu dane použije podnikateľ na výpočet dane
-    // z podnikania. na tomto riadku musí podnikateľ uviesť, aká je výška jeho zdaniteľných príjmov. vo vašom prípade
-    // by to mohla byť suma príjmov z podnikania, ktoré zadáva na začiatku. Ak je táto hodnota na r. 95 menšia alebo
-    // rovná ako 100 000 eur, potom sa daň z podnikania počíta sadzbou 15%. Teda hodnotu z r. 94 vynásobíte
-    // sadzbou 15% a máte daň z podnikania na r. 96. Ak je hodnota na r. 95 viac ako 100 000 eur, potom sa daň z
-    // podnikania počíta klasickým systémom 19% alebo 25% - v závislosti, či je základ dane na r. 94 viac alebo menej
-    // ako 37 163,36 eur - tu ste teda už v tom, čo bolo kedysi.
     get r095() {
       return this.t1r10_prijmy
     },
-    // r. 96 - tu uvediete výšku dane z podnikania, ktorá sa vypočíta systémom, ako som popísala v r. 95. vychádza
-    // sa teda z r. 94, kedy sa r. 94 vynásobí buď sadzbou 15% alebo sa r. 94 vynásobí sadzbou 19%/25%. to,
-    // akú sadzbu použijete - na to vám dá odpoveď suma na r. 95
-    /** TODO rework */
     get r096() {
-      if (this.r094.lte(0)) {
+      if (this.r094.lessThan(0)) {
         return new Decimal(0)
       }
-      // má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r. 95<= 100 000.
+
       if (this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
-        return this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA)
-        // Ak r.94> 0 a súčasne r.95 > 100 000, potom:
+        return round(this.r094.times(DAN_Z_PRIJMU_SADZBA_ZNIZENA))
       }
 
-      // ak r.94 <= 37 163.36, tak r.96 = r.94 * 0.19
+      if (this.r095.greaterThan(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
+        if (this.r094.lessThanOrEqualTo(KONSTANTA)) {
+          return round(this.r094.times(DAN_Z_PRIJMU_SADZBA))
+        }
+        if (this.r094.greaterThan(KONSTANTA)) {
+          const a = round(new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA))
+          const b = this.r094.minus(KONSTANTA)
+          const c = round(b.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA))
+          return round(a.plus(c))
+        }
+      }
+
       if (this.r094.lte(KONSTANTA)) {
         return this.r094.times(DAN_Z_PRIJMU_SADZBA)
 
-        // ak r.94 > 37 163.36, tak r.96 = 37 163,36 * 0.19 + (r.94 - 37 163.36) * 0.25
       } else {
         return new Decimal(KONSTANTA)
           .times(DAN_Z_PRIJMU_SADZBA)
