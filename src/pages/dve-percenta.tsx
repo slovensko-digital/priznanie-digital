@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
 import {
   BooleanRadio,
-  CheckboxSmall,
+  Checkbox,
   FormWrapper,
   Input,
 } from '../components/FormComponents'
@@ -145,7 +145,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
               </div>
               {props.values.XIIoddiel_uplatnujem2percenta && (
                 <>
-                  <CheckboxSmall
+                  <Checkbox
                     name="splnam3per"
                     label={`spĺňam podmienky na poukázanie 3% z dane (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})`}
                   />
@@ -205,7 +205,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                     />
                   </div>
                   <h2 className="govuk-heading-l">Súhlas so zaslaním údajov</h2>
-                  <CheckboxSmall
+                  <Checkbox
                     name="XIIoddiel_suhlasZaslUdaje"
                     label="Želám si, aby prijímateľ 2% videl moje údaje (meno, priezvisko a adresa trvalého pobytu)"
                   />
