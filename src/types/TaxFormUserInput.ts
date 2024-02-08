@@ -104,6 +104,7 @@ export interface TaxFormUserInput {
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus?: boolean
   ziadamVratitDanovyPreplatok?: boolean
+  ziadamVratitDanovyBonusUroky?: boolean
   iban?: string
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by

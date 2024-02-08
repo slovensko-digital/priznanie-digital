@@ -29,7 +29,8 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
   const getIbanRoute = (): Route[] => {
     const isIbanRequired =
       taxForm.mozeZiadatVyplatitDanovyBonus ||
-      taxForm.mozeZiadatVratitDanovyPreplatok
+      taxForm.mozeZiadatVratitDanovyPreplatok ||
+      taxForm.mozeZiadatVratitDanovyBonusUroky
     return isIbanRequired ? ['/iban'] : []
   }
 

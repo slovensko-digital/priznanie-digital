@@ -197,6 +197,7 @@ export interface TaxForm {
    *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
    *   124 (+)*/
 
+  r127: Decimal
   /** zrazena dan zo zamestnania */
   r131: Decimal
   /** Zaplatené preddavky */
@@ -228,6 +229,8 @@ export interface TaxForm {
   ziadamVyplatitDanovyBonus: boolean
   mozeZiadatVratitDanovyPreplatok: boolean
   ziadamVratitDanovyPreplatok: boolean
+  mozeZiadatVratitDanovyBonusUroky: boolean
+  ziadamVratitDanovyBonusUroky: boolean
   iban: string
 
   /** Helper properties from input, that are not part of taxForm */

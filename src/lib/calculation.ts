@@ -426,7 +426,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r116_dan() {
       return round(this.r090.plus(this.r105))
     },
-    get r116a(){
+    get r116a() {
       if (this.partner_bonus_na_deti) {
         if (this.r034.pocetMesiacov === 12) {
           return this.r034a.plus(this.r038).plus(this.r045)
@@ -487,7 +487,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         }
 
         let zakladDane
-        if (this.partner_bonus_na_deti){
+        if (this.partner_bonus_na_deti) {
           zakladDane = this.r116a
         } else {
           zakladDane = this.r038.plus(this.r045)
@@ -513,7 +513,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         danovyBonus = danovyBonus.plus(vysledok)
       }
 
-      return {danovyBonus, nevyuzityDanovyBonus}
+      return { danovyBonus, nevyuzityDanovyBonus }
     },
     get r117() {
       return this.danovyBonusNaDieta.danovyBonus
@@ -541,6 +541,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get mozeZiadatVratitDanovyPreplatok() {
       return this.r136_danovy_preplatok.gt(0)
     },
+    get mozeZiadatVratitDanovyBonusUroky() {
+      return this.r127.gt(0)
+    },
     get r124() {
       return this.r118
     },
@@ -551,6 +554,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // get r126() {
     //   return Decimal.max(this.r123.minus(this.r125), 0)
     // },
+    get r127() {
+      return new Decimal(0)
+    },
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
@@ -631,6 +637,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** SECTION Danovy bonus */
     ziadamVyplatitDanovyBonus: input?.ziadamVyplatitDanovyBonus ?? false,
     ziadamVratitDanovyPreplatok: input?.ziadamVratitDanovyPreplatok ?? false,
+    ziadamVratitDanovyBonusUroky: input?.ziadamVratitDanovyBonusUroky ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
 
     datum: input.datum,
@@ -680,8 +687,8 @@ const getRate = (month: Months, child: Child) => {
   )
 
   const rate = age < 18
-  ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-  : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+    ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
+    : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
 
   if (
     month === Months.January &&
