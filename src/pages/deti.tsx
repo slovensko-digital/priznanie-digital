@@ -67,7 +67,7 @@ const Deti: Page<ChildrenUserInput> = ({
               ...childrenUserInputInitialValues,
               hasChildren: false,
             }
-          const { danovyBonusNaDieta } = calculate({...taxFormUserInput, ...userInput})
+          const { danovyBonusNaDieta } = calculate({ ...taxFormUserInput, ...userInput })
           setTaxFormUserInput(userInput)
           if (values.hasChildren) {
             if (danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))) {
@@ -218,29 +218,29 @@ const Deti: Page<ChildrenUserInput> = ({
                             <div
                               className={classnames('govuk-form-group', styles.inlineFieldContainer)}
                             >
-                              <Select
-                                name={`partner_bonus_na_deti_od`}
-                                label="Od"
-                                optionsWithValue={[...monthKeyValues(monthNames), {name: '', value: ''}]}
-                              />
-                              <Select
-                                name={`partner_bonus_na_deti_do`}
-                                label="Do"
-                                optionsWithValue={[...monthKeyValues(monthNames), {name: '', value: ''}]}
-                              />
-                            </div>
-                          <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
                           <Select
-                            name='partner_bonus_na_deti_typ_prijmu'
-                            label="Vyberte spôsob vysporiadania príjmov"
-                            optionsWithValue={[
-                              {name: '', value: "0"},
-                              {name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1"},
-                              {name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2"},
-                              {name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3"},
-                              {name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4"}
-                            ]}
+                            name={`partner_bonus_na_deti_od`}
+                            label="Od"
+                            optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
                           />
+                          <Select
+                            name={`partner_bonus_na_deti_do`}
+                            label="Do"
+                            optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
+                          />
+                        </div>
+                        <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
+                          <Select
+                          name='partner_bonus_na_deti_typ_prijmu'
+                          label="Vyberte spôsob vysporiadania príjmov"
+                          optionsWithValue={[
+                            { name: '', value: "0" },
+                            { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1" },
+                            { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2" },
+                            { name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3" },
+                            { name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4" }
+                          ]}
+                        />
 
                           <Input
                             name="r034a"
@@ -422,7 +422,7 @@ export const validate = (values: ChildrenUserInput) => {
       errors.children = childrenErrors
     }
 
-    if(values.partner_bonus_na_deti) {
+    if (values.partner_bonus_na_deti) {
       if (!["1", "2", "3", "4"].includes(values.partner_bonus_na_deti_typ_prijmu)) {
         errors.partner_bonus_na_deti_typ_prijmu = 'Vyberte jednu z možností spôsobu vysporiadania príjmov'
       }
@@ -439,7 +439,7 @@ export const validate = (values: ChildrenUserInput) => {
         errors.r034_priezvisko_a_meno = 'Zadajte meno a priezvisko'
       }
 
-      if(!values.r034_rodne_cislo) {
+      if (!values.r034_rodne_cislo) {
         errors.r034_rodne_cislo = 'Zadajte rodné číslo'
       } else if (!validateRodneCislo(values.r034_rodne_cislo)) {
         errors.r034_rodne_cislo = 'Zadané rodné číslo nie je správne'
