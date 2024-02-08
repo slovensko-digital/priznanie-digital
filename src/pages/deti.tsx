@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { FieldArray, Form } from 'formik'
+import { FieldArray, Form, useFormikContext } from 'formik'
 import styles from './deti.module.css'
 import {
   BooleanRadio,
   Input,
   FormWrapper,
-  Select
+  Select,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -54,6 +54,8 @@ const Deti: Page<ChildrenUserInput> = ({
     </Link>
   )
 
+  const [selectedChild, setSelectedChild] = useState<number | null>(0)
+
   return (
     <>
       {previousPageLink}
@@ -95,72 +97,90 @@ const Deti: Page<ChildrenUserInput> = ({
               name="hasChildren"
             />
             {values.hasChildren && (
-                <>
-                  <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+              <>
+                <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+                <p className="govuk-hint">
+                  V prípade, že ste sa v roku {TAX_YEAR} starali o
+                  nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
+                  nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
+                  máte právo na zľavu na dani.
+                </p>
+                <Details title="Aká je výška daňového bonusu?">
                   <p className="govuk-hint">
-                    V prípade, že ste sa v roku {TAX_YEAR} starali o
-                    nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
-                    nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    máte právo na zľavu na dani.
+                    <b>
+                      Daňový bonus na vyživované dieťa:
+                    </b>
+                    <ul>
+                      <li>
+                        do 18 rokov veku sumou{' '}
+                        {formatCurrency(
+                          CHILD_RATE_EIGHTEEN_AND_YOUNGER,
+                        )}{' '}
+                        mesačne.
+                      </li>
+                      <li>
+                        nad 18 rokov veku sumou{' '}
+                        {formatCurrency(
+                          CHILD_RATE_EIGHTEEN_AND_OLDER,
+                        )}{' '}
+                        mesačne.
+                      </li>
+                    </ul>
                   </p>
-                  <Details title="Aká je výška daňového bonusu?">
-                    <p className="govuk-hint">
-                      <b>
-                        Daňový bonus na vyživované dieťa:
-                      </b>
-                      <ul>
-                        <li>
-                          do 18 rokov veku sumou{' '}
-                          {formatCurrency(
-                            CHILD_RATE_EIGHTEEN_AND_YOUNGER,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                        <li>
-                          nad 18 rokov veku sumou{' '}
-                          {formatCurrency(
-                            CHILD_RATE_EIGHTEEN_AND_OLDER,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                      </ul>
-                    </p>
-                  </Details>
-                  <p className="govuk-hint">
-                    Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
-                  </p>
+                </Details>
+                <p className="govuk-hint">
+                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
+                </p>
 
-                  <FieldArray name="children">
-                    {(arrayHelpers) => (
-                      <div className={styles.childrenInputGroup}>
-                        {values.children.map((child, index) => (
-                          <div key={child.id}>
-                            {values.children.length > 1 && (
-                              <h2
-                                className={classnames(
-                                  'govuk-heading-m',
-                                  'govuk-!-margin-top-3',
-                                  styles.childHeadline,
-                                )}
-                              >
-                                {index + 1}. dieťa
-                                <button
-                                  className="govuk-button btn-secondary btn-warning"
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                  data-test={`remove-child-${index}`}
-                                >
-                                  Odstrániť {index + 1}. dieťa
-                                </button>
-                              </h2>
-                            )}
-                            <ChildForm
-                              savedValues={child}
-                              index={index}
-                              setFieldValue={setFieldValue}
-                            />
-                          </div>
-                        ))}
+                <FieldArray name="children">
+                  {(arrayHelpers) => (
+                    <>
+                      <div className="govuk-form-group">
+                        <dl className="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
+                          {
+                            values.children && values.children.map((child, index) => (
+                              <div className="govuk-summary-list__row" key={child.id}>
+                                <dt className="govuk-summary-list__key govuk-!-font-weight-regular hmrc-summary-list__key">
+                                  {child.priezviskoMeno}
+                                </dt>
+                                <dt className="govuk-summary-list__key govuk-!-font-weight-regular hmrc-summary-list__key">
+                                  {child.rodneCislo}
+                                </dt>
+                                <dd className="govuk-summary-list__actions hmrc-summary-list__actions">
+                                  <ul className="govuk-summary-list__actions-list">
+                                    <li onClick={() => setSelectedChild(index)} className="govuk-summary-list__actions-list-item"><a className="govuk-link"><span aria-hidden="true">Upraviť</span><span className="govuk-visually-hidden">Upraviť {child.priezviskoMeno}</span></a></li>
+                                    <li onClick={() => { arrayHelpers.remove(index); setSelectedChild(null) }} className="govuk-summary-list__actions-list-item"><a className="govuk-link"><span aria-hidden="true">Odstrániť</span><span className="govuk-visually-hidden">Odstrániť {child.priezviskoMeno} zo zoznamu</span></a></li>
+                                  </ul>
+                                </dd>
+                              </div>
+                            ))
+                          }
+                        </dl>
+                      </div>
+                      {selectedChild !== null &&
+                        <>
+                          <ChildForm
+                            index={selectedChild}
+                          />
+                          <button
+                            className="btn-secondary govuk-button"
+                            type="button"
+                            onClick={async () => {
+                              const errors = await validateForm()
+                              setErrors(errors)
+                              const hasErrors = Object.keys(errors).length > 0
+                              if (!hasErrors) {
+                                setSelectedChild(null)
+                              }
+                            }}
+                            data-test="save-child"
+                          >
+                            Uložiť dieťa
+                          </button>
+                        </>
+                      }
+
+                      {selectedChild === null &&
                         <button
                           className="btn-secondary govuk-button"
                           type="button"
@@ -169,6 +189,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             setErrors(errors)
                             const hasErrors = Object.keys(errors).length > 0
                             if (!hasErrors) {
+                              setSelectedChild(values.children.length)
                               arrayHelpers.push(makeEmptyChild())
                             }
                           }}
@@ -176,48 +197,92 @@ const Deti: Page<ChildrenUserInput> = ({
                         >
                           Pridať ďalšie dieťa
                         </button>
-                      </div>
-                    )}
-                  </FieldArray>
+                      }
 
-                  {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
-                    <>
-                      <p>
-                        Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevzužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
-                      </p>
-                      <BooleanRadio
-                        title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
-                        name="partner_bonus_na_deti"
-                      />
+                      <br />
+                      <br />
+                      <br />
+                    </>
+                  )}
+                </FieldArray>
 
-                      {values.partner_bonus_na_deti && (
-                        <>
-                          <h1 className="govuk-heading-l govuk-!-margin-top-3">
-                            Údaje o oprávnenej osobe
-                          </h1>
-                          <Input
-                            name="r034_priezvisko_a_meno"
-                            type="text"
-                            label="Meno a priezvisko manželky / manžela"
-                          />
-                          <Input
-                            name="r034_rodne_cislo"
-                            type="text"
-                            label="Rodné číslo"
-                            maxLength={13}
-                            onChange={async (event) => {
-                              const rodneCislo = formatRodneCislo(
-                                event.currentTarget.value,
-                                values.r034_rodne_cislo,
-                              )
-                              setFieldValue('r034_rodne_cislo', rodneCislo)
-                            }}
-                          />
-
-                          <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
-                            <div
-                              className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+                {/* <FieldArray name="children">
+                  {(arrayHelpers) => (
+                    <div className={styles.childrenInputGroup}>
+                      {values.children.map((child, index) => (
+                        <div key={child.id}>
+                          {values.children.length > 1 && (
+                            <h2
+                              className={classnames(
+                                'govuk-heading-m',
+                                'govuk-!-margin-top-3',
+                                styles.childHeadline,
+                              )}
                             >
+                              {index + 1}. dieťa
+                              <button
+                                className="govuk-button btn-secondary btn-warning"
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)}
+                                data-test={`remove-child-${index}`}
+                              >
+                                Odstrániť {index + 1}. dieťa
+                              </button>
+                            </h2>
+                          )}
+                          <ChildForm
+                            savedValues={child}
+                            index={index}
+                            setFieldValue={setFieldValue}
+                          />
+                        </div>
+                      ))}
+
+                    </div>
+                  )}
+                </FieldArray> */}
+
+                {
+                  JSON.stringify(values.children, null, '\t')
+                }
+                {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
+                  <>
+                    <p>
+                      Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevzužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
+                    </p>
+                    <BooleanRadio
+                      title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
+                      name="partner_bonus_na_deti"
+                    />
+
+                    {values.partner_bonus_na_deti && (
+                      <>
+                        <h1 className="govuk-heading-l govuk-!-margin-top-3">
+                          Údaje o oprávnenej osobe
+                        </h1>
+                        <Input
+                          name="r034_priezvisko_a_meno"
+                          type="text"
+                          label="Meno a priezvisko manželky / manžela"
+                        />
+                        <Input
+                          name="r034_rodne_cislo"
+                          type="text"
+                          label="Rodné číslo"
+                          maxLength={13}
+                          onChange={async (event) => {
+                            const rodneCislo = formatRodneCislo(
+                              event.currentTarget.value,
+                              values.r034_rodne_cislo,
+                            )
+                            setFieldValue('r034_rodne_cislo', rodneCislo)
+                          }}
+                        />
+
+                        <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
+                        <div
+                          className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+                        >
                           <Select
                             name={`partner_bonus_na_deti_od`}
                             label="Od"
@@ -230,7 +295,7 @@ const Deti: Page<ChildrenUserInput> = ({
                           />
                         </div>
                         <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
-                          <Select
+                        <Select
                           name='partner_bonus_na_deti_typ_prijmu'
                           label="Vyberte spôsob vysporiadania príjmov"
                           optionsWithValue={[
@@ -242,19 +307,19 @@ const Deti: Page<ChildrenUserInput> = ({
                           ]}
                         />
 
-                          <Input
-                            name="r034a"
-                            type="number"
-                            label="Prijem"
-                            hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
-            <button className="govuk-button" type="submit">
+                        <Input
+                          name="r034a"
+                          type="number"
+                          label="Prijem"
+                          hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
+                        />
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+            <button className="govuk-button" type="submit" onClick={() => setSelectedChild(null)}>
               Pokračovať
             </button>
           </Form>
@@ -281,10 +346,13 @@ const getIncomeHint = (value: string): string => {
 
 interface ChildFormProps {
   index: number
-  savedValues: ChildInput
-  setFieldValue: (name: string, value: string | boolean) => void
 }
-const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValue }: ChildFormProps) => {
+const ChildForm = ({ index }: ChildFormProps) => {
+  const { values, setFieldValue } = useFormikContext<ChildrenUserInput>()
+
+  const rodneCislo = values.children[index].rodneCislo
+  const wholeYear = values.children[index].wholeYear
+
   const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(rodneCislo, month))
   const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(rodneCislo, month))
   const monthOptions = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
@@ -292,17 +360,17 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
 
   useEffect(() => {
     if (validateRodneCislo(rodneCislo) && maxChildAgeBonusMonth(rodneCislo, 'Január')) {
-      if (bonusInPartOfYear) {
-        setFieldValue(`children[${index}].wholeYear`, false)
-      } else {
-        setFieldValue(`children[${index}].wholeYear`, true)
-      }
-      if (monthOptions.length) {
-        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
-        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length - 1]).value.toString()
-        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
-        setFieldValue(`children[${index}].monthTo`, toMonthValue)
-      }
+      // if (bonusInPartOfYear) {
+      //   setFieldValue(`children[${index}].wholeYear`, false)
+      // } else {
+      //   setFieldValue(`children[${index}].wholeYear`, true)
+      // }
+      // if (monthOptions.length) {
+      //   const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
+      //   const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length - 1]).value.toString()
+      //   setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
+      //   setFieldValue(`children[${index}].monthTo`, toMonthValue)
+      // }
     } else {
       setFieldValue(`children[${index}].wholeYear`, true)
     }
@@ -342,20 +410,8 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
           </legend>
           <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
           <div
-            className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+            // className={classnames('govuk-form-group', styles.inlineFieldContainer)}
           >
-            <Select
-              name={`children[${index}].monthFrom`}
-              label="Od"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 0 : false}
-            />
-            <Select
-              name={`children[${index}].monthTo`}
-              label="Do"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 11 : false}
-            />
           </div>
         </RadioConditional>
       </RadioGroup>
