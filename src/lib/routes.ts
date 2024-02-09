@@ -17,7 +17,7 @@ export type Route =
   | '/partner'
   | '/deti'
   | '/dochodok'
-  | '/hypoteka'
+  | '/uroky'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -41,6 +41,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/partner',
     '/deti',
     '/dochodok',
+    '/uroky',
     '/dve-percenta',
     '/osobne-udaje',
     '/suhrn',

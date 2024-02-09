@@ -68,6 +68,9 @@ export interface TaxFormUserInput {
   r037_uplatnuje_uroky?: boolean
   r037_zaplatene_uroky?: string
   r037_pocetMesiacov?: string
+  hypoteka_step?: number
+  uroky_rok_uzatvorenia?: string
+  datumZacatiaUroceniaUveru?: string
 
   /** SECTION Prijmy a poistenie  */
   t1r10_prijmy: string

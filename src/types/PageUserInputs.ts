@@ -81,9 +81,12 @@ export type PensionUserInput = Pick<
   'platil_prispevky_na_dochodok' | 'zaplatene_prispevky_na_dochodok'
 >
 
-export type MortgageUserInput = Pick<
+export type UrokyUserInput = Pick<
   TaxFormUserInput,
-  'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
+  'r037_uplatnuje_uroky'
+  | 'r037_zaplatene_uroky'
+  | 'r037_pocetMesiacov'
+  | 'hypoteka_step'
 >
 
 export type TwoPercentUserInput = Pick<
