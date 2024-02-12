@@ -79,6 +79,11 @@ export const makeEmptyChild = (): ChildInput => ({
 
 export const childrenUserInputInitialValues: ChildrenUserInput = {
   hasChildren: undefined,
+  partner_bonus_na_deti: undefined,
+  partner_bonus_na_deti_typ_prijmu: "0",
+  partner_bonus_na_deti_od: "",
+  partner_bonus_na_deti_do: "",
+  r034a: '',
   children: [makeEmptyChild()]
 }
 

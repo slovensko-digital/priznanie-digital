@@ -34,6 +34,13 @@ export type ChildrenUserInput = Pick<
   TaxFormUserInput,
   | 'hasChildren'
   | 'children'
+  | 'partner_bonus_na_deti'
+  | 'r034_priezvisko_a_meno'
+  | 'r034_rodne_cislo'
+  | 'r034a'
+  | 'partner_bonus_na_deti_typ_prijmu'
+  | 'partner_bonus_na_deti_od'
+  | 'partner_bonus_na_deti_do'
 >
 
 export type PartnerUserInput = Pick<
