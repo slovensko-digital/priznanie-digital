@@ -183,7 +183,7 @@ const Deti: Page<ChildrenUserInput> = ({
                   {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
                     <>
                       <p>
-                        Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevzužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
+                        Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevyužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
                       </p>
                       <BooleanRadio
                         title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
