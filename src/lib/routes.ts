@@ -17,8 +17,8 @@ export type Route =
   | '/partner'
   | '/deti'
   | '/dochodok'
-  | '/hypoteka'
   | '/prenajom'
+  | '/hypoteka'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -131,9 +131,9 @@ export const validateRoute = (
         '/partner': 'employed',
         '/deti': 'r032_uplatnujem_na_partnera',
         '/dochodok': 'hasChildren',
+        '/prenajom': 'platil_prispevky_na_dochodok',
         // TODO reanable with mortgage feature
         // '/hypoteka': 'platil_prispevky_na_dochodok',
-        '/prenajom': 'rent',
         // '/dve-percenta': 'dochodok',
         '/osobne-udaje': taxForm.XIIoddiel_uplatnujem2percenta
           ? 'XIIoddiel_uplatnujem2percenta'

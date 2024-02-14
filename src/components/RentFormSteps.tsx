@@ -9,7 +9,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
       title={'Prenajímali ste v roku 2023 nehnuteľnosť (nie na základe živnostenského oprávnenia) nezaradenú do obchodného majetku?'}
-      name="rent"
+      name="prenajimalSi"
       disabled={disabled}
     />
   </>

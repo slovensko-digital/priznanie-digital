@@ -92,6 +92,7 @@ export interface TaxFormUserInput {
   vydavkySpojeneSPrenajmom?: string
   vydavkyUplatnenieTyp?: string
   rent_step?: number
+  prenajimalSi?: boolean
 
   /** SECTION  Deti*/
   hasChildren?: boolean
