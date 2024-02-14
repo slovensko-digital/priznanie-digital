@@ -1,9 +1,13 @@
 import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
+import RadioConditional from "../components/radio/RadioConditional";
 import { formatRodneCislo } from '../lib/utils'
 import { RentFormProps } from './RentForm'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
+import { Form } from 'formik'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
@@ -12,13 +16,6 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
       name="prenajimalSi"
       disabled={disabled}
     />
-    <Details title="Kedy si môžem uplatniť zvýhodnenie?">
-      <>
-        <p>
-          xxx
-        </p>
-      </>
-    </Details>
   </>
 )
 
@@ -44,22 +41,51 @@ export const OslobodenieQuestion = ({ disabled }) => (
   />
 )
 
-export const OslobodenieVyskaQuestion = ({ disabled }) => (
-  <BooleanRadio
-    name="vyskaOslobodenia"
-    title="Ak ste v danom roku dosiahli aj príjem z príležitostnej činnosti, oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti."
-    disabled={disabled}
-    hint="xxxxx"
-  />
-)
+export const OslobodenieVyskaQuestion = ({ disabled }) => {
+  return (
+    <>
+      <Input
+        name="vyskaOslobodenia"
+        type="number"
+        label={`Ak ste v danom roku dosiahli aj príjem z príležitostnej činnosti, oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti.\nAkú výšku oslobodenia od dane si uplatňujete?`}
+        disabled={disabled}
+      />
+    </>
+  )
+}
 
 export const VydavkyQuestion = ({ disabled }) => (
-    <BooleanRadio
-      name="prijemZPrenajmuVyskaOslobodenia"
-      title={`Výška preukázateľných výdavkov spojených s príjmami z prenájmu nehnuteľností v roku ${TAX_YEAR}`}
-      disabled={disabled}
-      hint="xxxxx"
+  <>
+    <Input
+        name="prijemZPrenajmuVyskaOslobodenia"
+        type="number"
+        label={`Výška preukázateľných výdavkov spojených s príjmami z prenájmu nehnuteľností v roku ${TAX_YEAR}`}
+        disabled={disabled}
     />
+    <Details title="Čo sú preukázateľné výdavky?">
+      <>
+        <p>
+        V prípade nehnuteľnosti nezaradenej v obchodnom majetku je možné uplatniť nasledovné preukázateľné výdavky:
+        </p>
+        <ol>
+          <li>
+          výdavky za spotrebu energií (vody, plynu, tepla, elektrickej energie);
+          </li>
+          <li>zaplatené preddavky do fondu prevádzky, opráv a údržby;</li>
+          <li>výdavky za služby v prenajatej nehnuteľnosti, ako napr.</li>
+          <ol>
+            <li>odvádzane odpadovej vody z domácností, osvetlenie spoločných priestorov bytového domu</li>
+            <li>používanie a servis výťahu, používanie domovej práčovne, kontrola a čistenie komínov, čistenie žúmp</li>
+            <li>poplatky za TV a rozhlas vrátane koncesionárskych poplatkov</li>
+            <li>poplatky za pripojenie na internet</li>
+            <li>poplatky za povinnú správu bytového domu, službu vrátnika, recepcie, výdavky na strážnu službu, upratovanie spoločných priestorov bytového domu</li>
+            <li>výdavky za odvoz smetí, okrem miestneho poplatku za odvoz komunálneho odpadu</li>
+            <li>úhrady vlastníka bytu a nebytového priestoru za výkon činnosti zástupcu vlastníkov bytov a nebytových priestorov</li>
+          </ol>
+        </ol>
+      </>
+    </Details>
+  </>
   )
 
 export const VydavkyFormaQuestion = ({ disabled }) => (
