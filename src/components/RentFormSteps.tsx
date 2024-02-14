@@ -1,5 +1,5 @@
 import React from 'react'
-import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
+import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { RentFormProps } from './RentForm'
 import { Details } from './Details'
@@ -12,6 +12,13 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
       name="prenajimalSi"
       disabled={disabled}
     />
+    <Details title="Kedy si môžem uplatniť zvýhodnenie?">
+      <>
+        <p>
+          xxx
+        </p>
+      </>
+    </Details>
   </>
 )
 
@@ -62,22 +69,60 @@ export const VydavkyFormaQuestion = ({ disabled }) => (
         Preukázateľné výdavky uplatňujem na základe.
         </h1>
       </legend>
-      <CheckboxSmall
+      <Checkbox
         name="rent_podmienky.1"
         label="daňovej evidencie (najčastejší spôsob)"
         disabled={disabled}
       />
-      <CheckboxSmall
+      <Checkbox
         name="rent_podmienky.2"
         label="jednoduchého účtovníctva"
         disabled={disabled}
       />
-      <CheckboxSmall
+      <Checkbox
         name="rent_podmienky.3"
         label="podvojného účtovníctva"
         disabled={disabled}
       />
     </div>
+  )
+
+  export const EligiblePartnerForm = ({
+    values,
+    setFieldValue,
+  }: RentFormProps) => (
+    <>
+      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+        Vybrané údaje o manželke / manželovi
+      </h1>
+      <Input
+        name="r031_priezvisko_a_meno"
+        type="text"
+        label="Meno a priezvisko manželky / manžela"
+      />
+      <Input
+        name="rent"
+        type="text"
+        label="Rodné číslo"
+        maxLength={13}
+        onChange={async (event) => {
+          const pscValue = formatRodneCislo(
+            event.currentTarget.value,
+            values.rent,
+          )
+          setFieldValue('rent', pscValue)
+        }}
+      />
+
+      <Input
+        name="r032_partner_pocet_mesiacov"
+        type="number"
+        min={1}
+        max={12}
+        label="Počet mesiacov, v ktorých manželka / manžel spĺňal/a podmienky?"
+        hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
+      />
+    </>
   )
 
   export const NotEligible = () => (

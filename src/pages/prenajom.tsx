@@ -65,10 +65,6 @@ const Rent: Page<RentUserInput> = ({
 export const validate = (values: RentUserInput) => {
   const errors: Partial<FormErrors<RentUserInput>> = {}
 
-  if (typeof values.rent === 'undefined') {
-    errors.rent = 'Vyznačte odpoveď'
-  }
-
   return errors
 }
 

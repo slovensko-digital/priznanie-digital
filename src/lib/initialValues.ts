@@ -27,7 +27,6 @@ export const partnerUserInitialValues: PartnerUserInput = {
   partner_step: 0,
   partner_podmienky: {},
   r032_partner_vlastne_prijmy: '',
-
   r032_partner_pocet_mesiacov: '',
 }
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput =
@@ -57,14 +56,13 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
 
 export const rentUserInputInitialValues: RentUserInput = {
   rent: undefined,
-  prenajiamalSi: undefined,
+  prenajimalSi: undefined,
   vyskaPrijmovZPrenajmu: '',
   prijemZPrenajmuOslobodenieDane: undefined,
   vyskaOslobodenia: '',
   vydavkySpojeneSPrenajmom: '',
   vydavkyUplatnenieTyp: '',
   rent_step: 0,
-  rent_podmienky: {}
 }
 
 let childCounter = 0
@@ -118,6 +116,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
+  ...rentUserInputInitialValues,
   ...childrenUserInputInitialValues,
   ...pensionInitialValues,
   ...mortgageInitialValues,
