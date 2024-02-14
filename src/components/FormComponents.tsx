@@ -199,68 +199,21 @@ export const BooleanRadio = <Name extends keyof UserInput>({
   )
 }
 
-interface CheckboxProps<Name> {
-  name: Name
-  title: string
-  label?: string
-  hint?: string
-}
-export const Checkbox = <Name extends keyof UserInput>({
-  title,
-  hint,
-  label,
-  ...props
-}: CheckboxProps<Name>) => {
-  const [field, meta] = useField(props.name)
-  return (
-    <div className="govuk-form-group">
-      <fieldset className="govuk-fieldset" aria-describedby="waste-hint">
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
-          <h1 className="govuk-fieldset__heading">{title}</h1>
-        </legend>
-        {hint ? <span className="govuk-hint">{hint}</span> : null}
-        {meta.error ? (
-          <span id={props.name} className="govuk-error-message">
-            <span className="govuk-visually-hidden">Chyba:</span> {meta.error}
-          </span>
-        ) : null}
-        <div className="govuk-checkboxes">
-          <div className="govuk-checkboxes__item">
-            <input
-              {...field}
-              {...props}
-              id={props.name}
-              className="govuk-checkboxes__input"
-              type="checkbox"
-            />
-            <label
-              className="govuk-label govuk-checkboxes__label"
-              htmlFor={props.name}
-            >
-              {label ?? 'Ano'}
-            </label>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  )
-}
-
-interface CheckboxSmallProps {
+interface CheckboxProps {
   name: string
   className?: string
   disabled?: boolean
   label: ReactNode
   hint?: ReactNode
 }
-export const CheckboxSmall = ({
+export const Checkbox = ({
   name,
   label,
   className,
   disabled = false,
   hint,
   ...props
-}: CheckboxSmallProps) => {
+}: CheckboxProps) => {
   const [field, meta] = useField(name)
   return (
     <div

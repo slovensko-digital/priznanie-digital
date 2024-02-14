@@ -1,5 +1,5 @@
 import React from 'react'
-import { BooleanRadio, CheckboxSmall, Input } from './FormComponents'
+import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
@@ -120,32 +120,32 @@ export const ConditionsQuestion = ({ disabled }) => (
         Spĺňa vaša manželka / manžel aspoň jednu z podmienok?
       </h1>
     </legend>
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.1"
       label="Staral/a sa o dieťa do 3 rokov"
       disabled={disabled}
     />
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.2"
       label="Staral/a sa o dieťa do  6 rokov s nepriaznivým zdravotným stavom"
       disabled={disabled}
     />
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.3"
       label="Poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
       disabled={disabled}
     />
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.4"
       label="Poberal/a príspevok na opatrovanie ťažko zdravotne postihnutého"
       disabled={disabled}
     />
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.5"
       label="Bol/a evidovaný/á ako uchádzač o zamestnanie"
       disabled={disabled}
     />
-    <CheckboxSmall
+    <Checkbox
       name="partner_podmienky.6"
       label="Považuje sa za občana so zdravotným postihnutím alebo s ťažkým zdravotným postihnutím"
       disabled={disabled}

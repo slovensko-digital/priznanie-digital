@@ -8,5 +8,7 @@ describe('Cases', () => {
     'withTaxReturn',
     'withEmploymentBonus',
     'withHighIncome',
+    'withHighIncome2',
+    'withHighIncome3',
   ])
 })
