@@ -88,7 +88,7 @@ export interface TaxFormUserInput {
   vyskaPrijmovZPrenajmu?: string
   prijemZPrenajmuOslobodenieDane?: boolean
   vyskaOslobodenia?: string
-  prijemZPrenajmuVyskaOslobodenia?: string
+  vydavkyZPrenajmu?: string
   vydavkySpojeneSPrenajmom?: string
   vydavkyUplatnenieTyp?: string
   rent_step?: number

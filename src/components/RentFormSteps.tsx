@@ -1,14 +1,9 @@
 import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
-import RadioGroup from "../components/radio/RadioGroup";
-import Radio from "../components/radio/Radio";
-import RadioConditional from "../components/radio/RadioConditional";
 import { formatRodneCislo } from '../lib/utils'
 import { RentFormProps } from './RentForm'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
-import { Form } from 'formik'
-
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
@@ -49,6 +44,8 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
         type="number"
         label={`Ak ste v danom roku dosiahli aj príjem z príležitostnej činnosti, oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti.\nAkú výšku oslobodenia od dane si uplatňujete?`}
         disabled={disabled}
+        min={1}
+        max={500}
       />
     </>
   )
@@ -57,12 +54,14 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
 export const VydavkyQuestion = ({ disabled }) => (
   <>
     <Input
-        name="prijemZPrenajmuVyskaOslobodenia"
+        name="vydavkyZPrenajmu"
         type="number"
         label={`Výška preukázateľných výdavkov spojených s príjmami z prenájmu nehnuteľností v roku ${TAX_YEAR}`}
         disabled={disabled}
+        min={1}
+        max={500}
     />
-    <Details title="Čo sú preukázateľné výdavky?">
+    <Details title="Čo sú preukázateľné výdavky">
       <>
         <p>
         V prípade nehnuteľnosti nezaradenej v obchodnom majetku je možné uplatniť nasledovné preukázateľné výdavky:
@@ -111,44 +110,6 @@ export const VydavkyFormaQuestion = ({ disabled }) => (
         disabled={disabled}
       />
     </div>
-  )
-
-  export const EligiblePartnerForm = ({
-    values,
-    setFieldValue,
-  }: RentFormProps) => (
-    <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Vybrané údaje o manželke / manželovi
-      </h1>
-      <Input
-        name="r031_priezvisko_a_meno"
-        type="text"
-        label="Meno a priezvisko manželky / manžela"
-      />
-      <Input
-        name="rent"
-        type="text"
-        label="Rodné číslo"
-        maxLength={13}
-        onChange={async (event) => {
-          const pscValue = formatRodneCislo(
-            event.currentTarget.value,
-            values.rent,
-          )
-          setFieldValue('rent', pscValue)
-        }}
-      />
-
-      <Input
-        name="r032_partner_pocet_mesiacov"
-        type="number"
-        min={1}
-        max={12}
-        label="Počet mesiacov, v ktorých manželka / manžel spĺňal/a podmienky?"
-        hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
-      />
-    </>
   )
 
   export const NotEligible = () => (
