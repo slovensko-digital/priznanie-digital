@@ -1,7 +1,5 @@
 import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
-import { formatRodneCislo } from '../lib/utils'
-import { RentFormProps } from './RentForm'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
 export const ApplyForBonusQuestion = ({ disabled }) => (

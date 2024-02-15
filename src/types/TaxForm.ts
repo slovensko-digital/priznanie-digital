@@ -110,6 +110,10 @@ export interface TaxForm {
   priloha3_r10_zdravotne: Decimal
 
   /** SECTION Prenajom */
+  t1r11s1?: Decimal
+  t1r11s2?: Decimal
+  r60_r65?: Decimal
+  r80_r124?: Decimal
 
   /** Základ dane (čiastkový základ dane)  */
   r038: Decimal
