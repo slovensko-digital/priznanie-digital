@@ -190,7 +190,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
               ]
             : [
                 {
-                  title: 'Neplatňujem si zvýhodnenie na manželku / manžela',
+                  title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
                 },
               ]
         }
