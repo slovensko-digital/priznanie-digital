@@ -93,7 +93,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     },
     {
       title:
-        'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
+        'Nárok na daňový bonus na vyživované deti',
       value: summary.danovyBonusNaDieta,
       key: 'danovyBonusNaDieta',
     },

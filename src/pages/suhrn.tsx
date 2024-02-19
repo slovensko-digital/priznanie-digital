@@ -190,13 +190,13 @@ const Suhrn: Page<TaxFormUserInput> = ({
               ]
             : [
                 {
-                  title: 'Neplatňujem si zvýhodnenie na manželku / manžela',
+                  title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
                 },
               ]
         }
       />
       <Summary
-        title="Dieťa do 16 rokov alebo študent do 25 rokov, v&nbsp;spoločnej domácnosti"
+        title="Deti, pri ktorých si uplatňujem nárok na daňový bonus na vyživované dieťa"
         href={'/deti'}
         rows={
           taxFormUserInput.hasChildren
