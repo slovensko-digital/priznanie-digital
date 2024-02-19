@@ -198,7 +198,7 @@ const Deti: Page<ChildrenUserInput> = ({
                           <Input
                             name="r034_priezvisko_a_meno"
                             type="text"
-                            label="Meno a priezvisko manželky / manžela"
+                            label="Meno a priezvisko druhej oprávnenej osoby"
                           />
                           <Input
                             name="r034_rodne_cislo"
