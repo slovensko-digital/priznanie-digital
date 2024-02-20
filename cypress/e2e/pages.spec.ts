@@ -806,6 +806,7 @@ describe('Summary page', () => {
     '/zamestnanie',
     '/partner',
     '/deti',
+    '/deti',
     '/dochodok',
     // '/hypoteka',
     '/osobne-udaje',

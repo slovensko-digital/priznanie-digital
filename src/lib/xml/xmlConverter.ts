@@ -33,9 +33,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.hlavicka.adresaTrvPobytu.obec = taxForm.r010_obec
   form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat
 
-  /** TODO Vypocitat riadne mikrodanovnika */
-  form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
-
   form.dokument.telo.tabulka1.t1r2.s1 = roundDecimal(taxForm.t1r2_prijmy)
   form.dokument.telo.tabulka1.t1r10.s1 = roundDecimal(taxForm.t1r10_prijmy)
   form.dokument.telo.tabulka1.t1r10.s2 = roundDecimal(taxForm.t1r10_vydavky)
@@ -96,6 +93,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       form.dokument.telo.r34.m09 = boolToString(taxForm.r034.m09)
       form.dokument.telo.r34.m10 = boolToString(taxForm.r034.m10)
       form.dokument.telo.r34.m11 = boolToString(taxForm.r034.m11)
+      form.dokument.telo.r34.m12 = boolToString(taxForm.r034.m12)
       form.dokument.telo.r34.dokladRocZuct = boolToString(taxForm.r034.dokladRocZuct)
       form.dokument.telo.r34.dokladVyskaDane = boolToString(taxForm.r034.dokladVyskaDane)
       form.dokument.telo.r34.druhaOsobaPodalaDPvSR = boolToString(taxForm.r034.druhaOsobaPodalaDPvSR)
@@ -160,9 +158,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = roundDecimal(taxForm.r074_znizenie_partner)
 
   form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = decimalToString(
-    taxForm.r078_zaklad_dane_zo_zamestnania,
-  )
+  form.dokument.telo.r78 = roundDecimal(taxForm.r078_zaklad_dane_zo_zamestnania)
   form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
   form.dokument.telo.r81 = decimalToString(taxForm.r081)
   form.dokument.telo.r90 = roundDecimal(taxForm.r090)

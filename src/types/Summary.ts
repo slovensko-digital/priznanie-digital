@@ -2,14 +2,15 @@ import Decimal from 'decimal.js'
 
 export interface Summary {
   prijmy: Decimal
-  zdravotnePoistne: Decimal
-  socialnePoistne: Decimal
+  pausalneVydavky: Decimal
   zaplatenePoistneSpolu: Decimal
-  zvyhodnenieNaManz: Decimal
-  danovyBonusNaDieta: Decimal
-  prispevokNaDochodkovePoist: Decimal
+  nezdanitelnaCastNaSeba: Decimal
+  nezdanitelnaCastNaPartnera: Decimal
   zakladDane: Decimal
-  danovyPreplatok: Decimal
+  danSpolu: Decimal
+  preddavkyNaDan: Decimal
+  danovyBonusNaDeti: Decimal
+  danovyBonusNaVyplatenie: Decimal
+  danovyPreplatokNaVyplatenie: Decimal
   danNaUhradu: Decimal
-  zaplatenePreddavky: Decimal
 }
