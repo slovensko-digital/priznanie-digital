@@ -21,7 +21,6 @@ interface SummaryRow {
   description?: string
   value: Decimal
   fontSize?: number
-  testId?: string
 }
 interface SummaryProps {
   rows: SummaryRow[]
@@ -30,7 +29,7 @@ const Summary = ({ rows }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {rows.map(({ key, title, description, value, fontSize, testId }) => (
+        {rows.map(({ key, title, description, value, fontSize }) => (
           <tr
             className="govuk-table__row"
             style={fontSize ? { fontSize } : undefined}
@@ -44,7 +43,7 @@ const Summary = ({ rows }: SummaryProps) => (
                 </div>
               )}
             </td>
-            <td className="govuk-table__cell govuk-table__cell--numeric" data-test={testId}>
+            <td className="govuk-table__cell govuk-table__cell--numeric" data-test={key}>
               <strong>{formatCurrency(value.toNumber())}</strong>
             </td>
           </tr>

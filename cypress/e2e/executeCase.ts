@@ -317,20 +317,37 @@ const executeTestCase = (testCase: string) => {
 
         cy.contains('Daň na úhradu')
 
-        cy.get('.govuk-table__cell').contains(
-          formatCurrency(
-            new Decimal(parseInputNumber(input.t1r10_prijmy))
-              .plus(
-                parseInputNumber(input.uhrnPrijmovOdVsetkychZamestnavatelov),
-              )
-              .toNumber(),
-          ),
+        cy.get('[data-test="prijmy"]').contains(
+          formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber())
         )
 
-        cy.get('[data-test="r136_danovy_preplatok"]').contains(
-          formatCurrency(taxForm.r136_danovy_preplatok)
+        cy.get('[data-test="pausalneVydavky"]').contains(
+          formatCurrency(taxForm.r040.minus(taxForm.priloha3_r13_zdravotne).minus(taxForm.priloha3_r09_socialne).toNumber())
         )
 
+        cy.get('[data-test="zakladDane"]').contains(
+          formatCurrency(taxForm.r078_zaklad_dane_zo_zamestnania.plus(taxForm.r092).toNumber())
+        )
+
+        cy.get('[data-test="danSpolu"]').contains(
+          formatCurrency(taxForm.r116_dan.toNumber())
+        )
+
+        cy.get('[data-test="danovyBonusNaDeti"]').contains(
+          formatCurrency(taxForm.r117.toNumber())
+        )
+
+        cy.get('[data-test="danovyBonusNaVyplatenie"]').contains(
+          formatCurrency(taxForm.r121.toNumber())
+        )
+
+        cy.get('[data-test="danovyPreplatokNaVyplatenie"]').contains(
+          formatCurrency(taxForm.r136_danovy_preplatok.toNumber())
+        )
+
+        cy.get('[data-test="danNaUhradu"]').contains(
+          formatCurrency(taxForm.r135_dan_na_uhradu.toNumber())
+        )
         next()
 
         /** SECTION Download */
