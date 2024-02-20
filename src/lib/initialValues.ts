@@ -56,7 +56,6 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
 
 export const rentUserInputInitialValues: RentUserInput = {
   rent: undefined,
-  prenajimalSi: undefined,
   vyskaPrijmovZPrenajmu: '',
   prijemZPrenajmuOslobodenieDane: undefined,
   vyskaOslobodenia: '',

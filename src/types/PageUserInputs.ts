@@ -22,7 +22,6 @@ export type EmployedUserInput = Pick<
 export type RentUserInput = Pick<
   TaxFormUserInput,
   | 'rent'
-  | 'prenajimalSi'
   | 'vyskaPrijmovZPrenajmu'
   | 'prijemZPrenajmuOslobodenieDane'
   | 'vyskaOslobodenia'
