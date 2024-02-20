@@ -192,12 +192,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Rent */
     get t1r11s1() {
-      return new Decimal(input.vyskaPrijmovZPrenajmu)
+      return new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
     },
     get t1r11s2() {
-      const vydavky = new Decimal(input.vydavkyZPrenajmu)
-      const prijmy = new Decimal(input.vyskaPrijmovZPrenajmu)
-      const oslobodenie = new Decimal(input.vyskaOslobodenia)
+      const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
+      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
+      const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
       if (vydavky.isZero()) {
         return prijmy.minus(vydavky)
       } else {
