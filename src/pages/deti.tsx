@@ -39,6 +39,7 @@ import RadioGroup from "../components/radio/RadioGroup";
 import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
 import Decimal from 'decimal.js'
+import { Warning } from '../components/Warning'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -248,6 +249,8 @@ const Deti: Page<ChildrenUserInput> = ({
                             label="Prijem"
                             hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
                           />
+
+                          <AttachmentWarning prijem={values.partner_bonus_na_deti_typ_prijmu} />
                         </>
                       )}
                     </>
@@ -264,16 +267,34 @@ const Deti: Page<ChildrenUserInput> = ({
   )
 }
 
+const AttachmentWarning = ({ prijem }) => {
+  if (prijem === "3") {
+    return (
+      <Warning>
+        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu dokladu o vykonanom ročnom zúčtovaní preddavkov druhej oprávnenej osoby.
+      </Warning>
+    )
+  }
+  if (prijem === "4") {
+    return (
+      <Warning>
+        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu preukazujúceho výšku základu dane druhej oprávnenej osoby.
+      </Warning>
+    )
+  }
+  return null
+}
+
 const getIncomeHint = (value: string): string => {
   switch (value) {
     case "0":
       return ''
     case "1":
-      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ A riadok 39'
+      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ A riadok 39'
     case "2":
-      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ B riadok 72'
+      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ B riadok 72'
     case "3":
-      return 'Ročné zúčtovanie preddavkov na daň riadok 3'
+      return 'Výšku príjmov zistíte z ročného zúčtovania preddavkov na daň riadok 3.'
     default:
       break;
   }
