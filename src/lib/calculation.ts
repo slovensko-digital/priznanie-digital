@@ -554,8 +554,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
+    get r132() {
+      return new Decimal(0)
+    },
     get r133() {
       return new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0'))
+    },
+    get r134() {
+      return new Decimal(0)
     },
     get r135_dan_na_uhradu() {
       const baseTax =
@@ -643,25 +649,20 @@ export function calculate(input: TaxFormUserInput): TaxForm {
   }
 }
 
-export function buildSummary(form: TaxForm): Summary {
+export const buildSummary = (form: TaxForm): Summary => {
   return {
-    prijmy: form.t1r10_prijmy.plus(form.r036),
-    zdravotnePoistne: form.priloha3_r13_zdravotne.plus(
-      form.priloha3_r10_zdravotne,
-    ),
-    socialnePoistne: form.priloha3_r11_socialne.plus(
-      form.priloha3_r09_socialne,
-    ),
-    get zaplatenePoistneSpolu() {
-      return this.zdravotnePoistne.plus(this.socialnePoistne)
-    },
-    zvyhodnenieNaManz: form.r074_znizenie_partner,
-    danovyBonusNaDieta: form.r117,
-    prispevokNaDochodkovePoist: form.r075_zaplatene_prispevky_na_dochodok,
-    zakladDane: form.r080_zaklad_dane_celkovo,
-    danovyPreplatok: form.r136_danovy_preplatok,
+    prijmy: form.r036.plus(form.r039),
+    pausalneVydavky: (form.r040.minus(form.priloha3_r13_zdravotne).minus(form.priloha3_r09_socialne)).negated(),
+    zaplatenePoistneSpolu: (form.r037.plus(form.priloha3_r13_zdravotne).plus(form.priloha3_r09_socialne)).negated(),
+    nezdanitelnaCastNaSeba: form.r073.negated(),
+    nezdanitelnaCastNaPartnera: form.r074_znizenie_partner.negated(),
+    zakladDane: form.r078_zaklad_dane_zo_zamestnania.plus(form.r092),
+    danSpolu: form.r116_dan,
+    preddavkyNaDan: (form.r131.plus(form.r132).plus(form.r133).plus(form.r134)).negated(),
+    danovyBonusNaDeti: form.r117.negated(),
+    danovyBonusNaVyplatenie: form.r121,
+    danovyPreplatokNaVyplatenie: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
-    zaplatenePreddavky: form.r133,
   }
 }
 
