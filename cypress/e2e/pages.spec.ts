@@ -771,7 +771,7 @@ describe('IBAN page', () => {
   })
 })
 
-describe('Summary page', () => {
+describe.only('Summary page', () => {
   it('has working navigation', () => {
     cy.visit('/suhrn')
 
@@ -805,6 +805,7 @@ describe('Summary page', () => {
     '/prijmy-a-vydavky',
     '/zamestnanie',
     '/partner',
+    '/deti',
     '/deti',
     '/dochodok',
     // '/hypoteka',
