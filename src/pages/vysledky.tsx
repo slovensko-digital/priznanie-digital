@@ -45,11 +45,7 @@ const Summary = ({ rows }: SummaryProps) => (
               )}
             </td>
             <td className="govuk-table__cell govuk-table__cell--numeric" data-test={testId}>
-              {value.gt(0) ? (
-                <strong>{formatCurrency(value.toNumber())}</strong>
-              ) : (
-                <span>0,00 EUR</span>
-              )}
+              <strong>{formatCurrency(value.toNumber())}</strong>
             </td>
           </tr>
         ))}
@@ -67,19 +63,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 
   const summaryRows = [
     {
-      title: 'Príjmy',
+      title: 'Príjmy spolu',
       value: summary.prijmy,
       key: 'prijmy',
     },
     {
-      title: 'Zdravotné poistné',
-      value: summary.zdravotnePoistne,
-      key: 'zdravotnePoistne',
-    },
-    {
-      title: 'Sociálne poistné',
-      value: summary.socialnePoistne,
-      key: 'socialnePoistne',
+      title: 'Paušálne výdavky',
+      value: summary.pausalneVydavky,
+      key: 'pausalneVydavky',
     },
     {
       title: 'Zaplatené poistné spolu',
@@ -87,20 +78,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'zaplatenePoistneSpolu',
     },
     {
-      title: 'Zvýhodnenie na manželku / manžela',
-      value: summary.zvyhodnenieNaManz,
-      key: 'zvyhodnenieNaManz',
+      title: 'Nezdaniteľná časť na vás',
+      value: summary.nezdanitelnaCastNaSeba,
+      key: 'nezdanitelnaCastNaSeba',
     },
     {
-      title:
-        'Nárok na daňový bonus na vyživované deti',
-      value: summary.danovyBonusNaDieta,
-      key: 'danovyBonusNaDieta',
-    },
-    {
-      title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: summary.prispevokNaDochodkovePoist,
-      key: 'prispevokNaDochodkovePoist',
+      title: 'Nezdaniteľná časť na manželku / manžela',
+      value: summary.nezdanitelnaCastNaPartnera,
+      key: 'nezdanitelnaCastNaPartnera',
     },
     {
       title: 'Základ dane',
@@ -108,17 +93,37 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'zakladDane',
     },
     {
-      title: 'Daňový preplatok / daňový bonus na vyplatenie',
-      value: summary.danovyPreplatok,
-      key: 'danovyPreplatok',
+      title: 'Daň spolu',
+      value: summary.danSpolu,
+      key: 'danSpolu',
+    },
+    {
+      title: 'Preddavky na daň',
+      value: summary.preddavkyNaDan,
+      key: 'preddavkyNaDan',
+    },
+    {
+      title: 'Nárok na daňový bonus na deti',
+      value: summary.danovyBonusNaDeti,
+      key: 'danovyBonusNaDeti',
       testId: 'r136_danovy_preplatok',
+    },
+    {
+      title: 'Daňový bonus na vyplatenie',
+      value: summary.danovyBonusNaVyplatenie,
+      key: 'danovyBonusNaVyplatenie',
+    },
+    {
+      title: 'Daňový preplatok na vyplatenie',
+      value: summary.danovyPreplatokNaVyplatenie,
+      key: 'danovyPreplatokNaVyplatenie',
     },
     {
       title: 'Daň na úhradu',
       value: summary.danNaUhradu,
       key: 'danNaUhradu',
       fontSize: 30,
-    },
+    }
   ]
 
   const monthlyPrepayment = Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY
