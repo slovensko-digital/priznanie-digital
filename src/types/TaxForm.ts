@@ -220,7 +220,6 @@ export interface TaxForm {
     obchMeno: string
     suhlasZaslUdaje: boolean
   }
-  mikrodanovnik: boolean
   datum: string
 
   /** SECTION Danovy bonus */

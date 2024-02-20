@@ -33,9 +33,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.hlavicka.adresaTrvPobytu.obec = taxForm.r010_obec
   form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat
 
-  /** TODO Vypocitat riadne mikrodanovnika */
-  form.dokument.telo.mikrodanovnikPar2w = boolToString(taxForm.mikrodanovnik)
-
   form.dokument.telo.tabulka1.t1r2.s1 = roundDecimal(taxForm.t1r2_prijmy)
   form.dokument.telo.tabulka1.t1r10.s1 = roundDecimal(taxForm.t1r10_prijmy)
   form.dokument.telo.tabulka1.t1r10.s2 = roundDecimal(taxForm.t1r10_vydavky)
