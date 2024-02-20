@@ -132,21 +132,16 @@ export const ConditionsQuestion = ({ disabled }) => (
     />
     <Checkbox
       name="partner_podmienky.3"
-      label="Poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.4"
       label="Poberal/a príspevok na opatrovanie ťažko zdravotne postihnutého"
       disabled={disabled}
     />
     <Checkbox
-      name="partner_podmienky.5"
+      name="partner_podmienky.4"
       label="Bol/a evidovaný/á ako uchádzač o zamestnanie"
       disabled={disabled}
     />
     <Checkbox
-      name="partner_podmienky.6"
+      name="partner_podmienky.5"
       label="Považuje sa za občana so zdravotným postihnutím alebo s ťažkým zdravotným postihnutím"
       disabled={disabled}
     />
