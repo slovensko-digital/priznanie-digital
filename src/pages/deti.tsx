@@ -180,7 +180,7 @@ const Deti: Page<ChildrenUserInput> = ({
                     )}
                   </FieldArray>
 
-                  {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
+                  {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) || values.partner_bonus_na_deti === true) && (
                     <>
                       <p>
                         Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevyužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
