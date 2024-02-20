@@ -131,9 +131,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = roundDecimal(taxForm.r074_znizenie_partner)
 
   form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = decimalToString(
-    taxForm.r078_zaklad_dane_zo_zamestnania,
-  )
+  form.dokument.telo.r78 = roundDecimal(taxForm.r078_zaklad_dane_zo_zamestnania)
   form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
   form.dokument.telo.r81 = decimalToString(taxForm.r081)
   form.dokument.telo.r90 = roundDecimal(taxForm.r090)
