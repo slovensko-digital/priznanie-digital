@@ -93,6 +93,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       form.dokument.telo.r34.m09 = boolToString(taxForm.r034.m09)
       form.dokument.telo.r34.m10 = boolToString(taxForm.r034.m10)
       form.dokument.telo.r34.m11 = boolToString(taxForm.r034.m11)
+      form.dokument.telo.r34.m12 = boolToString(taxForm.r034.m12)
       form.dokument.telo.r34.dokladRocZuct = boolToString(taxForm.r034.dokladRocZuct)
       form.dokument.telo.r34.dokladVyskaDane = boolToString(taxForm.r034.dokladVyskaDane)
       form.dokument.telo.r34.druhaOsobaPodalaDPvSR = boolToString(taxForm.r034.druhaOsobaPodalaDPvSR)
