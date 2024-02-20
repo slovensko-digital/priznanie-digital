@@ -102,7 +102,7 @@ const Deti: Page<ChildrenUserInput> = ({
                     V prípade, že ste sa v roku {TAX_YEAR} starali o
                     nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
                     nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    máte právo na zľavu na dani.
+                    máte právo na zľavu na dani. Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                   </p>
                   <Details title="Aká je výška daňového bonusu?">
                     <p className="govuk-hint">
@@ -127,6 +127,10 @@ const Deti: Page<ChildrenUserInput> = ({
                       </ul>
                     </p>
                   </Details>
+                  <p className="govuk-hint">
+                    Za mesiace január až apríl 2023 je možné uplatniť daňový bonus len v prípade,
+                    ak sa na vyživované dieťa neposkytla dotácia na podporu výchovy k stravovacím návykom dieťaťa.
+                  </p>
                   <p className="govuk-hint">
                     Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                   </p>
