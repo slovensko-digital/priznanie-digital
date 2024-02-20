@@ -126,9 +126,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     }
   ]
 
-  const monthlyPrepayment = Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY
+  const monthlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
 
-  const quarterlyPrepayment = Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY
+  const quarterlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
 
   const prePayments = monthlyPrepayment || quarterlyPrepayment
 
