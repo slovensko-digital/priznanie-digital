@@ -898,6 +898,60 @@ export const monthToKeyValue = (month: string) => {
   }
 }
 
+export const monthNumberToName = (month: number) => {
+  if (month == 0) {
+    return 'Január'
+  }
+  if (month == 1) {
+    return 'Február'
+  }
+  if (month == 2) {
+    return 'Marec'
+  }
+  if (month == 3) {
+    return 'Apríl'
+  }
+  if (month == 4) {
+    return 'Máj'
+  }
+  if (month == 5) {
+    return 'Jún'
+  }
+  if (month == 6) {
+    return 'Júl'
+  }
+  if (month == 7) {
+    return 'August'
+  }
+  if (month == 8) {
+    return 'September'
+  }
+  if (month == 9) {
+    return 'Október'
+  }
+  if (month == 10) {
+    return 'November'
+  }
+  if (month == 11) {
+    return 'December'
+  }
+}
+
+export const typPrijmuToName = (typPrijmu: string) => {
+  if (typPrijmu === "1" ) {
+    return "DPFO typ A"
+  }
+  if (typPrijmu === "2" ) {
+    return "DPFO typ B"
+  }
+  if (typPrijmu === "3" ) {
+    return "Ročné zúčtovanie"
+  }
+  if (typPrijmu === "4" ) {
+    return "Iné"
+  }
+}
+
 export const monthKeyValues = (months: string[]): optionWithValue[] => {
   return months.map(monthToKeyValue)
 }

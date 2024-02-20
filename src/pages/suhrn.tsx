@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
-import { TAX_YEAR } from '../lib/calculation'
+import { TAX_YEAR, monthNumberToName, typPrijmuToName } from '../lib/calculation'
 
 interface SummaryRow {
   title: string
@@ -122,46 +122,46 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.employed
             ? [
-                {
-                  title: 'Úhrn príjmov od všetkých zamestnávateľov',
-                  value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
-                  currency: true,
-                  allignRight: true,
-                },
-                {
-                  title: 'Úhrn sociálneho poistného',
-                  value:
-                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
-                  currency: true,
-                  allignRight: true,
-                  testId: 'r039_socialne',
-                },
-                {
-                  title: 'Úhrn zdravotného poistného',
-                  value:
-                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
-                  currency: true,
-                  allignRight: true,
-                  testId: 'r039_zdravotne',
-                },
-                {
-                  title: 'Úhrn preddavkov na daň',
-                  value: taxFormUserInput.uhrnPreddavkovNaDan,
-                  currency: true,
-                  allignRight: true,
-                },
-                {
-                  title: 'Údaje o daňovom bonuse na dieťa',
-                  value: taxFormUserInput.udajeODanovomBonuseNaDieta,
-                  currency: true,
-                  allignRight: true,
-                },
-              ]
+              {
+                title: 'Úhrn príjmov od všetkých zamestnávateľov',
+                value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
+                currency: true,
+                allignRight: true,
+              },
+              {
+                title: 'Úhrn sociálneho poistného',
+                value:
+                  taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+                currency: true,
+                allignRight: true,
+                testId: 'r039_socialne',
+              },
+              {
+                title: 'Úhrn zdravotného poistného',
+                value:
+                  taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+                currency: true,
+                allignRight: true,
+                testId: 'r039_zdravotne',
+              },
+              {
+                title: 'Úhrn preddavkov na daň',
+                value: taxFormUserInput.uhrnPreddavkovNaDan,
+                currency: true,
+                allignRight: true,
+              },
+              {
+                title: 'Údaje o daňovom bonuse na dieťa',
+                value: taxFormUserInput.udajeODanovomBonuseNaDieta,
+                currency: true,
+                allignRight: true,
+              },
+            ]
             : [
-                {
-                  title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
-                },
-              ]
+              {
+                title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
+              },
+            ]
         }
       />
       <Summary
@@ -170,29 +170,29 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.r032_uplatnujem_na_partnera
             ? [
-                {
-                  title: 'Meno a priezvisko manželky / manžela',
-                  value: taxFormUserInput.r031_priezvisko_a_meno,
-                },
-                {
-                  title: 'Rodné číslo',
-                  value: taxFormUserInput.r031_rodne_cislo,
-                },
-                {
-                  title: 'Vlastné príjmy manželky / manžela',
-                  value: taxFormUserInput.r032_partner_vlastne_prijmy,
-                  currency: true,
-                },
-                {
-                  title: 'Počet mesiacov kedy mala manželka / manžel príjmy',
-                  value: taxFormUserInput.r032_partner_pocet_mesiacov,
-                },
-              ]
+              {
+                title: 'Meno a priezvisko manželky / manžela',
+                value: taxFormUserInput.r031_priezvisko_a_meno,
+              },
+              {
+                title: 'Rodné číslo',
+                value: taxFormUserInput.r031_rodne_cislo,
+              },
+              {
+                title: 'Vlastné príjmy manželky / manžela',
+                value: taxFormUserInput.r032_partner_vlastne_prijmy,
+                currency: true,
+              },
+              {
+                title: 'Počet mesiacov kedy mala manželka / manžel príjmy',
+                value: taxFormUserInput.r032_partner_pocet_mesiacov,
+              },
+            ]
             : [
-                {
-                  title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
-                },
-              ]
+              {
+                title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
+              },
+            ]
         }
       />
       <Summary
@@ -201,19 +201,54 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.hasChildren
             ? taxFormUserInput.children
-                .map((child) => [
-                  { title: 'Meno a priezvisko', value: child.priezviskoMeno },
-                  {
-                    title: 'Rodné číslo',
-                    value: child.rodneCislo,
-                  },
-                ])
-                .reduce((result, value) => [...result, ...value], [])
-            : [
+              .map((child) => [
+                { title: 'Meno a priezvisko', value: child.priezviskoMeno },
                 {
-                  title: 'Nemám alebo neuplatňujem si',
+                  title: 'Rodné číslo',
+                  value: child.rodneCislo,
                 },
-              ]
+              ])
+              .reduce((result, value) => [...result, ...value], [])
+            : [
+              {
+                title: 'Nemám alebo neuplatňujem si',
+              },
+            ]
+        }
+      />
+      <Summary
+        title="Druhá opravnená osoba pre daňový bonus na vyživované dieťi"
+        href={'/deti'}
+        rows={
+          taxFormUserInput.partner_bonus_na_deti
+            ? [
+              {
+                title: 'Meno a priezvisko',
+                value: taxFormUserInput.r034_priezvisko_a_meno,
+              },
+              {
+                title: 'Rodné číslo',
+                value: taxFormUserInput.r034_rodne_cislo,
+              },
+              {
+                title: 'Mesiace kedy splnila podmienky',
+                value: `${monthNumberToName(parseInt(taxFormUserInput.partner_bonus_na_deti_od))} - ${monthNumberToName(parseInt(taxFormUserInput.partner_bonus_na_deti_do))}`,
+              },
+              {
+                title: 'Spôsob vysporiadania príjmov',
+                value: typPrijmuToName(taxFormUserInput.partner_bonus_na_deti_typ_prijmu),
+              },
+              {
+                title: 'Príjmy',
+                value: taxFormUserInput.r034a,
+                currency: true,
+              },
+            ]
+            : [
+              {
+                title: 'Nemám nárok alebo neuplatňujem si',
+              },
+            ]
         }
       />
       <Summary
@@ -222,12 +257,12 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.platil_prispevky_na_dochodok
             ? [
-                {
-                  title: 'Výška zaplatených príspevkov',
-                  value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
-                  currency: true,
-                },
-              ]
+              {
+                title: 'Výška zaplatených príspevkov',
+                value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
+                currency: true,
+              },
+            ]
             : [{ title: 'Neplatil som' }]
         }
       />
