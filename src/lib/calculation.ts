@@ -640,13 +640,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         MIN_2_PERCENT_CALCULATED_DONATION,
       )
     },
-
-    get mikrodanovnik() {
-      if (this.r095.lte(DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT)) {
-        return true
-      }
-      return false
-    },
   }
 }
 
