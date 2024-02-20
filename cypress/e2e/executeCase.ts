@@ -194,6 +194,15 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        if (input.rent) {
+          getInput('rent', '-yes').click()
+          // TODO
+        } else {
+          getInput('rent', '-no').click()
+        }
+
+        next()
+
         // TODO Reanable with mortgage feature
         // /**  SECTION Hypoteka */
         // assertUrl('/hypoteka')
