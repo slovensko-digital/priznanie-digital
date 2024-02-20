@@ -184,7 +184,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 currency: true,
               },
               {
-                title: 'Počet mesiacov kedy mala manželka / manžel príjmy',
+                title: 'Počet mesiacov, v ktorých bol splnený nárok na NČZD na manžela / manželku',
                 value: taxFormUserInput.r032_partner_pocet_mesiacov,
               },
             ]
