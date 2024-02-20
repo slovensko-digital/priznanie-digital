@@ -337,7 +337,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // ak je r. 40 viac ako je r. 77, potom na r. 78 uvediete rozdiel r. 40 - . 77
     get r078_zaklad_dane_zo_zamestnania() {
       return round(
-        Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0),
+        Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0)
       )
     },
     // r. 80 - tu uvediete vo vašom prípade sumu, ktorá je na r. 78. keďže nepočítate s inými typmi príjmov,
