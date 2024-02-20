@@ -188,6 +188,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return mapPartnerChildBonus(input)
     },
 
+    r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
+
     /** SECTION Rent */
     get t1r11s1() {
       return new Decimal(input.vyskaPrijmovZPrenajmu)
