@@ -189,43 +189,25 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Rent */
-    // prijem 11. t1R11S1
-    // vydavok 11. t1R11S2
-    // prijem 13. t1R13S1
-    // vydavok 13. t1R11S2
-
-    // danova evidencia cbPriPrijmoch11Ods6Zak1a2
-    // jednoducha uctovnictvo cbPriPrijmoch11Ods6Zak4
-    // podvojne uctovnictvo cbPriPrijmoch11Ods6Zak3
-
-    // 58 t58
-    // 59 t59
-    // 60 t60
-    // 65 t65
-    // 80 t80
-    // 81 t81
-    // 90 t90
-    // 116 t116
-    // 118 t118
-    // 124 t124
-
     get t1r11s1() {
-      return input.vyskaPrijmovZPrenajmu
-    }
+      return new Decimal(input.vyskaPrijmovZPrenajmu)
+    },
     get t1r11s2() {
-      if (vydavkyZPrenajmu == 0) {
-        return input.vyskaPrijmovZPrenajmu - input.prijemZPrenajmuOslobodenieDane
+      const vydavky = new Decimal(input.vydavkyZPrenajmu)
+      const prijmy = new Decimal(input.vyskaPrijmovZPrenajmu)
+      const oslobodenie = new Decimal(input.vyskaOslobodenia)
+      if (vydavky.isZero()) {
+        return prijmy.minus(vydavky)
       } else {
-        return ((input.vyskaPrijmovZPrenajmu -input.prijemZPrenajmuOslobodenieDane)/input.vyskaPrijmovZPrenajmu)*vydavkyZPrenajmu
+        return ((prijmy.minus(oslobodenie)).div(prijmy)).mul(vydavky)
       }
-    }
+    },
     get r60_r65() {
-      return this.t1r11s1 - this.t1r11s2
-    }
+      return this.t1r11s1.minus(this.t1r11s2)
+    },
     get r80_r124() {
-      return (this.t1r11s1 - this.t1r11s2) * DAN_Z_PRIJMU_SADZBA
-    }
-
+      return (this.t1r11s1.minus(this.t1r11s2)).mul(DAN_Z_PRIJMU_SADZBA)
+    },
     /** END SECTION Rent */
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/

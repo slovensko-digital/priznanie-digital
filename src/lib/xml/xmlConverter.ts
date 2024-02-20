@@ -103,44 +103,24 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Rent */
-    // prijem 11. t1R11S1
-    // vydavok 11. t1R11S2
-    // prijem 13. t1R13S1
-    // vydavok 13. t1R11S2
-
-    // danova evidencia cbPriPrijmoch11Ods6Zak1a2
-    // jednoducha uctovnictvo cbPriPrijmoch11Ods6Zak4
-    // podvojne uctovnictvo cbPriPrijmoch11Ods6Zak3
-
-    // 58 t58
-    // 59 t59
-    // 60 t60
-    // 65 t65
-    // 80 t80
-    // 81 t81
-    // 90 t90
-    // 116 t116
-    // 118 t118
-    // 124 t124
-  form.dokument.telo.tabulka1.t1r11.s1 = taxForm.t1r11s1
-  form.dokument.telo.tabulka1.t1r11.s2 = taxForm.t1r11s2
-
-  form.dokument.telo.tabulka1.t1r13.s1 = taxForm.t1r11s1
-  form.dokument.telo.tabulka1.t1r13.s2 = taxForm.t1r11s2
+  form.dokument.telo.tabulka1.t1r11.s1 = decimalToString(taxForm.t1r11s1)
+  form.dokument.telo.tabulka1.t1r11.s2 = decimalToString(taxForm.t1r11s2)
+  form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r11s1)
+  form.dokument.telo.tabulka1.t1r13.s2 = decimalToString(taxForm.t1r11s2)
 
   // TODO Typ evidencie checkbox
-  form.dokument.telo.
+  //form.dokument.telo.
 
-  form.dokument.telo.r58 = taxForm.t1r11s1
-  form.dokument.telo.r59 = taxForm.t1r11s2
-  form.dokument.telo.r60 = taxForm.r60_r65
-  form.dokument.telo.r65 = taxForm.r60_r65
-  form.dokument.telo.r80 = taxForm.r80_r124
-  form.dokument.telo.r81 = taxForm.r80_r124
-  form.dokument.telo.r90 = taxForm.r80_r124
-  form.dokument.telo.r116 = taxForm.r80_r124
-  form.dokument.telo.r118 = taxForm.r80_r124
-  form.dokument.telo.r124 = taxForm.r80_r124
+  form.dokument.telo.r58 = decimalToString(taxForm.t1r11s1)
+  form.dokument.telo.r59 = decimalToString(taxForm.t1r11s2)
+  form.dokument.telo.r60 = decimalToString(taxForm.r60_r65)
+  form.dokument.telo.r65 = decimalToString(taxForm.r60_r65)
+  form.dokument.telo.r80 = decimalToString(taxForm.r80_r124)
+  form.dokument.telo.r81 = decimalToString(taxForm.r80_r124)
+  form.dokument.telo.r90 = decimalToString(taxForm.r80_r124)
+  form.dokument.telo.r116 = decimalToString(taxForm.r80_r124)
+  form.dokument.telo.r118 = decimalToString(taxForm.r80_r124)
+  form.dokument.telo.r124 = decimalToString(taxForm.r80_r124)
 
   /** SECTION Mortgage */
   // if (taxForm.r037_uplatnuje_uroky) {
