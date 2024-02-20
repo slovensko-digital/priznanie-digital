@@ -771,7 +771,7 @@ describe('IBAN page', () => {
   })
 })
 
-describe.only('Summary page', () => {
+describe('Summary page', () => {
   it('has working navigation', () => {
     cy.visit('/suhrn')
 
