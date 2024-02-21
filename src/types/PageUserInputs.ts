@@ -86,6 +86,14 @@ export type UrokyUserInput = Pick<
   'r037_uplatnuje_uroky'
   | 'r037_zaplatene_uroky'
   | 'r037_pocetMesiacov'
+  | 'uroky_zaciatok_urocenia_den'
+  | 'uroky_zaciatok_urocenia_mesiac'
+  | 'uroky_zaciatok_urocenia_rok'
+  | 'uroky_dalsi_dlznik'
+  | 'uroky_pocet_dlznikov'
+  | 'uroky_dalsi_uver_uplatnuje'
+  | 'uroky_splnam_vek_kriteria'
+  | 'uroky_splnam_prijem'
   | 'hypoteka_step'
 >
 

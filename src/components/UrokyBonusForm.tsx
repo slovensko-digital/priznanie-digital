@@ -2,15 +2,16 @@ import { UrokyUserInput } from '../types/PageUserInputs'
 import React, { useEffect, useRef } from 'react'
 import { FormikProps } from 'formik'
 import {
-  AlreadyAppliedQuestion,
+  DalsiDlzniciQuestion,
   ApplyForBonusQuestion,
-  ConditionsQuestion,
-  EligiblePartnerForm,
   ZaciatokUveruQuestion,
-  IncomeQuestion,
+  ZaplateneUrokyQuestion,
   NotEligible,
   PreviousButton,
   SubmitButton,
+  DalsiUverQuestion,
+  VekQuestion,
+  PrijemQuestion,
 } from './UrokyBonusFormSteps'
 import { validateUrokyBonusForm } from '../lib/validateUrokyBonusForm'
 
@@ -61,11 +62,13 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
     }
   }
 
-  addQuestionForStep(1, ZaciatokUveruQuestion)
-  addQuestionForStep(2, AlreadyAppliedQuestion)
-  addQuestionForStep(3, ConditionsQuestion)
-  addQuestionForStep(4, IncomeQuestion)
-  addQuestionForStep(5, EligiblePartnerForm)
+  addQuestionForStep(1, DalsiUverQuestion)
+  addQuestionForStep(2, ZaciatokUveruQuestion)
+  addQuestionForStep(3, DalsiDlzniciQuestion)
+  addQuestionForStep(4, VekQuestion)
+  addQuestionForStep(5, PrijemQuestion)
+  addQuestionForStep(6, ZaplateneUrokyQuestion)
+  // addQuestionForStep(7, EligiblePartnerForm)
 
   return (
     <>

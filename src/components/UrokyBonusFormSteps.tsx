@@ -1,9 +1,15 @@
 import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
-import { formatRodneCislo } from '../lib/utils'
+import { formatCurrency, formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
+import Fieldset from './fieldset/Fieldset'
+import RadioGroup from './radio/RadioGroup'
+import Radio from './radio/Radio'
+import RadioConditional from './radio/RadioConditional'
+import Decimal from 'decimal.js'
+import { Warning } from './Warning'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
@@ -26,66 +32,20 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
   </>
 )
 
-export const IncomeQuestion = ({ disabled }) => {
-  return (
-    <>
-      <Input
-        name="r032_partner_vlastne_prijmy"
-        type="number"
-        label={`Vlastné príjmy manželky / manžela za zdaňovacie obdobie ${TAX_YEAR}`}
-        disabled={disabled}
-      />
-      <Details title="Ako vypočítať vlastný príjem?">
-        <>
-          <p>Do vlastného príjmu manželky / manžela patria napr.:</p>
-          <ul>
-            <li>materské,</li>
-            <li>príjem zo zamestnania (znížený o poistné),</li>
-            <li>príjmy z podnikania (v plnej výške),</li>
-            <li>podpora v nezamestnanosti,</li>
-            <li>sociálne dávky,</li>
-            <li>dávky a príspevky v hmotnej núdzi,</li>
-            <li>nemocenské a úrazové dávky,</li>
-            <li>peňažný príspevok na opatrovanie</li>
-            <li>dôchodok (invalidný, starobný, výsluhový, vdovský)</li>
-            <li>dávky z garančného poistenia,</li>
-            <li>príjmy z prenájmu,</li>
-            <li>úroky z vkladov,</li>
-            <li>výhry,</li>
-            <li>
-              podiel na zisku (dividenda) vyplácaný zo zisku obchodnej
-              spoločnosti alebo družstva
-            </li>
-            <li>príjmy z kapitálového majetku</li>
-            <li>ostatné príjmy</li>
-          </ul>
-          <p>
-            Vlastný príjem manželky (manžela) sa znižuje o zaplatené poistné a
-            príspevky na zdravotné a sociálne poistenie, ktoré bola manželka
-            (manžel) povinná zaplatiť.
-          </p>
-          <p>Do vlastného príjmu manželky / manžela nepatria:</p>
-          <ul>
-            <li>zamestnanecká prémia,</li>
-            <li>daňový bonus na deti,</li>
-            <li>zvýšenie dôchodku pre bezvládnosť,</li>
-            <li>
-              štátne sociálne dávky (rodičovský príspevok, prídavok na dieťa,
-              príplatok k prídavku na dieťa, príspevok pri narodení dieťaťa, na
-              viac súčasne narodených detí, príspevok na pohreb, vianočný
-              príspevok dôchodcom, príplatok k dôchodku politických väzňov,
-              príspevok športovému reprezentantovi),
-            </li>
-            <li>
-              štipendium poskytované študentovi, ktorý sa sústavne pripravuje na
-              budúce povolanie.
-            </li>
-          </ul>
-        </>
-      </Details>
-    </>
-  )
-}
+export const ZaplateneUrokyQuestion = ({ disabled }) => (
+  <>
+    <Input
+      name="r037_zaplatene_uroky"
+      type="number"
+      label={`Aká bola výška zaplatených úrokov v roku ${TAX_YEAR} na základe potvrdenia vydaného bankou?`}
+      disabled={disabled}
+    />
+    <Warning>
+      Potvrdenie vydané veriteľom (bankou) je potrebné priložiť ako prílohu k daňovému priznaniu.
+    </Warning>
+  </>
+)
+
 
 export const ZaciatokUveruQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
@@ -94,29 +54,152 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
         Ak si chcete uplatniť daňový bonus na zaplatené úroky z úveru na bývanie uveďte:
       </h1>
     </legend>
+    <p className='govuk-hint'>
+      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich
+      bezprostredne po sebe nasledujúcich rokov počnúc mesiacom,
+      v ktorom začalo úročenie úveru na bývanie.
+    </p>
     <Input
       name="uroky_rok_uzatvorenia"
       type="number"
       label="Rok uzatvorenia zmluvy o úvere na bývanie"
       disabled={disabled}
     />
-    <Input
-      name="datumZacatiaUroceniaUveru"
-      type="text"
-      label="Dátum začatia úročenie úveru"
-      disabled={disabled}
-    />
+    <label
+      className="govuk-label govuk-!-font-weight-bold"
+    >
+      Dátum začatia úročenia úveru
+    </label>
+    <div className="govuk-form-group">
+      <fieldset
+        className="govuk-fieldset"
+        role="group"
+        aria-describedby="zaciatok-urocenia-hint"
+      >
+        <div id="zaciatok-urocenia-hint" className="govuk-hint">
+          Zadajte datum začatia úročenia úveru napríklad
+          <br />
+          27 8 {TAX_YEAR - 3}
+        </div>
+        <div className="govuk-date-input" id="zaciatok-prijmov">
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zaciatok_urocenia_den"
+                label="Deň"
+                type="number"
+                width={2}
+              />
+            </div>
+          </div>
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zaciatok_urocenia_mesiac"
+                label="Mesiac"
+                type="number"
+                width={2}
+              />
+            </div>
+          </div>
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zaciatok_urocenia_rok"
+                type="number"
+                label="Rok"
+                width={4}
+              />
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
 )
 
-export const AlreadyAppliedQuestion = ({ disabled }) => (
+export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue }) => (
+  <Fieldset title={`Ste dlžníkom zo zmluvy o úvere na bývanie spolu s inými dlžníkmi?`}
+    hint="Nárok na daňový bonus na zaplatené úroky má možnosť uplatniť len jeden z dlžníkov."
+    error={errors.uroky_dalsi_dlznik}
+  >
+    <RadioGroup value={String(values.uroky_dalsi_dlznik)} onChange={(value) => {
+      debugger
+      setFieldValue('uroky_dalsi_dlznik', value === 'true')
+    }}>
+      <Radio name="uroky_dalsi_dlznik-input-yes" label="Áno" value="true" />
+      <RadioConditional forValue="true">
+        <Input
+          name="uroky_pocet_dlznikov"
+          type="number"
+          label="Počet dlžníkov zo zmluvy o úvere"
+          hint="Uveďte počet dlžníkov spolu s vami"
+          width={4}
+        />
+      </RadioConditional>
+
+      <Radio name="uroky_dalsi_dlznik-input-no" label="Nie" value="false" />
+    </RadioGroup>
+  </Fieldset>
+)
+
+export const DalsiUverQuestion = ({ disabled }) => (
   <BooleanRadio
-    name="partner_bonus_uplatneny"
-    title="Uplatnili ste si zvýhodnenie inou cestou?"
+    name="uroky_dalsi_uver_uplatnuje"
+    title="Ste dlžníkom / spoludlžníkom aj v inej zmluve o úvere na bývanie, na ktorú sa uplatňuje nárok na daňový bonus na zaplatené úroky?"
     disabled={disabled}
-    hint="Zvýhodnenie na manželku / manžela si môžete uplatniť aj prostredníctvom zamestnávateľa pri ročnom zúčtovaní dane alebo vlastným daňovým priznaním."
   />
 )
+
+export const VekQuestion = ({ disabled, values: { uroky_dalsi_dlznik } }) => (
+  <BooleanRadio
+    name="uroky_splnam_vek_kriteria"
+    title={`Mali ste ku dňu podania žiadosti o úver ${uroky_dalsi_dlznik ? '(aj všetci spoludlžníci) ' : ''}najmenej 18 a najviac 35 rokov?`}
+    disabled={disabled}
+  />
+)
+
+/*
+suma 1 240,20 EUR; táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2018
+suma 1 316,90 EUR; táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2019
+suma 1 419,60 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách  uzatvorených v roku 2020
+suma 1 472,90 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2021 
+suma 1 574,30 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2022
+suma 1 695,20 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2023
+*/
+
+
+const maxPrijem = ({uroky_rok_uzatvorenia: rok, uroky_pocet_dlznikov, uroky_dalsi_dlznik}): Decimal => {
+  const pocet_dlznikov = uroky_dalsi_dlznik ? new Decimal(parseInt(uroky_pocet_dlznikov)) : new Decimal(1)
+  switch (rok) {
+    case '2018':
+      return new Decimal(1240.20).mul(pocet_dlznikov)
+    case '2019':
+      return new Decimal(1316.90).mul(pocet_dlznikov)
+    case '2020':
+      return new Decimal(1419.60).mul(pocet_dlznikov)
+    case '2021':
+      return new Decimal(1472.90).mul(pocet_dlznikov)
+    case '2022':
+      return new Decimal(1574.30).mul(pocet_dlznikov)
+    case '2023':
+      return new Decimal(1695.20).mul(pocet_dlznikov)
+    default:
+      return new Decimal(0)
+  }
+}
+
+export const PrijemQuestion = ({ disabled, values: { uroky_dalsi_dlznik, uroky_rok_uzatvorenia, uroky_pocet_dlznikov } }) => {
+  const prijem = formatCurrency(maxPrijem({uroky_rok_uzatvorenia, uroky_pocet_dlznikov, uroky_dalsi_dlznik}).toNumber())
+
+  return (
+    <BooleanRadio
+      name="uroky_splnam_prijem"
+      title={`Bol váš priemerný mesačný príjem ${uroky_dalsi_dlznik ? '(spolu so spoludlžníkmi) ' : ''}za kalendárny rok ${parseInt(uroky_rok_uzatvorenia)-1} max. vo výške ${prijem}?`}
+      disabled={disabled}
+    />
+  )
+}
 
 export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">

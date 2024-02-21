@@ -1,4 +1,4 @@
-import { validate } from '../src/pages/hypoteka'
+import { validate } from '../src/pages/uroky'
 import { testValidation } from './utils/testValidation'
 
 describe('hypoteka', () => {
