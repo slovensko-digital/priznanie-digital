@@ -192,7 +192,7 @@ const sampleSchema: OutputJson = {
           s2: '',
         },
       },
-      mikrodanovnikPar2w: '1',
+      mikrodanovnikPar2w: '0',
       vydavkyPar6ods11_ods1a2: '0',
       vydavkyPar6ods11_ods3: '0',
       vydavkyPar6ods11_ods4: '0',

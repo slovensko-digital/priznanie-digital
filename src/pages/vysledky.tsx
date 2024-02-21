@@ -21,7 +21,6 @@ interface SummaryRow {
   description?: string
   value: Decimal
   fontSize?: number
-  testId?: string
 }
 interface SummaryProps {
   rows: SummaryRow[]
@@ -30,7 +29,7 @@ const Summary = ({ rows }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {rows.map(({ key, title, description, value, fontSize, testId }) => (
+        {rows.map(({ key, title, description, value, fontSize }) => (
           <tr
             className="govuk-table__row"
             style={fontSize ? { fontSize } : undefined}
@@ -44,12 +43,8 @@ const Summary = ({ rows }: SummaryProps) => (
                 </div>
               )}
             </td>
-            <td className="govuk-table__cell govuk-table__cell--numeric" data-test={testId}>
-              {value.gt(0) ? (
-                <strong>{formatCurrency(value.toNumber())}</strong>
-              ) : (
-                <span>0,00 EUR</span>
-              )}
+            <td className="govuk-table__cell govuk-table__cell--numeric" data-test={key}>
+              <strong>{formatCurrency(value.toNumber())}</strong>
             </td>
           </tr>
         ))}
@@ -67,19 +62,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 
   const summaryRows = [
     {
-      title: 'Príjmy',
+      title: 'Príjmy spolu',
       value: summary.prijmy,
       key: 'prijmy',
     },
     {
-      title: 'Zdravotné poistné',
-      value: summary.zdravotnePoistne,
-      key: 'zdravotnePoistne',
-    },
-    {
-      title: 'Sociálne poistné',
-      value: summary.socialnePoistne,
-      key: 'socialnePoistne',
+      title: 'Paušálne výdavky',
+      value: summary.pausalneVydavky,
+      key: 'pausalneVydavky',
     },
     {
       title: 'Zaplatené poistné spolu',
@@ -87,20 +77,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'zaplatenePoistneSpolu',
     },
     {
-      title: 'Zvýhodnenie na manželku / manžela',
-      value: summary.zvyhodnenieNaManz,
-      key: 'zvyhodnenieNaManz',
+      title: 'Nezdaniteľná časť na vás',
+      value: summary.nezdanitelnaCastNaSeba,
+      key: 'nezdanitelnaCastNaSeba',
     },
     {
-      title:
-        'Daňový bonus na dieťa do 16 rokov alebo študenta do 25 rokov s ktorým žijete v spoločnej domácnosti',
-      value: summary.danovyBonusNaDieta,
-      key: 'danovyBonusNaDieta',
-    },
-    {
-      title: 'Príspevok na dôchodkové poistenie (III. pilier)',
-      value: summary.prispevokNaDochodkovePoist,
-      key: 'prispevokNaDochodkovePoist',
+      title: 'Nezdaniteľná časť na manželku / manžela',
+      value: summary.nezdanitelnaCastNaPartnera,
+      key: 'nezdanitelnaCastNaPartnera',
     },
     {
       title: 'Základ dane',
@@ -108,22 +92,42 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'zakladDane',
     },
     {
-      title: 'Daňový preplatok / daňový bonus na vyplatenie',
-      value: summary.danovyPreplatok,
-      key: 'danovyPreplatok',
+      title: 'Daň spolu',
+      value: summary.danSpolu,
+      key: 'danSpolu',
+    },
+    {
+      title: 'Preddavky na daň',
+      value: summary.preddavkyNaDan,
+      key: 'preddavkyNaDan',
+    },
+    {
+      title: 'Nárok na daňový bonus na deti',
+      value: summary.danovyBonusNaDeti,
+      key: 'danovyBonusNaDeti',
       testId: 'r136_danovy_preplatok',
+    },
+    {
+      title: 'Daňový bonus na vyplatenie',
+      value: summary.danovyBonusNaVyplatenie,
+      key: 'danovyBonusNaVyplatenie',
+    },
+    {
+      title: 'Daňový preplatok na vyplatenie',
+      value: summary.danovyPreplatokNaVyplatenie,
+      key: 'danovyPreplatokNaVyplatenie',
     },
     {
       title: 'Daň na úhradu',
       value: summary.danNaUhradu,
       key: 'danNaUhradu',
       fontSize: 30,
-    },
+    }
   ]
 
-  const monthlyPrepayment = Number(summary.danNaUhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY
+  const monthlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
 
-  const quarterlyPrepayment = Number(summary.danNaUhradu) > SPODNA_SADZBA_PRE_PREDDAVKY
+  const quarterlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
 
   const prePayments = monthlyPrepayment || quarterlyPrepayment
 

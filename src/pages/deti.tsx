@@ -39,6 +39,7 @@ import RadioGroup from "../components/radio/RadioGroup";
 import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
 import Decimal from 'decimal.js'
+import { Warning } from '../components/Warning'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -101,7 +102,7 @@ const Deti: Page<ChildrenUserInput> = ({
                     V prípade, že ste sa v roku {TAX_YEAR} starali o
                     nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
                     nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    máte právo na zľavu na dani.
+                    máte právo na zľavu na dani. Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                   </p>
                   <Details title="Aká je výška daňového bonusu?">
                     <p className="govuk-hint">
@@ -126,6 +127,10 @@ const Deti: Page<ChildrenUserInput> = ({
                       </ul>
                     </p>
                   </Details>
+                  <p className="govuk-hint">
+                    Za mesiace január až apríl 2023 je možné uplatniť daňový bonus len v prípade,
+                    ak sa na vyživované dieťa neposkytla dotácia na podporu výchovy k stravovacím návykom dieťaťa.
+                  </p>
                   <p className="govuk-hint">
                     Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                   </p>
@@ -180,7 +185,7 @@ const Deti: Page<ChildrenUserInput> = ({
                     )}
                   </FieldArray>
 
-                  {taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) && (
+                  {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) || values.partner_bonus_na_deti === true) && (
                     <>
                       <p>
                         Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevyužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
@@ -198,7 +203,7 @@ const Deti: Page<ChildrenUserInput> = ({
                           <Input
                             name="r034_priezvisko_a_meno"
                             type="text"
-                            label="Meno a priezvisko manželky / manžela"
+                            label="Meno a priezvisko druhej oprávnenej osoby"
                           />
                           <Input
                             name="r034_rodne_cislo"
@@ -248,6 +253,8 @@ const Deti: Page<ChildrenUserInput> = ({
                             label="Prijem"
                             hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
                           />
+
+                          <AttachmentWarning prijem={values.partner_bonus_na_deti_typ_prijmu} />
                         </>
                       )}
                     </>
@@ -264,16 +271,34 @@ const Deti: Page<ChildrenUserInput> = ({
   )
 }
 
+const AttachmentWarning = ({ prijem }) => {
+  if (prijem === "3") {
+    return (
+      <Warning>
+        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu dokladu o vykonanom ročnom zúčtovaní preddavkov druhej oprávnenej osoby.
+      </Warning>
+    )
+  }
+  if (prijem === "4") {
+    return (
+      <Warning>
+        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu preukazujúceho výšku základu dane druhej oprávnenej osoby.
+      </Warning>
+    )
+  }
+  return null
+}
+
 const getIncomeHint = (value: string): string => {
   switch (value) {
     case "0":
       return ''
     case "1":
-      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ A riadok 39'
+      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ A riadok 39'
     case "2":
-      return 'Formulár daňového priznania k dani z príjmov fyzickej osoby - typ B riadok 72'
+      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ B riadok 72'
     case "3":
-      return 'Ročné zúčtovanie preddavkov na daň riadok 3'
+      return 'Výšku príjmov zistíte z ročného zúčtovania preddavkov na daň riadok 3.'
     default:
       break;
   }

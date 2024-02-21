@@ -111,7 +111,6 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <li>SZČO starobní dôchodcovia</li>
             <li>Práca na dohodu</li>
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
-            <li>Príspevky z prvej pomoci</li>
           </ul>
         </>
       </Warning>

@@ -200,8 +200,10 @@ export interface TaxForm {
   r127: Decimal
   /** zrazena dan zo zamestnania */
   r131: Decimal
+  r132: Decimal
   /** Zaplatené preddavky */
   r133: Decimal
+  r134: Decimal
 
   r135_dan_na_uhradu: Decimal
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
@@ -221,7 +223,6 @@ export interface TaxForm {
     obchMeno: string
     suhlasZaslUdaje: boolean
   }
-  mikrodanovnik: boolean
   datum: string
 
   /** SECTION Danovy bonus */
