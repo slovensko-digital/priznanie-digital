@@ -194,19 +194,17 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
-        // TODO Reanable with mortgage feature
-        // /**  SECTION Hypoteka */
-        // assertUrl('/hypoteka')
+        /**  SECTION Hypoteka */
+        assertUrl('/uroky')
 
-        // if (input.r037_uplatnuje_uroky) {
-        //   getInput('r037_uplatnuje_uroky', '-yes').click()
-        //   typeToInput('r037_zaplatene_uroky', input)
-        //   typeToInput('r037_pocetMesiacov', input)
-        // } else {
-        //   getInput('r037_uplatnuje_uroky', '-no').click()
-        // }
+        if (input.r037_uplatnuje_uroky) {
+          getInput('r037_uplatnuje_uroky', '-yes').click()
+          // TODO
+        } else {
+          getInput('r037_uplatnuje_uroky', '-no').click()
+        }
 
-        // next()
+        next()
 
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
