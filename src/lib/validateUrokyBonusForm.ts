@@ -1,9 +1,9 @@
-import { UrokyUserInput, PartnerUserInput } from '../types/PageUserInputs'
-import { parseInputNumber } from './utils'
+// import { UrokyUserInput } from '../types/PageUserInputs'
+// import { parseInputNumber } from './utils'
 
 export const validateUrokyBonusForm = (
-  values: UrokyUserInput,
-  step = null,
+  // values: UrokyUserInput,
+  // step = null,
 ): boolean => {
   return true
   // const step1 = true // first step is not validated

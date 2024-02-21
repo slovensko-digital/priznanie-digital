@@ -46,6 +46,7 @@ const Uroky: Page<UrokyUserInput> = ({
 
 export const validate = (values: UrokyUserInput) => {
   const errors: Partial<FormErrors<UrokyUserInput>> = {}
+  console.log(values)
 
   return errors
 }
