@@ -99,10 +99,10 @@ const Deti: Page<ChildrenUserInput> = ({
                 <>
                   <h1 className="govuk-heading-l">Informácie o deťoch</h1>
                   <p className="govuk-hint">
-                    V prípade, že ste sa v roku {TAX_YEAR} starali o
-                    nezaopatrené dieťa do 18 rokov, študenta do 25 rokov alebo o
-                    nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    máte právo na zľavu na dani. Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                    V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
+                    študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
+                    pri splnení <a className='govuk-link' target='_blank' href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</a> máte nárok na daňové zvýhodnenie.
+                    Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                   </p>
                   <Details title="Aká je výška daňového bonusu?">
                     <p className="govuk-hint">
