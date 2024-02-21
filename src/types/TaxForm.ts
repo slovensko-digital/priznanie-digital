@@ -188,16 +188,10 @@ export interface TaxForm {
 
   r122: Decimal
 
-  /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
-  // r123: Decimal
-  /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
-   *   úroky(r. 107 - r. 112) zrkadli r118*/
+  r123: Decimal
   r124: Decimal
-  /**   Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu
-   *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
-   *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
-   *   124 (+)*/
-
+  r125: Decimal
+  r126: Decimal
   r127: Decimal
   /** zrazena dan zo zamestnania */
   r131: Decimal

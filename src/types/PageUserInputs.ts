@@ -83,9 +83,8 @@ export type PensionUserInput = Pick<
 
 export type UrokyUserInput = Pick<
   TaxFormUserInput,
-  'r037_uplatnuje_uroky'
-  | 'r037_zaplatene_uroky'
-  | 'r037_pocetMesiacov'
+  'r035_uplatnuje_uroky'
+  | 'r035_zaplatene_uroky'
   | 'uroky_zaciatok_urocenia_den'
   | 'uroky_zaciatok_urocenia_mesiac'
   | 'uroky_zaciatok_urocenia_rok'

@@ -108,7 +108,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
       datumZacatiaUroceniaUveru: taxForm.r035_datum_zacatia_urocenia_uveru
     }
-
   }
 
   /** SECTION Employed */
@@ -153,8 +152,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r120 = decimalToString(taxForm.r120)
   form.dokument.telo.r121 = decimalToString(taxForm.r121)
   form.dokument.telo.r122 = decimalToString(taxForm.r122)
-
+  form.dokument.telo.r123 = decimalToString(taxForm.r123)
   form.dokument.telo.r124 = roundDecimal(taxForm.r124)
+  form.dokument.telo.r126 = decimalToString(taxForm.r126)
+  form.dokument.telo.r127 = decimalToString(taxForm.r127)
   form.dokument.telo.r131 = decimalToString(taxForm.r131)
 
   form.dokument.telo.r133 = decimalToString(taxForm.r133)

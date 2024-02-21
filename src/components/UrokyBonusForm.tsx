@@ -38,6 +38,7 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
     useRef(),
     useRef(),
     useRef(),
+    useRef(),
   ]
 
   useEffect(() => {

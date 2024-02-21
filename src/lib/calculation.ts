@@ -191,10 +191,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
-    r035_uplat_dan_bonus_zaplat_uroky: input?.r037_uplatnuje_uroky ?? false,
+    r035_uplat_dan_bonus_zaplat_uroky: input?.r035_uplatnuje_uroky ?? false,
     get r035_zaplatene_uroky() {
       // TODO
-      return new Decimal(parseInputNumber(input?.r037_zaplatene_uroky ?? '0'))
+      return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
     },
     get r035_pocet_mesiacov(){
       // TODO
@@ -543,6 +543,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r122() {
       return Decimal.max(this.r119.minus(this.r117), 0)
     },
+    get r123() {
+      return Decimal.min(this.r035_zaplatene_uroky.times(0.5), 400)
+    },
+    get r124() {
+      return this.r118
+    },
+    r125: new Decimal(0),
+    get r126() {
+      return Decimal.max(this.r123.minus(this.r125), 0)
+    },
     get mozeZiadatVyplatitDanovyBonus() {
       return this.r121.gt(0)
     },
@@ -552,18 +562,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get mozeZiadatVratitDanovyBonusUroky() {
       return this.r127.gt(0)
     },
-    get r124() {
-      return this.r118
-    },
-    /** TODO */
-    // get r125() {
-    //   return new Decimal(0)
-    // },
-    // get r126() {
-    //   return Decimal.max(this.r123.minus(this.r125), 0)
-    // },
     get r127() {
-      return new Decimal(0)
+      return Decimal.max(this.r126.minus(this.r118), 0)
     },
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))

@@ -15,7 +15,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
       title={`Boli ste v roku ${TAX_YEAR} dlžníkom z úveru na bývanie?`}
-      name="r037_uplatnuje_uroky"
+      name="r035_uplatnuje_uroky"
       disabled={disabled}
     />
     <Details title="Kedy si môžem uplatniť zvýhodnenie?">
@@ -35,7 +35,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
 export const ZaplateneUrokyQuestion = ({ disabled }) => (
   <>
     <Input
-      name="r037_zaplatene_uroky"
+      name="r035_zaplatene_uroky"
       type="number"
       label={`Aká bola výška zaplatených úrokov v roku ${TAX_YEAR} na základe potvrdenia vydaného bankou?`}
       disabled={disabled}

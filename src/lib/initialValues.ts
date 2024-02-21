@@ -82,9 +82,8 @@ export const pensionInitialValues: PensionUserInput = {
 }
 
 export const urokyInitialValues: UrokyUserInput = {
-  r037_pocetMesiacov: '',
-  r037_zaplatene_uroky: '',
-  r037_uplatnuje_uroky: undefined,
+  r035_zaplatene_uroky: '',
+  r035_uplatnuje_uroky: undefined,
   hypoteka_step: 0,
 }
 

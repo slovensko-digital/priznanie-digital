@@ -6,9 +6,11 @@ import { FormErrors, UrokyUserInput } from '../types/PageUserInputs'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
 import { UrokyBonusForm } from '../components/UrokyBonusForm'
+import { urokyInitialValues } from '../lib/initialValues'
 
 const Uroky: Page<UrokyUserInput> = ({
   taxFormUserInput,
+  setTaxFormUserInput,
   router,
   previousRoute,
   nextRoute,
@@ -22,10 +24,22 @@ const Uroky: Page<UrokyUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values, { setFieldValue }) => {
-          if (values.hypoteka_step === 0 && values.r037_uplatnuje_uroky === false) {
+          if (values.hypoteka_step === 0 && values.r035_uplatnuje_uroky === false) {
             router.push(nextRoute)
           } else {
-            setFieldValue('hypoteka_step', values.hypoteka_step + 1)
+            if (values.hypoteka_step === 6) {
+              const userInput = values.r035_uplatnuje_uroky
+                ? values
+                : {
+                  ...urokyInitialValues,
+                  r035_uplatnuje_uroky: values.r035_uplatnuje_uroky,
+                  r035_zaplatene_uroky: values.r035_zaplatene_uroky,
+                }
+              setTaxFormUserInput(userInput)
+              router.push(nextRoute)
+            } else {
+              setFieldValue('hypoteka_step', values.hypoteka_step + 1)
+            }
           }
         }}
       >

@@ -65,9 +65,8 @@ export interface TaxFormUserInput {
   partner_podmienky?: Record<string, boolean>
 
   /** SECTION  Mortage */
-  r037_uplatnuje_uroky?: boolean
-  r037_zaplatene_uroky?: string
-  r037_pocetMesiacov?: string
+  r035_uplatnuje_uroky?: boolean
+  r035_zaplatene_uroky?: string
   hypoteka_step?: number
   uroky_rok_uzatvorenia?: string
   uroky_zaciatok_urocenia_den?: string

@@ -197,11 +197,11 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Hypoteka */
         assertUrl('/uroky')
 
-        if (input.r037_uplatnuje_uroky) {
-          getInput('r037_uplatnuje_uroky', '-yes').click()
+        if (input.r035_uplatnuje_uroky) {
+          getInput('r035_uplatnuje_uroky', '-yes').click()
           // TODO
         } else {
-          getInput('r037_uplatnuje_uroky', '-no').click()
+          getInput('r035_uplatnuje_uroky', '-no').click()
         }
 
         next()
