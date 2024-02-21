@@ -101,15 +101,16 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Mortgage */
-  // if (taxForm.r037_uplatnuje_uroky) {
-  //   form.dokument.telo.r37 = {
-  //     uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
-  //     zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
-  //     pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
-  //   }
-  //   form.dokument.telo.r112 = taxForm.r123.toFixed(2)
-  //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
-  // }
+  if (taxForm.r035_uplat_dan_bonus_zaplat_uroky) {
+    form.dokument.telo.r35 = {
+      uplatDanBonusZaplatUroky: boolToString(taxForm.r035_uplat_dan_bonus_zaplat_uroky),
+      zaplateneUroky: decimalToString(taxForm.r035_zaplatene_uroky),
+      pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
+      datumZacatiaUroceniaUveru: taxForm.r035_datum_zacatia_urocenia_uveru
+    }
+
+  }
+
   /** SECTION Employed */
 
   if (taxForm.employed) {

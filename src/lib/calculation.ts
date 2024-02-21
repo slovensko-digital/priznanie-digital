@@ -191,11 +191,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
-    // r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    // r037_zaplatene_uroky: new Decimal(
-    //   parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
-    // ),
-    // r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
+    r035_uplat_dan_bonus_zaplat_uroky: input?.r037_uplatnuje_uroky ?? false,
+    get r035_zaplatene_uroky() {
+      // TODO
+      return new Decimal(parseInputNumber(input?.r037_zaplatene_uroky ?? '0'))
+    },
+    get r035_pocet_mesiacov(){
+      // TODO
+      return 12
+    },
+    get r035_datum_zacatia_urocenia_uveru() {
+      // TODO
+      return '01.03.2021'
+    },
 
     /** SECTION Employment */
     r036: new Decimal(
