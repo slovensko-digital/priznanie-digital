@@ -555,11 +555,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r119.minus(this.r117), 0)
     },
     get r123() {
-      let limit = new Decimal(400)
-      if (this.r035_pocet_mesiacov !== 12) {
-        limit = limit.div(12).times(this.r035_pocet_mesiacov)
+      if (this.r035_uplat_dan_bonus_zaplat_uroky) {
+        let limit = new Decimal(400)
+        if (this.r035_pocet_mesiacov !== 12) {
+          const mesacne = limit.div(12)
+          limit = mesacne.times(this.r035_pocet_mesiacov)
+        }
+        return Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit)
+      } else {
+        return new Decimal(0)
       }
-      return Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit)
     },
     get r124() {
       return this.r118
