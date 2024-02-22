@@ -42,8 +42,6 @@ export const bugReport5Input: E2eTestUserInput = {
   ],
   "platil_prispevky_na_dochodok": true,
   "zaplatene_prispevky_na_dochodok": "180",
-  "r037_pocetMesiacov": "",
-  "r037_zaplatene_uroky": "",
   "expectNgoDonationValue": true,
   "XIIoddiel_uplatnujem2percenta": true,
   "splnam3per": false,
