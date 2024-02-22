@@ -182,13 +182,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r153 = taxForm.employed ? '5' : '4'
 
-  const maDanovBonus =
+  const maDanovyBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
+  const maDanovyBonusUroky = taxForm.mozeZiadatVratitDanovyBonusUroky && taxForm.ziadamVratitDanovyBonusUroky
   const maDanovyPreplatok =
     taxForm.mozeZiadatVratitDanovyPreplatok &&
     taxForm.ziadamVratitDanovyPreplatok
 
-  if (maDanovBonus || maDanovyPreplatok) {
+  if (maDanovyBonus || maDanovyPreplatok || maDanovyBonusUroky) {
     form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
     form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
     form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'
@@ -198,6 +199,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
     if (taxForm.ziadamVratitDanovyPreplatok) {
       form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
+    }
+    if (taxForm.ziadamVratitDanovyBonusUroky) {
+      form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonusUroky = '1'
     }
   }
 
