@@ -53,12 +53,9 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
 
   const questions: React.FC<any>[] = [ApplyForBonusQuestion]
 
-  console.log('values', values)
-
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
-      // validateUrokyBonusForm(values, currentStep
-      if (validateUrokyBonusForm()) {
+      if (validateUrokyBonusForm(values, currentStep)) {
         questions.push(NextQuestion)
       } else {
         questions.push(NotEligible)
@@ -72,7 +69,6 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
   addQuestionForStep(4, VekQuestion)
   addQuestionForStep(5, PrijemQuestion)
   addQuestionForStep(6, ZaplateneUrokyQuestion)
-  // addQuestionForStep(7, EligiblePartnerForm)
 
   return (
     <>

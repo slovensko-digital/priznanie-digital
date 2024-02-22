@@ -266,25 +266,25 @@ const Suhrn: Page<TaxFormUserInput> = ({
             : [{ title: 'Neplatil som' }]
         }
       />
-      {/* <Summary
-      title="Zaplatené úroky z hypotéky"
-      href={'/hypoteka'}
-      rows={
-        taxFormUserInput.r037_uplatnuje_uroky
-          ? [
-              {
-                title: 'Zaplatené úroky',
-                value: taxFormUserInput.r037_zaplatene_uroky,
-                currency: true,
-              },
-              {
-                title: 'Počet mesiacov',
-                value: taxFormUserInput.r037_pocetMesiacov,
-              },
-            ]
-          : [{ title: 'Neplatil som' }]
-      }
-    /> */}
+      <Summary
+        title="Zaplatené úroky z hypotéky"
+        href={'/uroky'}
+        rows={
+          taxFormUserInput.r035_uplatnuje_uroky
+            ? [
+                {
+                  title: 'Zaplatené úroky',
+                  value: taxFormUserInput.r035_zaplatene_uroky,
+                  currency: true,
+                },
+                // {
+                //   title: 'Počet mesiacov',
+                //   value: taxFormUserInput.r035,
+                // },
+              ]
+            : [{ title: 'Neplatil som' }]
+        }
+      />
       <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}

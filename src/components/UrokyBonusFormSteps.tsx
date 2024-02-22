@@ -89,6 +89,7 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
                 label="Deň"
                 type="number"
                 width={2}
+                disabled={disabled}
               />
             </div>
           </div>
@@ -99,6 +100,7 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
                 label="Mesiac"
                 type="number"
                 width={2}
+                disabled={disabled}
               />
             </div>
           </div>
@@ -109,6 +111,7 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
                 type="number"
                 label="Rok"
                 width={4}
+                disabled={disabled}
               />
             </div>
           </div>
@@ -118,7 +121,7 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
   </div>
 )
 
-export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue }) => (
+export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue, disabled }) => (
   <Fieldset title={`Ste dlžníkom zo zmluvy o úvere na bývanie spolu s inými dlžníkmi?`}
     hint="Nárok na daňový bonus na zaplatené úroky má možnosť uplatniť len jeden z dlžníkov."
     error={errors.uroky_dalsi_dlznik}
@@ -127,7 +130,7 @@ export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue }) => (
       debugger
       setFieldValue('uroky_dalsi_dlznik', value === 'true')
     }}>
-      <Radio name="uroky_dalsi_dlznik-input-yes" label="Áno" value="true" />
+      <Radio name="uroky_dalsi_dlznik-input-yes" label="Áno" value="true" disabled={disabled} />
       <RadioConditional forValue="true">
         <Input
           name="uroky_pocet_dlznikov"
@@ -135,10 +138,11 @@ export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue }) => (
           label="Počet dlžníkov zo zmluvy o úvere"
           hint="Uveďte počet dlžníkov spolu s vami"
           width={4}
+          disabled={disabled}
         />
       </RadioConditional>
 
-      <Radio name="uroky_dalsi_dlznik-input-no" label="Nie" value="false" />
+      <Radio name="uroky_dalsi_dlznik-input-no" label="Nie" value="false" disabled={disabled} />
     </RadioGroup>
   </Fieldset>
 )
@@ -246,7 +250,7 @@ export const NotEligible = () => (
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
       Nemáte nárok na uplatnenie
     </h1>
-    <p>Nespĺňate podmienky pre uplatnenie zvýhodnenia na manželku / manžela</p>
+    <p>Nespĺňate podmienky pre uplatnenie daňového bonusu na zaplatené úroky.</p>
   </div>
 )
 

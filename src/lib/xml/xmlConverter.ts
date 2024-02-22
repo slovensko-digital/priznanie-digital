@@ -3,7 +3,7 @@ import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
-import { boolToString, decimalToString, roundDecimal } from '../utils'
+import { boolToString, decimalToString, formatDate, roundDecimal } from '../utils'
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
@@ -106,7 +106,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       uplatDanBonusZaplatUroky: boolToString(taxForm.r035_uplat_dan_bonus_zaplat_uroky),
       zaplateneUroky: decimalToString(taxForm.r035_zaplatene_uroky),
       pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
-      datumZacatiaUroceniaUveru: taxForm.r035_datum_zacatia_urocenia_uveru
+      datumZacatiaUroceniaUveru: formatDate(taxForm.r035_datum_zacatia_urocenia_uveru)
     }
   }
 

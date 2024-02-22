@@ -43,6 +43,7 @@ const ZVYHODNENIE_NA_PARTNERA = 14_862.228
 export const TAX_YEAR = 2023
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
+export const UROKY_POCET_ROKOV = 5
 
 export enum Months {
   January = 1,
@@ -201,8 +202,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return 12
     },
     get r035_datum_zacatia_urocenia_uveru() {
-      // TODO
-      return '01.03.2021'
+      const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
+      const mesiac = Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
+      const rok = Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+      return new Date(rok, mesiac - 1, den)
     },
 
     /** SECTION Employment */

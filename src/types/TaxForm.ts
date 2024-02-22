@@ -80,7 +80,7 @@ export interface TaxForm {
   r035_uplat_dan_bonus_zaplat_uroky?: boolean
   r035_zaplatene_uroky?: Decimal
   r035_pocet_mesiacov?: number
-  r035_datum_zacatia_urocenia_uveru?: string
+  r035_datum_zacatia_urocenia_uveru?: Date
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
