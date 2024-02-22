@@ -191,15 +191,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
-    /** SECTION Mortgage NAMES ARE WRONG TODO*/
+    /** SECTION Mortgage **/
     r035_uplat_dan_bonus_zaplat_uroky: input?.r035_uplatnuje_uroky ?? false,
     get r035_zaplatene_uroky() {
       // TODO
       return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
     },
     get r035_pocet_mesiacov(){
-      // TODO
-      return 12
+      const yearDiff = TAX_YEAR - Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+      if (yearDiff === 0) {
+        // Uver zacal v roku za ktory sa podava DP
+        return POCET_MESIACOV - Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) + 1
+      } else if (yearDiff === UROKY_POCET_ROKOV) {
+        // Narok na DB je 5 rokov od zaciatku urokov a teda toto je posledny rok
+        return Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
+      } else if (yearDiff < UROKY_POCET_ROKOV && yearDiff > 0) {
+        return POCET_MESIACOV
+      }
     },
     get r035_datum_zacatia_urocenia_uveru() {
       const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
@@ -547,7 +555,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r119.minus(this.r117), 0)
     },
     get r123() {
-      return Decimal.min(this.r035_zaplatene_uroky.times(0.5), 400)
+      let limit = new Decimal(400)
+      if (this.r035_pocet_mesiacov !== 12) {
+        limit = limit.div(12).times(this.r035_pocet_mesiacov)
+      }
+      return Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit)
     },
     get r124() {
       return this.r118
