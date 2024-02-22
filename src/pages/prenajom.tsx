@@ -32,10 +32,12 @@ const Rent: Page<RentUserInput> = ({
                   ...rentUserInputInitialValues,
                   rent: false,
                 }
-
-
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
+          } else if (values.prijemZPrenajmuOslobodenieDane === false && values.rent_step === 2) {
+            values.rent_step = 3
+            values.vyskaOslobodenia = "0"
+            setFieldValue('rent_step', values.rent_step + 1)
           } else {
             setFieldValue('rent_step', values.rent_step + 1)
           }
@@ -107,12 +109,6 @@ export const validate = (values: RentUserInput) => {
   ) {
     errors.vydavkyZPrenajmu =
       'Zadajte sumu - číslo'
-  }
-
-  if (
-    values.rent_step === 5 &&
-    (typeof values.rent_uctovnictvo_danova_evidencia === 'undefined' || typeof values.rent_uctovnictvo_jednoduche === 'undefined' || typeof values.rent_uctovnictvo_podvojne === 'undefined')) {
-      errors.rent_uctovnictvo_danova_evidencia = 'Vyznačte práve jednu odpoveď'
   }
 
   return errors
