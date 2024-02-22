@@ -57,11 +57,13 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
 export const rentUserInputInitialValues: RentUserInput = {
   rent: undefined,
   vyskaPrijmovZPrenajmu: '',
-  prijemZPrenajmuOslobodenieDane: undefined,
   vyskaOslobodenia: '',
-  vydavkySpojeneSPrenajmom: '',
-  vydavkyUplatnenieTyp: '',
+  prijemZPrenajmuOslobodenieDane: undefined,
+  vydavkyZPrenajmu: '',
   rent_step: 0,
+  rent_uctovnictvo_danova_evidencia: undefined,
+  rent_uctovnictvo_jednoduche: undefined,
+  rent_uctovnictvo_podvojne: undefined,
 }
 
 let childCounter = 0

@@ -23,10 +23,12 @@ export type RentUserInput = Pick<
   TaxFormUserInput,
   | 'rent'
   | 'vyskaPrijmovZPrenajmu'
-  | 'prijemZPrenajmuOslobodenieDane'
   | 'vyskaOslobodenia'
-  | 'vydavkySpojeneSPrenajmom'
-  | 'vydavkyUplatnenieTyp'
+  | 'prijemZPrenajmuOslobodenieDane'
+  | 'vydavkyZPrenajmu'
+  | 'rent_uctovnictvo_danova_evidencia'
+  | 'rent_uctovnictvo_jednoduche'
+  | 'rent_uctovnictvo_podvojne'
   | 'rent_step'
 >
 

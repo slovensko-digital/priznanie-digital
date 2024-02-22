@@ -192,12 +192,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Rent */
     get t1r11s1() {
-      return new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-    },
-    get t1r11s2() {
-      const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
       const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+      return prijmy.minus(oslobodenie)
+    },
+    get t1r11s2() {
+      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
+      const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+      const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
       if (vydavky.isZero()) {
         return prijmy.minus(vydavky)
       } else {
@@ -207,9 +209,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r60_r65() {
       return this.t1r11s1.minus(this.t1r11s2)
     },
-    get r80_r124() {
-      return (this.t1r11s1.minus(this.t1r11s2)).mul(DAN_Z_PRIJMU_SADZBA)
-    },
+    rent_uctovnictvo_danova_evidencia: input?.rent_uctovnictvo_danova_evidencia ?? false,
+    rent_uctovnictvo_jednoduche: input?.rent_uctovnictvo_jednoduche ?? false,
+    rent_uctovnictvo_podvojne: input?.rent_uctovnictvo_podvojne ?? false,
     /** END SECTION Rent */
 
     /** SECTION Mortgage NAMES ARE WRONG TODO*/
@@ -366,7 +368,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
     // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania
+      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r60_r65)
     },
     // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
     // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -

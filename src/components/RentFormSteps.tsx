@@ -93,17 +93,17 @@ export const VydavkyFormaQuestion = ({ disabled }) => (
         </h1>
       </legend>
       <Checkbox
-        name="rent_podmienky.1"
+        name="rent_uctovnictvo_danova_evidencia"
         label="daňovej evidencie (najčastejší spôsob)"
         disabled={disabled}
       />
       <Checkbox
-        name="rent_podmienky.2"
+        name="rent_uctovnictvo_jednoduche"
         label="jednoduchého účtovníctva"
         disabled={disabled}
       />
       <Checkbox
-        name="rent_podmienky.3"
+        name="rent_uctovnictvo_podvojne"
         label="podvojného účtovníctva"
         disabled={disabled}
       />

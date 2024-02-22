@@ -106,26 +106,19 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r11s1)
   form.dokument.telo.tabulka1.t1r13.s2 = decimalToString(taxForm.t1r11s2)
 
-  form.dokument.telo.cbPriPrijmoch11Ods6Zak1a2 = boolToString(
-    !taxForm.XIIoddiel_uplatnujem2percenta,
-  )
-  form.dokument.telo.cbPriPrijmoch11Ods6Zak4 = boolToString(
-    !taxForm.XIIoddiel_uplatnujem2percenta,
-  )
-  form.dokument.telo.cbPriPrijmoch11Ods6Zak3 = boolToString(
-    !taxForm.XIIoddiel_uplatnujem2percenta,
-  )
+  form.dokument.telo.vydavkyPar6ods11_ods1a2 = boolToString(taxForm.rent_uctovnictvo_danova_evidencia)
+  form.dokument.telo.vydavkyPar6ods11_ods3 = boolToString(taxForm.rent_uctovnictvo_jednoduche)
+  form.dokument.telo.vydavkyPar6ods11_ods4 = boolToString(taxForm.rent_uctovnictvo_podvojne)
 
   form.dokument.telo.r58 = decimalToString(taxForm.t1r11s1)
   form.dokument.telo.r59 = decimalToString(taxForm.t1r11s2)
   form.dokument.telo.r60 = decimalToString(taxForm.r60_r65)
   form.dokument.telo.r65 = decimalToString(taxForm.r60_r65)
-  form.dokument.telo.r80 = decimalToString(taxForm.r60_r65)
-  form.dokument.telo.r81 = decimalToString(taxForm.r80_r124)
-  form.dokument.telo.r90 = decimalToString(taxForm.r80_r124)
-  form.dokument.telo.r116 = decimalToString(taxForm.r80_r124)
-  form.dokument.telo.r118 = decimalToString(taxForm.r80_r124)
-  form.dokument.telo.r124 = decimalToString(taxForm.r80_r124)
+
+  // Rent is also dependend on r80,r81,r90,r116,r118,r124
+  // which is resolved in common tax calculations
+
+  /** END SECTOIN Rent */
 
   /** SECTION Mortgage */
   // if (taxForm.r037_uplatnuje_uroky) {

@@ -114,6 +114,10 @@ export interface TaxForm {
   t1r11s2?: Decimal
   r60_r65?: Decimal
   r80_r124?: Decimal
+  rent_uctovnictvo_danova_evidencia?: boolean
+  rent_uctovnictvo_jednoduche?: boolean
+  rent_uctovnictvo_podvojne?: boolean
+
 
   /** Základ dane (čiastkový základ dane)  */
   r038: Decimal
