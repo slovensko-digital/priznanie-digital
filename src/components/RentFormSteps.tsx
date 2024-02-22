@@ -113,9 +113,8 @@ export const VydavkyFormaQuestion = ({ disabled }) => (
   export const NotEligible = () => (
     <div data-test="ineligible-message">
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Nemáte nárok na uplatnenie
+        Nemáte nárok na uplatnenie tak vysokej sumy
       </h1>
-      <p>Nespĺňate podmienky pre uplatnenie zvýhodnenia na manželku / manžela</p>
     </div>
   )
 

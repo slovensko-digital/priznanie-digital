@@ -12,7 +12,6 @@ import {
   PreviousButton,
   SubmitButton,
 } from './RentFormSteps'
-import { validateRentForm } from '../lib/validateRentForm'
 
 const scrollToElement = (element, smooth = true) => {
   if (element && element.current) {
@@ -53,11 +52,7 @@ export const RentForm = (props: RentFormProps) => {
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
-      if (validateRentForm(values, currentStep)) {
         questions.push(NextQuestion)
-      } else {
-        questions.push(NotEligible)
-      }
     }
   }
 

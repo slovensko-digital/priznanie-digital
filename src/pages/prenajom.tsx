@@ -3,7 +3,6 @@ import { Form } from 'formik'
 import { FormWrapper } from '../components/FormComponents'
 import { FormErrors, RentUserInput } from '../types/PageUserInputs'
 import { RentForm } from '../components/RentForm'
-import { validateRentForm } from '../lib/validateRentForm'
 import { Page } from '../components/Page'
 import { rentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
@@ -25,7 +24,6 @@ const Rent: Page<RentUserInput> = ({
         onSubmit={(values, { setFieldValue }) => {
           if (
             values.rent === false ||
-            validateRentForm(values, values.rent_step) === false ||
             values.rent_step === 5
           ) {
             const userInput = values.rent
@@ -35,9 +33,6 @@ const Rent: Page<RentUserInput> = ({
                   rent: false,
                 }
 
-            if (!validateRentForm(values, values.rent_step)) {
-              true
-            }
 
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
@@ -63,6 +58,62 @@ const Rent: Page<RentUserInput> = ({
 
 export const validate = (values: RentUserInput) => {
   const errors: Partial<FormErrors<RentUserInput>> = {}
+
+  if (typeof values.rent === 'undefined') {
+    errors.rent = 'Vyznačte odpoveď'
+  }
+
+  if (
+    values.rent_step === 1 &&
+    typeof values.vyskaPrijmovZPrenajmu === 'undefined') {
+      errors.vyskaPrijmovZPrenajmu = 'Vyznačte odpoveď [2]'
+  } else if (
+    values.rent_step === 1 &&
+    !values.vyskaPrijmovZPrenajmu.match(/^\d+$/) ||
+    Number.parseInt(values.vyskaPrijmovZPrenajmu, 10) < 0
+  ) {
+    errors.vyskaPrijmovZPrenajmu =
+      'Zadajte sumu - číslo'
+  }
+
+  if (
+    values.rent_step === 2 &&
+    typeof values.prijemZPrenajmuOslobodenieDane === 'undefined') {
+      errors.prijemZPrenajmuOslobodenieDane = 'Vyznačte odpoveď'
+  }
+
+  if (
+    values.rent_step === 3 &&
+    typeof values.vyskaOslobodenia === 'undefined') {
+      errors.vyskaOslobodenia = 'Vyznačte odpoveď'
+  } else if (
+    values.rent_step === 3 &&
+    !values.vyskaOslobodenia.match(/^\d+$/) ||
+    Number.parseInt(values.vyskaOslobodenia, 10) < 0 ||
+    Number.parseInt(values.vyskaOslobodenia, 10) > 500
+  ) {
+    errors.vyskaOslobodenia =
+      'Zadajte sumu - číslo od 0 do 500'
+  }
+
+  if (
+    values.rent_step === 4 &&
+    typeof values.vydavkyZPrenajmu === 'undefined') {
+      errors.vydavkyZPrenajmu = 'Vyznačte odpoveď'
+  } else if (
+    values.rent_step === 4 &&
+    !values.vydavkyZPrenajmu.match(/^\d+$/) ||
+    Number.parseInt(values.vydavkyZPrenajmu, 10) < 0
+  ) {
+    errors.vydavkyZPrenajmu =
+      'Zadajte sumu - číslo'
+  }
+
+  if (
+    values.rent_step === 5 &&
+    (typeof values.rent_uctovnictvo_danova_evidencia === 'undefined' || typeof values.rent_uctovnictvo_jednoduche === 'undefined' || typeof values.rent_uctovnictvo_podvojne === 'undefined')) {
+      errors.rent_uctovnictvo_danova_evidencia = 'Vyznačte práve jednu odpoveď'
+  }
 
   return errors
 }
