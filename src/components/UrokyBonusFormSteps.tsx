@@ -163,16 +163,6 @@ export const VekQuestion = ({ disabled, values: { uroky_dalsi_dlznik } }) => (
   />
 )
 
-/*
-suma 1 240,20 EUR; táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2018
-suma 1 316,90 EUR; táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2019
-suma 1 419,60 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách  uzatvorených v roku 2020
-suma 1 472,90 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2021 
-suma 1 574,30 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2022
-suma 1 695,20 EUR, táto suma priemerného mesačného príjmu sa posudzuje pri zmluvách uzatvorených v roku 2023
-*/
-
-
 const maxPrijem = ({uroky_rok_uzatvorenia: rok, uroky_pocet_dlznikov, uroky_dalsi_dlznik}): Decimal => {
   const pocet_dlznikov = uroky_dalsi_dlznik ? new Decimal(parseInt(uroky_pocet_dlznikov)) : new Decimal(1)
   switch (rok) {
