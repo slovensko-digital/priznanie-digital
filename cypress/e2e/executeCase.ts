@@ -15,7 +15,6 @@ import {
   postponeHomeRoute,
 } from '../../src/lib/routes'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
-import Decimal from 'decimal.js'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
@@ -199,7 +198,38 @@ const executeTestCase = (testCase: string) => {
 
         if (input.r035_uplatnuje_uroky) {
           getInput('r035_uplatnuje_uroky', '-yes').click()
-          // TODO
+
+          next()
+
+          getInput('uroky_dalsi_uver_uplatnuje', '-no').click()
+
+          next()
+
+          typeToInput('uroky_rok_uzatvorenia', input)
+          typeToInput('uroky_zaciatok_urocenia_den', input)
+          typeToInput('uroky_zaciatok_urocenia_mesiac', input)
+          typeToInput('uroky_zaciatok_urocenia_rok', input)
+
+          next()
+
+          if (input.uroky_dalsi_dlznik) {
+            getInput('uroky_dalsi_dlznik', '-yes').click()
+            typeToInput('uroky_pocet_dlznikov', input)
+          } else {
+            getInput('uroky_dalsi_dlznik', '-no').click()
+          }
+
+          next()
+
+          getInput('uroky_splnam_vek_kriteria', '-yes').click()
+
+          next()
+
+          getInput('uroky_splnam_prijem', '-yes').click()
+
+          next()
+
+          typeToInput('r035_zaplatene_uroky', input)
         } else {
           getInput('r035_uplatnuje_uroky', '-no').click()
         }
@@ -288,6 +318,23 @@ const executeTestCase = (testCase: string) => {
             typeToInput('iban', input)
           } else {
             getInput('ziadamVyplatitDanovyBonus', '-no').click()
+          }
+
+          next()
+        }
+
+        if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
+          /** SECTION IBAN */
+          assertUrl('/iban')
+
+          cy.contains('Žiadam o vyplatenie daňového bonusu na zaplatené úroky')
+          cy.get('[data-test=ineligible-message]').should('not.exist')
+
+          if (input.ziadamVratitDanovyBonusUroky) {
+            getInput('ziadamVratitDanovyBonusUroky', '-yes').click()
+            typeToInput('iban', input)
+          } else {
+            getInput('ziadamVratitDanovyBonusUroky', '-no').click()
           }
 
           next()
