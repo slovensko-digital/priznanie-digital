@@ -9,7 +9,7 @@ import { UrokyBonusForm } from '../components/UrokyBonusForm'
 import { urokyInitialValues } from '../lib/initialValues'
 import { validateUrokyBonusForm } from '../lib/validateUrokyBonusForm'
 import { TAX_YEAR } from '../lib/calculation'
-import { numberInputRegexp, parseInputNumber } from '../lib/utils'
+import { numberInputRegexp } from '../lib/utils'
 
 const Uroky: Page<UrokyUserInput> = ({
   taxFormUserInput,
