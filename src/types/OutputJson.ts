@@ -796,9 +796,6 @@ export interface Telo {
   splnam3per: string
   r151: string
   r152: R152
-  cbPriPrijmoch11Ods6Zak1a2: string
-  cbPriPrijmoch11Ods6Zak4: string
-  cbPriPrijmoch11Ods6Zak3: string
   osobitneZaznamy: OsobitneZaznamy
   r153: string
   datumVyhlasenia: string
