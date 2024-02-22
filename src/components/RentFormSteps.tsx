@@ -2,6 +2,8 @@ import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
@@ -86,28 +88,13 @@ export const VydavkyQuestion = ({ disabled }) => (
   )
 
 export const VydavkyFormaQuestion = ({ disabled }) => (
-    <div className="govuk-form-group">
-      <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 className="govuk-fieldset__heading">
-        Preukázateľné výdavky uplatňujem na základe.
-        </h1>
-      </legend>
-      <Checkbox
-        name="rent_uctovnictvo_danova_evidencia"
-        label="daňovej evidencie (najčastejší spôsob)"
-        disabled={disabled}
-      />
-      <Checkbox
-        name="rent_uctovnictvo_jednoduche"
-        label="jednoduchého účtovníctva"
-        disabled={disabled}
-      />
-      <Checkbox
-        name="rent_uctovnictvo_podvojne"
-        label="podvojného účtovníctva"
-        disabled={disabled}
-      />
-    </div>
+  <RadioGroup value="rent_uctovnictvo_danova_evidencia,rent_uctovnictvo_jednoduche,rent_uctovnictvo_podvojne" onChange={(value) => {
+    setFieldValue(value)
+  }}>
+    <Radio name="rent_uctovnictvo_danova_evidencia" label="daňovej evidencie (najčastejší spôsob)" value="rent_uctovnictvo_danova_evidencia" disabled={disabled} />
+    <Radio name="rent_uctovnictvo_jednoduche" label="jednoduchého účtovníctva" value="rent_uctovnictvo_jednoduche" disabled={disabled} />
+    <Radio name="rent_uctovnictvo_podvojne" label="podvojného účtovníctva" value="rent_uctovnictvo_podvojne" disabled={disabled} />
+  </RadioGroup>
   )
 
   export const NotEligible = () => (
