@@ -92,7 +92,7 @@ export const validateRodneCislo = (value: string): boolean => {
 
 export const maxChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
   return (
-    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) <= MAX_CHILD_AGE_BONUS
+    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) < MAX_CHILD_AGE_BONUS
   )
 }
 export const minChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
