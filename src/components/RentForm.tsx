@@ -8,7 +8,6 @@ import {
   OslobodenieVyskaQuestion,
   VydavkyQuestion,
   VydavkyFormaQuestion,
-  NotEligible,
   PreviousButton,
   SubmitButton,
 } from './RentFormSteps'
@@ -28,7 +27,7 @@ export interface RentFormProps extends FormikProps<RentUserInput> {
 }
 
 export const RentForm = (props: RentFormProps) => {
-  const { values, setStep, step } = props
+  const { setStep, step } = props
   const questionElements = [
     useRef(),
     useRef(),
