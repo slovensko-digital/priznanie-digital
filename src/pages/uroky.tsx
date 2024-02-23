@@ -8,7 +8,7 @@ import { Page } from '../components/Page'
 import { UrokyBonusForm } from '../components/UrokyBonusForm'
 import { urokyInitialValues } from '../lib/initialValues'
 import { validateUrokyBonusForm } from '../lib/validateUrokyBonusForm'
-import { TAX_YEAR } from '../lib/calculation'
+import { TAX_YEAR, UROKY_POCET_ROKOV } from '../lib/calculation'
 import { numberInputRegexp } from '../lib/utils'
 
 const Uroky: Page<UrokyUserInput> = ({
@@ -99,6 +99,10 @@ export const validate = (values: UrokyUserInput) => {
     }
     if (zaciatok_urocenia.getFullYear() !== zaciatok_urocenia_rok) {
       errors.uroky_zaciatok_urocenia_rok = 'Zadajte rok v správnom tvare'
+    }
+
+    if (zaciatok_urocenia.getFullYear() < TAX_YEAR - UROKY_POCET_ROKOV) {
+      errors.uroky_zaciatok_urocenia_rok = `Rok začiatku úročenia nemôže byť skôr ako ${TAX_YEAR - UROKY_POCET_ROKOV}`
     }
 
     if (zaciatok_urocenia.getFullYear() > TAX_YEAR) {
