@@ -132,6 +132,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Uroky */
+    getInput('r035_uplatnuje_uroky', '-no').click()
+
+    next()
+
     // Shows error, when presses next without interaction
     next()
     getError().should('have.length', 1)
@@ -248,6 +253,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Uroky */
+    getInput('r035_uplatnuje_uroky', '-no').click()
+
+    next()
+
     // When presses yes, additional fields appear
     cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-yes]').click()
 
@@ -358,6 +368,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Uroky */
+    getInput('r035_uplatnuje_uroky', '-no').click()
+
+    next()
+
     cy.get('[data-test=XIIoddiel_uplatnujem2percenta-input-no]').click()
     next()
     getError().should('have.length', 0)
@@ -456,6 +471,11 @@ describe('twoPercent page', () => {
     } else {
       getInput('platil_prispevky_na_dochodok', '-no').click()
     }
+
+    next()
+
+    /* SECTION Uroky */
+    getInput('r035_uplatnuje_uroky', '-no').click()
 
     next()
 

@@ -627,7 +627,7 @@ describe('Pension page', () => {
     cy.get('[data-test=platil_prispevky_na_dochodok-input-no]').click()
     next()
     next()
-    assertUrl('/osobne-udaje')
+    assertUrl('/uroky')
 
     //  Go back to our page
     cy.visit('/dochodok')
@@ -643,7 +643,7 @@ describe('Pension page', () => {
 
     next()
     next()
-    assertUrl('/osobne-udaje')
+    assertUrl('/uroky')
   })
 })
 
@@ -809,7 +809,7 @@ describe('Summary page', () => {
     '/deti',
     '/dochodok',
     '/prenajom',
-    // '/hypoteka',
+    '/uroky',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, () => {

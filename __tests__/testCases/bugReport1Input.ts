@@ -50,8 +50,6 @@ export const bugReport1Input: E2eTestUserInput = {
   ],
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '',
-  r037_pocetMesiacov: '',
-  r037_zaplatene_uroky: '',
   expectNgoDonationValue: false,
   r142_ico: '',
   r142_obchMeno: '',

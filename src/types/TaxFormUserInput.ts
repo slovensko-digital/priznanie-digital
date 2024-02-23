@@ -65,9 +65,18 @@ export interface TaxFormUserInput {
   partner_podmienky?: Record<string, boolean>
 
   /** SECTION  Mortage */
-  r037_uplatnuje_uroky?: boolean
-  r037_zaplatene_uroky?: string
-  r037_pocetMesiacov?: string
+  r035_uplatnuje_uroky?: boolean
+  r035_zaplatene_uroky?: string
+  hypoteka_step?: number
+  uroky_rok_uzatvorenia?: string
+  uroky_zaciatok_urocenia_den?: string
+  uroky_zaciatok_urocenia_mesiac?: string
+  uroky_zaciatok_urocenia_rok?: string
+  uroky_dalsi_dlznik?: boolean
+  uroky_pocet_dlznikov?: string
+  uroky_dalsi_uver_uplatnuje?: boolean
+  uroky_splnam_vek_kriteria?: boolean
+  uroky_splnam_prijem?: boolean
 
   /** SECTION Prijmy a poistenie  */
   t1r10_prijmy: string
@@ -115,6 +124,7 @@ export interface TaxFormUserInput {
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus?: boolean
   ziadamVratitDanovyPreplatok?: boolean
+  ziadamVratitDanovyBonusUroky?: boolean
   iban?: string
 
   /** Musi byt sucastou user inputu, aj ked sa generuje automaticky, inac by

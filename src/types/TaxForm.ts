@@ -77,9 +77,10 @@ export interface TaxForm {
   r032_partner_pocet_mesiacov?: number
 
   /** SECTION  Mortage */
-  // r037_uplatnuje_uroky?: boolean
-  // r037_zaplatene_uroky?: Decimal
-  // r037_pocetMesiacov?: number
+  r035_uplat_dan_bonus_zaplat_uroky?: boolean
+  r035_zaplatene_uroky?: Decimal
+  r035_pocet_mesiacov?: number
+  r035_datum_zacatia_urocenia_uveru?: Date
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
@@ -198,16 +199,14 @@ export interface TaxForm {
 
   r122: Decimal
 
-  /** Riadok 112 vypĺňa daňovník, ktorý vyplnil IV. ODDIEL. Ak daňovník uplatňuje daňový bonus na zaplatené úroky podľa § 33a zákona, daňovým bonusom na zaplatené úroky podľa § 33a zákona je suma vo výške 50% zo zaplatených úrokov v príslušnom zdaňovacom období z riadku 37, najviac však do výšky 400 eur za rok. Ak obdobie úročenia úveru na bývanie počas ktorého má daňovník nárok na tento daňový bonus začalo v priebehu zdaňovacieho obdobia, uvádza sa v r. 112 suma zodpovedajúca pomernej časti daňového bonusu na zaplatené úroky z maximálnej sumy 400 eur pripadajúca na počet kalendárnych mesiacov, v ktorých vznikol nárok na jeho uplatnenie.*/
-  // r123: Decimal
-  /**   Daň (daňová povinnosť) znížená o daňový bonus a o daňový bonus na zaplatené
-   *   úroky(r. 107 - r. 112) zrkadli r118*/
+  r123: Decimal
   r124: Decimal
-  /**   Daň na úhradu vrátane zamestnávateľom nesprávne vyplateného daňového bonusu
-   *   podľa § 33 zákona33) r. 105 - r. 106 + r. 108 + r. 110 - r. 112 + r. 114 +
-   *   r. 116 + r. 117 - r. 118 - r. 119 - r. 120 - r. 121 - r. 122 - r. 123 - r.
-   *   124 (+)*/
-
+  r125: Decimal
+  r126: Decimal
+  r127: Decimal
+  r128: Decimal
+  r129: Decimal
+  r130: Decimal
   /** zrazena dan zo zamestnania */
   r131: Decimal
   r132: Decimal
@@ -240,6 +239,8 @@ export interface TaxForm {
   ziadamVyplatitDanovyBonus: boolean
   mozeZiadatVratitDanovyPreplatok: boolean
   ziadamVratitDanovyPreplatok: boolean
+  mozeZiadatVratitDanovyBonusUroky: boolean
+  ziadamVratitDanovyBonusUroky: boolean
   iban: string
 
   /** Helper properties from input, that are not part of taxForm */

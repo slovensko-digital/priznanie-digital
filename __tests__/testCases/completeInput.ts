@@ -26,11 +26,6 @@ export const completeInput: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '50',
   employed: true,
 
-  /** SECTION Mortgage */
-  r037_uplatnuje_uroky: true,
-  r037_zaplatene_uroky: '200',
-  r037_pocetMesiacov: '12',
-
   /** SECTION Pension */
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '180',

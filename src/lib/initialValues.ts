@@ -5,7 +5,7 @@ import {
   EmployedUserInput,
   ChildrenUserInput,
   PensionUserInput,
-  MortgageUserInput,
+  UrokyUserInput,
   TwoPercentUserInput,
   TaxBonusUserInput,
   RentUserInput,
@@ -93,10 +93,10 @@ export const pensionInitialValues: PensionUserInput = {
   zaplatene_prispevky_na_dochodok: '',
 }
 
-export const mortgageInitialValues: MortgageUserInput = {
-  r037_pocetMesiacov: '',
-  r037_zaplatene_uroky: '',
-  r037_uplatnuje_uroky: undefined,
+export const urokyInitialValues: UrokyUserInput = {
+  r035_zaplatene_uroky: '',
+  r035_uplatnuje_uroky: undefined,
+  hypoteka_step: 0,
 }
 
 export const twoPercentInitialValues: TwoPercentUserInput = {
@@ -120,7 +120,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...rentUserInputInitialValues,
   ...childrenUserInputInitialValues,
   ...pensionInitialValues,
-  ...mortgageInitialValues,
+  ...urokyInitialValues,
   ...twoPercentInitialValues,
   ...taxBonusInitialInput,
   ...{ datum: '' },

@@ -94,9 +94,20 @@ export type PensionUserInput = Pick<
   'platil_prispevky_na_dochodok' | 'zaplatene_prispevky_na_dochodok'
 >
 
-export type MortgageUserInput = Pick<
+export type UrokyUserInput = Pick<
   TaxFormUserInput,
-  'r037_uplatnuje_uroky' | 'r037_zaplatene_uroky' | 'r037_pocetMesiacov'
+  'r035_uplatnuje_uroky'
+  | 'r035_zaplatene_uroky'
+  | 'uroky_rok_uzatvorenia'
+  | 'uroky_zaciatok_urocenia_den'
+  | 'uroky_zaciatok_urocenia_mesiac'
+  | 'uroky_zaciatok_urocenia_rok'
+  | 'uroky_dalsi_dlznik'
+  | 'uroky_pocet_dlznikov'
+  | 'uroky_dalsi_uver_uplatnuje'
+  | 'uroky_splnam_vek_kriteria'
+  | 'uroky_splnam_prijem'
+  | 'hypoteka_step'
 >
 
 export type TwoPercentUserInput = Pick<
@@ -110,7 +121,10 @@ export type TwoPercentUserInput = Pick<
 
 export type TaxBonusUserInput = Pick<
   TaxFormUserInput,
-  'ziadamVyplatitDanovyBonus' | 'ziadamVratitDanovyPreplatok' | 'iban'
+  'ziadamVyplatitDanovyBonus'
+  | 'ziadamVratitDanovyPreplatok'
+  | 'ziadamVratitDanovyBonusUroky'
+  | 'iban'
 >
 
 export type IncomeSourceCountryUserInput = Pick<
