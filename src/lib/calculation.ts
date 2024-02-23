@@ -567,7 +567,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r124() {
-      return this.r118
+      return Decimal.max(this.r118.minus(this.r123), 0)
     },
     r125: new Decimal(0),
     get r126() {
