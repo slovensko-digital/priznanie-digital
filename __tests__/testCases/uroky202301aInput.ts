@@ -1,9 +1,9 @@
 import { TAX_YEAR } from '../../src/lib/calculation'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
-import { case202302Input } from './case202302Input'
+import { case202301Input } from './case202301Input'
 
-export const uroky202302Input: E2eTestUserInput = {
-  ...case202302Input,
+export const uroky202301aInput: E2eTestUserInput = {
+  ...case202301Input,
   r035_uplatnuje_uroky: true,
   uroky_rok_uzatvorenia: (TAX_YEAR - 3).toString(),
   uroky_zaciatok_urocenia_den: '21',
