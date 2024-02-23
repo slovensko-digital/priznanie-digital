@@ -808,6 +808,7 @@ describe('Summary page', () => {
     '/deti',
     '/deti',
     '/dochodok',
+    '/prenajom',
     // '/hypoteka',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
