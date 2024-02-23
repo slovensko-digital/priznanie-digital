@@ -1,5 +1,5 @@
 import React from 'react'
-import { BooleanRadio, Checkbox, Input } from './FormComponents'
+import { BooleanRadio, Input } from './FormComponents'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
 import RadioGroup from "../components/radio/RadioGroup";
@@ -87,9 +87,8 @@ export const VydavkyQuestion = ({ disabled }) => (
   </>
   )
 
-export const VydavkyFormaQuestion = ({ disabled }) => (
-  <RadioGroup value="rent_uctovnictvo_danova_evidencia,rent_uctovnictvo_jednoduche,rent_uctovnictvo_podvojne" onChange={(value) => {
-    setFieldValue(value)
+export const VydavkyFormaQuestion = ({ disabled, setFieldValue }) => (
+  <RadioGroup value="rent_uctovnictvo_danova_evidencia,rent_uctovnictvo_jednoduche,rent_uctovnictvo_podvojne" onChange={(value) => { setFieldValue('rent_uctovnictvo_danova_evidencia', value === 'true')
   }}>
     <Radio name="rent_uctovnictvo_danova_evidencia" label="daňovej evidencie (najčastejší spôsob)" value="rent_uctovnictvo_danova_evidencia" disabled={disabled} />
     <Radio name="rent_uctovnictvo_jednoduche" label="jednoduchého účtovníctva" value="rent_uctovnictvo_jednoduche" disabled={disabled} />
