@@ -585,6 +585,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r127() {
       return Decimal.max(this.r126.minus(this.r118), 0)
     },
+    r128: new Decimal(0),
+    r129: new Decimal(0),
+    r130: new Decimal(0),
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
@@ -598,24 +601,32 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r135_dan_na_uhradu() {
-      const baseTax =
-        this.r116_dan.gt(17) || this.r117.gt(0) ? this.r116_dan : new Decimal(0)
+      /*
+      Ak (r.116>17,00) alebo (r.116<=17,00 a zároveň je r.117>0 alebo r.123>0), potom
+      r.135=Max(0,r. 116 - r. 117 + r. 119 + r. 121 - r. 123 + r. 125 + r. 127 + r. 128 - r. 129 - r. 130 - r. 131 - r. 132 - r. 133 - r. 134).
+      Inak r.135=Max(0,0 - r. 117 + r. 119 + r. 121 - r. 123 + r. 125 + r. 127 + r. 128 - r. 129 - r. 130 - r. 131 - r. 132 - r. 133 - r. 134).
+      Ak daň na úhradu nepresiahne 5 €, daň sa neplatí.
+      */
 
-      const tax = Decimal.max(
-        0,
-        baseTax
-          .minus(this.r117)
-          .plus(this.r119)
-          .plus(this.r121)
-          .minus(this.r131)
-          .minus(this.r133),
-      )
+      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const base = podmienka ? this.r116_dan : new Decimal(0)
+      let tax = base
+                .minus(this.r117)
+                .plus(this.r119)
+                .plus(this.r121)
+                .minus(this.r123)
+                .plus(this.r125)
+                .plus(this.r127)
+                .plus(this.r128)
+                .minus(this.r129)
+                .minus(this.r130)
+                .minus(this.r131)
+                .minus(this.r132)
+                .minus(this.r133)
+                .minus(this.r134)
+      tax = Decimal.max(0, tax)
+
       return tax.gt(5) ? tax : new Decimal(0)
-      // 'r. 125': má byť výsledkom Max(0,r.105-r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124) ak platí, r.105>17.00 alebo r.105<=17.00 a zároveň je r.106>0 alebo r.112>0.
-      // Inak r.125=max(0,0–r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124).
-      // Ak daň na úhradu nepresiahne 5€, daň sa neplatí, v r.125 sa uvedie nula.
-
-      // vo vypocte chyba: +r.116+r.117-r.118-r.119-r.121-r.123-r.124 (asi ich netreba lebo sa nevyplnaju vo formulari, tj su rovne nula)
     },
     get r136_danovy_preplatok() {
       return Decimal.abs(

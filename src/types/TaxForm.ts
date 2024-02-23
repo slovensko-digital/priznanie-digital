@@ -193,6 +193,9 @@ export interface TaxForm {
   r125: Decimal
   r126: Decimal
   r127: Decimal
+  r128: Decimal
+  r129: Decimal
+  r130: Decimal
   /** zrazena dan zo zamestnania */
   r131: Decimal
   r132: Decimal
