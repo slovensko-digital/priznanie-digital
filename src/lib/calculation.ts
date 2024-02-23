@@ -113,6 +113,13 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
   }
 }
 
+export const zaciatok_urocenia_datum = (input: TaxFormUserInput) => {
+  const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
+  const mesiac = Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
+  const rok = Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+  return new Date(rok, mesiac - 1, den)
+}
+
 export function calculate(input: TaxFormUserInput): TaxForm {
   /** Combine default vaules with user input */
   return {
@@ -210,10 +217,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r035_datum_zacatia_urocenia_uveru() {
-      const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
-      const mesiac = Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
-      const rok = Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
-      return new Date(rok, mesiac - 1, den)
+      return zaciatok_urocenia_datum(input)
     },
 
     /** SECTION Employment */
@@ -706,7 +710,9 @@ export const buildSummary = (form: TaxForm): Summary => {
     danSpolu: form.r116_dan,
     preddavkyNaDan: (form.r131.plus(form.r132).plus(form.r133).plus(form.r134)).negated(),
     danovyBonusNaDeti: form.r117.negated(),
+    danovyBonusNaUroky: form.r123.negated(),
     danovyBonusNaVyplatenie: form.r121,
+    danovyBonysNaVyplatenieUroky: form.r127,
     danovyPreplatokNaVyplatenie: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
   }

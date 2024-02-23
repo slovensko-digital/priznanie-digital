@@ -10,7 +10,9 @@ export interface Summary {
   danSpolu: Decimal
   preddavkyNaDan: Decimal
   danovyBonusNaDeti: Decimal
+  danovyBonusNaUroky: Decimal
   danovyBonusNaVyplatenie: Decimal
+  danovyBonysNaVyplatenieUroky: Decimal
   danovyPreplatokNaVyplatenie: Decimal
   danNaUhradu: Decimal
 }
