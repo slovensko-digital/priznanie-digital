@@ -43,6 +43,7 @@ const ZVYHODNENIE_NA_PARTNERA = 14_862.228
 export const TAX_YEAR = 2023
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
+export const UROKY_POCET_ROKOV = 5
 
 export enum Months {
   January = 1,
@@ -110,6 +111,13 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
     pocetMesiacov: monthTo - monthFrom + 1
   }
+}
+
+export const zaciatok_urocenia_datum = (input: TaxFormUserInput) => {
+  const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
+  const mesiac = Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
+  const rok = Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+  return new Date(rok, mesiac - 1, den)
 }
 
 export function calculate(input: TaxFormUserInput): TaxForm {
@@ -190,12 +198,26 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
-    /** SECTION Mortgage NAMES ARE WRONG TODO*/
-    // r037_uplatnuje_uroky: input?.r037_uplatnuje_uroky ?? false,
-    // r037_zaplatene_uroky: new Decimal(
-    //   parseInputNumber(input?.r037_zaplatene_uroky ?? '0'),
-    // ),
-    // r037_pocetMesiacov: parseInputNumber(input?.r037_pocetMesiacov ?? '0'),
+    /** SECTION Mortgage **/
+    r035_uplat_dan_bonus_zaplat_uroky: input?.r035_uplatnuje_uroky ?? false,
+    get r035_zaplatene_uroky() {
+      return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
+    },
+    get r035_pocet_mesiacov(){
+      const yearDiff = TAX_YEAR - Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+      if (yearDiff === 0) {
+        // Uver zacal v roku za ktory sa podava DP
+        return POCET_MESIACOV - Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) + 1
+      } else if (yearDiff === UROKY_POCET_ROKOV) {
+        // Narok na DB je 5 rokov od zaciatku urokov a teda toto je posledny rok
+        return Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) - 1
+      } else if (yearDiff < UROKY_POCET_ROKOV && yearDiff > 0) {
+        return POCET_MESIACOV
+      }
+    },
+    get r035_datum_zacatia_urocenia_uveru() {
+      return zaciatok_urocenia_datum(input)
+    },
 
     /** SECTION Employment */
     r036: new Decimal(
@@ -426,7 +448,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r116_dan() {
       return round(this.r090.plus(this.r105))
     },
-    get r116a(){
+    get r116a() {
       if (this.partner_bonus_na_deti) {
         if (this.r034.pocetMesiacov === 12) {
           return this.r034a.plus(this.r038).plus(this.r045)
@@ -487,7 +509,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         }
 
         let zakladDane
-        if (this.partner_bonus_na_deti){
+        if (this.partner_bonus_na_deti) {
           zakladDane = this.r116a
         } else {
           zakladDane = this.r038.plus(this.r045)
@@ -513,7 +535,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         danovyBonus = danovyBonus.plus(vysledok)
       }
 
-      return {danovyBonus, nevyuzityDanovyBonus}
+      return { danovyBonus, nevyuzityDanovyBonus }
     },
     get r117() {
       return this.danovyBonusNaDieta.danovyBonus
@@ -535,22 +557,40 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r122() {
       return Decimal.max(this.r119.minus(this.r117), 0)
     },
+    get r123() {
+      if (this.r035_uplat_dan_bonus_zaplat_uroky) {
+        let limit = new Decimal(400)
+        if (this.r035_pocet_mesiacov !== 12) {
+          const mesacne = round(limit.div(12))
+          limit = mesacne.times(this.r035_pocet_mesiacov)
+        }
+        return Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit)
+      } else {
+        return new Decimal(0)
+      }
+    },
+    get r124() {
+      return Decimal.max(this.r118.minus(this.r123), 0)
+    },
+    r125: new Decimal(0),
+    get r126() {
+      return Decimal.max(this.r123.minus(this.r125), 0)
+    },
     get mozeZiadatVyplatitDanovyBonus() {
       return this.r121.gt(0)
     },
     get mozeZiadatVratitDanovyPreplatok() {
       return this.r136_danovy_preplatok.gt(0)
     },
-    get r124() {
-      return this.r118
+    get mozeZiadatVratitDanovyBonusUroky() {
+      return this.r127.gt(0)
     },
-    /** TODO */
-    // get r125() {
-    //   return new Decimal(0)
-    // },
-    // get r126() {
-    //   return Decimal.max(this.r123.minus(this.r125), 0)
-    // },
+    get r127() {
+      return Decimal.max(this.r126.minus(this.r118), 0)
+    },
+    r128: new Decimal(0),
+    r129: new Decimal(0),
+    r130: new Decimal(0),
     get r131() {
       return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
     },
@@ -564,24 +604,32 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r135_dan_na_uhradu() {
-      const baseTax =
-        this.r116_dan.gt(17) || this.r117.gt(0) ? this.r116_dan : new Decimal(0)
+      /*
+      Ak (r.116>17,00) alebo (r.116<=17,00 a zároveň je r.117>0 alebo r.123>0), potom
+      r.135=Max(0,r. 116 - r. 117 + r. 119 + r. 121 - r. 123 + r. 125 + r. 127 + r. 128 - r. 129 - r. 130 - r. 131 - r. 132 - r. 133 - r. 134).
+      Inak r.135=Max(0,0 - r. 117 + r. 119 + r. 121 - r. 123 + r. 125 + r. 127 + r. 128 - r. 129 - r. 130 - r. 131 - r. 132 - r. 133 - r. 134).
+      Ak daň na úhradu nepresiahne 5 €, daň sa neplatí.
+      */
 
-      const tax = Decimal.max(
-        0,
-        baseTax
-          .minus(this.r117)
-          .plus(this.r119)
-          .plus(this.r121)
-          .minus(this.r131)
-          .minus(this.r133),
-      )
+      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const base = podmienka ? this.r116_dan : new Decimal(0)
+      let tax = base
+                .minus(this.r117)
+                .plus(this.r119)
+                .plus(this.r121)
+                .minus(this.r123)
+                .plus(this.r125)
+                .plus(this.r127)
+                .plus(this.r128)
+                .minus(this.r129)
+                .minus(this.r130)
+                .minus(this.r131)
+                .minus(this.r132)
+                .minus(this.r133)
+                .minus(this.r134)
+      tax = Decimal.max(0, tax)
+
       return tax.gt(5) ? tax : new Decimal(0)
-      // 'r. 125': má byť výsledkom Max(0,r.105-r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124) ak platí, r.105>17.00 alebo r.105<=17.00 a zároveň je r.106>0 alebo r.112>0.
-      // Inak r.125=max(0,0–r.106+r.108+r.110-r.112+r.114+r.116+r.117-r.118-r.119-r.120-r.121-r.122-r.123-r.124).
-      // Ak daň na úhradu nepresiahne 5€, daň sa neplatí, v r.125 sa uvedie nula.
-
-      // vo vypocte chyba: +r.116+r.117-r.118-r.119-r.121-r.123-r.124 (asi ich netreba lebo sa nevyplnaju vo formulari, tj su rovne nula)
     },
     get r136_danovy_preplatok() {
       return Decimal.abs(
@@ -637,6 +685,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** SECTION Danovy bonus */
     ziadamVyplatitDanovyBonus: input?.ziadamVyplatitDanovyBonus ?? false,
     ziadamVratitDanovyPreplatok: input?.ziadamVratitDanovyPreplatok ?? false,
+    ziadamVratitDanovyBonusUroky: input?.ziadamVratitDanovyBonusUroky ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
 
     datum: input.datum,
@@ -660,7 +709,9 @@ export const buildSummary = (form: TaxForm): Summary => {
     danSpolu: form.r116_dan,
     preddavkyNaDan: (form.r131.plus(form.r132).plus(form.r133).plus(form.r134)).negated(),
     danovyBonusNaDeti: form.r117.negated(),
+    danovyBonusNaUroky: form.r123.negated(),
     danovyBonusNaVyplatenie: form.r121,
+    danovyBonysNaVyplatenieUroky: form.r127,
     danovyPreplatokNaVyplatenie: form.r136_danovy_preplatok,
     danNaUhradu: form.r135_dan_na_uhradu,
   }
@@ -674,8 +725,8 @@ const getRate = (month: Months, child: Child) => {
   )
 
   const rate = age < 18
-  ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-  : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+    ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
+    : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
 
   if (
     month === Months.January &&

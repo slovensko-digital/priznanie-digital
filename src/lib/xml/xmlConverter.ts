@@ -3,7 +3,7 @@ import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
-import { boolToString, decimalToString, roundDecimal } from '../utils'
+import { boolToString, decimalToString, formatDate, roundDecimal } from '../utils'
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
@@ -101,15 +101,15 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Mortgage */
-  // if (taxForm.r037_uplatnuje_uroky) {
-  //   form.dokument.telo.r37 = {
-  //     uplatDanBonusZaplatUroky: boolToString(taxForm.r037_uplatnuje_uroky),
-  //     zaplateneUroky: taxForm.r037_zaplatene_uroky.toFixed(2),
-  //     pocetMesiacov: taxForm.r037_pocetMesiacov.toFixed(),
-  //   }
-  //   form.dokument.telo.r112 = taxForm.r123.toFixed(2)
-  //   form.dokument.telo.r115 = taxForm.r126.toFixed(2)
-  // }
+  if (taxForm.r035_uplat_dan_bonus_zaplat_uroky) {
+    form.dokument.telo.r35 = {
+      uplatDanBonusZaplatUroky: boolToString(taxForm.r035_uplat_dan_bonus_zaplat_uroky),
+      zaplateneUroky: decimalToString(taxForm.r035_zaplatene_uroky),
+      pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
+      datumZacatiaUroceniaUveru: formatDate(taxForm.r035_datum_zacatia_urocenia_uveru)
+    }
+  }
+
   /** SECTION Employed */
 
   if (taxForm.employed) {
@@ -152,8 +152,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r120 = decimalToString(taxForm.r120)
   form.dokument.telo.r121 = decimalToString(taxForm.r121)
   form.dokument.telo.r122 = decimalToString(taxForm.r122)
-
+  form.dokument.telo.r123 = decimalToString(taxForm.r123)
   form.dokument.telo.r124 = roundDecimal(taxForm.r124)
+  form.dokument.telo.r126 = decimalToString(taxForm.r126)
+  form.dokument.telo.r127 = decimalToString(taxForm.r127)
   form.dokument.telo.r131 = decimalToString(taxForm.r131)
 
   form.dokument.telo.r133 = decimalToString(taxForm.r133)
@@ -180,13 +182,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r153 = taxForm.employed ? '5' : '4'
 
-  const maDanovBonus =
+  const maDanovyBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
+  const maDanovyBonusUroky = taxForm.mozeZiadatVratitDanovyBonusUroky && taxForm.ziadamVratitDanovyBonusUroky
   const maDanovyPreplatok =
     taxForm.mozeZiadatVratitDanovyPreplatok &&
     taxForm.ziadamVratitDanovyPreplatok
 
-  if (maDanovBonus || maDanovyPreplatok) {
+  if (maDanovyBonus || maDanovyPreplatok || maDanovyBonusUroky) {
     form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
     form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
     form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'
@@ -196,6 +199,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
     if (taxForm.ziadamVratitDanovyPreplatok) {
       form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
+    }
+    if (taxForm.ziadamVratitDanovyBonusUroky) {
+      form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonusUroky = '1'
     }
   }
 

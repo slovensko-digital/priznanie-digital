@@ -35,8 +35,6 @@ export const bugReport2bInput: E2eTestUserInput = {
   children: [],
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',
-  r037_pocetMesiacov: '',
-  r037_zaplatene_uroky: '',
   expectNgoDonationValue: true,
   XIIoddiel_uplatnujem2percenta: false,
   r142_ico: '',

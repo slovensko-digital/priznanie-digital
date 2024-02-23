@@ -26,11 +26,6 @@ export const case202202dInput: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '0',
   employed: false,
 
-  /** SECTION Mortgage */
-  r037_uplatnuje_uroky: true,
-  r037_zaplatene_uroky: '200',
-  r037_pocetMesiacov: '12',
-
   /** SECTION Pension */
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',

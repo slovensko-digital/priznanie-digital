@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency, parseInputNumber } from '../lib/utils'
+import { formatCurrency, formatDate, parseInputNumber } from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
-import { TAX_YEAR, monthNumberToName, typPrijmuToName } from '../lib/calculation'
+import { TAX_YEAR, monthNumberToName, typPrijmuToName, zaciatok_urocenia_datum } from '../lib/calculation'
 
 interface SummaryRow {
   title: string
@@ -266,25 +266,25 @@ const Suhrn: Page<TaxFormUserInput> = ({
             : [{ title: 'Neplatil som' }]
         }
       />
-      {/* <Summary
-      title="Zaplatené úroky z hypotéky"
-      href={'/hypoteka'}
-      rows={
-        taxFormUserInput.r037_uplatnuje_uroky
-          ? [
-              {
-                title: 'Zaplatené úroky',
-                value: taxFormUserInput.r037_zaplatene_uroky,
-                currency: true,
-              },
-              {
-                title: 'Počet mesiacov',
-                value: taxFormUserInput.r037_pocetMesiacov,
-              },
-            ]
-          : [{ title: 'Neplatil som' }]
-      }
-    /> */}
+      <Summary
+        title="Zaplatené úroky z hypotéky"
+        href={'/uroky'}
+        rows={
+          taxFormUserInput.r035_uplatnuje_uroky
+            ? [
+                {
+                  title: `Zaplatené úroky v roku ${TAX_YEAR}`,
+                  value: taxFormUserInput.r035_zaplatene_uroky,
+                  currency: true,
+                },
+                {
+                  title: 'Začiatok úročenia',
+                  value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
+                },
+              ]
+            : [{ title: 'Neplatil som' }]
+        }
+      />
       <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}

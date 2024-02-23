@@ -105,12 +105,21 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       title: 'Nárok na daňový bonus na deti',
       value: summary.danovyBonusNaDeti,
       key: 'danovyBonusNaDeti',
-      testId: 'r136_danovy_preplatok',
+    },
+    {
+      title: 'Daňový bonus na zaplatené úroky',
+      value: summary.danovyBonusNaUroky,
+      key: 'danovyBonusNaUroky',
     },
     {
       title: 'Daňový bonus na vyplatenie',
       value: summary.danovyBonusNaVyplatenie,
       key: 'danovyBonusNaVyplatenie',
+    },
+    {
+      title: 'Daňový bonus na vyplatenie úroky',
+      value: summary.danovyBonysNaVyplatenieUroky,
+      key: 'danovyBonysNaVyplatenieUroky'
     },
     {
       title: 'Daňový preplatok na vyplatenie',
