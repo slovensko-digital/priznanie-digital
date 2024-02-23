@@ -204,7 +204,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return POCET_MESIACOV - Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) + 1
       } else if (yearDiff === UROKY_POCET_ROKOV) {
         // Narok na DB je 5 rokov od zaciatku urokov a teda toto je posledny rok
-        return Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
+        return Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) - 1
       } else if (yearDiff < UROKY_POCET_ROKOV && yearDiff > 0) {
         return POCET_MESIACOV
       }
@@ -558,7 +558,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
         let limit = new Decimal(400)
         if (this.r035_pocet_mesiacov !== 12) {
-          const mesacne = limit.div(12)
+          const mesacne = round(limit.div(12))
           limit = mesacne.times(this.r035_pocet_mesiacov)
         }
         return Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit)
