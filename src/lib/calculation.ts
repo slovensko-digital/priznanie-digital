@@ -206,7 +206,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return ((prijmy.minus(oslobodenie)).div(prijmy)).mul(vydavky)
       }
     },
-    get r60_r65() {
+    get r60() {
+      return this.t1r11s1.minus(this.t1r11s2)
+    },
+    get r65() {
       return this.t1r11s1.minus(this.t1r11s2)
     },
     rent_uctovnictvo_danova_evidencia: input?.rent_uctovnictvo_danova_evidencia ?? false,
@@ -368,7 +371,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
     // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r60_r65)
+      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r65)
     },
     // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
     // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -

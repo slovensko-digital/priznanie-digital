@@ -97,14 +97,6 @@ export const VydavkyFormaQuestion = ({ disabled }) => (
   </RadioGroup>
   )
 
-  export const NotEligible = () => (
-    <div data-test="ineligible-message">
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
-        Nemáte nárok na uplatnenie tak vysokej sumy
-      </h1>
-    </div>
-  )
-
 export const PreviousButton = ({ onClick }) => (
   <button
     className="govuk-button btn-secondary"

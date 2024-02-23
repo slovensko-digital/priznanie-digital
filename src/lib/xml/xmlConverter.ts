@@ -112,8 +112,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r58 = decimalToString(taxForm.t1r11s1)
   form.dokument.telo.r59 = decimalToString(taxForm.t1r11s2)
-  form.dokument.telo.r60 = decimalToString(taxForm.r60_r65)
-  form.dokument.telo.r65 = decimalToString(taxForm.r60_r65)
+  form.dokument.telo.r60 = decimalToString(taxForm.r60)
+  form.dokument.telo.r65 = decimalToString(taxForm.r65)
 
   // Rent is also dependend on r80,r81,r90,r116,r118,r124
   // which is resolved in common tax calculations
