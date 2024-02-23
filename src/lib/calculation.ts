@@ -201,7 +201,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** SECTION Mortgage **/
     r035_uplat_dan_bonus_zaplat_uroky: input?.r035_uplatnuje_uroky ?? false,
     get r035_zaplatene_uroky() {
-      // TODO
       return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
     },
     get r035_pocet_mesiacov(){
