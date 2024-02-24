@@ -701,8 +701,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 export const buildSummary = (form: TaxForm): Summary => {
   return {
     prijmy: form.r036.plus(form.r039),
-    pausalneVydavky: (form.r040.minus(form.priloha3_r13_zdravotne).minus(form.priloha3_r09_socialne)).negated(),
-    zaplatenePoistneSpolu: (form.r037.plus(form.priloha3_r13_zdravotne).plus(form.priloha3_r09_socialne)).negated(),
+    pausalneVydavky: (form.r040.minus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
+    zaplatenePoistneSpolu: (form.r037.plus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
     nezdanitelnaCastNaSeba: form.r073.negated(),
     nezdanitelnaCastNaPartnera: form.r074_znizenie_partner.negated(),
     zakladDane: form.r078_zaklad_dane_zo_zamestnania.plus(form.r092),
