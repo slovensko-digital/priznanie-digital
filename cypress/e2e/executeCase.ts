@@ -367,7 +367,7 @@ const executeTestCase = (testCase: string) => {
         )
 
         cy.get('[data-test="pausalneVydavky"]').contains(
-          formatCurrency(taxForm.r040.minus(taxForm.priloha3_r13_zdravotne).minus(taxForm.priloha3_r09_socialne).toNumber())
+          formatCurrency(taxForm.r040.minus(taxForm.vydavkyPoistPar6ods11_ods1a2).toNumber())
         )
 
         cy.get('[data-test="zakladDane"]').contains(
