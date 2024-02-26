@@ -570,7 +570,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           return round(Decimal.min(c,d))
         } else if (this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR) {
           const limit = round(new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12)).times(this.r035_pocet_mesiacov)
-          return round(Decimal.min(this.r035_zaplatene_uroky.div(12).times(this.r035_pocet_mesiacov), limit))
+          return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit))
         }
       } else {
         return new Decimal(0)
