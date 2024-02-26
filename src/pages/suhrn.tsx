@@ -294,6 +294,12 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: taxFormUserInput.vyskaPrijmovZPrenajmu,
                   currency: true,
                   allignRight: true,
+                },
+                {
+                  title: 'Výška výdavkov z prenájmu nehnuteľností',
+                  value: taxFormUserInput.vydavkyZPrenajmu,
+                  currency: true,
+                  allignRight: true,
                 }
               ]
         }
