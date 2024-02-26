@@ -18,5 +18,6 @@ describe('Uroky', () => {
     'uroky202305b',
     'uroky202305c',
     'uroky202306',
+    'uroky202307',
   ])
 })
