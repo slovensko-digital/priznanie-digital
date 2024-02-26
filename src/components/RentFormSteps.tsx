@@ -7,8 +7,9 @@ import Radio from "../components/radio/Radio";
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={'Prenajímali ste v roku 2023 nehnuteľnosť (nie na základe živnostenského oprávnenia) nezaradenú do obchodného majetku?'}
+      title={'Prenajímali ste v roku 2023 nehnuteľnosť'}
       name="rent"
+      hint="Nie na základe živnostenského oprávnenia, nezaradenú do obchodného majetku s výdavkami vedenými podľa daňovej evidencie "
       disabled={disabled}
     />
   </>
@@ -85,15 +86,6 @@ export const VydavkyQuestion = ({ disabled }) => (
       </>
     </Details>
   </>
-  )
-
-export const VydavkyFormaQuestion = ({ disabled, setFieldValue }) => (
-  <RadioGroup value="rent_uctovnictvo_danova_evidencia,rent_uctovnictvo_jednoduche,rent_uctovnictvo_podvojne" onChange={(value) => { setFieldValue('rent_uctovnictvo_danova_evidencia', value === 'true')
-  }}>
-    <Radio name="rent_uctovnictvo_danova_evidencia" label="daňovej evidencie (najčastejší spôsob)" value="rent_uctovnictvo_danova_evidencia" disabled={disabled} />
-    <Radio name="rent_uctovnictvo_jednoduche" label="jednoduchého účtovníctva" value="rent_uctovnictvo_jednoduche" disabled={disabled} />
-    <Radio name="rent_uctovnictvo_podvojne" label="podvojného účtovníctva" value="rent_uctovnictvo_podvojne" disabled={disabled} />
-  </RadioGroup>
   )
 
 export const PreviousButton = ({ onClick }) => (

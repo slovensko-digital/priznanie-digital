@@ -106,9 +106,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r11s1)
   form.dokument.telo.tabulka1.t1r13.s2 = decimalToString(taxForm.t1r11s2)
 
-  form.dokument.telo.vydavkyPar6ods11_ods1a2 = boolToString(taxForm.rent_uctovnictvo_danova_evidencia)
-  form.dokument.telo.vydavkyPar6ods11_ods3 = boolToString(taxForm.rent_uctovnictvo_jednoduche)
-  form.dokument.telo.vydavkyPar6ods11_ods4 = boolToString(taxForm.rent_uctovnictvo_podvojne)
+  form.dokument.telo.vydavkyPar6ods11_ods1a2 = boolToString(true)
 
   form.dokument.telo.r58 = decimalToString(taxForm.t1r11s1)
   form.dokument.telo.r59 = decimalToString(taxForm.t1r11s2)
