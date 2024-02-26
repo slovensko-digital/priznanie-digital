@@ -808,8 +808,8 @@ describe('Summary page', () => {
     '/deti',
     '/deti',
     '/dochodok',
-    '/prenajom',
     '/uroky',
+    '/prenajom',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, () => {
