@@ -2,8 +2,6 @@ import React from 'react'
 import { BooleanRadio, Input } from './FormComponents'
 import { Details } from './Details'
 import { TAX_YEAR } from '../lib/calculation'
-import RadioGroup from "../components/radio/RadioGroup";
-import Radio from "../components/radio/Radio";
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
@@ -31,8 +29,9 @@ export const IncomeQuestion = ({ disabled }) => {
 export const OslobodenieQuestion = ({ disabled }) => (
   <BooleanRadio
     name="prijemZPrenajmuOslobodenieDane"
-    title="Chcete pri príjmoch z prenájmu nehnuteľností uplatniť oslobodenie od dane max. do výšky 500 EUR?
+    title="Chcete pri príjmoch z prenájmu nehnuteľností uplatniť oslobodenie od dane?
     "
+    hint="Maximálne do výšky 500 EUR"
     disabled={disabled}
   />
 )
@@ -43,7 +42,8 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
       <Input
         name="vyskaOslobodenia"
         type="number"
-        label={`Ak ste v danom roku dosiahli aj príjem z príležitostnej činnosti, oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti.\nAkú výšku oslobodenia od dane si uplatňujete?`}
+        label="Dosiahli ste v danom roku aj príjem z príležitostnej činnosti?"
+        hint="Ak áno oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti. Akú výšku oslobodenia od dane si uplatňujete?"
         disabled={disabled}
         min={1}
         max={500}

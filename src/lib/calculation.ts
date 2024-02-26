@@ -218,7 +218,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r035_datum_zacatia_urocenia_uveru() {
       return zaciatok_urocenia_datum(input)
     },
-    
+
     /** SECTION Rent */
     get t1r11s1() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
