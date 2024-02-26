@@ -32,6 +32,7 @@ export const RentForm = (props: RentFormProps) => {
     useRef(),
     useRef(),
     useRef(),
+    useRef(),
   ]
 
   useEffect(() => {

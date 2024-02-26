@@ -24,7 +24,7 @@ const Rent: Page<RentUserInput> = ({
         onSubmit={(values, { setFieldValue }) => {
           if (
             values.rent === false ||
-            values.rent_step === 5
+            values.rent_step === 4
           ) {
             const userInput = values.rent
               ? values
