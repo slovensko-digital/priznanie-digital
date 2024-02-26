@@ -26,9 +26,6 @@ export type RentUserInput = Pick<
   | 'vyskaOslobodenia'
   | 'prijemZPrenajmuOslobodenieDane'
   | 'vydavkyZPrenajmu'
-  | 'rent_uctovnictvo_danova_evidencia'
-  | 'rent_uctovnictvo_jednoduche'
-  | 'rent_uctovnictvo_podvojne'
   | 'rent_step'
 >
 

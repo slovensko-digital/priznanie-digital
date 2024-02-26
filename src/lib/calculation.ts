@@ -241,9 +241,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r65() {
       return this.t1r11s1.minus(this.t1r11s2)
     },
-    rent_uctovnictvo_danova_evidencia: input?.rent_uctovnictvo_danova_evidencia ?? false,
-    rent_uctovnictvo_jednoduche: input?.rent_uctovnictvo_jednoduche ?? false,
-    rent_uctovnictvo_podvojne: input?.rent_uctovnictvo_podvojne ?? false,
 
     /** SECTION Employment */
     r036: new Decimal(

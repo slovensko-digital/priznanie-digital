@@ -61,9 +61,6 @@ export const rentUserInputInitialValues: RentUserInput = {
   prijemZPrenajmuOslobodenieDane: undefined,
   vydavkyZPrenajmu: '',
   rent_step: 0,
-  rent_uctovnictvo_danova_evidencia: undefined,
-  rent_uctovnictvo_jednoduche: undefined,
-  rent_uctovnictvo_podvojne: undefined,
 }
 
 let childCounter = 0
