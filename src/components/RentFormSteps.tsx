@@ -68,20 +68,18 @@ export const VydavkyQuestion = ({ disabled }) => (
         V prípade nehnuteľnosti nezaradenej v obchodnom majetku je možné uplatniť nasledovné preukázateľné výdavky:
         </p>
         <ol>
-          <li>
-          výdavky za spotrebu energií (vody, plynu, tepla, elektrickej energie);
-          </li>
-          <li>zaplatené preddavky do fondu prevádzky, opráv a údržby;</li>
-          <li>výdavky za služby v prenajatej nehnuteľnosti, ako napr.</li>
-          <ol>
-            <li>odvádzane odpadovej vody z domácností, osvetlenie spoločných priestorov bytového domu</li>
-            <li>používanie a servis výťahu, používanie domovej práčovne, kontrola a čistenie komínov, čistenie žúmp</li>
-            <li>poplatky za TV a rozhlas vrátane koncesionárskych poplatkov</li>
-            <li>poplatky za pripojenie na internet</li>
-            <li>poplatky za povinnú správu bytového domu, službu vrátnika, recepcie, výdavky na strážnu službu, upratovanie spoločných priestorov bytového domu</li>
-            <li>výdavky za odvoz smetí, okrem miestneho poplatku za odvoz komunálneho odpadu</li>
-            <li>úhrady vlastníka bytu a nebytového priestoru za výkon činnosti zástupcu vlastníkov bytov a nebytových priestorov</li>
-          </ol>
+        <li>Výdavky za spotrebu energií (vody, plynu, tepla, elektrickej energie)</li>
+        <li>Zaplatené preddavky do fondu prevádzky, opráv a údržby;</li>
+        <li>Výdavky za služby v prenajatej nehnuteľnosti, ako napr:</li>
+        <ul>
+          <li>odvádzane odpadovej vody z domácností, osvetlenie spoločných priestorov bytového domu</li>
+          <li>používanie a servis výťahu, používanie domovej práčovne, kontrola a čistenie komínov, čistenie žúmp</li>
+          <li>poplatky za TV a rozhlas vrátane koncesionárskych poplatkov</li>
+          <li>poplatky za pripojenie na internet</li>
+          <li>poplatky za povinnú správu bytového domu, službu vrátnika, recepcie, výdavky na strážnu službu, upratovanie spoločných priestorov bytového domu</li>
+          <li>výdavky za odvoz smetí, okrem miestneho poplatku za odvoz komunálneho odpadu</li>
+          <li>úhrady vlastníka bytu a nebytového priestoru za výkon činnosti zástupcu vlastníkov bytov a nebytových priestorov</li>
+        </ul>
         </ol>
       </>
     </Details>
