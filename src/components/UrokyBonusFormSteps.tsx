@@ -127,7 +127,6 @@ export const DalsiDlzniciQuestion = ({ values, errors, setFieldValue, disabled }
     error={errors.uroky_dalsi_dlznik}
   >
     <RadioGroup value={String(values.uroky_dalsi_dlznik)} onChange={(value) => {
-      debugger
       setFieldValue('uroky_dalsi_dlznik', value === 'true')
     }}>
       <Radio name="uroky_dalsi_dlznik-input-yes" label="Áno" value="true" disabled={disabled} />
