@@ -196,6 +196,7 @@ const executeTestCase = (testCase: string) => {
         if (input.rent) {
           getInput('rent', '-yes').click()
           typeToInput('vyskaPrijmovZPrenajmu', input)
+          next()
           // TODO
         } else {
           getInput('rent', '-no').click()
