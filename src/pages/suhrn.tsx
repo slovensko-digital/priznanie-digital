@@ -217,7 +217,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title="Druhá opravnená osoba pre daňový bonus na vyživované dieťi"
+        title="Druhá opravnená osoba pre daňový bonus na vyživované deti"
         href={'/deti'}
         rows={
           taxFormUserInput.partner_bonus_na_deti
