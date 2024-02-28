@@ -74,7 +74,7 @@ const Deti: Page<ChildrenUserInput> = ({
             if (danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))) {
               router.push(nextRoute)
             } else {
-              if (values.partner_bonus_na_deti === false) {
+              if (values.partner_bonus_na_deti === false || values.partner_bonus_na_deti_chce_uplatnit === false) {
                 router.push(nextRoute)
               } else if (values.partner_bonus_na_deti === true) {
                 const errors = validate(values)
@@ -96,171 +96,180 @@ const Deti: Page<ChildrenUserInput> = ({
               name="hasChildren"
             />
             {values.hasChildren && (
-                <>
-                  <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+              <>
+                <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+                <p className="govuk-hint">
+                  V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
+                  študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
+                  pri splnení <a className='govuk-link' target='_blank' href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</a> máte nárok na daňové zvýhodnenie.
+                  Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                </p>
+                <Details title="Aká je výška daňového bonusu?">
                   <p className="govuk-hint">
-                    V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
-                    študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                    pri splnení <a className='govuk-link' target='_blank' href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</a> máte nárok na daňové zvýhodnenie.
-                    Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                    <b>
+                      Daňový bonus na vyživované dieťa:
+                    </b>
+                    <ul>
+                      <li>
+                        do 18 rokov veku sumou{' '}
+                        {formatCurrency(
+                          CHILD_RATE_EIGHTEEN_AND_YOUNGER,
+                        )}{' '}
+                        mesačne.
+                      </li>
+                      <li>
+                        nad 18 rokov veku sumou{' '}
+                        {formatCurrency(
+                          CHILD_RATE_EIGHTEEN_AND_OLDER,
+                        )}{' '}
+                        mesačne.
+                      </li>
+                    </ul>
                   </p>
-                  <Details title="Aká je výška daňového bonusu?">
-                    <p className="govuk-hint">
-                      <b>
-                        Daňový bonus na vyživované dieťa:
-                      </b>
-                      <ul>
-                        <li>
-                          do 18 rokov veku sumou{' '}
-                          {formatCurrency(
-                            CHILD_RATE_EIGHTEEN_AND_YOUNGER,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                        <li>
-                          nad 18 rokov veku sumou{' '}
-                          {formatCurrency(
-                            CHILD_RATE_EIGHTEEN_AND_OLDER,
-                          )}{' '}
-                          mesačne.
-                        </li>
-                      </ul>
-                    </p>
-                  </Details>
-                  <p className="govuk-hint">
-                    Za mesiace január až apríl 2023 je možné uplatniť daňový bonus len v prípade,
-                    ak sa na vyživované dieťa neposkytla dotácia na podporu výchovy k stravovacím návykom dieťaťa.
-                  </p>
-                  <p className="govuk-hint">
-                    Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
-                  </p>
+                </Details>
+                <p className="govuk-hint">
+                  Za mesiace január až apríl 2023 je možné uplatniť daňový bonus len v prípade,
+                  ak sa na vyživované dieťa neposkytla dotácia na podporu výchovy k stravovacím návykom dieťaťa.
+                </p>
+                <p className="govuk-hint">
+                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
+                </p>
 
-                  <FieldArray name="children">
-                    {(arrayHelpers) => (
-                      <div className={styles.childrenInputGroup}>
-                        {values.children.map((child, index) => (
-                          <div key={child.id}>
-                            {values.children.length > 1 && (
-                              <h2
-                                className={classnames(
-                                  'govuk-heading-m',
-                                  'govuk-!-margin-top-3',
-                                  styles.childHeadline,
-                                )}
+                <FieldArray name="children">
+                  {(arrayHelpers) => (
+                    <div className={styles.childrenInputGroup}>
+                      {values.children.map((child, index) => (
+                        <div key={child.id}>
+                          {values.children.length > 1 && (
+                            <h2
+                              className={classnames(
+                                'govuk-heading-m',
+                                'govuk-!-margin-top-3',
+                                styles.childHeadline,
+                              )}
+                            >
+                              {index + 1}. dieťa
+                              <button
+                                className="govuk-button btn-secondary btn-warning"
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)}
+                                data-test={`remove-child-${index}`}
                               >
-                                {index + 1}. dieťa
-                                <button
-                                  className="govuk-button btn-secondary btn-warning"
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                  data-test={`remove-child-${index}`}
-                                >
-                                  Odstrániť {index + 1}. dieťa
-                                </button>
-                              </h2>
-                            )}
-                            <ChildForm
-                              savedValues={child}
-                              index={index}
-                              setFieldValue={setFieldValue}
+                                Odstrániť {index + 1}. dieťa
+                              </button>
+                            </h2>
+                          )}
+                          <ChildForm
+                            savedValues={child}
+                            index={index}
+                            setFieldValue={setFieldValue}
+                          />
+                        </div>
+                      ))}
+                      <button
+                        className="btn-secondary govuk-button"
+                        type="button"
+                        onClick={async () => {
+                          const errors = await validateForm()
+                          setErrors(errors)
+                          const hasErrors = Object.keys(errors).length > 0
+                          if (!hasErrors) {
+                            arrayHelpers.push(makeEmptyChild())
+                          }
+                        }}
+                        data-test="add-child"
+                      >
+                        Pridať ďalšie dieťa
+                      </button>
+                    </div>
+                  )}
+                </FieldArray>
+
+                {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) || values.partner_bonus_na_deti === true) && (
+                  <>
+                    <BooleanRadio
+                      title={`Chcete si navýšiť daňový bonus ešte max. o ${formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}?`}
+                      hint={`Podľa vaších príjmov a počtu detí máte nárok na daňový bonus vo výške ${formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}.
+                        Daňový bonus si môžete ešte navýšiť max o sumu ${formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}, ak zadáte údaje druhej oprávnenej osoby.`}
+                      name="partner_bonus_na_deti_chce_uplatnit"
+                    />
+                    {values.partner_bonus_na_deti_chce_uplatnit &&
+                      <>
+                        <BooleanRadio
+                          title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
+                          hint='Druhou oprávnenou osobou môže byť napr. druhý rodič dieťaťa, matkin manžel, otcova manželka alebo osoba, ktorej bolo dieťa zverené.'
+                          name="partner_bonus_na_deti"
+                        />
+
+                        {values.partner_bonus_na_deti && (
+                          <>
+                            <h1 className="govuk-heading-l govuk-!-margin-top-3">
+                              Údaje o oprávnenej osobe
+                            </h1>
+                            <Input
+                              name="r034_priezvisko_a_meno"
+                              type="text"
+                              label="Meno a priezvisko druhej oprávnenej osoby"
                             />
-                          </div>
-                        ))}
-                        <button
-                          className="btn-secondary govuk-button"
-                          type="button"
-                          onClick={async () => {
-                            const errors = await validateForm()
-                            setErrors(errors)
-                            const hasErrors = Object.keys(errors).length > 0
-                            if (!hasErrors) {
-                              arrayHelpers.push(makeEmptyChild())
-                            }
-                          }}
-                          data-test="add-child"
-                        >
-                          Pridať ďalšie dieťa
-                        </button>
-                      </div>
-                    )}
-                  </FieldArray>
+                            <Input
+                              name="r034_rodne_cislo"
+                              type="text"
+                              label="Rodné číslo"
+                              maxLength={13}
+                              onChange={async (event) => {
+                                const rodneCislo = formatRodneCislo(
+                                  event.currentTarget.value,
+                                  values.r034_rodne_cislo,
+                                )
+                                setFieldValue('r034_rodne_cislo', rodneCislo)
+                              }}
+                            />
 
-                  {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) || values.partner_bonus_na_deti === true) && (
-                    <>
-                      <p>
-                        Podľa vaších príjmov a počtu detí máte nárok na daňový bonus na vyživované dieťa vo výške {formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}. Ešte máte nevyužitý daňový bonus vo výške <b>{formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}</b>.
-                      </p>
-                      <BooleanRadio
-                        title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
-                        name="partner_bonus_na_deti"
-                      />
-
-                      {values.partner_bonus_na_deti && (
-                        <>
-                          <h1 className="govuk-heading-l govuk-!-margin-top-3">
-                            Údaje o oprávnenej osobe
-                          </h1>
-                          <Input
-                            name="r034_priezvisko_a_meno"
-                            type="text"
-                            label="Meno a priezvisko druhej oprávnenej osoby"
-                          />
-                          <Input
-                            name="r034_rodne_cislo"
-                            type="text"
-                            label="Rodné číslo"
-                            maxLength={13}
-                            onChange={async (event) => {
-                              const rodneCislo = formatRodneCislo(
-                                event.currentTarget.value,
-                                values.r034_rodne_cislo,
-                              )
-                              setFieldValue('r034_rodne_cislo', rodneCislo)
-                            }}
-                          />
-
-                          <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
+                            <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
+                            <p className='govuk-hint'>Druhá oprávnená osoba musí spĺňať na začiatku kalendárneho mesiaca rovnaké podmienky ako daňovník, t. j. stará sa o vyživované dieťa žijúce s ňou v domácnosti.</p>
                             <div
                               className={classnames('govuk-form-group', styles.inlineFieldContainer)}
                             >
-                          <Select
-                            name={`partner_bonus_na_deti_od`}
-                            label="Od"
-                            optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
-                          />
-                          <Select
-                            name={`partner_bonus_na_deti_do`}
-                            label="Do"
-                            optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
-                          />
-                        </div>
-                        <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
-                          <Select
-                          name='partner_bonus_na_deti_typ_prijmu'
-                          label="Vyberte spôsob vysporiadania príjmov"
-                          optionsWithValue={[
-                            { name: '', value: "0" },
-                            { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1" },
-                            { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2" },
-                            { name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3" },
-                            { name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4" }
-                          ]}
-                        />
+                              <Select
+                                name={`partner_bonus_na_deti_od`}
+                                label="Od"
+                                optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
+                              />
+                              <Select
+                                name={`partner_bonus_na_deti_do`}
+                                label="Do"
+                                optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
+                              />
+                            </div>
+                            <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
+                            <Select
+                              name='partner_bonus_na_deti_typ_prijmu'
+                              label="Vyberte spôsob vysporiadania príjmov"
+                              optionsWithValue={[
+                                { name: '', value: "0" },
+                                { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1" },
+                                { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2" },
+                                { name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3" },
+                                { name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4" }
+                              ]}
+                            />
 
-                          <Input
-                            name="r034a"
-                            type="number"
-                            label="Prijem"
-                            hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
-                          />
+                            <Input
+                              name="r034a"
+                              type="number"
+                              label="Prijem"
+                              hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
+                            />
 
-                          <AttachmentWarning prijem={values.partner_bonus_na_deti_typ_prijmu} />
-                        </>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
+                            <AttachmentWarning prijem={values.partner_bonus_na_deti_typ_prijmu} />
+                          </>
+                        )}
+                      </>
+                    }
+                  </>
+                )}
+              </>
+            )}
             <button className="govuk-button" type="submit">
               Pokračovať
             </button>
