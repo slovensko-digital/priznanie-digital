@@ -155,6 +155,7 @@ const executeTestCase = (testCase: string) => {
           next()
           cy.url().then(url => {
             if (input.partner_bonus_na_deti) {
+              getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
               getInput('partner_bonus_na_deti', '-yes').click()
               typeToInput('r034_priezvisko_a_meno', input)
               typeToInput('r034_rodne_cislo', input)
@@ -171,7 +172,7 @@ const executeTestCase = (testCase: string) => {
               next()
             } else {
               if (!url.includes('/dochodok')) {
-                getInput('partner_bonus_na_deti', '-no').click()
+                getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
                 next()
               }
             }
