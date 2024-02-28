@@ -36,7 +36,7 @@ const Rent: Page<RentUserInput> = ({
             router.push(nextRoute)
           } else if (values.prijemZPrenajmuOslobodenieDane === false && values.rent_step === 2) {
             values.rent_step = 3
-            values.vyskaOslobodenia = "0"
+            values.vyskaOslobodenia = "500"
             setFieldValue('rent_step', values.rent_step + 1)
           } else {
             setFieldValue('rent_step', values.rent_step + 1)

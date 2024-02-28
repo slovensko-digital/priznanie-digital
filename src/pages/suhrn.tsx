@@ -300,7 +300,13 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: taxFormUserInput.vydavkyZPrenajmu,
                   currency: true,
                   allignRight: true,
-                }
+                },
+                {
+                  title: 'Výška oslobodenia z prenájmu nehnuteľností a príležitostnej činnosti',
+                  value: taxFormUserInput.vyskaOslobodenia,
+                  currency: true,
+                  allignRight: true,
+                },
               ]
         }
       />

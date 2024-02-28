@@ -5,7 +5,7 @@ import { TAX_YEAR } from '../lib/calculation'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={'Prenajímali ste v roku 2023 nehnuteľnosť'}
+      title={'Prenajímali ste v roku 2023 nehnuteľnosť?'}
       name="rent"
       hint="Nie na základe živnostenského oprávnenia, nezaradenú do obchodného majetku s výdavkami vedenými podľa daňovej evidencie "
       disabled={disabled}
@@ -19,7 +19,7 @@ export const IncomeQuestion = ({ disabled }) => {
       <Input
         name="vyskaPrijmovZPrenajmu"
         type="number"
-        label={`Výška príjmov z prenájmu nehnuteľností dosiahnutá v roku ${TAX_YEAR}`}
+        label={`Výška príjmov z prenájmu nehnuteľností dosiahnutá v roku ${TAX_YEAR}.`}
         disabled={disabled}
       />
     </>
@@ -29,7 +29,7 @@ export const IncomeQuestion = ({ disabled }) => {
 export const OslobodenieQuestion = ({ disabled }) => (
   <BooleanRadio
     name="prijemZPrenajmuOslobodenieDane"
-    title="Chcete pri príjmoch z prenájmu nehnuteľností uplatniť oslobodenie od dane?
+    title="Dosiahli ste v danom roku aj príjem z príležitostnej činnosti?
     "
     hint="Maximálne do výšky 500 EUR"
     disabled={disabled}
@@ -42,8 +42,8 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
       <Input
         name="vyskaOslobodenia"
         type="number"
-        label="Dosiahli ste v danom roku aj príjem z príležitostnej činnosti?"
-        hint="Ak áno oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti. Akú výšku oslobodenia od dane si uplatňujete?"
+        label="Ak áno oslobodenie od dane max. do výšky 500 EUR sa uplatňuje spolu na príjmy z prenájmu nehnuteľností a príjmy z príležitostnej činnosti."
+        hint="Akú výšku oslobodenia od dane si uplatňujete?"
         disabled={disabled}
         min={1}
         max={500}
