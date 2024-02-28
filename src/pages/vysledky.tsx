@@ -153,7 +153,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         prePayments &&
         <Warning>
             <strong>
-              Predpokladané {monthlyPrepayment ? 'mesačné' : 'kvartálne'} preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023">Finančnej správy</a>.
+              Predpokladané {monthlyPrepayment ? 'mesačné' : 'kvartálne'} preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023" target="_blank">Finančnej správy</a>.
             </strong>
         </Warning>
       }
