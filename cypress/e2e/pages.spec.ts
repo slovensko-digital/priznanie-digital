@@ -414,7 +414,7 @@ describe('osobne-udaje page', () => {
   })
 })
 
-describe.only('Children page', () => {
+describe('Children page', () => {
   it('has working validation', () => {
     navigateEligibleToChildrenPage()
     assertUrl('/deti')
