@@ -26,6 +26,8 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
         <ul>
           <li>má dobu splatnosti najmenej 5 rokov a najviac 30 rokov</li>
           <li>je zabezpečený záložným právom k tuzemskej nehnuteľnosti</li>
+          <li>nedošlo v roku {TAX_YEAR} k refinancovaniu úveru</li>
+          <li>nedošlo v roku {TAX_YEAR} k zosplatneniu úveru</li>
         </ul>
       </>
     </Details>
