@@ -21,7 +21,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
     <Details title="Kedy si môžem uplatniť zvýhodnenie?">
       <>
         <p>
-          Daňový bonus na zaplatené úroky si môžete uplatniť na úver ktorý
+          Daňový bonus na zaplatené úroky si môžete uplatniť na úver, ktorý
         </p>
         <ul>
           <li>má dobu splatnosti najmenej 5 rokov a najviac 30 rokov</li>
