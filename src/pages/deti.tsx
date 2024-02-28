@@ -111,14 +111,14 @@ const Deti: Page<ChildrenUserInput> = ({
                     </b>
                     <ul>
                       <li>
-                        do 18 rokov veku sumou{' '}
+                        do 18 rokov sumou{' '}
                         {formatCurrency(
                           CHILD_RATE_EIGHTEEN_AND_YOUNGER,
                         )}{' '}
                         mesačne.
                       </li>
                       <li>
-                        nad 18 rokov veku sumou{' '}
+                        nad 18 rokov sumou{' '}
                         {formatCurrency(
                           CHILD_RATE_EIGHTEEN_AND_OLDER,
                         )}{' '}
