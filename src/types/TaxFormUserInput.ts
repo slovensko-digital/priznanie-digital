@@ -94,6 +94,7 @@ export interface TaxFormUserInput {
 
   /** SECTION  Deti*/
   hasChildren?: boolean
+  partner_bonus_na_deti_chce_uplatnit?: boolean
   partner_bonus_na_deti?: boolean
   r034_priezvisko_a_meno?: string
   r034_rodne_cislo?: string
