@@ -87,6 +87,11 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'nezdanitelnaCastNaPartnera',
     },
     {
+      title: 'Príspevky na doplnkové dôchodkové poistenie',
+      value: summary.prispevkyNaDochodkovePoistenie,
+      key: 'prispevkyNaDochodkovePoistenie'
+    },
+    {
       title: 'Základ dane',
       value: summary.zakladDane,
       key: 'zakladDane',
@@ -112,19 +117,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'danovyBonusNaUroky',
     },
     {
-      title: 'Daňový bonus na vyplatenie',
-      value: summary.danovyBonusNaVyplatenie,
-      key: 'danovyBonusNaVyplatenie',
-    },
-    {
-      title: 'Daňový bonus na vyplatenie úroky',
-      value: summary.danovyBonysNaVyplatenieUroky,
-      key: 'danovyBonysNaVyplatenieUroky'
-    },
-    {
-      title: 'Daňový preplatok na vyplatenie',
-      value: summary.danovyPreplatokNaVyplatenie,
-      key: 'danovyPreplatokNaVyplatenie',
+      title: 'Daňový bonus/preplatok na vyplatenie',
+      value: summary.danovyBonusPreplatokNaVyplatenie,
+      key: 'danovyBonusPreplatokNaVyplatenie',
     },
     {
       title: 'Daň na úhradu',

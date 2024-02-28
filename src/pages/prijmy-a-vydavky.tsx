@@ -55,7 +55,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                 />
                 <Input
                   name="zaplatenePreddavky"
-                  hint={`Celkové uhradené preddavky na daň z príjmov v roku ${TAX_YEAR}. Započítajte aj preddavky, ktoré ste uhradili v roku ${TAX_YEAR+1} na daň z príjmov za rok ${TAX_YEAR}. Ak ste v roku ${TAX_YEAR} neplatili žiadne preddavky, uveďte 0.`}
+                  hint={`Celkové uhradené preddavky na daň z príjmov v roku ${TAX_YEAR}. Ak ste v roku ${TAX_YEAR} neplatili žiadne preddavky, uveďte 0.`}
                   type="number"
                   label="Zaplatené preddavky"
                 />
