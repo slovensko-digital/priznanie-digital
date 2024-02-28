@@ -6,13 +6,12 @@ export interface Summary {
   zaplatenePoistneSpolu: Decimal
   nezdanitelnaCastNaSeba: Decimal
   nezdanitelnaCastNaPartnera: Decimal
+  prispevkyNaDochodkovePoistenie: Decimal
   zakladDane: Decimal
   danSpolu: Decimal
   preddavkyNaDan: Decimal
   danovyBonusNaDeti: Decimal
   danovyBonusNaUroky: Decimal
-  danovyBonusNaVyplatenie: Decimal
-  danovyBonysNaVyplatenieUroky: Decimal
-  danovyPreplatokNaVyplatenie: Decimal
+  danovyBonusPreplatokNaVyplatenie: Decimal
   danNaUhradu: Decimal
 }
