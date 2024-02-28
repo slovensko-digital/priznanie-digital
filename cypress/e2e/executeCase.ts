@@ -172,7 +172,7 @@ const executeTestCase = (testCase: string) => {
               next()
             } else {
               if (!url.includes('/dochodok')) {
-                getInput('partner_bonus_na_deti', '-no').click()
+                getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
                 next()
               }
             }
