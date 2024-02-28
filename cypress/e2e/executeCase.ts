@@ -382,12 +382,8 @@ const executeTestCase = (testCase: string) => {
           formatCurrency(taxForm.r117.toNumber())
         )
 
-        cy.get('[data-test="danovyBonusNaVyplatenie"]').contains(
-          formatCurrency(taxForm.r121.toNumber())
-        )
-
-        cy.get('[data-test="danovyPreplatokNaVyplatenie"]').contains(
-          formatCurrency(taxForm.r136_danovy_preplatok.toNumber())
+        cy.get('[data-test="danovyBonusPreplatokNaVyplatenie"]').contains(
+          formatCurrency(taxForm.r121.plus(taxForm.r136_danovy_preplatok).plus(taxForm.r127).toNumber())
         )
 
         cy.get('[data-test="danNaUhradu"]').contains(
