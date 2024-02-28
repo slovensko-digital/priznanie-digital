@@ -414,7 +414,7 @@ describe('osobne-udaje page', () => {
   })
 })
 
-describe('Children page', () => {
+describe.only('Children page', () => {
   it('has working validation', () => {
     navigateEligibleToChildrenPage()
     assertUrl('/deti')
@@ -440,7 +440,7 @@ describe('Children page', () => {
     )
 
     next()
-    getInput('partner_bonus_na_deti', '-no').click()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
 
     next()
     assertUrl('/dochodok')
@@ -528,7 +528,7 @@ describe('Children page', () => {
     cy.get('[data-test="remove-child-2"]').click()
 
     next()
-    getInput('partner_bonus_na_deti', '-no').click()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
     next()
     assertUrl('/dochodok')
   })
