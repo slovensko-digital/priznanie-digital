@@ -221,6 +221,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Rent */
+    rent: input?.rent ?? false,
     get t1r11s1() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
       const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
@@ -236,11 +237,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return ((prijmy.minus(oslobodenie)).div(prijmy)).mul(vydavky)
       }
     },
-    get r60() {
-      return this.t1r11s1.minus(this.t1r11s2)
+    get t1r13s1() {
+      return this.t1r11s1
     },
-    get r65() {
-      return this.t1r11s1.minus(this.t1r11s2)
+    get t1r13s2() {
+      return this.t1r11s2
     },
 
     /** SECTION Employment */
@@ -293,6 +294,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r057() {
       return this.r055
+    },
+    get r058() {
+      return this.t1r13s1
+    },
+    get r059() {
+      return this.t1r13s2
+    },
+    get r060() {
+      return this.r058.minus(this.r059)
+    },
+    get r065() {
+      return this.r060
     },
     // v r. 72 spočítate, koľko je súčet základov dane zo zamestnania (§ 5) a koľko je základ
     // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 38 a 57
@@ -390,7 +403,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
     // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r65)
+      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r065)
     },
     // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
     // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -

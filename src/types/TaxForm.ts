@@ -111,15 +111,11 @@ export interface TaxForm {
   priloha3_r10_zdravotne: Decimal
 
   /** SECTION Prenajom */
+  rent?: boolean
   t1r11s1?: Decimal
   t1r11s2?: Decimal
-  r60?: Decimal
-  r65?: Decimal
-  r80_r124?: Decimal
-  rent_uctovnictvo_danova_evidencia?: boolean
-  rent_uctovnictvo_jednoduche?: boolean
-  rent_uctovnictvo_podvojne?: boolean
-
+  t1r13s1?: Decimal
+  t1r13s2?: Decimal
 
   /** Základ dane (čiastkový základ dane)  */
   r038: Decimal
@@ -144,6 +140,10 @@ export interface TaxForm {
   r057: Decimal
   /**   Základ dane z príjmov pred znížením o nezdaniteľnú časť základu dane (r. 40
    *   + r. 57)*/
+  r058: Decimal
+  r059: Decimal
+  r060?: Decimal
+  r065?: Decimal
   r072_pred_znizenim: Decimal
   /**   Hardconuta value 3937.35 - nezdaniteľnú časť základu Ak r.72>20 507, potom
    *    r.73 má byť výsledkom max(0,9 064.094-(1/4)*r.72–r.30). Ak r72<=20 507,
