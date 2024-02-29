@@ -770,7 +770,7 @@ export const buildSummary = (form: TaxForm): Summary => {
     danovyBonusPreplatokNaVyplatenie: form.r136_danovy_preplatok.plus(form.r121).plus(form.r127),
     danNaUhradu: form.r135_dan_na_uhradu,
     prijemNehnutelnost: form.t1r11s1,
-    vydavkyNehnutelnost: form.t1r11s2,
+    vydavkyNehnutelnost: form.t1r11s2.negated(),
   }
 }
 

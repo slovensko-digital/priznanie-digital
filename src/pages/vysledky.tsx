@@ -60,6 +60,19 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 }) => {
   const summary = buildSummary(taxForm)
 
+  const rentRows = [
+    {
+      title: 'Príjem z prenájmu nehnuteľnosti',
+      value: summary.prijemNehnutelnost,
+      key: 'danovyBonusNaDeti',
+    },
+    {
+      title: 'Výdavky z prenájmu nehnuteľnosti',
+      value: summary.vydavkyNehnutelnost,
+      key: 'danovyBonusNaUroky',
+    }
+  ]
+
   const summaryRows = [
     {
       title: 'Príjmy spolu',
@@ -91,6 +104,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.prispevkyNaDochodkovePoistenie,
       key: 'prispevkyNaDochodkovePoistenie'
     },
+    ...(taxForm.rent ? rentRows : []),
     {
       title: 'Základ dane',
       value: summary.zakladDane,
@@ -105,16 +119,6 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       title: 'Preddavky na daň',
       value: summary.preddavkyNaDan,
       key: 'preddavkyNaDan',
-    },
-    {
-      title: 'Výška zdaniteľného príjmu z prenájmu nehnuteľnosti',
-      value: summary.prijemNehnutelnost,
-      key: 'danovyBonusNaDeti',
-    },
-    {
-      title: 'Výdavky z prenájmu nehnuteľnosti',
-      value: summary.vydavkyNehnutelnost,
-      key: 'danovyBonusNaUroky',
     },
     {
       title: 'Nárok na daňový bonus na deti',
