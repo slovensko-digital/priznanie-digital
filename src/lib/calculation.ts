@@ -246,7 +246,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.prenajom_oslobodenie.isZero()) {
         return prijmy.minus(vydavky)
       } else {
-        return ((prijmy.minus(this.prenajom_oslobodenie)).div(prijmy)).mul(vydavky)
+        const result = ((prijmy.minus(this.prenajom_oslobodenie)).div(prijmy)).mul(vydavky)
+        return Decimal.min(this.t1r11s1, result)
       }
     },
     get t1r13s1() {
