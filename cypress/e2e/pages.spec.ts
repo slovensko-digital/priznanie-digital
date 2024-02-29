@@ -284,8 +284,6 @@ describe('Partner page', () => {
     next()
     cy.get('[data-test=ineligible-message]').should('not.exist')
 
-    next()
-    cy.get('[data-test=ineligible-message]').should('not.exist')
     cy.get('[data-test="partner_podmienky.1-input"]').should('exist')
 
     // Continue to see ineligible message
