@@ -194,11 +194,24 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        /**  SECTION Prenajom */
+        assertUrl('/prenajom')
+
         if (input.rent) {
           getInput('rent', '-yes').click()
+          next()
           typeToInput('vyskaPrijmovZPrenajmu', input)
           next()
-          // TODO
+          if (input.prenajomPrijemZPrilezitostnejCinnosti) {
+            getInput('prenajomPrijemZPrilezitostnejCinnosti', '-yes').click()
+            next()
+            typeToInput('vyskaOslobodenia', input)
+            next()
+          } else {
+            getInput('prenajomPrijemZPrilezitostnejCinnosti', '-no').click()
+            next()
+          }
+          typeToInput('vydavkyZPrenajmu', input)
         } else {
           getInput('rent', '-no').click()
         }
