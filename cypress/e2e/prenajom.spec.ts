@@ -4,5 +4,9 @@ describe('Prenajom', () => {
   executeAllTestCases([
     'prenajom202301',
     'prenajom202302',
+    'prenajom202303',
+    'prenajom202304',
+    'prenajom202305',
+    'prenajom202306',
   ])
 })
