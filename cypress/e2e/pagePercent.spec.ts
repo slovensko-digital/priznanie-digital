@@ -130,6 +130,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Prenajom */
+    getInput('rent', '-no').click()
+
+    next()
+
     /* SECTION Uroky */
     getInput('r035_uplatnuje_uroky', '-no').click()
 
@@ -249,6 +254,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Prenajom */
+    getInput('rent', '-no').click()
+
+    next()
+
     /* SECTION Uroky */
     getInput('r035_uplatnuje_uroky', '-no').click()
 
@@ -362,6 +372,11 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* SECTION Prenajom */
+    getInput('rent', '-no').click()
+
+    next()
+
     /* SECTION Uroky */
     getInput('r035_uplatnuje_uroky', '-no').click()
 
@@ -463,6 +478,11 @@ describe('twoPercent page', () => {
     } else {
       getInput('platil_prispevky_na_dochodok', '-no').click()
     }
+
+    next()
+
+    /* SECTION Prenajom */
+    getInput('rent', '-no').click()
 
     next()
 

@@ -8,6 +8,7 @@ import {
   UrokyUserInput,
   TwoPercentUserInput,
   TaxBonusUserInput,
+  RentUserInput,
 } from '../types/PageUserInputs'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
@@ -26,7 +27,6 @@ export const partnerUserInitialValues: PartnerUserInput = {
   partner_step: 0,
   partner_podmienky: {},
   r032_partner_vlastne_prijmy: '',
-
   r032_partner_pocet_mesiacov: '',
 }
 export const personalInformationUserInputInitialValues: PersonalInformationUserInput =
@@ -52,6 +52,15 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
   udajeODanovomBonuseNaDieta: '',
   uhrnPreddavkovNaDan: '',
+}
+
+export const rentUserInputInitialValues: RentUserInput = {
+  rent: undefined,
+  vyskaPrijmovZPrenajmu: '',
+  vyskaOslobodenia: '',
+  prenajomPrijemZPrilezitostnejCinnosti: undefined,
+  vydavkyZPrenajmu: '',
+  rent_step: 0,
 }
 
 let childCounter = 0
@@ -105,6 +114,7 @@ export const initTaxFormUserInputValues: TaxFormUserInput = {
   ...partnerUserInitialValues,
   ...personalInformationUserInputInitialValues,
   ...employmentUserInputInitialValues,
+  ...rentUserInputInitialValues,
   ...childrenUserInputInitialValues,
   ...pensionInitialValues,
   ...urokyInitialValues,

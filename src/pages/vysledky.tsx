@@ -60,6 +60,19 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 }) => {
   const summary = buildSummary(taxForm)
 
+  const rentRows = [
+    {
+      title: 'Príjem z prenájmu nehnuteľnosti',
+      value: summary.prijemNehnutelnost,
+      key: 'prijemNehnutelnost',
+    },
+    {
+      title: 'Výdavky z prenájmu nehnuteľnosti',
+      value: summary.vydavkyNehnutelnost,
+      key: 'vydavkyNehnutelnost',
+    }
+  ]
+
   const summaryRows = [
     {
       title: 'Príjmy spolu',
@@ -91,6 +104,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.prispevkyNaDochodkovePoistenie,
       key: 'prispevkyNaDochodkovePoistenie'
     },
+    ...(taxForm.rent ? rentRows : []),
     {
       title: 'Základ dane',
       value: summary.zakladDane,

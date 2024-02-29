@@ -32,6 +32,8 @@ export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
 const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
 
+export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
+
 export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
 export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
 
@@ -220,6 +222,41 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return zaciatok_urocenia_datum(input)
     },
 
+    /** SECTION Rent */
+    rent: input?.rent ?? false,
+    get prenajom_oslobodenie() {
+      const prilezitostnaCinnost = input?.prenajomPrijemZPrilezitostnejCinnosti ?? false
+      if (this.rent) {
+        if (prilezitostnaCinnost) {
+          return new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+        } else {
+          return new Decimal(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)
+        }
+      } else {
+        return new Decimal(0)
+      }
+    },
+    get t1r11s1() {
+      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
+      return prijmy.minus(this.prenajom_oslobodenie)
+    },
+    get t1r11s2() {
+      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
+      const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
+      if (this.prenajom_oslobodenie.isZero()) {
+        return vydavky
+      } else {
+        const result = (this.t1r11s1.div(prijmy)).mul(vydavky)
+        return Decimal.min(this.t1r11s1, result)
+      }
+    },
+    get t1r13s1() {
+      return this.t1r11s1
+    },
+    get t1r13s2() {
+      return this.t1r11s2
+    },
+
     /** SECTION Employment */
     r036: new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
@@ -270,6 +307,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r057() {
       return this.r055
+    },
+    get r058() {
+      return this.t1r13s1
+    },
+    get r059() {
+      return this.t1r13s2
+    },
+    get r060() {
+      return this.r058.minus(this.r059)
+    },
+    get r065() {
+      return this.r060
     },
     // v r. 72 spočítate, koľko je súčet základov dane zo zamestnania (§ 5) a koľko je základ
     // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 38 a 57
@@ -367,7 +416,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // tak to rovno môžete dať, že sa to rovná. opäť, ak je hodnota na r. 78 0,00,
     // aj na r. 80 musíte preniesť 0,00, nemôže ostať prázdny
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania
+      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r065)
     },
     // 5. idete počítať daň zo základu dane, ktorý ste vypočítali a uviedli na r. 80. Táto daň sa počíta tak, ako v minulosti,
     // teda buď je sadzba 19% alebo 25%, podľa toho, aká je výška základu dane, či je to rovné alebo menšie ako 37 163,36 eur -
@@ -720,6 +769,8 @@ export const buildSummary = (form: TaxForm): Summary => {
     danovyBonusNaUroky: form.r123.negated(),
     danovyBonusPreplatokNaVyplatenie: form.r136_danovy_preplatok.plus(form.r121).plus(form.r127),
     danNaUhradu: form.r135_dan_na_uhradu,
+    prijemNehnutelnost: form.t1r11s1,
+    vydavkyNehnutelnost: form.t1r11s2.negated(),
   }
 }
 
