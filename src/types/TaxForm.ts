@@ -112,6 +112,7 @@ export interface TaxForm {
 
   /** SECTION Prenajom */
   rent?: boolean
+  prenajom_oslobodenie: Decimal
   t1r11s1?: Decimal
   t1r11s2?: Decimal
   t1r13s1?: Decimal

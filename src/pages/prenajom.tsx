@@ -7,6 +7,7 @@ import { Page } from '../components/Page'
 import { rentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
 import { ErrorSummary } from '../components/ErrorSummary'
+import { OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI } from '../lib/calculation'
 
 const Rent: Page<RentUserInput> = ({
   setTaxFormUserInput,
@@ -36,7 +37,7 @@ const Rent: Page<RentUserInput> = ({
             router.push(nextRoute)
           } else if (values.prenajomPrijemZPrilezitostnejCinnosti === false && values.rent_step === 2) {
             values.rent_step = 3
-            values.vyskaOslobodenia = "500"
+            values.vyskaOslobodenia = OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI.toString()
             setFieldValue('rent_step', values.rent_step + 1)
           } else {
             setFieldValue('rent_step', values.rent_step + 1)

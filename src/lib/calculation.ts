@@ -32,6 +32,8 @@ export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
 const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
 
+export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
+
 export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
 export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
 
@@ -222,19 +224,25 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Rent */
     rent: input?.rent ?? false,
+    get prenajom_oslobodenie() {
+      const prilezitostnaCinnost = input?.prenajomPrijemZPrilezitostnejCinnosti ?? false
+      if (prilezitostnaCinnost) {
+        return new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+      } else {
+        return new Decimal(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)
+      }
+    },
     get t1r11s1() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-      const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
-      return prijmy.minus(oslobodenie)
+      return prijmy.minus(this.prenajom_oslobodenie)
     },
     get t1r11s2() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-      const oslobodenie = new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
       const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
-      if (vydavky.isZero()) {
+      if (this.prenajom_oslobodenie.isZero()) {
         return prijmy.minus(vydavky)
       } else {
-        return ((prijmy.minus(oslobodenie)).div(prijmy)).mul(vydavky)
+        return ((prijmy.minus(this.prenajom_oslobodenie)).div(prijmy)).mul(vydavky)
       }
     },
     get t1r13s1() {
