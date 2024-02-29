@@ -43,7 +43,6 @@ export const bugReport2bInput: E2eTestUserInput = {
   iban: 'anon',
   datum: '',
   partner_spolocna_domacnost: true,
-  partner_bonus_uplatneny: false,
   ...{
     r001_dic: '233123123',
     r003_nace: '62010 - Počítačové programovanie',

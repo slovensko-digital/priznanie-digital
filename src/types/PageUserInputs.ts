@@ -42,7 +42,6 @@ export type PartnerUserInput = Pick<
   | 'r032_partner_pocet_mesiacov'
   | 'partner_step'
   | 'partner_spolocna_domacnost'
-  | 'partner_bonus_uplatneny'
   | 'partner_podmienky'
 >
 

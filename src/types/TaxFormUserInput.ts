@@ -61,7 +61,6 @@ export interface TaxFormUserInput {
   r032_partner_pocet_mesiacov?: string
   partner_step?: number
   partner_spolocna_domacnost?: boolean
-  partner_bonus_uplatneny?: boolean
   partner_podmienky?: Record<string, boolean>
 
   /** SECTION  Mortage */

@@ -22,7 +22,6 @@ export const withBonusInput: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '3000',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
 
   /** SECTION Kids */

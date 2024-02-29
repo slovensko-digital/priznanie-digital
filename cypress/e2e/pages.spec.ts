@@ -283,16 +283,7 @@ describe('Partner page', () => {
     cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
     next()
     cy.get('[data-test=ineligible-message]').should('not.exist')
-    getInput('partner_bonus_uplatneny', '-yes').should('exist')
 
-    // Click radio, continue to see ineligible message
-    cy.get('[data-test=partner_bonus_uplatneny-input-yes]').click()
-    next()
-    cy.get('[data-test=ineligible-message]').should('exist')
-
-    // Go back and change answer, continue to see more fields
-    cy.get('button').contains('Späť').click()
-    cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
     next()
     cy.get('[data-test=ineligible-message]').should('not.exist')
     cy.get('[data-test="partner_podmienky.1-input"]').should('exist')

@@ -61,7 +61,6 @@ export const bugReport6Input: E2eTestUserInput = {
   "ziadamVyplatitDanovyBonus": true,
   "datum": "",
   "partner_spolocna_domacnost": true,
-  "partner_bonus_uplatneny": false,
   "r006_titul_za": "",
   "ziadamVratitDanovyPreplatok": true
 }
