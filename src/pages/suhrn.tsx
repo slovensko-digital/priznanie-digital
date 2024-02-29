@@ -286,7 +286,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title={`Prenajom pre rok ${TAX_YEAR}`}
+        title={`Prenájom nehnutelností`}
         href={'/prenajom'}
         rows={[
                 {
