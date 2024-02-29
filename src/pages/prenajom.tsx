@@ -36,9 +36,8 @@ const Rent: Page<RentUserInput> = ({
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
           } else if (values.prenajomPrijemZPrilezitostnejCinnosti === false && values.rent_step === 2) {
-            values.rent_step = 3
-            values.vyskaOslobodenia = OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI.toString()
-            setFieldValue('rent_step', values.rent_step + 1)
+            setFieldValue('vyskaOslobodenia', OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI.toString())
+            setFieldValue('rent_step', values.rent_step + 2)
           } else {
             setFieldValue('rent_step', values.rent_step + 1)
           }
