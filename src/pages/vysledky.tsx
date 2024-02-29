@@ -64,12 +64,12 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     {
       title: 'Príjem z prenájmu nehnuteľnosti',
       value: summary.prijemNehnutelnost,
-      key: 'danovyBonusNaDeti',
+      key: 'prijemNehnutelnost',
     },
     {
       title: 'Výdavky z prenájmu nehnuteľnosti',
       value: summary.vydavkyNehnutelnost,
-      key: 'danovyBonusNaUroky',
+      key: 'vydavkyNehnutelnost',
     }
   ]
 
