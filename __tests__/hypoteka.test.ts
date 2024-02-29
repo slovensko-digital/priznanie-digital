@@ -2,7 +2,7 @@ import { TAX_YEAR } from '../src/lib/calculation'
 import { validate } from '../src/pages/uroky'
 import { testValidation } from './utils/testValidation'
 
-describe.only('hypoteka', () => {
+describe('hypoteka', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
