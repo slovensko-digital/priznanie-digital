@@ -47,7 +47,6 @@ export const withHighIncome2Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '200',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
 
   /** Pension */

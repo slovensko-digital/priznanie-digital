@@ -27,7 +27,7 @@ const Partner: Page<PartnerUserInput> = ({
           if (
             values.r032_uplatnujem_na_partnera === false ||
             validatePartnerBonusForm(values, values.partner_step) === false ||
-            values.partner_step === 5
+            values.partner_step === 4
           ) {
             const userInput = values.r032_uplatnujem_na_partnera
               ? values
@@ -80,18 +80,14 @@ export const validate = (values: PartnerUserInput) => {
     errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
   }
 
-  if (values.partner_step === 2 && validatePartnerBonusForm(values, 2)) {
-    if (typeof values.partner_bonus_uplatneny === 'undefined') {
-      errors.partner_bonus_uplatneny = 'Vyznačte odpoveď'
-    }
-  } else if (values.partner_step === 4 && validatePartnerBonusForm(values, 4)) {
+  if (values.partner_step === 3 && validatePartnerBonusForm(values, 3)) {
     if (!values.r032_partner_vlastne_prijmy) {
       errors.r032_partner_vlastne_prijmy =
         'Zadajte vlastné príjmy manželky / manžela'
     } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
       errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
     }
-  } else if (values.partner_step === 5 && validatePartnerBonusForm(values, 5)) {
+  } else if (values.partner_step === 4 && validatePartnerBonusForm(values, 4)) {
     if (!values.r031_priezvisko_a_meno) {
       errors.r031_priezvisko_a_meno =
         'Zadajte meno a priezvisko manželky / manžela.'

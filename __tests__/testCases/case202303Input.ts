@@ -37,7 +37,6 @@ export const case202303Input: E2eTestUserInput = {
   r032_partner_pocet_mesiacov: '12',
   r032_partner_vlastne_prijmy: '3000',
   partner_spolocna_domacnost: true,
-  partner_bonus_uplatneny: false,
   partner_podmienky: { '1': true },
 
   /** SECTION Children */
