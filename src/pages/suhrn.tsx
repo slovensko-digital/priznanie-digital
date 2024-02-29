@@ -272,17 +272,49 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.r035_uplatnuje_uroky
             ? [
-                {
-                  title: `Zaplatené úroky v roku ${TAX_YEAR}`,
-                  value: taxFormUserInput.r035_zaplatene_uroky,
-                  currency: true,
-                },
-                {
-                  title: 'Začiatok úročenia',
-                  value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
-                },
-              ]
+              {
+                title: `Zaplatené úroky v roku ${TAX_YEAR}`,
+                value: taxFormUserInput.r035_zaplatene_uroky,
+                currency: true,
+              },
+              {
+                title: 'Začiatok úročenia',
+                value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
+              },
+            ]
             : [{ title: 'Neplatil som' }]
+        }
+      />
+      <Summary
+        title={`Prenájom nehnutelností`}
+        href={'/prenajom'}
+        rows={
+          taxFormUserInput.rent
+            ?
+            [
+              {
+                title: 'Výška príjmov z prenájmu nehnuteľností',
+                value: taxFormUserInput.vyskaPrijmovZPrenajmu,
+                currency: true,
+                allignRight: true,
+              },
+              {
+                title: 'Výška výdavkov z prenájmu nehnuteľností',
+                value: taxFormUserInput.vydavkyZPrenajmu,
+                currency: true,
+                allignRight: true,
+              },
+              {
+                title: 'Výška oslobodenia z prenájmu nehnuteľností a príležitostnej činnosti',
+                value: taxFormUserInput.vyskaOslobodenia,
+                currency: true,
+                allignRight: true,
+              },
+            ] : [
+              {
+                title: `Nemám príjmy z prenájmu nehnuteľností`
+              }
+            ]
         }
       />
       <Summary

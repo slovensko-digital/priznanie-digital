@@ -92,6 +92,14 @@ export interface TaxFormUserInput {
   uhrnPreddavkovNaDan?: string
   udajeODanovomBonuseNaDieta?: string
 
+  /** SECTION Prenajom */
+  rent?: boolean
+  vyskaPrijmovZPrenajmu?: string
+  prenajomPrijemZPrilezitostnejCinnosti?: boolean
+  vyskaOslobodenia?: string
+  vydavkyZPrenajmu?: string
+  rent_step?: number
+
   /** SECTION  Deti*/
   hasChildren?: boolean
   partner_bonus_na_deti_chce_uplatnit?: boolean

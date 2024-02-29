@@ -100,6 +100,21 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
+  /** SECTION Rent */
+  if (taxForm.rent) {
+    form.dokument.telo.tabulka1.t1r11.s1 = decimalToString(taxForm.t1r11s1)
+    form.dokument.telo.tabulka1.t1r11.s2 = decimalToString(taxForm.t1r11s2)
+    form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r13s1)
+    form.dokument.telo.tabulka1.t1r13.s2 = decimalToString(taxForm.t1r13s2)
+
+    form.dokument.telo.vydavkyPar6ods11_ods3 = boolToString(true)
+
+    form.dokument.telo.r58 = decimalToString(taxForm.r058)
+    form.dokument.telo.r59 = decimalToString(taxForm.r059)
+    form.dokument.telo.r60 = decimalToString(taxForm.r060)
+    form.dokument.telo.r65 = decimalToString(taxForm.r065)
+  }
+
   /** SECTION Mortgage */
   if (taxForm.r035_uplat_dan_bonus_zaplat_uroky) {
     form.dokument.telo.r35 = {
