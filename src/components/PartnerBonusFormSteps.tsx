@@ -104,15 +104,6 @@ export const HouseholdQuestion = ({ disabled }) => (
   />
 )
 
-export const AlreadyAppliedQuestion = ({ disabled }) => (
-  <BooleanRadio
-    name="partner_bonus_uplatneny"
-    title="Uplatnili ste si zvýhodnenie inou cestou?"
-    disabled={disabled}
-    hint="Zvýhodnenie na manželku / manžela si môžete uplatniť aj prostredníctvom zamestnávateľa pri ročnom zúčtovaní dane alebo vlastným daňovým priznaním."
-  />
-)
-
 export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">

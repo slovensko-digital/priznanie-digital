@@ -107,8 +107,6 @@ const executeTestCase = (testCase: string) => {
           next()
           cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
           next()
-          cy.get('[data-test=partner_bonus_uplatneny-input-no]').click()
-          next()
           cy.get('[data-test="partner_podmienky.1-input"]').click()
           next()
           typeToInput('r032_partner_vlastne_prijmy', input)

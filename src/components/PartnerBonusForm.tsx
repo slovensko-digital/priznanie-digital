@@ -2,7 +2,6 @@ import { PartnerUserInput } from '../types/PageUserInputs'
 import React, { useEffect, useRef } from 'react'
 import { FormikProps } from 'formik'
 import {
-  AlreadyAppliedQuestion,
   ApplyForBonusQuestion,
   ConditionsQuestion,
   EligiblePartnerForm,
@@ -36,7 +35,6 @@ export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
     useRef(),
     useRef(),
     useRef(),
-    useRef(),
   ]
 
   useEffect(() => {
@@ -62,10 +60,9 @@ export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
   }
 
   addQuestionForStep(1, HouseholdQuestion)
-  addQuestionForStep(2, AlreadyAppliedQuestion)
-  addQuestionForStep(3, ConditionsQuestion)
-  addQuestionForStep(4, IncomeQuestion)
-  addQuestionForStep(5, EligiblePartnerForm)
+  addQuestionForStep(2, ConditionsQuestion)
+  addQuestionForStep(3, IncomeQuestion)
+  addQuestionForStep(4, EligiblePartnerForm)
 
   return (
     <>
