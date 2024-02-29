@@ -28,7 +28,7 @@ export const IncomeQuestion = ({ disabled }) => {
 
 export const OslobodenieQuestion = ({ disabled }) => (
   <BooleanRadio
-    name="prijemZPrenajmuOslobodenieDane"
+    name="prenajomPrijemZPrilezitostnejCinnosti"
     title={`Dosiahli ste v roku ${TAX_YEAR} aj príjem z príležitostnej činnosti?`}
     hint="Maximálne do výšky 500 EUR"
     disabled={disabled}

@@ -58,7 +58,7 @@ export const rentUserInputInitialValues: RentUserInput = {
   rent: undefined,
   vyskaPrijmovZPrenajmu: '',
   vyskaOslobodenia: '',
-  prijemZPrenajmuOslobodenieDane: undefined,
+  prenajomPrijemZPrilezitostnejCinnosti: undefined,
   vydavkyZPrenajmu: '',
   rent_step: 0,
 }

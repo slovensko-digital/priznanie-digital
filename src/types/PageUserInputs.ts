@@ -24,7 +24,7 @@ export type RentUserInput = Pick<
   | 'rent'
   | 'vyskaPrijmovZPrenajmu'
   | 'vyskaOslobodenia'
-  | 'prijemZPrenajmuOslobodenieDane'
+  | 'prenajomPrijemZPrilezitostnejCinnosti'
   | 'vydavkyZPrenajmu'
   | 'rent_step'
 >

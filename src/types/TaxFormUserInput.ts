@@ -95,7 +95,7 @@ export interface TaxFormUserInput {
   /** SECTION Prenajom */
   rent?: boolean
   vyskaPrijmovZPrenajmu?: string
-  prijemZPrenajmuOslobodenieDane?: boolean
+  prenajomPrijemZPrilezitostnejCinnosti?: boolean
   vyskaOslobodenia?: string
   vydavkyZPrenajmu?: string
   rent_step?: number

@@ -34,7 +34,7 @@ const Rent: Page<RentUserInput> = ({
                 }
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
-          } else if (values.prijemZPrenajmuOslobodenieDane === false && values.rent_step === 2) {
+          } else if (values.prenajomPrijemZPrilezitostnejCinnosti === false && values.rent_step === 2) {
             values.rent_step = 3
             values.vyskaOslobodenia = "500"
             setFieldValue('rent_step', values.rent_step + 1)
@@ -80,8 +80,8 @@ export const validate = (values: RentUserInput) => {
 
   if (
     values.rent_step === 2 &&
-    typeof values.prijemZPrenajmuOslobodenieDane === 'undefined') {
-      errors.prijemZPrenajmuOslobodenieDane = 'Vyznačte odpoveď'
+    typeof values.prenajomPrijemZPrilezitostnejCinnosti === 'undefined') {
+      errors.prenajomPrijemZPrilezitostnejCinnosti = 'Vyznačte odpoveď'
   }
 
   if (
