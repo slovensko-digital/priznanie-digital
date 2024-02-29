@@ -8,5 +8,6 @@ describe('Prenajom', () => {
     'prenajom202304',
     'prenajom202305',
     'prenajom202306',
+    'prenajom202307',
   ])
 })
