@@ -244,9 +244,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
       const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
       if (this.prenajom_oslobodenie.isZero()) {
-        return prijmy.minus(vydavky)
+        return vydavky
       } else {
-        const result = ((prijmy.minus(this.prenajom_oslobodenie)).div(prijmy)).mul(vydavky)
+        const result = (this.t1r11s1.div(prijmy)).mul(vydavky)
         return Decimal.min(this.t1r11s1, result)
       }
     },
