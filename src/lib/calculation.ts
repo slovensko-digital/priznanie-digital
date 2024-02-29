@@ -226,10 +226,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     rent: input?.rent ?? false,
     get prenajom_oslobodenie() {
       const prilezitostnaCinnost = input?.prenajomPrijemZPrilezitostnejCinnosti ?? false
-      if (prilezitostnaCinnost) {
-        return new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+      if (this.rent) {
+        if (prilezitostnaCinnost) {
+          return new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
+        } else {
+          return new Decimal(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)
+        }
       } else {
-        return new Decimal(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)
+        return new Decimal(0)
       }
     },
     get t1r11s1() {
