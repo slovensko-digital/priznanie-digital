@@ -8,6 +8,7 @@ import { rentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI } from '../lib/calculation'
+import { numberInputRegexp } from '../lib/utils'
 
 const Rent: Page<RentUserInput> = ({
   setTaxFormUserInput,
@@ -71,7 +72,7 @@ export const validate = (values: RentUserInput) => {
       errors.vyskaPrijmovZPrenajmu = 'Vyznačte odpoveď [2]'
   } else if (
     values.rent_step === 1 &&
-    !values.vyskaPrijmovZPrenajmu.match(/^\d+$/) ||
+    !values.vyskaPrijmovZPrenajmu.match(numberInputRegexp) ||
     Number.parseInt(values.vyskaPrijmovZPrenajmu, 10) < 0
   ) {
     errors.vyskaPrijmovZPrenajmu =
@@ -90,7 +91,7 @@ export const validate = (values: RentUserInput) => {
       errors.vyskaOslobodenia = 'Vyznačte odpoveď'
   } else if (
     values.rent_step === 3 &&
-    !values.vyskaOslobodenia.match(/^\d+$/) ||
+    !values.vyskaOslobodenia.match(numberInputRegexp) ||
     Number.parseInt(values.vyskaOslobodenia, 10) < 0 ||
     Number.parseInt(values.vyskaOslobodenia, 10) > 500
   ) {
@@ -104,7 +105,7 @@ export const validate = (values: RentUserInput) => {
       errors.vydavkyZPrenajmu = 'Vyznačte odpoveď'
   } else if (
     values.rent_step === 4 &&
-    !values.vydavkyZPrenajmu.match(/^\d+$/) ||
+    !values.vydavkyZPrenajmu.match(numberInputRegexp) ||
     Number.parseInt(values.vydavkyZPrenajmu, 10) < 0
   ) {
     errors.vydavkyZPrenajmu =
