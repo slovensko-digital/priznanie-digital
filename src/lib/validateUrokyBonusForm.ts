@@ -9,13 +9,14 @@ export const validateUrokyBonusForm = (
 
   const step1 = values.uroky_dalsi_uver_uplatnuje === false
 
+  const rok_uzatvorenia = Number.parseInt(values.uroky_rok_uzatvorenia, 10)
   const den = Number.parseInt(values.uroky_zaciatok_urocenia_den, 10)
   const mesiac = Number.parseInt(values.uroky_zaciatok_urocenia_mesiac, 10)
   const rok = Number.parseInt(values.uroky_zaciatok_urocenia_rok, 10)
   const zaciatok_urocenia = new Date(rok, mesiac - 1, den)
   const limit_zaciatku = new Date(TAX_YEAR-UROKY_POCET_ROKOV, 0, 1)
 
-  const step2 = zaciatok_urocenia >= limit_zaciatku
+  const step2 = zaciatok_urocenia >= limit_zaciatku && rok_uzatvorenia >= TAX_YEAR - UROKY_POCET_ROKOV
 
   const step3 = true
 
