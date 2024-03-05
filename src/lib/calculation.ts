@@ -12,6 +12,7 @@ import { validatePartnerBonusForm } from './validatePartnerBonusForm'
 import { Summary } from '../types/Summary'
 import { optionWithValue } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
+import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
 // NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
@@ -202,7 +203,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
 
     /** SECTION Mortgage **/
-    r035_uplat_dan_bonus_zaplat_uroky: input?.r035_uplatnuje_uroky ?? false,
+    get r035_uplat_dan_bonus_zaplat_uroky() {
+      return (
+        input?.r035_uplatnuje_uroky && validateUrokyBonusForm(input)
+      )
+    },
     get r035_zaplatene_uroky() {
       return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
     },
@@ -621,9 +626,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           const limit = round(new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12)).times(this.r035_pocet_mesiacov)
           return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit))
         }
-      } else {
-        return new Decimal(0)
       }
+      return new Decimal(0)
     },
     get r124() {
       return Decimal.max(this.r118.minus(this.r123), 0)
