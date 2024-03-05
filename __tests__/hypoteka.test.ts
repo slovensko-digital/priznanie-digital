@@ -20,6 +20,7 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
           hypoteka_step: 2,
         },
         expected: ['uroky_rok_uzatvorenia', 'uroky_zaciatok_urocenia_den', 'uroky_zaciatok_urocenia_mesiac', 'uroky_zaciatok_urocenia_rok'],
@@ -27,6 +28,7 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
           uroky_rok_uzatvorenia: TAX_YEAR-1,
           hypoteka_step: 2,
         },
@@ -35,6 +37,7 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
           uroky_rok_uzatvorenia: TAX_YEAR-1,
           uroky_zaciatok_urocenia_den: '1',
           uroky_zaciatok_urocenia_mesiac: '1',
@@ -46,6 +49,11 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
           hypoteka_step: 3,
         },
         expected: ['uroky_dalsi_dlznik'],
@@ -53,6 +61,11 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
           hypoteka_step: 3,
           uroky_dalsi_dlznik: true,
         },
@@ -61,6 +74,11 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
           hypoteka_step: 3,
           uroky_dalsi_dlznik: false,
         },
@@ -69,6 +87,11 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
           hypoteka_step: 4,
         },
         expected: ['uroky_splnam_vek_kriteria'],
@@ -84,6 +107,12 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
+          uroky_splnam_vek_kriteria: true,
           hypoteka_step: 5,
         },
         expected: ['uroky_splnam_prijem'],
@@ -91,6 +120,12 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
+          uroky_splnam_vek_kriteria: true,
           hypoteka_step: 5,
           uroky_splnam_prijem: true,
         },
@@ -99,6 +134,13 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
+          uroky_splnam_vek_kriteria: true,
+          uroky_splnam_prijem: true,
           hypoteka_step: 6,
           r035_zaplatene_uroky: undefined,
         },
@@ -107,6 +149,13 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
+          uroky_splnam_vek_kriteria: true,
+          uroky_splnam_prijem: true,
           hypoteka_step: 6,
           r035_zaplatene_uroky: '123,45',
         },
@@ -123,6 +172,13 @@ describe('hypoteka', () => {
       {
         input: {
           r035_uplatnuje_uroky: true,
+          uroky_dalsi_uver_uplatnuje: false,
+          uroky_rok_uzatvorenia: TAX_YEAR-1,
+          uroky_zaciatok_urocenia_den: '1',
+          uroky_zaciatok_urocenia_mesiac: '1',
+          uroky_zaciatok_urocenia_rok: TAX_YEAR-1,
+          uroky_splnam_vek_kriteria: true,
+          uroky_splnam_prijem: true,
           hypoteka_step: 6,
           r035_zaplatene_uroky: '123,45a',
         },
