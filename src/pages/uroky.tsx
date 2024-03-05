@@ -76,7 +76,7 @@ export const validate = (values: UrokyUserInput) => {
     typeof values.uroky_dalsi_uver_uplatnuje === 'undefined'
   ) {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
-  } else if (values.hypoteka_step === 2) {
+  } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
     if (typeof values.uroky_rok_uzatvorenia === 'undefined') {
       errors.uroky_rok_uzatvorenia = 'Zadajte rok'
     } else {
@@ -108,7 +108,7 @@ export const validate = (values: UrokyUserInput) => {
     if (zaciatok_urocenia.getFullYear() > TAX_YEAR) {
       errors.uroky_zaciatok_urocenia_rok = `Rok začiatku úročenia môže byť najviac ${TAX_YEAR}`
     }
-  } else if (values.hypoteka_step === 3) {
+  } else if (values.hypoteka_step === 3 && validateUrokyBonusForm(values, 3)) {
     if (typeof values.uroky_dalsi_dlznik === 'undefined') {
       errors.uroky_dalsi_dlznik = 'Vyznačte odpoveď'
     } else {
@@ -122,15 +122,15 @@ export const validate = (values: UrokyUserInput) => {
         }
       }
     }
-  } else if (values.hypoteka_step === 4) {
+  } else if (values.hypoteka_step === 4 && validateUrokyBonusForm(values, 4)) {
     if (typeof values.uroky_splnam_vek_kriteria === 'undefined') {
       errors.uroky_splnam_vek_kriteria = 'Vyznačte odpoveď'
     }
-  } else if (values.hypoteka_step === 5) {
+  } else if (values.hypoteka_step === 5 && validateUrokyBonusForm(values, 5)) {
     if (typeof values.uroky_splnam_prijem === 'undefined') {
       errors.uroky_splnam_prijem = 'Vyznačte odpoveď'
     }
-  } else if (values.hypoteka_step === 6) {
+  } else if (values.hypoteka_step === 6 && validateUrokyBonusForm(values, 6)) {
     if (typeof values.r035_zaplatene_uroky === 'undefined') {
       errors.r035_zaplatene_uroky = 'Zadajte zaplatené úroky'
     } else if (!values.r035_zaplatene_uroky.match(numberInputRegexp)) {

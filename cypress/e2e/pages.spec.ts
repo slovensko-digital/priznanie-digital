@@ -14,7 +14,7 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
-import { MAX_CHILD_AGE_BONUS, TAX_YEAR } from '../../src/lib/calculation'
+import { MAX_CHILD_AGE_BONUS, TAX_YEAR, UROKY_POCET_ROKOV } from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -631,6 +631,136 @@ describe('Pension page', () => {
 
     next()
     assertUrl('/prenajom')
+  })
+})
+
+describe('Uroky page', () => {
+  it('has working ui', () => {
+    cy.visit('/uroky')
+
+    // Back button should work and be the correct page
+    cy.get('[data-test=back]').click()
+    assertUrl('/prenajom')
+
+    //  Go back to our page
+    cy.visit('/uroky')
+
+    // Shows error, when presses next without interaction
+    next()
+    getError().should('have.length', 1)
+
+    // When presses no, can continue to next page
+    cy.get('[data-test=r035_uplatnuje_uroky-input-no]').click()
+    next()
+    assertUrl('/dve-percenta')
+  })
+
+  it('determines eligibility', () => {
+    cy.visit('/uroky')
+
+    // When presses yes, additional fields appears
+    cy.get('[data-test=r035_uplatnuje_uroky-input-yes]').click()
+    next()
+
+    getInput('uroky_dalsi_uver_uplatnuje', '-yes').should('exist')
+
+    // Should show error if not filled in
+    next()
+    getError().should('have.length', 1)
+
+    // Click radio, continue to see ineligible message
+    cy.get('[data-test=uroky_dalsi_uver_uplatnuje-input-yes]').click()
+    next()
+    cy.get('[data-test=ineligible-message]').should('exist')
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+
+    // Go back and change answer, continue to see more fields
+    cy.get('button').contains('Späť').click()
+    cy.get('[data-test=uroky_dalsi_uver_uplatnuje-input-no]').click()
+    next()
+    cy.get('[data-test=ineligible-message]').should('not.exist')
+
+    cy.get('[data-test="uroky_rok_uzatvorenia-input"]').should('exist')
+
+    cy.get('[data-test="uroky_zaciatok_urocenia_den-input"]').should('exist')
+    cy.get('[data-test="uroky_zaciatok_urocenia_mesiac-input"]').should('exist')
+    cy.get('[data-test="uroky_zaciatok_urocenia_rok-input"]').should('exist')
+
+    next()
+    getError().should('have.length', 4)
+
+    getInput('uroky_rok_uzatvorenia').type((TAX_YEAR-UROKY_POCET_ROKOV - 1).toString())
+    getInput('uroky_zaciatok_urocenia_den').type('1')
+    getInput('uroky_zaciatok_urocenia_mesiac').type('2')
+    getInput('uroky_zaciatok_urocenia_rok').type((TAX_YEAR-2).toString())
+
+    next()
+    cy.get('[data-test=ineligible-message]').should('exist')
+
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+
+    cy.get('button').contains('Späť').click()
+
+    getInput('uroky_rok_uzatvorenia').clear().type((TAX_YEAR-UROKY_POCET_ROKOV).toString())
+
+    next()
+
+    next()
+    getError().should('have.length', 1)
+
+    cy.get('[data-test=uroky_dalsi_dlznik-input-yes]').click()
+
+    cy.get('[data-test="uroky_pocet_dlznikov-input"]').should('exist')
+
+    getInput('uroky_pocet_dlznikov').type('2')
+
+    next()
+
+    next()
+
+    getError().should('have.length', 1)
+
+    cy.get('[data-test=uroky_splnam_vek_kriteria-input-no]').click()
+
+    next()
+    cy.get('[data-test=ineligible-message]').should('exist')
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+    cy.get('button').contains('Späť').click()
+
+    cy.get('[data-test=uroky_splnam_vek_kriteria-input-yes]').click()
+
+    next()
+
+    next()
+    getError().should('have.length', 1)
+    cy.get('[data-test=uroky_splnam_prijem-input-no]').click()
+    next()
+    cy.get('[data-test=ineligible-message]').should('exist')
+    next()
+    assertUrl('/dve-percenta')
+    cy.get('[data-test=back]').click()
+    cy.get('button').contains('Späť').click()
+    cy.get('[data-test=uroky_splnam_prijem-input-yes]').click()
+    next()
+
+    next()
+    getError().should('have.length', 1)
+
+    getInput('r035_zaplatene_uroky').type('a')
+
+    next()
+    getError().should('have.length', 1)
+
+    getInput('r035_zaplatene_uroky').clear().type('123.41')
+
+    next()
+    assertUrl('/dve-percenta')
   })
 })
 
