@@ -76,7 +76,7 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
   let priznanyPrijem = null
   const oslobodenie = parseInputNumber(vyskaOslobodenia)
   if (oslobodenie > 0) {
-    priznanyPrijem = Decimal.max(new Decimal(vyskaPrijmovZPrenajmu).minus(new Decimal(oslobodenie)), 0)
+    priznanyPrijem = Decimal.max(new Decimal(parseInputNumber(vyskaPrijmovZPrenajmu)).minus(new Decimal(oslobodenie)), 0)
   }
   const hint = prenajomPrijemZPrilezitostnejCinnosti === true ? `Na príjem z prenájmu už môžete využiť iba zvyšok oslobodenia po odpočítani príjmu z príležitostnej činnosti. Teda ${formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)} mínus príjem z príležitostnej činnosti.` : `Keďže ste nemali príjem z príležitostnej činnosti, môžete si uplatniť oslobodenie v maximálnej výške ${formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}.`
   return (
