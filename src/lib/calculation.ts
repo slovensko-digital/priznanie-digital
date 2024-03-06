@@ -293,7 +293,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r038() {
-      return this.r036.minus(this.r037)
+      return Decimal.max(this.r036.minus(this.r037), 0)
     },
     get r039() {
       return this.t1r10_prijmy
@@ -593,7 +593,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return { danovyBonus, nevyuzityDanovyBonus }
     },
     get r117() {
-      return this.danovyBonusNaDieta.danovyBonus
+      return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
     },
     get r118() {
       return Decimal.max(this.r116_dan.minus(this.r117), 0)
