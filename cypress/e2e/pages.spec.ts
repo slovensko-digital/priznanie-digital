@@ -801,7 +801,6 @@ describe('Results page', () => {
     cy.visit('/vysledky')
 
     cy.get('h1').contains('Výpočet dane za rok')
-    cy.get('h2').contains('Stručný prehľad')
   })
 })
 

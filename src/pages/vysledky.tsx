@@ -23,11 +23,15 @@ interface SummaryRow {
   fontSize?: number
 }
 interface SummaryProps {
-  rows: SummaryRow[]
+  rows: SummaryRow[],
+  title?: string
 }
-const Summary = ({ rows }: SummaryProps) => (
+const Summary = ({ rows, title }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
+      {title && (
+        <caption className="govuk-table__caption govuk-table__caption--l">{title}</caption>
+      )}
       <tbody className="govuk-table__body">
         {rows.map(({ key, title, description, value, fontSize }) => (
           <tr
@@ -60,19 +64,6 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
 }) => {
   const summary = buildSummary(taxForm)
 
-  const rentRows = [
-    {
-      title: 'Príjem z prenájmu nehnuteľnosti',
-      value: summary.prijemNehnutelnost,
-      key: 'prijemNehnutelnost',
-    },
-    {
-      title: 'Výdavky z prenájmu nehnuteľnosti',
-      value: summary.vydavkyNehnutelnost,
-      key: 'vydavkyNehnutelnost',
-    }
-  ]
-
   const summaryRows = [
     {
       title: 'Príjmy spolu',
@@ -104,12 +95,34 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.prispevkyNaDochodkovePoistenie,
       key: 'prispevkyNaDochodkovePoistenie'
     },
-    ...(taxForm.rent ? rentRows : []),
     {
       title: 'Základ dane',
       value: summary.zakladDane,
       key: 'zakladDane',
+      fontSize: 20,
+    }
+  ]
+
+  const rentRows = [
+    {
+      title: 'Príjmy spolu',
+      value: summary.prijemNehnutelnost,
+      key: 'prijemNehnutelnost',
     },
+    {
+      title: 'Preukázateľné výdavky spolu',
+      value: summary.vydavkyNehnutelnost,
+      key: 'vydavkyNehnutelnost',
+    },
+    {
+      title: 'Základ dane',
+      value: summary.zakladDanZPrenajmu,
+      key: 'zakladDanZPrenajmu',
+      fontSize: 20,
+    }
+  ]
+
+  const totalRows = [
     {
       title: 'Daň spolu',
       value: summary.danSpolu,
@@ -131,7 +144,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       key: 'danovyBonusNaUroky',
     },
     {
-      title: 'Daňový bonus/preplatok na vyplatenie',
+      title: 'Daňový bonus / preplatok na vyplatenie',
       value: summary.danovyBonusPreplatokNaVyplatenie,
       key: 'danovyBonusPreplatokNaVyplatenie',
     },
@@ -155,8 +168,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         {`Výpočet dane za rok ${TAX_YEAR}`}
       </h1>
-      <h2 className="govuk-heading-m govuk-!-margin-top-3">Stručný prehľad</h2>
-      <Summary rows={summaryRows} />
+      <Summary title='Príjmy zo zamestnania a živnosti' rows={summaryRows} />
+      <Summary title='Príjmy z prenájmu nehnuteľností' rows={rentRows} />
+      <Summary title='Daň na úhradu / daňový preplatok' rows={totalRows} />
 
       {
         prePayments &&
