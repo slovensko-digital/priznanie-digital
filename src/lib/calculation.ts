@@ -4,7 +4,6 @@ import {
   getRodneCisloAgeAtYearAndMonth,
   parseInputNumber,
   percentage,
-  sum,
   round,
 } from './utils'
 import Decimal from 'decimal.js'
@@ -329,7 +328,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     // v r. 72 spočítate, koľko je súčet základov dane zo zamestnania (§ 5) a koľko je základ
     // dane z podnikania (§ 6/1 a § 6/2), teda urobíte súčet riadkov 38 a 57
     get r072_pred_znizenim() {
-      return sum(this.r057, this.r038)
+      return Decimal.max(this.r038.plus(this.r057), 0)
     },
     // v r.73 až 76 uvediete, aké nezdaniteľné časti si uplatní daňovník - to sú tie údaje z úvodu, ktoré vypĺňa,
     // či mal kúpeľnú starostlivosť, či si platí DDP... v riadku 77 tieto nezdaniteľné časti na daňovníka spočítate,
