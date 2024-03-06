@@ -36,9 +36,13 @@ const Rent: Page<RentUserInput> = ({
                 }
             setTaxFormUserInput(userInput)
             router.push(nextRoute)
-          } else if (values.prenajomPrijemZPrilezitostnejCinnosti === false && values.rent_step === 2) {
-            setFieldValue('vyskaOslobodenia', OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI.toString())
-            setFieldValue('rent_step', values.rent_step + 2)
+          } else if (values.rent_step === 3) {
+            if (values.prenajomPrijemZPrilezitostnejCinnosti === false) {
+              setFieldValue('vyskaOslobodenia', OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI.toString())
+            } else if (values.prenajomPrijemZPrilezitostnejCinnosti === true) {
+              setFieldValue('vyskaOslobodenia', '')
+            }
+            setFieldValue('rent_step', values.rent_step + 1)
           } else {
             setFieldValue('rent_step', values.rent_step + 1)
           }
@@ -81,35 +85,35 @@ export const validate = (values: RentUserInput) => {
 
   if (
     values.rent_step === 2 &&
+    typeof values.vydavkyZPrenajmu === 'undefined') {
+      errors.vydavkyZPrenajmu = 'Vyznačte odpoveď'
+  } else if (
+    values.rent_step === 2 &&
+    !values.vydavkyZPrenajmu.match(numberInputRegexp) ||
+    Number.parseInt(values.vydavkyZPrenajmu, 10) < 0
+  ) {
+    errors.vydavkyZPrenajmu =
+      'Zadajte sumu - číslo'
+  }
+
+  if (
+    values.rent_step === 3 &&
     typeof values.prenajomPrijemZPrilezitostnejCinnosti === 'undefined') {
       errors.prenajomPrijemZPrilezitostnejCinnosti = 'Vyznačte odpoveď'
   }
 
   if (
-    values.rent_step === 3 &&
+    values.rent_step === 4 &&
     typeof values.vyskaOslobodenia === 'undefined') {
       errors.vyskaOslobodenia = 'Vyznačte odpoveď'
   } else if (
-    values.rent_step === 3 &&
+    values.rent_step === 4 &&
     !values.vyskaOslobodenia.match(numberInputRegexp) ||
     Number.parseInt(values.vyskaOslobodenia, 10) < 0 ||
     Number.parseInt(values.vyskaOslobodenia, 10) > 500
   ) {
     errors.vyskaOslobodenia =
       'Zadajte sumu - číslo od 0 do 500'
-  }
-
-  if (
-    values.rent_step === 4 &&
-    typeof values.vydavkyZPrenajmu === 'undefined') {
-      errors.vydavkyZPrenajmu = 'Vyznačte odpoveď'
-  } else if (
-    values.rent_step === 4 &&
-    !values.vydavkyZPrenajmu.match(numberInputRegexp) ||
-    Number.parseInt(values.vydavkyZPrenajmu, 10) < 0
-  ) {
-    errors.vydavkyZPrenajmu =
-      'Zadajte sumu - číslo'
   }
 
   return errors

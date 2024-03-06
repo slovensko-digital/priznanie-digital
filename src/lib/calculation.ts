@@ -243,17 +243,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get t1r11s1() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-      return prijmy.minus(this.prenajom_oslobodenie)
+      return Decimal.max(prijmy.minus(this.prenajom_oslobodenie), 0)
     },
     get t1r11s2() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
       const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
+      let result = new Decimal(0)
       if (this.prenajom_oslobodenie.isZero()) {
-        return vydavky
+        result = vydavky
       } else {
-        const result = (this.t1r11s1.div(prijmy)).mul(vydavky)
-        return Decimal.min(this.t1r11s1, result)
+        result = (this.t1r11s1.div(prijmy)).mul(vydavky)
       }
+      return Decimal.max(Decimal.min(this.t1r11s1, result), 0)
     },
     get t1r13s1() {
       return this.t1r11s1

@@ -200,16 +200,20 @@ const executeTestCase = (testCase: string) => {
           next()
           typeToInput('vyskaPrijmovZPrenajmu', input)
           next()
+          typeToInput('vydavkyZPrenajmu', input)
+          next()
           if (input.prenajomPrijemZPrilezitostnejCinnosti) {
             getInput('prenajomPrijemZPrilezitostnejCinnosti', '-yes').click()
             next()
+            getInput('vyskaOslobodenia').should('have.value', '')
             typeToInput('vyskaOslobodenia', input)
             next()
           } else {
             getInput('prenajomPrijemZPrilezitostnejCinnosti', '-no').click()
             next()
+            getInput('vyskaOslobodenia').should('have.value', '500')
+            next()
           }
-          typeToInput('vydavkyZPrenajmu', input)
         } else {
           getInput('rent', '-no').click()
         }
