@@ -54,9 +54,9 @@ export const RentForm = (props: RentFormProps) => {
   }
 
   addQuestionForStep(1, IncomeQuestion)
-  addQuestionForStep(2, OslobodenieQuestion)
-  addQuestionForStep(3, OslobodenieVyskaQuestion)
-  addQuestionForStep(4, VydavkyQuestion)
+  addQuestionForStep(2, VydavkyQuestion)
+  addQuestionForStep(3, OslobodenieQuestion)
+  addQuestionForStep(4, OslobodenieVyskaQuestion)
 
   return (
     <>
