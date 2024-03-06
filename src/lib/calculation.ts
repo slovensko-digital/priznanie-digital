@@ -761,6 +761,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
 export const buildSummary = (form: TaxForm): Summary => {
   return {
+    // zivnost a zamestnanie
     prijmy: form.r036.plus(form.r039),
     pausalneVydavky: (form.r040.minus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
     zaplatenePoistneSpolu: (form.r037.plus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
@@ -768,14 +769,17 @@ export const buildSummary = (form: TaxForm): Summary => {
     nezdanitelnaCastNaPartnera: form.r074_znizenie_partner.negated(),
     prispevkyNaDochodkovePoistenie: form.r075_zaplatene_prispevky_na_dochodok.negated(),
     zakladDane: form.r078_zaklad_dane_zo_zamestnania.plus(form.r092),
+    // prenajom
+    prijemNehnutelnost: form.t1r11s1,
+    vydavkyNehnutelnost: form.t1r11s2.negated(),
+    zakladDanZPrenajmu: form.r065,
+    // dan na uhradu alebo preplatok
     danSpolu: form.r116_dan,
     preddavkyNaDan: (form.r131.plus(form.r132).plus(form.r133).plus(form.r134)).negated(),
     danovyBonusNaDeti: form.r117.negated(),
     danovyBonusNaUroky: form.r123.negated(),
     danovyBonusPreplatokNaVyplatenie: form.r136_danovy_preplatok.plus(form.r121).plus(form.r127),
     danNaUhradu: form.r135_dan_na_uhradu,
-    prijemNehnutelnost: form.t1r11s1,
-    vydavkyNehnutelnost: form.t1r11s2.negated(),
   }
 }
 
