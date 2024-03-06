@@ -104,9 +104,9 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
           </p>
           <ul className="govuk-list govuk-list--bullet">
-            <li>Iné príjmy ako zo živnosti a zamestnania</li>
-            <li>Príjem zo zahraničia</li>
-            <li>Daňový bonus na zaplatené úroky</li>
+            <li>Iné príjmy ako zo živnosti, zamestnania a z prenájmu nehnuteľností</li>
+            <li>Príjem zo zahraničia (s výnimkou príjmov zo živnosti - poskytovanie služieb)</li>
+            <li>Daňový bonus zo zvýšenia zaplatenej splátky úveru na bývanie</li>
             <li>Daňové straty</li>
             <li>SZČO starobní dôchodcovia</li>
             <li>Práca na dohodu</li>
