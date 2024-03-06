@@ -32,7 +32,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
               <ErrorSummary<IncomeAndExpenseUserInput> errors={errors} />
               <Form className="form" noValidate>
                 <h2 className="govuk-heading-l">
-                  Príjmy a odvody do sociálnej a zdravotnej poisťovne
+                  Príjmy a odvody do sociálnej a zdravotnej poisťovne zo živnosti
                 </h2>
 
                 <Input
