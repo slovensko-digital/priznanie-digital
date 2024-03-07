@@ -109,6 +109,14 @@ const randomInput = (): TaxFormUserInput => {
     }
   }
 
+  if (dochodok) {
+    input = {
+      ...input,
+      platil_prispevky_na_dochodok: true,
+      zaplatene_prispevky_na_dochodok: randomFromRangeString(0, 180),
+    }
+  }
+
   return input
 }
 
