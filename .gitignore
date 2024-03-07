@@ -42,3 +42,5 @@ cypress/downloads
 
 # backup files
 *.sw?
+
+public/coverage/
