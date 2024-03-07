@@ -563,17 +563,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       return { danovyBonus, nevyuzityDanovyBonus }
     },
-    get preddavky() {
+    get preddavkyNaDan() {
       const r055_dan = round(this.r055.mul(DAN_Z_PRIJMU_SADZBA))
-      let preddavky
+      let suma
       let periodicita
 
       if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
-        preddavky = Number(round(r055_dan.div(POCET_MESIACOV)))
+        suma = Number(round(r055_dan.div(POCET_MESIACOV)))
       } else if (Number(r055_dan) > SPODNA_SADZBA_PRE_PREDDAVKY) {
-        preddavky = Number(round(r055_dan.div(POCET_KVARTALOV)))
+        suma = Number(round(r055_dan.div(POCET_KVARTALOV)))
       } else {
-        preddavky = false
+        suma = false
       }
 
       if (this.r055.mul(DAN_Z_PRIJMU_SADZBA) > (new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))) {
@@ -582,8 +582,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         periodicita = "mesačné"
       }
 
-
-      return { preddavky , periodicita }
+      return { suma , periodicita }
     },
     get r117() {
       return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
