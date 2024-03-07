@@ -352,7 +352,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
-      if (this.r032_uplatnujem_na_partnera) {
+      if (this.r032_uplatnujem_na_partnera && this.r072_pred_znizenim.gt(0)) {
         if (this.r072_pred_znizenim.gt(KONSTANTA)) {
           const zaklad = new Decimal(ZVYHODNENIE_NA_PARTNERA).minus(
             this.r072_pred_znizenim.times(0.25),
