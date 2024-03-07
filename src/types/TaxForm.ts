@@ -234,6 +234,7 @@ export interface TaxForm {
     suhlasZaslUdaje: boolean
   }
   datum: string
+  socZdravPoistenieDatum: string
 
   /** SECTION Danovy bonus */
   mozeZiadatVyplatitDanovyBonus: boolean

@@ -9,7 +9,8 @@ import { UrokyBonusForm } from '../components/UrokyBonusForm'
 import { urokyInitialValues } from '../lib/initialValues'
 import { validateUrokyBonusForm } from '../lib/validateUrokyBonusForm'
 import { TAX_YEAR, UROKY_POCET_ROKOV } from '../lib/calculation'
-import { numberInputRegexp } from '../lib/utils'
+import { numberInputRegexp, parseInputNumber } from '../lib/utils'
+import Decimal from 'decimal.js'
 
 const Uroky: Page<UrokyUserInput> = ({
   taxFormUserInput,
@@ -135,6 +136,8 @@ export const validate = (values: UrokyUserInput) => {
       errors.r035_zaplatene_uroky = 'Zadajte zaplatené úroky'
     } else if (!values.r035_zaplatene_uroky.match(numberInputRegexp)) {
       errors.r035_zaplatene_uroky = 'Zadajte zaplatené úroky vo formáte 123,45'
+    } else if (!new Decimal(parseInputNumber(values.r035_zaplatene_uroky)).lessThanOrEqualTo(new Decimal(9999.99))) {
+      errors.r035_zaplatene_uroky = 'Zaplatené úroky môžu byť maximálne 9999,99'
     }
   }
 

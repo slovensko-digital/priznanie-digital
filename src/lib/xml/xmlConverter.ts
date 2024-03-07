@@ -241,7 +241,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     taxForm.priloha3_r13_zdravotne,
   )
 
-  form.dokument.telo.socZdravPoistenie.datum = taxForm.datum
+  form.dokument.telo.socZdravPoistenie.datum = taxForm.socZdravPoistenieDatum
 
   return form
 }

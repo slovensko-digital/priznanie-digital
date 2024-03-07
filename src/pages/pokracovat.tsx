@@ -19,7 +19,7 @@ const buildXml = (taxForm: TaxForm) => convertToXML(setDate(taxForm))
 const buildSummaryFields = (obj: Summary) => {
   return Object.keys(obj).map((key) => ({
     name: `submission[extra][params][summary][${key}]`,
-    value: obj[key].gt(0) ? formatCurrency(obj[key].toNumber()) : '0,00 EUR',
+    value: obj[key].eq(0) ? '0,00 EUR' : formatCurrency(obj[key].toNumber()),
   }))
 }
 
