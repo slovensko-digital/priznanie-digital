@@ -164,10 +164,10 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       <Summary title='Daň na úhradu / daňový preplatok' rows={totalRows} />
 
       {
-        taxForm.preddavkyNaDan.suma &&
+        taxForm.preddavkyNaDan.suma.greaterThan(0) &&
         <Warning>
             <strong>
-              Predpokladané { taxForm.preddavkyNaDan.periodicita } preddavky na daň z príjmov v roku {TAX_YEAR+1} budú { taxForm.preddavkyNaDan.suma }€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024" target="_blank">Finančnej správy</a>.
+              Predpokladané { taxForm.preddavkyNaDan.periodicita } preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024" target="_blank">Finančnej správy</a>.
             </strong>
         </Warning>
       }

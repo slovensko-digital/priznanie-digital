@@ -35,8 +35,8 @@ const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
 
 export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
 
-export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
-export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
+export const SPODNA_SADZBA_PRE_PREDDAVKY = new Decimal(5000)
+export const VRCHNA_SADZBA_PRE_PREDDAVKY = new Decimal(16600)
 
 const POCET_KVARTALOV = 4
 const POCET_MESIACOV = 12
@@ -565,24 +565,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get preddavkyNaDan() {
       const r055_dan = round(this.r055.mul(DAN_Z_PRIJMU_SADZBA))
-      let suma
-      let periodicita
 
-      if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
-        suma = Number(round(r055_dan.div(POCET_MESIACOV)))
-      } else if (Number(r055_dan) > SPODNA_SADZBA_PRE_PREDDAVKY) {
-        suma = Number(round(r055_dan.div(POCET_KVARTALOV)))
+      if (r055_dan.greaterThan(SPODNA_SADZBA_PRE_PREDDAVKY)) {
+        return {
+          suma: r055_dan.div(POCET_KVARTALOV),
+          periodicita: 'kvartálne'
+        }
+      } else if (r055_dan.greaterThan(VRCHNA_SADZBA_PRE_PREDDAVKY)) {
+        return {
+          suma: r055_dan.div(POCET_MESIACOV),
+          periodicita: 'mesačne'
+        }
       } else {
-        suma = false
+        return {
+          suma: new Decimal(0),
+          periodicita: 'neplatí'
+        }
       }
-
-      if (this.r055.mul(DAN_Z_PRIJMU_SADZBA) > (new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))) {
-        periodicita = "kvartálne"
-      } else if (this.r055.mul(DAN_Z_PRIJMU_SADZBA) > (new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))) {
-        periodicita = "mesačné"
-      }
-
-      return { suma , periodicita }
     },
     get r117() {
       return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
