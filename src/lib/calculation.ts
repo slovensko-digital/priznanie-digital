@@ -20,7 +20,7 @@ const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
-export const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
+const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 
@@ -563,6 +563,28 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       return { danovyBonus, nevyuzityDanovyBonus }
     },
+    get preddavky() {
+      const r055_dan = round(this.r055.mul(DAN_Z_PRIJMU_SADZBA))
+      let preddavky
+      let periodicita
+
+      if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
+        preddavky = Number(round(r055_dan.div(POCET_MESIACOV)))
+      } else if (Number(r055_dan) > SPODNA_SADZBA_PRE_PREDDAVKY) {
+        preddavky = Number(round(r055_dan.div(POCET_KVARTALOV)))
+      } else {
+        preddavky = false
+      }
+
+      if (this.r055.mul(DAN_Z_PRIJMU_SADZBA) > (new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))) {
+        periodicita = "kvartálne"
+      } else if (this.r055.mul(DAN_Z_PRIJMU_SADZBA) > (new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))) {
+        periodicita = "mesačné"
+      }
+
+
+      return { preddavky , periodicita }
+    },
     get r117() {
       return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
     },
@@ -1057,21 +1079,4 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
-}
-
-export const monthlyPrepayment = (form: TaxForm): boolean => {
-  return form.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
-}
-
-export const quarterlyPrepayment = (form: TaxForm): boolean => {
-  return form.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
-}
-
-export const countPreddavky = (form: TaxForm): Number => {
-  const r055_dan = round(form.r055.mul(DAN_Z_PRIJMU_SADZBA))
-  if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round(r055_dan.div(POCET_MESIACOV)))
-  } else if (Number(r055_dan) > SPODNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round(r055_dan.div(POCET_KVARTALOV)))
-  }
 }
