@@ -402,7 +402,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r080_zaklad_dane_celkovo() {
-      return this.r078_zaklad_dane_zo_zamestnania.plus(this.r065)
+      return round(this.r078_zaklad_dane_zo_zamestnania.plus(this.r065))
     },
     get r081() {
       if (this.r080_zaklad_dane_celkovo.isZero()) {
@@ -410,7 +410,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
 
       if (this.r080_zaklad_dane_celkovo.lte(KONSTANTA)) {
-        return this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA)
+        return round(this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA))
       }
       const danZPrvejCasti = round(new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA))
       const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
