@@ -253,5 +253,9 @@ export interface TaxForm {
     danovyBonus: Decimal
     nevyuzityDanovyBonus: Decimal
   }
+  preddavkyNaDan: {
+    suma: Decimal
+    periodicita: string
+  }
   canDonateTwoPercentOfTax: boolean
 }

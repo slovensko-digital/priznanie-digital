@@ -35,8 +35,8 @@ const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
 
 export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
 
-export const SPODNA_SADZBA_PRE_PREDDAVKY = 5000
-export const VRCHNA_SADZBA_PRE_PREDDAVKY = 16600
+export const SPODNA_SADZBA_PRE_PREDDAVKY = new Decimal(5000)
+export const VRCHNA_SADZBA_PRE_PREDDAVKY = new Decimal(16600)
 
 const POCET_KVARTALOV = 4
 const POCET_MESIACOV = 12
@@ -563,6 +563,26 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       return { danovyBonus, nevyuzityDanovyBonus }
     },
+    get preddavkyNaDan() {
+      const r055_dan = round(this.r055.mul(DAN_Z_PRIJMU_SADZBA))
+
+      if (r055_dan.greaterThan(SPODNA_SADZBA_PRE_PREDDAVKY)) {
+        return {
+          suma: r055_dan.div(POCET_KVARTALOV),
+          periodicita: 'kvartálne'
+        }
+      } else if (r055_dan.greaterThan(VRCHNA_SADZBA_PRE_PREDDAVKY)) {
+        return {
+          suma: r055_dan.div(POCET_MESIACOV),
+          periodicita: 'mesačne'
+        }
+      } else {
+        return {
+          suma: new Decimal(0),
+          periodicita: 'neplatí'
+        }
+      }
+    },
     get r117() {
       return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
     },
@@ -1057,12 +1077,4 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
-}
-
-export const countPreddavky = (form: TaxForm): Number => {
-  if (Number(form.r135_dan_na_uhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_MESIACOV))))
-  } else if (Number(form.r135_dan_na_uhradu) > SPODNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_KVARTALOV))))
-  }
 }

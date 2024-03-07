@@ -7,11 +7,8 @@ import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
-import { countPreddavky } from '../lib/calculation'
 import {
   TAX_YEAR,
-  SPODNA_SADZBA_PRE_PREDDAVKY,
-  VRCHNA_SADZBA_PRE_PREDDAVKY,
 } from '../lib/calculation'
 
 
@@ -156,12 +153,6 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     }
   ]
 
-  const monthlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
-
-  const quarterlyPrepayment = taxForm.r135_dan_na_uhradu.greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
-
-  const prePayments = monthlyPrepayment || quarterlyPrepayment
-
   return (
     <>
       <BackLink href={previousRoute} />
@@ -173,10 +164,10 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       <Summary title='Daň na úhradu / daňový preplatok' rows={totalRows} />
 
       {
-        prePayments &&
+        taxForm.preddavkyNaDan.suma.greaterThan(0) &&
         <Warning>
             <strong>
-              Predpokladané {monthlyPrepayment ? 'mesačné' : 'kvartálne'} preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {countPreddavky(taxForm)}€ (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2023" target="_blank">Finančnej správy</a>.
+              Predpokladané { taxForm.preddavkyNaDan.periodicita } preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má informatívny charakter). Pre viac informácií navštívte web <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024" target="_blank">Finančnej správy</a>.
             </strong>
         </Warning>
       }
