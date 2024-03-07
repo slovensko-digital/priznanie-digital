@@ -721,6 +721,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     datum: input.datum,
 
+    get socZdravPoistenieDatum() {
+      const priloha3Prazdna = [
+        this.priloha3_r08_poistne_spolu,
+        this.priloha3_r09_socialne,
+        this.priloha3_r10_zdravotne,
+        this.priloha3_r11_socialne,
+        this.priloha3_r13_zdravotne
+      ].every((x) => x.eq(0))
+      return priloha3Prazdna ? '' : this.datum
+    },
+
     get canDonateTwoPercentOfTax() {
       return percentage(this.r124, 3).gte(
         MIN_2_PERCENT_CALCULATED_DONATION,
