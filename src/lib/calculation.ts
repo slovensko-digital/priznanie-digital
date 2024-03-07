@@ -20,7 +20,7 @@ const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
-const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
+export const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 
@@ -1060,9 +1060,10 @@ export const donateOnly3Percent = (form: TaxForm): boolean => {
 }
 
 export const countPreddavky = (form: TaxForm): Number => {
-  if (Number(form.r135_dan_na_uhradu) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_MESIACOV))))
-  } else if (Number(form.r135_dan_na_uhradu) > SPODNA_SADZBA_PRE_PREDDAVKY) {
-    return Number(round((form.r055.mul(DAN_Z_PRIJMU_SADZBA).div(POCET_KVARTALOV))))
+  const r055_dan = round(form.r055.mul(DAN_Z_PRIJMU_SADZBA))
+  if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
+    return Number(r055_dan.div(POCET_MESIACOV))
+  } else if (Number(r055_dan > SPODNA_SADZBA_PRE_PREDDAVKY)) {
+    return Number(r055_dan.div(POCET_KVARTALOV))
   }
 }
