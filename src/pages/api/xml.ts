@@ -9,12 +9,11 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  const rawTaxFormUserInput = req.body.taxFormUserInput
-  if (!rawTaxFormUserInput) {
+  const taxFormUserInput: TaxFormUserInput = req.body.taxFormUserInput
+
+  if (!taxFormUserInput) {
     return res.status(500).json({ error: 'invalid data' })
   }
-
-  const taxFormUserInput: TaxFormUserInput = JSON.parse(rawTaxFormUserInput)
   const taxForm: TaxForm = calculate(setDate(taxFormUserInput))
 
   res.setHeader(

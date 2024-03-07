@@ -41,7 +41,7 @@ const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
 
-const formSuccessful = (stub) => () => {
+export const formSuccessful = (stub) => () => {
   expect(stub).to.be.calledWith('Naplnenie formulára prebehlo úspešne')
 }
 

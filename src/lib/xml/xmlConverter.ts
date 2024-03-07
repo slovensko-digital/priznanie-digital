@@ -47,14 +47,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Partner */
-  if (taxForm.r031_priezvisko_a_meno && taxForm.r031_rodne_cislo) {
+  if (taxForm.r032_uplatnujem_na_partnera) {
+
     form.dokument.telo.r31 = {
       priezviskoMeno: taxForm.r031_priezvisko_a_meno,
       rodneCislo: taxForm.r031_rodne_cislo,
     }
-  }
 
-  if (taxForm.r032_uplatnujem_na_partnera) {
     form.dokument.telo.r32 = {
       uplatnujemNCZDNaManzela: boolToString(
         taxForm.r032_uplatnujem_na_partnera,
