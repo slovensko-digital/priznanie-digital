@@ -1063,7 +1063,7 @@ export const countPreddavky = (form: TaxForm): Number => {
   const r055_dan = round(form.r055.mul(DAN_Z_PRIJMU_SADZBA))
   if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {
     return Number(r055_dan.div(POCET_MESIACOV))
-  } else if (Number(r055_dan > SPODNA_SADZBA_PRE_PREDDAVKY)) {
+  } else if (Number(r055_dan) > SPODNA_SADZBA_PRE_PREDDAVKY) {
     return Number(r055_dan.div(POCET_KVARTALOV))
   }
 }
