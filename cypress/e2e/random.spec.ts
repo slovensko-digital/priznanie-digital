@@ -17,10 +17,11 @@ const randomFromRangeString = (min: number, max: number) => {
 
 const randomInput = (): TaxFormUserInput => {
   const employed = Math.random() > 0.5
-  const hasChildren = Math.random() > 0.5
+  const hasChildren = Math.random() > 0.2
   const partner = Math.random() > 0.7
-  const rent = Math.random() > 0.5
-  const uroky = Math.random() > 0.5
+  const rent = Math.random() > 0.3
+  const uroky = Math.random() > 0.3
+  const dochodok = Math.random() > 0.2
 
   let input: TaxFormUserInput = {
     t1r10_prijmy: randomFromRangeString(0, 100000),
