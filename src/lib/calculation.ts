@@ -1059,6 +1059,10 @@ export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }
 
+export const monthlyPrepayment = taxForm.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
+
+export const quarterlyPrepayment = taxForm.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
+
 export const countPreddavky = (form: TaxForm): Number => {
   const r055_dan = round(form.r055.mul(DAN_Z_PRIJMU_SADZBA))
   if (Number(r055_dan) > VRCHNA_SADZBA_PRE_PREDDAVKY) {

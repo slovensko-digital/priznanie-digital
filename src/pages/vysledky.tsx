@@ -7,12 +7,9 @@ import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
-import { countPreddavky } from '../lib/calculation'
+import { monthlyPrepayment, quarterlyPrepayment, countPreddavky } from '../lib/calculation'
 import {
   TAX_YEAR,
-  SPODNA_SADZBA_PRE_PREDDAVKY,
-  VRCHNA_SADZBA_PRE_PREDDAVKY,
-  DAN_Z_PRIJMU_SADZBA,
 } from '../lib/calculation'
 
 
@@ -156,10 +153,6 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       fontSize: 30,
     }
   ]
-
-  const monthlyPrepayment = taxForm.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(VRCHNA_SADZBA_PRE_PREDDAVKY))
-
-  const quarterlyPrepayment = taxForm.r055.mul(DAN_Z_PRIJMU_SADZBA).greaterThan(new Decimal(SPODNA_SADZBA_PRE_PREDDAVKY))
 
   const prePayments = monthlyPrepayment || quarterlyPrepayment
 
