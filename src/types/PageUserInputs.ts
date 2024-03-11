@@ -109,6 +109,7 @@ export type UrokyUserInput = Pick<
 
 export type TwoPercentUserInput = Pick<
   TaxFormUserInput,
+  | 'dve_percenta_podporujem'
   | 'XIIoddiel_uplatnujem2percenta'
   | 'splnam3per'
   | 'r142_ico'
