@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
 import {
-  BooleanRadio,
   Checkbox,
   FormWrapper,
   Input,
@@ -19,7 +18,6 @@ import {
 } from '../components/AutoCompleteInput'
 
 import { Page } from '../components/Page'
-import { twoPercentInitialValues } from '../lib/initialValues'
 import { Details } from '../components/Details'
 import RadioGroup from '../components/radio/RadioGroup'
 import Radio from '../components/radio/Radio'
