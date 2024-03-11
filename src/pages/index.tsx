@@ -113,7 +113,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
             <li>
               <ExternalLink href="https://kros.sk/danove-priznania/">
-                Pre nepodporované prípady môžete použiť aplikáciu KROS
+                Pre nami nepodporované scenáre, odporúčame použiť aplikáciu KROS
               </ExternalLink>
           </li>
           </ul>
