@@ -3,6 +3,7 @@ import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { EmployedUserInput } from '../../src/types/PageUserInputs'
 import { TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
+import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
 
 const randomFromRange = (min: number, max: number) => {
@@ -22,11 +23,14 @@ const randomInput = (): TaxFormUserInput => {
   const rent = Math.random() > 0.3
   const uroky = Math.random() > 0.3
   const dochodok = Math.random() > 0.2
+  const prijmy = randomFromRange(0, 100000)
+  const socPercent = randomFromRange(0, 40).div(100).toFixed(2)
+  const zdravPercent = randomFromRange(0, 40).div(100).toFixed(2)
 
   let input: TaxFormUserInput = {
-    t1r10_prijmy: randomFromRangeString(0, 100000),
-    priloha3_r11_socialne: randomFromRangeString(0, 100000),
-    priloha3_r13_zdravotne: randomFromRangeString(0, 100000),
+    t1r10_prijmy: prijmy.toString(),
+    priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
+    priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
     zaplatenePreddavky: randomFromRangeString(0, 100000),
     employed,
     hasChildren,
@@ -56,17 +60,39 @@ const randomInput = (): TaxFormUserInput => {
   }
 
   if (hasChildren) {
-    // const childrenCount = randomFromRange(1, 7).round().toNumber()
-    // Array.from({ length: childrenCount }).forEach((value, index) => {
-    //   input.children.push({
-    //     id: index,
-    //     priezviskoMeno: 'Fake Name',
-    //     rodneCislo: string
-    //     wholeYear: boolean
-    //     monthFrom: string
-    //     monthTo: string
-    //   })
-    // })
+    const childrenCount = randomFromRange(1, 7).round().toNumber()
+    Array.from({ length: childrenCount }).forEach((value, index) => {
+      const age = randomFromRange(0, 25).round().toNumber()
+      const month = randomFromRange(0, 11).round().toNumber()
+      const birthDate = new Date(TAX_YEAR - age, month, 15)
+      const gender = Math.random() > 0.5
+      const wholeYear = Math.random() > 0.5
+
+      let monthFrom = 0
+      let monthTo = 11
+
+      if (!wholeYear){
+        if (age === 0) {
+          monthFrom = randomFromRange(month, 11).round().toNumber()
+          monthTo = randomFromRange(month, 11).round().toNumber()
+        } else if (age === 25) {
+          monthFrom = randomFromRange(0, month).round().toNumber()
+          monthTo = randomFromRange(0, month).round().toNumber()
+        } else {
+          monthFrom = randomFromRange(0, 11).round().toNumber()
+          monthTo = randomFromRange(0, 11).round().toNumber()
+        }
+      }
+
+      input.children.push({
+        id: index,
+        priezviskoMeno: `Fake Child ${index}`,
+        rodneCislo: generateBirthId(birthDate, gender ? 'FEMALE' : 'MALE').pure,
+        wholeYear: true,
+        monthFrom: monthFrom.toString(),
+        monthTo: monthTo.toString(),
+      })
+    })
   }
 
   if (partner) {
