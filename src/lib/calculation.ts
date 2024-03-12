@@ -610,7 +610,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r123() {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
         if (this.r035_pocet_mesiacov === 12) {
-          return Decimal.min(this.r035_zaplatene_uroky.times(0.5), new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY))
+          return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY)))
         } else if (this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR - UROKY_POCET_ROKOV) {
           const a = this.r035_zaplatene_uroky.times(0.5)
           const b = round(a).div(12)
