@@ -92,6 +92,7 @@ export interface TaxForm {
 
   /**   Deti*/
   r033?: Child[]
+  r033a: boolean
   partner_bonus_na_deti: boolean
   r034: Partner
   r034a: Decimal

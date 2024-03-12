@@ -75,6 +75,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    form.dokument.telo.r33a = boolToString(taxForm.r033a)
     if (taxForm.partner_bonus_na_deti) {
       form.dokument.telo.uplatnujemPar33Ods8 = boolToString(taxForm.partner_bonus_na_deti)
       form.dokument.telo.r34a = decimalToString(taxForm.r034a)

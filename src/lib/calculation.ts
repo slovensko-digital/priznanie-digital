@@ -195,6 +195,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
+    get r033a() {
+      return this.r033.length > 4
+    },
+
     get partner_bonus_na_deti() {
       return input.partner_bonus_na_deti
     },
