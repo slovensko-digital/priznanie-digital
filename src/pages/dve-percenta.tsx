@@ -209,7 +209,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                     </div>
                   </RadioConditional>
 
-                  <Radio name="platil_prispevky_na_dochodok-input-no" label="Nie" value="nie" />
+                  <Radio name="dve_percenta_podporujem-input-no" label="Nie" value="nie" />
                 </RadioGroup>
               </Fieldset>
               <button
