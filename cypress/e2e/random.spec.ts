@@ -28,7 +28,7 @@ const randomInput = (): TaxFormUserInput => {
   const zdravPercent = randomFromRange(0, 40).div(100).toFixed(2)
 
   let input: TaxFormUserInput = {
-    t1r10_prijmy: prijmy.toString(),
+    t1r10_prijmy: prijmy.toFixed(2),
     priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
     priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
     zaplatenePreddavky: randomFromRangeString(0, 100000),
