@@ -50,7 +50,7 @@ export const getStreetNumber = ({
 
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
-  const roundNumber = roundDecimal(new Decimal(value || 0))
+  const roundNumber = decimalToString(new Decimal(value || 0))
   const formattedNumber = roundNumber
     .replace(findPlaceForThousandsDivider, ' ')
     .replace('.', ',')
@@ -222,9 +222,5 @@ export const boolToString = (bool: boolean) => {
 }
 
 export const decimalToString = (decimal: Decimal) => {
-  return decimal.equals(0) ? '' : roundDecimal(decimal)
-}
-
-export const roundDecimal = (input: Decimal, decimals = 2): string => {
-  return input.toFixed(decimals)
+  return decimal.toFixed(2)
 }
