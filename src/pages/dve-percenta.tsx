@@ -23,6 +23,7 @@ import RadioGroup from '../components/radio/RadioGroup'
 import Radio from '../components/radio/Radio'
 import RadioConditional from '../components/radio/RadioConditional'
 import Fieldset from '../components/fieldset/Fieldset'
+import { ExternalLink } from '../components/ExternalLink'
 
 const makeHandleOrganisationAutoform = ({
   setValues,
@@ -105,8 +106,18 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
         </h1>
         <p data-test="ineligible-message">
           Ľutujeme, nespĺňate podmienky na poukázanie čiastky dane, nakoľko by táto čiastka neprekočila {formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}.
-          Dôvodom je nepostačujúca výska zaplatenej dane.
+          Dôvodom je nepostačujúca výška zaplatenej dane.
         </p>
+        <div className="box govuk-!-margin-bottom-5">
+          <p>
+            Stále viete {' '}
+            <ExternalLink href='https://slovensko-digital.darujme.sk/podporte-nas-financne-darujme/'>
+              podporiť prácu Slovensko.Digital
+            </ExternalLink>
+            {' '}, ktoré za pomoci dobrovoľníkov pripravilo túto aplikáciu prostredníctvom ľubovolného finančného daru.
+            Každému darcovi a darkyni ďakujeme !
+          </p>
+        </div>
         <Link href={nextRoute} legacyBehavior>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
             Pokračovať
@@ -206,6 +217,17 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                           )
                         }}
                       />
+                    </div>
+
+                    <div className="box govuk-!-margin-top-5">
+                      <p>
+                        Ak ste sa aj rozhodli svojimi 2% podporiť inú organizáciu, stále viete {' '}
+                        <ExternalLink href='https://slovensko-digital.darujme.sk/podporte-nas-financne-darujme/'>
+                          podporiť prácu Slovensko.Digital
+                        </ExternalLink>
+                        {' '}, ktoré za pomoci dobrovoľníkov pripravilo túto aplikáciu prostredníctvom ľubovolného finančného daru.
+                        Každému darcovi a darkyni ďakujeme !
+                      </p>
                     </div>
                   </RadioConditional>
 
