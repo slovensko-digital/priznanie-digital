@@ -222,7 +222,7 @@ export const boolToString = (bool: boolean) => {
 }
 
 export const decimalToString = (decimal: Decimal) => {
-  return decimal.equals(0) ? '' : roundDecimal(decimal)
+  return decimal.equals(0) ? '' : decimal.toString()
 }
 
 export const roundDecimal = (input: Decimal, decimals = 2): string => {
