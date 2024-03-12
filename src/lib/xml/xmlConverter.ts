@@ -3,7 +3,7 @@ import cloneDeep from 'lodash.clonedeep'
 import outputBasis from './outputBasis'
 import { TaxForm } from '../../types/TaxForm'
 import { OutputJson, Dieta } from '../../types/OutputJson'
-import { boolToString, decimalToString, formatDate, roundDecimal } from '../utils'
+import { boolToString, decimalToString, formatDate } from '../utils'
 
 export function convertToJson(taxForm: TaxForm): OutputJson {
   const form: OutputJson = cloneDeep(outputBasis)
@@ -33,15 +33,15 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.hlavicka.adresaTrvPobytu.obec = taxForm.r010_obec
   form.dokument.hlavicka.adresaTrvPobytu.stat = taxForm.r011_stat
 
-  form.dokument.telo.tabulka1.t1r2.s1 = roundDecimal(taxForm.t1r2_prijmy)
-  form.dokument.telo.tabulka1.t1r10.s1 = roundDecimal(taxForm.t1r10_prijmy)
-  form.dokument.telo.tabulka1.t1r10.s2 = roundDecimal(taxForm.t1r10_vydavky)
+  form.dokument.telo.tabulka1.t1r2.s1 = decimalToString(taxForm.t1r2_prijmy)
+  form.dokument.telo.tabulka1.t1r10.s1 = decimalToString(taxForm.t1r10_prijmy)
+  form.dokument.telo.tabulka1.t1r10.s2 = decimalToString(taxForm.t1r10_vydavky)
 
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = roundDecimal(
+  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
     taxForm.vydavkyPoistPar6ods11_ods1a2,
   )
   if (taxForm.platil_prispevky_na_dochodok) {
-    form.dokument.telo.r75 = roundDecimal(
+    form.dokument.telo.r75 = decimalToString(
       taxForm.r075_zaplatene_prispevky_na_dochodok,
     )
   }
@@ -58,7 +58,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       uplatnujemNCZDNaManzela: boolToString(
         taxForm.r032_uplatnujem_na_partnera,
       ),
-      vlastnePrijmy: roundDecimal(taxForm?.r032_partner_vlastne_prijmy),
+      vlastnePrijmy: decimalToString(taxForm?.r032_partner_vlastne_prijmy),
       pocetMesiacov: taxForm?.r032_partner_pocet_mesiacov.toString(),
     }
   }
@@ -127,54 +127,54 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   /** SECTION Employed */
 
   if (taxForm.employed) {
-    form.dokument.telo.r36 = roundDecimal(taxForm.r036)
-    form.dokument.telo.r37 = roundDecimal(taxForm.r037)
-    form.dokument.telo.r38 = roundDecimal(taxForm.r038)
-    form.dokument.telo.socZdravPoistenie.pr8 = roundDecimal(taxForm.r039)
+    form.dokument.telo.r36 = decimalToString(taxForm.r036)
+    form.dokument.telo.r37 = decimalToString(taxForm.r037)
+    form.dokument.telo.r38 = decimalToString(taxForm.r038)
+    form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.r039)
   }
 
-  form.dokument.telo.r39 = roundDecimal(taxForm.r039)
-  form.dokument.telo.r40 = roundDecimal(taxForm.r040)
-  form.dokument.telo.r41 = roundDecimal(taxForm.r041)
-  form.dokument.telo.r45 = roundDecimal(taxForm.r045)
-  form.dokument.telo.r55 = roundDecimal(taxForm.r055)
-  form.dokument.telo.r57 = roundDecimal(taxForm.r057)
+  form.dokument.telo.r39 = decimalToString(taxForm.r039)
+  form.dokument.telo.r40 = decimalToString(taxForm.r040)
+  form.dokument.telo.r41 = decimalToString(taxForm.r041)
+  form.dokument.telo.r45 = decimalToString(taxForm.r045)
+  form.dokument.telo.r55 = decimalToString(taxForm.r055)
+  form.dokument.telo.r57 = decimalToString(taxForm.r057)
 
-  form.dokument.telo.r72 = roundDecimal(taxForm.r072_pred_znizenim)
-  form.dokument.telo.r73 = roundDecimal(taxForm.r073)
-  form.dokument.telo.r74 = roundDecimal(taxForm.r074_znizenie_partner)
+  form.dokument.telo.r72 = decimalToString(taxForm.r072_pred_znizenim)
+  form.dokument.telo.r73 = decimalToString(taxForm.r073)
+  form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
-  form.dokument.telo.r77 = roundDecimal(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = roundDecimal(taxForm.r078_zaklad_dane_zo_zamestnania)
+  form.dokument.telo.r77 = decimalToString(taxForm.r077_nezdanitelna_cast)
+  form.dokument.telo.r78 = decimalToString(taxForm.r078_zaklad_dane_zo_zamestnania)
   form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
   form.dokument.telo.r81 = decimalToString(taxForm.r081)
-  form.dokument.telo.r90 = roundDecimal(taxForm.r090)
-  form.dokument.telo.r91 = roundDecimal(taxForm.r091)
-  form.dokument.telo.r92 = roundDecimal(taxForm.r092)
-  form.dokument.telo.r94 = roundDecimal(taxForm.r094)
-  form.dokument.telo.r95 = roundDecimal(taxForm.r095)
-  form.dokument.telo.r96 = roundDecimal(taxForm.r096)
-  form.dokument.telo.r105 = roundDecimal(taxForm.r105)
+  form.dokument.telo.r90 = decimalToString(taxForm.r090)
+  form.dokument.telo.r91 = decimalToString(taxForm.r091)
+  form.dokument.telo.r92 = decimalToString(taxForm.r092)
+  form.dokument.telo.r94 = decimalToString(taxForm.r094)
+  form.dokument.telo.r95 = decimalToString(taxForm.r095)
+  form.dokument.telo.r96 = decimalToString(taxForm.r096)
+  form.dokument.telo.r105 = decimalToString(taxForm.r105)
   form.dokument.telo.r106 = '0.00'
   form.dokument.telo.r115 = '0.00'
-  form.dokument.telo.r116 = roundDecimal(taxForm.r116_dan)
+  form.dokument.telo.r116 = decimalToString(taxForm.r116_dan)
   form.dokument.telo.r116a = decimalToString(taxForm.r116a)
   form.dokument.telo.r117 = decimalToString(taxForm.r117)
 
-  form.dokument.telo.r118 = roundDecimal(taxForm.r118)
+  form.dokument.telo.r118 = decimalToString(taxForm.r118)
   form.dokument.telo.r119 = decimalToString(taxForm.r119)
   form.dokument.telo.r120 = decimalToString(taxForm.r120)
   form.dokument.telo.r121 = decimalToString(taxForm.r121)
   form.dokument.telo.r122 = decimalToString(taxForm.r122)
   form.dokument.telo.r123 = decimalToString(taxForm.r123)
-  form.dokument.telo.r124 = roundDecimal(taxForm.r124)
+  form.dokument.telo.r124 = decimalToString(taxForm.r124)
   form.dokument.telo.r126 = decimalToString(taxForm.r126)
   form.dokument.telo.r127 = decimalToString(taxForm.r127)
   form.dokument.telo.r131 = decimalToString(taxForm.r131)
 
   form.dokument.telo.r133 = decimalToString(taxForm.r133)
 
-  form.dokument.telo.r135 = roundDecimal(taxForm.r135_dan_na_uhradu)
+  form.dokument.telo.r135 = decimalToString(taxForm.r135_dan_na_uhradu)
   form.dokument.telo.r136 = decimalToString(taxForm.r136_danovy_preplatok)
 
   /** SECTION 2 percent */
@@ -183,7 +183,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   )
 
   if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
-    form.dokument.telo.r151 = roundDecimal(taxForm.r151)
+    form.dokument.telo.r151 = decimalToString(taxForm.r151)
     form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
     form.dokument.telo.r152 = {
       ...taxForm.r152,
@@ -233,10 +233,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     taxForm.priloha3_r10_zdravotne,
   )
 
-  form.dokument.telo.socZdravPoistenie.pr11 = roundDecimal(
+  form.dokument.telo.socZdravPoistenie.pr11 = decimalToString(
     taxForm.priloha3_r11_socialne,
   )
-  form.dokument.telo.socZdravPoistenie.pr13 = roundDecimal(
+  form.dokument.telo.socZdravPoistenie.pr13 = decimalToString(
     taxForm.priloha3_r13_zdravotne,
   )
 

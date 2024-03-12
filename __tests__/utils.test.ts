@@ -19,8 +19,7 @@ import {
   validateIbanCountry,
   getRodneCisloAgeAtYearAndMonth,
   boolToString,
-  decimalToString,
-  roundDecimal,
+  decimalToString
 } from '../src/lib/utils'
 import Decimal from 'decimal.js'
 
@@ -364,7 +363,7 @@ describe('utils', () => {
 
   describe('#decimalToString', () => {
     it('should return empty string for zero', () => {
-      expect(decimalToString(new Decimal(0))).toBe('')
+      expect(decimalToString(new Decimal(0))).toBe('0.00')
     })
 
     it('should return rounded number to 2 decimals', () => {
@@ -393,16 +392,12 @@ describe('utils', () => {
 
     scenarios.forEach(({ input, output }) => {
       it(`should round ${input} to ${output}`, () => {
-        expect(roundDecimal(input)).toBe(output)
+        expect(round(input).toString()).toBe(output)
       })
     })
 
     it('should roundDecimal to 2 decimal places by default', () => {
-      expect(roundDecimal(new Decimal(10))).toBe('10.00')
-    })
-
-    it('should roundDecimal to 0 decimal places', () => {
-      expect(roundDecimal(new Decimal(10.9), 0)).toBe('11')
+      expect(round(new Decimal(10)).toString()).toBe('10')
     })
   })
 
