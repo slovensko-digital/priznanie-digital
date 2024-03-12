@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { EmployedUserInput } from '../../src/types/PageUserInputs'
-import { TAX_YEAR } from '../../src/lib/calculation'
+import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
@@ -101,7 +101,7 @@ const randomInput = (): TaxFormUserInput => {
       r031_priezvisko_a_meno: 'Partner Fake',
       r031_rodne_cislo: '9609226286',
       r032_partner_pocet_mesiacov: randomFromRange(1, 12).round().toNumber().toString(),
-      r032_partner_vlastne_prijmy: randomFromRangeString(0, 10000),
+      r032_partner_vlastne_prijmy: randomFromRangeString(0, PARTNER_MAX_ODPOCET),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
       partner_podmienky: { '1': true }
