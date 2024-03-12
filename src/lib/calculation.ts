@@ -687,17 +687,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return tax.gt(MINIMALNA_DAN_NA_ZAPLATENIE) ? tax : new Decimal(0)
     },
     get r136_danovy_preplatok() {
-      return Decimal.abs(
-        Decimal.min(
-          0,
-          new Decimal(this.r116_dan)
-            .minus(this.r117)
-            .plus(this.r119)
-            .plus(this.r121)
-            .minus(this.r131)
-            .minus(this.r133),
-        ),
-      )
+      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const base = podmienka ? this.r116_dan : new Decimal(0)
+      let tax = base
+                .minus(this.r117)
+                .plus(this.r119)
+                .plus(this.r121)
+                .minus(this.r123)
+                .plus(this.r125)
+                .plus(this.r127)
+                .plus(this.r128)
+                .minus(this.r129)
+                .minus(this.r130)
+                .minus(this.r131)
+                .minus(this.r132)
+                .minus(this.r133)
+                .minus(this.r134)
+      return Decimal.abs(tax)
     },
     splnam3per: input?.splnam3per ?? false,
     get suma_2_percenta() {
