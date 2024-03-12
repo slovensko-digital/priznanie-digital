@@ -703,7 +703,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .minus(this.r132)
                 .minus(this.r133)
                 .minus(this.r134)
-      return Decimal.abs(tax)
+      return Decimal.min(0, tax).negated()
     },
     splnam3per: input?.splnam3per ?? false,
     get suma_2_percenta() {
