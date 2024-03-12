@@ -195,6 +195,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return input.children.map((child) => mapChild(child))
     },
 
+    get r033a() {
+      return this.r033.length > 4
+    },
+
     get partner_bonus_na_deti() {
       return input.partner_bonus_na_deti
     },
@@ -479,7 +483,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         if (this.r034.pocetMesiacov === 12) {
           return this.r034a.plus(this.r038).plus(this.r045)
         } else {
-          const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
+          const partner = round(round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov))
           return this.r038.plus(this.r045).plus(partner)
         }
       } else {
@@ -541,13 +545,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           zakladDane = this.r038.plus(this.r045)
         }
 
-        zakladDane = zakladDane.toDecimalPlaces(2, Decimal.ROUND_UP)
+        zakladDane = round(zakladDane)
         const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)
-        let limit = zakladDane.times(percentLimit).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+        let limit = round(zakladDane.times(percentLimit))
 
         if (pocetMesiacovVSkupine !== 12) {
-          const pom = limit.div(12).toDecimalPlaces(2)
-          limit = pom.times(pocetMesiacovVSkupine).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+          const pom = round(limit.div(12))
+          limit = round(pom.times(pocetMesiacovVSkupine))
         }
 
         let vysledok = new Decimal(0)
@@ -606,7 +610,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r123() {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
         if (this.r035_pocet_mesiacov === 12) {
-          return Decimal.min(this.r035_zaplatene_uroky.times(0.5), new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY))
+          return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY)))
         } else if (this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR - UROKY_POCET_ROKOV) {
           const a = this.r035_zaplatene_uroky.times(0.5)
           const b = round(a).div(12)
@@ -683,17 +687,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return tax.gt(MINIMALNA_DAN_NA_ZAPLATENIE) ? tax : new Decimal(0)
     },
     get r136_danovy_preplatok() {
-      return Decimal.abs(
-        Decimal.min(
-          0,
-          new Decimal(this.r116_dan)
-            .minus(this.r117)
-            .plus(this.r119)
-            .plus(this.r121)
-            .minus(this.r131)
-            .minus(this.r133),
-        ),
-      )
+      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const base = podmienka ? this.r116_dan : new Decimal(0)
+      let tax = base
+                .minus(this.r117)
+                .plus(this.r119)
+                .plus(this.r121)
+                .minus(this.r123)
+                .plus(this.r125)
+                .plus(this.r127)
+                .plus(this.r128)
+                .minus(this.r129)
+                .minus(this.r130)
+                .minus(this.r131)
+                .minus(this.r132)
+                .minus(this.r133)
+                .minus(this.r134)
+      return Decimal.min(0, tax).negated()
     },
     splnam3per: input?.splnam3per ?? false,
     get suma_2_percenta() {

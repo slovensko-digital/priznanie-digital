@@ -268,7 +268,7 @@ const executeTestCase = (testCase: string) => {
         if (input.expectNgoDonationValue) {
           cy.get('.govuk-hint').contains(input.percent2)
 
-          if (input.XIIoddiel_uplatnujem2percenta) {
+          if (input.dve_percenta_podporujem) {
             cy.get('[data-test="dve_percenta_podporujem-inu-input"]').click()
 
             cy.get('label[for="splnam3per"]').contains(input.percent3)
