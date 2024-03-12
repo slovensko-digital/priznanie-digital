@@ -132,6 +132,9 @@ const randomInput = (): TaxFormUserInput => {
       uroky_dalsi_dlznik: true,
       uroky_pocet_dlznikov: '2',
       r035_zaplatene_uroky: randomFromRangeString(0, 9999),
+      uroky_dalsi_uver_uplatnuje: false,
+      uroky_splnam_vek_kriteria: true,
+      uroky_splnam_prijem: true,
     }
   }
 
