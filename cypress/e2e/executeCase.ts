@@ -37,7 +37,7 @@ const next = () => {
   return cy.contains('Pokračovať').click()
 }
 
-const assertUrl = (url: Route | PostponeRoute) => {
+export const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
 
