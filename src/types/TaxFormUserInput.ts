@@ -113,6 +113,7 @@ export interface TaxFormUserInput {
   children: ChildInput[]
 
   /** SECTION  Dve percenta */
+  dve_percenta_podporujem?: "ano-sk-digital"| "ano-inu" | "nie"  
   XIIoddiel_uplatnujem2percenta?: boolean
   splnam3per?: boolean
   r142_ico?: string

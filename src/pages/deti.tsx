@@ -22,6 +22,7 @@ import {
   maxChildAgeBonusMonth,
   minChildAgeBonusMonth,
   numberInputRegexp,
+  parseInputNumber,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -40,6 +41,7 @@ import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
+import { ExternalLink } from '../components/ExternalLink'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -101,7 +103,7 @@ const Deti: Page<ChildrenUserInput> = ({
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
                   študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                  pri splnení <a className='govuk-link' target='_blank' href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</a> máte nárok na daňové zvýhodnenie.
+                  pri splnení <ExternalLink href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</ExternalLink> máte nárok na daňové zvýhodnenie.
                   Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                 </p>
                 <Details title="Aká je výška daňového bonusu?">
@@ -373,8 +375,8 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
         <Radio name={`children[${index}]-bonus-interval-input-partyear`} label="V niektorých mesiacoch" value="partYear" disabled={!validateRodneCislo(rodneCislo) || monthOptions.length === 0} />
         <RadioConditional forValue="partYear">
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
           </legend>
-          <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
           <div
             className={classnames('govuk-form-group', styles.inlineFieldContainer)}
           >
@@ -484,6 +486,8 @@ export const validate = (values: ChildrenUserInput) => {
           'Zadajte vlastné príjmy manželky / manžela'
       } else if (!values.r034a.match(numberInputRegexp)) {
         errors.r034a = 'Zadajte príjmy vo formáte 123,45'
+      } else if (new Decimal(parseInputNumber(values.r034a)).lessThanOrEqualTo(0)) {
+        errors.r034a = 'Príjem musí byť viac ako 0'
       }
     }
   }

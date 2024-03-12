@@ -98,6 +98,7 @@ export const urokyInitialValues: UrokyUserInput = {
 
 export const twoPercentInitialValues: TwoPercentUserInput = {
   XIIoddiel_uplatnujem2percenta: undefined,
+  dve_percenta_podporujem: undefined,
   splnam3per: false,
   r142_ico: '',
   r142_obchMeno: '',
