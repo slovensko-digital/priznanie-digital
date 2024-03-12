@@ -483,7 +483,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         if (this.r034.pocetMesiacov === 12) {
           return this.r034a.plus(this.r038).plus(this.r045)
         } else {
-          const partner = round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov)
+          const partner = round(round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov))
           return this.r038.plus(this.r045).plus(partner)
         }
       } else {
@@ -545,13 +545,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           zakladDane = this.r038.plus(this.r045)
         }
 
-        zakladDane = zakladDane.toDecimalPlaces(2, Decimal.ROUND_UP)
+        zakladDane = round(zakladDane)
         const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)
-        let limit = zakladDane.times(percentLimit).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+        let limit = round(zakladDane.times(percentLimit))
 
         if (pocetMesiacovVSkupine !== 12) {
-          const pom = limit.div(12).toDecimalPlaces(2)
-          limit = pom.times(pocetMesiacovVSkupine).toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+          const pom = round(limit.div(12))
+          limit = round(pom.times(pocetMesiacovVSkupine))
         }
 
         let vysledok = new Decimal(0)
