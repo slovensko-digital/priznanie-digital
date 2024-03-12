@@ -7,6 +7,7 @@ import { useFormikContext } from 'formik'
 import { RentUserInput } from '../types/PageUserInputs'
 import { formatCurrency, parseInputNumber } from '../lib/utils'
 import Decimal from 'decimal.js'
+import { ExternalLink } from './ExternalLink'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
@@ -46,14 +47,14 @@ export const OslobodenieQuestion = ({ disabled }) => (
       </ul>
       ak úhrn týchto príjmov nepresiahne v zdaňovacom období {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}, pričom ak takto vymedzené príjmy presiahnu túto sumu,
       do základu dane sa zahrnú len príjmy nad sumu {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}. Detailné informácie nájdete na stránke {' '}
-      <a href="https://podpora.financnasprava.sk/186937-Oslobodenie-pr%C3%ADjmov-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD">Finančnej správy SR</a>.
+      <ExternalLink href='https://podpora.financnasprava.sk/186937-Oslobodenie-pr%C3%ADjmov-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD'>Finančnej správy SR</ExternalLink>.
     </p>
     <Details title="Čo je príjem z príležitostnej činnosti?">
       <>
         <p>
           Príjmom z príležitostnej činnosti je iba taký príjem, ktorý plynie fyzickej osobe bez zmluvne dohodnutých podmienok.
           Príležitostný príjem je zárobok, ktorý je občasný, je nepravidelný, to ale neznamená, že musí ísť o jednorazový príjem. Detailné informácie nájdete na stránke {' '}
-          <a href="https://podpora.financnasprava.sk/531581-Pr%C3%ADjmy-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD">Finančnej správy SR</a>.
+          <ExternalLink href='https://podpora.financnasprava.sk/531581-Pr%C3%ADjmy-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD'>Finančnej správy SR</ExternalLink>.
         </p>
         <ul>
           <li>pokosenie trávy susedovi</li>
