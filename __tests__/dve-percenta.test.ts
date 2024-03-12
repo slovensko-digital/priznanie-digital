@@ -11,17 +11,17 @@ describe('dve-percenta', () => {
   describe('#validate', () => {
     testValidation(validate, [
       {
-        input: { XIIoddiel_uplatnujem2percenta: undefined },
-        expected: ['XIIoddiel_uplatnujem2percenta'],
+        input: { dve_percenta_podporujem: undefined },
+        expected: ['dve_percenta_podporujem'],
       },
-      { input: { XIIoddiel_uplatnujem2percenta: false }, expected: [] },
+      { input: { dve_percenta_podporujem: "nie" }, expected: [] },
       {
-        input: { XIIoddiel_uplatnujem2percenta: true },
+        input: { dve_percenta_podporujem: "ano-inu" },
         expected: ['r142_ico', 'r142_obchMeno'],
       },
       {
         input: {
-          XIIoddiel_uplatnujem2percenta: true,
+          dve_percenta_podporujem: "ano-inu",
           r142_ico: '1',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -29,7 +29,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          XIIoddiel_uplatnujem2percenta: true,
+          dve_percenta_podporujem: "ano-inu",
           r142_ico: '12 345 67',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -37,7 +37,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          XIIoddiel_uplatnujem2percenta: true,
+          dve_percenta_podporujem: "ano-inu",
           r142_ico: '12 345 678',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -45,7 +45,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          XIIoddiel_uplatnujem2percenta: true,
+          dve_percenta_podporujem: "ano-inu",
           r142_ico: '12 345 6',
           r142_obchMeno: 'Fake, o.z.',
         },
