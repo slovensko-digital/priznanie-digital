@@ -22,6 +22,7 @@ import {
   maxChildAgeBonusMonth,
   minChildAgeBonusMonth,
   numberInputRegexp,
+  parseInputNumber,
 } from '../lib/utils'
 import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -484,6 +485,8 @@ export const validate = (values: ChildrenUserInput) => {
           'Zadajte vlastné príjmy manželky / manžela'
       } else if (!values.r034a.match(numberInputRegexp)) {
         errors.r034a = 'Zadajte príjmy vo formáte 123,45'
+      } else if (new Decimal(parseInputNumber(values.r034a)).lessThanOrEqualTo(0)) {
+        errors.r034a = 'Príjem musí byť viac ako 0'
       }
     }
   }
