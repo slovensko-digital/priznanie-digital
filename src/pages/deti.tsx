@@ -41,6 +41,7 @@ import Radio from "../components/radio/Radio";
 import RadioConditional from "../components/radio/RadioConditional";
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
+import { ExternalLink } from '../components/ExternalLink'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -102,7 +103,7 @@ const Deti: Page<ChildrenUserInput> = ({
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
                   študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                  pri splnení <a className='govuk-link' target='_blank' href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</a> máte nárok na daňové zvýhodnenie.
+                  pri splnení <ExternalLink href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</ExternalLink> máte nárok na daňové zvýhodnenie.
                   Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                 </p>
                 <Details title="Aká je výška daňového bonusu?">
