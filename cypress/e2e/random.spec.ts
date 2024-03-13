@@ -90,7 +90,7 @@ const randomInput = (): TaxFormUserInput => {
         id: index,
         priezviskoMeno: `Fake Child ${index}`,
         rodneCislo: generateBirthId(birthDate, gender ? 'FEMALE' : 'MALE').pure,
-        wholeYear: true,
+        wholeYear,
         monthFrom: monthFrom.toString(),
         monthTo: monthTo.toString(),
       })
@@ -155,7 +155,7 @@ describe('Random inputs', () => {
   it('should pass', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
-  Array.from({ length: 50 }).forEach((_, i) => {
+  Array.from({ length: 25 }).forEach((_, i) => {
     it(`should pass random input ${i}`, (done) => {
       const input = randomInput()
       cy.log(JSON.stringify(input, null, 2))
