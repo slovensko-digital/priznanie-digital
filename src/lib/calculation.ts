@@ -334,26 +334,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r060
     },
     get r072_pred_znizenim() {
-      return Decimal.max(this.r038.plus(this.r057), 0)
+      return round(Decimal.max(this.r038.plus(this.r057), 0))
     },
     get r073() {
-      if (
-        this.r072_pred_znizenim.eq(0) ||
-        this.r072_pred_znizenim.gte(KONSTANTA)
-      ) {
+      if (this.r072_pred_znizenim.isZero()) {
         return new Decimal(0)
+      } else if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
+        return round(Decimal.max(0, new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(round(this.r072_pred_znizenim.div(4)))))
+      } else {
+        return NEZDANITELNA_CAST_ZAKLADU
       }
-      if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return round(
-          Decimal.max(
-            0,
-            new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(
-              round(this.r072_pred_znizenim.times(0.25)),
-            ),
-          ),
-        )
-      }
-      return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera && this.r072_pred_znizenim.gt(0)) {
@@ -437,7 +427,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r057.minus(this.r091), 0)
     },
     get r094() {
-      return this.r092
+      return round(this.r092)
     },
     get r095() {
       return this.t1r10_prijmy
@@ -464,12 +454,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
 
       if (this.r094.lte(KONSTANTA)) {
-        return this.r094.times(DAN_Z_PRIJMU_SADZBA)
-
+        return round(this.r094.times(DAN_Z_PRIJMU_SADZBA))
       } else {
-        return new Decimal(KONSTANTA)
+        return round(new Decimal(KONSTANTA)
           .times(DAN_Z_PRIJMU_SADZBA)
-          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA))
+          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)))
       }
     },
     get r105() {
@@ -480,11 +469,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r116a() {
       if (this.partner_bonus_na_deti) {
-        if (this.r034.pocetMesiacov === 12) {
-          return this.r034a.plus(this.r038).plus(this.r045)
-        } else {
+        const podmienka = this.r038.greaterThan(0) || this.r045.greaterThan(0)
+        if (this.r034.pocetMesiacov === 12 && podmienka) {
+          return round(this.r034a.plus(this.r038).plus(this.r045))
+        } else if ((this.r034.pocetMesiacov > 0 && this.r034.pocetMesiacov < 12) && podmienka) {
           const partner = round(round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov))
-          return this.r038.plus(this.r045).plus(partner)
+          return round(this.r038.plus(this.r045).plus(partner))
+        } else {
+          return new Decimal(0)
         }
       } else {
         return new Decimal(0)

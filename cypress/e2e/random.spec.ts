@@ -61,26 +61,28 @@ const randomInput = (): TaxFormUserInput => {
 
   if (hasChildren) {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
-    Array.from({ length: childrenCount }).forEach((value, index) => {
+    Array.from({ length: childrenCount }).forEach((_, index) => {
       const age = randomFromRange(0, 25).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
       const birthDate = new Date(TAX_YEAR - age, month, 15)
       const gender = Math.random() > 0.5
-      const wholeYear = Math.random() > 0.5
+      let wholeYear = Math.random() > 0.5
 
       let monthFrom = 0
       let monthTo = 11
 
-      if (!wholeYear){
+      if (!wholeYear || age === 0 || age === 25){
         if (age === 0) {
           monthFrom = randomFromRange(month, 11).round().toNumber()
-          monthTo = randomFromRange(month, 11).round().toNumber()
+          monthTo = randomFromRange(monthFrom, 11).round().toNumber()
+          wholeYear = false
         } else if (age === 25) {
           monthFrom = randomFromRange(0, month).round().toNumber()
-          monthTo = randomFromRange(0, month).round().toNumber()
+          monthTo = randomFromRange(monthFrom, month).round().toNumber()
+          wholeYear = false
         } else {
           monthFrom = randomFromRange(0, 11).round().toNumber()
-          monthTo = randomFromRange(0, 11).round().toNumber()
+          monthTo = randomFromRange(monthFrom, 11).round().toNumber()
         }
       }
 
@@ -88,7 +90,7 @@ const randomInput = (): TaxFormUserInput => {
         id: index,
         priezviskoMeno: `Fake Child ${index}`,
         rodneCislo: generateBirthId(birthDate, gender ? 'FEMALE' : 'MALE').pure,
-        wholeYear: true,
+        wholeYear,
         monthFrom: monthFrom.toString(),
         monthTo: monthTo.toString(),
       })
