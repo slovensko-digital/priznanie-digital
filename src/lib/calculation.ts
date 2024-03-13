@@ -437,7 +437,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return Decimal.max(this.r057.minus(this.r091), 0)
     },
     get r094() {
-      return this.r092
+      return round(this.r092)
     },
     get r095() {
       return this.t1r10_prijmy
@@ -464,12 +464,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
 
       if (this.r094.lte(KONSTANTA)) {
-        return this.r094.times(DAN_Z_PRIJMU_SADZBA)
-
+        return round(this.r094.times(DAN_Z_PRIJMU_SADZBA))
       } else {
-        return new Decimal(KONSTANTA)
+        return round(new Decimal(KONSTANTA)
           .times(DAN_Z_PRIJMU_SADZBA)
-          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA))
+          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)))
       }
     },
     get r105() {
