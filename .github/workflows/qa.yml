@@ -160,3 +160,9 @@ jobs:
           autoformtoken: ${{ secrets.AUTOFORMTOKEN }}
           # navody.digital base url for redirect
           NAVODY_BASE_URL: https://staging.navody.digital
+      - name: 'Upload Downloads Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-downloads-folder
+          path: cypress/downloads/
+          retention-days: 90
