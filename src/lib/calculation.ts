@@ -334,26 +334,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r060
     },
     get r072_pred_znizenim() {
-      return Decimal.max(this.r038.plus(this.r057), 0)
+      return round(Decimal.max(this.r038.plus(this.r057), 0))
     },
     get r073() {
-      if (
-        this.r072_pred_znizenim.eq(0) ||
-        this.r072_pred_znizenim.gte(KONSTANTA)
-      ) {
+      if (this.r072_pred_znizenim.isZero()) {
         return new Decimal(0)
+      } else if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
+        return round(Decimal.max(0, new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(round(this.r072_pred_znizenim.div(4)))))
+      } else {
+        return NEZDANITELNA_CAST_ZAKLADU
       }
-      if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return round(
-          Decimal.max(
-            0,
-            new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(
-              round(this.r072_pred_znizenim.times(0.25)),
-            ),
-          ),
-        )
-      }
-      return NEZDANITELNA_CAST_ZAKLADU
     },
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera && this.r072_pred_znizenim.gt(0)) {
