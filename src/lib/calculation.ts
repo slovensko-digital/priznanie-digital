@@ -479,11 +479,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r116a() {
       if (this.partner_bonus_na_deti) {
-        if (this.r034.pocetMesiacov === 12) {
-          return this.r034a.plus(this.r038).plus(this.r045)
-        } else {
+        const podmienka = this.r038.greaterThan(0) || this.r045.greaterThan(0)
+        if (this.r034.pocetMesiacov === 12 && podmienka) {
+          return round(this.r034a.plus(this.r038).plus(this.r045))
+        } else if ((this.r034.pocetMesiacov > 0 && this.r034.pocetMesiacov < 12) && podmienka) {
           const partner = round(round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov))
-          return this.r038.plus(this.r045).plus(partner)
+          return round(this.r038.plus(this.r045).plus(partner))
+        } else {
+          return new Decimal(0)
         }
       } else {
         return new Decimal(0)
