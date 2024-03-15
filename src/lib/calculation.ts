@@ -501,22 +501,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         month: month
       }))
 
-      const monthGroups = []
-      let lastChangeIndex = 0
+      const childCountGroups = months
+        .map(({ count }) => count)
+        .filter((x, i, a) => a.indexOf(x) == i) // remove duplicates
+        .sort((a, b) => a - b) // sort ascending
 
-      for (let index = 1; index < months.length; index++) {
-        const currentElement = months[index];
-        const previousElement = months[index - 1];
+      const monthGroups = Array.from({ length: childCountGroups.length }, () => [])
 
-        if (currentElement.count !== previousElement.count) {
-          monthGroups.push(months.slice(lastChangeIndex, index))
-          lastChangeIndex = index
-        }
-
-        if (index === months.length - 1) {
-          monthGroups.push(months.slice(lastChangeIndex, index + 1))
-        }
+      for (const month of months) {
+        const index = childCountGroups.indexOf(month.count)
+        monthGroups[index].push(month)
       }
+
       let danovyBonus = new Decimal(0)
       let nevyuzityDanovyBonus = new Decimal(0)
 
