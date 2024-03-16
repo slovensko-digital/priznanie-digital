@@ -138,16 +138,18 @@ const randomInput = (): TaxFormUserInput => {
   }
 
   if (uroky) {
-    const rok = randomFromRangeString(TAX_YEAR - 5, TAX_YEAR)
+    const rok = randomFromRange(TAX_YEAR - 5, TAX_YEAR).round().toNumber().toString()
+    const mesiac = randomFromRange(1, 12).round().toNumber().toString()
+    const pocetDlznikov = randomFromRange(1, 10).round().toNumber()
     input = {
       ...input,
       r035_uplatnuje_uroky: true,
       uroky_rok_uzatvorenia: rok,
       uroky_zaciatok_urocenia_den: '21',
-      uroky_zaciatok_urocenia_mesiac: '8',
+      uroky_zaciatok_urocenia_mesiac: mesiac,
       uroky_zaciatok_urocenia_rok: rok,
-      uroky_dalsi_dlznik: true,
-      uroky_pocet_dlznikov: '2',
+      uroky_dalsi_dlznik: pocetDlznikov > 1,
+      uroky_pocet_dlznikov: pocetDlznikov.toString(),
       r035_zaplatene_uroky: randomFromRangeString(0, 9999),
       uroky_dalsi_uver_uplatnuje: false,
       uroky_splnam_vek_kriteria: true,
