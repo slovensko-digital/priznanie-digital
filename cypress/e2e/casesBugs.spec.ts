@@ -24,6 +24,8 @@ describe('Cases', () => {
     'bugReport17',
     'bugReport18',
     'bugReport19',
+    'bugReport20',
+    'bugReport21',
     'employmentWrongChildBonus'
   ])
 })
