@@ -301,7 +301,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r038() {
-      return Decimal.max(this.r036.minus(this.r037), 0)
+      return round(Decimal.max(this.r036.minus(this.r037), 0))
     },
     get r039() {
       return this.t1r10_prijmy
@@ -310,10 +310,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r10_vydavky
     },
     get r041() {
-      return Decimal.abs(this.r039.minus(this.r040))
+      return round(Decimal.abs(this.r039.minus(this.r040)))
     },
     get r045() {
-      return this.r041
+      return round(this.r041)
     },
     get r055() {
       return this.r045
