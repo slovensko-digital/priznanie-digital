@@ -42,7 +42,7 @@ const POCET_KVARTALOV = 4
 const POCET_MESIACOV = 12
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = 14_862.228
+const ZVYHODNENIE_NA_PARTNERA = new Decimal(14862.23)
 export const TAX_YEAR = 2023
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
@@ -301,7 +301,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r038() {
-      return Decimal.max(this.r036.minus(this.r037), 0)
+      return round(Decimal.max(this.r036.minus(this.r037), 0))
     },
     get r039() {
       return this.t1r10_prijmy
@@ -310,10 +310,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r10_vydavky
     },
     get r041() {
-      return Decimal.abs(this.r039.minus(this.r040))
+      return round(Decimal.abs(this.r039.minus(this.r040)))
     },
     get r045() {
-      return this.r041
+      return round(this.r041)
     },
     get r055() {
       return this.r045
@@ -348,8 +348,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r074_znizenie_partner() {
       if (this.r032_uplatnujem_na_partnera && this.r072_pred_znizenim.gt(0)) {
         if (this.r072_pred_znizenim.gt(KONSTANTA)) {
-          const zaklad = new Decimal(ZVYHODNENIE_NA_PARTNERA).minus(
-            this.r072_pred_znizenim.times(0.25),
+          const zaklad = ZVYHODNENIE_NA_PARTNERA.minus(
+            round(this.r072_pred_znizenim.times(0.25))
           )
           const zakladZinzenyOPartnerovPrijem = zaklad.minus(
             Decimal.max(this.r032_partner_vlastne_prijmy, 0),
@@ -358,7 +358,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             return Decimal.max(0, round(zakladZinzenyOPartnerovPrijem))
           } else {
             const mesacne = round(zakladZinzenyOPartnerovPrijem.div(12))
-            return Decimal.max(0, mesacne.times(this.r032_partner_pocet_mesiacov))
+            return Decimal.max(0, round(mesacne.times(this.r032_partner_pocet_mesiacov)))
           }
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {

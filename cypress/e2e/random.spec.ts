@@ -61,6 +61,7 @@ const randomInput = (): TaxFormUserInput => {
 
   if (hasChildren) {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
+    const partnerChildBonus = Math.random() > 0.3
     Array.from({ length: childrenCount }).forEach((_, index) => {
       const age = randomFromRange(0, 25).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
@@ -95,6 +96,20 @@ const randomInput = (): TaxFormUserInput => {
         monthTo: monthTo.toString(),
       })
     })
+
+    if (partnerChildBonus) {
+      const randomKid = input.children[randomFromRange(0, childrenCount - 1).round().toNumber()]
+      input = {
+        ...input,
+        partner_bonus_na_deti: true,
+        r034_priezvisko_a_meno: 'Beth Smith',
+        r034_rodne_cislo: '975917/1565',
+        partner_bonus_na_deti_od: randomKid.wholeYear ? '0' : randomKid.monthFrom.toString(),
+        partner_bonus_na_deti_do: randomKid.wholeYear ? '11' : randomKid.monthTo.toString(),
+        partner_bonus_na_deti_typ_prijmu: '1',
+        r034a: randomFromRangeString(0, 100000)
+      }
+    }
   }
 
   if (partner) {
@@ -123,16 +138,18 @@ const randomInput = (): TaxFormUserInput => {
   }
 
   if (uroky) {
-    const rok = randomFromRangeString(TAX_YEAR - 5, TAX_YEAR)
+    const rok = randomFromRange(TAX_YEAR - 5, TAX_YEAR).round().toNumber().toString()
+    const mesiac = randomFromRange(1, 12).round().toNumber().toString()
+    const pocetDlznikov = randomFromRange(1, 10).round().toNumber()
     input = {
       ...input,
       r035_uplatnuje_uroky: true,
       uroky_rok_uzatvorenia: rok,
       uroky_zaciatok_urocenia_den: '21',
-      uroky_zaciatok_urocenia_mesiac: '8',
+      uroky_zaciatok_urocenia_mesiac: mesiac,
       uroky_zaciatok_urocenia_rok: rok,
-      uroky_dalsi_dlznik: true,
-      uroky_pocet_dlznikov: '2',
+      uroky_dalsi_dlznik: pocetDlznikov > 1,
+      uroky_pocet_dlznikov: pocetDlznikov.toString(),
       r035_zaplatene_uroky: randomFromRangeString(0, 9999),
       uroky_dalsi_uver_uplatnuje: false,
       uroky_splnam_vek_kriteria: true,
@@ -158,7 +175,6 @@ describe('Random inputs', () => {
   Array.from({ length: 50 }).forEach((_, i) => {
     it(`should pass random input ${i}`, (done) => {
       const input = randomInput()
-      cy.log(JSON.stringify(input, null, 2))
       cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
       const filePath = `cypress/downloads/randomOutput${i}.xml`
       cy.request({
