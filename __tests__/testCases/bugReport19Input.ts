@@ -85,10 +85,10 @@ export const bugReport19Input: E2eTestUserInput = {
     1: true
   },
   r035_uplatnuje_uroky: true,
-  uroky_rok_uzatvorenia: "2021.91",
+  uroky_rok_uzatvorenia: "2021",
   uroky_zaciatok_urocenia_den: "21",
   uroky_zaciatok_urocenia_mesiac: "8",
-  uroky_zaciatok_urocenia_rok: "2021.91",
+  uroky_zaciatok_urocenia_rok: "2021",
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: "2",
   r035_zaplatene_uroky: "4949.12",
