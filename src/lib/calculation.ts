@@ -143,34 +143,34 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** SECTION Prijmy */
     get t1r2_prijmy() {
       // TODO fix input name
-      return new Decimal(parseInputNumber(input.t1r10_prijmy))
+      return round(new Decimal(parseInputNumber(input.t1r10_prijmy)))
     },
     get t1r10_prijmy() {
-      return this.t1r2_prijmy
+      return round(this.t1r2_prijmy)
     },
     get t1r10_vydavky() {
       const vydavky = Decimal.min(
         this.t1r10_prijmy.times(0.6),
         PAUSALNE_VYDAVKY_MAX,
       ).add(this.vydavkyPoistPar6ods11_ods1a2)
-      return Decimal.min(vydavky, this.t1r2_prijmy)
+      return round(Decimal.min(vydavky, this.t1r2_prijmy))
     },
 
-    priloha3_r11_socialne: new Decimal(
+    priloha3_r11_socialne: round(new Decimal(
       parseInputNumber(input.priloha3_r11_socialne),
-    ),
-    priloha3_r13_zdravotne: new Decimal(
+    )),
+    priloha3_r13_zdravotne: round(new Decimal(
       parseInputNumber(input.priloha3_r13_zdravotne),
-    ),
+    )),
 
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
-    r075_zaplatene_prispevky_na_dochodok: Decimal.min(
+    r075_zaplatene_prispevky_na_dochodok: round(Decimal.min(
       180,
       new Decimal(
         parseInputNumber(input?.zaplatene_prispevky_na_dochodok ?? '0'),
       ),
-    ),
+    )),
 
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
@@ -182,9 +182,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         input?.r032_uplatnujem_na_partnera && validatePartnerBonusForm(input)
       )
     },
-    r032_partner_vlastne_prijmy: new Decimal(
+    r032_partner_vlastne_prijmy: round(new Decimal(
       parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),
-    ),
+    )),
     r032_partner_pocet_mesiacov: parseInputNumber(
       input?.r032_partner_pocet_mesiacov ?? '0',
     ),
@@ -207,7 +207,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return mapPartnerChildBonus(input)
     },
 
-    r034a: new Decimal(parseInputNumber(input?.r034a ?? '0')),
+    r034a: round(new Decimal(parseInputNumber(input?.r034a ?? '0'))),
 
     /** SECTION Mortgage **/
     get r035_uplat_dan_bonus_zaplat_uroky() {
@@ -216,7 +216,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       )
     },
     get r035_zaplatene_uroky() {
-      return new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0'))
+      return round(new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0')))
     },
     get r035_pocet_mesiacov(){
       const yearDiff = TAX_YEAR - Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
@@ -250,7 +250,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get t1r11s1() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-      return Decimal.max(prijmy.minus(this.prenajom_oslobodenie), 0)
+      return round(Decimal.max(prijmy.minus(this.prenajom_oslobodenie), 0))
     },
     get t1r11s2() {
       const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
@@ -261,7 +261,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       } else {
         result = (this.t1r11s1.div(prijmy)).mul(vydavky)
       }
-      return Decimal.max(Decimal.min(this.t1r11s1, result), 0)
+      return round(Decimal.max(Decimal.min(this.t1r11s1, result), 0))
     },
     get t1r13s1() {
       return this.t1r11s1
@@ -271,10 +271,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Employment */
-    r036: new Decimal(
+    r036: round(new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
-    ),
-    r037: new Decimal(
+    )),
+    r037: round(new Decimal(
       parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
     ).plus(
       new Decimal(
@@ -282,32 +282,32 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
         ),
       ),
-    ),
+    )),
 
     get vydavkyPoistPar6ods11_ods1a2() {
-      return this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne)
+      return round(this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne))
     },
     get priloha3_r08_poistne_spolu() {
-      return this.r037
+      return round(this.r037)
     },
     get priloha3_r09_socialne() {
-      return new Decimal(
+      return round(new Decimal(
         parseInputNumber(input.uhrnPovinnehoPoistnehoNaSocialnePoistenie),
-      )
+      ))
     },
     get priloha3_r10_zdravotne() {
-      return new Decimal(
+      return round(new Decimal(
         parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
-      )
+      ))
     },
     get r038() {
       return round(Decimal.max(this.r036.minus(this.r037), 0))
     },
     get r039() {
-      return this.t1r10_prijmy
+      return round(this.t1r10_prijmy)
     },
     get r040() {
-      return this.t1r10_vydavky
+      return round(this.t1r10_vydavky)
     },
     get r041() {
       return round(Decimal.abs(this.r039.minus(this.r040)))
@@ -316,22 +316,22 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(this.r041)
     },
     get r055() {
-      return this.r045
+      return round(this.r045)
     },
     get r057() {
-      return this.r055
+      return round(this.r055)
     },
     get r058() {
-      return this.t1r13s1
+      return round(this.t1r13s1)
     },
     get r059() {
-      return this.t1r13s2
+      return round(this.t1r13s2)
     },
     get r060() {
-      return Decimal.max(this.r058.minus(this.r059), 0)
+      return round(Decimal.max(this.r058.minus(this.r059), 0))
     },
     get r065() {
-      return this.r060
+      return round(this.r060)
     },
     get r072_pred_znizenim() {
       return round(Decimal.max(this.r038.plus(this.r057), 0))
@@ -355,10 +355,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             Decimal.max(this.r032_partner_vlastne_prijmy, 0),
           )
           if (this.r032_partner_pocet_mesiacov === 12) {
-            return Decimal.max(0, round(zakladZinzenyOPartnerovPrijem))
+            return round(Decimal.max(0, round(zakladZinzenyOPartnerovPrijem)))
           } else {
             const mesacne = round(zakladZinzenyOPartnerovPrijem.div(12))
-            return Decimal.max(0, round(mesacne.times(this.r032_partner_pocet_mesiacov)))
+            return round(Decimal.max(0, round(mesacne.times(this.r032_partner_pocet_mesiacov))))
           }
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {
@@ -373,22 +373,22 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
                 .div(12),
             )
-            return Decimal.max(
+            return round(Decimal.max(
               0,
               round(mesacne.times(this.r032_partner_pocet_mesiacov)),
-            )
+            ))
           }
         }
       }
       return new Decimal(0)
     },
     get r077_nezdanitelna_cast() {
-      return Decimal.min(
+      return round(Decimal.min(
         this.r073
           .plus(this.r074_znizenie_partner)
           .plus(this.r075_zaplatene_prispevky_na_dochodok),
         this.r072_pred_znizenim,
-      )
+      ))
     },
     get r078_zaklad_dane_zo_zamestnania() {
       return round(
@@ -413,7 +413,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       ))
     },
     get r090() {
-      return this.r081
+      return round(this.r081)
     },
     get r091() {
       if (this.r078_zaklad_dane_zo_zamestnania.eq(0)) {
@@ -424,13 +424,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r092() {
-      return Decimal.max(this.r057.minus(this.r091), 0)
+      return round(Decimal.max(this.r057.minus(this.r091), 0))
     },
     get r094() {
       return round(this.r092)
     },
     get r095() {
-      return this.t1r10_prijmy
+      return round(this.t1r10_prijmy)
     },
     get r096() {
       if (this.r094.lessThan(0)) {
@@ -462,7 +462,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r105() {
-      return this.r096
+      return round(this.r096)
     },
     get r116_dan() {
       return round(this.r090.plus(this.r105))
@@ -576,24 +576,24 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r117() {
-      return Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0)
+      return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
     },
     get r118() {
-      return Decimal.max(this.r116_dan.minus(this.r117), 0)
+      return round(Decimal.max(this.r116_dan.minus(this.r117), 0))
     },
     get r119() {
-      return new Decimal(
+      return round(new Decimal(
         parseInputNumber(input?.udajeODanovomBonuseNaDieta ?? '0'),
-      )
+      ))
     },
     get r120() {
-      return Decimal.max(new Decimal(this.r117).minus(this.r119), 0)
+      return round(Decimal.max(new Decimal(this.r117).minus(this.r119), 0))
     },
     get r121() {
-      return Decimal.max(this.r120.minus(this.r116_dan), 0)
+      return round(Decimal.max(this.r120.minus(this.r116_dan), 0))
     },
     get r122() {
-      return Decimal.max(this.r119.minus(this.r117), 0)
+      return round(Decimal.max(this.r119.minus(this.r117), 0))
     },
     get r123() {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
@@ -613,11 +613,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r124() {
-      return Decimal.max(this.r118.minus(this.r123), 0)
+      return round(Decimal.max(this.r118.minus(this.r123), 0))
     },
     r125: new Decimal(0),
     get r126() {
-      return Decimal.max(this.r123.minus(this.r125), 0)
+      return round(Decimal.max(this.r123.minus(this.r125), 0))
     },
     get mozeZiadatVyplatitDanovyBonus() {
       return this.r121.gt(0)
@@ -629,19 +629,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r127.gt(0)
     },
     get r127() {
-      return Decimal.max(this.r126.minus(this.r118), 0)
+      return round(Decimal.max(this.r126.minus(this.r118), 0))
     },
     r128: new Decimal(0),
     r129: new Decimal(0),
     r130: new Decimal(0),
     get r131() {
-      return new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0'))
+      return round(new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0')))
     },
     get r132() {
       return new Decimal(0)
     },
     get r133() {
-      return new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0'))
+      return round(new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0')))
     },
     get r134() {
       return new Decimal(0)
@@ -672,7 +672,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .minus(this.r134)
       tax = Decimal.max(0, tax)
 
-      return tax.gt(MINIMALNA_DAN_NA_ZAPLATENIE) ? tax : new Decimal(0)
+      return tax.gt(MINIMALNA_DAN_NA_ZAPLATENIE) ? round(tax) : new Decimal(0)
     },
     get r136_danovy_preplatok() {
       const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
@@ -691,14 +691,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .minus(this.r132)
                 .minus(this.r133)
                 .minus(this.r134)
-      return Decimal.min(0, tax).negated()
+      return Decimal.min(0, round(tax)).negated()
     },
     splnam3per: input?.splnam3per ?? false,
     get suma_2_percenta() {
-      return percentage(this.r124, 2)
+      return round(percentage(this.r124, 2))
     },
     get suma_3_percenta() {
-      return percentage(this.r124, 3)
+      return round(percentage(this.r124, 3))
     },
     get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
@@ -709,7 +709,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       /** Min of 3 EUR is required */
       return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION)
-        ? NGOAmount
+        ? round(NGOAmount)
         : new Decimal(0)
     },
     get r152() {
