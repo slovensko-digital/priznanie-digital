@@ -66,6 +66,10 @@ const Uroky: Page<UrokyUserInput> = ({
   )
 }
 
+const isInteger = (value: string) => {
+  return new Decimal(value).isInteger()
+}
+
 export const validate = (values: UrokyUserInput) => {
   const errors: Partial<FormErrors<UrokyUserInput>> = {}
   if (typeof values.r035_uplatnuje_uroky === 'undefined') {
@@ -78,7 +82,7 @@ export const validate = (values: UrokyUserInput) => {
   ) {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
   } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
-    if (typeof values.uroky_rok_uzatvorenia === 'undefined') {
+    if (typeof values.uroky_rok_uzatvorenia === 'undefined' || !isInteger(values.uroky_rok_uzatvorenia)) {
       errors.uroky_rok_uzatvorenia = 'Zadajte rok'
     } else {
       const rok = Number.parseInt(values.uroky_rok_uzatvorenia, 10)
@@ -92,13 +96,13 @@ export const validate = (values: UrokyUserInput) => {
     const zaciatok_urocenia_rok = Number.parseInt(values.uroky_zaciatok_urocenia_rok, 10)
     const zaciatok_urocenia = new Date(zaciatok_urocenia_rok, zaciatok_urocenia_mesiac - 1, ziaciatok_urocenia_den)
 
-    if (zaciatok_urocenia.getDate() !== ziaciatok_urocenia_den) {
+    if (zaciatok_urocenia.getDate() !== ziaciatok_urocenia_den || !isInteger(values.uroky_zaciatok_urocenia_den)) {
       errors.uroky_zaciatok_urocenia_den = 'Zadajte deň v správnom tvare'
     }
-    if ((zaciatok_urocenia.getMonth() + 1) !== zaciatok_urocenia_mesiac) {
+    if ((zaciatok_urocenia.getMonth() + 1) !== zaciatok_urocenia_mesiac || !isInteger(values.uroky_zaciatok_urocenia_mesiac)) {
       errors.uroky_zaciatok_urocenia_mesiac = 'Zadajte mesiac v správnom tvare'
     }
-    if (zaciatok_urocenia.getFullYear() !== zaciatok_urocenia_rok) {
+    if (zaciatok_urocenia.getFullYear() !== zaciatok_urocenia_rok || !isInteger(values.uroky_zaciatok_urocenia_rok)) {
       errors.uroky_zaciatok_urocenia_rok = 'Zadajte rok v správnom tvare'
     }
 
