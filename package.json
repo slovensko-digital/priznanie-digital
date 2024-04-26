@@ -20,7 +20,7 @@
     "cy:run": "cypress run",
     "cy:run:dashboard": "cypress run --record --parallel",
     "cy:ci": "PORT=3000 start-server-and-test start http://localhost:3000/ cy:run:dashboard",
-    "lint": "eslint . --format pretty --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --format pretty",
     "check:ts": "tsc --noEmit",
     "git-comit-hash": "echo {\\\"gitCommit\\\":\\\"$(git rev-parse --short HEAD)\\\"} > ./git-commit.json && git add ./git-commit.json"
   },
