@@ -69,32 +69,17 @@ const Iban: Page<TaxBonusUserInput> = ({
           <BackLink href={previousRoute} />
           <Form className="form" noValidate>
             <ErrorSummary<TaxBonusUserInput> errors={errors} />
-
-            {taxForm.mozeZiadatVyplatitDanovyBonus && (
-              <BooleanRadio
-                name="ziadamVyplatitDanovyBonus"
-                title="Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu"
-              />
-            )}
-
-            {taxForm.mozeZiadatVratitDanovyPreplatok && (
               <BooleanRadio
                 name="ziadamVratitDanovyPreplatok"
                 title="Žiadam o vrátenie daňového preplatku"
               />
-            )}
-
-            {taxForm.mozeZiadatVratitDanovyBonusUroky && (
-              <BooleanRadio
-                name="ziadamVratitDanovyBonusUroky"
-                title="Žiadam o vyplatenie daňového bonusu na zaplatené úroky"
-              />
-            )}
-
-            {(values.ziadamVyplatitDanovyBonus ||
-              values.ziadamVratitDanovyPreplatok ||
-              values.ziadamVratitDanovyBonusUroky) && (
-                <Input
+            {(
+              values.ziadamVratitDanovyPreplatok) && (
+                <>
+                  <div className='govuk-label govuk-!-margin-bottom-3'>Daňový preplatok je vo výške:
+                    <span className='govuk-label govuk-!-font-weight-bold'>{taxForm.r136_danovy_preplatok.toNumber()} €</span>
+                  </div>
+                  <Input
                   name="iban"
                   type="text"
                   label="IBAN"
@@ -107,12 +92,12 @@ const Iban: Page<TaxBonusUserInput> = ({
                     )
                     setFieldValue('iban', iban)
                   }}
-                />
+                  />
+                </>
               )}
-
-            <button data-test="next" className="govuk-button" type="submit">
-              Pokračovať
-            </button>
+              <button data-test="next" className="govuk-button" type="submit">
+                Pokračovať
+              </button>
           </Form>
         </>
       )}
@@ -126,13 +111,7 @@ export const makeValidate =
   (taxForm: TaxForm) => (values: TaxBonusUserInput) => {
     const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
-    if (
-      taxForm.mozeZiadatVyplatitDanovyBonus &&
-      typeof values.ziadamVyplatitDanovyBonus === 'undefined'
-    ) {
-      errors.ziadamVyplatitDanovyBonus = 'Vyznačte odpoveď na daňový bonus'
-    }
-
+   
     if (
       taxForm.mozeZiadatVratitDanovyPreplatok &&
       typeof values.ziadamVratitDanovyPreplatok === 'undefined'
@@ -141,18 +120,12 @@ export const makeValidate =
         'Vyznačte odpoveď na daňový preplatok'
     }
 
-    if (
-      taxForm.mozeZiadatVratitDanovyBonusUroky &&
-      typeof values.ziadamVratitDanovyBonusUroky === 'undefined'
-    ) {
-      errors.ziadamVratitDanovyBonusUroky =
-        'Vyznačte odpoveď na daňový bonus'
-    }
+    
 
     if (
-      values.ziadamVyplatitDanovyBonus ||
-      values.ziadamVratitDanovyPreplatok ||
-      values.ziadamVratitDanovyBonusUroky
+      
+      values.ziadamVratitDanovyPreplatok 
+      
     ) {
       if (!values.iban || values.iban === '') {
         // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
