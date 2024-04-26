@@ -39,6 +39,9 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
+      - name: Remove yarn lock to install fresh deps
+        run: rm yarn.lock
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
