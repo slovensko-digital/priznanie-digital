@@ -16,12 +16,11 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "es2022",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "keyofStringsOnly": true,
     "incremental": true
   },
   "exclude": ["node_modules", "cypress", "public", "./cypress.config.ts"],
