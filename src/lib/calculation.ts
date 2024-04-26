@@ -1076,3 +1076,6 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }
+
+export const IDENTIFICATION_NUMBER_LENGTH = new Decimal(13)
+

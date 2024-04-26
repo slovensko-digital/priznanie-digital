@@ -3,7 +3,7 @@ import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatCurrency, formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
-import { TAX_YEAR } from '../lib/calculation'
+import { IDENTIFICATION_NUMBER_LENGTH, TAX_YEAR } from '../lib/calculation'
 import Fieldset from './fieldset/Fieldset'
 import RadioGroup from './radio/RadioGroup'
 import Radio from './radio/Radio'
@@ -268,7 +268,9 @@ export const EligiblePartnerForm = ({
           event.currentTarget.value,
           values.r031_rodne_cislo,
         )
-        setFieldValue('r031_rodne_cislo', pscValue)
+        const shouldValidate= IDENTIFICATION_NUMBER_LENGTH.toNumber() <= pscValue.length
+
+        setFieldValue('r031_rodne_cislo', pscValue, shouldValidate)
       }}
     />
 
