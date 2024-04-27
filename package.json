@@ -86,6 +86,9 @@
     "typescript": "5.4.5",
     "xml2js": "0.6.2"
   },
+  "resolutions": {
+    "string-width": "4.2.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged && yarn check:ts && yarn git-comit-hash"
