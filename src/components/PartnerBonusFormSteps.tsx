@@ -3,7 +3,7 @@ import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
-import { TAX_YEAR } from '../lib/calculation'
+import { RODNE_CISLO_DLZKA, TAX_YEAR } from '../lib/calculation'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
@@ -167,11 +167,12 @@ export const EligiblePartnerForm = ({
       label="Rodné číslo"
       maxLength={13}
       onChange={async (event) => {
-        const pscValue = formatRodneCislo(
+        const rodneCislo = formatRodneCislo(
           event.currentTarget.value,
           values.r031_rodne_cislo,
         )
-        setFieldValue('r031_rodne_cislo', pscValue)
+        const shouldValidate = RODNE_CISLO_DLZKA <= rodneCislo.length
+        setFieldValue('r031_rodne_cislo', rodneCislo, shouldValidate)
       }}
     />
 

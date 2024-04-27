@@ -30,6 +30,7 @@ import {
   calculate,
   CHILD_RATE_EIGHTEEN_AND_OLDER,
   CHILD_RATE_EIGHTEEN_AND_YOUNGER,
+  RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
   monthToKeyValue,
@@ -217,13 +218,14 @@ const Deti: Page<ChildrenUserInput> = ({
                               name="r034_rodne_cislo"
                               type="text"
                               label="Rodné číslo"
-                              maxLength={13}
+                              maxLength={RODNE_CISLO_DLZKA}
                               onChange={async (event) => {
                                 const rodneCislo = formatRodneCislo(
                                   event.currentTarget.value,
                                   values.r034_rodne_cislo,
                                 )
-                                setFieldValue('r034_rodne_cislo', rodneCislo)
+                                const shouldValidate = rodneCislo.length >= RODNE_CISLO_DLZKA
+                                setFieldValue('r034_rodne_cislo', rodneCislo, shouldValidate)
                               }}
                             />
 
@@ -318,7 +320,7 @@ const getIncomeHint = (value: string): string => {
 interface ChildFormProps {
   index: number
   savedValues: ChildInput
-  setFieldValue: (name: string, value: string | boolean) => void
+  setFieldValue: (name: string, value: string | boolean, shouldValidate?: boolean) => void
 }
 const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValue }: ChildFormProps) => {
   const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(rodneCislo, month))
@@ -355,14 +357,15 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
         name={`children[${index}].rodneCislo` as any}
         type="text"
         label="Rodné číslo"
-        maxLength={13}
+        maxLength={RODNE_CISLO_DLZKA}
         width={10}
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
             rodneCislo,
           )
-          setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue)
+          const shouldValidate = rodneCisloValue.length >= RODNE_CISLO_DLZKA
+          setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue, shouldValidate)
         }}
       />
       <h3 className="govuk-heading-s">
