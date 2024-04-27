@@ -2,7 +2,7 @@ import App, { AppProps } from 'next/app'
 
 /* eslint-disable import/no-unassigned-import */
 import '../styles/global.css'
-import '../styles/navody-digital-0.1.8.min.css'
+import 'navody-digital-frontend/govuk/all.scss'
 import '../styles/libs.css'
 /* eslint-enable import/no-unassigned-import */
 
