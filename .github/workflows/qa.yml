@@ -39,6 +39,9 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
+      - name: Remove yarn lock to install fresh deps
+        run: rm yarn.lock
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
@@ -58,6 +61,9 @@ jobs:
         with:
           submodules: 'recursive'
 
+      - name: Remove yarn lock to install fresh deps
+        run: rm yarn.lock
+
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
@@ -67,20 +73,20 @@ jobs:
         with:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules-and-next
-        with:
-          path: |
-            ~/.yarn
-            ~/.cache/Cypress
-            ./node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+      # - name: Cache node modules
+      #   uses: actions/cache@v2
+      #   env:
+      #     cache-name: cache-node-modules-and-next
+      #   with:
+      #     path: |
+      #       ~/.yarn
+      #       ~/.cache/Cypress
+      #       ./node_modules
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ env.cache-name }}-
+      #       ${{ runner.os }}-build-
+      #       ${{ runner.os }}-
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
