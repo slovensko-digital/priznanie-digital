@@ -129,6 +129,12 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 allignRight: true,
               },
               {
+                title: 'Úhrn príjmov zo všetkých dohôd',
+                value: taxFormUserInput.uhrnPrijmovZoVsetkychDohod,
+                currency: true,
+                allignRight: true,
+              },
+              {
                 title: 'Úhrn sociálneho poistného',
                 value:
                   taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,

@@ -111,6 +111,9 @@ export interface TaxForm {
   priloha3_r09_socialne: Decimal
   priloha3_r10_zdravotne: Decimal
 
+  /** SECTION  Dohoda */
+  r036a: Decimal
+
   /** SECTION Prenajom */
   rent?: boolean
   prenajom_oslobodenie: Decimal
@@ -249,6 +252,7 @@ export interface TaxForm {
   /** Helper properties from input, that are not part of taxForm */
   children: boolean
   employed: boolean
+  dohoda: boolean
   XIIoddiel_uplatnujem2percenta: boolean
   danovyBonusNaDieta: {
     danovyBonus: Decimal

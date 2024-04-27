@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
-import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
+import { DohodaUserInput, FormErrors } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
@@ -9,7 +9,7 @@ import { employmentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 
-const Zamestnanie: Page<EmployedUserInput> = ({
+const Dohoda: Page<DohodaUserInput> = ({
   setTaxFormUserInput,
   taxFormUserInput,
   router,
@@ -19,15 +19,15 @@ const Zamestnanie: Page<EmployedUserInput> = ({
   return (
     <>
       <BackLink href={previousRoute} />
-      <FormWrapper<EmployedUserInput>
+      <FormWrapper<DohodaUserInput>
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          const userInput = values.employed
+          const userInput = values.dohoda
             ? values
             : {
                 ...employmentUserInputInitialValues,
-                employed: false,
+                dohoda: false,
               }
           setTaxFormUserInput(userInput)
           router.push(nextRoute)
@@ -35,40 +35,40 @@ const Zamestnanie: Page<EmployedUserInput> = ({
       >
         {({ values, errors }) => (
           <Form className="form" noValidate>
-            <ErrorSummary<EmployedUserInput> errors={errors} />
+            <ErrorSummary<DohodaUserInput> errors={errors} />
             <BooleanRadio
-              title={`Mali ste v roku ${TAX_YEAR} príjmy zo zamestnania v SR?`}
-              name="employed"
+              title={`Mali ste v roku ${TAX_YEAR} príjmy z dohôd v SR?`}
+              name="dohoda"
             />
-            {values.employed && (
+            {values.dohoda && (
               <>
-              <h3 className="govuk-heading-m">Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výsledné.</h3>
+              <h3 className="govuk-heading-m">Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby". Ak ste mali viac dohôd, tak tieto sumy spočítajte a uveďte výsledné.</h3>
                 <Input
-                  name="uhrnPrijmovOdVsetkychZamestnavatelov"
+                  name="uhrnPrijmovZoVsetkychDohod"
                   type="number"
-                  label="Úhrn vyplatených zdaniteľných príjmov"
-                  hint={`Tento údaj nájdete v riadku 01.`}
+                  label="Úhrn príjmov plynúcich na základe dohôd o prácach vykonávaných mimo pracovného pomeru"
+                  hint={`Napríklad na základe Dohody o vykonaní práce. Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01a.`}
                 />
                 <Input
-                  name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
+                  name="uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody"
                   type="number"
                   label="Úhrn sociálneho poistného"
                   hint={`Tento údaj nájdete v riadok 02a.`}
                 />
                 <Input
-                  name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
+                  name="uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody"
                   type="number"
                   label="Úhrn zdravotného poistného"
                   hint={`Tento údaj nájdete v riadok 02b.`}
                 />
                 <Input
-                  name="uhrnPreddavkovNaDan"
+                  name="uhrnPreddavkovNaDanDohody"
                   type="number"
                   label="Úhrn preddavkov na daň"
                   hint={`Tento údaj nájdete v riadku 04.`}
                 />
                 <Input
-                  name="udajeODanovomBonuseNaDieta"
+                  name="udajeODanovomBonuseNaDietaDohody"
                   type="number"
                   label="Údaje o daňovom bonuse na dieťa"
                   hint={`Tento údaj nájdete v riadku 13 v časti "Úhrnná suma priznaného a vyplateného daňového bonusu".`}
@@ -85,58 +85,58 @@ const Zamestnanie: Page<EmployedUserInput> = ({
   )
 }
 
-export const validate = (values: EmployedUserInput) => {
-  const errors: Partial<FormErrors<EmployedUserInput>> = {}
+export const validate = (values: DohodaUserInput) => {
+  const errors: Partial<FormErrors<DohodaUserInput>> = {}
 
-  if (typeof values.employed === 'undefined') {
-    errors.employed = 'Vyznačte odpoveď'
+  if (typeof values.dohoda === 'undefined') {
+    errors.dohoda = 'Vyznačte odpoveď'
   }
 
-  if (values.employed) {
-    if (!values.uhrnPrijmovOdVsetkychZamestnavatelov) {
-      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
-        'Zadajte úhrn príjmov od všetkých zamestnávateľov'
+  if (values.dohoda) {
+    if (!values.uhrnPrijmovZoVsetkychDohod) {
+      errors.uhrnPrijmovZoVsetkychDohod =
+        'Zadajte úhrn príjmov zo všetkých dohôd'
     } else if (
-      !values.uhrnPrijmovOdVsetkychZamestnavatelov.match(numberInputRegexp)
+      !values.uhrnPrijmovZoVsetkychDohod.match(numberInputRegexp)
     ) {
-      errors.uhrnPrijmovOdVsetkychZamestnavatelov =
+      errors.uhrnPrijmovZoVsetkychDohod =
         'Zadajte sumu príjmov vo formáte 123,45'
     }
 
-    if (!values.uhrnPovinnehoPoistnehoNaSocialnePoistenie) {
-      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
+    if (!values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody) {
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
         'Zadajte úhrn sociálneho poistného'
     } else if (
-      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenie.match(numberInputRegexp)
+      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody.match(numberInputRegexp)
     ) {
-      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenie =
+      errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
         'Zadajte sumu sociálneho poistného vo formáte 123,45'
     }
 
-    if (!values.uhrnPovinnehoPoistnehoNaZdravotnePoistenie) {
-      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenie =
+    if (!values.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody) {
+      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody =
         'Zadajte úhrn zdravotného poistného'
     } else if (
-      !values.uhrnPovinnehoPoistnehoNaZdravotnePoistenie.match(
+      !values.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody.match(
         numberInputRegexp,
       )
     ) {
-      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenie =
+      errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody =
         'Zadajte sumu zdravotného poistného vo formáte 123,45'
     }
 
-    if (!values.uhrnPreddavkovNaDan) {
-      errors.uhrnPreddavkovNaDan = 'Zadajte úhrn preddavkov na daň'
-    } else if (!values.uhrnPreddavkovNaDan.match(numberInputRegexp)) {
-      errors.uhrnPreddavkovNaDan =
+    if (!values.uhrnPreddavkovNaDanDohody) {
+      errors.uhrnPreddavkovNaDanDohody = 'Zadajte úhrn preddavkov na daň'
+    } else if (!values.uhrnPreddavkovNaDanDohody.match(numberInputRegexp)) {
+      errors.uhrnPreddavkovNaDanDohody =
         'Zadajte sumu povinného poistného vo formáte 123,45'
     }
 
-    if (!values.udajeODanovomBonuseNaDieta) {
-      errors.udajeODanovomBonuseNaDieta =
+    if (!values.udajeODanovomBonuseNaDietaDohody) {
+      errors.udajeODanovomBonuseNaDietaDohody =
         'Zadajte údaje o daňovom bonuse na dieťa'
-    } else if (!values.udajeODanovomBonuseNaDieta.match(numberInputRegexp)) {
-      errors.udajeODanovomBonuseNaDieta =
+    } else if (!values.udajeODanovomBonuseNaDietaDohody.match(numberInputRegexp)) {
+      errors.udajeODanovomBonuseNaDietaDohody =
         'Zadajte sumu povinného poistného vo formáte 123,45'
     }
   }
@@ -144,4 +144,4 @@ export const validate = (values: EmployedUserInput) => {
   return errors
 }
 
-export default Zamestnanie
+export default Dohoda

@@ -19,6 +19,16 @@ export type EmployedUserInput = Pick<
   | 'uhrnPreddavkovNaDan'
 >
 
+export type DohodaUserInput = Pick<
+  TaxFormUserInput,
+  | 'dohoda'
+  | 'uhrnPrijmovZoVsetkychDohod'
+  | 'uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody'
+  | 'uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody'
+  | 'udajeODanovomBonuseNaDietaDohody'
+  | 'uhrnPreddavkovNaDanDohody'
+>
+
 export type RentUserInput = Pick<
   TaxFormUserInput,
   | 'rent'

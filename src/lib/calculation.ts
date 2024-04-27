@@ -272,9 +272,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.t1r11s2
     },
 
-    /** SECTION Employment */
+    /** SECTION Employment a Dohody */
     r036: round(new Decimal(
       parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
+    ).plus(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPrijmovZoVsetkychDohod ?? '0'
+        ),
+      ),
+    )),
+    r036a: round(new Decimal(
+      parseInputNumber(input?.uhrnPrijmovZoVsetkychDohod ?? '0'),
     )),
     r037: round(new Decimal(
       parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
@@ -282,6 +291,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       new Decimal(
         parseInputNumber(
           input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
+        ),
+      ),
+    ).plus(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody ?? '0',
+        ),
+      ),
+    ).plus(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody ?? '0',
         ),
       ),
     )),
@@ -586,7 +607,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r119() {
       return round(new Decimal(
         parseInputNumber(input?.udajeODanovomBonuseNaDieta ?? '0'),
-      ))
+      ).plus(parseInputNumber(input?.udajeODanovomBonuseNaDietaDohody ?? '0')))
     },
     get r120() {
       return round(Decimal.max(new Decimal(this.r117).minus(this.r119), 0))
@@ -637,7 +658,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r129: new Decimal(0),
     r130: new Decimal(0),
     get r131() {
-      return round(new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0')))
+      return round(new Decimal(parseInputNumber(input?.uhrnPreddavkovNaDan ?? '0')).plus(parseInputNumber(input?.uhrnPreddavkovNaDanDohody ?? '0')))
     },
     get r132() {
       return new Decimal(0)
@@ -726,6 +747,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
+    dohoda: input?.dohoda ?? false,
 
     get XIIoddiel_uplatnujem2percenta() {
       return this.canDonateTwoPercentOfTax
