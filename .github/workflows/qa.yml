@@ -61,6 +61,9 @@ jobs:
         with:
           submodules: 'recursive'
 
+      - name: Remove yarn lock to install fresh deps
+        run: rm yarn.lock
+
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
