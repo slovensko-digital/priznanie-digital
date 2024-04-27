@@ -2,7 +2,7 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "20"
+    "node": "22"
   },
   "scripts": {
     "clean": "rm -rf ./.next && rm ./__tests__/**/*.output.*",
@@ -36,8 +36,8 @@
     "lodash.clonedeep": "4.5.0",
     "next": "^14.2.3",
     "nookies": "2.5.2",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rodnecislo": "1.6.0",
     "webpack": "^5.91.0",
     "xml-js": "1.6.11",
@@ -51,9 +51,9 @@
     "@types/jest": "^29.5.12",
     "@types/lodash.clonedeep": "4.5.9",
     "@types/node": "20.12.7",
-    "@types/react": "^18.3.0",
+    "@types/react": "^18.3.1",
     "@types/xml2js": "0.4.14",
-    "@types/yup": "0.29.14",
+    "@types/yup": "0.32.0",
     "@typescript-eslint/eslint-plugin": "7.7.1",
     "@typescript-eslint/parser": "7.7.1",
     "babel-eslint": "10.1.0",
@@ -70,7 +70,7 @@
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-react": "7.34.1",
-    "eslint-plugin-react-hooks": "4.6.1",
+    "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-sonarjs": "0.25.1",
     "eslint-plugin-unicorn": "52.0.0",
     "husky": "9.0.11",
