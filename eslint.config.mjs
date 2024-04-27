@@ -7,13 +7,13 @@ export default [
             "!public/",
             "public/*",
         ],
-        files: [
-            {
-              "patterns": "**/*.js",
-              "patterns": "**/*.jsx",
-              "patterns": "**/*.ts",
-              "patterns": "**/*.tsx",
-            }
-        ]
+        // "files": [
+        //     {
+        //       "patterns": "**/*.js",
+        //       "patterns": "**/*.jsx",
+        //       "patterns": "**/*.ts",
+        //       "patterns": "**/*.tsx",
+        //     }
+        // ]
     }
 ];
