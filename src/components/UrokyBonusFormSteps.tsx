@@ -8,6 +8,7 @@ import Radio from './radio/Radio'
 import RadioConditional from './radio/RadioConditional'
 import Decimal from 'decimal.js'
 import { Warning } from './Warning'
+import { TAX_YEAR } from '../lib/calculation'
 
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
