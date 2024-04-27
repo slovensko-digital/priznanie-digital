@@ -115,7 +115,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
               <ExternalLink href="https://kros.sk/danove-priznania/">
                 Pre nami nepodporované scenáre, odporúčame použiť aplikáciu KROS
               </ExternalLink>
-          </li>
+            </li>
           </ul>
         </>
       </Warning>
@@ -133,6 +133,9 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-bottom-3"
           >
             Súhlasím a chcem pripraviť daňové priznanie
+            <svg className="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+            </svg>
           </button>
         </Link>
       )}
@@ -159,7 +162,7 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) =>
     <h2 className="govuk-heading-m govuk-!-margin-top-3">
       {`Odklad daňového priznania za rok ${TAX_YEAR}`}
     </h2>
-    <PostponeText now={now}/>
+    <PostponeText now={now} />
     <ul className="govuk-list govuk-list--bullet">
       <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
       <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
@@ -180,9 +183,9 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) =>
   </>
 )
 
-const PostponeText = ({ now }: { now: Date}) => (
+const PostponeText = ({ now }: { now: Date }) => (
   <>
-    {((now.getMonth() > 2) && (now.getFullYear() == TAX_YEAR+1)) && (
+    {((now.getMonth() > 2) && (now.getFullYear() == TAX_YEAR + 1)) && (
       <>
         <p>
           {`Riadny termín pre podanie daňového priznania a zaplatenie dane bol do
