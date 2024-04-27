@@ -734,10 +734,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Danovy bonus */
-    
-    ziadamVyplatitDanovyBonus: input?.ziadamVratitDanovyPreplatok ?? false,
-    ziadamVratitDanovyPreplatok: input?.ziadamVratitDanovyPreplatok ?? false,
-    ziadamVratitDanovyBonusUroky: input?.ziadamVratitDanovyPreplatok ?? false,
+    ziadamVyplatitDanovyBonus: input?.ziadamVratitPreplatok ?? false,
+    ziadamVratitDanovyPreplatok: input?.ziadamVratitPreplatok ?? false,
+    ziadamVratitDanovyBonusUroky: input?.ziadamVratitPreplatok ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
 
     datum: input.datum,

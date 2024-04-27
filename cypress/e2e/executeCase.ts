@@ -371,14 +371,14 @@ const executeTestCase = (testCase: string) => {
           /** SECTION IBAN */
           assertUrl('/iban')
 
-          cy.contains('Žiadam o vrátenie daňového preplatku')
+          cy.contains('Žiadam o vrátenie')
           cy.get('[data-test=ineligible-message]').should('not.exist')
 
-          if (input.ziadamVratitDanovyPreplatok) {
-            getInput('ziadamVratitDanovyPreplatok', '-yes').click()
+          if (input.ziadamVratitPreplatok) {
+            getInput('ziadamVratitPreplatok', '-yes').click()
             typeToInput('iban', input)
           } else {
-            getInput('ziadamVratitDanovyPreplatok', '-no').click()
+            getInput('ziadamVratitPreplatok', '-no').click()
           }
 
           next()

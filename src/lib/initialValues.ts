@@ -107,7 +107,7 @@ export const twoPercentInitialValues: TwoPercentUserInput = {
 
 export const taxBonusInitialInput: TaxBonusUserInput = {
   iban: '',
-  ziadamVyplatitDanovyBonus: undefined,
+  ziadamVratitPreplatok: undefined,
 }
 
 export const initTaxFormUserInputValues: TaxFormUserInput = {
