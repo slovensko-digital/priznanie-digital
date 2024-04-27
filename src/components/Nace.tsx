@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
-import Fuse from 'fuse.js'
+import Fuse, { FuseResult } from 'fuse.js'
 import { getNace } from '../lib/api'
 import styles from './Nace.module.css'
 import { AutoCompleteInput } from './AutoCompleteInput'
@@ -30,7 +30,7 @@ interface Nace {
   label: string
 }
 
-const formatNace = (nace: Fuse.FuseResult<Nace>) => ({
+const formatNace = (nace: FuseResult<Nace>) => ({
   id: nace?.item?.code,
   value: `${nace?.item?.code} - ${nace?.item?.label}`,
 })
@@ -72,7 +72,7 @@ export const Nace: React.FC = () => {
         label="NACE"
         minLength={0}
         fetchData={async (value) => {
-          const data = searchNace(value) as Fuse.FuseResult<Nace>[]
+          const data = searchNace(value) as FuseResult<Nace>[]
           return data.map((nace) => formatNace(nace))
         }}
       />

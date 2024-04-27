@@ -143,7 +143,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
             <ErrorSummary<TwoPercentUserInput> errors={props.errors} />
             <Form className="form" noValidate>
               <Fieldset
-                title={`Chcete poukázať 2% alebo 3% zaplatenej dane niektorej neziskovej organizácii?`}
+                title="Chcete poukázať 2% alebo 3% zaplatenej dane niektorej neziskovej organizácii?"
                 error={props.errors.dve_percenta_podporujem}
                 hint={uplatnenie2PercentHint}
               >

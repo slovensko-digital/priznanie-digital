@@ -3,6 +3,7 @@ import {useRadioGroupContext} from "./RadioGroup";
 
 interface Props {
   readonly forValue: string;
+  readonly children?: React.ReactNode;
 }
 
 const RadioConditional: FC<Props> = ({ forValue, children }) => {
