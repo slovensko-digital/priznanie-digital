@@ -1,9 +1,7 @@
 import React from 'react'
-import { BooleanRadio, Checkbox, Input } from './FormComponents'
-import { formatCurrency, formatRodneCislo } from '../lib/utils'
-import { PartnerBonusFormProps } from './PartnerBonusForm'
+import { BooleanRadio, Input } from './FormComponents'
+import { formatCurrency } from '../lib/utils'
 import { Details } from './Details'
-import { IDENTIFICATION_NUMBER_LENGTH, TAX_YEAR } from '../lib/calculation'
 import Fieldset from './fieldset/Fieldset'
 import RadioGroup from './radio/RadioGroup'
 import Radio from './radio/Radio'
@@ -196,46 +194,6 @@ export const PrijemQuestion = ({ disabled, values: { uroky_dalsi_dlznik, uroky_r
   )
 }
 
-export const ConditionsQuestion = ({ disabled }) => (
-  <div className="govuk-form-group">
-    <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 className="govuk-fieldset__heading">
-        Spĺňa vaša manželka / manžel aspoň jednu z podmienok?
-      </h1>
-    </legend>
-    <Checkbox
-      name="partner_podmienky.1"
-      label="Staral/a sa o dieťa do 3 rokov"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.2"
-      label="Staral/a sa o dieťa do  6 rokov s nepriaznivým zdravotným stavom"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.3"
-      label="Poberá príspevok na opatrovanie ťažko zdravotne postihnutého"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.4"
-      label="Poberal/a príspevok na opatrovanie ťažko zdravotne postihnutého"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.5"
-      label="Bol/a evidovaný/á ako uchádzač o zamestnanie"
-      disabled={disabled}
-    />
-    <Checkbox
-      name="partner_podmienky.6"
-      label="Považuje sa za občana so zdravotným postihnutím alebo s ťažkým zdravotným postihnutím"
-      disabled={disabled}
-    />
-  </div>
-)
-
 export const NotEligible = () => (
   <div data-test="ineligible-message">
     <h1 className="govuk-heading-l govuk-!-margin-top-3">
@@ -243,46 +201,6 @@ export const NotEligible = () => (
     </h1>
     <p>Nespĺňate podmienky pre uplatnenie daňového bonusu na zaplatené úroky.</p>
   </div>
-)
-
-export const EligiblePartnerForm = ({
-  values,
-  setFieldValue,
-}: PartnerBonusFormProps) => (
-  <>
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
-      Vybrané údaje o manželke / manželovi
-    </h1>
-    <Input
-      name="r031_priezvisko_a_meno"
-      type="text"
-      label="Meno a priezvisko manželky / manžela"
-    />
-    <Input
-      name="r031_rodne_cislo"
-      type="text"
-      label="Rodné číslo"
-      maxLength={13}
-      onChange={async (event) => {
-        const pscValue = formatRodneCislo(
-          event.currentTarget.value,
-          values.r031_rodne_cislo,
-        )
-        const shouldValidate= IDENTIFICATION_NUMBER_LENGTH.toNumber() <= pscValue.length
-
-        setFieldValue('r031_rodne_cislo', pscValue, shouldValidate)
-      }}
-    />
-
-    <Input
-      name="r032_partner_pocet_mesiacov"
-      type="number"
-      min={1}
-      max={12}
-      label="Počet mesiacov, v ktorých manželka / manžel spĺňal/a podmienky?"
-      hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
-    />
-  </>
 )
 
 export const PreviousButton = ({ onClick }) => (
