@@ -149,7 +149,7 @@ describe('Employment page', () => {
 
     // Should submit and next page should be parter
     next()
-    assertUrl('/partner')
+    assertUrl('/dohoda')
   })
   it('should erase previous answers when answer is changed to "no"', () => {
     cy.visit('/zamestnanie')
@@ -170,7 +170,7 @@ describe('Employment page', () => {
     next()
 
     // go back
-    assertUrl('/partner')
+    assertUrl('/dohoda')
     cy.get('[data-test=back]').click()
     assertUrl('/zamestnanie')
 
@@ -220,7 +220,7 @@ describe('Employment page', () => {
     next()
 
     // go back
-    assertUrl('/partner')
+    assertUrl('/dohoda')
     cy.get('[data-test=back]').click()
     assertUrl('/zamestnanie')
 
