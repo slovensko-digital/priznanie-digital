@@ -12,7 +12,7 @@
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
     "start:next": "next start",
     "test:watch": "yarn test -- -- watch",
-    "test": "jest",
+    "test": "jest --clearCache",
     "coverage:html": "yarn test --coverage --coverageDirectory='public/coverage' --collectCoverageFrom='src/**/*.ts' && echo 'You can find the coverage report at http://localhost:3000/coverage/lcov-report/lib/index.html'",
     "ci": "yarn lint && yarn test -- --ci&& yarn build && yarn cy:ci",
     "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
