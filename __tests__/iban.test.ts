@@ -17,19 +17,19 @@ describe('iban', () => {
         },
         { input: { ziadamVyplatitDanovyBonus: false }, expected: [] },
         {
-          input: { ziadamVyplatitDanovyBonus: true },
+          input: { ziadamVratitPreplatok: true },
           expected: ['iban'],
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             iban: 'a',
           },
           expected: ['iban'],
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             iban: 'SK6807200002891987426353',
           },
           expected: [],
@@ -117,14 +117,14 @@ describe('iban', () => {
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             ziadamVratitDanovyPreplatok: undefined,
           },
           expected: ['ziadamVratitDanovyPreplatok', 'iban'],
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             ziadamVratitDanovyPreplatok: false,
           },
           expected: ['iban'],
@@ -138,14 +138,14 @@ describe('iban', () => {
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             ziadamVratitDanovyPreplatok: true,
           },
           expected: ['iban'],
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             ziadamVratitDanovyPreplatok: true,
             iban: 'a',
           },
@@ -153,7 +153,7 @@ describe('iban', () => {
         },
         {
           input: {
-            ziadamVyplatitDanovyBonus: true,
+            ziadamVratitPreplatok: true,
             ziadamVratitDanovyPreplatok: true,
             iban: 'SK6807200002891987426353',
           },

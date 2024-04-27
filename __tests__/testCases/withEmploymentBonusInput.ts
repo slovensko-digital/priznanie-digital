@@ -41,8 +41,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
     },
   ],
   datum: '22.02.2020',
-  ziadamVyplatitDanovyBonus: false,
-  ziadamVratitDanovyPreplatok: true,
+  ziadamVratitPreplatok: true,
   iban: 'SK6807200002891987426353',
 
   expectNgoDonationValue: false,
