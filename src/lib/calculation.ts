@@ -41,6 +41,8 @@ export const VRCHNA_SADZBA_PRE_PREDDAVKY = new Decimal(16600)
 const POCET_KVARTALOV = 4
 const POCET_MESIACOV = 12
 
+export const RODNE_CISLO_DLZKA = 13
+
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = new Decimal(14862.23)
 export const TAX_YEAR = 2023
@@ -1076,6 +1078,4 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 export const donateOnly3Percent = (form: TaxForm): boolean => {
   return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
 }
-
-export const IDENTIFICATION_NUMBER_LENGTH = new Decimal(13)
 

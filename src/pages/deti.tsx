@@ -30,7 +30,7 @@ import {
   calculate,
   CHILD_RATE_EIGHTEEN_AND_OLDER,
   CHILD_RATE_EIGHTEEN_AND_YOUNGER,
-  IDENTIFICATION_NUMBER_LENGTH,
+  RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
   monthToKeyValue,
@@ -218,13 +218,13 @@ const Deti: Page<ChildrenUserInput> = ({
                               name="r034_rodne_cislo"
                               type="text"
                               label="Rodné číslo"
-                              maxLength={IDENTIFICATION_NUMBER_LENGTH.toNumber() }
+                              maxLength={RODNE_CISLO_DLZKA}
                               onChange={async (event) => {
                                 const rodneCislo = formatRodneCislo(
                                   event.currentTarget.value,
                                   values.r034_rodne_cislo,
                                 )
-                                const shouldValidate= IDENTIFICATION_NUMBER_LENGTH.toNumber() <= rodneCislo.length
+                                const shouldValidate = rodneCislo.length >= RODNE_CISLO_DLZKA
                                 setFieldValue('r034_rodne_cislo', rodneCislo, shouldValidate)
                               }}
                             />
@@ -357,14 +357,14 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
         name={`children[${index}].rodneCislo` as any}
         type="text"
         label="Rodné číslo"
-        maxLength={IDENTIFICATION_NUMBER_LENGTH.toNumber() }
+        maxLength={RODNE_CISLO_DLZKA}
         width={10}
         onChange={async (event) => {
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
             rodneCislo,
           )
-          const shouldValidate= IDENTIFICATION_NUMBER_LENGTH.toNumber() <= rodneCisloValue.length
+          const shouldValidate = rodneCisloValue.length >= RODNE_CISLO_DLZKA
           setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue, shouldValidate)
         }}
       />
