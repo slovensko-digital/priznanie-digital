@@ -87,7 +87,9 @@
     "xml2js": "0.6.2"
   },
   "resolutions": {
-    "string-width": "4.2.0"
+    "string-width": "4.2.0",
+    "strip-ansi": "6.0.0",
+    "wrap-ansi": "7.0.0"
   },
   "husky": {
     "hooks": {
