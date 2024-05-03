@@ -15,6 +15,7 @@ describe('routes', () => {
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
+        '/dohoda',
         '/partner',
         '/deti',
         '/dochodok',
@@ -35,6 +36,7 @@ describe('routes', () => {
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
+        '/dohoda',
         '/partner',
         '/deti',
         '/dochodok',
@@ -57,6 +59,7 @@ describe('routes', () => {
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
+        '/dohoda',
         '/partner',
         '/deti',
         '/dochodok',
@@ -80,6 +83,7 @@ describe('routes', () => {
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
+        '/dohoda',
         '/partner',
         '/deti',
         '/dochodok',
@@ -173,7 +177,7 @@ describe('routes', () => {
 
     it('should not redirect from route when form is filled out', () => {
       validateRoute(
-        { route: '/partner', replace } as any,
+        { route: '/dohoda', replace } as any,
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,

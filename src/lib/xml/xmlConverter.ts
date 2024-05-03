@@ -134,6 +134,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.r039)
   }
 
+  if (taxForm.dohoda) {
+    form.dokument.telo.r36a = decimalToString(taxForm.r036a)
+    form.dokument.telo.r37 = decimalToString(taxForm.r037)
+    form.dokument.telo.r38 = decimalToString(taxForm.r038)
+    form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.r039)
+  }
+
   form.dokument.telo.r39 = decimalToString(taxForm.r039)
   form.dokument.telo.r40 = decimalToString(taxForm.r040)
   form.dokument.telo.r41 = decimalToString(taxForm.r041)
@@ -196,6 +203,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   form.dokument.telo.r153 = taxForm.employed ? '5' : '4'
+  form.dokument.telo.r153 = taxForm.dohoda ? '5' : '4'
 
   const maDanovyBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
