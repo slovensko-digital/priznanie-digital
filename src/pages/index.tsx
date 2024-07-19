@@ -158,7 +158,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
 }
 
 const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) => {
-  const isPostponeExtensionTime = now.getMonth() < 11;
+  const isPostponeTime = now.getMonth() < 3
 
   return (
     <>
@@ -172,14 +172,14 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) =>
       </ul>
 
       {
-        ((isPostponeExtensionTime && isPostponeLive) || isDebug) && (
+        ((isPostponeTime && isPostponeLive) || isDebug) && (
           <>
             <p className="govuk-body-xs">
               Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
               nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
               neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
             </p>
-            <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
+            <PostponeButton isPostponeTime={isPostponeTime} nextPostponeRoute={nextPostponeRoute} />
           </>
         )
       }
@@ -208,9 +208,7 @@ const PostponeText = ({ now }: { now: Date }) => (
   </>
 )
 
-const PostponeButton = ({ now, nextPostponeRoute }) => {
-  const isPostponeTime = now.getMonth() < 3
-
+const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
   if (!isPostponeTime) {
     return (
       <button
