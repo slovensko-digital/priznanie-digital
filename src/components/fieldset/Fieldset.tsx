@@ -4,6 +4,7 @@ interface Props {
   readonly title: string;
   readonly hint?: string;
   readonly error?: string;
+  readonly children?: React.ReactNode;
 }
 
 const Fieldset: FC<Props> = ({title, hint, error, children}) => {
