@@ -120,7 +120,11 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
         </>
       </Warning>
 
-      <DataProcessingTerms />
+      <p className="govuk-body-xs">
+        Používaním tejto služby súhlasíte so spracovaním osobných údajov v
+        rozsahu nevyhnutnom na vygenerovanie daňového priznania. Vaše údaje
+        neukladáme, sú použité výlučne na spracovanie daňového priznania.
+      </p>
 
       {(isLive || isDebug) && (
         <Link href={nextRoute} legacyBehavior>
@@ -170,7 +174,11 @@ const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) =>
       {
         ((isPostponeTime && isPostponeLive) || isDebug) && (
           <>
-            <DataProcessingTerms />
+            <p className="govuk-body-xs">
+              Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+              nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+              neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+            </p>
             <PostponeButton isPostponeTime={isPostponeTime} nextPostponeRoute={nextPostponeRoute} />
           </>
         )
@@ -226,11 +234,3 @@ const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
     )
   }
 }
-
-const DataProcessingTerms = () => (
-  <p className="govuk-body-xs">
-    Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-    nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
-    neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
-  </p>
-)
