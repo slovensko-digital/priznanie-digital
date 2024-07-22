@@ -2,8 +2,8 @@ import { postponeHomeRoute, PostponeRoute, Route } from '../../src/lib/routes'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 
-const date = new Date
-const month = date.getMonth() + 1;
+const date = new Date()
+const month = date.getMonth() + 1
 
 function getInputPostpone<K extends keyof PostponeUserInput>(
   key: K,
@@ -70,7 +70,10 @@ if (month >= 1 && month < 4) {
 
       cy.contains('Július Renceš').click()
 
-      getInputPostpone('meno_priezvisko').should('contain.value', 'Július Renceš')
+      getInputPostpone('meno_priezvisko').should(
+        'contain.value',
+        'Július Renceš',
+      )
       getInputPostpone('ulica').should('contain.value', 'Benková Potôň')
       getInputPostpone('cislo').should('contain.value', '343')
       getInputPostpone('psc').should('contain.value', '930 36')

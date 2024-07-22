@@ -13,5 +13,5 @@ export const uroky202307Input: E2eTestUserInput = {
   uroky_zaciatok_urocenia_mesiac: '5',
   uroky_zaciatok_urocenia_rok: `${TAX_YEAR - UROKY_POCET_ROKOV}`,
   uroky_dalsi_dlznik: false,
-  r035_zaplatene_uroky: '698'
+  r035_zaplatene_uroky: '698',
 }

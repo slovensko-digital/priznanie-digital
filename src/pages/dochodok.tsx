@@ -9,10 +9,10 @@ import { pensionInitialValues } from '../lib/initialValues'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { TAX_YEAR } from '../lib/calculation'
 import { Details } from '../components/Details'
-import Fieldset from "../components/fieldset/Fieldset";
-import RadioGroup from "../components/radio/RadioGroup";
-import Radio from "../components/radio/Radio";
-import RadioConditional from "../components/radio/RadioConditional";
+import Fieldset from '../components/fieldset/Fieldset'
+import RadioGroup from '../components/radio/RadioGroup'
+import Radio from '../components/radio/Radio'
+import RadioConditional from '../components/radio/RadioConditional'
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -43,13 +43,24 @@ const Dochodok: Page<PensionUserInput> = ({
         {({ values, errors, setFieldValue }) => (
           <Form className="form" noValidate>
             <ErrorSummary<PensionUserInput> errors={errors} />
-            <Fieldset title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
-                      error={errors.platil_prispevky_na_dochodok}
+            <Fieldset
+              title={`Platili ste v roku ${TAX_YEAR} príspevky na doplnkové dôchodkové poistenie (III. pilier)?`}
+              error={errors.platil_prispevky_na_dochodok}
             >
-              <RadioGroup value={String(values.platil_prispevky_na_dochodok)} onChange={(value) => {
-                setFieldValue('platil_prispevky_na_dochodok', value === 'true')
-              }}>
-                <Radio name="platil_prispevky_na_dochodok-input-yes" label="Áno" value="true"/>
+              <RadioGroup
+                value={String(values.platil_prispevky_na_dochodok)}
+                onChange={(value) => {
+                  setFieldValue(
+                    'platil_prispevky_na_dochodok',
+                    value === 'true',
+                  )
+                }}
+              >
+                <Radio
+                  name="platil_prispevky_na_dochodok-input-yes"
+                  label="Áno"
+                  value="true"
+                />
                 <RadioConditional forValue="true">
                   <Input
                     name="zaplatene_prispevky_na_dochodok"
@@ -59,7 +70,11 @@ const Dochodok: Page<PensionUserInput> = ({
                   />
                 </RadioConditional>
 
-                <Radio name="platil_prispevky_na_dochodok-input-no" label="Nie" value="false"/>
+                <Radio
+                  name="platil_prispevky_na_dochodok-input-no"
+                  label="Nie"
+                  value="false"
+                />
               </RadioGroup>
             </Fieldset>
             <Details

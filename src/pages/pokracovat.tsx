@@ -9,7 +9,11 @@ import { buildSummary } from '../lib/calculation'
 import { Summary } from '../types/Summary'
 
 const {
-  publicRuntimeConfig: { priznanieEmailTemplateId, navodyBaseUrl, priznanieStepUrl },
+  publicRuntimeConfig: {
+    priznanieEmailTemplateId,
+    navodyBaseUrl,
+    priznanieStepUrl,
+  },
 } = getConfig()
 
 const action_url = `${navodyBaseUrl}${priznanieStepUrl}`

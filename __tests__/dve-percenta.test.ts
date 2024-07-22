@@ -14,14 +14,14 @@ describe('dve-percenta', () => {
         input: { dve_percenta_podporujem: undefined },
         expected: ['dve_percenta_podporujem'],
       },
-      { input: { dve_percenta_podporujem: "nie" }, expected: [] },
+      { input: { dve_percenta_podporujem: 'nie' }, expected: [] },
       {
-        input: { dve_percenta_podporujem: "ano-inu" },
+        input: { dve_percenta_podporujem: 'ano-inu' },
         expected: ['r142_ico', 'r142_obchMeno'],
       },
       {
         input: {
-          dve_percenta_podporujem: "ano-inu",
+          dve_percenta_podporujem: 'ano-inu',
           r142_ico: '1',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -29,7 +29,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          dve_percenta_podporujem: "ano-inu",
+          dve_percenta_podporujem: 'ano-inu',
           r142_ico: '12 345 67',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -37,7 +37,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          dve_percenta_podporujem: "ano-inu",
+          dve_percenta_podporujem: 'ano-inu',
           r142_ico: '12 345 678',
           r142_obchMeno: 'Fake, o.z.',
         },
@@ -45,7 +45,7 @@ describe('dve-percenta', () => {
       },
       {
         input: {
-          dve_percenta_podporujem: "ano-inu",
+          dve_percenta_podporujem: 'ano-inu',
           r142_ico: '12 345 6',
           r142_obchMeno: 'Fake, o.z.',
         },

@@ -6,7 +6,7 @@ import {
   BooleanRadio,
   Input,
   FormWrapper,
-  Select
+  Select,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -37,9 +37,9 @@ import {
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
-import RadioGroup from "../components/radio/RadioGroup";
-import Radio from "../components/radio/Radio";
-import RadioConditional from "../components/radio/RadioConditional";
+import RadioGroup from '../components/radio/RadioGroup'
+import Radio from '../components/radio/Radio'
+import RadioConditional from '../components/radio/RadioConditional'
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
 import { ExternalLink } from '../components/ExternalLink'
@@ -50,7 +50,7 @@ const Deti: Page<ChildrenUserInput> = ({
   taxFormUserInput,
   router,
   previousRoute,
-  nextRoute
+  nextRoute,
 }) => {
   const previousPageLink = (
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
@@ -68,16 +68,24 @@ const Deti: Page<ChildrenUserInput> = ({
           let userInput = values.hasChildren
             ? values
             : {
-              ...childrenUserInputInitialValues,
-              hasChildren: false,
-            }
-          const { danovyBonusNaDieta } = calculate({ ...taxFormUserInput, ...userInput })
+                ...childrenUserInputInitialValues,
+                hasChildren: false,
+              }
+          const { danovyBonusNaDieta } = calculate({
+            ...taxFormUserInput,
+            ...userInput,
+          })
           setTaxFormUserInput(userInput)
           if (values.hasChildren) {
-            if (danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))) {
+            if (
+              danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))
+            ) {
               router.push(nextRoute)
             } else {
-              if (values.partner_bonus_na_deti === false || values.partner_bonus_na_deti_chce_uplatnit === false) {
+              if (
+                values.partner_bonus_na_deti === false ||
+                values.partner_bonus_na_deti_chce_uplatnit === false
+              ) {
                 router.push(nextRoute)
               } else if (values.partner_bonus_na_deti === true) {
                 const errors = validate(values)
@@ -102,37 +110,35 @@ const Deti: Page<ChildrenUserInput> = ({
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
                 <p className="govuk-hint">
-                  V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené dieťa do 18 rokov,
-                  študenta do 25 rokov alebo o nezaopatrené dieťa do 25 rokov, ktoré je dlhodobo choré,
-                  pri splnení <ExternalLink href='https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-'>stanovených podmienok</ExternalLink> máte nárok na daňové zvýhodnenie.
-                  Prechodný pobyt dieťaťa mimo domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                  V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
+                  dieťa do 18 rokov, študenta do 25 rokov alebo o nezaopatrené
+                  dieťa do 25 rokov, ktoré je dlhodobo choré, pri splnení{' '}
+                  <ExternalLink href="https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-">
+                    stanovených podmienok
+                  </ExternalLink>{' '}
+                  máte nárok na daňové zvýhodnenie. Prechodný pobyt dieťaťa mimo
+                  domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                 </p>
                 <Details title="Aká je výška daňového bonusu?">
                   <p className="govuk-hint">
-                    <b>
-                      Daňový bonus na vyživované dieťa:
-                    </b>
+                    <b>Daňový bonus na vyživované dieťa:</b>
                     <ul>
                       <li>
                         do 18 rokov sumou{' '}
-                        {formatCurrency(
-                          CHILD_RATE_EIGHTEEN_AND_YOUNGER,
-                        )}{' '}
+                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_YOUNGER)}{' '}
                         mesačne.
                       </li>
                       <li>
                         nad 18 rokov sumou{' '}
-                        {formatCurrency(
-                          CHILD_RATE_EIGHTEEN_AND_OLDER,
-                        )}{' '}
-                        mesačne.
+                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
                   </p>
                 </Details>
                 <p className="govuk-hint">
-                  Za mesiace január až apríl 2023 je možné uplatniť daňový bonus len v prípade,
-                  ak sa na vyživované dieťa neposkytla dotácia na podporu výchovy k stravovacím návykom dieťaťa.
+                  Za mesiace január až apríl 2023 je možné uplatniť daňový bonus
+                  len v prípade, ak sa na vyživované dieťa neposkytla dotácia na
+                  podporu výchovy k stravovacím návykom dieťaťa.
                 </p>
                 <p className="govuk-hint">
                   Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
@@ -188,19 +194,28 @@ const Deti: Page<ChildrenUserInput> = ({
                   )}
                 </FieldArray>
 
-                {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(new Decimal(0)) || values.partner_bonus_na_deti === true) && (
+                {(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.greaterThan(
+                  new Decimal(0),
+                ) ||
+                  values.partner_bonus_na_deti === true) && (
                   <>
                     <BooleanRadio
-                      title={`Chcete si navýšiť daňový bonus ešte max. o ${formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}?`}
-                      hint={`Podľa vaších príjmov a počtu detí máte nárok na daňový bonus vo výške ${formatCurrency(taxForm.danovyBonusNaDieta.danovyBonus.toNumber())}.
-                        Daňový bonus si môžete ešte navýšiť max o sumu ${formatCurrency(taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber())}, ak zadáte údaje druhej oprávnenej osoby.`}
+                      title={`Chcete si navýšiť daňový bonus ešte max. o ${formatCurrency(
+                        taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber(),
+                      )}?`}
+                      hint={`Podľa vaších príjmov a počtu detí máte nárok na daňový bonus vo výške ${formatCurrency(
+                        taxForm.danovyBonusNaDieta.danovyBonus.toNumber(),
+                      )}.
+                        Daňový bonus si môžete ešte navýšiť max o sumu ${formatCurrency(
+                          taxForm.danovyBonusNaDieta.nevyuzityDanovyBonus.toNumber(),
+                        )}, ak zadáte údaje druhej oprávnenej osoby.`}
                       name="partner_bonus_na_deti_chce_uplatnit"
                     />
-                    {values.partner_bonus_na_deti_chce_uplatnit &&
+                    {values.partner_bonus_na_deti_chce_uplatnit && (
                       <>
                         <BooleanRadio
                           title={`Spĺňa nárok na daňový bonus aj druhá oprávnená osoba?`}
-                          hint='Druhou oprávnenou osobou môže byť napr. druhý rodič dieťaťa, matkin manžel, otcova manželka alebo osoba, ktorej bolo dieťa zverené.'
+                          hint="Druhou oprávnenou osobou môže byť napr. druhý rodič dieťaťa, matkin manžel, otcova manželka alebo osoba, ktorej bolo dieťa zverené."
                           name="partner_bonus_na_deti"
                         />
 
@@ -224,37 +239,75 @@ const Deti: Page<ChildrenUserInput> = ({
                                   event.currentTarget.value,
                                   values.r034_rodne_cislo,
                                 )
-                                const shouldValidate = rodneCislo.length >= RODNE_CISLO_DLZKA
-                                setFieldValue('r034_rodne_cislo', rodneCislo, shouldValidate)
+                                const shouldValidate =
+                                  rodneCislo.length >= RODNE_CISLO_DLZKA
+                                setFieldValue(
+                                  'r034_rodne_cislo',
+                                  rodneCislo,
+                                  shouldValidate,
+                                )
                               }}
                             />
 
-                            <h2 className='govuk-heading-m'>Na začiatku ktorých mesiacov spĺňala druhá oprávnená osoba podmienky na daňový bonus na vyživované dieťa?</h2>
-                            <p className='govuk-hint'>Druhá oprávnená osoba musí spĺňať na začiatku kalendárneho mesiaca rovnaké podmienky ako daňovník, t. j. stará sa o vyživované dieťa žijúce s ňou v domácnosti.</p>
+                            <h2 className="govuk-heading-m">
+                              Na začiatku ktorých mesiacov spĺňala druhá
+                              oprávnená osoba podmienky na daňový bonus na
+                              vyživované dieťa?
+                            </h2>
+                            <p className="govuk-hint">
+                              Druhá oprávnená osoba musí spĺňať na začiatku
+                              kalendárneho mesiaca rovnaké podmienky ako
+                              daňovník, t. j. stará sa o vyživované dieťa žijúce
+                              s ňou v domácnosti.
+                            </p>
                             <div
-                              className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+                              className={classnames(
+                                'govuk-form-group',
+                                styles.inlineFieldContainer,
+                              )}
                             >
                               <Select
                                 name={`partner_bonus_na_deti_od`}
                                 label="Od"
-                                optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
+                                optionsWithValue={[
+                                  ...monthKeyValues(monthNames),
+                                  { name: '', value: '' },
+                                ]}
                               />
                               <Select
                                 name={`partner_bonus_na_deti_do`}
                                 label="Do"
-                                optionsWithValue={[...monthKeyValues(monthNames), { name: '', value: '' }]}
+                                optionsWithValue={[
+                                  ...monthKeyValues(monthNames),
+                                  { name: '', value: '' },
+                                ]}
                               />
                             </div>
-                            <h2 className="govuk-heading-m">Akým spôsobom vysporiada/la svoje zdaniteľné príjmy druhá oprávnená osoba za rok 2023?</h2>
+                            <h2 className="govuk-heading-m">
+                              Akým spôsobom vysporiada/la svoje zdaniteľné
+                              príjmy druhá oprávnená osoba za rok 2023?
+                            </h2>
                             <Select
-                              name='partner_bonus_na_deti_typ_prijmu'
+                              name="partner_bonus_na_deti_typ_prijmu"
                               label="Vyberte spôsob vysporiadania príjmov"
                               optionsWithValue={[
-                                { name: '', value: "0" },
-                                { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A', value: "1" },
-                                { name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B', value: "2" },
-                                { name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom', value: "3" },
-                                { name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie', value: "4" }
+                                { name: '', value: '0' },
+                                {
+                                  name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A',
+                                  value: '1',
+                                },
+                                {
+                                  name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B',
+                                  value: '2',
+                                },
+                                {
+                                  name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom',
+                                  value: '3',
+                                },
+                                {
+                                  name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie',
+                                  value: '4',
+                                },
                               ]}
                             />
 
@@ -262,14 +315,18 @@ const Deti: Page<ChildrenUserInput> = ({
                               name="r034a"
                               type="number"
                               label="Prijem"
-                              hint={getIncomeHint(values.partner_bonus_na_deti_typ_prijmu)}
+                              hint={getIncomeHint(
+                                values.partner_bonus_na_deti_typ_prijmu,
+                              )}
                             />
 
-                            <AttachmentWarning prijem={values.partner_bonus_na_deti_typ_prijmu} />
+                            <AttachmentWarning
+                              prijem={values.partner_bonus_na_deti_typ_prijmu}
+                            />
                           </>
                         )}
                       </>
-                    }
+                    )}
                   </>
                 )}
               </>
@@ -285,17 +342,19 @@ const Deti: Page<ChildrenUserInput> = ({
 }
 
 const AttachmentWarning = ({ prijem }) => {
-  if (prijem === "3") {
+  if (prijem === '3') {
     return (
       <Warning>
-        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu dokladu o vykonanom ročnom zúčtovaní preddavkov druhej oprávnenej osoby.
+        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu
+        dokladu o vykonanom ročnom zúčtovaní preddavkov druhej oprávnenej osoby.
       </Warning>
     )
   }
-  if (prijem === "4") {
+  if (prijem === '4') {
     return (
       <Warning>
-        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu preukazujúceho výšku základu dane druhej oprávnenej osoby.
+        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu
+        preukazujúceho výšku základu dane druhej oprávnenej osoby.
       </Warning>
     )
   }
@@ -304,32 +363,49 @@ const AttachmentWarning = ({ prijem }) => {
 
 const getIncomeHint = (value: string): string => {
   switch (value) {
-    case "0":
+    case '0':
       return ''
-    case "1":
+    case '1':
       return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ A riadok 39'
-    case "2":
+    case '2':
       return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ B riadok 72'
-    case "3":
+    case '3':
       return 'Výšku príjmov zistíte z ročného zúčtovania preddavkov na daň riadok 3.'
     default:
-      break;
+      break
   }
 }
 
 interface ChildFormProps {
   index: number
   savedValues: ChildInput
-  setFieldValue: (name: string, value: string | boolean, shouldValidate?: boolean) => void
+  setFieldValue: (
+    name: string,
+    value: string | boolean,
+    shouldValidate?: boolean,
+  ) => void
 }
-const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValue }: ChildFormProps) => {
-  const monthNamesFrom = monthNames.filter(month => minChildAgeBonusMonth(rodneCislo, month))
-  const monthNamesUntil = monthNames.filter(month => maxChildAgeBonusMonth(rodneCislo, month))
-  const monthOptions = monthNamesUntil.filter(value => monthNamesFrom.includes(value));
+const ChildForm = ({
+  savedValues: { rodneCislo, wholeYear },
+  index,
+  setFieldValue,
+}: ChildFormProps) => {
+  const monthNamesFrom = monthNames.filter((month) =>
+    minChildAgeBonusMonth(rodneCislo, month),
+  )
+  const monthNamesUntil = monthNames.filter((month) =>
+    maxChildAgeBonusMonth(rodneCislo, month),
+  )
+  const monthOptions = monthNamesUntil.filter((value) =>
+    monthNamesFrom.includes(value),
+  )
   const bonusInPartOfYear = monthOptions.length < 12
 
   useEffect(() => {
-    if (validateRodneCislo(rodneCislo) && maxChildAgeBonusMonth(rodneCislo, 'Január')) {
+    if (
+      validateRodneCislo(rodneCislo) &&
+      maxChildAgeBonusMonth(rodneCislo, 'Január')
+    ) {
       if (bonusInPartOfYear) {
         setFieldValue(`children[${index}].wholeYear`, false)
       } else {
@@ -337,7 +413,9 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
       }
       if (monthOptions.length) {
         const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
-        const toMonthValue = monthToKeyValue(monthOptions[monthOptions.length - 1]).value.toString()
+        const toMonthValue = monthToKeyValue(
+          monthOptions[monthOptions.length - 1],
+        ).value.toString()
         setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
         setFieldValue(`children[${index}].monthTo`, toMonthValue)
       }
@@ -365,23 +443,46 @@ const ChildForm = ({ savedValues: { rodneCislo, wholeYear }, index, setFieldValu
             rodneCislo,
           )
           const shouldValidate = rodneCisloValue.length >= RODNE_CISLO_DLZKA
-          setFieldValue(`children[${index}].rodneCislo`, rodneCisloValue, shouldValidate)
+          setFieldValue(
+            `children[${index}].rodneCislo`,
+            rodneCisloValue,
+            shouldValidate,
+          )
         }}
       />
-      <h3 className="govuk-heading-s">
-        Daňový bonus si uplatňujem
-      </h3>
-      <RadioGroup value={wholeYear ? 'wholeYear' : 'partYear'} onChange={(value) => {
-        setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
-      }}>
-        <Radio name={`children[${index}]-bonus-interval-input-wholeyear`} label="Za celý kalendárny rok" value="wholeYear" disabled={!validateRodneCislo(rodneCislo) || bonusInPartOfYear} />
-        <Radio name={`children[${index}]-bonus-interval-input-partyear`} label="V niektorých mesiacoch" value="partYear" disabled={!validateRodneCislo(rodneCislo) || monthOptions.length === 0} />
+      <h3 className="govuk-heading-s">Daňový bonus si uplatňujem</h3>
+      <RadioGroup
+        value={wholeYear ? 'wholeYear' : 'partYear'}
+        onChange={(value) => {
+          setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
+        }}
+      >
+        <Radio
+          name={`children[${index}]-bonus-interval-input-wholeyear`}
+          label="Za celý kalendárny rok"
+          value="wholeYear"
+          disabled={!validateRodneCislo(rodneCislo) || bonusInPartOfYear}
+        />
+        <Radio
+          name={`children[${index}]-bonus-interval-input-partyear`}
+          label="V niektorých mesiacoch"
+          value="partYear"
+          disabled={
+            !validateRodneCislo(rodneCislo) || monthOptions.length === 0
+          }
+        />
         <RadioConditional forValue="partYear">
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <p className='govuk-hint'>Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až {monthOptions[monthOptions.length - 1]}</p>
+            <p className="govuk-hint">
+              Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až{' '}
+              {monthOptions[monthOptions.length - 1]}
+            </p>
           </legend>
           <div
-            className={classnames('govuk-form-group', styles.inlineFieldContainer)}
+            className={classnames(
+              'govuk-form-group',
+              styles.inlineFieldContainer,
+            )}
           >
             <Select
               name={`children[${index}].monthFrom`}
@@ -448,10 +549,11 @@ export const validate = (values: ChildrenUserInput) => {
       if (
         !childValues.wholeYear &&
         Number.parseInt(childValues.monthFrom, 10) >
-        Number.parseInt(childValues.monthTo, 10)
+          Number.parseInt(childValues.monthTo, 10)
       ) {
-        childErrors.monthTo = `Musí byť ${monthNames[childValues.monthFrom]
-          } alebo neskôr`
+        childErrors.monthTo = `Musí byť ${
+          monthNames[childValues.monthFrom]
+        } alebo neskôr`
       }
 
       return childErrors
@@ -462,15 +564,18 @@ export const validate = (values: ChildrenUserInput) => {
     }
 
     if (values.partner_bonus_na_deti) {
-      if (!["1", "2", "3", "4"].includes(values.partner_bonus_na_deti_typ_prijmu)) {
-        errors.partner_bonus_na_deti_typ_prijmu = 'Vyberte jednu z možností spôsobu vysporiadania príjmov'
+      if (
+        !['1', '2', '3', '4'].includes(values.partner_bonus_na_deti_typ_prijmu)
+      ) {
+        errors.partner_bonus_na_deti_typ_prijmu =
+          'Vyberte jednu z možností spôsobu vysporiadania príjmov'
       }
 
-      if (values.partner_bonus_na_deti_od === "") {
+      if (values.partner_bonus_na_deti_od === '') {
         errors.partner_bonus_na_deti_od = 'Zadajte začiatok'
       }
 
-      if (values.partner_bonus_na_deti_do === "") {
+      if (values.partner_bonus_na_deti_do === '') {
         errors.partner_bonus_na_deti_do = 'Zadajte koniec'
       }
 
@@ -485,11 +590,12 @@ export const validate = (values: ChildrenUserInput) => {
       }
 
       if (!values.r034a) {
-        errors.r034a =
-          'Zadajte vlastné príjmy manželky / manžela'
+        errors.r034a = 'Zadajte vlastné príjmy manželky / manžela'
       } else if (!values.r034a.match(numberInputRegexp)) {
         errors.r034a = 'Zadajte príjmy vo formáte 123,45'
-      } else if (new Decimal(parseInputNumber(values.r034a)).lessThanOrEqualTo(0)) {
+      } else if (
+        new Decimal(parseInputNumber(values.r034a)).lessThanOrEqualTo(0)
+      ) {
         errors.r034a = 'Príjem musí byť viac ako 0'
       }
     }

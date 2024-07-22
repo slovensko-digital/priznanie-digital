@@ -13,11 +13,10 @@ const WRITE_FILES = false
 const comparable = (xml: string) =>
   parseStringPromise(xml, { trim: true, normalize: true, normalizeTags: true })
 
-
-const testCases = readdirSync('./__tests__/testCases/', {withFileTypes: true})
-.filter(item => !item.isDirectory())
-.map(item => item.name)
-.map(item => item.replace('Input.ts', ''))
+const testCases = readdirSync('./__tests__/testCases/', { withFileTypes: true })
+  .filter((item) => !item.isDirectory())
+  .map((item) => item.name)
+  .map((item) => item.replace('Input.ts', ''))
 
 describe('calcIntergration', () => {
   testCases.forEach((testCase) => {

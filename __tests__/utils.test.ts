@@ -19,7 +19,7 @@ import {
   validateIbanCountry,
   getRodneCisloAgeAtYearAndMonth,
   boolToString,
-  decimalToString
+  decimalToString,
 } from '../src/lib/utils'
 import Decimal from 'decimal.js'
 

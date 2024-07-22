@@ -93,7 +93,7 @@ export type PensionUserInput = Pick<
 
 export type UrokyUserInput = Pick<
   TaxFormUserInput,
-  'r035_uplatnuje_uroky'
+  | 'r035_uplatnuje_uroky'
   | 'r035_zaplatene_uroky'
   | 'uroky_rok_uzatvorenia'
   | 'uroky_zaciatok_urocenia_den'
@@ -119,7 +119,7 @@ export type TwoPercentUserInput = Pick<
 
 export type TaxBonusUserInput = Pick<
   TaxFormUserInput,
-  'ziadamVyplatitDanovyBonus'
+  | 'ziadamVyplatitDanovyBonus'
   | 'ziadamVratitDanovyPreplatok'
   | 'ziadamVratitDanovyBonusUroky'
   | 'iban'

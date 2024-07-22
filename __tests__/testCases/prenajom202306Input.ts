@@ -7,5 +7,5 @@ export const prenajom202306Input: E2eTestUserInput = {
   vyskaPrijmovZPrenajmu: '6984',
   vydavkyZPrenajmu: '1569',
   prenajomPrijemZPrilezitostnejCinnosti: true,
-  vyskaOslobodenia: '350'
+  vyskaOslobodenia: '350',
 }

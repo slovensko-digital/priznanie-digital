@@ -3,5 +3,5 @@ import { withEmploymentInput } from './withEmploymentInput'
 
 export const employmentWrongChildBonusInput: E2eTestUserInput = {
   ...withEmploymentInput,
-  udajeODanovomBonuseNaDieta: '3000'
+  udajeODanovomBonuseNaDieta: '3000',
 }
