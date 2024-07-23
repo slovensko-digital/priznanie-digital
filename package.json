@@ -15,7 +15,7 @@
     "test": "jest",
     "coverage:html": "yarn test --coverage --coverageDirectory='public/coverage' --collectCoverageFrom='src/**/*.ts' && echo 'You can find the coverage report at http://localhost:3000/coverage/lcov-report/lib/index.html'",
     "ci": "yarn lint && yarn test -- --ci&& yarn build && yarn cy:ci",
-    "prettier": "prettier --write  './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
+    "prettier": "prettier --write --loglevel silent './{src,__tests__,cypress}/**/*.{ts,tsx,js,css}'",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:dashboard": "cypress run --record --parallel",
