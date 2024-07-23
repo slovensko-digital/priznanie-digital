@@ -185,37 +185,35 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({
-  nextPostponeRoute,
-  now,
-  isPostponeLive,
-  isDebug,
-}) => (
-  <>
-    <h2 className="govuk-heading-m govuk-!-margin-top-3">
-      {`Odklad daňového priznania za rok ${TAX_YEAR}`}
-    </h2>
-    <PostponeText now={now} />
-    <ul className="govuk-list govuk-list--bullet">
-      <li>{`do 30.6.${
-        TAX_YEAR + 1
-      } ak ste mali príjmy len zo Slovenska, alebo`}</li>
-      <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
-    </ul>
+const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) => {
+  const isPostponeTime = now.getMonth() < 3
 
-    {(isPostponeLive || isDebug) && (
-      <>
-        <p className="govuk-body-xs">
-          Používaním tejto služby súhlasíte so spracovaním osobných údajov v
-          rozsahu nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše
-          údaje neukladáme, sú použité výlučne na spracovanie odkladu daňového
-          priznania.
-        </p>
-        <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
-      </>
-    )}
-  </>
-)
+  return (
+    <>
+      <h2 className="govuk-heading-m govuk-!-margin-top-3">
+        {`Odklad daňového priznania za rok ${TAX_YEAR}`}
+      </h2>
+      <PostponeText now={now} />
+      <ul className="govuk-list govuk-list--bullet">
+        <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
+        <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
+      </ul>
+
+      {
+        ((isPostponeTime && isPostponeLive) || isDebug) && (
+          <>
+            <p className="govuk-body-xs">
+              Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
+              nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
+              neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+            </p>
+            <PostponeButton isPostponeTime={isPostponeTime} nextPostponeRoute={nextPostponeRoute} />
+          </>
+        )
+      }
+    </>
+  )
+}
 
 const PostponeText = ({ now }: { now: Date }) => (
   <>
@@ -240,9 +238,7 @@ const PostponeText = ({ now }: { now: Date }) => (
   </>
 )
 
-const PostponeButton = ({ now, nextPostponeRoute }) => {
-  const isPostponeTime = now.getMonth() < 3
-
+const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
   if (!isPostponeTime) {
     return (
       <button
