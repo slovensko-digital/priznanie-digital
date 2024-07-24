@@ -5,11 +5,10 @@ import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
-
 const randomFromRange = (min: number, max: number) => {
   const minD = new Decimal(min)
   const maxD = new Decimal(max)
-  return (Decimal.random().times(maxD.minus(minD))).plus(minD)
+  return Decimal.random().times(maxD.minus(minD)).plus(minD)
 }
 
 const randomFromRangeString = (min: number, max: number) => {
@@ -50,7 +49,10 @@ const randomInput = (): TaxFormUserInput => {
   const zamestnanie: EmployedUserInput = {
     uhrnPrijmovOdVsetkychZamestnavatelov: randomFromRangeString(0, 100000),
     uhrnPovinnehoPoistnehoNaSocialnePoistenie: randomFromRangeString(0, 100000),
-    uhrnPovinnehoPoistnehoNaZdravotnePoistenie: randomFromRangeString(0, 100000),
+    uhrnPovinnehoPoistnehoNaZdravotnePoistenie: randomFromRangeString(
+      0,
+      100000,
+    ),
     udajeODanovomBonuseNaDieta: randomFromRangeString(0, 100000),
     uhrnPreddavkovNaDan: randomFromRangeString(0, 100000),
   }
@@ -72,7 +74,7 @@ const randomInput = (): TaxFormUserInput => {
       let monthFrom = 0
       let monthTo = 11
 
-      if (!wholeYear || age === 0 || age === 25){
+      if (!wholeYear || age === 0 || age === 25) {
         if (age === 0) {
           monthFrom = randomFromRange(month, 11).round().toNumber()
           monthTo = randomFromRange(monthFrom, 11).round().toNumber()
@@ -98,16 +100,25 @@ const randomInput = (): TaxFormUserInput => {
     })
 
     if (partnerChildBonus) {
-      const randomKid = input.children[randomFromRange(0, childrenCount - 1).round().toNumber()]
+      const randomKid =
+        input.children[
+          randomFromRange(0, childrenCount - 1)
+            .round()
+            .toNumber()
+        ]
       input = {
         ...input,
         partner_bonus_na_deti: true,
         r034_priezvisko_a_meno: 'Beth Smith',
         r034_rodne_cislo: '975917/1565',
-        partner_bonus_na_deti_od: randomKid.wholeYear ? '0' : randomKid.monthFrom.toString(),
-        partner_bonus_na_deti_do: randomKid.wholeYear ? '11' : randomKid.monthTo.toString(),
+        partner_bonus_na_deti_od: randomKid.wholeYear
+          ? '0'
+          : randomKid.monthFrom.toString(),
+        partner_bonus_na_deti_do: randomKid.wholeYear
+          ? '11'
+          : randomKid.monthTo.toString(),
         partner_bonus_na_deti_typ_prijmu: '1',
-        r034a: randomFromRangeString(0, 100000)
+        r034a: randomFromRangeString(0, 100000),
       }
     }
   }
@@ -117,11 +128,17 @@ const randomInput = (): TaxFormUserInput => {
       ...input,
       r031_priezvisko_a_meno: 'Partner Fake',
       r031_rodne_cislo: '9609226286',
-      r032_partner_pocet_mesiacov: randomFromRange(1, 12).round().toNumber().toString(),
-      r032_partner_vlastne_prijmy: randomFromRangeString(0, PARTNER_MAX_ODPOCET),
+      r032_partner_pocet_mesiacov: randomFromRange(1, 12)
+        .round()
+        .toNumber()
+        .toString(),
+      r032_partner_vlastne_prijmy: randomFromRangeString(
+        0,
+        PARTNER_MAX_ODPOCET,
+      ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
-      partner_podmienky: { '1': true }
+      partner_podmienky: { '1': true },
     }
   }
 
@@ -133,12 +150,17 @@ const randomInput = (): TaxFormUserInput => {
       vyskaPrijmovZPrenajmu: randomFromRangeString(0, 10000),
       vydavkyZPrenajmu: randomFromRangeString(0, 10000),
       prenajomPrijemZPrilezitostnejCinnosti: prilezitostnaCinnost,
-      vyskaOslobodenia: prilezitostnaCinnost ? randomFromRangeString(0, 500) : '500',
+      vyskaOslobodenia: prilezitostnaCinnost
+        ? randomFromRangeString(0, 500)
+        : '500',
     }
   }
 
   if (uroky) {
-    const rok = randomFromRange(TAX_YEAR - 5, TAX_YEAR).round().toNumber().toString()
+    const rok = randomFromRange(TAX_YEAR - 5, TAX_YEAR)
+      .round()
+      .toNumber()
+      .toString()
     const mesiac = randomFromRange(1, 12).round().toNumber().toString()
     const pocetDlznikov = randomFromRange(1, 10).round().toNumber()
     input = {
@@ -186,7 +208,8 @@ describe('Random inputs', () => {
       })
         .then((response) => {
           cy.writeFile(filePath, response.body, 'utf-8')
-        }).then(() => {
+        })
+        .then(() => {
           /**  Validate our results with the FS form */
           cy.visit('http://localhost:3000/form/form.572.html')
 

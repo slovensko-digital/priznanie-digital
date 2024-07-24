@@ -13,7 +13,6 @@ export const bugReport7Input: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '99999,99',
   uhrnPreddavkovNaDan: '400000',
 
-
   r031_priezvisko_a_meno: 'Fake Fake',
   r031_rodne_cislo: '9609226286',
   r032_partner_pocet_mesiacov: '2',
@@ -36,5 +35,5 @@ export const bugReport7Input: E2eTestUserInput = {
   children: [],
 
   expectNgoDonationValue: true,
-  percent2: '775,27'
+  percent2: '775,27',
 }

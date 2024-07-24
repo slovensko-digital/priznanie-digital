@@ -7,11 +7,8 @@ import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
 import { buildSummary } from '../lib/calculation'
-import {
-  TAX_YEAR,
-} from '../lib/calculation'
+import { TAX_YEAR } from '../lib/calculation'
 import { ExternalLink } from '../components/ExternalLink'
-
 
 interface SummaryRow {
   key: string
@@ -21,14 +18,16 @@ interface SummaryRow {
   fontSize?: number
 }
 interface SummaryProps {
-  rows: SummaryRow[],
+  rows: SummaryRow[]
   title?: string
 }
 const Summary = ({ rows, title }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
       {title && (
-        <caption className="govuk-table__caption govuk-table__caption--l">{title}</caption>
+        <caption className="govuk-table__caption govuk-table__caption--l">
+          {title}
+        </caption>
       )}
       <tbody className="govuk-table__body">
         {rows.map(({ key, title, description, value, fontSize }) => (
@@ -45,7 +44,10 @@ const Summary = ({ rows, title }: SummaryProps) => (
                 </div>
               )}
             </td>
-            <td className="govuk-table__cell govuk-table__cell--numeric" data-test={key}>
+            <td
+              className="govuk-table__cell govuk-table__cell--numeric"
+              data-test={key}
+            >
               <strong>{formatCurrency(value.toNumber())}</strong>
             </td>
           </tr>
@@ -91,14 +93,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
     {
       title: 'Príspevky na doplnkové dôchodkové poistenie',
       value: summary.prispevkyNaDochodkovePoistenie,
-      key: 'prispevkyNaDochodkovePoistenie'
+      key: 'prispevkyNaDochodkovePoistenie',
     },
     {
       title: 'Základ dane',
       value: summary.zakladDane,
       key: 'zakladDane',
       fontSize: 20,
-    }
+    },
   ]
 
   const rentRows = [
@@ -117,7 +119,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.zakladDanZPrenajmu,
       key: 'zakladDanZPrenajmu',
       fontSize: 20,
-    }
+    },
   ]
 
   const totalRows = [
@@ -151,7 +153,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.danNaUhradu,
       key: 'danNaUhradu',
       fontSize: 30,
-    }
+    },
   ]
 
   return (
@@ -160,18 +162,24 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         {`Výpočet dane za rok ${TAX_YEAR}`}
       </h1>
-      <Summary title='Príjmy zo zamestnania a živnosti' rows={summaryRows} />
-      <Summary title='Príjmy z prenájmu nehnuteľností' rows={rentRows} />
-      <Summary title='Daň na úhradu / daňový preplatok' rows={totalRows} />
+      <Summary title="Príjmy zo zamestnania a živnosti" rows={summaryRows} />
+      <Summary title="Príjmy z prenájmu nehnuteľností" rows={rentRows} />
+      <Summary title="Daň na úhradu / daňový preplatok" rows={totalRows} />
 
-      {
-        taxForm.preddavkyNaDan.suma.greaterThan(0) &&
+      {taxForm.preddavkyNaDan.suma.greaterThan(0) && (
         <Warning>
-            <strong>
-              Predpokladané { taxForm.preddavkyNaDan.periodicita } preddavky na daň z príjmov v roku {TAX_YEAR+1} budú {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má informatívny charakter). Pre viac informácií navštívte web <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024">Finančnej správy</ExternalLink>.
-            </strong>
+          <strong>
+            Predpokladané {taxForm.preddavkyNaDan.periodicita} preddavky na daň
+            z príjmov v roku {TAX_YEAR + 1} budú{' '}
+            {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má
+            informatívny charakter). Pre viac informácií navštívte web{' '}
+            <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024">
+              Finančnej správy
+            </ExternalLink>
+            .
+          </strong>
         </Warning>
-      }
+      )}
 
       <Link href={nextRoute} legacyBehavior>
         <button

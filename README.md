@@ -36,6 +36,7 @@ Install dependencies:
 ```bash
 yarn
 ```
+
 Create environment variables:
 ```bash
 cp .env.example .env

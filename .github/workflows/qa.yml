@@ -45,6 +45,9 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      - name: Prettier
+        run: yarn prettier
+
       - name: TypeScript
         run: yarn check:ts
 

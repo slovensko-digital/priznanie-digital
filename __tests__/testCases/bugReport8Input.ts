@@ -29,5 +29,5 @@ export const bugReport8Input: E2eTestUserInput = {
   children: [],
 
   expectNgoDonationValue: true,
-  percent2: '39,08'
+  percent2: '39,08',
 }

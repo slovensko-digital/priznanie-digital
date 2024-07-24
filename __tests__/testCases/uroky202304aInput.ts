@@ -14,5 +14,5 @@ export const uroky202304aInput: E2eTestUserInput = {
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '2',
   r035_zaplatene_uroky: '987.65',
-  percent2: '193,04'
+  percent2: '193,04',
 }

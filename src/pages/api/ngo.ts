@@ -63,7 +63,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json({ error: 'unable to fetch data from financnasprava.sk' })
   }
 
-  const results = data.search(searchString).map(({ item }) => item).slice(0, 20)
+  const results = data
+    .search(searchString)
+    .map(({ item }) => item)
+    .slice(0, 20)
 
   res.statusCode = 200
   res.json(results)

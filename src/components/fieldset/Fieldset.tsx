@@ -1,13 +1,12 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react'
 
 interface Props {
-  readonly title: string;
-  readonly hint?: string;
-  readonly error?: string;
+  readonly title: string
+  readonly hint?: string
+  readonly error?: string
 }
 
-const Fieldset: FC<Props> = ({title, hint, error, children}) => {
-
+const Fieldset: FC<Props> = ({ title, hint, error, children }) => {
   return (
     <fieldset className="govuk-fieldset">
       <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -16,11 +15,12 @@ const Fieldset: FC<Props> = ({title, hint, error, children}) => {
       {hint && <span className="govuk-hint">{hint}</span>}
       {error && (
         <span data-test="error" className="govuk-error-message">
-            <span className="govuk-visually-hidden">Chyba:</span> {error}
-          </span>
+          <span className="govuk-visually-hidden">Chyba:</span> {error}
+        </span>
       )}
       {children}
-    </fieldset>)
+    </fieldset>
+  )
 }
 
-export default Fieldset;
+export default Fieldset
