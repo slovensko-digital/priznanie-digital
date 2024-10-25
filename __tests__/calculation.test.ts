@@ -126,10 +126,8 @@ describe('With child (for tax year 2022)', () => {
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
     //   ) // kazdy mesiac ked vek < 6 rokov
-
     //   expect(result.r117a).toEqual(monthSums)
     // })
-
     // test('Child turning 6 in 2022 (february)', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
@@ -137,7 +135,6 @@ describe('With child (for tax year 2022)', () => {
     //     children: [childTurning6InFeb],
     //     t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     //   })
-
     //   const monthSums = sum(
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
@@ -145,10 +142,8 @@ describe('With child (for tax year 2022)', () => {
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
     //   )
-
     //   expect(result.r117a).toEqual(monthSums)
     // })
-
     // test('Child turning 6 in 2022 (july)', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
@@ -156,7 +151,6 @@ describe('With child (for tax year 2022)', () => {
     //     children: [childTurning6InJul],
     //     t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     //   })
-
     //   const part1 = sum(
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
@@ -166,7 +160,6 @@ describe('With child (for tax year 2022)', () => {
     //   ) // februar - jul (vek do 6 rokov vratane mesiaca dovrsenia) ale jul uz patri do druhej polovice roka
     //   expect(result.r117a).toEqual(part1)
     // })
-
     // test('Child over 6', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
@@ -174,7 +167,6 @@ describe('With child (for tax year 2022)', () => {
     //     children: [childOver6],
     //     t1r10_prijmy: (15_000).toString(),
     //   })
-
     //   const monthSums = sum(
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
@@ -188,7 +180,6 @@ describe('With child (for tax year 2022)', () => {
     //   ) // vek nad 6 rokov vratane mesiaca dovrsenia
     //   expect(result.r117).toEqual(monthSums)
     // })
-
     // test('More children', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
@@ -201,7 +192,6 @@ describe('With child (for tax year 2022)', () => {
     //     ],
     //     t1r10_prijmy: (25_000).toString(),
     //   })
-
     //   // childOver6
     //   const childOver6Sum = sum(
     //     CHILD_RATE_OVER_SIX_UNTIL_JULY,
@@ -214,7 +204,6 @@ describe('With child (for tax year 2022)', () => {
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //   )
-
     //   // childTurning6InFeb
     //   const childTurning6InFebSum = sum(
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
@@ -227,7 +216,6 @@ describe('With child (for tax year 2022)', () => {
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //   )
-
     //   // childTurning6InJul
     //   const childTurning6InJulSum = sum(
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,
@@ -240,7 +228,6 @@ describe('With child (for tax year 2022)', () => {
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //     CHILD_RATE_FIFTEEN_AND_YOUNGER_FROM_JULY,
     //   ) // januar - jul (vek do 6 rokov vratane mesiaca dovrsenia)
-
     //   // childUnder6
     //   const childUnder6Sum = sum(
     //     CHILD_RATE_SIX_AND_YOUNGER_UNTIL_JULY,

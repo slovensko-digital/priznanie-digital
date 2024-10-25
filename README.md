@@ -29,13 +29,14 @@ If you are not familiar with the process [see this guide](https://github.com/fir
 
 ## How to develop
 
-You need [yarn](https://yarnpkg.com/getting-started/install) and [node 16.13.2](https://nodejs.org/en/).
+You need [yarn](https://yarnpkg.com/getting-started/install) and [node 18](https://nodejs.org/en/).
 
 Install dependencies:
 
 ```bash
 yarn
 ```
+
 Create environment variables:
 ```bash
 cp .env.example .env

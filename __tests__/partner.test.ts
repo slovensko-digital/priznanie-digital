@@ -73,8 +73,7 @@ describe('partner', () => {
           partner_podmienky: { 1: true },
           partner_step: 4,
         },
-        expected: [
-        ],
+        expected: [],
       },
       {
         input: {

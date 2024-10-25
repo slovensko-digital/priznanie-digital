@@ -61,7 +61,13 @@ interface MyAppProps extends AppProps {
   isPostponeLive: boolean
 }
 
-const MyApp = ({ Component, isDebug, isLive, isPostponeLive, pageProps }: MyAppProps) => {
+const MyApp = ({
+  Component,
+  isDebug,
+  isLive,
+  isPostponeLive,
+  pageProps,
+}: MyAppProps) => {
   const [taxForm, setTaxForm] = useState<TaxForm>(
     taxFormUserInputToTaxForm(initTaxFormUserInputValues),
   )
@@ -153,7 +159,7 @@ MyApp.getInitialProps = (context) => {
       context?.ctx?.req?.headers?.cookie,
     ),
     isLive,
-    isPostponeLive
+    isPostponeLive,
   }
 }
 

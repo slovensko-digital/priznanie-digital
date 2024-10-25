@@ -19,5 +19,5 @@ export const withHighIncomeInput: E2eTestUserInput = {
   expectNgoDonationValue: true,
 
   percent2: '140,13',
-  percent3: '214,32'
+  percent3: '214,32',
 }

@@ -14,7 +14,11 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
-import { MAX_CHILD_AGE_BONUS, TAX_YEAR, UROKY_POCET_ROKOV } from '../../src/lib/calculation'
+import {
+  MAX_CHILD_AGE_BONUS,
+  TAX_YEAR,
+  UROKY_POCET_ROKOV,
+} from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -559,11 +563,13 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
     cy.get('[data-test="children[0].rodneCislo-input"]').type('9105010013')
     next()
-    getError().contains(`Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`)
+    getError().contains(
+      `Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`,
+    )
   })
 
   it('has working range limit for kid born in tax year', () => {
@@ -573,12 +579,20 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
     cy.get('[data-test="children[0].rodneCislo-input"]').type('2309083139')
-    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch September až December')
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 4)
-    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 4)
+    cy.contains(
+      'Daňový bonus si môžete uplatniť v mesiacoch September až December',
+    )
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
+      'have.length',
+      4,
+    )
+    cy.get('[data-test="children[0].monthTo-select"]>option').should(
+      'have.length',
+      4,
+    )
   })
 
   it('has working range limit for kid bonus ending in tax year', () => {
@@ -588,12 +602,20 @@ describe('Children page', () => {
     // When presses yes, additional fields appears
     getInput('hasChildren', '-yes').click()
 
-    cy.get('[data-test="children[0].priezviskoMeno-input"]').type("John Doe")
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
     cy.get('[data-test="children[0].rodneCislo-input"]').type('980912/2532')
-    cy.contains('Daňový bonus si môžete uplatniť v mesiacoch Január až September')
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should('have.length', 9)
-    cy.get('[data-test="children[0].monthTo-select"]>option').should('have.length', 9)
+    cy.contains(
+      'Daňový bonus si môžete uplatniť v mesiacoch Január až September',
+    )
+    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
+      'have.length',
+      9,
+    )
+    cy.get('[data-test="children[0].monthTo-select"]>option').should(
+      'have.length',
+      9,
+    )
   })
 })
 
@@ -691,10 +713,12 @@ describe('Uroky page', () => {
     next()
     getError().should('have.length', 4)
 
-    getInput('uroky_rok_uzatvorenia').type((TAX_YEAR-UROKY_POCET_ROKOV - 1).toString())
+    getInput('uroky_rok_uzatvorenia').type(
+      (TAX_YEAR - UROKY_POCET_ROKOV - 1).toString(),
+    )
     getInput('uroky_zaciatok_urocenia_den').type('1')
     getInput('uroky_zaciatok_urocenia_mesiac').type('2')
-    getInput('uroky_zaciatok_urocenia_rok').type((TAX_YEAR-2).toString())
+    getInput('uroky_zaciatok_urocenia_rok').type((TAX_YEAR - 2).toString())
 
     next()
     cy.get('[data-test=ineligible-message]').should('exist')
@@ -705,7 +729,9 @@ describe('Uroky page', () => {
 
     cy.get('button').contains('Späť').click()
 
-    getInput('uroky_rok_uzatvorenia').clear().type((TAX_YEAR-UROKY_POCET_ROKOV).toString())
+    getInput('uroky_rok_uzatvorenia')
+      .clear()
+      .type((TAX_YEAR - UROKY_POCET_ROKOV).toString())
 
     next()
 

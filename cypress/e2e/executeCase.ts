@@ -151,9 +151,13 @@ const executeTestCase = (testCase: string) => {
             )
 
             if (child.wholeYear) {
-              cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
+              cy.get(
+                `[data-test="children[${index}]-bonus-interval-input-wholeyear"]`,
+              ).click()
             } else {
-              cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
+              cy.get(
+                `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
+              ).click()
               cy.get(
                 `[data-test="children[${index}].monthFrom-select"]`,
               ).select(child.monthFrom)
@@ -167,21 +171,21 @@ const executeTestCase = (testCase: string) => {
             }
           })
           next()
-          cy.url().then(url => {
+          cy.url().then((url) => {
             if (input.partner_bonus_na_deti) {
               getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
               getInput('partner_bonus_na_deti', '-yes').click()
               typeToInput('r034_priezvisko_a_meno', input)
               typeToInput('r034_rodne_cislo', input)
-              cy.get(
-                `[data-test="partner_bonus_na_deti_od-select"]`,
-              ).select(input.partner_bonus_na_deti_od)
-              cy.get(
-                `[data-test="partner_bonus_na_deti_do-select"]`,
-              ).select(input.partner_bonus_na_deti_do)
+              cy.get(`[data-test="partner_bonus_na_deti_od-select"]`).select(
+                input.partner_bonus_na_deti_od,
+              )
+              cy.get(`[data-test="partner_bonus_na_deti_do-select"]`).select(
+                input.partner_bonus_na_deti_do,
+              )
               cy.get(
                 `[data-test="partner_bonus_na_deti_typ_prijmu-select"]`,
-              ).select("1")
+              ).select('1')
               typeToInput('r034a', input)
               next()
             } else {
@@ -190,7 +194,7 @@ const executeTestCase = (testCase: string) => {
                 next()
               }
             }
-          });
+          })
         } else {
           getInput('hasChildren', '-no').click()
           next()
@@ -405,33 +409,52 @@ const executeTestCase = (testCase: string) => {
 
         cy.contains('Daň na úhradu')
 
-        cy.get('[data-test="prijmy"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber())
-        )
+        cy.get('[data-test="prijmy"]')
+          .should('have.length', 1)
+          .contains(formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber()))
 
-        cy.get('[data-test="pausalneVydavky"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r040.minus(taxForm.vydavkyPoistPar6ods11_ods1a2).toNumber())
-        )
+        cy.get('[data-test="pausalneVydavky"]')
+          .should('have.length', 1)
+          .contains(
+            formatCurrency(
+              taxForm.r040
+                .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
+                .toNumber(),
+            ),
+          )
 
-        cy.get('[data-test="zakladDane"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r078_zaklad_dane_zo_zamestnania.plus(taxForm.r092).toNumber())
-        )
+        cy.get('[data-test="zakladDane"]')
+          .should('have.length', 1)
+          .contains(
+            formatCurrency(
+              taxForm.r078_zaklad_dane_zo_zamestnania
+                .plus(taxForm.r092)
+                .toNumber(),
+            ),
+          )
 
-        cy.get('[data-test="danSpolu"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r116_dan.toNumber())
-        )
+        cy.get('[data-test="danSpolu"]')
+          .should('have.length', 1)
+          .contains(formatCurrency(taxForm.r116_dan.toNumber()))
 
-        cy.get('[data-test="danovyBonusNaDeti"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r117.toNumber())
-        )
+        cy.get('[data-test="danovyBonusNaDeti"]')
+          .should('have.length', 1)
+          .contains(formatCurrency(taxForm.r117.toNumber()))
 
-        cy.get('[data-test="danovyBonusPreplatokNaVyplatenie"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r121.plus(taxForm.r136_danovy_preplatok).plus(taxForm.r127).toNumber())
-        )
+        cy.get('[data-test="danovyBonusPreplatokNaVyplatenie"]')
+          .should('have.length', 1)
+          .contains(
+            formatCurrency(
+              taxForm.r121
+                .plus(taxForm.r136_danovy_preplatok)
+                .plus(taxForm.r127)
+                .toNumber(),
+            ),
+          )
 
-        cy.get('[data-test="danNaUhradu"]').should('have.length', 1).contains(
-          formatCurrency(taxForm.r135_dan_na_uhradu.toNumber())
-        )
+        cy.get('[data-test="danNaUhradu"]')
+          .should('have.length', 1)
+          .contains(formatCurrency(taxForm.r135_dan_na_uhradu.toNumber()))
         next()
 
         /** SECTION Download */

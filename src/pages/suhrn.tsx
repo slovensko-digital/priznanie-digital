@@ -7,7 +7,12 @@ import classnames from 'classnames'
 import { Warning } from '../components/Warning'
 import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
-import { TAX_YEAR, monthNumberToName, typPrijmuToName, zaciatok_urocenia_datum } from '../lib/calculation'
+import {
+  TAX_YEAR,
+  monthNumberToName,
+  typPrijmuToName,
+  zaciatok_urocenia_datum,
+} from '../lib/calculation'
 
 interface SummaryRow {
   title: string
@@ -39,28 +44,37 @@ const Summary = (props: SummaryProps) => (
     </h2>
     <table className="govuk-table">
       <tbody className="govuk-table__body">
-        {props.rows.map(({ title, value, currency, testId, allignRight }, index) => (
-          <tr className="govuk-table__row" key={`${title}-${index}`}>
-            {value ? (
-              <>
-                <td className={allignRight ? "govuk-table__cell" : "govuk-table__cell govuk-!-width-one-half"}>
-                  {title}
-                </td>
-                <td
-                  className="govuk-table__cell"
-                  style={{ textAlign: allignRight ? 'end' : 'start', whiteSpace: 'nowrap' }}
-                  data-test={testId}
-                >
-                  {currency ? formatCurrency(parseInputNumber(value)) : value}
-                </td>
-              </>
-            ) : (
-              <td className="govuk-table__cell">
-                {title}
-              </td>
-            )}
-          </tr>
-        ))}
+        {props.rows.map(
+          ({ title, value, currency, testId, allignRight }, index) => (
+            <tr className="govuk-table__row" key={`${title}-${index}`}>
+              {value ? (
+                <>
+                  <td
+                    className={
+                      allignRight
+                        ? 'govuk-table__cell'
+                        : 'govuk-table__cell govuk-!-width-one-half'
+                    }
+                  >
+                    {title}
+                  </td>
+                  <td
+                    className="govuk-table__cell"
+                    style={{
+                      textAlign: allignRight ? 'end' : 'start',
+                      whiteSpace: 'nowrap',
+                    }}
+                    data-test={testId}
+                  >
+                    {currency ? formatCurrency(parseInputNumber(value)) : value}
+                  </td>
+                </>
+              ) : (
+                <td className="govuk-table__cell">{title}</td>
+              )}
+            </tr>
+          ),
+        )}
       </tbody>
     </table>
   </>
@@ -94,25 +108,25 @@ const Suhrn: Page<TaxFormUserInput> = ({
             title: 'Príjmy',
             value: taxFormUserInput.t1r10_prijmy,
             currency: true,
-            allignRight: true
+            allignRight: true,
           },
           {
             title: 'Sociálne poistenie',
             value: taxFormUserInput.priloha3_r11_socialne,
             currency: true,
-            allignRight: true
+            allignRight: true,
           },
           {
             title: 'Zdravotné poistenie',
             value: taxFormUserInput.priloha3_r13_zdravotne,
             currency: true,
-            allignRight: true
+            allignRight: true,
           },
           {
             title: 'Zaplatené preddavky',
             value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
-            allignRight: true
+            allignRight: true,
           },
         ]}
       />
@@ -164,10 +178,10 @@ const Suhrn: Page<TaxFormUserInput> = ({
               },
             ]
             : [
-              {
-                title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
-              },
-            ]
+                {
+                  title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
+                },
+              ]
         }
       />
       <Summary
@@ -176,29 +190,30 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.r032_uplatnujem_na_partnera
             ? [
-              {
-                title: 'Meno a priezvisko manželky / manžela',
-                value: taxFormUserInput.r031_priezvisko_a_meno,
-              },
-              {
-                title: 'Rodné číslo',
-                value: taxFormUserInput.r031_rodne_cislo,
-              },
-              {
-                title: 'Vlastné príjmy manželky / manžela',
-                value: taxFormUserInput.r032_partner_vlastne_prijmy,
-                currency: true,
-              },
-              {
-                title: 'Počet mesiacov, v ktorých bol splnený nárok na NČZD na manžela / manželku',
-                value: taxFormUserInput.r032_partner_pocet_mesiacov,
-              },
-            ]
+                {
+                  title: 'Meno a priezvisko manželky / manžela',
+                  value: taxFormUserInput.r031_priezvisko_a_meno,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.r031_rodne_cislo,
+                },
+                {
+                  title: 'Vlastné príjmy manželky / manžela',
+                  value: taxFormUserInput.r032_partner_vlastne_prijmy,
+                  currency: true,
+                },
+                {
+                  title:
+                    'Počet mesiacov, v ktorých bol splnený nárok na NČZD na manžela / manželku',
+                  value: taxFormUserInput.r032_partner_pocet_mesiacov,
+                },
+              ]
             : [
-              {
-                title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
-              },
-            ]
+                {
+                  title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
+                },
+              ]
         }
       />
       <Summary
@@ -207,19 +222,19 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.hasChildren
             ? taxFormUserInput.children
-              .map((child) => [
-                { title: 'Meno a priezvisko', value: child.priezviskoMeno },
-                {
-                  title: 'Rodné číslo',
-                  value: child.rodneCislo,
-                },
-              ])
-              .reduce((result, value) => [...result, ...value], [])
+                .map((child) => [
+                  { title: 'Meno a priezvisko', value: child.priezviskoMeno },
+                  {
+                    title: 'Rodné číslo',
+                    value: child.rodneCislo,
+                  },
+                ])
+                .reduce((result, value) => [...result, ...value], [])
             : [
-              {
-                title: 'Nemám alebo neuplatňujem si',
-              },
-            ]
+                {
+                  title: 'Nemám alebo neuplatňujem si',
+                },
+              ]
         }
       />
       <Summary
@@ -228,33 +243,39 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.partner_bonus_na_deti
             ? [
-              {
-                title: 'Meno a priezvisko',
-                value: taxFormUserInput.r034_priezvisko_a_meno,
-              },
-              {
-                title: 'Rodné číslo',
-                value: taxFormUserInput.r034_rodne_cislo,
-              },
-              {
-                title: 'Mesiace kedy splnila podmienky',
-                value: `${monthNumberToName(parseInt(taxFormUserInput.partner_bonus_na_deti_od))} - ${monthNumberToName(parseInt(taxFormUserInput.partner_bonus_na_deti_do))}`,
-              },
-              {
-                title: 'Spôsob vysporiadania príjmov',
-                value: typPrijmuToName(taxFormUserInput.partner_bonus_na_deti_typ_prijmu),
-              },
-              {
-                title: 'Príjmy',
-                value: taxFormUserInput.r034a,
-                currency: true,
-              },
-            ]
+                {
+                  title: 'Meno a priezvisko',
+                  value: taxFormUserInput.r034_priezvisko_a_meno,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.r034_rodne_cislo,
+                },
+                {
+                  title: 'Mesiace kedy splnila podmienky',
+                  value: `${monthNumberToName(
+                    parseInt(taxFormUserInput.partner_bonus_na_deti_od),
+                  )} - ${monthNumberToName(
+                    parseInt(taxFormUserInput.partner_bonus_na_deti_do),
+                  )}`,
+                },
+                {
+                  title: 'Spôsob vysporiadania príjmov',
+                  value: typPrijmuToName(
+                    taxFormUserInput.partner_bonus_na_deti_typ_prijmu,
+                  ),
+                },
+                {
+                  title: 'Príjmy',
+                  value: taxFormUserInput.r034a,
+                  currency: true,
+                },
+              ]
             : [
-              {
-                title: 'Nemám nárok alebo neuplatňujem si',
-              },
-            ]
+                {
+                  title: 'Nemám nárok alebo neuplatňujem si',
+                },
+              ]
         }
       />
       <Summary
@@ -263,12 +284,12 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.platil_prispevky_na_dochodok
             ? [
-              {
-                title: 'Výška zaplatených príspevkov',
-                value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
-                currency: true,
-              },
-            ]
+                {
+                  title: 'Výška zaplatených príspevkov',
+                  value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
+                  currency: true,
+                },
+              ]
             : [{ title: 'Neplatil som' }]
         }
       />
@@ -278,16 +299,16 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.r035_uplatnuje_uroky
             ? [
-              {
-                title: `Zaplatené úroky v roku ${TAX_YEAR}`,
-                value: taxFormUserInput.r035_zaplatene_uroky,
-                currency: true,
-              },
-              {
-                title: 'Začiatok úročenia',
-                value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
-              },
-            ]
+                {
+                  title: `Zaplatené úroky v roku ${TAX_YEAR}`,
+                  value: taxFormUserInput.r035_zaplatene_uroky,
+                  currency: true,
+                },
+                {
+                  title: 'Začiatok úročenia',
+                  value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
+                },
+              ]
             : [{ title: 'Neplatil som' }]
         }
       />
@@ -296,31 +317,31 @@ const Suhrn: Page<TaxFormUserInput> = ({
         href={'/prenajom'}
         rows={
           taxFormUserInput.rent
-            ?
-            [
-              {
-                title: 'Výška príjmov z prenájmu nehnuteľností',
-                value: taxFormUserInput.vyskaPrijmovZPrenajmu,
-                currency: true,
-                allignRight: true,
-              },
-              {
-                title: 'Výška výdavkov z prenájmu nehnuteľností',
-                value: taxFormUserInput.vydavkyZPrenajmu,
-                currency: true,
-                allignRight: true,
-              },
-              {
-                title: 'Výška oslobodenia z prenájmu nehnuteľností',
-                value: taxFormUserInput.vyskaOslobodenia,
-                currency: true,
-                allignRight: true,
-              },
-            ] : [
-              {
-                title: `Nemám príjmy z prenájmu nehnuteľností`
-              }
-            ]
+            ? [
+                {
+                  title: 'Výška príjmov z prenájmu nehnuteľností',
+                  value: taxFormUserInput.vyskaPrijmovZPrenajmu,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Výška výdavkov z prenájmu nehnuteľností',
+                  value: taxFormUserInput.vydavkyZPrenajmu,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Výška oslobodenia z prenájmu nehnuteľností',
+                  value: taxFormUserInput.vyskaOslobodenia,
+                  currency: true,
+                  allignRight: true,
+                },
+              ]
+            : [
+                {
+                  title: `Nemám príjmy z prenájmu nehnuteľností`,
+                },
+              ]
         }
       />
       <Summary

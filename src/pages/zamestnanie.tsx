@@ -42,7 +42,12 @@ const Zamestnanie: Page<EmployedUserInput> = ({
             />
             {values.employed && (
               <>
-              <h3 className="govuk-heading-m">Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak ste mali viac zamestnávateľov, tak tieto sumy spočítajte a uveďte výsledné.</h3>
+                <h3 className="govuk-heading-m">
+                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak
+                  ste mali viac zamestnávateľov, tak tieto sumy spočítajte a
+                  uveďte výsledné.
+                </h3>
                 <Input
                   name="uhrnPrijmovOdVsetkychZamestnavatelov"
                   type="number"

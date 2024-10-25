@@ -309,20 +309,20 @@ export const Select = ({
         value={typeof disabled === 'number' ? disabled : field.value}
         data-test={`${name}-select`}
       >
-        {
-          options && options.length && options.map((name, key) => (
+        {options &&
+          options.length &&
+          options.map((name, key) => (
             <option key={key} value={optionAsValue ? name : key}>
               {name}
             </option>
-          ))
-        }
-        {
-          optionsWithValue && optionsWithValue.length && optionsWithValue.map(({ name, value }) => (
+          ))}
+        {optionsWithValue &&
+          optionsWithValue.length &&
+          optionsWithValue.map(({ name, value }) => (
             <option key={value} value={value}>
               {name}
             </option>
-          ))
-        }
+          ))}
       </select>
     </div>
   )

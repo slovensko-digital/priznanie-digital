@@ -60,5 +60,5 @@ export const withHighIncome2Input: E2eTestUserInput = {
   XIIoddiel_suhlasZaslUdaje: true,
 
   percent2: '520,40',
-  percent3: '780,60'
+  percent3: '780,60',
 }

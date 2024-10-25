@@ -68,37 +68,41 @@ export enum Months {
 
 const makeMapChild =
   (hasChildren: boolean) =>
-    (child: ChildInput): Child => {
-      const monthFrom = Number.parseInt(child.monthFrom, 10)
-      const monthTo = Number.parseInt(child.monthTo, 10)
+  (child: ChildInput): Child => {
+    const monthFrom = Number.parseInt(child.monthFrom, 10)
+    const monthTo = Number.parseInt(child.monthTo, 10)
 
-      return {
-        priezviskoMeno: child.priezviskoMeno,
-        rodneCislo: child.rodneCislo.replace(/\D/g, ''),
-        m00: hasChildren && child.wholeYear,
-        m01: hasChildren && !child.wholeYear && monthFrom === 0,
-        m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
-        m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
-        m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
-        m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
-        m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
-        m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
-        m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
-        m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
-        m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
-        m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
-        m12: hasChildren && !child.wholeYear && monthTo === 11,
-      }
+    return {
+      priezviskoMeno: child.priezviskoMeno,
+      rodneCislo: child.rodneCislo.replace(/\D/g, ''),
+      m00: hasChildren && child.wholeYear,
+      m01: hasChildren && !child.wholeYear && monthFrom === 0,
+      m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
+      m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
+      m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
+      m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
+      m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
+      m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
+      m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
+      m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
+      m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
+      m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
+      m12: hasChildren && !child.wholeYear && monthTo === 11,
     }
+  }
 
 const mapPartnerChildBonus = (input: ChildrenUserInput) => {
-  const wholeYear = input.partner_bonus_na_deti_od === '0' && input.partner_bonus_na_deti_do === '11'
+  const wholeYear =
+    input.partner_bonus_na_deti_od === '0' &&
+    input.partner_bonus_na_deti_do === '11'
   const monthFrom = Number.parseInt(input.partner_bonus_na_deti_od, 10)
   const monthTo = Number.parseInt(input.partner_bonus_na_deti_do, 10)
 
   return {
     priezviskoMeno: input.r034_priezvisko_a_meno,
-    rodneCislo: input.r034_rodne_cislo ? input.r034_rodne_cislo.replace(/\D/g, '') : '',
+    rodneCislo: input.r034_rodne_cislo
+      ? input.r034_rodne_cislo.replace(/\D/g, '')
+      : '',
     m00: wholeYear,
     m01: !wholeYear && monthFrom === 0,
     m02: !wholeYear && monthFrom <= 1 && monthTo >= 1,
@@ -112,10 +116,12 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
     m10: !wholeYear && monthFrom <= 9 && monthTo >= 9,
     m11: !wholeYear && monthFrom <= 10 && monthTo >= 10,
     m12: !wholeYear && monthTo === 11,
-    druhaOsobaPodalaDPvSR: input.partner_bonus_na_deti_typ_prijmu === '1' || input.partner_bonus_na_deti_typ_prijmu === '2',
+    druhaOsobaPodalaDPvSR:
+      input.partner_bonus_na_deti_typ_prijmu === '1' ||
+      input.partner_bonus_na_deti_typ_prijmu === '2',
     dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
-    pocetMesiacov: monthTo - monthFrom + 1
+    pocetMesiacov: monthTo - monthFrom + 1,
   }
 }
 
@@ -158,21 +164,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(Decimal.min(vydavky, this.t1r2_prijmy))
     },
 
-    priloha3_r11_socialne: round(new Decimal(
-      parseInputNumber(input.priloha3_r11_socialne),
-    )),
-    priloha3_r13_zdravotne: round(new Decimal(
-      parseInputNumber(input.priloha3_r13_zdravotne),
-    )),
+    priloha3_r11_socialne: round(
+      new Decimal(parseInputNumber(input.priloha3_r11_socialne)),
+    ),
+    priloha3_r13_zdravotne: round(
+      new Decimal(parseInputNumber(input.priloha3_r13_zdravotne)),
+    ),
 
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
-    r075_zaplatene_prispevky_na_dochodok: round(Decimal.min(
-      180,
-      new Decimal(
-        parseInputNumber(input?.zaplatene_prispevky_na_dochodok ?? '0'),
+    r075_zaplatene_prispevky_na_dochodok: round(
+      Decimal.min(
+        180,
+        new Decimal(
+          parseInputNumber(input?.zaplatene_prispevky_na_dochodok ?? '0'),
+        ),
       ),
-    )),
+    ),
 
     /** SECTION Partner */
     r031_priezvisko_a_meno: input?.r031_priezvisko_a_meno ?? '',
@@ -184,9 +192,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         input?.r032_uplatnujem_na_partnera && validatePartnerBonusForm(input)
       )
     },
-    r032_partner_vlastne_prijmy: round(new Decimal(
-      parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0'),
-    )),
+    r032_partner_vlastne_prijmy: round(
+      new Decimal(parseInputNumber(input?.r032_partner_vlastne_prijmy ?? '0')),
+    ),
     r032_partner_pocet_mesiacov: parseInputNumber(
       input?.r032_partner_pocet_mesiacov ?? '0',
     ),
@@ -213,18 +221,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Mortgage **/
     get r035_uplat_dan_bonus_zaplat_uroky() {
-      return (
-        input?.r035_uplatnuje_uroky && validateUrokyBonusForm(input)
-      )
+      return input?.r035_uplatnuje_uroky && validateUrokyBonusForm(input)
     },
     get r035_zaplatene_uroky() {
-      return round(new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0')))
+      return round(
+        new Decimal(parseInputNumber(input?.r035_zaplatene_uroky ?? '0')),
+      )
     },
-    get r035_pocet_mesiacov(){
-      const yearDiff = TAX_YEAR - Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+    get r035_pocet_mesiacov() {
+      const yearDiff =
+        TAX_YEAR - Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
       if (yearDiff === 0) {
         // Uver zacal v roku za ktory sa podava DP
-        return POCET_MESIACOV - Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) + 1
+        return (
+          POCET_MESIACOV -
+          Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) +
+          1
+        )
       } else if (yearDiff === UROKY_POCET_ROKOV) {
         // Narok na DB je 5 rokov od zaciatku urokov a teda toto je posledny rok
         return Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10) - 1
@@ -239,7 +252,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     /** SECTION Rent */
     rent: input?.rent ?? false,
     get prenajom_oslobodenie() {
-      const prilezitostnaCinnost = input?.prenajomPrijemZPrilezitostnejCinnosti ?? false
+      const prilezitostnaCinnost =
+        input?.prenajomPrijemZPrilezitostnejCinnosti ?? false
       if (this.rent) {
         if (prilezitostnaCinnost) {
           return new Decimal(parseInputNumber(input?.vyskaOslobodenia ?? '0'))
@@ -251,17 +265,23 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get t1r11s1() {
-      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
+      const prijmy = new Decimal(
+        parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'),
+      )
       return round(Decimal.max(prijmy.minus(this.prenajom_oslobodenie), 0))
     },
     get t1r11s2() {
-      const prijmy = new Decimal(parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'))
-      const vydavky = new Decimal(parseInputNumber(input?.vydavkyZPrenajmu ?? '0'))
+      const prijmy = new Decimal(
+        parseInputNumber(input?.vyskaPrijmovZPrenajmu ?? '0'),
+      )
+      const vydavky = new Decimal(
+        parseInputNumber(input?.vydavkyZPrenajmu ?? '0'),
+      )
       let result = new Decimal(0)
       if (this.prenajom_oslobodenie.isZero()) {
         result = vydavky
       } else {
-        result = (this.t1r11s1.div(prijmy)).mul(vydavky)
+        result = this.t1r11s1.div(prijmy).mul(vydavky)
       }
       return round(Decimal.max(Decimal.min(this.t1r11s1, result), 0))
     },
@@ -290,7 +310,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     ).plus(
       new Decimal(
         parseInputNumber(
-          input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
+          input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0',
+        ),
+      ).plus(
+        new Decimal(
+          parseInputNumber(
+            input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
+          ),
         ),
       ),
     ).plus(
@@ -306,7 +332,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         ),
       ),
     )),
-
     get vydavkyPoistPar6ods11_ods1a2() {
       return round(this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne))
     },
@@ -314,14 +339,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(this.r037)
     },
     get priloha3_r09_socialne() {
-      return round(new Decimal(
-        parseInputNumber(input.uhrnPovinnehoPoistnehoNaSocialnePoistenie),
-      ))
+      return round(
+        new Decimal(
+          parseInputNumber(input.uhrnPovinnehoPoistnehoNaSocialnePoistenie),
+        ),
+      )
     },
     get priloha3_r10_zdravotne() {
-      return round(new Decimal(
-        parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
-      ))
+      return round(
+        new Decimal(
+          parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
+        ),
+      )
     },
     get r038() {
       return round(Decimal.max(this.r036.minus(this.r037), 0))
@@ -363,7 +392,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r072_pred_znizenim.isZero()) {
         return new Decimal(0)
       } else if (this.r072_pred_znizenim.gt(MAX_ZAKLAD_DANE)) {
-        return round(Decimal.max(0, new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(round(this.r072_pred_znizenim.div(4)))))
+        return round(
+          Decimal.max(
+            0,
+            new Decimal(ZIVOTNE_MINIMUM_NASOBOK).minus(
+              round(this.r072_pred_znizenim.div(4)),
+            ),
+          ),
+        )
       } else {
         return NEZDANITELNA_CAST_ZAKLADU
       }
@@ -372,7 +408,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r032_uplatnujem_na_partnera && this.r072_pred_znizenim.gt(0)) {
         if (this.r072_pred_znizenim.gt(KONSTANTA)) {
           const zaklad = ZVYHODNENIE_NA_PARTNERA.minus(
-            round(this.r072_pred_znizenim.times(0.25))
+            round(this.r072_pred_znizenim.times(0.25)),
           )
           const zakladZinzenyOPartnerovPrijem = zaklad.minus(
             Decimal.max(this.r032_partner_vlastne_prijmy, 0),
@@ -381,7 +417,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             return round(Decimal.max(0, round(zakladZinzenyOPartnerovPrijem)))
           } else {
             const mesacne = round(zakladZinzenyOPartnerovPrijem.div(12))
-            return round(Decimal.max(0, round(mesacne.times(this.r032_partner_pocet_mesiacov))))
+            return round(
+              Decimal.max(
+                0,
+                round(mesacne.times(this.r032_partner_pocet_mesiacov)),
+              ),
+            )
           }
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {
@@ -396,27 +437,29 @@ export function calculate(input: TaxFormUserInput): TaxForm {
                 .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
                 .div(12),
             )
-            return round(Decimal.max(
-              0,
-              round(mesacne.times(this.r032_partner_pocet_mesiacov)),
-            ))
+            return round(
+              Decimal.max(
+                0,
+                round(mesacne.times(this.r032_partner_pocet_mesiacov)),
+              ),
+            )
           }
         }
       }
       return new Decimal(0)
     },
     get r077_nezdanitelna_cast() {
-      return round(Decimal.min(
-        this.r073
-          .plus(this.r074_znizenie_partner)
-          .plus(this.r075_zaplatene_prispevky_na_dochodok),
-        this.r072_pred_znizenim,
-      ))
+      return round(
+        Decimal.min(
+          this.r073
+            .plus(this.r074_znizenie_partner)
+            .plus(this.r075_zaplatene_prispevky_na_dochodok),
+          this.r072_pred_znizenim,
+        ),
+      )
     },
     get r078_zaklad_dane_zo_zamestnania() {
-      return round(
-        Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0)
-      )
+      return round(Decimal.max(this.r038.minus(this.r077_nezdanitelna_cast), 0))
     },
     get r080_zaklad_dane_celkovo() {
       return round(this.r078_zaklad_dane_zo_zamestnania.plus(this.r065))
@@ -429,11 +472,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r080_zaklad_dane_celkovo.lte(KONSTANTA)) {
         return round(this.r080_zaklad_dane_celkovo.times(DAN_Z_PRIJMU_SADZBA))
       }
-      const danZPrvejCasti = round(new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA))
+      const danZPrvejCasti = round(
+        new Decimal(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA),
+      )
       const toCoPrevysuje = this.r080_zaklad_dane_celkovo.minus(KONSTANTA)
-      return round(danZPrvejCasti.plus(
-        round(toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)),
-      ))
+      return round(
+        danZPrvejCasti.plus(
+          round(toCoPrevysuje.times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)),
+        ),
+      )
     },
     get r090() {
       return round(this.r081)
@@ -479,9 +526,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.r094.lte(KONSTANTA)) {
         return round(this.r094.times(DAN_Z_PRIJMU_SADZBA))
       } else {
-        return round(new Decimal(KONSTANTA)
-          .times(DAN_Z_PRIJMU_SADZBA)
-          .plus(this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA)))
+        return round(
+          new Decimal(KONSTANTA)
+            .times(DAN_Z_PRIJMU_SADZBA)
+            .plus(
+              this.r094.minus(KONSTANTA).times(DAN_Z_PRIJMU_SADZBA_ZVYSENA),
+            ),
+        )
       }
     },
     get r105() {
@@ -495,8 +546,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         const podmienka = this.r038.greaterThan(0) || this.r045.greaterThan(0)
         if (this.r034.pocetMesiacov === 12 && podmienka) {
           return round(this.r034a.plus(this.r038).plus(this.r045))
-        } else if ((this.r034.pocetMesiacov > 0 && this.r034.pocetMesiacov < 12) && podmienka) {
-          const partner = round(round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov))
+        } else if (
+          this.r034.pocetMesiacov > 0 &&
+          this.r034.pocetMesiacov < 12 &&
+          podmienka
+        ) {
+          const partner = round(
+            round(this.r034a.dividedBy(12)).times(this.r034.pocetMesiacov),
+          )
           return round(this.r038.plus(this.r045).plus(partner))
         } else {
           return new Decimal(0)
@@ -521,7 +578,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         Months.December,
       ].map((month) => ({
         count: getPocetDetivMesiaci(this.r033, month),
-        month: month
+        month: month,
       }))
 
       const childCountGroups = months
@@ -529,7 +586,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         .filter((x, i, a) => a.indexOf(x) == i) // remove duplicates
         .sort((a, b) => a - b) // sort ascending
 
-      const monthGroups = Array.from({ length: childCountGroups.length }, () => [])
+      const monthGroups = Array.from(
+        { length: childCountGroups.length },
+        () => [],
+      )
 
       for (const month of months) {
         const index = childCountGroups.indexOf(month.count)
@@ -541,7 +601,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       for (const monthGroup of monthGroups) {
         const pocetMesiacovVSkupine = monthGroup.length
-        let partialSum = new Decimal(0);
+        let partialSum = new Decimal(0)
         for (const month of monthGroup) {
           for (const child of this.r033) {
             const rate = getRate(month.month, child)
@@ -568,7 +628,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         let vysledok = new Decimal(0)
         if (partialSum.greaterThan(limit)) {
           vysledok = limit
-          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(partialSum.minus(limit))
+          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(
+            partialSum.minus(limit),
+          )
         } else {
           vysledok = partialSum
         }
@@ -584,17 +646,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (r055_dan.greaterThan(SPODNA_SADZBA_PRE_PREDDAVKY)) {
         return {
           suma: r055_dan.div(POCET_KVARTALOV),
-          periodicita: 'kvartálne'
+          periodicita: 'kvartálne',
         }
       } else if (r055_dan.greaterThan(VRCHNA_SADZBA_PRE_PREDDAVKY)) {
         return {
           suma: r055_dan.div(POCET_MESIACOV),
-          periodicita: 'mesačne'
+          periodicita: 'mesačne',
         }
       } else {
         return {
           suma: new Decimal(0),
-          periodicita: 'neplatí'
+          periodicita: 'neplatí',
         }
       }
     },
@@ -621,15 +683,29 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r123() {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
         if (this.r035_pocet_mesiacov === 12) {
-          return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY)))
-        } else if (this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR - UROKY_POCET_ROKOV) {
+          return round(
+            Decimal.min(
+              this.r035_zaplatene_uroky.times(0.5),
+              new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY),
+            ),
+          )
+        } else if (
+          this.r035_datum_zacatia_urocenia_uveru.getFullYear() ===
+          TAX_YEAR - UROKY_POCET_ROKOV
+        ) {
           const a = this.r035_zaplatene_uroky.times(0.5)
           const b = round(a).div(12)
           const c = round(b).times(this.r035_pocet_mesiacov)
-          const d = round(new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12)).times(this.r035_pocet_mesiacov)
-          return round(Decimal.min(c,d))
-        } else if (this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR) {
-          const limit = round(new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12)).times(this.r035_pocet_mesiacov)
+          const d = round(
+            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
+          ).times(this.r035_pocet_mesiacov)
+          return round(Decimal.min(c, d))
+        } else if (
+          this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR
+        ) {
+          const limit = round(
+            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
+          ).times(this.r035_pocet_mesiacov)
           return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit))
         }
       }
@@ -664,7 +740,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return new Decimal(0)
     },
     get r133() {
-      return round(new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0')))
+      return round(
+        new Decimal(parseInputNumber(input?.zaplatenePreddavky ?? '0')),
+      )
     },
     get r134() {
       return new Decimal(0)
@@ -677,43 +755,47 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       Ak daň na úhradu nepresiahne 5 €, daň sa neplatí.
       */
 
-      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const podmienka =
+        this.r116_dan.gt(17) ||
+        (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
       const base = podmienka ? this.r116_dan : new Decimal(0)
       let tax = base
-                .minus(this.r117)
-                .plus(this.r119)
-                .plus(this.r121)
-                .minus(this.r123)
-                .plus(this.r125)
-                .plus(this.r127)
-                .plus(this.r128)
-                .minus(this.r129)
-                .minus(this.r130)
-                .minus(this.r131)
-                .minus(this.r132)
-                .minus(this.r133)
-                .minus(this.r134)
+        .minus(this.r117)
+        .plus(this.r119)
+        .plus(this.r121)
+        .minus(this.r123)
+        .plus(this.r125)
+        .plus(this.r127)
+        .plus(this.r128)
+        .minus(this.r129)
+        .minus(this.r130)
+        .minus(this.r131)
+        .minus(this.r132)
+        .minus(this.r133)
+        .minus(this.r134)
       tax = Decimal.max(0, tax)
 
       return tax.gt(MINIMALNA_DAN_NA_ZAPLATENIE) ? round(tax) : new Decimal(0)
     },
     get r136_danovy_preplatok() {
-      const podmienka = this.r116_dan.gt(17) || (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
+      const podmienka =
+        this.r116_dan.gt(17) ||
+        (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
       const base = podmienka ? this.r116_dan : new Decimal(0)
       let tax = base
-                .minus(this.r117)
-                .plus(this.r119)
-                .plus(this.r121)
-                .minus(this.r123)
-                .plus(this.r125)
-                .plus(this.r127)
-                .plus(this.r128)
-                .minus(this.r129)
-                .minus(this.r130)
-                .minus(this.r131)
-                .minus(this.r132)
-                .minus(this.r133)
-                .minus(this.r134)
+        .minus(this.r117)
+        .plus(this.r119)
+        .plus(this.r121)
+        .minus(this.r123)
+        .plus(this.r125)
+        .plus(this.r127)
+        .plus(this.r128)
+        .minus(this.r129)
+        .minus(this.r130)
+        .minus(this.r131)
+        .minus(this.r132)
+        .minus(this.r133)
+        .minus(this.r134)
       return Decimal.min(0, round(tax)).negated()
     },
     splnam3per: input?.splnam3per ?? false,
@@ -728,7 +810,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         return new Decimal(0)
       }
 
-      const NGOAmount = this.splnam3per ? this.suma_3_percenta : this.suma_2_percenta
+      const NGOAmount = this.splnam3per
+        ? this.suma_3_percenta
+        : this.suma_2_percenta
 
       /** Min of 3 EUR is required */
       return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION)
@@ -769,15 +853,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.priloha3_r09_socialne,
         this.priloha3_r10_zdravotne,
         this.priloha3_r11_socialne,
-        this.priloha3_r13_zdravotne
+        this.priloha3_r13_zdravotne,
       ].every((x) => x.eq(0))
       return priloha3Prazdna ? '' : this.datum
     },
 
     get canDonateTwoPercentOfTax() {
-      return percentage(this.r124, 3).gte(
-        MIN_2_PERCENT_CALCULATED_DONATION,
-      )
+      return percentage(this.r124, 3).gte(MIN_2_PERCENT_CALCULATED_DONATION)
     },
   }
 }
@@ -786,11 +868,16 @@ export const buildSummary = (form: TaxForm): Summary => {
   return {
     // zivnost a zamestnanie
     prijmy: form.r036.plus(form.r039),
-    pausalneVydavky: (form.r040.minus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
-    zaplatenePoistneSpolu: (form.r037.plus(form.vydavkyPoistPar6ods11_ods1a2)).negated(),
+    pausalneVydavky: form.r040
+      .minus(form.vydavkyPoistPar6ods11_ods1a2)
+      .negated(),
+    zaplatenePoistneSpolu: form.r037
+      .plus(form.vydavkyPoistPar6ods11_ods1a2)
+      .negated(),
     nezdanitelnaCastNaSeba: form.r073.negated(),
     nezdanitelnaCastNaPartnera: form.r074_znizenie_partner.negated(),
-    prispevkyNaDochodkovePoistenie: form.r075_zaplatene_prispevky_na_dochodok.negated(),
+    prispevkyNaDochodkovePoistenie:
+      form.r075_zaplatene_prispevky_na_dochodok.negated(),
     zakladDane: form.r078_zaklad_dane_zo_zamestnania.plus(form.r092),
     // prenajom
     prijemNehnutelnost: form.t1r11s1,
@@ -798,10 +885,16 @@ export const buildSummary = (form: TaxForm): Summary => {
     zakladDanZPrenajmu: form.r065,
     // dan na uhradu alebo preplatok
     danSpolu: form.r116_dan,
-    preddavkyNaDan: (form.r131.plus(form.r132).plus(form.r133).plus(form.r134)).negated(),
+    preddavkyNaDan: form.r131
+      .plus(form.r132)
+      .plus(form.r133)
+      .plus(form.r134)
+      .negated(),
     danovyBonusNaDeti: form.r117.negated(),
     danovyBonusNaUroky: form.r123.negated(),
-    danovyBonusPreplatokNaVyplatenie: form.r136_danovy_preplatok.plus(form.r121).plus(form.r127),
+    danovyBonusPreplatokNaVyplatenie: form.r136_danovy_preplatok
+      .plus(form.r121)
+      .plus(form.r127),
     danNaUhradu: form.r135_dan_na_uhradu,
   }
 }
@@ -813,80 +906,45 @@ const getRate = (month: Months, child: Child) => {
     month - 1,
   )
 
-  const rate = age < 18
-    ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-    : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+  const rate =
+    age < 18
+      ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
+      : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
 
-  if (
-    month === Months.January &&
-    (child.m01 || child.m00)
-  ) {
+  if (month === Months.January && (child.m01 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.February &&
-    (child.m02 || child.m00)
-  ) {
+  if (month === Months.February && (child.m02 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.March &&
-    (child.m03 || child.m00)
-  ) {
+  if (month === Months.March && (child.m03 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.April &&
-    (child.m04 || child.m00)
-  ) {
+  if (month === Months.April && (child.m04 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.May &&
-    (child.m05 || child.m00)
-  ) {
+  if (month === Months.May && (child.m05 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.June &&
-    (child.m06 || child.m00)
-  ) {
+  if (month === Months.June && (child.m06 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.July &&
-    (child.m07 || child.m00)
-  ) {
+  if (month === Months.July && (child.m07 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.August &&
-    (child.m08 || child.m00)
-  ) {
+  if (month === Months.August && (child.m08 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.September &&
-    (child.m09 || child.m00)
-  ) {
+  if (month === Months.September && (child.m09 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.October &&
-    (child.m10 || child.m00)
-  ) {
+  if (month === Months.October && (child.m10 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.November &&
-    (child.m11 || child.m00)
-  ) {
+  if (month === Months.November && (child.m11 || child.m00)) {
     return rate
   }
-  if (
-    month === Months.December &&
-    (child.m12 || child.m00)
-  ) {
+  if (month === Months.December && (child.m12 || child.m00)) {
     return rate
   }
 
@@ -965,76 +1023,76 @@ export const monthToKeyValue = (month: string) => {
   if (month == 'Január') {
     return {
       name: month,
-      value: 0
+      value: 0,
     }
   }
   if (month == 'Február') {
     return {
       name: month,
-      value: 1
+      value: 1,
     }
   }
   if (month == 'Marec') {
     return {
       name: month,
-      value: 2
+      value: 2,
     }
   }
   if (month == 'Apríl') {
     return {
       name: month,
-      value: 3
+      value: 3,
     }
   }
   if (month == 'Máj') {
     return {
       name: month,
-      value: 4
+      value: 4,
     }
   }
   if (month == 'Jún') {
     return {
       name: month,
-      value: 5
+      value: 5,
     }
   }
   if (month == 'Júl') {
     return {
       name: month,
-      value: 6
+      value: 6,
     }
   }
   if (month == 'August') {
     return {
       name: month,
-      value: 7
+      value: 7,
     }
   }
   if (month == 'September') {
     return {
       name: month,
-      value: 8
+      value: 8,
     }
   }
 
   if (month == 'Október') {
     return {
       name: month,
-      value: 9
+      value: 9,
     }
   }
 
   if (month == 'November') {
     return {
       name: month,
-      value: 10
+      value: 10,
     }
   }
 
   if (month == 'December') {
     return {
       name: month,
-      value: 11
+      value: 11,
     }
   }
 }
@@ -1079,17 +1137,17 @@ export const monthNumberToName = (month: number) => {
 }
 
 export const typPrijmuToName = (typPrijmu: string) => {
-  if (typPrijmu === "1" ) {
-    return "DPFO typ A"
+  if (typPrijmu === '1') {
+    return 'DPFO typ A'
   }
-  if (typPrijmu === "2" ) {
-    return "DPFO typ B"
+  if (typPrijmu === '2') {
+    return 'DPFO typ B'
   }
-  if (typPrijmu === "3" ) {
-    return "Ročné zúčtovanie"
+  if (typPrijmu === '3') {
+    return 'Ročné zúčtovanie'
   }
-  if (typPrijmu === "4" ) {
-    return "Iné"
+  if (typPrijmu === '4') {
+    return 'Iné'
   }
 }
 
@@ -1098,6 +1156,8 @@ export const monthKeyValues = (months: string[]): optionWithValue[] => {
 }
 
 export const donateOnly3Percent = (form: TaxForm): boolean => {
-  return form.canDonateTwoPercentOfTax && (form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION)
+  return (
+    form.canDonateTwoPercentOfTax &&
+    form.suma_2_percenta.toNumber() < MIN_2_PERCENT_CALCULATED_DONATION
+  )
 }
-

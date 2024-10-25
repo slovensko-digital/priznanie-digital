@@ -29,7 +29,13 @@ const IconLock = () => (
   </svg>
 )
 
-const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive, isPostponeLive }) => (
+const Home = ({
+  nextRoute,
+  nextPostponeRoute,
+  isDebug,
+  isLive,
+  isPostponeLive,
+}) => (
   <>
     <div className="govuk-grid-column-two-thirds">
       <TaxFormSection nextRoute={nextRoute} isDebug={isDebug} isLive={isLive} />
@@ -37,7 +43,12 @@ const Home = ({ nextRoute, nextPostponeRoute, isDebug, isLive, isPostponeLive })
 
     <div className="govuk-grid-column-one-third">
       <div className={styles.postponeBox}>
-        <PostponeSection nextPostponeRoute={nextPostponeRoute} now={new Date()} isPostponeLive={isPostponeLive} isDebug={isDebug} />
+        <PostponeSection
+          nextPostponeRoute={nextPostponeRoute}
+          now={new Date()}
+          isPostponeLive={isPostponeLive}
+          isDebug={isDebug}
+        />
       </div>
 
       <ul className={styles.safeList}>
@@ -78,7 +89,9 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       <p className="govuk-body-l">
         {isLive
           ? `Vyplňte si daňové priznanie rýchlo a jednoducho.`
-          : `Daňové priznanie si tak budete môcť aj v roku ${TAX_YEAR + 1} pripraviť
+          : `Daňové priznanie si tak budete môcť aj v roku ${
+              TAX_YEAR + 1
+            } pripraviť
         rýchlo a jednoducho.`}
       </p>
 
@@ -104,9 +117,16 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <strong>Tieto prípady zatiaľ nepodporujeme:</strong>
           </p>
           <ul className="govuk-list govuk-list--bullet">
-            <li>Iné príjmy ako zo živnosti, zamestnania a z prenájmu nehnuteľností</li>
-            <li>Príjem zo zahraničia (s výnimkou príjmov zo živnosti - poskytovanie služieb)</li>
-            <li>Daňový bonus zo zvýšenia zaplatenej splátky úveru na bývanie</li>
+            <li>
+              Iné príjmy ako zo živnosti, zamestnania a z prenájmu nehnuteľností
+            </li>
+            <li>
+              Príjem zo zahraničia (s výnimkou príjmov zo živnosti -
+              poskytovanie služieb)
+            </li>
+            <li>
+              Daňový bonus zo zvýšenia zaplatenej splátky úveru na bývanie
+            </li>
             <li>Daňové straty</li>
             <li>SZČO starobní dôchodcovia</li>
             <li>Práca na dohodu</li>
@@ -133,7 +153,15 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-bottom-3"
           >
             Súhlasím a chcem pripraviť daňové priznanie
-            <svg className="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+            <svg
+              className="govuk-button__start-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="17.5"
+              height="19"
+              viewBox="0 0 33 40"
+              aria-hidden="true"
+              focusable="false"
+            >
               <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
             </svg>
           </button>
@@ -157,42 +185,56 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   )
 }
 
-const PostponeSection = ({ nextPostponeRoute, now, isPostponeLive, isDebug }) => (
-  <>
-    <h2 className="govuk-heading-m govuk-!-margin-top-3">
-      {`Odklad daňového priznania za rok ${TAX_YEAR}`}
-    </h2>
-    <PostponeText now={now} />
-    <ul className="govuk-list govuk-list--bullet">
-      <li>{`do 30.6.${TAX_YEAR + 1} ak ste mali príjmy len zo Slovenska, alebo`}</li>
-      <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
-    </ul>
+const PostponeSection = ({
+  nextPostponeRoute,
+  now,
+  isPostponeLive,
+  isDebug,
+}) => {
+  const isPostponeTime = now.getMonth() < 3
 
-    {
-      (isPostponeLive || isDebug) && (
+  return (
+    <>
+      <h2 className="govuk-heading-m govuk-!-margin-top-3">
+        {`Odklad daňového priznania za rok ${TAX_YEAR}`}
+      </h2>
+      <PostponeText now={now} />
+      <ul className="govuk-list govuk-list--bullet">
+        <li>{`do 30.6.${
+          TAX_YEAR + 1
+        } ak ste mali príjmy len zo Slovenska, alebo`}</li>
+        <li>{`do 30.9.${TAX_YEAR + 1} ak ste mali príjmy aj zo zahraničia`}</li>
+      </ul>
+
+      {((isPostponeTime && isPostponeLive) || isDebug) && (
         <>
           <p className="govuk-body-xs">
-            Používaním tejto služby súhlasíte so spracovaním osobných údajov v rozsahu
-            nevyhnutnom na vygenerovanie odkladu daňového priznania. Vaše údaje
-            neukladáme, sú použité výlučne na spracovanie odkladu daňového priznania.
+            Používaním tejto služby súhlasíte so spracovaním osobných údajov v
+            rozsahu nevyhnutnom na vygenerovanie odkladu daňového priznania.
+            Vaše údaje neukladáme, sú použité výlučne na spracovanie odkladu
+            daňového priznania.
           </p>
-          <PostponeButton now={now} nextPostponeRoute={nextPostponeRoute} />
+          <PostponeButton
+            isPostponeTime={isPostponeTime}
+            nextPostponeRoute={nextPostponeRoute}
+          />
         </>
-      )
-    }
-  </>
-)
+      )}
+    </>
+  )
+}
 
 const PostponeText = ({ now }: { now: Date }) => (
   <>
-    {((now.getMonth() > 2) && (now.getFullYear() == TAX_YEAR + 1)) && (
+    {now.getMonth() > 2 && now.getFullYear() == TAX_YEAR + 1 && (
       <>
         <p>
           {`Riadny termín pre podanie daňového priznania a zaplatenie dane bol do
       31.3.${TAX_YEAR + 1}`}
         </p>
         <p>Termín ste si mohli predĺžiť:</p>
-      </>)}
+      </>
+    )}
     {(now.getMonth() < 3 || now.getFullYear() == TAX_YEAR) && (
       <>
         <p>
@@ -200,13 +242,12 @@ const PostponeText = ({ now }: { now: Date }) => (
   31.3.${TAX_YEAR + 1}`}
         </p>
         <p>Termín si viete predĺžiť:</p>
-      </>)}
+      </>
+    )}
   </>
 )
 
-const PostponeButton = ({ now, nextPostponeRoute }) => {
-  const isPostponeTime = now.getMonth() < 3
-
+const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
   if (!isPostponeTime) {
     return (
       <button

@@ -63,5 +63,5 @@ export const case202202aInput: E2eTestUserInput = {
   expectNgoDonationValue: true,
 
   percent2: '173,62',
-  percent3: '320,78'
+  percent3: '320,78',
 }

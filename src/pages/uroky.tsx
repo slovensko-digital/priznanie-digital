@@ -34,11 +34,11 @@ const Uroky: Page<UrokyUserInput> = ({
             values.hypoteka_step === 6
           ) {
             const userInput = values.r035_uplatnuje_uroky
-            ? values
-            : {
-              ...urokyInitialValues,
-              r035_uplatnuje_uroky: false,
-            }
+              ? values
+              : {
+                  ...urokyInitialValues,
+                  r035_uplatnuje_uroky: false,
+                }
 
             if (!validateUrokyBonusForm(values, values.hypoteka_step)) {
               userInput.r035_zaplatene_uroky = ''
@@ -82,32 +82,60 @@ export const validate = (values: UrokyUserInput) => {
   ) {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
   } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
-    if (typeof values.uroky_rok_uzatvorenia === 'undefined' || !isInteger(values.uroky_rok_uzatvorenia)) {
+    if (
+      typeof values.uroky_rok_uzatvorenia === 'undefined' ||
+      !isInteger(values.uroky_rok_uzatvorenia)
+    ) {
       errors.uroky_rok_uzatvorenia = 'Zadajte rok'
     } else {
       const rok = Number.parseInt(values.uroky_rok_uzatvorenia, 10)
       if (rok > TAX_YEAR) {
-        errors.uroky_rok_uzatvorenia = 'Rok uzatvorenia úveru nemôže byť v budúcnosti'
+        errors.uroky_rok_uzatvorenia =
+          'Rok uzatvorenia úveru nemôže byť v budúcnosti'
       }
     }
 
-    const ziaciatok_urocenia_den = Number.parseInt(values.uroky_zaciatok_urocenia_den, 10)
-    const zaciatok_urocenia_mesiac = Number.parseInt(values.uroky_zaciatok_urocenia_mesiac, 10)
-    const zaciatok_urocenia_rok = Number.parseInt(values.uroky_zaciatok_urocenia_rok, 10)
-    const zaciatok_urocenia = new Date(zaciatok_urocenia_rok, zaciatok_urocenia_mesiac - 1, ziaciatok_urocenia_den)
+    const ziaciatok_urocenia_den = Number.parseInt(
+      values.uroky_zaciatok_urocenia_den,
+      10,
+    )
+    const zaciatok_urocenia_mesiac = Number.parseInt(
+      values.uroky_zaciatok_urocenia_mesiac,
+      10,
+    )
+    const zaciatok_urocenia_rok = Number.parseInt(
+      values.uroky_zaciatok_urocenia_rok,
+      10,
+    )
+    const zaciatok_urocenia = new Date(
+      zaciatok_urocenia_rok,
+      zaciatok_urocenia_mesiac - 1,
+      ziaciatok_urocenia_den,
+    )
 
-    if (zaciatok_urocenia.getDate() !== ziaciatok_urocenia_den || !isInteger(values.uroky_zaciatok_urocenia_den)) {
+    if (
+      zaciatok_urocenia.getDate() !== ziaciatok_urocenia_den ||
+      !isInteger(values.uroky_zaciatok_urocenia_den)
+    ) {
       errors.uroky_zaciatok_urocenia_den = 'Zadajte deň v správnom tvare'
     }
-    if ((zaciatok_urocenia.getMonth() + 1) !== zaciatok_urocenia_mesiac || !isInteger(values.uroky_zaciatok_urocenia_mesiac)) {
+    if (
+      zaciatok_urocenia.getMonth() + 1 !== zaciatok_urocenia_mesiac ||
+      !isInteger(values.uroky_zaciatok_urocenia_mesiac)
+    ) {
       errors.uroky_zaciatok_urocenia_mesiac = 'Zadajte mesiac v správnom tvare'
     }
-    if (zaciatok_urocenia.getFullYear() !== zaciatok_urocenia_rok || !isInteger(values.uroky_zaciatok_urocenia_rok)) {
+    if (
+      zaciatok_urocenia.getFullYear() !== zaciatok_urocenia_rok ||
+      !isInteger(values.uroky_zaciatok_urocenia_rok)
+    ) {
       errors.uroky_zaciatok_urocenia_rok = 'Zadajte rok v správnom tvare'
     }
 
     if (zaciatok_urocenia.getFullYear() < TAX_YEAR - UROKY_POCET_ROKOV) {
-      errors.uroky_zaciatok_urocenia_rok = `Rok začiatku úročenia nemôže byť skôr ako ${TAX_YEAR - UROKY_POCET_ROKOV}`
+      errors.uroky_zaciatok_urocenia_rok = `Rok začiatku úročenia nemôže byť skôr ako ${
+        TAX_YEAR - UROKY_POCET_ROKOV
+      }`
     }
 
     if (zaciatok_urocenia.getFullYear() > TAX_YEAR) {
@@ -121,7 +149,8 @@ export const validate = (values: UrokyUserInput) => {
         if (typeof values.uroky_pocet_dlznikov === 'undefined') {
           errors.uroky_pocet_dlznikov = 'Zadajte počet dlžníkov'
         } else if (!values.uroky_pocet_dlznikov.match(/^\d+$/)) {
-          errors.uroky_pocet_dlznikov = 'Zadajte počet dlžníkov vo formáte čísla napr. 5'
+          errors.uroky_pocet_dlznikov =
+            'Zadajte počet dlžníkov vo formáte čísla napr. 5'
         } else if (Number.parseInt(values.uroky_pocet_dlznikov, 10) < 2) {
           errors.uroky_pocet_dlznikov = 'Počet dlžníkov musí byť aspoň 2'
         }
@@ -140,7 +169,11 @@ export const validate = (values: UrokyUserInput) => {
       errors.r035_zaplatene_uroky = 'Zadajte zaplatené úroky'
     } else if (!values.r035_zaplatene_uroky.match(numberInputRegexp)) {
       errors.r035_zaplatene_uroky = 'Zadajte zaplatené úroky vo formáte 123,45'
-    } else if (!new Decimal(parseInputNumber(values.r035_zaplatene_uroky)).lessThanOrEqualTo(new Decimal(9999.99))) {
+    } else if (
+      !new Decimal(
+        parseInputNumber(values.r035_zaplatene_uroky),
+      ).lessThanOrEqualTo(new Decimal(9999.99))
+    ) {
       errors.r035_zaplatene_uroky = 'Zaplatené úroky môžu byť maximálne 9999,99'
     }
   }

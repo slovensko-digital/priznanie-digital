@@ -10,12 +10,14 @@ export const validatePartnerBonusForm = (
 
   const step1 = values.partner_spolocna_domacnost === true
 
-  const step2 = values.partner_podmienky &&
+  const step2 =
+    values.partner_podmienky &&
     Object.keys(values.partner_podmienky)
       .map((key) => values.partner_podmienky[key])
       .some((value) => value === true)
 
-  const step3 = values.r032_partner_vlastne_prijmy !== '' &&
+  const step3 =
+    values.r032_partner_vlastne_prijmy !== '' &&
     parseInputNumber(values.r032_partner_vlastne_prijmy) < PARTNER_MAX_ODPOCET
 
   const step4 = true

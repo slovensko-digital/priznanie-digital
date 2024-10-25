@@ -90,21 +90,33 @@ export const validateRodneCislo = (value: string): boolean => {
   )
 }
 
-export const maxChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+export const maxChildAgeBonusMonth = (
+  rodneCislo: string,
+  month: string,
+): boolean => {
   return (
-    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) < MAX_CHILD_AGE_BONUS
+    getRodneCisloAgeAtYearAndMonth(
+      rodneCislo.replace(' / ', ''),
+      TAX_YEAR,
+      monthToKeyValue(month).value,
+    ) < MAX_CHILD_AGE_BONUS
   )
 }
-export const minChildAgeBonusMonth = (rodneCislo: string, month: string): boolean => {
+export const minChildAgeBonusMonth = (
+  rodneCislo: string,
+  month: string,
+): boolean => {
   return (
-    getRodneCisloAgeAtYearAndMonth(rodneCislo.replace(' / ', ''), TAX_YEAR, monthToKeyValue(month).value) >= 0
+    getRodneCisloAgeAtYearAndMonth(
+      rodneCislo.replace(' / ', ''),
+      TAX_YEAR,
+      monthToKeyValue(month).value,
+    ) >= 0
   )
 }
 
 export const getBirthMonth = (value: string): number => {
-  return (
-    rodnecislo(value.replace(' / ', '')).month()
-  )
+  return rodnecislo(value.replace(' / ', '')).month()
 }
 
 // logic from https://github.com/kub1x/rodnecislo
@@ -126,7 +138,7 @@ export const getRodneCisloAgeAtYearAndMonth = (
     return age
   }
 
-  if (dateMonth == rc.month() && dateYear == rc.year()){
+  if (dateMonth == rc.month() && dateYear == rc.year()) {
     return 0
   }
 

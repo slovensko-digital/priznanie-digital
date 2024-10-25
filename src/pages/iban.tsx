@@ -52,14 +52,16 @@ const Iban: Page<TaxBonusUserInput> = ({
       validate={makeValidate(taxForm)}
       onSubmit={(values) => {
         const userInput =
-          values.ziadamVyplatitDanovyBonus || values.ziadamVratitDanovyPreplatok || values.ziadamVratitDanovyBonusUroky
+          values.ziadamVyplatitDanovyBonus ||
+          values.ziadamVratitDanovyPreplatok ||
+          values.ziadamVratitDanovyBonusUroky
             ? values
             : {
-              ...taxBonusInitialInput,
-              ziadamVyplatitDanovyBonus: false,
-              ziadamVratitDanovyPreplatok: false,
-              ziadamVratitDanovyBonusUroky: false
-            }
+                ...taxBonusInitialInput,
+                ziadamVyplatitDanovyBonus: false,
+                ziadamVratitDanovyPreplatok: false,
+                ziadamVratitDanovyBonusUroky: false,
+              }
         setTaxFormUserInput(userInput)
         router.push(nextRoute)
       }}
@@ -94,21 +96,21 @@ const Iban: Page<TaxBonusUserInput> = ({
             {(values.ziadamVyplatitDanovyBonus ||
               values.ziadamVratitDanovyPreplatok ||
               values.ziadamVratitDanovyBonusUroky) && (
-                <Input
-                  name="iban"
-                  type="text"
-                  label="IBAN"
-                  hint="Účet musí byť vedený v banke na Slovensku pod vašim menom."
-                  maxLength={29}
-                  onChange={(event) => {
-                    const iban = formatIban(
-                      event.currentTarget.value,
-                      values.iban,
-                    )
-                    setFieldValue('iban', iban)
-                  }}
-                />
-              )}
+              <Input
+                name="iban"
+                type="text"
+                label="IBAN"
+                hint="Účet musí byť vedený v banke na Slovensku pod vašim menom."
+                maxLength={29}
+                onChange={(event) => {
+                  const iban = formatIban(
+                    event.currentTarget.value,
+                    values.iban,
+                  )
+                  setFieldValue('iban', iban)
+                }}
+              />
+            )}
 
             <button data-test="next" className="govuk-button" type="submit">
               Pokračovať
@@ -145,8 +147,7 @@ export const makeValidate =
       taxForm.mozeZiadatVratitDanovyBonusUroky &&
       typeof values.ziadamVratitDanovyBonusUroky === 'undefined'
     ) {
-      errors.ziadamVratitDanovyBonusUroky =
-        'Vyznačte odpoveď na daňový bonus'
+      errors.ziadamVratitDanovyBonusUroky = 'Vyznačte odpoveď na daňový bonus'
     }
 
     if (

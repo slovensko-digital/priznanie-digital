@@ -30,9 +30,7 @@ describe('routes', () => {
     })
 
     it('should return routes with children, without iban', () => {
-      expect(
-        getOrderedRoutes({} as TaxForm),
-      ).toStrictEqual([
+      expect(getOrderedRoutes({} as TaxForm)).toStrictEqual([
         homeRoute,
         '/prijmy-a-vydavky',
         '/zamestnanie',
@@ -102,7 +100,6 @@ describe('routes', () => {
   describe('#getRoutes', () => {
     describe('nextRoute', () => {
       describe('for route /partner', () => {
-
         it('should be correct when eligible for children bonus', () => {
           const { nextRoute } = getRoutes('/partner', {} as TaxForm)
           expect(nextRoute()).toBe('/deti')

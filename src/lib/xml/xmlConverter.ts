@@ -48,7 +48,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   /** SECTION Partner */
   if (taxForm.r032_uplatnujem_na_partnera) {
-
     form.dokument.telo.r31 = {
       priezviskoMeno: taxForm.r031_priezvisko_a_meno,
       rodneCislo: taxForm.r031_rodne_cislo,
@@ -77,7 +76,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }) as Dieta[]
     form.dokument.telo.r33a = boolToString(taxForm.r033a)
     if (taxForm.partner_bonus_na_deti) {
-      form.dokument.telo.uplatnujemPar33Ods8 = boolToString(taxForm.partner_bonus_na_deti)
+      form.dokument.telo.uplatnujemPar33Ods8 = boolToString(
+        taxForm.partner_bonus_na_deti,
+      )
       form.dokument.telo.r34a = decimalToString(taxForm.r034a)
       form.dokument.telo.r34.priezviskoMeno = taxForm.r034.priezviskoMeno
       form.dokument.telo.r34.rodneCislo = taxForm.r034.rodneCislo
@@ -94,9 +95,15 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       form.dokument.telo.r34.m10 = boolToString(taxForm.r034.m10)
       form.dokument.telo.r34.m11 = boolToString(taxForm.r034.m11)
       form.dokument.telo.r34.m12 = boolToString(taxForm.r034.m12)
-      form.dokument.telo.r34.dokladRocZuct = boolToString(taxForm.r034.dokladRocZuct)
-      form.dokument.telo.r34.dokladVyskaDane = boolToString(taxForm.r034.dokladVyskaDane)
-      form.dokument.telo.r34.druhaOsobaPodalaDPvSR = boolToString(taxForm.r034.druhaOsobaPodalaDPvSR)
+      form.dokument.telo.r34.dokladRocZuct = boolToString(
+        taxForm.r034.dokladRocZuct,
+      )
+      form.dokument.telo.r34.dokladVyskaDane = boolToString(
+        taxForm.r034.dokladVyskaDane,
+      )
+      form.dokument.telo.r34.druhaOsobaPodalaDPvSR = boolToString(
+        taxForm.r034.druhaOsobaPodalaDPvSR,
+      )
     }
   }
 
@@ -118,10 +125,14 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   /** SECTION Mortgage */
   if (taxForm.r035_uplat_dan_bonus_zaplat_uroky) {
     form.dokument.telo.r35 = {
-      uplatDanBonusZaplatUroky: boolToString(taxForm.r035_uplat_dan_bonus_zaplat_uroky),
+      uplatDanBonusZaplatUroky: boolToString(
+        taxForm.r035_uplat_dan_bonus_zaplat_uroky,
+      ),
       zaplateneUroky: decimalToString(taxForm.r035_zaplatene_uroky),
       pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
-      datumZacatiaUroceniaUveru: formatDate(taxForm.r035_datum_zacatia_urocenia_uveru)
+      datumZacatiaUroceniaUveru: formatDate(
+        taxForm.r035_datum_zacatia_urocenia_uveru,
+      ),
     }
   }
 
@@ -153,7 +164,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   form.dokument.telo.r77 = decimalToString(taxForm.r077_nezdanitelna_cast)
-  form.dokument.telo.r78 = decimalToString(taxForm.r078_zaklad_dane_zo_zamestnania)
+  form.dokument.telo.r78 = decimalToString(
+    taxForm.r078_zaklad_dane_zo_zamestnania,
+  )
   form.dokument.telo.r80 = decimalToString(taxForm.r080_zaklad_dane_celkovo)
   form.dokument.telo.r81 = decimalToString(taxForm.r081)
   form.dokument.telo.r90 = decimalToString(taxForm.r090)
@@ -207,7 +220,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   const maDanovyBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
-  const maDanovyBonusUroky = taxForm.mozeZiadatVratitDanovyBonusUroky && taxForm.ziadamVratitDanovyBonusUroky
+  const maDanovyBonusUroky =
+    taxForm.mozeZiadatVratitDanovyBonusUroky &&
+    taxForm.ziadamVratitDanovyBonusUroky
   const maDanovyPreplatok =
     taxForm.mozeZiadatVratitDanovyPreplatok &&
     taxForm.ziadamVratitDanovyPreplatok

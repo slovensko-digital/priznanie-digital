@@ -109,20 +109,24 @@ describe('twoPercent page', () => {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
-        cy.get(
-          `[data-test="children[${index}].priezviskoMeno-input"]`,
-        ).type(child.priezviskoMeno)
+        cy.get(`[data-test="children[${index}].priezviskoMeno-input"]`).type(
+          child.priezviskoMeno,
+        )
         cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
           child.rodneCislo,
         )
 
         if (child.wholeYear) {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
-        } else {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
           cy.get(
-            `[data-test="children[${index}].monthFrom-select"]`,
-          ).select(child.monthFrom)
+            `[data-test="children[${index}]-bonus-interval-input-wholeyear"]`,
+          ).click()
+        } else {
+          cy.get(
+            `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
+          ).click()
+          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
+            child.monthFrom,
+          )
           cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
             child.monthTo,
           )
@@ -170,7 +174,9 @@ describe('twoPercent page', () => {
     getError().should('have.length', 2)
 
     // Type to input
-    getInput('r142_obchMeno').type('Domka - Združenie saleziánskej mládeže, stredisko Banská Bystrica')
+    getInput('r142_obchMeno').type(
+      'Domka - Združenie saleziánskej mládeže, stredisko Banská Bystrica',
+    )
     getInput('r142_ico').type('35983558')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
 
@@ -223,7 +229,10 @@ describe('twoPercent page', () => {
     cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
     cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
     cy.get('#tbico152').should('have.value', '35983558')
-    cy.get('#tbObchMeno152').should('have.value', 'Domka - Združenie saleziánskej mládeže, stredisko Banská Bystrica')
+    cy.get('#tbObchMeno152').should(
+      'have.value',
+      'Domka - Združenie saleziánskej mládeže, stredisko Banská Bystrica',
+    )
     cy.get('#form-button-validate').click().should(formSuccessful(stub))
     cy.get('#errorsContainer')
       .should((el) => expect(el.text()).to.be.empty)
@@ -300,20 +309,24 @@ describe('twoPercent page', () => {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
-        cy.get(
-          `[data-test="children[${index}].priezviskoMeno-input"]`,
-        ).type(child.priezviskoMeno)
+        cy.get(`[data-test="children[${index}].priezviskoMeno-input"]`).type(
+          child.priezviskoMeno,
+        )
         cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
           child.rodneCislo,
         )
 
         if (child.wholeYear) {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
-        } else {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
           cy.get(
-            `[data-test="children[${index}].monthFrom-select"]`,
-          ).select(child.monthFrom)
+            `[data-test="children[${index}]-bonus-interval-input-wholeyear"]`,
+          ).click()
+        } else {
+          cy.get(
+            `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
+          ).click()
+          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
+            child.monthFrom,
+          )
           cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
             child.monthTo,
           )
@@ -487,20 +500,24 @@ describe('twoPercent page', () => {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
-        cy.get(
-          `[data-test="children[${index}].priezviskoMeno-input"]`,
-        ).type(child.priezviskoMeno)
+        cy.get(`[data-test="children[${index}].priezviskoMeno-input"]`).type(
+          child.priezviskoMeno,
+        )
         cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
           child.rodneCislo,
         )
 
         if (child.wholeYear) {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
-        } else {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
           cy.get(
-            `[data-test="children[${index}].monthFrom-select"]`,
-          ).select(child.monthFrom)
+            `[data-test="children[${index}]-bonus-interval-input-wholeyear"]`,
+          ).click()
+        } else {
+          cy.get(
+            `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
+          ).click()
+          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
+            child.monthFrom,
+          )
           cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
             child.monthTo,
           )
@@ -539,7 +556,6 @@ describe('twoPercent page', () => {
     cy.get('[data-test=dve_percenta_podporujem-input-no]').click()
     next()
     getError().should('have.length', 0)
-
   })
   it('works with Slovensko.Digital pre-fill', (done) => {
     const input = with2percentInput
@@ -612,20 +628,24 @@ describe('twoPercent page', () => {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
-        cy.get(
-          `[data-test="children[${index}].priezviskoMeno-input"]`,
-        ).type(child.priezviskoMeno)
+        cy.get(`[data-test="children[${index}].priezviskoMeno-input"]`).type(
+          child.priezviskoMeno,
+        )
         cy.get(`[data-test="children[${index}].rodneCislo-input"]`).type(
           child.rodneCislo,
         )
 
         if (child.wholeYear) {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-wholeyear"]`).click()
-        } else {
-          cy.get(`[data-test="children[${index}]-bonus-interval-input-partyear"]`).click()
           cy.get(
-            `[data-test="children[${index}].monthFrom-select"]`,
-          ).select(child.monthFrom)
+            `[data-test="children[${index}]-bonus-interval-input-wholeyear"]`,
+          ).click()
+        } else {
+          cy.get(
+            `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
+          ).click()
+          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
+            child.monthFrom,
+          )
           cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
             child.monthTo,
           )

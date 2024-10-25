@@ -14,7 +14,7 @@ export interface Summary {
   danovyBonusNaUroky: Decimal
   danovyBonusPreplatokNaVyplatenie: Decimal
   danNaUhradu: Decimal
-  prijemNehnutelnost: Decimal,
-  vydavkyNehnutelnost: Decimal,
-  zakladDanZPrenajmu: Decimal,
+  prijemNehnutelnost: Decimal
+  vydavkyNehnutelnost: Decimal
+  zakladDanZPrenajmu: Decimal
 }
