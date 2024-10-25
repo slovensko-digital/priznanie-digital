@@ -6,6 +6,7 @@ export type IncomeAndExpenseUserInput = Pick<
   | 't1r10_prijmy'
   | 'priloha3_r11_socialne'
   | 'priloha3_r13_zdravotne'
+  | 'priloha3_r14_zdravotne'
   | 'zaplatenePreddavky'
 >
 

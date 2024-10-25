@@ -90,6 +90,8 @@ export interface TaxForm {
   priloha3_r11_socialne: Decimal
   /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: Decimal
+  /**   TODO */
+  priloha3_r14_zdravotne: Decimal
 
   /**   Deti*/
   r033?: Child[]

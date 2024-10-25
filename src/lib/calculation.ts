@@ -177,6 +177,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     priloha3_r13_zdravotne: round(
       new Decimal(parseInputNumber(input.priloha3_r13_zdravotne)),
     ),
+    priloha3_r14_zdravotne: round(
+      new Decimal(parseInputNumber(input.priloha3_r14_zdravotne)),
+    ),
 
     /** SECTION Dochodok */
     platil_prispevky_na_dochodok: input?.platil_prispevky_na_dochodok ?? false,
@@ -882,6 +885,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.priloha3_r10_zdravotne,
         this.priloha3_r11_socialne,
         this.priloha3_r13_zdravotne,
+        this.priloha3_r14_zdravotne,
       ].every((x) => x.eq(0))
       return priloha3Prazdna ? '' : this.datum
     },
