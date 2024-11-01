@@ -64,6 +64,9 @@ const navigateEligibleToChildrenPage = () => {
   assertUrl('/zamestnanie')
   skipPage()
 
+  assertUrl('/dohoda')
+  skipPage()
+
   assertUrl('/partner')
   skipPage()
 }
@@ -249,7 +252,7 @@ describe('Partner page', () => {
 
     // Back button should work and be the correct page
     cy.get('[data-test=back]').click()
-    assertUrl('/zamestnanie')
+    assertUrl('/dohoda')
 
     //  Go back to our page
     cy.visit('/partner')
@@ -470,6 +473,9 @@ describe('Children page', () => {
       udajeODanovomBonuseNaDieta: '0',
     })
     next()
+
+    assertUrl('/dohoda')
+    skipPage()
 
     assertUrl('/partner')
     skipPage()
@@ -851,6 +857,9 @@ describe('IBAN page', () => {
     assertUrl('/partner')
     skipPage()
 
+    assertUrl('/partner')
+    skipPage()
+
     assertUrl('/deti')
     getInput('hasChildren', '-yes').click()
 
@@ -946,6 +955,7 @@ describe('Summary page', () => {
   ;[
     '/prijmy-a-vydavky',
     '/zamestnanie',
+    '/dohoda',
     '/partner',
     '/deti',
     '/deti',
