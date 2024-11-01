@@ -138,7 +138,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   /** SECTION Employed */
 
-  if (taxForm.employed) {
+  if (taxForm.employed || taxForm.dohoda) {
     form.dokument.telo.r36 = decimalToString(taxForm.r036)
     form.dokument.telo.r37 = decimalToString(taxForm.r037)
     form.dokument.telo.r38 = decimalToString(taxForm.r038)
@@ -147,9 +147,6 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   if (taxForm.dohoda) {
     form.dokument.telo.r36a = decimalToString(taxForm.r036a)
-    form.dokument.telo.r37 = decimalToString(taxForm.r037)
-    form.dokument.telo.r38 = decimalToString(taxForm.r038)
-    form.dokument.telo.socZdravPoistenie.pr8 = decimalToString(taxForm.r039)
   }
 
   form.dokument.telo.r39 = decimalToString(taxForm.r039)

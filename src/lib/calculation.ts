@@ -293,37 +293,48 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Employment a Dohody */
-    r036: round(new Decimal(
-      parseInputNumber(input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'),
-    ).plus(
+    r036: round(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPrijmovOdVsetkychZamestnavatelov ?? '0'
+        ),
+      ).plus(
+        new Decimal(
+          parseInputNumber(
+            input?.uhrnPrijmovZoVsetkychDohod ?? '0'
+          ),
+        ),
+      ),
+    ),
+    r036a: round(
       new Decimal(
         parseInputNumber(
           input?.uhrnPrijmovZoVsetkychDohod ?? '0'
         ),
       ),
-    )),
-    r036a: round(new Decimal(
-      parseInputNumber(input?.uhrnPrijmovZoVsetkychDohod ?? '0'),
-    )),
-    r037: round(new Decimal(
-      parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
+    ),
+    r037: round(
+      new Decimal(
+        parseInputNumber(
+          input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'
+        ),
     ).plus(
         new Decimal(
           parseInputNumber(
             input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
           ),
         ),
-      ),
-    ).plus(
-      new Decimal(
-        parseInputNumber(
+      ).plus(
+        new Decimal(
+          parseInputNumber(
           input?.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody ?? '0',
+          ),
         ),
-      ),
-    ).plus(
-      new Decimal(
-        parseInputNumber(
-          input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody ?? '0',
+      ).plus(
+        new Decimal(
+          parseInputNumber(
+            input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody ?? '0',
+          ),
         ),
       ),
     ),
