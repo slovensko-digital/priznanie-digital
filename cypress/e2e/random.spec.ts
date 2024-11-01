@@ -1,6 +1,9 @@
 import Decimal from 'decimal.js'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
-import { EmployedUserInput, DohodaUserInput } from '../../src/types/PageUserInputs'
+import {
+  EmployedUserInput,
+  DohodaUserInput,
+} from '../../src/types/PageUserInputs'
 import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
@@ -65,8 +68,14 @@ const randomInput = (): TaxFormUserInput => {
 
   const dohody: DohodaUserInput = {
     uhrnPrijmovZoVsetkychDohod: randomFromRangeString(0, 100000),
-    uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(0, 100000),
-    uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: randomFromRangeString(0, 100000),
+    uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(
+      0,
+      100000,
+    ),
+    uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: randomFromRangeString(
+      0,
+      100000,
+    ),
     udajeODanovomBonuseNaDietaDohody: randomFromRangeString(0, 1000),
     uhrnPreddavkovNaDanDohody: randomFromRangeString(0, 100000),
   }

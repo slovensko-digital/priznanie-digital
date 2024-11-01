@@ -42,7 +42,11 @@ const Dohoda: Page<DohodaUserInput> = ({
             />
             {values.dohoda && (
               <>
-              <h3 className="govuk-heading-m">Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby". Ak ste mali viac dohôd, tak tieto sumy spočítajte a uveďte výsledné.</h3>
+                <h3 className="govuk-heading-m">
+                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby". Ak ste mali viac dohôd,
+                  tak tieto sumy spočítajte a uveďte výsledné.
+                </h3>
                 <Input
                   name="uhrnPrijmovZoVsetkychDohod"
                   type="number"
@@ -96,9 +100,7 @@ export const validate = (values: DohodaUserInput) => {
     if (!values.uhrnPrijmovZoVsetkychDohod) {
       errors.uhrnPrijmovZoVsetkychDohod =
         'Zadajte úhrn príjmov zo všetkých dohôd'
-    } else if (
-      !values.uhrnPrijmovZoVsetkychDohod.match(numberInputRegexp)
-    ) {
+    } else if (!values.uhrnPrijmovZoVsetkychDohod.match(numberInputRegexp)) {
       errors.uhrnPrijmovZoVsetkychDohod =
         'Zadajte sumu príjmov vo formáte 123,45'
     }
@@ -107,7 +109,9 @@ export const validate = (values: DohodaUserInput) => {
       errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
         'Zadajte úhrn sociálneho poistného'
     } else if (
-      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody.match(numberInputRegexp)
+      !values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody.match(
+        numberInputRegexp,
+      )
     ) {
       errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
         'Zadajte sumu sociálneho poistného vo formáte 123,45'
@@ -135,7 +139,9 @@ export const validate = (values: DohodaUserInput) => {
     if (!values.udajeODanovomBonuseNaDietaDohody) {
       errors.udajeODanovomBonuseNaDietaDohody =
         'Zadajte údaje o daňovom bonuse na dieťa'
-    } else if (!values.udajeODanovomBonuseNaDietaDohody.match(numberInputRegexp)) {
+    } else if (
+      !values.udajeODanovomBonuseNaDietaDohody.match(numberInputRegexp)
+    ) {
       errors.udajeODanovomBonuseNaDietaDohody =
         'Zadajte sumu povinného poistného vo formáte 123,45'
     }

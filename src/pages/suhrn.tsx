@@ -136,41 +136,41 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.employed
             ? [
-              {
-                title: 'Úhrn príjmov od všetkých zamestnávateľov',
-                value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
-                currency: true,
-                allignRight: true,
-              },
-              {
-                title: 'Úhrn sociálneho poistného',
-                value:
-                  taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
-                currency: true,
-                allignRight: true,
-                testId: 'r039_socialne',
-              },
-              {
-                title: 'Úhrn zdravotného poistného',
-                value:
-                  taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
-                currency: true,
-                allignRight: true,
-                testId: 'r039_zdravotne',
-              },
-              {
-                title: 'Úhrn preddavkov na daň',
-                value: taxFormUserInput.uhrnPreddavkovNaDan,
-                currency: true,
-                allignRight: true,
-              },
-              {
-                title: 'Údaje o daňovom bonuse na dieťa',
-                value: taxFormUserInput.udajeODanovomBonuseNaDieta,
-                currency: true,
-                allignRight: true,
-              },
-            ]
+                {
+                  title: 'Úhrn príjmov od všetkých zamestnávateľov',
+                  value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Úhrn sociálneho poistného',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+                  currency: true,
+                  allignRight: true,
+                  testId: 'r039_socialne',
+                },
+                {
+                  title: 'Úhrn zdravotného poistného',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+                  currency: true,
+                  allignRight: true,
+                  testId: 'r039_zdravotne',
+                },
+                {
+                  title: 'Úhrn preddavkov na daň',
+                  value: taxFormUserInput.uhrnPreddavkovNaDan,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Údaje o daňovom bonuse na dieťa',
+                  value: taxFormUserInput.udajeODanovomBonuseNaDieta,
+                  currency: true,
+                  allignRight: true,
+                },
+              ]
             : [
                 {
                   title: `V roku ${TAX_YEAR} som nebol zamestnaný`,
@@ -184,35 +184,35 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.dohoda
             ? [
-              {
-                title: 'Úhrn príjmov zo všetkých dohôd',
-                value: taxFormUserInput.uhrnPrijmovZoVsetkychDohod,
-                currency: true,
-                allignRight: true,
-              },
-              {
-                title: 'Úhrn sociálneho poistného z dohôd',
-                value:
-                  taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
-                currency: true,
-                allignRight: true,
-                testId: 'r039_socialne',
-              },
-              {
-                title: 'Úhrn zdravotného poistného z dohôd',
-                value:
-                  taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
-                currency: true,
-                allignRight: true,
-                testId: 'r039_zdravotne',
-              },
-              {
-                title: 'Úhrn preddavkov na daň z dohôd',
-                value: taxFormUserInput.uhrnPreddavkovNaDan,
-                currency: true,
-                allignRight: true,
-              },
-            ]
+                {
+                  title: 'Úhrn príjmov zo všetkých dohôd',
+                  value: taxFormUserInput.uhrnPrijmovZoVsetkychDohod,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Úhrn sociálneho poistného z dohôd',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+                  currency: true,
+                  allignRight: true,
+                  testId: 'r039_socialne',
+                },
+                {
+                  title: 'Úhrn zdravotného poistného z dohôd',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+                  currency: true,
+                  allignRight: true,
+                  testId: 'r039_zdravotne',
+                },
+                {
+                  title: 'Úhrn preddavkov na daň z dohôd',
+                  value: taxFormUserInput.uhrnPreddavkovNaDan,
+                  currency: true,
+                  allignRight: true,
+                },
+              ]
             : [
                 {
                   title: `V roku ${TAX_YEAR} som nepracoval na dohodu`,
