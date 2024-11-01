@@ -673,9 +673,19 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(Decimal.max(this.r116_dan.minus(this.r117), 0))
     },
     get r119() {
-      return round(new Decimal(
-        parseInputNumber(input?.udajeODanovomBonuseNaDieta ?? '0'),
-      ).plus(parseInputNumber(input?.udajeODanovomBonuseNaDietaDohody ?? '0')))
+      return round(
+        new Decimal(
+          parseInputNumber(
+            input?.udajeODanovomBonuseNaDieta ?? '0'
+          ),
+        ).plus(
+          new Decimal(
+            parseInputNumber(
+              input?.udajeODanovomBonuseNaDietaDohody ?? '0'
+            ),
+          ),
+        ),
+      )
     },
     get r120() {
       return round(Decimal.max(new Decimal(this.r117).minus(this.r119), 0))

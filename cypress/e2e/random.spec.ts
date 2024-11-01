@@ -55,7 +55,7 @@ const randomInput = (): TaxFormUserInput => {
       0,
       100000,
     ),
-    udajeODanovomBonuseNaDieta: randomFromRangeString(0, 100000),
+    udajeODanovomBonuseNaDieta: randomFromRangeString(0, 1000),
     uhrnPreddavkovNaDan: randomFromRangeString(0, 100000),
   }
 
@@ -67,7 +67,7 @@ const randomInput = (): TaxFormUserInput => {
     uhrnPrijmovZoVsetkychDohod: randomFromRangeString(0, 100000),
     uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(0, 100000),
     uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: randomFromRangeString(0, 100000),
-    udajeODanovomBonuseNaDietaDohody: randomFromRangeString(0, 100000),
+    udajeODanovomBonuseNaDietaDohody: randomFromRangeString(0, 1000),
     uhrnPreddavkovNaDanDohody: randomFromRangeString(0, 100000),
   }
 
