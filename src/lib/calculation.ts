@@ -308,11 +308,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     r037: round(new Decimal(
       parseInputNumber(input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0'),
     ).plus(
-      new Decimal(
-        parseInputNumber(
-          input?.uhrnPovinnehoPoistnehoNaSocialnePoistenie ?? '0',
-        ),
-      ).plus(
         new Decimal(
           parseInputNumber(
             input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie ?? '0',
@@ -331,7 +326,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody ?? '0',
         ),
       ),
-    )),
+    ),
     get vydavkyPoistPar6ods11_ods1a2() {
       return round(this.priloha3_r11_socialne.plus(this.priloha3_r13_zdravotne))
     },

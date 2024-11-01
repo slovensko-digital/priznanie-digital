@@ -5,7 +5,7 @@ import { DohodaUserInput, FormErrors } from '../types/PageUserInputs'
 import { numberInputRegexp } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { Page } from '../components/Page'
-import { employmentUserInputInitialValues } from '../lib/initialValues'
+import { dohodaUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 
@@ -26,7 +26,7 @@ const Dohoda: Page<DohodaUserInput> = ({
           const userInput = values.dohoda
             ? values
             : {
-                ...employmentUserInputInitialValues,
+                ...dohodaUserInputInitialValues,
                 dohoda: false,
               }
           setTaxFormUserInput(userInput)
@@ -53,13 +53,13 @@ const Dohoda: Page<DohodaUserInput> = ({
                   name="uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody"
                   type="number"
                   label="Úhrn sociálneho poistného"
-                  hint={`Tento údaj nájdete v riadok 02a.`}
+                  hint={`Tento údaj nájdete v riadku 02a.`}
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody"
                   type="number"
                   label="Úhrn zdravotného poistného"
-                  hint={`Tento údaj nájdete v riadok 02b.`}
+                  hint={`Tento údaj nájdete v riadku 02b.`}
                 />
                 <Input
                   name="uhrnPreddavkovNaDanDohody"

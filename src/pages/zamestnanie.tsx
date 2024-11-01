@@ -58,13 +58,13 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
-                  hint={`Tento údaj nájdete v riadok 02a.`}
+                  hint={`Tento údaj nájdete v riadku 02a.`}
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
                   type="number"
                   label="Úhrn zdravotného poistného"
-                  hint={`Tento údaj nájdete v riadok 02b.`}
+                  hint={`Tento údaj nájdete v riadku 02b.`}
                 />
                 <Input
                   name="uhrnPreddavkovNaDan"
