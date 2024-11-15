@@ -129,7 +129,6 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             </li>
             <li>Daňové straty</li>
             <li>SZČO starobní dôchodcovia</li>
-            <li>Práca na dohodu</li>
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
             <li>
               <ExternalLink href="https://kros.sk/danove-priznania/">
