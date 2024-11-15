@@ -193,25 +193,29 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 {
                   title: 'Úhrn sociálneho poistného z dohôd',
                   value:
-                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
                   currency: true,
                   allignRight: true,
-                  testId: 'r039_socialne',
                 },
                 {
                   title: 'Úhrn zdravotného poistného z dohôd',
                   value:
-                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
                   currency: true,
                   allignRight: true,
-                  testId: 'r039_zdravotne',
                 },
                 {
                   title: 'Úhrn preddavkov na daň z dohôd',
-                  value: taxFormUserInput.uhrnPreddavkovNaDan,
+                  value: taxFormUserInput.uhrnPreddavkovNaDanDohody,
                   currency: true,
                   allignRight: true,
                 },
+                {
+                  title: 'Údaje o daňovom bonuse na dieťa z dohôd',
+                  value: taxFormUserInput.udajeODanovomBonuseNaDietaDohody,
+                  currency: true,
+                  allignRight: true,
+                }
               ]
             : [
                 {
