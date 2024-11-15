@@ -212,8 +212,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     }
   }
 
-  form.dokument.telo.r153 = taxForm.employed ? '5' : '4'
-  form.dokument.telo.r153 = taxForm.dohoda ? '5' : '4'
+  form.dokument.telo.r153 = (taxForm.employed || taxForm.dohoda) ? '5' : '4'
 
   const maDanovyBonus =
     taxForm.mozeZiadatVyplatitDanovyBonus && taxForm.ziadamVyplatitDanovyBonus
