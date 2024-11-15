@@ -215,7 +215,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: taxFormUserInput.udajeODanovomBonuseNaDietaDohody,
                   currency: true,
                   allignRight: true,
-                }
+                },
               ]
             : [
                 {
