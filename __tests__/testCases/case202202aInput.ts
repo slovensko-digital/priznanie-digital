@@ -26,6 +26,14 @@ export const case202202aInput: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '0',
   employed: false,
 
+  /** SECTION Dohoda */
+  uhrnPrijmovZoVsetkychDohod: '5500',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: '1200',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: '330',
+  uhrnPreddavkovNaDanDohody: '120',
+  udajeODanovomBonuseNaDietaDohody: '100',
+  dohoda: true,
+
   /** SECTION Pension */
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',
@@ -62,6 +70,6 @@ export const case202202aInput: E2eTestUserInput = {
 
   expectNgoDonationValue: true,
 
-  percent2: '173,62',
+  percent2: '193,88',
   percent3: '320,78',
 }

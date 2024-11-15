@@ -69,6 +69,22 @@ describe('twoPercent page', () => {
 
     next()
 
+    /**  SECTION Dohoda */
+    assertUrl('/dohoda')
+
+    if (input.dohoda) {
+      getInput('dohoda', '-yes').click()
+      typeToInput('uhrnPrijmovZoVsetkychDohod', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
+      typeToInput('uhrnPreddavkovNaDanDohody', input)
+      typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+    } else {
+      getInput('dohoda', '-no').click()
+    }
+
+    next()
+
     /**  SECTION Partner */
     if (input.r032_uplatnujem_na_partnera) {
       getInput('r032_uplatnujem_na_partnera', '-yes').click()
@@ -253,6 +269,22 @@ describe('twoPercent page', () => {
 
     next()
 
+    /**  SECTION Dohoda */
+    assertUrl('/dohoda')
+
+    if (input.dohoda) {
+      getInput('dohoda', '-yes').click()
+      typeToInput('uhrnPrijmovZoVsetkychDohod', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
+      typeToInput('uhrnPreddavkovNaDanDohody', input)
+      typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+    } else {
+      getInput('dohoda', '-no').click()
+    }
+
+    next()
+
     /**  SECTION Partner */
     if (input.r032_uplatnujem_na_partnera) {
       getInput('r032_uplatnujem_na_partnera', '-yes').click()
@@ -428,6 +460,22 @@ describe('twoPercent page', () => {
 
     next()
 
+    /**  SECTION Dohoda */
+    assertUrl('/dohoda')
+
+    if (input.dohoda) {
+      getInput('dohoda', '-yes').click()
+      typeToInput('uhrnPrijmovZoVsetkychDohod', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
+      typeToInput('uhrnPreddavkovNaDanDohody', input)
+      typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+    } else {
+      getInput('dohoda', '-no').click()
+    }
+
+    next()
+
     /**  SECTION Partner */
     if (input.r032_uplatnujem_na_partnera) {
       getInput('r032_uplatnujem_na_partnera', '-yes').click()
@@ -536,6 +584,22 @@ describe('twoPercent page', () => {
       typeToInput('udajeODanovomBonuseNaDieta', input)
     } else {
       getInput('employed', '-no').click()
+    }
+
+    next()
+
+    /**  SECTION Dohoda */
+    assertUrl('/dohoda')
+
+    if (input.dohoda) {
+      getInput('dohoda', '-yes').click()
+      typeToInput('uhrnPrijmovZoVsetkychDohod', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
+      typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
+      typeToInput('uhrnPreddavkovNaDanDohody', input)
+      typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+    } else {
+      getInput('dohoda', '-no').click()
     }
 
     next()

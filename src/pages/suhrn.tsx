@@ -179,6 +179,52 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
+        title={`Dohody v SR pre rok ${TAX_YEAR}`}
+        href={'/dohoda'}
+        rows={
+          taxFormUserInput.dohoda
+            ? [
+                {
+                  title: 'Úhrn príjmov zo všetkých dohôd',
+                  value: taxFormUserInput.uhrnPrijmovZoVsetkychDohod,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Úhrn sociálneho poistného z dohôd',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Úhrn zdravotného poistného z dohôd',
+                  value:
+                    taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Úhrn preddavkov na daň z dohôd',
+                  value: taxFormUserInput.uhrnPreddavkovNaDanDohody,
+                  currency: true,
+                  allignRight: true,
+                },
+                {
+                  title: 'Údaje o daňovom bonuse na dieťa z dohôd',
+                  value: taxFormUserInput.udajeODanovomBonuseNaDietaDohody,
+                  currency: true,
+                  allignRight: true,
+                },
+              ]
+            : [
+                {
+                  title: `V roku ${TAX_YEAR} som nepracoval na dohodu`,
+                },
+              ]
+        }
+      />
+      <Summary
         title="Zvýhodnenie na manželku / manžela"
         href={'/partner'}
         rows={

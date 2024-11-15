@@ -3,6 +3,7 @@ import {
   PartnerUserInput,
   IncomeAndExpenseUserInput,
   EmployedUserInput,
+  DohodaUserInput,
   ChildrenUserInput,
   PensionUserInput,
   UrokyUserInput,
@@ -52,6 +53,15 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
   udajeODanovomBonuseNaDieta: '',
   uhrnPreddavkovNaDan: '',
+}
+
+export const dohodaUserInputInitialValues: DohodaUserInput = {
+  dohoda: undefined,
+  uhrnPrijmovZoVsetkychDohod: '',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: '',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: '',
+  udajeODanovomBonuseNaDietaDohody: '',
+  uhrnPreddavkovNaDanDohody: '',
 }
 
 export const rentUserInputInitialValues: RentUserInput = {
