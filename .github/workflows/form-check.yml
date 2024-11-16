@@ -29,16 +29,19 @@ jobs:
       - name: Check if new version is available
         id: check-step
         run: |
+          md5sum form.zip
           md5sum form.zip > ./public/form.zip.md5
           if git diff --exit-code ./public/form.zip.md5; then
             echo "skipnext=true" >> $GITHUB_OUTPUT
           else
             echo "skipnext=false" >> $GITHUB_OUTPUT
           fi
-      - name: abc
+      - name: Unzip form files
         if : ( steps.check-step.outputs.skipnext  != 'true' ) 
         run: |
           echo "will only run if skipnext is not true"
+          unzip form.zip -d ./public
+          ls -ls ./public
 
 
 
