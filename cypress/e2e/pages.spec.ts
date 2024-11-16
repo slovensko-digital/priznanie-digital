@@ -902,7 +902,7 @@ describe('IBAN page', () => {
 
     getError().should('have.length', 1)
 
-    getInput('ziadamVyplatitDanovyBonus', '-no').click()
+    getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-no').click()
     next()
     getError().should('have.length', 0)
 
@@ -910,7 +910,7 @@ describe('IBAN page', () => {
     cy.get('.govuk-back-link').click()
     getError().should('have.length', 0)
 
-    getInput('ziadamVyplatitDanovyBonus', '-yes').click()
+    getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-yes').click()
     getInput('iban').should('exist')
     next()
 
