@@ -1,6 +1,9 @@
 import Decimal from 'decimal.js'
 import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
-import { EmployedUserInput } from '../../src/types/PageUserInputs'
+import {
+  EmployedUserInput,
+  DohodaUserInput,
+} from '../../src/types/PageUserInputs'
 import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
@@ -17,6 +20,7 @@ const randomFromRangeString = (min: number, max: number) => {
 
 const randomInput = (): TaxFormUserInput => {
   const employed = Math.random() > 0.5
+  const dohoda = Math.random() > 0.5
   const hasChildren = Math.random() > 0.2
   const partner = Math.random() > 0.7
   const rent = Math.random() > 0.3
@@ -32,6 +36,7 @@ const randomInput = (): TaxFormUserInput => {
     priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
     zaplatenePreddavky: randomFromRangeString(0, 100000),
     employed,
+    dohoda,
     hasChildren,
     children: [],
     r005_meno: 'Fake',
@@ -53,12 +58,30 @@ const randomInput = (): TaxFormUserInput => {
       0,
       100000,
     ),
-    udajeODanovomBonuseNaDieta: randomFromRangeString(0, 100000),
+    udajeODanovomBonuseNaDieta: randomFromRangeString(0, 1000),
     uhrnPreddavkovNaDan: randomFromRangeString(0, 100000),
   }
 
   if (employed) {
     input = { ...input, ...zamestnanie }
+  }
+
+  const dohody: DohodaUserInput = {
+    uhrnPrijmovZoVsetkychDohod: randomFromRangeString(0, 100000),
+    uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(
+      0,
+      100000,
+    ),
+    uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: randomFromRangeString(
+      0,
+      100000,
+    ),
+    udajeODanovomBonuseNaDietaDohody: randomFromRangeString(0, 1000),
+    uhrnPreddavkovNaDanDohody: randomFromRangeString(0, 100000),
+  }
+
+  if (dohoda) {
+    input = { ...input, ...dohody }
   }
 
   if (hasChildren) {

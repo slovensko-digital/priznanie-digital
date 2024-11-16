@@ -54,25 +54,17 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   label="Úhrn vyplatených zdaniteľných príjmov"
                   hint={`Tento údaj nájdete v riadku 01.`}
                 />
-                {/* TODO: Pridat input
-                  <Input
-                    name="r038"
-                    type="number"
-                    label="Úhrn príjmov plynúcich na základe dohôd o prácach vykonávaných mimo pracovného pomeru"
-                    hint={`Napríklad na základe Dohody o vykonaní práce. Na tlačive "Potvrdenie o zdaniteľných príjmoch fyzickej osoby zo závislej činnosti" nájdete tento údaj v riadku 01a. Ak ste nemali takýto príjem, vyplňte 0.`}
-                  />
-                */}
                 <Input
                   name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
-                  hint={`Tento údaj nájdete v riadok 02a.`}
+                  hint={`Tento údaj nájdete v riadku 02a.`}
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
                   type="number"
                   label="Úhrn zdravotného poistného"
-                  hint={`Tento údaj nájdete v riadok 02b.`}
+                  hint={`Tento údaj nájdete v riadku 02b.`}
                 />
                 <Input
                   name="uhrnPreddavkovNaDan"

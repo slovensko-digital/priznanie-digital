@@ -25,6 +25,7 @@ export const case202302Input: E2eTestUserInput = {
   uhrnPreddavkovNaDan: '446.76',
   udajeODanovomBonuseNaDieta: '0',
   employed: true,
+  dohoda: false,
 
   /** SECTION Pension */
   platil_prispevky_na_dochodok: false,

@@ -99,6 +99,22 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        /**  SECTION Dohoda */
+        assertUrl('/dohoda')
+
+        if (input.dohoda) {
+          getInput('dohoda', '-yes').click()
+          typeToInput('uhrnPrijmovZoVsetkychDohod', input)
+          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
+          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
+          typeToInput('uhrnPreddavkovNaDanDohody', input)
+          typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+        } else {
+          getInput('dohoda', '-no').click()
+        }
+
+        next()
+
         /**  SECTION Partner */
         assertUrl('/partner')
 

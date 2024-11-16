@@ -26,6 +26,14 @@ export const case202202cInput: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '0',
   employed: false,
 
+  /** SECTION Dohoda */
+  uhrnPrijmovZoVsetkychDohod: '0',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: '0',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: '0',
+  uhrnPreddavkovNaDanDohody: '0',
+  udajeODanovomBonuseNaDietaDohody: '0',
+  dohoda: false,
+
   /** SECTION Pension */
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',

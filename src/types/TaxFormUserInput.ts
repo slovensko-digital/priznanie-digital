@@ -92,6 +92,14 @@ export interface TaxFormUserInput {
   uhrnPreddavkovNaDan?: string
   udajeODanovomBonuseNaDieta?: string
 
+  /**  SECTION Dohoda */
+  dohoda?: boolean
+  uhrnPrijmovZoVsetkychDohod?: string
+  uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody?: string
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody?: string
+  uhrnPreddavkovNaDanDohody?: string
+  udajeODanovomBonuseNaDietaDohody?: string
+
   /** SECTION Prenajom */
   rent?: boolean
   vyskaPrijmovZPrenajmu?: string
