@@ -1,0 +1,28 @@
+name: Quality Assurance
+
+on:
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * *'  # This cron expression runs the workflow every day at midnight UTC
+
+env:
+  CURRENT_FORM_VERSION: "DPFOBv23"
+
+jobs:
+  download:
+    name: Download Form File
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download config file
+        run: wget https://edane.financnasprava.sk/java/prod/eform/config.xml -O config.xml
+      - name: Filter only for Danove Priznanie Files
+        run: |
+          grep -i "DPFO" config.xml | grep "ElektronickyFormular" > dp.out
+          cat dp.out
+          grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p' >> $ZIP_URL
+          echo $ZIP_URL
+          wget $ZIP_URL -O form.zip 
+      
+    
