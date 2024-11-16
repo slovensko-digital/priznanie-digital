@@ -488,8 +488,8 @@ export interface BankovyUcet {
 
 export interface DanovyPreplatokBonus {
   vyplatitDanovyBonus: string
-  vratitDanPreplatok: string
   vyplatitDanovyBonusUroky: string
+  vratitDanPreplatok: string
   sposobPlatby: SposobPlatby
   bankovyUcet: BankovyUcet
   datum: string
