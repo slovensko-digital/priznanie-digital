@@ -588,7 +588,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="danovyPreplatokBonusType">
 		<xsd:sequence>
-		<xsd:element name="vyplatitDanovyBonus" type="only_0_1"/>
+			<xsd:element name="vyplatitDanovyBonus" type="only_0_1"/>
 			<xsd:element name="vyplatitDanovyBonusUroky" type="only_0_1"/>
 			<xsd:element name="vratitDanPreplatok" type="only_0_1"/>
 			<xsd:element name="sposobPlatby" type="sposobPlatbyType"/>
