@@ -21,8 +21,7 @@ jobs:
         run: |
           grep -i "DPFO" config.xml | grep "ElektronickyFormular" > dp.out
           cat dp.out
-          ZIP_URL=""
-          grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p' >> $ZIP_URL
+          ZIP_URL=$(grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p')
           echo $ZIP_URL
           wget $ZIP_URL -O form.zip 
       
