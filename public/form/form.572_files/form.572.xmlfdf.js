@@ -576,9 +576,7 @@ function createxmlfinal() {
 
     // XV. Oddiel
     stringBuilder.appendLine('\t<danovyPreplatokBonus>');
-    stringBuilder.appendLine('\t\t<vyplatitDanovyBonus>' + (document.getElementById("cbVyplatit").checked ? '1' : '0') + '</vyplatitDanovyBonus>');
-    stringBuilder.appendLine('\t\t<vyplatitDanovyBonusUroky>' + (document.getElementById("chBonus").checked ? '1' : '0') + '</vyplatitDanovyBonusUroky>');
-    stringBuilder.appendLine('\t\t<vratitDanPreplatok>' + (document.getElementById("cbVratenie").checked ? '1' : '0') + '</vratitDanPreplatok>');
+    stringBuilder.appendLine('\t\t<vyplatitDanovyBonusUrokPreplatok>' + (document.getElementById("cbVyplatit").checked ? '1' : '0') + '</vyplatitDanovyBonusUrokPreplatok>');
     stringBuilder.appendLine('\t\t<sposobPlatby>');
     stringBuilder.appendLine('\t\t\t<poukazka>' + (document.getElementById("cbPoukazkaDB").checked ? '1' : '0') + '</poukazka>');
     stringBuilder.appendLine('\t\t\t<ucet>' + (document.getElementById("cbUcetDB").checked ? '1' : '0') + '</ucet>');
@@ -1619,7 +1617,6 @@ function processTelo(telo) {
 
                     if (bNode.nodeName == "vyplatitDanovyBonus") $("#cbVyplatit").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "vyplatitDanovyBonusUroky") $("#chBonus").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
-                    if (bNode.nodeName == "vratitDanPreplatok") $("#cbVratenie").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
 
                     if (bNode.nodeName == "sposobPlatby") {
                         for (var k = 0; k < bNode.childNodes.length; k++) {

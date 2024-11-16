@@ -241,12 +241,8 @@ export interface TaxForm {
   socZdravPoistenieDatum: string
 
   /** SECTION Danovy bonus */
-  mozeZiadatVyplatitDanovyBonus: boolean
-  ziadamVyplatitDanovyBonus: boolean
-  mozeZiadatVratitDanovyPreplatok: boolean
-  ziadamVratitDanovyPreplatok: boolean
-  mozeZiadatVratitDanovyBonusUroky: boolean
-  ziadamVratitDanovyBonusUroky: boolean
+  mozeZiadatVratitPreplatkyBonusyUroky: boolean
+  ziadamVyplatitDanovyBonusUrokPreplatok: boolean
   iban: string
 
   /** Helper properties from input, that are not part of taxForm */

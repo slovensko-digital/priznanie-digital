@@ -19,7 +19,7 @@ export const withTaxReturnInput: E2eTestUserInput = {
   children: [],
 
   /** SECTION Danovy preplatok */
-  ziadamVratitDanovyPreplatok: true,
+  ziadamVyplatitDanovyBonusUrokPreplatok: true,
   iban: 'SK6807200002891987426353',
 
   expectNgoDonationValue: true,

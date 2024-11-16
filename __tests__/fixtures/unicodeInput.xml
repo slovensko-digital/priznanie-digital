@@ -597,9 +597,7 @@
         <r153>3</r153>
         <datumVyhlasenia>22.02.2020</datumVyhlasenia>
         <danovyPreplatokBonus>
-            <vyplatitDanovyBonus>0</vyplatitDanovyBonus>
-            <vyplatitDanovyBonusUroky>0</vyplatitDanovyBonusUroky>
-            <vratitDanPreplatok>0</vratitDanPreplatok>
+            <vyplatitDanovyBonusUrokPreplatok>0</vyplatitDanovyBonusUrokPreplatok>
             <sposobPlatby>
                 <poukazka>0</poukazka>
                 <ucet>0</ucet>

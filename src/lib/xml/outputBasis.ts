@@ -565,9 +565,7 @@ const sampleSchema: OutputJson = {
       r153: '0',
       datumVyhlasenia: '',
       danovyPreplatokBonus: {
-        vyplatitDanovyBonus: '0',
-        vyplatitDanovyBonusUroky: '0',
-        vratitDanPreplatok: '0',
+        vyplatitDanovyBonusUrokPreplatok: '0',
         sposobPlatby: {
           poukazka: '0',
           ucet: '0',
