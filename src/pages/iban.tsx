@@ -103,7 +103,7 @@ const Iban: Page<TaxBonusUserInput> = ({
             {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
               <BooleanRadio
                 name="ziadamVyplatitDanovyBonusUrokPreplatok"
-                title="Žiadam o vyplatenie daňových bonusov alebo preplatkov"
+                title="Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov?"
                 hint={Preplatky}
               />
             )}
