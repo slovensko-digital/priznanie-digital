@@ -29,10 +29,7 @@ export type Route =
 
 export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
   const getIbanRoute = (): Route[] => {
-    const isIbanRequired =
-      taxForm.mozeZiadatVyplatitDanovyBonus ||
-      taxForm.mozeZiadatVratitDanovyPreplatok ||
-      taxForm.mozeZiadatVratitDanovyBonusUroky
+    const isIbanRequired = taxForm.mozeZiadatVratitPreplatkyBonusyUroky
     return isIbanRequired ? ['/iban'] : []
   }
 

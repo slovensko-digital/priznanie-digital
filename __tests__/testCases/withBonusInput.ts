@@ -48,7 +48,7 @@ export const withBonusInput: E2eTestUserInput = {
   hasChildren: true,
 
   /** SECTION Danovy bonus */
-  ziadamVyplatitDanovyBonus: true,
+  ziadamVyplatitDanovyBonusUrokPreplatok: true,
   iban: 'SK6807200002891987426353',
 
   expectNgoDonationValue: false,

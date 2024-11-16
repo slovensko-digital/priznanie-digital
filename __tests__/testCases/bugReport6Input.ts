@@ -58,9 +58,8 @@ export const bugReport6Input: E2eTestUserInput = {
   r142_obchMeno: '',
   XIIoddiel_suhlasZaslUdaje: false,
   iban: 'SK6807200002891987426353',
-  ziadamVyplatitDanovyBonus: true,
+  ziadamVyplatitDanovyBonusUrokPreplatok: true,
   datum: '',
   partner_spolocna_domacnost: true,
   r006_titul_za: '',
-  ziadamVratitDanovyPreplatok: true,
 }
