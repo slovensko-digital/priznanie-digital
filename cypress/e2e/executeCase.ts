@@ -351,7 +351,7 @@ const executeTestCase = (testCase: string) => {
 
         const taxForm = calculate(input)
 
-        if (taxForm.mozeZiadatVratitPreplatkyBonusyUroky) {
+        if (taxForm.mozeZiadatVyplatitDanovyBonus) {
           /** SECTION IBAN */
           assertUrl('/iban')
 
@@ -361,10 +361,44 @@ const executeTestCase = (testCase: string) => {
           cy.get('[data-test=ineligible-message]').should('not.exist')
 
           if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
-            getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-yes').click()
+            getInput('ziadamVyplatitDanovyBonus', '-yes').click()
             typeToInput('iban', input)
           } else {
-            getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-no').click()
+            getInput('ziadamVyplatitDanovyBonus', '-no').click()
+          }
+
+          next()
+        }
+
+        if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
+          /** SECTION IBAN */
+          assertUrl('/iban')
+
+          cy.contains('Žiadam o vyplatenie daňového bonusu na zaplatené úroky')
+          cy.get('[data-test=ineligible-message]').should('not.exist')
+
+          if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
+            getInput('ziadamVratitDanovyBonusUroky', '-yes').click()
+            typeToInput('iban', input)
+          } else {
+            getInput('ziadamVratitDanovyBonusUroky', '-no').click()
+          }
+
+          next()
+        }
+
+        if (taxForm.mozeZiadatVratitDanovyPreplatok) {
+          /** SECTION IBAN */
+          assertUrl('/iban')
+
+          cy.contains('Žiadam o vrátenie daňového preplatku')
+          cy.get('[data-test=ineligible-message]').should('not.exist')
+
+          if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
+            getInput('ziadamVratitDanovyPreplatok', '-yes').click()
+            typeToInput('iban', input)
+          } else {
+            getInput('ziadamVratitDanovyPreplatok', '-no').click()
           }
 
           next()
