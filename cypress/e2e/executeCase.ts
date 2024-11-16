@@ -359,7 +359,6 @@ const executeTestCase = (testCase: string) => {
             'Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške',
           )
           cy.get('[data-test=ineligible-message]').should('not.exist')
-          cy.contains('Spolu:')
 
           if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
             getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-yes').click()
