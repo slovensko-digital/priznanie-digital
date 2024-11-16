@@ -734,7 +734,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get mozeZiadatVratitPreplatkyBonusyUroky() {
       return (
-        this.r121.gt(0) || this.r136_danovy_preplatok.gt(0) || this.r127.gt(0)
+        this.mozeZiadatVyplatitDanovyBonus || this.mozeZiadatVratitDanovyPreplatok || this.mozeZiadatVratitDanovyBonusUroky
       )
     },
     get r127() {
