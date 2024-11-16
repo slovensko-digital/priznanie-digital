@@ -6,7 +6,7 @@ describe('iban', () => {
   describe('#validate', () => {
     describe('mozeZiadatVratitPreplatkyBonusyUroky', () => {
       const taxFormMock = {
-        mozeZiadatVratitPreplatkyBonusyUroky: true
+        mozeZiadatVratitPreplatkyBonusyUroky: true,
       } as TaxForm
 
       testValidation(makeValidate(taxFormMock), [
@@ -14,7 +14,10 @@ describe('iban', () => {
           input: { ziadamVyplatitDanovyBonusUrokPreplatok: undefined },
           expected: ['ziadamVyplatitDanovyBonusUrokPreplatok'],
         },
-        { input: { ziadamVyplatitDanovyBonusUrokPreplatok: false }, expected: [] },
+        {
+          input: { ziadamVyplatitDanovyBonusUrokPreplatok: false },
+          expected: [],
+        },
         {
           input: { ziadamVyplatitDanovyBonusUrokPreplatok: true },
           expected: ['iban'],

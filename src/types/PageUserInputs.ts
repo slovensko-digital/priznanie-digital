@@ -129,8 +129,7 @@ export type TwoPercentUserInput = Pick<
 
 export type TaxBonusUserInput = Pick<
   TaxFormUserInput,
-  | 'ziadamVyplatitDanovyBonusUrokPreplatok'
-  | 'iban'
+  'ziadamVyplatitDanovyBonusUrokPreplatok' | 'iban'
 >
 
 export type IncomeSourceCountryUserInput = Pick<

@@ -214,8 +214,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r153 = taxForm.employed || taxForm.dohoda ? '5' : '4'
 
-
-  if (taxForm.mozeZiadatVratitPreplatkyBonusyUroky && taxForm.ziadamVyplatitDanovyBonusUrokPreplatok) {
+  if (
+    taxForm.mozeZiadatVratitPreplatkyBonusyUroky &&
+    taxForm.ziadamVyplatitDanovyBonusUrokPreplatok
+  ) {
     form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
     form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
     form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'

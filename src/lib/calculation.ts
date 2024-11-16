@@ -733,7 +733,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return this.r127.gt(0)
     },
     get mozeZiadatVratitPreplatkyBonusyUroky() {
-      return this.r121.gt(0) || this.r136_danovy_preplatok.gt(0) || this.r127.gt(0)
+      return (
+        this.r121.gt(0) || this.r136_danovy_preplatok.gt(0) || this.r127.gt(0)
+      )
     },
     get r127() {
       return round(Decimal.max(this.r126.minus(this.r118), 0))
@@ -852,7 +854,8 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
 
     /** SECTION Danovy bonus */
-    ziadamVyplatitDanovyBonusUrokPreplatok: input?.ziadamVyplatitDanovyBonusUrokPreplatok ?? false,
+    ziadamVyplatitDanovyBonusUrokPreplatok:
+      input?.ziadamVyplatitDanovyBonusUrokPreplatok ?? false,
     iban: input?.iban ? input?.iban.replace(/\s/g, '') : '',
 
     datum: input.datum,

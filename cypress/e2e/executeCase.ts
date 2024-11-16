@@ -355,13 +355,9 @@ const executeTestCase = (testCase: string) => {
           /** SECTION IBAN */
           assertUrl('/iban')
 
-          cy.contains(
-            'Žiadam o vyplatenie daňových bonusov alebo preplatkov',
-          )
+          cy.contains('Žiadam o vyplatenie daňových bonusov alebo preplatkov')
           cy.get('[data-test=ineligible-message]').should('not.exist')
-          cy.contains(
-            'Spolu:',
-          )
+          cy.contains('Spolu:')
 
           if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
             getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-yes').click()
@@ -371,21 +367,15 @@ const executeTestCase = (testCase: string) => {
           }
 
           if (taxForm.mozeZiadatVyplatitDanovyBonus) {
-            cy.contains(
-              'Daňový bonus:',
-            )
+            cy.contains('Daňový bonus:')
           }
 
           if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
-            cy.contains(
-              'Daňový bonus na zaplatené úroky:',
-            )
+            cy.contains('Daňový bonus na zaplatené úroky:')
           }
 
           if (taxForm.mozeZiadatVratitDanovyPreplatok) {
-            cy.contains(
-              'Daňový preplatok:',
-            )
+            cy.contains('Daňový preplatok:')
           }
 
           next()
