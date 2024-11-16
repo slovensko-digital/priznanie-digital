@@ -41,6 +41,8 @@ jobs:
         run: |
           echo "will only run if skipnext is not true"
           unzip form.zip -d ./
+          rm -rf ./public/form
+          mkdir ./public/form
           mv ./form.* ./public/form
           ls -ls ./public
 
