@@ -355,7 +355,9 @@ const executeTestCase = (testCase: string) => {
           /** SECTION IBAN */
           assertUrl('/iban')
 
-          cy.contains('Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške')
+          cy.contains(
+            'Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške',
+          )
           cy.get('[data-test=ineligible-message]').should('not.exist')
           cy.contains('Spolu:')
 

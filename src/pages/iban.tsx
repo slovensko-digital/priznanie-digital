@@ -26,9 +26,7 @@ const Iban: Page<TaxBonusUserInput> = ({
   const danovyBonus = taxForm.r121
   const danovyBonusUroky = taxForm.r127
   const danovyPreplatok = taxForm.r136_danovy_preplatok
-  const spolu = danovyBonus
-    .plus(danovyBonusUroky)
-    .plus(danovyPreplatok)
+  const spolu = danovyBonus.plus(danovyBonusUroky).plus(danovyPreplatok)
 
   const Preplatky = (
     <ul className="govuk-list govuk-list--bullet">
@@ -97,7 +95,9 @@ const Iban: Page<TaxBonusUserInput> = ({
             {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
               <BooleanRadio
                 name="ziadamVyplatitDanovyBonusUrokPreplatok"
-                title={`Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške ${formatCurrency(spolu.toNumber())}?`}
+                title={`Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške ${formatCurrency(
+                  spolu.toNumber(),
+                )}?`}
                 hint={Preplatky}
               />
             )}
