@@ -31,32 +31,26 @@ const Iban: Page<TaxBonusUserInput> = ({
     .plus(danovyPreplatok)
 
   const Preplatky = (
-    <section>
+    <ul className="govuk-list govuk-list--bullet">
       {taxForm.mozeZiadatVyplatitDanovyBonus && (
-        <div>
-          <strong>Daňový bonus:</strong>
-          <p>{formatCurrency(danovyBonus.toNumber())}</p>
-        </div>
+        <li>
+          <strong>Daňový bonus: </strong>
+          {formatCurrency(danovyBonus.toNumber())}
+        </li>
       )}
       {taxForm.mozeZiadatVratitDanovyBonusUroky && (
-        <div>
-          <strong>Daňový bonus na zaplatené úroky:</strong>
-          <p>{formatCurrency(danovyBonusUroky.toNumber())}</p>
-        </div>
+        <li>
+          <strong>Daňový bonus na zaplatené úroky: </strong>
+          {formatCurrency(danovyBonusUroky.toNumber())}
+        </li>
       )}
       {taxForm.mozeZiadatVratitDanovyPreplatok && (
-        <div>
-          <strong>Daňový preplatok:</strong>
-          <p>{formatCurrency(danovyPreplatok.toNumber())}</p>
-        </div>
+        <li>
+          <strong>Daňový preplatok: </strong>
+          {formatCurrency(danovyPreplatok.toNumber())}
+        </li>
       )}
-      {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
-        <div>
-          <strong>Spolu:</strong>
-          <p>{formatCurrency(spolu.toNumber())}</p>
-        </div>
-      )}
-    </section>
+    </ul>
   )
 
   if (!taxForm.mozeZiadatVratitPreplatkyBonusyUroky) {
@@ -103,7 +97,7 @@ const Iban: Page<TaxBonusUserInput> = ({
             {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
               <BooleanRadio
                 name="ziadamVyplatitDanovyBonusUrokPreplatok"
-                title="Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov?"
+                title={`Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške ${formatCurrency(spolu.toNumber())}?`}
                 hint={Preplatky}
               />
             )}
