@@ -44,7 +44,18 @@ jobs:
           rm -rf ./public/form
           mkdir ./public/form
           mv ./form.* ./public/form
-          ls -ls ./public
-
+          ls -ls ./public/form
+      - name: Commit changes
+        if : ( steps.check-step.outputs.skipnext  != 'true' ) 
+        run: |
+      - name: Create new branch and commit changes
+        if: steps.check-step.outputs.skipnext != 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b update-form-$(date +%Y%m%d%H%M%S)
+          git add ./public/form.zip.md5 ./public/form
+          git commit -m "Update form files"
+          git push origin HEAD
 
 
