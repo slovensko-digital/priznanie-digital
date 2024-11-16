@@ -40,7 +40,8 @@ jobs:
         if : ( steps.check-step.outputs.skipnext  != 'true' ) 
         run: |
           echo "will only run if skipnext is not true"
-          unzip form.zip -d ./public
+          unzip form.zip -d ./public/
+          mv ./public/form.* ./public/
           ls -ls ./public
 
 
