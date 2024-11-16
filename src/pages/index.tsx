@@ -4,6 +4,7 @@ import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { TAX_YEAR } from '../lib/calculation'
 import { ExternalLink } from '../components/ExternalLink'
+import getConfig from 'next/config'
 
 const IconCheck = () => (
   <svg
@@ -71,6 +72,10 @@ const Home = ({
 )
 
 export default Home
+
+const {
+  publicRuntimeConfig: { informujteMaKedBudeLive, navodyBaseUrl },
+} = getConfig()
 
 const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   return (
@@ -169,7 +174,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
 
       {!isLive && (
         <Link
-          href="https://navody.digital/zivotne-situacie/elektronicke-podanie-danoveho-priznania-2023#aplikacia"
+          href={`${navodyBaseUrl}${informujteMaKedBudeLive}`}
           legacyBehavior
         >
           <button

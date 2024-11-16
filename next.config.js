@@ -7,6 +7,7 @@ module.exports = {
     navodyBaseUrl: process.env.NEXT_PUBLIC_navodyBaseUrl,
     priznanieStepUrl: process.env.NEXT_PUBLIC_priznanieStepUrl,
     odkladStepUrl: process.env.NEXT_PUBLIC_odkladStepUrl,
+    informujteMaKedBudeLive: process.env.NEXT_PUBLIC_informujteMaKedBudeLive,
     plausibleDomain: process.env.NEXT_PUBLIC_plausibleDomain,
     odkladEmailTemplateId: process.env.NEXT_PUBLIC_odkladEmailTemplateId,
     priznanieEmailTemplateId: process.env.NEXT_PUBLIC_priznanieEmailTemplateId,
