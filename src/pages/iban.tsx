@@ -23,35 +23,37 @@ const Iban: Page<TaxBonusUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  const danovyBonus = Number(taxForm.r121)
-  const danovyBonusUroky = Number(taxForm.r127)
-  const danovyPreplatok = Number(taxForm.r136_danovy_preplatok)
-  const spolu = danovyBonus + danovyBonusUroky + danovyPreplatok
+  const danovyBonus = taxForm.r121
+  const danovyBonusUroky = taxForm.r127
+  const danovyPreplatok = taxForm.r136_danovy_preplatok
+  const spolu = danovyBonus
+    .plus(danovyBonusUroky)
+    .plus(danovyPreplatok)
 
   const Preplatky = (
     <section>
       {taxForm.mozeZiadatVyplatitDanovyBonus && (
         <div>
           <strong>Daňový bonus:</strong>
-          <p>{formatCurrency(danovyBonus)}</p>
+          <p>{formatCurrency(danovyBonus.toNumber())}</p>
         </div>
       )}
       {taxForm.mozeZiadatVratitDanovyBonusUroky && (
         <div>
           <strong>Daňový bonus na zaplatené úroky:</strong>
-          <p>{formatCurrency(danovyBonusUroky)}</p>
+          <p>{formatCurrency(danovyBonusUroky.toNumber())}</p>
         </div>
       )}
       {taxForm.mozeZiadatVratitDanovyPreplatok && (
         <div>
           <strong>Daňový preplatok:</strong>
-          <p>{formatCurrency(danovyPreplatok)}</p>
+          <p>{formatCurrency(danovyPreplatok.toNumber())}</p>
         </div>
       )}
       {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
         <div>
           <strong>Spolu:</strong>
-          <p>{formatCurrency(spolu)}</p>
+          <p>{formatCurrency(spolu.toNumber())}</p>
         </div>
       )}
     </section>
