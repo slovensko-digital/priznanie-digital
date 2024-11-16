@@ -31,7 +31,7 @@ jobs:
         run: |
           md5sum form.zip
           md5sum form.zip > ./public/form.zip.md5
-          if git diff --exit-code ./public/form.zip.md5; then
+          if ! git diff --exit-code ./public/form.zip.md5; then
             echo "skipnext=true" >> $GITHUB_OUTPUT
           else
             echo "skipnext=false" >> $GITHUB_OUTPUT
