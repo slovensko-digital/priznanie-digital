@@ -351,54 +351,32 @@ const executeTestCase = (testCase: string) => {
 
         const taxForm = calculate(input)
 
-        if (taxForm.mozeZiadatVyplatitDanovyBonus) {
+        if (taxForm.mozeZiadatVratitPreplatkyBonusyUroky) {
           /** SECTION IBAN */
           assertUrl('/iban')
 
           cy.contains(
-            'Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu',
+            'Chcete požiadať o vyplatenie daňových bonusov alebo preplatkov vo výške',
           )
           cy.get('[data-test=ineligible-message]').should('not.exist')
 
-          if (input.ziadamVyplatitDanovyBonus) {
-            getInput('ziadamVyplatitDanovyBonus', '-yes').click()
+          if (input.ziadamVyplatitDanovyBonusUrokPreplatok) {
+            getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-yes').click()
             typeToInput('iban', input)
           } else {
-            getInput('ziadamVyplatitDanovyBonus', '-no').click()
+            getInput('ziadamVyplatitDanovyBonusUrokPreplatok', '-no').click()
           }
 
-          next()
-        }
-
-        if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
-          /** SECTION IBAN */
-          assertUrl('/iban')
-
-          cy.contains('Žiadam o vyplatenie daňového bonusu na zaplatené úroky')
-          cy.get('[data-test=ineligible-message]').should('not.exist')
-
-          if (input.ziadamVratitDanovyBonusUroky) {
-            getInput('ziadamVratitDanovyBonusUroky', '-yes').click()
-            typeToInput('iban', input)
-          } else {
-            getInput('ziadamVratitDanovyBonusUroky', '-no').click()
+          if (taxForm.mozeZiadatVyplatitDanovyBonus) {
+            cy.contains('Daňový bonus: ')
           }
 
-          next()
-        }
+          if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
+            cy.contains('Daňový bonus na zaplatené úroky: ')
+          }
 
-        if (taxForm.mozeZiadatVratitDanovyPreplatok) {
-          /** SECTION IBAN */
-          assertUrl('/iban')
-
-          cy.contains('Žiadam o vrátenie daňového preplatku')
-          cy.get('[data-test=ineligible-message]').should('not.exist')
-
-          if (input.ziadamVratitDanovyPreplatok) {
-            getInput('ziadamVratitDanovyPreplatok', '-yes').click()
-            typeToInput('iban', input)
-          } else {
-            getInput('ziadamVratitDanovyPreplatok', '-no').click()
+          if (taxForm.mozeZiadatVratitDanovyPreplatok) {
+            cy.contains('Daňový preplatok: ')
           }
 
           next()
