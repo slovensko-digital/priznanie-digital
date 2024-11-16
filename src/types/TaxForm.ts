@@ -241,6 +241,9 @@ export interface TaxForm {
   socZdravPoistenieDatum: string
 
   /** SECTION Danovy bonus */
+  mozeZiadatVyplatitDanovyBonus: boolean
+  mozeZiadatVratitDanovyPreplatok: boolean
+  mozeZiadatVratitDanovyBonusUroky: boolean
   mozeZiadatVratitPreplatkyBonusyUroky: boolean
   ziadamVyplatitDanovyBonusUrokPreplatok: boolean
   iban: string

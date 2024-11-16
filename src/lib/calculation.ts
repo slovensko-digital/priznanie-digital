@@ -723,6 +723,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r126() {
       return round(Decimal.max(this.r123.minus(this.r125), 0))
     },
+    get mozeZiadatVyplatitDanovyBonus() {
+      return this.r121.gt(0)
+    },
+    get mozeZiadatVratitDanovyPreplatok() {
+      return this.r136_danovy_preplatok.gt(0)
+    },
+    get mozeZiadatVratitDanovyBonusUroky() {
+      return this.r127.gt(0)
+    },
     get mozeZiadatVratitPreplatkyBonusyUroky() {
       return this.r121.gt(0) || this.r136_danovy_preplatok.gt(0) || this.r127.gt(0)
     },

@@ -1615,8 +1615,7 @@ function processTelo(telo) {
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
 
-                    if (bNode.nodeName == "vyplatitDanovyBonus") $("#cbVyplatit").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
-                    if (bNode.nodeName == "vyplatitDanovyBonusUroky") $("#chBonus").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
+                    if (bNode.nodeName == "vyplatitDanovyBonusUrokPreplatok") $("#cbVyplatit").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
 
                     if (bNode.nodeName == "sposobPlatby") {
                         for (var k = 0; k < bNode.childNodes.length; k++) {

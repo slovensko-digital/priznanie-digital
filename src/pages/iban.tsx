@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { FormErrors, TaxBonusUserInput } from '../types/PageUserInputs'
 import { Form, FormikProps } from 'formik'
 import { ErrorSummary } from '../components/ErrorSummary'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import {
+  formatCurrency,
   formatIban,
   validateIbanCountry,
   validateIbanFormat,
@@ -22,6 +23,59 @@ const Iban: Page<TaxBonusUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
+  const Preplatky = useMemo(() => 
+    {
+      const danovyBonus = Number(taxForm.r121);
+      const danovyBonusUroky = Number(taxForm.r127);
+      const danovyPreplatok = Number(taxForm.r136_danovy_preplatok);
+      const spolu = danovyBonus + danovyBonusUroky + danovyPreplatok;
+
+      return (
+        <section>
+          {taxForm.mozeZiadatVyplatitDanovyBonus && (
+            <div>
+              <strong>
+                Daňový bonus:
+              </strong>
+              <p>
+                {formatCurrency(danovyBonus)}
+              </p>
+            </div>
+          )}
+          {taxForm.mozeZiadatVratitDanovyBonusUroky && (
+            <div>
+              <strong>
+                Daňový bonus na zaplatené úroky:
+              </strong>
+              <p>
+                {formatCurrency(danovyBonusUroky)}
+              </p>
+            </div>
+          )}
+          {taxForm.mozeZiadatVratitDanovyPreplatok && (
+            <div>
+              <strong>
+                Daňový preplatok:
+              </strong>
+              <p>
+                {formatCurrency(danovyPreplatok)}
+              </p>
+            </div>
+          )}
+          {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
+            <div>
+              <strong>
+                Spolu:
+              </strong>
+              <p>
+                {formatCurrency(spolu)}
+              </p>
+            </div>
+          )}
+        </section>
+      )
+    }, [taxForm])
+
   if (
     !taxForm.mozeZiadatVratitPreplatkyBonusyUroky
   ) {
@@ -69,7 +123,8 @@ const Iban: Page<TaxBonusUserInput> = ({
             {taxForm.mozeZiadatVratitPreplatkyBonusyUroky && (
               <BooleanRadio
                 name="ziadamVyplatitDanovyBonusUrokPreplatok"
-                title="Žiadam o vyplatenie daňového bonusu alebo rozdielu daňového bonusu, daňového preplatku alebo daňového bonusu na zaplatené úroky"
+                title="Žiadam o vyplatenie daňových bonusov alebo preplatkov"
+                hint={Preplatky}
               />
             )}
 
