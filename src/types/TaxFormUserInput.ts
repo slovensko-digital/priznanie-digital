@@ -129,6 +129,10 @@ export interface TaxFormUserInput {
   XIIoddiel_suhlasZaslUdaje?: boolean
 
   /** SECTION Danovy bonus */
+  r121?: string
+  r127?: string
+  r136_danovy_preplatok?: string
+
   ziadamVyplatitDanovyBonus?: boolean
   ziadamVratitDanovyPreplatok?: boolean
   ziadamVratitDanovyBonusUroky?: boolean

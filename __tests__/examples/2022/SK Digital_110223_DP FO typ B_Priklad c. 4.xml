@@ -576,7 +576,9 @@
 	<r153>5</r153>
 	<datumVyhlasenia>11.02.2023</datumVyhlasenia>
 	<danovyPreplatokBonus>
-		<vyplatitDanovyBonusUrokPreplatok>0</vyplatitDanovyBonusUrokPreplatok>
+		<vyplatitDanovyBonus>0</vyplatitDanovyBonus>
+		<vyplatitDanovyBonusUroky>0</vyplatitDanovyBonusUroky>
+		<vratitDanPreplatok>0</vratitDanPreplatok>
 		<sposobPlatby>
 			<poukazka>0</poukazka>
 			<ucet>0</ucet>

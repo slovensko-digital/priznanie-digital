@@ -214,12 +214,21 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r153 = taxForm.employed || taxForm.dohoda ? '5' : '4'
 
+
   if (taxForm.mozeZiadatVratitPreplatkyBonusyUroky && taxForm.ziadamVyplatitDanovyBonusUrokPreplatok) {
     form.dokument.telo.danovyPreplatokBonus.bankovyUcet.IBAN = taxForm.iban
     form.dokument.telo.danovyPreplatokBonus.datum = taxForm.datum
     form.dokument.telo.danovyPreplatokBonus.sposobPlatby.ucet = '1'
 
-    form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonusUrokPreplatok = '1'
+    if (taxForm.mozeZiadatVyplatitDanovyBonus) {
+      form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonus = '1'
+    }
+    if (taxForm.mozeZiadatVratitDanovyPreplatok) {
+      form.dokument.telo.danovyPreplatokBonus.vratitDanPreplatok = '1'
+    }
+    if (taxForm.mozeZiadatVratitDanovyBonusUroky) {
+      form.dokument.telo.danovyPreplatokBonus.vyplatitDanovyBonusUroky = '1'
+    }
   }
 
   form.dokument.telo.datumVyhlasenia = taxForm.datum
