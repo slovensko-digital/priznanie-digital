@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Download config file
         run: wget https://edane.financnasprava.sk/java/prod/eform/config.xml -O config.xml
       - name: Filter only for Danove Priznanie Files
@@ -24,5 +26,19 @@ jobs:
           ZIP_URL=$(grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p')
           echo $ZIP_URL
           wget $ZIP_URL -O form.zip 
-      
-    
+      - name: Check if new version is available
+        id: check-step
+        run: |
+          md5sum form.zip > ./public/form.zip.md5
+          if git diff --exit-code ./public/form.zip.md5; then
+            echo "skipnext=true" >> $GITHUB_OUTPUT
+          else
+            echo "skipnext=false" >> $GITHUB_OUTPUT
+          fi
+      - name: abc
+        if : ( steps.check-step.outputs.skipnext  != 'true' ) 
+        run: |
+          echo "will only run if skipnext is not true"
+
+
+
