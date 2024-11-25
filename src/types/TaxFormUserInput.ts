@@ -82,6 +82,7 @@ export interface TaxFormUserInput {
   t1r10_prijmy: string
   priloha3_r11_socialne: string
   priloha3_r13_zdravotne: string
+  priloha3_r14_zdravotne: string
   zaplatenePreddavky?: string
 
   /**  SECTION Zamestnanie */
