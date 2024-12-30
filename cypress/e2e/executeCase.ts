@@ -527,7 +527,7 @@ const executePostponeCase = (testCase: string) => {
         const filePath = path.join(__dirname, '../downloads/file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form-odklad/form.548.html')
+        cy.visit('/form-odklad/form.596.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)

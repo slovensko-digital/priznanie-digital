@@ -195,7 +195,7 @@ const PostponeSection = ({
   isPostponeLive,
   isDebug,
 }) => {
-  const isPostponeTime = now.getMonth() < 3
+  const isPostponeTime = now.getMonth() < 3 || now.getFullYear() == TAX_YEAR
 
   return (
     <>

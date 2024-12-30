@@ -50,7 +50,7 @@ describe('postpone', () => {
       // Access named export
       const input: PostponeUserInput = inputModule[`${testCase}Input`]
 
-      const outputXml = convertPostponeToXML(input)
+      const outputXml = convertPostponeToXML(setDate(input))
 
       if (WRITE_FILES) {
         fs.writeFile(
