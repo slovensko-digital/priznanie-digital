@@ -59,7 +59,11 @@ export const executeAllPostponeCases = (testCases: string[]) => {
 }
 
 // TODO: remove after 1.1.2025
-const cleanUpErrors = (errorText: string) => errorText.replace(`'XIII.oddiel Dátum': nesmie byť vyšší ako aktuálny dátum.`, '').replace(`Príloha č.3 : dátum nesmie byť vyšší ako aktuálny dátum`, '').trim()
+const cleanUpErrors = (errorText: string) =>
+  errorText
+    .replace(`'XIII.oddiel Dátum': nesmie byť vyšší ako aktuálny dátum.`, '')
+    .replace(`Príloha č.3 : dátum nesmie byť vyšší ako aktuálny dátum`, '')
+    .trim()
 
 const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
