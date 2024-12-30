@@ -22,7 +22,15 @@ export const formatDate = (date: Date): string => {
   return `${day}.${month}.${year}`
 }
 
-export const setDate = <T>(input: T, date: Date = new Date()) => {
+export const setDate = <T>(input: T, date: Date = null) => {
+  if (date === null) {
+    const now = new Date()
+    if (now.getFullYear() === TAX_YEAR) {
+      date = new Date(TAX_YEAR+1, 0, 1)
+    } else {
+      date = now
+    }
+  }
   return {
     ...input,
     datum: formatDate(date),
