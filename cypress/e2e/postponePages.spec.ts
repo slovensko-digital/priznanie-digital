@@ -1,6 +1,7 @@
 import { postponeHomeRoute, PostponeRoute, Route } from '../../src/lib/routes'
 import { foreignIncomeInput } from '../../__tests__/testCases/postpone/foreignIncomeInput'
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
+import { TAX_YEAR } from '../../src/lib/calculation'
 
 const date = new Date()
 const month = date.getMonth() + 1
@@ -36,7 +37,7 @@ beforeEach(() => {
 })
 // button is not usable outside scope of first three months
 // when postpone for tax report is availible
-if (month >= 1 && month < 4) {
+if (month >= 1 && month < 4 || date.getFullYear() == TAX_YEAR) {
   describe('/odklad/osobne-udaje page', () => {
     beforeEach('Navigate to test page', () => {
       cy.visit(postponeHomeRoute)
