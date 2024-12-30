@@ -58,6 +58,9 @@ export const executeAllPostponeCases = (testCases: string[]) => {
   testCases.forEach((testCase) => executePostponeCase(testCase))
 }
 
+// TODO: remove after 1.1.2025
+const cleanUpErrors = (errorText: string) => errorText.replace(`'XIII.oddiel Dátum': nesmie byť vyšší ako aktuálny dátum.`, '').replace(`Príloha č.3 : dátum nesmie byť vyšší ako aktuálny dátum`, '').trim()
+
 const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
@@ -460,7 +463,7 @@ const executeTestCase = (testCase: string) => {
         cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
         cy.get('#form-button-validate').click().should(formSuccessful(stub))
         cy.get('#errorsContainer')
-          .should((el) => expect(el.text()).to.be.empty)
+          .should((el) => expect(cleanUpErrors(el.text())).to.be.empty)
           .then(() => done())
       },
     )
