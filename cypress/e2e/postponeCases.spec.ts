@@ -10,7 +10,7 @@ const month = now.getMonth() + 1
 // testy na podavanie odkladu padaju ked sa pustia po lehote na podanie odkladu kvoli datumu
 // datum sa da namockovat v setDate() (src/lib/utils.js)
 // test bezi len ak je formular o odklad aktualny od Januara do konca Marca
-if (month >= 1 && month < 4 || now.getFullYear() == TAX_YEAR) {
+if ((month >= 1 && month < 4) || now.getFullYear() == TAX_YEAR) {
   describe('Postpone cases', () => {
     executeAllPostponeCases(['basic', 'foreignIncome'])
   })

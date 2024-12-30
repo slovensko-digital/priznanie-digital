@@ -37,7 +37,7 @@ beforeEach(() => {
 })
 // button is not usable outside scope of first three months
 // when postpone for tax report is availible
-if (month >= 1 && month < 4 || date.getFullYear() == TAX_YEAR) {
+if ((month >= 1 && month < 4) || date.getFullYear() == TAX_YEAR) {
   describe('/odklad/osobne-udaje page', () => {
     beforeEach('Navigate to test page', () => {
       cy.visit(postponeHomeRoute)
