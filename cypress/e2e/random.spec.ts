@@ -234,7 +234,7 @@ describe('Random inputs', () => {
         })
         .then(() => {
           /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.572.html')
+          cy.visit('http://localhost:3000/form/form.601.html')
 
           const stub = cy.stub()
           cy.on('window:alert', stub)
