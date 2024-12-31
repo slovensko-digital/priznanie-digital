@@ -711,7 +711,9 @@ describe('Uroky page', () => {
     cy.get('[data-test=ineligible-message]').should('not.exist')
 
     cy.get('[data-test="uroky_zmluva_rok_uzatvorenia-input"]').should('exist')
-    cy.get('[data-test="uroky_zmluva_mesiac_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_mesiac_uzatvorenia-input"]').should(
+      'exist',
+    )
     cy.get('[data-test="uroky_zmluva_den_uzatvorenia-input"]').should('exist')
 
     cy.get('[data-test="uroky_zaciatok_urocenia_den-input"]').should('exist')

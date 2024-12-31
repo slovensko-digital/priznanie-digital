@@ -254,7 +254,11 @@ const maxPrijem = ({
 
 export const PrijemQuestion = ({
   disabled,
-  values: { uroky_dalsi_dlznik, uroky_zmluva_rok_uzatvorenia, uroky_pocet_dlznikov },
+  values: {
+    uroky_dalsi_dlznik,
+    uroky_zmluva_rok_uzatvorenia,
+    uroky_pocet_dlznikov,
+  },
 }) => {
   const prijem = formatCurrency(
     maxPrijem({
