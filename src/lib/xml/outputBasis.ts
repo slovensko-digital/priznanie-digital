@@ -133,6 +133,7 @@ const sampleSchema: OutputJson = {
         zaplateneUroky: '',
         pocetMesiacov: '',
         datumZacatiaUroceniaUveru: '',
+        datumUzavretiaZmluvyOUvere: '',
       },
       r36: '',
       r36a: '',
@@ -224,6 +225,10 @@ const sampleSchema: OutputJson = {
           s1: '',
           s2: '',
         },
+        t1r6: {
+          s1: '',
+          s2: '',
+        },
       },
       tabulka1b: {
         t1r1: {
@@ -243,9 +248,7 @@ const sampleSchema: OutputJson = {
       r44: '',
       r45: '',
       r46: '',
-      r47: '',
-      r48: '',
-      r49: {
+      r47: {
         rok: '2020',
         udaje: {
           r02: '',
@@ -253,7 +256,7 @@ const sampleSchema: OutputJson = {
           r04: '',
         },
       },
-      r50: {
+      r48: {
         rok: '2021',
         udaje: {
           r02: '',
@@ -261,15 +264,23 @@ const sampleSchema: OutputJson = {
           r04: '',
         },
       },
-      r51: {
+      r49: {
         rok: '2022',
         udaje: {
           r02: '',
           r03: '',
+          r04: '',
         },
       },
+      r50: {
+        rok: '2023',
+        udaje: {
+          r02: '',
+          r04: '',
+        },
+      },
+      r51: '',
       r52: '',
-      r52a: '',
       r53: '',
       r54: '',
       r55: '',
@@ -707,7 +718,7 @@ const sampleSchema: OutputJson = {
           s2: '',
         },
         pr7: '',
-        pr8: '7',
+        pr8: '',
         pr9: '',
         pr10: '',
         pr11: '',

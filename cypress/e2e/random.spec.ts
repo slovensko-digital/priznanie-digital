@@ -5,7 +5,7 @@ import {
   DohodaUserInput,
 } from '../../src/types/PageUserInputs'
 import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
-import { formSuccessful } from './executeCase'
+import { cleanUpErrors, formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
 const randomFromRange = (min: number, max: number) => {
@@ -189,7 +189,9 @@ const randomInput = (): TaxFormUserInput => {
     input = {
       ...input,
       r035_uplatnuje_uroky: true,
-      uroky_rok_uzatvorenia: rok,
+      uroky_zmluva_rok_uzatvorenia: rok,
+      uroky_zmluva_mesiac_uzatvorenia: mesiac,
+      uroky_zmluva_den_uzatvorenia: '10',
       uroky_zaciatok_urocenia_den: '21',
       uroky_zaciatok_urocenia_mesiac: mesiac,
       uroky_zaciatok_urocenia_rok: rok,
@@ -234,7 +236,7 @@ describe('Random inputs', () => {
         })
         .then(() => {
           /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.572.html')
+          cy.visit('http://localhost:3000/form/form.601.html')
 
           const stub = cy.stub()
           cy.on('window:alert', stub)
@@ -246,7 +248,7 @@ describe('Random inputs', () => {
           cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
           cy.get('#form-button-validate').click().should(formSuccessful(stub))
           cy.get('#errorsContainer')
-            .should((el) => expect(el.text()).to.be.empty)
+            .should((el) => expect(cleanUpErrors(el.text())).to.be.empty)
             .then(() => done())
         })
     })

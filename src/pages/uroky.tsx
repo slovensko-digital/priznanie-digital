@@ -83,14 +83,14 @@ export const validate = (values: UrokyUserInput) => {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
   } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
     if (
-      typeof values.uroky_rok_uzatvorenia === 'undefined' ||
-      !isInteger(values.uroky_rok_uzatvorenia)
+      typeof values.uroky_zmluva_rok_uzatvorenia === 'undefined' ||
+      !isInteger(values.uroky_zmluva_rok_uzatvorenia)
     ) {
-      errors.uroky_rok_uzatvorenia = 'Zadajte rok'
+      errors.uroky_zmluva_rok_uzatvorenia = 'Zadajte rok'
     } else {
-      const rok = Number.parseInt(values.uroky_rok_uzatvorenia, 10)
+      const rok = Number.parseInt(values.uroky_zmluva_rok_uzatvorenia, 10)
       if (rok > TAX_YEAR) {
-        errors.uroky_rok_uzatvorenia =
+        errors.uroky_zmluva_rok_uzatvorenia =
           'Rok uzatvorenia úveru nemôže byť v budúcnosti'
       }
     }

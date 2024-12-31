@@ -59,12 +59,57 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
       bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
       úročenie úveru na bývanie.
     </p>
-    <Input
-      name="uroky_rok_uzatvorenia"
-      type="number"
-      label="Rok uzatvorenia zmluvy o úvere na bývanie"
-      disabled={disabled}
-    />
+    <label className="govuk-label govuk-!-font-weight-bold">
+      Dátum uzavretia zmluvy o úvere na bývanie
+    </label>
+    <div className="govuk-form-group">
+      <fieldset
+        className="govuk-fieldset"
+        role="group"
+        aria-describedby="zmluva-uzatvorenie-hint"
+      >
+        <div id="zmluva-uzatvorenie-hint" className="govuk-hint">
+          Zadajte dátum uzavretia zmluvy napríklad
+          <br />
+          14 5 {TAX_YEAR - 3}
+        </div>
+        <div className="govuk-date-input" id="zmluva-uzatvorenie-zaciatok">
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zmluva_den_uzatvorenia"
+                label="Deň"
+                type="number"
+                width={2}
+                disabled={disabled}
+              />
+            </div>
+          </div>
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zmluva_mesiac_uzatvorenia"
+                label="Mesiac"
+                type="number"
+                width={2}
+                disabled={disabled}
+              />
+            </div>
+          </div>
+          <div className="govuk-date-input__item">
+            <div className="govuk-form-group">
+              <Input
+                name="uroky_zmluva_rok_uzatvorenia"
+                type="number"
+                label="Rok"
+                width={4}
+                disabled={disabled}
+              />
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
     <label className="govuk-label govuk-!-font-weight-bold">
       Dátum začatia úročenia úveru
     </label>
@@ -75,7 +120,7 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
         aria-describedby="zaciatok-urocenia-hint"
       >
         <div id="zaciatok-urocenia-hint" className="govuk-hint">
-          Zadajte datum začatia úročenia úveru napríklad
+          Zadajte dátum začatia úročenia úveru napríklad
           <br />
           27 8 {TAX_YEAR - 3}
         </div>
@@ -182,7 +227,7 @@ export const VekQuestion = ({ disabled, values: { uroky_dalsi_dlznik } }) => (
 )
 
 const maxPrijem = ({
-  uroky_rok_uzatvorenia: rok,
+  uroky_zmluva_rok_uzatvorenia: rok,
   uroky_pocet_dlznikov,
   uroky_dalsi_dlznik,
 }): Decimal => {
@@ -190,8 +235,6 @@ const maxPrijem = ({
     ? new Decimal(parseInt(uroky_pocet_dlznikov))
     : new Decimal(1)
   switch (rok) {
-    case '2018':
-      return new Decimal(1240.2).mul(pocet_dlznikov)
     case '2019':
       return new Decimal(1316.9).mul(pocet_dlznikov)
     case '2020':
@@ -209,11 +252,15 @@ const maxPrijem = ({
 
 export const PrijemQuestion = ({
   disabled,
-  values: { uroky_dalsi_dlznik, uroky_rok_uzatvorenia, uroky_pocet_dlznikov },
+  values: {
+    uroky_dalsi_dlznik,
+    uroky_zmluva_rok_uzatvorenia,
+    uroky_pocet_dlznikov,
+  },
 }) => {
   const prijem = formatCurrency(
     maxPrijem({
-      uroky_rok_uzatvorenia,
+      uroky_zmluva_rok_uzatvorenia,
       uroky_pocet_dlznikov,
       uroky_dalsi_dlznik,
     }).toNumber(),
@@ -225,7 +272,7 @@ export const PrijemQuestion = ({
       title={`Bol váš priemerný mesačný príjem ${
         uroky_dalsi_dlznik ? '(spolu so spoludlžníkmi) ' : ''
       }za kalendárny rok ${
-        parseInt(uroky_rok_uzatvorenia) - 1
+        parseInt(uroky_zmluva_rok_uzatvorenia) - 1
       } max. vo výške ${prijem}?`}
       disabled={disabled}
     />
