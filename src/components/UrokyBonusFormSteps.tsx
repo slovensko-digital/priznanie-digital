@@ -235,8 +235,6 @@ const maxPrijem = ({
     ? new Decimal(parseInt(uroky_pocet_dlznikov))
     : new Decimal(1)
   switch (rok) {
-    case '2018':
-      return new Decimal(1240.2).mul(pocet_dlznikov)
     case '2019':
       return new Decimal(1316.9).mul(pocet_dlznikov)
     case '2020':
