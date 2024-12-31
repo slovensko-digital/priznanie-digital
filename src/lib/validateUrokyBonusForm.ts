@@ -13,14 +13,14 @@ export const validateUrokyBonusForm = (
     values.uroky_zmluva_rok_uzatvorenia,
     10,
   )
-  const mesiac_uzatvorenia = Number.parseInt(
-    values.uroky_zmluva_mesiac_uzatvorenia,
-    10,
-  )
-  const den_uzatvorenia = Number.parseInt(
-    values.uroky_zmluva_den_uzatvorenia,
-    10,
-  )
+  // const mesiac_uzatvorenia = Number.parseInt(
+  //   values.uroky_zmluva_mesiac_uzatvorenia,
+  //   10,
+  // )
+  // const den_uzatvorenia = Number.parseInt(
+  //   values.uroky_zmluva_den_uzatvorenia,
+  //   10,
+  // )
 
   const den_urocenia = Number.parseInt(values.uroky_zaciatok_urocenia_den, 10)
   const mesiac_urocenia = Number.parseInt(
@@ -34,11 +34,11 @@ export const validateUrokyBonusForm = (
     mesiac_urocenia - 1,
     den_urocenia,
   )
-  const datum_uzatvorenia = new Date(
-    rok_uzatvorenia,
-    mesiac_uzatvorenia - 1,
-    den_uzatvorenia,
-  )
+  // const datum_uzatvorenia = new Date(
+  //   rok_uzatvorenia,
+  //   mesiac_uzatvorenia - 1,
+  //   den_uzatvorenia,
+  // )
   const limit_zaciatku = new Date(TAX_YEAR - UROKY_POCET_ROKOV, 0, 1)
 
   const step2 =
