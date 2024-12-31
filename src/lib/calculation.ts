@@ -13,25 +13,23 @@ import { optionWithValue } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
-// NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const KONSTANTA = 41_445.46
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_646.48)
+const KONSTANTA = 47_537.98
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
-const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(60_000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
-const MAX_ZAKLAD_DANE = 21_754.18
-export const PARTNER_MAX_ODPOCET = 4500.86
+const MAX_ZAKLAD_DANE = 24_952.06
 
 export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 140
 export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
-const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
+const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
 
 export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
 
@@ -44,7 +42,8 @@ const POCET_MESIACOV = 12
 export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = new Decimal(14862.23)
+const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
+export const PARTNER_MAX_ODPOCET = 5_162.50
 export const TAX_YEAR = 2024
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
