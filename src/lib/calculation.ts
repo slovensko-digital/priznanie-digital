@@ -48,7 +48,7 @@ export const TAX_YEAR = 2024
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
 export const UROKY_POCET_ROKOV = 5
-export const DANOVY_BONYS_NA_ZAPLATENE_UROKY = 400
+const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 
 export enum Months {
   January = 1,
@@ -699,7 +699,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           return round(
             Decimal.min(
               this.r035_zaplatene_uroky.times(0.5),
-              new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY),
+              new Decimal(DANOVY_BONUS_NA_ZAPLATENE_UROKY),
             ),
           )
         } else if (
@@ -710,14 +710,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           const b = round(a).div(12)
           const c = round(b).times(this.r035_pocet_mesiacov)
           const d = round(
-            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
+            new Decimal(DANOVY_BONUS_NA_ZAPLATENE_UROKY).div(12),
           ).times(this.r035_pocet_mesiacov)
           return round(Decimal.min(c, d))
         } else if (
           this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR
         ) {
           const limit = round(
-            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
+            new Decimal(DANOVY_BONUS_NA_ZAPLATENE_UROKY).div(12),
           ).times(this.r035_pocet_mesiacov)
           return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit))
         }
