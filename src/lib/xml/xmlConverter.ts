@@ -133,7 +133,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       datumZacatiaUroceniaUveru: formatDate(
         taxForm.r035_datum_zacatia_urocenia_uveru,
       ),
-      datumUzavretiaZmluvyOUvere: '2000-01-01', // TODO: add to user questions
+      datumUzavretiaZmluvyOUvere: formatDate(taxForm.r035_datum_uzatvorenia_zmluvy),
     }
   }
 

@@ -259,7 +259,10 @@ const executeTestCase = (testCase: string) => {
 
           next()
 
-          typeToInput('uroky_rok_uzatvorenia', input)
+          typeToInput('uroky_zmluva_rok_uzatvorenia', input)
+          typeToInput('uroky_zmluva_mesiac_uzatvorenia', input)
+          typeToInput('uroky_zmluva_den_uzatvorenia', input)
+          
           typeToInput('uroky_zaciatok_urocenia_den', input)
           typeToInput('uroky_zaciatok_urocenia_mesiac', input)
           typeToInput('uroky_zaciatok_urocenia_rok', input)

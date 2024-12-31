@@ -710,7 +710,9 @@ describe('Uroky page', () => {
     next()
     cy.get('[data-test=ineligible-message]').should('not.exist')
 
-    cy.get('[data-test="uroky_rok_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_rok_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_mesiac_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_den_uzatvorenia-input"]').should('exist')
 
     cy.get('[data-test="uroky_zaciatok_urocenia_den-input"]').should('exist')
     cy.get('[data-test="uroky_zaciatok_urocenia_mesiac-input"]').should('exist')
@@ -719,9 +721,12 @@ describe('Uroky page', () => {
     next()
     getError().should('have.length', 4)
 
-    getInput('uroky_rok_uzatvorenia').type(
+    getInput('uroky_zmluva_rok_uzatvorenia').type(
       (TAX_YEAR - UROKY_POCET_ROKOV - 1).toString(),
     )
+    getInput('uroky_zmluva_mesiac_uzatvorenia').type('1')
+    getInput('uroky_zmluva_den_uzatvorenia').type('1')
+
     getInput('uroky_zaciatok_urocenia_den').type('1')
     getInput('uroky_zaciatok_urocenia_mesiac').type('2')
     getInput('uroky_zaciatok_urocenia_rok').type((TAX_YEAR - 2).toString())
@@ -735,7 +740,7 @@ describe('Uroky page', () => {
 
     cy.get('button').contains('Späť').click()
 
-    getInput('uroky_rok_uzatvorenia')
+    getInput('uroky_zmluva_rok_uzatvorenia')
       .clear()
       .type((TAX_YEAR - UROKY_POCET_ROKOV).toString())
 

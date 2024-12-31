@@ -24,7 +24,9 @@ describe('hypoteka', () => {
           hypoteka_step: 2,
         },
         expected: [
-          'uroky_rok_uzatvorenia',
+          'uroky_zmluva_rok_uzatvorenia',
+          'uroky_zmluva_mesiac_uzatvorenia',
+          'uroky_zmluva_den_uzatvorenia',
           'uroky_zaciatok_urocenia_den',
           'uroky_zaciatok_urocenia_mesiac',
           'uroky_zaciatok_urocenia_rok',

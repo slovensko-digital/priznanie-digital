@@ -67,7 +67,9 @@ export interface TaxFormUserInput {
   r035_uplatnuje_uroky?: boolean
   r035_zaplatene_uroky?: string
   hypoteka_step?: number
-  uroky_rok_uzatvorenia?: string
+  uroky_zmluva_den_uzatvorenia?: string
+  uroky_zmluva_mesiac_uzatvorenia?: string
+  uroky_zmluva_rok_uzatvorenia?: string
   uroky_zaciatok_urocenia_den?: string
   uroky_zaciatok_urocenia_mesiac?: string
   uroky_zaciatok_urocenia_rok?: string

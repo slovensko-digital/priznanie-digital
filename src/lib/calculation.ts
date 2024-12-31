@@ -131,6 +131,13 @@ export const zaciatok_urocenia_datum = (input: TaxFormUserInput) => {
   return new Date(rok, mesiac - 1, den)
 }
 
+const uzatvorenie_zmluvy_datum = (input: TaxFormUserInput) => {
+  const den = Number.parseInt(input.uroky_zmluva_den_uzatvorenia, 10)
+  const mesiac = Number.parseInt(input.uroky_zmluva_mesiac_uzatvorenia, 10)
+  const rok = Number.parseInt(input.uroky_zmluva_rok_uzatvorenia, 10)
+  return new Date(rok, mesiac - 1, den)
+}
+
 export function calculate(input: TaxFormUserInput): TaxForm {
   /** Combine default vaules with user input */
   return {
@@ -247,7 +254,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r035_datum_zacatia_urocenia_uveru() {
       return zaciatok_urocenia_datum(input)
     },
-
+    get r035_datum_uzatvorenia_zmluvy() {
+      return uzatvorenie_zmluvy_datum(input)
+    },
     /** SECTION Rent */
     rent: input?.rent ?? false,
     get prenajom_oslobodenie() {
