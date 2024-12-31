@@ -108,7 +108,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Rent */
-  if (taxForm.rent) {
+  if (taxForm.rent && (taxForm.t1r11s1.greaterThan(0) || taxForm.t1r11s2.greaterThan(0))) {
     form.dokument.telo.tabulka1.t1r11.s1 = decimalToString(taxForm.t1r11s1)
     form.dokument.telo.tabulka1.t1r11.s2 = decimalToString(taxForm.t1r11s2)
     form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r13s1)
