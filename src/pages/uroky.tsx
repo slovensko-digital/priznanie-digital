@@ -82,19 +82,12 @@ export const validate = (values: UrokyUserInput) => {
   ) {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
   } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
-
-    const zmluva_den = Number.parseInt(
-      values.uroky_zmluva_den_uzatvorenia,
-      10,
-    )
+    const zmluva_den = Number.parseInt(values.uroky_zmluva_den_uzatvorenia, 10)
     const zmluva_mesiac = Number.parseInt(
       values.uroky_zmluva_mesiac_uzatvorenia,
       10,
     )
-    const zmluva_rok = Number.parseInt(
-      values.uroky_zmluva_rok_uzatvorenia,
-      10,
-    )
+    const zmluva_rok = Number.parseInt(values.uroky_zmluva_rok_uzatvorenia, 10)
     const datum_uzavretia_zmluvy = new Date(
       zmluva_rok,
       zmluva_mesiac - 1,
