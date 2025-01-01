@@ -259,6 +259,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.socZdravPoistenie.pr13 = decimalToString(
     taxForm.priloha3_r13_zdravotne,
   )
+  form.dokument.telo.socZdravPoistenie.pr14 = decimalToString(
+    taxForm.priloha3_r14_zdravotne,
+  )
 
   form.dokument.telo.socZdravPoistenie.datum = taxForm.socZdravPoistenieDatum
 
