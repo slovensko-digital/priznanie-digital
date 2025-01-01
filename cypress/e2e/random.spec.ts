@@ -5,7 +5,7 @@ import {
   DohodaUserInput,
 } from '../../src/types/PageUserInputs'
 import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
-import { cleanUpErrors, formSuccessful } from './executeCase'
+import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
 const randomFromRange = (min: number, max: number) => {
@@ -248,7 +248,7 @@ describe('Random inputs', () => {
           cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
           cy.get('#form-button-validate').click().should(formSuccessful(stub))
           cy.get('#errorsContainer')
-            .should((el) => expect(cleanUpErrors(el.text())).to.be.empty)
+            .should((el) => expect(el.text()).to.be.empty)
             .then(() => done())
         })
     })

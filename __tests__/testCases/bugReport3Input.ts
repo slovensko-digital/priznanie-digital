@@ -43,7 +43,7 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '990216/8452',
+      rodneCislo: '000216/6274',
 
       wholeYear: true,
       monthFrom: '0',

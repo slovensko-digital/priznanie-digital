@@ -721,7 +721,7 @@ describe('Uroky page', () => {
     cy.get('[data-test="uroky_zaciatok_urocenia_rok-input"]').should('exist')
 
     next()
-    getError().should('have.length', 4)
+    getError().should('have.length', 6)
 
     getInput('uroky_zmluva_rok_uzatvorenia').type(
       (TAX_YEAR - UROKY_POCET_ROKOV - 1).toString(),
