@@ -82,6 +82,37 @@ export const validate = (values: UrokyUserInput) => {
   ) {
     errors.uroky_dalsi_uver_uplatnuje = 'Vyznačte odpoveď'
   } else if (values.hypoteka_step === 2 && validateUrokyBonusForm(values, 2)) {
+
+    const zmluva_den = Number.parseInt(
+      values.uroky_zmluva_den_uzatvorenia,
+      10,
+    )
+    const zmluva_mesiac = Number.parseInt(
+      values.uroky_zmluva_mesiac_uzatvorenia,
+      10,
+    )
+    const zmluva_rok = Number.parseInt(
+      values.uroky_zmluva_rok_uzatvorenia,
+      10,
+    )
+    const datum_uzavretia_zmluvy = new Date(
+      zmluva_rok,
+      zmluva_mesiac - 1,
+      zmluva_den,
+    )
+
+    if (
+      datum_uzavretia_zmluvy.getDate() !== zmluva_den ||
+      !isInteger(values.uroky_zmluva_den_uzatvorenia)
+    ) {
+      errors.uroky_zmluva_den_uzatvorenia = 'Zadajte deň v správnom tvare'
+    }
+    if (
+      datum_uzavretia_zmluvy.getMonth() + 1 !== zmluva_mesiac ||
+      !isInteger(values.uroky_zmluva_mesiac_uzatvorenia)
+    ) {
+      errors.uroky_zmluva_mesiac_uzatvorenia = 'Zadajte mesiac v správnom tvare'
+    }
     if (
       typeof values.uroky_zmluva_rok_uzatvorenia === 'undefined' ||
       !isInteger(values.uroky_zmluva_rok_uzatvorenia)
