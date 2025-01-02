@@ -46,13 +46,9 @@ jobs:
           mkdir ./public/form
           mv ./form.* ./public/form
           FORM_FOLDER=$(find ./public/form -maxdepth 1 -type d ! -path ./public/form | head -n 1 | sed 's|./||')
-          echo $FORM_FOLDER
           mv $FORM_FOLDER/* ./public/form
           rm -rf $FORM_FOLDER
           ls -ls ./public/form
-      - name: Commit changes
-        if : ( steps.check-step.outputs.skipnext  != 'true' ) 
-        run: |
       - name: Create new branch and commit changes
         if: steps.check-step.outputs.skipnext != 'true'
         run: |
