@@ -41,11 +41,11 @@ jobs:
         run: |
           echo "will only run if skipnext is not true"
           unzip form.zip -d ./
+          rm form.zip
           rm -rf ./public/form
           mkdir ./public/form
           mv ./form.* ./public/form
           FOLDER_NAME=$(find ./public/form -maxdepth 1 -type d ! -path ./public/form | head -n 1 | sed 's|./||')
-          rm form.zip
           echo $FOLDER_NAME
           ls -ls ./public/form
       - name: Commit changes
