@@ -105,7 +105,9 @@ export type UrokyUserInput = Pick<
   TaxFormUserInput,
   | 'r035_uplatnuje_uroky'
   | 'r035_zaplatene_uroky'
-  | 'uroky_rok_uzatvorenia'
+  | 'uroky_zmluva_den_uzatvorenia'
+  | 'uroky_zmluva_mesiac_uzatvorenia'
+  | 'uroky_zmluva_rok_uzatvorenia'
   | 'uroky_zaciatok_urocenia_den'
   | 'uroky_zaciatok_urocenia_mesiac'
   | 'uroky_zaciatok_urocenia_rok'

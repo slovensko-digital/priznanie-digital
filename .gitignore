@@ -44,3 +44,5 @@ cypress/downloads
 *.sw?
 
 public/coverage/
+
+config.xml
