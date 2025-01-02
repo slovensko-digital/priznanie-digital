@@ -1,10 +1,8 @@
 name: Quality Assurance
 
 on:
-  pull_request:
-    branches: [ master ]
   schedule:
-    - cron: '0 0 * * *'  # This cron expression runs the workflow every day at midnight UTC
+    - cron: '0 * * * *'  # This cron expression runs the workflow every hour
 
 env:
   CURRENT_FORM_VERSION: "DPFOBv24"
@@ -13,6 +11,7 @@ jobs:
   download:
     name: Download Form File
     runs-on: ubuntu-latest
+    if: github.ref_name == 'master'
 
     steps:
       - name: Checkout repository
