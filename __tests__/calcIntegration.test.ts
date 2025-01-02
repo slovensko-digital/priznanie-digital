@@ -1,7 +1,7 @@
 import { promises as fs, readdirSync } from 'fs'
 import { parseStringPromise } from 'xml2js'
 import { convertToXML } from '../src/lib/xml/xmlConverter'
-import { calculate } from '../src/lib/calculation'
+import { calculate, TAX_YEAR } from '../src/lib/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'
@@ -50,7 +50,9 @@ describe('postpone', () => {
       // Access named export
       const input: PostponeUserInput = inputModule[`${testCase}Input`]
 
-      const outputXml = convertPostponeToXML(setDate(input))
+      const outputXml = convertPostponeToXML(
+        setDate(input, new Date(TAX_YEAR + 1, 0, 1)),
+      )
 
       if (WRITE_FILES) {
         fs.writeFile(
