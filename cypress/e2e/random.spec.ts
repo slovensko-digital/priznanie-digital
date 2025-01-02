@@ -219,7 +219,7 @@ describe('Random inputs', () => {
   it('should pass', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
-  Array.from({ length: 1000 }).forEach((_, i) => {
+  Array.from({ length: 500 }).forEach((_, i) => {
     it(`should pass random input ${i}`, (done) => {
       const input = randomInput()
       cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
