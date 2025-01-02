@@ -35,6 +35,12 @@ const getError = () => cy.get('[data-test=error]')
 
 beforeEach(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
+  // Ignore uncaught exceptions in the 3rd party form code
+  cy.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress
+    // inside the cy.origin() method from failing the test
+    return false
+  })
 })
 
 describe('twoPercent page', () => {
