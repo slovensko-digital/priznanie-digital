@@ -13,25 +13,23 @@ import { optionWithValue } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(4922.82)
-// NEZDANITELNA_CAST_JE_NULA_AK_JE_ZAKLAD_DANE_VYSSI_AKO
-const KONSTANTA = 41_445.46
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_646.48)
+const KONSTANTA = 47_537.98
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
-const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(49_790)
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(60_000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
-const MAX_ZAKLAD_DANE = 21_754.18
-export const PARTNER_MAX_ODPOCET = 4500.86
+const MAX_ZAKLAD_DANE = 24_952.06
 
 export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 140
 export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
-const ZIVOTNE_MINIMUM_NASOBOK = 10_361.36
+const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
 
 export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
 
@@ -44,12 +42,14 @@ const POCET_MESIACOV = 12
 export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = new Decimal(14862.23)
+const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
+export const PARTNER_MAX_ODPOCET = 5_162.5
 export const TAX_YEAR = 2024
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const MAX_CHILD_AGE_BONUS = 25
 export const UROKY_POCET_ROKOV = 5
-export const DANOVY_BONYS_NA_ZAPLATENE_UROKY = 400
+const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
+const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
 
 export enum Months {
   January = 1,
@@ -129,6 +129,13 @@ export const zaciatok_urocenia_datum = (input: TaxFormUserInput) => {
   const den = Number.parseInt(input.uroky_zaciatok_urocenia_den, 10)
   const mesiac = Number.parseInt(input.uroky_zaciatok_urocenia_mesiac, 10)
   const rok = Number.parseInt(input.uroky_zaciatok_urocenia_rok, 10)
+  return new Date(rok, mesiac - 1, den)
+}
+
+const uzatvorenie_zmluvy_datum = (input: TaxFormUserInput) => {
+  const den = Number.parseInt(input.uroky_zmluva_den_uzatvorenia, 10)
+  const mesiac = Number.parseInt(input.uroky_zmluva_mesiac_uzatvorenia, 10)
+  const rok = Number.parseInt(input.uroky_zmluva_rok_uzatvorenia, 10)
   return new Date(rok, mesiac - 1, den)
 }
 
@@ -248,7 +255,9 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get r035_datum_zacatia_urocenia_uveru() {
       return zaciatok_urocenia_datum(input)
     },
-
+    get r035_datum_uzatvorenia_zmluvy() {
+      return uzatvorenie_zmluvy_datum(input)
+    },
     /** SECTION Rent */
     rent: input?.rent ?? false,
     get prenajom_oslobodenie() {
@@ -687,11 +696,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r123() {
       if (this.r035_uplat_dan_bonus_zaplat_uroky) {
+        const danovy_bonus =
+          this.r035_datum_uzatvorenia_zmluvy.getFullYear() >= 2024
+            ? DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024
+            : DANOVY_BONUS_NA_ZAPLATENE_UROKY
         if (this.r035_pocet_mesiacov === 12) {
           return round(
             Decimal.min(
               this.r035_zaplatene_uroky.times(0.5),
-              new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY),
+              new Decimal(danovy_bonus),
             ),
           )
         } else if (
@@ -701,16 +714,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           const a = this.r035_zaplatene_uroky.times(0.5)
           const b = round(a).div(12)
           const c = round(b).times(this.r035_pocet_mesiacov)
-          const d = round(
-            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
-          ).times(this.r035_pocet_mesiacov)
+          const d = round(new Decimal(danovy_bonus).div(12)).times(
+            this.r035_pocet_mesiacov,
+          )
           return round(Decimal.min(c, d))
         } else if (
           this.r035_datum_zacatia_urocenia_uveru.getFullYear() === TAX_YEAR
         ) {
-          const limit = round(
-            new Decimal(DANOVY_BONYS_NA_ZAPLATENE_UROKY).div(12),
-          ).times(this.r035_pocet_mesiacov)
+          const limit = round(new Decimal(danovy_bonus).div(12)).times(
+            this.r035_pocet_mesiacov,
+          )
           return round(Decimal.min(this.r035_zaplatene_uroky.times(0.5), limit))
         }
       }

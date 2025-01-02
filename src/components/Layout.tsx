@@ -48,7 +48,7 @@ const Layout: React.FC<Props> = ({
         </div>
 
         <div className="govuk-width-container">
-          <main className="govuk-main-wrapper">
+          <main className="govuk-main-wrapper" style={{ paddingTop: 0 }}>
             <div className="govuk-grid-row">
               <div className={wrapperClassName}>{children}</div>
             </div>

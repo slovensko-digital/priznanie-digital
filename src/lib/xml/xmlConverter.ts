@@ -108,7 +108,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION Rent */
-  if (taxForm.rent) {
+  if (
+    taxForm.rent &&
+    (taxForm.t1r11s1.greaterThan(0) || taxForm.t1r11s2.greaterThan(0))
+  ) {
     form.dokument.telo.tabulka1.t1r11.s1 = decimalToString(taxForm.t1r11s1)
     form.dokument.telo.tabulka1.t1r11.s2 = decimalToString(taxForm.t1r11s2)
     form.dokument.telo.tabulka1.t1r13.s1 = decimalToString(taxForm.t1r13s1)
@@ -132,6 +135,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       pocetMesiacov: taxForm.r035_pocet_mesiacov.toString(),
       datumZacatiaUroceniaUveru: formatDate(
         taxForm.r035_datum_zacatia_urocenia_uveru,
+      ),
+      datumUzavretiaZmluvyOUvere: formatDate(
+        taxForm.r035_datum_uzatvorenia_zmluvy,
       ),
     }
   }
