@@ -587,7 +587,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('2309083139')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2409083105')
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch September až December',
     )
@@ -610,7 +610,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('980912/2532')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('9909121354')
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch Január až September',
     )
@@ -710,18 +710,25 @@ describe('Uroky page', () => {
     next()
     cy.get('[data-test=ineligible-message]').should('not.exist')
 
-    cy.get('[data-test="uroky_rok_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_rok_uzatvorenia-input"]').should('exist')
+    cy.get('[data-test="uroky_zmluva_mesiac_uzatvorenia-input"]').should(
+      'exist',
+    )
+    cy.get('[data-test="uroky_zmluva_den_uzatvorenia-input"]').should('exist')
 
     cy.get('[data-test="uroky_zaciatok_urocenia_den-input"]').should('exist')
     cy.get('[data-test="uroky_zaciatok_urocenia_mesiac-input"]').should('exist')
     cy.get('[data-test="uroky_zaciatok_urocenia_rok-input"]').should('exist')
 
     next()
-    getError().should('have.length', 4)
+    getError().should('have.length', 6)
 
-    getInput('uroky_rok_uzatvorenia').type(
+    getInput('uroky_zmluva_rok_uzatvorenia').type(
       (TAX_YEAR - UROKY_POCET_ROKOV - 1).toString(),
     )
+    getInput('uroky_zmluva_mesiac_uzatvorenia').type('1')
+    getInput('uroky_zmluva_den_uzatvorenia').type('1')
+
     getInput('uroky_zaciatok_urocenia_den').type('1')
     getInput('uroky_zaciatok_urocenia_mesiac').type('2')
     getInput('uroky_zaciatok_urocenia_rok').type((TAX_YEAR - 2).toString())
@@ -735,7 +742,7 @@ describe('Uroky page', () => {
 
     cy.get('button').contains('Späť').click()
 
-    getInput('uroky_rok_uzatvorenia')
+    getInput('uroky_zmluva_rok_uzatvorenia')
       .clear()
       .type((TAX_YEAR - UROKY_POCET_ROKOV).toString())
 

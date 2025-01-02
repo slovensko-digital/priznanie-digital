@@ -102,3 +102,7 @@ a:hover {
     position: relative;
     top: 4px;
 }
+
+select span > option {
+	display: none;
+}

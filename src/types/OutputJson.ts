@@ -99,6 +99,7 @@ export interface R35 {
   zaplateneUroky: string
   pocetMesiacov: string
   datumZacatiaUroceniaUveru: string
+  datumUzavretiaZmluvyOUvere: string
 }
 
 export interface T1r1 {
@@ -213,6 +214,10 @@ export interface Tabulka1a {
   t1r3: T1r32
   t1r4: T1r42
   t1r5: T1r52
+  t1r6: {
+    s1: string
+    s2: string
+  }
 }
 
 export interface T1r15 {
@@ -243,19 +248,24 @@ export interface R4 {
 
 export interface Udaje2 {
   r02: string
-  r03: string
+  r04: string
+}
+
+interface R47 {
+  rok: string
+  udaje: Udaje
+}
+
+interface R48 {
+  rok: string
+  udaje: Udaje
 }
 
 interface R49 {
   rok: string
   udaje: Udaje
 }
-
 export interface R50 {
-  rok: string
-  udaje: Udaje
-}
-export interface R51 {
   rok: string
   udaje: Udaje2
 }
@@ -685,13 +695,12 @@ export interface Telo {
   r44: string
   r45: string
   r46: string
-  r47: string
-  r48: string
+  r47: R47
+  r48: R48
   r49: R49
   r50: R50
-  r51: R51
+  r51: string
   r52: string
-  r52a: string
   r53: string
   r54: string
   r55: string

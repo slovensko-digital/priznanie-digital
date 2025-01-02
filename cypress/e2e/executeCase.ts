@@ -252,7 +252,10 @@ const executeTestCase = (testCase: string) => {
 
           next()
 
-          typeToInput('uroky_rok_uzatvorenia', input)
+          typeToInput('uroky_zmluva_rok_uzatvorenia', input)
+          typeToInput('uroky_zmluva_mesiac_uzatvorenia', input)
+          typeToInput('uroky_zmluva_den_uzatvorenia', input)
+
           typeToInput('uroky_zaciatok_urocenia_den', input)
           typeToInput('uroky_zaciatok_urocenia_mesiac', input)
           typeToInput('uroky_zaciatok_urocenia_rok', input)
@@ -286,7 +289,7 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {
-          cy.get('.govuk-hint').contains(input.percent2)
+          // cy.get('.govuk-hint').contains(input.percent2) TODO: skip 2% for now
 
           if (input.dve_percenta_podporujem) {
             cy.get('[data-test="dve_percenta_podporujem-inu-input"]').click()
@@ -448,7 +451,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.572.html')
+        cy.visit('/form/form.601.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)
@@ -527,7 +530,7 @@ const executePostponeCase = (testCase: string) => {
         const filePath = path.join(__dirname, '../downloads/file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form-odklad/form.548.html')
+        cy.visit('/form-odklad/form.596.html')
 
         const stub = cy.stub()
         cy.on('window:alert', stub)

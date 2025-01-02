@@ -218,7 +218,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.572.html')
+    cy.visit('/form/form.601.html')
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -412,7 +412,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.572.html')
+    cy.visit('/form/form.601.html')
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -721,7 +721,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.572.html')
+    cy.visit('/form/form.601.html')
 
     const stub = cy.stub()
     cy.on('window:alert', stub)

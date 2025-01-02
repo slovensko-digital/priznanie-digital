@@ -189,7 +189,9 @@ const randomInput = (): TaxFormUserInput => {
     input = {
       ...input,
       r035_uplatnuje_uroky: true,
-      uroky_rok_uzatvorenia: rok,
+      uroky_zmluva_rok_uzatvorenia: rok,
+      uroky_zmluva_mesiac_uzatvorenia: mesiac,
+      uroky_zmluva_den_uzatvorenia: '10',
       uroky_zaciatok_urocenia_den: '21',
       uroky_zaciatok_urocenia_mesiac: mesiac,
       uroky_zaciatok_urocenia_rok: rok,
@@ -234,7 +236,7 @@ describe('Random inputs', () => {
         })
         .then(() => {
           /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.572.html')
+          cy.visit('http://localhost:3000/form/form.601.html')
 
           const stub = cy.stub()
           cy.on('window:alert', stub)

@@ -44,12 +44,16 @@ function createxmlfinal() {
     ident = 4;
     // Potrebne rozdelit na dva riadky max 37 znakov - Nazov06
 
-    var meno = divideRows(3, 'taOdd1ObchMeno');
+    obchodneMeno = htmlEncode($('#taOdd1ObchMeno').val());
 
-    stringBuilder.appendLine(AddSectionIdent('<riadok>' + htmlEncode(meno[0]) + '</riadok>'));
-    stringBuilder.appendLine(AddSectionIdent('<riadok>' + htmlEncode(meno[1]) + '</riadok>'));
-    stringBuilder.appendLine(AddSectionIdent('<riadok>' + htmlEncode(meno[2].substr(0, 37)) + '</riadok>'));
-
+    if (obchodneMeno.includes('%0A')) {
+        const riadky = obchodneMeno.split('%0A'); // Rozdelí text na základe '%0A'
+        riadky.forEach(riadok => {
+            stringBuilder.appendLine('\t\t\t\t<riadok>' + riadok + '</riadok>');
+        });
+    } else {
+        stringBuilder.appendLine('\t\t\t\t<riadok>' + obchodneMeno + '</riadok>');
+    }
     ident = 3;
     stringBuilder.appendLine(AddSectionIdent('</obchodneMeno>'));
     stringBuilder.append(getElement('ico', true, 'ico'));
@@ -576,7 +580,7 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbOdd3Telefon').val()) + ')/T (vypracoval-tel)>>');
 
     stringBuilder.appendLine('    ] ');
-    stringBuilder.appendLine('    /F (form.548.OZN493-22-print-save.pdf)');
+    stringBuilder.appendLine('    /F (form.596.OZN493-24-print-save.pdf)');
     stringBuilder.appendLine('    /ID [ <0f1c0c5013770170f4042d0f9bbdc064><67bbe03ad822ab86734fd4c8c191afa2>]');
     stringBuilder.appendLine('  >> ');
     stringBuilder.appendLine('>> ');
