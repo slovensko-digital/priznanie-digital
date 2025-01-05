@@ -349,7 +349,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
                 },
               ]
-            : [{ title: 'Neplatil som' }]
+            : [{ title: 'Neuplatňujem daňový bonus' }]
         }
       />
       <Summary

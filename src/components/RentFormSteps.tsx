@@ -14,7 +14,7 @@ import { ExternalLink } from './ExternalLink'
 export const ApplyForBonusQuestion = ({ disabled }) => (
   <>
     <BooleanRadio
-      title={'Prenajímali ste v roku 2023 nehnuteľnosť?'}
+      title={`Prenajímali ste v roku ${TAX_YEAR} nehnuteľnosť?`}
       name="rent"
       hint="Nie na základe živnostenského oprávnenia, nezaradenú do obchodného majetku s výdavkami vedenými podľa daňovej evidencie "
       disabled={disabled}
