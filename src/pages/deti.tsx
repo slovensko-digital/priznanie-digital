@@ -280,7 +280,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             </div>
                             <h2 className="govuk-heading-m">
                               Akým spôsobom vysporiada/la svoje zdaniteľné
-                              príjmy druhá oprávnená osoba za rok 2023?
+                              príjmy druhá oprávnená osoba za rok {TAX_YEAR}?
                             </h2>
                             <Select
                               name="partner_bonus_na_deti_typ_prijmu"
