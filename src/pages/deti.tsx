@@ -136,11 +136,6 @@ const Deti: Page<ChildrenUserInput> = ({
                   </p>
                 </Details>
                 <p className="govuk-hint">
-                  Za mesiace január až apríl 2023 je možné uplatniť daňový bonus
-                  len v prípade, ak sa na vyživované dieťa neposkytla dotácia na
-                  podporu výchovy k stravovacím návykom dieťaťa.
-                </p>
-                <p className="govuk-hint">
                   Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                 </p>
 
