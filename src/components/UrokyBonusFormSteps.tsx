@@ -46,7 +46,7 @@ export const ZaplateneUrokyQuestion = ({ disabled }) => (
   </>
 )
 
-export const ZaciatokUveruQuestion = ({ disabled }) => (
+export const ZaciatokUveruQuestion = ({ disabled, values }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
       <h1 className="govuk-fieldset__heading">
@@ -161,6 +161,14 @@ export const ZaciatokUveruQuestion = ({ disabled }) => (
         </div>
       </fieldset>
     </div>
+
+    {
+      parseInt(values.uroky_zmluva_rok_uzatvorenia, 10) >= 2024 && (
+        <Warning>
+          Úver musí byť určený na byt alebo rodinný dom slúžiaci výlučne k vlastnému trvalému bývaniu alebo k vlastnému trvalému bývaniu spolu s blízkymi osobami.
+        </Warning>
+      )
+    }
   </div>
 )
 
