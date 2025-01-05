@@ -348,7 +348,7 @@ const AttachmentWarning = ({ prijem }) => {
   if (prijem === '4') {
     return (
       <Warning>
-        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu
+        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu dokladu
         preukazujúceho výšku základu dane druhej oprávnenej osoby.
       </Warning>
     )
