@@ -245,6 +245,8 @@ const maxPrijem = ({
       return new Decimal(1574.3).mul(pocet_dlznikov)
     case '2023':
       return new Decimal(1695.2).mul(pocet_dlznikov)
+    case '2024':
+      return new Decimal(2288).mul(pocet_dlznikov) // TODO: add 2024 e2e test
     default:
       return new Decimal(0)
   }
