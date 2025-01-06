@@ -88,9 +88,9 @@ export interface TaxForm {
   t1r10_prijmy: Decimal
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
   priloha3_r11_socialne: Decimal
-  /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
+  /**   Preukázateľne zaplatené poistné na zdravotné poistenie z príjmov*/
   priloha3_r13_zdravotne: Decimal
-  /**   TODO */
+  /**   Preukázateľne zaplatené preddavky na zdravotné poistenie z príjmov*/
   priloha3_r14_zdravotne: Decimal
 
   /**   Deti*/
