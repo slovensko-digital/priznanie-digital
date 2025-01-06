@@ -3,6 +3,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 export const withEmploymentBonusInput: E2eTestUserInput = {
   priloha3_r11_socialne: '435.22',
   priloha3_r13_zdravotne: '217.33',
+  priloha3_r14_zdravotne: '0',
   r001_dic: '233123123',
   r003_nace: '62010 - Počítačové programovanie',
   r005_meno: 'Fake',

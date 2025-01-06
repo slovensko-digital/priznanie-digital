@@ -5,6 +5,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 export const bugReport4Input: E2eTestUserInput = {
   priloha3_r11_socialne: '5000',
   priloha3_r13_zdravotne: '5000',
+  priloha3_r14_zdravotne: '0',
   r005_meno: 'Fake',
   r004_priezvisko: 'Name',
   r001_dic: '233123123',

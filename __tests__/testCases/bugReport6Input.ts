@@ -4,6 +4,7 @@ export const bugReport6Input: E2eTestUserInput = {
   t1r10_prijmy: '17636',
   priloha3_r11_socialne: '1126,68',
   priloha3_r13_zdravotne: '669,86',
+  priloha3_r14_zdravotne: '0',
   zaplatenePreddavky: '0',
   r031_priezvisko_a_meno: 'E M',
   r031_rodne_cislo: '835313 / 2348',

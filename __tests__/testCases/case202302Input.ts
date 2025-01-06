@@ -4,6 +4,7 @@ export const case202302Input: E2eTestUserInput = {
   t1r10_prijmy: '13800',
   priloha3_r11_socialne: '1720.95',
   priloha3_r13_zdravotne: '687.96',
+  priloha3_r14_zdravotne: '0',
   zaplatenePreddavky: '0',
   r001_dic: '233123123',
   r003_nace: '62010 - Počítačové programovanie',

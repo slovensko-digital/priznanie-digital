@@ -4,6 +4,7 @@ export const bugReport12Input: E2eTestUserInput = {
   t1r10_prijmy: '98321.04',
   priloha3_r11_socialne: '17697.79',
   priloha3_r13_zdravotne: '15731.37',
+  priloha3_r14_zdravotne: '0',
   zaplatenePreddavky: '53116.29',
   employed: true,
   hasChildren: true,

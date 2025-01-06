@@ -3,6 +3,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 export const withHighIncome2Input: E2eTestUserInput = {
   priloha3_r11_socialne: '8000',
   priloha3_r13_zdravotne: '10000',
+  priloha3_r14_zdravotne: '0',
   t1r10_prijmy: '100000',
   zaplatenePreddavky: '6000',
   r005_meno: 'Fake',
