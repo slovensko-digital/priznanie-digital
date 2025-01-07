@@ -350,6 +350,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(
         new Decimal(
           parseInputNumber(input.uhrnPovinnehoPoistnehoNaSocialnePoistenie),
+        ).plus(
+          new Decimal(
+            parseInputNumber(
+              input?.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody ?? '0',
+            ),
+          ),
         ),
       )
     },
@@ -357,6 +363,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(
         new Decimal(
           parseInputNumber(input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie),
+        ).plus(
+          new Decimal(
+            parseInputNumber(
+              input?.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody ?? '0',
+            ),
+          ),
         ),
       )
     },
