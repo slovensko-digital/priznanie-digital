@@ -563,15 +563,18 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       const sum1 = this.r090.plus(this.r105)
       const sum2 = this.r036.plus(this.r095).plus(this.r058)
 
-      const condition1 = this.r117.equals(0) && this.r123.equals(0) && sum1.lte(17.0)
-      const condition2 = this.r117.equals(0) && this.r123.equals(0) && sum2.lte(HRANICA_ZDANITELNEHO_PRIJMU)
+      const condition1 =
+        this.r117.equals(0) && this.r123.equals(0) && sum1.lte(17.0)
+      const condition2 =
+        this.r117.equals(0) &&
+        this.r123.equals(0) &&
+        sum2.lte(HRANICA_ZDANITELNEHO_PRIJMU)
 
       if (condition1 || condition2) {
         return new Decimal(0)
       } else {
         return Decimal.max(0, round(sum1))
       }
-
     },
     get r116a() {
       if (this.partner_bonus_na_deti) {
