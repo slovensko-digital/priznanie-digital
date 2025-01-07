@@ -50,6 +50,7 @@ export const MAX_CHILD_AGE_BONUS = 25
 export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
+const HRANICA_ZDANITELNEHO_PRIJMU = new Decimal(2_823.24)
 
 export enum Months {
   January = 1,
@@ -559,7 +560,21 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(this.r096)
     },
     get r116_dan() {
-      return round(this.r090.plus(this.r105))
+      const sum1 = this.r090.plus(this.r105)
+      const sum2 = this.r036.plus(this.r095).plus(this.r058)
+
+      const condition1 =
+        this.r117.equals(0) && this.r123.equals(0) && sum1.lte(17.0)
+      const condition2 =
+        this.r117.equals(0) &&
+        this.r123.equals(0) &&
+        sum2.lte(HRANICA_ZDANITELNEHO_PRIJMU)
+
+      if (condition1 || condition2) {
+        return new Decimal(0)
+      } else {
+        return Decimal.max(0, round(sum1))
+      }
     },
     get r116a() {
       if (this.partner_bonus_na_deti) {
