@@ -3,6 +3,7 @@ name: Quality Assurance
 on:
   schedule:
     - cron: '0 * * * *'  # This cron expression runs the workflow every hour
+  push:
 
 env:
   CURRENT_FORM_VERSION: "DPFOBv24"
@@ -24,17 +25,24 @@ jobs:
           cat dp.out
           ZIP_URL=$(grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p')
           echo $ZIP_URL
-          wget $ZIP_URL -O form.zip 
+          wget $ZIP_URL -O form.zip
+          md5sum form.zip
       - name: Check if new version is available
         id: check-step
         run: |
+          echo "step1"
+          cat ./public/form.zip.md5
+          echo "step2"
           md5sum form.zip
+          echo "step3"
           md5sum form.zip > ./public/form.zip.md5
           if git diff --exit-code ./public/form.zip.md5; then
             echo "skipnext=true" >> $GITHUB_OUTPUT
           else
             echo "skipnext=false" >> $GITHUB_OUTPUT
           fi
+          echo "step4"
+          echo $GITHUB_OUTPUT
       - name: Unzip form files
         if : ( steps.check-step.outputs.skipnext  != 'true' ) 
         run: |
