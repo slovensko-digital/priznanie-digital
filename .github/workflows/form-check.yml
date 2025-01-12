@@ -1,9 +1,11 @@
 name: Quality Assurance
 
 on:
-  # schedule:
-  #   - cron: '0 * * * *'  # This cron expression runs the workflow every hour
+  schedule:
+    - cron: '0 * * * *'  # This cron expression runs the workflow every hour
   pull_request:
+    branches: 
+      - master
 
 env:
   CURRENT_FORM_VERSION: "DPFOBv24"
