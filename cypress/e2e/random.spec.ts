@@ -222,7 +222,7 @@ describe('Random inputs', () => {
   Array.from({ length: 500 }).forEach((_, i) => {
     it(`should pass random input ${i}`, {
       retries: {
-        runMode: 2,
+        runMode: 0,
         openMode: 0,
       }
     }, (done) => {
