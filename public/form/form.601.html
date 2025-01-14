@@ -9739,10 +9739,10 @@ else
       return 'form.601.ro.xslt';
       break;
     case 11:
-      return 'DPFOBv24-poucenie.pdf'+'|r.123.pdf';
+      return 'DPFOBv24-poucenie.zip';
       break;
     case 13:
-      return 'form.601.dpfob.png';
+      return 'form.601.r.123.pdf'+'|form.601.dpfob.png';
       break;
     default:
       return null;
@@ -9766,10 +9766,10 @@ function GetExternalResource(resourcetype, index) {
       if (index == null || index =='form.601.ro.xslt') return 'form.601.ro.xslt';
       break;
     case 11:
-      if (index == null || index =='DPFOBv24-poucenie.pdf') return 'form.601.DPFOBv24-poucenie.pdf';
-      if (index == null || index =='r.123.pdf') return 'form.601.r.123.pdf';
+      if (index == null || index =='DPFOBv24-poucenie.zip') return 'form.601.DPFOBv24-poucenie.zip';
       break;
     case 13:
+      if (index == null || index =='form.601.r.123.pdf') return 'form.601.r.123.pdf';
       if (index == null || index =='form.601.dpfob.png') return 'form.601.dpfob.png';
       break;
     default:
@@ -15346,6 +15346,12 @@ var retval = ("'r.13 s.2 tab.1': môže byť maximálne do výšky riadku 13/Pr�
 				validatorObject.settings.messages['tbPrekazatenePoistne']['customW'] = vypocet_tbprekazatenepoistne_T1(sid);
 				iserr = true;
 			}
+				
+			if (!iserr && !vypocet_tbprekazatenepoistne_C2(sid))
+			{
+				validatorObject.settings.messages['tbPrekazatenePoistne']['customW'] = vypocet_tbprekazatenepoistne_T2(sid);
+				iserr = true;
+			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('t1R10S2'));
@@ -15377,13 +15383,27 @@ var retval = ("");
 			function vypocet_tbprekazatenepoistne_C1(sid) {
 			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_11 = hodnota(null, 'tbPr3_11','n',sid,'layoutRow39757','d12.2');
+			var t_tbpr3_12 = hodnota(null, 'tbPr3_12','n',sid,'layoutRow39757','d12.2');
+			var t_tbpr3_13 = hodnota(null, 'tbPr3_13','n',sid,'layoutRow39757','d12.2');
+			var t_tbpr3_14 = hodnota(null, 'tbPr3_14','n',sid,'layoutRow39757','d12.2');
+var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&(Math.round(100.0000000000001*(t_tbpr3_11+t_tbpr3_12+t_tbpr3_13+t_tbpr3_14))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0)))));
+				return retval;
+			}
+			function vypocet_tbprekazatenepoistne_T1(sid) {
+var retval = ("'Preukázateľne zaplatené poistné': ak je v poli vyplnený údaj, tak v Prílohe č.3 daňového priznania vyplňte zaplatené poistné na sociálne alebo zdravotné poistenie v r. 11 alebo r. 12 alebo r. 13 alebo r. 14 okrem takéhoto poistného zaplateného v zahraničí.");
+				return retval; //;
+			}
+				
+			function vypocet_tbprekazatenepoistne_C2(sid) {
+			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
+			var t_tbpr3_11 = hodnota(null, 'tbPr3_11','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_13 = hodnota(null, 'tbPr3_13','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_14 = hodnota(null, 'tbPr3_14','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_12 = hodnota(null, 'tbPr3_12','n',sid,'layoutRow39757','d12.2');
 var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&(((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPrekazatenePoistne',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPrekazatenePoistne',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>Math.round(100.0000000000001*(0))))||((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPrekazatenePoistne',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPrekazatenePoistne',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>Math.round(100.0000000000001*(0))))||Math.round(100.0000000000001*(t_tbpr3_14))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0))&&(Math.round(100.0000000000001*(t_tbpr3_11+t_tbpr3_12+t_tbpr3_13+t_tbpr3_14))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
-			function vypocet_tbprekazatenepoistne_T1(sid) {
+			function vypocet_tbprekazatenepoistne_T2(sid) {
 var retval = (" 'Preukázateľne zaplatené poistné': ak je v poli vyplnený údaj, tak v Prílohe č.3 daňového priznania vyplňte zaplatené poistné na sociálne alebo zdravotné poistenie v r. 11 alebo r. 12 alebo r. 13 alebo r. 14 okrem takéhoto poistného zaplateného v zahraničí.");
 				return retval; //;
 			}
@@ -29730,12 +29750,6 @@ var retval = ("");
 				validatorObject.settings.messages['tbPr3_11']['customW'] = vypocet_tbpr3_11_T1(sid);
 				iserr = true;
 			}
-				
-			if (!iserr && !vypocet_tbpr3_11_C2(sid))
-			{
-				validatorObject.settings.messages['tbPr3_11']['customW'] = vypocet_tbpr3_11_T2(sid);
-				iserr = true;
-			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('tbPrekazatenePoistne'));
@@ -29767,25 +29781,14 @@ var retval = ("'Príloha č.3 r.11':  má byť >= 0");
 			function vypocet_tbpr3_11_C1(sid) {
 			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_11 = hodnota(null, 'tbPr3_11','n',sid,'layoutRow39757','d12.2');
-var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr3_11))==Math.round(100.0000000000001*(0))))));
-				return retval;
-			}
-			function vypocet_tbpr3_11_T1(sid) {
-var retval = ("Príloha č.3 : r11 - ak je vyplnené toto pole tak musí byť vyplnené pole 'Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona' (na str. 4, pod tab.1) ");
-				return retval; //;
-			}
-				
-			function vypocet_tbpr3_11_C2(sid) {
-			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
-			var t_tbpr3_11 = hodnota(null, 'tbPr3_11','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_13 = hodnota(null, 'tbPr3_13','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_14 = hodnota(null, 'tbPr3_14','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_12 = hodnota(null, 'tbPr3_12','n',sid,'layoutRow39757','d12.2');
 var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&(((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>Math.round(100.0000000000001*(0))))||((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_11',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>Math.round(100.0000000000001*(0))))||Math.round(100.0000000000001*(t_tbpr3_14))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0))&&(Math.round(100.0000000000001*(t_tbpr3_11+t_tbpr3_12+t_tbpr3_13+t_tbpr3_14))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
-			function vypocet_tbpr3_11_T2(sid) {
-var retval = ("");
+			function vypocet_tbpr3_11_T1(sid) {
+var retval = ("Príloha č.3 : r11 - ak je vyplnené toto pole tak musí byť vyplnené pole 'Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona' (na str. 4, pod tab.1) ");
 				return retval; //;
 			}
 		function kontrola_tbPr3_13(element, sid, dblclick) {		
@@ -29809,12 +29812,6 @@ var retval = ("");
 			if (!iserr && !vypocet_tbpr3_13_C1(sid))
 			{
 				validatorObject.settings.messages['tbPr3_13']['customW'] = vypocet_tbpr3_13_T1(sid);
-				iserr = true;
-			}
-				
-			if (!iserr && !vypocet_tbpr3_13_C2(sid))
-			{
-				validatorObject.settings.messages['tbPr3_13']['customW'] = vypocet_tbpr3_13_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -29846,17 +29843,6 @@ var retval = ("'Príloha č.3 r.13':  má byť >= 0");
 				
 			function vypocet_tbpr3_13_C1(sid) {
 			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
-			var t_tbpr3_13 = hodnota(null, 'tbPr3_13','n',sid,'layoutRow39757','d12.2');
-var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr3_13))==Math.round(100.0000000000001*(0))))));
-				return retval;
-			}
-			function vypocet_tbpr3_13_T1(sid) {
-var retval = ("Príloha č.3 : r13 - ak je vyplnené toto pole tak musí byť vyplnené pole 'Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona' (na str. 4, pod tab.1) ");
-				return retval; //;
-			}
-				
-			function vypocet_tbpr3_13_C2(sid) {
-			var t_tbprekazatenepoistne = hodnota(null, 'tbPrekazatenePoistne','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_11 = hodnota(null, 'tbPr3_11','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_13 = hodnota(null, 'tbPr3_13','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr3_14 = hodnota(null, 'tbPr3_14','n',sid,'layoutRow39757','d12.2');
@@ -29864,8 +29850,8 @@ var retval = ("Príloha č.3 : r13 - ak je vyplnené toto pole tak musí byť vy
 var retval = (((Math.round(100.0000000000001*(t_tbprekazatenepoistne))>Math.round(100.0000000000001*(0))&&(((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_11))>Math.round(100.0000000000001*(0))))||((Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>=Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))!=Math.round(100.0000000000001*(inlinesumavydavkov('tbPr3_13',sid)))&&Math.round(100.0000000000001*(t_tbpr3_13))>Math.round(100.0000000000001*(0))))||Math.round(100.0000000000001*(t_tbpr3_14))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_tbprekazatenepoistne))==Math.round(100.0000000000001*(0))&&(Math.round(100.0000000000001*(t_tbpr3_11+t_tbpr3_12+t_tbpr3_13+t_tbpr3_14))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
-			function vypocet_tbpr3_13_T2(sid) {
-var retval = ("");
+			function vypocet_tbpr3_13_T1(sid) {
+var retval = ("Príloha č.3 : r13 - ak je vyplnené toto pole tak musí byť vyplnené pole 'Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona' (na str. 4, pod tab.1) ");
 				return retval; //;
 			}
 		function kontrola_tbPr3_12(element, sid, dblclick) {		
@@ -65944,7 +65930,7 @@ customW: ""
 											
 <div id="layoutCell160803" class="cell  textNapravo" >		
 			
-		<label class="fieldLabel" title="" for="t116" style="display: none">riadok 116 </label><span class="fieldContent"><input  id="t116" name="t116" title="Nerezident dôchodca (zaškrtnuté políčko nerezident a súčasne r29): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak ak (r36+r95+r58+r66+r69)/r146&gt;= 0,90 a zároveň r146&gt;0 potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak (menej ako 90%) r116=Max(0,r90+r105+r115+ r. 28 Prílohy 2). Ostatní (rezident a nerezident nedôchodca): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom ak r117=0 a r123=0 súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 €, potom r116=0. Inak r116=r90+r105+r115+Pr2r28 r. 28 Prílohy 2. Inak (jednoduché účtovníctvo): Ak r117=0 a r123=0 a súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 € alebo ak (r117=0 a r123=0 a súčasne (r36+r95+r58+r66+r69+r.6 stĺ. 1 Príloha 2 + r. 24 stĺ.1 Príloha )&lt;=2 823,24), potom r116=0. Inak r116=Max(0,r90+r105+r115+ r.28 Prílohy 2)." type="text" class="textBox" maxlength="11" size="163"  alt="Nerezident dôchodca (zaškrtnuté políčko nerezident a súčasne r29): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak ak (r36+r95+r58+r66+r69)/r146&gt;= 0,90 a zároveň r146&gt;0 potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak (menej ako 90%) r116=Max(0,r90+r105+r115+ r. 28 Prílohy 2). Ostatní (rezident a nerezident nedôchodca): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom ak r117=0 a r123=0 súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 €, potom r116=0. Inak r116=r90+r105+r115+Pr2r28 r. 28 Prílohy 2. Inak (jednoduché účtovníctvo): Ak r117=0 a r123=0 a súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 € alebo ak (r117=0 a r123=0 a súčasne (r36+r95+r58+r66+r69+r.6 stĺ. 1 Príloha 2 + r. 24 stĺ.1 Príloha )&lt;=2 823,24), potom r116=0. Inak r116=Max(0,r90+r105+r115+ r.28 Prílohy 2)." value=""  ></input></span>	
+		<label class="fieldLabel" title="" for="t116" style="display: none">riadok 116 </label><span class="fieldContent"><input  id="t116" name="t116" title="Nerezident dôchodca (zaškrtnuté políčko nerezident a súčasne r29): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak ak (r36+r95+r58+r66+r69)/r146&gt;= 0,90 a zároveň r146&gt;0 potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak (menej ako 90%) r116=Max(0,r90+r105+r115+ r. 28 Prílohy 2). Ostatní (rezident a nerezident nedôchodca): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom ak r117=0 a r123=0 súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 €, potom r116=0. Inak r116=r90+r105+r115+Pr2r28 r. 28 Prílohy 2. Inak (jednoduché účtovníctvo): Ak r117=0 a r123=0 a súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 € alebo ak [r117=0 a r123=0 a súčasne (r36+r95+r58+r66+r69+r.6 stĺ. 1 Príloha 2 + r. 24 stĺ.1 Príloha 2)&lt;=2 823,24], potom r116=0. Inak r116=Max(0,r90+r105+r115+ r.28 Prílohy 2)." type="text" class="textBox" maxlength="11" size="163"  alt="Nerezident dôchodca (zaškrtnuté políčko nerezident a súčasne r29): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak ak (r36+r95+r58+r66+r69)/r146&gt;= 0,90 a zároveň r146&gt;0 potom pre r116 sa minimálna výška dane počíta ako u rezidenta. Inak (menej ako 90%) r116=Max(0,r90+r105+r115+ r. 28 Prílohy 2). Ostatní (rezident a nerezident nedôchodca): Ak (je vyplnený r41 alebo r42 bez vyplnenia r39 a r40) alebo (je vyplnený r61 alebo r62 bez vyplnenia r58 a r59) (podvojné účtovníctvo), potom ak r117=0 a r123=0 súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 €, potom r116=0. Inak r116=r90+r105+r115+Pr2r28 r. 28 Prílohy 2. Inak (jednoduché účtovníctvo): Ak r117=0 a r123=0 a súčasne r90+r105+r115+ r. 28 Prílohy 2&lt;=17 € alebo ak [r117=0 a r123=0 a súčasne (r36+r95+r58+r66+r69+r.6 stĺ. 1 Príloha 2 + r. 24 stĺ.1 Príloha 2)&lt;=2 823,24], potom r116=0. Inak r116=Max(0,r90+r105+r115+ r.28 Prílohy 2)." value=""  ></input></span>	
 		<div class="clear"></div>
 </div>							
 						
