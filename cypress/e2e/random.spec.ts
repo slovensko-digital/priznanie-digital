@@ -220,48 +220,54 @@ describe('Random inputs', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
   Array.from({ length: 500 }).forEach((_, i) => {
-    it(`should pass random input ${i}`, {
-      retries: {
-        runMode: 0,
-        openMode: 0,
-      }
-    }, (done) => {
-      const input = randomInput()
-      cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
-      const filePath = `cypress/downloads/randomOutput${i}.xml`
-      cy.request({
-        method: 'POST',
-        url: 'http://localhost:3000/api/xml',
-        body: {
-          taxFormUserInput: input,
+    it(
+      `should pass random input ${i}`,
+      {
+        retries: {
+          runMode: 0,
+          openMode: 0,
         },
-      })
-        .then((response) => {
-          cy.writeFile(filePath, response.body, 'utf-8')
+      },
+      (done) => {
+        const input = randomInput()
+        cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
+        const filePath = `cypress/downloads/randomOutput${i}.xml`
+        cy.request({
+          method: 'POST',
+          url: 'http://localhost:3000/api/xml',
+          body: {
+            taxFormUserInput: input,
+          },
         })
-        .then(() => {
-          /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.601.html')
-          // Ignore uncaught exceptions in the 3rd party form code
-          cy.on('uncaught:exception', (err, runnable) => {
-            // returning false here prevents Cypress
-            // inside the cy.origin() method from failing the test
-            return false
+          .then((response) => {
+            cy.writeFile(filePath, response.body, 'utf-8')
           })
+          .then(() => {
+            /**  Validate our results with the FS form */
+            cy.visit('http://localhost:3000/form/form.601.html')
+            // Ignore uncaught exceptions in the 3rd party form code
+            cy.on('uncaught:exception', (err, runnable) => {
+              // returning false here prevents Cypress
+              // inside the cy.origin() method from failing the test
+              return false
+            })
 
-          const stub = cy.stub()
-          cy.on('window:alert', stub)
+            const stub = cy.stub()
+            cy.on('window:alert', stub)
 
-          cy.get('#form-button-load').click()
-          cy.get('#form-buttons-load-dialog > input').selectFile(filePath)
+            cy.get('#form-button-load').click()
+            cy.get('#form-buttons-load-dialog > input').selectFile(filePath)
 
-          cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
-          cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
-          cy.get('#form-button-validate').click().should(formSuccessful(stub))
-          cy.get('#errorsContainer')
-            .should((el) => expect(el.text()).to.be.empty)
-            .then(() => done())
-        })
-    })
+            cy.get(
+              '#form-buttons-load-dialog-confirm > .ui-button-text',
+            ).click()
+            cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
+            cy.get('#form-button-validate').click().should(formSuccessful(stub))
+            cy.get('#errorsContainer')
+              .should((el) => expect(el.text()).to.be.empty)
+              .then(() => done())
+          })
+      },
+    )
   })
 })
