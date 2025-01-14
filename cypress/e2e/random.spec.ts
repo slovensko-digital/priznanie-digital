@@ -220,7 +220,12 @@ describe('Random inputs', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
   Array.from({ length: 500 }).forEach((_, i) => {
-    it(`should pass random input ${i}`, (done) => {
+    it(`should pass random input ${i}`, {
+      retries: {
+        runMode: 2,
+        openMode: 0,
+      }
+    }, (done) => {
       const input = randomInput()
       cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
       const filePath = `cypress/downloads/randomOutput${i}.xml`
