@@ -52,6 +52,6 @@ export const bugReport5Input: E2eTestUserInput = {
   datum: '',
   r006_titul_za: '',
 
-  percent2: '74,82',
+  percent2: '55,07',
   percent3: '112,23',
 }
