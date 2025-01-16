@@ -934,6 +934,8 @@ export const buildSummary = (form: TaxForm): Summary => {
     prispevkyNaDochodkovePoistenie:
       form.r075_zaplatene_prispevky_na_dochodok.negated(),
     zakladDane: form.r078_zaklad_dane_zo_zamestnania.plus(form.r092),
+    // dohody
+    prijemDohody: form.r036a,
     // prenajom
     prijemNehnutelnost: form.t1r11s1,
     vydavkyNehnutelnost: form.t1r11s2.negated(),
