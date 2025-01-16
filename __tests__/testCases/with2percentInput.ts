@@ -22,6 +22,6 @@ export const with2percentInput: E2eTestUserInput = {
   r142_obchMeno: 'Slovensko.Digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '9,23',
+  percent2: '7,06',
   percent3: '13,85',
 }
