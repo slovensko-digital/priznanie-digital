@@ -12987,12 +12987,6 @@ var retval = ("'r. 149': Ak je vyplnený, potom musí byť zaškrtnutý r. 12 (n
 				validatorObject.settings.messages['t150']['customW'] = vypocet_t150_T1(sid);
 				iserr = true;
 			}
-				
-			if (!iserr && !vypocet_t150_C2(sid))
-			{
-				validatorObject.settings.messages['t150']['customW'] = vypocet_t150_T2(sid);
-				iserr = true;
-			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cbNerezident'));
@@ -13037,17 +13031,6 @@ var retval = (((Math.round(100.0000000000001*(t_t150))>Math.round(100.0000000000
 			}
 			function vypocet_t150_T1(sid) {
 var retval = ("'r. 150': Ak je vyplnený, potom musí byť zaškrtnutý r. 12 (nerezident) a vyplnené polia 'Od'  -  'Do'  v riadku 12 na 1. strane daňového priznania.");
-				return retval; //;
-			}
-				
-			function vypocet_t150_C2(sid) {
-			var t_t149 = hodnota(null, 't149','n',sid,'layoutRow39757','b');
-			var t_t150 = hodnota(null, 't150','n',sid,'layoutRow39757','d12.2');
-var retval = (((Math.round(100.0000000000001*(t_t149))==Math.round(100.0000000000001*(1))&&Math.round(100.0000000000001*(t_t150))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_t149))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t150))==Math.round(100.0000000000001*(0)))));
-				return retval;
-			}
-			function vypocet_t150_T2(sid) {
-var retval = ("'r. 150': má byť >0, ak je zaškrtnutý r.149.");
 				return retval; //;
 			}
 		function kontrola_tbPr3S1(element, sid, dblclick) {		
