@@ -17,4 +17,5 @@ export interface Summary {
   prijemNehnutelnost: Decimal
   vydavkyNehnutelnost: Decimal
   zakladDanZPrenajmu: Decimal
+  prijemDohody: Decimal
 }

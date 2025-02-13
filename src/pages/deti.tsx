@@ -136,11 +136,6 @@ const Deti: Page<ChildrenUserInput> = ({
                   </p>
                 </Details>
                 <p className="govuk-hint">
-                  Za mesiace január až apríl 2023 je možné uplatniť daňový bonus
-                  len v prípade, ak sa na vyživované dieťa neposkytla dotácia na
-                  podporu výchovy k stravovacím návykom dieťaťa.
-                </p>
-                <p className="govuk-hint">
                   Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
                 </p>
 
@@ -285,7 +280,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             </div>
                             <h2 className="govuk-heading-m">
                               Akým spôsobom vysporiada/la svoje zdaniteľné
-                              príjmy druhá oprávnená osoba za rok 2023?
+                              príjmy druhá oprávnená osoba za rok {TAX_YEAR}?
                             </h2>
                             <Select
                               name="partner_bonus_na_deti_typ_prijmu"
@@ -353,8 +348,8 @@ const AttachmentWarning = ({ prijem }) => {
   if (prijem === '4') {
     return (
       <Warning>
-        Ako prílohu k vášmu daňovému priznani je potrebné priložiť kópiu dokladu
-        preukazujúceho výšku základu dane druhej oprávnenej osoby.
+        Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu
+        dokladu preukazujúceho výšku základu dane druhej oprávnenej osoby.
       </Warning>
     )
   }

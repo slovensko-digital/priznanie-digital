@@ -59,6 +59,6 @@ export const withHighIncome3Input: E2eTestUserInput = {
   r142_obchMeno: 'Slovensko.Digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '520,42',
+  percent2: '505,80',
   percent3: '780,63',
 }

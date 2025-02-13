@@ -165,7 +165,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   allignRight: true,
                 },
                 {
-                  title: 'Údaje o daňovom bonuse na dieťa',
+                  title: 'Daňový bonus na dieťa',
                   value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
                   allignRight: true,
@@ -211,7 +211,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   allignRight: true,
                 },
                 {
-                  title: 'Údaje o daňovom bonuse na dieťa z dohôd',
+                  title: 'Daňový bonus na dieťa',
                   value: taxFormUserInput.udajeODanovomBonuseNaDietaDohody,
                   currency: true,
                   allignRight: true,
@@ -349,7 +349,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
                 },
               ]
-            : [{ title: 'Neplatil som' }]
+            : [{ title: 'Neuplatňujem daňový bonus' }]
         }
       />
       <Summary

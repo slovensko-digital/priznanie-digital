@@ -95,5 +95,5 @@ export const bugReport22Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '13.78',
   expectNgoDonationValue: true,
-  percent2: '115,27',
+  percent2: '107,26',
 }
