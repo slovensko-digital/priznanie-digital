@@ -19961,14 +19961,6 @@ var retval = ("'r. 96': má byť rovný r.94 * 0,15 ak je r. 94>0 a súčasne r.
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
 							for (var ii = 0; ii <= layoutSiblings.length; ii++)
 							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
 								validatorObject.element(document.getElementById(GetIncrementalValue('odd13Prijmy',ii)));
 							}
 						}
@@ -20214,14 +20206,6 @@ var retval = ("'r. 99': nemôže byť vyplnený  ak je r. 97 = 0 alebo nie je vy
 				validatorObject.element(document.getElementById('t102'));
 				validatorObject.element(document.getElementById('t103'));
 				validatorObject.element(document.getElementById('t104'));
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
 						{
 							var layoutSecDivDep = $("#layoutRow39930");
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
@@ -29139,12 +29123,6 @@ var retval = ("'XIII. oddiel z toho výdavky': má byť >=0 a súčasne <= Výda
 				validatorObject.settings.messages['odd13kod']['customW'] = vypocet_odd13kod_T1(sid);
 				iserr = true;
 			}
-				
-			if (!iserr && !vypocet_odd13kod_C2(sid))
-			{
-				validatorObject.settings.messages['odd13kod']['customW'] = vypocet_odd13kod_T2(sid);
-				iserr = true;
-			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				errorValidateFocusOut = true;
@@ -29175,23 +29153,6 @@ var retval = ((Math.round(100.0000000000001*(t_odd13kod))>=Math.round(100.000000
 				return retval;
 			}
 			function vypocet_odd13kod_T1(sid) {
-var retval = ("");
-				return retval; //+ ' na strane ' + sid ;
-			}
-				
-			function vypocet_odd13kod_C2(sid) {
-			var t_t82 = hodnota(null, 't82','n',sid,'layoutRow39757','d12.2');
-			var t_t85 = hodnota(null, 't85','n',sid,'layoutRow39757','d12.2');
-			var t_t97 = hodnota(null, 't97','n',sid,'layoutRow39757','d12.2');
-			var t_t100 = hodnota(null, 't100','n',sid,'layoutRow39757','d12.2');
-			var t_t107 = hodnota(null, 't107','n',sid,'layoutRow39757','d12.2');
-			var t_t110 = hodnota(null, 't110','n',sid,'layoutRow39757','d12.2');
-			var t_tbpr2_10 = hodnota(null, 'tbPr2_10','n',sid,'layoutRow39757','d16.2');
-			var t_tbpr2_13 = hodnota(null, 'tbPr2_13','n',sid,'layoutRow39757','d16.2');
-var retval = ((((Math.round(100.0000000000001*(t_t82))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t85))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t97))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t100))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t107))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t110))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_10))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_13))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(inlinexiii('odd13kod',sid)))==Math.round(100.0000000000001*(1)))||(Math.round(100.0000000000001*(t_t82))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t85))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t97))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t100))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t107))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t110))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_10))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_13))<=Math.round(100.0000000000001*(0)))));
-				return retval;
-			}
-			function vypocet_odd13kod_T2(sid) {
 var retval = ("");
 				return retval; //+ ' na strane ' + sid ;
 			}
@@ -29265,6 +29226,12 @@ var retval = ("'XIII. oddiel Druh príjmu/§': má byť vyplnený ak sú vyplnen
 				validatorObject.settings.messages['odd13Prijmy']['customW'] = vypocet_odd13prijmy_T2(sid);
 				iserr = true;
 			}
+				
+			if (!iserr && !vypocet_odd13prijmy_C3(sid))
+			{
+				validatorObject.settings.messages['odd13Prijmy']['customW'] = vypocet_odd13prijmy_T3(sid);
+				iserr = true;
+			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',sid)));
@@ -29309,11 +29276,28 @@ var retval = ("'XIII. oddiel Príjmy': má byť >=0 "+hlaskaXIII(sid)+"");
 			var t_t110 = hodnota(null, 't110','n',sid,'layoutRow39757','d12.2');
 			var t_tbpr2_10 = hodnota(null, 'tbPr2_10','n',sid,'layoutRow39757','d16.2');
 			var t_tbpr2_13 = hodnota(null, 'tbPr2_13','n',sid,'layoutRow39757','d16.2');
-var retval = ((((Math.round(100.0000000000001*(t_t82))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t85))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t97))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t100))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t107))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t110))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_10))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_13))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(inlinexiii('odd13Prijmy',sid)))==Math.round(100.0000000000001*(1)))||(Math.round(100.0000000000001*(t_t82))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t85))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t97))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t100))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t107))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t110))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_13))<=Math.round(100.0000000000001*(0)))));
+var retval = ((((Math.round(100.0000000000001*(t_t82))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t85))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t97))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t100))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t107))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t110))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_10))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_13))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(inlinexiii('odd13Prijmy',sid)))==Math.round(100.0000000000001*(1)))||(Math.round(100.0000000000001*(t_t82))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t85))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t97))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t100))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t107))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t110))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_10))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_13))<=Math.round(100.0000000000001*(0)))));
 				return retval;
 			}
 			function vypocet_odd13prijmy_T2(sid) {
 var retval = (" Ak je aspoň jeden z riadkov r.82, r.85, r.97, r.100, r.107,  r.110, prílohač.2 r.10 alebo príloha č.2 r.13 väčší ako nula, tak vyplňte v XIII. oddiele údaje o príjmoch zo zdrojov v zahraničí. ");
+				return retval; //+ ' na strane ' + sid ;
+			}
+				
+			function vypocet_odd13prijmy_C3(sid) {
+			var t_t82 = hodnota(null, 't82','n',sid,'layoutRow39757','d12.2');
+			var t_t85 = hodnota(null, 't85','n',sid,'layoutRow39757','d12.2');
+			var t_t97 = hodnota(null, 't97','n',sid,'layoutRow39757','d12.2');
+			var t_t100 = hodnota(null, 't100','n',sid,'layoutRow39757','d12.2');
+			var t_t107 = hodnota(null, 't107','n',sid,'layoutRow39757','d12.2');
+			var t_t110 = hodnota(null, 't110','n',sid,'layoutRow39757','d12.2');
+			var t_tbpr2_10 = hodnota(null, 'tbPr2_10','n',sid,'layoutRow39757','d16.2');
+			var t_tbpr2_13 = hodnota(null, 'tbPr2_13','n',sid,'layoutRow39757','d16.2');
+var retval = ((((Math.round(100.0000000000001*(t_t82))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t85))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t97))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t100))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t107))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t110))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_10))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_tbpr2_13))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(inlinexiii('odd13Prijmy',sid)))==Math.round(100.0000000000001*(1)))||(Math.round(100.0000000000001*(t_t82))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t85))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t97))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t100))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t107))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t110))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_10))<=Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpr2_13))<=Math.round(100.0000000000001*(0)))));
+				return retval;
+			}
+			function vypocet_odd13prijmy_T3(sid) {
+var retval = ("");
 				return retval; //+ ' na strane ' + sid ;
 			}
 		function kontrola_odd13Vydavky(element, sid, dblclick) {		
@@ -32740,14 +32724,6 @@ var retval = ("'r. 106': má byť rovný 19% z r68. Zaokrúhľuje sa matematicky
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
 							for (var ii = 0; ii <= layoutSiblings.length; ii++)
 							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
 								validatorObject.element(document.getElementById(GetIncrementalValue('odd13Prijmy',ii)));
 							}
 						}
@@ -32995,14 +32971,6 @@ var retval = ("'r. 109': nemôže byť vyplnený  ak je r. 107 = 0 alebo  nie je
 				validatorObject.element(document.getElementById('t112'));
 				validatorObject.element(document.getElementById('t113'));
 				validatorObject.element(document.getElementById('t114'));
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
 						{
 							var layoutSecDivDep = $("#layoutRow39930");
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
@@ -35165,14 +35133,6 @@ var retval = ("'Príloha č.2 r.09': má byť výsledkom (r.07 * r.08)/100. Suma
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
 							for (var ii = 0; ii <= layoutSiblings.length; ii++)
 							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
 								validatorObject.element(document.getElementById(GetIncrementalValue('odd13Prijmy',ii)));
 							}
 						}
@@ -35630,14 +35590,6 @@ var retval = ("'Príloha č.2 r.12': má byť výsledkom (r.11 * r.08)/100. Suma
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cbNerezident'));
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
 						{
 							var layoutSecDivDep = $("#layoutRow39930");
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
@@ -39903,14 +39855,6 @@ var retval = ("'r. 91': má byť rovný r.77 – r.38, ak je r.78=0. Inak r. 91=
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
 							for (var ii = 0; ii <= layoutSiblings.length; ii++)
 							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
 								validatorObject.element(document.getElementById(GetIncrementalValue('odd13Prijmy',ii)));
 							}
 						}
@@ -40472,14 +40416,6 @@ var retval = ("'r. 84': má byť  prázdny ak je prázdny  r.82.");
 				validatorObject.element(document.getElementById('t83'));
 				validatorObject.element(document.getElementById('t84'));
 				validatorObject.element(document.getElementById('t90'));
-						{
-							var layoutSecDivDep = $("#layoutRow39930");
-							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
-							for (var ii = 0; ii <= layoutSiblings.length; ii++)
-							{
-								validatorObject.element(document.getElementById(GetIncrementalValue('odd13kod',ii)));
-							}
-						}
 						{
 							var layoutSecDivDep = $("#layoutRow39930");
 							var layoutSiblings = layoutSecDivDep.siblings('div[id^=layoutRow39930' + repeatingPostfix + ']');
