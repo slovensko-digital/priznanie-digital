@@ -424,7 +424,7 @@ const ChildForm = ({
       <Input
         name={`children[${index}].priezviskoMeno` as any}
         type="text"
-        label="Meno a priezvisko"
+        label="Priezvisko a meno"
       />
       <Input
         name={`children[${index}].rodneCislo` as any}
