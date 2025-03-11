@@ -100,7 +100,7 @@ export const validate = (values: PartnerUserInput) => {
 
     if (!values.r032_partner_pocet_mesiacov) {
       errors.r032_partner_pocet_mesiacov =
-        'Zadajte počet mesiacov, kedy mal/a manželka / manžel príjem.'
+        'Zadajte počet mesiacov, kedy manžel/manželka spĺňal/spĺňala podmienky na uplatnenie daňového bonusu.'
     } else if (
       !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
       Number.parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
