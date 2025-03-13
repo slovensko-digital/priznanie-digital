@@ -34957,7 +34957,7 @@ var retval = (((Math.round(100.0000000000001*(t_tbpr2_07))>Math.round(100.000000
 				return retval;
 			}
 			function vypocet_tbpr2_08_T0(sid) {
-var retval = ("'Príloha č.2 r.08':Sadzba dane môže byť len 7 alebo 10%.");
+var retval = ("'Príloha č.2 r.08':Sadzba dane môže byť len 7 alebo 10%. Sadzba dane sa neuvedie, ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane. Výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka.");
 				return retval; //;
 			}
 		function kontrola_tbPr2_09(element, sid, dblclick) {		
@@ -35093,7 +35093,7 @@ var retval = ((Math.round(100.0000000000001*(t_tbpr2_09))==Math.round(100.000000
 				return retval;
 			}
 			function vypocet_tbpr2_09_T2(sid) {
-var retval = ("'Príloha č.2 r.09': má byť výsledkom (r.07 * r.08)/100. Suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta ("+(inlinerpr2r09('tbPr2_09',sid))+")");
+var retval = ("'Príloha č.2 r.09': má byť výsledkom (r.07 * r.08)/100. Suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta ("+(inlinerpr2r09('tbPr2_09',sid))+") . Ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane a v riadku 08 sa sadzba dane neuvedie, výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a výsledok výpočtu sa uvedie v tomto riadku. Uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka.");
 				return retval; //;
 			}
 		function kontrola_tbPr2_10(element, sid, dblclick) {		
@@ -55698,7 +55698,7 @@ customW: ""
 											
 <div id="layoutCell160263" class="cell " >		
 			
-		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup> 1)</sup></label><br />	
+		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup>1)</sup></label><br />	
 		<div class="clear"></div>
 </div>							
 						
@@ -70325,7 +70325,7 @@ prostriedkov) v inom formáte ako IBAN, uvádza v XIII. oddiele číslo účtu, 
 											
 <div id="layoutCell161617" class="cell  textNapravo" >		
 			
-		<label class="fieldLabel" title="" for="tbPr2_08" style="display: none">Príloha 2 - riadok 08 </label><span class="fieldContent"><input  id="tbPr2_08" name="tbPr2_08" title=" Môže byť len číslo 7 alebo 10. Sadzba dane môže byť len 7 alebo 10%. Nezáporné číslo." type="text" class="textBox" maxlength="2" size="261"  alt=" Môže byť len číslo 7 alebo 10. Sadzba dane môže byť len 7 alebo 10%. Nezáporné číslo." value=""  ></input></span>	
+		<label class="fieldLabel" title="" for="tbPr2_08" style="display: none">Príloha 2 - riadok 08 </label><span class="fieldContent"><input  id="tbPr2_08" name="tbPr2_08" title="Môže byť len číslo 7 alebo 10. Sadzba dane môže byť len 7 alebo 10%. Nezáporné číslo. Sadzba dane sa neuvedie, ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane. Výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka." type="text" class="textBox" maxlength="2" size="261"  alt="Môže byť len číslo 7 alebo 10. Sadzba dane môže byť len 7 alebo 10%. Nezáporné číslo. Sadzba dane sa neuvedie, ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane. Výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka." value=""  ></input></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -70370,7 +70370,7 @@ prostriedkov) v inom formáte ako IBAN, uvádza v XIII. oddiele číslo účtu, 
 											
 <div id="layoutCell161621" class="cell  textNapravo" >		
 			
-		<label class="fieldLabel" title="" for="tbPr2_09" style="display: none">Príloha 2 - riadok 09 </label><span class="fieldContent"><input  id="tbPr2_09" name="tbPr2_09" title="R9 = R7 * R8 / 100, suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta.  Nezáporné desatinné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="11" size="261"  alt="R9 = R7 * R8 / 100, suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta.  Nezáporné desatinné číslo s dvoma desatinnými miestami." value=""  ></input></span>	
+		<label class="fieldLabel" title="" for="tbPr2_09" style="display: none">Príloha 2 - riadok 09 </label><span class="fieldContent"><input  id="tbPr2_09" name="tbPr2_09" title="R9 = R7 * R8 / 100, suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta. Ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane a v riadku 08 sa sadzba dane neuvedie, výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a výsledok výpočtu sa uvedie v tomto riadku. Uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka. Nezáporné desatinné číslo s dvoma desatinnými miestami." type="text" class="textBox" maxlength="11" size="261"  alt="R9 = R7 * R8 / 100, suma zaokrúhlená matematicky s presnosťou na dve desatinné miesta. Ak sú v riadku 07 zahrnuté príjmy (výnosy) zdaňované rozdielnou sadzbou dane a v riadku 08 sa sadzba dane neuvedie, výpočet dane podľa jednotlivých sadzieb dane sa vykoná samostatne a výsledok výpočtu sa uvedie v tomto riadku. Uvedené skutočnosti sa uvedú v XIII. Oddiele – Miesto na osobitné záznamy daňovníka. Nezáporné desatinné číslo s dvoma desatinnými miestami." value=""  ></input></span>	
 		<div class="clear"></div>
 </div>							
 						
