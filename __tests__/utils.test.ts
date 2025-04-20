@@ -104,9 +104,9 @@ describe('utils', () => {
 
   describe('#formatCurrency', () => {
     const scenarios = [
-      { input: 1234.564, output: '1 234,56 EUR' },
+      { input: 1234.564, output: '1\u00A0234,56 EUR' },
       { input: 123.455, output: '123,46 EUR' },
-      { input: 1000000, output: '1 000 000,00 EUR' },
+      { input: 1000000, output: '1\u00A0000\u00A0000,00 EUR' },
     ]
 
     scenarios.forEach(({ input, output }) => {
