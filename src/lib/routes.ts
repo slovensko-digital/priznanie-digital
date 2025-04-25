@@ -110,7 +110,7 @@ export const validateRoute = (
   taxForm: TaxForm,
   taxFormUserInput: TaxFormUserInput,
   postponeUserInput: PostponeUserInput,
-  isDebug: boolean = false,
+  isDebug = false,
 ) => {
   if (!isDebug) {
     const isPostponeRoute = router.route.match(/\/odklad\//)

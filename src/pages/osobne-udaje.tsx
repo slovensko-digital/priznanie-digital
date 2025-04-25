@@ -39,7 +39,7 @@ const makeHandlePersonAutoform = ({
       country
 
     if (subject.statutory.length > 0) {
-      ;({
+      ({
         first_name,
         last_name,
         prefixes,

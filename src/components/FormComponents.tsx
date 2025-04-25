@@ -23,7 +23,7 @@ export const FormWrapper = <FormikInput extends FormikValues>({
     const errors = formikProps.validate(values)
     const firstError = errors && Object.keys(errors)[0]
     if (firstError) {
-      ;(document.querySelector(`#${firstError}`) as HTMLInputElement)?.focus()
+      (document.querySelector(`#${firstError}`) as HTMLInputElement)?.focus()
     }
     return errors
   }
@@ -66,7 +66,7 @@ export const Input = <Name extends keyof UserInput>({
     if (type === 'number') {
       return {
         pattern: numberInputRegexp,
-        inputMode: 'numeric' as 'numeric',
+        inputMode: 'numeric' as const,
         spellCheck: false,
       }
     }

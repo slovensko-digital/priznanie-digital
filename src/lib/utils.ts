@@ -140,7 +140,7 @@ export const getRodneCisloAgeAtYearAndMonth = (
   const dateMonth = date.getMonth()
   // const dateDay = date.getDate()
 
-  var age = dateYear - rc.year()
+  const age = dateYear - rc.year()
 
   if (dateMonth > rc.month()) {
     return age

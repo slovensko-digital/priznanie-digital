@@ -65,7 +65,7 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          let userInput = values.hasChildren
+          const userInput = values.hasChildren
             ? values
             : {
                 ...childrenUserInputInitialValues,

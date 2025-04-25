@@ -838,7 +838,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         this.r116_dan.gt(17) ||
         (this.r116_dan.lte(17) && (this.r117.gt(0) || this.r123.gt(0)))
       const base = podmienka ? this.r116_dan : new Decimal(0)
-      let tax = base
+      const tax = base
         .minus(this.r117)
         .plus(this.r119)
         .plus(this.r121)
