@@ -70,34 +70,16 @@ jobs:
         containers: [1, 2, 3, 4, 5]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@master
-        with:
-          submodules: 'recursive'
+      - uses: actions/checkout@v4
 
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
+      - name: Enable Corepack
+        run: corepack enable
 
-      - name: Use Node.js (.nvmrc)
-        uses: actions/setup-node@master
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.nvm.outputs.NVMRC }}'
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules-and-next
-        with:
-          path: |
-            ~/.yarn
-            ~/.cache/Cypress
-            ./node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          node-version: '22.x'
+          cache: 'yarn'
 
       - name: Install Dependencies
         run: yarn install --immutable
