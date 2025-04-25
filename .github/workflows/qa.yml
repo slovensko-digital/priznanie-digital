@@ -50,7 +50,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Unit Tests
         run: yarn test --ci
@@ -100,7 +100,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build
         run: yarn build
