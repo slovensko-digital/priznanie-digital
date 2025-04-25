@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   parserOptions: {
     project: ['./tsconfig.json', './cypress/tsconfig.json'],
   },
@@ -46,3 +46,5 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
   },
 }
+
+export default config;
