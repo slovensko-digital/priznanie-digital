@@ -64,7 +64,7 @@ jobs:
           git checkout -b update-form-${{ env.hash }}
 
           # Add all changes including untracked files in the specified directory
-          git add ./public/form.zip.md5 ./public/form || true
+          git add ./public/form.zip.md5 ./public/form dp.out
 
           # Ensure to include any other necessary files, adjust paths accordingly
           if [[ -n "$(git status --porcelain)" ]]; then
