@@ -61,7 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8] # Increased parallelism
 
     steps:
       - uses: actions/checkout@v4
@@ -74,6 +74,14 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'yarn'
+
+      - name: Cache Cypress Binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-
 
       - name: Install Dependencies
         run: yarn install --immutable
@@ -89,8 +97,6 @@ jobs:
           record: true
           parallel: true
           group: 'Functional Tests'
-          browser: chrome  # Add this line to specify a faster browser
-          wait-on-timeout: 120  # Increase timeout for better network stability
         env:
           PORT: 3000
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
