@@ -149,8 +149,11 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
     dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
 
-    pocetMesiacov: sumMonths.reduce((count, currentValue) => {
-      return count + (currentValue ? 1 : 0)
+    pocetMesiacov: sumMonths.reduce((count, isEligible, index) => {
+      if (index >= monthFrom && index <= monthTo && isEligible) {
+        return count + 1
+      }
+      return count
     }, 0),
   }
 }
