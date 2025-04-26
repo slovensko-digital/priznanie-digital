@@ -53,10 +53,13 @@ export const getStreetNumber = ({
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
   const roundNumber = decimalToString(new Decimal(value || 0))
+
+  const nbSpace = '\u00A0' // Unicode non-breaking space to prevent line breaks
+
   const formattedNumber = roundNumber
-    .replace(findPlaceForThousandsDivider, '\u00A0')
+    .replace(findPlaceForThousandsDivider, nbSpace)
     .replace('.', ',')
-  return `${formattedNumber} EUR`
+  return `${formattedNumber}${nbSpace}EUR`
 }
 
 export const numberInputRegexp = '^[0-9]+([,\\.][0-9]{1,2})?$'
