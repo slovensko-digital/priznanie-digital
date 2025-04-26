@@ -1,8 +1,8 @@
 name: Form Check
 
-on: push
-  # schedule:
-  #   - cron: '0 6 * * *'  # This cron expression runs the workflow every day at 6:00
+on:
+  schedule:
+    - cron: '0 6 * * *'  # This cron expression runs the workflow every day at 6:00
 
 env:
   CURRENT_FORM_VERSION: "DPFOBv24"
