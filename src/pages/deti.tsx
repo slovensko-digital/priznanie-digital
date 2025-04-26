@@ -33,7 +33,6 @@ import {
   CHILD_RATE_EIGHTEEN_AND_YOUNGER,
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
-  monthKeyValues,
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
@@ -261,22 +260,39 @@ const Deti: Page<ChildrenUserInput> = ({
                                 styles.inlineFieldContainer,
                               )}
                             >
-                              <Select
-                                name={`partner_bonus_na_deti_od`}
-                                label="Od"
-                                optionsWithValue={[
-                                  ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
-                                ]}
-                              />
-                              <Select
-                                name={`partner_bonus_na_deti_do`}
-                                label="Do"
-                                optionsWithValue={[
-                                  ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
-                                ]}
-                              />
+                              {/*<Select*/}
+                              {/*  name={`partner_bonus_na_deti_od`}*/}
+                              {/*  label="Od"*/}
+                              {/*  optionsWithValue={[*/}
+                              {/*    ...monthKeyValues(monthNames),*/}
+                              {/*    { name: '', value: '' },*/}
+                              {/*  ]}*/}
+                              {/*/>*/}
+                              {/*<Select*/}
+                              {/*  name={`partner_bonus_na_deti_do`}*/}
+                              {/*  label="Do"*/}
+                              {/*  optionsWithValue={[*/}
+                              {/*    ...monthKeyValues(monthNames),*/}
+                              {/*    { name: '', value: '' },*/}
+                              {/*  ]}*/}
+                              {/*/>*/}
+                              <div
+                                className={classnames(
+                                  styles.checkBoxRow,
+                                  'govuk-checkboxes govuk-checkboxes--small',
+                                )}
+                              >
+                                {monthNames.map((month, monthIndex) => (
+                                  <Checkbox
+                                    key={month}
+                                    name={`partner_bonus_na_deti_m0${
+                                      monthIndex + 1
+                                    }`}
+                                    label={month}
+                                    notInFormGroup
+                                  />
+                                ))}
+                              </div>
                             </div>
                             <h2 className="govuk-heading-m">
                               Akým spôsobom vysporiada/la svoje zdaniteľné
@@ -531,12 +547,15 @@ interface ChildFormErrors {
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
-  partner_bonus_na_deti_od?: string
-  partner_bonus_na_deti_do?: string
+  partner_bonus_na_deti_mesiace?: string
   partner_bonus_na_deti_typ_prijmu?: string
   r034_priezvisko_a_meno?: string
   r034_rodne_cislo?: string
   r034a?: string
+}
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 export const validate = (values: ChildrenUserInput) => {
@@ -585,7 +604,7 @@ export const validate = (values: ChildrenUserInput) => {
         childErrors.noMonthSelected =
           'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus'
         //scroll to the top where the error is shown
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        scrollToTop()
       }
 
       return childErrors
@@ -603,12 +622,23 @@ export const validate = (values: ChildrenUserInput) => {
           'Vyberte jednu z možností spôsobu vysporiadania príjmov'
       }
 
-      if (values.partner_bonus_na_deti_od === '') {
-        errors.partner_bonus_na_deti_od = 'Zadajte začiatok'
-      }
-
-      if (values.partner_bonus_na_deti_do === '') {
-        errors.partner_bonus_na_deti_do = 'Zadajte koniec'
+      if (
+        !values.partner_bonus_na_deti_m01 &&
+        !values.partner_bonus_na_deti_m02 &&
+        !values.partner_bonus_na_deti_m03 &&
+        !values.partner_bonus_na_deti_m04 &&
+        !values.partner_bonus_na_deti_m05 &&
+        !values.partner_bonus_na_deti_m06 &&
+        !values.partner_bonus_na_deti_m07 &&
+        !values.partner_bonus_na_deti_m08 &&
+        !values.partner_bonus_na_deti_m09 &&
+        !values.partner_bonus_na_deti_m10 &&
+        !values.partner_bonus_na_deti_m11 &&
+        !values.partner_bonus_na_deti_m12
+      ) {
+        errors.partner_bonus_na_deti_mesiace =
+          'Vyberte mesiace v ktorych si partner uplatňuje daňový bonus'
+        scrollToTop()
       }
 
       if (!values.r034_priezvisko_a_meno) {

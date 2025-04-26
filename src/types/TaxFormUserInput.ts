@@ -129,7 +129,19 @@ export interface TaxFormUserInput {
   r034_rodne_cislo?: string
   r034a?: string
   partner_bonus_na_deti_typ_prijmu?: '1' | '2' | '3' | '4' | '0'
-  partner_bonus_na_deti_od?: string
+  partner_bonus_na_deti_m01?: boolean
+  partner_bonus_na_deti_m02?: boolean
+  partner_bonus_na_deti_m03?: boolean
+  partner_bonus_na_deti_m04?: boolean
+  partner_bonus_na_deti_m05?: boolean
+  partner_bonus_na_deti_m06?: boolean
+  partner_bonus_na_deti_m07?: boolean
+  partner_bonus_na_deti_m08?: boolean
+  partner_bonus_na_deti_m09?: boolean
+  partner_bonus_na_deti_m10?: boolean
+  partner_bonus_na_deti_m11?: boolean
+  partner_bonus_na_deti_m12?: boolean
+
   partner_bonus_na_deti_do?: string
   children: ChildInput[]
 
