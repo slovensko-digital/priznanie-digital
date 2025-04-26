@@ -67,7 +67,7 @@ jobs:
       matrix:
         # run multiple copies of the current job in parallel
         # Cypress seems to run on all but one machines defined here
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
       - uses: actions/checkout@v4
