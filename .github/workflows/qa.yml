@@ -5,14 +5,18 @@ on:
     branches: [ master ]
 
 jobs:
-  setup:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Enable Corepack
         run: corepack enable
 
-      - uses: actions/setup-node@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           cache: 'yarn'
@@ -20,33 +24,39 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable
 
-      - name: Cache Cypress Binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+      - name: Lint
+        run: yarn lint
+
+      - name: Prettier
+        run: yarn prettier
+
+      - name: TypeScript
+        run: yarn check:ts
 
   unit:
-    name: Unit Tests
-    needs: setup
+    name: Unit tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # Assuming you have split tests into multiple groups
-        group: [group1, group2, group3]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js and Install Dependencies
-        uses: ./.github/actions/setup.yml
+      - name: Enable Corepack
+        run: corepack enable
 
-      - name: Run Unit Tests (Group ${{ matrix.group }})
-        run: yarn test --ci --group=$GROUP
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Unit Tests
+        run: yarn test --ci
 
   functional:
-    name: Functional Tests
-    needs: setup
+    name: Functional tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -56,8 +66,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js and Install Dependencies
-        uses: ./.github/actions/setup.yml
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --immutable
 
       - name: Build
         run: yarn build
@@ -70,6 +89,8 @@ jobs:
           record: true
           parallel: true
           group: 'Functional Tests'
+          browser: chrome  # Add this line to specify a faster browser
+          wait-on-timeout: 120  # Increase timeout for better network stability
         env:
           PORT: 3000
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
@@ -81,6 +102,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: cypress-downloads-folder-${{ matrix.containers }}
+          name: cypress-downloads-folder-${{ strategy.job-index }}
           path: cypress/downloads/
           retention-days: 90
