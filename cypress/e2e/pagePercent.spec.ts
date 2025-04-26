@@ -365,7 +365,7 @@ describe("twoPercent page", () => {
     next();
 
     // When presses yes, additional fields appear
-    cy.get("[data-test=dve_percenta_podporujem-inu-input]").click();
+    cy.get("[data-test=dve_percenta_podporujem-ano-inu-input]").click();
 
     /** With autoform */
     getInput("r142_obchMeno").type("Lifestarter");
