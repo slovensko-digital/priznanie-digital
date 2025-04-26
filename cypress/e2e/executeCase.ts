@@ -314,7 +314,7 @@ const executeTestCase = (testCase: string) => {
               cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
             }
           } else {
-            cy.get('[data-test="dve_percenta_podporujem-input-no"]').click()
+            cy.get('[data-test="dve_percenta_podporujem-nie-input"]').click()
           }
         }
 
