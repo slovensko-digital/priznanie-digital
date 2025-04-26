@@ -173,7 +173,7 @@ describe('twoPercent page', () => {
     getError().should('have.length', 1)
 
     // When presses yes, additional fields appear
-    cy.get('[data-test=dve_percenta_podporujem-inu-input]').click()
+    cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
     // All aditional fields should be required
     next()
@@ -369,7 +369,7 @@ describe('twoPercent page', () => {
     next()
 
     // When presses yes, additional fields appear
-    cy.get('[data-test=dve_percenta_podporujem-inu-input]').click()
+    cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
     /** With autoform */
     getInput('r142_obchMeno').type('Lifestarter')
