@@ -94,28 +94,37 @@ const makeMapChild =
   }
 
 const mapPartnerChildBonus = (input: ChildrenUserInput) => {
-  const processedChildrenData = input.children.map(childInput => {
+  const processedChildrenData = input.children.map((childInput) => {
     let months = []
     for (let i = 0; i < 12; i++) {
-      const age = getRodneCisloAgeAtYearAndStartOfMonth(childInput.rodneCislo.replace(/\D/g, ''), TAX_YEAR, i)
-      if(age==-1 || age > MAX_CHILD_AGE_BONUS) {
+      const age = getRodneCisloAgeAtYearAndStartOfMonth(
+        childInput.rodneCislo.replace(/\D/g, ''),
+        TAX_YEAR,
+        i,
+      )
+      if (age == -1 || age > MAX_CHILD_AGE_BONUS) {
         months.push(false)
-      }else{
+      } else {
         months.push(true)
       }
     }
-    return months  
+    return months
   })
-  const sumMonths: boolean[] = processedChildrenData.reduce((acc, childMonths) => {
-    return acc.map((isAnyChildEligible, index) => isAnyChildEligible || childMonths[index]);
-  }, Array(12).fill(false));
+  const sumMonths: boolean[] = processedChildrenData.reduce(
+    (acc, childMonths) => {
+      return acc.map(
+        (isAnyChildEligible, index) => isAnyChildEligible || childMonths[index],
+      )
+    },
+    Array(12).fill(false),
+  )
   const monthFrom = Number.parseInt(input.partner_bonus_na_deti_od, 10)
   const monthTo = Number.parseInt(input.partner_bonus_na_deti_do, 10)
   const wholeYear =
     input.partner_bonus_na_deti_od === '0' &&
     input.partner_bonus_na_deti_do === '11' &&
     sumMonths[0]
-  
+
   return {
     priezviskoMeno: input.r034_priezvisko_a_meno,
     rodneCislo: input.r034_rodne_cislo
@@ -141,8 +150,8 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
 
     pocetMesiacov: sumMonths.reduce((count, currentValue) => {
-      return count + (currentValue ? 1 : 0);
-    }, 0)
+      return count + (currentValue ? 1 : 0)
+    }, 0),
   }
 }
 
