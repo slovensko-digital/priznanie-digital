@@ -185,7 +185,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         rows={summaryRows}
         compactView
       />
-      {!summary.prijemNehnutelnost.equals(new Decimal(0)) && (
+      {taxForm.rent && (
         <Summary title="Príjmy z prenájmu nehnuteľností" rows={rentRows} />
       )}
       <Summary title="Daň na úhradu / daňový preplatok" rows={totalRows} />
