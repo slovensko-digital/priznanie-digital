@@ -32,13 +32,13 @@ export interface UrokyBonusFormProps extends FormikProps<UrokyUserInput> {
 export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
   const { values, setStep, step } = props
   const questionElements = [
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
   ]
 
   useEffect(() => {
