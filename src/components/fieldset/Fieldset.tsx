@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { PropsWithChildren } from 'react'
-=======
 import { FC, ReactNode } from "react";
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
 
 interface Props {
   readonly title: string;
@@ -11,12 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Fieldset = ({
-  title,
-  hint,
-  error,
-  children,
-}: PropsWithChildren<Props>) => {
+const Fieldset: FC<Props> = ({ title, hint, error, children }) => {
   return (
     <fieldset className="govuk-fieldset">
       <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">

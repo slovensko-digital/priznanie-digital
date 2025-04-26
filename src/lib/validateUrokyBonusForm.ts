@@ -39,11 +39,7 @@ export const validateUrokyBonusForm = (
   //   mesiac_uzatvorenia - 1,
   //   den_uzatvorenia,
   // )
-<<<<<<< HEAD
   const limit_zaciatku = new Date(TAX_YEAR - UROKY_POCET_ROKOV, 1, 1)
-=======
-  const limit_zaciatku = new Date(TAX_YEAR - UROKY_POCET_ROKOV, 0, 1);
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
 
   const step2 =
     zaciatok_urocenia >= limit_zaciatku &&

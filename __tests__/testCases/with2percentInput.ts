@@ -17,20 +17,9 @@ export const with2percentInput: E2eTestUserInput = {
   hasChildren: false,
   children: [],
   expectNgoDonationValue: true,
-<<<<<<< HEAD
-  dve_percenta_podporujem: 'ano-sk-digital',
-  XIIoddiel_suhlasZaslUdaje: true,
-
-  percent2: '7,06',
-  percent3: '10,59',
-}
-=======
-  XIIoddiel_uplatnujem2percenta: true,
-  r142_ico: "50158635",
-  r142_obchMeno: "Slovensko.Digital",
+  dve_percenta_podporujem: "ano-sk-digital",
   XIIoddiel_suhlasZaslUdaje: true,
 
   percent2: "7,06",
-  percent3: "13,85",
+  percent3: "10,59",
 };
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)

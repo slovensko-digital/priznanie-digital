@@ -64,23 +64,6 @@ export interface TaxFormUserInput {
   partner_podmienky?: Record<string, boolean>;
 
   /** SECTION  Mortage */
-<<<<<<< HEAD
-  r035_uplatnuje_uroky?: boolean
-  r035_zaplatene_uroky?: string
-  hypoteka_step?: number
-  uroky_zmluva_den_uzatvorenia?: string
-  uroky_zmluva_mesiac_uzatvorenia?: string
-  uroky_zmluva_rok_uzatvorenia?: string
-  uroky_zaciatok_urocenia_den?: string
-  uroky_zaciatok_urocenia_mesiac?: string
-  uroky_zaciatok_urocenia_rok?: string
-  uroky_dalsi_dlznik?: boolean
-  uroky_pocet_dlznikov?: string
-  uroky_dalsi_uver_uplatnuje?: boolean
-  uroky_splnam_vek_kriteria?: boolean
-  uroky_splnam_prijem?: boolean
-  uroky_nesplna_datumy?: boolean
-=======
   r035_uplatnuje_uroky?: boolean;
   r035_zaplatene_uroky?: string;
   hypoteka_step?: number;
@@ -95,7 +78,6 @@ export interface TaxFormUserInput {
   uroky_dalsi_uver_uplatnuje?: boolean;
   uroky_splnam_vek_kriteria?: boolean;
   uroky_splnam_prijem?: boolean;
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
 
   /** SECTION Prijmy a poistenie  */
   // TODO: rename t1r10_prijmy to t1r2_prijmy

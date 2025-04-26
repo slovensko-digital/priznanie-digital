@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import { Form } from 'formik'
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
-import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
-import { numberInputRegexp } from '../lib/utils'
-import { ErrorSummary } from '../components/ErrorSummary'
-import { Page } from '../components/Page'
-import { employmentUserInputInitialValues } from '../lib/initialValues'
-import { BackLink } from '../components/BackLink'
-import { TAX_YEAR } from '../lib/calculation'
-import TooltipHint from '../components/TooltipHint'
-import styles from './zamestnanie.module.css'
-=======
-import React from "react";
 import { Form } from "formik";
 import { BooleanRadio, FormWrapper, Input } from "../components/FormComponents";
 import { EmployedUserInput, FormErrors } from "../types/PageUserInputs";
@@ -22,7 +7,8 @@ import { Page } from "../components/Page";
 import { employmentUserInputInitialValues } from "../lib/initialValues";
 import { BackLink } from "../components/BackLink";
 import { TAX_YEAR } from "../lib/calculation";
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
+import TooltipHint from "../components/TooltipHint";
+import styles from "./zamestnanie.module.css";
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,

@@ -197,13 +197,8 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
             Predpokladané {taxForm.preddavkyNaDan.periodicita} preddavky na daň
             z príjmov v roku {TAX_YEAR + 1} budú{" "}
             {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má
-<<<<<<< HEAD
-            informatívny charakter). Pre viac informácií navštívte web{' '}
-            <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2025">
-=======
             informatívny charakter). Pre viac informácií navštívte web{" "}
             <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024">
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
               Finančnej správy
             </ExternalLink>
             .
