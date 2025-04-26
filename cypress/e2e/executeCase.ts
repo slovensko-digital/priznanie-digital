@@ -263,52 +263,29 @@ const executeTestCase = (testCase: string) => {
           typeToInput("uroky_zaciatok_urocenia_mesiac", input);
           typeToInput("uroky_zaciatok_urocenia_rok", input);
 
-<<<<<<< HEAD
-          next()
+          next();
           if (!input.uroky_nesplna_datumy) {
             if (input.uroky_dalsi_dlznik) {
-              getInput('uroky_dalsi_dlznik', '-yes').click()
-              typeToInput('uroky_pocet_dlznikov', input)
+              getInput("uroky_dalsi_dlznik", "-yes").click();
+              typeToInput("uroky_pocet_dlznikov", input);
             } else {
-              getInput('uroky_dalsi_dlznik', '-no').click()
+              getInput("uroky_dalsi_dlznik", "-no").click();
             }
 
-            next()
+            next();
 
-            getInput('uroky_splnam_vek_kriteria', '-yes').click()
+            getInput("uroky_splnam_vek_kriteria", "-yes").click();
 
-            next()
+            next();
 
-            getInput('uroky_splnam_prijem', '-yes').click()
+            getInput("uroky_splnam_prijem", "-yes").click();
 
-            next()
+            next();
 
-            typeToInput('r035_zaplatene_uroky', input)
+            typeToInput("r035_zaplatene_uroky", input);
           } else {
-            cy.get('[data-test=ineligible-message]').should('be.visible')
+            cy.get("[data-test=ineligible-message]").should("be.visible");
           }
-=======
-          next();
-
-          if (input.uroky_dalsi_dlznik) {
-            getInput("uroky_dalsi_dlznik", "-yes").click();
-            typeToInput("uroky_pocet_dlznikov", input);
-          } else {
-            getInput("uroky_dalsi_dlznik", "-no").click();
-          }
-
-          next();
-
-          getInput("uroky_splnam_vek_kriteria", "-yes").click();
-
-          next();
-
-          getInput("uroky_splnam_prijem", "-yes").click();
-
-          next();
-
-          typeToInput("r035_zaplatene_uroky", input);
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
         } else {
           getInput("r035_uplatnuje_uroky", "-no").click();
         }
@@ -321,13 +298,9 @@ const executeTestCase = (testCase: string) => {
           cy.get(".govuk-hint").contains(input.percent2);
 
           if (input.dve_percenta_podporujem) {
-<<<<<<< HEAD
             cy.get(
               `[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`,
-            ).click()
-=======
-            cy.get('[data-test="dve_percenta_podporujem-inu-input"]').click();
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
+            ).click();
 
             cy.get('label[for="splnam3per"]').contains(input.percent3);
 
@@ -335,25 +308,16 @@ const executeTestCase = (testCase: string) => {
               getInput("splnam3per").click();
             }
 
-<<<<<<< HEAD
-            if (input.dve_percenta_podporujem !== 'ano-sk-digital') {
-              typeToInput('r142_obchMeno', input)
-              typeToInput('r142_ico', input)
+            if (input.dve_percenta_podporujem !== "ano-sk-digital") {
+              typeToInput("r142_obchMeno", input);
+              typeToInput("r142_ico", input);
             }
-=======
-            typeToInput("r142_obchMeno", input);
-            typeToInput("r142_ico", input);
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
 
             if (input.XIIoddiel_suhlasZaslUdaje) {
               cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click();
             }
           } else {
-<<<<<<< HEAD
-            cy.get('[data-test="dve_percenta_podporujem-nie-input"]').click()
-=======
-            cy.get('[data-test="dve_percenta_podporujem-input-no"]').click();
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
+            cy.get('[data-test="dve_percenta_podporujem-nie-input"]').click();
           }
         }
 
@@ -499,11 +463,7 @@ const executeTestCase = (testCase: string) => {
         /**  Validate our results with the FS form */
         cy.visit("/form/form.601.html");
         // Ignore uncaught exceptions in the 3rd party form code
-<<<<<<< HEAD
-        cy.on('uncaught:exception', (_err, _runnable) => {
-=======
         cy.on("uncaught:exception", (_err, _runnable) => {
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
           // returning false here prevents Cypress
           // inside the cy.origin() method from failing the test
           return false;

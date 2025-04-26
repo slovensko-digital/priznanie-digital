@@ -132,8 +132,8 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   hint={
                     <div>
                       <span className={styles.hintText}>
-                        Tento údaj nájdete v riadku 13 v časti "Úhrnná suma
-                        priznaného a vyplateného daňového bonusu".
+                        Tento údaj nájdete v riadku 13 v časti &quot;Úhrnná suma
+                        priznaného a vyplateného daňového bonusu&quot;.
                       </span>
                       <TooltipHint>
                         <img

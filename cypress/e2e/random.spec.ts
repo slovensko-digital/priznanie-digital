@@ -239,11 +239,7 @@ describe("Random inputs", () => {
           /**  Validate our results with the FS form */
           cy.visit("http://localhost:3000/form/form.601.html");
           // Ignore uncaught exceptions in the 3rd party form code
-<<<<<<< HEAD
-          cy.on('uncaught:exception', (_err, _runnable) => {
-=======
           cy.on("uncaught:exception", (_err, _runnable) => {
->>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
             // returning false here prevents Cypress
             // inside the cy.origin() method from failing the test
             return false;
