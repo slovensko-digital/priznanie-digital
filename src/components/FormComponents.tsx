@@ -215,7 +215,8 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
-  const isChecked = field.value && field.value.length > 0 && field.value[0] === 'on'
+  const isChecked =
+    field.value && field.value.length > 0 && field.value[0] === 'on'
   return (
     <div
       className={classnames([
