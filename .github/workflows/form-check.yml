@@ -62,9 +62,17 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b update-form-${{ env.hash }}
+
+          # Add specific files to the commit
           git add ./public/form.zip.md5 ./public/form
-          git commit -m "Update form files"
-          git push origin HEAD
+
+          # Ensure to include any other necessary files, adjust paths accordingly
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "Update form files"
+            git push origin HEAD
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Create Pull Request
         if: env.branch_exists == 'false'
