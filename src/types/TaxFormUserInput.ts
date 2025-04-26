@@ -78,6 +78,7 @@ export interface TaxFormUserInput {
   uroky_dalsi_uver_uplatnuje?: boolean
   uroky_splnam_vek_kriteria?: boolean
   uroky_splnam_prijem?: boolean
+  uroky_nesplna_datumy?: boolean
 
   /** SECTION Prijmy a poistenie  */
   // TODO: rename t1r10_prijmy to t1r2_prijmy
