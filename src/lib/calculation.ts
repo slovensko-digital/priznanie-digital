@@ -42,7 +42,7 @@ const POCET_MESIACOV = 12
 
 export const RODNE_CISLO_DLZKA = 13
 
-// 63,4-násobok platnéhro životného minima
+// 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
 export const PARTNER_MAX_ODPOCET = 5_162.5
 export const TAX_YEAR = 2024
