@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon {
+  cursor: pointer;
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
+.content {
+  position: absolute;
+  bottom: 50%;
+  background-color: white;
+  border: 1px solid #b1b4b6;
+  padding: 6px;
+  border-radius: 4px;
+  z-index: 100;
+  min-width: 200px;
+}
+
+/* tooltip is not relevant for mobile devices */
+@media only screen and (max-width: 600px) {
+  .container {
+    display: none;
+  }
+}

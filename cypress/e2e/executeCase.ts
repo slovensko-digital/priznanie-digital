@@ -261,25 +261,28 @@ const executeTestCase = (testCase: string) => {
           typeToInput('uroky_zaciatok_urocenia_rok', input)
 
           next()
+          if (!input.uroky_nesplna_datumy) {
+            if (input.uroky_dalsi_dlznik) {
+              getInput('uroky_dalsi_dlznik', '-yes').click()
+              typeToInput('uroky_pocet_dlznikov', input)
+            } else {
+              getInput('uroky_dalsi_dlznik', '-no').click()
+            }
 
-          if (input.uroky_dalsi_dlznik) {
-            getInput('uroky_dalsi_dlznik', '-yes').click()
-            typeToInput('uroky_pocet_dlznikov', input)
+            next()
+
+            getInput('uroky_splnam_vek_kriteria', '-yes').click()
+
+            next()
+
+            getInput('uroky_splnam_prijem', '-yes').click()
+
+            next()
+
+            typeToInput('r035_zaplatene_uroky', input)
           } else {
-            getInput('uroky_dalsi_dlznik', '-no').click()
+            cy.get('[data-test=ineligible-message]').should('be.visible')
           }
-
-          next()
-
-          getInput('uroky_splnam_vek_kriteria', '-yes').click()
-
-          next()
-
-          getInput('uroky_splnam_prijem', '-yes').click()
-
-          next()
-
-          typeToInput('r035_zaplatene_uroky', input)
         } else {
           getInput('r035_uplatnuje_uroky', '-no').click()
         }
@@ -292,7 +295,9 @@ const executeTestCase = (testCase: string) => {
           cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.dve_percenta_podporujem) {
-            cy.get('[data-test="dve_percenta_podporujem-inu-input"]').click()
+            cy.get(
+              `[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`,
+            ).click()
 
             cy.get('label[for="splnam3per"]').contains(input.percent3)
 
@@ -300,14 +305,16 @@ const executeTestCase = (testCase: string) => {
               getInput('splnam3per').click()
             }
 
-            typeToInput('r142_obchMeno', input)
-            typeToInput('r142_ico', input)
+            if (input.dve_percenta_podporujem !== 'ano-sk-digital') {
+              typeToInput('r142_obchMeno', input)
+              typeToInput('r142_ico', input)
+            }
 
             if (input.XIIoddiel_suhlasZaslUdaje) {
               cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
             }
           } else {
-            cy.get('[data-test="dve_percenta_podporujem-input-no"]').click()
+            cy.get('[data-test="dve_percenta_podporujem-nie-input"]').click()
           }
         }
 
@@ -453,7 +460,7 @@ const executeTestCase = (testCase: string) => {
         /**  Validate our results with the FS form */
         cy.visit('/form/form.601.html')
         // Ignore uncaught exceptions in the 3rd party form code
-        cy.on('uncaught:exception', (err, runnable) => {
+        cy.on('uncaught:exception', (_err, _runnable) => {
           // returning false here prevents Cypress
           // inside the cy.origin() method from failing the test
           return false
