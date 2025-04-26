@@ -26,6 +26,7 @@ jobs:
           ZIP_URL=$(grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p')
           echo $ZIP_URL
           wget $ZIP_URL -O form.zip
+          rm dp.out
 
       - name: Generate MD5 Hash
         id: generate-hash
@@ -64,8 +65,7 @@ jobs:
           git checkout -b update-form-${{ env.hash }}
 
           # Add all changes including untracked files in the specified directory
-          git add ./public/form.zip.md5 ./public/form dp.out
-
+          git add ./public/form.zip.md5 ./public/form
           # Ensure to include any other necessary files, adjust paths accordingly
           if [[ -n "$(git status --porcelain)" ]]; then
             # Commit only if there are changes
