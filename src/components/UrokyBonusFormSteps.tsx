@@ -1,16 +1,19 @@
-import React from 'react'
-import { BooleanRadio, Input } from './FormComponents'
-import { formatCurrency } from '../lib/utils'
-import { Details } from './Details'
-import Fieldset from './fieldset/Fieldset'
-import RadioGroup from './radio/RadioGroup'
-import Radio from './radio/Radio'
-import RadioConditional from './radio/RadioConditional'
-import Decimal from 'decimal.js'
-import { Warning } from './Warning'
-import { TAX_YEAR } from '../lib/calculation'
+import { BooleanRadio, Input } from "./FormComponents";
+import { formatCurrency } from "../lib/utils";
+import { Details } from "./Details";
+import Fieldset from "./fieldset/Fieldset";
+import RadioGroup from "./radio/RadioGroup";
+import Radio from "./radio/Radio";
+import RadioConditional from "./radio/RadioConditional";
+import Decimal from "decimal.js";
+import { Warning } from "./Warning";
+import { TAX_YEAR } from "../lib/calculation";
 
-export const ApplyForBonusQuestion = ({ disabled }) => (
+interface Props {
+  disabled?: boolean;
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={`Boli ste v roku ${TAX_YEAR} dlžníkom z úveru na bývanie?`}
@@ -29,7 +32,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
       </>
     </Details>
   </>
-)
+);
 
 export const ZaplateneUrokyQuestion = ({ disabled }) => (
   <>
@@ -44,7 +47,7 @@ export const ZaplateneUrokyQuestion = ({ disabled }) => (
       daňovému priznaniu.
     </Warning>
   </>
-)
+);
 
 export const ZaciatokUveruQuestion = ({ disabled, values }) => (
   <div className="govuk-form-group">
@@ -59,6 +62,7 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
       úročenie úveru na bývanie.
     </p>
+    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
       Dátum uzavretia zmluvy o úvere na bývanie
     </label>
@@ -110,6 +114,7 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
         </div>
       </fieldset>
     </div>
+    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
       Dátum začatia úročenia úveru
     </label>
@@ -161,7 +166,6 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
         </div>
       </fieldset>
     </div>
-
     {parseInt(values.uroky_zmluva_rok_uzatvorenia, 10) >= 2024 && (
       <Warning>
         Úver musí byť určený na byt alebo rodinný dom slúžiaci výlučne k
@@ -170,7 +174,7 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       </Warning>
     )}
   </div>
-)
+);
 
 export const DalsiDlzniciQuestion = ({
   values,
@@ -186,7 +190,7 @@ export const DalsiDlzniciQuestion = ({
     <RadioGroup
       value={String(values.uroky_dalsi_dlznik)}
       onChange={(value) => {
-        setFieldValue('uroky_dalsi_dlznik', value === 'true')
+        setFieldValue("uroky_dalsi_dlznik", value === "true");
       }}
     >
       <Radio
@@ -214,7 +218,7 @@ export const DalsiDlzniciQuestion = ({
       />
     </RadioGroup>
   </Fieldset>
-)
+);
 
 export const DalsiUverQuestion = ({ disabled }) => (
   <BooleanRadio
@@ -222,17 +226,17 @@ export const DalsiUverQuestion = ({ disabled }) => (
     title="Ste dlžníkom / spoludlžníkom aj v inej zmluve o úvere na bývanie, na ktorú sa uplatňuje nárok na daňový bonus na zaplatené úroky?"
     disabled={disabled}
   />
-)
+);
 
 export const VekQuestion = ({ disabled, values: { uroky_dalsi_dlznik } }) => (
   <BooleanRadio
     name="uroky_splnam_vek_kriteria"
     title={`Mali ste ku dňu podania žiadosti o úver ${
-      uroky_dalsi_dlznik ? '(aj všetci spoludlžníci) ' : ''
+      uroky_dalsi_dlznik ? "(aj všetci spoludlžníci) " : ""
     }najmenej 18 a najviac 35 rokov?`}
     disabled={disabled}
   />
-)
+);
 
 const maxPrijem = ({
   uroky_zmluva_rok_uzatvorenia: rok,
@@ -241,24 +245,24 @@ const maxPrijem = ({
 }): Decimal => {
   const pocet_dlznikov = uroky_dalsi_dlznik
     ? new Decimal(parseInt(uroky_pocet_dlznikov))
-    : new Decimal(1)
+    : new Decimal(1);
   switch (rok) {
-    case '2019':
-      return new Decimal(1316.9).mul(pocet_dlznikov)
-    case '2020':
-      return new Decimal(1419.6).mul(pocet_dlznikov)
-    case '2021':
-      return new Decimal(1472.9).mul(pocet_dlznikov)
-    case '2022':
-      return new Decimal(1574.3).mul(pocet_dlznikov)
-    case '2023':
-      return new Decimal(1695.2).mul(pocet_dlznikov)
-    case '2024':
-      return new Decimal(2288).mul(pocet_dlznikov) // TODO: add 2024 e2e test
+    case "2019":
+      return new Decimal(1316.9).mul(pocet_dlznikov);
+    case "2020":
+      return new Decimal(1419.6).mul(pocet_dlznikov);
+    case "2021":
+      return new Decimal(1472.9).mul(pocet_dlznikov);
+    case "2022":
+      return new Decimal(1574.3).mul(pocet_dlznikov);
+    case "2023":
+      return new Decimal(1695.2).mul(pocet_dlznikov);
+    case "2024":
+      return new Decimal(2288).mul(pocet_dlznikov); // TODO: add 2024 e2e test
     default:
-      return new Decimal(0)
+      return new Decimal(0);
   }
-}
+};
 
 export const PrijemQuestion = ({
   disabled,
@@ -274,20 +278,20 @@ export const PrijemQuestion = ({
       uroky_pocet_dlznikov,
       uroky_dalsi_dlznik,
     }).toNumber(),
-  )
+  );
 
   return (
     <BooleanRadio
       name="uroky_splnam_prijem"
       title={`Bol váš priemerný mesačný príjem ${
-        uroky_dalsi_dlznik ? '(spolu so spoludlžníkmi) ' : ''
+        uroky_dalsi_dlznik ? "(spolu so spoludlžníkmi) " : ""
       }za kalendárny rok ${
         parseInt(uroky_zmluva_rok_uzatvorenia) - 1
       } max. vo výške ${prijem}?`}
       disabled={disabled}
     />
-  )
-}
+  );
+};
 
 export const NotEligible = () => (
   <div data-test="ineligible-message">
@@ -298,7 +302,7 @@ export const NotEligible = () => (
       Nespĺňate podmienky pre uplatnenie daňového bonusu na zaplatené úroky.
     </p>
   </div>
-)
+);
 
 export const PreviousButton = ({ onClick }) => (
   <button
@@ -308,10 +312,10 @@ export const PreviousButton = ({ onClick }) => (
   >
     Späť
   </button>
-)
+);
 
 export const SubmitButton = () => (
   <button className="govuk-button" type="submit">
     Pokračovať
   </button>
-)
+);

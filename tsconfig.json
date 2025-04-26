@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -24,10 +20,13 @@
     "keyofStringsOnly": true,
     "incremental": true
   },
-  "exclude": ["node_modules", "cypress", "public", "./cypress.config.ts"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": [
+    "node_modules",
+    "cypress",
+    "public",
+    "./cypress.config.ts",
+    "prettier.config.js",
+    "eslint.config.mjs"
+  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -1,13 +1,13 @@
-import React from 'react'
-import { Form } from 'formik'
-import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
-import { DohodaUserInput, FormErrors } from '../types/PageUserInputs'
-import { numberInputRegexp } from '../lib/utils'
-import { ErrorSummary } from '../components/ErrorSummary'
-import { Page } from '../components/Page'
-import { dohodaUserInputInitialValues } from '../lib/initialValues'
-import { BackLink } from '../components/BackLink'
-import { TAX_YEAR } from '../lib/calculation'
+import React from "react";
+import { Form } from "formik";
+import { BooleanRadio, FormWrapper, Input } from "../components/FormComponents";
+import { DohodaUserInput, FormErrors } from "../types/PageUserInputs";
+import { numberInputRegexp } from "../lib/utils";
+import { ErrorSummary } from "../components/ErrorSummary";
+import { Page } from "../components/Page";
+import { dohodaUserInputInitialValues } from "../lib/initialValues";
+import { BackLink } from "../components/BackLink";
+import { TAX_YEAR } from "../lib/calculation";
 
 const Dohoda: Page<DohodaUserInput> = ({
   setTaxFormUserInput,
@@ -28,9 +28,9 @@ const Dohoda: Page<DohodaUserInput> = ({
             : {
                 ...dohodaUserInputInitialValues,
                 dohoda: false,
-              }
-          setTaxFormUserInput(userInput)
-          router.push(nextRoute)
+              };
+          setTaxFormUserInput(userInput);
+          router.push(nextRoute);
         }}
       >
         {({ values, errors }) => (
@@ -43,9 +43,9 @@ const Dohoda: Page<DohodaUserInput> = ({
             {values.dohoda && (
               <>
                 <h3 className="govuk-heading-m">
-                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
-                  zdaniteľných príjmoch fyzickej osoby". Ak ste mali viac dohôd,
-                  tak tieto sumy spočítajte a uveďte výsledné.
+                  Nasledujúce hodnoty nájdete na tlačive &quot;Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby&quot;. Ak ste mali viac
+                  dohôd, tak tieto sumy spočítajte a uveďte výsledné.
                 </h3>
                 <Input
                   name="uhrnPrijmovZoVsetkychDohod"
@@ -86,68 +86,68 @@ const Dohoda: Page<DohodaUserInput> = ({
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 export const validate = (values: DohodaUserInput) => {
-  const errors: Partial<FormErrors<DohodaUserInput>> = {}
+  const errors: Partial<FormErrors<DohodaUserInput>> = {};
 
-  if (typeof values.dohoda === 'undefined') {
-    errors.dohoda = 'Vyznačte odpoveď'
+  if (typeof values.dohoda === "undefined") {
+    errors.dohoda = "Vyznačte odpoveď";
   }
 
   if (values.dohoda) {
     if (!values.uhrnPrijmovZoVsetkychDohod) {
       errors.uhrnPrijmovZoVsetkychDohod =
-        'Zadajte úhrn príjmov zo všetkých dohôd'
+        "Zadajte úhrn príjmov zo všetkých dohôd";
     } else if (!values.uhrnPrijmovZoVsetkychDohod.match(numberInputRegexp)) {
       errors.uhrnPrijmovZoVsetkychDohod =
-        'Zadajte sumu príjmov vo formáte 123,45'
+        "Zadajte sumu príjmov vo formáte 123,45";
     }
 
     if (!values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody) {
       errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
-        'Zadajte úhrn sociálneho poistného'
+        "Zadajte úhrn sociálneho poistného";
     } else if (
       !values.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody.match(
         numberInputRegexp,
       )
     ) {
       errors.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody =
-        'Zadajte sumu sociálneho poistného vo formáte 123,45'
+        "Zadajte sumu sociálneho poistného vo formáte 123,45";
     }
 
     if (!values.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody) {
       errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody =
-        'Zadajte úhrn zdravotného poistného'
+        "Zadajte úhrn zdravotného poistného";
     } else if (
       !values.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody.match(
         numberInputRegexp,
       )
     ) {
       errors.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody =
-        'Zadajte sumu zdravotného poistného vo formáte 123,45'
+        "Zadajte sumu zdravotného poistného vo formáte 123,45";
     }
 
     if (!values.uhrnPreddavkovNaDanDohody) {
-      errors.uhrnPreddavkovNaDanDohody = 'Zadajte úhrn preddavkov na daň'
+      errors.uhrnPreddavkovNaDanDohody = "Zadajte úhrn preddavkov na daň";
     } else if (!values.uhrnPreddavkovNaDanDohody.match(numberInputRegexp)) {
       errors.uhrnPreddavkovNaDanDohody =
-        'Zadajte sumu povinného poistného vo formáte 123,45'
+        "Zadajte sumu povinného poistného vo formáte 123,45";
     }
 
     if (!values.udajeODanovomBonuseNaDietaDohody) {
       errors.udajeODanovomBonuseNaDietaDohody =
-        'Zadajte údaje o daňovom bonuse na dieťa'
+        "Zadajte údaje o daňovom bonuse na dieťa";
     } else if (
       !values.udajeODanovomBonuseNaDietaDohody.match(numberInputRegexp)
     ) {
       errors.udajeODanovomBonuseNaDietaDohody =
-        'Zadajte sumu povinného poistného vo formáte 123,45'
+        "Zadajte sumu povinného poistného vo formáte 123,45";
     }
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default Dohoda
+export default Dohoda;

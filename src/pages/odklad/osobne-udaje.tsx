@@ -1,24 +1,24 @@
-import React from 'react'
-import { Form, FormikProps } from 'formik'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { NextPage } from 'next'
-import { FormWrapper, Input, Select } from '../../components/FormComponents'
-import styles from '../osobne-udaje.module.css'
+import React from "react";
+import { Form, FormikProps } from "formik";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { NextPage } from "next";
+import { FormWrapper, Input, Select } from "../../components/FormComponents";
+import styles from "../osobne-udaje.module.css";
 import {
   FormErrors,
   PersonalInformationPostponePage,
-} from '../../types/PageUserInputs'
-import { getAutoformByPersonName } from '../../lib/api'
-import { getPostponeRoutes } from '../../lib/routes'
-import { AutoCompleteInput } from '../../components/AutoCompleteInput'
-import { PostponeUserInput } from '../../types/PostponeUserInput'
-import { ErrorSummary } from '../../components/ErrorSummary'
-import { formatPsc, getStreetNumber } from '../../lib/utils'
-import { countries } from '../../lib/postpone/countries'
-import { AutoFormSubject } from '../../types/api'
+} from "../../types/PageUserInputs";
+import { getAutoformByPersonName } from "../../lib/api";
+import { getPostponeRoutes } from "../../lib/routes";
+import { AutoCompleteInput } from "../../components/AutoCompleteInput";
+import { PostponeUserInput } from "../../types/PostponeUserInput";
+import { ErrorSummary } from "../../components/ErrorSummary";
+import { formatPsc, getStreetNumber } from "../../lib/utils";
+import { countries } from "../../lib/postpone/countries";
+import { AutoFormSubject } from "../../types/api";
 
-const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/osobne-udaje')
+const { nextRoute, previousRoute } = getPostponeRoutes("/odklad/osobne-udaje");
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -34,10 +34,10 @@ const makeHandlePersonAutoform = ({
       building_number,
       municipality,
       postal_code,
-      country
+      country;
 
     if (subject.statutory.length > 0) {
-      ;({
+      ({
         first_name,
         last_name,
         prefixes,
@@ -48,35 +48,35 @@ const makeHandlePersonAutoform = ({
         municipality,
         postal_code,
         country,
-      } = subject.statutory[0])
+      } = subject.statutory[0]);
     }
 
     setValues({
       ...values,
-      meno_priezvisko: subject.name || '',
-      priezvisko: last_name || '',
-      meno: first_name || '',
-      titul_pred: prefixes || '',
-      titul_za: postfixes || '',
-      dic: `${subject.tin}` || '',
-      ulica: street || municipality || '',
-      cislo: getStreetNumber({ reg_number, building_number }) || '',
-      psc: postal_code ? formatPsc(postal_code) : '',
-      obec: municipality || '',
-      stat: country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
-    })
-  }
-}
+      meno_priezvisko: subject.name || "",
+      priezvisko: last_name || "",
+      meno: first_name || "",
+      titul_pred: prefixes || "",
+      titul_za: postfixes || "",
+      dic: `${subject.tin}` || "",
+      ulica: street || municipality || "",
+      cislo: getStreetNumber({ reg_number, building_number }) || "",
+      psc: postal_code ? formatPsc(postal_code) : "",
+      obec: municipality || "",
+      stat: country === "Slovenská republika" ? "Slovensko" : "", // TODO: add mapping function for all possible countries from autoform to all options from form 548
+    });
+  };
+};
 
 interface Props {
-  setPostponeUserInput: (values: PersonalInformationPostponePage) => void
-  postponeUserInput: PostponeUserInput
+  setPostponeUserInput: (values: PersonalInformationPostponePage) => void;
+  postponeUserInput: PostponeUserInput;
 }
 const OsobneUdaje: NextPage<Props> = ({
   setPostponeUserInput,
   postponeUserInput,
 }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
@@ -87,11 +87,11 @@ const OsobneUdaje: NextPage<Props> = ({
         initialValues={postponeUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setPostponeUserInput(values)
-          router.push(nextRoute)
+          setPostponeUserInput(values);
+          router.push(nextRoute);
         }}
       >
-        {(props) => (
+        {(props: FormikProps<PersonalInformationPostponePage>) => (
           <>
             <ErrorSummary<PersonalInformationPostponePage>
               errors={props.errors}
@@ -108,11 +108,11 @@ const OsobneUdaje: NextPage<Props> = ({
                 label="Zadajte meno, priezvisko alebo podnikateľský názov"
                 onSelect={makeHandlePersonAutoform(props)}
                 fetchData={async (name) => {
-                  const data = await getAutoformByPersonName(name)
+                  const data = await getAutoformByPersonName(name);
                   return data.map((item) => ({
                     ...item,
                     value: `${item.name} ${item.formatted_address}`,
-                  }))
+                  }));
                 }}
               />
 
@@ -182,8 +182,8 @@ const OsobneUdaje: NextPage<Props> = ({
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.psc,
-                    )
-                    props.setFieldValue('psc', pscValue)
+                    );
+                    props.setFieldValue("psc", pscValue);
                   }}
                 />
 
@@ -210,49 +210,49 @@ const OsobneUdaje: NextPage<Props> = ({
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 export const validate = (values: PersonalInformationPostponePage) => {
-  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {}
+  const errors: Partial<FormErrors<PersonalInformationPostponePage>> = {};
 
   if (!values.dic) {
-    errors.dic = 'Zadajte pridelené DIČ'
+    errors.dic = "Zadajte pridelené DIČ";
   } else if (values.dic.length < 9 || values.dic.length > 10) {
     /**
      * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
      */
-    errors.dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
+    errors.dic = "DIČ musí mať minimálne 9 znakov a maximálne 10 znakov";
   }
 
   if (!values.meno) {
-    errors.meno = 'Zadajte vaše meno'
+    errors.meno = "Zadajte vaše meno";
   }
 
   if (!values.priezvisko) {
-    errors.priezvisko = 'Zadajte vaše priezvisko'
+    errors.priezvisko = "Zadajte vaše priezvisko";
   }
 
   if (!values.cislo) {
-    errors.cislo = 'Zadajte číslo domu'
+    errors.cislo = "Zadajte číslo domu";
   }
 
-  const pscNumberFormat = /^\d{3} \d{2}$/
+  const pscNumberFormat = /^\d{3} \d{2}$/;
   if (!values.psc) {
-    errors.psc = 'Zadajte PSČ'
+    errors.psc = "Zadajte PSČ";
   } else if (!pscNumberFormat.test(values.psc)) {
-    errors.psc = 'PSČ môže obsahovať iba 5 čísel'
+    errors.psc = "PSČ môže obsahovať iba 5 čísel";
   }
 
   if (!values.obec) {
-    errors.obec = 'Zadajte obec'
+    errors.obec = "Zadajte obec";
   }
 
   if (!values.stat) {
-    errors.stat = 'Zadajte štát'
+    errors.stat = "Zadajte štát";
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default OsobneUdaje
+export default OsobneUdaje;

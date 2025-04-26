@@ -1,18 +1,18 @@
-import React from 'react'
-import Link from 'next/link'
-import { Form } from 'formik'
-import { FormWrapper, Input } from '../components/FormComponents'
-import { FormErrors, PensionUserInput } from '../types/PageUserInputs'
-import { numberInputRegexp, parseInputNumber } from '../lib/utils'
-import { Page } from '../components/Page'
-import { pensionInitialValues } from '../lib/initialValues'
-import { ErrorSummary } from '../components/ErrorSummary'
-import { TAX_YEAR } from '../lib/calculation'
-import { Details } from '../components/Details'
-import Fieldset from '../components/fieldset/Fieldset'
-import RadioGroup from '../components/radio/RadioGroup'
-import Radio from '../components/radio/Radio'
-import RadioConditional from '../components/radio/RadioConditional'
+import React from "react";
+import Link from "next/link";
+import { Form } from "formik";
+import { FormWrapper, Input } from "../components/FormComponents";
+import { FormErrors, PensionUserInput } from "../types/PageUserInputs";
+import { numberInputRegexp, parseInputNumber } from "../lib/utils";
+import { Page } from "../components/Page";
+import { pensionInitialValues } from "../lib/initialValues";
+import { ErrorSummary } from "../components/ErrorSummary";
+import { TAX_YEAR } from "../lib/calculation";
+import { Details } from "../components/Details";
+import Fieldset from "../components/fieldset/Fieldset";
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
+import RadioConditional from "../components/radio/RadioConditional";
 
 const Dochodok: Page<PensionUserInput> = ({
   setTaxFormUserInput,
@@ -35,9 +35,9 @@ const Dochodok: Page<PensionUserInput> = ({
             : {
                 ...pensionInitialValues,
                 platil_prispevky_na_dochodok: false,
-              }
-          setTaxFormUserInput(userInput)
-          router.push(nextRoute)
+              };
+          setTaxFormUserInput(userInput);
+          router.push(nextRoute);
         }}
       >
         {({ values, errors, setFieldValue }) => (
@@ -51,9 +51,9 @@ const Dochodok: Page<PensionUserInput> = ({
                 value={String(values.platil_prispevky_na_dochodok)}
                 onChange={(value) => {
                   setFieldValue(
-                    'platil_prispevky_na_dochodok',
-                    value === 'true',
-                  )
+                    "platil_prispevky_na_dochodok",
+                    value === "true",
+                  );
                 }}
               >
                 <Radio
@@ -79,7 +79,7 @@ const Dochodok: Page<PensionUserInput> = ({
             </Fieldset>
             <Details
               title={
-                'Nezdaniteľnú časť základu dane na príspevky na doplnkové dôchodkové poistenie je možné uplatniť iba u daňovníka, ktorý spĺňa nasledovné podmienky:'
+                "Nezdaniteľnú časť základu dane na príspevky na doplnkové dôchodkové poistenie je možné uplatniť iba u daňovníka, ktorý spĺňa nasledovné podmienky:"
               }
             >
               <ul>
@@ -104,32 +104,32 @@ const Dochodok: Page<PensionUserInput> = ({
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 export const validate = (values: PensionUserInput) => {
-  const errors: Partial<FormErrors<PensionUserInput>> = {}
+  const errors: Partial<FormErrors<PensionUserInput>> = {};
 
-  if (typeof values.platil_prispevky_na_dochodok === 'undefined') {
-    errors.platil_prispevky_na_dochodok = 'Vyznačte odpoveď'
+  if (typeof values.platil_prispevky_na_dochodok === "undefined") {
+    errors.platil_prispevky_na_dochodok = "Vyznačte odpoveď";
   }
 
   if (values.platil_prispevky_na_dochodok) {
     if (!values.zaplatene_prispevky_na_dochodok) {
       errors.zaplatene_prispevky_na_dochodok =
-        'Zadajte výšku zaplatených príspevkov'
+        "Zadajte výšku zaplatených príspevkov";
     } else if (
       !values.zaplatene_prispevky_na_dochodok.match(numberInputRegexp)
     ) {
       errors.zaplatene_prispevky_na_dochodok =
-        'Zadajte výšku príspevkov vo formáte 123,45'
+        "Zadajte výšku príspevkov vo formáte 123,45";
     } else if (parseInputNumber(values.zaplatene_prispevky_na_dochodok) > 180) {
       errors.zaplatene_prispevky_na_dochodok =
-        'Výška príspevkov nesmie presiahnuť 180,00 eur'
+        "Výška príspevkov nesmie presiahnuť 180,00 eur";
     }
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default Dochodok
+export default Dochodok;

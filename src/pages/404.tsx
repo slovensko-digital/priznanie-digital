@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function Custom404() {
   return (
@@ -10,5 +10,5 @@ export default function Custom404() {
         Skontrolujte prosím či ste zadali správnu adresu alebo nás kontaktujte.
       </p>
     </>
-  )
+  );
 }

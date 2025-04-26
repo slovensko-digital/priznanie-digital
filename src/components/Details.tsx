@@ -1,12 +1,12 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useState } from "react";
 
 export interface DetailsProps {
-  title: string
-  children: ReactNode
+  title: string;
+  children: ReactNode;
 }
 
 export const Details = ({ title, children }: DetailsProps) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <details className="govuk-details" data-module="govuk-details">
       <summary
@@ -17,5 +17,5 @@ export const Details = ({ title, children }: DetailsProps) => {
       </summary>
       {isOpen && <div className="govuk-details__text">{children}</div>}
     </details>
-  )
-}
+  );
+};

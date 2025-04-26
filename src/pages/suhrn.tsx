@@ -1,37 +1,37 @@
-import React from 'react'
-import Link from 'next/link'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency, formatDate, parseInputNumber } from '../lib/utils'
-import styles from './suhrn.module.css'
-import classnames from 'classnames'
-import { Warning } from '../components/Warning'
-import { Page } from '../components/Page'
-import { BackLink } from '../components/BackLink'
+import React from "react";
+import Link from "next/link";
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { formatCurrency, formatDate, parseInputNumber } from "../lib/utils";
+import styles from "./suhrn.module.css";
+import classnames from "classnames";
+import { Warning } from "../components/Warning";
+import { Page } from "../components/Page";
+import { BackLink } from "../components/BackLink";
 import {
   TAX_YEAR,
   monthNumberToName,
   typPrijmuToName,
   zaciatok_urocenia_datum,
-} from '../lib/calculation'
+} from "../lib/calculation";
 
 interface SummaryRow {
-  title: string
-  value?: string
-  currency?: boolean
-  testId?: string
-  allignRight?: boolean
+  title: string;
+  value?: string;
+  currency?: boolean;
+  testId?: string;
+  allignRight?: boolean;
 }
 interface SummaryProps {
-  title: string
-  rows: SummaryRow[]
-  href?: string
+  title: string;
+  rows: SummaryRow[];
+  href?: string;
 }
 const Summary = (props: SummaryProps) => (
   <>
     <h2
       className={classnames(
-        'govuk-heading-m',
-        'govuk-!-margin-top-3',
+        "govuk-heading-m",
+        "govuk-!-margin-top-3",
         styles.summaryTitle,
       )}
     >
@@ -52,8 +52,8 @@ const Summary = (props: SummaryProps) => (
                   <td
                     className={
                       allignRight
-                        ? 'govuk-table__cell'
-                        : 'govuk-table__cell govuk-!-width-one-half'
+                        ? "govuk-table__cell"
+                        : "govuk-table__cell govuk-!-width-one-half"
                     }
                   >
                     {title}
@@ -61,8 +61,8 @@ const Summary = (props: SummaryProps) => (
                   <td
                     className="govuk-table__cell"
                     style={{
-                      textAlign: allignRight ? 'end' : 'start',
-                      whiteSpace: 'nowrap',
+                      textAlign: allignRight ? "end" : "start",
+                      whiteSpace: "nowrap",
                     }}
                     data-test={testId}
                   >
@@ -78,7 +78,7 @@ const Summary = (props: SummaryProps) => (
       </tbody>
     </table>
   </>
-)
+);
 
 const Suhrn: Page<TaxFormUserInput> = ({
   taxFormUserInput,
@@ -102,28 +102,28 @@ const Suhrn: Page<TaxFormUserInput> = ({
 
       <Summary
         title="Príjmy a odvody SZČO"
-        href={'/prijmy-a-vydavky'}
+        href={"/prijmy-a-vydavky"}
         rows={[
           {
-            title: 'Príjmy',
+            title: "Príjmy",
             value: taxFormUserInput.t1r10_prijmy,
             currency: true,
             allignRight: true,
           },
           {
-            title: 'Sociálne poistenie',
+            title: "Sociálne poistenie",
             value: taxFormUserInput.priloha3_r11_socialne,
             currency: true,
             allignRight: true,
           },
           {
-            title: 'Zdravotné poistenie',
+            title: "Zdravotné poistenie",
             value: taxFormUserInput.priloha3_r13_zdravotne,
             currency: true,
             allignRight: true,
           },
           {
-            title: 'Zaplatené preddavky',
+            title: "Zaplatené preddavky",
             value: taxFormUserInput.zaplatenePreddavky,
             currency: true,
             allignRight: true,
@@ -132,40 +132,40 @@ const Suhrn: Page<TaxFormUserInput> = ({
       />
       <Summary
         title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
-        href={'/zamestnanie'}
+        href={"/zamestnanie"}
         rows={
           taxFormUserInput.employed
             ? [
                 {
-                  title: 'Úhrn príjmov od všetkých zamestnávateľov',
+                  title: "Úhrn príjmov od všetkých zamestnávateľov",
                   value: taxFormUserInput.uhrnPrijmovOdVsetkychZamestnavatelov,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Úhrn sociálneho poistného',
+                  title: "Úhrn sociálneho poistného",
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
                   currency: true,
                   allignRight: true,
-                  testId: 'r039_socialne',
+                  testId: "r039_socialne",
                 },
                 {
-                  title: 'Úhrn zdravotného poistného',
+                  title: "Úhrn zdravotného poistného",
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
                   currency: true,
                   allignRight: true,
-                  testId: 'r039_zdravotne',
+                  testId: "r039_zdravotne",
                 },
                 {
-                  title: 'Úhrn preddavkov na daň',
+                  title: "Úhrn preddavkov na daň",
                   value: taxFormUserInput.uhrnPreddavkovNaDan,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Daňový bonus na dieťa',
+                  title: "Daňový bonus na dieťa",
                   value: taxFormUserInput.udajeODanovomBonuseNaDieta,
                   currency: true,
                   allignRight: true,
@@ -180,38 +180,38 @@ const Suhrn: Page<TaxFormUserInput> = ({
       />
       <Summary
         title={`Dohody v SR pre rok ${TAX_YEAR}`}
-        href={'/dohoda'}
+        href={"/dohoda"}
         rows={
           taxFormUserInput.dohoda
             ? [
                 {
-                  title: 'Úhrn príjmov zo všetkých dohôd',
+                  title: "Úhrn príjmov zo všetkých dohôd",
                   value: taxFormUserInput.uhrnPrijmovZoVsetkychDohod,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Úhrn sociálneho poistného z dohôd',
+                  title: "Úhrn sociálneho poistného z dohôd",
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Úhrn zdravotného poistného z dohôd',
+                  title: "Úhrn zdravotného poistného z dohôd",
                   value:
                     taxFormUserInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Úhrn preddavkov na daň z dohôd',
+                  title: "Úhrn preddavkov na daň z dohôd",
                   value: taxFormUserInput.uhrnPreddavkovNaDanDohody,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Daňový bonus na dieťa',
+                  title: "Daňový bonus na dieťa",
                   value: taxFormUserInput.udajeODanovomBonuseNaDietaDohody,
                   currency: true,
                   allignRight: true,
@@ -226,73 +226,73 @@ const Suhrn: Page<TaxFormUserInput> = ({
       />
       <Summary
         title="Zvýhodnenie na manželku / manžela"
-        href={'/partner'}
+        href={"/partner"}
         rows={
           taxFormUserInput.r032_uplatnujem_na_partnera
             ? [
                 {
-                  title: 'Meno a priezvisko manželky / manžela',
+                  title: "Meno a priezvisko manželky / manžela",
                   value: taxFormUserInput.r031_priezvisko_a_meno,
                 },
                 {
-                  title: 'Rodné číslo',
+                  title: "Rodné číslo",
                   value: taxFormUserInput.r031_rodne_cislo,
                 },
                 {
-                  title: 'Vlastné príjmy manželky / manžela',
+                  title: "Vlastné príjmy manželky / manžela",
                   value: taxFormUserInput.r032_partner_vlastne_prijmy,
                   currency: true,
                 },
                 {
                   title:
-                    'Počet mesiacov, v ktorých bol splnený nárok na NČZD na manžela / manželku',
+                    "Počet mesiacov, v ktorých bol splnený nárok na NČZD na manžela / manželku",
                   value: taxFormUserInput.r032_partner_pocet_mesiacov,
                 },
               ]
             : [
                 {
-                  title: 'Neuplatňujem si zvýhodnenie na manželku / manžela',
+                  title: "Neuplatňujem si zvýhodnenie na manželku / manžela",
                 },
               ]
         }
       />
       <Summary
         title="Deti, pri ktorých si uplatňujem nárok na daňový bonus na vyživované dieťa"
-        href={'/deti'}
+        href={"/deti"}
         rows={
           taxFormUserInput.hasChildren
             ? taxFormUserInput.children
                 .map((child) => [
-                  { title: 'Meno a priezvisko', value: child.priezviskoMeno },
+                  { title: "Meno a priezvisko", value: child.priezviskoMeno },
                   {
-                    title: 'Rodné číslo',
+                    title: "Rodné číslo",
                     value: child.rodneCislo,
                   },
                 ])
                 .reduce((result, value) => [...result, ...value], [])
             : [
                 {
-                  title: 'Nemám alebo neuplatňujem si',
+                  title: "Nemám alebo neuplatňujem si",
                 },
               ]
         }
       />
       <Summary
         title="Druhá opravnená osoba pre daňový bonus na vyživované deti"
-        href={'/deti'}
+        href={"/deti"}
         rows={
           taxFormUserInput.partner_bonus_na_deti
             ? [
                 {
-                  title: 'Meno a priezvisko',
+                  title: "Meno a priezvisko",
                   value: taxFormUserInput.r034_priezvisko_a_meno,
                 },
                 {
-                  title: 'Rodné číslo',
+                  title: "Rodné číslo",
                   value: taxFormUserInput.r034_rodne_cislo,
                 },
                 {
-                  title: 'Mesiace kedy splnila podmienky',
+                  title: "Mesiace kedy splnila podmienky",
                   value: `${monthNumberToName(
                     parseInt(taxFormUserInput.partner_bonus_na_deti_od),
                   )} - ${monthNumberToName(
@@ -300,42 +300,42 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   )}`,
                 },
                 {
-                  title: 'Spôsob vysporiadania príjmov',
+                  title: "Spôsob vysporiadania príjmov",
                   value: typPrijmuToName(
                     taxFormUserInput.partner_bonus_na_deti_typ_prijmu,
                   ),
                 },
                 {
-                  title: 'Príjmy',
+                  title: "Príjmy",
                   value: taxFormUserInput.r034a,
                   currency: true,
                 },
               ]
             : [
                 {
-                  title: 'Nemám nárok alebo neuplatňujem si',
+                  title: "Nemám nárok alebo neuplatňujem si",
                 },
               ]
         }
       />
       <Summary
         title="Príspevky na doplnkové dôchodkové poistenie (III. pilier)"
-        href={'/dochodok'}
+        href={"/dochodok"}
         rows={
           taxFormUserInput.platil_prispevky_na_dochodok
             ? [
                 {
-                  title: 'Výška zaplatených príspevkov',
+                  title: "Výška zaplatených príspevkov",
                   value: taxFormUserInput.zaplatene_prispevky_na_dochodok,
                   currency: true,
                 },
               ]
-            : [{ title: 'Neplatil som' }]
+            : [{ title: "Neplatil som" }]
         }
       />
       <Summary
         title="Zaplatené úroky z hypotéky"
-        href={'/uroky'}
+        href={"/uroky"}
         rows={
           taxFormUserInput.r035_uplatnuje_uroky
             ? [
@@ -345,33 +345,33 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
                 {
-                  title: 'Začiatok úročenia',
+                  title: "Začiatok úročenia",
                   value: formatDate(zaciatok_urocenia_datum(taxFormUserInput)),
                 },
               ]
-            : [{ title: 'Neuplatňujem daňový bonus' }]
+            : [{ title: "Neuplatňujem daňový bonus" }]
         }
       />
       <Summary
         title={`Prenájom nehnutelností`}
-        href={'/prenajom'}
+        href={"/prenajom"}
         rows={
           taxFormUserInput.rent
             ? [
                 {
-                  title: 'Výška príjmov z prenájmu nehnuteľností',
+                  title: "Výška príjmov z prenájmu nehnuteľností",
                   value: taxFormUserInput.vyskaPrijmovZPrenajmu,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Výška výdavkov z prenájmu nehnuteľností',
+                  title: "Výška výdavkov z prenájmu nehnuteľností",
                   value: taxFormUserInput.vydavkyZPrenajmu,
                   currency: true,
                   allignRight: true,
                 },
                 {
-                  title: 'Výška oslobodenia z prenájmu nehnuteľností',
+                  title: "Výška oslobodenia z prenájmu nehnuteľností",
                   value: taxFormUserInput.vyskaOslobodenia,
                   currency: true,
                   allignRight: true,
@@ -386,32 +386,32 @@ const Suhrn: Page<TaxFormUserInput> = ({
       />
       <Summary
         title="Údaje o daňovníkovi"
-        href={'/osobne-udaje'}
+        href={"/osobne-udaje"}
         rows={[
-          { title: 'DIČ', value: taxFormUserInput.r001_dic },
+          { title: "DIČ", value: taxFormUserInput.r001_dic },
           {
-            title: 'Meno',
+            title: "Meno",
             value: taxFormUserInput.r005_meno,
-            testId: 'r005_meno',
+            testId: "r005_meno",
           },
           {
-            title: 'Priezvisko',
+            title: "Priezvisko",
             value: taxFormUserInput.r004_priezvisko,
-            testId: 'r004_priezvisko',
+            testId: "r004_priezvisko",
           },
         ]}
       />
       <Summary
         title="Adresa trvalého pobytu"
-        href={'/osobne-udaje'}
+        href={"/osobne-udaje"}
         rows={[
           {
-            title: 'Ulica a súpisné číslo',
+            title: "Ulica a súpisné číslo",
             value: `${taxFormUserInput.r007_ulica} ${taxFormUserInput.r008_cislo}`,
           },
-          { title: 'PSČ', value: taxFormUserInput.r009_psc },
-          { title: 'Obec', value: taxFormUserInput.r010_obec },
-          { title: 'Štát', value: taxFormUserInput.r011_stat },
+          { title: "PSČ", value: taxFormUserInput.r009_psc },
+          { title: "Obec", value: taxFormUserInput.r010_obec },
+          { title: "Štát", value: taxFormUserInput.r011_stat },
         ]}
       />
       <Link href={nextRoute} legacyBehavior>
@@ -424,7 +424,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         </button>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default Suhrn
+export default Suhrn;

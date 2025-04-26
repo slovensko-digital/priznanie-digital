@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
-import Link from 'next/link'
-import { FieldArray, Form } from 'formik'
-import styles from './deti.module.css'
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { FieldArray, Form } from "formik";
+import styles from "./deti.module.css";
 import {
   BooleanRadio,
   Input,
   FormWrapper,
   Select,
-} from '../components/FormComponents'
-import { ChildrenUserInput } from '../types/PageUserInputs'
-import { ChildInput, monthNames } from '../types/TaxFormUserInput'
+} from "../components/FormComponents";
+import { ChildrenUserInput } from "../types/PageUserInputs";
+import { ChildInput, monthNames } from "../types/TaxFormUserInput";
 import {
   childrenUserInputInitialValues,
   makeEmptyChild,
-} from '../lib/initialValues'
-import classnames from 'classnames'
+} from "../lib/initialValues";
+import classnames from "classnames";
 import {
   formatCurrency,
   formatRodneCislo,
@@ -23,9 +23,9 @@ import {
   minChildAgeBonusMonth,
   numberInputRegexp,
   parseInputNumber,
-} from '../lib/utils'
-import { Page } from '../components/Page'
-import { ErrorSummary } from '../components/ErrorSummary'
+} from "../lib/utils";
+import { Page } from "../components/Page";
+import { ErrorSummary } from "../components/ErrorSummary";
 import {
   calculate,
   CHILD_RATE_EIGHTEEN_AND_OLDER,
@@ -35,14 +35,15 @@ import {
   monthKeyValues,
   monthToKeyValue,
   TAX_YEAR,
-} from '../lib/calculation'
-import { Details } from '../components/Details'
-import RadioGroup from '../components/radio/RadioGroup'
-import Radio from '../components/radio/Radio'
-import RadioConditional from '../components/radio/RadioConditional'
-import Decimal from 'decimal.js'
-import { Warning } from '../components/Warning'
-import { ExternalLink } from '../components/ExternalLink'
+} from "../lib/calculation";
+import { Details } from "../components/Details";
+import RadioGroup from "../components/radio/RadioGroup";
+import Radio from "../components/radio/Radio";
+import RadioConditional from "../components/radio/RadioConditional";
+import Decimal from "decimal.js";
+import { Warning } from "../components/Warning";
+import { ExternalLink } from "../components/ExternalLink";
+import { UserInput } from "../types/UserInput";
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -56,7 +57,7 @@ const Deti: Page<ChildrenUserInput> = ({
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
       Späť
     </Link>
-  )
+  );
 
   return (
     <>
@@ -65,37 +66,37 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          let userInput = values.hasChildren
+          const userInput = values.hasChildren
             ? values
             : {
                 ...childrenUserInputInitialValues,
                 hasChildren: false,
-              }
+              };
           const { danovyBonusNaDieta } = calculate({
             ...taxFormUserInput,
             ...userInput,
-          })
-          setTaxFormUserInput(userInput)
+          });
+          setTaxFormUserInput(userInput);
           if (values.hasChildren) {
             if (
               danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))
             ) {
-              router.push(nextRoute)
+              router.push(nextRoute);
             } else {
               if (
                 values.partner_bonus_na_deti === false ||
                 values.partner_bonus_na_deti_chce_uplatnit === false
               ) {
-                router.push(nextRoute)
+                router.push(nextRoute);
               } else if (values.partner_bonus_na_deti === true) {
-                const errors = validate(values)
+                const errors = validate(values);
                 if (Object.keys(errors).length === 0) {
-                  router.push(nextRoute)
+                  router.push(nextRoute);
                 }
               }
             }
           } else {
-            router.push(nextRoute)
+            router.push(nextRoute);
           }
         }}
       >
@@ -112,10 +113,10 @@ const Deti: Page<ChildrenUserInput> = ({
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
                   dieťa do 18 rokov, študenta do 25 rokov alebo o nezaopatrené
-                  dieťa do 25 rokov, ktoré je dlhodobo choré, pri splnení{' '}
+                  dieťa do 25 rokov, ktoré je dlhodobo choré, pri splnení{" "}
                   <ExternalLink href="https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-">
                     stanovených podmienok
-                  </ExternalLink>{' '}
+                  </ExternalLink>{" "}
                   máte nárok na daňové zvýhodnenie. Prechodný pobyt dieťaťa mimo
                   domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
                 </p>
@@ -124,12 +125,12 @@ const Deti: Page<ChildrenUserInput> = ({
                     <b>Daňový bonus na vyživované dieťa:</b>
                     <ul>
                       <li>
-                        do 18 rokov sumou{' '}
-                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_YOUNGER)}{' '}
+                        do 18 rokov sumou{" "}
+                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_YOUNGER)}{" "}
                         mesačne.
                       </li>
                       <li>
-                        nad 18 rokov sumou{' '}
+                        nad 18 rokov sumou{" "}
                         {formatCurrency(CHILD_RATE_EIGHTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
@@ -147,8 +148,8 @@ const Deti: Page<ChildrenUserInput> = ({
                           {values.children.length > 1 && (
                             <h2
                               className={classnames(
-                                'govuk-heading-m',
-                                'govuk-!-margin-top-3',
+                                "govuk-heading-m",
+                                "govuk-!-margin-top-3",
                                 styles.childHeadline,
                               )}
                             >
@@ -174,11 +175,11 @@ const Deti: Page<ChildrenUserInput> = ({
                         className="btn-secondary govuk-button"
                         type="button"
                         onClick={async () => {
-                          const errors = await validateForm()
-                          setErrors(errors)
-                          const hasErrors = Object.keys(errors).length > 0
+                          const errors = await validateForm();
+                          setErrors(errors);
+                          const hasErrors = Object.keys(errors).length > 0;
                           if (!hasErrors) {
-                            arrayHelpers.push(makeEmptyChild())
+                            arrayHelpers.push(makeEmptyChild());
                           }
                         }}
                         data-test="add-child"
@@ -233,14 +234,14 @@ const Deti: Page<ChildrenUserInput> = ({
                                 const rodneCislo = formatRodneCislo(
                                   event.currentTarget.value,
                                   values.r034_rodne_cislo,
-                                )
+                                );
                                 const shouldValidate =
-                                  rodneCislo.length >= RODNE_CISLO_DLZKA
+                                  rodneCislo.length >= RODNE_CISLO_DLZKA;
                                 setFieldValue(
-                                  'r034_rodne_cislo',
+                                  "r034_rodne_cislo",
                                   rodneCislo,
                                   shouldValidate,
-                                )
+                                );
                               }}
                             />
 
@@ -257,7 +258,7 @@ const Deti: Page<ChildrenUserInput> = ({
                             </p>
                             <div
                               className={classnames(
-                                'govuk-form-group',
+                                "govuk-form-group",
                                 styles.inlineFieldContainer,
                               )}
                             >
@@ -266,7 +267,7 @@ const Deti: Page<ChildrenUserInput> = ({
                                 label="Od"
                                 optionsWithValue={[
                                   ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
+                                  { name: "", value: "" },
                                 ]}
                               />
                               <Select
@@ -274,7 +275,7 @@ const Deti: Page<ChildrenUserInput> = ({
                                 label="Do"
                                 optionsWithValue={[
                                   ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
+                                  { name: "", value: "" },
                                 ]}
                               />
                             </div>
@@ -286,22 +287,22 @@ const Deti: Page<ChildrenUserInput> = ({
                               name="partner_bonus_na_deti_typ_prijmu"
                               label="Vyberte spôsob vysporiadania príjmov"
                               optionsWithValue={[
-                                { name: '', value: '0' },
+                                { name: "", value: "0" },
                                 {
-                                  name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A',
-                                  value: '1',
+                                  name: "Podaním daňového priznania k dani z príjmov fyzickej osoby typ: A",
+                                  value: "1",
                                 },
                                 {
-                                  name: 'Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B',
-                                  value: '2',
+                                  name: "Podaním daňového priznania k dani z príjmov fyzickej osoby typ: B",
+                                  value: "2",
                                 },
                                 {
-                                  name: 'Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom',
-                                  value: '3',
+                                  name: "Vykonaním ročného zúčtovania preddavkov na daň z príjmov zamestnávateľom",
+                                  value: "3",
                                 },
                                 {
-                                  name: 'Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie',
-                                  value: '4',
+                                  name: "Nemala povinnosť podať daňového priznanie / nebolo jej vykonané ročné zúčtovanie",
+                                  value: "4",
                                 },
                               ]}
                             />
@@ -333,52 +334,52 @@ const Deti: Page<ChildrenUserInput> = ({
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 const AttachmentWarning = ({ prijem }) => {
-  if (prijem === '3') {
+  if (prijem === "3") {
     return (
       <Warning>
         Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu
         dokladu o vykonanom ročnom zúčtovaní preddavkov druhej oprávnenej osoby.
       </Warning>
-    )
+    );
   }
-  if (prijem === '4') {
+  if (prijem === "4") {
     return (
       <Warning>
         Ako prílohu k vášmu daňovému priznaniu je potrebné priložiť kópiu
         dokladu preukazujúceho výšku základu dane druhej oprávnenej osoby.
       </Warning>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 const getIncomeHint = (value: string): string => {
   switch (value) {
-    case '0':
-      return ''
-    case '1':
-      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ A riadok 39'
-    case '2':
-      return 'Výšku príjmov zistíte z formuláru daňového priznania FO typ B riadok 72'
-    case '3':
-      return 'Výšku príjmov zistíte z ročného zúčtovania preddavkov na daň riadok 3.'
+    case "0":
+      return "";
+    case "1":
+      return "Výšku príjmov zistíte z formuláru daňového priznania FO typ A riadok 39";
+    case "2":
+      return "Výšku príjmov zistíte z formuláru daňového priznania FO typ B riadok 72";
+    case "3":
+      return "Výšku príjmov zistíte z ročného zúčtovania preddavkov na daň riadok 3.";
     default:
-      break
+      break;
   }
-}
+};
 
 interface ChildFormProps {
-  index: number
-  savedValues: ChildInput
+  index: number;
+  savedValues: ChildInput;
   setFieldValue: (
     name: string,
     value: string | boolean,
     shouldValidate?: boolean,
-  ) => void
+  ) => void;
 }
 const ChildForm = ({
   savedValues: { rodneCislo, wholeYear },
@@ -387,47 +388,49 @@ const ChildForm = ({
 }: ChildFormProps) => {
   const monthNamesFrom = monthNames.filter((month) =>
     minChildAgeBonusMonth(rodneCislo, month),
-  )
+  );
   const monthNamesUntil = monthNames.filter((month) =>
     maxChildAgeBonusMonth(rodneCislo, month),
-  )
+  );
   const monthOptions = monthNamesUntil.filter((value) =>
     monthNamesFrom.includes(value),
-  )
-  const bonusInPartOfYear = monthOptions.length < 12
+  );
+  const bonusInPartOfYear = monthOptions.length < 12;
 
   useEffect(() => {
     if (
       validateRodneCislo(rodneCislo) &&
-      maxChildAgeBonusMonth(rodneCislo, 'Január')
+      maxChildAgeBonusMonth(rodneCislo, "Január")
     ) {
       if (bonusInPartOfYear) {
-        setFieldValue(`children[${index}].wholeYear`, false)
+        setFieldValue(`children[${index}].wholeYear`, false);
       } else {
-        setFieldValue(`children[${index}].wholeYear`, true)
+        setFieldValue(`children[${index}].wholeYear`, true);
       }
       if (monthOptions.length) {
-        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
+        const fromMonthValue = monthToKeyValue(
+          monthOptions[0],
+        ).value.toString();
         const toMonthValue = monthToKeyValue(
           monthOptions[monthOptions.length - 1],
-        ).value.toString()
-        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
-        setFieldValue(`children[${index}].monthTo`, toMonthValue)
+        ).value.toString();
+        setFieldValue(`children[${index}].monthFrom`, fromMonthValue);
+        setFieldValue(`children[${index}].monthTo`, toMonthValue);
       }
     } else {
-      setFieldValue(`children[${index}].wholeYear`, true)
+      setFieldValue(`children[${index}].wholeYear`, true);
     }
-  }, [bonusInPartOfYear, rodneCislo])
+  }, [bonusInPartOfYear, rodneCislo]);
 
   return (
     <>
       <Input
-        name={`children[${index}].priezviskoMeno` as any}
+        name={`children[${index}].priezviskoMeno` as keyof UserInput}
         type="text"
         label="Meno a priezvisko"
       />
       <Input
-        name={`children[${index}].rodneCislo` as any}
+        name={`children[${index}].rodneCislo` as keyof UserInput}
         type="text"
         label="Rodné číslo"
         maxLength={RODNE_CISLO_DLZKA}
@@ -436,20 +439,20 @@ const ChildForm = ({
           const rodneCisloValue = formatRodneCislo(
             event.currentTarget.value,
             rodneCislo,
-          )
-          const shouldValidate = rodneCisloValue.length >= RODNE_CISLO_DLZKA
+          );
+          const shouldValidate = rodneCisloValue.length >= RODNE_CISLO_DLZKA;
           setFieldValue(
             `children[${index}].rodneCislo`,
             rodneCisloValue,
             shouldValidate,
-          )
+          );
         }}
       />
       <h3 className="govuk-heading-s">Daňový bonus si uplatňujem</h3>
       <RadioGroup
-        value={wholeYear ? 'wholeYear' : 'partYear'}
+        value={wholeYear ? "wholeYear" : "partYear"}
         onChange={(value) => {
-          setFieldValue(`children[${index}].wholeYear`, value === 'wholeYear')
+          setFieldValue(`children[${index}].wholeYear`, value === "wholeYear");
         }}
       >
         <Radio
@@ -469,13 +472,13 @@ const ChildForm = ({
         <RadioConditional forValue="partYear">
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--s">
             <p className="govuk-hint">
-              Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až{' '}
+              Daňový bonus si môžete uplatniť v mesiacoch {monthOptions[0]} až{" "}
               {monthOptions[monthOptions.length - 1]}
             </p>
           </legend>
           <div
             className={classnames(
-              'govuk-form-group',
+              "govuk-form-group",
               styles.inlineFieldContainer,
             )}
           >
@@ -495,50 +498,50 @@ const ChildForm = ({
         </RadioConditional>
       </RadioGroup>
     </>
-  )
-}
+  );
+};
 
 interface ChildFormErrors {
-  priezviskoMeno?: string
-  rodneCislo?: string
-  monthTo?: string
+  priezviskoMeno?: string;
+  rodneCislo?: string;
+  monthTo?: string;
 }
 interface ChildrenFormErrors {
-  hasChildren?: string
-  children?: ChildFormErrors[]
-  partner_bonus_na_deti_od?: string
-  partner_bonus_na_deti_do?: string
-  partner_bonus_na_deti_typ_prijmu?: string
-  r034_priezvisko_a_meno?: string
-  r034_rodne_cislo?: string
-  r034a?: string
+  hasChildren?: string;
+  children?: ChildFormErrors[];
+  partner_bonus_na_deti_od?: string;
+  partner_bonus_na_deti_do?: string;
+  partner_bonus_na_deti_typ_prijmu?: string;
+  r034_priezvisko_a_meno?: string;
+  r034_rodne_cislo?: string;
+  r034a?: string;
 }
 
 export const validate = (values: ChildrenUserInput) => {
-  const errors: ChildrenFormErrors = {}
+  const errors: ChildrenFormErrors = {};
 
-  if (typeof values.hasChildren === 'undefined') {
-    errors.hasChildren = 'Vyznačte odpoveď'
+  if (typeof values.hasChildren === "undefined") {
+    errors.hasChildren = "Vyznačte odpoveď";
   }
   if (values.hasChildren) {
     const childrenErrors = values.children.map((childValues, index) => {
-      const childErrors: ChildFormErrors = {}
+      const childErrors: ChildFormErrors = {};
 
       if (childValues.priezviskoMeno.length === 0) {
-        childErrors.priezviskoMeno = 'Zadajte meno a priezvisko dieťaťa'
+        childErrors.priezviskoMeno = "Zadajte meno a priezvisko dieťaťa";
       }
       if (!childValues.rodneCislo) {
-        childErrors.rodneCislo = 'Zadajte rodné číslo dieťaťa'
+        childErrors.rodneCislo = "Zadajte rodné číslo dieťaťa";
       } else if (!validateRodneCislo(childValues.rodneCislo)) {
-        childErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
-      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, 'Január')) {
-        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`
+        childErrors.rodneCislo = "Zadané rodné číslo nie je správne";
+      } else if (!maxChildAgeBonusMonth(childValues.rodneCislo, "Január")) {
+        childErrors.rodneCislo = `Dieťa malo v roku ${TAX_YEAR} viac ako ${MAX_CHILD_AGE_BONUS} rokov.`;
       } else if (
         values.children
           .slice(0, index)
           .find((v) => v.rodneCislo === childValues.rodneCislo)
       ) {
-        childErrors.rodneCislo = 'Každé dieťa môže byť zadané iba 1 krát'
+        childErrors.rodneCislo = "Každé dieťa môže byť zadané iba 1 krát";
       }
 
       if (
@@ -548,55 +551,55 @@ export const validate = (values: ChildrenUserInput) => {
       ) {
         childErrors.monthTo = `Musí byť ${
           monthNames[childValues.monthFrom]
-        } alebo neskôr`
+        } alebo neskôr`;
       }
 
-      return childErrors
-    })
+      return childErrors;
+    });
 
     if (childrenErrors.some((err) => Object.keys(err).length > 0)) {
-      errors.children = childrenErrors
+      errors.children = childrenErrors;
     }
 
     if (values.partner_bonus_na_deti) {
       if (
-        !['1', '2', '3', '4'].includes(values.partner_bonus_na_deti_typ_prijmu)
+        !["1", "2", "3", "4"].includes(values.partner_bonus_na_deti_typ_prijmu)
       ) {
         errors.partner_bonus_na_deti_typ_prijmu =
-          'Vyberte jednu z možností spôsobu vysporiadania príjmov'
+          "Vyberte jednu z možností spôsobu vysporiadania príjmov";
       }
 
-      if (values.partner_bonus_na_deti_od === '') {
-        errors.partner_bonus_na_deti_od = 'Zadajte začiatok'
+      if (values.partner_bonus_na_deti_od === "") {
+        errors.partner_bonus_na_deti_od = "Zadajte začiatok";
       }
 
-      if (values.partner_bonus_na_deti_do === '') {
-        errors.partner_bonus_na_deti_do = 'Zadajte koniec'
+      if (values.partner_bonus_na_deti_do === "") {
+        errors.partner_bonus_na_deti_do = "Zadajte koniec";
       }
 
       if (!values.r034_priezvisko_a_meno) {
-        errors.r034_priezvisko_a_meno = 'Zadajte meno a priezvisko'
+        errors.r034_priezvisko_a_meno = "Zadajte meno a priezvisko";
       }
 
       if (!values.r034_rodne_cislo) {
-        errors.r034_rodne_cislo = 'Zadajte rodné číslo'
+        errors.r034_rodne_cislo = "Zadajte rodné číslo";
       } else if (!validateRodneCislo(values.r034_rodne_cislo)) {
-        errors.r034_rodne_cislo = 'Zadané rodné číslo nie je správne'
+        errors.r034_rodne_cislo = "Zadané rodné číslo nie je správne";
       }
 
       if (!values.r034a) {
-        errors.r034a = 'Zadajte vlastné príjmy manželky / manžela'
+        errors.r034a = "Zadajte vlastné príjmy manželky / manžela";
       } else if (!values.r034a.match(numberInputRegexp)) {
-        errors.r034a = 'Zadajte príjmy vo formáte 123,45'
+        errors.r034a = "Zadajte príjmy vo formáte 123,45";
       } else if (
         new Decimal(parseInputNumber(values.r034a)).lessThanOrEqualTo(0)
       ) {
-        errors.r034a = 'Príjem musí byť viac ako 0'
+        errors.r034a = "Príjem musí byť viac ako 0";
       }
     }
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default Deti
+export default Deti;

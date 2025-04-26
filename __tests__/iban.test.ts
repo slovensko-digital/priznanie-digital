@@ -1,18 +1,18 @@
-import { makeValidate } from '../src/pages/iban'
-import { testValidation } from './utils/testValidation'
-import { TaxForm } from '../src/types/TaxForm'
+import { makeValidate } from "../src/pages/iban";
+import { testValidation } from "./utils/testValidation";
+import { TaxForm } from "../src/types/TaxForm";
 
-describe('iban', () => {
-  describe('#validate', () => {
-    describe('mozeZiadatVratitPreplatkyBonusyUroky', () => {
+describe("iban", () => {
+  describe("#validate", () => {
+    describe("mozeZiadatVratitPreplatkyBonusyUroky", () => {
       const taxFormMock = {
         mozeZiadatVratitPreplatkyBonusyUroky: true,
-      } as TaxForm
+      } as TaxForm;
 
       testValidation(makeValidate(taxFormMock), [
         {
           input: { ziadamVyplatitDanovyBonusUrokPreplatok: undefined },
-          expected: ['ziadamVyplatitDanovyBonusUrokPreplatok'],
+          expected: ["ziadamVyplatitDanovyBonusUrokPreplatok"],
         },
         {
           input: { ziadamVyplatitDanovyBonusUrokPreplatok: false },
@@ -20,23 +20,23 @@ describe('iban', () => {
         },
         {
           input: { ziadamVyplatitDanovyBonusUrokPreplatok: true },
-          expected: ['iban'],
+          expected: ["iban"],
         },
         {
           input: {
             ziadamVyplatitDanovyBonusUrokPreplatok: true,
-            iban: 'a',
+            iban: "a",
           },
-          expected: ['iban'],
+          expected: ["iban"],
         },
         {
           input: {
             ziadamVyplatitDanovyBonusUrokPreplatok: true,
-            iban: 'SK6807200002891987426353',
+            iban: "SK6807200002891987426353",
           },
           expected: [],
         },
-      ])
-    })
-  })
-})
+      ]);
+    });
+  });
+});

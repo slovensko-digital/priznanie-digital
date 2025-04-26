@@ -1,14 +1,18 @@
-import React from 'react'
-import { BooleanRadio, Checkbox, Input } from './FormComponents'
-import { formatRodneCislo } from '../lib/utils'
-import { PartnerBonusFormProps } from './PartnerBonusForm'
-import { Details } from './Details'
-import { RODNE_CISLO_DLZKA, TAX_YEAR } from '../lib/calculation'
+import React from "react";
+import { BooleanRadio, Checkbox, Input } from "./FormComponents";
+import { formatRodneCislo } from "../lib/utils";
+import { PartnerBonusFormProps } from "./PartnerBonusForm";
+import { Details } from "./Details";
+import { RODNE_CISLO_DLZKA, TAX_YEAR } from "../lib/calculation";
 
-export const ApplyForBonusQuestion = ({ disabled }) => (
+interface Props {
+  disabled?: boolean;
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
-      title={'Chcete si uplatniť zvýhodnenie na manželku / manžela?'}
+      title={"Chcete si uplatniť zvýhodnenie na manželku / manžela?"}
       name="r032_uplatnujem_na_partnera"
       disabled={disabled}
     />
@@ -33,7 +37,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
       </>
     </Details>
   </>
-)
+);
 
 export const IncomeQuestion = ({ disabled }) => {
   return (
@@ -93,8 +97,8 @@ export const IncomeQuestion = ({ disabled }) => {
         </>
       </Details>
     </>
-  )
-}
+  );
+};
 
 export const HouseholdQuestion = ({ disabled }) => (
   <BooleanRadio
@@ -102,7 +106,7 @@ export const HouseholdQuestion = ({ disabled }) => (
     title="Žije s vami manželka / manžel v spoločnej domácnosti?"
     disabled={disabled}
   />
-)
+);
 
 export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
@@ -137,7 +141,7 @@ export const ConditionsQuestion = ({ disabled }) => (
       disabled={disabled}
     />
   </div>
-)
+);
 
 export const NotEligible = () => (
   <div data-test="ineligible-message">
@@ -146,7 +150,7 @@ export const NotEligible = () => (
     </h1>
     <p>Nespĺňate podmienky pre uplatnenie zvýhodnenia na manželku / manžela</p>
   </div>
-)
+);
 
 export const EligiblePartnerForm = ({
   values,
@@ -170,9 +174,9 @@ export const EligiblePartnerForm = ({
         const rodneCislo = formatRodneCislo(
           event.currentTarget.value,
           values.r031_rodne_cislo,
-        )
-        const shouldValidate = RODNE_CISLO_DLZKA <= rodneCislo.length
-        setFieldValue('r031_rodne_cislo', rodneCislo, shouldValidate)
+        );
+        const shouldValidate = RODNE_CISLO_DLZKA <= rodneCislo.length;
+        setFieldValue("r031_rodne_cislo", rodneCislo, shouldValidate);
       }}
     />
 
@@ -185,7 +189,7 @@ export const EligiblePartnerForm = ({
       hint="Pozor! Ak sú splnené uvedené podmienky iba jeden alebo niekoľko kalendárnych mesiacov v zdaňovacom období, môže si daňovník znížiť základ dane o nezdaniteľnú časť základu dane na manželku zodpovedajúcu 1/12 sumy nezdaniteľnej časti za každý kalendárny mesiac, na začiatku ktorého boli splnené podmienky na uplatnenie tejto nezdaniteľnej časti základu dane."
     />
   </>
-)
+);
 
 export const PreviousButton = ({ onClick }) => (
   <button
@@ -195,10 +199,10 @@ export const PreviousButton = ({ onClick }) => (
   >
     Späť
   </button>
-)
+);
 
 export const SubmitButton = () => (
   <button className="govuk-button" type="submit">
     Pokračovať
   </button>
-)
+);

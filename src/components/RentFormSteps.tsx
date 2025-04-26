@@ -1,17 +1,22 @@
-import React from 'react'
-import { BooleanRadio, Input } from './FormComponents'
-import { Details } from './Details'
+import React from "react";
+import { BooleanRadio, Input } from "./FormComponents";
+import { Details } from "./Details";
 import {
   OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI,
   TAX_YEAR,
-} from '../lib/calculation'
-import { Warning } from './Warning'
-import { useFormikContext } from 'formik'
-import { RentUserInput } from '../types/PageUserInputs'
-import { formatCurrency, parseInputNumber } from '../lib/utils'
-import Decimal from 'decimal.js'
-import { ExternalLink } from './ExternalLink'
-export const ApplyForBonusQuestion = ({ disabled }) => (
+} from "../lib/calculation";
+import { Warning } from "./Warning";
+import { useFormikContext } from "formik";
+import { RentUserInput } from "../types/PageUserInputs";
+import { formatCurrency, parseInputNumber } from "../lib/utils";
+import Decimal from "decimal.js";
+import { ExternalLink } from "./ExternalLink";
+
+interface Props {
+  disabled?: boolean;
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={`Prenajímali ste v roku ${TAX_YEAR} nehnuteľnosť?`}
@@ -20,7 +25,7 @@ export const ApplyForBonusQuestion = ({ disabled }) => (
       disabled={disabled}
     />
   </>
-)
+);
 
 export const IncomeQuestion = ({ disabled }) => {
   return (
@@ -32,8 +37,8 @@ export const IncomeQuestion = ({ disabled }) => {
         disabled={disabled}
       />
     </>
-  )
-}
+  );
+};
 
 export const OslobodenieQuestion = ({ disabled }) => (
   <>
@@ -48,11 +53,11 @@ export const OslobodenieQuestion = ({ disabled }) => (
         <li>príjmy z prenájmu nehnuteľností a</li>
         <li>príjmy z príležitostnej činnost</li>
       </ul>
-      ak úhrn týchto príjmov nepresiahne v zdaňovacom období{' '}
+      ak úhrn týchto príjmov nepresiahne v zdaňovacom období{" "}
       {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}, pričom ak takto
       vymedzené príjmy presiahnu túto sumu, do základu dane sa zahrnú len príjmy
       nad sumu {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}. Detailné
-      informácie nájdete na stránke{' '}
+      informácie nájdete na stránke{" "}
       <ExternalLink href="https://podpora.financnasprava.sk/186937-Oslobodenie-pr%C3%ADjmov-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD">
         Finančnej správy SR
       </ExternalLink>
@@ -64,7 +69,7 @@ export const OslobodenieQuestion = ({ disabled }) => (
           Príjmom z príležitostnej činnosti je iba taký príjem, ktorý plynie
           fyzickej osobe bez zmluvne dohodnutých podmienok. Príležitostný príjem
           je zárobok, ktorý je občasný, je nepravidelný, to ale neznamená, že
-          musí ísť o jednorazový príjem. Detailné informácie nájdete na stránke{' '}
+          musí ísť o jednorazový príjem. Detailné informácie nájdete na stránke{" "}
           <ExternalLink href="https://podpora.financnasprava.sk/531581-Pr%C3%ADjmy-z-pr%C3%ADle%C5%BEitostn%C3%BDch-%C4%8Dinnost%C3%AD">
             Finančnej správy SR
           </ExternalLink>
@@ -83,29 +88,29 @@ export const OslobodenieQuestion = ({ disabled }) => (
       </>
     </Details>
     <Warning>
-      Príjem z príležitostnej činnosti nad{' '}
+      Príjem z príležitostnej činnosti nad{" "}
       {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)} momentálne nie je
       podporovaný.
     </Warning>
   </>
-)
+);
 
 export const OslobodenieVyskaQuestion = ({ disabled }) => {
-  const { values } = useFormikContext<RentUserInput>()
+  const { values } = useFormikContext<RentUserInput>();
   const {
     prenajomPrijemZPrilezitostnejCinnosti,
     vyskaPrijmovZPrenajmu,
     vyskaOslobodenia,
-  } = values
-  let priznanyPrijem = null
-  const oslobodenie = parseInputNumber(vyskaOslobodenia)
+  } = values;
+  let priznanyPrijem = null;
+  const oslobodenie = parseInputNumber(vyskaOslobodenia);
   if (oslobodenie > 0) {
     priznanyPrijem = Decimal.max(
       new Decimal(parseInputNumber(vyskaPrijmovZPrenajmu)).minus(
         new Decimal(oslobodenie),
       ),
       0,
-    )
+    );
   }
   const hint =
     prenajomPrijemZPrilezitostnejCinnosti === true
@@ -114,7 +119,7 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
         )} mínus príjem z príležitostnej činnosti.`
       : `Keďže ste nemali príjem z príležitostnej činnosti, môžete si uplatniť oslobodenie v maximálnej výške ${formatCurrency(
           OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI,
-        )}.`
+        )}.`;
   return (
     <>
       <Input
@@ -128,13 +133,13 @@ export const OslobodenieVyskaQuestion = ({ disabled }) => {
       />
       {priznanyPrijem && (
         <p>
-          Váš priznaný príjem z prenájmu nehnuteľností bude{' '}
+          Váš priznaný príjem z prenájmu nehnuteľností bude{" "}
           {formatCurrency(priznanyPrijem.toNumber())}.
         </p>
       )}
     </>
-  )
-}
+  );
+};
 
 export const VydavkyQuestion = ({ disabled }) => (
   <>
@@ -188,7 +193,7 @@ export const VydavkyQuestion = ({ disabled }) => (
       </>
     </Details>
   </>
-)
+);
 
 export const PreviousButton = ({ onClick }) => (
   <button
@@ -198,10 +203,10 @@ export const PreviousButton = ({ onClick }) => (
   >
     Späť
   </button>
-)
+);
 
 export const SubmitButton = () => (
   <button className="govuk-button" type="submit">
     Pokračovať
   </button>
-)
+);

@@ -1,7 +1,7 @@
-import { TaxFormUserInput } from './TaxFormUserInput'
+import { TaxFormUserInput } from "./TaxFormUserInput";
 
 export interface E2eTestUserInput extends TaxFormUserInput {
-  expectNgoDonationValue?: boolean
-  percent2?: string
-  percent3?: string
+  expectNgoDonationValue?: boolean;
+  percent2?: string;
+  percent3?: string;
 }

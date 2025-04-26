@@ -1,27 +1,27 @@
-import React from 'react'
-import { Form, FormikProps } from 'formik'
-import Link from 'next/link'
-import { FormWrapper, Input } from '../components/FormComponents'
-import styles from './osobne-udaje.module.css'
+import React from "react";
+import { Form, FormikProps } from "formik";
+import Link from "next/link";
+import { FormWrapper, Input } from "../components/FormComponents";
+import styles from "./osobne-udaje.module.css";
 import {
   PersonalInformationUserInput,
   FormErrors,
-} from '../types/PageUserInputs'
-import { getAutoformByPersonName } from '../lib/api'
-import { ErrorSummary } from '../components/ErrorSummary'
-import { AutoCompleteInput } from '../components/AutoCompleteInput'
-import { formatPsc, getStreetNumber } from '../lib/utils'
-import { Nace } from '../components/Nace'
-import { Page } from '../components/Page'
-import { AutoFormSubject } from '../types/api'
+} from "../types/PageUserInputs";
+import { getAutoformByPersonName } from "../lib/api";
+import { ErrorSummary } from "../components/ErrorSummary";
+import { AutoCompleteInput } from "../components/AutoCompleteInput";
+import { formatPsc, getStreetNumber } from "../lib/utils";
+import { Nace } from "../components/Nace";
+import { Page } from "../components/Page";
+import { AutoFormSubject } from "../types/api";
 
 const formatNace = (economicActivity) => {
-  const { code, name } = economicActivity || {}
+  const { code, name } = economicActivity || {};
   if (code && name) {
-    return `${code} - ${name}`
+    return `${code} - ${name}`;
   }
-  return ''
-}
+  return "";
+};
 
 const makeHandlePersonAutoform = ({
   setValues,
@@ -36,10 +36,10 @@ const makeHandlePersonAutoform = ({
       building_number,
       municipality,
       postal_code,
-      country
+      country;
 
     if (subject.statutory.length > 0) {
-      ;({
+      ({
         first_name,
         last_name,
         prefixes,
@@ -50,25 +50,25 @@ const makeHandlePersonAutoform = ({
         municipality,
         postal_code,
         country,
-      } = subject.statutory[0])
+      } = subject.statutory[0]);
     }
 
     setValues({
       meno_priezvisko: subject.name,
-      r004_priezvisko: last_name || '',
-      r005_meno: first_name || '',
-      r006_titul: prefixes || '',
-      r006_titul_za: postfixes || '',
-      r001_dic: `${subject.tin}` || '',
+      r004_priezvisko: last_name || "",
+      r005_meno: first_name || "",
+      r006_titul: prefixes || "",
+      r006_titul_za: postfixes || "",
+      r001_dic: `${subject.tin}` || "",
       r003_nace: formatNace(subject.main_economic_activity),
-      r007_ulica: street || municipality || '',
-      r008_cislo: getStreetNumber({ reg_number, building_number }) || '',
-      r009_psc: postal_code ? formatPsc(postal_code) : '',
-      r010_obec: municipality || '',
-      r011_stat: country || '',
-    })
-  }
-}
+      r007_ulica: street || municipality || "",
+      r008_cislo: getStreetNumber({ reg_number, building_number }) || "",
+      r009_psc: postal_code ? formatPsc(postal_code) : "",
+      r010_obec: municipality || "",
+      r011_stat: country || "",
+    });
+  };
+};
 
 const OsobneUdaje: Page<PersonalInformationUserInput> = ({
   setTaxFormUserInput,
@@ -86,8 +86,8 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values)
-          router.push(nextRoute)
+          setTaxFormUserInput(values);
+          router.push(nextRoute);
         }}
       >
         {(props) => (
@@ -105,12 +105,12 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                 label="Zadajte meno, priezvisko alebo podnikateľský názov"
                 onSelect={makeHandlePersonAutoform(props)}
                 fetchData={async (name) => {
-                  const data = await getAutoformByPersonName(name)
+                  const data = await getAutoformByPersonName(name);
                   return data.map((item) => ({
                     ...item,
                     id: item.id,
                     value: `${item.name} ${item.formatted_address}`,
-                  }))
+                  }));
                 }}
               />
 
@@ -183,8 +183,8 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
                     const pscValue = formatPsc(
                       event.currentTarget.value,
                       props.values.r009_psc,
-                    )
-                    props.setFieldValue('r009_psc', pscValue)
+                    );
+                    props.setFieldValue("r009_psc", pscValue);
                   }}
                 />
 
@@ -206,49 +206,49 @@ const OsobneUdaje: Page<PersonalInformationUserInput> = ({
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 export const validate = (values: PersonalInformationUserInput) => {
-  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {}
+  const errors: Partial<FormErrors<PersonalInformationUserInput>> = {};
 
   if (!values.r001_dic) {
-    errors.r001_dic = 'Zadajte pridelené DIČ'
+    errors.r001_dic = "Zadajte pridelené DIČ";
   } else if (values.r001_dic.length < 9 || values.r001_dic.length > 10) {
     /**
      * @see https://ec.europa.eu/taxation_customs/tin/pdf/sk/TIN_-_subject_sheet_-_2_structure_and_specificities_sk.pdf
      */
-    errors.r001_dic = 'DIČ musí mať minimálne 9 znakov a maximálne 10 znakov'
+    errors.r001_dic = "DIČ musí mať minimálne 9 znakov a maximálne 10 znakov";
   }
 
   if (!values.r005_meno) {
-    errors.r005_meno = 'Zadajte vaše meno'
+    errors.r005_meno = "Zadajte vaše meno";
   }
 
   if (!values.r004_priezvisko) {
-    errors.r004_priezvisko = 'Zadajte vaše priezvisko'
+    errors.r004_priezvisko = "Zadajte vaše priezvisko";
   }
 
   if (!values.r008_cislo) {
-    errors.r008_cislo = 'Zadajte číslo domu'
+    errors.r008_cislo = "Zadajte číslo domu";
   }
 
-  const pscNumberFormat = /^\d{3} \d{2}$/
+  const pscNumberFormat = /^\d{3} \d{2}$/;
   if (!values.r009_psc) {
-    errors.r009_psc = 'Zadajte PSČ'
+    errors.r009_psc = "Zadajte PSČ";
   } else if (!pscNumberFormat.test(values.r009_psc)) {
-    errors.r009_psc = 'PSČ môže obsahovať iba 5 čísel'
+    errors.r009_psc = "PSČ môže obsahovať iba 5 čísel";
   }
 
   if (!values.r010_obec) {
-    errors.r010_obec = 'Zadajte obec'
+    errors.r010_obec = "Zadajte obec";
   }
 
   if (!values.r011_stat) {
-    errors.r011_stat = 'Zadajte štát'
+    errors.r011_stat = "Zadajte štát";
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default OsobneUdaje
+export default OsobneUdaje;

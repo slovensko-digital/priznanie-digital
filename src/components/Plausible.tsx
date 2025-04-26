@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import getConfig from 'next/config'
+import Head from "next/head";
+import getConfig from "next/config";
 
 const {
   publicRuntimeConfig: { plausibleDomain },
-} = getConfig()
+} = getConfig();
 
 export function Plausible() {
   return (
@@ -14,5 +14,5 @@ export function Plausible() {
         src="https://plausible.io/js/plausible.js"
       />
     </Head>
-  )
+  );
 }

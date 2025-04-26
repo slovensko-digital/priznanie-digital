@@ -1,43 +1,43 @@
-import React, { useState } from 'react'
-import { Form } from 'formik'
-import classNames from 'classnames'
-import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
-import { FormWrapper, Input } from './FormComponents'
-import { ErrorSummary } from './ErrorSummary'
-import { FeedbackFormInput } from '../types/UserInput'
-import { rodnecislo } from 'rodnecislo'
+import React, { useState } from "react";
+import { Form } from "formik";
+import classNames from "classnames";
+import { ChildInput, TaxFormUserInput } from "../types/TaxFormUserInput";
+import { FormWrapper, Input } from "./FormComponents";
+import { ErrorSummary } from "./ErrorSummary";
+import { FeedbackFormInput } from "../types/UserInput";
+import { rodnecislo } from "rodnecislo";
 
 const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {
     ...taxFormUserInput,
-    r001_dic: 'anon',
-    r003_nace: 'anon',
-    r004_priezvisko: 'anon',
-    r005_meno: 'anon',
-    meno_priezvisko: 'anon',
-    r007_ulica: 'anon',
-    r008_cislo: 'anon',
-    r009_psc: 'anon',
-    r010_obec: 'anon',
-    r011_stat: 'anon',
-    r031_priezvisko_a_meno: 'anon',
-    r031_rodne_cislo: 'anon',
-    iban: 'anon',
-    email: 'anon',
+    r001_dic: "anon",
+    r003_nace: "anon",
+    r004_priezvisko: "anon",
+    r005_meno: "anon",
+    meno_priezvisko: "anon",
+    r007_ulica: "anon",
+    r008_cislo: "anon",
+    r009_psc: "anon",
+    r010_obec: "anon",
+    r011_stat: "anon",
+    r031_priezvisko_a_meno: "anon",
+    r031_rodne_cislo: "anon",
+    iban: "anon",
+    email: "anon",
     children: taxFormUserInput.children.map(anoymizeChild),
-  }
-}
+  };
+};
 
 export const anoymizeChild = (child: ChildInput) => {
-  const rCislo = rodnecislo(child.rodneCislo.replace(' / ', ''))
+  const rCislo = rodnecislo(child.rodneCislo.replace(" / ", ""));
   return {
     ...child,
-    rodneCislo: 'anon',
+    rodneCislo: "anon",
     rokNarodenia: rCislo.year(),
     mesiacNarodenia: rCislo.month() + 1,
-    priezviskoMeno: 'anon',
-  }
-}
+    priezviskoMeno: "anon",
+  };
+};
 
 const sendFeedback = async ({
   whatWereYouDoing,
@@ -45,8 +45,8 @@ const sendFeedback = async ({
   email,
   taxFormUserInput,
 }) => {
-  const response = await fetch('/api/feedback', {
-    method: 'POST',
+  const response = await fetch("/api/feedback", {
+    method: "POST",
     body: JSON.stringify({
       whatWereYouDoing,
       whatWentWrong,
@@ -54,31 +54,31 @@ const sendFeedback = async ({
       taxFormUserInput: anonymizeTaxForm(taxFormUserInput),
       url: window.location.href,
     }),
-  })
-  return response.status === 200
-}
+  });
+  return response.status === 200;
+};
 
 const validateFeedbackForm = (values) => {
-  const errors: any = {}
+  const errors: Record<string, string> = {};
 
   if (!values.whatWereYouDoing) {
-    errors.whatWereYouDoing = 'Napíšte prosím čo ste robili keď nastala chyba'
+    errors.whatWereYouDoing = "Napíšte prosím čo ste robili keď nastala chyba";
   }
 
   if (!values.whatWentWrong) {
-    errors.whatWentWrong = 'Napíšte prosím aká chyba nastala'
+    errors.whatWentWrong = "Napíšte prosím aká chyba nastala";
   }
 
   if (values.email && !values.email.match(/^.+@.+\.[a-z]+$/i)) {
-    errors.email = 'Zadajte správny email, alebo nechajte pole prázdne'
+    errors.email = "Zadajte správny email, alebo nechajte pole prázdne";
   }
 
-  return errors
-}
+  return errors;
+};
 
 interface FeedbackFormProps {
-  taxFormUserInput: TaxFormUserInput
-  close: () => void
+  taxFormUserInput: TaxFormUserInput;
+  close: () => void;
 }
 
 const FeedbackForm: React.FC<FeedbackFormProps> = ({
@@ -86,7 +86,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   close,
 }) => {
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] =
-    useState(undefined)
+    useState(undefined);
 
   return (
     <div
@@ -104,13 +104,13 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
         </div>
         <div
           className="govuk-grid-column-one-third"
-          style={{ textAlign: 'right' }}
+          style={{ textAlign: "right" }}
         >
           <a
             href="#"
             onClick={(e) => {
-              e.preventDefault()
-              close()
+              e.preventDefault();
+              close();
             }}
           >
             zatvoriť
@@ -124,22 +124,22 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
           ) : (
             <FormWrapper<FeedbackFormInput>
               initialValues={{
-                whatWereYouDoing: '',
-                whatWentWrong: '',
-                email: '',
+                whatWereYouDoing: "",
+                whatWentWrong: "",
+                email: "",
               }}
               validate={validateFeedbackForm}
               onSubmit={async (values, { setErrors }) => {
                 const success = await sendFeedback({
                   ...values,
                   taxFormUserInput,
-                })
-                setIsSubmittedSuccessfully(success)
+                });
+                setIsSubmittedSuccessfully(success);
 
                 if (!success) {
                   setErrors({
-                    saving: 'Chyba pri odosielaní, skúste znovu',
-                  })
+                    saving: "Chyba pri odosielaní, skúste znovu",
+                  });
                 }
               }}
             >
@@ -167,14 +167,14 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
                     type="submit"
                     data-test="submit"
                     className={classNames(
-                      'govuk-button',
-                      'govuk-button--large',
-                      'govuk-!-margin-top-4',
-                      { 'govuk-button--disabled': formik.isSubmitting },
+                      "govuk-button",
+                      "govuk-button--large",
+                      "govuk-!-margin-top-4",
+                      { "govuk-button--disabled": formik.isSubmitting },
                     )}
                     disabled={formik.isSubmitting}
                   >
-                    {formik.isSubmitting ? 'Odosielam...' : 'Odoslať'}
+                    {formik.isSubmitting ? "Odosielam..." : "Odoslať"}
                   </button>
                 </Form>
               )}
@@ -183,15 +183,15 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 interface FeedbackProps {
-  taxFormUserInput: TaxFormUserInput
+  taxFormUserInput: TaxFormUserInput;
 }
 
 export const Feedback: React.FC<FeedbackProps> = ({ taxFormUserInput }) => {
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   if (isFeedbackOpen) {
     return (
@@ -199,7 +199,7 @@ export const Feedback: React.FC<FeedbackProps> = ({ taxFormUserInput }) => {
         taxFormUserInput={taxFormUserInput}
         close={() => setIsFeedbackOpen(false)}
       />
-    )
+    );
   }
   return (
     <div className="sdn-feedbackbar__container" id="sdn-feedbackbar-container">
@@ -213,8 +213,8 @@ export const Feedback: React.FC<FeedbackProps> = ({ taxFormUserInput }) => {
             className="sdn-feedbackbar__link"
             data-test="feedback"
             onClick={(e) => {
-              e.preventDefault()
-              setIsFeedbackOpen(true)
+              e.preventDefault();
+              setIsFeedbackOpen(true);
             }}
           >
             Napíšte nám
@@ -222,5 +222,5 @@ export const Feedback: React.FC<FeedbackProps> = ({ taxFormUserInput }) => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,14 +1,14 @@
-import React from 'react'
-import { Form } from 'formik'
-import { FormWrapper } from '../components/FormComponents'
-import { FormErrors, PartnerUserInput } from '../types/PageUserInputs'
-import { numberInputRegexp, validateRodneCislo } from '../lib/utils'
-import { PartnerBonusForm } from '../components/PartnerBonusForm'
-import { validatePartnerBonusForm } from '../lib/validatePartnerBonusForm'
-import { Page } from '../components/Page'
-import { partnerUserInitialValues } from '../lib/initialValues'
-import { BackLink } from '../components/BackLink'
-import { ErrorSummary } from '../components/ErrorSummary'
+import React from "react";
+import { Form } from "formik";
+import { FormWrapper } from "../components/FormComponents";
+import { FormErrors, PartnerUserInput } from "../types/PageUserInputs";
+import { numberInputRegexp, validateRodneCislo } from "../lib/utils";
+import { PartnerBonusForm } from "../components/PartnerBonusForm";
+import { validatePartnerBonusForm } from "../lib/validatePartnerBonusForm";
+import { Page } from "../components/Page";
+import { partnerUserInitialValues } from "../lib/initialValues";
+import { BackLink } from "../components/BackLink";
+import { ErrorSummary } from "../components/ErrorSummary";
 
 const Partner: Page<PartnerUserInput> = ({
   setTaxFormUserInput,
@@ -34,20 +34,20 @@ const Partner: Page<PartnerUserInput> = ({
               : {
                   ...partnerUserInitialValues,
                   r032_uplatnujem_na_partnera: false,
-                }
+                };
 
             if (!validatePartnerBonusForm(values, values.partner_step)) {
-              userInput.r032_partner_vlastne_prijmy = ''
-              userInput.r031_priezvisko_a_meno = ''
-              userInput.r031_rodne_cislo = ''
-              userInput.r032_partner_pocet_mesiacov = ''
-              userInput.r032_partner_pocet_mesiacov = ''
+              userInput.r032_partner_vlastne_prijmy = "";
+              userInput.r031_priezvisko_a_meno = "";
+              userInput.r031_rodne_cislo = "";
+              userInput.r032_partner_pocet_mesiacov = "";
+              userInput.r032_partner_pocet_mesiacov = "";
             }
 
-            setTaxFormUserInput(userInput)
-            router.push(nextRoute)
+            setTaxFormUserInput(userInput);
+            router.push(nextRoute);
           } else {
-            setFieldValue('partner_step', values.partner_step + 1)
+            setFieldValue("partner_step", values.partner_step + 1);
           }
         }}
       >
@@ -57,61 +57,61 @@ const Partner: Page<PartnerUserInput> = ({
             <PartnerBonusForm
               {...props}
               step={props.values.partner_step}
-              setStep={(value) => props.setFieldValue('partner_step', value)}
+              setStep={(value) => props.setFieldValue("partner_step", value)}
             />
           </Form>
         )}
       </FormWrapper>
     </>
-  )
-}
+  );
+};
 
 export const validate = (values: PartnerUserInput) => {
-  const errors: Partial<FormErrors<PartnerUserInput>> = {}
+  const errors: Partial<FormErrors<PartnerUserInput>> = {};
 
-  if (typeof values.r032_uplatnujem_na_partnera === 'undefined') {
-    errors.r032_uplatnujem_na_partnera = 'Vyznačte odpoveď'
+  if (typeof values.r032_uplatnujem_na_partnera === "undefined") {
+    errors.r032_uplatnujem_na_partnera = "Vyznačte odpoveď";
   }
 
   if (
     values.partner_step === 1 &&
-    typeof values.partner_spolocna_domacnost === 'undefined'
+    typeof values.partner_spolocna_domacnost === "undefined"
   ) {
-    errors.partner_spolocna_domacnost = 'Vyznačte odpoveď'
+    errors.partner_spolocna_domacnost = "Vyznačte odpoveď";
   }
 
   if (values.partner_step === 3 && validatePartnerBonusForm(values, 3)) {
     if (!values.r032_partner_vlastne_prijmy) {
       errors.r032_partner_vlastne_prijmy =
-        'Zadajte vlastné príjmy manželky / manžela'
+        "Zadajte vlastné príjmy manželky / manžela";
     } else if (!values.r032_partner_vlastne_prijmy.match(numberInputRegexp)) {
-      errors.r032_partner_vlastne_prijmy = 'Zadajte príjmy vo formáte 123,45'
+      errors.r032_partner_vlastne_prijmy = "Zadajte príjmy vo formáte 123,45";
     }
   } else if (values.partner_step === 4 && validatePartnerBonusForm(values, 4)) {
     if (!values.r031_priezvisko_a_meno) {
       errors.r031_priezvisko_a_meno =
-        'Zadajte meno a priezvisko manželky / manžela.'
+        "Zadajte meno a priezvisko manželky / manžela.";
     }
     if (!values.r031_rodne_cislo) {
-      errors.r031_rodne_cislo = 'Zadajte rodné číslo manželky / manžela'
+      errors.r031_rodne_cislo = "Zadajte rodné číslo manželky / manžela";
     } else if (!validateRodneCislo(values.r031_rodne_cislo)) {
-      errors.r031_rodne_cislo = 'Zadané rodné číslo nie je správne'
+      errors.r031_rodne_cislo = "Zadané rodné číslo nie je správne";
     }
 
     if (!values.r032_partner_pocet_mesiacov) {
       errors.r032_partner_pocet_mesiacov =
-        'Zadajte počet mesiacov, kedy manžel/manželka spĺňal/spĺňala podmienky na uplatnenie daňového bonusu.'
+        "Zadajte počet mesiacov, kedy manžel/manželka spĺňal/spĺňala podmienky na uplatnenie daňového bonusu.";
     } else if (
       !values.r032_partner_pocet_mesiacov.match(/^\d+$/) ||
       Number.parseInt(values.r032_partner_pocet_mesiacov, 10) < 0 ||
       Number.parseInt(values.r032_partner_pocet_mesiacov, 10) > 12
     ) {
       errors.r032_partner_pocet_mesiacov =
-        'Zadajte počet mesiacov - číslo od 0 do 12'
+        "Zadajte počet mesiacov - číslo od 0 do 12";
     }
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default Partner
+export default Partner;

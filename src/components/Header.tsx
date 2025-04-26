@@ -1,10 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
-  const router = useRouter()
-  const isLandingPage = router.pathname === '/' || router.pathname === '/domov'
+  const router = useRouter();
+  const isLandingPage = router.pathname === "/" || router.pathname === "/domov";
 
   const logo = (
     <a className="sdn-header__link">
@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         alt="priznanie.digital"
       />
     </a>
-  )
+  );
 
   return (
     <header
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         )}
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

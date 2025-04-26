@@ -1,27 +1,27 @@
-import React from 'react'
-import { formatCurrency } from '../lib/utils'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { Page } from '../components/Page'
-import { Warning } from '../components/Warning'
-import Decimal from 'decimal.js'
-import { BackLink } from '../components/BackLink'
-import Link from 'next/link'
-import { buildSummary, TAX_YEAR } from '../lib/calculation'
-import { ExternalLink } from '../components/ExternalLink'
+import React from "react";
+import { formatCurrency } from "../lib/utils";
+import { TaxFormUserInput } from "../types/TaxFormUserInput";
+import { Page } from "../components/Page";
+import { Warning } from "../components/Warning";
+import Decimal from "decimal.js";
+import { BackLink } from "../components/BackLink";
+import Link from "next/link";
+import { buildSummary, TAX_YEAR } from "../lib/calculation";
+import { ExternalLink } from "../components/ExternalLink";
 
 interface SummaryRow {
-  key: string
-  title: string
-  description?: string
-  value: Decimal
-  fontSize?: number
-  showEvenWhenZero?: boolean
+  key: string;
+  title: string;
+  description?: string;
+  value: Decimal;
+  fontSize?: number;
+  showEvenWhenZero?: boolean;
 }
 
 interface SummaryProps {
-  rows: SummaryRow[]
-  title?: string
-  compactView?: boolean // Do not show rows with zero value
+  rows: SummaryRow[];
+  title?: string;
+  compactView?: boolean; // Do not show rows with zero value
 }
 
 const Summary = ({ rows, title, compactView = false }: SummaryProps) => (
@@ -42,7 +42,8 @@ const Summary = ({ rows, title, compactView = false }: SummaryProps) => (
             fontSize,
             showEvenWhenZero = false,
           }) => {
-            if (compactView && value.equals(0) && !showEvenWhenZero) return null
+            if (compactView && value.equals(0) && !showEvenWhenZero)
+              return null;
 
             return (
               <tr
@@ -65,114 +66,114 @@ const Summary = ({ rows, title, compactView = false }: SummaryProps) => (
                   <strong>{formatCurrency(value.toNumber())}</strong>
                 </td>
               </tr>
-            )
+            );
           },
         )}
       </tbody>
     </table>
   </div>
-)
+);
 
 const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   taxForm,
   previousRoute,
   nextRoute,
 }) => {
-  const summary = buildSummary(taxForm)
+  const summary = buildSummary(taxForm);
 
   const summaryRows = [
     {
-      title: 'Príjmy spolu',
+      title: "Príjmy spolu",
       value: summary.prijmy,
-      key: 'prijmy',
+      key: "prijmy",
     },
     {
-      title: 'Paušálne výdavky',
+      title: "Paušálne výdavky",
       value: summary.pausalneVydavky,
-      key: 'pausalneVydavky',
+      key: "pausalneVydavky",
     },
     {
-      title: 'Zaplatené poistné spolu',
+      title: "Zaplatené poistné spolu",
       value: summary.zaplatenePoistneSpolu,
-      key: 'zaplatenePoistneSpolu',
+      key: "zaplatenePoistneSpolu",
     },
     {
-      title: 'Nezdaniteľná časť na vás',
+      title: "Nezdaniteľná časť na vás",
       value: summary.nezdanitelnaCastNaSeba,
-      key: 'nezdanitelnaCastNaSeba',
+      key: "nezdanitelnaCastNaSeba",
     },
     {
-      title: 'Nezdaniteľná časť na manželku / manžela',
+      title: "Nezdaniteľná časť na manželku / manžela",
       value: summary.nezdanitelnaCastNaPartnera,
-      key: 'nezdanitelnaCastNaPartnera',
+      key: "nezdanitelnaCastNaPartnera",
     },
     {
-      title: 'Príspevky na doplnkové dôchodkové poistenie',
+      title: "Príspevky na doplnkové dôchodkové poistenie",
       value: summary.prispevkyNaDochodkovePoistenie,
-      key: 'prispevkyNaDochodkovePoistenie',
+      key: "prispevkyNaDochodkovePoistenie",
     },
     {
-      title: 'Základ dane',
+      title: "Základ dane",
       value: summary.zakladDane,
-      key: 'zakladDane',
+      key: "zakladDane",
       fontSize: 20,
       showEvenWhenZero: true,
     },
-  ]
+  ];
 
   const rentRows = [
     {
-      title: 'Príjmy spolu',
+      title: "Príjmy spolu",
       value: summary.prijemNehnutelnost,
-      key: 'prijemNehnutelnost',
+      key: "prijemNehnutelnost",
     },
     {
-      title: 'Preukázateľné výdavky spolu',
+      title: "Preukázateľné výdavky spolu",
       value: summary.vydavkyNehnutelnost,
-      key: 'vydavkyNehnutelnost',
+      key: "vydavkyNehnutelnost",
     },
     {
-      title: 'Základ dane',
+      title: "Základ dane",
       value: summary.zakladDanZPrenajmu,
-      key: 'zakladDanZPrenajmu',
+      key: "zakladDanZPrenajmu",
       fontSize: 20,
       showEvenWhenZero: true,
     },
-  ]
+  ];
 
   const totalRows = [
     {
-      title: 'Daň spolu',
+      title: "Daň spolu",
       value: summary.danSpolu,
-      key: 'danSpolu',
+      key: "danSpolu",
     },
     {
-      title: 'Preddavky na daň',
+      title: "Preddavky na daň",
       value: summary.preddavkyNaDan,
-      key: 'preddavkyNaDan',
+      key: "preddavkyNaDan",
     },
     {
-      title: 'Nárok na daňový bonus na deti',
+      title: "Nárok na daňový bonus na deti",
       value: summary.danovyBonusNaDeti,
-      key: 'danovyBonusNaDeti',
+      key: "danovyBonusNaDeti",
     },
     {
-      title: 'Daňový bonus na zaplatené úroky',
+      title: "Daňový bonus na zaplatené úroky",
       value: summary.danovyBonusNaUroky,
-      key: 'danovyBonusNaUroky',
+      key: "danovyBonusNaUroky",
     },
     {
-      title: 'Daňový bonus / preplatok na vyplatenie',
+      title: "Daňový bonus / preplatok na vyplatenie",
       value: summary.danovyBonusPreplatokNaVyplatenie,
-      key: 'danovyBonusPreplatokNaVyplatenie',
+      key: "danovyBonusPreplatokNaVyplatenie",
     },
     {
-      title: 'Daň na úhradu',
+      title: "Daň na úhradu",
       value: summary.danNaUhradu,
-      key: 'danNaUhradu',
+      key: "danNaUhradu",
       fontSize: 30,
     },
-  ]
+  ];
 
   return (
     <>
@@ -194,10 +195,15 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         <Warning>
           <strong>
             Predpokladané {taxForm.preddavkyNaDan.periodicita} preddavky na daň
-            z príjmov v roku {TAX_YEAR + 1} budú{' '}
+            z príjmov v roku {TAX_YEAR + 1} budú{" "}
             {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má
+<<<<<<< HEAD
             informatívny charakter). Pre viac informácií navštívte web{' '}
             <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2025">
+=======
+            informatívny charakter). Pre viac informácií navštívte web{" "}
+            <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024">
+>>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
               Finančnej správy
             </ExternalLink>
             .
@@ -215,7 +221,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         </button>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default Vysledky
+export default Vysledky;

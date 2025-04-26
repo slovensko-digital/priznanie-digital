@@ -1,44 +1,44 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { makeAttachment, sendEmail } from '../../lib/sendinblue'
+import { NextApiRequest, NextApiResponse } from "next";
+import { makeAttachment, sendEmail } from "../../lib/sendinblue";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const parsedBody = JSON.parse(req.body)
+  const parsedBody = JSON.parse(req.body);
 
   const ipAddress =
-    req.connection.remoteAddress || req.headers['x-forwarded-for'] || '?'
+    req.connection.remoteAddress || req.headers["x-forwarded-for"] || "?";
 
-  const attachment = []
+  const attachment = [];
   if (parsedBody.taxFormUserInput) {
     attachment.push(
       makeAttachment(
-        'taxFormUserInput.json.txt',
+        "taxFormUserInput.json.txt",
         JSON.stringify(parsedBody.taxFormUserInput, null, 2),
       ),
-    )
+    );
   }
   if (parsedBody.postponeUserInput) {
     attachment.push(
       makeAttachment(
-        'postponeUserInput.json.txt',
+        "postponeUserInput.json.txt",
         parsedBody.postponeUserInput,
       ),
-    )
+    );
   }
 
   try {
     await sendEmail({
-      to: 'navody@slovensko.digital',
-      replyTo: `${parsedBody.email || 'noreply@slovensko.digital'}`,
+      to: "navody@slovensko.digital",
+      replyTo: `${parsedBody.email || "noreply@slovensko.digital"}`,
       subject: parsedBody.whatWereYouDoing,
       textContent: `${parsedBody.whatWentWrong}\n\n
-Email: ${parsedBody.email || '[neuvedený]'}
+Email: ${parsedBody.email || "[neuvedený]"}
 URL: ${parsedBody.url}
 IP adresa: ${ipAddress}
 Dátum: ${new Date().toLocaleString()}`,
       attachment,
-    })
-    res.status(200).send({ sent: true })
-  } catch (error) {
-    res.status(400).send({ sent: false })
+    });
+    res.status(200).send({ sent: true });
+  } catch (_error) {
+    res.status(400).send({ sent: false });
   }
-}
+};

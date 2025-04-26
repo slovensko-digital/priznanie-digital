@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React, { PropsWithChildren } from 'react'
+=======
+import { FC, ReactNode } from "react";
+>>>>>>> 1f1a75a (migrate eslint and prettier + fix errors)
 
 interface Props {
-  readonly title: string
-  readonly hint?: string
-  readonly error?: string
+  readonly title: string;
+  readonly hint?: string;
+  readonly error?: string;
+  children: ReactNode;
 }
 
 const Fieldset = ({
@@ -25,7 +30,7 @@ const Fieldset = ({
       )}
       {children}
     </fieldset>
-  )
-}
+  );
+};
 
-export default Fieldset
+export default Fieldset;

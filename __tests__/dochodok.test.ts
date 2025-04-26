@@ -1,39 +1,39 @@
-import { validate } from '../src/pages/dochodok'
-import { testValidation } from './utils/testValidation'
+import { validate } from "../src/pages/dochodok";
+import { testValidation } from "./utils/testValidation";
 
-describe('dochodok', () => {
-  describe('#validate', () => {
+describe("dochodok", () => {
+  describe("#validate", () => {
     testValidation(validate, [
       {
         input: { platil_prispevky_na_dochodok: undefined },
-        expected: ['platil_prispevky_na_dochodok'],
+        expected: ["platil_prispevky_na_dochodok"],
       },
       { input: { platil_prispevky_na_dochodok: false }, expected: [] },
       {
         input: { platil_prispevky_na_dochodok: true },
-        expected: ['zaplatene_prispevky_na_dochodok'],
+        expected: ["zaplatene_prispevky_na_dochodok"],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          zaplatene_prispevky_na_dochodok: 'a',
+          zaplatene_prispevky_na_dochodok: "a",
         },
-        expected: ['zaplatene_prispevky_na_dochodok'],
+        expected: ["zaplatene_prispevky_na_dochodok"],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          zaplatene_prispevky_na_dochodok: '180,01',
+          zaplatene_prispevky_na_dochodok: "180,01",
         },
-        expected: ['zaplatene_prispevky_na_dochodok'],
+        expected: ["zaplatene_prispevky_na_dochodok"],
       },
       {
         input: {
           platil_prispevky_na_dochodok: true,
-          zaplatene_prispevky_na_dochodok: '10',
+          zaplatene_prispevky_na_dochodok: "10",
         },
         expected: [],
       },
-    ])
-  })
-})
+    ]);
+  });
+});

@@ -1,102 +1,102 @@
-import { rodnecislo } from 'rodnecislo'
-import IBAN from 'iban'
-import Decimal from 'decimal.js'
-import base64 from 'base64-js'
-import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from './calculation'
+import { rodnecislo } from "rodnecislo";
+import IBAN from "iban";
+import Decimal from "decimal.js";
+import base64 from "base64-js";
+import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from "./calculation";
 
 export const sortObjectKeys = (object: object) => {
-  const ordered = {}
+  const ordered = {};
   Object.keys(object)
     .sort()
     .forEach((key) => {
-      ordered[key] = object[key]
-    })
-  return ordered
-}
+      ordered[key] = object[key];
+    });
+  return ordered;
+};
 
 export const formatDate = (date: Date): string => {
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
 
-  return `${day}.${month}.${year}`
-}
+  return `${day}.${month}.${year}`;
+};
 
 export const setDate = <T>(input: T, date: Date = null) => {
   if (date === null) {
-    const now = new Date()
+    const now = new Date();
     if (now.getFullYear() === TAX_YEAR) {
-      date = new Date(TAX_YEAR + 1, 0, 1)
+      date = new Date(TAX_YEAR + 1, 0, 1);
     } else {
-      date = now
+      date = now;
     }
   }
   return {
     ...input,
     datum: formatDate(date),
-  }
-}
+  };
+};
 
 export const getStreetNumber = ({
   reg_number,
   building_number,
 }: {
-  reg_number: number
-  building_number: string
+  reg_number: number;
+  building_number: string;
 }): string => {
   if (reg_number !== null && building_number !== null) {
-    return `${reg_number}/${building_number}`
+    return `${reg_number}/${building_number}`;
   }
   if (reg_number === null && building_number !== null) {
-    return building_number
+    return building_number;
   }
   if (reg_number !== null && building_number === null) {
-    return `${reg_number}`
+    return `${reg_number}`;
   }
-  return null
-}
+  return null;
+};
 
 export const formatCurrency = (value: number): string => {
-  const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
-  const roundNumber = decimalToString(new Decimal(value || 0))
+  const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g;
+  const roundNumber = decimalToString(new Decimal(value || 0));
   const formattedNumber = roundNumber
-    .replace(findPlaceForThousandsDivider, ' ')
-    .replace('.', ',')
-  return `${formattedNumber} EUR`
-}
+    .replace(findPlaceForThousandsDivider, " ")
+    .replace(".", ",");
+  return `${formattedNumber} EUR`;
+};
 
-export const numberInputRegexp = '^[0-9]+([,\\.][0-9]{1,2})?$'
+export const numberInputRegexp = "^[0-9]+([,\\.][0-9]{1,2})?$";
 
-export const formatPsc = (newValue: string, previousValue = '') => {
-  const formattedNewValue = newValue.replace(/\D/g, '')
+export const formatPsc = (newValue: string, previousValue = "") => {
+  const formattedNewValue = newValue.replace(/\D/g, "");
   // when deleting space using backspace, delete both space and the number before it
   if (`${newValue} ` === previousValue) {
-    return formattedNewValue.slice(0, -1)
+    return formattedNewValue.slice(0, -1);
   }
 
   // add space after first 3 digits
-  return formattedNewValue.replace(/^(\d{3})/, '$1 ')
-}
+  return formattedNewValue.replace(/^(\d{3})/, "$1 ");
+};
 
 export const translit = (value: string) => {
-  return value.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
-}
+  return value.normalize("NFD").replace(/[\u0300-\u036F]/g, "");
+};
 
-export const formatRodneCislo = (newValue: string, previousValue = '') => {
-  const formattedNewValue = newValue.replace(/\D/g, '')
+export const formatRodneCislo = (newValue: string, previousValue = "") => {
+  const formattedNewValue = newValue.replace(/\D/g, "");
   if (`${newValue} ` === previousValue) {
-    return newValue.slice(0, -3)
+    return newValue.slice(0, -3);
   } else {
-    return formattedNewValue.replace(/^(\d{6})/, '$1 / ')
+    return formattedNewValue.replace(/^(\d{6})/, "$1 / ");
   }
-}
+};
 
 export const validateRodneCislo = (value: string): boolean => {
   return (
     /^\d{6} \/ \d{3,4}$/.test(value) &&
-    rodnecislo(value.replace(' / ', '')).isValid()
-  )
-}
+    rodnecislo(value.replace(" / ", "")).isValid()
+  );
+};
 
 export const maxChildAgeBonusMonth = (
   rodneCislo: string,
@@ -104,28 +104,28 @@ export const maxChildAgeBonusMonth = (
 ): boolean => {
   return (
     getRodneCisloAgeAtYearAndMonth(
-      rodneCislo.replace(' / ', ''),
+      rodneCislo.replace(" / ", ""),
       TAX_YEAR,
       monthToKeyValue(month).value,
     ) < MAX_CHILD_AGE_BONUS
-  )
-}
+  );
+};
 export const minChildAgeBonusMonth = (
   rodneCislo: string,
   month: string,
 ): boolean => {
   return (
     getRodneCisloAgeAtYearAndMonth(
-      rodneCislo.replace(' / ', ''),
+      rodneCislo.replace(" / ", ""),
       TAX_YEAR,
       monthToKeyValue(month).value,
     ) >= 0
-  )
-}
+  );
+};
 
 export const getBirthMonth = (value: string): number => {
-  return rodnecislo(value.replace(' / ', '')).month()
-}
+  return rodnecislo(value.replace(" / ", "")).month();
+};
 
 // logic from https://github.com/kub1x/rodnecislo
 export const getRodneCisloAgeAtYearAndMonth = (
@@ -133,114 +133,116 @@ export const getRodneCisloAgeAtYearAndMonth = (
   year: number,
   month: number,
 ): number => {
-  const rc = rodnecislo(rodneCislo)
+  const rc = rodnecislo(rodneCislo);
 
-  const date = new Date(year, month, 1)
-  const dateYear = date.getFullYear()
-  const dateMonth = date.getMonth()
+  const date = new Date(year, month, 1);
+  const dateYear = date.getFullYear();
+  const dateMonth = date.getMonth();
   // const dateDay = date.getDate()
 
-  var age = dateYear - rc.year()
+  const age = dateYear - rc.year();
 
   if (dateMonth > rc.month()) {
-    return age
+    return age;
   }
 
   if (dateMonth == rc.month() && dateYear == rc.year()) {
-    return 0
+    return 0;
   }
 
   if (dateMonth <= rc.month()) {
-    return age - 1 // if birthday is on this month, return age - 1
+    return age - 1; // if birthday is on this month, return age - 1
   }
 
-  return age
-}
+  return age;
+};
 
-export const formatIban = (newValue: string, previousValue = '') => {
-  const prefix = newValue.trim().slice(0, 2)
-  const number = newValue.trim().slice(2).replace(/\D/g, '')
-  const formattedNewValue = `${prefix}${number}`
+export const formatIban = (newValue: string, previousValue = "") => {
+  const prefix = newValue.trim().slice(0, 2);
+  const number = newValue.trim().slice(2).replace(/\D/g, "");
+  const formattedNewValue = `${prefix}${number}`;
   if (`${newValue} ` === previousValue) {
-    return newValue.slice(0, -2)
+    return newValue.slice(0, -2);
   } else {
-    return IBAN.printFormat(formattedNewValue)
+    return IBAN.printFormat(formattedNewValue);
   }
-}
+};
 
 export const validateIbanFormat = (value: string): boolean => {
-  return IBAN.isValid(value.replace(/\s/g, ''))
-}
+  return IBAN.isValid(value.replace(/\s/g, ""));
+};
 
 export const validateIbanCountry = (value: string): boolean => {
-  return /^sk/i.test(value.trim())
-}
+  return /^sk/i.test(value.trim());
+};
 
 export interface ParsedName {
-  first: string
-  last: string
-  title: string
+  first: string;
+  last: string;
+  title: string;
 }
 
 export const round = (decimal: Decimal): Decimal => {
-  return decimal.toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
-}
+  return decimal.toDecimalPlaces(2, Decimal.ROUND_HALF_UP);
+};
 
 export function parseInputNumber(input: string): number {
-  const cleanedInput = !input || input === '' ? '0' : input.replace(',', '.')
-  return Number(cleanedInput)
+  const cleanedInput = !input || input === "" ? "0" : input.replace(",", ".");
+  return Number(cleanedInput);
 }
 
 export const parseStreetAndNumber = (streetAndNumber) => {
   const parsedStreet = streetAndNumber
     .trim()
-    .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/)
+    .match(/^(.*)\s([\d+/]+[A-Za-z]?)$/);
 
-  const street = parsedStreet ? parsedStreet[1] : streetAndNumber.trim()
-  const number = parsedStreet ? parsedStreet[2] : ''
+  const street = parsedStreet ? parsedStreet[1] : streetAndNumber.trim();
+  const number = parsedStreet ? parsedStreet[2] : "";
 
-  return [street, number]
-}
+  return [street, number];
+};
 
 export const percentage = (base: Decimal, percent: number) => {
-  return round(base.div(100).times(percent))
-}
+  return round(base.div(100).times(percent));
+};
 
-const mapHelper = (arr, callback): any => {
-  const res = []
-  let kValue
-  let mappedValue
+const mapHelper = (arr, callback): unknown => {
+  const res = [];
+  let kValue;
+  let mappedValue;
 
   for (let k = 0, len = arr.length; k < len; k++) {
-    if (typeof arr === 'string' && !!arr.charAt(k)) {
-      kValue = arr.charAt(k)
-      mappedValue = callback(kValue, k, arr)
-      res[k] = mappedValue
-    } else if (typeof arr !== 'string' && k in arr) {
-      kValue = arr[k]
-      mappedValue = callback(kValue, k, arr)
-      res[k] = mappedValue
+    if (typeof arr === "string" && !!arr.charAt(k)) {
+      kValue = arr.charAt(k);
+      mappedValue = callback(kValue, k, arr);
+      res[k] = mappedValue;
+    } else if (typeof arr !== "string" && k in arr) {
+      kValue = arr[k];
+      mappedValue = callback(kValue, k, arr);
+      res[k] = mappedValue;
     }
   }
-  return res
-}
+  return res;
+};
 
 export const encodeUnicodeCharacters = (input: string): string => {
   return encodeURIComponent(input).replace(/%([\dA-F]{2})/g, (_, char) =>
-    String.fromCharCode(Number('0x' + char)),
-  )
-}
+    String.fromCharCode(Number("0x" + char)),
+  );
+};
 
 export const toBase64 = (value: string): string => {
-  return base64.fromByteArray(
-    mapHelper(encodeUnicodeCharacters(value), (char) => char.charCodeAt(0)),
-  )
-}
+  const uint8Arr = mapHelper(encodeUnicodeCharacters(value), (char: string) =>
+    char.charCodeAt(0),
+  ) as Uint8Array;
+
+  return base64.fromByteArray(uint8Arr);
+};
 
 export const boolToString = (bool: boolean) => {
-  return bool ? '1' : '0'
-}
+  return bool ? "1" : "0";
+};
 
 export const decimalToString = (decimal: Decimal) => {
-  return decimal.toFixed(2)
-}
+  return decimal.toFixed(2);
+};
