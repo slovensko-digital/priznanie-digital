@@ -295,7 +295,9 @@ const executeTestCase = (testCase: string) => {
           cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.dve_percenta_podporujem) {
-            cy.get(`[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`).click()
+            cy.get(
+              `[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`,
+            ).click()
 
             cy.get('label[for="splnam3per"]').contains(input.percent3)
 
@@ -303,7 +305,7 @@ const executeTestCase = (testCase: string) => {
               getInput('splnam3per').click()
             }
 
-            if (input.dve_percenta_podporujem !== 'ano-sk-digital') {              
+            if (input.dve_percenta_podporujem !== 'ano-sk-digital') {
               typeToInput('r142_obchMeno', input)
               typeToInput('r142_ico', input)
             }
