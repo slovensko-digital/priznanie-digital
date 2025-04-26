@@ -6,7 +6,8 @@ import { urokyEligibleInput } from './urokyEligibleInput'
 export const uroky202502Input: E2eTestUserInput = {
   ...case202302Input,
   ...urokyEligibleInput,
-  r035_uplatnuje_uroky: false,
+  r035_uplatnuje_uroky: true,
+  uroky_nesplna_datumy: true,
   uroky_zmluva_rok_uzatvorenia: (TAX_YEAR - 3).toString(),
   uroky_zmluva_mesiac_uzatvorenia: '6',
   uroky_zmluva_den_uzatvorenia: '1',
