@@ -215,6 +215,7 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
+  const isChecked = field.value && field.value.length > 0 && field.value[0] === 'on'
   return (
     <div
       className={classnames([
@@ -235,7 +236,7 @@ export const Checkbox = ({
           type="checkbox"
           data-test={`${field.name}-input`}
           id={name}
-          checked={field.value === true}
+          checked={isChecked}
           disabled={disabled}
         />
         <label className="govuk-label govuk-checkboxes__label" htmlFor={name}>
