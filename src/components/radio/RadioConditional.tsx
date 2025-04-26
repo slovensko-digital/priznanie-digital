@@ -1,12 +1,12 @@
-import React, { PropsWithChildren } from "react";
-import { useRadioGroupContext } from "./RadioGroup";
+import React, { PropsWithChildren } from 'react'
+import { useRadioGroupContext } from './RadioGroup'
 
 interface Props {
-  readonly forValue: string;
+  readonly forValue: string
 }
 
 const RadioConditional = ({ forValue, children }: PropsWithChildren<Props>) => {
-  const { selected } = useRadioGroupContext();
+  const { selected } = useRadioGroupContext()
 
   return (
     <>
@@ -14,7 +14,7 @@ const RadioConditional = ({ forValue, children }: PropsWithChildren<Props>) => {
         <div className="govuk-radios__conditional">{children}</div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default RadioConditional;
+export default RadioConditional

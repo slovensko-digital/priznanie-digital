@@ -1,25 +1,25 @@
-import React, { createContext, useContext, PropsWithChildren } from "react";
+import React, { createContext, useContext, PropsWithChildren } from 'react'
 
 interface RadioGroupState {
-  readonly selected: string;
-  readonly onSelect: (selected: string) => void;
+  readonly selected: string
+  readonly onSelect: (selected: string) => void
 }
 
-const RadioGroupContext = createContext<RadioGroupState>(null);
+const RadioGroupContext = createContext<RadioGroupState>(null)
 
 export const useRadioGroupContext = (): RadioGroupState => {
-  const context = useContext(RadioGroupContext);
+  const context = useContext(RadioGroupContext)
   if (!context) {
     throw new Error(
-      "useRadioGroupContext must be used within the RadioGroupContext.Provider",
-    );
+      'useRadioGroupContext must be used within the RadioGroupContext.Provider',
+    )
   }
-  return context;
-};
+  return context
+}
 
 interface Props {
-  readonly value: string;
-  readonly onChange: (value: string) => void;
+  readonly value: string
+  readonly onChange: (value: string) => void
 }
 
 const RadioGroup = ({
@@ -37,7 +37,7 @@ const RadioGroup = ({
         </fieldset>
       </div>
     </RadioGroupContext.Provider>
-  );
-};
+  )
+}
 
-export default RadioGroup;
+export default RadioGroup

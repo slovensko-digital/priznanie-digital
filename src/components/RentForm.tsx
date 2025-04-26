@@ -1,6 +1,6 @@
-import { RentUserInput } from "../types/PageUserInputs";
-import React, { useEffect, useRef } from "react";
-import { FormikProps } from "formik";
+import { RentUserInput } from '../types/PageUserInputs'
+import React, { useEffect, useRef } from 'react'
+import { FormikProps } from 'formik'
 import {
   ApplyForBonusQuestion,
   IncomeQuestion,
@@ -9,59 +9,59 @@ import {
   VydavkyQuestion,
   PreviousButton,
   SubmitButton,
-} from "./RentFormSteps";
+} from './RentFormSteps'
 
 const scrollToElement = (element, smooth = true) => {
   if (element && element.current) {
     element.current.scrollIntoView({
-      behavior: smooth ? "smooth" : "auto",
-      block: "center",
-    });
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'center',
+    })
   }
-};
+}
 
 export interface RentFormProps extends FormikProps<RentUserInput> {
-  step: number;
-  setStep: (step: number) => void;
+  step: number
+  setStep: (step: number) => void
 }
 
 export const RentForm = (props: RentFormProps) => {
-  const { setStep, step } = props;
+  const { setStep, step } = props
   const questionElements = [
     useRef(undefined),
     useRef(undefined),
     useRef(undefined),
     useRef(undefined),
     useRef(undefined),
-  ];
+  ]
 
   useEffect(() => {
     setTimeout(() => {
-      scrollToElement(questionElements[step]);
-    }, 25);
-  }, [step, questionElements]);
+      scrollToElement(questionElements[step])
+    }, 25)
+  }, [step, questionElements])
 
   const previousStep = () => {
-    setStep(step - 1);
-  };
+    setStep(step - 1)
+  }
 
-  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion];
+  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
-      questions.push(NextQuestion);
+      questions.push(NextQuestion)
     }
-  };
+  }
 
-  addQuestionForStep(1, IncomeQuestion);
-  addQuestionForStep(2, VydavkyQuestion);
-  addQuestionForStep(3, OslobodenieQuestion);
-  addQuestionForStep(4, OslobodenieVyskaQuestion);
+  addQuestionForStep(1, IncomeQuestion)
+  addQuestionForStep(2, VydavkyQuestion)
+  addQuestionForStep(3, OslobodenieQuestion)
+  addQuestionForStep(4, OslobodenieVyskaQuestion)
 
   return (
     <>
       {questions.map((Question, index) => {
-        const isLast = index === step;
+        const isLast = index === step
 
         return (
           <div
@@ -71,9 +71,9 @@ export const RentForm = (props: RentFormProps) => {
           >
             <Question {...props} disabled={!isLast} />
           </div>
-        );
+        )
       })}
       {step > 0 && <PreviousButton onClick={previousStep} />} <SubmitButton />
     </>
-  );
-};
+  )
+}

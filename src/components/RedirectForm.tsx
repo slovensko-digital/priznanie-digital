@@ -1,23 +1,23 @@
-import React, { useEffect, useRef } from "react";
-import getConfig from "next/config";
-import fileDownload from "js-file-download";
-import { ErrorSummary } from "./ErrorSummary";
-import Link from "next/link";
+import React, { useEffect, useRef } from 'react'
+import getConfig from 'next/config'
+import fileDownload from 'js-file-download'
+import { ErrorSummary } from './ErrorSummary'
+import Link from 'next/link'
 
 const {
   publicRuntimeConfig: { navodyBaseUrl },
-} = getConfig();
+} = getConfig()
 
 export interface RedirectField {
-  name: string;
-  value: string;
+  name: string
+  value: string
 }
 
 interface RedirectFormProps {
-  fields: RedirectField[];
-  canContinue: boolean;
-  debugDownload?: string;
-  isDebug: boolean;
+  fields: RedirectField[]
+  canContinue: boolean
+  debugDownload?: string
+  isDebug: boolean
 }
 
 export const RedirectForm: React.FC<RedirectFormProps> = ({
@@ -26,29 +26,29 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
   debugDownload,
   isDebug,
 }) => {
-  const form = useRef(null);
+  const form = useRef(null)
   useEffect(() => {
     if (!isDebug && form.current) {
-      form.current.submit();
+      form.current.submit()
     }
-  }, [form, isDebug]);
+  }, [form, isDebug])
 
   if (!canContinue && !isDebug) {
     return (
       <div className="govuk-!-margin-top-6">
         <ErrorSummary
           errors={{
-            session: "Vaša session vypršala",
+            session: 'Vaša session vypršala',
           }}
         />
         <Link href="/" legacyBehavior>
           <button className="govuk-button">Začnite znovu</button>
         </Link>
       </div>
-    );
+    )
   }
 
-  const action = `${navodyBaseUrl}/podania/nove`;
+  const action = `${navodyBaseUrl}/podania/nove`
   return (
     <>
       <p className="govuk-!-margin-top-6">
@@ -69,8 +69,8 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
         )}
       </form>
     </>
-  );
-};
+  )
+}
 
 const Debug = ({ canContinue, download }) => (
   <div style={{ opacity: 0.4 }}>
@@ -93,11 +93,11 @@ const Debug = ({ canContinue, download }) => (
         className="govuk-button"
         data-test="debug-download"
         onClick={() => {
-          fileDownload(download, "file.xml");
+          fileDownload(download, 'file.xml')
         }}
       >
         DEBUG: Stiahnuť XML
       </button>
     )}
   </div>
-);
+)

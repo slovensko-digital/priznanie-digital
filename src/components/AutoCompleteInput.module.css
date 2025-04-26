@@ -23,12 +23,12 @@
   padding-right: 40px;
 }
 .autocompleteFieldLoading::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 40px;
   height: 40px;
   right: 5px;
   bottom: 0;
-  background: url("/assets/images/spinner.png") center center no-repeat !important;
+  background: url('/assets/images/spinner.png') center center no-repeat !important;
   pointer-events: none;
 }

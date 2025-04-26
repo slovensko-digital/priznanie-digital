@@ -1,266 +1,266 @@
-import Decimal from "decimal.js";
+import Decimal from 'decimal.js'
 
 export interface Child {
-  priezviskoMeno: string;
-  rodneCislo: string;
-  m00: boolean;
-  m01: boolean;
-  m02: boolean;
-  m03: boolean;
-  m04: boolean;
-  m05: boolean;
-  m06: boolean;
-  m07: boolean;
-  m08: boolean;
-  m09: boolean;
-  m10: boolean;
-  m11: boolean;
-  m12: boolean;
+  priezviskoMeno: string
+  rodneCislo: string
+  m00: boolean
+  m01: boolean
+  m02: boolean
+  m03: boolean
+  m04: boolean
+  m05: boolean
+  m06: boolean
+  m07: boolean
+  m08: boolean
+  m09: boolean
+  m10: boolean
+  m11: boolean
+  m12: boolean
 }
 
 interface Partner {
-  priezviskoMeno: string;
-  rodneCislo: string;
-  m00: boolean;
-  m01: boolean;
-  m02: boolean;
-  m03: boolean;
-  m04: boolean;
-  m05: boolean;
-  m06: boolean;
-  m07: boolean;
-  m08: boolean;
-  m09: boolean;
-  m10: boolean;
-  m11: boolean;
-  m12: boolean;
-  druhaOsobaPodalaDPvSR: boolean;
-  dokladRocZuct: boolean;
-  dokladVyskaDane: boolean;
-  pocetMesiacov: number;
+  priezviskoMeno: string
+  rodneCislo: string
+  m00: boolean
+  m01: boolean
+  m02: boolean
+  m03: boolean
+  m04: boolean
+  m05: boolean
+  m06: boolean
+  m07: boolean
+  m08: boolean
+  m09: boolean
+  m10: boolean
+  m11: boolean
+  m12: boolean
+  druhaOsobaPodalaDPvSR: boolean
+  dokladRocZuct: boolean
+  dokladVyskaDane: boolean
+  pocetMesiacov: number
 }
 
 export interface TaxForm {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
-  r001_dic: string;
+  r001_dic: string
   /** 03 - SK NACE - Hlavná, prevažná činnosť */
-  r003_nace: string;
+  r003_nace: string
   /**   04 - Priezvisko*/
-  r004_priezvisko: string;
+  r004_priezvisko: string
   /**   05 - Meno*/
-  r005_meno: string;
+  r005_meno: string
   /** 06 - Titul pred menom*/
-  r006_titul: string;
+  r006_titul: string
   /** 06 - Titul za priezviskom*/
-  r006_titul_za: string;
+  r006_titul_za: string
   /**   07 - Ulica*/
-  r007_ulica: string;
+  r007_ulica: string
   /**   08 - Súpisné/orientačné číslo **/
-  r008_cislo: string;
+  r008_cislo: string
   /** PSC */
-  r009_psc: string;
+  r009_psc: string
   /**   10 - Obec **/
-  r010_obec: string;
+  r010_obec: string
   /**   11 - Štát **/
-  r011_stat: string;
+  r011_stat: string
 
   /** SECTION Dochodok */
   /** 75 - ods. 10 - na preukázateľne zaplatené príspevky na doplnkové dôchodkové sporenie maximálne vo výške 180 eur */
-  platil_prispevky_na_dochodok?: boolean;
-  r075_zaplatene_prispevky_na_dochodok?: Decimal;
+  platil_prispevky_na_dochodok?: boolean
+  r075_zaplatene_prispevky_na_dochodok?: Decimal
 
   /** SECTION  Partner*/
-  r031_priezvisko_a_meno?: string;
-  r031_rodne_cislo?: string;
-  r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: Decimal;
-  r032_partner_pocet_mesiacov?: number;
+  r031_priezvisko_a_meno?: string
+  r031_rodne_cislo?: string
+  r032_uplatnujem_na_partnera?: boolean
+  r032_partner_vlastne_prijmy?: Decimal
+  r032_partner_pocet_mesiacov?: number
 
   /** SECTION  Mortage */
-  r035_uplat_dan_bonus_zaplat_uroky?: boolean;
-  r035_zaplatene_uroky?: Decimal;
-  r035_pocet_mesiacov?: number;
-  r035_datum_zacatia_urocenia_uveru?: Date;
-  r035_datum_uzatvorenia_zmluvy?: Date;
+  r035_uplat_dan_bonus_zaplat_uroky?: boolean
+  r035_zaplatene_uroky?: Decimal
+  r035_pocet_mesiacov?: number
+  r035_datum_zacatia_urocenia_uveru?: Date
+  r035_datum_uzatvorenia_zmluvy?: Date
 
   /** SECTION Prijmy a poistenie  */
   /**   VIs.Príjmy z tabuľky č. 1, stĺ. 1, r. 10 TODO asi zrkadlenie do VI.Príjmy z tabuľky č. 1, stĺ. 1, r. 2*/
-  t1r10_prijmy: Decimal;
+  t1r10_prijmy: Decimal
   /**   Preukázateľne zaplatené poistné na sociálne poistenie z príjmov*/
-  priloha3_r11_socialne: Decimal;
+  priloha3_r11_socialne: Decimal
   /**   Preukázaeľne zaplatené poistné na zdravotné poistenie z príjmov*/
-  priloha3_r13_zdravotne: Decimal;
+  priloha3_r13_zdravotne: Decimal
 
   /**   Deti*/
-  r033?: Child[];
-  r033a: boolean;
-  partner_bonus_na_deti: boolean;
-  r034: Partner;
-  r034a: Decimal;
+  r033?: Child[]
+  r033a: boolean
+  partner_bonus_na_deti: boolean
+  r034: Partner
+  r034a: Decimal
 
   /**   VI.Výdavky z tabuľky č. 1, stĺ. 2, r.10*/
-  t1r10_vydavky: Decimal;
-  t1r2_prijmy: Decimal;
+  t1r10_vydavky: Decimal
+  t1r2_prijmy: Decimal
 
   /**   Preukázateľne zaplatené poistné z príjmov podľa § 6 ods. 1 a 2 zákona */
-  vydavkyPoistPar6ods11_ods1a2: Decimal;
+  vydavkyPoistPar6ods11_ods1a2: Decimal
 
   /** SECTION  Zamestnanie */
-  r036: Decimal;
-  r037: Decimal;
-  priloha3_r08_poistne_spolu: Decimal;
-  priloha3_r09_socialne: Decimal;
-  priloha3_r10_zdravotne: Decimal;
+  r036: Decimal
+  r037: Decimal
+  priloha3_r08_poistne_spolu: Decimal
+  priloha3_r09_socialne: Decimal
+  priloha3_r10_zdravotne: Decimal
 
   /** SECTION  Dohoda */
-  r036a: Decimal;
+  r036a: Decimal
 
   /** SECTION Prenajom */
-  rent?: boolean;
-  prenajom_oslobodenie: Decimal;
-  t1r11s1?: Decimal;
-  t1r11s2?: Decimal;
-  t1r13s1?: Decimal;
-  t1r13s2?: Decimal;
+  rent?: boolean
+  prenajom_oslobodenie: Decimal
+  t1r11s1?: Decimal
+  t1r11s2?: Decimal
+  t1r13s1?: Decimal
+  t1r13s2?: Decimal
 
   /** Základ dane (čiastkový základ dane)  */
-  r038: Decimal;
+  r038: Decimal
   /**   The same as t1r10_vydavky*/
-  r039: Decimal;
+  r039: Decimal
   /**   Výdavky z tabuľky č. 1, stĺ. 2, r.10 The same as expense above*/
-  r040: Decimal;
+  r040: Decimal
   /**   Základ dane (kladný rozdiel r. 41 a r. 42); výsledok hospodárenia (zisk)*/
-  r041: Decimal;
+  r041: Decimal
   /**  TODO  Strata (záporný rozdiel r. 41 a r. 42); výsledok hospodárenia (strata) */
   // r042: number;
   /**   Základ dane (čiastkový základ dane) z príjmov (r. 43 + r. 44 + r. 45 - r.
    *   46) > 0*/
-  r045: Decimal;
+  r045: Decimal
   /**   Znížený čiastkový základ dane z príjmov o stratu z predchádzajúcich
    *   zdaňovacích období maximálne do sumy v r. 47 (r. 47 - r. 54) ASI zrkadlenie
    *   047 */
-  r055: Decimal;
+  r055: Decimal
   /**   Základ dane (čiastkový základ dane) z príjmov znížený o odpočet výdavkov
    *   (nákladov) na výskum a vývoj zaokrúhlený na eurocenty nadol (r. 55 - r. 56)
    *   Zrkadlenie 55*/
-  r057: Decimal;
+  r057: Decimal
   /**   Základ dane z príjmov pred znížením o nezdaniteľnú časť základu dane (r. 40
    *   + r. 57)*/
-  r058: Decimal;
-  r059: Decimal;
-  r060?: Decimal;
-  r065?: Decimal;
-  r072_pred_znizenim: Decimal;
+  r058: Decimal
+  r059: Decimal
+  r060?: Decimal
+  r065?: Decimal
+  r072_pred_znizenim: Decimal
   /**   Hardconuta value 3937.35 - nezdaniteľnú časť základu Ak r.72>20 507, potom
    *    r.73 má byť výsledkom max(0,9 064.094-(1/4)*r.72–r.30). Ak r72<=20 507,
    *    potom r.73 má byť výsledkom max(0,3 937.35–r.30). (2814.10)*/
-  r073: Decimal;
+  r073: Decimal
   /**   "Ak je vyplnene r.31 rodné číslo a r.32 počet mesiacov, potom ak r.72>36
    *   256.38 potom r.74=max(0,[13 001.438 –1/4*r.72–max(r.32 vlastný
    *   príjem,0)]*1/12*r.32 počet mesiacov). Ak r.72<=36 256.38, potom
    *   r.74=max(0,[ 3 937.35 –max(r.32 vlastný príjem,0)]*1/12*r.32 počet
    *   mesiacov)"*/
-  r074_znizenie_partner: Decimal;
+  r074_znizenie_partner: Decimal
   /**   Spolu (r. 73 + r. 74 + r.75 + r.76) maximálne do výšky základu dane v r. 72*/
-  r077_nezdanitelna_cast: Decimal;
+  r077_nezdanitelna_cast: Decimal
   /**   Základ dane z príjmov  po znížení o nezdaniteľnú časť (r. 72 - r. 77)*/
-  r078_zaklad_dane_zo_zamestnania: Decimal;
+  r078_zaklad_dane_zo_zamestnania: Decimal
   /**   Základ dane zistený (r. 78 + r. 65 + r. 71 + r. 79)*/
-  r080_zaklad_dane_celkovo: Decimal;
+  r080_zaklad_dane_celkovo: Decimal
   /**   Daň zo základu dane zisteného uvedeného v riadku 80 zaokrúhlená na
    *   eurocenty nadol r080 * 0.19*/
-  r081: Decimal;
+  r081: Decimal
   /**   'r. 90': má byť výsledkom r.84 - r.89 ak platí, že r. 82 je rôzne od 0 a
    *   súčasne r.85>0. Ak r.82 = 0 a súčasne r. 85>0, potom r.90 je výsledkom r.81
    *   - r. 89. Inak ak r82<>0 a r85=0, potom r.90 je rovné r.84. Inak r. 90 =
    *   r.81.Zrkadlenie r081 TODO preverit */
-  r090: Decimal;
-  r091: Decimal;
-  r092: Decimal;
-  r094: Decimal;
-  r095: Decimal;
-  r096: Decimal;
-  r105: Decimal;
+  r090: Decimal
+  r091: Decimal
+  r092: Decimal
+  r094: Decimal
+  r095: Decimal
+  r096: Decimal
+  r105: Decimal
   /**   Daň (daňová povinnosť) zo základu dane z osobitného základu dane a z
    *   osobitného základu dane (r. 90 + r. 104 + r. 28 Prílohy č. 2) Zrkadlenie
    *   r081*/
-  r116_dan: Decimal;
-  r116a: Decimal;
+  r116_dan: Decimal
+  r116a: Decimal
 
   /** Nárok na daňový bonus (na jedno dieťa alebo úhrn na viac vyživovaných detí) podľa § 33 zákona 22)  */
-  r117: Decimal;
+  r117: Decimal
 
   /**   Daň (daňová povinnosť) znížená o daňový bonus (r. 105 - r. 106) Zrkadlenie
    *   r081*/
-  r118: Decimal;
+  r118: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona priznaného a vyplateného zamestnávateľom   */
-  r119: Decimal;
+  r119: Decimal
 
   /** Rozdiel riadkov r. 106 - r. 108 > 0  */
-  r120: Decimal;
+  r120: Decimal
 
   /** Suma daňového bonusu podľa § 33 zákona na poukázanie správcom dane24) r. 109 - r. 105 >0 */
-  r121: Decimal;
+  r121: Decimal
 
-  r122: Decimal;
+  r122: Decimal
 
-  r123: Decimal;
-  r124: Decimal;
-  r125: Decimal;
-  r126: Decimal;
-  r127: Decimal;
-  r128: Decimal;
-  r129: Decimal;
-  r130: Decimal;
+  r123: Decimal
+  r124: Decimal
+  r125: Decimal
+  r126: Decimal
+  r127: Decimal
+  r128: Decimal
+  r129: Decimal
+  r130: Decimal
   /** zrazena dan zo zamestnania */
-  r131: Decimal;
-  r132: Decimal;
+  r131: Decimal
+  r132: Decimal
   /** Zaplatené preddavky */
-  r133: Decimal;
-  r134: Decimal;
+  r133: Decimal
+  r134: Decimal
 
-  r135_dan_na_uhradu: Decimal;
+  r135_dan_na_uhradu: Decimal
   /**   Daňový preplatok znížený o zamestnávateľom nesprávne vyplatený daňový bonus
    *   podľa § 33 zákona Ak je r135_dan_na_uhradu, tak absolutna hodnota
    *   r135_dan_na_uhradu */
-  r136_danovy_preplatok: Decimal;
-  splnam3per: boolean;
+  r136_danovy_preplatok: Decimal
+  splnam3per: boolean
   /** 2 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  suma_2_percenta: Decimal;
+  suma_2_percenta: Decimal
   /** 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  suma_3_percenta: Decimal;
+  suma_3_percenta: Decimal
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  r151: Decimal;
+  r151: Decimal
 
   r152?: {
-    ico: string;
-    obchMeno: string;
-    suhlasZaslUdaje: boolean;
-  };
-  datum: string;
-  socZdravPoistenieDatum: string;
+    ico: string
+    obchMeno: string
+    suhlasZaslUdaje: boolean
+  }
+  datum: string
+  socZdravPoistenieDatum: string
 
   /** SECTION Danovy bonus */
-  mozeZiadatVyplatitDanovyBonus: boolean;
-  mozeZiadatVratitDanovyPreplatok: boolean;
-  mozeZiadatVratitDanovyBonusUroky: boolean;
-  mozeZiadatVratitPreplatkyBonusyUroky: boolean;
-  ziadamVyplatitDanovyBonusUrokPreplatok: boolean;
-  iban: string;
+  mozeZiadatVyplatitDanovyBonus: boolean
+  mozeZiadatVratitDanovyPreplatok: boolean
+  mozeZiadatVratitDanovyBonusUroky: boolean
+  mozeZiadatVratitPreplatkyBonusyUroky: boolean
+  ziadamVyplatitDanovyBonusUrokPreplatok: boolean
+  iban: string
 
   /** Helper properties from input, that are not part of taxForm */
-  children: boolean;
-  employed: boolean;
-  dohoda: boolean;
-  XIIoddiel_uplatnujem2percenta: boolean;
+  children: boolean
+  employed: boolean
+  dohoda: boolean
+  XIIoddiel_uplatnujem2percenta: boolean
   danovyBonusNaDieta: {
-    danovyBonus: Decimal;
-    nevyuzityDanovyBonus: Decimal;
-  };
+    danovyBonus: Decimal
+    nevyuzityDanovyBonus: Decimal
+  }
   preddavkyNaDan: {
-    suma: Decimal;
-    periodicita: string;
-  };
-  canDonateTwoPercentOfTax: boolean;
+    suma: Decimal
+    periodicita: string
+  }
+  canDonateTwoPercentOfTax: boolean
 }

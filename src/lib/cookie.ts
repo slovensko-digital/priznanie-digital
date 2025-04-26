@@ -3,7 +3,7 @@ export const checkCookie = (
   value: string,
   cookieString: string = null,
 ) => {
-  const browserCookie = typeof document !== "undefined" && document.cookie;
-  const cookies = cookieString || browserCookie;
-  return new RegExp(`${key}=${value}(;|$)`).test(cookies);
-};
+  const browserCookie = typeof document !== 'undefined' && document.cookie
+  const cookies = cookieString || browserCookie
+  return new RegExp(`${key}=${value}(;|$)`).test(cookies)
+}

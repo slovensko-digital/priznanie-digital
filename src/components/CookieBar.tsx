@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { parseCookies, setCookie } from "nookies";
+import React, { useEffect, useState } from 'react'
+import { parseCookies, setCookie } from 'nookies'
 
 /**
  * Displays GDPR cookie consent message.
@@ -11,24 +11,24 @@ import { parseCookies, setCookie } from "nookies";
  * Display the consent message only client-side if it was not closed yet.
  */
 export const CookieBar = () => {
-  const [accepted, setAccepted] = useState(true);
-  const { cookieConsent } = parseCookies();
+  const [accepted, setAccepted] = useState(true)
+  const { cookieConsent } = parseCookies()
 
   useEffect(() => {
-    setAccepted(cookieConsent === "accepted");
-  }, [setAccepted, cookieConsent]);
+    setAccepted(cookieConsent === 'accepted')
+  }, [setAccepted, cookieConsent])
 
   if (accepted) {
-    return null;
+    return null
   }
 
   const onAccept = () => {
-    setCookie(null, "cookieConsent", "accepted", {
+    setCookie(null, 'cookieConsent', 'accepted', {
       maxAge: 30 * 24 * 60 * 60,
-      path: "/",
-    });
-    setAccepted(true);
-  };
+      path: '/',
+    })
+    setAccepted(true)
+  }
 
   return (
     <div
@@ -92,5 +92,5 @@ export const CookieBar = () => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}

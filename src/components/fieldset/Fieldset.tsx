@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from 'react'
 
 interface Props {
-  readonly title: string;
-  readonly hint?: string;
-  readonly error?: string;
+  readonly title: string
+  readonly hint?: string
+  readonly error?: string
 }
 
 const Fieldset = ({
@@ -25,7 +25,7 @@ const Fieldset = ({
       )}
       {children}
     </fieldset>
-  );
-};
+  )
+}
 
-export default Fieldset;
+export default Fieldset

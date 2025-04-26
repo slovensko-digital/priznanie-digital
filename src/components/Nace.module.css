@@ -1,5 +1,5 @@
 .autocompleteField::after {
-  content: "▼" !important;
+  content: '▼' !important;
   position: absolute;
   width: 30px;
   height: 36px;
@@ -17,13 +17,13 @@
   padding-right: 40px;
 }
 .autocompleteFieldLoading::after {
-  content: "" !important;
+  content: '' !important;
   position: absolute;
   width: 30px;
   height: 40px;
   right: 5px;
   top: 32px;
-  background: url("/assets/images/spinner.png") center center no-repeat !important;
+  background: url('/assets/images/spinner.png') center center no-repeat !important;
   pointer-events: none;
 }
 

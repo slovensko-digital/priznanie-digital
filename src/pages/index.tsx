@@ -1,10 +1,10 @@
-import React from "react";
-import Link from "next/link";
-import styles from "./index.module.css";
-import { Warning } from "../components/Warning";
-import { TAX_YEAR } from "../lib/calculation";
-import { ExternalLink } from "../components/ExternalLink";
-import getConfig from "next/config";
+import React from 'react'
+import Link from 'next/link'
+import styles from './index.module.css'
+import { Warning } from '../components/Warning'
+import { TAX_YEAR } from '../lib/calculation'
+import { ExternalLink } from '../components/ExternalLink'
+import getConfig from 'next/config'
 
 const IconCheck = () => (
   <svg
@@ -16,7 +16,7 @@ const IconCheck = () => (
     <path d="M0 0h24v24H0z" fill="none" />
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
   </svg>
-);
+)
 
 const IconLock = () => (
   <svg
@@ -28,7 +28,7 @@ const IconLock = () => (
     <path d="M0 0h24v24H0z" fill="none" />
     <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
   </svg>
-);
+)
 
 const Home = ({
   nextRoute,
@@ -60,7 +60,7 @@ const Home = ({
         <li>
           <IconCheck />
           <p>
-            Pripravené v spolupráci s daňovými poradcami z{" "}
+            Pripravené v spolupráci s daňovými poradcami z{' '}
             <ExternalLink href="https://www.linkedin.com/company/avenias/">
               AVENIAS Tax & Legal
             </ExternalLink>
@@ -69,13 +69,13 @@ const Home = ({
       </ul>
     </div>
   </>
-);
+)
 
-export default Home;
+export default Home
 
 const {
   publicRuntimeConfig: { informujteMaKedBudeLive, navodyBaseUrl },
-} = getConfig();
+} = getConfig()
 
 const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   return (
@@ -186,8 +186,8 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
         </Link>
       )}
     </>
-  );
-};
+  )
+}
 
 const PostponeSection = ({
   nextPostponeRoute,
@@ -195,7 +195,7 @@ const PostponeSection = ({
   isPostponeLive,
   isDebug,
 }) => {
-  const isPostponeTime = now.getMonth() < 3 || now.getFullYear() == TAX_YEAR;
+  const isPostponeTime = now.getMonth() < 3 || now.getFullYear() == TAX_YEAR
 
   return (
     <>
@@ -225,8 +225,8 @@ const PostponeSection = ({
         </>
       )}
     </>
-  );
-};
+  )
+}
 
 const PostponeText = ({ now }: { now: Date }) => (
   <>
@@ -249,7 +249,7 @@ const PostponeText = ({ now }: { now: Date }) => (
       </>
     )}
   </>
-);
+)
 
 const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
   if (!isPostponeTime) {
@@ -261,7 +261,7 @@ const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
       >
         Termín na podanie odkladu DP vypršal
       </button>
-    );
+    )
   }
 
   if (isPostponeTime) {
@@ -274,6 +274,6 @@ const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
           Súhlasím a chcem odložiť daňové priznanie
         </button>
       </Link>
-    );
+    )
   }
-};
+}

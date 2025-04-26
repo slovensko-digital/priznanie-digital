@@ -3,194 +3,194 @@ import {
   getRoutes,
   validateRoute,
   homeRoute,
-} from "../src/lib/routes";
-import { TaxFormUserInput } from "../src/types/TaxFormUserInput";
-import { TaxForm } from "../src/types/TaxForm";
-import { PostponeUserInput } from "../src/types/PostponeUserInput";
-import { NextRouter } from "next/router";
+} from '../src/lib/routes'
+import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
+import { TaxForm } from '../src/types/TaxForm'
+import { PostponeUserInput } from '../src/types/PostponeUserInput'
+import { NextRouter } from 'next/router'
 
-describe("routes", () => {
-  describe("#getOrderedRoutes", () => {
-    it("should return routes without children, without iban", () => {
+describe('routes', () => {
+  describe('#getOrderedRoutes', () => {
+    it('should return routes without children, without iban', () => {
       expect(getOrderedRoutes({} as TaxForm)).toStrictEqual([
         homeRoute,
-        "/prijmy-a-vydavky",
-        "/zamestnanie",
-        "/dohoda",
-        "/partner",
-        "/deti",
-        "/dochodok",
-        "/prenajom",
-        "/uroky",
-        "/dve-percenta",
-        "/osobne-udaje",
-        "/suhrn",
-        "/vysledky",
-        "/pokracovat",
-      ]);
-    });
+        '/prijmy-a-vydavky',
+        '/zamestnanie',
+        '/dohoda',
+        '/partner',
+        '/deti',
+        '/dochodok',
+        '/prenajom',
+        '/uroky',
+        '/dve-percenta',
+        '/osobne-udaje',
+        '/suhrn',
+        '/vysledky',
+        '/pokracovat',
+      ])
+    })
 
-    it("should return routes with children, without iban", () => {
+    it('should return routes with children, without iban', () => {
       expect(getOrderedRoutes({} as TaxForm)).toStrictEqual([
         homeRoute,
-        "/prijmy-a-vydavky",
-        "/zamestnanie",
-        "/dohoda",
-        "/partner",
-        "/deti",
-        "/dochodok",
-        "/prenajom",
-        "/uroky",
-        "/dve-percenta",
-        "/osobne-udaje",
-        "/suhrn",
-        "/vysledky",
-        "/pokracovat",
-      ]);
-    });
+        '/prijmy-a-vydavky',
+        '/zamestnanie',
+        '/dohoda',
+        '/partner',
+        '/deti',
+        '/dochodok',
+        '/prenajom',
+        '/uroky',
+        '/dve-percenta',
+        '/osobne-udaje',
+        '/suhrn',
+        '/vysledky',
+        '/pokracovat',
+      ])
+    })
 
-    it("should return routes with children, with iban", () => {
+    it('should return routes with children, with iban', () => {
       expect(
         getOrderedRoutes({
           mozeZiadatVratitPreplatkyBonusyUroky: true,
         } as TaxForm),
       ).toStrictEqual([
         homeRoute,
-        "/prijmy-a-vydavky",
-        "/zamestnanie",
-        "/dohoda",
-        "/partner",
-        "/deti",
-        "/dochodok",
-        "/prenajom",
-        "/uroky",
-        "/dve-percenta",
-        "/osobne-udaje",
-        "/suhrn",
-        "/iban",
-        "/vysledky",
-        "/pokracovat",
-      ]);
-    });
+        '/prijmy-a-vydavky',
+        '/zamestnanie',
+        '/dohoda',
+        '/partner',
+        '/deti',
+        '/dochodok',
+        '/prenajom',
+        '/uroky',
+        '/dve-percenta',
+        '/osobne-udaje',
+        '/suhrn',
+        '/iban',
+        '/vysledky',
+        '/pokracovat',
+      ])
+    })
 
-    it("should return routes without children, with iban", () => {
+    it('should return routes without children, with iban', () => {
       expect(
         getOrderedRoutes({
           mozeZiadatVratitPreplatkyBonusyUroky: true,
         } as TaxForm),
       ).toStrictEqual([
         homeRoute,
-        "/prijmy-a-vydavky",
-        "/zamestnanie",
-        "/dohoda",
-        "/partner",
-        "/deti",
-        "/dochodok",
-        "/prenajom",
-        "/uroky",
-        "/dve-percenta",
-        "/osobne-udaje",
-        "/suhrn",
-        "/iban",
-        "/vysledky",
-        "/pokracovat",
-      ]);
-    });
-  });
+        '/prijmy-a-vydavky',
+        '/zamestnanie',
+        '/dohoda',
+        '/partner',
+        '/deti',
+        '/dochodok',
+        '/prenajom',
+        '/uroky',
+        '/dve-percenta',
+        '/osobne-udaje',
+        '/suhrn',
+        '/iban',
+        '/vysledky',
+        '/pokracovat',
+      ])
+    })
+  })
 
-  describe("#getRoutes", () => {
-    describe("nextRoute", () => {
-      describe("for route /partner", () => {
-        it("should be correct when eligible for children bonus", () => {
-          const { nextRoute } = getRoutes("/partner", {} as TaxForm);
-          expect(nextRoute()).toBe("/deti");
-        });
-      });
+  describe('#getRoutes', () => {
+    describe('nextRoute', () => {
+      describe('for route /partner', () => {
+        it('should be correct when eligible for children bonus', () => {
+          const { nextRoute } = getRoutes('/partner', {} as TaxForm)
+          expect(nextRoute()).toBe('/deti')
+        })
+      })
 
-      describe("for route /suhrn", () => {
-        it("should be correct when not eligible for refund", () => {
-          const { nextRoute } = getRoutes("/suhrn", {} as TaxForm);
-          expect(nextRoute()).toBe("/vysledky");
-        });
+      describe('for route /suhrn', () => {
+        it('should be correct when not eligible for refund', () => {
+          const { nextRoute } = getRoutes('/suhrn', {} as TaxForm)
+          expect(nextRoute()).toBe('/vysledky')
+        })
 
-        it("should be correct when eligible for refund", () => {
-          const { nextRoute } = getRoutes("/suhrn", {
+        it('should be correct when eligible for refund', () => {
+          const { nextRoute } = getRoutes('/suhrn', {
             mozeZiadatVratitPreplatkyBonusyUroky: true,
-          } as TaxForm);
-          expect(nextRoute()).toBe("/iban");
-        });
-      });
-    });
+          } as TaxForm)
+          expect(nextRoute()).toBe('/iban')
+        })
+      })
+    })
 
-    describe("previousRoute", () => {
-      describe("for route /dochodok", () => {
-        it("should be correct when eligible for children bonus", () => {
-          const { previousRoute } = getRoutes("/dochodok", {} as TaxForm);
-          expect(previousRoute()).toBe("/deti");
-        });
-      });
+    describe('previousRoute', () => {
+      describe('for route /dochodok', () => {
+        it('should be correct when eligible for children bonus', () => {
+          const { previousRoute } = getRoutes('/dochodok', {} as TaxForm)
+          expect(previousRoute()).toBe('/deti')
+        })
+      })
 
-      describe("for route /vysledky", () => {
-        it("should be correct when not eligible for refund", () => {
-          const { previousRoute } = getRoutes("/vysledky", {} as TaxForm);
-          expect(previousRoute()).toBe("/suhrn");
-        });
+      describe('for route /vysledky', () => {
+        it('should be correct when not eligible for refund', () => {
+          const { previousRoute } = getRoutes('/vysledky', {} as TaxForm)
+          expect(previousRoute()).toBe('/suhrn')
+        })
 
-        it("should be correct when eligible for refund", () => {
-          const { previousRoute } = getRoutes("/vysledky", {
+        it('should be correct when eligible for refund', () => {
+          const { previousRoute } = getRoutes('/vysledky', {
             mozeZiadatVratitPreplatkyBonusyUroky: true,
-          } as TaxForm);
-          expect(previousRoute()).toBe("/iban");
-        });
-      });
-    });
-  });
+          } as TaxForm)
+          expect(previousRoute()).toBe('/iban')
+        })
+      })
+    })
+  })
 
-  describe("#validateRoute", () => {
-    const replace = jest.fn();
+  describe('#validateRoute', () => {
+    const replace = jest.fn()
 
     afterEach(() => {
-      jest.clearAllMocks();
-    });
+      jest.clearAllMocks()
+    })
 
-    it("should redirect from route when form is not filled out", () => {
+    it('should redirect from route when form is not filled out', () => {
       validateRoute(
-        { route: "/partner", replace } as unknown as NextRouter,
+        { route: '/partner', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
         {} as PostponeUserInput,
-      );
-      expect(replace).toHaveBeenCalledWith(homeRoute);
-    });
+      )
+      expect(replace).toHaveBeenCalledWith(homeRoute)
+    })
 
-    it("should redirect from route when form is empty", () => {
+    it('should redirect from route when form is empty', () => {
       validateRoute(
-        { route: "/odklad/suhrn", replace } as unknown as NextRouter,
+        { route: '/odklad/suhrn', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
-        { priezvisko: "" } as PostponeUserInput,
-      );
-      expect(replace).toHaveBeenCalledWith(homeRoute);
-    });
+        { priezvisko: '' } as PostponeUserInput,
+      )
+      expect(replace).toHaveBeenCalledWith(homeRoute)
+    })
 
-    it("should not redirect from route when form is filled out", () => {
+    it('should not redirect from route when form is filled out', () => {
       validateRoute(
-        { route: "/dohoda", replace } as unknown as NextRouter,
+        { route: '/dohoda', replace } as unknown as NextRouter,
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,
-      );
-      expect(replace).toHaveBeenCalledTimes(0);
-    });
+      )
+      expect(replace).toHaveBeenCalledTimes(0)
+    })
 
-    it("should not redirect from route when postpone form is filled out", () => {
+    it('should not redirect from route when postpone form is filled out', () => {
       validateRoute(
-        { route: "/odklad/osobne-udaje", replace } as unknown as NextRouter,
+        { route: '/odklad/osobne-udaje', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
         { prijmy_zo_zahranicia: false } as PostponeUserInput,
-      );
-      expect(replace).toHaveBeenCalledTimes(0);
-    });
-  });
-});
+      )
+      expect(replace).toHaveBeenCalledTimes(0)
+    })
+  })
+})

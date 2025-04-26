@@ -1,12 +1,12 @@
-import React from "react";
-import { Form, FormikProps } from "formik";
-import { FormWrapper, Input } from "../components/FormComponents";
-import { FormErrors, IncomeAndExpenseUserInput } from "../types/PageUserInputs";
-import { numberInputRegexp } from "../lib/utils";
-import { ErrorSummary } from "../components/ErrorSummary";
-import { Page } from "../components/Page";
-import { BackLink } from "../components/BackLink";
-import { TAX_YEAR } from "../lib/calculation";
+import React from 'react'
+import { Form, FormikProps } from 'formik'
+import { FormWrapper, Input } from '../components/FormComponents'
+import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'
+import { numberInputRegexp } from '../lib/utils'
+import { ErrorSummary } from '../components/ErrorSummary'
+import { Page } from '../components/Page'
+import { BackLink } from '../components/BackLink'
+import { TAX_YEAR } from '../lib/calculation'
 
 const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
   taxFormUserInput,
@@ -22,8 +22,8 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          setTaxFormUserInput(values);
-          router.push(nextRoute);
+          setTaxFormUserInput(values)
+          router.push(nextRoute)
         }}
       >
         {({ errors }: FormikProps<IncomeAndExpenseUserInput>) => {
@@ -66,59 +66,59 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                 </button>
               </Form>
             </>
-          );
+          )
         }}
       </FormWrapper>
     </>
-  );
-};
+  )
+}
 
 export const validate = (values: IncomeAndExpenseUserInput) => {
-  const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {};
+  const errors: Partial<FormErrors<IncomeAndExpenseUserInput>> = {}
 
   if (!values.t1r10_prijmy) {
-    errors.t1r10_prijmy = "Zadajte vaše celkové príjmy";
+    errors.t1r10_prijmy = 'Zadajte vaše celkové príjmy'
   }
   if (values.t1r10_prijmy && !values.t1r10_prijmy.match(numberInputRegexp)) {
-    errors.t1r10_prijmy = "Zadajte sumu príjmov vo formáte 123,45";
+    errors.t1r10_prijmy = 'Zadajte sumu príjmov vo formáte 123,45'
   }
 
   if (!values.priloha3_r11_socialne) {
     errors.priloha3_r11_socialne =
-      "Zadajte vaše celkové uhradené sociálne poistné";
+      'Zadajte vaše celkové uhradené sociálne poistné'
   }
   if (
     values.priloha3_r11_socialne &&
     !values.priloha3_r11_socialne.match(numberInputRegexp)
   ) {
     errors.priloha3_r11_socialne =
-      "Zadajte sumu sociálneho poistenia vo formáte 123,45";
+      'Zadajte sumu sociálneho poistenia vo formáte 123,45'
   }
 
   if (!values.priloha3_r13_zdravotne) {
     errors.priloha3_r13_zdravotne =
-      "Zadajte vaše celkové uhradené zdravotné poistné";
+      'Zadajte vaše celkové uhradené zdravotné poistné'
   }
   if (
     values.priloha3_r13_zdravotne &&
     !values.priloha3_r13_zdravotne.match(numberInputRegexp)
   ) {
     errors.priloha3_r13_zdravotne =
-      "Zadajte sumu zdravotného poistenia vo formáte 123,45";
+      'Zadajte sumu zdravotného poistenia vo formáte 123,45'
   }
 
   if (!values.zaplatenePreddavky) {
-    errors.zaplatenePreddavky = "Zadajte vaše zaplatené preddavky";
+    errors.zaplatenePreddavky = 'Zadajte vaše zaplatené preddavky'
   }
   if (
     values.zaplatenePreddavky &&
     !values.zaplatenePreddavky.match(numberInputRegexp)
   ) {
     errors.zaplatenePreddavky =
-      "Zadajte vaše zaplatené preddavky vo formáte 123,45";
+      'Zadajte vaše zaplatené preddavky vo formáte 123,45'
   }
 
-  return errors;
-};
+  return errors
+}
 
-export default PrijmyAVydavky;
+export default PrijmyAVydavky

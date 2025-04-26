@@ -1,32 +1,32 @@
-import React, { ReactNode, useState } from "react";
-import classnames from "classnames";
-import styles from "./tooltipHint.module.css";
+import React, { ReactNode, useState } from 'react'
+import classnames from 'classnames'
+import styles from './tooltipHint.module.css'
 
 interface TooltipHintProps {
-  children: ReactNode;
-  className?: string;
+  children: ReactNode
+  className?: string
 }
 
-const TOOLTIP_HIDE_DELAY_MS = 250;
+const TOOLTIP_HIDE_DELAY_MS = 250
 
 const TooltipHint = ({ children, className }: TooltipHintProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [leaveTimeout, setLeaveTimeout] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false)
+  const [leaveTimeout, setLeaveTimeout] = useState<number | null>(null)
 
   const handleMouseEnter = () => {
     if (leaveTimeout) {
-      clearTimeout(leaveTimeout);
-      setLeaveTimeout(null);
+      clearTimeout(leaveTimeout)
+      setLeaveTimeout(null)
     }
-    setIsVisible(true);
-  };
+    setIsVisible(true)
+  }
 
   const handleMouseLeave = () => {
     const timeout = window.setTimeout(() => {
-      setIsVisible(false);
-    }, TOOLTIP_HIDE_DELAY_MS);
-    setLeaveTimeout(timeout);
-  };
+      setIsVisible(false)
+    }, TOOLTIP_HIDE_DELAY_MS)
+    setLeaveTimeout(timeout)
+  }
 
   return (
     <div
@@ -49,7 +49,7 @@ const TooltipHint = ({ children, className }: TooltipHintProps) => {
       </svg>
       {isVisible && (
         <div
-          className={classnames("govuk-body", styles.content, className)}
+          className={classnames('govuk-body', styles.content, className)}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -57,7 +57,7 @@ const TooltipHint = ({ children, className }: TooltipHintProps) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TooltipHint;
+export default TooltipHint

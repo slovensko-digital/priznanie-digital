@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react'
 
 export interface WarningProps {
-  className?: string;
-  children: ReactNode;
+  className?: string
+  children: ReactNode
 }
 
 export const Warning = ({ children, className }: WarningProps) => (
@@ -12,4 +12,4 @@ export const Warning = ({ children, className }: WarningProps) => (
     </span>
     <div className="govuk-warning-text__text">{children}</div>
   </div>
-);
+)

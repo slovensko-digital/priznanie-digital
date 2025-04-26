@@ -1,14 +1,14 @@
-import { executeAllTestCases } from "./executeCase";
+import { executeAllTestCases } from './executeCase'
 
-describe("Cases", () => {
+describe('Cases', () => {
   executeAllTestCases([
-    "with2percent",
-    "with3percent",
-    "withBonus",
-    "withTaxReturn",
-    "withEmploymentBonus",
-    "withHighIncome",
-    "withHighIncome2",
-    "withHighIncome3",
-  ]);
-});
+    'with2percent',
+    'with3percent',
+    'withBonus',
+    'withTaxReturn',
+    'withEmploymentBonus',
+    'withHighIncome',
+    'withHighIncome2',
+    'withHighIncome3',
+  ])
+})

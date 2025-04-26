@@ -1,11 +1,11 @@
-import { executeAllTestCases } from "./executeCase";
+import { executeAllTestCases } from './executeCase'
 
-describe("Cases", () => {
+describe('Cases', () => {
   executeAllTestCases([
-    "case202301",
-    "case202302",
-    "case202303",
-    "case202304",
-    "case202305",
-  ]);
-});
+    'case202301',
+    'case202302',
+    'case202303',
+    'case202304',
+    'case202305',
+  ])
+})

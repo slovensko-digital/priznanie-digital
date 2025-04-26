@@ -1,19 +1,19 @@
-import React from "react";
-import Link from "next/link";
-import { FormErrors, TaxBonusUserInput } from "../types/PageUserInputs";
-import { Form, FormikProps } from "formik";
-import { ErrorSummary } from "../components/ErrorSummary";
-import { BooleanRadio, FormWrapper, Input } from "../components/FormComponents";
+import React from 'react'
+import Link from 'next/link'
+import { FormErrors, TaxBonusUserInput } from '../types/PageUserInputs'
+import { Form, FormikProps } from 'formik'
+import { ErrorSummary } from '../components/ErrorSummary'
+import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import {
   formatCurrency,
   formatIban,
   validateIbanCountry,
   validateIbanFormat,
-} from "../lib/utils";
-import { Page } from "../components/Page";
-import { taxBonusInitialInput } from "../lib/initialValues";
-import { TaxForm } from "../types/TaxForm";
-import { BackLink } from "../components/BackLink";
+} from '../lib/utils'
+import { Page } from '../components/Page'
+import { taxBonusInitialInput } from '../lib/initialValues'
+import { TaxForm } from '../types/TaxForm'
+import { BackLink } from '../components/BackLink'
 
 const Iban: Page<TaxBonusUserInput> = ({
   taxForm,
@@ -23,10 +23,10 @@ const Iban: Page<TaxBonusUserInput> = ({
   previousRoute,
   nextRoute,
 }) => {
-  const danovyBonus = taxForm.r121;
-  const danovyBonusUroky = taxForm.r127;
-  const danovyPreplatok = taxForm.r136_danovy_preplatok;
-  const spolu = danovyBonus.plus(danovyBonusUroky).plus(danovyPreplatok);
+  const danovyBonus = taxForm.r121
+  const danovyBonusUroky = taxForm.r127
+  const danovyPreplatok = taxForm.r136_danovy_preplatok
+  const spolu = danovyBonus.plus(danovyBonusUroky).plus(danovyPreplatok)
 
   const Preplatky = (
     <ul className="govuk-list govuk-list--bullet">
@@ -49,7 +49,7 @@ const Iban: Page<TaxBonusUserInput> = ({
         </li>
       )}
     </ul>
-  );
+  )
 
   if (!taxForm.mozeZiadatVratitPreplatkyBonusyUroky) {
     return (
@@ -68,7 +68,7 @@ const Iban: Page<TaxBonusUserInput> = ({
           </button>
         </Link>
       </>
-    );
+    )
   }
 
   return (
@@ -81,9 +81,9 @@ const Iban: Page<TaxBonusUserInput> = ({
           : {
               ...taxBonusInitialInput,
               ziadamVyplatitDanovyBonusziadamVyplatitDanovyBonus: false,
-            };
-        setTaxFormUserInput(userInput);
-        router.push(nextRoute);
+            }
+        setTaxFormUserInput(userInput)
+        router.push(nextRoute)
       }}
     >
       {({ values, errors, setFieldValue }: FormikProps<TaxBonusUserInput>) => (
@@ -113,8 +113,8 @@ const Iban: Page<TaxBonusUserInput> = ({
                   const iban = formatIban(
                     event.currentTarget.value,
                     values.iban,
-                  );
-                  setFieldValue("iban", iban);
+                  )
+                  setFieldValue('iban', iban)
                 }}
               />
             )}
@@ -126,33 +126,33 @@ const Iban: Page<TaxBonusUserInput> = ({
         </>
       )}
     </FormWrapper>
-  );
-};
+  )
+}
 
-export default Iban;
+export default Iban
 
 export const makeValidate =
   (taxForm: TaxForm) => (values: TaxBonusUserInput) => {
-    const errors: Partial<FormErrors<TaxBonusUserInput>> = {};
+    const errors: Partial<FormErrors<TaxBonusUserInput>> = {}
 
     if (
       taxForm.mozeZiadatVratitPreplatkyBonusyUroky &&
-      typeof values.ziadamVyplatitDanovyBonusUrokPreplatok === "undefined"
+      typeof values.ziadamVyplatitDanovyBonusUrokPreplatok === 'undefined'
     ) {
       errors.ziadamVyplatitDanovyBonusUrokPreplatok =
-        "Vyznačte odpoveď na daňový bonus alebo preplatok";
+        'Vyznačte odpoveď na daňový bonus alebo preplatok'
     }
 
     if (values.ziadamVyplatitDanovyBonusUrokPreplatok) {
-      if (!values.iban || values.iban === "") {
+      if (!values.iban || values.iban === '') {
         // Medzinárodné bankové číslo účtu (angl. International Bank Account Number, skr. IBAN)
-        errors.iban = "Zadajte váš IBAN";
+        errors.iban = 'Zadajte váš IBAN'
       } else if (!validateIbanFormat(values.iban)) {
-        errors.iban = "Zadajte váš IBAN v správnom formáte";
+        errors.iban = 'Zadajte váš IBAN v správnom formáte'
       } else if (!validateIbanCountry(values.iban)) {
-        errors.iban = "Zadajte slovenský IBAN";
+        errors.iban = 'Zadajte slovenský IBAN'
       }
     }
 
-    return errors;
-  };
+    return errors
+  }

@@ -1,16 +1,16 @@
-import React from "react";
-import { NextPage } from "next";
-import { getPostponeRoutes } from "../../lib/routes";
-import { PostponeUserInput } from "../../types/PostponeUserInput";
-import { BackLink } from "../../components/BackLink";
-import Link from "next/link";
-import { TAX_YEAR } from "../../lib/calculation";
+import React from 'react'
+import { NextPage } from 'next'
+import { getPostponeRoutes } from '../../lib/routes'
+import { PostponeUserInput } from '../../types/PostponeUserInput'
+import { BackLink } from '../../components/BackLink'
+import Link from 'next/link'
+import { TAX_YEAR } from '../../lib/calculation'
 
-const { nextRoute, previousRoute } = getPostponeRoutes("/odklad/suhrn");
+const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
 
 interface Props {
-  postponeUserInput: PostponeUserInput;
-  setPostponeUserInput: (values: PostponeUserInput) => void;
+  postponeUserInput: PostponeUserInput
+  setPostponeUserInput: (values: PostponeUserInput) => void
 }
 const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
   return (
@@ -26,7 +26,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
               Príjmy zo zahraničia
             </td>
             <td className="govuk-table__cell govuk-!-width-one-half">
-              {postponeUserInput.prijmy_zo_zahranicia ? "Áno" : "Nie"}
+              {postponeUserInput.prijmy_zo_zahranicia ? 'Áno' : 'Nie'}
             </td>
           </tr>
           <tr className="govuk-table__row">
@@ -109,7 +109,7 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
         </button>
       </Link>
     </>
-  );
-};
+  )
+}
 
-export default Suhrn;
+export default Suhrn

@@ -1,13 +1,13 @@
-import React from "react";
-import { Feedback } from "./Feedback";
-import { TaxFormUserInput } from "../types/TaxFormUserInput";
-import { PostponeUserInput } from "../types/PostponeUserInput";
-import { ExternalLink } from "./ExternalLink";
-import { PrivacyPolicyLink } from "./PrivacyPolicyLink";
+import React from 'react'
+import { Feedback } from './Feedback'
+import { TaxFormUserInput } from '../types/TaxFormUserInput'
+import { PostponeUserInput } from '../types/PostponeUserInput'
+import { ExternalLink } from './ExternalLink'
+import { PrivacyPolicyLink } from './PrivacyPolicyLink'
 
 interface Props {
-  taxFormUserInput: TaxFormUserInput;
-  postponeUserInput: PostponeUserInput;
+  taxFormUserInput: TaxFormUserInput
+  postponeUserInput: PostponeUserInput
 }
 
 const Footer = ({ taxFormUserInput }: Props) => {
@@ -80,7 +80,7 @@ const Footer = ({ taxFormUserInput }: Props) => {
         </div>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
