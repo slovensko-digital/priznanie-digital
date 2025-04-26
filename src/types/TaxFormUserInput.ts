@@ -54,14 +54,14 @@ export interface TaxFormUserInput {
   zaplatene_prispevky_na_dochodok?: string;
 
   /** SECTION  Partner*/
-  r031_priezvisko_a_meno?: string;
-  r031_rodne_cislo?: string;
-  r032_uplatnujem_na_partnera?: boolean;
-  r032_partner_vlastne_prijmy?: string;
-  r032_partner_pocet_mesiacov?: string;
-  partner_step?: number;
-  partner_spolocna_domacnost?: boolean;
-  partner_podmienky?: Record<string, boolean>;
+  r031_priezvisko_a_meno?: string
+  r031_rodne_cislo?: string
+  r032_uplatnujem_na_partnera?: boolean
+  r032_partner_vlastne_prijmy?: string
+  r032_partner_pocet_mesiacov?: string
+  partner_step?: number
+  partner_spolocna_domacnost?: boolean
+  partner_podmienky?: Record<string, string[]>
 
   /** SECTION  Mortage */
   r035_uplatnuje_uroky?: boolean;

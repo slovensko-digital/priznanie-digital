@@ -37,7 +37,7 @@ export const case202204Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: "0",
   r032_uplatnujem_na_partnera: false,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { "1": true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [

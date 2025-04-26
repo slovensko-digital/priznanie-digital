@@ -36,7 +36,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: "3000,76",
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { "1": true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [

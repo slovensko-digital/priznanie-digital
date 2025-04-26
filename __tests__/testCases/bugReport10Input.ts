@@ -42,7 +42,7 @@ export const bugReport10Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
   partner_podmienky: {
-    "1": true,
+    '1': ['on'],
   },
   r035_uplatnuje_uroky: true,
   uroky_zmluva_rok_uzatvorenia: "2019",
