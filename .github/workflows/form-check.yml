@@ -64,19 +64,24 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b update-form-${{ env.hash }}
 
-          # Add all changes including untracked files in the specified directory
-          git add ./public/form.zip.md5 ./public/form
-          # Ensure to include any other necessary files, adjust paths accordingly
+          # Add all changes including untracked files
+          git add ./public/form.zip.md5 ./public/form dp.out
+
+          # Check if there are changes to be committed
           if [[ -n "$(git status --porcelain)" ]]; then
-            # Commit only if there are changes
             git commit -m "Update form files"
             git push origin HEAD
+
+            # Set environment variable indicating that changes exist
+            echo "changes_exist=true" >> $GITHUB_ENV
           else
             echo "No changes to commit."
+            # Set environment variable indicating no changes
+            echo "changes_exist=false" >> $GITHUB_ENV
           fi
 
       - name: Create Pull Request
-        if: env.branch_exists == 'false'
+        if: env.changes_exist == 'true' && env.branch_exists == 'false'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -85,8 +90,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Update form files',
-              head: `update-form-${{ env.hash }}`,
-              base: 'master',
+              head: `update-form-${process.env.hash}`,
+              base: 'master',  # Use 'main' if that's the default branch
               body: 'This PR updates the form files to the latest version.'
             });
             console.log(`Pull Request created at ${pullRequest.html_url}`);
