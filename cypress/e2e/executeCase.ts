@@ -261,25 +261,28 @@ const executeTestCase = (testCase: string) => {
           typeToInput('uroky_zaciatok_urocenia_rok', input)
 
           next()
+          if (!input.uroky_nesplna_datumy) {
+            if (input.uroky_dalsi_dlznik) {
+              getInput('uroky_dalsi_dlznik', '-yes').click()
+              typeToInput('uroky_pocet_dlznikov', input)
+            } else {
+              getInput('uroky_dalsi_dlznik', '-no').click()
+            }
 
-          if (input.uroky_dalsi_dlznik) {
-            getInput('uroky_dalsi_dlznik', '-yes').click()
-            typeToInput('uroky_pocet_dlznikov', input)
+            next()
+
+            getInput('uroky_splnam_vek_kriteria', '-yes').click()
+
+            next()
+
+            getInput('uroky_splnam_prijem', '-yes').click()
+
+            next()
+
+            typeToInput('r035_zaplatene_uroky', input)
           } else {
-            getInput('uroky_dalsi_dlznik', '-no').click()
+            cy.get('[data-test=ineligible-message]').should('be.visible')
           }
-
-          next()
-
-          getInput('uroky_splnam_vek_kriteria', '-yes').click()
-
-          next()
-
-          getInput('uroky_splnam_prijem', '-yes').click()
-
-          next()
-
-          typeToInput('r035_zaplatene_uroky', input)
         } else {
           getInput('r035_uplatnuje_uroky', '-no').click()
         }
