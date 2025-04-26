@@ -1,0 +1,50 @@
+import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+
+export const bugReport25Input: E2eTestUserInput = {
+    "t1r10_prijmy": "13829.72",
+    "priloha3_r11_socialne": "3042.54",
+    "priloha3_r13_zdravotne": "414.89",
+    "zaplatenePreddavky": "59640.97",
+    "employed": true,
+    "dohoda": true,
+    "hasChildren": true,
+    "children": [
+      {
+        "id": 0,
+        "priezviskoMeno": "Fake Child 0",
+        "rodneCislo": "2410154725",
+        "wholeYear": false,
+        "monthFrom": "9",
+        "monthTo": "10"
+      }
+    ],
+    "r005_meno": "Fake",
+    "r004_priezvisko": "Name",
+    "r001_dic": "233123123",
+    "r003_nace": "62010 - Počítačové programovanie",
+    "r007_ulica": "Mierova",
+    "r008_cislo": "4",
+    "r009_psc": "82105",
+    "r010_obec": "Bratislava 3",
+    "r011_stat": "Slovensko",
+    "datum": "22.02.2020",
+    "uhrnPrijmovOdVsetkychZamestnavatelov": "50037.45",
+    "uhrnPovinnehoPoistnehoNaSocialnePoistenie": "53900.65",
+    "uhrnPovinnehoPoistnehoNaZdravotnePoistenie": "44935.89",
+    "udajeODanovomBonuseNaDieta": "720.01",
+    "uhrnPreddavkovNaDan": "38418.17",
+    "uhrnPrijmovZoVsetkychDohod": "68531.90",
+    "uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody": "97672.74",
+    "uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody": "91673.20",
+    "udajeODanovomBonuseNaDietaDohody": "468.17",
+    "uhrnPreddavkovNaDanDohody": "18222.78",
+    "partner_bonus_na_deti": true,
+    "r034_priezvisko_a_meno": "Beth Smith",
+    "r034_rodne_cislo": "975917/1565",
+    "partner_bonus_na_deti_od": "9",
+    "partner_bonus_na_deti_do": "10",
+    "partner_bonus_na_deti_typ_prijmu": "1",
+    "r034a": "50113.74",
+    "platil_prispevky_na_dochodok": true,
+    "zaplatene_prispevky_na_dochodok": "31.33"
+  }

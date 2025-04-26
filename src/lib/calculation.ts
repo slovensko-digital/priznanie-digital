@@ -2,6 +2,7 @@ import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Child, TaxForm } from '../types/TaxForm'
 import {
   getRodneCisloAgeAtYearAndMonth,
+  getRodneCisloAgeAtYearAndStartOfMonth,
   parseInputNumber,
   percentage,
   round,
@@ -41,7 +42,7 @@ const POCET_MESIACOV = 12
 
 export const RODNE_CISLO_DLZKA = 13
 
-// 63,4-násobok platného životného minima
+// 63,4-násobok platnéhro životného minima
 const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
 export const PARTNER_MAX_ODPOCET = 5_162.5
 export const TAX_YEAR = 2024
@@ -93,36 +94,55 @@ const makeMapChild =
   }
 
 const mapPartnerChildBonus = (input: ChildrenUserInput) => {
-  const wholeYear =
-    input.partner_bonus_na_deti_od === '0' &&
-    input.partner_bonus_na_deti_do === '11'
+  const processedChildrenData = input.children.map(childInput => {
+    let months = []
+    for (let i = 0; i < 12; i++) {
+      const age = getRodneCisloAgeAtYearAndStartOfMonth(childInput.rodneCislo.replace(/\D/g, ''), TAX_YEAR, i)
+      if(age==-1 || age > MAX_CHILD_AGE_BONUS) {
+        months.push(false)
+      }else{
+        months.push(true)
+      }
+    }
+    return months  
+  })
+  const sumMonths: boolean[] = processedChildrenData.reduce((acc, childMonths) => {
+    return acc.map((isAnyChildEligible, index) => isAnyChildEligible || childMonths[index]);
+  }, Array(12).fill(false));
   const monthFrom = Number.parseInt(input.partner_bonus_na_deti_od, 10)
   const monthTo = Number.parseInt(input.partner_bonus_na_deti_do, 10)
-
+  const wholeYear =
+    input.partner_bonus_na_deti_od === '0' &&
+    input.partner_bonus_na_deti_do === '11' &&
+    sumMonths[0]
+  
   return {
     priezviskoMeno: input.r034_priezvisko_a_meno,
     rodneCislo: input.r034_rodne_cislo
       ? input.r034_rodne_cislo.replace(/\D/g, '')
       : '',
     m00: wholeYear,
-    m01: !wholeYear && monthFrom === 0,
-    m02: !wholeYear && monthFrom <= 1 && monthTo >= 1,
-    m03: !wholeYear && monthFrom <= 2 && monthTo >= 2,
-    m04: !wholeYear && monthFrom <= 3 && monthTo >= 3,
-    m05: !wholeYear && monthFrom <= 4 && monthTo >= 4,
-    m06: !wholeYear && monthFrom <= 5 && monthTo >= 5,
-    m07: !wholeYear && monthFrom <= 6 && monthTo >= 6,
-    m08: !wholeYear && monthFrom <= 7 && monthTo >= 7,
-    m09: !wholeYear && monthFrom <= 8 && monthTo >= 8,
-    m10: !wholeYear && monthFrom <= 9 && monthTo >= 9,
-    m11: !wholeYear && monthFrom <= 10 && monthTo >= 10,
-    m12: !wholeYear && monthTo === 11,
+    m01: !wholeYear && monthFrom === 0 && sumMonths[0],
+    m02: !wholeYear && monthFrom <= 1 && monthTo >= 1 && sumMonths[1],
+    m03: !wholeYear && monthFrom <= 2 && monthTo >= 2 && sumMonths[2],
+    m04: !wholeYear && monthFrom <= 3 && monthTo >= 3 && sumMonths[3],
+    m05: !wholeYear && monthFrom <= 4 && monthTo >= 4 && sumMonths[4],
+    m06: !wholeYear && monthFrom <= 5 && monthTo >= 5 && sumMonths[5],
+    m07: !wholeYear && monthFrom <= 6 && monthTo >= 6 && sumMonths[6],
+    m08: !wholeYear && monthFrom <= 7 && monthTo >= 7 && sumMonths[7],
+    m09: !wholeYear && monthFrom <= 8 && monthTo >= 8 && sumMonths[8],
+    m10: !wholeYear && monthFrom <= 9 && monthTo >= 9 && sumMonths[9],
+    m11: !wholeYear && monthFrom <= 10 && monthTo >= 10 && sumMonths[10],
+    m12: !wholeYear && monthTo === 11 && sumMonths[11],
     druhaOsobaPodalaDPvSR:
       input.partner_bonus_na_deti_typ_prijmu === '1' ||
       input.partner_bonus_na_deti_typ_prijmu === '2',
     dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
-    pocetMesiacov: monthTo - monthFrom + 1,
+
+    pocetMesiacov: sumMonths.reduce((count, currentValue) => {
+      return count + (currentValue ? 1 : 0);
+    }, 0)
   }
 }
 
