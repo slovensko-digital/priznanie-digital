@@ -14,7 +14,7 @@ export const validatePartnerBonusForm = (
     values.partner_podmienky &&
     Object.keys(values.partner_podmienky)
       .map((key) => values.partner_podmienky[key][0])
-      .includes('on')
+      .includes("on");
 
   const step3 =
     values.r032_partner_vlastne_prijmy !== "" &&

@@ -39,7 +39,7 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
     useRef(undefined),
     useRef(undefined),
     useRef(undefined),
-  ]
+  ];
 
   useEffect(() => {
     setTimeout(() => {

@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from 'react'
-import { useRadioGroupContext } from './RadioGroup'
+import React, { PropsWithChildren } from "react";
+import { useRadioGroupContext } from "./RadioGroup";
 
 interface Props {
   readonly forValue: string;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const RadioConditional = ({ forValue, children }: PropsWithChildren<Props>) => {
-  const { selected } = useRadioGroupContext()
+  const { selected } = useRadioGroupContext();
 
   return (
     <>

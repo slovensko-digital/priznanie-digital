@@ -214,9 +214,9 @@ export const Checkbox = ({
   hint,
   ...props
 }: CheckboxProps) => {
-  const [field, meta] = useField(name)
+  const [field, meta] = useField(name);
   const isChecked =
-    field.value && field.value.length > 0 && field.value[0] === 'on'
+    field.value && field.value.length > 0 && field.value[0] === "on";
   return (
     <div
       className={classnames([

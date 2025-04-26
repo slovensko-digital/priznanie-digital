@@ -46,7 +46,7 @@ export const bugReport23Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
   partner_podmienky: {
-    1: ['on'],
+    1: ["on"],
   },
   rent: true,
   vyskaPrijmovZPrenajmu: "417.11",
