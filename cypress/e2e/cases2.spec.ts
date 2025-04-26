@@ -4,6 +4,7 @@ describe('Cases', () => {
   executeAllTestCases([
     'with2percent',
     'with3percent',
+    'with3percentOther',
     'withBonus',
     'withTaxReturn',
     'withEmploymentBonus',

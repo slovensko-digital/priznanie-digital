@@ -47,7 +47,7 @@ export const withHighIncome3Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '2013.37',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** Pension */
   platil_prispevky_na_dochodok: true,
