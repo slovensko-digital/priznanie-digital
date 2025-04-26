@@ -10,7 +10,7 @@ export const bugReport2aInput: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_step: 4,
   partner_podmienky: {
-    '1': true,
+    '1': ['on'],
   },
   r032_partner_vlastne_prijmy: '3500',
   r032_partner_pocet_mesiacov: '6',
