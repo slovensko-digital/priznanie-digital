@@ -6,7 +6,12 @@ interface Props {
   readonly error?: string
 }
 
-const Fieldset = ({ title, hint, error, children }: PropsWithChildren<Props>) => {
+const Fieldset = ({
+  title,
+  hint,
+  error,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
     <fieldset className="govuk-fieldset">
       <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">

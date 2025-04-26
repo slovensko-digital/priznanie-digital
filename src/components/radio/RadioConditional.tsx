@@ -5,7 +5,7 @@ interface Props {
   readonly forValue: string
 }
 
-const RadioConditional = ({ forValue, children }: PropsWithChildren<Props> ) => {
+const RadioConditional = ({ forValue, children }: PropsWithChildren<Props>) => {
   const { selected } = useRadioGroupContext()
 
   return (

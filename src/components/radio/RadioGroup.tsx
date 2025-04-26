@@ -22,7 +22,11 @@ interface Props {
   readonly onChange: (value: string) => void
 }
 
-const RadioGroup = ({ value, onChange, children }: PropsWithChildren<Props>) => {
+const RadioGroup = ({
+  value,
+  onChange,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
     <RadioGroupContext.Provider value={{ selected: value, onSelect: onChange }}>
       <div className="govuk-form-group">
