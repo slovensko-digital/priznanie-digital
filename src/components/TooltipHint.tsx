@@ -7,14 +7,32 @@ interface TooltipHintProps {
   className?: string
 }
 
+const TOOLTIP_HIDE_DELAY_MS = 250
+
 const TooltipHint = ({ children, className }: TooltipHintProps) => {
   const [isVisible, setIsVisible] = useState(false)
+  const [leaveTimeout, setLeaveTimeout] = useState<number | null>(null)
+
+  const handleMouseEnter = () => {
+    if (leaveTimeout) {
+      clearTimeout(leaveTimeout)
+      setLeaveTimeout(null)
+    }
+    setIsVisible(true)
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = window.setTimeout(() => {
+      setIsVisible(false)
+    }, TOOLTIP_HIDE_DELAY_MS)
+    setLeaveTimeout(timeout)
+  }
 
   return (
     <div
       className={styles.container}
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <svg
         width="20"
@@ -30,7 +48,11 @@ const TooltipHint = ({ children, className }: TooltipHintProps) => {
         />
       </svg>
       {isVisible && (
-        <div className={classnames('govuk-body', styles.content, className)}>
+        <div
+          className={classnames('govuk-body', styles.content, className)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           {children}
         </div>
       )}
