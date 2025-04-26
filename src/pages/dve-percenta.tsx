@@ -186,7 +186,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                   }}
                 >
                   <Radio
-                    name="dve_percenta_podporujem-sk-digital-input"
+                    name="dve_percenta_podporujem-ano-sk-digital-input"
                     label="Áno, Slovensko.Digital"
                     value="ano-sk-digital"
                   />
@@ -196,7 +196,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                   </RadioConditional>
 
                   <Radio
-                    name="dve_percenta_podporujem-inu-input"
+                    name="dve_percenta_podporujem-ano-inu-input"
                     label="Áno, inú organizáciu"
                     value="ano-inu"
                   />
@@ -253,7 +253,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                   </RadioConditional>
 
                   <Radio
-                    name="dve_percenta_podporujem-input-no"
+                    name="dve_percenta_podporujem-nie-input"
                     label="Nie"
                     value="nie"
                   />
