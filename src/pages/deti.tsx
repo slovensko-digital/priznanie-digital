@@ -7,6 +7,7 @@ import {
   Input,
   FormWrapper,
   Select,
+  Checkbox,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -33,7 +34,6 @@ import {
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
-  monthToKeyValue,
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
@@ -380,6 +380,7 @@ interface ChildFormProps {
     shouldValidate?: boolean,
   ) => void
 }
+
 const ChildForm = ({
   savedValues: { rodneCislo, wholeYear },
   index,
@@ -391,6 +392,7 @@ const ChildForm = ({
   const monthNamesUntil = monthNames.filter((month) =>
     maxChildAgeBonusMonth(rodneCislo, month),
   )
+
   const monthOptions = monthNamesUntil.filter((value) =>
     monthNamesFrom.includes(value),
   )
@@ -407,17 +409,22 @@ const ChildForm = ({
         setFieldValue(`children[${index}].wholeYear`, true)
       }
       if (monthOptions.length) {
-        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
-        const toMonthValue = monthToKeyValue(
-          monthOptions[monthOptions.length - 1],
-        ).value.toString()
-        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
-        setFieldValue(`children[${index}].monthTo`, toMonthValue)
+        // reset the month checkboxes
+        monthOptions.forEach((_month, monthIndex) => {
+          setFieldValue(`children[${index}].m0${monthIndex}`, false)
+        })
       }
     } else {
       setFieldValue(`children[${index}].wholeYear`, true)
     }
   }, [bonusInPartOfYear, rodneCislo])
+
+  const getMonthFieldName = (monthIndex: number) => {
+    const formMonthIndex = monthIndex + 1
+    return monthIndex > 9
+      ? `children[${index}].m${formMonthIndex}`
+      : `children[${index}].m0${formMonthIndex}`
+  }
 
   return (
     <>
@@ -479,18 +486,35 @@ const ChildForm = ({
               styles.inlineFieldContainer,
             )}
           >
-            <Select
-              name={`children[${index}].monthFrom`}
-              label="Od"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 0 : false}
-            />
-            <Select
-              name={`children[${index}].monthTo`}
-              label="Do"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 11 : false}
-            />
+            {/*previously implemented version with selects*/}
+            {/*<Select*/}
+            {/*  name={`children[${index}].monthFrom`}*/}
+            {/*  label="Od"*/}
+            {/*  optionsWithValue={monthKeyValues(monthOptions)}*/}
+            {/*  disabled={wholeYear ? 0 : false}*/}
+            {/*/>*/}
+            {/*<Select*/}
+            {/*  name={`children[${index}].monthTo`}*/}
+            {/*  label="Do"*/}
+            {/*  optionsWithValue={monthKeyValues(monthOptions)}*/}
+            {/*  disabled={wholeYear 11 : false}*/}
+            {/*/>*/}
+            <div
+              className={classnames(
+                styles.checkBoxRow,
+                'govuk-checkboxes govuk-checkboxes--small',
+              )}
+            >
+              {monthNames.map((month, monthIndex) => (
+                <Checkbox
+                  key={month}
+                  name={getMonthFieldName(monthIndex)}
+                  label={month}
+                  notInFormGroup
+                  disabled={wholeYear || !monthOptions.includes(month)}
+                />
+              ))}
+            </div>
           </div>
         </RadioConditional>
       </RadioGroup>
@@ -501,8 +525,9 @@ const ChildForm = ({
 interface ChildFormErrors {
   priezviskoMeno?: string
   rodneCislo?: string
-  monthTo?: string
+  noMonthSelected?: string
 }
+
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
@@ -543,12 +568,24 @@ export const validate = (values: ChildrenUserInput) => {
 
       if (
         !childValues.wholeYear &&
-        Number.parseInt(childValues.monthFrom, 10) >
-          Number.parseInt(childValues.monthTo, 10)
+        !childValues.m01 &&
+        !childValues.m02 &&
+        !childValues.m03 &&
+        !childValues.m04 &&
+        !childValues.m05 &&
+        !childValues.m06 &&
+        !childValues.m07 &&
+        !childValues.m08 &&
+        !childValues.m09 &&
+        !childValues.m10 &&
+        !childValues.m11 &&
+        !childValues.m12
       ) {
-        childErrors.monthTo = `Musí byť ${
-          monthNames[childValues.monthFrom]
-        } alebo neskôr`
+        console.log(childValues)
+        childErrors.noMonthSelected =
+          'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus'
+        //scroll to the top where the error is shown
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
 
       return childErrors

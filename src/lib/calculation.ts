@@ -70,25 +70,22 @@ export enum Months {
 const makeMapChild =
   (hasChildren: boolean) =>
   (child: ChildInput): Child => {
-    const monthFrom = Number.parseInt(child.monthFrom, 10)
-    const monthTo = Number.parseInt(child.monthTo, 10)
-
     return {
       priezviskoMeno: child.priezviskoMeno,
       rodneCislo: child.rodneCislo.replace(/\D/g, ''),
       m00: hasChildren && child.wholeYear,
-      m01: hasChildren && !child.wholeYear && monthFrom === 0,
-      m02: hasChildren && !child.wholeYear && monthFrom <= 1 && monthTo >= 1,
-      m03: hasChildren && !child.wholeYear && monthFrom <= 2 && monthTo >= 2,
-      m04: hasChildren && !child.wholeYear && monthFrom <= 3 && monthTo >= 3,
-      m05: hasChildren && !child.wholeYear && monthFrom <= 4 && monthTo >= 4,
-      m06: hasChildren && !child.wholeYear && monthFrom <= 5 && monthTo >= 5,
-      m07: hasChildren && !child.wholeYear && monthFrom <= 6 && monthTo >= 6,
-      m08: hasChildren && !child.wholeYear && monthFrom <= 7 && monthTo >= 7,
-      m09: hasChildren && !child.wholeYear && monthFrom <= 8 && monthTo >= 8,
-      m10: hasChildren && !child.wholeYear && monthFrom <= 9 && monthTo >= 9,
-      m11: hasChildren && !child.wholeYear && monthFrom <= 10 && monthTo >= 10,
-      m12: hasChildren && !child.wholeYear && monthTo === 11,
+      m01: hasChildren && !child.wholeYear && child.m01,
+      m02: hasChildren && !child.wholeYear && child.m02,
+      m03: hasChildren && !child.wholeYear && child.m03,
+      m04: hasChildren && !child.wholeYear && child.m04,
+      m05: hasChildren && !child.wholeYear && child.m05,
+      m06: hasChildren && !child.wholeYear && child.m06,
+      m07: hasChildren && !child.wholeYear && child.m07,
+      m08: hasChildren && !child.wholeYear && child.m08,
+      m09: hasChildren && !child.wholeYear && child.m09,
+      m10: hasChildren && !child.wholeYear && child.m10,
+      m11: hasChildren && !child.wholeYear && child.m11,
+      m12: hasChildren && !child.wholeYear && child.m12,
     }
   }
 

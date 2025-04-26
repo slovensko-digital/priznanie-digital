@@ -18,8 +18,18 @@ export interface ChildInput {
   priezviskoMeno: string
   rodneCislo: string
   wholeYear: boolean
-  monthFrom: string
-  monthTo: string
+  m01?: boolean
+  m02?: boolean
+  m03?: boolean
+  m04?: boolean
+  m05?: boolean
+  m06?: boolean
+  m07?: boolean
+  m08?: boolean
+  m09?: boolean
+  m10?: boolean
+  m11?: boolean
+  m12?: boolean
 }
 
 export interface TaxFormUserInput {
