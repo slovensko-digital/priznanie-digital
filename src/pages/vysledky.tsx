@@ -6,8 +6,7 @@ import { Warning } from '../components/Warning'
 import Decimal from 'decimal.js'
 import { BackLink } from '../components/BackLink'
 import Link from 'next/link'
-import { buildSummary } from '../lib/calculation'
-import { TAX_YEAR } from '../lib/calculation'
+import { buildSummary, TAX_YEAR } from '../lib/calculation'
 import { ExternalLink } from '../components/ExternalLink'
 
 interface SummaryRow {
@@ -16,12 +15,16 @@ interface SummaryRow {
   description?: string
   value: Decimal
   fontSize?: number
+  showEvenWhenZero?: boolean
 }
+
 interface SummaryProps {
   rows: SummaryRow[]
   title?: string
+  compactView?: boolean // Do not show rows with zero value
 }
-const Summary = ({ rows, title }: SummaryProps) => (
+
+const Summary = ({ rows, title, compactView = false }: SummaryProps) => (
   <div id="summary">
     <table className="govuk-table">
       {title && (
@@ -30,28 +33,41 @@ const Summary = ({ rows, title }: SummaryProps) => (
         </caption>
       )}
       <tbody className="govuk-table__body">
-        {rows.map(({ key, title, description, value, fontSize }) => (
-          <tr
-            className="govuk-table__row"
-            style={fontSize ? { fontSize } : undefined}
-            key={key}
-          >
-            <td className="govuk-table__cell">
-              {title}
-              {description && (
-                <div className="govuk-!-margin-top-1">
-                  <small>{description}</small>
-                </div>
-              )}
-            </td>
-            <td
-              className="govuk-table__cell govuk-table__cell--numeric"
-              data-test={key}
-            >
-              <strong>{formatCurrency(value.toNumber())}</strong>
-            </td>
-          </tr>
-        ))}
+        {rows.map(
+          ({
+            key,
+            title,
+            description,
+            value,
+            fontSize,
+            showEvenWhenZero = false,
+          }) => {
+            if (compactView && value.equals(0) && !showEvenWhenZero) return null
+
+            return (
+              <tr
+                className="govuk-table__row"
+                style={fontSize ? { fontSize } : undefined}
+                key={key}
+              >
+                <td className="govuk-table__cell">
+                  {title}
+                  {description && (
+                    <div className="govuk-!-margin-top-1">
+                      <small>{description}</small>
+                    </div>
+                  )}
+                </td>
+                <td
+                  className="govuk-table__cell govuk-table__cell--numeric"
+                  data-test={key}
+                >
+                  <strong>{formatCurrency(value.toNumber())}</strong>
+                </td>
+              </tr>
+            )
+          },
+        )}
       </tbody>
     </table>
   </div>
@@ -100,6 +116,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.zakladDane,
       key: 'zakladDane',
       fontSize: 20,
+      showEvenWhenZero: true,
     },
   ]
 
@@ -119,6 +136,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       value: summary.zakladDanZPrenajmu,
       key: 'zakladDanZPrenajmu',
       fontSize: 20,
+      showEvenWhenZero: true,
     },
   ]
 
@@ -162,8 +180,14 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         {`Výpočet dane za rok ${TAX_YEAR}`}
       </h1>
-      <Summary title="Príjmy zo zamestnania a živnosti" rows={summaryRows} />
-      <Summary title="Príjmy z prenájmu nehnuteľností" rows={rentRows} />
+      <Summary
+        title="Príjmy zo zamestnania a živnosti"
+        rows={summaryRows}
+        compactView
+      />
+      {taxForm.rent && (
+        <Summary title="Príjmy z prenájmu nehnuteľností" rows={rentRows} />
+      )}
       <Summary title="Daň na úhradu / daňový preplatok" rows={totalRows} />
 
       {taxForm.preddavkyNaDan.suma.greaterThan(0) && (
