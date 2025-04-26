@@ -130,12 +130,16 @@ describe('twoPercent page', () => {
           cy.get(
             `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
           ).click()
-          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
-            child.monthFrom,
-          )
-          cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
-            child.monthTo,
-          )
+          for (let month = 1; month <= 12; month++) {
+            const monthKey = `m${
+              month < 10 ? '0' + month : month
+            }` as keyof typeof child
+            if (child[monthKey]) {
+              cy.get(
+                `[data-test="children[${index}].${monthKey}-input"]`,
+              ).check()
+            }
+          }
         }
 
         if (index + 1 < input.children.length) {
@@ -330,12 +334,16 @@ describe('twoPercent page', () => {
           cy.get(
             `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
           ).click()
-          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
-            child.monthFrom,
-          )
-          cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
-            child.monthTo,
-          )
+          for (let month = 1; month <= 12; month++) {
+            const monthKey = `m${
+              month < 10 ? '0' + month : month
+            }` as keyof typeof child
+            if (child[monthKey]) {
+              cy.get(
+                `[data-test="children[${index}].${monthKey}-input"]`,
+              ).check()
+            }
+          }
         }
 
         if (index + 1 < input.children.length) {
@@ -521,12 +529,16 @@ describe('twoPercent page', () => {
           cy.get(
             `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
           ).click()
-          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
-            child.monthFrom,
-          )
-          cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
-            child.monthTo,
-          )
+          for (let month = 1; month <= 12; month++) {
+            const monthKey = `m${
+              month < 10 ? '0' + month : month
+            }` as keyof typeof child
+            if (child[monthKey]) {
+              cy.get(
+                `[data-test="children[${index}].${monthKey}-input"]`,
+              ).check()
+            }
+          }
         }
 
         if (index + 1 < input.children.length) {
@@ -649,12 +661,16 @@ describe('twoPercent page', () => {
           cy.get(
             `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
           ).click()
-          cy.get(`[data-test="children[${index}].monthFrom-select"]`).select(
-            child.monthFrom,
-          )
-          cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
-            child.monthTo,
-          )
+          for (let month = 1; month <= 12; month++) {
+            const monthKey = `m${
+              month < 10 ? '0' + month : month
+            }` as keyof typeof child
+            if (child[monthKey]) {
+              cy.get(
+                `[data-test="children[${index}].${monthKey}-input"]`,
+              ).check()
+            }
+          }
         }
 
         if (index + 1 < input.children.length) {

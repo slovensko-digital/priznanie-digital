@@ -158,12 +158,17 @@ const executeTestCase = (testCase: string) => {
               cy.get(
                 `[data-test="children[${index}]-bonus-interval-input-partyear"]`,
               ).click()
-              cy.get(
-                `[data-test="children[${index}].monthFrom-select"]`,
-              ).select(child.monthFrom)
-              cy.get(`[data-test="children[${index}].monthTo-select"]`).select(
-                child.monthTo,
-              )
+
+              for (let month = 1; month <= 12; month++) {
+                const monthKey = `m${
+                  month < 10 ? '0' + month : month
+                }` as keyof typeof child
+                if (child[monthKey]) {
+                  cy.get(
+                    `[data-test="children[${index}].${monthKey}-input"]`,
+                  ).check()
+                }
+              }
             }
 
             if (index + 1 < input.children.length) {
@@ -177,12 +182,6 @@ const executeTestCase = (testCase: string) => {
               getInput('partner_bonus_na_deti', '-yes').click()
               typeToInput('r034_priezvisko_a_meno', input)
               typeToInput('r034_rodne_cislo', input)
-              cy.get(`[data-test="partner_bonus_na_deti_od-select"]`).select(
-                input.partner_bonus_na_deti_od,
-              )
-              cy.get(`[data-test="partner_bonus_na_deti_do-select"]`).select(
-                input.partner_bonus_na_deti_do,
-              )
               cy.get(
                 `[data-test="partner_bonus_na_deti_typ_prijmu-select"]`,
               ).select('1')

@@ -59,7 +59,7 @@ const Deti: Page<ChildrenUserInput> = ({
 
   const getMonthFieldName = (monthIndex: number): string => {
     const formMonthIndex = monthIndex + 1
-    return monthIndex > 9
+    return formMonthIndex >= 10
       ? `partner_bonus_na_deti_m${formMonthIndex}`
       : `partner_bonus_na_deti_m0${formMonthIndex}`
   }
@@ -293,7 +293,6 @@ const Deti: Page<ChildrenUserInput> = ({
                                   <Checkbox
                                     key={month}
                                     name={getMonthFieldName(monthIndex)}
-                                    data-test={getMonthFieldName(monthIndex)}
                                     label={month}
                                     notInFormGroup
                                   />
@@ -443,7 +442,7 @@ const ChildForm = ({
 
   const getMonthFieldName = (monthIndex: number) => {
     const formMonthIndex = monthIndex + 1
-    return monthIndex > 9
+    return formMonthIndex >= 10
       ? `children[${index}].m${formMonthIndex}`
       : `children[${index}].m0${formMonthIndex}`
   }
@@ -531,7 +530,6 @@ const ChildForm = ({
                 <Checkbox
                   key={month}
                   name={getMonthFieldName(monthIndex)}
-                  data-test={getMonthFieldName(monthIndex)}
                   label={month}
                   notInFormGroup
                   disabled={wholeYear || !monthOptions.includes(month)}
