@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { PropsWithChildren } from 'react'
 
 interface Props {
   readonly title: string
@@ -6,7 +6,7 @@ interface Props {
   readonly error?: string
 }
 
-const Fieldset: FC<Props> = ({ title, hint, error, children }) => {
+const Fieldset = ({ title, hint, error, children }: PropsWithChildren<Props>) => {
   return (
     <fieldset className="govuk-fieldset">
       <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
