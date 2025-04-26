@@ -63,11 +63,12 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b update-form-${{ env.hash }}
 
-          # Add specific files to the commit
-          git add ./public/form.zip.md5 ./public/form
+          # Add all changes including untracked files in the specified directory
+          git add ./public/form.zip.md5 ./public/form || true
 
           # Ensure to include any other necessary files, adjust paths accordingly
           if [[ -n "$(git status --porcelain)" ]]; then
+            # Commit only if there are changes
             git commit -m "Update form files"
             git push origin HEAD
           else
