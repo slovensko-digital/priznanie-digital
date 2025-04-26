@@ -29,7 +29,13 @@ export interface PartnerBonusFormProps extends FormikProps<PartnerUserInput> {
 
 export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
   const { values, setStep, step } = props
-  const questionElements = [useRef(undefined), useRef(undefined), useRef(undefined), useRef(undefined), useRef(undefined)]
+  const questionElements = [
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+  ]
 
   useEffect(() => {
     setTimeout(() => {

@@ -27,7 +27,13 @@ export interface RentFormProps extends FormikProps<RentUserInput> {
 
 export const RentForm = (props: RentFormProps) => {
   const { setStep, step } = props
-  const questionElements = [useRef(undefined), useRef(undefined), useRef(undefined), useRef(undefined), useRef(undefined)]
+  const questionElements = [
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+  ]
 
   useEffect(() => {
     setTimeout(() => {
