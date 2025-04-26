@@ -161,7 +161,7 @@ const randomInput = (): TaxFormUserInput => {
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
-      partner_podmienky: { '1': true },
+      partner_podmienky: { '1': ["on"] },
     }
   }
 
