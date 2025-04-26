@@ -173,7 +173,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
             z príjmov v roku {TAX_YEAR + 1} budú{' '}
             {formatCurrency(taxForm.preddavkyNaDan.suma.toNumber())} (výpočet má
             informatívny charakter). Pre viac informácií navštívte web{' '}
-            <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2024">
+            <ExternalLink href="https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/danove-kalkulacky/vypocet-preddavkov-fo-2025">
               Finančnej správy
             </ExternalLink>
             .
