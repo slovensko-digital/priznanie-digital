@@ -11,7 +11,6 @@ jobs:
   download:
     name: Download and Process Form
     runs-on: ubuntu-latest
-    if: github.ref_name == 'master'
 
     steps:
       - name: Checkout repository
