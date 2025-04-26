@@ -4,7 +4,6 @@ interface Props {
   readonly title: string;
   readonly hint?: string;
   readonly error?: string;
-  children: ReactNode;
 }
 
 const Fieldset = ({

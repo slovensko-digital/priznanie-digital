@@ -20,7 +20,6 @@ export const useRadioGroupContext = (): RadioGroupState => {
 interface Props {
   readonly value: string;
   readonly onChange: (value: string) => void;
-  children: ReactNode;
 }
 
 const RadioGroup = ({
