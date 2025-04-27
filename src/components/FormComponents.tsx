@@ -66,7 +66,7 @@ export const Input = <Name extends keyof UserInput>({
     if (type === 'number') {
       return {
         pattern: numberInputRegexp,
-        inputMode: 'numeric' as 'numeric',
+        inputMode: 'numeric' as const,
         spellCheck: false,
       }
     }

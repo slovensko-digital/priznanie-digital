@@ -1,5 +1,5 @@
 /* eslint-disable promise/no-callback-in-promise */
-/* eslint-disable func-names */
+
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/always-return */
 /* eslint-disable promise/catch-or-return */

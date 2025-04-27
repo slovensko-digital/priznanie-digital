@@ -140,7 +140,7 @@ export const getRodneCisloAgeAtYearAndMonth = (
   const dateMonth = date.getMonth()
   // const dateDay = date.getDate()
 
-  var age = dateYear - rc.year()
+  const age = dateYear - rc.year()
 
   if (dateMonth > rc.month()) {
     return age
@@ -206,7 +206,7 @@ export const percentage = (base: Decimal, percent: number) => {
   return round(base.div(100).times(percent))
 }
 
-const mapHelper = (arr, callback): any => {
+const mapHelper = (arr, callback): unknown => {
   const res = []
   let kValue
   let mappedValue
@@ -232,9 +232,11 @@ export const encodeUnicodeCharacters = (input: string): string => {
 }
 
 export const toBase64 = (value: string): string => {
-  return base64.fromByteArray(
-    mapHelper(encodeUnicodeCharacters(value), (char) => char.charCodeAt(0)),
-  )
+  const uint8Arr = mapHelper(encodeUnicodeCharacters(value), (char: string) =>
+    char.charCodeAt(0),
+  ) as Uint8Array
+
+  return base64.fromByteArray(uint8Arr)
 }
 
 export const boolToString = (bool: boolean) => {

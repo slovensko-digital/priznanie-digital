@@ -59,7 +59,7 @@ const sendFeedback = async ({
 }
 
 const validateFeedbackForm = (values) => {
-  const errors: any = {}
+  const errors: Record<string, string> = {}
 
   if (!values.whatWereYouDoing) {
     errors.whatWereYouDoing = 'Napíšte prosím čo ste robili keď nastala chyba'

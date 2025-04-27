@@ -6,7 +6,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).send({
       git_commit: getGitCommit(),
     })
-  } catch (error) {
+  } catch (_error) {
     res.status(500)
   }
 }

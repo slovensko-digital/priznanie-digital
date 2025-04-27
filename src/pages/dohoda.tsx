@@ -43,9 +43,9 @@ const Dohoda: Page<DohodaUserInput> = ({
             {values.dohoda && (
               <>
                 <h3 className="govuk-heading-m">
-                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
-                  zdaniteľných príjmoch fyzickej osoby". Ak ste mali viac dohôd,
-                  tak tieto sumy spočítajte a uveďte výsledné.
+                  Nasledujúce hodnoty nájdete na tlačive &quot;Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby&quot;. Ak ste mali viac
+                  dohôd, tak tieto sumy spočítajte a uveďte výsledné.
                 </h3>
                 <Input
                   name="uhrnPrijmovZoVsetkychDohod"

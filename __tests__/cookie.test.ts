@@ -5,7 +5,7 @@ describe('cookie', () => {
     beforeAll(() => {
       global['document'] = {
         cookie: '',
-      } as any
+      } as Document
     })
 
     afterAll(() => {

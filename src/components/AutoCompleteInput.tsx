@@ -4,16 +4,18 @@ import { useField } from 'formik'
 import styles from './AutoCompleteInput.module.css'
 import { Input } from './FormComponents'
 import { UserInput } from '../types/UserInput'
+import { AutoFormSubject } from '../types/api'
 
-export interface AutoCompleteData extends Record<string, any> {
+export interface AutoCompleteData extends Omit<AutoFormSubject, 'id'> {
   id: number | string
-  value: string
 }
 
 export interface AutoCompleteInputProps {
   name: keyof UserInput
   label: string
-  fetchData: (value: string) => Promise<AutoCompleteData[]>
+  fetchData: (
+    value: string,
+  ) => Promise<Pick<AutoCompleteData, 'id' | 'value'>[]>
   onSelect?: (data: AutoCompleteData) => void
   minLength?: number
 }
@@ -38,7 +40,7 @@ export const AutoCompleteInput = ({
 
   const onAutocompleteItemSelect = (item) => {
     fieldHelpers.setValue(item.value)
-    onSelect && onSelect(item)
+    onSelect?.(item)
   }
 
   const handleUserInput = async (value: string) => {

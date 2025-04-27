@@ -51,7 +51,7 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
     setStep(step - 1)
   }
 
-  const questions: React.FC<any>[] = [ApplyForBonusQuestion]
+  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {

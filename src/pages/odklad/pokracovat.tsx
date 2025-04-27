@@ -72,7 +72,7 @@ const buildFields = (userInput: PostponeUserInput): RedirectField[] => {
   ]
 }
 
-const ContinuePage: Page<{}> = ({ postponeUserInput, isDebug }) => {
+const ContinuePage: Page = ({ postponeUserInput, isDebug }) => {
   return (
     <RedirectForm
       isDebug={isDebug}

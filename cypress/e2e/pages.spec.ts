@@ -1,7 +1,3 @@
-/* eslint-disable func-names */
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/always-return */
-/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput'

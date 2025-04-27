@@ -38,7 +38,7 @@ Dátum: ${new Date().toLocaleString()}`,
       attachment,
     })
     res.status(200).send({ sent: true })
-  } catch (error) {
+  } catch (_error) {
     res.status(400).send({ sent: false })
   }
 }

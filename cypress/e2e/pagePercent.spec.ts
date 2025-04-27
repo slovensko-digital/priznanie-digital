@@ -1,7 +1,3 @@
-/* eslint-disable func-names */
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/always-return */
-/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
@@ -173,7 +169,7 @@ describe('twoPercent page', () => {
     getError().should('have.length', 1)
 
     // When presses yes, additional fields appear
-    cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
+    cy.get('[data-test=dve_percenta_podporujem-inu-input]').click()
 
     // All aditional fields should be required
     next()

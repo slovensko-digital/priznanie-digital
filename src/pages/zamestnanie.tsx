@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
@@ -45,10 +44,10 @@ const Zamestnanie: Page<EmployedUserInput> = ({
             {values.employed && (
               <>
                 <h3 className="govuk-heading-m">
-                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
-                  zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak
-                  ste mali viac zamestnávateľov, tak tieto sumy spočítajte a
-                  uveďte výsledné.
+                  Nasledujúce hodnoty nájdete na tlačive &quot;Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby zo závislej
+                  činnosti&quot;. Ak ste mali viac zamestnávateľov, tak tieto
+                  sumy spočítajte a uveďte výsledné.
                 </h3>
                 <Input
                   name="uhrnPrijmovOdVsetkychZamestnavatelov"
@@ -133,8 +132,8 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                   hint={
                     <div>
                       <span className={styles.hintText}>
-                        Tento údaj nájdete v riadku 13 v časti "Úhrnná suma
-                        priznaného a vyplateného daňového bonusu".
+                        Tento údaj nájdete v riadku 13 v časti &quot;Úhrnná suma
+                        priznaného a vyplateného daňového bonusu&quot;.
                       </span>
                       <TooltipHint>
                         <img

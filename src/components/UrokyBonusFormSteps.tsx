@@ -1,4 +1,3 @@
-import React from 'react'
 import { BooleanRadio, Input } from './FormComponents'
 import { formatCurrency } from '../lib/utils'
 import { Details } from './Details'
@@ -10,7 +9,11 @@ import Decimal from 'decimal.js'
 import { Warning } from './Warning'
 import { TAX_YEAR } from '../lib/calculation'
 
-export const ApplyForBonusQuestion = ({ disabled }) => (
+interface Props {
+  disabled?: boolean
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={`Boli ste v roku ${TAX_YEAR} dlžníkom z úveru na bývanie?`}
@@ -59,6 +62,7 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
       úročenie úveru na bývanie.
     </p>
+    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
       Dátum uzavretia zmluvy o úvere na bývanie
     </label>
@@ -110,6 +114,7 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
         </div>
       </fieldset>
     </div>
+    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
       Dátum začatia úročenia úveru
     </label>
@@ -161,7 +166,6 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
         </div>
       </fieldset>
     </div>
-
     {parseInt(values.uroky_zmluva_rok_uzatvorenia, 10) >= 2024 && (
       <Warning>
         Úver musí byť určený na byt alebo rodinný dom slúžiaci výlučne k
