@@ -1,4 +1,4 @@
-name: Quality Assurance
+name: Form Check
 
 on:
   schedule:
@@ -9,36 +9,44 @@ env:
 
 jobs:
   download:
-    name: Download Form File
+    name: Download and Process Form
     runs-on: ubuntu-latest
-    if: github.ref_name == 'master'
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Download config file
         run: wget https://edane.financnasprava.sk/java/prod/eform/config.xml -O config.xml
+
       - name: Filter only for Danove Priznanie Files
         run: |
           grep -i "DPFO" config.xml | grep "ElektronickyFormular" > dp.out
           cat dp.out
           ZIP_URL=$(grep -i $CURRENT_FORM_VERSION dp.out | sed -n 's/.*Url="\([^"]*\)".*/\1/p')
           echo $ZIP_URL
-          wget $ZIP_URL -O form.zip 
-      - name: Check if new version is available
-        id: check-step
+          wget $ZIP_URL -O form.zip
+          rm dp.out
+
+      - name: Generate MD5 Hash
+        id: generate-hash
         run: |
-          md5sum form.zip
-          md5sum form.zip > ./public/form.zip.md5
-          if git diff --exit-code ./public/form.zip.md5; then
-            echo "skipnext=true" >> $GITHUB_OUTPUT
+          HASH=$(md5sum form.zip | cut -d ' ' -f 1)
+          echo "hash=$HASH" >> $GITHUB_ENV
+
+      - name: Check if branch exists for current hash
+        id: check-branch
+        run: |
+          git fetch --all
+          if git ls-remote --exit-code --heads origin update-form-${{ env.hash }}; then
+            echo "branch_exists=true" >> $GITHUB_ENV
           else
-            echo "skipnext=false" >> $GITHUB_OUTPUT
+            echo "branch_exists=false" >> $GITHUB_ENV
           fi
+
       - name: Unzip form files
-        if : ( steps.check-step.outputs.skipnext  != 'true' ) 
+        if: env.branch_exists == 'false'
         run: |
-          echo "will only run if skipnext is not true"
           unzip form.zip -d ./
           rm form.zip
           rm -rf ./public/form
@@ -48,14 +56,42 @@ jobs:
           mv $FORM_FOLDER/* ./public/form
           rm -rf $FORM_FOLDER
           ls -ls ./public/form
+
       - name: Create new branch and commit changes
-        if: steps.check-step.outputs.skipnext != 'true'
+        if: env.branch_exists == 'false'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b update-form-$(date +%Y%m%d%H%M%S)
+          git checkout -b update-form-${{ env.hash }}
+
+          # Add all changes including untracked files
           git add ./public/form.zip.md5 ./public/form
-          git commit -m "Update form files"
-          git push origin HEAD
 
+          # Check if there are changes to be committed
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "Update form files"
+            git push origin HEAD
 
+            # Set environment variable indicating that changes exist
+            echo "changes_exist=true" >> $GITHUB_ENV
+          else
+            echo "No changes to commit."
+            # Set environment variable indicating no changes
+            echo "changes_exist=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Pull Request
+        if: env.changes_exist == 'true' && env.branch_exists == 'false'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Update form files',
+              head: `update-form-${process.env.hash}`,
+              base: 'master',  # Use 'main' if that's the default branch
+              body: 'This PR updates the form files to the latest version.'
+            });
+            console.log(`Pull Request created at ${pullRequest.html_url}`);
