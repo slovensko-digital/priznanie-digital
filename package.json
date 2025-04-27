@@ -5,7 +5,6 @@
     "node": "22"
   },
   "scripts": {
-    "clean": "rm -rf ./.next && rm ./__tests__/**/*.output.*",
     "dev": "next dev --turbopack",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
