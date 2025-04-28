@@ -42,6 +42,7 @@ import RadioConditional from '../components/radio/RadioConditional'
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
 import { ExternalLink } from '../components/ExternalLink'
+import { UserInput } from '../types/UserInput'
 
 const Deti: Page<ChildrenUserInput> = ({
   setTaxFormUserInput,
@@ -71,7 +72,7 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          let userInput = values.hasChildren
+          const userInput = values.hasChildren
             ? values
             : {
                 ...childrenUserInputInitialValues,
@@ -450,12 +451,12 @@ const ChildForm = ({
   return (
     <>
       <Input
-        name={`children[${index}].priezviskoMeno` as any}
+        name={`children[${index}].priezviskoMeno` as keyof UserInput}
         type="text"
         label="Meno a priezvisko"
       />
       <Input
-        name={`children[${index}].rodneCislo` as any}
+        name={`children[${index}].rodneCislo` as keyof UserInput}
         type="text"
         label="Rodné číslo"
         maxLength={RODNE_CISLO_DLZKA}

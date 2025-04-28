@@ -27,7 +27,13 @@ export interface RentFormProps extends FormikProps<RentUserInput> {
 
 export const RentForm = (props: RentFormProps) => {
   const { setStep, step } = props
-  const questionElements = [useRef(), useRef(), useRef(), useRef(), useRef()]
+  const questionElements = [
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+  ]
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,7 +45,7 @@ export const RentForm = (props: RentFormProps) => {
     setStep(step - 1)
   }
 
-  const questions: React.FC<any>[] = [ApplyForBonusQuestion]
+  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {

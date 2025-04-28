@@ -5,14 +5,14 @@ export const generateBirthId = (
   birthDate: Date,
   gender: GenderType,
 ): BirthIdGeneratorResult => {
-  let year = String(birthDate.getFullYear()).substring(2)
+  const year = String(birthDate.getFullYear()).substring(2)
   let month = birthDate.getMonth() + 1
   if (gender === 'FEMALE') {
     month += 50
   }
-  let day = birthDate.getDate()
+  const day = birthDate.getDate()
 
-  let firstPart = [year, paddingLeft(month), paddingLeft(day)].join('')
+  const firstPart = [year, paddingLeft(month), paddingLeft(day)].join('')
 
   let suffixLength = 4
   let randomSeed = Math.floor(Math.random() * 9980)
@@ -20,9 +20,9 @@ export const generateBirthId = (
     suffixLength = 3
     randomSeed = Math.floor(Math.random() * 980)
   }
-  let tempBirthId = paddingRight(firstPart, suffixLength)
+  const tempBirthId = paddingRight(firstPart, suffixLength)
 
-  let originalLength = tempBirthId.length //by converting string to Number, we may loose leading 0
+  const originalLength = tempBirthId.length //by converting string to Number, we may loose leading 0
   let birthId = String(nextNumberDivided11(Number(tempBirthId) + randomSeed))
   if (originalLength !== birthId.length) {
     //we have lost leading zeroes
@@ -35,8 +35,8 @@ export const generateBirthId = (
 }
 
 const addDelimeter = (birthId: string): string => {
-  let firstPart = birthId.substring(0, 6)
-  let secondPart = birthId.substring(6)
+  const firstPart = birthId.substring(0, 6)
+  const secondPart = birthId.substring(6)
   return `${firstPart}/${secondPart}`
 }
 

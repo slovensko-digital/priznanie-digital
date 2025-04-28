@@ -149,4 +149,7 @@ export type IncomeSourceCountryUserInput = Pick<
   'prijmy_zo_zahranicia'
 >
 
-export type FormErrors<FormInput extends {}> = Record<keyof FormInput, string>
+export type FormErrors<FormInput extends object> = Record<
+  keyof FormInput,
+  string
+>

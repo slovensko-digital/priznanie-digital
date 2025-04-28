@@ -161,7 +161,7 @@ const randomInput = (): TaxFormUserInput => {
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
-      partner_podmienky: { '1': true },
+      partner_podmienky: { '1': ['on'] },
     }
   }
 
@@ -233,6 +233,7 @@ describe('Random inputs', () => {
       })
         .then((response) => {
           cy.writeFile(filePath, response.body, 'utf-8')
+          return
         })
         .then(() => {
           /**  Validate our results with the FS form */
@@ -256,6 +257,7 @@ describe('Random inputs', () => {
           cy.get('#errorsContainer')
             .should((el) => expect(el.text()).to.be.empty)
             .then(() => done())
+          return
         })
     })
   })

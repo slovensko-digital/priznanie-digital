@@ -1,7 +1,3 @@
-/* eslint-disable func-names */
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/always-return */
-/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
@@ -189,6 +185,7 @@ describe('twoPercent page', () => {
     )
     getInput('r142_ico').type('35983558')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').should('be.checked')
 
     next()
 
@@ -248,7 +245,7 @@ describe('twoPercent page', () => {
       .should((el) => expect(el.text()).to.be.empty)
       .then(() => done())
   })
-  it.only('with autoform', (done) => {
+  it('with autoform', (done) => {
     const input = with2percentInput
 
     cy.visit(homeRoute)
@@ -571,7 +568,7 @@ describe('twoPercent page', () => {
 
     next()
 
-    cy.get('[data-test=dve_percenta_podporujem-input-no]').click()
+    cy.get('[data-test=dve_percenta_podporujem-nie-input]').click()
     next()
     getError().should('have.length', 0)
   })
@@ -703,7 +700,13 @@ describe('twoPercent page', () => {
 
     next()
 
-    cy.get('[data-test=dve_percenta_podporujem-sk-digital-input]').click()
+    cy.get('[data-test=dve_percenta_podporujem-ano-sk-digital-input]').click()
+
+    cy.get('[data-test="splnam3per-input"]').click()
+    cy.get('[data-test="splnam3per-input"]').should('be.checked')
+
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').should('be.checked')
 
     next()
 

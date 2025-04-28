@@ -32,13 +32,13 @@ export interface UrokyBonusFormProps extends FormikProps<UrokyUserInput> {
 export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
   const { values, setStep, step } = props
   const questionElements = [
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
   ]
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const UrokyBonusForm = (props: UrokyBonusFormProps) => {
     setStep(step - 1)
   }
 
-  const questions: React.FC<any>[] = [ApplyForBonusQuestion]
+  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {
