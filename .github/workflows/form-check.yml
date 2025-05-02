@@ -91,7 +91,7 @@ jobs:
               repo: context.repo.repo,
               title: 'Update form files',
               head: `update-form-${process.env.hash}`,
-              base: 'master',  # Use 'main' if that's the default branch
+              base: 'master',
               body: 'This PR updates the form files to the latest version.'
             });
             console.log(`Pull Request created at ${pullRequest.html_url}`);
