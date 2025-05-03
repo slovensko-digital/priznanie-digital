@@ -9889,6 +9889,7 @@ if (!context && $("[name='druh_priznania']").eq(2).attr("checked")) {} else {
 }
 //live zmena editovania datumu
 (context == null ? $('form'): context).find("[name='druh_priznania']").live('change', function () {
+    setTimeout(function () { 
  if ($("[name='druh_priznania']").eq(2).attr("checked")) {
   $("#dtpDatumDDP, #t137, #t138, #t139, #t140, #t141, #t142, #t143, #t144").removeAttr("disabled").removeClass("disableValidators").focusout();
  } else {
@@ -9898,7 +9899,8 @@ if (!context && $("[name='druh_priznania']").eq(2).attr("checked")) {} else {
    .removeClass("error warning")
    .val("");
   $(".error[for='dtpDatumDDP']").hide();
- }
+        }
+    }, 5);
 });
 
 (context == null ? $('form'): context).find("#t107, #t110").live("focusout", function () {
