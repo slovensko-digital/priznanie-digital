@@ -91,10 +91,33 @@ const makeMapChild =
 
 const mapPartnerChildBonus = (input: ChildrenUserInput) => {
   const wholeYear =
-    input.partner_bonus_na_deti_od === '0' &&
-    input.partner_bonus_na_deti_do === '11'
-  const monthFrom = Number.parseInt(input.partner_bonus_na_deti_od, 10)
-  const monthTo = Number.parseInt(input.partner_bonus_na_deti_do, 10)
+    input.partner_bonus_na_deti_m01 &&
+    input.partner_bonus_na_deti_m02 &&
+    input.partner_bonus_na_deti_m03 &&
+    input.partner_bonus_na_deti_m04 &&
+    input.partner_bonus_na_deti_m05 &&
+    input.partner_bonus_na_deti_m06 &&
+    input.partner_bonus_na_deti_m07 &&
+    input.partner_bonus_na_deti_m08 &&
+    input.partner_bonus_na_deti_m09 &&
+    input.partner_bonus_na_deti_m10 &&
+    input.partner_bonus_na_deti_m11 &&
+    input.partner_bonus_na_deti_m12
+
+  const pocetMesiacov = [
+    input.partner_bonus_na_deti_m01,
+    input.partner_bonus_na_deti_m02,
+    input.partner_bonus_na_deti_m03,
+    input.partner_bonus_na_deti_m04,
+    input.partner_bonus_na_deti_m05,
+    input.partner_bonus_na_deti_m06,
+    input.partner_bonus_na_deti_m07,
+    input.partner_bonus_na_deti_m08,
+    input.partner_bonus_na_deti_m09,
+    input.partner_bonus_na_deti_m10,
+    input.partner_bonus_na_deti_m11,
+    input.partner_bonus_na_deti_m12,
+  ].filter(Boolean).length
 
   return {
     priezviskoMeno: input.r034_priezvisko_a_meno,
@@ -102,24 +125,24 @@ const mapPartnerChildBonus = (input: ChildrenUserInput) => {
       ? input.r034_rodne_cislo.replace(/\D/g, '')
       : '',
     m00: wholeYear,
-    m01: !wholeYear && monthFrom === 0,
-    m02: !wholeYear && monthFrom <= 1 && monthTo >= 1,
-    m03: !wholeYear && monthFrom <= 2 && monthTo >= 2,
-    m04: !wholeYear && monthFrom <= 3 && monthTo >= 3,
-    m05: !wholeYear && monthFrom <= 4 && monthTo >= 4,
-    m06: !wholeYear && monthFrom <= 5 && monthTo >= 5,
-    m07: !wholeYear && monthFrom <= 6 && monthTo >= 6,
-    m08: !wholeYear && monthFrom <= 7 && monthTo >= 7,
-    m09: !wholeYear && monthFrom <= 8 && monthTo >= 8,
-    m10: !wholeYear && monthFrom <= 9 && monthTo >= 9,
-    m11: !wholeYear && monthFrom <= 10 && monthTo >= 10,
-    m12: !wholeYear && monthTo === 11,
+    m01: !wholeYear && input.partner_bonus_na_deti_m01,
+    m02: !wholeYear && input.partner_bonus_na_deti_m02,
+    m03: !wholeYear && input.partner_bonus_na_deti_m03,
+    m04: !wholeYear && input.partner_bonus_na_deti_m04,
+    m05: !wholeYear && input.partner_bonus_na_deti_m05,
+    m06: !wholeYear && input.partner_bonus_na_deti_m06,
+    m07: !wholeYear && input.partner_bonus_na_deti_m07,
+    m08: !wholeYear && input.partner_bonus_na_deti_m08,
+    m09: !wholeYear && input.partner_bonus_na_deti_m09,
+    m10: !wholeYear && input.partner_bonus_na_deti_m10,
+    m11: !wholeYear && input.partner_bonus_na_deti_m11,
+    m12: !wholeYear && input.partner_bonus_na_deti_m12,
     druhaOsobaPodalaDPvSR:
       input.partner_bonus_na_deti_typ_prijmu === '1' ||
       input.partner_bonus_na_deti_typ_prijmu === '2',
     dokladRocZuct: input.partner_bonus_na_deti_typ_prijmu === '3',
     dokladVyskaDane: input.partner_bonus_na_deti_typ_prijmu === '4',
-    pocetMesiacov: monthTo - monthFrom + 1,
+    pocetMesiacov: pocetMesiacov,
   }
 }
 
