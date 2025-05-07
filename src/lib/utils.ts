@@ -6,11 +6,9 @@ import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from './calculation'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
-  Object.keys(object)
-    .sort()
-    .forEach((key) => {
-      ordered[key] = object[key]
-    })
+  for (const key of Object.keys(object).sort()) {
+    ordered[key] = object[key]
+  }
   return ordered
 }
 
@@ -25,11 +23,7 @@ export const formatDate = (date: Date): string => {
 export const setDate = <T>(input: T, date: Date = null) => {
   if (date === null) {
     const now = new Date()
-    if (now.getFullYear() === TAX_YEAR) {
-      date = new Date(TAX_YEAR + 1, 0, 1)
-    } else {
-      date = now
-    }
+    date = now.getFullYear() === TAX_YEAR ? new Date(TAX_YEAR + 1, 0, 1) : now
   }
   return {
     ...input,
@@ -59,10 +53,13 @@ export const getStreetNumber = ({
 export const formatCurrency = (value: number): string => {
   const findPlaceForThousandsDivider = /\B(?=(\d{3})+(?!\d))/g
   const roundNumber = decimalToString(new Decimal(value || 0))
+
+  const nbSpace = '\u00A0' // Unicode non-breaking space to prevent line breaks
+
   const formattedNumber = roundNumber
-    .replace(findPlaceForThousandsDivider, ' ')
+    .replace(findPlaceForThousandsDivider, nbSpace)
     .replace('.', ',')
-  return `${formattedNumber} EUR`
+  return `${formattedNumber}${nbSpace}EUR`
 }
 
 export const numberInputRegexp = '^[0-9]+([,\\.][0-9]{1,2})?$'
@@ -84,11 +81,9 @@ export const translit = (value: string) => {
 
 export const formatRodneCislo = (newValue: string, previousValue = '') => {
   const formattedNewValue = newValue.replace(/\D/g, '')
-  if (`${newValue} ` === previousValue) {
-    return newValue.slice(0, -3)
-  } else {
-    return formattedNewValue.replace(/^(\d{6})/, '$1 / ')
-  }
+  return `${newValue} ` === previousValue
+    ? newValue.slice(0, -3)
+    : formattedNewValue.replace(/^(\d{6})/, '$1 / ')
 }
 
 export const validateRodneCislo = (value: string): boolean => {
@@ -161,11 +156,9 @@ export const formatIban = (newValue: string, previousValue = '') => {
   const prefix = newValue.trim().slice(0, 2)
   const number = newValue.trim().slice(2).replace(/\D/g, '')
   const formattedNewValue = `${prefix}${number}`
-  if (`${newValue} ` === previousValue) {
-    return newValue.slice(0, -2)
-  } else {
-    return IBAN.printFormat(formattedNewValue)
-  }
+  return `${newValue} ` === previousValue
+    ? newValue.slice(0, -2)
+    : IBAN.printFormat(formattedNewValue)
 }
 
 export const validateIbanFormat = (value: string): boolean => {

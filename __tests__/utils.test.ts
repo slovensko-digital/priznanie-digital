@@ -1,25 +1,23 @@
 import {
-  parseStreetAndNumber,
-  encodeUnicodeCharacters,
-  getStreetNumber,
-  round,
-} from '../src/lib/utils'
-import {
-  sortObjectKeys,
-  formatCurrency,
-  setDate,
-  formatDate,
-  numberInputRegexp,
-  formatPsc,
-  translit,
-  formatRodneCislo,
-  validateRodneCislo,
-  formatIban,
-  validateIbanFormat,
-  validateIbanCountry,
-  getRodneCisloAgeAtYearAndMonth,
   boolToString,
   decimalToString,
+  encodeUnicodeCharacters,
+  formatCurrency,
+  formatDate,
+  formatIban,
+  formatPsc,
+  formatRodneCislo,
+  getRodneCisloAgeAtYearAndMonth,
+  getStreetNumber,
+  numberInputRegexp,
+  parseStreetAndNumber,
+  round,
+  setDate,
+  sortObjectKeys,
+  translit,
+  validateIbanCountry,
+  validateIbanFormat,
+  validateRodneCislo,
 } from '../src/lib/utils'
 import Decimal from 'decimal.js'
 
@@ -95,36 +93,41 @@ describe('utils', () => {
       },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should format to ${output}`, () => {
         expect(getStreetNumber(input)).toBe(output)
       })
-    })
+    }
   })
 
   describe('#formatCurrency', () => {
+    const nbSpace = '\u00A0' // Unicode non-breaking space to prevent line breaks
+
     const scenarios = [
-      { input: 1234.564, output: '1 234,56 EUR' },
-      { input: 123.455, output: '123,46 EUR' },
-      { input: 1000000, output: '1 000 000,00 EUR' },
+      { input: 1234.564, output: `1${nbSpace}234,56${nbSpace}EUR` },
+      { input: 123.455, output: `123,46${nbSpace}EUR` },
+      {
+        input: 1_000_000,
+        output: `1${nbSpace}000${nbSpace}000,00${nbSpace}EUR`,
+      },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should format ${input} to ${output}`, () => {
         expect(formatCurrency(input)).toBe(output)
       })
-    })
+    }
   })
 
   describe('numberInputRegexp', () => {
     describe('for valid values', () => {
       const validInputs = ['0', '10', '120,3', '120,34', '120.3', '120.34']
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return true for ${value}`, () => {
           expect(new RegExp(numberInputRegexp).test(value)).toBe(true)
         })
-      })
+      }
     })
 
     describe('for invalid values', () => {
@@ -142,11 +145,11 @@ describe('utils', () => {
         '-15.20',
       ]
 
-      invalidInputs.forEach((value) => {
+      for (const value of invalidInputs) {
         it(`should return false for ${value}`, () => {
           expect(new RegExp(numberInputRegexp).test(value)).toBe(false)
         })
-      })
+      }
     })
   })
 
@@ -185,11 +188,11 @@ describe('utils', () => {
         '110124 / 0426',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return true for value "${value}"`, () => {
           expect(validateRodneCislo(value)).toBe(true)
         })
-      })
+      }
     })
 
     describe('for invalid values', () => {
@@ -204,11 +207,11 @@ describe('utils', () => {
         '950215 / 45301',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return false for value "${value}"`, () => {
           expect(validateRodneCislo(value)).toBe(false)
         })
-      })
+      }
     })
   })
 
@@ -229,11 +232,11 @@ describe('utils', () => {
       { rc: '2055180017', age: 0, year, month },
     ]
 
-    inputs.forEach(({ rc, age, year, month }) => {
+    for (const { rc, age, year, month } of inputs) {
       it(`should return age "${age}" for value "${rc}"`, () => {
         expect(getRodneCisloAgeAtYearAndMonth(rc, year, month)).toBe(age)
       })
-    })
+    }
   })
 
   describe('#formatIban', () => {
@@ -263,11 +266,11 @@ describe('utils', () => {
         'DE89 3704 0044 0532 0130 00',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return true for value "${value}"`, () => {
           expect(validateIbanFormat(value)).toBe(true)
         })
-      })
+      }
     })
 
     describe('for invalid values', () => {
@@ -279,11 +282,11 @@ describe('utils', () => {
         '19874263530720',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return false for value "${value}"`, () => {
           expect(validateIbanFormat(value)).toBe(false)
         })
-      })
+      }
     })
   })
 
@@ -294,11 +297,11 @@ describe('utils', () => {
         ' SK68 0720 0002   8919 8742 6353 ',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return true for value "${value}"`, () => {
           expect(validateIbanCountry(value)).toBe(true)
         })
-      })
+      }
     })
 
     describe('for invalid values', () => {
@@ -307,11 +310,11 @@ describe('utils', () => {
         'DE89370400440532013000',
       ]
 
-      validInputs.forEach((value) => {
+      for (const value of validInputs) {
         it(`should return false for value "${value}"`, () => {
           expect(validateIbanCountry(value)).toBe(false)
         })
-      })
+      }
     })
   })
 
@@ -324,11 +327,11 @@ describe('utils', () => {
       { input: 'Ulica bez čísla ', output: ['Ulica bez čísla', ''] },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should return "${output}" for "${input}"`, () => {
         expect(parseStreetAndNumber(input)).toEqual(output)
       })
-    })
+    }
   })
 
   describe('encodeUnicodeCharacters', () => {
@@ -338,11 +341,11 @@ describe('utils', () => {
       { input: 'No Changes Here 123', output: 'No Changes Here 123' },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should return "${output}" for "${input}"`, () => {
         expect(encodeUnicodeCharacters(input)).toEqual(output)
       })
-    })
+    }
 
     it('should process complete XML correctly', () => {
       expect(
@@ -380,7 +383,7 @@ describe('utils', () => {
       { input: new Decimal(123.451), output: '123.45' },
       { input: new Decimal(123.454), output: '123.45' },
       { input: new Decimal(123.455), output: '123.46' },
-      { input: new Decimal(123.454449), output: '123.45' },
+      { input: new Decimal(123.454_449), output: '123.45' },
       { input: new Decimal(123.459), output: '123.46' },
       { input: new Decimal(123.46), output: '123.46' },
       { input: new Decimal(123.461), output: '123.46' },
@@ -390,11 +393,11 @@ describe('utils', () => {
       { input: new Decimal(123.469), output: '123.47' },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should round ${input} to ${output}`, () => {
         expect(round(input).toString()).toBe(output)
       })
-    })
+    }
 
     it('should roundDecimal to 2 decimal places by default', () => {
       expect(round(new Decimal(10)).toString()).toBe('10')
@@ -408,7 +411,7 @@ describe('utils', () => {
       { input: new Decimal(123.451), output: '123.45' },
       { input: new Decimal(123.454), output: '123.45' },
       { input: new Decimal(123.455), output: '123.46' },
-      { input: new Decimal(123.454449), output: '123.45' },
+      { input: new Decimal(123.454_449), output: '123.45' },
       { input: new Decimal(123.459), output: '123.46' },
       { input: new Decimal(123.46), output: '123.46' },
       { input: new Decimal(123.461), output: '123.46' },
@@ -418,10 +421,10 @@ describe('utils', () => {
       { input: new Decimal(123.469), output: '123.47' },
     ]
 
-    scenarios.forEach(({ input, output }) => {
+    for (const { input, output } of scenarios) {
       it(`should round ${input} to ${output}`, () => {
         expect(round(input).valueOf()).toBe(output)
       })
-    })
+    }
   })
 })
