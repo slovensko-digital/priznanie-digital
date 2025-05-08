@@ -14,6 +14,30 @@ import {
   zaciatok_urocenia_datum,
 } from '../lib/calculation'
 
+const getPartnerMonthsString = (input: TaxFormUserInput): string => {
+  const months = []
+  if (input.partner_bonus_na_deti_m01) months.push(0)
+  if (input.partner_bonus_na_deti_m02) months.push(1)
+  if (input.partner_bonus_na_deti_m03) months.push(2)
+  if (input.partner_bonus_na_deti_m04) months.push(3)
+  if (input.partner_bonus_na_deti_m05) months.push(4)
+  if (input.partner_bonus_na_deti_m06) months.push(5)
+  if (input.partner_bonus_na_deti_m07) months.push(6)
+  if (input.partner_bonus_na_deti_m08) months.push(7)
+  if (input.partner_bonus_na_deti_m09) months.push(8)
+  if (input.partner_bonus_na_deti_m10) months.push(9)
+  if (input.partner_bonus_na_deti_m11) months.push(10)
+  if (input.partner_bonus_na_deti_m12) months.push(11)
+
+  if (months.length === 0) return ''
+  if (months.length === 12) return 'Január - December'
+
+  const firstMonth = months[0]
+  const lastMonth = months[months.length - 1]
+
+  return `${monthNumberToName(firstMonth)} - ${monthNumberToName(lastMonth)}`
+}
+
 interface SummaryRow {
   title: string
   value?: string
@@ -293,11 +317,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                 },
                 {
                   title: 'Mesiace kedy splnila podmienky',
-                  value: `${monthNumberToName(
-                    parseInt(taxFormUserInput.partner_bonus_na_deti_od),
-                  )} - ${monthNumberToName(
-                    parseInt(taxFormUserInput.partner_bonus_na_deti_do),
-                  )}`,
+                  value: getPartnerMonthsString(taxFormUserInput),
                 },
                 {
                   title: 'Spôsob vysporiadania príjmov',
