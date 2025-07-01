@@ -9723,6 +9723,43 @@ else
   return 0;
 }
 
+function inliner34mesiacer33(element,sid) {
+var uplatnitPostup = $("#cb34_Uplatnujem")
+var arrayR33 = [];
+var arrayR34 = [];
+
+for (var i = 1; i <= 12; i++) {
+    var cislo = i < 10 ? '0' + i : i;
+    var checkboxy = $('[name="cbM' + cislo + '_1"]');
+
+    if (checkboxy.filter(':checked').length > 0) {
+        arrayR33.push(i);
+    }
+}
+
+for (var i = 1; i <= 12; i++) {
+    var padded = (i < 10 ? '0' + i : '' + i);
+    var checkbox = $('#cbM' + padded + '_1_OO');
+
+    if (checkbox.is(':checked')) {
+        arrayR34.push(i);
+    }
+}
+
+if (uplatnitPostup.is(':checked')) {
+    if (arrayR34.length && arrayR33.length) {
+        for (var i = 0; i < arrayR34.length; i++) {
+            if ($.inArray(arrayR34[i], arrayR33) !== -1) {
+                return 0;
+            }
+        }
+        return 1;
+    } else {
+        return 0;
+    }
+}
+}
+
 
 		function GetExternalResourceIndex(resourcetype) {
   switch (resourcetype) {
@@ -45338,6 +45375,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM00_1_OO',sid)))==Math
 var retval = ("'r.34' môžu byť vyznačené len tie mesiace, na začiatku ktorých druhá oprávnená osoba spĺňa podmienky pre uplatnenie daňového bonusu podľa zákona. Ak sú na r.33 uvedené len deti narodené od 2.1.2024 vrátane, potom nemôže byť zaškrtnuté pole 1-12. Druhá oprávnená osoba spĺňa podmienky na uplatnenie daňového bonusu len časť roka.");
 				return retval; //;
 			}
+				
+			function vypocet_cbm00_1_oo_C3(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM00_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm00_1_oo_T3(sid) {
+var retval = ("Riadok 34 - Navýšenie základu dane o základ dane druhej oprávnenej osoby je možné len ak táto osba je oprávnenou, aspoň za jeden totožný mesiac, za ktorý si daňovník uplatňuje daňový bonus a zároveň na začiatku ktorého druhá oprávnená osoba splnila podmienky na uplatnenie daňového bonusu.");
+				return retval; //;
+			}
 		function kontrola2_cbM00_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45359,6 +45405,12 @@ var retval = ("'r.34' môžu byť vyznačené len tie mesiace, na začiatku ktor
 			if (!iserr && !vypocet_cbm00_1_oo_C2(sid))
 			{
 				validatorObject.settings.messages['cbM00_1_OO']['customW'] = vypocet_cbm00_1_oo_T2(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm00_1_oo_C3(sid))
+			{
+				validatorObject.settings.messages['cbM00_1_OO']['customW'] = vypocet_cbm00_1_oo_T3(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45440,6 +45492,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM00_1_OO',sid)))==Math
 var retval = ("'r.34' môžu byť vyznačené len tie mesiace, na začiatku ktorých druhá oprávnená osoba spĺňa podmienky pre uplatnenie daňového bonusu podľa zákona. Ak sú na r.33 uvedené len deti narodené od 2.1.2024 vrátane, potom nemôže byť zaškrtnuté pole 1-12. Druhá oprávnená osoba spĺňa podmienky na uplatnenie daňového bonusu len časť roka.");
 				return retval; //;
 			}
+				
+			function vypocet_cbm00_1_oo_C3(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM00_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm00_1_oo_T3(sid) {
+var retval = ("Riadok 34 - Navýšenie základu dane o základ dane druhej oprávnenej osoby je možné len ak táto osba je oprávnenou, aspoň za jeden totožný mesiac, za ktorý si daňovník uplatňuje daňový bonus a zároveň na začiatku ktorého druhá oprávnená osoba splnila podmienky na uplatnenie daňového bonusu.");
+				return retval; //;
+			}
 		function kontrola_cbM01_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45461,6 +45522,12 @@ var retval = ("'r.34' môžu byť vyznačené len tie mesiace, na začiatku ktor
 			if (!iserr && !vypocet_cbm01_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM01_1_OO']['customW'] = vypocet_cbm01_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm01_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM01_1_OO']['customW'] = vypocet_cbm01_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45520,6 +45587,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM01_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm01_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM01_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm01_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM02_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45541,6 +45617,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm02_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM02_1_OO']['customW'] = vypocet_cbm02_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm02_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM02_1_OO']['customW'] = vypocet_cbm02_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45600,6 +45682,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM02_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm02_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM02_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm02_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM03_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45621,6 +45712,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm03_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM03_1_OO']['customW'] = vypocet_cbm03_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm03_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM03_1_OO']['customW'] = vypocet_cbm03_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45680,6 +45777,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM03_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm03_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM03_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm03_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM04_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45701,6 +45807,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm04_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM04_1_OO']['customW'] = vypocet_cbm04_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm04_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM04_1_OO']['customW'] = vypocet_cbm04_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45760,6 +45872,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM04_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm04_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM04_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm04_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM05_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45781,6 +45902,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm05_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM05_1_OO']['customW'] = vypocet_cbm05_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm05_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM05_1_OO']['customW'] = vypocet_cbm05_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45840,6 +45967,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM05_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm05_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM05_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm05_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM06_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45861,6 +45997,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm06_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM06_1_OO']['customW'] = vypocet_cbm06_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm06_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM06_1_OO']['customW'] = vypocet_cbm06_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -45920,6 +46062,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM06_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm06_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM06_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm06_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM07_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -45941,6 +46092,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm07_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM07_1_OO']['customW'] = vypocet_cbm07_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm07_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM07_1_OO']['customW'] = vypocet_cbm07_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46000,6 +46157,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM07_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm07_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM07_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm07_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM08_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -46021,6 +46187,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm08_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM08_1_OO']['customW'] = vypocet_cbm08_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm08_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM08_1_OO']['customW'] = vypocet_cbm08_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46080,6 +46252,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM08_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm08_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM08_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm08_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM09_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -46101,6 +46282,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm09_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM09_1_OO']['customW'] = vypocet_cbm09_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm09_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM09_1_OO']['customW'] = vypocet_cbm09_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46160,6 +46347,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM09_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm09_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM09_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm09_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM10_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -46181,6 +46377,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm10_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM10_1_OO']['customW'] = vypocet_cbm10_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm10_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM10_1_OO']['customW'] = vypocet_cbm10_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46240,6 +46442,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM10_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm10_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM10_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm10_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM11_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -46261,6 +46472,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm11_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM11_1_OO']['customW'] = vypocet_cbm11_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm11_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM11_1_OO']['customW'] = vypocet_cbm11_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46320,6 +46537,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM11_1_OO',sid)))==Math
 var retval = ("");
 				return retval; //;
 			}
+				
+			function vypocet_cbm11_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM11_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm11_1_oo_T2(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola_cbM12_1_OO(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2025' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -46341,6 +46567,12 @@ var retval = ("");
 			if (!iserr && !vypocet_cbm12_1_oo_C1(sid))
 			{
 				validatorObject.settings.messages['cbM12_1_OO']['customW'] = vypocet_cbm12_1_oo_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_cbm12_1_oo_C2(sid))
+			{
+				validatorObject.settings.messages['cbM12_1_OO']['customW'] = vypocet_cbm12_1_oo_T2(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -46397,6 +46629,15 @@ var retval = ((Math.round(100.0000000000001*(inliner34('cbM12_1_OO',sid)))==Math
 				return retval;
 			}
 			function vypocet_cbm12_1_oo_T1(sid) {
+var retval = ("");
+				return retval; //;
+			}
+				
+			function vypocet_cbm12_1_oo_C2(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner34mesiacer33('cbM12_1_OO',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_cbm12_1_oo_T2(sid) {
 var retval = ("");
 				return retval; //;
 			}
@@ -55701,7 +55942,7 @@ customW: ""
 											
 <div id="layoutCell160263" class="cell " >		
 			
-		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup>1)</sup></label><br />	
+		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup> 1)</sup></label><br />	
 		<div class="clear"></div>
 </div>							
 						
