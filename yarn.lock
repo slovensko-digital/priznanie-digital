@@ -7952,7 +7952,7 @@ __metadata:
     prettier: "npm:3.6.2"
     react: "npm:19.2.0"
     react-dom: "npm:19.2.0"
-    rodnecislo: "npm:1.7.0"
+    rodnecislo: "npm:1.6.0"
     sass: "npm:^1.93.2"
     start-server-and-test: "npm:1.15.4"
     typescript: "npm:4.9.5"
@@ -8430,10 +8430,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rodnecislo@npm:1.7.0":
-  version: 1.7.0
-  resolution: "rodnecislo@npm:1.7.0"
-  checksum: 10c0/2349d90274e97087ea149e398ae6ce65090db91805390e9b8d0246d639ff41964ac1957bab23a01982b2de7f3fd5121c4fff2e43bec91dea1fb90e9eea324f3c
+"rodnecislo@npm:1.6.0":
+  version: 1.6.0
+  resolution: "rodnecislo@npm:1.6.0"
+  checksum: 10c0/73ec26a11f475d76b04d886cb593369a29764069e9ccfaa792bd7f9f924e91c2270531fd96c05055d18609be32873e0b8de037834baaa1c5516c5e85ca9f4888
   languageName: node
   linkType: hard
 
