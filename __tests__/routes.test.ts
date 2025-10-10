@@ -7,6 +7,7 @@ import {
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { TaxForm } from '../src/types/TaxForm'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
+import { NextRouter } from 'next/router'
 
 describe('routes', () => {
   describe('#getOrderedRoutes', () => {
@@ -154,7 +155,7 @@ describe('routes', () => {
 
     it('should redirect from route when form is not filled out', () => {
       validateRoute(
-        { route: '/partner', replace } as any,
+        { route: '/partner', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
         {} as PostponeUserInput,
@@ -164,7 +165,7 @@ describe('routes', () => {
 
     it('should redirect from route when form is empty', () => {
       validateRoute(
-        { route: '/odklad/suhrn', replace } as any,
+        { route: '/odklad/suhrn', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
         { priezvisko: '' } as PostponeUserInput,
@@ -174,7 +175,7 @@ describe('routes', () => {
 
     it('should not redirect from route when form is filled out', () => {
       validateRoute(
-        { route: '/dohoda', replace } as any,
+        { route: '/dohoda', replace } as unknown as NextRouter,
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,
@@ -184,7 +185,7 @@ describe('routes', () => {
 
     it('should not redirect from route when postpone form is filled out', () => {
       validateRoute(
-        { route: '/odklad/osobne-udaje', replace } as any,
+        { route: '/odklad/osobne-udaje', replace } as unknown as NextRouter,
         {} as TaxForm,
         {} as TaxFormUserInput,
         { prijmy_zo_zahranicia: false } as PostponeUserInput,

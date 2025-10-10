@@ -161,7 +161,7 @@ const randomInput = (): TaxFormUserInput => {
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
-      partner_podmienky: { '1': true },
+      partner_podmienky: { '1': ['on'] },
     }
   }
 
@@ -233,12 +233,13 @@ describe('Random inputs', () => {
       })
         .then((response) => {
           cy.writeFile(filePath, response.body, 'utf-8')
+          return
         })
         .then(() => {
           /**  Validate our results with the FS form */
           cy.visit('http://localhost:3000/form/form.601.html')
           // Ignore uncaught exceptions in the 3rd party form code
-          cy.on('uncaught:exception', (err, runnable) => {
+          cy.on('uncaught:exception', (_err, _runnable) => {
             // returning false here prevents Cypress
             // inside the cy.origin() method from failing the test
             return false
@@ -256,6 +257,7 @@ describe('Random inputs', () => {
           cy.get('#errorsContainer')
             .should((el) => expect(el.text()).to.be.empty)
             .then(() => done())
+          return
         })
     })
   })

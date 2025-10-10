@@ -61,7 +61,7 @@ export interface TaxFormUserInput {
   r032_partner_pocet_mesiacov?: string
   partner_step?: number
   partner_spolocna_domacnost?: boolean
-  partner_podmienky?: Record<string, boolean>
+  partner_podmienky?: Record<string, string[]>
 
   /** SECTION  Mortage */
   r035_uplatnuje_uroky?: boolean
@@ -78,6 +78,7 @@ export interface TaxFormUserInput {
   uroky_dalsi_uver_uplatnuje?: boolean
   uroky_splnam_vek_kriteria?: boolean
   uroky_splnam_prijem?: boolean
+  uroky_nesplna_datumy?: boolean
 
   /** SECTION Prijmy a poistenie  */
   // TODO: rename t1r10_prijmy to t1r2_prijmy

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { EmployedUserInput, FormErrors } from '../types/PageUserInputs'
@@ -8,6 +7,8 @@ import { Page } from '../components/Page'
 import { employmentUserInputInitialValues } from '../lib/initialValues'
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
+import TooltipHint from '../components/TooltipHint'
+import styles from './zamestnanie.module.css'
 
 const Zamestnanie: Page<EmployedUserInput> = ({
   setTaxFormUserInput,
@@ -43,40 +44,106 @@ const Zamestnanie: Page<EmployedUserInput> = ({
             {values.employed && (
               <>
                 <h3 className="govuk-heading-m">
-                  Nasledujúce hodnoty nájdete na tlačive "Potvrdenie o
-                  zdaniteľných príjmoch fyzickej osoby zo závislej činnosti". Ak
-                  ste mali viac zamestnávateľov, tak tieto sumy spočítajte a
-                  uveďte výsledné.
+                  Nasledujúce hodnoty nájdete na tlačive &quot;Potvrdenie o
+                  zdaniteľných príjmoch fyzickej osoby zo závislej
+                  činnosti&quot;. Ak ste mali viac zamestnávateľov, tak tieto
+                  sumy spočítajte a uveďte výsledné.
                 </h3>
                 <Input
                   name="uhrnPrijmovOdVsetkychZamestnavatelov"
                   type="number"
                   label="Úhrn vyplatených zdaniteľných príjmov"
-                  hint={`Tento údaj nájdete v riadku 01.`}
+                  hint={
+                    <div>
+                      <span className={styles.hintText}>
+                        Tento údaj nájdete v riadku 01.
+                      </span>
+                      <TooltipHint>
+                        <img
+                          className={styles.hintImage}
+                          src="/assets/images/zamestnanie-hint-01.png"
+                          alt="zamestnanie-hint-01"
+                        />
+                      </TooltipHint>
+                    </div>
+                  }
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaSocialnePoistenie"
                   type="number"
                   label="Úhrn sociálneho poistného"
-                  hint={`Tento údaj nájdete v riadku 02a.`}
+                  hint={
+                    <div>
+                      <span className={styles.hintText}>
+                        Tento údaj nájdete v riadku 02a.
+                      </span>
+                      <TooltipHint>
+                        <img
+                          className={styles.hintImage}
+                          src="/assets/images/zamestnanie-hint-02a.png"
+                          alt="zamestnanie-hint-02a"
+                        />
+                      </TooltipHint>
+                    </div>
+                  }
                 />
                 <Input
                   name="uhrnPovinnehoPoistnehoNaZdravotnePoistenie"
                   type="number"
                   label="Úhrn zdravotného poistného"
-                  hint={`Tento údaj nájdete v riadku 02b.`}
+                  hint={
+                    <div>
+                      <span className={styles.hintText}>
+                        Tento údaj nájdete v riadku 02b.
+                      </span>
+                      <TooltipHint>
+                        <img
+                          className={styles.hintImage}
+                          src="/assets/images/zamestnanie-hint-02b.png"
+                          alt="zamestnanie-hint-02b"
+                        />
+                      </TooltipHint>
+                    </div>
+                  }
                 />
                 <Input
                   name="uhrnPreddavkovNaDan"
                   type="number"
                   label="Úhrn preddavkov na daň"
-                  hint={`Tento údaj nájdete v riadku 04.`}
+                  hint={
+                    <div>
+                      <span className={styles.hintText}>
+                        Tento údaj nájdete v riadku 04.
+                      </span>
+                      <TooltipHint>
+                        <img
+                          className={styles.hintImage}
+                          src="/assets/images/zamestnanie-hint-04.png"
+                          alt="zamestnanie-hint-04"
+                        />
+                      </TooltipHint>
+                    </div>
+                  }
                 />
                 <Input
                   name="udajeODanovomBonuseNaDieta"
                   type="number"
                   label="Údaje o daňovom bonuse na dieťa"
-                  hint={`Tento údaj nájdete v riadku 13 v časti "Úhrnná suma priznaného a vyplateného daňového bonusu".`}
+                  hint={
+                    <div>
+                      <span className={styles.hintText}>
+                        Tento údaj nájdete v riadku 13 v časti &quot;Úhrnná suma
+                        priznaného a vyplateného daňového bonusu&quot;.
+                      </span>
+                      <TooltipHint>
+                        <img
+                          className={styles.hintImage}
+                          src="/assets/images/zamestnanie-hint-13.png"
+                          alt="zamestnanie-hint-13"
+                        />
+                      </TooltipHint>
+                    </div>
+                  }
                 />
               </>
             )}

@@ -83,6 +83,9 @@ export const getNace = async () => {
   return fetch(`nace.json`)
     .then((response) => response.json())
     .then((values) => {
-      return values.map((item) => ({ ...item, translit: translit(item.label) }))
+      return values.map((item) => ({
+        ...item,
+        translit: translit(item.label),
+      }))
     })
 }

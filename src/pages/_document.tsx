@@ -1,6 +1,5 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { getGitCommit } from '../lib/constants'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -49,7 +48,6 @@ class MyDocument extends Document {
             property="twitter:image"
             content="/assets/images/priznanie-share-image.png"
           />
-          <meta name="build:commit" content={getGitCommit()} />
         </Head>
         <body>
           <Main />

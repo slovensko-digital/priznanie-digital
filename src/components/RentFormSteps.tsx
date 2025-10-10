@@ -11,7 +11,12 @@ import { RentUserInput } from '../types/PageUserInputs'
 import { formatCurrency, parseInputNumber } from '../lib/utils'
 import Decimal from 'decimal.js'
 import { ExternalLink } from './ExternalLink'
-export const ApplyForBonusQuestion = ({ disabled }) => (
+
+interface Props {
+  disabled?: boolean
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={`Prenajímali ste v roku ${TAX_YEAR} nehnuteľnosť?`}
