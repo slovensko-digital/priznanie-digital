@@ -6,7 +6,10 @@
 /// <reference types="cypress" />
 
 import { UserInput } from '../../src/types/UserInput'
-import { formatCurrency as formatCurrencyOrigin, parseInputNumber } from '../../src/lib/utils'
+import {
+  formatCurrency as formatCurrencyOrigin,
+  parseInputNumber,
+} from '../../src/lib/utils'
 import { calculate, TAX_YEAR } from '../../src/lib/calculation'
 import {
   Route,
