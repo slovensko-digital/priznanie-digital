@@ -183,13 +183,23 @@ const executeTestCase = (testCase: string) => {
             }
           })
           next()
-          cy.wait(50)
+          cy.wait(500)
           cy.url().then((url) => {
             if (input.partner_bonus_na_deti) {
               getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
               getInput('partner_bonus_na_deti', '-yes').click()
               typeToInput('r034_priezvisko_a_meno', input)
               typeToInput('r034_rodne_cislo', input)
+              for (let month = 1; month <= 12; month++) {
+                const monthKey = `m${
+                  month < 10 ? '0' + month : month
+                }`
+                if (input[`partner_bonus_na_deti_${monthKey}`]) {
+                  cy.get(
+                    `[data-test="partner_bonus_na_deti_${monthKey}-input"]`,
+                  ).check()
+                }
+              }
               cy.get(
                 `[data-test="partner_bonus_na_deti_typ_prijmu-select"]`,
               ).select('1')
