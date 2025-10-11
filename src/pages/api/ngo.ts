@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { AutoFormSubject } from '../../types/api'
 import Fuse from 'fuse.js'
 import ngos from '../../../public/ngos.json'
+import { RollbarInstance } from '../../lib/rollbar'
 
 const maxCacheAgeInMinutes = 15
 
@@ -60,6 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (error) {
     console.log(error)
     res.statusCode = 500
+    RollbarInstance.error(error)
     return res.json({ error: 'unable to fetch data from financnasprava.sk' })
   }
 
