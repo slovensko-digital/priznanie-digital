@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress'
+import { validateXml } from './cypress/tasks/validateXML';
 
 export default defineConfig({
   defaultCommandTimeout: 8000,
@@ -7,10 +8,16 @@ export default defineConfig({
   video: false,
   projectId: 'ivst8i',
   downloadsFolder: 'cypress/downloads',
+  fileServerFolder: 'cypress/fileServer',
   trashAssetsBeforeRuns: true,
   retries: 1,
   e2e: {
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    setupNodeEvents(on, config) {
+      on('task', {
+        validateXml
+      })
+    },
   },
 })

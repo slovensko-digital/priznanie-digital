@@ -18,3 +18,13 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+import { ValidateXmlParams } from '../tasks/validateXML';
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      task(event: 'validateXml', arg: ValidateXmlParams): Chainable<any>
+    }
+  }
+}

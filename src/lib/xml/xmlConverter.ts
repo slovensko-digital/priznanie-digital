@@ -66,6 +66,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   /** SECTION Children */
   if (taxForm.r033 && taxForm.r033.length > 0 && taxForm.r117.greaterThan(0)) {
+    const dieta = form.dokument.telo.r33.dieta[0];
     form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
@@ -74,6 +75,12 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    // deti musia byt od 4 do 20
+    if (form.dokument.telo.r33.dieta.length < 4) {
+      [...Array(4-form.dokument.telo.r33.dieta.length)].forEach(() => {
+        form.dokument.telo.r33.dieta.push(dieta);
+      })
+    }
     form.dokument.telo.r33a = boolToString(taxForm.r033a)
     if (taxForm.partner_bonus_na_deti) {
       form.dokument.telo.uplatnujemPar33Ods8 = boolToString(
