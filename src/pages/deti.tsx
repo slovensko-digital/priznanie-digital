@@ -492,19 +492,6 @@ const ChildForm = ({
               styles.inlineFieldContainer,
             )}
           >
-            {/*previously implemented version with selects*/}
-            {/*<Select*/}
-            {/*  name={`children[${index}].monthFrom`}*/}
-            {/*  label="Od"*/}
-            {/*  optionsWithValue={monthKeyValues(monthOptions)}*/}
-            {/*  disabled={wholeYear ? 0 : false}*/}
-            {/*/>*/}
-            {/*<Select*/}
-            {/*  name={`children[${index}].monthTo`}*/}
-            {/*  label="Do"*/}
-            {/*  optionsWithValue={monthKeyValues(monthOptions)}*/}
-            {/*  disabled={wholeYear 11 : false}*/}
-            {/*/>*/}
             <div
               className={classnames(
                 styles.checkBoxRow,
