@@ -183,6 +183,7 @@ const executeTestCase = (testCase: string) => {
             }
           })
           next()
+          cy.wait(50)
           cy.url().then((url) => {
             if (input.partner_bonus_na_deti) {
               getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
