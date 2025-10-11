@@ -38,6 +38,7 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "rodnecislo": "1.6.0",
+    "rollbar": "^2.26.4",
     "sass": "^1.75.0",
     "webpack": "^5.76.0",
     "xml-js": "1.6.11",
