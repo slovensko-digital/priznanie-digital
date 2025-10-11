@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
 import { Checkbox, FormWrapper, Input } from '../components/FormComponents'
@@ -8,7 +8,6 @@ import { getNgoByName } from '../lib/api'
 import { formatCurrency } from '../lib/utils'
 import {
   calculate,
-  donateOnly3Percent,
   MIN_2_PERCENT_CALCULATED_DONATION,
 } from '../lib/calculation'
 import { ErrorSummary } from '../components/ErrorSummary'
@@ -87,15 +86,8 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
 }) => {
   const submitButtonRef = useRef(null)
   const calculatedTax = calculate(taxFormUserInput)
-
-  const uplatnenie2PercentHint = donateOnly3Percent(calculatedTax)
-    ? `Nanešťastie, nespĺňate podmienky pre darovanie 2%, nakoľko by
-          táto čiastka neprekočila ${formatCurrency(MIN_2_PERCENT_CALCULATED_DONATION)}, avšak spĺňate podmienky pre darovanie 3% zaplatenej dane (${formatCurrency(
-        calculatedTax.suma_3_percenta.toNumber(),
-      )})`
-    : `Spĺňate podmienky a môžete poukázať ${formatCurrency(
-        calculatedTax.suma_2_percenta.toNumber(),
-      )}`
+  const [percenta, setPercenta] = useState<'2' | '3' | 'nie'>();
+  const uplatnenie2PercentHint = ''
 
   const previousPageLink = (
     <Link href={previousRoute} data-test="back" className="govuk-back-link">
@@ -157,108 +149,133 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                 hint={uplatnenie2PercentHint}
               >
                 <RadioGroup
-                  value={String(props.values.dve_percenta_podporujem)}
-                  onChange={(value) => {
-                    if (value === 'ano-sk-digital') {
-                      props.setValues({
-                        ...props.values,
-                        r142_ico: '50 158 635',
-                        r142_obchMeno: 'Slovensko.Digital',
-                        XIIoddiel_uplatnujem2percenta: true,
-                        dve_percenta_podporujem: 'ano-sk-digital',
-                      })
-                    } else if (value === 'ano-inu') {
-                      props.setValues({
-                        ...props.values,
-                        r142_ico: '',
-                        r142_obchMeno: '',
-                        XIIoddiel_uplatnujem2percenta: true,
-                        dve_percenta_podporujem: 'ano-inu',
-                      })
-                    } else {
-                      props.setValues({
-                        ...props.values,
-                        r142_ico: '',
-                        r142_obchMeno: '',
-                        XIIoddiel_uplatnujem2percenta: false,
-                        dve_percenta_podporujem: 'nie',
-                      })
-                    }
+                  value={percenta}
+                  onChange={(value: '2' | '3' | 'nie') => {
+                    setPercenta(value);
                   }}
                 >
                   <Radio
-                    name="dve_percenta_podporujem-ano-sk-digital-input"
-                    label="Áno, Slovensko.Digital"
-                    value="ano-sk-digital"
+                    name={"splnam2per"}
+                    value={'2'}
+                    label={`Poukázať 2 percentá (${formatCurrency(calculatedTax.suma_2_percenta.toNumber())})`}
+                    disabled={calculatedTax.suma_2_percenta.lessThan(3)}
                   />
-                  <RadioConditional forValue="ano-sk-digital">
-                    <TriPercenta calculatedTax={calculatedTax} />
-                    <Suhlas />
-                  </RadioConditional>
-
                   <Radio
-                    name="dve_percenta_podporujem-ano-inu-input"
-                    label="Áno, inú organizáciu"
-                    value="ano-inu"
+                    name={"splnam3per"}
+                    value={'3'}
+                    label={`Poukázať 3 percentá (${formatCurrency(calculatedTax.suma_3_percenta.toNumber())})`}
                   />
-                  <RadioConditional forValue="ano-inu">
-                    <TriPercenta calculatedTax={calculatedTax} />
-                    <Suhlas />
-                    <h2 className="govuk-heading-l">Údaje o prijímateľovi</h2>
-                    <p>
-                      Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
-                    </p>
-
-                    <AutoCompleteInput
-                      name="r142_obchMeno"
-                      label="Názov neziskovej organizácie alebo občianskeho združenia"
-                      onSelect={makeHandleOrganisationAutoform(props)}
-                      fetchData={async (name) => {
-                        const data = await getNgoByName(name)
-                        return data.map((item) => ({
-                          ...item,
-                          id: item.id,
-                          value: `${item.name}, ${item.municipality}`,
-                        }))
-                      }}
-                    />
-
-                    <div className={styles.inlineFieldContainer}>
-                      <Input
-                        className={styles.inlineField}
-                        name="r142_ico"
-                        type="text"
-                        label="IČO"
-                        maxLength={12}
-                        onChange={async (event) => {
-                          props.setFieldValue(
-                            'r142_ico',
-                            event.currentTarget.value,
-                          )
-                        }}
-                      />
-                    </div>
-
-                    <div className="box govuk-!-margin-top-5">
-                      <p>
-                        Ak ste sa aj rozhodli svojimi 2% podporiť inú
-                        organizáciu, stále viete{' '}
-                        <ExternalLink href="https://slovensko-digital.darujme.sk/podporte-nas-financne-darujme/">
-                          podporiť prácu Slovensko.Digital
-                        </ExternalLink>{' '}
-                        , ktoré za pomoci dobrovoľníkov pripravilo túto
-                        aplikáciu prostredníctvom ľubovolného finančného daru.
-                        Každému darcovi a darkyni ďakujeme !
-                      </p>
-                    </div>
-                  </RadioConditional>
-
                   <Radio
-                    name="dve_percenta_podporujem-nie-input"
-                    label="Nie"
-                    value="nie"
+                    name={"nie"}
+                    value={'nie'}
+                    label={'nie'}
                   />
                 </RadioGroup>
+
+                {(percenta === '2' || percenta === '3') &&
+                  <RadioGroup
+                    value={String(props.values.dve_percenta_podporujem)}
+                    onChange={(value) => {
+                      if (value === 'ano-sk-digital') {
+                        props.setValues({
+                          ...props.values,
+                          r142_ico: '50 158 635',
+                          r142_obchMeno: 'Slovensko.Digital',
+                          XIIoddiel_uplatnujem2percenta: true,
+                          dve_percenta_podporujem: 'ano-sk-digital',
+                        })
+                      } else if (value === 'ano-inu') {
+                        props.setValues({
+                          ...props.values,
+                          r142_ico: '',
+                          r142_obchMeno: '',
+                          XIIoddiel_uplatnujem2percenta: true,
+                          dve_percenta_podporujem: 'ano-inu',
+                        })
+                      } else {
+                        props.setValues({
+                          ...props.values,
+                          r142_ico: '',
+                          r142_obchMeno: '',
+                          XIIoddiel_uplatnujem2percenta: false,
+                          dve_percenta_podporujem: 'nie',
+                        })
+                      }
+                    }}
+                  >
+                    komu?
+                    <Radio
+                      name="dve_percenta_podporujem-ano-sk-digital-input"
+                      label="Áno, Slovensko.Digital"
+                      value="ano-sk-digital"
+                    />
+                    <RadioConditional forValue="ano-sk-digital">
+                      <Suhlas />
+                    </RadioConditional>
+
+                    <Radio
+                      name="dve_percenta_podporujem-ano-inu-input"
+                      label="Áno, inú organizáciu"
+                      value="ano-inu"
+                    />
+                    <RadioConditional forValue="ano-inu">
+                      <Suhlas />
+                      <h2 className="govuk-heading-l">Údaje o prijímateľovi</h2>
+                      <p>
+                        Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
+                      </p>
+
+                      <AutoCompleteInput
+                        name="r142_obchMeno"
+                        label="Názov neziskovej organizácie alebo občianskeho združenia"
+                        onSelect={makeHandleOrganisationAutoform(props)}
+                        fetchData={async (name) => {
+                          const data = await getNgoByName(name)
+                          return data.map((item) => ({
+                            ...item,
+                            id: item.id,
+                            value: `${item.name}, ${item.municipality}`,
+                          }))
+                        }}
+                      />
+
+                      <div className={styles.inlineFieldContainer}>
+                        <Input
+                          className={styles.inlineField}
+                          name="r142_ico"
+                          type="text"
+                          label="IČO"
+                          maxLength={12}
+                          onChange={async (event) => {
+                            props.setFieldValue(
+                              'r142_ico',
+                              event.currentTarget.value,
+                            )
+                          }}
+                        />
+                      </div>
+
+                      <div className="box govuk-!-margin-top-5">
+                        <p>
+                          Ak ste sa aj rozhodli svojimi 2% podporiť inú
+                          organizáciu, stále viete{' '}
+                          <ExternalLink href="https://slovensko-digital.darujme.sk/podporte-nas-financne-darujme/">
+                            podporiť prácu Slovensko.Digital
+                          </ExternalLink>{' '}
+                          , ktoré za pomoci dobrovoľníkov pripravilo túto
+                          aplikáciu prostredníctvom ľubovolného finančného daru.
+                          Každému darcovi a darkyni ďakujeme !
+                        </p>
+                      </div>
+                    </RadioConditional>
+
+                    {/*<Radio*/}
+                    {/*  name="dve_percenta_podporujem-nie-input"*/}
+                    {/*  label="Nie"*/}
+                    {/*  value="nie"*/}
+                    {/*/>*/}
+                  </RadioGroup>
+                }
               </Fieldset>
               <button
                 data-test="next"
