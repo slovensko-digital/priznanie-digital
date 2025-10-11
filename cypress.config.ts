@@ -1,5 +1,4 @@
 import { defineConfig } from 'cypress'
-import { validateXml } from './cypress/tasks/validate-xml';
 
 export default defineConfig({
   defaultCommandTimeout: 8000,
@@ -14,10 +13,13 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
-    setupNodeEvents(on, config) {
-      on('task', {
-        validateXml
-      })
+    setupNodeEvents(on) {
+      on("task", {
+        validateXml: async (args) => {
+          const { validateXml } = require("./tasks/validateXml");
+          return validateXml(args);
+        },
+      });
     },
   },
 })
