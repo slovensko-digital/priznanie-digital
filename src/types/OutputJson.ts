@@ -48,6 +48,13 @@ export interface Zastupca {
   email: string
 }
 
+export interface Nerezident {
+  nerezident: string
+  datumOd: string
+  datumDo: string
+  TIN: string
+}
+
 export interface Hlavicka {
   dic: string
   datumNarodenia: string
@@ -59,7 +66,7 @@ export interface Hlavicka {
   titul: string
   titulZa: string
   adresaTrvPobytu: AdresaTrvPobytu
-  nerezident: string
+  nerezident: Nerezident
   prepojeniePar2: string
   adresaObvPobytu: AdresaObvPobytu
   zastupca: Zastupca

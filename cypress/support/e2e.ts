@@ -18,3 +18,14 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+import { ValidateXmlParams } from '../tasks/validateXml';
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      task(event: "validateXml", arg: ValidateXmlParams): Chainable<boolean>;
+    }
+  }
+}

@@ -68,7 +68,7 @@ export const executeAllPostponeCases = (testCases: string[]) => {
 const executeTestCase = (testCase: string) => {
   it(testCase, (done) => {
     import(`../../__tests__/testCases/${testCase}Input.ts`).then(
-      (inputModule) => {
+      async (inputModule) => {
         cy.setCookie('you-shall', 'not-pass') // enable debug mode for redirect page
 
         // Access named export
@@ -463,6 +463,10 @@ const executeTestCase = (testCase: string) => {
 
         const downloadsFolder = Cypress.config('downloadsFolder')
         const filePath = path.join(downloadsFolder, 'file.xml')
+
+        const schemaPath = path.join(Cypress.config('fileServerFolder'), 'schema2025.xsd');
+
+        cy.task("validateXml", { filePath, schemaPath });
 
         /**  Validate our results with the FS form */
         cy.visit('/form/form.601.html')
