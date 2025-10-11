@@ -16,7 +16,7 @@ export default defineConfig({
     setupNodeEvents(on) {
       on("task", {
         validateXml: async (args) => {
-          const { validateXml } = require("./tasks/validateXml");
+          const { validateXml } = require("./tasks/validate-xml");
           return validateXml(args);
         },
       });
