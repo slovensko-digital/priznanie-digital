@@ -6,7 +6,10 @@
 /// <reference types="cypress" />
 
 import { UserInput } from '../../src/types/UserInput'
-import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
+import {
+  formatCurrency as formatCurrencyOrigin,
+  parseInputNumber,
+} from '../../src/lib/utils'
 import { calculate, TAX_YEAR } from '../../src/lib/calculation'
 import {
   Route,
@@ -17,6 +20,10 @@ import {
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+
+function formatCurrency(value: number) {
+  return formatCurrencyOrigin(value).replaceAll('\u00A0', ' ')
+}
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
