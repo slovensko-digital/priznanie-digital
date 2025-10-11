@@ -268,22 +268,6 @@ const Deti: Page<ChildrenUserInput> = ({
                                 styles.inlineFieldContainer,
                               )}
                             >
-                              {/*<Select*/}
-                              {/*  name={`partner_bonus_na_deti_od`}*/}
-                              {/*  label="Od"*/}
-                              {/*  optionsWithValue={[*/}
-                              {/*    ...monthKeyValues(monthNames),*/}
-                              {/*    { name: '', value: '' },*/}
-                              {/*  ]}*/}
-                              {/*/>*/}
-                              {/*<Select*/}
-                              {/*  name={`partner_bonus_na_deti_do`}*/}
-                              {/*  label="Do"*/}
-                              {/*  optionsWithValue={[*/}
-                              {/*    ...monthKeyValues(monthNames),*/}
-                              {/*    { name: '', value: '' },*/}
-                              {/*  ]}*/}
-                              {/*/>*/}
                               <div
                                 className={classnames(
                                   styles.checkBoxRow,
