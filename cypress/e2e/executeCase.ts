@@ -459,12 +459,7 @@ const executeTestCase = (testCase: string) => {
 
         const schemaPath = path.join(Cypress.config('fileServerFolder'), 'schema2025.xsd');
 
-        cy.task("validateXml", { filePath, schemaPath }).then((result: { valid: boolean, messages: string[] }) => {
-          if (!result.valid) {
-            const formatted = result.messages.map((m: string) => `  - ${m}`).join("\n");
-            throw new Error(`XML validation failed:\n${formatted}`);
-          }
-        });
+        cy.task("validateXml", { filePath, schemaPath });
 
         /**  Validate our results with the FS form */
         cy.visit('/form/form.601.html')

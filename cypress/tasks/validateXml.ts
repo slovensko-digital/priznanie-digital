@@ -6,7 +6,7 @@ export interface ValidateXmlParams {
   schemaPath: string
 }
 
-export async function validateXml({ filePath, schemaPath }: ValidateXmlParams) {
+export default async function validateXml({ filePath, schemaPath }: ValidateXmlParams) {
   const xmlString = fs.readFileSync(filePath, 'utf-8');
   const xsdString = fs.readFileSync(schemaPath, 'utf-8');
 
