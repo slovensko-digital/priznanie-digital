@@ -1,4 +1,7 @@
 module.exports = {
+  // build a standalone output (creates .next/standalone) so the Dockerfile
+  // can copy the minimal server bundle into the runtime image
+  output: 'standalone',
   // to load runtime env vars we need to pass them via public runtime config (and disable static optimization)
   // this allows us to deploy one bundle into multiple envs
   publicRuntimeConfig: {
