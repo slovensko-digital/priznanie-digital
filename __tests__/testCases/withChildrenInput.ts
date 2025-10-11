@@ -25,7 +25,7 @@ export const withChildrenInput: E2eTestUserInput = {
       m03: false,
       m04: false,
       m05: false,
-      m06: true,
+      m06: false,
       m07: true,
       m08: true,
       m09: true,

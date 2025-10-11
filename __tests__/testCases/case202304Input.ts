@@ -51,7 +51,7 @@ export const case202304Input: E2eTestUserInput = {
       m03: false,
       m04: false,
       m05: false,
-      m06: true,
+      m06: false,
       m07: true,
       m08: true,
       m09: true,
@@ -87,6 +87,7 @@ export const case202304Input: E2eTestUserInput = {
   partner_bonus_na_deti_m03: true,
   partner_bonus_na_deti_m04: true,
   partner_bonus_na_deti_m05: true,
+  partner_bonus_na_deti_m06: true,
   r034a: '5000',
 
   expectNgoDonationValue: true,

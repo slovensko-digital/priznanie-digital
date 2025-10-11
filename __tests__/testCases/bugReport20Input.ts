@@ -37,7 +37,7 @@ export const bugReport20Input: E2eTestUserInput = {
       m04: true,
       m05: true,
       m06: true,
-      m07: false,
+      m07: true,
       m08: false,
       m09: false,
       m10: false,
