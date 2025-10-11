@@ -1,5 +1,5 @@
 import fs from 'fs'
-import validator from 'xsd-schema-validator'
+import libxml from 'libxmljs'
 
 export interface ValidateXmlParams {
   filePath: string
@@ -7,9 +7,20 @@ export interface ValidateXmlParams {
 }
 
 export async function validateXml({ filePath, schemaPath }: ValidateXmlParams) {
-  const xmlContent = fs.readFileSync(filePath, 'utf8')
-  const result = await validator.validateXML(xmlContent, schemaPath);
-  console.log('aaaaaaaaaa');
-  console.log(result);
-  return result ? result : true;
+  const xmlString = fs.readFileSync(filePath, 'utf-8');
+  const xsdString = fs.readFileSync(schemaPath, 'utf-8');
+
+  const xmlDoc = libxml.parseXml(xmlString);
+  const xsdDoc = libxml.parseXml(xsdString);
+  const isValid = await xmlDoc.validate(xsdDoc);
+
+  if (isValid) {
+    return { valid: true, messages: [] };
+  }
+  const messages = xmlDoc.validationErrors.map((e) => e.message.trim());
+
+  return {
+    valid: false,
+    messages: messages,
+  };
 }
