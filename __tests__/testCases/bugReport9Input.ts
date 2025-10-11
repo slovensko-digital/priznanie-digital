@@ -35,7 +35,7 @@ export const bugReport9Input: E2eTestUserInput = {
 
       wholeYear: false,
       m01: false,
-      m02: true,
+      m02: false,
       m03: true,
       m04: true,
       m05: true,
