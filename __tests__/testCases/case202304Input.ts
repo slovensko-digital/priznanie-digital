@@ -59,7 +59,7 @@ export const case202304Input: E2eTestUserInput = {
       m05: false,
       m06: false,
       m07: false,
-      m08: true,
+      m08: false,
       m09: true,
       m10: true,
       m11: true,
