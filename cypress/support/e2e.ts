@@ -22,9 +22,10 @@ import './commands'
 import { ValidateXmlParams } from '../tasks/validate-xml';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
-      task(event: 'validateXml', arg: ValidateXmlParams): Chainable<any>
+      task(event: "validateXml", arg: ValidateXmlParams): Chainable<boolean>;
     }
   }
 }
