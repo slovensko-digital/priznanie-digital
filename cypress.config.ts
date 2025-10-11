@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress'
-import { validateXml } from './cypress/tasks/validateXML';
+import { validateXml } from './cypress/tasks/validate-xml';
 
 export default defineConfig({
   defaultCommandTimeout: 8000,

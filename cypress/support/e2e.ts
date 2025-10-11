@@ -19,7 +19,7 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { ValidateXmlParams } from '../tasks/validateXML';
+import { ValidateXmlParams } from '../tasks/validate-xml';
 
 declare global {
   namespace Cypress {
