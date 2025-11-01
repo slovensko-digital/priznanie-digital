@@ -55,32 +55,6 @@ jobs:
       - name: Unit Tests
         run: yarn test --ci
 
-  docker-build:
-    # this step ensures that the Docker image builds correctly
-    # it does not push the image to any registry, this image is not used anywhere
-    # final image is build in gitlab ci pipeline
-    name: Check Docker build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image (no push)
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile
-          push: false
-          tags: priznaniedigital:ci-${{ github.run_id }}
-          # load=false avoids loading image into runner docker
-          load: false
-
   functional:
     name: Functional tests
     runs-on: ubuntu-latest
