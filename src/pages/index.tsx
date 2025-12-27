@@ -173,7 +173,9 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       )}
 
       {!isLive && (
-        <Link href={`${navodyBaseUrl}${informujteMaKedBudeLive}`}>
+        <Link
+          href={`${navodyBaseUrl}${informujteMaKedBudeLive}`}
+        >
           <button
             type="button"
             className="govuk-button govuk-button--large govuk-button--start"
