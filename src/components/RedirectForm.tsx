@@ -41,7 +41,7 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
             session: 'Vaša session vypršala',
           }}
         />
-        <Link href="/">
+        <Link href="/" legacyBehavior>
           <button className="govuk-button">Začnite znovu</button>
         </Link>
       </div>

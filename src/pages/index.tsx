@@ -151,7 +151,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       </p>
 
       {(isLive || isDebug) && (
-        <Link href={nextRoute}>
+        <Link href={nextRoute} legacyBehavior>
           <button
             type="button"
             className="govuk-button govuk-button--large govuk-button--start govuk-!-margin-bottom-3"
@@ -175,6 +175,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       {!isLive && (
         <Link
           href={`${navodyBaseUrl}${informujteMaKedBudeLive}`}
+          legacyBehavior
         >
           <button
             type="button"
@@ -265,7 +266,7 @@ const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
 
   if (isPostponeTime) {
     return (
-      <Link href={nextPostponeRoute}>
+      <Link href={nextPostponeRoute} legacyBehavior>
         <button
           type="button"
           className="btn-secondary govuk-button govuk-button--large"
