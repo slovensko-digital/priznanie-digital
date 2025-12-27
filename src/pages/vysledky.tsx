@@ -205,7 +205,7 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
         </Warning>
       )}
 
-      <Link href={nextRoute} legacyBehavior>
+      <Link href={nextRoute}>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-3"

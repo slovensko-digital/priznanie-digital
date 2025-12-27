@@ -26,7 +26,7 @@ const Header: React.FC = () => {
         {isLandingPage ? (
           logo
         ) : (
-          <Link href="/" legacyBehavior>
+          <Link href="/">
             {logo}
           </Link>
         )}

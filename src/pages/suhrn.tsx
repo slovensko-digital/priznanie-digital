@@ -414,7 +414,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           { title: 'Štát', value: taxFormUserInput.r011_stat },
         ]}
       />
-      <Link href={nextRoute} legacyBehavior>
+      <Link href={nextRoute}>
         <button
           data-test="next"
           className="govuk-button govuk-!-margin-top-4"

@@ -126,7 +126,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
             darkyni ďakujeme !
           </p>
         </div>
-        <Link href={nextRoute} legacyBehavior>
+        <Link href={nextRoute}>
           <button className="govuk-button govuk-!-margin-top-4" type="button">
             Pokračovať
           </button>

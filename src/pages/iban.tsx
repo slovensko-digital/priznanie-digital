@@ -58,7 +58,7 @@ const Iban: Page<TaxBonusUserInput> = ({
           Nemáte nárok na vyplatenie daňového bonusu, rozdielu daňového bonusu
           ani na vrátenie daňového preplatku
         </p>
-        <Link href={nextRoute} legacyBehavior>
+        <Link href={nextRoute}>
           <button
             data-test="next"
             className="govuk-button govuk-!-margin-top-3"
