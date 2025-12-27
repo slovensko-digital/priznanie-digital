@@ -175,7 +175,6 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       {!isLive && (
         <Link
           href={`${navodyBaseUrl}${informujteMaKedBudeLive}`}
-          legacyBehavior
         >
           <button
             type="button"
