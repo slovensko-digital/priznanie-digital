@@ -206,7 +206,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '5' : '4'
+  form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '7' : '6'
 
   if (
     taxForm.mozeZiadatVratitPreplatkyBonusyUroky &&
