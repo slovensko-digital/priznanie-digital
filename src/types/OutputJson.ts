@@ -570,6 +570,22 @@ interface Pril1bPar30eVydavkyInvesticie {
   r11: string
   r12: string
 }
+interface Pril1cPar30caVydavkySportRiadok {
+  s01Od: string
+  s01Do: string
+  s02: string
+  s03: string
+}
+interface Pril1cPar30caVydavkySport {
+  r01: Pril1cPar30caVydavkySportRiadok
+  r02: Pril1cPar30caVydavkySportRiadok
+  r03: Pril1cPar30caVydavkySportRiadok
+  r04: Pril1cPar30caVydavkySportRiadok
+  r05: Pril1cPar30caVydavkySportRiadok
+  r06: string
+  r07: string
+  r08: string
+}
 
 export interface Pr4 {
   s1: string
@@ -601,7 +617,7 @@ export interface Pr24 {
   s2: string
 }
 
-export interface PrilPodielyNaZisku {
+export interface Pril2PodielyNaZisku {
   pr1: string
   pr2: string
   pr3: string
@@ -630,6 +646,23 @@ export interface PrilPodielyNaZisku {
   pr26: string
   pr27: string
   pr28: string
+}
+
+interface Pril3VynosyZDlhopisov {
+  pr1: string
+  pr2: string
+  pr3: string
+  pr4: string
+  pr5: string
+  pr6: string
+  pr7: string
+  pr8: string
+  pr9: string
+  pr10: string
+  pr11: string
+  pr12: string
+  pr13: string
+  pr14: string
 }
 
 export interface Pr1 {
@@ -719,6 +752,7 @@ export interface Telo {
   r48: R48
   r49: R49
   r50: R50
+  r50a: R50a
   r51: string
   r52: string
   r53: string
@@ -818,6 +852,7 @@ export interface Telo {
   r144: string
   r145: string
   r146: string
+  r146a : string
   r147: string
   r148: string
   r149: string
@@ -825,12 +860,15 @@ export interface Telo {
   r151: R151
   r152: string
   r153: R153
+  r154: string
   osobitneZaznamy: OsobitneZaznamy
   datumVyhlasenia: string
   danovyPreplatokBonus: DanovyPreplatokBonus
   prilPar30cOdpocetVydavkov: PrilPar30cOdpocetVydavkov
   pril1bPar30eVydavkyInvesticie: Pril1bPar30eVydavkyInvesticie
-  prilPodielyNaZisku: PrilPodielyNaZisku
+  pril1cPar30caVydavkySport: Pril1cPar30caVydavkySport
+  pril2PodielyNaZisku: Pril2PodielyNaZisku
+  pril3VynosyZDlhopisov: Pril3VynosyZDlhopisov
   socZdravPoistenie: SocZdravPoistenie
 }
 
