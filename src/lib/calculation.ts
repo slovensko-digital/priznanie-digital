@@ -1067,7 +1067,7 @@ const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
       return new Decimal(0.43)
     }
     case 4: {
-      return new Decimal(0.50)
+      return new Decimal(0.5)
     }
     case 5: {
       return new Decimal(0.57)
