@@ -864,10 +864,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r146() {
       // TODO: random number before I figure out what to put here
-      return new Decimal(5);
+      return new Decimal(5)
     },
     get r146a() {
-      return this.r146;
+      return this.r146
     },
     get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
