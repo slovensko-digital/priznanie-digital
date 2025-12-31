@@ -27,8 +27,9 @@ const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
 const MAX_ZAKLAD_DANE = 24_952.06
 
-export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 100
-export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
+export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
+export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
+export const MAX_CHILD_AGE_BONUS = 18
 
 const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
 
@@ -47,7 +48,6 @@ const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_370.97)
 export const PARTNER_MAX_ODPOCET = 5_260.61
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
-export const MAX_CHILD_AGE_BONUS = 18
 export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
@@ -972,8 +972,8 @@ const getRate = (month: Months, child: Child) => {
 
   const rate =
     age < 18
-      ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-      : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+      ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER)
+      : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
 
   if (month === Months.January && (child.m01 || child.m00)) {
     return rate
