@@ -863,8 +863,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      // TODO: random number before I figure out what to put here
-      return new Decimal(5)
+      return new Decimal(0)
     },
     get r146a() {
       return this.r146
