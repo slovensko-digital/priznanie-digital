@@ -10,7 +10,7 @@ import {
   formatCurrency as formatCurrencyOrigin,
   parseInputNumber,
 } from '../../src/lib/utils'
-import { calculate, TAX_YEAR } from '../../src/lib/calculation'
+import { calculate, FORM_URL, TAX_YEAR } from '../../src/lib/calculation'
 import {
   Route,
   PostponeRoute,
@@ -465,7 +465,7 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.601.html')
+        cy.visit(FORM_URL)
         // Ignore uncaught exceptions in the 3rd party form code
         cy.on('uncaught:exception', (_err, _runnable) => {
           // returning false here prevents Cypress

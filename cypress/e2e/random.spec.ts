@@ -4,7 +4,7 @@ import {
   EmployedUserInput,
   DohodaUserInput,
 } from '../../src/types/PageUserInputs'
-import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
+import { FORM_URL, PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
@@ -237,7 +237,7 @@ describe('Random inputs', () => {
         })
         .then(() => {
           /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.601.html')
+          cy.visit(`http://localhost:3000${FORM_URL}`)
           // Ignore uncaught exceptions in the 3rd party form code
           cy.on('uncaught:exception', (_err, _runnable) => {
             // returning false here prevents Cypress
