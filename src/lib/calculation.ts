@@ -14,11 +14,11 @@ import { ChildrenUserInput } from '../types/PageUserInputs'
 import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
 export const FORM_URL = '/form/form.621.html'
-const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_646.48)
+const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_753.79)
 const KONSTANTA = 47_537.98
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
-const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(60_000)
+const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
 const DAN_Z_PRIJMU_SADZBA_ZNIZENA = new Decimal(0.15)
 const DAN_Z_PRIJMU_SADZBA = new Decimal(0.19)
 const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
@@ -27,7 +27,7 @@ const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
 const MAX_ZAKLAD_DANE = 24_952.06
 
-export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 140
+export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
 
 const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
