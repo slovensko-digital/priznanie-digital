@@ -32,8 +32,6 @@ export const withBonusInput: E2eTestUserInput = {
       rodneCislo: '1607201167',
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
     {
       id: 2,
@@ -41,8 +39,6 @@ export const withBonusInput: E2eTestUserInput = {
       rodneCislo: '1057201167',
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
   ],
   hasChildren: true,

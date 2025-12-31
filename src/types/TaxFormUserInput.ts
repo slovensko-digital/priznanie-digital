@@ -18,8 +18,18 @@ export interface ChildInput {
   priezviskoMeno: string
   rodneCislo: string
   wholeYear: boolean
-  monthFrom: string
-  monthTo: string
+  m01?: boolean
+  m02?: boolean
+  m03?: boolean
+  m04?: boolean
+  m05?: boolean
+  m06?: boolean
+  m07?: boolean
+  m08?: boolean
+  m09?: boolean
+  m10?: boolean
+  m11?: boolean
+  m12?: boolean
 }
 
 export interface TaxFormUserInput {
@@ -119,7 +129,19 @@ export interface TaxFormUserInput {
   r034_rodne_cislo?: string
   r034a?: string
   partner_bonus_na_deti_typ_prijmu?: '1' | '2' | '3' | '4' | '0'
-  partner_bonus_na_deti_od?: string
+  partner_bonus_na_deti_m01?: boolean
+  partner_bonus_na_deti_m02?: boolean
+  partner_bonus_na_deti_m03?: boolean
+  partner_bonus_na_deti_m04?: boolean
+  partner_bonus_na_deti_m05?: boolean
+  partner_bonus_na_deti_m06?: boolean
+  partner_bonus_na_deti_m07?: boolean
+  partner_bonus_na_deti_m08?: boolean
+  partner_bonus_na_deti_m09?: boolean
+  partner_bonus_na_deti_m10?: boolean
+  partner_bonus_na_deti_m11?: boolean
+  partner_bonus_na_deti_m12?: boolean
+
   partner_bonus_na_deti_do?: string
   children: ChildInput[]
 

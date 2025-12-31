@@ -37,8 +37,6 @@ export const bugReport3Input: E2eTestUserInput = {
       rodneCislo: '000205/6901',
 
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '11',
     },
     {
       id: 2,
@@ -46,8 +44,6 @@ export const bugReport3Input: E2eTestUserInput = {
       rodneCislo: '000216/6274',
 
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '11',
     },
   ],
   platil_prispevky_na_dochodok: true,

@@ -81,16 +81,24 @@ export const makeEmptyChild = (): ChildInput => ({
   rodneCislo: '',
 
   wholeYear: true,
-  monthFrom: '0',
-  monthTo: '11',
+  m01: false,
+  m02: false,
+  m03: false,
+  m04: false,
+  m05: false,
+  m06: false,
+  m07: false,
+  m08: false,
+  m09: false,
+  m10: false,
+  m11: false,
+  m12: false,
 })
 
 export const childrenUserInputInitialValues: ChildrenUserInput = {
   hasChildren: undefined,
   partner_bonus_na_deti: undefined,
   partner_bonus_na_deti_typ_prijmu: '0',
-  partner_bonus_na_deti_od: '',
-  partner_bonus_na_deti_do: '',
   r034a: '',
   children: [makeEmptyChild()],
 }
