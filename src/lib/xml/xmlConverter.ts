@@ -202,23 +202,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r136 = decimalToString(taxForm.r136_danovy_preplatok)
 
   /** SECTION 2 percent */
-  form.dokument.telo.neuplatnujem = boolToString(
+  form.dokument.telo.r151.neuplatnujemPar50 = boolToString(
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
-    form.dokument.telo.r151 = decimalToString(taxForm.r151)
-    form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
-    form.dokument.telo.r152 = {
-      ...taxForm.r152,
-      obchMeno: {
-        riadok: [taxForm.r152.obchMeno],
-      },
-      suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
-    }
-  }
-
-  form.dokument.telo.r153 = taxForm.employed || taxForm.dohoda ? '5' : '4'
+  form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '7' : '6'
 
   if (
     taxForm.mozeZiadatVratitPreplatkyBonusyUroky &&

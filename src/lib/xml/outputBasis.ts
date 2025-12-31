@@ -276,6 +276,14 @@ const sampleSchema: OutputJson = {
         rok: '2023',
         udaje: {
           r02: '',
+          r03: '',
+          r04: '',
+        },
+      },
+      r50a: {
+        rok: '2024',
+        udaje: {
+          r02: '',
           r04: '',
         },
       },
@@ -283,6 +291,7 @@ const sampleSchema: OutputJson = {
       r52: '',
       r53: '',
       r54: '',
+      r54a: '',
       r55: '',
       r56: '',
       r57: '',
@@ -497,19 +506,34 @@ const sampleSchema: OutputJson = {
       r144: '',
       r145: '',
       r146: '',
+      r146a: '',
       r147: '',
       r148: '',
       r149: '0',
       r150: '',
-      neuplatnujem: '0',
-      splnam3per: '0',
-      r151: '',
-      r152: {
+      r151: {
+        splnam3per: '0',
+        neuplatnujemPar50: '1',
         ico: '',
         obchMeno: {
           riadok: [''],
         },
-        suhlasZaslUdaje: '0',
+        suhlasSoZaslanim: '0',
+      },
+      r152: '',
+      r153: {
+        neuplatnujemPar50aa: '1',
+        bolZverenyDoStarostlivosti: '0',
+        rodicA: {
+          rodneCislo: '',
+          priezvisko: '',
+          meno: '',
+        },
+        rodicB: {
+          rodneCislo: '',
+          priezvisko: '',
+          meno: '',
+        },
       },
       osobitneZaznamy: {
         uvadza: '0',
@@ -573,7 +597,7 @@ const sampleSchema: OutputJson = {
         rekreaciaSuma: '',
         zaznamy: '',
       },
-      r153: '0',
+      r154: '0',
       datumVyhlasenia: '',
       danovyPreplatokBonus: {
         vyplatitDanovyBonus: '0',
@@ -701,7 +725,42 @@ const sampleSchema: OutputJson = {
         r11: '',
         r12: '',
       },
-      prilPodielyNaZisku: {
+      pril1cPar30caVydavkySport: {
+        r01: {
+          s01Od: '',
+          s01Do: '',
+          s02: '',
+          s03: '',
+        },
+        r02: {
+          s01Od: '',
+          s01Do: '',
+          s02: '',
+          s03: '',
+        },
+        r03: {
+          s01Od: '',
+          s01Do: '',
+          s02: '',
+          s03: '',
+        },
+        r04: {
+          s01Od: '',
+          s01Do: '',
+          s02: '',
+          s03: '',
+        },
+        r05: {
+          s01Od: '',
+          s01Do: '',
+          s02: '',
+          s03: '',
+        },
+        r06: '',
+        r07: '',
+        r08: '',
+      },
+      pril2PodielyNaZisku: {
         pr1: '',
         pr2: '',
         pr3: '',
@@ -748,6 +807,22 @@ const sampleSchema: OutputJson = {
         pr26: '35',
         pr27: '',
         pr28: '',
+      },
+      pril3VynosyZDlhopisov: {
+        pr1: '',
+        pr2: '',
+        pr3: '',
+        pr4: '16',
+        pr5: '',
+        pr6: '',
+        pr7: '',
+        pr8: '',
+        pr9: '',
+        pr10: '',
+        pr11: '',
+        pr12: '',
+        pr13: '',
+        pr14: '',
       },
       socZdravPoistenie: {
         pr1: {

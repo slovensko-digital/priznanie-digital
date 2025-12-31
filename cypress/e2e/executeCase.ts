@@ -483,16 +483,10 @@ const executeTestCase = (testCase: string) => {
         cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
         cy.get('#form-button-validate').click().should(formSuccessful(stub))
 
-        // TODO: This should be removed once the underlying issue in the form is fixed
-        // See https://slovensko-digital.slack.com/archives/CU5QZ04G7/p1760181155119349
-        const ignoredError = `Riadok 34 - Navýšenie základu dane o základ dane druhej oprávnenej osoby je možné len ak táto osba je oprávnenou, aspoň za jeden totožný mesiac, za ktorý si daňovník uplatňuje daňový bonus a zároveň na začiatku ktorého druhá oprávnená osoba splnila podmienky na uplatnenie daňového bonusu.`
-
         cy.get('#errorsContainer')
           .invoke('text')
           .then((text) => {
-            // remove the known, non-actionable message and assert no other text remains
-            const remaining = text.replace(ignoredError, '').trim()
-            expect(remaining).to.equal('')
+            expect(text).to.equal('')
           })
           .then(() => done())
       },
