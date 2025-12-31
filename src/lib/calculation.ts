@@ -13,6 +13,7 @@ import { optionWithValue } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
+export const FORM_URL = '/form/form.621.html'
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_646.48)
 const KONSTANTA = 47_537.98
 const PAUSALNE_VYDAVKY_MAX = 20_000

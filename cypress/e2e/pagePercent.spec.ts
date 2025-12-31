@@ -7,6 +7,7 @@ import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { UserInput } from '../../src/types/UserInput'
 import path from 'path'
 import { assertUrl, formSuccessful } from './executeCase'
+import { FORM_URL } from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -221,7 +222,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -415,7 +416,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -730,7 +731,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
