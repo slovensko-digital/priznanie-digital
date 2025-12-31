@@ -34,20 +34,18 @@ export const bugReport3Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '000205/6901',
-
+      rodneCislo: '090430/0925',
       wholeYear: true,
       monthFrom: '0',
-      monthTo: '11',
+      monthTo: '0',
     },
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '000216/6274',
-
+      rodneCislo: '090430/0925',
       wholeYear: true,
       monthFrom: '0',
-      monthTo: '11',
+      monthTo: '0',
     },
   ],
   platil_prispevky_na_dochodok: true,
