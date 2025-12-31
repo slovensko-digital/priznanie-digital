@@ -4,7 +4,11 @@ import {
   EmployedUserInput,
   DohodaUserInput,
 } from '../../src/types/PageUserInputs'
-import { FORM_URL, PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
+import {
+  FORM_URL,
+  PARTNER_MAX_ODPOCET,
+  TAX_YEAR,
+} from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
