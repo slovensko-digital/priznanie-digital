@@ -15,7 +15,7 @@ import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
 export const FORM_URL = '/form/form.621.html'
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_753.79)
-const KONSTANTA = 47_537.98
+const KONSTANTA = 48_441.43
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
@@ -43,11 +43,11 @@ const POCET_MESIACOV = 12
 export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
-export const PARTNER_MAX_ODPOCET = 5_162.5
+const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_370.97)
+export const PARTNER_MAX_ODPOCET = 5_260.61
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
-export const MAX_CHILD_AGE_BONUS = 25
+export const MAX_CHILD_AGE_BONUS = 18
 export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
