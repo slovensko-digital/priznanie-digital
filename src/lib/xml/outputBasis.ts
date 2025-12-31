@@ -822,7 +822,7 @@ const sampleSchema: OutputJson = {
         pr11: '',
         pr12: '',
         pr13: '',
-        pr14: ''
+        pr14: '',
       },
       socZdravPoistenie: {
         pr1: {
