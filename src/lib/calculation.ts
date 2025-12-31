@@ -15,7 +15,7 @@ import { validateUrokyBonusForm } from './validateUrokyBonusForm'
 
 export const FORM_URL = '/form/form.621.html'
 const NEZDANITELNA_CAST_ZAKLADU = new Decimal(5_753.79)
-const KONSTANTA = 47_537.98
+const KONSTANTA = 48_441.43
 const PAUSALNE_VYDAVKY_MAX = 20_000
 
 const DAN_Z_PRIJMU_ZNIZENA_SADZBA_LIMIT = new Decimal(100_000)
@@ -27,8 +27,9 @@ const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
 const MAX_ZAKLAD_DANE = 24_952.06
 
-export const CHILD_RATE_EIGHTEEN_AND_YOUNGER = 100
-export const CHILD_RATE_EIGHTEEN_AND_OLDER = 50
+export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
+export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
+export const MAX_CHILD_AGE_BONUS = 18
 
 const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
 
@@ -43,11 +44,10 @@ const POCET_MESIACOV = 12
 export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
-const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_046.99)
-export const PARTNER_MAX_ODPOCET = 5_162.5
+const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_370.97)
+export const PARTNER_MAX_ODPOCET = 5_260.61
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
-export const MAX_CHILD_AGE_BONUS = 25
 export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
@@ -966,8 +966,8 @@ const getRate = (month: Months, child: Child) => {
 
   const rate =
     age < 18
-      ? new Decimal(CHILD_RATE_EIGHTEEN_AND_YOUNGER)
-      : new Decimal(CHILD_RATE_EIGHTEEN_AND_OLDER)
+      ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER)
+      : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
 
   if (month === Months.January && (child.m01 || child.m00)) {
     return rate
@@ -1058,22 +1058,22 @@ const getPocetDetivMesiaci = (deti: TaxForm['r033'], month: Months): number => {
 const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
   switch (pocetDeti) {
     case 1: {
-      return new Decimal(0.2)
+      return new Decimal(0.29)
     }
     case 2: {
-      return new Decimal(0.27)
+      return new Decimal(0.36)
     }
     case 3: {
-      return new Decimal(0.34)
+      return new Decimal(0.43)
     }
     case 4: {
-      return new Decimal(0.41)
+      return new Decimal(0.5)
     }
     case 5: {
-      return new Decimal(0.48)
+      return new Decimal(0.57)
     }
     default:
-      return pocetDeti >= 6 ? new Decimal(0.55) : new Decimal(0)
+      return pocetDeti >= 6 ? new Decimal(0.64) : new Decimal(0)
   }
 }
 

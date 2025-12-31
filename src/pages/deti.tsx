@@ -28,8 +28,8 @@ import { Page } from '../components/Page'
 import { ErrorSummary } from '../components/ErrorSummary'
 import {
   calculate,
-  CHILD_RATE_EIGHTEEN_AND_OLDER,
-  CHILD_RATE_EIGHTEEN_AND_YOUNGER,
+  CHILD_RATE_FIFTEEN_AND_OLDER,
+  CHILD_RATE_FIFTEEN_AND_YOUNGER,
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
@@ -110,6 +110,7 @@ const Deti: Page<ChildrenUserInput> = ({
             {values.hasChildren && (
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+                {/* TODO */}
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
                   dieťa do 18 rokov, študenta do 25 rokov alebo o nezaopatrené
@@ -125,13 +126,13 @@ const Deti: Page<ChildrenUserInput> = ({
                     <b>Daňový bonus na vyživované dieťa:</b>
                     <ul>
                       <li>
-                        do 18 rokov sumou{' '}
-                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_YOUNGER)}{' '}
+                        do 15 rokov sumou{' '}
+                        {formatCurrency(CHILD_RATE_FIFTEEN_AND_YOUNGER)}{' '}
                         mesačne.
                       </li>
                       <li>
-                        nad 18 rokov sumou{' '}
-                        {formatCurrency(CHILD_RATE_EIGHTEEN_AND_OLDER)} mesačne.
+                        nad 15 rokov sumou{' '}
+                        {formatCurrency(CHILD_RATE_FIFTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
                   </p>
