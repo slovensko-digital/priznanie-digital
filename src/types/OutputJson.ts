@@ -267,6 +267,11 @@ interface R49 {
 }
 export interface R50 {
   rok: string
+  udaje: Udaje
+}
+
+export interface R50a {
+  rok: string
   udaje: Udaje2
 }
 
@@ -460,12 +465,27 @@ export interface Tabulka3 {
   t3r19: T3r19
 }
 
-export interface R152 {
+export interface R151 {
+  splnam3per: string
+  neuplatnujemPar50: string
   ico: string
   obchMeno: {
     riadok: string[]
   }
-  suhlasZaslUdaje: string
+  suhlasSoZaslanim: string
+}
+
+export interface Rodic {
+  rodneCislo: string
+  priezvisko: string
+  meno: string
+}
+
+export interface R153 {
+  neuplatnujemPar50aa: string
+  bolZverenyDoStarostlivosti: string
+  rodicA: Rodic
+  rodicB: Rodic
 }
 
 export interface UdajeOprijmoch {
@@ -703,6 +723,7 @@ export interface Telo {
   r52: string
   r53: string
   r54: string
+  r54a: string
   r55: string
   r56: string
   r57: string
@@ -801,12 +822,10 @@ export interface Telo {
   r148: string
   r149: string
   r150: string
-  neuplatnujem: string
-  splnam3per: string
-  r151: string
-  r152: R152
+  r151: R151
+  r152: string
+  r153: R153
   osobitneZaznamy: OsobitneZaznamy
-  r153: string
   datumVyhlasenia: string
   danovyPreplatokBonus: DanovyPreplatokBonus
   prilPar30cOdpocetVydavkov: PrilPar30cOdpocetVydavkov
