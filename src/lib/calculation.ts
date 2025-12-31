@@ -1064,22 +1064,22 @@ const getPocetDetivMesiaci = (deti: TaxForm['r033'], month: Months): number => {
 const getPercentualnyLimitNaDeti = (pocetDeti: number): Decimal => {
   switch (pocetDeti) {
     case 1: {
-      return new Decimal(0.2)
+      return new Decimal(0.29)
     }
     case 2: {
-      return new Decimal(0.27)
+      return new Decimal(0.36)
     }
     case 3: {
-      return new Decimal(0.34)
+      return new Decimal(0.43)
     }
     case 4: {
-      return new Decimal(0.41)
+      return new Decimal(0.50)
     }
     case 5: {
-      return new Decimal(0.48)
+      return new Decimal(0.57)
     }
     default:
-      return pocetDeti >= 6 ? new Decimal(0.55) : new Decimal(0)
+      return pocetDeti >= 6 ? new Decimal(0.64) : new Decimal(0)
   }
 }
 
