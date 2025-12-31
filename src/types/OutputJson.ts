@@ -852,7 +852,7 @@ export interface Telo {
   r144: string
   r145: string
   r146: string
-  r146a : string
+  r146a: string
   r147: string
   r148: string
   r149: string
