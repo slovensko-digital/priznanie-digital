@@ -52,10 +52,10 @@ export const case202202aInput: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0606070014',
+      rodneCislo: '090430/0925',
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
+      monthFrom: '0',
+      monthTo: '0',
     },
     {
       id: 2,
