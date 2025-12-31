@@ -862,6 +862,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get suma_3_percenta() {
       return round(percentage(this.r124, 3))
     },
+    get r146() {
+      // TODO: random number before I figure out what to put here
+      return new Decimal(5);
+    },
+    get r146a() {
+      return this.r146;
+    },
     get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
         return new Decimal(0)

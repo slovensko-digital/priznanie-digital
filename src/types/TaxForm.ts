@@ -225,6 +225,8 @@ export interface TaxForm {
    *   podľa § 33 zákona Ak je r135_dan_na_uhradu, tak absolutna hodnota
    *   r135_dan_na_uhradu */
   r136_danovy_preplatok: Decimal
+  r146: Decimal
+  r146a: Decimal
   splnam3per: boolean
   /** 2 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   suma_2_percenta: Decimal
