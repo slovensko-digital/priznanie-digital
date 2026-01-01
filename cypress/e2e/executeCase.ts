@@ -488,18 +488,7 @@ const executeTestCase = (testCase: string) => {
         cy.get('#errorsContainer')
           .invoke('text')
           .then((text) => {
-            // TODO: remove in 2026
-            const remain = text
-              .replace(
-                `'XIII.oddiel Dátum': nesmie byť vyšší ako aktuálny dátum.`,
-                '',
-              )
-              .replace(
-                `Príloha č.4 : dátum nesmie byť vyšší ako aktuálny dátum`,
-                '',
-              )
-              .trim()
-            expect(remain).to.equal('')
+            expect(text).to.equal('')
           })
           .then(() => done())
       },
