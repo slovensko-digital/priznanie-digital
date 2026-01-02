@@ -882,7 +882,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r146() {
       // TODO: figure out what this field is
-      return new Decimal(0)
+      return this.r072_pred_znizenim
     },
     get r146a() {
       return this.r146
