@@ -25,13 +25,13 @@ const DAN_Z_PRIJMU_SADZBA_ZVYSENA = new Decimal(0.25)
 const MINIMALNA_DAN_NA_ZAPLATENIE = new Decimal(5)
 
 export const MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA = 3876
-const MAX_ZAKLAD_DANE = 24_952.06
+const MAX_ZAKLAD_DANE = new Decimal(25_426.27)
 
 export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
 export const MAX_CHILD_AGE_BONUS = 18
 
-const ZIVOTNE_MINIMUM_NASOBOK = 11_884.5
+const ZIVOTNE_MINIMUM_NASOBOK = new Decimal(12_110.36)
 
 export const OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI = 500
 
@@ -51,7 +51,8 @@ export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
-const HRANICA_ZDANITELNEHO_PRIJMU = new Decimal(2_823.24)
+const HRANICA_ZDANITELNEHO_PRIJMU = new Decimal(2_876.9)
+const HRANICA_PRIJMU_ZO_SLOVENSKA = new Decimal(0.9)
 
 export enum Months {
   January = 1,
@@ -697,7 +698,24 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r117() {
-      return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+      const r146andr146aGreaterThanZero =
+        this.r146a.greaterThan(0) && this.r146.greaterThan(0)
+      if (r146andr146aGreaterThanZero) {
+        const percentoPrijmovZoSlovenska = round(
+          this.r146a.dividedBy(this.r146),
+        )
+        if (percentoPrijmovZoSlovenska.lessThan(HRANICA_PRIJMU_ZO_SLOVENSKA)) {
+          return new Decimal(0)
+        } else if (
+          percentoPrijmovZoSlovenska.greaterThanOrEqualTo(
+            HRANICA_PRIJMU_ZO_SLOVENSKA,
+          )
+        ) {
+          return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+        }
+      } else {
+        return new Decimal(0)
+      }
     },
     get r118() {
       return round(Decimal.max(this.r116_dan.minus(this.r117), 0))
@@ -864,7 +882,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r146() {
       // TODO: figure out what this field is
-      return new Decimal(0)
+      return this.r072_pred_znizenim
     },
     get r146a() {
       return this.r146
