@@ -52,6 +52,7 @@ export const UROKY_POCET_ROKOV = 5
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
 const HRANICA_ZDANITELNEHO_PRIJMU = new Decimal(2_823.24)
+const HRANICA_PRIJMU_ZO_SLOVENSKA = new Decimal(0.9)
 
 export enum Months {
   January = 1,
@@ -697,7 +698,14 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r117() {
-      return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+      const percentoPrijmovZoSlovenska = round(this.r146a.dividedBy(this.r146))
+      if (percentoPrijmovZoSlovenska.lessThan(HRANICA_PRIJMU_ZO_SLOVENSKA) && this.r146a.greaterThan(0) && this.r146.greaterThan(0)) {
+        return new Decimal(0)
+      } else if (percentoPrijmovZoSlovenska.greaterThanOrEqualTo(HRANICA_PRIJMU_ZO_SLOVENSKA) && this.r146a.greaterThan(0) && this.r146.greaterThan(0)) {
+        return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+      } else {
+        return new Decimal(0)
+      }
     },
     get r118() {
       return round(Decimal.max(this.r116_dan.minus(this.r117), 0))
