@@ -698,11 +698,21 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r117() {
-      const percentoPrijmovZoSlovenska = round(this.r146a.dividedBy(this.r146))
-      if (percentoPrijmovZoSlovenska.lessThan(HRANICA_PRIJMU_ZO_SLOVENSKA) && this.r146a.greaterThan(0) && this.r146.greaterThan(0)) {
-        return new Decimal(0)
-      } else if (percentoPrijmovZoSlovenska.greaterThanOrEqualTo(HRANICA_PRIJMU_ZO_SLOVENSKA) && this.r146a.greaterThan(0) && this.r146.greaterThan(0)) {
-        return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+      const r146andr146aGreaterThanZero =
+        this.r146a.greaterThan(0) && this.r146.greaterThan(0)
+      if (r146andr146aGreaterThanZero) {
+        const percentoPrijmovZoSlovenska = round(
+          this.r146a.dividedBy(this.r146),
+        )
+        if (percentoPrijmovZoSlovenska.lessThan(HRANICA_PRIJMU_ZO_SLOVENSKA)) {
+          return new Decimal(0)
+        } else if (
+          percentoPrijmovZoSlovenska.greaterThanOrEqualTo(
+            HRANICA_PRIJMU_ZO_SLOVENSKA,
+          )
+        ) {
+          return round(Decimal.max(this.danovyBonusNaDieta.danovyBonus, 0))
+        }
       } else {
         return new Decimal(0)
       }
