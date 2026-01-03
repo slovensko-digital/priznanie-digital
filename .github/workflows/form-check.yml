@@ -5,7 +5,7 @@ on:
     - cron: '0 6 * * *'  # This cron expression runs the workflow every day at 6:00
 
 env:
-  CURRENT_FORM_VERSION: "DPFOBv24"
+  CURRENT_FORM_VERSION: "DPFOBv25"
 
 jobs:
   download:

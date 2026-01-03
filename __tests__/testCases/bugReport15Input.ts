@@ -11,15 +11,15 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0454153260',
+      rodneCislo: '0960229391',
       wholeYear: true,
       monthFrom: '0',
-      monthTo: '11',
+      monthTo: '0',
     },
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0854157348',
+      rodneCislo: '0904240865',
       wholeYear: false,
       monthFrom: '8',
       monthTo: '9',
@@ -27,10 +27,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0410152787',
+      rodneCislo: '0904244451',
       wholeYear: true,
       monthFrom: '0',
-      monthTo: '11',
+      monthTo: '0',
     },
     {
       id: 3,
@@ -43,7 +43,7 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0305157017',
+      rodneCislo: '1008125547',
       wholeYear: false,
       monthFrom: '2',
       monthTo: '6',

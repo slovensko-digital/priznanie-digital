@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { makeAttachment, sendEmail } from '../../lib/sendinblue'
+import { RollbarInstance } from '../../lib/rollbar'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const parsedBody = JSON.parse(req.body)
-
-  const ipAddress =
-    req.connection.remoteAddress || req.headers['x-forwarded-for'] || '?'
 
   const attachment = []
   if (parsedBody.taxFormUserInput) {
@@ -33,12 +31,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       textContent: `${parsedBody.whatWentWrong}\n\n
 Email: ${parsedBody.email || '[neuvedený]'}
 URL: ${parsedBody.url}
-IP adresa: ${ipAddress}
 Dátum: ${new Date().toLocaleString()}`,
       attachment,
     })
     res.status(200).send({ sent: true })
   } catch (_error) {
+    RollbarInstance.error(_error)
     res.status(400).send({ sent: false })
   }
 }
