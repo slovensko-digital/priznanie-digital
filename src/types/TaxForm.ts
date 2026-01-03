@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js'
+import { Rodic } from './OutputJson'
 
 export interface Child {
   priezviskoMeno: string
@@ -239,6 +240,13 @@ export interface TaxForm {
     ico: string
     obchMeno: string
     suhlasZaslUdaje: boolean
+  }
+
+  r153?: {
+    rodicA: Rodic
+    rodicB: Rodic
+    neuplatnujemPar50aa: boolean
+    bolZverenyDoStarostlivosti: boolean
   }
   datum: string
   socZdravPoistenieDatum: string

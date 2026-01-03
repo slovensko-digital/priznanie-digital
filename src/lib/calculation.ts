@@ -911,6 +911,25 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
       }
     },
+    get r153() {
+      if (!input.dve_percenta_rodicom){
+        return undefined
+      }
+      return {
+        neuplatnujemPar50aa: false,
+        bolZverenyDoStarostlivosti: input.dve_percenta_rodicom_nahradna_starostlivost,
+        rodicA: {
+          meno: input.dve_percenta_rodicA.meno,
+          priezvisko: input.dve_percenta_rodicA.priezvisko,
+          rodneCislo: input.dve_percenta_rodicA.rodneCislo.replace(/\D/g, ''),
+        },
+        rodicB: {
+          meno: input.dve_percenta_rodicB.meno,
+          priezvisko: input.dve_percenta_rodicB.priezvisko,
+          rodneCislo: input.dve_percenta_rodicB.rodneCislo.replace(/\D/g, ''),
+        },
+      }
+    },
     children: input?.hasChildren ?? false,
     employed: input?.employed ?? false,
     dohoda: input?.dohoda ?? false,
