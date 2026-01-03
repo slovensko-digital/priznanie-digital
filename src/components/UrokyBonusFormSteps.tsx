@@ -7,7 +7,7 @@ import Radio from './radio/Radio'
 import RadioConditional from './radio/RadioConditional'
 import Decimal from 'decimal.js'
 import { Warning } from './Warning'
-import { TAX_YEAR } from '../lib/calculation'
+import { TAX_YEAR, UROKY_POCET_ROKOV } from '../lib/calculation'
 
 interface Props {
   disabled?: boolean
@@ -16,7 +16,7 @@ interface Props {
 export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
-      title={`Boli ste v roku ${TAX_YEAR} dlžníkom z úveru na bývanie?`}
+      title={`Splácali ste v roku ${TAX_YEAR} úver na bývanie, ktorý bol uzavretý po roku ${TAX_YEAR - UROKY_POCET_ROKOV}?`}
       name="r035_uplatnuje_uroky"
       disabled={disabled}
     />
