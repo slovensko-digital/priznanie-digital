@@ -111,7 +111,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   }}
                 >
                   <Radio
-                    name="dve_percenta_rodicia-ano-input"
+                    name="dve_percenta_rodicom-input-yes"
                     label="Áno"
                     value="true"
                   />
@@ -132,7 +132,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   </RadioConditional>
 
                   <Radio
-                    name="dve_percenta_rodicia-nie-input"
+                    name="dve_percenta_rodicom-input-no"
                     label="Nie"
                     value="false"
                   />

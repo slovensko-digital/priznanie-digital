@@ -296,6 +296,16 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        /** SECTION Dve percenta rodicom */
+
+        assertUrl('/dve-percenta-rodicom')
+        if (input.dve_percenta_rodicom) {
+          getInput('dve_percenta_rodicom', '-yes').click()
+        } else {
+          getInput('dve_percenta_rodicom', '-no').click()
+        }
+        next()
+
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {
