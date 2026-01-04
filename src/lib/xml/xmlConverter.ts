@@ -208,7 +208,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
-  if (taxForm.r153 && taxForm.canDonateTwoPercentOfTax && taxForm.r153.neuplatnujemPar50aa == false) {
+  if (
+    taxForm.r153 &&
+    taxForm.canDonateTwoPercentOfTax &&
+    taxForm.r153.neuplatnujemPar50aa == false
+  ) {
     form.dokument.telo.r153.neuplatnujemPar50aa = boolToString(
       taxForm.r153.neuplatnujemPar50aa,
     )
