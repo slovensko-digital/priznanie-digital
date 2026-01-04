@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import Link from 'next/link'
-import { Form, FormikProps } from 'formik'
-import { Checkbox, FormWrapper, Input } from '../components/FormComponents'
+import { Form } from 'formik'
+import { FormWrapper } from '../components/FormComponents'
 import {
   DvePercentaRodicomUserInput,
   FormErrors,
@@ -95,7 +95,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                           meno: 'Beth',
                           priezvisko: 'Sanchez',
                           rodneCislo: '825412/9796',
-                        }
+                        },
                       })
                     } else if (value === 'false') {
                       props.setValues({
@@ -117,11 +117,17 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   />
                   <RadioConditional forValue="true">
                     {props.values.dve_percenta_rodicA && (
-                      <>{props.values.dve_percenta_rodicA.meno} {props.values.dve_percenta_rodicA.priezvisko}</>
+                      <>
+                        {props.values.dve_percenta_rodicA.meno}{' '}
+                        {props.values.dve_percenta_rodicA.priezvisko}
+                      </>
                     )}
                     <br />
                     {props.values.dve_percenta_rodicB && (
-                      <>{props.values.dve_percenta_rodicB.meno} {props.values.dve_percenta_rodicB.priezvisko}</>
+                      <>
+                        {props.values.dve_percenta_rodicB.meno}{' '}
+                        {props.values.dve_percenta_rodicB.priezvisko}
+                      </>
                     )}
                   </RadioConditional>
 

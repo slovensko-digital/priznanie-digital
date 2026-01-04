@@ -912,12 +912,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r153() {
-      if (!input.dve_percenta_rodicom){
+      if (!input.dve_percenta_rodicom) {
         return undefined
       }
       return {
         neuplatnujemPar50aa: false,
-        bolZverenyDoStarostlivosti: input.dve_percenta_rodicom_nahradna_starostlivost,
+        bolZverenyDoStarostlivosti:
+          input.dve_percenta_rodicom_nahradna_starostlivost,
         rodicA: {
           meno: input.dve_percenta_rodicA.meno,
           priezvisko: input.dve_percenta_rodicA.priezvisko,

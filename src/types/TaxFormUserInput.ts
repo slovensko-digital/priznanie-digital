@@ -139,8 +139,8 @@ export interface TaxFormUserInput {
 
   /** SECTION  Dve percenta rodicom */
   dve_percenta_rodicom?: boolean
-  dve_percenta_rodicA: RodicInput
-  dve_percenta_rodicB: RodicInput
+  dve_percenta_rodicA?: RodicInput
+  dve_percenta_rodicB?: RodicInput
   dve_percenta_rodicom_nahradna_starostlivost?: boolean
 
   /** SECTION Danovy bonus */
