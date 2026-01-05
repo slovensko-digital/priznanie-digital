@@ -131,7 +131,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Summary
-        title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
+        title={`Zamestnanie v SR za rok ${TAX_YEAR}`}
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
@@ -179,7 +179,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title={`Dohody v SR pre rok ${TAX_YEAR}`}
+        title={`Dohody v SR za rok ${TAX_YEAR}`}
         href={'/dohoda'}
         rows={
           taxFormUserInput.dohoda
