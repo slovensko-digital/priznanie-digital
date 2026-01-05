@@ -83,7 +83,7 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
       <h1 className="govuk-heading-l govuk-!-margin-top-3">
         Vyplnenie daňového priznania
         <br />
-        {`(verzia pre rok ${TAX_YEAR})`}
+        {`(verzia za rok ${TAX_YEAR})`}
       </h1>
 
       {!isLive && (
