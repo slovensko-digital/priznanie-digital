@@ -126,68 +126,71 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                     value="obidvom"
                   />
                   <RadioConditional forValue="obidvom">
-                    <div>
-                      <h2 className="govuk-heading-m">Údaje o rodičovi A</h2>
-                      <Input
-                        name="dve_percenta_rodicA.meno"
-                        type="text"
-                        label="Meno"
-                      />
-                      <Input
-                        name="dve_percenta_rodicA.priezvisko"
-                        type="text"
-                        label="Priezvisko"
-                      />
-                      <Input
-                        name="dve_percenta_rodicA.rodneCislo"
-                        type="text"
-                        label="Rodné číslo"
-                        maxLength={RODNE_CISLO_DLZKA}
-                        onChange={(event) => {
-                          const rodneCislo = formatRodneCislo(
-                            event.currentTarget.value,
-                            props.values.dve_percenta_rodicA?.rodneCislo || '',
-                          )
-                          const shouldValidate =
-                            rodneCislo.length >= RODNE_CISLO_DLZKA
-                          props.setFieldValue(
-                            'dve_percenta_rodicA.rodneCislo',
-                            rodneCislo,
-                            shouldValidate,
-                          )
-                        }}
-                      />
-
-                      <h2 className="govuk-heading-m govuk-!-margin-top-6">Údaje o rodičovi B</h2>
-                      <Input
-                        name="dve_percenta_rodicB.meno"
-                        type="text"
-                        label="Meno"
-                      />
-                      <Input
-                        name="dve_percenta_rodicB.priezvisko"
-                        type="text"
-                        label="Priezvisko"
-                      />
-                      <Input
-                        name="dve_percenta_rodicB.rodneCislo"
-                        type="text"
-                        label="Rodné číslo"
-                        maxLength={RODNE_CISLO_DLZKA}
-                        onChange={(event) => {
-                          const rodneCislo = formatRodneCislo(
-                            event.currentTarget.value,
-                            props.values.dve_percenta_rodicB?.rodneCislo || '',
-                          )
-                          const shouldValidate =
-                            rodneCislo.length >= RODNE_CISLO_DLZKA
-                          props.setFieldValue(
-                            'dve_percenta_rodicB.rodneCislo',
-                            rodneCislo,
-                            shouldValidate,
-                          )
-                        }}
-                      />
+                    <div className="govuk-grid-row">
+                      <div className="govuk-grid-column-one-half">
+                        <h2 className="govuk-heading-m">Údaje o rodičovi A</h2>
+                        <Input
+                          name="dve_percenta_rodicA.meno"
+                          type="text"
+                          label="Meno"
+                        />
+                        <Input
+                          name="dve_percenta_rodicA.priezvisko"
+                          type="text"
+                          label="Priezvisko"
+                        />
+                        <Input
+                          name="dve_percenta_rodicA.rodneCislo"
+                          type="text"
+                          label="Rodné číslo"
+                          maxLength={RODNE_CISLO_DLZKA}
+                          onChange={(event) => {
+                            const rodneCislo = formatRodneCislo(
+                              event.currentTarget.value,
+                              props.values.dve_percenta_rodicA?.rodneCislo || '',
+                            )
+                            const shouldValidate =
+                              rodneCislo.length >= RODNE_CISLO_DLZKA
+                            props.setFieldValue(
+                              'dve_percenta_rodicA.rodneCislo',
+                              rodneCislo,
+                              shouldValidate,
+                            )
+                          }}
+                        />
+                      </div>
+                      <div className="govuk-grid-column-one-half">
+                        <h2 className="govuk-heading-m">Údaje o rodičovi B</h2>
+                        <Input
+                          name="dve_percenta_rodicB.meno"
+                          type="text"
+                          label="Meno"
+                        />
+                        <Input
+                          name="dve_percenta_rodicB.priezvisko"
+                          type="text"
+                          label="Priezvisko"
+                        />
+                        <Input
+                          name="dve_percenta_rodicB.rodneCislo"
+                          type="text"
+                          label="Rodné číslo"
+                          maxLength={RODNE_CISLO_DLZKA}
+                          onChange={(event) => {
+                            const rodneCislo = formatRodneCislo(
+                              event.currentTarget.value,
+                              props.values.dve_percenta_rodicB?.rodneCislo || '',
+                            )
+                            const shouldValidate =
+                              rodneCislo.length >= RODNE_CISLO_DLZKA
+                            props.setFieldValue(
+                              'dve_percenta_rodicB.rodneCislo',
+                              rodneCislo,
+                              shouldValidate,
+                            )
+                          }}
+                        />
+                      </div>
                     </div>
                   </RadioConditional>
 
