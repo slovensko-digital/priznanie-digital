@@ -59,8 +59,12 @@ const navigateToEligibleDvePercentaRodicomPage = () => {
   // Navigate through the flow with sufficient income to be eligible for 2%
   cy.visit('/prijmy-a-vydavky')
   getInput('t1r10_prijmy').type(with2percentInput.t1r10_prijmy)
-  getInput('priloha3_r11_socialne').type(with2percentInput.priloha3_r11_socialne)
-  getInput('priloha3_r13_zdravotne').type(with2percentInput.priloha3_r13_zdravotne)
+  getInput('priloha3_r11_socialne').type(
+    with2percentInput.priloha3_r11_socialne,
+  )
+  getInput('priloha3_r13_zdravotne').type(
+    with2percentInput.priloha3_r13_zdravotne,
+  )
   getInput('zaplatenePreddavky').type('0')
   next()
 
