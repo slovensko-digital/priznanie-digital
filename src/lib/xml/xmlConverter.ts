@@ -222,9 +222,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.r153.rodicA.meno = taxForm.r153.rodicA.meno
     form.dokument.telo.r153.rodicA.priezvisko = taxForm.r153.rodicA.priezvisko
     form.dokument.telo.r153.rodicA.rodneCislo = taxForm.r153.rodicA.rodneCislo
-    form.dokument.telo.r153.rodicB.meno = taxForm.r153.rodicB.meno
-    form.dokument.telo.r153.rodicB.priezvisko = taxForm.r153.rodicB.priezvisko
-    form.dokument.telo.r153.rodicB.rodneCislo = taxForm.r153.rodicB.rodneCislo
+    if (taxForm.r153.rodicB) {
+      form.dokument.telo.r153.rodicB.meno = taxForm.r153.rodicB.meno
+      form.dokument.telo.r153.rodicB.priezvisko = taxForm.r153.rodicB.priezvisko
+      form.dokument.telo.r153.rodicB.rodneCislo = taxForm.r153.rodicB.rodneCislo
+    }
   }
 
   form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '7' : '6'

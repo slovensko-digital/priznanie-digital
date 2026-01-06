@@ -1,5 +1,6 @@
 import { validate } from '../src/pages/dve-percenta-rodicom'
 import { calculate } from '../src/lib/calculation'
+import { convertToXML } from '../src/lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 
@@ -335,6 +336,80 @@ describe('dve-percenta-rodicom', () => {
       })
 
       expect(result.r153?.rodicA?.rodneCislo).toBe('1234567890')
+    })
+  })
+
+  describe('#convertToXML r153', () => {
+    const baseInput: TaxFormUserInput = {
+      ...initTaxFormUserInputValues,
+      r001_dic: '233123123',
+      r003_nace: '62010 - Počítačové programovanie',
+      r005_meno: 'Test',
+      r004_priezvisko: 'User',
+      r007_ulica: 'Testova',
+      r008_cislo: '1',
+      r009_psc: '82105',
+      r010_obec: 'Bratislava',
+      r011_stat: 'Slovensko',
+      t1r10_prijmy: '50000',
+      priloha3_r11_socialne: '3000',
+      priloha3_r13_zdravotne: '2000',
+      datum: '22.02.2026',
+    }
+
+    it('should include parent A data in XML when "jednemu" is selected', () => {
+      const taxForm = calculate({
+        ...baseInput,
+        dve_percenta_rodicom: 'jednemu',
+        dve_percenta_rodicA: {
+          meno: 'Ján',
+          priezvisko: 'Novák',
+          rodneCislo: '625412 / 2512',
+        },
+        dve_percenta_rodicom_nahradna_starostlivost: false,
+      })
+
+      const xml = convertToXML(taxForm)
+
+      expect(xml).toContain('<neuplatnujemPar50aa>0</neuplatnujemPar50aa>')
+      expect(xml).toContain('<bolZverenyDoStarostlivosti>0</bolZverenyDoStarostlivosti>')
+      expect(xml).toContain('<rodicA>')
+      expect(xml).toContain('<meno>Ján</meno>')
+      expect(xml).toContain('<priezvisko>Novák</priezvisko>')
+      expect(xml).toContain('<rodneCislo>6254122512</rodneCislo>')
+    })
+
+    it('should include both parents data in XML when "obidvom" is selected', () => {
+      const taxForm = calculate({
+        ...baseInput,
+        dve_percenta_rodicom: 'obidvom',
+        dve_percenta_rodicA: {
+          meno: 'Ján',
+          priezvisko: 'Novák',
+          rodneCislo: '625412 / 2512',
+        },
+        dve_percenta_rodicB: {
+          meno: 'Mária',
+          priezvisko: 'Nováková',
+          rodneCislo: '625412 / 3304',
+        },
+        dve_percenta_rodicom_nahradna_starostlivost: true,
+      })
+
+      const xml = convertToXML(taxForm)
+
+      expect(xml).toContain('<neuplatnujemPar50aa>0</neuplatnujemPar50aa>')
+      expect(xml).toContain('<bolZverenyDoStarostlivosti>1</bolZverenyDoStarostlivosti>')
+      expect(xml).toContain('<rodicA>')
+      expect(xml).toContain('<rodicB>')
+      // Parent A
+      expect(xml).toMatch(/<rodicA>[\s\S]*<meno>Ján<\/meno>[\s\S]*<\/rodicA>/)
+      expect(xml).toMatch(/<rodicA>[\s\S]*<priezvisko>Novák<\/priezvisko>[\s\S]*<\/rodicA>/)
+      expect(xml).toMatch(/<rodicA>[\s\S]*<rodneCislo>6254122512<\/rodneCislo>[\s\S]*<\/rodicA>/)
+      // Parent B
+      expect(xml).toMatch(/<rodicB>[\s\S]*<meno>Mária<\/meno>[\s\S]*<\/rodicB>/)
+      expect(xml).toMatch(/<rodicB>[\s\S]*<priezvisko>Nováková<\/priezvisko>[\s\S]*<\/rodicB>/)
+      expect(xml).toMatch(/<rodicB>[\s\S]*<rodneCislo>6254123304<\/rodneCislo>[\s\S]*<\/rodicB>/)
     })
   })
 })
