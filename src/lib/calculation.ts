@@ -912,7 +912,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get r153() {
-      if (!input.dve_percenta_rodicom) {
+      if (!input.dve_percenta_rodicom || input.dve_percenta_rodicom === 'nie') {
         return undefined
       }
       return {
@@ -924,11 +924,11 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           priezvisko: input.dve_percenta_rodicA.priezvisko,
           rodneCislo: input.dve_percenta_rodicA.rodneCislo.replace(/\D/g, ''),
         },
-        rodicB: {
+        rodicB: input.dve_percenta_rodicom === 'obidvom' ? {
           meno: input.dve_percenta_rodicB.meno,
           priezvisko: input.dve_percenta_rodicB.priezvisko,
           rodneCislo: input.dve_percenta_rodicB.rodneCislo.replace(/\D/g, ''),
-        },
+        } : undefined,
       }
     },
     children: input?.hasChildren ?? false,

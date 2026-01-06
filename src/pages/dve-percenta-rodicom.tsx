@@ -82,42 +82,50 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                 hint={`Môžete poukázať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}, jednému alebo obidvom rodičom.`}
               >
                 <RadioGroup
-                  value={String(props.values.dve_percenta_rodicom ?? '')}
+                  value={props.values.dve_percenta_rodicom ?? ''}
                   onChange={(value) => {
-                    if (value === 'true') {
+                    if (value === 'obidvom') {
                       props.setValues({
                         ...props.values,
-                        dve_percenta_rodicom: true,
+                        dve_percenta_rodicom: 'obidvom',
                         dve_percenta_rodicA: {
-                          meno: 'Rick',
-                          priezvisko: 'Sanchez',
-                          rodneCislo: '801203/1049',
+                          meno: '',
+                          priezvisko: '',
+                          rodneCislo: '',
                         },
                         dve_percenta_rodicB: {
-                          meno: 'Beth',
-                          priezvisko: 'Sanchez',
-                          rodneCislo: '825412/9796',
+                          meno: '',
+                          priezvisko: '',
+                          rodneCislo: '',
                         },
                       })
-                    } else if (value === 'false') {
+                    } else if (value === 'jednemu') {
                       props.setValues({
                         ...props.values,
-                        dve_percenta_rodicom: false,
+                        dve_percenta_rodicom: 'jednemu',
+                        dve_percenta_rodicA: {
+                          meno: '',
+                          priezvisko: '',
+                          rodneCislo: '',
+                        },
+                        dve_percenta_rodicB: undefined,
                       })
                     } else {
                       props.setValues({
                         ...props.values,
-                        dve_percenta_rodicom: false,
+                        dve_percenta_rodicom: 'nie',
+                        dve_percenta_rodicA: undefined,
+                        dve_percenta_rodicB: undefined,
                       })
                     }
                   }}
                 >
                   <Radio
-                    name="dve_percenta_rodicom-input-yes"
-                    label="Áno"
-                    value="true"
+                    name="dve_percenta_rodicom-input-obidvom"
+                    label="Áno, obidvom rodičom"
+                    value="obidvom"
                   />
-                  <RadioConditional forValue="true">
+                  <RadioConditional forValue="obidvom">
                     <div>
                       <h2 className="govuk-heading-m">Údaje o rodičovi A</h2>
                       <Input
@@ -138,7 +146,6 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                         onChange={(event) => {
                           const rodneCislo = formatRodneCislo(
                             event.currentTarget.value,
-                            // preserve previous value if present
                             props.values.dve_percenta_rodicA?.rodneCislo || '',
                           )
                           const shouldValidate =
@@ -185,9 +192,49 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   </RadioConditional>
 
                   <Radio
-                    name="dve_percenta_rodicom-input-no"
+                    name="dve_percenta_rodicom-input-jednemu"
+                    label="Áno, iba jednému rodičovi"
+                    value="jednemu"
+                  />
+                  <RadioConditional forValue="jednemu">
+                    <div>
+                      <h2 className="govuk-heading-m">Údaje o rodičovi</h2>
+                      <Input
+                        name="dve_percenta_rodicA.meno"
+                        type="text"
+                        label="Meno"
+                      />
+                      <Input
+                        name="dve_percenta_rodicA.priezvisko"
+                        type="text"
+                        label="Priezvisko"
+                      />
+                      <Input
+                        name="dve_percenta_rodicA.rodneCislo"
+                        type="text"
+                        label="Rodné číslo"
+                        maxLength={RODNE_CISLO_DLZKA}
+                        onChange={(event) => {
+                          const rodneCislo = formatRodneCislo(
+                            event.currentTarget.value,
+                            props.values.dve_percenta_rodicA?.rodneCislo || '',
+                          )
+                          const shouldValidate =
+                            rodneCislo.length >= RODNE_CISLO_DLZKA
+                          props.setFieldValue(
+                            'dve_percenta_rodicA.rodneCislo',
+                            rodneCislo,
+                            shouldValidate,
+                          )
+                        }}
+                      />
+                    </div>
+                  </RadioConditional>
+
+                  <Radio
+                    name="dve_percenta_rodicom-input-nie"
                     label="Nie"
-                    value="false"
+                    value="nie"
                   />
                 </RadioGroup>
               </Fieldset>
@@ -234,7 +281,7 @@ type Errors = Partial<FormErrors<DvePercentaRodicomUserInput>>
 export const validate = (values: DvePercentaRodicomUserInput): Errors => {
   const errors: Errors = {}
 
-  if (typeof values.dve_percenta_rodicom === 'undefined') {
+  if (!values.dve_percenta_rodicom) {
     errors.dve_percenta_rodicom = 'Vyznačte odpoveď'
   }
   return errors

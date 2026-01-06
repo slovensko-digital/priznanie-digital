@@ -138,7 +138,7 @@ export interface TaxFormUserInput {
   XIIoddiel_suhlasZaslUdaje?: boolean
 
   /** SECTION  Dve percenta rodicom */
-  dve_percenta_rodicom?: boolean
+  dve_percenta_rodicom?: 'obidvom' | 'jednemu' | 'nie'
   dve_percenta_rodicA?: RodicInput
   dve_percenta_rodicB?: RodicInput
   dve_percenta_rodicom_nahradna_starostlivost?: boolean
