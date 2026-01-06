@@ -372,7 +372,9 @@ describe('dve-percenta-rodicom', () => {
       const xml = convertToXML(taxForm)
 
       expect(xml).toContain('<neuplatnujemPar50aa>0</neuplatnujemPar50aa>')
-      expect(xml).toContain('<bolZverenyDoStarostlivosti>0</bolZverenyDoStarostlivosti>')
+      expect(xml).toContain(
+        '<bolZverenyDoStarostlivosti>0</bolZverenyDoStarostlivosti>',
+      )
       expect(xml).toContain('<rodicA>')
       expect(xml).toContain('<meno>Ján</meno>')
       expect(xml).toContain('<priezvisko>Novák</priezvisko>')
@@ -399,17 +401,27 @@ describe('dve-percenta-rodicom', () => {
       const xml = convertToXML(taxForm)
 
       expect(xml).toContain('<neuplatnujemPar50aa>0</neuplatnujemPar50aa>')
-      expect(xml).toContain('<bolZverenyDoStarostlivosti>1</bolZverenyDoStarostlivosti>')
+      expect(xml).toContain(
+        '<bolZverenyDoStarostlivosti>1</bolZverenyDoStarostlivosti>',
+      )
       expect(xml).toContain('<rodicA>')
       expect(xml).toContain('<rodicB>')
       // Parent A
       expect(xml).toMatch(/<rodicA>[\s\S]*<meno>Ján<\/meno>[\s\S]*<\/rodicA>/)
-      expect(xml).toMatch(/<rodicA>[\s\S]*<priezvisko>Novák<\/priezvisko>[\s\S]*<\/rodicA>/)
-      expect(xml).toMatch(/<rodicA>[\s\S]*<rodneCislo>6254122512<\/rodneCislo>[\s\S]*<\/rodicA>/)
+      expect(xml).toMatch(
+        /<rodicA>[\s\S]*<priezvisko>Novák<\/priezvisko>[\s\S]*<\/rodicA>/,
+      )
+      expect(xml).toMatch(
+        /<rodicA>[\s\S]*<rodneCislo>6254122512<\/rodneCislo>[\s\S]*<\/rodicA>/,
+      )
       // Parent B
       expect(xml).toMatch(/<rodicB>[\s\S]*<meno>Mária<\/meno>[\s\S]*<\/rodicB>/)
-      expect(xml).toMatch(/<rodicB>[\s\S]*<priezvisko>Nováková<\/priezvisko>[\s\S]*<\/rodicB>/)
-      expect(xml).toMatch(/<rodicB>[\s\S]*<rodneCislo>6254123304<\/rodneCislo>[\s\S]*<\/rodicB>/)
+      expect(xml).toMatch(
+        /<rodicB>[\s\S]*<priezvisko>Nováková<\/priezvisko>[\s\S]*<\/rodicB>/,
+      )
+      expect(xml).toMatch(
+        /<rodicB>[\s\S]*<rodneCislo>6254123304<\/rodneCislo>[\s\S]*<\/rodicB>/,
+      )
     })
   })
 })
