@@ -157,6 +157,9 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                     value="obidvom"
                   />
                   <RadioConditional forValue="obidvom">
+                    <p className="govuk-hint">
+                      Každý rodič dostane {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
+                    </p>
                     <div className="govuk-grid-row">
                       <div className="govuk-grid-column-one-half">
                         <h2 className="govuk-heading-m">Údaje o rodičovi A</h2>
@@ -232,6 +235,9 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                     value="jednemu"
                   />
                   <RadioConditional forValue="jednemu">
+                    <p className="govuk-hint">
+                      Rodič dostane {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
+                    </p>
                     <div>
                       <h2 className="govuk-heading-m">Údaje o rodičovi</h2>
                       <Input
