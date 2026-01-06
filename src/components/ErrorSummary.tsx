@@ -52,6 +52,19 @@ export function ErrorSummary<Values>({ errors }: ErrorSummaryProps<Values>) {
                   />
                 ))
               })
+            } else if (
+              typeof labelOrSubErrors === 'object' &&
+              labelOrSubErrors !== null
+            ) {
+              // Handle nested object errors (e.g., dve_percenta_rodicA: { meno: '...' })
+              const nestedEntries = Object.entries(labelOrSubErrors)
+              return nestedEntries.map(([subname, sublabel]) => (
+                <ErrorItem
+                  key={`${name}.${subname}`}
+                  name={`${name}.${subname}`}
+                  label={`${sublabel}`}
+                />
+              ))
             }
             return null
           })}
