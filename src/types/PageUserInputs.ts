@@ -129,6 +129,14 @@ export type TwoPercentUserInput = Pick<
   | 'XIIoddiel_suhlasZaslUdaje'
 >
 
+export type DvePercentaRodicomUserInput = Pick<
+  TaxFormUserInput,
+  | 'dve_percenta_rodicom'
+  | 'dve_percenta_rodicA'
+  | 'dve_percenta_rodicB'
+  | 'dve_percenta_rodicom_nahradna_starostlivost'
+>
+
 export type TaxBonusUserInput = Pick<
   TaxFormUserInput,
   'ziadamVyplatitDanovyBonusUrokPreplatok' | 'iban'

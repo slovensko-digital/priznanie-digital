@@ -385,6 +385,47 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
+        title="Poukázanie 2% dane rodičom"
+        href={'/dve-percenta-rodicom'}
+        rows={
+          taxFormUserInput.dve_percenta_rodicom === 'obidvom'
+            ? [
+                {
+                  title: 'Rodič A',
+                  value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                },
+                {
+                  title: 'Rodič B',
+                  value: `${taxFormUserInput.dve_percenta_rodicB?.meno} ${taxFormUserInput.dve_percenta_rodicB?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicB?.rodneCislo,
+                },
+              ]
+            : taxFormUserInput.dve_percenta_rodicom === 'jednemu'
+              ? [
+                  {
+                    title: 'Rodič',
+                    value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                  },
+                  {
+                    title: 'Rodné číslo',
+                    value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nepoukázal som 2% dane rodičom',
+                  },
+                ]
+        }
+      />
+      <Summary
         title="Údaje o daňovníkovi"
         href={'/osobne-udaje'}
         rows={[

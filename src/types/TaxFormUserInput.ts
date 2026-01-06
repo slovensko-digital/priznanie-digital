@@ -22,6 +22,12 @@ export interface ChildInput {
   monthTo: string
 }
 
+interface RodicInput {
+  rodneCislo: string
+  meno: string
+  priezvisko: string
+}
+
 export interface TaxFormUserInput {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
@@ -130,6 +136,12 @@ export interface TaxFormUserInput {
   r142_ico?: string
   r142_obchMeno?: string
   XIIoddiel_suhlasZaslUdaje?: boolean
+
+  /** SECTION  Dve percenta rodicom */
+  dve_percenta_rodicom?: 'obidvom' | 'jednemu' | 'nie'
+  dve_percenta_rodicA?: RodicInput
+  dve_percenta_rodicB?: RodicInput
+  dve_percenta_rodicom_nahradna_starostlivost?: boolean
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus?: boolean
