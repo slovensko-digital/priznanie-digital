@@ -924,11 +924,17 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           priezvisko: input.dve_percenta_rodicA.priezvisko,
           rodneCislo: input.dve_percenta_rodicA.rodneCislo.replace(/\D/g, ''),
         },
-        rodicB: input.dve_percenta_rodicom === 'obidvom' ? {
-          meno: input.dve_percenta_rodicB.meno,
-          priezvisko: input.dve_percenta_rodicB.priezvisko,
-          rodneCislo: input.dve_percenta_rodicB.rodneCislo.replace(/\D/g, ''),
-        } : undefined,
+        rodicB:
+          input.dve_percenta_rodicom === 'obidvom'
+            ? {
+                meno: input.dve_percenta_rodicB.meno,
+                priezvisko: input.dve_percenta_rodicB.priezvisko,
+                rodneCislo: input.dve_percenta_rodicB.rodneCislo.replace(
+                  /\D/g,
+                  '',
+                ),
+              }
+            : undefined,
       }
     },
     children: input?.hasChildren ?? false,

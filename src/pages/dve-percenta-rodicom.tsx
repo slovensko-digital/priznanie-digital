@@ -158,7 +158,8 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   />
                   <RadioConditional forValue="obidvom">
                     <p className="govuk-hint">
-                      Každý rodič dostane {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
+                      Každý rodič dostane{' '}
+                      {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
                     </p>
                     <div className="govuk-grid-row">
                       <div className="govuk-grid-column-one-half">
@@ -181,7 +182,8 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                           onChange={(event) => {
                             const rodneCislo = formatRodneCislo(
                               event.currentTarget.value,
-                              props.values.dve_percenta_rodicA?.rodneCislo || '',
+                              props.values.dve_percenta_rodicA?.rodneCislo ||
+                                '',
                             )
                             const shouldValidate =
                               rodneCislo.length >= RODNE_CISLO_DLZKA
@@ -213,7 +215,8 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                           onChange={(event) => {
                             const rodneCislo = formatRodneCislo(
                               event.currentTarget.value,
-                              props.values.dve_percenta_rodicB?.rodneCislo || '',
+                              props.values.dve_percenta_rodicB?.rodneCislo ||
+                                '',
                             )
                             const shouldValidate =
                               rodneCislo.length >= RODNE_CISLO_DLZKA
@@ -236,7 +239,8 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                   />
                   <RadioConditional forValue="jednemu">
                     <p className="govuk-hint">
-                      Rodič dostane {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
+                      Rodič dostane{' '}
+                      {formatCurrency(calculatedTax.suma_2_percenta.toNumber())}
                     </p>
                     <div>
                       <h2 className="govuk-heading-m">Údaje o rodičovi</h2>
