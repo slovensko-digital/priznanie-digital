@@ -10,6 +10,25 @@ import classnames from 'classnames'
 import { UserInput } from '../types/UserInput'
 import { numberInputRegexp } from '../lib/utils'
 
+/**
+ * Utility type that generates dot-notation paths for nested objects.
+ * E.g., for { a: { b: string } } it generates "a" | "a.b"
+ */
+type NestedKeyOf<T, Depth extends number = 3> = Depth extends 0
+  ? never
+  : T extends object
+    ? {
+        [K in keyof T & string]: T[K] extends object
+          ? K | `${K}.${NestedKeyOf<T[K], Prev[Depth]>}`
+          : K
+      }[keyof T & string]
+    : never
+
+type Prev = [never, 0, 1, 2, 3]
+
+/** All valid field names: top-level keys + nested paths */
+type UserInputFieldName = NestedKeyOf<UserInput>
+
 export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
   children: (formikProps: FormikProps<FormikInput>) => ReactNode
 }
@@ -49,7 +68,7 @@ interface InputProps<Name> {
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 
-export const Input = <Name extends keyof UserInput>({
+export const Input = <Name extends UserInputFieldName>({
   label,
   hint,
   width,
