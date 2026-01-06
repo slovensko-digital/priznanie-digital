@@ -208,6 +208,27 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     !taxForm.XIIoddiel_uplatnujem2percenta,
   )
 
+  if (
+    taxForm.r153 &&
+    taxForm.canDonateTwoPercentOfTax &&
+    taxForm.r153.neuplatnujemPar50aa === false
+  ) {
+    form.dokument.telo.r153.neuplatnujemPar50aa = boolToString(
+      taxForm.r153.neuplatnujemPar50aa,
+    )
+    form.dokument.telo.r153.bolZverenyDoStarostlivosti = boolToString(
+      taxForm.r153.bolZverenyDoStarostlivosti,
+    )
+    form.dokument.telo.r153.rodicA.meno = taxForm.r153.rodicA.meno
+    form.dokument.telo.r153.rodicA.priezvisko = taxForm.r153.rodicA.priezvisko
+    form.dokument.telo.r153.rodicA.rodneCislo = taxForm.r153.rodicA.rodneCislo
+    if (taxForm.r153.rodicB) {
+      form.dokument.telo.r153.rodicB.meno = taxForm.r153.rodicB.meno
+      form.dokument.telo.r153.rodicB.priezvisko = taxForm.r153.rodicB.priezvisko
+      form.dokument.telo.r153.rodicB.rodneCislo = taxForm.r153.rodicB.rodneCislo
+    }
+  }
+
   form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '7' : '6'
 
   if (

@@ -296,6 +296,20 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        /** SECTION Dve percenta rodicom */
+
+        assertUrl('/dve-percenta-rodicom')
+        if (input.expectNgoDonationValue) {
+          if (input.dve_percenta_rodicom === 'obidvom') {
+            getInput('dve_percenta_rodicom', '-obidvom').click()
+          } else if (input.dve_percenta_rodicom === 'jednemu') {
+            getInput('dve_percenta_rodicom', '-jednemu').click()
+          } else {
+            getInput('dve_percenta_rodicom', '-nie').click()
+          }
+        }
+        next()
+
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {

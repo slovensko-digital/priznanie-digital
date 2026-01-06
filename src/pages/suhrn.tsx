@@ -131,7 +131,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Summary
-        title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
+        title={`Zamestnanie v SR za rok ${TAX_YEAR}`}
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
@@ -179,7 +179,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title={`Dohody v SR pre rok ${TAX_YEAR}`}
+        title={`Dohody v SR za rok ${TAX_YEAR}`}
         href={'/dohoda'}
         rows={
           taxFormUserInput.dohoda
@@ -382,6 +382,47 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   title: `Nemám príjmy z prenájmu nehnuteľností`,
                 },
               ]
+        }
+      />
+      <Summary
+        title="Poukázanie 2% dane rodičom"
+        href={'/dve-percenta-rodicom'}
+        rows={
+          taxFormUserInput.dve_percenta_rodicom === 'obidvom'
+            ? [
+                {
+                  title: 'Rodič A',
+                  value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                },
+                {
+                  title: 'Rodič B',
+                  value: `${taxFormUserInput.dve_percenta_rodicB?.meno} ${taxFormUserInput.dve_percenta_rodicB?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicB?.rodneCislo,
+                },
+              ]
+            : taxFormUserInput.dve_percenta_rodicom === 'jednemu'
+              ? [
+                  {
+                    title: 'Rodič',
+                    value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                  },
+                  {
+                    title: 'Rodné číslo',
+                    value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nepoukázal som 2% dane rodičom',
+                  },
+                ]
         }
       />
       <Summary
