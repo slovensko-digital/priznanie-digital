@@ -2,10 +2,7 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import { Form, useField } from 'formik'
 import { FormWrapper, Input, Checkbox } from '../components/FormComponents'
-import {
-  DvePercentaRodicomUserInput,
-  FormErrors,
-} from '../types/PageUserInputs'
+import { DvePercentaRodicomUserInput } from '../types/PageUserInputs'
 import { formatCurrency } from '../lib/utils'
 import {
   calculate,
@@ -13,7 +10,7 @@ import {
   TAX_YEAR,
   RODNE_CISLO_DLZKA,
 } from '../lib/calculation'
-import { formatRodneCislo } from '../lib/utils'
+import { formatRodneCislo, validateRodneCislo } from '../lib/utils'
 import { ErrorSummary } from '../components/ErrorSummary'
 
 import { Page } from '../components/Page'
@@ -185,12 +182,10 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                               props.values.dve_percenta_rodicA?.rodneCislo ||
                                 '',
                             )
-                            const shouldValidate =
-                              rodneCislo.length >= RODNE_CISLO_DLZKA
                             props.setFieldValue(
                               'dve_percenta_rodicA.rodneCislo',
                               rodneCislo,
-                              shouldValidate,
+                              false,
                             )
                           }}
                         />
@@ -218,12 +213,10 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                               props.values.dve_percenta_rodicB?.rodneCislo ||
                                 '',
                             )
-                            const shouldValidate =
-                              rodneCislo.length >= RODNE_CISLO_DLZKA
                             props.setFieldValue(
                               'dve_percenta_rodicB.rodneCislo',
                               rodneCislo,
-                              shouldValidate,
+                              false,
                             )
                           }}
                         />
@@ -264,12 +257,10 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                             event.currentTarget.value,
                             props.values.dve_percenta_rodicA?.rodneCislo || '',
                           )
-                          const shouldValidate =
-                            rodneCislo.length >= RODNE_CISLO_DLZKA
                           props.setFieldValue(
                             'dve_percenta_rodicA.rodneCislo',
                             rodneCislo,
-                            shouldValidate,
+                            false,
                           )
                         }}
                       />
@@ -323,13 +314,70 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
   )
 }
 
-type Errors = Partial<FormErrors<DvePercentaRodicomUserInput>>
+type ParentErrors = {
+  [K in keyof NonNullable<
+    DvePercentaRodicomUserInput['dve_percenta_rodicA']
+  >]?: string
+}
+
+type Errors = {
+  [K in keyof DvePercentaRodicomUserInput]?: K extends
+    | 'dve_percenta_rodicA'
+    | 'dve_percenta_rodicB'
+    ? ParentErrors
+    : string
+}
+
 export const validate = (values: DvePercentaRodicomUserInput): Errors => {
   const errors: Errors = {}
 
   if (!values.dve_percenta_rodicom) {
     errors.dve_percenta_rodicom = 'Vyznačte odpoveď'
   }
+
+  if (
+    values.dve_percenta_rodicom === 'obidvom' ||
+    values.dve_percenta_rodicom === 'jednemu'
+  ) {
+    const rodicAErrors: ParentErrors = {}
+
+    if (!values.dve_percenta_rodicA?.meno) {
+      rodicAErrors.meno = 'Zadajte meno rodiča'
+    }
+    if (!values.dve_percenta_rodicA?.priezvisko) {
+      rodicAErrors.priezvisko = 'Zadajte priezvisko rodiča'
+    }
+    if (!values.dve_percenta_rodicA?.rodneCislo) {
+      rodicAErrors.rodneCislo = 'Zadajte rodné číslo rodiča'
+    } else if (!validateRodneCislo(values.dve_percenta_rodicA.rodneCislo)) {
+      rodicAErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
+    }
+
+    if (Object.keys(rodicAErrors).length > 0) {
+      errors.dve_percenta_rodicA = rodicAErrors
+    }
+  }
+
+  if (values.dve_percenta_rodicom === 'obidvom') {
+    const rodicBErrors: ParentErrors = {}
+
+    if (!values.dve_percenta_rodicB?.meno) {
+      rodicBErrors.meno = 'Zadajte meno rodiča'
+    }
+    if (!values.dve_percenta_rodicB?.priezvisko) {
+      rodicBErrors.priezvisko = 'Zadajte priezvisko rodiča'
+    }
+    if (!values.dve_percenta_rodicB?.rodneCislo) {
+      rodicBErrors.rodneCislo = 'Zadajte rodné číslo rodiča'
+    } else if (!validateRodneCislo(values.dve_percenta_rodicB.rodneCislo)) {
+      rodicBErrors.rodneCislo = 'Zadané rodné číslo nie je správne'
+    }
+
+    if (Object.keys(rodicBErrors).length > 0) {
+      errors.dve_percenta_rodicB = rodicBErrors
+    }
+  }
+
   return errors
 }
 
