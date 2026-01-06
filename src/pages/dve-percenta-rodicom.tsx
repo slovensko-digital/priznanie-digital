@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import Link from 'next/link'
-import { Form } from 'formik'
-import { FormWrapper, Input } from '../components/FormComponents'
+import { Form, useField } from 'formik'
+import { FormWrapper, Input, Checkbox } from '../components/FormComponents'
 import {
   DvePercentaRodicomUserInput,
   FormErrors,
@@ -22,6 +22,34 @@ import RadioGroup from '../components/radio/RadioGroup'
 import Radio from '../components/radio/Radio'
 import RadioConditional from '../components/radio/RadioConditional'
 import Fieldset from '../components/fieldset/Fieldset'
+
+interface AdoptionCheckboxProps {
+  labelSingular?: boolean
+}
+
+const AdoptionCheckbox = ({ labelSingular = false }: AdoptionCheckboxProps) => {
+  const [field] = useField('dve_percenta_rodicom_nahradna_starostlivost')
+  const isChecked = field.value === true
+
+  return (
+    <div className="govuk-!-margin-top-6">
+      <Checkbox
+        name="dve_percenta_rodicom_nahradna_starostlivost"
+        label={
+          labelSingular
+            ? 'Bol/a som osvojený/á rodičom'
+            : 'Bol/a som osvojený/á rodičmi'
+        }
+      />
+      {isChecked && (
+        <p className="govuk-hint govuk-!-margin-top-2">
+          K daňovému priznaniu je potrebné priložiť doklad preukazujúci
+          osvojenie.
+        </p>
+      )}
+    </div>
+  )
+}
 
 const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
   setTaxFormUserInput,
@@ -98,6 +126,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                           priezvisko: '',
                           rodneCislo: '',
                         },
+                        dve_percenta_rodicom_nahradna_starostlivost: false,
                       })
                     } else if (value === 'jednemu') {
                       props.setValues({
@@ -109,6 +138,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                           rodneCislo: '',
                         },
                         dve_percenta_rodicB: undefined,
+                        dve_percenta_rodicom_nahradna_starostlivost: false,
                       })
                     } else {
                       props.setValues({
@@ -116,6 +146,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                         dve_percenta_rodicom: 'nie',
                         dve_percenta_rodicA: undefined,
                         dve_percenta_rodicB: undefined,
+                        dve_percenta_rodicom_nahradna_starostlivost: false,
                       })
                     }
                   }}
@@ -192,6 +223,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                         />
                       </div>
                     </div>
+                    <AdoptionCheckbox />
                   </RadioConditional>
 
                   <Radio
@@ -232,6 +264,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
                         }}
                       />
                     </div>
+                    <AdoptionCheckbox labelSingular />
                   </RadioConditional>
 
                   <Radio
