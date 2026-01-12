@@ -1,26 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0014)about:internet -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>OZN493v24 - Oznámenie o predĺžení lehoty na podanie daňového priznania</title>
-	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="language" content="sk-SK">
-		<script src="./form.596_files/jquery.min.js" type="text/javascript"></script>
-<script src="./form.596_files/jquery-ui.min.js" type="text/javascript"></script>
-<script src="./form.596_files/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="./form.596_files/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-<script src="./form.596_files/wrapper.js" type="text/javascript"></script>
-<script src="./form.596_files/ego.statusDialog.js" type="text/javascript"></script>
-<script src="./form.596_files/PFS_ego.js" type="text/javascript"></script>
-<script src="./form.596_files/PFS_jquery.validate.js" type="text/javascript"></script>
-<script src="./form.596_files/PFS_jquery.form.plugins.js" type="text/javascript"></script>
-<script src="./form.596_files/p_pfs.js" type="text/javascript"></script>
-<script src="./form.596_files/jquery.maskedinput.min.js" type="text/javascript"></script>
-<script src="./form.596_files/form.596.xmlfdf.js" type="text/javascript"></script>
-<link href="./form.596_files/jquery-ui.css" rel="stylesheet" type="text/css">
-<link href="./form.596_files/base.css" rel="stylesheet" type="text/css">
-<link href="./form.596_files/ego.css" rel="stylesheet" type="text/css">
-<link href="./form.596_files/p_pfs.css" rel="stylesheet" type="text/css">
+		<script src="form.596_files/jquery.min.js" type="text/javascript"></script>
+<script src="form.596_files/jquery-ui.min.js" type="text/javascript"></script>
+<script src="form.596_files/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="form.596_files/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="form.596_files/wrapper.js" type="text/javascript"></script>
+<script src="form.596_files/ego.statusDialog.js" type="text/javascript"></script>
+<script src="form.596_files/PFS_ego.js" type="text/javascript"></script>
+<script src="form.596_files/PFS_jquery.validate.js" type="text/javascript"></script>
+<script src="form.596_files/PFS_jquery.form.plugins.js" type="text/javascript"></script>
+<script src="form.596_files/p_pfs.js" type="text/javascript"></script>
+<script src="form.596_files/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="form.596_files/form.596.xmlfdf.js" type="text/javascript"></script>
+<link href="form.596_files/jquery-ui.css" rel="stylesheet" type="text/css">
+<link href="form.596_files/base.css" rel="stylesheet" type="text/css">
+<link href="form.596_files/ego.css" rel="stylesheet" type="text/css">
+<link href="form.596_files/p_pfs.css" rel="stylesheet" type="text/css">
 
 		<script type="text/javascript">
 		(function($, undefined) {
@@ -158,7 +157,7 @@ function inlinelimitdatumdo(element,sid) {
 var aktualnyDatum = new Date();
 aktualnyDatum = $("#dtpZdObdobieDo").val();
 
-
+// toto je spodna hranica
   var hranicaDatum = new Date();
   hranicaDatum = '01.01.2024';
 
@@ -539,18 +538,6 @@ if (key == "datumNarodenia") {
   if (key == 'nazovStatu') {
     $("#tbTPStat").val(value);
   }
-  if (key == 'ulica') {
-    $("#tbUlicaSK").val(value);
-  }
-  if (key == 'cisloDomu') {
-    $("#tdCisloSK").val(value);
-  }
-  if (key == 'psc') {
-    $("#tbPSCSK").val(value);
-  }
-  if (key == 'obec') {
-    $("#tbObecSK").val(value);
-  }
   if (key == 'rok_zo') {
     $("#zaRok").val(value);
   }
@@ -577,10 +564,6 @@ function GetDefaultValue() {
   retString = retString + 'psc' + '¶'+ $("#tbTPPSC").val() + '¶';
   retString = retString + 'obec' + '¶'+ $("#tbTPObec").val() + '¶';
   retString = retString + 'nazovStatu' + '¶'+ $("#tbTPStat").val() + '¶';
-  retString = retString + 'ulica' + '¶'+ $("#tbUlicaSK").val() + '¶';
-  retString = retString + 'cisloDomu' + '¶'+ $("#tdCisloSK").val() + '¶';
-  retString = retString + 'psc' + '¶'+ $("#tbPSCSK").val() + '¶';
-  retString = retString + 'obec' + '¶'+ $("#tbObecSK").val() + '¶';
   retString = retString + 'rok_zo' + '¶'+ $("#zaRok").val() + '¶';
   retString = retString + 'datumOd_zo' + '¶'+ $("#dtpZdObdobieOd").val() + '¶';
   retString = retString + 'datumDo_zo' + '¶'+ $("#dtpZdObdobieDo").val() + '¶';
@@ -673,6 +656,12 @@ $('input[type=text]').live('change blur', function () {
   $("#dtpZdObdobieDo").datepicker("option","minDate", new Date(2023, 1 - 1, 1));
 
 
+
+/*
+prolongacia
+
+7.1.2026 - doplneny rok do checkboxu 2025 - inline netreba 
+*/
 
 
 			
@@ -2614,7 +2603,7 @@ customW: ""
 tbRodneCislo :
 {
 maxlength: "Maximálna dĺžka položky '05 - Rodné číslo (pred lomkou)' musí byť: 6 ",
-tbRodneCisloRegEx: "Položka '05 - Rodné číslo (pred lomkou)' má neplatný formát",
+tbRodneCisloRegEx: "Položka '05 - Rodné číslo (pred lomkou)' musí obsahovať 6 číslic.",
 customE: ""
 },
 
@@ -2624,7 +2613,7 @@ customE: ""
 tbRodneCislo_2 :
 {
 maxlength: "Maximálna dĺžka položky '05 -Rodné číslo (za lomkou)' musí byť: 4 ",
-tbRodneCislo_2RegEx: "Položka '05 -Rodné číslo (za lomkou)' má neplatný formát",
+tbRodneCislo_2RegEx: "Položka '05 -Rodné číslo (za lomkou)' musí obsahovať 3 alebo 4 číslice. ",
 customE: ""
 },
 
@@ -2828,11 +2817,11 @@ customE: ""
 .sirokyTextBox410px TEXTAREA {  width:410px; height: 16px; }
 
 	</style>
-</head>
-<body>
+<script src="form.596_files/autogram-inject.bundle.js" type="text/javascript"></script></head>
+<body data-new-gr-c-s-check-loaded="8.934.0" data-gr-ext-installed="">
 	<noscript><p class="noscript">Pre kompletnú funkčnosť aplikácie je potrebné povoliť JavaScript</p></noscript>
 	<div id="errorsContainerDiv" class="errorsContainerDiv"> <ul id="errorsContainer" class="errorsContainer"><li></li></ul> </div>
-	<form id="OznamenieOVykonaniUpravyZakladuDane176v16" action="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html">
+	<form id="OznamenieOVykonaniUpravyZakladuDane176v16" action="">
 		<div id="main" class="layoutMain ui-widget-content">	
 						 
 		<div id="layoutRow39158" class="layoutRow ui-tabs ui-widget-content  nocaption " title="">
@@ -2876,7 +2865,17 @@ customE: ""
 											
 <div id="layoutCell158084" class="cell  textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:880px;">Oznámenie o predĺžení lehoty na podanie daňového priznania k dani z príjmov fyzickej osoby alebo daňového priznania k dani z príjmov právnickej osoby (ďalej len „oznámenie“) podáva daňovník príslušnému správcovi dane do uplynutia lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona, tzn. do troch kalendárnych mesiacov po uplynutí zdaňovacieho obdobia. Táto lehota sa predlžuje najviac o tri celé kalendárne mesiace alebo najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí. Tento postup neuplatňuje daňovník v konkurze, daňovník v likvidácii a dedič, ktorý podáva daňové priznanie za zomrelého daňovníka.<sup>1)</sup> </span>	
+		<span class="fieldLabel" title="" style="width:880px;">Oznámenie o 
+predĺžení lehoty na podanie daňového priznania k dani z príjmov fyzickej
+ osoby alebo daňového priznania k dani z príjmov právnickej osoby (ďalej
+ len „oznámenie“) podáva daňovník príslušnému správcovi dane do 
+uplynutia lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona,
+ tzn. do troch kalendárnych mesiacov po uplynutí zdaňovacieho obdobia. 
+Táto lehota sa predlžuje najviac o tri celé kalendárne mesiace alebo 
+najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov 
+daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí. Tento 
+postup neuplatňuje daňovník v konkurze, daňovník v likvidácii a dedič, 
+ktorý podáva daňové priznanie za zomrelého daňovníka.<sup>1)</sup> </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -2895,7 +2894,7 @@ customE: ""
 											
 <div id="layoutCell158086" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="tbDic" style="width:200px;">01 - Daňové identifikačné číslo (DIČ) </label><span class="fieldContent"><input id="tbDic" name="tbDic" title="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8." type="text" class="textBox" maxlength="10" size="190" alt="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8." value=""></span>	
+		<label class="fieldLabel" title="" for="tbDic" style="width:200px;">01 - Daňové identifikačné číslo (DIČ) </label><span class="fieldContent"><input id="tbDic" name="tbDic" title="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8." type="text" class="textBox" maxlength="10" size="190" alt="Daňové identifikačné číslo (DIČ) - jedinečný desaťmiestny identifikátor. Pre FO musí byť povinne vyplnený aspoň riadok 1, 5 alebo 6 a pre PO riadok 1 alebo 8."></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -2925,7 +2924,7 @@ customE: ""
 											
 <div id="layoutCell158168" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="zaRok" style="width:40px;">Za rok </label><span class="fieldContent"><select id="zaRok" name="zaRok" class="comboBox" title="Rok pre FO musí byť vyplnený, ak je vyplnený aspoň jeden z riadkov r. 2 až r. 6. Nemôže byť súčasne vyplnený rok pre FO a ZO od-do pre PO. Oznámenie o predĺžení lehoty na podanie DP za rok 2024 môže byť podané najskôr 1.1.2025. "><option value=""></option><option value="2024">2024</option></select></span>	
+		<label class="fieldLabel" title="" for="zaRok" style="width:40px;">Za rok </label><span class="fieldContent"><select id="zaRok" name="zaRok" class="comboBox" title="Rok pre FO musí byť vyplnený, ak je vyplnený aspoň jeden z riadkov r. 2 až r. 6. Nemôže byť súčasne vyplnený rok pre FO a ZO od-do pre PO. Oznámenie o predĺžení lehoty na podanie DP za rok 2024 môže byť podané najskôr 1.1.2025. "><option value="" selected="selected"></option><option value="2024">2024</option><option value="2025">2025</option></select></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3054,7 +3053,7 @@ customE: ""
 											
 <div id="layoutCell158095" class="cell  sirokyTextBox260pxPriezvisko dolava9px">		
 			
-		<label class="fieldLabel" title="" for="tbOdd1Priezvisko" style="display: none">02 - Priezvisko </label><span class="fieldContent"><input id="tbOdd1Priezvisko" name="tbOdd1Priezvisko" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="380" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd1Priezvisko" style="display: none">02 - Priezvisko </label><span class="fieldContent"><input id="tbOdd1Priezvisko" name="tbOdd1Priezvisko" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="380" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. "></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3070,7 +3069,7 @@ customE: ""
 											
 <div id="layoutCell158087" class="cell  sirokyTextBox210pxx">		
 			
-		<label class="fieldLabel" title="" for="tbOdd1Meno" style="display: none">03 - Meno </label><span class="fieldContent"><input id="tbOdd1Meno" name="tbOdd1Meno" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="257" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd1Meno" style="display: none">03 - Meno </label><span class="fieldContent"><input id="tbOdd1Meno" name="tbOdd1Meno" title="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. " type="text" class="textBox" maxlength="40" size="257" alt="Musí byť vyplnené meno, priezvisko fyzickej osoby alebo obchodné meno právnickej osoby. "></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3086,7 +3085,7 @@ customE: ""
 											
 <div id="layoutCell158089" class="cell  kratkyTextBox120pxTitul">		
 			
-		<label class="fieldLabel" title="" for="tbOdd1TitulPred" style="display: none">04 - Titul (pred menom) </label><span class="fieldContent"><input id="tbOdd1TitulPred" name="tbOdd1TitulPred" title="" type="text" class="textBox" maxlength="20" size="210" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd1TitulPred" style="display: none">04 - Titul (pred menom) </label><span class="fieldContent"><input id="tbOdd1TitulPred" name="tbOdd1TitulPred" title="" type="text" class="textBox" maxlength="20" size="210" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3118,7 +3117,7 @@ customE: ""
 											
 <div id="layoutCell158093" class="cell  kratkyTextBox120pxTitul">		
 			
-		<label class="fieldLabel" title="" for="tbOdd1TitulZa" style="display: none">04 - Titul (za menom) </label><span class="fieldContent"><input id="tbOdd1TitulZa" name="tbOdd1TitulZa" title="" type="text" class="textBox" maxlength="20" size="25" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd1TitulZa" style="display: none">04 - Titul (za menom) </label><span class="fieldContent"><input id="tbOdd1TitulZa" name="tbOdd1TitulZa" title="" type="text" class="textBox" maxlength="20" size="25" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3143,7 +3142,7 @@ customE: ""
 											
 <div id="layoutCell158098" class="cell  kratkyTextBox120pxTitul">		
 			
-		<label class="fieldLabel" title="" for="tbRodneCislo" style="display: none">05 - Rodné číslo (pred lomkou) </label><span class="fieldContent"><input id="tbRodneCislo" name="tbRodneCislo" title="Položka &#39;Rodné číslo&#39; pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." type="text" class="textBox" maxlength="6" size="190" alt="Položka &#39;Rodné číslo&#39; pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." value=""></span>	
+		<label class="fieldLabel" title="" for="tbRodneCislo" style="display: none">05 - Rodné číslo (pred lomkou) </label><span class="fieldContent"><input id="tbRodneCislo" name="tbRodneCislo" title="Položka 'Rodné číslo' pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia." type="text" class="textBox" maxlength="6" size="190" alt="Položka 'Rodné číslo' pozostáva z 9 alebo 10 čísel. Fyzická osoba musí povinne uviesť DIČ, RČ alebo Dátum narodenia."></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3175,7 +3174,7 @@ customE: ""
 											
 <div id="layoutCell158102" class="cell  kratkyTextBox120pxTitul">		
 			
-		<label class="fieldLabel" title="" for="tbRodneCislo_2" style="display: none">05 -Rodné číslo (za lomkou) </label><span class="fieldContent"><input id="tbRodneCislo_2" name="tbRodneCislo_2" title="" type="text" class="textBox" maxlength="4" size="190" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbRodneCislo_2" style="display: none">05 -Rodné číslo (za lomkou) </label><span class="fieldContent"><input id="tbRodneCislo_2" name="tbRodneCislo_2" title="" type="text" class="textBox" maxlength="4" size="190" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3258,7 +3257,7 @@ customE: ""
 											
 <div id="layoutCell158113" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="ico" style="display: none">08 - IČO </label><span class="fieldContent"><input id="ico" name="ico" title="Položka &#39;IČO&#39; musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO" type="text" class="textBox" maxlength="12" size="190" alt="Položka &#39;IČO&#39; musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO" value=""></span>	
+		<label class="fieldLabel" title="" for="ico" style="display: none">08 - IČO </label><span class="fieldContent"><input id="ico" name="ico" title="Položka 'IČO' musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO" type="text" class="textBox" maxlength="12" size="190" alt="Položka 'IČO' musí obsahovať 8 alebo 12 čísel. Právnická osoba  musí povinne uviesť DIČ alebo IČO"></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3315,7 +3314,7 @@ customE: ""
 											
 <div id="layoutCell158117" class="cell  sirokyTextBox600px">		
 			
-		<label class="fieldLabel" title="" for="tbTPUlica" style="width:291px;">09 - Ulica </label><span class="fieldContent"><input id="tbTPUlica" name="tbTPUlica" title="" type="text" class="textBox" maxlength="60" size="669" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbTPUlica" style="width:291px;">09 - Ulica </label><span class="fieldContent"><input id="tbTPUlica" name="tbTPUlica" title="" type="text" class="textBox" maxlength="60" size="669" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3331,7 +3330,7 @@ customE: ""
 											
 <div id="layoutCell158120" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="tdTPCislo" style="width:291px;">10 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdTPCislo" name="tdTPCislo" title="" type="text" class="textBox" maxlength="20" size="191" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tdTPCislo" style="width:291px;">10 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdTPCislo" name="tdTPCislo" title="" type="text" class="textBox" maxlength="20" size="191" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3362,7 +3361,7 @@ customE: ""
 											
 <div id="layoutCell158124" class="cell  doprava5px kratkyTextBox87px">		
 			
-		<label class="fieldLabel" title="" for="tbTPPSC" style="width:291px;">11 - PSČ </label><span class="fieldContent"><input id="tbTPPSC" name="tbTPPSC" title="" type="text" class="textBox" maxlength="10" size="112" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbTPPSC" style="width:291px;">11 - PSČ </label><span class="fieldContent"><input id="tbTPPSC" name="tbTPPSC" title="" type="text" class="textBox" maxlength="10" size="112" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3378,7 +3377,7 @@ customE: ""
 											
 <div id="layoutCell158126" class="cell  sirokyTextBox400px">		
 			
-		<label class="fieldLabel" title="" for="tbTPObec" style="width:291px;">12 - Obec <em>*</em></label><span class="fieldContent"><input id="tbTPObec" name="tbTPObec" title="Obec musí byť vyplnená." type="text" class="textBox" maxlength="40" size="480" alt="Obec musí byť vyplnená." value=""></span>	
+		<label class="fieldLabel" title="" for="tbTPObec" style="width:291px;">12 - Obec <em>*</em></label><span class="fieldContent"><input id="tbTPObec" name="tbTPObec" title="Obec musí byť vyplnená." type="text" class="textBox" maxlength="40" size="480" alt="Obec musí byť vyplnená."></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3394,7 +3393,7 @@ customE: ""
 											
 <div id="layoutCell158128" class="cell  sirokyComboBox260px">		
 			
-		<label class="fieldLabel" title="" for="tbTPStat" style="width:291px;">13 - Štát <em>*</em></label><span class="fieldContent"><select id="tbTPStat" name="tbTPStat" class="comboBox" title=""><option value=""></option><option value="Andorra">AD - Andorra</option><option value="Spojené arabské emiráty">AE - Spojené arabské emiráty</option><option value="Afganistan">AF - Afganistan</option><option value="Antigua a Barbuda">AG - Antigua a Barbuda</option><option value="Anguilla">AI - Anguilla</option><option value="Albánsko">AL - Albánsko</option><option value="Arménsko">AM - Arménsko</option><option value="Angola">AO - Angola</option><option value="Antarktída">AQ - Antarktída</option><option value="Argentína">AR - Argentína</option><option value="Americká Samoa">AS - Americká Samoa</option><option value="Rakúsko">AT - Rakúsko</option><option value="Austrália">AU - Austrália</option><option value="Aruba">AW - Aruba</option><option value="Alandy">AX - Alandy</option><option value="Azerbajdžan">AZ - Azerbajdžan</option><option value="Bosna a Hercegovina">BA - Bosna a Hercegovina</option><option value="Barbados">BB - Barbados</option><option value="Bangladéš">BD - Bangladéš</option><option value="Belgicko">BE - Belgicko</option><option value="Burkina">BF - Burkina</option><option value="Bulharsko">BG - Bulharsko</option><option value="Bahrajn">BH - Bahrajn</option><option value="Burundi">BI - Burundi</option><option value="Benin">BJ - Benin</option><option value="Svätý Bartolomej">BL - Svätý Bartolomej</option><option value="Bermudy">BM - Bermudy</option><option value="Brunej">BN - Brunej</option><option value="Bolívia">BO - Bolívia</option><option value="Bonaire, Svätý Eustach a Saba">BQ - Bonaire, Svätý Eustach a Saba</option><option value="Brazília">BR - Brazília</option><option value="Bahamy">BS - Bahamy</option><option value="Bhután">BT - Bhután</option><option value="Bouvetov ostrov">BV - Bouvetov ostrov</option><option value="Botswana">BW - Botswana</option><option value="Bielorusko">BY - Bielorusko</option><option value="Belize">BZ - Belize</option><option value="Kanada">CA - Kanada</option><option value="Kokosové ostrovy">CC - Kokosové ostrovy</option><option value="Kongo (býv. Zair)">CD - Kongo (býv. Zair)</option><option value="Stredoafrická republika">CF - Stredoafrická republika</option><option value="Kongo">CG - Kongo</option><option value="Pobrežie Slonoviny">CI - Pobrežie Slonoviny</option><option value="Cookove ostrovy">CK - Cookove ostrovy</option><option value="Čile">CL - Čile</option><option value="Kamerun">CM - Kamerun</option><option value="Čína">CN - Čína</option><option value="Kolumbia">CO - Kolumbia</option><option value="Kostarika">CR - Kostarika</option><option value="Kuba">CU - Kuba</option><option value="Kapverdy">CV - Kapverdy</option><option value="Curaçao">CW - Curaçao</option><option value="Vianočný ostrov">CX - Vianočný ostrov</option><option value="Cyprus">CY - Cyprus</option><option value="Česko">CZ - Česko</option><option value="Nemecko">DE - Nemecko</option><option value="Džibutsko">DJ - Džibutsko</option><option value="Dánsko">DK - Dánsko</option><option value="Dominika">DM - Dominika</option><option value="Dominikánska republika">DO - Dominikánska republika</option><option value="Alžírsko">DZ - Alžírsko</option><option value="Ekvádor">EC - Ekvádor</option><option value="Estónsko">EE - Estónsko</option><option value="Egypt">EG - Egypt</option><option value="Západná Sahara">EH - Západná Sahara</option><option value="Eritrea">ER - Eritrea</option><option value="Španielsko">ES - Španielsko</option><option value="Etiópia">ET - Etiópia</option><option value="Fínsko">FI - Fínsko</option><option value="Fidži">FJ - Fidži</option><option value="Falklandy">FK - Falklandy</option><option value="Mikronézia">FM - Mikronézia</option><option value="Faerské ostrovy">FO - Faerské ostrovy</option><option value="Francúzsko">FR - Francúzsko</option><option value="Gabon">GA - Gabon</option><option value="Spojené kráľovstvo">GB - Spojené kráľovstvo</option><option value="Grenada">GD - Grenada</option><option value="Gruzínsko">GE - Gruzínsko</option><option value="Francúzska Guyana">GF - Francúzska Guyana</option><option value="Guernsey">GG - Guernsey</option><option value="Ghana">GH - Ghana</option><option value="Gibraltár">GI - Gibraltár</option><option value="Grónsko">GL - Grónsko</option><option value="Gambia">GM - Gambia</option><option value="Guinea">GN - Guinea</option><option value="Guadeloupe">GP - Guadeloupe</option><option value="Rovníková Guinea">GQ - Rovníková Guinea</option><option value="Grécko">GR - Grécko</option><option value="Južná Georgia a Južné Sandwichove ostrovy">GS - Južná Georgia a Južné Sandwichove ostrovy</option><option value="Guatemala">GT - Guatemala</option><option value="Guam">GU - Guam</option><option value="Guinea-Bissau">GW - Guinea-Bissau</option><option value="Guyana">GY - Guyana</option><option value="Hongkong">HK - Hongkong</option><option value="Heardov ostrov a Macdonaldove ostrovy">HM - Heardov ostrov a Macdonaldove ostrovy</option><option value="Honduras">HN - Honduras</option><option value="Chorvátsko">HR - Chorvátsko</option><option value="Haiti">HT - Haiti</option><option value="Maďarsko">HU - Maďarsko</option><option value="Švajčiarsko">CH - Švajčiarsko</option><option value="Indonézia">ID - Indonézia</option><option value="Írsko">IE - Írsko</option><option value="Izrael">IL - Izrael</option><option value="Man">IM - Man</option><option value="India">IN - India</option><option value="Britské indickooceánske územie">IO - Britské indickooceánske územie</option><option value="Irak">IQ - Irak</option><option value="Irán">IR - Irán</option><option value="Island">IS - Island</option><option value="Taliansko">IT - Taliansko</option><option value="Jersey">JE - Jersey</option><option value="Jamajka">JM - Jamajka</option><option value="Jordánsko">JO - Jordánsko</option><option value="Japonsko">JP - Japonsko</option><option value="Keňa">KE - Keňa</option><option value="Kirgizsko">KG - Kirgizsko</option><option value="Kambodža">KH - Kambodža</option><option value="Kiribati">KI - Kiribati</option><option value="Komory">KM - Komory</option><option value="Svätý Krištof a Nevis">KN - Svätý Krištof a Nevis</option><option value="Kórejská ľudovodemokratická republika">KP - Kórejská ľudovodemokratická republika</option><option value="Kórejská republika">KR - Kórejská republika</option><option value="Kuvajt">KW - Kuvajt</option><option value="Kajmanie ostrovy">KY - Kajmanie ostrovy</option><option value="Kazachstan">KZ - Kazachstan</option><option value="Laos">LA - Laos</option><option value="Libanon">LB - Libanon</option><option value="Svätá Lucia">LC - Svätá Lucia</option><option value="Lichtenštajnsko">LI - Lichtenštajnsko</option><option value="Srí Lanka">LK - Srí Lanka</option><option value="Libéria">LR - Libéria</option><option value="Lesotho">LS - Lesotho</option><option value="Litva">LT - Litva</option><option value="Luxembursko">LU - Luxembursko</option><option value="Lotyšsko">LV - Lotyšsko</option><option value="Líbya">LY - Líbya</option><option value="Maroko">MA - Maroko</option><option value="Monako">MC - Monako</option><option value="Moldavsko">MD - Moldavsko</option><option value="Čierna Hora">ME - Čierna Hora</option><option value="Svätý Martin (francúzska časť)">MF - Svätý Martin (francúzska časť)</option><option value="Madagaskar">MG - Madagaskar</option><option value="Marshallove ostrovy">MH - Marshallove ostrovy</option><option value="Macedónsko">MK - Macedónsko</option><option value="Mali">ML - Mali</option><option value="Mjanmarsko">MM - Mjanmarsko</option><option value="Mongolsko">MN - Mongolsko</option><option value="Macao">MO - Macao</option><option value="Severné Mariány">MP - Severné Mariány</option><option value="Martinik">MQ - Martinik</option><option value="Mauritánia">MR - Mauritánia</option><option value="Montserrat">MS - Montserrat</option><option value="Malta">MT - Malta</option><option value="Maurícius">MU - Maurícius</option><option value="Maldivy">MV - Maldivy</option><option value="Malawi">MW - Malawi</option><option value="Mexiko">MX - Mexiko</option><option value="Malajzia">MY - Malajzia</option><option value="Mozambik">MZ - Mozambik</option><option value="Namíbia">NA - Namíbia</option><option value="Nová Kaledónia">NC - Nová Kaledónia</option><option value="Niger">NE - Niger</option><option value="Norfolk">NF - Norfolk</option><option value="Nigéria">NG - Nigéria</option><option value="Nikaragua">NI - Nikaragua</option><option value="Holandsko">NL - Holandsko</option><option value="Nórsko">NO - Nórsko</option><option value="Nepál">NP - Nepál</option><option value="Nauru">NR - Nauru</option><option value="Niue">NU - Niue</option><option value="Nový Zéland">NZ - Nový Zéland</option><option value="Omán">OM - Omán</option><option value="Panama">PA - Panama</option><option value="Peru">PE - Peru</option><option value="Francúzska Polynézia">PF - Francúzska Polynézia</option><option value="Papua-Nová Guinea">PG - Papua-Nová Guinea</option><option value="Filipíny">PH - Filipíny</option><option value="Pakistan">PK - Pakistan</option><option value="Poľsko">PL - Poľsko</option><option value="Saint Pierre a Miquelon">PM - Saint Pierre a Miquelon</option><option value="Pitcairnove ostrovy">PN - Pitcairnove ostrovy</option><option value="Portoriko">PR - Portoriko</option><option value="Palestína">PS - Palestína</option><option value="Portugalsko">PT - Portugalsko</option><option value="Palau">PW - Palau</option><option value="Paraguaj">PY - Paraguaj</option><option value="Katar">QA - Katar</option><option value="Réunion">RE - Réunion</option><option value="Rumunsko">RO - Rumunsko</option><option value="Srbsko">RS - Srbsko</option><option value="Rusko">RU - Rusko</option><option value="Rwanda">RW - Rwanda</option><option value="Saudská Arábia">SA - Saudská Arábia</option><option value="Šalamúnove ostrovy">SB - Šalamúnove ostrovy</option><option value="Seychely">SC - Seychely</option><option value="Sudán">SD - Sudán</option><option value="Švédsko">SE - Švédsko</option><option value="Singapur">SG - Singapur</option><option value="Svätá Helena, Ascension">SH - Svätá Helena, Ascension</option><option value="Slovinsko">SI - Slovinsko</option><option value="Svalbard a Jan Mayen">SJ - Svalbard a Jan Mayen</option><option value="Slovensko">SK - Slovensko</option><option value="Sierra Leone">SL - Sierra Leone</option><option value="San Maríno">SM - San Maríno</option><option value="Senegal">SN - Senegal</option><option value="Somálsko">SO - Somálsko</option><option value="Surinam">SR - Surinam</option><option value="Južný Sudán">SS - Južný Sudán</option><option value="Svätý Tomáš a Princov ostrov">ST - Svätý Tomáš a Princov ostrov</option><option value="Salvádor">SV - Salvádor</option><option value="Svätý Martin (holandská časť)">SX - Svätý Martin (holandská časť)</option><option value="Sýria">SY - Sýria</option><option value="Svazijsko">SZ - Svazijsko</option><option value="Turks a Caicos">TC - Turks a Caicos</option><option value="Čad">TD - Čad</option><option value="Francúzske južné územia">TF - Francúzske južné územia</option><option value="Togo">TG - Togo</option><option value="Thajsko">TH - Thajsko</option><option value="Tadžikistan">TJ - Tadžikistan</option><option value="Tokelau">TK - Tokelau</option><option value="Východný Timor">TL - Východný Timor</option><option value="Turkménsko">TM - Turkménsko</option><option value="Tunisko">TN - Tunisko</option><option value="Tonga">TO - Tonga</option><option value="Turecko">TR - Turecko</option><option value="Trinidad a Tobago">TT - Trinidad a Tobago</option><option value="Tuvalu">TV - Tuvalu</option><option value="Taiwan">TW - Taiwan</option><option value="Tanzánia">TZ - Tanzánia</option><option value="Ukrajina">UA - Ukrajina</option><option value="Uganda">UG - Uganda</option><option value="Menšie odľahlé ostrovy USA">UM - Menšie odľahlé ostrovy USA</option><option value="Spojené štáty, USA">US - Spojené štáty, USA</option><option value="Uruguaj">UY - Uruguaj</option><option value="Uzbekistan">UZ - Uzbekistan</option><option value="Vatikán">VA - Vatikán</option><option value="Svätý Vincent a Grenadíny">VC - Svätý Vincent a Grenadíny</option><option value="Venezuela">VE - Venezuela</option><option value="Britské Panenské ostrovy">VG - Britské Panenské ostrovy</option><option value="Americké Panenské ostrovy">VI - Americké Panenské ostrovy</option><option value="Vietnam">VN - Vietnam</option><option value="Vanuatu">VU - Vanuatu</option><option value="Wallis a Futuna">WF - Wallis a Futuna</option><option value="Samoa">WS - Samoa</option><option value="Jemen">YE - Jemen</option><option value="Mayotte">YT - Mayotte</option><option value="Južná Afrika">ZA - Južná Afrika</option><option value="Zambia">ZM - Zambia</option><option value="Zimbabwe">ZW - Zimbabwe</option></select></span>	
+		<label class="fieldLabel" title="" for="tbTPStat" style="width:291px;">13 - Štát <em>*</em></label><span class="fieldContent"><select id="tbTPStat" name="tbTPStat" class="comboBox" title=""><option value="" selected="selected"></option><option value="Andorra">AD - Andorra</option><option value="Spojené arabské emiráty">AE - Spojené arabské emiráty</option><option value="Afganistan">AF - Afganistan</option><option value="Antigua a Barbuda">AG - Antigua a Barbuda</option><option value="Anguilla">AI - Anguilla</option><option value="Albánsko">AL - Albánsko</option><option value="Arménsko">AM - Arménsko</option><option value="Angola">AO - Angola</option><option value="Antarktída">AQ - Antarktída</option><option value="Argentína">AR - Argentína</option><option value="Americká Samoa">AS - Americká Samoa</option><option value="Rakúsko">AT - Rakúsko</option><option value="Austrália">AU - Austrália</option><option value="Aruba">AW - Aruba</option><option value="Alandy">AX - Alandy</option><option value="Azerbajdžan">AZ - Azerbajdžan</option><option value="Bosna a Hercegovina">BA - Bosna a Hercegovina</option><option value="Barbados">BB - Barbados</option><option value="Bangladéš">BD - Bangladéš</option><option value="Belgicko">BE - Belgicko</option><option value="Burkina">BF - Burkina</option><option value="Bulharsko">BG - Bulharsko</option><option value="Bahrajn">BH - Bahrajn</option><option value="Burundi">BI - Burundi</option><option value="Benin">BJ - Benin</option><option value="Svätý Bartolomej">BL - Svätý Bartolomej</option><option value="Bermudy">BM - Bermudy</option><option value="Brunej">BN - Brunej</option><option value="Bolívia">BO - Bolívia</option><option value="Bonaire, Svätý Eustach a Saba">BQ - Bonaire, Svätý Eustach a Saba</option><option value="Brazília">BR - Brazília</option><option value="Bahamy">BS - Bahamy</option><option value="Bhután">BT - Bhután</option><option value="Bouvetov ostrov">BV - Bouvetov ostrov</option><option value="Botswana">BW - Botswana</option><option value="Bielorusko">BY - Bielorusko</option><option value="Belize">BZ - Belize</option><option value="Kanada">CA - Kanada</option><option value="Kokosové ostrovy">CC - Kokosové ostrovy</option><option value="Kongo (býv. Zair)">CD - Kongo (býv. Zair)</option><option value="Stredoafrická republika">CF - Stredoafrická republika</option><option value="Kongo">CG - Kongo</option><option value="Pobrežie Slonoviny">CI - Pobrežie Slonoviny</option><option value="Cookove ostrovy">CK - Cookove ostrovy</option><option value="Čile">CL - Čile</option><option value="Kamerun">CM - Kamerun</option><option value="Čína">CN - Čína</option><option value="Kolumbia">CO - Kolumbia</option><option value="Kostarika">CR - Kostarika</option><option value="Kuba">CU - Kuba</option><option value="Kapverdy">CV - Kapverdy</option><option value="Curaçao">CW - Curaçao</option><option value="Vianočný ostrov">CX - Vianočný ostrov</option><option value="Cyprus">CY - Cyprus</option><option value="Česko">CZ - Česko</option><option value="Nemecko">DE - Nemecko</option><option value="Džibutsko">DJ - Džibutsko</option><option value="Dánsko">DK - Dánsko</option><option value="Dominika">DM - Dominika</option><option value="Dominikánska republika">DO - Dominikánska republika</option><option value="Alžírsko">DZ - Alžírsko</option><option value="Ekvádor">EC - Ekvádor</option><option value="Estónsko">EE - Estónsko</option><option value="Egypt">EG - Egypt</option><option value="Západná Sahara">EH - Západná Sahara</option><option value="Eritrea">ER - Eritrea</option><option value="Španielsko">ES - Španielsko</option><option value="Etiópia">ET - Etiópia</option><option value="Fínsko">FI - Fínsko</option><option value="Fidži">FJ - Fidži</option><option value="Falklandy">FK - Falklandy</option><option value="Mikronézia">FM - Mikronézia</option><option value="Faerské ostrovy">FO - Faerské ostrovy</option><option value="Francúzsko">FR - Francúzsko</option><option value="Gabon">GA - Gabon</option><option value="Spojené kráľovstvo">GB - Spojené kráľovstvo</option><option value="Grenada">GD - Grenada</option><option value="Gruzínsko">GE - Gruzínsko</option><option value="Francúzska Guyana">GF - Francúzska Guyana</option><option value="Guernsey">GG - Guernsey</option><option value="Ghana">GH - Ghana</option><option value="Gibraltár">GI - Gibraltár</option><option value="Grónsko">GL - Grónsko</option><option value="Gambia">GM - Gambia</option><option value="Guinea">GN - Guinea</option><option value="Guadeloupe">GP - Guadeloupe</option><option value="Rovníková Guinea">GQ - Rovníková Guinea</option><option value="Grécko">GR - Grécko</option><option value="Južná Georgia a Južné Sandwichove ostrovy">GS - Južná Georgia a Južné Sandwichove ostrovy</option><option value="Guatemala">GT - Guatemala</option><option value="Guam">GU - Guam</option><option value="Guinea-Bissau">GW - Guinea-Bissau</option><option value="Guyana">GY - Guyana</option><option value="Hongkong">HK - Hongkong</option><option value="Heardov ostrov a Macdonaldove ostrovy">HM - Heardov ostrov a Macdonaldove ostrovy</option><option value="Honduras">HN - Honduras</option><option value="Chorvátsko">HR - Chorvátsko</option><option value="Haiti">HT - Haiti</option><option value="Maďarsko">HU - Maďarsko</option><option value="Švajčiarsko">CH - Švajčiarsko</option><option value="Indonézia">ID - Indonézia</option><option value="Írsko">IE - Írsko</option><option value="Izrael">IL - Izrael</option><option value="Man">IM - Man</option><option value="India">IN - India</option><option value="Britské indickooceánske územie">IO - Britské indickooceánske územie</option><option value="Irak">IQ - Irak</option><option value="Irán">IR - Irán</option><option value="Island">IS - Island</option><option value="Taliansko">IT - Taliansko</option><option value="Jersey">JE - Jersey</option><option value="Jamajka">JM - Jamajka</option><option value="Jordánsko">JO - Jordánsko</option><option value="Japonsko">JP - Japonsko</option><option value="Keňa">KE - Keňa</option><option value="Kirgizsko">KG - Kirgizsko</option><option value="Kambodža">KH - Kambodža</option><option value="Kiribati">KI - Kiribati</option><option value="Komory">KM - Komory</option><option value="Svätý Krištof a Nevis">KN - Svätý Krištof a Nevis</option><option value="Kórejská ľudovodemokratická republika">KP - Kórejská ľudovodemokratická republika</option><option value="Kórejská republika">KR - Kórejská republika</option><option value="Kuvajt">KW - Kuvajt</option><option value="Kajmanie ostrovy">KY - Kajmanie ostrovy</option><option value="Kazachstan">KZ - Kazachstan</option><option value="Laos">LA - Laos</option><option value="Libanon">LB - Libanon</option><option value="Svätá Lucia">LC - Svätá Lucia</option><option value="Lichtenštajnsko">LI - Lichtenštajnsko</option><option value="Srí Lanka">LK - Srí Lanka</option><option value="Libéria">LR - Libéria</option><option value="Lesotho">LS - Lesotho</option><option value="Litva">LT - Litva</option><option value="Luxembursko">LU - Luxembursko</option><option value="Lotyšsko">LV - Lotyšsko</option><option value="Líbya">LY - Líbya</option><option value="Maroko">MA - Maroko</option><option value="Monako">MC - Monako</option><option value="Moldavsko">MD - Moldavsko</option><option value="Čierna Hora">ME - Čierna Hora</option><option value="Svätý Martin (francúzska časť)">MF - Svätý Martin (francúzska časť)</option><option value="Madagaskar">MG - Madagaskar</option><option value="Marshallove ostrovy">MH - Marshallove ostrovy</option><option value="Macedónsko">MK - Macedónsko</option><option value="Mali">ML - Mali</option><option value="Mjanmarsko">MM - Mjanmarsko</option><option value="Mongolsko">MN - Mongolsko</option><option value="Macao">MO - Macao</option><option value="Severné Mariány">MP - Severné Mariány</option><option value="Martinik">MQ - Martinik</option><option value="Mauritánia">MR - Mauritánia</option><option value="Montserrat">MS - Montserrat</option><option value="Malta">MT - Malta</option><option value="Maurícius">MU - Maurícius</option><option value="Maldivy">MV - Maldivy</option><option value="Malawi">MW - Malawi</option><option value="Mexiko">MX - Mexiko</option><option value="Malajzia">MY - Malajzia</option><option value="Mozambik">MZ - Mozambik</option><option value="Namíbia">NA - Namíbia</option><option value="Nová Kaledónia">NC - Nová Kaledónia</option><option value="Niger">NE - Niger</option><option value="Norfolk">NF - Norfolk</option><option value="Nigéria">NG - Nigéria</option><option value="Nikaragua">NI - Nikaragua</option><option value="Holandsko">NL - Holandsko</option><option value="Nórsko">NO - Nórsko</option><option value="Nepál">NP - Nepál</option><option value="Nauru">NR - Nauru</option><option value="Niue">NU - Niue</option><option value="Nový Zéland">NZ - Nový Zéland</option><option value="Omán">OM - Omán</option><option value="Panama">PA - Panama</option><option value="Peru">PE - Peru</option><option value="Francúzska Polynézia">PF - Francúzska Polynézia</option><option value="Papua-Nová Guinea">PG - Papua-Nová Guinea</option><option value="Filipíny">PH - Filipíny</option><option value="Pakistan">PK - Pakistan</option><option value="Poľsko">PL - Poľsko</option><option value="Saint Pierre a Miquelon">PM - Saint Pierre a Miquelon</option><option value="Pitcairnove ostrovy">PN - Pitcairnove ostrovy</option><option value="Portoriko">PR - Portoriko</option><option value="Palestína">PS - Palestína</option><option value="Portugalsko">PT - Portugalsko</option><option value="Palau">PW - Palau</option><option value="Paraguaj">PY - Paraguaj</option><option value="Katar">QA - Katar</option><option value="Réunion">RE - Réunion</option><option value="Rumunsko">RO - Rumunsko</option><option value="Srbsko">RS - Srbsko</option><option value="Rusko">RU - Rusko</option><option value="Rwanda">RW - Rwanda</option><option value="Saudská Arábia">SA - Saudská Arábia</option><option value="Šalamúnove ostrovy">SB - Šalamúnove ostrovy</option><option value="Seychely">SC - Seychely</option><option value="Sudán">SD - Sudán</option><option value="Švédsko">SE - Švédsko</option><option value="Singapur">SG - Singapur</option><option value="Svätá Helena, Ascension">SH - Svätá Helena, Ascension</option><option value="Slovinsko">SI - Slovinsko</option><option value="Svalbard a Jan Mayen">SJ - Svalbard a Jan Mayen</option><option value="Slovensko">SK - Slovensko</option><option value="Sierra Leone">SL - Sierra Leone</option><option value="San Maríno">SM - San Maríno</option><option value="Senegal">SN - Senegal</option><option value="Somálsko">SO - Somálsko</option><option value="Surinam">SR - Surinam</option><option value="Južný Sudán">SS - Južný Sudán</option><option value="Svätý Tomáš a Princov ostrov">ST - Svätý Tomáš a Princov ostrov</option><option value="Salvádor">SV - Salvádor</option><option value="Svätý Martin (holandská časť)">SX - Svätý Martin (holandská časť)</option><option value="Sýria">SY - Sýria</option><option value="Svazijsko">SZ - Svazijsko</option><option value="Turks a Caicos">TC - Turks a Caicos</option><option value="Čad">TD - Čad</option><option value="Francúzske južné územia">TF - Francúzske južné územia</option><option value="Togo">TG - Togo</option><option value="Thajsko">TH - Thajsko</option><option value="Tadžikistan">TJ - Tadžikistan</option><option value="Tokelau">TK - Tokelau</option><option value="Východný Timor">TL - Východný Timor</option><option value="Turkménsko">TM - Turkménsko</option><option value="Tunisko">TN - Tunisko</option><option value="Tonga">TO - Tonga</option><option value="Turecko">TR - Turecko</option><option value="Trinidad a Tobago">TT - Trinidad a Tobago</option><option value="Tuvalu">TV - Tuvalu</option><option value="Taiwan">TW - Taiwan</option><option value="Tanzánia">TZ - Tanzánia</option><option value="Ukrajina">UA - Ukrajina</option><option value="Uganda">UG - Uganda</option><option value="Menšie odľahlé ostrovy USA">UM - Menšie odľahlé ostrovy USA</option><option value="Spojené štáty, USA">US - Spojené štáty, USA</option><option value="Uruguaj">UY - Uruguaj</option><option value="Uzbekistan">UZ - Uzbekistan</option><option value="Vatikán">VA - Vatikán</option><option value="Svätý Vincent a Grenadíny">VC - Svätý Vincent a Grenadíny</option><option value="Venezuela">VE - Venezuela</option><option value="Britské Panenské ostrovy">VG - Britské Panenské ostrovy</option><option value="Americké Panenské ostrovy">VI - Americké Panenské ostrovy</option><option value="Vietnam">VN - Vietnam</option><option value="Vanuatu">VU - Vanuatu</option><option value="Wallis a Futuna">WF - Wallis a Futuna</option><option value="Samoa">WS - Samoa</option><option value="Jemen">YE - Jemen</option><option value="Mayotte">YT - Mayotte</option><option value="Južná Afrika">ZA - Južná Afrika</option><option value="Zambia">ZM - Zambia</option><option value="Zimbabwe">ZW - Zimbabwe</option></select></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3444,7 +3443,7 @@ customE: ""
 											
 <div id="layoutCell158141" class="cell  sirokyTextBox600px">		
 			
-		<label class="fieldLabel" title="" for="tbUlicaSK" style="width:291px;">14 - Ulica </label><span class="fieldContent"><input id="tbUlicaSK" name="tbUlicaSK" title="" type="text" class="textBox" maxlength="60" size="669" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbUlicaSK" style="width:291px;">14 - Ulica </label><span class="fieldContent"><input id="tbUlicaSK" name="tbUlicaSK" title="" type="text" class="textBox" maxlength="60" size="669" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3460,7 +3459,7 @@ customE: ""
 											
 <div id="layoutCell158144" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="tdCisloSK" style="width:291px;">15 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdCisloSK" name="tdCisloSK" title="" type="text" class="textBox" maxlength="20" size="191" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tdCisloSK" style="width:291px;">15 - Súpisné / orientačné číslo </label><span class="fieldContent"><input id="tdCisloSK" name="tdCisloSK" title="" type="text" class="textBox" maxlength="20" size="191" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3491,7 +3490,7 @@ customE: ""
 											
 <div id="layoutCell158148" class="cell  doprava5px kratkyTextBox87px">		
 			
-		<label class="fieldLabel" title="" for="tbPSCSK" style="width:291px;">16 - PSČ </label><span class="fieldContent"><input id="tbPSCSK" name="tbPSCSK" title="" type="text" class="textBox" maxlength="5" size="112" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbPSCSK" style="width:291px;">16 - PSČ </label><span class="fieldContent"><input id="tbPSCSK" name="tbPSCSK" title="" type="text" class="textBox" maxlength="5" size="112" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3507,7 +3506,7 @@ customE: ""
 											
 <div id="layoutCell158150" class="cell  sirokyTextBox400px">		
 			
-		<label class="fieldLabel" title="" for="tbObecSK" style="width:291px;">17 - Obec </label><span class="fieldContent"><input id="tbObecSK" name="tbObecSK" title="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo." type="text" class="textBox" maxlength="40" size="480" alt="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo." value=""></span>	
+		<label class="fieldLabel" title="" for="tbObecSK" style="width:291px;">17 - Obec </label><span class="fieldContent"><input id="tbObecSK" name="tbObecSK" title="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo." type="text" class="textBox" maxlength="40" size="480" alt="Vypĺňa sa, ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo."></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3551,7 +3550,9 @@ customE: ""
 											
 <div id="layoutCell158140" class="cell  mensiText">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">Daňovník vyznačí, podľa ktorého ustanovenia zákona si predlžuje lehotu na podanie daňového priznania a uvedie novú (predĺženú) lehotu. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">Daňovník 
+vyznačí, podľa ktorého ustanovenia zákona si predlžuje lehotu na podanie
+ daňového priznania a uvedie novú (predĺženú) lehotu. </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3576,7 +3577,7 @@ customE: ""
 											
 <div id="layoutCell158131" class="cell ">		
 			
-		<input id="cbPismA" name="cbPismA" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. a) zákona(najviac o tri celé kalendárne mesiace)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><br>	
+		<input id="cbPismA" name="cbPismA" title="Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona' alebo pole 'podľa § 49 ods. 3 písm. b) zákona'" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. a) zákona(najviac o tri celé kalendárne mesiace)" alt="Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona' alebo pole 'podľa § 49 ods. 3 písm. b) zákona'"><br>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3602,7 +3603,7 @@ customE: ""
 											
 <div id="layoutCell158132" class="cell  topMinus5px">		
 			
-		<label class="fieldLabel" title="" for="dtpLehota" style="width:100px;">nová lehota <em>*</em></label><span class="fieldContent"><input alt="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." id="dtpLehota" name="dtpLehota" title="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole &#39;podľa §49 ods. 3 písm. b) zákona&#39;, tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
+		<label class="fieldLabel" title="" for="dtpLehota" style="width:100px;">nová lehota <em>*</em></label><span class="fieldContent"><input alt="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona', tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole 'podľa §49 ods. 3 písm. b) zákona', tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." id="dtpLehota" name="dtpLehota" title="Dátum musí byť posledný deň kalendárneho mesiaca. Nová lehota na podanie DP musí byť vyšia ako je zákonná lehota na podanie DP. Ak je zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona', tak lehota na podanie DP môže byť predĺžená maximálne o 3 kalendárne mesiace.  Ak je zaškrtnuté pole 'podľa §49 ods. 3 písm. b) zákona', tak lehota na podanie DP môže byť predĺžená maximálne o 6 kalendárných mesiacov." type="text" class="date datepicker hasDatepicker" maxlength="14" size="190"></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3627,7 +3628,7 @@ customE: ""
 											
 <div id="layoutCell158137" class="cell ">		
 			
-		<input id="cbPismB" name="cbPismB" title="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. b) zákona (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú sumy príjmov priraditeľné podľa § 3 ods. 1 písm. h) zákona daňovníkovi podľa § 2 písm. d) prvého bodu zákona alebo zdaniteľné príjmy plynúce zo zdrojov v zahraničí)" alt="Musí byť zaškrtnuté pole &#39;podľa §49 ods. 3 písm. a) zákona&#39; alebo pole &#39;podľa § 49 ods. 3 písm. b) zákona&#39;"><br>	
+		<input id="cbPismB" name="cbPismB" title="Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona' alebo pole 'podľa § 49 ods. 3 písm. b) zákona'" type="checkbox" class="checkBox" value="predĺženie lehoty podľa § 49 ods. 3 písm. b) zákona (najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú sumy príjmov priraditeľné podľa § 3 ods. 1 písm. h) zákona daňovníkovi podľa § 2 písm. d) prvého bodu zákona alebo zdaniteľné príjmy plynúce zo zdrojov v zahraničí)" alt="Musí byť zaškrtnuté pole 'podľa §49 ods. 3 písm. a) zákona' alebo pole 'podľa § 49 ods. 3 písm. b) zákona'"><br>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3637,7 +3638,9 @@ customE: ""
 											
 <div id="layoutCell158138" class="cell ">		
 			
-		<span class="fieldLabel" title="" style="width:800px;">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. b) zákona</b> <br>(najviac o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí) </span>	
+		<span class="fieldLabel" title="" style="width:800px;">predĺženie lehoty podľa <b>§ 49 ods. 3 písm. b) zákona</b> <br>(najviac
+ o šesť celých kalendárnych mesiacov, ak súčasťou príjmov daňovníka sú 
+zdaniteľné príjmy plynúce zo zdrojov v zahraničí) </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3690,7 +3693,7 @@ customE: ""
 											
 <div id="layoutCell158157" class="cell  sirokyTextBox410px">		
 			
-		<label class="fieldLabel" title="" for="tbOdd3Vypracoval" style="display: none">Vypracoval </label><span class="fieldContent"><input id="tbOdd3Vypracoval" name="tbOdd3Vypracoval" title="" type="text" class="textBox" maxlength="50" size="190" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd3Vypracoval" style="display: none">Vypracoval </label><span class="fieldContent"><input id="tbOdd3Vypracoval" name="tbOdd3Vypracoval" title="" type="text" class="textBox" maxlength="50" size="190" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3722,7 +3725,7 @@ customE: ""
 											
 <div id="layoutCell158162" class="cell ">		
 			
-		<label class="fieldLabel" title="" for="tbOdd3Telefon" style="display: none">Telefónne číslo </label><span class="fieldContent"><input id="tbOdd3Telefon" name="tbOdd3Telefon" title="" type="text" class="textBox" maxlength="13" size="190" alt="" value=""></span>	
+		<label class="fieldLabel" title="" for="tbOdd3Telefon" style="display: none">Telefónne číslo </label><span class="fieldContent"><input id="tbOdd3Telefon" name="tbOdd3Telefon" title="" type="text" class="textBox" maxlength="13" size="190" alt=""></span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3775,31 +3778,67 @@ customE: ""
 											
 <div id="layoutCell158174" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">1) Daňovníkovi v konkurze alebo daňovníkovi v likvidácii môže správca dane predĺžiť lehotu na podanie daňového priznania k dani z príjmov len na základe žiadosti podanej najneskôr 15 dní pred uplynutím lehoty na podanie daňového priznania podľa § 49 ods. 2 zákona  [žiadosť správcu (konkurz vyhlásený podľa druhej časti zákona č. 7/2005 Z. z. o konkurze a reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení neskorších predpisov), žiadosť daňovníka v konkurze (konkurz vyhlásený podľa štvrtej časti zákona č. 7/2005 Z. z. o konkurze a reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení neskorších predpisov) alebo žiadosť daňovníka v likvidácii].<br>Ak má povinnosť podať daňové priznanie k dani z príjmov fyzickej osoby dedič podľa § 49 ods. 4 a 5 zákona, správca dane môže lehotu na jeho podanie predĺžiť len na základe žiadosti dediča podanej najneskôr 15 dní pred uplynutím lehoty na podanie daňového priznania podľa § 49 ods. 4 a 5 zákona. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">1) Daňovníkovi v
+ konkurze alebo daňovníkovi v likvidácii môže správca dane predĺžiť 
+lehotu na podanie daňového priznania k dani z príjmov len na základe 
+žiadosti podanej najneskôr 15 dní pred uplynutím lehoty na podanie 
+daňového priznania podľa § 49 ods. 2 zákona  [žiadosť správcu (konkurz 
+vyhlásený podľa druhej časti zákona č. 7/2005 Z. z. o konkurze a 
+reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení 
+neskorších predpisov), žiadosť daňovníka v konkurze (konkurz vyhlásený 
+podľa štvrtej časti zákona č. 7/2005 Z. z. o konkurze a 
+reštrukturalizácii a o zmene a doplnení niektorých zákonov v znení 
+neskorších predpisov) alebo žiadosť daňovníka v likvidácii].<br>Ak má 
+povinnosť podať daňové priznanie k dani z príjmov fyzickej osoby dedič 
+podľa § 49 ods. 4 a 5 zákona, správca dane môže lehotu na jeho podanie 
+predĺžiť len na základe žiadosti dediča podanej najneskôr 15 dní pred 
+uplynutím lehoty na podanie daňového priznania podľa § 49 ods. 4 a 5 
+zákona. </span>	
 		<div class="clear"></div>
 </div>							
 											
 <div id="layoutCell158175" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">2) Uvedie sa zdaňovacie obdobie, kalendárny rok u fyzickej osoby alebo kalendárny rok, hospodársky rok alebo iné zdaňovacie obdobie u právnickej osoby, za ktoré sa predlžuje lehota na podanie daňového priznania na základe oznámenia daňovníka. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">2) Uvedie sa 
+zdaňovacie obdobie, kalendárny rok u fyzickej osoby alebo kalendárny 
+rok, hospodársky rok alebo iné zdaňovacie obdobie u právnickej osoby, za
+ ktoré sa predlžuje lehota na podanie daňového priznania na základe 
+oznámenia daňovníka. </span>	
 		<div class="clear"></div>
 </div>							
 											
 <div id="layoutCell158176" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">3) Ak daňovník zistí, že v podanom oznámení uviedol nesprávne alebo neúplné údaje, podá nové oznámenie, v ktorom uvedie správne údaje. Ak sa daňovník rozhodne, že daňové priznanie podá v inej (predĺženej) lehote, do uplynutia lehoty podľa § 49 ods. 2 zákona môže podať nové oznámenie, v ktorom uvedie novú (predĺženú) lehotu. Skutočnosť, že oznámenie podáva z týchto dôvodov, vyznačí krížikom a uvedie dátum podania predchádzajúceho oznámenia. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">3) Ak daňovník 
+zistí, že v podanom oznámení uviedol nesprávne alebo neúplné údaje, podá
+ nové oznámenie, v ktorom uvedie správne údaje. Ak sa daňovník rozhodne,
+ že daňové priznanie podá v inej (predĺženej) lehote, do uplynutia 
+lehoty podľa § 49 ods. 2 zákona môže podať nové oznámenie, v ktorom 
+uvedie novú (predĺženú) lehotu. Skutočnosť, že oznámenie podáva z týchto
+ dôvodov, vyznačí krížikom a uvedie dátum podania predchádzajúceho 
+oznámenia. </span>	
 		<div class="clear"></div>
 </div>							
 											
 <div id="layoutCell158177" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">4) Vypĺňa sa, len ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo sídlo. Fyzická osoba uvedie adresu bydliska alebo adresu pobytu na území Slovenskej republiky, kde sa v zdaňovacom období obvykle zdržiavala. Právnická osoba uvedie umiestnenie stálej prevádzkarne alebo organizačnej zložky. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">4) Vypĺňa sa, 
+len ak daňovník nemá na území Slovenskej republiky trvalý pobyt alebo 
+sídlo. Fyzická osoba uvedie adresu bydliska alebo adresu pobytu na území
+ Slovenskej republiky, kde sa v zdaňovacom období obvykle zdržiavala. 
+Právnická osoba uvedie umiestnenie stálej prevádzkarne alebo 
+organizačnej zložky. </span>	
 		<div class="clear"></div>
 </div>							
 											
 <div id="layoutCell158178" class="cell  mensiText textJustify">		
 			
-		<span class="fieldLabel" title="" style="width:850px;">5) Daňovník uvedie novú (predĺženú) lehotu, ktorou je koniec kalendárneho mesiaca, v ktorej podá daňové priznanie a v ktorej je aj daň splatná, napr. 30.04., 31.05. alebo 30.06., resp. ak súčasťou jeho príjmov sú zdaniteľné príjmy plynúce zo zdrojov v zahraničí aj 31.07., 31.08. alebo 30.09. </span>	
+		<span class="fieldLabel" title="" style="width:850px;">5) Daňovník 
+uvedie novú (predĺženú) lehotu, ktorou je koniec kalendárneho mesiaca, v
+ ktorej podá daňové priznanie a v ktorej je aj daň splatná, napr. 
+30.04., 31.05. alebo 30.06., resp. ak súčasťou jeho príjmov sú 
+zdaniteľné príjmy plynúce zo zdrojov v zahraničí aj 31.07., 31.08. alebo
+ 30.09. </span>	
 		<div class="clear"></div>
 </div>							
 						
@@ -3831,7 +3870,7 @@ customE: ""
 	</form>
 
 
-<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
-			<img id="statusLoader" src="./form.596_files/ajax-loader.png" alt="Čakajte prosím">
+<div style="display: none; z-index: 1000; outline: 0px; position: absolute;" class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-statusDialog"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-statusDialog">Dialog</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="statusDialog" class="ui-dialog-content ui-widget-content">
+			<img id="statusLoader" src="form.596_files/ajax-loader.png" alt="Čakajte prosím">
 			<p id="statusMessage" class="statusMessage"></p>
-		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1735591546429.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, -1, &#39;M&#39;);" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all" onclick="DP_jQuery_1735591546429.datepicker._adjustDate(&#39;#dtpZdObdobieDo&#39;, +1, &#39;M&#39;);" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">December</span>&nbsp;<span class="ui-datepicker-year">2024</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">1</a></td></tr><tr><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">2</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">3</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">4</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">5</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">6</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">7</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">8</a></td></tr><tr><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">9</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">10</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">11</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">12</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">13</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">14</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">15</a></td></tr><tr><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">16</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">17</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">18</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">19</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">20</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">21</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">22</a></td></tr><tr><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">23</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">24</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">25</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">26</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">27</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">28</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">29</a></td></tr><tr><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">30</a></td><td class=" " onclick="DP_jQuery_1735591546429.datepicker._selectDay(&#39;#dtpZdObdobieDo&#39;,11,2024, this);return false;"><a class="ui-state-default" href="https://pfseform.financnasprava.sk/Formulare/eFormVzor/DP/form.596.html#">31</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></body></html>
+		</div><div class="ui-resizable-handle ui-resizable-disable"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" onclick="DP_jQuery_1768218059426.datepicker._adjustDate('#dtpZdObdobieDo', -1, 'M');" title="&lt;Predchádzajúci"><span class="ui-icon ui-icon-circle-triangle-w">&lt;Predchádzajúci</span></a><a class="ui-datepicker-next ui-corner-all" onclick="DP_jQuery_1768218059426.datepicker._adjustDate('#dtpZdObdobieDo', +1, 'M');" title="Nasledujúci&gt;"><span class="ui-icon ui-icon-circle-triangle-e">Nasledujúci&gt;</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">Január</span>&nbsp;<span class="ui-datepicker-year">2026</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th><span title="Pondelok">Po</span></th><th><span title="Utorok">Ut</span></th><th><span title="Streda">St</span></th><th><span title="Štvrtok">Št</span></th><th><span title="Piatok">Pia</span></th><th class="ui-datepicker-week-end"><span title="Sobota">So</span></th><th class="ui-datepicker-week-end"><span title="Nedeľa">Ne</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">1</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">2</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">3</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">4</a></td></tr><tr><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">5</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">6</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">7</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">8</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">9</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">10</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">11</a></td></tr><tr><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="#">12</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">13</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">14</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">15</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">16</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">17</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">18</a></td></tr><tr><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">19</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">20</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">21</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">22</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">23</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">24</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">25</a></td></tr><tr><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">26</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">27</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">28</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">29</a></td><td class=" " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">30</a></td><td class=" ui-datepicker-week-end " onclick="DP_jQuery_1768218059426.datepicker._selectDay('#dtpZdObdobieDo',0,2026, this);return false;"><a class="ui-state-default" href="#">31</a></td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
