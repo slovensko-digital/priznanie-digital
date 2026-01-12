@@ -881,8 +881,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      // TODO: figure out what this field is
-      return this.r072_pred_znizenim
+      return this.r074_znizenie_partner.plus(this.r075_zaplatene_prispevky_na_dochodok)
     },
     get r146a() {
       return this.r146
