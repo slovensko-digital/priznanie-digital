@@ -19,7 +19,7 @@ export const postponeBasis: PostponeOutput = {
       },
       pravnickaOsoba: {
         obchodneMeno: {
-          riadok: ''
+          riadok: '',
         },
         ico: '',
       },

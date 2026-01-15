@@ -37,8 +37,8 @@ interface NovaLehota {
 }
 
 interface RodneCislo {
-  rcPredLom: string;
-  rcZaLom: string;
+  rcPredLom: string
+  rcZaLom: string
 }
 
 interface Sidlo {
