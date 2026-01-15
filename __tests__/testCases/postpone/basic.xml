@@ -3,27 +3,49 @@
    <hlavicka>
       <dic>1231231232</dic>
       <zaRok>2025</zaRok>
+      <datumOd/>
+      <datumDo/>
       <dovodDoplnenia>0</dovodDoplnenia>
+      <datumPovodne/>
       <fyzickaOsoba>
          <priezvisko>Heisenberg</priezvisko>
          <meno>Werner</meno>
          <titulPred>Ing.</titulPred>
          <titulZa>PhD.</titulZa>
+         <rodneCislo>
+            <rcPredLom/>
+            <rcZaLom/>
+         </rodneCislo>
+         <datumNarodenia/>
       </fyzickaOsoba>
+      <pravnickaOsoba>
+         <obchodneMeno>
+            <riadok/>
+         </obchodneMeno>
+         <ico/>
+      </pravnickaOsoba>
       <sidlo>
-         <psc>82105</psc>
          <ulica>Mierová</ulica>
          <supisneOrientacneCislo>4</supisneOrientacneCislo>
+         <psc>82105</psc>
          <obec>Bratislava 3</obec>
          <stat>Slovensko</stat>
       </sidlo>
+      <adresaSr>
+         <ulica/>
+         <supisneOrientacneCislo/>
+         <psc/>
+         <obec/>
+      </adresaSr>
       <novaLehota>
          <predlzenie493a>1</predlzenie493a>
          <predlzenie493b>0</predlzenie493b>
          <datumLehota>30.06.2026</datumLehota>
       </novaLehota>
       <vypracoval>
+         <vypr/>
          <dna>01.01.2026</dna>
+         <telefon/>
       </vypracoval>
       <podpis>1</podpis>
    </hlavicka>
