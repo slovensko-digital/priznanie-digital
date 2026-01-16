@@ -102,7 +102,7 @@ const DvePercentaRodicom: Page<DvePercentaRodicomUserInput> = ({
             <ErrorSummary<DvePercentaRodicomUserInput> errors={props.errors} />
             <Form className="form" noValidate>
               <Fieldset
-                title={`Chcete poukázať 2% dane rodičom?`}
+                title={`Chcete poukázať 2% dane rodičom, ktorí dovŕšili dôchodkový vek?`}
                 error={props.errors.dve_percenta_rodicom}
                 hint={`Môžete poukázať ${formatCurrency(calculatedTax.suma_2_percenta.toNumber())}, jednému alebo obidvom rodičom. Poukázanie 2% dane rodičom neovplyvňuje možnosť poukázať 2% alebo 3% dane neziskovej organizácii.`}
               >
