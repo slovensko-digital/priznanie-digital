@@ -882,11 +882,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      return this.r074_znizenie_partner.plus(
-        this.r075_zaplatene_prispevky_na_dochodok,
-      )
+      return this.r036.plus(this.r039).plus(this.t1r11s1)
     },
     get r146a() {
+      // v nasom pripade by 146 a 146a mali byt vzdy rovnake
       return this.r146
     },
     get r151() {
