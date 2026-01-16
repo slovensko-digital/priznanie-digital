@@ -29,6 +29,7 @@ const MAX_ZAKLAD_DANE = new Decimal(25_426.27)
 
 export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
+const CHILD_BONUS_AGE_DIVIDER = 15
 export const MAX_CHILD_AGE_BONUS = 18
 
 const ZIVOTNE_MINIMUM_NASOBOK = new Decimal(12_110.36)
@@ -1017,7 +1018,7 @@ const getRate = (month: Months, child: Child) => {
   )
 
   const rate =
-    age < 18
+    age < CHILD_BONUS_AGE_DIVIDER
       ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER)
       : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
 
