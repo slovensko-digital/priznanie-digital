@@ -29,6 +29,7 @@ const MAX_ZAKLAD_DANE = new Decimal(25_426.27)
 
 export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
+const CHILD_BONUS_AGE_DIVIDER = 15
 export const MAX_CHILD_AGE_BONUS = 18
 
 const ZIVOTNE_MINIMUM_NASOBOK = new Decimal(12_110.36)
@@ -881,10 +882,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      // TODO: figure out what this field is
-      return this.r072_pred_znizenim
+      return this.r036.plus(this.r039).plus(this.t1r11s1)
     },
     get r146a() {
+      // v nasom pripade by 146 a 146a mali byt vzdy rovnake
       return this.r146
     },
     get r151() {
@@ -1016,7 +1017,7 @@ const getRate = (month: Months, child: Child) => {
   )
 
   const rate =
-    age < 18
+    age < CHILD_BONUS_AGE_DIVIDER
       ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER)
       : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
 
