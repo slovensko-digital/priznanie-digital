@@ -208,9 +208,15 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   }
 
   /** SECTION 2 percent */
-  form.dokument.telo.r151.neuplatnujemPar50 = boolToString(
-    !taxForm.XIIoddiel_uplatnujem2percenta,
-  )
+  if (taxForm.canDonateTwoPercentOfTax && taxForm.XIIoddiel_uplatnujem2percenta) {
+    form.dokument.telo.r151.neuplatnujemPar50 = boolToString(
+      !taxForm.XIIoddiel_uplatnujem2percenta,
+    )
+    form.dokument.telo.r151.splnam3per = boolToString(taxForm.splnam3per)
+    form.dokument.telo.r151.ico = taxForm.r152.ico
+    form.dokument.telo.r151.obchMeno.riadok = [taxForm.r152.obchMeno]
+    form.dokument.telo.r151.suhlasSoZaslanim = boolToString(taxForm.r152.suhlasZaslUdaje)
+  }
 
   if (
     taxForm.r153 &&
