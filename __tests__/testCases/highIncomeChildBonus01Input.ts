@@ -60,5 +60,5 @@ export const highIncomeChildBonus01Input: E2eTestUserInput = {
   datum: '15.03.2026',
 
   expectNgoDonationValue: true,
-  percent2: '114,55'
+  percent2: '114,55',
 }

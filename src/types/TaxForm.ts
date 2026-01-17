@@ -238,7 +238,7 @@ export interface TaxForm {
     obchMeno: string
     suhlasZaslUdaje: boolean
   }
-  
+
   /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   r152?: Decimal
 
