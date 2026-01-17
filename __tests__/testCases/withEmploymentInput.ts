@@ -22,6 +22,6 @@ export const withEmploymentInput: E2eTestUserInput = {
   datum: '22.02.2022',
   expectNgoDonationValue: true,
 
-  percent2: '16,06',
+  percent2: '15,74',
   percent3: '28,89',
 }
