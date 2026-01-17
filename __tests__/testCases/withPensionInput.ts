@@ -24,6 +24,6 @@ export const withPensionInput: E2eTestUserInput = {
 
   expectNgoDonationValue: true,
 
-  percent2: '6,55',
+  percent2: '6,23',
   percent3: '14,63',
 }

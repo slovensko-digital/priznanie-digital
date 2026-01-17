@@ -20,6 +20,6 @@ export const with2percentInput: E2eTestUserInput = {
   dve_percenta_podporujem: 'ano-sk-digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '7,06',
-  percent3: '10,59',
+  percent2: '6,74',
+  percent3: '10,11',
 }

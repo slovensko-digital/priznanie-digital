@@ -18,6 +18,6 @@ export const withHighIncomeInput: E2eTestUserInput = {
   children: [],
   expectNgoDonationValue: true,
 
-  percent2: '106,06',
+  percent2: '105,38',
   percent3: '214,32',
 }

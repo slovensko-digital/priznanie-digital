@@ -943,6 +943,16 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     },
     get r151() {
       if (!input.XIIoddiel_uplatnujem2percenta) {
+        return undefined
+      }
+      return {
+        ico: input.r142_ico.replace(/\D/g, ''),
+        obchMeno: input.r142_obchMeno,
+        suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
+      }
+    },
+    get r152() {
+      if (!input.XIIoddiel_uplatnujem2percenta) {
         return new Decimal(0)
       }
 
@@ -954,16 +964,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return NGOAmount.gte(MIN_2_PERCENT_CALCULATED_DONATION)
         ? round(NGOAmount)
         : new Decimal(0)
-    },
-    get r152() {
-      if (!input.XIIoddiel_uplatnujem2percenta) {
-        return undefined
-      }
-      return {
-        ico: input.r142_ico.replace(/\D/g, ''),
-        obchMeno: input.r142_obchMeno,
-        suhlasZaslUdaje: input.XIIoddiel_suhlasZaslUdaje,
-      }
     },
     get r153() {
       if (!input.dve_percenta_rodicom || input.dve_percenta_rodicom === 'nie') {

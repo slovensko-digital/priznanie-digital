@@ -165,6 +165,10 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
     // Shows error, when presses next without interaction
     next()
     getError().should('have.length', 1)
@@ -366,6 +370,10 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
     // When presses yes, additional fields appear
     cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
@@ -557,6 +565,10 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
     cy.get('[data-test=dve_percenta_podporujem-nie-input]').click()
     next()
     getError().should('have.length', 0)
@@ -683,6 +695,10 @@ describe('twoPercent page', () => {
     /* SECTION Uroky */
     getInput('r035_uplatnuje_uroky', '-no').click()
 
+    next()
+
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
     next()
 
     cy.get('[data-test=dve_percenta_podporujem-ano-sk-digital-input]').click()
