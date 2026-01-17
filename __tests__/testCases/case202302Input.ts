@@ -1,9 +1,9 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202302Input: E2eTestUserInput = {
-  t1r10_prijmy: '13800',
-  priloha3_r11_socialne: '1720.95',
-  priloha3_r13_zdravotne: '687.96',
+  t1r10_prijmy: '2500',
+  priloha3_r11_socialne: '250',
+  priloha3_r13_zdravotne: '100',
   zaplatenePreddavky: '0',
   r001_dic: '233123123',
   r003_nace: '62010 - Počítačové programovanie',
@@ -19,10 +19,10 @@ export const case202302Input: E2eTestUserInput = {
   datum: '22.02.2024',
 
   /** SECTION Employment */
-  uhrnPrijmovOdVsetkychZamestnavatelov: '8400',
-  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '789.60',
-  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '336',
-  uhrnPreddavkovNaDan: '446.76',
+  uhrnPrijmovOdVsetkychZamestnavatelov: '1800',
+  uhrnPovinnehoPoistnehoNaSocialnePoistenie: '180',
+  uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '72',
+  uhrnPreddavkovNaDan: '80',
   udajeODanovomBonuseNaDieta: '0',
   employed: true,
   dohoda: false,
