@@ -313,16 +313,14 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {
-          // TODO: disable check while 2% is not functional
-          // cy.get('.govuk-hint').contains(input.percent2)
+          cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.dve_percenta_podporujem) {
             cy.get(
               `[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`,
             ).click()
 
-            // TODO: disable check while 2% is not functional
-            // cy.get('label[for="splnam3per"]').contains(input.percent3)
+            cy.get('label[for="splnam3per"]').contains(input.percent3)
 
             if (input.splnam3per) {
               getInput('splnam3per').click()
