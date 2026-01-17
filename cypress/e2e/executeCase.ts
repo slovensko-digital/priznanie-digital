@@ -502,13 +502,7 @@ const executeTestCase = (testCase: string) => {
         cy.get('#errorsContainer')
           .invoke('text')
           .then((text) => {
-            const remain = text
-              .replace(
-                'Riadok 34 - Navýšenie základu dane o základ dane druhej oprávnenej osoby je možné len ak táto osoba je oprávnenou, aspoň za jeden totožný mesiac, za ktorý si daňovník uplatňuje daňový bonus a zároveň na začiatku ktorého druhá oprávnená osoba splnila podmienky na uplatnenie daňového bonusu.',
-                '',
-              )
-              .trim()
-            expect(remain).to.equal('')
+            expect(text).to.equal('')
           })
           .then(() => done())
       },
