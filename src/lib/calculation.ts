@@ -617,10 +617,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
       // High-income reduction algorithm (when zakladDane > 25740)
       if (zakladDane.greaterThan(HIGH_INCOME_THRESHOLD)) {
-        const basePom = zakladDane
-          .minus(HIGH_INCOME_THRESHOLD)
-          .div(10)
-          .div(12)
+        const basePom = zakladDane.minus(HIGH_INCOME_THRESHOLD).div(10).div(12)
 
         for (const child of this.r033) {
           const { mesiaceDo15, mesiaceOd15 } = getMonthsByAgeCategory(child)
