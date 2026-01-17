@@ -4301,22 +4301,18 @@ function inliner117(element,sid) {
                     }
                 }
 
-                function getNumberOfMonth(childidexik) {
-                    var countMonths = 0;
-                    var firstTrueIndex = -1;
-                    for (var j = 0; j <= validChildren[childidexik].months.length; j++) {
-                        if (validChildren[childidexik].months[0]) {
-                            return countMonths = 12;
-                        }
-                        else if (validChildren[childidexik].months[j]) {
-                            countMonths += 1;
-                            if (firstTrueIndex === -1) {
-                                firstTrueIndex = j;  // uloží prvý nájdený index
-                            }
-                        }
+                function getSelectedMonths(childIndex) {
+                    const months = validChildren[childIndex].months;
+
+                    if (months[0]) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+                    const selected = [];
+                    for (let m = 1; m <= 12; m++) {
+                        if (months[m]) selected.push(m);
                     }
-                    return { countMonths: countMonths, index: firstTrueIndex };
+                    return selected;
                 }
+
                 var sumaDB = 0;
                 var sumaDo15 = 0;
                 var sumaOd15 = 0;
@@ -4434,32 +4430,25 @@ function inliner117(element,sid) {
             var sumaDB = Big(0);
 
             for (var i = 0; i < validChildren.length; i++) { // validChildren = počet detí
-                var numberMonth = getNumberOfMonth(i);       // index + countMonths pre dané dieťa
+                                var mesiaceDo15 = 0;
+                                var mesiaceOd15 = 0;
 
-                var mesiaceDo15 = 0;
-                var mesiaceOd15 = 0;
+                                var dateNar = new Date(validChildren[i].datum);
+                                var selectedMonths = getSelectedMonths(i);
 
-                // prechádzam všetky mesiace, ktoré sú pre toto dieťa označené
-                for (var monthIndex = numberMonth.index;
-                    monthIndex < numberMonth.index + numberMonth.countMonths;
-                    monthIndex++) {
+                                for (var k = 0; k < selectedMonths.length; k++) {
+                                    var monthIndex = selectedMonths[k];
 
-                    if (!validChildren[i].months[monthIndex]) continue;
+                                    var rozdiel = DateDiffInYears(dateNar, new Date(2025, monthIndex - 1, 0));
 
-                    var dateNar = new Date(validChildren[i].datum);
-                    var rozdiel = DateDiffInYears(dateNar, new Date(2025, monthIndex - 1, 0));
+                                    if (rozdiel < 15) mesiaceDo15++;
+                                    else if (rozdiel < 18) mesiaceOd15++;
+                                }
 
-                    if (rozdiel < 15) {
-                        mesiaceDo15++;
-                    } else if (rozdiel < 18) {
-                        mesiaceOd15++;
-                    }
-                }
-
-                // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
-                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
-                    continue;
-                }
+                                // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
+                                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
+                                    continue;
+                                }
 
                 // výpočet pom = mesačné zníženie na 1 dieťa
                 var basePom = Big(rBase - 25740).div(10).div(12);
@@ -8957,7 +8946,7 @@ var uplatnitPostup = $("#cb34_Uplatnujem")
 var arrayR33 = [];
 var arrayR34 = [];
 
-for (var i = 1; i <= 12; i++) {
+for (var i = 0; i <= 12; i++) {
     var cislo = i < 10 ? '0' + i : i;
     var checkboxy = $('[name="cbM' + cislo + '_1"]');
 
@@ -8966,7 +8955,7 @@ for (var i = 1; i <= 12; i++) {
     }
 }
 
-for (var i = 1; i <= 12; i++) {
+for (var i = 0; i <= 12; i++) {
     var padded = (i < 10 ? '0' + i : '' + i);
     var checkbox = $('#cbM' + padded + '_1_OO');
 
@@ -8976,7 +8965,10 @@ for (var i = 1; i <= 12; i++) {
 }
 
 if (uplatnitPostup.is(':checked')) {
-    if (arrayR34.length && arrayR33.length) {
+    if ($.inArray(0, arrayR33) !== -1) {
+        return 0;
+    }
+    else if (arrayR34.length && arrayR33.length) {
         for (var i = 0; i < arrayR34.length; i++) {
             if ($.inArray(arrayR34[i], arrayR33) !== -1) {
                 return 0;
@@ -22573,6 +22565,7 @@ var retval = ("");
 				validatorObject.element(document.getElementById('cbNeuplatnujem'));
 				validatorObject.element(document.getElementById('cbSplnam3Per'));
 				validatorObject.element(document.getElementById('chbsuhlas'));
+				validatorObject.element(document.getElementById('tbPodiel152'));
 				errorValidateFocusOut = true;
 			}
 			return !iserr;
@@ -50392,6 +50385,17 @@ var retval = ((((Math.round(100.0000000000001*(t_tbpodiel152))>Math.round(100.00
 var retval = ("'r.152': má byť <= (0.02 resp 0.03 * r.124) ak platí, že (0.02 resp. 0.03 * r.124) >= 3.00 zaokrúhlené matematicky s presnosťou na dve desatinné miesta. Inak r.152 = 0. ("+(zaokruhli_matmj(2,(Math.round(100.0000000000001*(t_t124*(0.02+0.01*t_cbsplnam3per)))>=Math.round(100.0000000000001*(3.00 ))&&Math.round(100.0000000000001*( t_cbneuplatnujem))==Math.round(100.0000000000001*(0)))*zaokruhli_matmj(2,(((Math.round((((t_t124*(2+t_cbsplnam3per)))/100+0.00001)*100))/100)))))+")");
 				return retval; //;
 			}
+				
+			function vypocet_tbpodiel152_C4(sid) {
+			var t_tbico152 = hodnota(null, 'tbico152','n',sid,'layoutRow41539','s');
+			var t_tbpodiel152 = hodnota(null, 'tbPodiel152','n',sid,'layoutRow41539','d6.2');
+var retval = (((Math.round(100.0000000000001*(t_tbico152))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpodiel152))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbico152))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpodiel152))==Math.round(100.0000000000001*(0)))));
+				return retval;
+			}
+			function vypocet_tbpodiel152_T4(sid) {
+var retval = ("");
+				return retval; //;
+			}
 		function kontrola2_tbPodiel152(element, sid, dblclick) {		
 			if ($("#cmbRok").val() == '2026' && element.id !== 'tbPriezvisko18' && element.id !== 'tbMeno19' && element.id !== 'tbTitulPred20' && element.id !== 'tbTitulZa20' && element.id !== 't21_1RC' && element.id !== 't21_2RC' && element.id !== 'tbUlica22' && element.id !== 'tbCislo23' && element.id !== 'tbPSC24' && element.id !== 'tbObec25' && element.id !== 'tbStat26' && element.id !== 'tbTelCislo27' && element.id !== 'cmbRok' && element.id !== 'tbEmail28') return;		
 			
@@ -50413,6 +50417,12 @@ var retval = ("'r.152': má byť <= (0.02 resp 0.03 * r.124) ak platí, že (0.0
 			if (!iserr && !vypocet_tbpodiel152_C1(sid))
 			{
 				validatorObject.settings.messages['tbPodiel152']['customW'] = vypocet_tbpodiel152_T1(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_tbpodiel152_C4(sid))
+			{
+				validatorObject.settings.messages['tbPodiel152']['customW'] = vypocet_tbpodiel152_T4(sid);
 				iserr = true;
 			}
 			if (errorValidateFocusOut) {
@@ -50480,6 +50490,17 @@ var retval = ((((Math.round(100.0000000000001*(t_tbpodiel152))>Math.round(100.00
 			var t_cbsplnam3per = hodnota(null, 'cbSplnam3Per','n',sid,'layoutRow41539','b');
 			var t_cbneuplatnujem = hodnota(null, 'cbNeuplatnujem','n',sid,'layoutRow41539','b');
 var retval = ("'r.152': má byť <= (0.02 resp 0.03 * r.124) ak platí, že (0.02 resp. 0.03 * r.124) >= 3.00 zaokrúhlené matematicky s presnosťou na dve desatinné miesta. Inak r.152 = 0. ("+(zaokruhli_matmj(2,(Math.round(100.0000000000001*(t_t124*(0.02+0.01*t_cbsplnam3per)))>=Math.round(100.0000000000001*(3.00 ))&&Math.round(100.0000000000001*( t_cbneuplatnujem))==Math.round(100.0000000000001*(0)))*zaokruhli_matmj(2,(((Math.round((((t_t124*(2+t_cbsplnam3per)))/100+0.00001)*100))/100)))))+")");
+				return retval; //;
+			}
+				
+			function vypocet_tbpodiel152_C4(sid) {
+			var t_tbico152 = hodnota(null, 'tbico152','n',sid,'layoutRow41539','s');
+			var t_tbpodiel152 = hodnota(null, 'tbPodiel152','n',sid,'layoutRow41539','d6.2');
+var retval = (((Math.round(100.0000000000001*(t_tbico152))>Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpodiel152))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_tbico152))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_tbpodiel152))==Math.round(100.0000000000001*(0)))));
+				return retval;
+			}
+			function vypocet_tbpodiel152_T4(sid) {
+var retval = ("");
 				return retval; //;
 			}
 		function kontrola_tbRodneCislo153A_1(element, sid, dblclick) {		
