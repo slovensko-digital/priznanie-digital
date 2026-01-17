@@ -29,7 +29,9 @@ const MAX_ZAKLAD_DANE = new Decimal(25_426.27)
 
 export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
+const CHILD_BONUS_AGE_DIVIDER = 15
 export const MAX_CHILD_AGE_BONUS = 18
+const HIGH_INCOME_THRESHOLD = new Decimal(25740)
 
 const ZIVOTNE_MINIMUM_NASOBOK = new Decimal(12_110.36)
 
@@ -49,6 +51,7 @@ export const PARTNER_MAX_ODPOCET = 5_260.61
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const UROKY_POCET_ROKOV = 5
+// do 2024 iba 400 od 2024 1200
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY = 400
 const DANOVY_BONUS_NA_ZAPLATENE_UROKY_2024 = 1200
 const HRANICA_ZDANITELNEHO_PRIJMU = new Decimal(2_876.9)
@@ -600,6 +603,68 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       }
     },
     get danovyBonusNaDieta() {
+      // Compute zakladDane first to determine which algorithm to use
+      let zakladDane
+      if (this.partner_bonus_na_deti) {
+        zakladDane = this.r116a
+      } else {
+        zakladDane = this.r038.plus(this.r045)
+      }
+      zakladDane = round(zakladDane)
+
+      let danovyBonus = new Decimal(0)
+      let nevyuzityDanovyBonus = new Decimal(0)
+
+      // High-income reduction algorithm (when zakladDane > 25740)
+      if (zakladDane.greaterThan(HIGH_INCOME_THRESHOLD)) {
+        const basePom = zakladDane.minus(HIGH_INCOME_THRESHOLD).div(10).div(12)
+
+        for (const child of this.r033) {
+          const { mesiaceDo15, mesiaceOd15 } = getMonthsByAgeCategory(child)
+
+          if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
+            continue
+          }
+
+          // Determine whether to round basePom
+          const pom =
+            mesiaceDo15 === 12 || mesiaceOd15 === 12 ? basePom : round(basePom)
+
+          // Calculate reductions
+          const znizenieDo15 = round(pom.times(mesiaceDo15))
+          const znizenieOd15 = round(pom.times(mesiaceOd15))
+
+          // Calculate base amounts
+          const sumaDo15 = new Decimal(mesiaceDo15).times(
+            CHILD_RATE_FIFTEEN_AND_YOUNGER,
+          )
+          const sumaOd15 = new Decimal(mesiaceOd15).times(
+            CHILD_RATE_FIFTEEN_AND_OLDER,
+          )
+
+          // Apply reduction (floor at 0)
+          const vysledokDo15 = Decimal.max(
+            new Decimal(0),
+            sumaDo15.minus(znizenieDo15),
+          )
+          const vysledokOd15 = Decimal.max(
+            new Decimal(0),
+            sumaOd15.minus(znizenieOd15),
+          )
+
+          const rawBonus = sumaDo15.plus(sumaOd15)
+          const vysledokDieta = round(vysledokDo15.plus(vysledokOd15))
+
+          danovyBonus = danovyBonus.plus(vysledokDieta)
+          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(
+            rawBonus.minus(vysledokDieta),
+          )
+        }
+
+        return { danovyBonus: round(danovyBonus), nevyuzityDanovyBonus }
+      }
+
+      // Standard algorithm (percentage limit based on child count)
       const months = [
         Months.January,
         Months.February,
@@ -633,9 +698,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         monthGroups[index].push(month)
       }
 
-      let danovyBonus = new Decimal(0)
-      let nevyuzityDanovyBonus = new Decimal(0)
-
       for (const monthGroup of monthGroups) {
         const pocetMesiacovVSkupine = monthGroup.length
         let partialSum = new Decimal(0)
@@ -646,14 +708,6 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           }
         }
 
-        let zakladDane
-        if (this.partner_bonus_na_deti) {
-          zakladDane = this.r116a
-        } else {
-          zakladDane = this.r038.plus(this.r045)
-        }
-
-        zakladDane = round(zakladDane)
         const percentLimit = getPercentualnyLimitNaDeti(monthGroup[0].count)
         let limit = round(zakladDane.times(percentLimit))
 
@@ -881,10 +935,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      // TODO: figure out what this field is
-      return this.r072_pred_znizenim
+      return this.r036.plus(this.r039).plus(this.t1r11s1)
     },
     get r146a() {
+      // v nasom pripade by 146 a 146a mali byt vzdy rovnake
       return this.r146
     },
     get r151() {
@@ -1016,7 +1070,7 @@ const getRate = (month: Months, child: Child) => {
   )
 
   const rate =
-    age < 18
+    age < CHILD_BONUS_AGE_DIVIDER
       ? new Decimal(CHILD_RATE_FIFTEEN_AND_YOUNGER)
       : new Decimal(CHILD_RATE_FIFTEEN_AND_OLDER)
 
@@ -1058,6 +1112,45 @@ const getRate = (month: Months, child: Child) => {
   }
 
   return new Decimal(0)
+}
+
+const getMonthsByAgeCategory = (
+  child: Child,
+): { mesiaceDo15: number; mesiaceOd15: number } => {
+  let mesiaceDo15 = 0
+  let mesiaceOd15 = 0
+
+  const months = [
+    { month: Months.January, flag: child.m01 },
+    { month: Months.February, flag: child.m02 },
+    { month: Months.March, flag: child.m03 },
+    { month: Months.April, flag: child.m04 },
+    { month: Months.May, flag: child.m05 },
+    { month: Months.June, flag: child.m06 },
+    { month: Months.July, flag: child.m07 },
+    { month: Months.August, flag: child.m08 },
+    { month: Months.September, flag: child.m09 },
+    { month: Months.October, flag: child.m10 },
+    { month: Months.November, flag: child.m11 },
+    { month: Months.December, flag: child.m12 },
+  ]
+
+  for (const { month, flag } of months) {
+    if (child.m00 || flag) {
+      const age = getRodneCisloAgeAtYearAndMonth(
+        child.rodneCislo,
+        TAX_YEAR,
+        month - 1,
+      )
+      if (age < CHILD_BONUS_AGE_DIVIDER) {
+        mesiaceDo15++
+      } else if (age < MAX_CHILD_AGE_BONUS) {
+        mesiaceOd15++
+      }
+    }
+  }
+
+  return { mesiaceDo15, mesiaceOd15 }
 }
 
 const getPocetDetivMesiaci = (deti: TaxForm['r033'], month: Months): number => {

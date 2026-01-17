@@ -129,9 +129,6 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
               Príjem zo zahraničia (s výnimkou príjmov zo živnosti -
               poskytovanie služieb)
             </li>
-            <li>
-              Daňový bonus zo zvýšenia zaplatenej splátky úveru na bývanie
-            </li>
             <li>Daňové straty</li>
             <li>SZČO starobní dôchodcovia</li>
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
