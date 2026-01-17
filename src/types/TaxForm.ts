@@ -233,14 +233,14 @@ export interface TaxForm {
   suma_2_percenta: Decimal
   /** 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   suma_3_percenta: Decimal
-  /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  r151: Decimal
-
-  r152?: {
+  r151: {
     ico: string
     obchMeno: string
     suhlasZaslUdaje: boolean
   }
+  
+  /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
+  r152?: Decimal
 
   r153?: {
     rodicA: Rodic

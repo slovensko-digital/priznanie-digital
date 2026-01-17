@@ -213,9 +213,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
       !taxForm.XIIoddiel_uplatnujem2percenta,
     )
     form.dokument.telo.r151.splnam3per = boolToString(taxForm.splnam3per)
-    form.dokument.telo.r151.ico = taxForm.r152.ico
-    form.dokument.telo.r151.obchMeno.riadok = [taxForm.r152.obchMeno]
-    form.dokument.telo.r151.suhlasSoZaslanim = boolToString(taxForm.r152.suhlasZaslUdaje)
+    form.dokument.telo.r151.ico = taxForm.r151.ico
+    form.dokument.telo.r151.obchMeno.riadok = [taxForm.r151.obchMeno]
+    form.dokument.telo.r151.suhlasSoZaslanim = boolToString(taxForm.r151.suhlasZaslUdaje)
+    form.dokument.telo.r152 = decimalToString(taxForm.r152)
   }
 
   if (
