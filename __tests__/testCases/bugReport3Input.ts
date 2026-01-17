@@ -70,6 +70,6 @@ export const bugReport3Input: E2eTestUserInput = {
     r005_meno: 'anon',
   },
 
-  percent2: '33,16',
+  percent2: '24,84',
   percent3: '72,79',
 }
