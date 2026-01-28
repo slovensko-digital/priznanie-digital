@@ -4445,56 +4445,41 @@ function inliner117(element,sid) {
                                     else if (rozdiel < 18) mesiaceOd15++;
                                 }
 
-                                // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
-                                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
-                                    continue;
-                                }
-
-                // výpočet pom = mesačné zníženie na 1 dieťa
-                var basePom = Big(rBase - 25740).div(10).div(12);
-                var pom;
-
-                if (mesiaceDo15 === 12 || mesiaceOd15 === 12) {
-                    pom = basePom;
-                } else {
-                    pom = basePom.round(2, 1);
-                }
-
-                // zníženie
-                var znizenieDo15 = pom.times(mesiaceDo15).round(2, 1);
-                var znizenieOd15 = pom.times(mesiaceOd15).round(2, 1);
-
-                // základné sumy
-                var sumaDo15 = mesiaceDo15 * 100; 
-                var sumaOd15 = mesiaceOd15 * 50;  
-
-                // výpočet segmentov so všetkými pravidlami (0 ak záporné, ak znizenie 0 → neredukuj)
-                var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
-                var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
-
-                var vysledokDieta = vysledokDo15.plus(vysledokOd15);
-                if (vysledokDieta.lt(0)) {
-                    vysledokDieta = Big(0);
-                }
-                vysledokDieta = vysledokDieta.round(2, 1);
-
-                // pripočítam do celkovej DB
-                sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
-            }
-        }
-
+     // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
+    if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
+        continue;
     }
 
+        var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
+
+        var celyRok = (mesiaceDo15 === 12 || mesiaceOd15 === 12);
+
+        var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
+
+        var sumaDo15 = mesiaceDo15 * 100;
+        var sumaOd15 = mesiaceOd15 * 50;
+
+        var znizenieDo15 = celyRok ? pom : pom.times(mesiaceDo15).round(2, 1);
+        var znizenieOd15 = celyRok ? pom : pom.times(mesiaceOd15).round(2, 1);
+
+        // výsledky
+        var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
+        var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
+
+        // spolu pre dieťa
+        var vysledokDieta = vysledokDo15.plus(vysledokOd15);
+        if (vysledokDieta.lt(0)) {
+            vysledokDieta = Big(0);
+        }
+        vysledokDieta = vysledokDieta.round(2, 1);
+
+        // pripočítam do celkovej DB
+        sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
+    }
+}
+    }
 
     sumaDB = Big(Number(sumaDB) || 0).round(2, 1);
-
- /*
-if (typeof t117 !== 'undefined' || t117 != 0) {
-  if (t117 < sumaDB) {
-   sumaDB = t117;
-  }
- }
-*/
 
 
     return sumaDB.toFixed(2);
@@ -40392,7 +40377,7 @@ var retval = ((Math.round(100.0000000000001*(t_t81))==Math.round(100.00000000000
 			}
 			function vypocet_t81_T1(sid) {
 			var t_t80 = hodnota(null, 't80','n',sid,'layoutRow41539','d12.2');
-var retval = ("'r. 81': má byť výsledkom r. 80 * 0,19 ak platí, že  r. 80 je väčší ako 0 a súčasne menší alebo rovný 48 441,43. Ak platí, že je r. 80 väčší ako 48 441,43 potom r.81  je  výsledkom 47 537,98* 0,19 + (r. 80 - 48 441,43) * 0,25. Inak r. 81 je rovný 0. Suma sa zaokrúhľuje matematicky s presnosťou na dve desatinné miesta. ("+(zaokruhli_matmj(2,(((Math.round(100.0000000000001*(t_t80))<=Math.round(100.0000000000001*(48441.43)))*(Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(0)))*((Math.round(((0.19*t_t80)+0.00001)*100))/100))+((Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(48441.43)))*(((Math.round(((0.19*48441.43)+0.00001)*100))/100)+((Math.round(((0.25*(t_t80-48441.43))+0.00001)*100))/100))))))+") ");
+var retval = ("'r. 81': má byť výsledkom r. 80 * 0,19 ak platí, že  r. 80 je väčší ako 0 a súčasne menší alebo rovný 48 441,43. Ak platí, že je r. 80 väčší ako 48 441,43 potom r.81  je  výsledkom 48 441,43* 0,19 + (r. 80 - 48 441,43) * 0,25. Inak r. 81 je rovný 0. Suma sa zaokrúhľuje matematicky s presnosťou na dve desatinné miesta. ("+(zaokruhli_matmj(2,(((Math.round(100.0000000000001*(t_t80))<=Math.round(100.0000000000001*(48441.43)))*(Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(0)))*((Math.round(((0.19*t_t80)+0.00001)*100))/100))+((Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(48441.43)))*(((Math.round(((0.19*48441.43)+0.00001)*100))/100)+((Math.round(((0.25*(t_t80-48441.43))+0.00001)*100))/100))))))+") ");
 				return retval; //;
 			}
 		function kontrola_t80(element, sid, dblclick) {		
