@@ -81,12 +81,18 @@ const executeTestCase = (testCase: string) => {
         cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
         /**  SECTION Prijmy a vydavky */
-        getInput('t1r10_prijmy').type(input.t1r10_prijmy)
-        getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
-        getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
-        getInput('zaplatenePreddavky').type(
-          input.zaplatenePreddavky ? input.zaplatenePreddavky : '0',
-        )
+
+        if (input.prijem_zo_zivnosti) {
+          getInput('prijem_zo_zivnosti', '-yes').click()
+          getInput('t1r10_prijmy').type(input.t1r10_prijmy)
+          getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
+          getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
+          getInput('zaplatenePreddavky').type(
+            input.zaplatenePreddavky ? input.zaplatenePreddavky : '0',
+          )
+        } else {
+          getInput('prijem_zo_zivnosti', '-no').click()
+        }
 
         next()
 

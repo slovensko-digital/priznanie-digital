@@ -88,6 +88,7 @@ export interface TaxFormUserInput {
 
   /** SECTION Prijmy a poistenie  */
   // TODO: rename t1r10_prijmy to t1r2_prijmy
+  prijem_zo_zivnosti: boolean
   t1r10_prijmy: string
   priloha3_r11_socialne: string
   priloha3_r13_zdravotne: string

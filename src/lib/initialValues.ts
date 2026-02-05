@@ -15,6 +15,7 @@ import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
+  prijem_zo_zivnosti: undefined,
   t1r10_prijmy: '',
   priloha3_r11_socialne: '',
   priloha3_r13_zdravotne: '',
