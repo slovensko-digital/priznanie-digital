@@ -3,6 +3,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 // https://trello.com/c/7nXCramK/146-testovanie-chyby-pau%C5%A1%C3%A1lne-v%C3%BDdavky-a-strata
 
 export const bugReport4Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '5000',
   priloha3_r13_zdravotne: '5000',
   r005_meno: 'Fake',

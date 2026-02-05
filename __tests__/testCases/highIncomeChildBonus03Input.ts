@@ -28,6 +28,7 @@ import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
  */
 export const highIncomeChildBonus03Input: E2eTestUserInput = {
   // SZCO income (self-employed)
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '15000',
   priloha3_r11_socialne: '800',
   priloha3_r13_zdravotne: '400',

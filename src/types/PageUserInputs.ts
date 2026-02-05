@@ -3,6 +3,7 @@ import { PostponeUserInput } from './PostponeUserInput'
 
 export type IncomeAndExpenseUserInput = Pick<
   TaxFormUserInput,
+  | 'prijem_zo_zivnosti'
   | 't1r10_prijmy'
   | 'priloha3_r11_socialne'
   | 'priloha3_r13_zdravotne'

@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202202bInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '78000',
   priloha3_r11_socialne: '2253.36',
   priloha3_r13_zdravotne: '951.72',
