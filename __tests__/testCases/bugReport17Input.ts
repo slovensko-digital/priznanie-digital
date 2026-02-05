@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport17Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '13062.35',
   priloha3_r11_socialne: '3004.34',
   priloha3_r13_zdravotne: '3788.08',

@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const withEmploymentBonusInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '435.22',
   priloha3_r13_zdravotne: '217.33',
   r001_dic: '233123123',
