@@ -4445,56 +4445,41 @@ function inliner117(element,sid) {
                                     else if (rozdiel < 18) mesiaceOd15++;
                                 }
 
-                                // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
-                                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
-                                    continue;
-                                }
-
-                // výpočet pom = mesačné zníženie na 1 dieťa
-                var basePom = Big(rBase - 25740).div(10).div(12);
-                var pom;
-
-                if (mesiaceDo15 === 12 || mesiaceOd15 === 12) {
-                    pom = basePom;
-                } else {
-                    pom = basePom.round(2, 1);
-                }
-
-                // zníženie
-                var znizenieDo15 = pom.times(mesiaceDo15).round(2, 1);
-                var znizenieOd15 = pom.times(mesiaceOd15).round(2, 1);
-
-                // základné sumy
-                var sumaDo15 = mesiaceDo15 * 100; 
-                var sumaOd15 = mesiaceOd15 * 50;  
-
-                // výpočet segmentov so všetkými pravidlami (0 ak záporné, ak znizenie 0 → neredukuj)
-                var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
-                var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
-
-                var vysledokDieta = vysledokDo15.plus(vysledokOd15);
-                if (vysledokDieta.lt(0)) {
-                    vysledokDieta = Big(0);
-                }
-                vysledokDieta = vysledokDieta.round(2, 1);
-
-                // pripočítam do celkovej DB
-                sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
-            }
-        }
-
+     // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
+    if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
+        continue;
     }
 
+        var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
+
+        var celyRok = (mesiaceDo15 === 12 || mesiaceOd15 === 12);
+
+        var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
+
+        var sumaDo15 = mesiaceDo15 * 100;
+        var sumaOd15 = mesiaceOd15 * 50;
+
+        var znizenieDo15 = celyRok ? pom : pom.times(mesiaceDo15).round(2, 1);
+        var znizenieOd15 = celyRok ? pom : pom.times(mesiaceOd15).round(2, 1);
+
+        // výsledky
+        var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
+        var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
+
+        // spolu pre dieťa
+        var vysledokDieta = vysledokDo15.plus(vysledokOd15);
+        if (vysledokDieta.lt(0)) {
+            vysledokDieta = Big(0);
+        }
+        vysledokDieta = vysledokDieta.round(2, 1);
+
+        // pripočítam do celkovej DB
+        sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
+    }
+}
+    }
 
     sumaDB = Big(Number(sumaDB) || 0).round(2, 1);
-
- /*
-if (typeof t117 !== 'undefined' || t117 != 0) {
-  if (t117 < sumaDB) {
-   sumaDB = t117;
-  }
- }
-*/
 
 
     return sumaDB.toFixed(2);
@@ -12376,6 +12361,9 @@ kontrola_R4_50(document.activeElement,'-1',2);
 $("#R4_50a").live('dblclick', function() {
 kontrola_R4_50a(document.activeElement,'-1',2);
 });
+$("#t146a").live('dblclick', function() {
+kontrola_t146a(document.activeElement,'-1',2);
+});
 $("#tbPr3_03").live('dblclick', function() {
 kontrola_tbPr3_03(document.activeElement,'-1',2);
 });
@@ -12579,19 +12567,14 @@ var retval = ("Druh daňového priznania je povinný údaj.");
 			return hodnota(element, 't146','n',sid,'layoutRow41539');
 		}
 		function vypocet_t146(sid) {
-						var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+						var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
 			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
 			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
 			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
 			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
 			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
 			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
-			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
-			var t_t74 = hodnota(null, 't74','n',sid,'layoutRow41539','d12.2');
-			var t_t75 = hodnota(null, 't75','n',sid,'layoutRow41539','d12.2');
-			var t_t123 = hodnota(null, 't123','n',sid,'layoutRow41539','d12.2');
-			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow41539','b');
-var retval = ((((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+((Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*0+((Math.round(100.0000000000001*(t_t74))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))>=Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*t_t146)));
+var retval = ((((Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))*t_t146)));
 			return retval;
 		}
 				
@@ -12606,18 +12589,18 @@ var retval = ("'r. 146': má byť >=0");
 			}
 				
 			function vypocet_t146_C1(sid) {
-			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
 			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
 			var t_t74 = hodnota(null, 't74','n',sid,'layoutRow41539','d12.2');
 			var t_t75 = hodnota(null, 't75','n',sid,'layoutRow41539','d12.2');
 			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
 			var t_t123 = hodnota(null, 't123','n',sid,'layoutRow41539','d12.2');
 			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow41539','b');
-var retval = ((((Math.round(100.0000000000001*(t_t146))>Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(1)))))||((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t75))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t123))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(0)))))||((Math.round(100.0000000000001*(t_t146))>Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_t146))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))));
+			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
+var retval = (((((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(1))))&&Math.round(100.0000000000001*(t_t146))>Math.round(100.0000000000001*(0)))||((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_t146))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t75))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t123))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
 			function vypocet_t146_T1(sid) {
-var retval = ("'r. 146': musí byť vyplnený ak daňovník je nerezident (zaškrtnutý r. 12  na 1. strane) a súčasne je vyplnený r. 74 alebo r. 75, alebo r. 117 alebo r. 123 alebo je zaškrtnuté pole 29. R.146 musí byť vyplnený ak daňovník je rezident, tzn. nie je zaškrtnutý r. 12  na 1. strane a súčasne je vyplnený r. 117. Daňovník uvedie úhrnnú sumu všetkých zdaniteľných príjmov, ktoré mu plynuli zo zdrojov na území SR aj v zahraničí vrátane príjmov, z ktorých sa daň vyberá zrážkou.");
+var retval = ("'r. 146': Ak daňovník je nerezident a súčasne je vyplnený r. 74 alebo r. 75, alebo r. 117 alebo r. 123 alebo je zaškrtnuté pole 29 potom r. 146 musí byť vyplnený. Ak daňovník je rezident a súčasne je vyplnený r. 117, potom r. 146 musí byť vyplnený. Daňovník uvedie úhrnnú sumu všetkých zdaniteľných príjmov, ktoré mu plynuli zo zdrojov na území SR aj v zahraničí vrátane príjmov, z ktorých sa daň vyberá zrážkou.");
 				return retval; //;
 			}
 				
@@ -12666,34 +12649,24 @@ var retval = ("");
 				
 			function vypocet_t146_C4(sid) {
 			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
-			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
 			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
 			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
 			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
 			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
 			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
-			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
-			var t_t74 = hodnota(null, 't74','n',sid,'layoutRow41539','d12.2');
-			var t_t75 = hodnota(null, 't75','n',sid,'layoutRow41539','d12.2');
-			var t_t123 = hodnota(null, 't123','n',sid,'layoutRow41539','d12.2');
-			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow41539','b');
-var retval = ((Math.round(100.0000000000001*(t_t146))==Math.round(100.0000000000001*(((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+((Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*0+((Math.round(100.0000000000001*(t_t74))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))>=Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*t_t146)))));
+var retval = ((Math.round(100.0000000000001*(t_t146))==Math.round(100.0000000000001*(((Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))*t_t146)))));
 				return retval;
 			}
 			function vypocet_t146_T4(sid) {
-			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
 			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
 			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
 			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
 			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
 			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
 			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
-			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
-			var t_t74 = hodnota(null, 't74','n',sid,'layoutRow41539','d12.2');
-			var t_t75 = hodnota(null, 't75','n',sid,'layoutRow41539','d12.2');
-			var t_t123 = hodnota(null, 't123','n',sid,'layoutRow41539','d12.2');
-			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow41539','b');
-var retval = ("'r. 146':  má byť výsledkom  max(r.36+r.58+r.66+r.69+r.95,r.146) ak je zaškrtnuté políčko nerezident. Inak ak r.117=0 potom r.146=0. ("+(((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+((Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*0+((Math.round(100.0000000000001*(t_t74))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>=Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))>=Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))*t_t146))+")");
+var retval = ("'r. 146': má byť výsledkom MAX(r.36+r.58+r.66+r.69+r.95,r.146). ("+(((Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146)+(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))*t_t146))+")");
 				return retval; //;
 			}
 				
@@ -13677,6 +13650,7 @@ var retval = ("Príloha č.4 : dátum nesmie byť vyšší ako aktuálny dátum"
 				validatorObject.element(document.getElementById('t119'));
 				validatorObject.element(document.getElementById('t123'));
 				validatorObject.element(document.getElementById('t124'));
+				validatorObject.element(document.getElementById('t146a'));
 				validatorObject.element(document.getElementById('t146'));
 				errorValidateFocusOut = true;
 			}
@@ -16141,6 +16115,7 @@ var retval = ("");
 				validatorObject.element(document.getElementById('t117'));
 				validatorObject.element(document.getElementById('t123'));
 				validatorObject.element(document.getElementById('t124'));
+				validatorObject.element(document.getElementById('t146a'));
 				validatorObject.element(document.getElementById('t146'));
 				errorValidateFocusOut = true;
 			}
@@ -17525,6 +17500,7 @@ var retval = ("'r.12 s.1 tab.2': má byť >=0");
 				validatorObject.element(document.getElementById('t117'));
 				validatorObject.element(document.getElementById('t123'));
 				validatorObject.element(document.getElementById('t124'));
+				validatorObject.element(document.getElementById('t146a'));
 				validatorObject.element(document.getElementById('t146'));
 				errorValidateFocusOut = true;
 			}
@@ -19171,6 +19147,7 @@ var retval = ("'r.19 s.2 tab.3': má byť  maximálne do výšky r.19/Príjmy v 
 				validatorObject.element(document.getElementById('t117'));
 				validatorObject.element(document.getElementById('t123'));
 				validatorObject.element(document.getElementById('t124'));
+				validatorObject.element(document.getElementById('t146a'));
 				validatorObject.element(document.getElementById('t146'));
 				errorValidateFocusOut = true;
 			}
@@ -39357,6 +39334,7 @@ var retval = ("'XIII.oddiel Výška príspevku na rekreáciu': Daňovník s prí
 				validatorObject.element(document.getElementById('t96'));
 				validatorObject.element(document.getElementById('t99'));
 				validatorObject.element(document.getElementById('t123'));
+				validatorObject.element(document.getElementById('t146a'));
 				validatorObject.element(document.getElementById('t146'));
 				errorValidateFocusOut = true;
 			}
@@ -40392,7 +40370,7 @@ var retval = ((Math.round(100.0000000000001*(t_t81))==Math.round(100.00000000000
 			}
 			function vypocet_t81_T1(sid) {
 			var t_t80 = hodnota(null, 't80','n',sid,'layoutRow41539','d12.2');
-var retval = ("'r. 81': má byť výsledkom r. 80 * 0,19 ak platí, že  r. 80 je väčší ako 0 a súčasne menší alebo rovný 48 441,43. Ak platí, že je r. 80 väčší ako 48 441,43 potom r.81  je  výsledkom 47 537,98* 0,19 + (r. 80 - 48 441,43) * 0,25. Inak r. 81 je rovný 0. Suma sa zaokrúhľuje matematicky s presnosťou na dve desatinné miesta. ("+(zaokruhli_matmj(2,(((Math.round(100.0000000000001*(t_t80))<=Math.round(100.0000000000001*(48441.43)))*(Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(0)))*((Math.round(((0.19*t_t80)+0.00001)*100))/100))+((Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(48441.43)))*(((Math.round(((0.19*48441.43)+0.00001)*100))/100)+((Math.round(((0.25*(t_t80-48441.43))+0.00001)*100))/100))))))+") ");
+var retval = ("'r. 81': má byť výsledkom r. 80 * 0,19 ak platí, že  r. 80 je väčší ako 0 a súčasne menší alebo rovný 48 441,43. Ak platí, že je r. 80 väčší ako 48 441,43 potom r.81  je  výsledkom 48 441,43* 0,19 + (r. 80 - 48 441,43) * 0,25. Inak r. 81 je rovný 0. Suma sa zaokrúhľuje matematicky s presnosťou na dve desatinné miesta. ("+(zaokruhli_matmj(2,(((Math.round(100.0000000000001*(t_t80))<=Math.round(100.0000000000001*(48441.43)))*(Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(0)))*((Math.round(((0.19*t_t80)+0.00001)*100))/100))+((Math.round(100.0000000000001*(t_t80))>Math.round(100.0000000000001*(48441.43)))*(((Math.round(((0.19*48441.43)+0.00001)*100))/100)+((Math.round(((0.25*(t_t80-48441.43))+0.00001)*100))/100))))))+") ");
 				return retval; //;
 			}
 		function kontrola_t80(element, sid, dblclick) {		
@@ -48148,6 +48126,18 @@ var retval = ("'r. 54a': uvádza sa uplatnenie daňovej straty vykázanej rok 20
 				validatorObject.settings.messages['t146a']['customW'] = vypocet_t146a_T3(sid);
 				iserr = true;
 			}
+				
+			if (!iserr && !vypocet_t146a_C4(sid))
+			{
+				validatorObject.settings.messages['t146a']['customW'] = vypocet_t146a_T4(sid);
+				iserr = true;
+			}
+				
+			if (!iserr && !vypocet_t146a_C5(sid))
+			{
+				validatorObject.settings.messages['t146a']['customW'] = vypocet_t146a_T5(sid);
+				iserr = true;
+			}
 			if (errorValidateFocusOut) {
 				errorValidateFocusOut = false;
 				validatorObject.element(document.getElementById('cbNerezident'));
@@ -48168,7 +48158,16 @@ var retval = ("'r. 54a': uvádza sa uplatnenie daňovej straty vykázanej rok 20
 			return hodnota(element, 't146a','n',sid,'layoutRow41539');
 		}
 		function vypocet_t146a(sid) {
-			return hodnota_t146a(null, sid);
+						var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
+			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
+			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
+			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
+			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
+			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
+			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
+var retval = ((((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146a)+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))))*t_t146a+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))))*t_t146a)));
+			return retval;
 		}
 				
 			function vypocet_t146a_C0(sid) {
@@ -48201,27 +48200,63 @@ var retval = ("'r. 146a': má byť >=0");
 			}
 				
 			function vypocet_t146a_C2(sid) {
-			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
 			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
 			var t_t74 = hodnota(null, 't74','n',sid,'layoutRow41539','d12.2');
 			var t_t75 = hodnota(null, 't75','n',sid,'layoutRow41539','d12.2');
 			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
 			var t_t123 = hodnota(null, 't123','n',sid,'layoutRow41539','d12.2');
 			var t_cbr29 = hodnota(null, 'cbr29','n',sid,'layoutRow41539','b');
-var retval = ((((Math.round(100.0000000000001*(t_t146a))>Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(1)))))||((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t75))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t123))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(0)))))||((Math.round(100.0000000000001*(t_t146a))>Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_t146a))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0)))));
+			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
+var retval = (((((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t75))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_t123))>Math.round(100.0000000000001*(0))||Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(1))))&&Math.round(100.0000000000001*(t_t146a))>Math.round(100.0000000000001*(0)))||((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0)))&&Math.round(100.0000000000001*(t_t146a))>Math.round(100.0000000000001*(0)))||(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1))&&(Math.round(100.0000000000001*(t_t74))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t75))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t123))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_cbr29))==Math.round(100.0000000000001*(0))))||(Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0))&&Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))))));
 				return retval;
 			}
 			function vypocet_t146a_T2(sid) {
-var retval = ("'r. 146a': musí byť vyplnený ak daňovník je nerezident (zaškrtnutý r. 12  na 1. strane) a súčasne je vyplnený r. 74 alebo r. 75, alebo r. 117 alebo r. 123 alebo je zaškrtnuté pole 29. R.146a musí byť vyplnený ak daňovník je rezident, tzn. nie je zaškrtnutý r. 12  na 1. strane a súčasne je vyplnený r. 117. Daňovník uvedie úhrnnú sumu všetkých zdaniteľných príjmov, ktoré mu plynuli zo zdrojov na území SR vrátane príjmov, z ktorých sa daň vyberá zrážkou.");
+var retval = ("'r. 146a': Ak daňovník je nerezident a súčasne je vyplnený r. 74 alebo r. 75, alebo r. 117 alebo r. 123 alebo je zaškrtnuté pole 29 potom r. 146a musí byť vyplnený. Ak daňovník je rezident a súčasne je vyplnený r. 117, potom r. 146a musí byť vyplnený. Daňovník uvedie úhrnnú sumu všetkých zdaniteľných príjmov, ktoré mu plynuli zo zdrojov na území SR aj v zahraničí vrátane príjmov, z ktorých sa daň vyberá zrážkou.");
 				return retval; //;
 			}
 				
 			function vypocet_t146a_C3(sid) {
-var retval = ((Math.round(100.0000000000001*(inliner146r146ar33('t146a',sid)))==Math.round(100.0000000000001*(0))));
+			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
+			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
+			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
+			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
+			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
+			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
+			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
+var retval = ((Math.round(100.0000000000001*(t_t146a))==Math.round(100.0000000000001*(((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146a)+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))))*t_t146a+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))))*t_t146a)))));
 				return retval;
 			}
 			function vypocet_t146a_T3(sid) {
+			var t_cbnerezident = hodnota(null, 'cbNerezident','n',sid,'layoutRow41539','b');
+			var t_r36 = hodnota(null, 'r36','n',sid,'layoutRow41539','d12.2');
+			var t_t95 = hodnota(null, 't95','n',sid,'layoutRow41539','d12.2');
+			var t_t58 = hodnota(null, 't58','n',sid,'layoutRow41539','d12.2');
+			var t_t66 = hodnota(null, 't66','n',sid,'layoutRow41539','d12.2');
+			var t_t69 = hodnota(null, 't69','n',sid,'layoutRow41539','d12.2');
+			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
+			var t_t117 = hodnota(null, 't117','n',sid,'layoutRow41539','d12.2');
+var retval = ("'r. 146a':  má byť výsledkom MAX(r.36+r.58+r.66+r.69+r.95,r.146a) ak je zaškrtnuté políčko nerezident. ("+(((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(1)))*Math.max((t_r36+t_t95+t_t58+t_t66+t_t69),t_t146a)+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))==Math.round(100.0000000000001*(0))))*t_t146a+((Math.round(100.0000000000001*(t_cbnerezident))==Math.round(100.0000000000001*(0)))&&(Math.round(100.0000000000001*(t_t117))>Math.round(100.0000000000001*(0))))*t_t146a))+")");
+				return retval; //;
+			}
+				
+			function vypocet_t146a_C4(sid) {
+var retval = ((Math.round(100.0000000000001*(inliner146r146ar33('t146a',sid)))==Math.round(100.0000000000001*(0))));
+				return retval;
+			}
+			function vypocet_t146a_T4(sid) {
 var retval = ("'r. 146a':Ak je vyplnený 'r33', potom musí byť vyplnený 'r146a'.");
+				return retval; //;
+			}
+				
+			function vypocet_t146a_C5(sid) {
+			var t_t146a = hodnota(null, 't146a','n',sid,'layoutRow41539','d12.2');
+			var t_t146 = hodnota(null, 't146','n',sid,'layoutRow41539','d12.2');
+var retval = ((Math.round(100.0000000000001*(t_t146a))<=Math.round(100.0000000000001*(t_t146))));
+				return retval;
+			}
+			function vypocet_t146a_T5(sid) {
+var retval = ("'r. 146a' musí byť nižší alebo rovný 'r. 146'.");
 				return retval; //;
 			}
 		function kontrola_tbPr3_02(element, sid, dblclick) {		
@@ -60873,7 +60908,7 @@ customW: ""
 											
 <div id="layoutCell167581" class="cell " >		
 			
-		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup>1)</sup></label><br />	
+		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie 1)</label><br />	
 		<div class="clear"></div>
 </div>							
 						
@@ -73172,7 +73207,7 @@ customW: ""
 											
 <div id="layoutCell168289" class="cell " >		
 			
-		<span class="fieldLabel" title=""  ><b><u><a href="form.601.prijimatelia_2025.html" target="_blank">(prehľad prijímateľov)</a></u></b> </span>	
+		<span class="fieldLabel" title=""  ><!--<b><u><a href="form.601.prijimatelia_2025.html" target="_blank">(prehľad prijímateľov)</a></u></b>--> </span>	
 		<div class="clear"></div>
 </div>							
 						
