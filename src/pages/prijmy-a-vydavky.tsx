@@ -39,7 +39,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
               <Form className="form" noValidate>
                 <ErrorSummary<IncomeAndExpenseUserInput> errors={errors} />
                 <BooleanRadio
-                  title={`Mali ste v roku ${TAX_YEAR} príjmy zo živnosti v SR?`}
+                  title={`Mali ste v roku ${TAX_YEAR} príjmy zo živnosti na území SR?`}
                   name="prijem_zo_zivnosti"
                 />
                 {values.prijem_zo_zivnosti && (
