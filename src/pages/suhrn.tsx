@@ -391,7 +391,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
           taxFormUserInput.dve_percenta_rodicom === 'obidvom'
             ? [
                 {
-                  title: 'Rodič A',
+                  title: 'Rodič 1',
                   value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
                 },
                 {
@@ -399,7 +399,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
                 },
                 {
-                  title: 'Rodič B',
+                  title: 'Rodič 2',
                   value: `${taxFormUserInput.dve_percenta_rodicB?.meno} ${taxFormUserInput.dve_percenta_rodicB?.priezvisko}`,
                 },
                 {
