@@ -376,6 +376,22 @@ export const validate = (values: DvePercentaRodicomUserInput): Errors => {
     if (Object.keys(rodicBErrors).length > 0) {
       errors.dve_percenta_rodicB = rodicBErrors
     }
+
+    // Check that both parents don't have the same rodné číslo (only if both are valid)
+    if (
+      values.dve_percenta_rodicA?.rodneCislo &&
+      values.dve_percenta_rodicB?.rodneCislo &&
+      validateRodneCislo(values.dve_percenta_rodicA.rodneCislo) &&
+      validateRodneCislo(values.dve_percenta_rodicB.rodneCislo) &&
+      values.dve_percenta_rodicA.rodneCislo ===
+        values.dve_percenta_rodicB.rodneCislo
+    ) {
+      if (!errors.dve_percenta_rodicB) {
+        errors.dve_percenta_rodicB = {}
+      }
+      errors.dve_percenta_rodicB.rodneCislo =
+        'Rodné číslo oboch rodičov nemôže byť rovnaké'
+    }
   }
 
   return errors
