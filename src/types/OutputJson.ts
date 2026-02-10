@@ -469,7 +469,7 @@ export interface R151 {
   splnam3per: string
   neuplatnujemPar50: string
   ico: string
-  obchMeno: {
+  obchodneMeno: {
     riadok: string[]
   }
   suhlasSoZaslanim: string
