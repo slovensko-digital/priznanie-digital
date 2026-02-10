@@ -187,6 +187,53 @@ describe('dve-percenta-rodicom', () => {
         expect(errors.dve_percenta_rodicB?.priezvisko).toBeUndefined()
         expect(errors.dve_percenta_rodicB?.rodneCislo).toBeUndefined()
       })
+
+      it('should return error when both parents have the same rodné číslo', () => {
+        const errors = validate({
+          dve_percenta_rodicom: 'obidvom',
+          dve_percenta_rodicA: {
+            meno: 'Ján',
+            priezvisko: 'Novák',
+            rodneCislo: '625412 / 2512',
+          },
+          dve_percenta_rodicB: {
+            meno: 'Mária',
+            priezvisko: 'Nováková',
+            rodneCislo: '625412 / 2512',
+          },
+          dve_percenta_rodicom_nahradna_starostlivost: false,
+        })
+        expect(errors.dve_percenta_rodicA).toBeUndefined()
+        expect(errors.dve_percenta_rodicB?.meno).toBeUndefined()
+        expect(errors.dve_percenta_rodicB?.priezvisko).toBeUndefined()
+        expect(errors.dve_percenta_rodicB?.rodneCislo).toBe(
+          'Rodné číslo oboch rodičov nemôže byť rovnaké',
+        )
+      })
+
+      it('should not return duplicate error when rodné číslo is also invalid', () => {
+        const errors = validate({
+          dve_percenta_rodicom: 'obidvom',
+          dve_percenta_rodicA: {
+            meno: 'Ján',
+            priezvisko: 'Novák',
+            rodneCislo: '123456789',
+          },
+          dve_percenta_rodicB: {
+            meno: 'Mária',
+            priezvisko: 'Nováková',
+            rodneCislo: '123456789',
+          },
+          dve_percenta_rodicom_nahradna_starostlivost: false,
+        })
+        // Invalid rodné číslo error takes precedence
+        expect(errors.dve_percenta_rodicA?.rodneCislo).toBe(
+          'Zadané rodné číslo nie je správne',
+        )
+        expect(errors.dve_percenta_rodicB?.rodneCislo).toBe(
+          'Zadané rodné číslo nie je správne',
+        )
+      })
     })
   })
 
