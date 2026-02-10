@@ -28,7 +28,7 @@ export const bugReport18Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0359153773',
+      rodneCislo: '1259158912',
       wholeYear: false,
       monthFrom: '5',
       monthTo: '10',
