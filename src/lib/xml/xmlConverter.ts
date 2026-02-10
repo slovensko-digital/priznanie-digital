@@ -37,9 +37,11 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r10.s1 = decimalToString(taxForm.t1r10_prijmy)
   form.dokument.telo.tabulka1.t1r10.s2 = decimalToString(taxForm.t1r10_vydavky)
 
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
-    taxForm.vydavkyPoistPar6ods11_ods1a2,
-  )
+  if (taxForm.t1r10_prijmy.greaterThan(0)) {
+    form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
+      taxForm.vydavkyPoistPar6ods11_ods1a2,
+    )
+  }
   if (taxForm.platil_prispevky_na_dochodok) {
     form.dokument.telo.r75 = decimalToString(
       taxForm.r075_zaplatene_prispevky_na_dochodok,

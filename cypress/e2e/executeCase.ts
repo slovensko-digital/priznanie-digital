@@ -379,9 +379,11 @@ const executeTestCase = (testCase: string) => {
 
         cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
 
-        cy.get('.govuk-table__cell').contains(
-          formatCurrency(parseInputNumber(input.t1r10_prijmy)),
-        )
+        if (input.prijem_zo_zivnosti) {
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseInputNumber(input.t1r10_prijmy)),
+          )
+        }
         cy.get('.govuk-table__cell').contains(input.r001_dic)
 
         next()
@@ -428,15 +430,17 @@ const executeTestCase = (testCase: string) => {
           .should('have.length', 1)
           .contains(formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber()))
 
-        cy.get('[data-test="pausalneVydavky"]')
-          .should('have.length', 1)
-          .contains(
-            formatCurrency(
-              taxForm.r040
-                .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
-                .toNumber(),
-            ),
-          )
+        if (input.prijem_zo_zivnosti) {
+          cy.get('[data-test="pausalneVydavky"]')
+            .should('have.length', 1)
+            .contains(
+              formatCurrency(
+                taxForm.r040
+                  .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
+                  .toNumber(),
+              ),
+            )
+        }
 
         cy.get('[data-test="zakladDane"]')
           .should('have.length', 1)
