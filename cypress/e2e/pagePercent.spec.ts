@@ -49,6 +49,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -254,6 +255,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -449,6 +451,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -581,6 +584,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
