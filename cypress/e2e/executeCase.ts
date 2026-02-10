@@ -431,15 +431,15 @@ const executeTestCase = (testCase: string) => {
           .contains(formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber()))
 
         if (input.prijem_zo_zivnosti) {
-        cy.get('[data-test="pausalneVydavky"]')
-          .should('have.length', 1)
-          .contains(
-            formatCurrency(
-              taxForm.r040
-                .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
-                .toNumber(),
-            ),
-          )
+          cy.get('[data-test="pausalneVydavky"]')
+            .should('have.length', 1)
+            .contains(
+              formatCurrency(
+                taxForm.r040
+                  .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
+                  .toNumber(),
+              ),
+            )
         }
 
         cy.get('[data-test="zakladDane"]')
