@@ -25,6 +25,7 @@ const skipPage = () => {
 const navigateToIneligibleDvePercentaRodicomPage = () => {
   // Navigate through the flow with low income to be ineligible for 2%
   cy.visit('/prijmy-a-vydavky')
+  getInput('prijem_zo_zivnosti', '-yes').click()
   getInput('t1r10_prijmy').type('100') // Very low income
   getInput('priloha3_r11_socialne').type('50')
   getInput('priloha3_r13_zdravotne').type('50')
@@ -58,6 +59,7 @@ const navigateToIneligibleDvePercentaRodicomPage = () => {
 const navigateToEligibleDvePercentaRodicomPage = () => {
   // Navigate through the flow with sufficient income to be eligible for 2%
   cy.visit('/prijmy-a-vydavky')
+  getInput('prijem_zo_zivnosti', '-yes').click()
   getInput('t1r10_prijmy').type(with2percentInput.t1r10_prijmy)
   getInput('priloha3_r11_socialne').type(
     with2percentInput.priloha3_r11_socialne,

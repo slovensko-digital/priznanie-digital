@@ -12,7 +12,7 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0060159913',
+      rodneCislo: '080722/5045',
       wholeYear: false,
       monthFrom: '3',
       monthTo: '7',
@@ -20,7 +20,7 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '000615/0716',
+      rodneCislo: '100314/4186',
       wholeYear: false,
       monthFrom: '0',
       monthTo: '7',
@@ -86,7 +86,7 @@ export const bugReport22Input: E2eTestUserInput = {
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '7',
   r035_zaplatene_uroky: '4328.81',

@@ -515,7 +515,7 @@ const sampleSchema: OutputJson = {
         splnam3per: '0',
         neuplatnujemPar50: '1',
         ico: '',
-        obchMeno: {
+        obchodneMeno: {
           riadok: [''],
         },
         suhlasSoZaslanim: '0',

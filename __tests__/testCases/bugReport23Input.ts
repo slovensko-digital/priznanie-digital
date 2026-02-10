@@ -12,7 +12,7 @@ export const bugReport23Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0209151899',
+      rodneCislo: '1103143811',
       wholeYear: false,
       monthFrom: '4',
       monthTo: '9',
