@@ -130,7 +130,7 @@ export const validateRoute = (
       value = postponeUserInput[requirement]
     } else {
       const requirements = {
-        '/zamestnanie': 't1r10_prijmy',
+        '/zamestnanie': 'prijem_zo_zivnosti',
         '/dohoda': 'employed',
         '/partner': 'dohoda',
         '/deti': 'r032_uplatnujem_na_partnera',
