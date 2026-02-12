@@ -657,7 +657,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
           danovyBonus = danovyBonus.plus(vysledokDieta)
         }
 
-        return { danovyBonus: round(danovyBonus), nevyuzityDanovyBonus: new Decimal(0) }
+        return {
+          danovyBonus: round(danovyBonus),
+          nevyuzityDanovyBonus: new Decimal(0),
+        }
       }
 
       // Standard algorithm (percentage limit based on child count)
