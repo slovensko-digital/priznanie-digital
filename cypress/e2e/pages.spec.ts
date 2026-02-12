@@ -12,6 +12,7 @@ import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
 import {
   MAX_CHILD_AGE_BONUS,
+  PARTNER_MAX_ODPOCET,
   TAX_YEAR,
   UROKY_POCET_ROKOV,
 } from '../../src/lib/calculation'
@@ -308,7 +309,7 @@ describe('Partner page', () => {
     // Fill out input with incorrect value (too high), continue to see ineligible message
     typeToInput('r032_partner_vlastne_prijmy', {
       ...withPartnerInput,
-      r032_partner_vlastne_prijmy: '5236',
+      r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET.plus(1).toString(),
     })
     next()
     cy.get('[data-test=ineligible-message]').should('exist')

@@ -47,7 +47,7 @@ export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_370.97)
-export const PARTNER_MAX_ODPOCET = 5_260.61
+export const PARTNER_MAX_ODPOCET = new Decimal(5_260.61)
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const UROKY_POCET_ROKOV = 5
