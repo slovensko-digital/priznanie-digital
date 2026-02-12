@@ -41,6 +41,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
       taxForm.vydavkyPoistPar6ods11_ods1a2,
     )
+    // checked only when there is self-employment income, as our form supports only flat expenses
+    form.dokument.telo.vydavkyPar6ods10_ods1a2 = '1'
   }
   if (taxForm.platil_prispevky_na_dochodok) {
     form.dokument.telo.r75 = decimalToString(

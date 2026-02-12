@@ -197,7 +197,7 @@ const sampleSchema: OutputJson = {
       vydavkyPar6ods11_ods1a2: '0',
       vydavkyPar6ods11_ods3: '0',
       vydavkyPar6ods11_ods4: '0',
-      vydavkyPar6ods10_ods1a2: '1', // checked by default as our for supports only flat expenses
+      vydavkyPar6ods10_ods1a2: '0',
       vydavkyPar6ods10_ods4: '0',
       vydavkyPoistPar6ods11_ods1a2: '',
       uplatnujemPar17ods17_ods1a2: '0',
