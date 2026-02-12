@@ -260,7 +260,7 @@ const maxPrijem = ({
     case '2024':
       return new Decimal(2288).mul(pocet_dlznikov)
     case '2025':
-      return new Decimal(2438.40).mul(pocet_dlznikov)
+      return new Decimal(2438.4).mul(pocet_dlznikov)
     default:
       return new Decimal(0)
   }
