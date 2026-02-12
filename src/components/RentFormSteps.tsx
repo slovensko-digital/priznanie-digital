@@ -51,7 +51,7 @@ export const OslobodenieQuestion = ({ disabled }) => (
       Od dane z príjmov sú oslobodené:
       <ul>
         <li>príjmy z prenájmu nehnuteľností a</li>
-        <li>príjmy z príležitostnej činnost</li>
+        <li>príjmy z príležitostnej činnosti</li>
       </ul>
       ak úhrn týchto príjmov nepresiahne v zdaňovacom období{' '}
       {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}, pričom ak takto

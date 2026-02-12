@@ -110,16 +110,14 @@ const Deti: Page<ChildrenUserInput> = ({
             {values.hasChildren && (
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
-                {/* TODO */}
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
-                  dieťa do 18 rokov, študenta do 25 rokov alebo o nezaopatrené
-                  dieťa do 25 rokov, ktoré je dlhodobo choré, pri splnení{' '}
+                  dieťa do 18 rokov, pri splnení{' '}
                   <ExternalLink href="https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-">
                     stanovených podmienok
                   </ExternalLink>{' '}
-                  máte nárok na daňové zvýhodnenie. Prechodný pobyt dieťaťa mimo
-                  domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                  máte nárok na daňové zvýhodnenie. Daňový bonus na dieťa si
+                  môže uplatniť iba jeden z rodičov.
                 </p>
                 <Details title="Aká je výška daňového bonusu?">
                   <p className="govuk-hint">
@@ -135,11 +133,18 @@ const Deti: Page<ChildrenUserInput> = ({
                         {formatCurrency(CHILD_RATE_FIFTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
+                    Od roku 2025 sa vypočítaný daňový bonus na vyživované deti
+                    aj znižuje, a to v závislosti od toho, či základ dane
+                    daňovníka (vrátane druhej oprávnenej osoby spoločne) z
+                    príjmov zo zamestnania a živnosti prekročí spolu sumu 25 740
+                    EUR. Ak sa na Vás zníženie aplikuje, prejaví sa to vo výške
+                    uplatneného daňového bonusu v záverečnej sumarizácii.
+                    Bližšie informácie je možné nájsť priamo na{' '}
+                    <ExternalLink href="https://podpora.financnasprava.sk/790897-Da%C5%88ov%C3%BD-bonus-na-vy%C5%BEivovan%C3%A9-die%C5%A5a-za-rok-2025">
+                      stránke finančnej správy.
+                    </ExternalLink>
                   </p>
                 </Details>
-                <p className="govuk-hint">
-                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
-                </p>
 
                 <FieldArray name="children">
                   {(arrayHelpers) => (

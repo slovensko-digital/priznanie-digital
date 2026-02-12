@@ -8,6 +8,7 @@ import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 import { incomeAndExpenseInitialValues } from '../lib/initialValues'
+import { Details } from '../components/Details'
 
 const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
   taxFormUserInput,
@@ -42,6 +43,19 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   title={`Mali ste v roku ${TAX_YEAR} príjmy zo živnosti na území SR?`}
                   name="prijem_zo_zivnosti"
                 />
+                <Details title="Ktoré príjmy zo živnosti podporujeme a ktoré nie?">
+                  <p className="govuk-hint">
+                    Aplikácia <b>nepodporuje</b> prípad{' '}
+                    <b>príjmov plynúcich zo zdrojov v zahraničí</b>, t. j.
+                    aktívnych príjmov za činnosti vykonávané fyzicky v zahraničí
+                    (napr. ak ste počas roka ako zamestnanec, živnostník,
+                    umelec, športovec vykonávali „prácu“ fyzicky v zahraničí) a
+                    pasívnych príjmov, ktoré vám vyplatila osoba, ktorá nie je
+                    daňovým rezidentom SR (napr. príjmy z prenájmu, predaja
+                    cenných papierov, dividend, úrokov, vytvorenia diela,
+                    licenčných poplatkov, ktoré vám vyplatila zahraničná osoba).
+                  </p>
+                </Details>
                 {values.prijem_zo_zivnosti && (
                   <>
                     <h2 className="govuk-heading-l">

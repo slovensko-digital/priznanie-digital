@@ -108,7 +108,8 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
 
       <p>
         Aplikácia je určená na podanie riadneho a opravného daňového priznania
-        pre SZČO uplatňujúce si paušálne výdavky.
+        pre SZČO vykonávajúce činnosť fyzicky na území SR, uplatňujúce paušálne
+        výdavky.
       </p>
 
       <p>
