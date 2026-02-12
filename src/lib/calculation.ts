@@ -652,16 +652,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             sumaOd15.minus(znizenieOd15),
           )
 
-          const rawBonus = sumaDo15.plus(sumaOd15)
           const vysledokDieta = round(vysledokDo15.plus(vysledokOd15))
 
           danovyBonus = danovyBonus.plus(vysledokDieta)
-          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(
-            rawBonus.minus(vysledokDieta),
-          )
         }
 
-        return { danovyBonus: round(danovyBonus), nevyuzityDanovyBonus }
+        return { danovyBonus: round(danovyBonus), nevyuzityDanovyBonus: new Decimal(0) }
       }
 
       // Standard algorithm (percentage limit based on child count)
