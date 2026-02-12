@@ -881,7 +881,7 @@ describe('IBAN page', () => {
     getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
 
     next()
-    
+
     assertUrl('/dochodok')
     skipPage()
 
