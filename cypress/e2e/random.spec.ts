@@ -161,7 +161,7 @@ const randomInput = (): TaxFormUserInput => {
         .toString(),
       r032_partner_vlastne_prijmy: randomFromRangeString(
         0,
-        PARTNER_MAX_ODPOCET,
+        PARTNER_MAX_ODPOCET.toNumber(),
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,

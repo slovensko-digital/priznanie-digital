@@ -453,15 +453,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {
             return round(
-              new Decimal(PARTNER_MAX_ODPOCET).minus(
+              PARTNER_MAX_ODPOCET.minus(
                 Decimal.max(this.r032_partner_vlastne_prijmy, 0),
               ),
             )
           } else {
             const mesacne = round(
-              new Decimal(PARTNER_MAX_ODPOCET)
-                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-                .div(12),
+              PARTNER_MAX_ODPOCET.minus(
+                Decimal.max(this.r032_partner_vlastne_prijmy, 0),
+              ).div(12),
             )
             return round(
               Decimal.max(

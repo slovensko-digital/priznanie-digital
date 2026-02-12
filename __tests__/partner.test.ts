@@ -68,7 +68,7 @@ describe('partner', () => {
       {
         input: {
           r032_uplatnujem_na_partnera: true,
-          r032_partner_vlastne_prijmy: `${PARTNER_MAX_ODPOCET}`,
+          r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET.toString(),
           partner_spolocna_domacnost: true,
           partner_podmienky: { 1: ['on'] },
           partner_step: 4,
