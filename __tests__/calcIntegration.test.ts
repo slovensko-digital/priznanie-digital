@@ -1,6 +1,6 @@
 import { promises as fs, readdirSync } from 'fs'
 import { parseStringPromise } from 'xml2js'
-import { convertToXML } from '../src/lib/xml/xmlConverter'
+import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter'
 import { calculate, TAX_YEAR } from '../src/lib/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
@@ -66,5 +66,27 @@ describe('postpone', () => {
 
       return expect(result).toStrictEqual(expected)
     })
+  })
+})
+
+describe('vydavkyPar6ods10_ods1a2 field', () => {
+  test('should be set to "1" when t1r10_prijmy > 0 (self-employed)', async () => {
+    const inputModule = await import('./testCases/completeInput')
+    const input: TaxFormUserInput = inputModule.completeInput
+
+    const taxForm = calculate(setDate(input, new Date(2024, 1, 10)))
+    const jsonForm = convertToJson(taxForm)
+
+    expect(jsonForm.dokument.telo.vydavkyPar6ods10_ods1a2).toBe('1')
+  })
+
+  test('should remain "0" when t1r10_prijmy = 0 (not self-employed)', async () => {
+    const inputModule = await import('./testCases/noPrijemZoZivnostiInput')
+    const input: TaxFormUserInput = inputModule.noPrijemZoZivnostiInput
+
+    const taxForm = calculate(setDate(input, new Date(2024, 1, 10)))
+    const jsonForm = convertToJson(taxForm)
+
+    expect(jsonForm.dokument.telo.vydavkyPar6ods10_ods1a2).toBe('0')
   })
 })
