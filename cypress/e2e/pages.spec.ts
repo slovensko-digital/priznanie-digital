@@ -861,7 +861,7 @@ describe('IBAN page', () => {
     assertUrl('/zamestnanie')
     skipPage()
 
-    assertUrl('/partner')
+    assertUrl('/dohoda')
     skipPage()
 
     assertUrl('/partner')
@@ -878,14 +878,24 @@ describe('IBAN page', () => {
     )
     next()
 
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+
+    next()
+    
     assertUrl('/dochodok')
     skipPage()
 
-    assertUrl('/dve-percenta')
+    assertUrl('/prenajom')
+    skipPage()
+
+    assertUrl('/uroky')
+    skipPage()
+
+    assertUrl('/dve-percenta-rodicom')
     next()
 
-    // assertUrl('/hypoteka')
-    // skipPage()
+    assertUrl('/dve-percenta')
+    next()
 
     assertUrl('/osobne-udaje')
     typeToInput('r001_dic', withBonusInput)
