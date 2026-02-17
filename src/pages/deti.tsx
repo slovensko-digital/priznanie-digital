@@ -40,6 +40,7 @@ import { Details } from '../components/Details'
 import RadioGroup from '../components/radio/RadioGroup'
 import Radio from '../components/radio/Radio'
 import RadioConditional from '../components/radio/RadioConditional'
+import Fieldset from '../components/fieldset/Fieldset'
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
 import { ExternalLink } from '../components/ExternalLink'
@@ -104,27 +105,25 @@ const Deti: Page<ChildrenUserInput> = ({
         {({ values, errors, setErrors, validateForm, setFieldValue }) => (
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
-            <h1 className="govuk-heading-l">Daňový bonus na dieťa</h1>
-            <RadioGroup
-              value={values.hasChildren ?? ''}
-              onChange={(value) => {
-                setFieldValue('hasChildren', value)
-              }}
+            <Fieldset
+              title={`Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas roku ${TAX_YEAR} žili v spoločnej domácnosti?`}
+              error={errors.hasChildren}
             >
-              <legend className="govuk-fieldset__legend govuk-fieldset__legend--m">
-                <p>
-                  Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas
-                  roku {TAX_YEAR} žili v spoločnej domácnosti?
-                </p>
-              </legend>
-              <Radio name="hasChildren-input-yes" label="Áno" value="yes" />
-              <Radio
-                name="hasChildren-input-income-used"
-                label="Nie, môj príjem bol použitý inou oprávnenou osobou"
-                value="income-used-by-someone-else"
-              />
-              <Radio name="hasChildren-input-no" label="Nie" value="no" />
-            </RadioGroup>
+              <RadioGroup
+                value={values.hasChildren ?? ''}
+                onChange={(value) => {
+                  setFieldValue('hasChildren', value)
+                }}
+              >
+                <Radio name="hasChildren-input-yes" label="Áno" value="yes" />
+                <Radio
+                  name="hasChildren-input-income-used"
+                  label="Nie, môj príjem bol použitý inou oprávnenou osobou"
+                  value="income-used-by-someone-else"
+                />
+                <Radio name="hasChildren-input-no" label="Nie" value="no" />
+              </RadioGroup>
+            </Fieldset>
             {values.hasChildren === 'yes' && (
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
