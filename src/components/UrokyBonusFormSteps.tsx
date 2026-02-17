@@ -59,9 +59,9 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       </h1>
     </legend>
     <p className="govuk-hint">
-      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich
-      bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
-      úročenie úveru na bývanie.
+      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich po
+      sebe nasledujúcich rokov, a to od mesiaca, v ktorom sa úver na bývanie
+      začal úročiť.
     </p>
     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
