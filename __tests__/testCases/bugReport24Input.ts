@@ -8,7 +8,7 @@ export const bugReport24Input: E2eTestUserInput = {
   zaplatenePreddavky: '2523.66',
   employed: true,
   dohoda: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,

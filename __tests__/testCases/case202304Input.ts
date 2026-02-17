@@ -59,7 +59,7 @@ export const case202304Input: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
   partner_bonus_na_deti: false,
   r034_priezvisko_a_meno: 'Beth Smith',
   r034_rodne_cislo: '895103/4169',

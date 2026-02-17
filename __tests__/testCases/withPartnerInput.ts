@@ -22,7 +22,7 @@ export const withPartnerInput: E2eTestUserInput = {
   partner_podmienky: { '1': ['on'] },
   t1r10_prijmy: '28000',
   datum: '19.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   expectNgoDonationValue: true,
 

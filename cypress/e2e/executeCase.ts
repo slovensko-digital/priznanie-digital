@@ -152,7 +152,7 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Kids */
         assertUrl('/deti')
 
-        if (input.hasChildren) {
+        if (input.hasChildren === 'yes') {
           getInput('hasChildren', '-yes').click()
 
           input.children.forEach((child, index) => {
