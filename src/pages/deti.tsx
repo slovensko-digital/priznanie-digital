@@ -30,6 +30,7 @@ import {
   calculate,
   CHILD_RATE_FIFTEEN_AND_OLDER,
   CHILD_RATE_FIFTEEN_AND_YOUNGER,
+  HIGH_INCOME_THRESHOLD,
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
@@ -133,13 +134,15 @@ const Deti: Page<ChildrenUserInput> = ({
                         {formatCurrency(CHILD_RATE_FIFTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
-                    Od roku 2025 sa vypočítaný daňový bonus na vyživované deti
-                    aj znižuje, a to v závislosti od toho, či základ dane
-                    daňovníka (vrátane druhej oprávnenej osoby spoločne) z
-                    príjmov zo zamestnania a živnosti prekročí spolu sumu 25 740
-                    EUR. Ak sa na Vás zníženie aplikuje, prejaví sa to vo výške
-                    uplatneného daňového bonusu v záverečnej sumarizácii.
-                    Bližšie informácie je možné nájsť priamo na{' '}
+                    Od roku 2025 sa daňový bonus na vyživované deti znižuje v
+                    závislosti od výšky základu dane. Ak základ dane daňovníka a
+                    druhej oprávnenej osoby z príjmov zo zamestnania a živnosti
+                    spolu presiahne sumu{' '}
+                    {formatCurrency(HIGH_INCOME_THRESHOLD.toNumber())}, výška
+                    daňového bonusu sa primerane zníži. Ak sa na vás toto
+                    zníženie vzťahuje, prejaví sa to v záverečnej sumarizácii
+                    nižšou sumou uplatneného daňového bonusu. Bližšie informácie
+                    je možné nájsť priamo na{' '}
                     <ExternalLink href="https://podpora.financnasprava.sk/790897-Da%C5%88ov%C3%BD-bonus-na-vy%C5%BEivovan%C3%A9-die%C5%A5a-za-rok-2025">
                       stránke finančnej správy.
                     </ExternalLink>
