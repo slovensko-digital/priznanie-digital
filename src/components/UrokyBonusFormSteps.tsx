@@ -18,6 +18,7 @@ export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
     <BooleanRadio
       title={`Splácali ste v roku ${TAX_YEAR} úver na bývanie, ktorý bol uzavretý po roku ${TAX_YEAR - UROKY_POCET_ROKOV}?`}
       name="r035_uplatnuje_uroky"
+      hint="Nárok vzniká, ak ste v čase podania žiadosti o úver mali najmenej 18 a najviac 35 rokov a spĺňate ďalšie podmienky uvedené nižšie."
       disabled={disabled}
     />
     <Details title="Kedy si môžem uplatniť zvýhodnenie?">
@@ -58,9 +59,9 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       </h1>
     </legend>
     <p className="govuk-hint">
-      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich
-      bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
-      úročenie úveru na bývanie.
+      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich po
+      sebe nasledujúcich rokov, a to od mesiaca, v ktorom sa úver na bývanie
+      začal úročiť.
     </p>
     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
