@@ -81,7 +81,7 @@ export const bugReport22Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '55.54',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
