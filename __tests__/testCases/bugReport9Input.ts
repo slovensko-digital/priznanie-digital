@@ -27,7 +27,7 @@ export const bugReport9Input: E2eTestUserInput = {
   r009_psc: '82105',
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,

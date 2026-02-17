@@ -53,7 +53,7 @@ export const highIncomeChildBonus03Input: E2eTestUserInput = {
   r011_stat: 'Slovensko',
 
   // Two children: one under 15, one 15-17
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,

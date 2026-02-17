@@ -25,7 +25,7 @@ const randomFromRangeString = (min: number, max: number) => {
 const randomInput = (): TaxFormUserInput => {
   const employed = Math.random() > 0.5
   const dohoda = Math.random() > 0.5
-  const hasChildren = Math.random() > 0.2
+  const hasChildren = Math.random() > 0.2 ? 'yes' : 'no'
   const partner = Math.random() > 0.7
   const rent = Math.random() > 0.3
   const uroky = Math.random() > 0.3
@@ -88,7 +88,7 @@ const randomInput = (): TaxFormUserInput => {
     input = { ...input, ...dohody }
   }
 
-  if (hasChildren) {
+  if (hasChildren === 'yes') {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
     const partnerChildBonus = Math.random() > 0.3
     Array.from({ length: childrenCount }).forEach((_, index) => {

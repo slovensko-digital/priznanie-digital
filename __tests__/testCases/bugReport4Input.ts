@@ -17,6 +17,6 @@ export const bugReport4Input: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '20000',
   datum: '22.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 }

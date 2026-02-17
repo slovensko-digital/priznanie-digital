@@ -36,7 +36,7 @@ const makeInput = (overrides: Partial<TaxFormUserInput>): TaxFormUserInput => ({
   r010_obec: 'Bratislava',
   r011_stat: 'Slovensko',
   datum: '15.03.2026',
-  hasChildren: true,
+  hasChildren: 'yes',
   ...overrides,
 })
 

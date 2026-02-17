@@ -66,18 +66,19 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          const userInput = values.hasChildren
-            ? values
-            : {
-                ...childrenUserInputInitialValues,
-                hasChildren: false,
-              }
+          const userInput =
+            values.hasChildren === 'yes'
+              ? values
+              : {
+                  ...childrenUserInputInitialValues,
+                  hasChildren: values.hasChildren,
+                }
           const { danovyBonusNaDieta } = calculate({
             ...taxFormUserInput,
             ...userInput,
           })
           setTaxFormUserInput(userInput)
-          if (values.hasChildren) {
+          if (values.hasChildren === 'yes') {
             if (
               danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))
             ) {
@@ -103,11 +104,28 @@ const Deti: Page<ChildrenUserInput> = ({
         {({ values, errors, setErrors, validateForm, setFieldValue }) => (
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
-            <BooleanRadio
-              title={`Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas roku ${TAX_YEAR} žili v spoločnej domácnosti?`}
-              name="hasChildren"
-            />
-            {values.hasChildren && (
+            <h1 className="govuk-heading-l">Daňový bonus na dieťa</h1>
+            <RadioGroup
+              value={values.hasChildren ?? ''}
+              onChange={(value) => {
+                setFieldValue('hasChildren', value)
+              }}
+            >
+              <legend className="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <p>
+                  Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas
+                  roku {TAX_YEAR} žili v spoločnej domácnosti?
+                </p>
+              </legend>
+              <Radio name="hasChildren-input-yes" label="Áno" value="yes" />
+              <Radio
+                name="hasChildren-input-income-used"
+                label="Nie, môj príjem bol použitý inou oprávnenou osobou"
+                value="income-used-by-someone-else"
+              />
+              <Radio name="hasChildren-input-no" label="Nie" value="no" />
+            </RadioGroup>
+            {values.hasChildren === 'yes' && (
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
                 <p className="govuk-hint">
@@ -524,10 +542,10 @@ interface ChildrenFormErrors {
 export const validate = (values: ChildrenUserInput) => {
   const errors: ChildrenFormErrors = {}
 
-  if (typeof values.hasChildren === 'undefined') {
+  if (!values.hasChildren) {
     errors.hasChildren = 'Vyznačte odpoveď'
   }
-  if (values.hasChildren) {
+  if (values.hasChildren === 'yes') {
     const childrenErrors = values.children.map((childValues, index) => {
       const childErrors: ChildFormErrors = {}
 

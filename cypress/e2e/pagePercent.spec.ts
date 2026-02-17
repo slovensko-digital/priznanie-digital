@@ -109,7 +109,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -311,7 +311,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -507,7 +507,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -640,7 +640,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
