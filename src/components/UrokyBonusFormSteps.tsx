@@ -18,6 +18,7 @@ export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
     <BooleanRadio
       title={`Splácali ste v roku ${TAX_YEAR} úver na bývanie, ktorý bol uzavretý po roku ${TAX_YEAR - UROKY_POCET_ROKOV}?`}
       name="r035_uplatnuje_uroky"
+      hint="Nárok vzniká, ak ste v čase podania žiadosti o úver mali najmenej 18 a najviac 35 rokov a spĺňate ďalšie podmienky uvedené nižšie."
       disabled={disabled}
     />
     <Details title="Kedy si môžem uplatniť zvýhodnenie?">
