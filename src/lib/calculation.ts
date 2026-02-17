@@ -214,7 +214,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Children */
     get r033() {
-      const mapChild = makeMapChild(input?.hasChildren)
+      const mapChild = makeMapChild(input?.hasChildren === 'yes')
       return input.children.map((child) => mapChild(child))
     },
 
@@ -934,7 +934,13 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       return round(percentage(this.r124, 3))
     },
     get r146() {
-      return this.r036.plus(this.r039).plus(this.t1r11s1)
+      if (
+        input.hasChildren === 'yes' ||
+        input.hasChildren === 'income-used-by-someone-else'
+      ) {
+        return this.r036.plus(this.r039).plus(this.r058)
+      }
+      return new Decimal(0)
     },
     get r146a() {
       // v nasom pripade by 146 a 146a mali byt vzdy rovnake
@@ -990,7 +996,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             : undefined,
       }
     },
-    children: input?.hasChildren ?? false,
+    children: input?.hasChildren === 'yes',
     employed: input?.employed ?? false,
     dohoda: input?.dohoda ?? false,
 

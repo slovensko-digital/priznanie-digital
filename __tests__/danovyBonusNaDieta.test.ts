@@ -36,7 +36,7 @@ const makeInput = (overrides: Partial<TaxFormUserInput>): TaxFormUserInput => ({
   r010_obec: 'Bratislava',
   r011_stat: 'Slovensko',
   datum: '15.03.2026',
-  hasChildren: true,
+  hasChildren: 'yes',
   ...overrides,
 })
 
@@ -248,5 +248,57 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
     expect(result.r038.plus(result.r045).toNumber()).toBe(30000)
     expect(result.danovyBonusNaDieta.danovyBonus.toNumber()).toBe(903)
     expect(result.r117.toNumber()).toBe(903)
+  })
+})
+
+describe('Rows r146 and r146a – based on hasChildren value', () => {
+  test('r146 and r146a are filled when hasChildren is "yes"', () => {
+    const input = makeInput({
+      hasChildren: 'yes',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '10000',
+      children: [
+        {
+          id: 1,
+          priezviskoMeno: 'Dieťa Prvé',
+          rodneCislo: '2001150001',
+          wholeYear: true,
+          monthFrom: '0',
+          monthTo: '11',
+        },
+      ],
+    })
+
+    const result = calculate(input)
+
+    expect(result.r146.toNumber()).toBeGreaterThan(0)
+    expect(result.r146a.toNumber()).toBeGreaterThan(0)
+    expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+  })
+
+  test('r146 and r146a are filled when hasChildren is "income-used-by-someone-else"', () => {
+    const input = makeInput({
+      hasChildren: 'income-used-by-someone-else',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '10000',
+      children: [],
+    })
+
+    const result = calculate(input)
+
+    expect(result.r146.toNumber()).toBeGreaterThan(0)
+    expect(result.r146a.toNumber()).toBeGreaterThan(0)
+    expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+  })
+
+  test('r146 and r146a are 0 when hasChildren is "no"', () => {
+    const input = makeInput({
+      hasChildren: 'no',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '10000',
+      children: [],
+    })
+
+    const result = calculate(input)
+
+    expect(result.r146.toNumber()).toBe(0)
+    expect(result.r146a.toNumber()).toBe(0)
   })
 })

@@ -119,7 +119,7 @@ export interface TaxFormUserInput {
   rent_step?: number
 
   /** SECTION  Deti*/
-  hasChildren?: boolean
+  hasChildren?: 'yes' | 'income-used-by-someone-else' | 'no'
   partner_bonus_na_deti_chce_uplatnit?: boolean
   partner_bonus_na_deti?: boolean
   r034_priezvisko_a_meno?: string
