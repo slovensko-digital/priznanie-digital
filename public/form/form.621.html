@@ -4221,198 +4221,468 @@ function inliner117(element,sid) {
     return 0;
 }
 
-            function cislo() {
-                var validChildren = [];
+ function cislo() {
+    var validChildren = [];
 
-                //cyklus prechádzajúci dietatmi
-                $("[id^='layoutRow41819']").each(function () {
-                    var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
-                    var result = DietaInfo($(element), 2025);
-                    if (result != null) {
-                        result.months = [];
-                        var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
+    //cyklus prechádzajúci dietatmi
+    $("[id^='layoutRow41819']").each(function () {
+        var element = $(this).find("[id^='r33RodCislo_2a'][value!='']");
+        var result = DietaInfo($(element), 2025);
+        if (result != null) {
+            result.months = [];
+            var allAreChecked = $(this).find("[id^='cbM00']").is(':checked');
 
-                        //cyklus prechádzajúci všetkými mesiacmi daného dietata
-                        $(this).find("[id^='cbM']").each(function () {
-                            var checked = (allAreChecked || $(this).is(":checked"));
+            //cyklus prechádzajúci všetkými mesiacmi daného dietata
+            $(this).find("[id^='cbM']").each(function () {
+                var checked = (allAreChecked || $(this).is(":checked"));
 
-                            if (checked && result.months.length != 0) {
-                                var month = result.months.length;
+                if (checked && result.months.length != 0) {
+                    var month = result.months.length;
 
-                                //vráti rozdiel medzi zaškrtnutym mesiacom (datumom) a vekom dietata v tom mesiaci
-                                var rozdiel = DateDiffInYears(result.datum, new Date(2025, month - 2, 31));
+                    //vráti rozdiel medzi zaškrtnutym mesiacom (datumom) a vekom dietata v tom mesiaci
+                    var rozdiel = DateDiffInYears(result.datum, new Date(2025, month - 2, 31));
 
-                                if (rozdiel == -1 && result._monthBirth == month) {
-                                    result.months.push(true); //mesiac narodania dietata
-                                }
-                                else if (0 <= rozdiel && rozdiel <= 18) {
-                                    if (rozdiel >= 18 && result._monthBirth < month) {
-                                        result.months.push(false); //mesiac dovrsenia 25 rokov dietata
-                                    } else {
-                                        result.months.push(true); //medzi 0 - 25 rokov
-                                    }
-                                }
-                                else {
-                                    result.months.push(false); //moc starý alebo nenarodený
-                                }
-                            }
-                            else {
-                                result.months.push(false); //nezasktnuty mesiac
-                            }
-                        });
-
-                        validChildren.push(result);
+                    if (rozdiel == -1 && result._monthBirth == month) {
+                        result.months.push(true); //mesiac narodenia dietata
                     }
-                });
-
-                //vráti počet detí v danom mesiaci
-                function getNumberOfChildsInMonth(monthIndex) {
-                    var numberOfChilds = 0;
-                    for (var i = 0; i < validChildren.length; i++) {
-                        if (validChildren[i].months[monthIndex]) {
-                            numberOfChilds += 1;
+                    else if (0 <= rozdiel && rozdiel <= 18) {
+                        if (rozdiel >= 18 && result._monthBirth < month) {
+                            result.months.push(false); //mesiac dovrsenia 18 rokov dietata
+                        } else {
+                            result.months.push(true); //medzi 0 - 18 rokov
                         }
                     }
-                    return numberOfChilds;
-                }
-
-                //získame pole s počtami detí v jednotlivých mesiacoch a pole s kategóriami mesiacodetí
-                let numberOfChildsInMonths = [];
-                let numberCategories = [];
-                for (var i = 1; i <= 12; i++) {
-                    let numberOfChildsInMonth = getNumberOfChildsInMonth(i);
-                    numberOfChildsInMonths.push(numberOfChildsInMonth);
-                    if (numberCategories.indexOf(numberOfChildsInMonth) == -1) {
-                        numberCategories.push(numberOfChildsInMonth)
+                    else {
+                        result.months.push(false); //moc starý alebo nenarodený
                     }
                 }
-
-
-                //rozdelí mesiace do skupín podla rovnakého počtu detí
-                monthGroups = [];
-
-                for (var i = 0; i < numberCategories.length; i++) {
-                    var pocetDeti = numberCategories[i];
-                    monthGroups.push([]);
-                    for (var j = 0; j < 12; j++) {
-                        if (numberOfChildsInMonths[j] == pocetDeti) {
-                            monthGroups[i].push(j + 1)
-                        }
-                    }
+                else {
+                    result.months.push(false); //nezasktnuty mesiac
                 }
+            });
 
-                function getSelectedMonths(childIndex) {
-                    const months = validChildren[childIndex].months;
+            validChildren.push(result);
+        }
+    });
 
-                    if (months[0]) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    //vráti počet detí v danom mesiaci
+    function getNumberOfChildsInMonth(monthIndex) {
+        var numberOfChilds = 0;
+        for (var i = 0; i < validChildren.length; i++) {
+            if (validChildren[i].months[monthIndex]) {
+                numberOfChilds += 1;
+            }
+        }
+        return numberOfChilds;
+    }
 
-                    const selected = [];
-                    for (let m = 1; m <= 12; m++) {
-                        if (months[m]) selected.push(m);
-                    }
-                    return selected;
-                }
+    //získame pole s počtami detí v jednotlivých mesiacoch a pole s kategóriami mesiacodetí
+    let numberOfChildsInMonths = [];
+    let numberCategories = [];
+    for (var i = 1; i <= 12; i++) {
+        let numberOfChildsInMonth = getNumberOfChildsInMonth(i);
+        numberOfChildsInMonths.push(numberOfChildsInMonth);
+        if (numberCategories.indexOf(numberOfChildsInMonth) == -1) {
+            numberCategories.push(numberOfChildsInMonth)
+        }
+    }
 
-                var sumaDB = 0;
-                var sumaDo15 = 0;
-                var sumaOd15 = 0;
-                var pocetMesiacovDo15 = 0;
-                var pocetMesiacovOd15 = 0;
 
-                //cyklus prechádzjúci všetkými rozdelenými skupinami mesiacov
-                   for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
+    //rozdelí mesiace do skupín podla rovnakého počtu detí
+    monthGroups = [];
 
-        var pocetMesiacovVSkupine = monthGroups[groupIndex].length; //pocet mesiacov v skupine mesiacov
-        var partialSumaDB = 0;
+    for (var i = 0; i < numberCategories.length; i++) {
+        var pocetDeti = numberCategories[i];
+        monthGroups.push([]);
+        for (var j = 0; j < 12; j++) {
+            if (numberOfChildsInMonths[j] == pocetDeti) {
+                monthGroups[i].push(j + 1)
+            }
+        }
+    }
 
-        //cyklus prechádzjúci všetkými mesiacmi v danej skupine mesiacov
-        for (var monthIndex = 0; monthIndex < pocetMesiacovVSkupine; monthIndex++) {
-            var numberOfChilds = 0;
+    function getSelectedMonths(childIndex) {
+        const months = validChildren[childIndex].months;
+
+        if (months[0]) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+        const selected = [];
+        for (let m = 1; m <= 12; m++) {
+            if (months[m]) selected.push(m);
+        }
+        return selected;
+    }
+
+    // pomocná funkcia – výpočet segmentu (do 15 / od 15)
+    function computeSegment(suma, znizenie) {
+        // ak nie je žiadne zníženie → ber plnú sumu
+        if (znizenie.eq(0)) {
+            return Big(suma).round(2, 1);
+        }
+
+        var res = Big(suma).minus(znizenie);
+
+        // ak by to náhodou vyšlo mínusové, nastav 0
+        if (res.lt(0)) {
+            res = Big(0);
+        }
+
+        return res.round(2, 1);
+    }
+
+    var sumaDB = 0;
+    var vys = Big(0);
+
+    // ==================== KONTROLA: 14+ DETÍ? ====================
+    // Najprv zisti max počet detí vo všetkých skupinách
+    var maxPocetDeti = 0;
+    for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
+        var numberOfChildsInGroup = 0;
+        for (var monthIndex = 0; monthIndex < monthGroups[groupIndex].length; monthIndex++) {
+            var month = monthGroups[groupIndex][monthIndex];
+            var childrenInMonth = 0;
+
             for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
-                var month = monthGroups[groupIndex][monthIndex];
-
                 if (validChildren[childIndex].months[month]) {
-                    numberOfChilds += 1;
-                    var date = new Date(validChildren[childIndex].datum)
+                    childrenInMonth += 1;
+                }
+            }
 
-                    var rozdiel = DateDiffInYears(date, new Date(2025, month - 1, 0));
+            if (childrenInMonth > numberOfChildsInGroup) {
+                numberOfChildsInGroup = childrenInMonth;
+            }
+        }
 
-                    if (rozdiel < 15) {
-                        partialSumaDB += 100.00;
-                    }
-                    else if (rozdiel < 18) {
-                        partialSumaDB += 50.00;
-                    }
+        if (numberOfChildsInGroup > maxPocetDeti) {
+            maxPocetDeti = numberOfChildsInGroup;
+        }
+    }
+
+    // ==================== VÝPOČET PRE 14+ DETÍ ====================
+    if (maxPocetDeti >= 14) {
+
+        var czd = $("#cb34_Uplatnujem").attr("checked")
+            ? Number($("#t116a").val())
+            : Number($("#r38").val()) + Number($("#t45").val());
+
+        // Zisti, či majú všetky deti rovnaký počet mesiacov
+        var vsetkyDetiRovnakyPocetMesiacov = true;
+        if (validChildren.length > 1) {
+            var prvyPocet = 0;
+            for (var m = 1; m <= 12; m++) {
+                if (validChildren[0].months[m]) prvyPocet++;
+            }
+
+            for (var i = 1; i < validChildren.length; i++) {
+                var pocet = 0;
+                for (var m = 1; m <= 12; m++) {
+                    if (validChildren[i].months[m]) pocet++;
+                }
+                if (pocet !== prvyPocet) {
+                    vsetkyDetiRovnakyPocetMesiacov = false;
+                    break;
                 }
             }
         }
 
-        //vysku limitu beriem podla toho či je zaškrtnuty "Uplatňujem postup podľa §33 ods. 8 zákona"
-        if ($("#cb34_Uplatnujem").attr("checked")) {
-            var limit = Number($("#t116a").val());
+        // Zisti, či sú VŠETKY deti v rovnakej vekovej kategórii (všetky do 15 ALEBO všetky 15-18)
+        var vsetkyDetiRovnakaVekovaSkupina = true;
+        var prvaDo15 = null;
+
+        for (var i = 0; i < validChildren.length; i++) {
+            var child = validChildren[i];
+            var jeDo15 = false;
+
+            // Skontroluj vek v prvom oprávnenom mesiaci
+            for (var month = 1; month <= 12; month++) {
+                if (child.months[month]) {
+                    var date = new Date(child.datum);
+                    var vek = DateDiffInYears(date, new Date(2025, month - 1, 0));
+                    jeDo15 = (vek < 15);
+                    break;
+                }
+            }
+
+            if (prvaDo15 === null) {
+                prvaDo15 = jeDo15;
+            } else if (prvaDo15 !== jeDo15) {
+                vsetkyDetiRovnakaVekovaSkupina = false;
+                break;
+            }
+        }
+
+        var rocnaDB = Big(czd).times(0.64);
+        var mesacnaDB = rocnaDB.div(12);
+
+        // Zníženie ak ČZD > 25740
+        var rocneZnizenie = Big(0);
+        if (czd > 25740) {
+            rocneZnizenie = Big(czd).minus(25740).div(10);
+        }
+
+        var celkovyBonus = Big(0);
+
+        // ========== PRÍPAD A: VŠETKY DETI V ROVNAKEJ VEKOVEJ SKUPINE ==========
+        if (vsetkyDetiRovnakaVekovaSkupina) {
+
+            for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                var child = validChildren[childIndex];
+                var sumaNaDieta = Big(0);
+                var pocetMesiacovDietata = 0;
+
+                for (var month = 1; month <= 12; month++) {
+                    if (child.months[month]) {
+                        pocetMesiacovDietata++;
+
+                        var pocetDetiVMesiaci = 0;
+                        for (var i = 0; i < validChildren.length; i++) {
+                            if (validChildren[i].months[month]) {
+                                pocetDetiVMesiaci++;
+                            }
+                        }
+
+                        var podielNaMesiac = mesacnaDB.div(pocetDetiVMesiaci);
+                        sumaNaDieta = sumaNaDieta.plus(podielNaMesiac);
+                    }
+                }
+
+                sumaNaDieta = sumaNaDieta.round(2, 1);
+
+                if (rocneZnizenie.gt(0) && pocetMesiacovDietata > 0) {
+                    var znizenie;
+                    if (pocetMesiacovDietata === 12) {
+                        znizenie = rocneZnizenie;
+                    } else {
+                        var mesacneZnizenie = rocneZnizenie.div(12).round(2, 1);
+                        znizenie = mesacneZnizenie.times(pocetMesiacovDietata);
+                    }
+
+                    sumaNaDieta = sumaNaDieta.minus(znizenie);
+                    if (sumaNaDieta.lt(0)) sumaNaDieta = Big(0);
+                    sumaNaDieta = sumaNaDieta.round(2, 1);
+                }
+
+                celkovyBonus = celkovyBonus.plus(sumaNaDieta);
+            }
+        }
+        // ========== PRÍPAD B: RÔZNE VEKOVÉ SKUPINY, ALE ROVNAKÝ POČET MESIACOV ==========
+        else if (!vsetkyDetiRovnakaVekovaSkupina && vsetkyDetiRovnakyPocetMesiacov) {
+
+            // Vypočítaj teoretické sumy pre každú vekovú skupinu
+            var sumaDo15 = Big(0);
+            var sumaOd15 = Big(0);
+            var pocetDo15 = 0;
+            var pocetOd15 = 0;
+
+            for (var i = 0; i < validChildren.length; i++) {
+                var child = validChildren[i];
+                var pocetMesiacov = 0;
+                var jeDo15 = false;
+
+                for (var month = 1; month <= 12; month++) {
+                    if (child.months[month]) {
+                        if (pocetMesiacov === 0) {
+                            var date = new Date(child.datum);
+                            var vek = DateDiffInYears(date, new Date(2025, month - 1, 0));
+                            jeDo15 = (vek < 15);
+                        }
+                        pocetMesiacov++;
+                    }
+                }
+
+                if (jeDo15) {
+                    sumaDo15 = sumaDo15.plus(pocetMesiacov * 100);
+                    pocetDo15++;
+                } else {
+                    sumaOd15 = sumaOd15.plus(pocetMesiacov * 50);
+                    pocetOd15++;
+                }
+            }
+
+            var celkovaTeoretickaSuma = sumaDo15.plus(sumaOd15);
+
+            // Vypočítaj percentá a ZAOKRÚHLI ich pomocou Math.round na 2 des. miesta
+            var percentoRawDo15 = Number(sumaDo15.div(celkovaTeoretickaSuma).times(100).toString());
+            var percentoRawOd15 = Number(sumaOd15.div(celkovaTeoretickaSuma).times(100).toString());
+
+            var percentoDo15 = Big(Math.round(percentoRawDo15 * 100) / 10000); // /10000 pretože sme násobili 100
+            var percentoOd15 = Big(Math.round(percentoRawOd15 * 100) / 10000);
+
+            // Rozdeľ ročnú DB podľa percent
+            var maxSumaDo15 = rocnaDB.times(percentoDo15).round(2, 1);
+            var maxSumaOd15 = rocnaDB.times(percentoOd15).round(2, 1);
+
+            // Suma na 1 dieťa v každej skupine - ZAOKRÚHLI každú osobitne
+            var sumaNaDietaDo15 = Big(0);
+            var sumaNaDietaOd15 = Big(0);
+
+            if (pocetDo15 > 0) {
+                sumaNaDietaDo15 = maxSumaDo15.div(pocetDo15).round(2, 1);
+            }
+            if (pocetOd15 > 0) {
+                sumaNaDietaOd15 = maxSumaOd15.div(pocetOd15).round(2, 1);
+            }
+
+            // Aplikuj zníženie
+            if (rocneZnizenie.gt(0)) {
+                sumaNaDietaDo15 = sumaNaDietaDo15.minus(rocneZnizenie);
+                if (sumaNaDietaDo15.lt(0)) sumaNaDietaDo15 = Big(0);
+                sumaNaDietaDo15 = sumaNaDietaDo15.round(2, 1);
+
+                sumaNaDietaOd15 = sumaNaDietaOd15.minus(rocneZnizenie);
+                if (sumaNaDietaOd15.lt(0)) sumaNaDietaOd15 = Big(0);
+                sumaNaDietaOd15 = sumaNaDietaOd15.round(2, 1);
+            }
+
+            // Celková suma
+            celkovyBonus = sumaNaDietaDo15.times(pocetDo15).plus(sumaNaDietaOd15.times(pocetOd15));
+        }
+        // ========== PRÍPAD C: RÔZNE POČTY MESIACOV ==========
+        else {
+
+            for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                var child = validChildren[childIndex];
+                var pocetMesiacov = 0;
+                var teoretickaSuma = Big(0);
+
+                for (var month = 1; month <= 12; month++) {
+                    if (child.months[month]) {
+                        pocetMesiacov++;
+                        var date = new Date(child.datum);
+                        var vek = DateDiffInYears(date, new Date(2025, month - 1, 0));
+
+                        if (vek < 15) {
+                            teoretickaSuma = teoretickaSuma.plus(100);
+                        } else if (vek < 18) {
+                            teoretickaSuma = teoretickaSuma.plus(50);
+                        }
+                    }
+                }
+
+                if (pocetMesiacov > 0) {
+                    var znizeniePomerne;
+                    if (pocetMesiacov === 12) {
+                        znizeniePomerne = rocneZnizenie;
+                    } else {
+                        var mesacneZnizenie = rocneZnizenie.div(12).round(2, 1);
+                        znizeniePomerne = mesacneZnizenie.times(pocetMesiacov);
+                    }
+
+                    var bonusZaDieta = teoretickaSuma.minus(znizeniePomerne);
+                    if (bonusZaDieta.lt(0)) bonusZaDieta = Big(0);
+                    bonusZaDieta = bonusZaDieta.round(2, 1);
+
+                    celkovyBonus = celkovyBonus.plus(bonusZaDieta);
+                }
+            }
+        }
+
+        // Porovnaj s max ročnou DB
+        if (celkovyBonus.gt(rocnaDB)) {
+            vys = rocnaDB;
         } else {
-            var limit38 = Number($("#r38").val());
-            var limit45 = Number($("#t45").val());
-            var limit = limit38 + limit45;
+            vys = celkovyBonus;
         }
+    }
+    // ==================== VÝPOČET PRE MENEJ AKO 14 DETÍ ====================
+    else {
+        var sumaDo15 = 0;
+        var sumaOd15 = 0;
+        var pocetMesiacovDo15 = 0;
+        var pocetMesiacovOd15 = 0;
 
+        //cyklus prechádzjúci všetkými rozdelenými skupinami mesiacov
+        for (var groupIndex = 0; groupIndex < monthGroups.length; groupIndex++) {
+            var pocetMesiacovVSkupine = monthGroups[groupIndex].length;
+            var partialSumaDB = 0;
 
-        limit = (Big(Number(limit))).round(2, 1) * 1;
-        switch (numberOfChilds) {
-            case 0:
-                break;
-            case 1:
-                limit = limit * 0.29;
-                break;
-            case 2:
-                limit = limit * 0.36;
-                break;
-            case 3:
-                limit = limit * 0.43;
-                break;
-            case 4:
-                limit = limit * 0.50;
-                break;
-            case 5:
-                limit = limit * 0.57;
-                break;
-            default:
-                limit = limit * 0.64;
-        }
+            //cyklus prechádzjúci všetkými mesiacmi v danej skupine mesiacov
+            var numberOfChilds = 0;
+            for (var monthIndex = 0; monthIndex < pocetMesiacovVSkupine; monthIndex++) {
+                for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                    var month = monthGroups[groupIndex][monthIndex];
 
-        limit = (Big(Number(limit))).round(2) * 1;
+                    if (validChildren[childIndex].months[month]) {
+                        numberOfChilds += 1;
+                        var date = new Date(validChildren[childIndex].datum)
 
-        //v prípade že v danej skupine mesiacov niesu zahrnute vsetky mesiace roka, musíme vypočítat alikvotnu ciastku limitu vzhladom na počet mesiacov v skupine
-        if (pocetMesiacovVSkupine != 12) {
-            var pom = Big(limit).div(12).round(2, 1); //deleno pocet mesiacov(12)
-            limit = (pom) * pocetMesiacovVSkupine;
+                        var rozdiel = DateDiffInYears(date, new Date(2025, month - 1, 0));
+
+                        if (rozdiel < 15) {
+                            partialSumaDB += 100.00;
+                            sumaDo15 += 100.00;
+                            pocetMesiacovDo15 += 1;
+                        }
+                        else if (rozdiel < 18) {
+                            partialSumaDB += 50.00;
+                            sumaOd15 += 50.00;
+                            pocetMesiacovOd15 += 1;
+                        }
+                    }
+                }
+            }
+
+            numberOfChilds = 0;
+            for (var monthIndex = 0; monthIndex < pocetMesiacovVSkupine; monthIndex++) {
+                var month = monthGroups[groupIndex][monthIndex];
+                var childrenInMonth = 0;
+
+                for (var childIndex = 0; childIndex < validChildren.length; childIndex++) {
+                    if (validChildren[childIndex].months[month]) {
+                        childrenInMonth += 1;
+                    }
+                }
+
+                if (childrenInMonth > numberOfChilds) {
+                    numberOfChilds = childrenInMonth;
+                }
+            }
+
+            //vysku limitu beriem podla toho či je zaškrtnuty "Uplatňujem postup podľa §33 ods. 8 zákona"
+            if ($("#cb34_Uplatnujem").attr("checked")) {
+                var limit = Number($("#t116a").val());
+            } else {
+                var limit38 = Number($("#r38").val());
+                var limit45 = Number($("#t45").val());
+                var limit = limit38 + limit45;
+            }
+
+            limit = (Big(Number(limit))).round(2, 1) * 1;
+            switch (numberOfChilds) {
+                case 0:
+                    break;
+                case 1:
+                    limit = limit * 0.29;
+                    break;
+                case 2:
+                    limit = limit * 0.36;
+                    break;
+                case 3:
+                    limit = limit * 0.43;
+                    break;
+                case 4:
+                    limit = limit * 0.50;
+                    break;
+                case 5:
+                    limit = limit * 0.57;
+                    break;
+                default:
+                    limit = limit * 0.64;
+            }
             limit = (Big(Number(limit))).round(2) * 1;
-        }
 
-        partialSumaDB = partialSumaDB > limit ? limit : partialSumaDB;
-
-        sumaDB += partialSumaDB;
-
-
-        //STEP 3
-        // pomocná funkcia – výpočet segmentu (do 15 / od 15)
-        function computeSegment(suma, znizenie) {
-            // ak nie je žiadne zníženie → ber plnú sumu
-            if (znizenie.eq(0)) {
-                return Big(suma).round(2, 1);
+            if (pocetMesiacovVSkupine != 12) {
+                var pomes = Big(limit).div(12).round(2, 1);
+                limit = (pomes) * pocetMesiacovVSkupine;
+                limit = (Big(Number(limit))).round(2) * 1;
             }
 
-            var res = Big(suma).minus(znizenie);
+            partialSumaDB = partialSumaDB > limit ? limit : partialSumaDB;
 
-            // ak by to náhodou vyšlo mínusové, nastav 0
-            if (res.lt(0)) {
-                res = Big(0);
-            }
-
-            return res.round(2, 1);
+            sumaDB += partialSumaDB;
         }
 
-        // hlavná logika
+        // Ak ČZD > 25740, použi iný výpočet
         var r38 = Big(Number($("#r38").val()) || 0);
         var r45 = Big(Number($("#t45").val()) || 0);
         var r38r45 = r38.plus(r45);
@@ -4427,61 +4697,65 @@ function inliner117(element,sid) {
                 rBase = Number(r38r45);
             }
 
-            var sumaDB = Big(0);
+            sumaDB = Big(0);
 
-            for (var i = 0; i < validChildren.length; i++) { // validChildren = počet detí
-                                var mesiaceDo15 = 0;
-                                var mesiaceOd15 = 0;
+            for (var i = 0; i < validChildren.length; i++) {
+                var mesiaceDo15 = 0;
+                var mesiaceOd15 = 0;
 
-                                var dateNar = new Date(validChildren[i].datum);
-                                var selectedMonths = getSelectedMonths(i);
+                var dateNar = new Date(validChildren[i].datum);
+                var selectedMonths = getSelectedMonths(i);
 
-                                for (var k = 0; k < selectedMonths.length; k++) {
-                                    var monthIndex = selectedMonths[k];
+                for (var k = 0; k < selectedMonths.length; k++) {
+                    var monthIndex = selectedMonths[k];
 
-                                    var rozdiel = DateDiffInYears(dateNar, new Date(2025, monthIndex - 1, 0));
+                    var rozdiel = DateDiffInYears(dateNar, new Date(2025, monthIndex - 1, 0));
 
-                                    if (rozdiel < 15) mesiaceDo15++;
-                                    else if (rozdiel < 18) mesiaceOd15++;
-                                }
+                    if (rozdiel < 15) mesiaceDo15++;
+                    else if (rozdiel < 18) mesiaceOd15++;
+                }
 
-     // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
-    if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
-        continue;
-    }
+                // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
+                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
+                    continue;
+                }
 
-        var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
+                var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
 
-        var celyRok = (mesiaceDo15 === 12 || mesiaceOd15 === 12);
+                var celyRok = (mesiaceDo15 === 12 || mesiaceOd15 === 12);
 
-        var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
+                var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
 
-        var sumaDo15 = mesiaceDo15 * 100;
-        var sumaOd15 = mesiaceOd15 * 50;
+                var sumaDo15 = mesiaceDo15 * 100;
+                var sumaOd15 = mesiaceOd15 * 50;
 
-        var znizenieDo15 = celyRok ? pom : pom.times(mesiaceDo15).round(2, 1);
-        var znizenieOd15 = celyRok ? pom : pom.times(mesiaceOd15).round(2, 1);
+                var znizenieDo15 = celyRok ? pom : pom.times(mesiaceDo15).round(2, 1);
+                var znizenieOd15 = celyRok ? pom : pom.times(mesiaceOd15).round(2, 1);
 
-        // výsledky
-        var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
-        var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
+                // výsledky
+                var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
+                var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
 
-        // spolu pre dieťa
-        var vysledokDieta = vysledokDo15.plus(vysledokOd15);
-        if (vysledokDieta.lt(0)) {
-            vysledokDieta = Big(0);
+                // spolu pre dieťa
+                var vysledokDieta = vysledokDo15.plus(vysledokOd15);
+                if (vysledokDieta.lt(0)) {
+                    vysledokDieta = Big(0);
+                }
+                vysledokDieta = vysledokDieta.round(2, 1);
+
+                // pripočítam do celkovej DB
+                sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
+            }
         }
-        vysledokDieta = vysledokDieta.round(2, 1);
 
-        // pripočítam do celkovej DB
-        sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
+        vys = Big(sumaDB);
     }
-}
+
+    if (vys.gt(0)) {
+        sumaDB = Number(vys);
     }
 
     sumaDB = Big(Number(sumaDB) || 0).round(2, 1);
-
-
     return sumaDB.toFixed(2);
 }
 
@@ -60908,7 +61182,7 @@ customW: ""
 											
 <div id="layoutCell167581" class="cell " >		
 			
-		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie 1)</label><br />	
+		<input id="rbDruhVykazuDodatocny" name="druh_priznania" title="Musí byť zaškrtnutý práve jeden druh DP. Pri DDP musí byť vyplnený dátum zistenia skutočnosti na podanie DDP a X. oddiel." type="radio" class="" value="dodatočné daňové priznanie 1)"  ></input><label for="rbDruhVykazuDodatocny" class="radioButtonLabel">dodatočné daňové priznanie <sup>1)</sup></label><br />	
 		<div class="clear"></div>
 </div>							
 						
