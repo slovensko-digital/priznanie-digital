@@ -95,7 +95,7 @@ describe('utils', () => {
 
     for (const { input, output } of scenarios) {
       it(`should format to ${output}`, () => {
-        expect(getStreetNumber(input)).toBe(output)
+        expect(getStreetNumber(input.reg_number, input.building_number)).toBe(output)
       })
     }
   })
