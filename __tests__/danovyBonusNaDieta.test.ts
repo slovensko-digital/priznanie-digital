@@ -1,4 +1,5 @@
 import { calculate } from '../src/lib/calculation'
+import { convertToJson } from '../src/lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 
@@ -273,6 +274,12 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
     expect(result.r146.toNumber()).toBeGreaterThan(0)
     expect(result.r146a.toNumber()).toBeGreaterThan(0)
     expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBeDefined()
+    expect(jsonForm.dokument.telo.r146).not.toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBeDefined()
+    expect(jsonForm.dokument.telo.r146a).not.toBe('')
   })
 
   test('r146 and r146a are filled when hasChildren is "income-used-by-someone-else"', () => {
@@ -287,6 +294,12 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
     expect(result.r146.toNumber()).toBeGreaterThan(0)
     expect(result.r146a.toNumber()).toBeGreaterThan(0)
     expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBeDefined()
+    expect(jsonForm.dokument.telo.r146).not.toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBeDefined()
+    expect(jsonForm.dokument.telo.r146a).not.toBe('')
   })
 
   test('r146 and r146a are 0 when hasChildren is "no"', () => {
@@ -300,5 +313,9 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
 
     expect(result.r146.toNumber()).toBe(0)
     expect(result.r146a.toNumber()).toBe(0)
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBe('')
   })
 })
