@@ -311,11 +311,18 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
               ]
-            : [
-                {
-                  title: 'Nemám nárok alebo neuplatňujem si',
-                },
-              ]
+            : taxFormUserInput.hasChildren === 'income-used-by-someone-else'
+              ? [
+                  {
+                    title:
+                      'Môj príjem bol použitý inou oprávnenou osobou',
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nemám nárok alebo neuplatňujem si',
+                  },
+                ]
         }
       />
       <Summary

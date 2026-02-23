@@ -45,6 +45,13 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                 />
                 <Details title="Ktoré príjmy zo živnosti podporujeme a ktoré nie?">
                   <p className="govuk-hint">
+                    Aplikácia <b>podporuje</b> prípad{' '}
+                    <b>príjmov plynúcich zo zdrojov na území SR</b>, t. j.
+                    aktívnych príjmov za činnosti vykonávané fyzicky v SR (napr.
+                    ak ste počas roka ako zamestnanec a/alebo živnostník
+                    vykonávali „prácu“ fyzicky v SR).
+                  </p>
+                  <p className="govuk-hint">
                     Aplikácia <b>nepodporuje</b> prípad{' '}
                     <b>príjmov plynúcich zo zdrojov v zahraničí</b>, t. j.
                     aktívnych príjmov za činnosti vykonávané fyzicky v zahraničí

@@ -134,6 +134,9 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <li>SZČO starobní dôchodcovia</li>
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
             <li>
+              Príjmy vysporiadané zrážkovou daňou (napr. dividendy, príjmy autorov)
+            </li>
+            <li>
               <ExternalLink href="https://kros.sk/danove-priznania/">
                 Pre nami nepodporované scenáre, odporúčame použiť aplikáciu KROS
               </ExternalLink>
