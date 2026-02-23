@@ -314,8 +314,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
             : taxFormUserInput.hasChildren === 'income-used-by-someone-else'
               ? [
                   {
-                    title:
-                      'Môj príjem bol použitý inou oprávnenou osobou',
+                    title: 'Môj príjem bol použitý inou oprávnenou osobou',
                   },
                 ]
               : [
