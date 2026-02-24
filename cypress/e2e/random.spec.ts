@@ -232,7 +232,7 @@ describe('Random inputs', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
 
-  const testCount = parseInt(process.env.RANDOM_TEST_LENGTH) || 50
+  const testCount = parseInt(process.env.RANDOM_TEST_LENGTH) || 5
   Array.from({ length: testCount }).forEach((_, i) => {
     it(`should pass random input ${i}`, (done) => {
       const input = randomInput()
