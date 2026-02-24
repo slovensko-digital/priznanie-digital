@@ -43,7 +43,7 @@ const PrijmyAVydavky: Page<IncomeAndExpenseUserInput> = ({
                   title={`Mali ste v roku ${TAX_YEAR} príjmy zo živnosti na území SR?`}
                   name="prijem_zo_zivnosti"
                 />
-                <Details title="Ktoré príjmy zo živnosti podporujeme a ktoré nie?">
+                <Details title="Ktoré príjmy podporujeme a ktoré nie?">
                   <p className="govuk-hint">
                     Aplikácia <b>podporuje</b> prípad{' '}
                     <b>príjmov plynúcich zo zdrojov na území SR</b>, t. j.
