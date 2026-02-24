@@ -186,7 +186,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r106 = '0.00'
   form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = decimalToString(taxForm.r116_dan)
-  form.dokument.telo.r116a = decimalToString(taxForm.r116a)
+  if (taxForm.maDanovyBonusNaDeti) {
+    form.dokument.telo.r116a = decimalToString(taxForm.r116a)
+  }
   if (taxForm.r117.greaterThan(0)) {
     form.dokument.telo.r117 = decimalToString(taxForm.r117)
   }
