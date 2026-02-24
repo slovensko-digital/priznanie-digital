@@ -933,6 +933,12 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get suma_3_percenta() {
       return round(percentage(this.r124, 3))
     },
+    get vypln_r146() {
+      return (
+        this.r146.gt(0) &&
+        (input.hasChildren === 'income-used-by-someone-else' || this.r117.gt(0))
+      )
+    },
     get r146() {
       if (
         input.hasChildren === 'yes' ||

@@ -226,6 +226,7 @@ export interface TaxForm {
    *   podľa § 33 zákona Ak je r135_dan_na_uhradu, tak absolutna hodnota
    *   r135_dan_na_uhradu */
   r136_danovy_preplatok: Decimal
+  vypln_r146: boolean
   r146: Decimal
   r146a: Decimal
   splnam3per: boolean
