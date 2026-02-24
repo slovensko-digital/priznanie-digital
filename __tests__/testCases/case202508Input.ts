@@ -61,9 +61,9 @@ export const case202508Input: E2eTestUserInput = {
   ],
   hasChildren: 'yes',
   partner_bonus_na_deti: false,
-  
+
   expectNgoDonationValue: true,
   percent2: '2 867,15',
   percent3: '4 300,73',
-  r035_uplatnuje_uroky: false
+  r035_uplatnuje_uroky: false,
 }
