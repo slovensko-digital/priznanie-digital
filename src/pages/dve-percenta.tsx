@@ -70,7 +70,7 @@ const TriPercenta = ({ calculatedTax }) => (
 
 const Suhlas = () => (
   <div>
-    <h2 className="govuk-heading-l">Súhlas so zaslaním údajov</h2>
+    <h2 className="govuk-heading-m">Súhlas so zaslaním údajov</h2>
     <Checkbox
       name="XIIoddiel_suhlasZaslUdaje"
       label="Želám si, aby prijímateľ 2% videl moje údaje (meno, priezvisko a adresa trvalého pobytu)"
@@ -203,7 +203,7 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
                   <RadioConditional forValue="ano-inu">
                     <TriPercenta calculatedTax={calculatedTax} />
                     <Suhlas />
-                    <h2 className="govuk-heading-l">Údaje o prijímateľovi</h2>
+                    <h2 className="govuk-heading-m">Údaje o prijímateľovi</h2>
                     <p>
                       Údaje môžete vyhladať a automaticky vyplniť podľa názvu.
                     </p>
