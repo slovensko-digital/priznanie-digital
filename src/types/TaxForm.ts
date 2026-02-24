@@ -274,4 +274,5 @@ export interface TaxForm {
     periodicita: string
   }
   canDonateTwoPercentOfTax: boolean
+  maDanovyBonusNaDeti: boolean
 }

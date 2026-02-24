@@ -69,7 +69,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   /** SECTION Children */
-  if (taxForm.r033 && taxForm.r033.length > 0 && taxForm.r117.greaterThan(0)) {
+  if (taxForm.maDanovyBonusNaDeti) {
     form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [

@@ -1033,6 +1033,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get canDonateTwoPercentOfTax() {
       return percentage(this.r124, 3).gte(MIN_2_PERCENT_CALCULATED_DONATION)
     },
+
+    get maDanovyBonusNaDeti() {
+      return this.r033 && this.r033.length > 0 && this.r117.gt(0)
+    },
   }
 }
 
