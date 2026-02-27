@@ -137,11 +137,6 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
               Príjmy vysporiadané zrážkovou daňou (napr. dividendy, príjmy
               autorov)
             </li>
-            <li>
-              <ExternalLink href="https://kros.sk/danove-priznania/">
-                Pre nami nepodporované scenáre, odporúčame použiť aplikáciu KROS
-              </ExternalLink>
-            </li>
           </ul>
         </>
       </Warning>
