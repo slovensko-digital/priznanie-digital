@@ -60,7 +60,7 @@ const makeHandlePersonAutoform = ({
       titul_za: postfixes || '',
       dic: `${subject.tin}` || '',
       ulica: street || municipality || '',
-      cislo: getStreetNumber({ reg_number, building_number }) || '',
+      cislo: getStreetNumber(reg_number, building_number) || '',
       psc: postal_code ? formatPsc(postal_code) : '',
       obec: municipality || '',
       stat: country === 'Slovenská republika' ? 'Slovensko' : '', // TODO: add mapping function for all possible countries from autoform to all options from form 548
