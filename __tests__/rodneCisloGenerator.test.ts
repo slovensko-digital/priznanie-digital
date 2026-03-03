@@ -191,6 +191,73 @@ describe('generateRodneCislo', () => {
       })
     })
 
+    describe('tax year based age generation', () => {
+      it('should generate birth ID for child turning 15 in July 2025', () => {
+        const result = generateRodneCislo({
+          turnsAge: 15,
+          turnsAgeInYear: 2025,
+          turnsAgeInMonth: 7, // July
+          gender: 'MALE',
+        })
+
+        const rc = rodnecislo(result.withDelimeter)
+        expect(rc.isValid()).toBe(true)
+        expect(rc.year()).toBe(2010) // 2025 - 15 = 2010
+        expect(rc.month()).toBe(6) // July (0-based)
+      })
+
+      it('should generate birth ID for child turning 18 in January 2025', () => {
+        const result = generateRodneCislo({
+          turnsAge: 18,
+          turnsAgeInYear: 2025,
+          turnsAgeInMonth: 1, // January
+          gender: 'FEMALE',
+        })
+
+        const rc = rodnecislo(result.withDelimeter)
+        expect(rc.isValid()).toBe(true)
+        expect(rc.year()).toBe(2007) // 2025 - 18 = 2007
+        expect(rc.month()).toBe(0) // January (0-based)
+        expect(rc.isFemale()).toBe(true)
+      })
+
+      it('should generate birth ID for child turning 15 in December 2024', () => {
+        const result = generateRodneCislo({
+          turnsAge: 15,
+          turnsAgeInYear: 2024,
+          turnsAgeInMonth: 12, // December
+          gender: 'MALE',
+        })
+
+        const rc = rodnecislo(result.withDelimeter)
+        expect(rc.isValid()).toBe(true)
+        expect(rc.year()).toBe(2009) // 2024 - 15 = 2009
+        expect(rc.month()).toBe(11) // December (0-based)
+      })
+
+      it('should work for various tax year scenarios', () => {
+        const testCases = [
+          { turnsAge: 15, turnsAgeInYear: 2025, turnsAgeInMonth: 6, expectedBirthYear: 2010, expectedBirthMonth: 5 },
+          { turnsAge: 18, turnsAgeInYear: 2025, turnsAgeInMonth: 3, expectedBirthYear: 2007, expectedBirthMonth: 2 },
+          { turnsAge: 25, turnsAgeInYear: 2024, turnsAgeInMonth: 8, expectedBirthYear: 1999, expectedBirthMonth: 7 },
+        ]
+
+        testCases.forEach(({ turnsAge, turnsAgeInYear, turnsAgeInMonth, expectedBirthYear, expectedBirthMonth }) => {
+          const result = generateRodneCislo({
+            turnsAge,
+            turnsAgeInYear,
+            turnsAgeInMonth,
+            gender: 'MALE',
+          })
+
+          const rc = rodnecislo(result.withDelimeter)
+          expect(rc.isValid()).toBe(true)
+          expect(rc.year()).toBe(expectedBirthYear)
+          expect(rc.month()).toBe(expectedBirthMonth)
+        })
+      })
+    })
+
     describe('divisibility by 11 check', () => {
       it('should generate number divisible by 11 for post-1954 dates', () => {
         // Run multiple times to test randomness

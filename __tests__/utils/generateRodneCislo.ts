@@ -4,8 +4,19 @@ export type BirthIdGeneratorResult = { withDelimeter: string; pure: string }
 export interface GenerateBirthIdOptions {
   /** Birth date. If not provided, calculated from age parameter or random date */
   birthDate?: Date
-  /** Age in years. Used if birthDate is not provided */
+  /** Age in years. Used if birthDate is not provided. Uses current date as reference. */
   age?: number
+  /**
+   * Age the person turns during the tax year.
+   * Must be used together with turnsAgeInYear and turnsAgeInMonth.
+   * Example: turnsAge: 15, turnsAgeInYear: 2025, turnsAgeInMonth: 7
+   * generates a birth ID for someone born in July 2010 (turns 15 in July 2025)
+   */
+  turnsAge?: number
+  /** The year (tax year) in which the person turns the specified age */
+  turnsAgeInYear?: number
+  /** The month (1-12) in which the person turns the specified age */
+  turnsAgeInMonth?: number
   /** Gender of the person */
   gender: GenderType
   /**
@@ -35,8 +46,23 @@ export const generateRodneCislo = (
 
   if (options.birthDate) {
     birthDate = options.birthDate
+  } else if (
+    options.turnsAge !== undefined &&
+    options.turnsAgeInYear !== undefined &&
+    options.turnsAgeInMonth !== undefined
+  ) {
+    // Calculate birth date from tax year context
+    // Person turns turnsAge in turnsAgeInMonth of turnsAgeInYear
+    // So they were born in turnsAgeInMonth of (turnsAgeInYear - turnsAge)
+    const birthYear = options.turnsAgeInYear - options.turnsAge
+    const birthMonth = options.turnsAgeInMonth - 1 // Convert to 0-based month
+    birthDate = new Date(
+      birthYear,
+      birthMonth,
+      Math.floor(Math.random() * 28) + 1, // Random day (1-28 to avoid issues)
+    )
   } else if (options.age !== undefined) {
-    // Calculate birth date from age
+    // Calculate birth date from age (uses current date as reference)
     const today = new Date()
     birthDate = new Date(
       today.getFullYear() - options.age,
