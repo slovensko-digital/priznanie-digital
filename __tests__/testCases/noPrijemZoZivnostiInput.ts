@@ -35,7 +35,7 @@ export const noPrijemZoZivnostiInput: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: false,
 
   /** SECTION Children */
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 
   /** SECTION Rent */

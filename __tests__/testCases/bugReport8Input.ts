@@ -26,7 +26,7 @@ export const bugReport8Input: E2eTestUserInput = {
   r010_obec: 'Bratislava 3',
   r011_stat: 'Slovensko',
   datum: '22.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 
   expectNgoDonationValue: true,

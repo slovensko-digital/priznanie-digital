@@ -41,6 +41,8 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
       taxForm.vydavkyPoistPar6ods11_ods1a2,
     )
+    // checked only when there is self-employment income, as our form supports only flat expenses
+    form.dokument.telo.vydavkyPar6ods10_ods1a2 = '1'
   }
   if (taxForm.platil_prispevky_na_dochodok) {
     form.dokument.telo.r75 = decimalToString(
@@ -67,7 +69,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   /** SECTION Children */
-  if (taxForm.r033 && taxForm.r033.length > 0 && taxForm.r117.greaterThan(0)) {
+  if (taxForm.maDanovyBonusNaDeti) {
     form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
@@ -184,7 +186,9 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r106 = '0.00'
   form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = decimalToString(taxForm.r116_dan)
-  form.dokument.telo.r116a = decimalToString(taxForm.r116a)
+  if (taxForm.maDanovyBonusNaDeti) {
+    form.dokument.telo.r116a = decimalToString(taxForm.r116a)
+  }
   if (taxForm.r117.greaterThan(0)) {
     form.dokument.telo.r117 = decimalToString(taxForm.r117)
   }
@@ -204,7 +208,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r135 = decimalToString(taxForm.r135_dan_na_uhradu)
   form.dokument.telo.r136 = decimalToString(taxForm.r136_danovy_preplatok)
-  if (taxForm.r146.greaterThan(0) && taxForm.r117.greaterThan(0)) {
+  if (taxForm.vypln_r146) {
     form.dokument.telo.r146 = decimalToString(taxForm.r146)
     form.dokument.telo.r146a = decimalToString(taxForm.r146a)
   }

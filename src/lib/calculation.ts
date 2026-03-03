@@ -31,7 +31,7 @@ export const CHILD_RATE_FIFTEEN_AND_YOUNGER = 100
 export const CHILD_RATE_FIFTEEN_AND_OLDER = 50
 const CHILD_BONUS_AGE_DIVIDER = 15
 export const MAX_CHILD_AGE_BONUS = 18
-const HIGH_INCOME_THRESHOLD = new Decimal(25740)
+export const HIGH_INCOME_THRESHOLD = new Decimal(25740)
 
 const ZIVOTNE_MINIMUM_NASOBOK = new Decimal(12_110.36)
 
@@ -47,7 +47,7 @@ export const RODNE_CISLO_DLZKA = 13
 
 // 63,4-násobok platného životného minima
 const ZVYHODNENIE_NA_PARTNERA = new Decimal(17_370.97)
-export const PARTNER_MAX_ODPOCET = 5_260.61
+export const PARTNER_MAX_ODPOCET = new Decimal(5_260.61)
 export const TAX_YEAR = 2025
 export const MIN_2_PERCENT_CALCULATED_DONATION = 3
 export const UROKY_POCET_ROKOV = 5
@@ -214,7 +214,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     /** SECTION Children */
     get r033() {
-      const mapChild = makeMapChild(input?.hasChildren)
+      const mapChild = makeMapChild(input?.hasChildren === 'yes')
       return input.children.map((child) => mapChild(child))
     },
 
@@ -453,15 +453,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
         } else {
           if (this.r032_partner_pocet_mesiacov === 12) {
             return round(
-              new Decimal(PARTNER_MAX_ODPOCET).minus(
+              PARTNER_MAX_ODPOCET.minus(
                 Decimal.max(this.r032_partner_vlastne_prijmy, 0),
               ),
             )
           } else {
             const mesacne = round(
-              new Decimal(PARTNER_MAX_ODPOCET)
-                .minus(Decimal.max(this.r032_partner_vlastne_prijmy, 0))
-                .div(12),
+              PARTNER_MAX_ODPOCET.minus(
+                Decimal.max(this.r032_partner_vlastne_prijmy, 0),
+              ).div(12),
             )
             return round(
               Decimal.max(
@@ -652,16 +652,15 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             sumaOd15.minus(znizenieOd15),
           )
 
-          const rawBonus = sumaDo15.plus(sumaOd15)
           const vysledokDieta = round(vysledokDo15.plus(vysledokOd15))
 
           danovyBonus = danovyBonus.plus(vysledokDieta)
-          nevyuzityDanovyBonus = nevyuzityDanovyBonus.plus(
-            rawBonus.minus(vysledokDieta),
-          )
         }
 
-        return { danovyBonus: round(danovyBonus), nevyuzityDanovyBonus }
+        return {
+          danovyBonus: round(danovyBonus),
+          nevyuzityDanovyBonus: new Decimal(0),
+        }
       }
 
       // Standard algorithm (percentage limit based on child count)
@@ -934,8 +933,20 @@ export function calculate(input: TaxFormUserInput): TaxForm {
     get suma_3_percenta() {
       return round(percentage(this.r124, 3))
     },
+    get vypln_r146() {
+      return (
+        this.r146.gt(0) &&
+        (input.hasChildren === 'income-used-by-someone-else' || this.r117.gt(0))
+      )
+    },
     get r146() {
-      return this.r036.plus(this.r039).plus(this.t1r11s1)
+      if (
+        input.hasChildren === 'yes' ||
+        input.hasChildren === 'income-used-by-someone-else'
+      ) {
+        return this.r036.plus(this.r039).plus(this.r058)
+      }
+      return new Decimal(0)
     },
     get r146a() {
       // v nasom pripade by 146 a 146a mali byt vzdy rovnake
@@ -991,7 +1002,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
             : undefined,
       }
     },
-    children: input?.hasChildren ?? false,
+    children: input?.hasChildren === 'yes',
     employed: input?.employed ?? false,
     dohoda: input?.dohoda ?? false,
 
@@ -1021,6 +1032,10 @@ export function calculate(input: TaxFormUserInput): TaxForm {
 
     get canDonateTwoPercentOfTax() {
       return percentage(this.r124, 3).gte(MIN_2_PERCENT_CALCULATED_DONATION)
+    },
+
+    get maDanovyBonusNaDeti() {
+      return this.r033 && this.r033.length > 0 && this.r117.gt(0)
     },
   }
 }

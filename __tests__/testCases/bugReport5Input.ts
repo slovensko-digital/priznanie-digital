@@ -30,7 +30,7 @@ export const bugReport5Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '9.40',
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '38.67',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [
     {
       id: 0,

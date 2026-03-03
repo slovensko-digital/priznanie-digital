@@ -12,6 +12,7 @@ import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
 import {
   MAX_CHILD_AGE_BONUS,
+  PARTNER_MAX_ODPOCET,
   TAX_YEAR,
   UROKY_POCET_ROKOV,
 } from '../../src/lib/calculation'
@@ -308,7 +309,7 @@ describe('Partner page', () => {
     // Fill out input with incorrect value (too high), continue to see ineligible message
     typeToInput('r032_partner_vlastne_prijmy', {
       ...withPartnerInput,
-      r032_partner_vlastne_prijmy: '5236',
+      r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET.plus(1).toString(),
     })
     next()
     cy.get('[data-test=ineligible-message]').should('exist')
@@ -860,7 +861,7 @@ describe('IBAN page', () => {
     assertUrl('/zamestnanie')
     skipPage()
 
-    assertUrl('/partner')
+    assertUrl('/dohoda')
     skipPage()
 
     assertUrl('/partner')
@@ -877,14 +878,24 @@ describe('IBAN page', () => {
     )
     next()
 
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+
+    next()
+
     assertUrl('/dochodok')
     skipPage()
 
-    assertUrl('/dve-percenta')
+    assertUrl('/prenajom')
+    skipPage()
+
+    assertUrl('/uroky')
+    skipPage()
+
+    assertUrl('/dve-percenta-rodicom')
     next()
 
-    // assertUrl('/hypoteka')
-    // skipPage()
+    assertUrl('/dve-percenta')
+    next()
 
     assertUrl('/osobne-udaje')
     typeToInput('r001_dic', withBonusInput)
@@ -968,6 +979,7 @@ describe('Summary page', () => {
     '/dochodok',
     '/uroky',
     '/prenajom',
+    '/dve-percenta-rodicom',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, () => {

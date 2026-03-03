@@ -109,7 +109,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -170,11 +170,7 @@ describe('twoPercent page', () => {
     getInput('dve_percenta_rodicom', '-nie').click()
     next()
 
-    // Shows error, when presses next without interaction
-    next()
-    getError().should('have.length', 1)
-
-    // When presses yes, additional fields appear
+    // When presses 'ano-inu', additional fields appear (clears pre-filled Slovensko.Digital)
     cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
     // All aditional fields should be required
@@ -315,7 +311,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -511,7 +507,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -644,7 +640,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {

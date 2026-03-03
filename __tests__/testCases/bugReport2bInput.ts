@@ -32,7 +32,7 @@ export const bugReport2bInput: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '0',
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '0',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',

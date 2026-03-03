@@ -7,7 +7,7 @@ export const bugReport10Input: E2eTestUserInput = {
   priloha3_r13_zdravotne: '1742.12',
   zaplatenePreddavky: '36750.48',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,

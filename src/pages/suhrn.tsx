@@ -260,7 +260,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         title="Deti, pri ktorých si uplatňujem nárok na daňový bonus na vyživované dieťa"
         href={'/deti'}
         rows={
-          taxFormUserInput.hasChildren
+          taxFormUserInput.hasChildren === 'yes'
             ? taxFormUserInput.children
                 .map((child) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
@@ -311,11 +311,17 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
               ]
-            : [
-                {
-                  title: 'Nemám nárok alebo neuplatňujem si',
-                },
-              ]
+            : taxFormUserInput.hasChildren === 'income-used-by-someone-else'
+              ? [
+                  {
+                    title: 'Môj príjem bol použitý inou oprávnenou osobou',
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nemám nárok alebo neuplatňujem si',
+                  },
+                ]
         }
       />
       <Summary

@@ -23,9 +23,10 @@ const randomFromRangeString = (min: number, max: number) => {
 }
 
 const randomInput = (): TaxFormUserInput => {
+  const prijem_zo_zivnosti = Math.random() > 0.5
   const employed = Math.random() > 0.5
   const dohoda = Math.random() > 0.5
-  const hasChildren = Math.random() > 0.2
+  const hasChildren = Math.random() > 0.2 ? 'yes' : 'no'
   const partner = Math.random() > 0.7
   const rent = Math.random() > 0.3
   const uroky = Math.random() > 0.3
@@ -35,10 +36,7 @@ const randomInput = (): TaxFormUserInput => {
   const zdravPercent = randomFromRange(0, 40).div(100).toFixed(2)
 
   let input: TaxFormUserInput = {
-    t1r10_prijmy: prijmy.toFixed(2),
-    priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
-    priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
-    zaplatenePreddavky: randomFromRangeString(0, 100000),
+    prijem_zo_zivnosti,
     employed,
     dohoda,
     hasChildren,
@@ -70,6 +68,16 @@ const randomInput = (): TaxFormUserInput => {
     input = { ...input, ...zamestnanie }
   }
 
+  if (prijem_zo_zivnosti) {
+    input = {
+      ...input,
+      t1r10_prijmy: prijmy.toFixed(2),
+      priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
+      priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
+      zaplatenePreddavky: randomFromRangeString(0, 100000),
+    }
+  }
+
   const dohody: DohodaUserInput = {
     uhrnPrijmovZoVsetkychDohod: randomFromRangeString(0, 100000),
     uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(
@@ -88,11 +96,11 @@ const randomInput = (): TaxFormUserInput => {
     input = { ...input, ...dohody }
   }
 
-  if (hasChildren) {
+  if (hasChildren === 'yes') {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
     const partnerChildBonus = Math.random() > 0.3
     Array.from({ length: childrenCount }).forEach((_, index) => {
-      const age = randomFromRange(0, 25).round().toNumber()
+      const age = randomFromRange(0, 18).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
       const birthDate = new Date(TAX_YEAR - age, month, 15)
       const gender = Math.random() > 0.5
@@ -161,7 +169,7 @@ const randomInput = (): TaxFormUserInput => {
         .toString(),
       r032_partner_vlastne_prijmy: randomFromRangeString(
         0,
-        PARTNER_MAX_ODPOCET,
+        PARTNER_MAX_ODPOCET.toNumber(),
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,

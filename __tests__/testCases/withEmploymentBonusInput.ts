@@ -20,7 +20,7 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
   udajeODanovomBonuseNaDieta: '2000.70',
   uhrnPreddavkovNaDan: '1178.93',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,

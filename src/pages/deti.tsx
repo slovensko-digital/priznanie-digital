@@ -30,6 +30,7 @@ import {
   calculate,
   CHILD_RATE_FIFTEEN_AND_OLDER,
   CHILD_RATE_FIFTEEN_AND_YOUNGER,
+  HIGH_INCOME_THRESHOLD,
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
   monthKeyValues,
@@ -40,6 +41,7 @@ import { Details } from '../components/Details'
 import RadioGroup from '../components/radio/RadioGroup'
 import Radio from '../components/radio/Radio'
 import RadioConditional from '../components/radio/RadioConditional'
+import Fieldset from '../components/fieldset/Fieldset'
 import Decimal from 'decimal.js'
 import { Warning } from '../components/Warning'
 import { ExternalLink } from '../components/ExternalLink'
@@ -66,18 +68,19 @@ const Deti: Page<ChildrenUserInput> = ({
         initialValues={taxFormUserInput}
         validate={validate}
         onSubmit={(values) => {
-          const userInput = values.hasChildren
-            ? values
-            : {
-                ...childrenUserInputInitialValues,
-                hasChildren: false,
-              }
+          const userInput =
+            values.hasChildren === 'yes'
+              ? values
+              : {
+                  ...childrenUserInputInitialValues,
+                  hasChildren: values.hasChildren,
+                }
           const { danovyBonusNaDieta } = calculate({
             ...taxFormUserInput,
             ...userInput,
           })
           setTaxFormUserInput(userInput)
-          if (values.hasChildren) {
+          if (values.hasChildren === 'yes') {
             if (
               danovyBonusNaDieta.nevyuzityDanovyBonus.equals(new Decimal(0))
             ) {
@@ -103,23 +106,36 @@ const Deti: Page<ChildrenUserInput> = ({
         {({ values, errors, setErrors, validateForm, setFieldValue }) => (
           <Form className="form">
             <ErrorSummary<ChildrenUserInput> errors={errors} />
-            <BooleanRadio
+            <Fieldset
               title={`Chcete si uplatniť daňový bonus na dieťa, s ktorým ste počas roku ${TAX_YEAR} žili v spoločnej domácnosti?`}
-              name="hasChildren"
-            />
-            {values.hasChildren && (
+              error={errors.hasChildren}
+            >
+              <RadioGroup
+                value={values.hasChildren ?? ''}
+                onChange={(value) => {
+                  setFieldValue('hasChildren', value)
+                }}
+              >
+                <Radio name="hasChildren-input-yes" label="Áno" value="yes" />
+                <Radio
+                  name="hasChildren-input-income-used"
+                  label="Nie, môj príjem bol použitý inou oprávnenou osobou"
+                  value="income-used-by-someone-else"
+                />
+                <Radio name="hasChildren-input-no" label="Nie" value="no" />
+              </RadioGroup>
+            </Fieldset>
+            {values.hasChildren === 'yes' && (
               <>
                 <h1 className="govuk-heading-l">Informácie o deťoch</h1>
-                {/* TODO */}
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
-                  dieťa do 18 rokov, študenta do 25 rokov alebo o nezaopatrené
-                  dieťa do 25 rokov, ktoré je dlhodobo choré, pri splnení{' '}
+                  dieťa do 18 rokov, pri splnení{' '}
                   <ExternalLink href="https://podpora.financnasprava.sk/392084-Vy%C5%BEivovan%C3%A9-die%C5%A5a-">
                     stanovených podmienok
                   </ExternalLink>{' '}
-                  máte nárok na daňové zvýhodnenie. Prechodný pobyt dieťaťa mimo
-                  domácnosti nemá vplyv na uplatnenie tohto daňového bonusu.
+                  máte nárok na daňové zvýhodnenie. Daňový bonus na dieťa si
+                  môže uplatniť iba jeden z rodičov.
                 </p>
                 <Details title="Aká je výška daňového bonusu?">
                   <p className="govuk-hint">
@@ -135,11 +151,20 @@ const Deti: Page<ChildrenUserInput> = ({
                         {formatCurrency(CHILD_RATE_FIFTEEN_AND_OLDER)} mesačne.
                       </li>
                     </ul>
+                    Od roku 2025 sa daňový bonus na vyživované deti znižuje v
+                    závislosti od výšky základu dane. Ak základ dane daňovníka a
+                    druhej oprávnenej osoby z príjmov zo zamestnania a živnosti
+                    spolu presiahne sumu{' '}
+                    {formatCurrency(HIGH_INCOME_THRESHOLD.toNumber())}, výška
+                    daňového bonusu sa primerane zníži. Ak sa na vás toto
+                    zníženie vzťahuje, prejaví sa to v záverečnej sumarizácii
+                    nižšou sumou uplatneného daňového bonusu. Bližšie informácie
+                    je možné nájsť priamo na{' '}
+                    <ExternalLink href="https://podpora.financnasprava.sk/790897-Da%C5%88ov%C3%BD-bonus-na-vy%C5%BEivovan%C3%A9-die%C5%A5a-za-rok-2025">
+                      stránke finančnej správy.
+                    </ExternalLink>
                   </p>
                 </Details>
-                <p className="govuk-hint">
-                  Daňový bonus na dieťa si môže uplatniť iba jeden z rodičov.
-                </p>
 
                 <FieldArray name="children">
                   {(arrayHelpers) => (
@@ -519,10 +544,10 @@ interface ChildrenFormErrors {
 export const validate = (values: ChildrenUserInput) => {
   const errors: ChildrenFormErrors = {}
 
-  if (typeof values.hasChildren === 'undefined') {
+  if (!values.hasChildren) {
     errors.hasChildren = 'Vyznačte odpoveď'
   }
-  if (values.hasChildren) {
+  if (values.hasChildren === 'yes') {
     const childrenErrors = values.children.map((childValues, index) => {
       const childErrors: ChildFormErrors = {}
 

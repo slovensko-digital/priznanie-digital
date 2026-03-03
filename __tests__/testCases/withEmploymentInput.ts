@@ -18,7 +18,7 @@ export const withEmploymentInput: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '700',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '300',
   employed: true,
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   datum: '22.02.2022',
   expectNgoDonationValue: true,

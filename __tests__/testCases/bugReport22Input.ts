@@ -7,7 +7,7 @@ export const bugReport22Input: E2eTestUserInput = {
   priloha3_r13_zdravotne: '18543.12',
   zaplatenePreddavky: '5764.27',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
@@ -81,7 +81,7 @@ export const bugReport22Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '55.54',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
@@ -96,5 +96,5 @@ export const bugReport22Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '13.78',
   expectNgoDonationValue: true,
-  percent2: '107,26',
+  percent2: '169,59',
 }

@@ -67,7 +67,7 @@ export const case202202aInput: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: true,
 

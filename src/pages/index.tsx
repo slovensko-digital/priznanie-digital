@@ -108,7 +108,8 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
 
       <p>
         Aplikácia je určená na podanie riadneho a opravného daňového priznania
-        pre SZČO uplatňujúce si paušálne výdavky.
+        pre SZČO vykonávajúce činnosť fyzicky na území SR, uplatňujúce paušálne
+        výdavky.
       </p>
 
       <p>
@@ -133,9 +134,8 @@ const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
             <li>SZČO starobní dôchodcovia</li>
             <li>Záväzky a pohľadávky (tabuľka 1b)</li>
             <li>
-              <ExternalLink href="https://kros.sk/danove-priznania/">
-                Pre nami nepodporované scenáre, odporúčame použiť aplikáciu KROS
-              </ExternalLink>
+              Príjmy vysporiadané zrážkovou daňou (napr. dividendy, príjmy
+              autorov)
             </li>
           </ul>
         </>

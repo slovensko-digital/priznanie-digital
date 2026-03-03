@@ -20,7 +20,7 @@ export const withPensionInput: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '170',
 
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 
   expectNgoDonationValue: true,

@@ -46,7 +46,7 @@ export const withBonusInput: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonusUrokPreplatok: true,

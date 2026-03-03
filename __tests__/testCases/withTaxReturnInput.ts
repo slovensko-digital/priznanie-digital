@@ -16,7 +16,7 @@ export const withTaxReturnInput: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
   datum: '22.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 
   /** SECTION Danovy preplatok */

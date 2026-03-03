@@ -22,7 +22,7 @@ export const withHighIncome2Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '8888.10',
   udajeODanovomBonuseNaDieta: '221.70',
   uhrnPreddavkovNaDan: '78.20',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,

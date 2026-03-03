@@ -46,7 +46,7 @@ export const highIncomeChildBonus02Input: E2eTestUserInput = {
   r011_stat: 'Slovensko',
 
   // Child 15-17 (born March 15, 2008)
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,
