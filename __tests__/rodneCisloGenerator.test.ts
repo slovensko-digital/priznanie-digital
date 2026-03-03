@@ -237,24 +237,50 @@ describe('generateRodneCislo', () => {
 
       it('should work for various tax year scenarios', () => {
         const testCases = [
-          { turnsAge: 15, turnsAgeInYear: 2025, turnsAgeInMonth: 6, expectedBirthYear: 2010, expectedBirthMonth: 5 },
-          { turnsAge: 18, turnsAgeInYear: 2025, turnsAgeInMonth: 3, expectedBirthYear: 2007, expectedBirthMonth: 2 },
-          { turnsAge: 25, turnsAgeInYear: 2024, turnsAgeInMonth: 8, expectedBirthYear: 1999, expectedBirthMonth: 7 },
+          {
+            turnsAge: 15,
+            turnsAgeInYear: 2025,
+            turnsAgeInMonth: 6,
+            expectedBirthYear: 2010,
+            expectedBirthMonth: 5,
+          },
+          {
+            turnsAge: 18,
+            turnsAgeInYear: 2025,
+            turnsAgeInMonth: 3,
+            expectedBirthYear: 2007,
+            expectedBirthMonth: 2,
+          },
+          {
+            turnsAge: 25,
+            turnsAgeInYear: 2024,
+            turnsAgeInMonth: 8,
+            expectedBirthYear: 1999,
+            expectedBirthMonth: 7,
+          },
         ]
 
-        testCases.forEach(({ turnsAge, turnsAgeInYear, turnsAgeInMonth, expectedBirthYear, expectedBirthMonth }) => {
-          const result = generateRodneCislo({
+        testCases.forEach(
+          ({
             turnsAge,
             turnsAgeInYear,
             turnsAgeInMonth,
-            gender: 'MALE',
-          })
+            expectedBirthYear,
+            expectedBirthMonth,
+          }) => {
+            const result = generateRodneCislo({
+              turnsAge,
+              turnsAgeInYear,
+              turnsAgeInMonth,
+              gender: 'MALE',
+            })
 
-          const rc = rodnecislo(result.withDelimeter)
-          expect(rc.isValid()).toBe(true)
-          expect(rc.year()).toBe(expectedBirthYear)
-          expect(rc.month()).toBe(expectedBirthMonth)
-        })
+            const rc = rodnecislo(result.withDelimeter)
+            expect(rc.isValid()).toBe(true)
+            expect(rc.year()).toBe(expectedBirthYear)
+            expect(rc.month()).toBe(expectedBirthMonth)
+          },
+        )
       })
     })
 
