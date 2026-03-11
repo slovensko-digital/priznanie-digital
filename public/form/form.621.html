@@ -4716,35 +4716,25 @@ function inliner117(element,sid) {
                 }
 
                 // ak dieťa nemá žiadny mesiac, nemá zmysel pokračovať
-                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) {
-                    continue;
-                }
+                if (mesiaceDo15 === 0 && mesiaceOd15 === 0) continue;
 
-                var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
+var basePom = Big(rBase).minus(25740).div(10).round(2, 1);
+var celyRok = (mesiaceDo15 + mesiaceOd15 === 12);
+var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
+var sumaDo15 = mesiaceDo15 * 100;
+var sumaOd15 = mesiaceOd15 * 50;
+var totalMesiace = mesiaceDo15 + mesiaceOd15;
+var znizenieDo15 = celyRok ? basePom.times(mesiaceDo15).div(totalMesiace).round(2, 1) : pom.times(mesiaceDo15).round(2, 1);
+var znizenieOd15 = celyRok ? basePom.minus(znizenieDo15).round(2, 1) : pom.times(mesiaceOd15).round(2, 1);
 
-                var celyRok = (mesiaceDo15 === 12 || mesiaceOd15 === 12);
+var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
+var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
 
-                var pom = celyRok ? basePom : basePom.div(12).round(2, 1);
+var vysledokDieta = vysledokDo15.plus(vysledokOd15);
+if (vysledokDieta.lt(0)) vysledokDieta = Big(0);
+vysledokDieta = vysledokDieta.round(2, 1);
 
-                var sumaDo15 = mesiaceDo15 * 100;
-                var sumaOd15 = mesiaceOd15 * 50;
-
-                var znizenieDo15 = celyRok ? pom : pom.times(mesiaceDo15).round(2, 1);
-                var znizenieOd15 = celyRok ? pom : pom.times(mesiaceOd15).round(2, 1);
-
-                // výsledky
-                var vysledokDo15 = computeSegment(sumaDo15, znizenieDo15);
-                var vysledokOd15 = computeSegment(sumaOd15, znizenieOd15);
-
-                // spolu pre dieťa
-                var vysledokDieta = vysledokDo15.plus(vysledokOd15);
-                if (vysledokDieta.lt(0)) {
-                    vysledokDieta = Big(0);
-                }
-                vysledokDieta = vysledokDieta.round(2, 1);
-
-                // pripočítam do celkovej DB
-                sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
+sumaDB = sumaDB.plus(vysledokDieta).round(2, 1);
             }
         }
 
@@ -9825,6 +9815,48 @@ else
 
 }
 
+function disableclickcheckboxvalid(element,sid) {
+/*
+
+TOTO JE SCRIPT PRE VSETKY CHECKBOXY
+
+    $("#errorsContainerDiv").find('label[for]').each(function () {
+        var $label = $(this);
+        if ($label.data('scrollBound')) return;
+        $label.data('scrollBound', true);
+        $label.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var target = $('#' + $label.attr('for'));
+            if (target.length) {
+                $('html, body').scrollTop(target.offset().top - 100);
+                target.focus();
+            }
+        });
+    });
+*/
+
+// TENTO JE PRE KONKRETNE CHECKBOXY
+
+var ids = ['cbPriPrijmoch11Ods6Zak1a2']; /////// sem treba vlozit idcka checkboxov
+for (var i = 0; i < ids.length; i++) {
+    var $label = $("label[for='" + ids[i] + "']").not('.checkBoxLabel');
+    if (!$label.length || $label.data('scrollBound')) continue;
+    $label.data('scrollBound', true);
+    (function (id) {
+        $label.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var target = $('#' + id);
+            if (target.length) {
+                $('html, body').scrollTop(target.offset().top - 100);
+                target.focus();
+            }
+        });
+    })(ids[i]);
+}
+}
+
 
 		function GetExternalResourceIndex(resourcetype) {
   switch (resourcetype) {
@@ -9844,7 +9876,7 @@ else
       return 'DPFOBv25-poucenie.pdf';
       break;
     case 13:
-      return 'form.621.DPFOB.png';
+      return 'form.621.DPFOB.png'+'|form.621.prijimatelia_2026.html';
       break;
     default:
       return null;
@@ -9872,6 +9904,7 @@ function GetExternalResource(resourcetype, index) {
       break;
     case 13:
       if (index == null || index =='form.621.DPFOB.png') return 'form.621.DPFOB.png';
+      if (index == null || index =='form.621.prijimatelia_2026.html') return 'form.621.prijimatelia_2026.html';
       break;
     default:
       return null;
@@ -11000,6 +11033,54 @@ po vypublikovaní formulára je potrebné zeditovať html formulára a nahradiť
 vložiť <sup> 1)</sup> za RB dodatočné. bude:  dodatočné daňové priznanie <sup>1)</sup>
 
 poznamka: inliner112 - nastrel pouzitia kniznice pre pocitanie s desatinnymi cislami, trebalo by zaviest globalne
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+Toto zaručí ak klikneme na error alebo warning hlášku, ktorá sa týka checkboxu tak nám ho nazaškrtne
+je potrebne zapracovať aj funkciu disableclickcheckboxvalid() kde treba zmenit id daného checkboxu.
+
+Za toto: 
+ignore: ".disableValidators",
+
+Treba doplnit prevzane a upravene z PFS.jquery.validate: 
+                onvalfocusin: function (element) {
+                    this.lastActive = element;
+
+                    // hide error label and remove error class on focus if enabled
+                    if (this.settings.focusCleanup && !this.blockFocusCleanup) {
+                        // this.settings.unhighlight && this.settings.unhighlight.call(this, element, this.settings.errorClass);
+                        this.settings.unhighlight && this.settings.unhighlight.call(this, element, this.settings.errorClass + ' ' + this.settings.warningClass);
+                        this.errorsFor(element.id).hide(); ////////////////////////////////////////////////////////////////////////// 
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalfocusout: function (element) {
+                    if (!this.checkable(element) && (true || !this.optional(element))) { //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalkeyup: function (element) {
+                    if (true || element == this.lastElement) { //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalclick: function (element) {
+                    if (true) {   //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+
+
 */
 
 $(window).bind("load", function () {
@@ -50879,7 +50960,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153a_1('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T2(sid) {
-var retval = ("VIII. Oddiel - r.153a - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
+var retval = ("XII. Oddiel - r.153a - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
 				return retval; //;
 			}
 				
@@ -50892,7 +50973,7 @@ var retval = (((Math.round(100.0000000000001*(t_priezvisko153a))==Math.round(100
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T3(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -50905,7 +50986,7 @@ var retval = (((Math.round(100.0000000000001*(t_meno153a))==Math.round(100.00000
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T4(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
 				return retval; //;
 			}
 		function kontrola2_tbRodneCislo153A_1(element, sid, dblclick) {		
@@ -50993,7 +51074,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153a_1('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T2(sid) {
-var retval = ("VIII. Oddiel - r.153a - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
+var retval = ("XII. Oddiel - r.153a - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
 				return retval; //;
 			}
 				
@@ -51006,7 +51087,7 @@ var retval = (((Math.round(100.0000000000001*(t_priezvisko153a))==Math.round(100
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T3(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -51019,7 +51100,7 @@ var retval = (((Math.round(100.0000000000001*(t_meno153a))==Math.round(100.00000
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_1_T4(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
 				return retval; //;
 			}
 		function kontrola_tbRodneCislo153A_2(element, sid, dblclick) {		
@@ -51089,7 +51170,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153a_2('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_2_T2(sid) {
-var retval = ("VIII. Oddiel - r.153a - neplatné rodné číslo, alebo rok narodenia.");
+var retval = ("XII. Oddiel - r.153a - neplatné rodné číslo, alebo rok narodenia.");
 				return retval; //;
 			}
 				
@@ -51203,7 +51284,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153a_2('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153a_2_T2(sid) {
-var retval = ("VIII. Oddiel - r.153a - neplatné rodné číslo, alebo rok narodenia.");
+var retval = ("XII. Oddiel - r.153a - neplatné rodné číslo, alebo rok narodenia.");
 				return retval; //;
 			}
 				
@@ -51286,7 +51367,7 @@ var retval = (((Math.round(100.0000000000001*((t_tbrodnecislo153a_1+t_tbrodnecis
 				return retval;
 			}
 			function vypocet_priezvisko153a_T1(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -51362,7 +51443,7 @@ var retval = (((Math.round(100.0000000000001*((t_tbrodnecislo153a_1+t_tbrodnecis
 				return retval;
 			}
 			function vypocet_priezvisko153a_T1(sid) {
-var retval = ("VIII. Oddiel - r.153a - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153a - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -51591,7 +51672,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153b_1('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T2(sid) {
-var retval = ("VIII. Oddiel - r.153b - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
+var retval = ("XII. Oddiel - r.153b - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
 				return retval; //;
 			}
 				
@@ -51604,7 +51685,7 @@ var retval = (((Math.round(100.0000000000001*(t_priezvisko153b))==Math.round(100
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T3(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -51617,7 +51698,7 @@ var retval = (((Math.round(100.0000000000001*(t_meno153b))==Math.round(100.00000
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T4(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
 				return retval; //;
 			}
 		function kontrola2_tbRodneCislo153B_1(element, sid, dblclick) {		
@@ -51705,7 +51786,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153b_1('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T2(sid) {
-var retval = ("VIII. Oddiel - r.153b - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
+var retval = ("XII. Oddiel - r.153b - neplatná prvá časť rodného čísla, alebo dátum narodenia (DDMM).");
 				return retval; //;
 			}
 				
@@ -51718,7 +51799,7 @@ var retval = (((Math.round(100.0000000000001*(t_priezvisko153b))==Math.round(100
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T3(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Priezvisko', musí byť vyplnené 'Rodné číslo' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -51731,7 +51812,7 @@ var retval = (((Math.round(100.0000000000001*(t_meno153b))==Math.round(100.00000
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_1_T4(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Meno', musí byť vyplnené 'Rodné číslo' a 'Priezvisko' rodiča.");
 				return retval; //;
 			}
 		function kontrola_tbRodneCislo153B_2(element, sid, dblclick) {		
@@ -51801,7 +51882,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153b_2('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_2_T2(sid) {
-var retval = ("VIII. Oddiel - r.153b - neplatné rodné číslo, alebo rok narodenia.");
+var retval = ("XII. Oddiel - r.153b - neplatné rodné číslo, alebo rok narodenia.");
 				return retval; //;
 			}
 				
@@ -51915,7 +51996,7 @@ var retval = (((Math.round(100.0000000000001*(inlinekontrolarc153b_2('tbRodneCis
 				return retval;
 			}
 			function vypocet_tbrodnecislo153b_2_T2(sid) {
-var retval = ("VIII. Oddiel - r.153b - neplatné rodné číslo, alebo rok narodenia.");
+var retval = ("XII. Oddiel - r.153b - neplatné rodné číslo, alebo rok narodenia.");
 				return retval; //;
 			}
 				
@@ -51998,7 +52079,7 @@ var retval = (((Math.round(100.0000000000001*((t_tbrodnecislo153b_1+t_tbrodnecis
 				return retval;
 			}
 			function vypocet_priezvisko153b_T1(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -52074,7 +52155,7 @@ var retval = (((Math.round(100.0000000000001*((t_tbrodnecislo153b_1+t_tbrodnecis
 				return retval;
 			}
 			function vypocet_priezvisko153b_T1(sid) {
-var retval = ("VIII. Oddiel - r.153b - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
+var retval = ("XII. Oddiel - r.153b - Ak je vyplnené 'Rodné číslo', musí byť vyplnené 'Priezvisko' a 'Meno' rodiča.");
 				return retval; //;
 			}
 				
@@ -52421,6 +52502,42 @@ var retval = (" Pole 'neuplatňujem postup podľa § 50aa zákona' musí byť oz
 				onkeyup: false,
 				onclick: false,
 		        ignore: ".disableValidators",
+                onvalfocusin: function (element) {
+                    this.lastActive = element;
+
+                    // hide error label and remove error class on focus if enabled
+                    if (this.settings.focusCleanup && !this.blockFocusCleanup) {
+                        // this.settings.unhighlight && this.settings.unhighlight.call(this, element, this.settings.errorClass);
+                        this.settings.unhighlight && this.settings.unhighlight.call(this, element, this.settings.errorClass + ' ' + this.settings.warningClass);
+                        this.errorsFor(element.id).hide(); ////////////////////////////////////////////////////////////////////////// 
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalfocusout: function (element) {
+                    if (!this.checkable(element) && (true || !this.optional(element))) { //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalkeyup: function (element) {
+                    if (true || element == this.lastElement) { //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
+                onvalclick: function (element) {
+                    if (true) {   //////////////////////////////////////////////////////////////////////////
+                        window.errorValidateFocusOut = true;
+                        this.element(element);
+                    }
+
+                    disableclickcheckboxvalid();
+                },
 				rules: {
 			  		
 
@@ -60894,7 +61011,7 @@ tbico152 :
 {
 maxlength: "Maximálna dĺžka položky '151 - IČO' musí byť: 12 ",
 minlength: "Minimálna dĺžka položky '151 - IČO' musí byť: 8 ",
-tbico152RegEx: "Položka '151 - IČO' má neplatný formát",
+tbico152RegEx: "Položka '151 - IČO' má neplatný formát. Je možné zadať číslo v rozsahu 8 alebo 12 znakov.",
 customW: ""
 },
 
@@ -73481,7 +73598,7 @@ customW: ""
 											
 <div id="layoutCell168289" class="cell " >		
 			
-		<span class="fieldLabel" title=""  ><!--<b><u><a href="form.601.prijimatelia_2025.html" target="_blank">(prehľad prijímateľov)</a></u></b>--> </span>	
+		<span class="fieldLabel" title=""  ><b><u><a href="form.621.prijimatelia_2026.html" target="_blank">(prehľad prijímateľov)</a></u></b> </span>	
 		<div class="clear"></div>
 </div>							
 						
