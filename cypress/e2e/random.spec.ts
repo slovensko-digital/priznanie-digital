@@ -41,6 +41,9 @@ const randomInput = (): TaxFormUserInput => {
     dohoda,
     hasChildren,
     children: [],
+    t1r10_prijmy: '0',
+    priloha3_r11_socialne: '0',
+    priloha3_r13_zdravotne: '0',
     r005_meno: 'Fake',
     r004_priezvisko: 'Name',
     r001_dic: '233123123',
@@ -109,12 +112,13 @@ const randomInput = (): TaxFormUserInput => {
       let monthFrom = 0
       let monthTo = 11
 
-      if (!wholeYear || age === 0 || age === 25) {
+      if (!wholeYear || age === 0 || age === 18) {
         if (age === 0) {
           monthFrom = randomFromRange(month, 11).round().toNumber()
           monthTo = randomFromRange(monthFrom, 11).round().toNumber()
           wholeYear = false
-        } else if (age === 25) {
+        } else if (age === 18) {
+          // child turns 18 during the tax year — bonus only up to and including birth month
           monthFrom = randomFromRange(0, month).round().toNumber()
           monthTo = randomFromRange(monthFrom, month).round().toNumber()
           wholeYear = false
