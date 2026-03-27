@@ -145,9 +145,7 @@ export const generateRodneCislo = (
   }
 
   if (!birthId) {
-    throw new Error(
-      `Failed to generate valid rodné číslo for year ${fullYear}`,
-    )
+    throw new Error(`Failed to generate valid rodné číslo for year ${fullYear}`)
   }
 
   return {
