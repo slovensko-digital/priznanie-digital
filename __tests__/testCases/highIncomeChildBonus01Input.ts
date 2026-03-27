@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 /**
  * Test case: Child under 15, income (zakladDane) 35740€ → bonus reduced to 200€
@@ -51,7 +52,10 @@ export const highIncomeChildBonus01Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Testovací Junior',
-      rodneCislo: '1557150001',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2015, 6, 15),
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '1',
       monthTo: '12',

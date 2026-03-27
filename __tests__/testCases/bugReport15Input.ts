@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport15Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -12,7 +13,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0960229391',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2009, 9, 22),
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
@@ -20,7 +24,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0904240865',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2009, 3, 24),
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '8',
       monthTo: '9',
@@ -28,7 +35,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0904244451',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2009, 3, 24),
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
@@ -36,7 +46,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '2257150192',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2022, 6, 15),
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -44,7 +57,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '1008125547',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2010, 7, 12),
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '2',
       monthTo: '6',
@@ -52,7 +68,10 @@ export const bugReport15Input: E2eTestUserInput = {
     {
       id: 5,
       priezviskoMeno: 'Fake Child 5',
-      rodneCislo: '1508152074',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2015, 7, 15),
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '5',
       monthTo: '7',

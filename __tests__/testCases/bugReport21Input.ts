@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport21Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -12,7 +13,10 @@ export const bugReport21Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '2258156373',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2022, 7, 15),
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -20,7 +24,10 @@ export const bugReport21Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0802153286',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2008, 1, 15),
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '0',
       monthTo: '6',

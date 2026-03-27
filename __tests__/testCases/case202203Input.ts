@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202203Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -45,7 +46,10 @@ export const case202203Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '2107010015',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2021, 6, 1),
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
@@ -53,7 +57,10 @@ export const case202203Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '2210120011',
+      rodneCislo: generateRodneCislo({
+        birthDate: new Date(2022, 9, 12),
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: `9`,
       monthTo: '11',
