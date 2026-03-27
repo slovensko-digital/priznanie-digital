@@ -13,6 +13,26 @@ export const monthNames: string[] = [
   'December',
 ]
 
+export interface ZamestnavatelInput {
+  id: number
+  nazov?: string
+  prijmy: string
+  socialnePoistne: string
+  zdravotnePoistne: string
+  preddavkyNaDan: string
+  danovyBonusNaDieta: string
+}
+
+export interface DohodaItemInput {
+  id: number
+  nazov?: string
+  prijmy: string
+  socialnePoistne: string
+  zdravotnePoistne: string
+  preddavkyNaDan: string
+  danovyBonusNaDieta: string
+}
+
 export interface ChildInput {
   id: number
   priezviskoMeno: string
@@ -89,6 +109,7 @@ export interface TaxFormUserInput {
 
   /**  SECTION Zamestnanie */
   employed?: boolean
+  zamestnavatelia?: ZamestnavatelInput[]
   uhrnPrijmovOdVsetkychZamestnavatelov?: string
   uhrnPovinnehoPoistnehoNaSocialnePoistenie?: string
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie?: string
@@ -97,6 +118,7 @@ export interface TaxFormUserInput {
 
   /**  SECTION Dohoda */
   dohoda?: boolean
+  dohody?: DohodaItemInput[]
   uhrnPrijmovZoVsetkychDohod?: string
   uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody?: string
   uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody?: string

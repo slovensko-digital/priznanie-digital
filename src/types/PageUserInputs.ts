@@ -12,6 +12,7 @@ export type IncomeAndExpenseUserInput = Pick<
 export type EmployedUserInput = Pick<
   TaxFormUserInput,
   | 'employed'
+  | 'zamestnavatelia'
   | 'uhrnPrijmovOdVsetkychZamestnavatelov'
   | 'uhrnPovinnehoPoistnehoNaSocialnePoistenie'
   | 'uhrnPovinnehoPoistnehoNaZdravotnePoistenie'
@@ -22,6 +23,7 @@ export type EmployedUserInput = Pick<
 export type DohodaUserInput = Pick<
   TaxFormUserInput,
   | 'dohoda'
+  | 'dohody'
   | 'uhrnPrijmovZoVsetkychDohod'
   | 'uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody'
   | 'uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody'

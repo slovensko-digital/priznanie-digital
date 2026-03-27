@@ -11,7 +11,12 @@ import {
   TaxBonusUserInput,
   RentUserInput,
 } from '../types/PageUserInputs'
-import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
+import {
+  ChildInput,
+  DohodaItemInput,
+  TaxFormUserInput,
+  ZamestnavatelInput,
+} from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -48,6 +53,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
+  zamestnavatelia: [],
   uhrnPrijmovOdVsetkychZamestnavatelov: '',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
@@ -57,6 +63,7 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
 
 export const dohodaUserInputInitialValues: DohodaUserInput = {
   dohoda: undefined,
+  dohody: [],
   uhrnPrijmovZoVsetkychDohod: '',
   uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: '',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: '',
@@ -72,6 +79,30 @@ export const rentUserInputInitialValues: RentUserInput = {
   vydavkyZPrenajmu: '',
   rent_step: 0,
 }
+
+let zamestnavatelCounter = 0
+
+export const makeEmptyZamestnavatel = (): ZamestnavatelInput => ({
+  id: zamestnavatelCounter++,
+  nazov: '',
+  prijmy: '',
+  socialnePoistne: '',
+  zdravotnePoistne: '',
+  preddavkyNaDan: '',
+  danovyBonusNaDieta: '',
+})
+
+let dohodaCounter = 0
+
+export const makeEmptyDohoda = (): DohodaItemInput => ({
+  id: dohodaCounter++,
+  nazov: '',
+  prijmy: '',
+  socialnePoistne: '',
+  zdravotnePoistne: '',
+  preddavkyNaDan: '',
+  danovyBonusNaDieta: '',
+})
 
 let childCounter = 0
 
