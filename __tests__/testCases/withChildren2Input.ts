@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
+const currentYear = new Date().getFullYear()
+
 export const withChildren2Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
@@ -21,7 +23,7 @@ export const withChildren2Input: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Morty Smith',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(2016, 6, 20),
+        birthDate: new Date(currentYear - 10, 6, 20),
         gender: 'MALE',
       }).pure,
       wholeYear: false,

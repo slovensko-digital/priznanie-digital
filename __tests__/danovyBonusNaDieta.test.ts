@@ -4,32 +4,27 @@ import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { generateRodneCislo } from './utils/generateRodneCislo'
 
-const child2020Jan = generateRodneCislo({
-  turnsAge: 5,
-  turnsAgeInYear: 2025,
-  turnsAgeInMonth: 1,
+const currentYear = new Date().getFullYear()
+
+const child5Jan = generateRodneCislo({
+  birthDate: new Date(currentYear - 5, 0, 15),
   gender: 'MALE',
 }).pure
-const child2015Jan = generateRodneCislo({
-  turnsAge: 10,
-  turnsAgeInYear: 2025,
-  turnsAgeInMonth: 1,
+const child10Jan = generateRodneCislo({
+  birthDate: new Date(currentYear - 10, 0, 15),
   gender: 'MALE',
 }).pure
-const child2023Jan = generateRodneCislo({
-  turnsAge: 2,
-  turnsAgeInYear: 2025,
-  turnsAgeInMonth: 1,
+const child2Jan = generateRodneCislo({
+  birthDate: new Date(currentYear - 2, 0, 15),
   gender: 'MALE',
 }).pure
-const child2013Jan = generateRodneCislo({
-  turnsAge: 12,
-  turnsAgeInYear: 2025,
-  turnsAgeInMonth: 1,
+const child12Jan = generateRodneCislo({
+  birthDate: new Date(currentYear - 12, 0, 15),
   gender: 'MALE',
 }).pure
-const child2025Nov = generateRodneCislo({
-  birthDate: new Date(2025, 10, 15),
+// Child born in November of the current tax year (partial-year edge case)
+const childNovCurrentYear = generateRodneCislo({
+  birthDate: new Date(currentYear, 10, 15),
   gender: 'MALE',
 }).pure
 
@@ -87,7 +82,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2020Jan,
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -95,7 +90,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: child2015Jan,
+          rodneCislo: child10Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -126,7 +121,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2023Jan,
+          rodneCislo: child2Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -134,7 +129,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: child2013Jan,
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -170,7 +165,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2013Jan,
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -178,7 +173,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: child2025Nov,
+          rodneCislo: childNovCurrentYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)
@@ -210,7 +205,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2023Jan,
+          rodneCislo: child2Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -218,7 +213,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: child2013Jan,
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -258,7 +253,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2020Jan,
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -266,7 +261,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: child2025Nov,
+          rodneCislo: childNovCurrentYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)
@@ -291,7 +286,7 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2020Jan,
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -340,7 +335,7 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: child2020Jan,
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
