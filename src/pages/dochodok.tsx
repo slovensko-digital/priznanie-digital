@@ -79,21 +79,21 @@ const Dochodok: Page<PensionUserInput> = ({
             </Fieldset>
             <Details
               title={
-                'Nezdaniteľnú časť základu dane na príspevky na doplnkové dôchodkové poistenie je možné uplatniť iba u daňovníka, ktorý spĺňa nasledovné podmienky:'
+                'Kedy si môžete uplatniť daňové zvýhodnenie za III. pilier:'
               }
             >
               <ul>
                 <li>
-                  príspevky na doplnkové dôchodkové sporenie zaplatil na základe
-                  účastníckej zmluvy uzatvorenej po 31.12.2013, alebo na základe
+                  príspevky na III. pilier ste zaplatili na základe
+                  účastníckej <strong>zmluvy uzatvorenej po 31.12.2013</strong>, alebo na základe
                   zmeny účastníckej zmluvy, ktorej súčasťou je zrušenie
                   dávkového plánu
                 </li>
                 <br />
                 <li>
-                  daňovník nemá uzatvorenú inú účastnícku zmluvu podľa zákona o
+                  nemáte uzatvorenú inú účastnícku zmluvu podľa zákona o
                   doplnkovom dôchodkovom sporení, ktorá nespĺňa podmienky
-                  stanovené novelou zákona o doplnkovom dôchodkom sporení
+                  stanovené novelou zákona o doplnkovom dôchodkovom sporení
                 </li>
               </ul>
             </Details>
