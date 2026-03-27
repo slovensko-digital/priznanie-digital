@@ -107,7 +107,7 @@ export const generateRodneCislo = (
   const isShortFormat = fullYear < 1954
 
   // Generate random serial number and calculate check digit
-  let birthId: string
+  let birthId: string | undefined
   if (isShortFormat) {
     // Short format (before 1954): no check digit, just 3-digit serial
     const serial = Math.floor(Math.random() * 1000)
@@ -142,6 +142,12 @@ export const generateRodneCislo = (
       const checkDigit = calculateCheckDigit(firstNineDigits, fullYear)
       birthId = firstNineDigits + (checkDigit || '0')
     }
+  }
+
+  if (!birthId) {
+    throw new Error(
+      `Failed to generate valid rodné číslo for year ${fullYear}`,
+    )
   }
 
   return {
