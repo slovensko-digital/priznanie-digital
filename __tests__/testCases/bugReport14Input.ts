@@ -1,7 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
+import { TAX_YEAR } from '../../src/lib/calculation'
 
-const currentYear = new Date().getFullYear()
 
 export const bugReport14Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -16,7 +16,9 @@ export const bugReport14Input: E2eTestUserInput = {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 17, 9, 22),
+        turnsAge: 16,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 10,
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
@@ -27,7 +29,9 @@ export const bugReport14Input: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 17, 1, 4),
+        turnsAge: 16,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 2,
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
@@ -38,7 +42,9 @@ export const bugReport14Input: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 7, 9, 15),
+        turnsAge: 6,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 10,
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
@@ -49,7 +55,9 @@ export const bugReport14Input: E2eTestUserInput = {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 17, 11, 20),
+        turnsAge: 16,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 12,
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,

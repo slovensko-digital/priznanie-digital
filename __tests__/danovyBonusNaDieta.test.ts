@@ -3,28 +3,38 @@ import { convertToJson } from '../src/lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { generateRodneCislo } from './utils/generateRodneCislo'
+import { TAX_YEAR } from '../src/lib/calculation'
 
-const currentYear = new Date().getFullYear()
 
 const child5Jan = generateRodneCislo({
-  birthDate: new Date(currentYear - 5, 0, 15),
+  turnsAge: 5,
+  turnsAgeInYear: TAX_YEAR,
+  turnsAgeInMonth: 1,
   gender: 'MALE',
 }).pure
 const child10Jan = generateRodneCislo({
-  birthDate: new Date(currentYear - 10, 0, 15),
+  turnsAge: 10,
+  turnsAgeInYear: TAX_YEAR,
+  turnsAgeInMonth: 1,
   gender: 'MALE',
 }).pure
 const child2Jan = generateRodneCislo({
-  birthDate: new Date(currentYear - 2, 0, 15),
+  turnsAge: 2,
+  turnsAgeInYear: TAX_YEAR,
+  turnsAgeInMonth: 1,
   gender: 'MALE',
 }).pure
 const child12Jan = generateRodneCislo({
-  birthDate: new Date(currentYear - 12, 0, 15),
+  turnsAge: 12,
+  turnsAgeInYear: TAX_YEAR,
+  turnsAgeInMonth: 1,
   gender: 'MALE',
 }).pure
 // Child born in November of the current tax year (partial-year edge case)
-const childNovCurrentYear = generateRodneCislo({
-  birthDate: new Date(currentYear, 10, 15),
+const childNovTaxYear = generateRodneCislo({
+  turnsAge: 0,
+  turnsAgeInYear: TAX_YEAR,
+  turnsAgeInMonth: 11,
   gender: 'MALE',
 }).pure
 
@@ -173,7 +183,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: childNovCurrentYear,
+          rodneCislo: childNovTaxYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)
@@ -261,7 +271,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: childNovCurrentYear,
+          rodneCislo: childNovTaxYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)

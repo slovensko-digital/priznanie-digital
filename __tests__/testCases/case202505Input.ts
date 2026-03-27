@@ -1,7 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
+import { TAX_YEAR } from '../../src/lib/calculation'
 
-const currentYear = new Date().getFullYear()
 
 export const case202505Input: E2eTestUserInput = {
   r001_dic: '524985744',
@@ -45,7 +45,9 @@ export const case202505Input: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Mrkvička Ferko',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 3, 6, 5),
+        turnsAge: 2,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 7,
         gender: 'MALE',
       }).pure,
       wholeYear: true,
@@ -56,7 +58,9 @@ export const case202505Input: E2eTestUserInput = {
       id: 2,
       priezviskoMeno: 'Mrkvička Janko',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 1, 9, 7),
+        turnsAge: 0,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 10,
         gender: 'MALE',
       }).pure,
       wholeYear: false,

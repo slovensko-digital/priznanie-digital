@@ -1,7 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
+import { TAX_YEAR } from '../../src/lib/calculation'
 
-const currentYear = new Date().getFullYear()
 
 /**
  * Test case: Child 15-17, income (zakladDane) 35740€ → bonus reduced to 0€
@@ -55,7 +55,9 @@ export const highIncomeChildBonus02Input: E2eTestUserInput = {
       id: 1,
       priezviskoMeno: 'Testovací Starší',
       rodneCislo: generateRodneCislo({
-        birthDate: new Date(currentYear - 18, 2, 15),
+        turnsAge: 17,
+        turnsAgeInYear: TAX_YEAR,
+        turnsAgeInMonth: 3,
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
