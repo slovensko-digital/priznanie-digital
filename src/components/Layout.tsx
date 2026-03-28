@@ -41,7 +41,7 @@ const Layout: React.FC<Props> = ({
           <div className="govuk-width-container">
             <div className="sdn-headline__container">
               <div className="sdn-headline__part">
-                <span className="sdn-headline__headline">{headline}</span>
+                <h1 className="sdn-headline__headline">{headline}</h1>
               </div>
             </div>
           </div>
