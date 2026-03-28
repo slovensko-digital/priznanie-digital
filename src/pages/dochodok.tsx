@@ -89,7 +89,6 @@ const Dochodok: Page<PensionUserInput> = ({
                   zmeny účastníckej zmluvy, ktorej súčasťou je zrušenie
                   dávkového plánu
                 </li>
-                <br />
                 <li>
                   nemáte uzatvorenú inú účastnícku zmluvu podľa zákona o
                   doplnkovom dôchodkovom sporení, ktorá nespĺňa podmienky
