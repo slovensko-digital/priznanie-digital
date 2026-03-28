@@ -2,6 +2,11 @@ import fs from 'fs'
 import os from 'os'
 import path from 'path'
 import { createMocks } from 'node-mocks-http'
+
+jest.mock('../src/lib/rollbar', () => ({
+  RollbarInstance: { error: jest.fn() },
+}))
+
 import handler from '../src/pages/api/conversion-import'
 
 const VALID_USERNAME = 'testuser'
