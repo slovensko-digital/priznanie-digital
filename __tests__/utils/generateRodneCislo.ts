@@ -1,3 +1,5 @@
+import { TAX_YEAR } from '../../src/lib/calculation'
+
 export type GenderType = 'MALE' | 'FEMALE'
 export type BirthIdGeneratorResult = { withDelimeter: string; pure: string }
 
@@ -13,7 +15,7 @@ export interface GenerateBirthIdOptions {
    * generates a birth ID for someone born in July 2010 (turns 15 in July 2025)
    */
   turnsAge?: number
-  /** The year (tax year) in which the person turns the specified age */
+  /** The year (tax year) in which the person turns the specified age. Defaults to TAX_YEAR. */
   turnsAgeInYear?: number
   /** The month (1-12) in which the person turns the specified age */
   turnsAgeInMonth?: number
@@ -48,13 +50,13 @@ export const generateRodneCislo = (
     birthDate = options.birthDate
   } else if (
     options.turnsAge !== undefined &&
-    options.turnsAgeInYear !== undefined &&
     options.turnsAgeInMonth !== undefined
   ) {
     // Calculate birth date from tax year context
     // Person turns turnsAge in turnsAgeInMonth of turnsAgeInYear
     // So they were born in turnsAgeInMonth of (turnsAgeInYear - turnsAge)
-    const birthYear = options.turnsAgeInYear - options.turnsAge
+    const year = options.turnsAgeInYear ?? TAX_YEAR
+    const birthYear = year - options.turnsAge
     const birthMonth = options.turnsAgeInMonth - 1 // Convert to 0-based month
     birthDate = new Date(
       birthYear,
