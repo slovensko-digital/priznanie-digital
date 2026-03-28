@@ -1,7 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
-
 export const case202508Input: E2eTestUserInput = {
   r001_dic: '1040000000',
   r003_nace: '01120 - Pestovanie ryže',

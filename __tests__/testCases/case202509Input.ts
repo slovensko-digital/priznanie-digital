@@ -1,7 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
-
 export const case202509Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
   employed: false,

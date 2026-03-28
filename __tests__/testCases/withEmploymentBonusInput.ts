@@ -1,7 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
-
 export const withEmploymentBonusInput: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '435.22',

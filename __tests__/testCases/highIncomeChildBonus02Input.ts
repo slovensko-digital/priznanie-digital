@@ -1,7 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
-
 /**
  * Test case: Child 15-17, income (zakladDane) 35740€ → bonus reduced to 0€
  *

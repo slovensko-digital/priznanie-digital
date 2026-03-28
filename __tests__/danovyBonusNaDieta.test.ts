@@ -4,7 +4,6 @@ import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 import { generateRodneCislo } from './utils/generateRodneCislo'
 
-
 const child5Jan = generateRodneCislo({
   turnsAge: 5,
   turnsAgeInMonth: 1,

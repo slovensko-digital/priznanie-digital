@@ -1,7 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
-
 export const bugReport21Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
   t1r10_prijmy: '14395.50',
