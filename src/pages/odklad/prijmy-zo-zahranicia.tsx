@@ -99,15 +99,17 @@ const PrijmyZoZahranicia: NextPage<Props> = ({
             />
             {values.prijmy_zo_zahranicia !== undefined && (
               <>
-                <p>
-                  Nový termín pre podanie daňového priznania je{' '}
-                  <strong>
-                    {values.prijmy_zo_zahranicia
-                      ? `30. septembra ${TAX_YEAR + 1}`
-                      : `30. júna ${TAX_YEAR + 1}`}
-                  </strong>
-                  .
-                </p>
+                <div aria-live="polite">
+                  <p key={String(values.prijmy_zo_zahranicia)}>
+                    Nový termín pre podanie daňového priznania je{' '}
+                    <strong>
+                      {values.prijmy_zo_zahranicia
+                        ? `30. septembra ${TAX_YEAR + 1}`
+                        : `30. júna ${TAX_YEAR + 1}`}
+                    </strong>
+                    .
+                  </p>
+                </div>
                 <p>
                   Samozrejme, priznanie môžete podať aj skôr, tento termín je
                   však záväzný a posledný možný. Odporúčame vám si ho poznačiť.
