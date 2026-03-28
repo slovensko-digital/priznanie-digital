@@ -12,6 +12,7 @@ import {
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 import { DohodaItemInput } from '../types/TaxFormUserInput'
+import { UserInput } from '../types/UserInput'
 
 const sumField = (
   items: DohodaItemInput[],
@@ -169,20 +170,20 @@ const Dohoda: Page<DohodaUserInput> = ({
                         )}
 
                         <Input
-                          name={`dohody[${editingIndex}].nazov` as any}
+                          name={`dohody[${editingIndex}].nazov` as keyof UserInput}
                           type="text"
                           label="Názov dohody (nepovinné)"
                           hint='Napríklad "Dohoda o vykonaní práce – ABC s.r.o."'
                         />
                         <Input
-                          name={`dohody[${editingIndex}].prijmy` as any}
+                          name={`dohody[${editingIndex}].prijmy` as keyof UserInput}
                           type="number"
                           label="Úhrn príjmov plynúcich na základe dohody"
                           hint='Na tlačive "Potvrdenie o zdaniteľných príjmoch" nájdete tento údaj v riadku 01a.'
                         />
                         <Input
                           name={
-                            `dohody[${editingIndex}].socialnePoistne` as any
+                            `dohody[${editingIndex}].socialnePoistne` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn sociálneho poistného"
@@ -190,21 +191,21 @@ const Dohoda: Page<DohodaUserInput> = ({
                         />
                         <Input
                           name={
-                            `dohody[${editingIndex}].zdravotnePoistne` as any
+                            `dohody[${editingIndex}].zdravotnePoistne` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn zdravotného poistného"
                           hint="Tento údaj nájdete v riadku 02b."
                         />
                         <Input
-                          name={`dohody[${editingIndex}].preddavkyNaDan` as any}
+                          name={`dohody[${editingIndex}].preddavkyNaDan` as keyof UserInput}
                           type="number"
                           label="Úhrn preddavkov na daň"
                           hint="Tento údaj nájdete v riadku 04."
                         />
                         <Input
                           name={
-                            `dohody[${editingIndex}].danovyBonusNaDieta` as any
+                            `dohody[${editingIndex}].danovyBonusNaDieta` as keyof UserInput
                           }
                           type="number"
                           label="Údaje o daňovom bonuse na dieťa"

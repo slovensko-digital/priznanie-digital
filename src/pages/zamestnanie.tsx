@@ -12,6 +12,7 @@ import {
 import { BackLink } from '../components/BackLink'
 import { TAX_YEAR } from '../lib/calculation'
 import { ZamestnavatelInput } from '../types/TaxFormUserInput'
+import { UserInput } from '../types/UserInput'
 
 const sumField = (
   items: ZamestnavatelInput[],
@@ -167,14 +168,14 @@ const Zamestnanie: Page<EmployedUserInput> = ({
 
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].nazov` as any
+                            `zamestnavatelia[${editingIndex}].nazov` as keyof UserInput
                           }
                           type="text"
                           label="Názov zamestnávateľa (nepovinné)"
                         />
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].prijmy` as any
+                            `zamestnavatelia[${editingIndex}].prijmy` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn vyplatených zdaniteľných príjmov"
@@ -182,7 +183,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                         />
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].socialnePoistne` as any
+                            `zamestnavatelia[${editingIndex}].socialnePoistne` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn sociálneho poistného"
@@ -190,7 +191,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                         />
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].zdravotnePoistne` as any
+                            `zamestnavatelia[${editingIndex}].zdravotnePoistne` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn zdravotného poistného"
@@ -198,7 +199,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                         />
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].preddavkyNaDan` as any
+                            `zamestnavatelia[${editingIndex}].preddavkyNaDan` as keyof UserInput
                           }
                           type="number"
                           label="Úhrn preddavkov na daň"
@@ -206,7 +207,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                         />
                         <Input
                           name={
-                            `zamestnavatelia[${editingIndex}].danovyBonusNaDieta` as any
+                            `zamestnavatelia[${editingIndex}].danovyBonusNaDieta` as keyof UserInput
                           }
                           type="number"
                           label="Údaje o daňovom bonuse na dieťa"
