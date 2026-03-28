@@ -21,8 +21,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const filePath = process.env.CONVERSION_IMPORT_FILEPATH
-      || path.join(process.cwd(), 'public', 'conversion-import.csv')
+    const filePath =
+      process.env.CONVERSION_IMPORT_FILEPATH ||
+      path.join(process.cwd(), 'public', 'conversion-import.csv')
     const csv = fs.readFileSync(filePath, 'utf-8')
 
     res.setHeader('Content-Type', 'text/csv')
@@ -31,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       'inline; filename="conversion-import.csv"',
     )
     res.status(200).send(csv)
-  } catch (error) {
+  } catch (_error) {
     res.status(500).json({ error: 'Failed to read conversion import file' })
   }
 }
