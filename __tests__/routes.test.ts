@@ -165,6 +165,9 @@ describe('routes', () => {
         {} as TaxForm,
         {} as TaxFormUserInput,
         {} as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledWith(homeRoute)
     })
@@ -175,6 +178,9 @@ describe('routes', () => {
         {} as TaxForm,
         {} as TaxFormUserInput,
         { priezvisko: '' } as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledWith(homeRoute)
     })
@@ -185,6 +191,9 @@ describe('routes', () => {
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledTimes(0)
     })
@@ -195,6 +204,9 @@ describe('routes', () => {
         {} as TaxForm,
         {} as TaxFormUserInput,
         { prijmy_zo_zahranicia: false } as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledTimes(0)
     })
