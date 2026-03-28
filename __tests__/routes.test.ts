@@ -152,6 +152,8 @@ describe('routes', () => {
 
   describe('#validateRoute', () => {
     const replace = jest.fn()
+    const mockRouter = (route: string) =>
+      ({ route, replace }) as unknown as NextRouter
 
     afterEach(() => {
       jest.clearAllMocks()
@@ -159,7 +161,7 @@ describe('routes', () => {
 
     it('should redirect from route when form is not filled out', () => {
       validateRoute(
-        { route: '/partner', replace } as unknown as NextRouter,
+        mockRouter('/partner'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         {} as PostponeUserInput,
@@ -169,7 +171,7 @@ describe('routes', () => {
 
     it('should redirect from route when form is empty', () => {
       validateRoute(
-        { route: '/odklad/suhrn', replace } as unknown as NextRouter,
+        mockRouter('/odklad/suhrn'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         { priezvisko: '' } as PostponeUserInput,
@@ -179,7 +181,7 @@ describe('routes', () => {
 
     it('should not redirect from route when form is filled out', () => {
       validateRoute(
-        { route: '/dohoda', replace } as unknown as NextRouter,
+        mockRouter('/dohoda'),
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,
@@ -189,7 +191,7 @@ describe('routes', () => {
 
     it('should not redirect from route when postpone form is filled out', () => {
       validateRoute(
-        { route: '/odklad/osobne-udaje', replace } as unknown as NextRouter,
+        mockRouter('/odklad/osobne-udaje'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         { prijmy_zo_zahranicia: false } as PostponeUserInput,
@@ -200,7 +202,7 @@ describe('routes', () => {
     describe('isLive guard', () => {
       it('should redirect form pages to home when isLive=false', () => {
         validateRoute(
-          { route: '/prijmy-a-vydavky', replace } as unknown as NextRouter,
+          mockRouter('/prijmy-a-vydavky'),
           {} as TaxForm,
           { prijem_zo_zivnosti: true } as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -225,7 +227,7 @@ describe('routes', () => {
         for (const route of formRoutes) {
           replace.mockClear()
           validateRoute(
-            { route, replace } as unknown as NextRouter,
+            mockRouter(route),
             {} as TaxForm,
             {} as TaxFormUserInput,
             {} as PostponeUserInput,
@@ -238,7 +240,7 @@ describe('routes', () => {
 
       it('should not redirect home page when isLive=false', () => {
         validateRoute(
-          { route: '/', replace } as unknown as NextRouter,
+          mockRouter('/'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -250,7 +252,7 @@ describe('routes', () => {
 
       it('should not redirect odklad pages when isLive=false but isPostponeLive=true', () => {
         validateRoute(
-          { route: '/odklad/prijmy-zo-zahranicia', replace } as unknown as NextRouter,
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -263,7 +265,7 @@ describe('routes', () => {
 
       it('should not redirect when isDebug=true even if isLive=false', () => {
         validateRoute(
-          { route: '/prijmy-a-vydavky', replace } as unknown as NextRouter,
+          mockRouter('/prijmy-a-vydavky'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -277,7 +279,7 @@ describe('routes', () => {
     describe('isPostponeLive guard', () => {
       it('should redirect odklad pages to home when isPostponeLive=false', () => {
         validateRoute(
-          { route: '/odklad/prijmy-zo-zahranicia', replace } as unknown as NextRouter,
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -298,7 +300,7 @@ describe('routes', () => {
         for (const route of odkladRoutes) {
           replace.mockClear()
           validateRoute(
-            { route, replace } as unknown as NextRouter,
+            mockRouter(route),
             {} as TaxForm,
             {} as TaxFormUserInput,
             {} as PostponeUserInput,
@@ -312,7 +314,7 @@ describe('routes', () => {
 
       it('should not redirect form pages when isPostponeLive=false but isLive=true', () => {
         validateRoute(
-          { route: '/prijmy-a-vydavky', replace } as unknown as NextRouter,
+          mockRouter('/prijmy-a-vydavky'),
           {} as TaxForm,
           { prijem_zo_zivnosti: true } as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -325,7 +327,7 @@ describe('routes', () => {
 
       it('should not redirect when isDebug=true even if isPostponeLive=false', () => {
         validateRoute(
-          { route: '/odklad/prijmy-zo-zahranicia', replace } as unknown as NextRouter,
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -340,7 +342,7 @@ describe('routes', () => {
     describe('both flags false', () => {
       it('should redirect form pages when both isLive and isPostponeLive are false', () => {
         validateRoute(
-          { route: '/prijmy-a-vydavky', replace } as unknown as NextRouter,
+          mockRouter('/prijmy-a-vydavky'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
@@ -353,7 +355,7 @@ describe('routes', () => {
 
       it('should redirect odklad pages when both isLive and isPostponeLive are false', () => {
         validateRoute(
-          { route: '/odklad/prijmy-zo-zahranicia', replace } as unknown as NextRouter,
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
           {} as TaxForm,
           {} as TaxFormUserInput,
           {} as PostponeUserInput,
