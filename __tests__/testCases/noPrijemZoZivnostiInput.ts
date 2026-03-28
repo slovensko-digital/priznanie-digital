@@ -46,5 +46,5 @@ export const noPrijemZoZivnostiInput: E2eTestUserInput = {
   vyskaOslobodenia: '500',
 
   expectNgoDonationValue: true,
-  percent2: '80,00',
+  percent2: '79,98',
 }

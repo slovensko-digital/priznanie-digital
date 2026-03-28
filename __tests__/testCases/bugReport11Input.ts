@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport11Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -12,7 +13,11 @@ export const bugReport11Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '1107151672',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 14,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -20,7 +25,11 @@ export const bugReport11Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '1955157644',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 6,
+        turnsAgeInMonth: 5,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '6',
       monthTo: '10',
@@ -62,5 +71,5 @@ export const bugReport11Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '45.99',
   expectNgoDonationValue: true,
-  percent2: '75,85',
+  percent2: '75,88',
 }
