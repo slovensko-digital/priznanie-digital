@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport14Input: E2eTestUserInput = {
   prijem_zo_zivnosti: true,
@@ -12,7 +13,11 @@ export const bugReport14Input: E2eTestUserInput = {
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0960229391',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
@@ -20,7 +25,11 @@ export const bugReport14Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0952047976',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 2,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
@@ -28,7 +37,11 @@ export const bugReport14Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '1960152579',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 6,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
@@ -36,7 +49,11 @@ export const bugReport14Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '0962201196',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 12,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '0',
