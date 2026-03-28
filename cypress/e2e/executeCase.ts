@@ -197,9 +197,7 @@ const executeTestCase = (testCase: string) => {
               typeToInput('r034_priezvisko_a_meno', input)
               typeToInput('r034_rodne_cislo', input)
               for (let month = 1; month <= 12; month++) {
-                const monthKey = `m${
-                  month < 10 ? '0' + month : month
-                }`
+                const monthKey = `m${month < 10 ? '0' + month : month}`
                 if (input[`partner_bonus_na_deti_${monthKey}`]) {
                   cy.get(
                     `[data-test="partner_bonus_na_deti_${monthKey}-input"]`,
