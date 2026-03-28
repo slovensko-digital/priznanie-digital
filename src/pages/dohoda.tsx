@@ -24,7 +24,7 @@ const sumField = (
   return total === 0 ? '' : total.toFixed(2).replace('.', ',')
 }
 
-const validateItem = (d: DohodaItemInput): Record<string, string> => {
+export const validateItem = (d: DohodaItemInput): Record<string, string> => {
   const errors: Record<string, string> = {}
   if (!d.prijmy || !d.prijmy.match(numberInputRegexp))
     errors.prijmy = d.prijmy

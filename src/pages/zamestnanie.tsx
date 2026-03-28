@@ -24,7 +24,7 @@ const sumField = (
   return total === 0 ? '' : total.toFixed(2).replace('.', ',')
 }
 
-const validateItem = (z: ZamestnavatelInput): Record<string, string> => {
+export const validateItem = (z: ZamestnavatelInput): Record<string, string> => {
   const errors: Record<string, string> = {}
   if (!z.prijmy || !z.prijmy.match(numberInputRegexp))
     errors.prijmy = z.prijmy
