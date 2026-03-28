@@ -113,9 +113,21 @@ export const validateRoute = (
   taxFormUserInput: TaxFormUserInput,
   postponeUserInput: PostponeUserInput,
   isDebug: boolean = false,
+  isLive: boolean = true,
+  isPostponeLive: boolean = true,
 ) => {
   if (!isDebug) {
     const isPostponeRoute = router.route.match(/\/odklad\//)
+
+    if (!isLive && router.route !== homeRoute && !isPostponeRoute) {
+      router.replace(homeRoute)
+      return
+    }
+
+    if (!isPostponeLive && isPostponeRoute) {
+      router.replace(homeRoute)
+      return
+    }
 
     let requirement
     let value
