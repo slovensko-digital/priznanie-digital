@@ -84,9 +84,9 @@ const Dochodok: Page<PensionUserInput> = ({
             >
               <ul>
                 <li>
-                  príspevky na III. pilier ste zaplatili na základe
-                  účastníckej <strong>zmluvy uzatvorenej po 31.12.2013</strong>, alebo na základe
-                  zmeny účastníckej zmluvy, ktorej súčasťou je zrušenie
+                  príspevky na III. pilier ste zaplatili na základe účastníckej{' '}
+                  <strong>zmluvy uzatvorenej po 31.12.2013</strong>, alebo na
+                  základe zmeny účastníckej zmluvy, ktorej súčasťou je zrušenie
                   dávkového plánu
                 </li>
                 <li>
