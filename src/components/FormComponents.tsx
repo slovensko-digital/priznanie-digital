@@ -234,9 +234,9 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
-  const isChecked =
-    field.value ||
-    (field.value && field.value.length > 0 && field.value[0] === 'on')
+  const isChecked = Array.isArray(field.value)
+    ? field.value.length > 0 && field.value[0] === 'on'
+    : !!field.value
 
   return (
     <div
@@ -256,6 +256,7 @@ export const Checkbox = ({
           {...props}
           className="govuk-checkboxes__input"
           type="checkbox"
+          value="on"
           data-test={`${field.name}-input`}
           id={name}
           checked={isChecked}
