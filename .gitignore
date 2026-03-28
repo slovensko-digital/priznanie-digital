@@ -46,3 +46,6 @@ cypress/downloads
 public/coverage/
 
 config.xml
+
+# conversion import data (contains real GCLIDs)
+/data/conversion-import.csv
