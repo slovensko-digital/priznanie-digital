@@ -296,7 +296,7 @@ export function calculate(input: TaxFormUserInput): TaxForm {
       if (this.prenajom_oslobodenie.isZero()) {
         result = vydavky
       } else {
-        result = this.t1r11s1.div(prijmy).mul(vydavky)
+        result = round(this.t1r11s1.div(prijmy)).mul(vydavky)
       }
       return round(Decimal.max(Decimal.min(this.t1r11s1, result), 0))
     },

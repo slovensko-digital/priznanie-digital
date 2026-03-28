@@ -91,6 +91,6 @@ export const case202506Input: E2eTestUserInput = {
   dve_percenta_rodicom: 'nie',
 
   expectNgoDonationValue: true,
-  percent2: '36,18',
-  percent3: '54,26',
+  percent2: '36,15',
+  percent3: '54,22',
 }
