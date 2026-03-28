@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202507Input: E2eTestUserInput = {
   r001_dic: '524985744',
@@ -46,7 +47,11 @@ export const case202507Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Mrkvička Ferko',
-      rodneCislo: '1008154741',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -54,7 +59,11 @@ export const case202507Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Mrkvička Janko',
-      rodneCislo: '2502154996',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 0,
+        turnsAgeInMonth: 2,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '1',
       monthTo: '11',
@@ -62,7 +71,11 @@ export const case202507Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Mrkvička Jozef',
-      rodneCislo: '0705152371',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 18,
+        turnsAgeInMonth: 5,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '0',
       monthTo: '4',

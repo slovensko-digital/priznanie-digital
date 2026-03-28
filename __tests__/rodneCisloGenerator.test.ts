@@ -216,7 +216,7 @@ describe('generateRodneCislo', () => {
 
         const rc = rodnecislo(result.withDelimeter)
         expect(rc.isValid()).toBe(true)
-        expect(rc.year()).toBe(2007) // 2025 - 18 = 2007
+        expect(rc.year()).toBe(2007) // 2007 = 2007
         expect(rc.month()).toBe(0) // January (0-based)
         expect(rc.isFemale()).toBe(true)
       })

@@ -2,6 +2,34 @@ import { calculate } from '../src/lib/calculation'
 import { convertToJson } from '../src/lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
+import { generateRodneCislo } from './utils/generateRodneCislo'
+
+const child5Jan = generateRodneCislo({
+  turnsAge: 5,
+  turnsAgeInMonth: 1,
+  gender: 'MALE',
+}).pure
+const child10Jan = generateRodneCislo({
+  turnsAge: 10,
+  turnsAgeInMonth: 1,
+  gender: 'MALE',
+}).pure
+const child2Jan = generateRodneCislo({
+  turnsAge: 2,
+  turnsAgeInMonth: 1,
+  gender: 'MALE',
+}).pure
+const child12Jan = generateRodneCislo({
+  turnsAge: 12,
+  turnsAgeInMonth: 1,
+  gender: 'MALE',
+}).pure
+// Child born in November of the current tax year (partial-year edge case)
+const childNovTaxYear = generateRodneCislo({
+  turnsAge: 0,
+  turnsAgeInMonth: 11,
+  gender: 'MALE',
+}).pure
 
 /**
  * Tests for daňový bonus na vyživované dieťa based on official FAQ examples
@@ -57,7 +85,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2001150001', // born Jan 15, 2020 → age 5 in 2025
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -65,7 +93,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: '1501150001', // born Jan 15, 2015 → age 10 in 2025
+          rodneCislo: child10Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -96,7 +124,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2301150001', // born Jan 15, 2023 → age 2 in 2025
+          rodneCislo: child2Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -104,7 +132,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: '1301150001', // born Jan 15, 2013 → age 12 in 2025
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -140,7 +168,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '1301150001', // born Jan 15, 2013 → age 12 in 2025
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -148,7 +176,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: '2511150001', // born Nov 15, 2025
+          rodneCislo: childNovTaxYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)
@@ -180,7 +208,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2301150001', // born Jan 15, 2023 → age 2 in 2025
+          rodneCislo: child2Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -188,7 +216,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: '1301150001', // born Jan 15, 2013 → age 12 in 2025
+          rodneCislo: child12Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -228,7 +256,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2001150001', // born Jan 15, 2020 → age 5 in 2025
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -236,7 +264,7 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
-          rodneCislo: '2511150001', // born Nov 15, 2025
+          rodneCislo: childNovTaxYear,
           wholeYear: false,
           monthFrom: '10', // November (0-based)
           monthTo: '11', // December (0-based)
@@ -261,7 +289,7 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2001150001',
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
@@ -310,7 +338,7 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
         {
           id: 1,
           priezviskoMeno: 'Dieťa Prvé',
-          rodneCislo: '2001150001',
+          rodneCislo: child5Jan,
           wholeYear: true,
           monthFrom: '0',
           monthTo: '11',
