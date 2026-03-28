@@ -7,13 +7,17 @@ import {
   formatIban,
   formatPsc,
   formatRodneCislo,
+  getBirthMonth,
   getRodneCisloAgeAtYearAndMonth,
   getStreetNumber,
+  maxChildAgeBonusMonth,
+  minChildAgeBonusMonth,
   numberInputRegexp,
   parseStreetAndNumber,
   round,
   setDate,
   sortObjectKeys,
+  toBase64,
   translit,
   validateIbanCountry,
   validateIbanFormat,
@@ -41,6 +45,12 @@ describe('utils', () => {
         children: true,
         datum: '03.02.2018',
       })
+    })
+
+    it('should use current date when no date is provided', () => {
+      const result = setDate({ value: 1 })
+      expect(result).toHaveProperty('datum')
+      expect(result.datum).toMatch(/^\d{2}\.\d{2}\.\d{4}$/)
     })
   })
   describe('#formatDate', () => {
@@ -90,6 +100,13 @@ describe('utils', () => {
           building_number: '32',
         },
         output: '0/32',
+      },
+      {
+        input: {
+          reg_number: null,
+          building_number: null,
+        },
+        output: null,
       },
     ]
 
@@ -426,5 +443,61 @@ describe('utils', () => {
         expect(round(input).valueOf()).toBe(output)
       })
     }
+  })
+
+  describe('#getBirthMonth', () => {
+    it('should return month 0 (January) for January birth', () => {
+      expect(getBirthMonth('8001010011')).toBe(0)
+    })
+
+    it('should return month 6 (July) for July birth', () => {
+      expect(getBirthMonth('8007010011')).toBe(6)
+    })
+
+    it('should handle formatted rodné číslo with space and slash', () => {
+      expect(getBirthMonth('800701 / 0011')).toBe(6)
+    })
+  })
+
+  describe('#maxChildAgeBonusMonth', () => {
+    // A person born in 2007 turns 18 at some point in 2025 (TAX_YEAR)
+    // rodneCislo for January 2007: '070101 / 0010'
+    it('should return true when child is younger than MAX_CHILD_AGE_BONUS', () => {
+      // Born July 2010 - still under 18 in early 2025
+      expect(maxChildAgeBonusMonth('100701 / 0014', 'Január')).toBe(true)
+    })
+
+    it('should return false when child is 18 or older', () => {
+      // Born January 2000 - over 18 in 2025
+      expect(maxChildAgeBonusMonth('000101 / 0017', 'Január')).toBe(false)
+    })
+  })
+
+  describe('#minChildAgeBonusMonth', () => {
+    it('should return true when child age is 0 or older', () => {
+      // Born January 2010 - age >= 0 in 2025
+      expect(minChildAgeBonusMonth('100101 / 0010', 'Január')).toBe(true)
+    })
+
+    it('should return false when child appears negative age (not yet born in the given month)', () => {
+      // Born December 2025 - not yet born in January 2025
+      expect(minChildAgeBonusMonth('251201 / 0016', 'Január')).toBe(false)
+    })
+  })
+
+  describe('#toBase64', () => {
+    it('should encode ASCII string to base64', () => {
+      expect(toBase64('hello')).toBe('aGVsbG8=')
+    })
+
+    it('should encode empty string to base64', () => {
+      expect(toBase64('')).toBe('')
+    })
+
+    it('should encode unicode string to base64', () => {
+      const result = toBase64('Ján')
+      expect(typeof result).toBe('string')
+      expect(result.length).toBeGreaterThan(0)
+    })
   })
 })

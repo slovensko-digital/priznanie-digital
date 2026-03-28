@@ -1,5 +1,6 @@
 import {
   getOrderedRoutes,
+  getPostponeRoutes,
   getRoutes,
   validateRoute,
   homeRoute,
@@ -124,6 +125,16 @@ describe('routes', () => {
           expect(nextRoute()).toBe('/iban')
         })
       })
+
+      describe('for an unknown route (not in ordered routes)', () => {
+        it('should return homeRoute', () => {
+          const { nextRoute } = getRoutes(
+            '/unknown-route' as never,
+            {} as TaxForm,
+          )
+          expect(nextRoute()).toBe(homeRoute)
+        })
+      })
     })
 
     describe('previousRoute', () => {
@@ -145,6 +156,16 @@ describe('routes', () => {
             mozeZiadatVratitPreplatkyBonusyUroky: true,
           } as TaxForm)
           expect(previousRoute()).toBe('/iban')
+        })
+      })
+
+      describe('for an unknown route (not in ordered routes)', () => {
+        it('should return homeRoute', () => {
+          const { previousRoute } = getRoutes(
+            '/unknown-route' as never,
+            {} as TaxForm,
+          )
+          expect(previousRoute()).toBe(homeRoute)
         })
       })
     })
@@ -195,6 +216,30 @@ describe('routes', () => {
         { prijmy_zo_zahranicia: false } as PostponeUserInput,
       )
       expect(replace).toHaveBeenCalledTimes(0)
+    })
+  })
+
+  describe('#getPostponeRoutes', () => {
+    it('should return correct nextRoute for /odklad/prijmy-zo-zahranicia', () => {
+      const { nextRoute, previousRoute } = getPostponeRoutes(
+        '/odklad/prijmy-zo-zahranicia',
+      )
+      expect(nextRoute).toBe('/odklad/osobne-udaje')
+      expect(previousRoute).toBe('/')
+    })
+
+    it('should return correct routes for /odklad/osobne-udaje', () => {
+      const { nextRoute, previousRoute } = getPostponeRoutes(
+        '/odklad/osobne-udaje',
+      )
+      expect(nextRoute).toBe('/odklad/suhrn')
+      expect(previousRoute).toBe('/odklad/prijmy-zo-zahranicia')
+    })
+
+    it('should return correct routes for /odklad/suhrn', () => {
+      const { nextRoute, previousRoute } = getPostponeRoutes('/odklad/suhrn')
+      expect(nextRoute).toBe('/odklad/pokracovat')
+      expect(previousRoute).toBe('/odklad/osobne-udaje')
     })
   })
 })
