@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202205Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '34800',
   priloha3_r11_socialne: '2253.36',
   priloha3_r13_zdravotne: '951.72',
@@ -44,29 +46,45 @@ export const case202205Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0606180014',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '0606180025',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 3,
       priezviskoMeno: 'Rick Sanchez',
-      rodneCislo: '0606180036',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 4,
       priezviskoMeno: 'Beth Smith',
-      rodneCislo: '0606180047',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: false,
 }

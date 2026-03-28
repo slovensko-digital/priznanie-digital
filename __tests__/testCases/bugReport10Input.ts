@@ -1,23 +1,33 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport10Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '9678.43',
   priloha3_r11_socialne: '193.57',
   priloha3_r13_zdravotne: '1742.12',
   zaplatenePreddavky: '36750.48',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0461156762',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0410155801',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 4,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
   ],
@@ -41,12 +51,12 @@ export const bugReport10Input: E2eTestUserInput = {
     '1': ['on'],
   },
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '8',
   uroky_zmluva_den_uzatvorenia: '21',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '2',
   r035_zaplatene_uroky: '6540.37',

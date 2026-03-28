@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202202aInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '78000',
   priloha3_r11_socialne: '2253.36',
   priloha3_r13_zdravotne: '951.72',
@@ -52,13 +54,21 @@ export const case202202aInput: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0606070014',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 4,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '220908/0016',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 3,
+        turnsAgeInMonth: 9,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       m01: false,
       m02: false,
@@ -74,10 +84,10 @@ export const case202202aInput: E2eTestUserInput = {
       m12: true,
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: true,
 
-  percent2: '189,06',
+  percent2: '169,29',
   percent3: '320,78',
 }

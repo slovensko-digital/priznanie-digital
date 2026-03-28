@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const completeDecimalInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000,23',
   priloha3_r13_zdravotne: '1000,23',
   r001_dic: '233123123',
@@ -43,7 +45,11 @@ export const completeDecimalInput: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '1607201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 9,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
 
       wholeYear: false,
       m01: false,
@@ -62,12 +68,16 @@ export const completeDecimalInput: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '1057201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 7,
+        gender: 'FEMALE',
+      }).pure,
 
       wholeYear: true,
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: false,
 

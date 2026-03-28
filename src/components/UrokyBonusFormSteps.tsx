@@ -7,7 +7,7 @@ import Radio from './radio/Radio'
 import RadioConditional from './radio/RadioConditional'
 import Decimal from 'decimal.js'
 import { Warning } from './Warning'
-import { TAX_YEAR } from '../lib/calculation'
+import { TAX_YEAR, UROKY_POCET_ROKOV } from '../lib/calculation'
 
 interface Props {
   disabled?: boolean
@@ -16,8 +16,9 @@ interface Props {
 export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
-      title={`Boli ste v roku ${TAX_YEAR} dlžníkom z úveru na bývanie?`}
+      title={`Splácali ste v roku ${TAX_YEAR} úver na bývanie, ktorý bol uzavretý po roku ${TAX_YEAR - UROKY_POCET_ROKOV}?`}
       name="r035_uplatnuje_uroky"
+      hint="Nárok vzniká, ak ste v čase podania žiadosti o úver mali najmenej 18 a najviac 35 rokov a spĺňate ďalšie podmienky uvedené nižšie."
       disabled={disabled}
     />
     <Details title="Kedy si môžem uplatniť zvýhodnenie?">
@@ -58,9 +59,9 @@ export const ZaciatokUveruQuestion = ({ disabled, values }) => (
       </h1>
     </legend>
     <p className="govuk-hint">
-      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich
-      bezprostredne po sebe nasledujúcich rokov počnúc mesiacom, v ktorom začalo
-      úročenie úveru na bývanie.
+      Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich po
+      sebe nasledujúcich rokov, a to od mesiaca, v ktorom sa úver na bývanie
+      začal úročiť.
     </p>
     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label className="govuk-label govuk-!-font-weight-bold">
@@ -258,7 +259,9 @@ const maxPrijem = ({
     case '2023':
       return new Decimal(1695.2).mul(pocet_dlznikov)
     case '2024':
-      return new Decimal(2288).mul(pocet_dlznikov) // TODO: add 2024 e2e test
+      return new Decimal(2288).mul(pocet_dlznikov)
+    case '2025':
+      return new Decimal(2438.4).mul(pocet_dlznikov)
     default:
       return new Decimal(0)
   }

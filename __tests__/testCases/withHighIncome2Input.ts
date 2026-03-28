@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const withHighIncome2Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '8000',
   priloha3_r13_zdravotne: '10000',
   t1r10_prijmy: '100000',
@@ -21,12 +23,16 @@ export const withHighIncome2Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '8888.10',
   udajeODanovomBonuseNaDieta: '221.70',
   uhrnPreddavkovNaDan: '78.20',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '1607201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 9,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       m01: false,
       m02: false,
@@ -44,7 +50,11 @@ export const withHighIncome2Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '1057201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 7,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
   ],
@@ -67,6 +77,6 @@ export const withHighIncome2Input: E2eTestUserInput = {
   r142_obchMeno: 'Slovensko.Digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '505,78',
+  percent2: '488,14',
   percent3: '780,60',
 }

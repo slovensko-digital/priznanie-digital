@@ -75,7 +75,7 @@ describe('With child (for tax year 2022)', () => {
   test('should map child', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,
-      hasChildren: true,
+      hasChildren: 'yes',
       children: [child],
       t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     })
@@ -99,7 +99,7 @@ describe('With child (for tax year 2022)', () => {
   test('should map child with wholeYear', () => {
     const result = calculate({
       ...initTaxFormUserInputValues,
-      hasChildren: true,
+      hasChildren: 'yes',
       children: [{ ...child, wholeYear: true }],
       t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     })
@@ -125,7 +125,7 @@ describe('With child (for tax year 2022)', () => {
     // test('Child under 6', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
-    //     hasChildren: true,
+    //     hasChildren: 'yes',
     //     children: [childUnder6],
     //     t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     //   })
@@ -141,7 +141,7 @@ describe('With child (for tax year 2022)', () => {
     // test('Child turning 6 in 2022 (february)', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
-    //     hasChildren: true,
+    //     hasChildren: 'yes',
     //     children: [childTurning6InFeb],
     //     t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     //   })
@@ -157,7 +157,7 @@ describe('With child (for tax year 2022)', () => {
     // test('Child turning 6 in 2022 (july)', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
-    //     hasChildren: true,
+    //     hasChildren: 'yes',
     //     children: [childTurning6InJul],
     //     t1r10_prijmy: MIN_PRIJEM_NA_DANOVY_BONUS_NA_DIETA.toString(),
     //   })
@@ -173,7 +173,7 @@ describe('With child (for tax year 2022)', () => {
     // test('Child over 6', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
-    //     hasChildren: true,
+    //     hasChildren: 'yes',
     //     children: [childOver6],
     //     t1r10_prijmy: (15_000).toString(),
     //   })
@@ -193,7 +193,7 @@ describe('With child (for tax year 2022)', () => {
     // test('More children', () => {
     //   const result = calculate({
     //     ...initTaxFormUserInputValues,
-    //     hasChildren: true,
+    //     hasChildren: 'yes',
     //     children: [
     //       { ...childOver6 },
     //       { ...childTurning6InFeb },

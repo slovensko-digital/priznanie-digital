@@ -3,6 +3,7 @@ import { PostponeUserInput } from './PostponeUserInput'
 
 export type IncomeAndExpenseUserInput = Pick<
   TaxFormUserInput,
+  | 'prijem_zo_zivnosti'
   | 't1r10_prijmy'
   | 'priloha3_r11_socialne'
   | 'priloha3_r13_zdravotne'
@@ -137,6 +138,14 @@ export type TwoPercentUserInput = Pick<
   | 'r142_ico'
   | 'r142_obchMeno'
   | 'XIIoddiel_suhlasZaslUdaje'
+>
+
+export type DvePercentaRodicomUserInput = Pick<
+  TaxFormUserInput,
+  | 'dve_percenta_rodicom'
+  | 'dve_percenta_rodicA'
+  | 'dve_percenta_rodicB'
+  | 'dve_percenta_rodicom_nahradna_starostlivost'
 >
 
 export type TaxBonusUserInput = Pick<

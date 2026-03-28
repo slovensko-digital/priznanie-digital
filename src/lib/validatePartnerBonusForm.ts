@@ -1,6 +1,7 @@
 import { PartnerUserInput } from '../types/PageUserInputs'
 import { parseInputNumber } from './utils'
 import { PARTNER_MAX_ODPOCET } from './calculation'
+import Decimal from 'decimal.js'
 
 export const validatePartnerBonusForm = (
   values: PartnerUserInput,
@@ -18,7 +19,9 @@ export const validatePartnerBonusForm = (
 
   const step3 =
     values.r032_partner_vlastne_prijmy !== '' &&
-    parseInputNumber(values.r032_partner_vlastne_prijmy) < PARTNER_MAX_ODPOCET
+    new Decimal(parseInputNumber(values.r032_partner_vlastne_prijmy)).lessThan(
+      PARTNER_MAX_ODPOCET,
+    )
 
   const step4 = true
 

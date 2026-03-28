@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport5Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '50805.79',
   priloha3_r11_socialne: '4910.66',
   priloha3_r13_zdravotne: '1914.22',
@@ -29,7 +30,7 @@ export const bugReport5Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '9.40',
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '38.67',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [
     {
       id: 0,
@@ -62,6 +63,6 @@ export const bugReport5Input: E2eTestUserInput = {
   datum: '',
   r006_titul_za: '',
 
-  percent2: '55,07',
+  percent2: '54,75',
   percent3: '112,23',
 }

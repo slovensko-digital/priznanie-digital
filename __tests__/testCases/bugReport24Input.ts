@@ -1,30 +1,44 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport24Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '16442.32',
   priloha3_r11_socialne: '2630.77',
   priloha3_r13_zdravotne: '4439.43',
   zaplatenePreddavky: '2523.66',
   employed: true,
   dohoda: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '2057158433',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 5,
+        turnsAgeInMonth: 7,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '2061156262',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 5,
+        turnsAgeInMonth: 11,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0108155982',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 17,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       m01: true,
       m02: true,
@@ -42,7 +56,11 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '0601156149',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 17,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       m01: false,
       m02: false,
@@ -60,13 +78,21 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0757155619',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 17,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 5,
       priezviskoMeno: 'Fake Child 5',
-      rodneCislo: '0105159560',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 3,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: false,
       m01: false,
       m02: false,

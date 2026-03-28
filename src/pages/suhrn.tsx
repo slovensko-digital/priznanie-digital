@@ -155,7 +155,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         ]}
       />
       <Summary
-        title={`Zamestnanie v SR pre rok ${TAX_YEAR}`}
+        title={`Zamestnanie v SR za rok ${TAX_YEAR}`}
         href={'/zamestnanie'}
         rows={
           taxFormUserInput.employed
@@ -203,7 +203,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         }
       />
       <Summary
-        title={`Dohody v SR pre rok ${TAX_YEAR}`}
+        title={`Dohody v SR za rok ${TAX_YEAR}`}
         href={'/dohoda'}
         rows={
           taxFormUserInput.dohoda
@@ -284,7 +284,7 @@ const Suhrn: Page<TaxFormUserInput> = ({
         title="Deti, pri ktorých si uplatňujem nárok na daňový bonus na vyživované dieťa"
         href={'/deti'}
         rows={
-          taxFormUserInput.hasChildren
+          taxFormUserInput.hasChildren === 'yes'
             ? taxFormUserInput.children
                 .map((child) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
@@ -331,11 +331,17 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   currency: true,
                 },
               ]
-            : [
-                {
-                  title: 'Nemám nárok alebo neuplatňujem si',
-                },
-              ]
+            : taxFormUserInput.hasChildren === 'income-used-by-someone-else'
+              ? [
+                  {
+                    title: 'Môj príjem bol použitý inou oprávnenou osobou',
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nemám nárok alebo neuplatňujem si',
+                  },
+                ]
         }
       />
       <Summary
@@ -402,6 +408,47 @@ const Suhrn: Page<TaxFormUserInput> = ({
                   title: `Nemám príjmy z prenájmu nehnuteľností`,
                 },
               ]
+        }
+      />
+      <Summary
+        title="Poukázanie 2% dane rodičom"
+        href={'/dve-percenta-rodicom'}
+        rows={
+          taxFormUserInput.dve_percenta_rodicom === 'obidvom'
+            ? [
+                {
+                  title: 'Rodič 1',
+                  value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                },
+                {
+                  title: 'Rodič 2',
+                  value: `${taxFormUserInput.dve_percenta_rodicB?.meno} ${taxFormUserInput.dve_percenta_rodicB?.priezvisko}`,
+                },
+                {
+                  title: 'Rodné číslo',
+                  value: taxFormUserInput.dve_percenta_rodicB?.rodneCislo,
+                },
+              ]
+            : taxFormUserInput.dve_percenta_rodicom === 'jednemu'
+              ? [
+                  {
+                    title: 'Rodič',
+                    value: `${taxFormUserInput.dve_percenta_rodicA?.meno} ${taxFormUserInput.dve_percenta_rodicA?.priezvisko}`,
+                  },
+                  {
+                    title: 'Rodné číslo',
+                    value: taxFormUserInput.dve_percenta_rodicA?.rodneCislo,
+                  },
+                ]
+              : [
+                  {
+                    title: 'Nepoukázal som 2% dane rodičom',
+                  },
+                ]
         }
       />
       <Summary

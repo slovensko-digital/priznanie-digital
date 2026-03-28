@@ -1,35 +1,53 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport14Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '31398.49',
   priloha3_r11_socialne: '4081.80',
   priloha3_r13_zdravotne: '313.98',
   zaplatenePreddavky: '65119.42',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0155157519',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0755156941',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 2,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '1960152579',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 6,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '0161156259',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 12,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
     },
   ],
@@ -44,12 +62,12 @@ export const bugReport14Input: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   datum: '22.02.2020',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '2',
   r035_zaplatene_uroky: '9449.74',

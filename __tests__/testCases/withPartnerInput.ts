@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const withPartnerInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r001_dic: '233123123',
@@ -21,10 +22,10 @@ export const withPartnerInput: E2eTestUserInput = {
   partner_podmienky: { '1': ['on'] },
   t1r10_prijmy: '28000',
   datum: '19.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   expectNgoDonationValue: true,
 
-  percent2: '4,17',
+  percent2: '3,56',
   percent3: '10,05',
 }

@@ -37,9 +37,13 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.tabulka1.t1r10.s1 = decimalToString(taxForm.t1r10_prijmy)
   form.dokument.telo.tabulka1.t1r10.s2 = decimalToString(taxForm.t1r10_vydavky)
 
-  form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
-    taxForm.vydavkyPoistPar6ods11_ods1a2,
-  )
+  if (taxForm.t1r10_prijmy.greaterThan(0)) {
+    form.dokument.telo.vydavkyPoistPar6ods11_ods1a2 = decimalToString(
+      taxForm.vydavkyPoistPar6ods11_ods1a2,
+    )
+    // checked only when there is self-employment income, as our form supports only flat expenses
+    form.dokument.telo.vydavkyPar6ods10_ods1a2 = '1'
+  }
   if (taxForm.platil_prispevky_na_dochodok) {
     form.dokument.telo.r75 = decimalToString(
       taxForm.r075_zaplatene_prispevky_na_dochodok,
@@ -65,7 +69,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r74 = decimalToString(taxForm.r074_znizenie_partner)
 
   /** SECTION Children */
-  if (taxForm.r033 && taxForm.r033.length > 0 && taxForm.r117.greaterThan(0)) {
+  if (taxForm.maDanovyBonusNaDeti) {
     form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
@@ -182,8 +186,12 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
   form.dokument.telo.r106 = '0.00'
   form.dokument.telo.r115 = '0.00'
   form.dokument.telo.r116 = decimalToString(taxForm.r116_dan)
-  form.dokument.telo.r116a = decimalToString(taxForm.r116a)
-  form.dokument.telo.r117 = decimalToString(taxForm.r117)
+  if (taxForm.maDanovyBonusNaDeti) {
+    form.dokument.telo.r116a = decimalToString(taxForm.r116a)
+  }
+  if (taxForm.r117.greaterThan(0)) {
+    form.dokument.telo.r117 = decimalToString(taxForm.r117)
+  }
 
   form.dokument.telo.r118 = decimalToString(taxForm.r118)
   form.dokument.telo.r119 = decimalToString(taxForm.r119)
@@ -200,25 +208,50 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   form.dokument.telo.r135 = decimalToString(taxForm.r135_dan_na_uhradu)
   form.dokument.telo.r136 = decimalToString(taxForm.r136_danovy_preplatok)
+  if (taxForm.vypln_r146) {
+    form.dokument.telo.r146 = decimalToString(taxForm.r146)
+    form.dokument.telo.r146a = decimalToString(taxForm.r146a)
+  }
 
   /** SECTION 2 percent */
-  form.dokument.telo.neuplatnujem = boolToString(
-    !taxForm.XIIoddiel_uplatnujem2percenta,
-  )
+  if (
+    taxForm.canDonateTwoPercentOfTax &&
+    taxForm.XIIoddiel_uplatnujem2percenta
+  ) {
+    form.dokument.telo.r151.neuplatnujemPar50 = boolToString(
+      !taxForm.XIIoddiel_uplatnujem2percenta,
+    )
+    form.dokument.telo.r151.splnam3per = boolToString(taxForm.splnam3per)
+    form.dokument.telo.r151.ico = taxForm.r151.ico
+    form.dokument.telo.r151.obchodneMeno.riadok = [taxForm.r151.obchMeno]
+    form.dokument.telo.r151.suhlasSoZaslanim = boolToString(
+      taxForm.r151.suhlasZaslUdaje,
+    )
+    form.dokument.telo.r152 = decimalToString(taxForm.r152)
+  }
 
-  if (taxForm.XIIoddiel_uplatnujem2percenta && taxForm.r152) {
-    form.dokument.telo.r151 = decimalToString(taxForm.r151)
-    form.dokument.telo.splnam3per = boolToString(taxForm.splnam3per)
-    form.dokument.telo.r152 = {
-      ...taxForm.r152,
-      obchMeno: {
-        riadok: [taxForm.r152.obchMeno],
-      },
-      suhlasZaslUdaje: boolToString(taxForm.r152.suhlasZaslUdaje),
+  if (
+    taxForm.r153 &&
+    taxForm.canDonateTwoPercentOfTax &&
+    taxForm.r153.neuplatnujemPar50aa === false
+  ) {
+    form.dokument.telo.r153.neuplatnujemPar50aa = boolToString(
+      taxForm.r153.neuplatnujemPar50aa,
+    )
+    form.dokument.telo.r153.bolZverenyDoStarostlivosti = boolToString(
+      taxForm.r153.bolZverenyDoStarostlivosti,
+    )
+    form.dokument.telo.r153.rodicA.meno = taxForm.r153.rodicA.meno
+    form.dokument.telo.r153.rodicA.priezvisko = taxForm.r153.rodicA.priezvisko
+    form.dokument.telo.r153.rodicA.rodneCislo = taxForm.r153.rodicA.rodneCislo
+    if (taxForm.r153.rodicB) {
+      form.dokument.telo.r153.rodicB.meno = taxForm.r153.rodicB.meno
+      form.dokument.telo.r153.rodicB.priezvisko = taxForm.r153.rodicB.priezvisko
+      form.dokument.telo.r153.rodicB.rodneCislo = taxForm.r153.rodicB.rodneCislo
     }
   }
 
-  form.dokument.telo.r153 = taxForm.employed || taxForm.dohoda ? '5' : '4'
+  form.dokument.telo.r154 = taxForm.employed || taxForm.dohoda ? '7' : '6'
 
   if (
     taxForm.mozeZiadatVratitPreplatkyBonusyUroky &&
