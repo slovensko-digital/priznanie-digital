@@ -1,4 +1,5 @@
 import { calculate } from '../src/lib/calculation'
+import { convertToJson } from '../src/lib/xml/xmlConverter'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { initTaxFormUserInputValues } from '../src/lib/initialValues'
 
@@ -273,6 +274,12 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
     expect(result.r146.toNumber()).toBeGreaterThan(0)
     expect(result.r146a.toNumber()).toBeGreaterThan(0)
     expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBeDefined()
+    expect(jsonForm.dokument.telo.r146).not.toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBeDefined()
+    expect(jsonForm.dokument.telo.r146a).not.toBe('')
   })
 
   test('r146 and r146a are filled when hasChildren is "income-used-by-someone-else"', () => {
@@ -287,6 +294,39 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
     expect(result.r146.toNumber()).toBeGreaterThan(0)
     expect(result.r146a.toNumber()).toBeGreaterThan(0)
     expect(result.r146.toNumber()).toBe(result.r146a.toNumber())
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBeDefined()
+    expect(jsonForm.dokument.telo.r146).not.toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBeDefined()
+    expect(jsonForm.dokument.telo.r146a).not.toBe('')
+  })
+
+  test('r146 and r146a are not filled when hasChildren is "yes" but r117 is 0 (high income)', () => {
+    const input = makeInput({
+      hasChildren: 'yes',
+      uhrnPrijmovOdVsetkychZamestnavatelov: '500000',
+      children: [
+        {
+          id: 1,
+          priezviskoMeno: 'Dieťa Prvé',
+          rodneCislo: '2001150001',
+          wholeYear: true,
+          monthFrom: '0',
+          monthTo: '11',
+        },
+      ],
+    })
+
+    const result = calculate(input)
+
+    expect(result.r146.toNumber()).toBe(500000)
+    expect(result.r117.toNumber()).toBe(0)
+    expect(result.vypln_r146).toBe(false)
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBe('')
   })
 
   test('r146 and r146a are 0 when hasChildren is "no"', () => {
@@ -300,5 +340,9 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
 
     expect(result.r146.toNumber()).toBe(0)
     expect(result.r146a.toNumber()).toBe(0)
+
+    const jsonForm = convertToJson(result)
+    expect(jsonForm.dokument.telo.r146).toBe('')
+    expect(jsonForm.dokument.telo.r146a).toBe('')
   })
 })
