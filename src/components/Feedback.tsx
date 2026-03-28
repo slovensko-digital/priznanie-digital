@@ -7,7 +7,7 @@ import { ErrorSummary } from './ErrorSummary'
 import { FeedbackFormInput } from '../types/UserInput'
 import { rodnecislo } from 'rodnecislo'
 
-const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
+export const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
   return {
     ...taxFormUserInput,
     r001_dic: 'anon',
@@ -22,6 +22,10 @@ const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
     r011_stat: 'anon',
     r031_priezvisko_a_meno: 'anon',
     r031_rodne_cislo: 'anon',
+    r034_priezvisko_a_meno: 'anon',
+    r034_rodne_cislo: 'anon',
+    r006_titul: 'anon',
+    r006_titul_za: 'anon',
     iban: 'anon',
     email: 'anon',
     children: taxFormUserInput.children.map(anoymizeChild),
