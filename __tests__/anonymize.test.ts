@@ -53,6 +53,16 @@ describe('anonymizeTaxForm', () => {
         monthTo: '11',
       },
     ],
+    dve_percenta_rodicA: {
+      meno: 'Ján',
+      priezvisko: 'Novák',
+      rodneCislo: '625412 / 2512',
+    },
+    dve_percenta_rodicB: {
+      meno: 'Mária',
+      priezvisko: 'Nováková',
+      rodneCislo: '665412 / 2517',
+    },
   }
 
   const result = anonymizeTaxForm(input)
@@ -64,6 +74,22 @@ describe('anonymizeTaxForm', () => {
   it('anonymizes child rodneCislo and priezviskoMeno', () => {
     expect(result.children[0].rodneCislo).toBe('anon')
     expect(result.children[0].priezviskoMeno).toBe('anon')
+  })
+
+  it('anonymizes dve_percenta_rodicA', () => {
+    expect(result.dve_percenta_rodicA).toEqual({
+      meno: 'anon',
+      priezvisko: 'anon',
+      rodneCislo: 'anon',
+    })
+  })
+
+  it('anonymizes dve_percenta_rodicB', () => {
+    expect(result.dve_percenta_rodicB).toEqual({
+      meno: 'anon',
+      priezvisko: 'anon',
+      rodneCislo: 'anon',
+    })
   })
 
   it('preserves non-PII fields', () => {
