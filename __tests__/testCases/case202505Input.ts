@@ -1,6 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
-import { TAX_YEAR } from '../../src/lib/calculation'
 
 
 export const case202505Input: E2eTestUserInput = {
@@ -46,7 +45,6 @@ export const case202505Input: E2eTestUserInput = {
       priezviskoMeno: 'Mrkvička Ferko',
       rodneCislo: generateRodneCislo({
         turnsAge: 2,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 7,
         gender: 'MALE',
       }).pure,
@@ -59,7 +57,6 @@ export const case202505Input: E2eTestUserInput = {
       priezviskoMeno: 'Mrkvička Janko',
       rodneCislo: generateRodneCislo({
         turnsAge: 0,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 10,
         gender: 'MALE',
       }).pure,

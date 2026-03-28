@@ -1,6 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
-import { TAX_YEAR } from '../../src/lib/calculation'
 
 
 export const bugReport9Input: E2eTestUserInput = {
@@ -37,7 +36,6 @@ export const bugReport9Input: E2eTestUserInput = {
       priezviskoMeno: 'anon',
       rodneCislo: generateRodneCislo({
         turnsAge: 2,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 3,
         gender: 'FEMALE',
       }).pure,

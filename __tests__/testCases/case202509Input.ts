@@ -1,6 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
-import { TAX_YEAR } from '../../src/lib/calculation'
 
 
 export const case202509Input: E2eTestUserInput = {
@@ -14,7 +13,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 0',
       rodneCislo: generateRodneCislo({
         turnsAge: 10,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 4,
         gender: 'FEMALE',
       }).pure,
@@ -27,7 +25,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 1',
       rodneCislo: generateRodneCislo({
         turnsAge: 0,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 2,
         gender: 'FEMALE',
       }).pure,
@@ -40,7 +37,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 2',
       rodneCislo: generateRodneCislo({
         turnsAge: 3,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 11,
         gender: 'FEMALE',
       }).pure,
@@ -53,7 +49,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 3',
       rodneCislo: generateRodneCislo({
         turnsAge: 8,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 6,
         gender: 'MALE',
       }).pure,
@@ -66,7 +61,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 4',
       rodneCislo: generateRodneCislo({
         turnsAge: 17,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 3,
         gender: 'FEMALE',
       }).pure,
@@ -79,7 +73,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 5',
       rodneCislo: generateRodneCislo({
         turnsAge: 1,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 10,
         gender: 'MALE',
       }).pure,
@@ -92,7 +85,6 @@ export const case202509Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 6',
       rodneCislo: generateRodneCislo({
         turnsAge: 5,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 11,
         gender: 'FEMALE',
       }).pure,

@@ -1,6 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
-import { TAX_YEAR } from '../../src/lib/calculation'
 
 
 /**
@@ -56,7 +55,6 @@ export const highIncomeChildBonus02Input: E2eTestUserInput = {
       priezviskoMeno: 'Testovací Starší',
       rodneCislo: generateRodneCislo({
         turnsAge: 17,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 3,
         gender: 'FEMALE',
       }).pure,

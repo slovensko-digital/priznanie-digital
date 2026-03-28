@@ -1,6 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
-import { TAX_YEAR } from '../../src/lib/calculation'
 
 
 export const bugReport13Input: E2eTestUserInput = {
@@ -17,7 +16,6 @@ export const bugReport13Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 0',
       rodneCislo: generateRodneCislo({
         turnsAge: 17,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 2,
         gender: 'MALE',
       }).pure,
@@ -30,7 +28,6 @@ export const bugReport13Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 1',
       rodneCislo: generateRodneCislo({
         turnsAge: 7,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 8,
         gender: 'FEMALE',
       }).pure,
@@ -43,7 +40,6 @@ export const bugReport13Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 2',
       rodneCislo: generateRodneCislo({
         turnsAge: 9,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 1,
         gender: 'MALE',
       }).pure,
@@ -56,7 +52,6 @@ export const bugReport13Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 3',
       rodneCislo: generateRodneCislo({
         turnsAge: 8,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 8,
         gender: 'FEMALE',
       }).pure,
@@ -69,7 +64,6 @@ export const bugReport13Input: E2eTestUserInput = {
       priezviskoMeno: 'Fake Child 4',
       rodneCislo: generateRodneCislo({
         turnsAge: 16,
-        turnsAgeInYear: TAX_YEAR,
         turnsAgeInMonth: 3,
         gender: 'FEMALE',
       }).pure,
