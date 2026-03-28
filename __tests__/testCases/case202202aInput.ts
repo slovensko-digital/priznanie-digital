@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202202aInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '78000',
   priloha3_r11_socialne: '2253.36',
   priloha3_r13_zdravotne: '951.72',
@@ -45,17 +46,17 @@ export const case202202aInput: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '0',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0606070014',
+      rodneCislo: '090430/0925',
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
+      monthFrom: '0',
+      monthTo: '0',
     },
     {
       id: 2,
@@ -66,10 +67,10 @@ export const case202202aInput: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: true,
 
-  percent2: '189,06',
+  percent2: '169,29',
   percent3: '320,78',
 }

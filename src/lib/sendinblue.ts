@@ -59,7 +59,7 @@ export const sendEmail = async ({
   return result
 }
 
-export const makeAttachment = (name: string, content: any) => ({
+export const makeAttachment = (name: string, content: string) => ({
   name,
   content: Buffer.from(content).toString('base64'),
 })

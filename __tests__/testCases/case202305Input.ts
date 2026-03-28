@@ -1,9 +1,10 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202305Input: E2eTestUserInput = {
-  t1r10_prijmy: '34800',
-  priloha3_r11_socialne: '2253.36',
-  priloha3_r13_zdravotne: '951.72',
+  prijem_zo_zivnosti: true,
+  t1r10_prijmy: '15000',
+  priloha3_r11_socialne: '1000',
+  priloha3_r13_zdravotne: '400',
   zaplatenePreddavky: '0',
   r001_dic: '233123123',
   r003_nace: '62010 - Počítačové programovanie',
@@ -37,7 +38,7 @@ export const case202305Input: E2eTestUserInput = {
   r032_partner_pocet_mesiacov: '12',
   r032_partner_vlastne_prijmy: '3000',
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
@@ -74,7 +75,7 @@ export const case202305Input: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
   partner_bonus_na_deti: true,
   r034_priezvisko_a_meno: 'Beth Smith',
   r034_rodne_cislo: '895103/4169',

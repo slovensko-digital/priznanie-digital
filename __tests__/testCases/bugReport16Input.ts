@@ -1,12 +1,13 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport16Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '30668.64',
   priloha3_r11_socialne: '1533.43',
   priloha3_r13_zdravotne: '613.37',
   zaplatenePreddavky: '99798.51',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
@@ -27,7 +28,7 @@ export const bugReport16Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0108151868',
+      rodneCislo: '0808159385',
       wholeYear: false,
       monthFrom: '6',
       monthTo: '7',
@@ -49,12 +50,12 @@ export const bugReport16Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '460.59',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '2',
   r035_zaplatene_uroky: '2866.75',

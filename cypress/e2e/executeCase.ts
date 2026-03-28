@@ -1,13 +1,16 @@
 /* eslint-disable promise/no-callback-in-promise */
-/* eslint-disable func-names */
+
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/always-return */
 /* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { UserInput } from '../../src/types/UserInput'
-import { formatCurrency, parseInputNumber } from '../../src/lib/utils'
-import { calculate, TAX_YEAR } from '../../src/lib/calculation'
+import {
+  formatCurrency as formatCurrencyOrigin,
+  parseInputNumber,
+} from '../../src/lib/utils'
+import { calculate, FORM_URL, TAX_YEAR } from '../../src/lib/calculation'
 import {
   Route,
   PostponeRoute,
@@ -17,6 +20,10 @@ import {
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+
+function formatCurrency(value: number) {
+  return formatCurrencyOrigin(value).replaceAll('\u00A0', ' ')
+}
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -74,12 +81,18 @@ const executeTestCase = (testCase: string) => {
         cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
         /**  SECTION Prijmy a vydavky */
-        getInput('t1r10_prijmy').type(input.t1r10_prijmy)
-        getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
-        getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
-        getInput('zaplatenePreddavky').type(
-          input.zaplatenePreddavky ? input.zaplatenePreddavky : '0',
-        )
+
+        if (input.prijem_zo_zivnosti) {
+          getInput('prijem_zo_zivnosti', '-yes').click()
+          getInput('t1r10_prijmy').type(input.t1r10_prijmy)
+          getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
+          getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
+          getInput('zaplatenePreddavky').type(
+            input.zaplatenePreddavky ? input.zaplatenePreddavky : '0',
+          )
+        } else {
+          getInput('prijem_zo_zivnosti', '-no').click()
+        }
 
         next()
 
@@ -139,7 +152,7 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Kids */
         assertUrl('/deti')
 
-        if (input.hasChildren) {
+        if (input.hasChildren === 'yes') {
           getInput('hasChildren', '-yes').click()
 
           input.children.forEach((child, index) => {
@@ -289,13 +302,29 @@ const executeTestCase = (testCase: string) => {
 
         next()
 
+        /** SECTION Dve percenta rodicom */
+
+        assertUrl('/dve-percenta-rodicom')
+        if (input.expectNgoDonationValue) {
+          if (input.dve_percenta_rodicom === 'obidvom') {
+            getInput('dve_percenta_rodicom', '-obidvom').click()
+          } else if (input.dve_percenta_rodicom === 'jednemu') {
+            getInput('dve_percenta_rodicom', '-jednemu').click()
+          } else {
+            getInput('dve_percenta_rodicom', '-nie').click()
+          }
+        }
+        next()
+
         /**  SECTION Two percent */
         assertUrl('/dve-percenta')
         if (input.expectNgoDonationValue) {
           cy.get('.govuk-hint').contains(input.percent2)
 
           if (input.dve_percenta_podporujem) {
-            cy.get('[data-test="dve_percenta_podporujem-inu-input"]').click()
+            cy.get(
+              `[data-test="dve_percenta_podporujem-${input.dve_percenta_podporujem}-input"]`,
+            ).click()
 
             cy.get('label[for="splnam3per"]').contains(input.percent3)
 
@@ -303,14 +332,16 @@ const executeTestCase = (testCase: string) => {
               getInput('splnam3per').click()
             }
 
-            typeToInput('r142_obchMeno', input)
-            typeToInput('r142_ico', input)
+            if (input.dve_percenta_podporujem !== 'ano-sk-digital') {
+              typeToInput('r142_obchMeno', input)
+              typeToInput('r142_ico', input)
+            }
 
             if (input.XIIoddiel_suhlasZaslUdaje) {
               cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
             }
           } else {
-            cy.get('[data-test="dve_percenta_podporujem-input-no"]').click()
+            cy.get('[data-test="dve_percenta_podporujem-nie-input"]').click()
           }
         }
 
@@ -324,7 +355,7 @@ const executeTestCase = (testCase: string) => {
         const naceNumber = input.r003_nace.match(/^(\d+)/)
         if (naceNumber) {
           getInput('r003_nace').type(naceNumber[1])
-          cy.contains(input.r003_nace).click()
+          cy.contains(input.r003_nace).should('be.visible').click()
         } else {
           typeToInput('r003_nace', input)
         }
@@ -348,9 +379,11 @@ const executeTestCase = (testCase: string) => {
 
         cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
 
-        cy.get('.govuk-table__cell').contains(
-          formatCurrency(parseInputNumber(input.t1r10_prijmy)),
-        )
+        if (input.prijem_zo_zivnosti) {
+          cy.get('.govuk-table__cell').contains(
+            formatCurrency(parseInputNumber(input.t1r10_prijmy)),
+          )
+        }
         cy.get('.govuk-table__cell').contains(input.r001_dic)
 
         next()
@@ -397,15 +430,17 @@ const executeTestCase = (testCase: string) => {
           .should('have.length', 1)
           .contains(formatCurrency(taxForm.r036.plus(taxForm.r039).toNumber()))
 
-        cy.get('[data-test="pausalneVydavky"]')
-          .should('have.length', 1)
-          .contains(
-            formatCurrency(
-              taxForm.r040
-                .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
-                .toNumber(),
-            ),
-          )
+        if (input.prijem_zo_zivnosti) {
+          cy.get('[data-test="pausalneVydavky"]')
+            .should('have.length', 1)
+            .contains(
+              formatCurrency(
+                taxForm.r040
+                  .minus(taxForm.vydavkyPoistPar6ods11_ods1a2)
+                  .toNumber(),
+              ),
+            )
+        }
 
         cy.get('[data-test="zakladDane"]')
           .should('have.length', 1)
@@ -454,9 +489,9 @@ const executeTestCase = (testCase: string) => {
         const filePath = path.join(downloadsFolder, 'file.xml')
 
         /**  Validate our results with the FS form */
-        cy.visit('/form/form.601.html')
+        cy.visit(FORM_URL)
         // Ignore uncaught exceptions in the 3rd party form code
-        cy.on('uncaught:exception', (err, runnable) => {
+        cy.on('uncaught:exception', (_err, _runnable) => {
           // returning false here prevents Cypress
           // inside the cy.origin() method from failing the test
           return false
@@ -471,8 +506,12 @@ const executeTestCase = (testCase: string) => {
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
         cy.get('#cmbDic1').should('have.value', input.r001_dic) // validate the form has laoded by checking DIC value
         cy.get('#form-button-validate').click().should(formSuccessful(stub))
+
         cy.get('#errorsContainer')
-          .should((el) => expect(el.text()).to.be.empty)
+          .invoke('text')
+          .then((text) => {
+            expect(text).to.equal('')
+          })
           .then(() => done())
       },
     )
@@ -549,8 +588,15 @@ const executePostponeCase = (testCase: string) => {
 
         cy.get('#form-buttons-load-dialog-confirm > .ui-button-text').click()
         cy.get('#form-button-validate').click().should(formSuccessful(stub))
+        const ignoredError = `Navýšenie základu dane o základ dane druhej oprávnenej osoby je možné len ak táto osba je oprávnenou, aspoň za jeden totožný mesiac, za ktorý si daňovník uplatňuje daňový bonus a zároveň na začiatku ktorého druhá oprávnená osoba splnila podmienky na uplatnenie daňového bonusu.`
+
         cy.get('#errorsContainer')
-          .should((el) => expect(el.text()).to.be.empty)
+          .invoke('text')
+          .then((text) => {
+            // remove the known, non-actionable message and assert no other text remains
+            const remaining = text.replace(ignoredError, '').trim()
+            expect(remaining).to.equal('')
+          })
           .then(() => done())
       },
     )

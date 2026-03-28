@@ -20,6 +20,7 @@ export type Route =
   | '/dochodok'
   | '/prenajom'
   | '/uroky'
+  | '/dve-percenta-rodicom'
   | '/dve-percenta'
   | '/osobne-udaje'
   | '/suhrn'
@@ -43,6 +44,7 @@ export const getOrderedRoutes = (taxForm: TaxForm): ReadonlyArray<Route> => {
     '/dochodok',
     '/prenajom',
     '/uroky',
+    '/dve-percenta-rodicom',
     '/dve-percenta',
     '/osobne-udaje',
     '/suhrn',
@@ -128,7 +130,7 @@ export const validateRoute = (
       value = postponeUserInput[requirement]
     } else {
       const requirements = {
-        '/zamestnanie': 't1r10_prijmy',
+        '/zamestnanie': 'prijem_zo_zivnosti',
         '/dohoda': 'employed',
         '/partner': 'dohoda',
         '/deti': 'r032_uplatnujem_na_partnera',

@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import Fuse from 'fuse.js'
 import { getNace } from '../lib/api'
 import styles from './Nace.module.css'
-import { AutoCompleteInput } from './AutoCompleteInput'
+import { AutoCompleteData, AutoCompleteInput } from './AutoCompleteInput'
 
 const options = {
   shouldSort: true,
@@ -30,7 +30,9 @@ interface Nace {
   label: string
 }
 
-const formatNace = (nace: Fuse.FuseResult<Nace>) => ({
+const formatNace = (
+  nace: Fuse.FuseResult<Nace>,
+): Pick<AutoCompleteData, 'value' | 'id'> => ({
   id: nace?.item?.code,
   value: `${nace?.item?.code} - ${nace?.item?.label}`,
 })
@@ -71,7 +73,7 @@ export const Nace: React.FC = () => {
         name="r003_nace"
         label="NACE"
         minLength={0}
-        fetchData={async (value) => {
+        fetchData={async (value: string) => {
           const data = searchNace(value) as Fuse.FuseResult<Nace>[]
           return data.map((nace) => formatNace(nace))
         }}

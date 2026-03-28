@@ -5,7 +5,11 @@ import { PartnerBonusFormProps } from './PartnerBonusForm'
 import { Details } from './Details'
 import { RODNE_CISLO_DLZKA, TAX_YEAR } from '../lib/calculation'
 
-export const ApplyForBonusQuestion = ({ disabled }) => (
+interface Props {
+  disabled?: boolean
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={'Chcete si uplatniť zvýhodnenie na manželku / manžela?'}
@@ -55,6 +59,7 @@ export const IncomeQuestion = ({ disabled }) => {
             <li>sociálne dávky,</li>
             <li>dávky a príspevky v hmotnej núdzi,</li>
             <li>nemocenské a úrazové dávky,</li>
+            <li>daňový bonus na zaplatené úroky</li>
             <li>peňažný príspevok na opatrovanie</li>
             <li>dôchodok (invalidný, starobný, výsluhový, vdovský)</li>
             <li>dávky z garančného poistenia,</li>

@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const withHighIncome2Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '8000',
   priloha3_r13_zdravotne: '10000',
   t1r10_prijmy: '100000',
@@ -21,7 +22,7 @@ export const withHighIncome2Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '8888.10',
   udajeODanovomBonuseNaDieta: '221.70',
   uhrnPreddavkovNaDan: '78.20',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,
@@ -47,7 +48,7 @@ export const withHighIncome2Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '200',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** Pension */
   platil_prispevky_na_dochodok: true,
@@ -59,6 +60,6 @@ export const withHighIncome2Input: E2eTestUserInput = {
   r142_obchMeno: 'Slovensko.Digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '505,78',
+  percent2: '488,14',
   percent3: '780,60',
 }

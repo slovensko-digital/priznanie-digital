@@ -40,7 +40,7 @@ describe('partner', () => {
         input: {
           r032_uplatnujem_na_partnera: true,
           partner_spolocna_domacnost: true,
-          partner_podmienky: { 1: true },
+          partner_podmienky: { 1: ['on'] },
           partner_step: 3,
         },
         expected: ['r032_partner_vlastne_prijmy'],
@@ -50,7 +50,7 @@ describe('partner', () => {
           r032_uplatnujem_na_partnera: true,
           r032_partner_vlastne_prijmy: 'a',
           partner_spolocna_domacnost: true,
-          partner_podmienky: { 1: true },
+          partner_podmienky: { 1: ['on'] },
           partner_step: 3,
         },
         expected: ['r032_partner_vlastne_prijmy'],
@@ -68,9 +68,9 @@ describe('partner', () => {
       {
         input: {
           r032_uplatnujem_na_partnera: true,
-          r032_partner_vlastne_prijmy: `${PARTNER_MAX_ODPOCET}`,
+          r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET.toString(),
           partner_spolocna_domacnost: true,
-          partner_podmienky: { 1: true },
+          partner_podmienky: { 1: ['on'] },
           partner_step: 4,
         },
         expected: [],
@@ -80,7 +80,7 @@ describe('partner', () => {
           r032_uplatnujem_na_partnera: true,
           r032_partner_vlastne_prijmy: '1000',
           partner_spolocna_domacnost: true,
-          partner_podmienky: { 1: true },
+          partner_podmienky: { 1: ['on'] },
           partner_step: 4,
         },
         expected: [
@@ -97,7 +97,7 @@ describe('partner', () => {
           r032_partner_vlastne_prijmy: '1000',
           r032_partner_pocet_mesiacov: '1',
           partner_spolocna_domacnost: true,
-          partner_podmienky: { 1: true },
+          partner_podmienky: { 1: ['on'] },
           partner_step: 3,
         },
         expected: [],

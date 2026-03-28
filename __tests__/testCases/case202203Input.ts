@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202203Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '11000',
   priloha3_r11_socialne: '1200',
   priloha3_r13_zdravotne: '650',
@@ -37,7 +38,7 @@ export const case202203Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '0',
   r032_uplatnujem_na_partnera: false,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
@@ -58,6 +59,6 @@ export const case202203Input: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
   expectNgoDonationValue: false,
 }

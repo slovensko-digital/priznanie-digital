@@ -91,7 +91,7 @@ const OsobneUdaje: NextPage<Props> = ({
           router.push(nextRoute)
         }}
       >
-        {(props) => (
+        {(props: FormikProps<PersonalInformationPostponePage>) => (
           <>
             <ErrorSummary<PersonalInformationPostponePage>
               errors={props.errors}

@@ -1,7 +1,3 @@
-/* eslint-disable func-names */
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/always-return */
-/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput'
@@ -16,6 +12,7 @@ import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
 import {
   MAX_CHILD_AGE_BONUS,
+  PARTNER_MAX_ODPOCET,
   TAX_YEAR,
   UROKY_POCET_ROKOV,
 } from '../../src/lib/calculation'
@@ -51,6 +48,7 @@ const skipPage = () => {
 
 const navigateEligibleToChildrenPage = () => {
   cy.visit('/prijmy-a-vydavky')
+  getInput('prijem_zo_zivnosti', '-yes').click()
   typeToInput('t1r10_prijmy', {
     ...withChildrenInput,
     t1r10_prijmy: '3876',
@@ -311,7 +309,7 @@ describe('Partner page', () => {
     // Fill out input with incorrect value (too high), continue to see ineligible message
     typeToInput('r032_partner_vlastne_prijmy', {
       ...withPartnerInput,
-      r032_partner_vlastne_prijmy: '5236',
+      r032_partner_vlastne_prijmy: PARTNER_MAX_ODPOCET.plus(1).toString(),
     })
     next()
     cy.get('[data-test=ineligible-message]').should('exist')
@@ -443,6 +441,7 @@ describe('Children page', () => {
   })
   it('has working ui for adding children', () => {
     cy.visit('/prijmy-a-vydavky')
+    getInput('prijem_zo_zivnosti', '-yes').click()
     typeToInput('t1r10_prijmy', { ...withChildrenInput, t1r10_prijmy: '3876' })
     typeToInput('priloha3_r11_socialne', withChildrenInput)
     typeToInput('priloha3_r13_zdravotne', withChildrenInput)
@@ -587,7 +586,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('2409083105')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2509076922')
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch September až December',
     )
@@ -610,7 +609,7 @@ describe('Children page', () => {
 
     cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
 
-    cy.get('[data-test="children[0].rodneCislo-input"]').type('9909121354')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('070907/4762')
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch Január až September',
     )
@@ -848,9 +847,10 @@ describe('IBAN page', () => {
     cy.visit('/iban')
     cy.get('[data-test=ineligible-message]').should('exist')
   })
-  it.skip('has working ui for eligible applicants', () => {
+  it('has working ui for eligible applicants', () => {
     // find exact numbers for 2023
     cy.visit('/prijmy-a-vydavky')
+    getInput('prijem_zo_zivnosti', '-yes').click()
     typeToInput('t1r10_prijmy', { ...withBonusInput, t1r10_prijmy: '6500' })
     typeToInput('priloha3_r11_socialne', withBonusInput)
     typeToInput('priloha3_r13_zdravotne', withBonusInput)
@@ -861,7 +861,7 @@ describe('IBAN page', () => {
     assertUrl('/zamestnanie')
     skipPage()
 
-    assertUrl('/partner')
+    assertUrl('/dohoda')
     skipPage()
 
     assertUrl('/partner')
@@ -878,14 +878,24 @@ describe('IBAN page', () => {
     )
     next()
 
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+
+    next()
+
     assertUrl('/dochodok')
     skipPage()
 
-    assertUrl('/dve-percenta')
+    assertUrl('/prenajom')
+    skipPage()
+
+    assertUrl('/uroky')
+    skipPage()
+
+    assertUrl('/dve-percenta-rodicom')
     next()
 
-    // assertUrl('/hypoteka')
-    // skipPage()
+    assertUrl('/dve-percenta')
+    next()
 
     assertUrl('/osobne-udaje')
     typeToInput('r001_dic', withBonusInput)
@@ -969,6 +979,7 @@ describe('Summary page', () => {
     '/dochodok',
     '/uroky',
     '/prenajom',
+    '/dve-percenta-rodicom',
     '/osobne-udaje',
   ].forEach((link: Route, index) => {
     it(`has working edit link to ${link}`, () => {

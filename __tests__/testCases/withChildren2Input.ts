@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const withChildren2Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r001_dic: '233123123',
@@ -24,7 +25,7 @@ export const withChildren2Input: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: false,
 

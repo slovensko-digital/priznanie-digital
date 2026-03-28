@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport1Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '5000',
   priloha3_r11_socialne: '100',
   priloha3_r13_zdravotne: '100',
@@ -9,7 +10,7 @@ export const bugReport1Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_step: 4,
   partner_podmienky: {
-    '1': true,
+    '1': ['on'],
   },
   r032_partner_vlastne_prijmy: '3500',
   r032_partner_pocet_mesiacov: '12',
@@ -27,7 +28,7 @@ export const bugReport1Input: E2eTestUserInput = {
   uhrnPrijmovOdVsetkychZamestnavatelov: '3248,3',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,

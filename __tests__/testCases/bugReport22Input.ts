@@ -1,17 +1,18 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport22Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '92715.60',
   priloha3_r11_socialne: '5562.94',
   priloha3_r13_zdravotne: '18543.12',
   zaplatenePreddavky: '5764.27',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0060159913',
+      rodneCislo: '080722/5045',
       wholeYear: false,
       monthFrom: '3',
       monthTo: '7',
@@ -19,7 +20,7 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '000615/0716',
+      rodneCislo: '100314/4186',
       wholeYear: false,
       monthFrom: '0',
       monthTo: '7',
@@ -72,7 +73,7 @@ export const bugReport22Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
   partner_podmienky: {
-    1: true,
+    1: ['on'],
   },
   rent: true,
   vyskaPrijmovZPrenajmu: '2143.43',
@@ -80,12 +81,12 @@ export const bugReport22Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '55.54',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '7',
   r035_zaplatene_uroky: '4328.81',
@@ -95,5 +96,5 @@ export const bugReport22Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '13.78',
   expectNgoDonationValue: true,
-  percent2: '107,26',
+  percent2: '169,59',
 }

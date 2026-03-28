@@ -11,7 +11,12 @@ import { RentUserInput } from '../types/PageUserInputs'
 import { formatCurrency, parseInputNumber } from '../lib/utils'
 import Decimal from 'decimal.js'
 import { ExternalLink } from './ExternalLink'
-export const ApplyForBonusQuestion = ({ disabled }) => (
+
+interface Props {
+  disabled?: boolean
+}
+
+export const ApplyForBonusQuestion = ({ disabled = false }: Props) => (
   <>
     <BooleanRadio
       title={`Prenajímali ste v roku ${TAX_YEAR} nehnuteľnosť?`}
@@ -46,7 +51,7 @@ export const OslobodenieQuestion = ({ disabled }) => (
       Od dane z príjmov sú oslobodené:
       <ul>
         <li>príjmy z prenájmu nehnuteľností a</li>
-        <li>príjmy z príležitostnej činnost</li>
+        <li>príjmy z príležitostnej činnosti</li>
       </ul>
       ak úhrn týchto príjmov nepresiahne v zdaňovacom období{' '}
       {formatCurrency(OSLOBODENIE_PRENAJOM_A_PRILZ_CINNOSTI)}, pričom ak takto

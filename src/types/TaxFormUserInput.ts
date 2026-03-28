@@ -42,6 +42,12 @@ export interface ChildInput {
   monthTo: string
 }
 
+interface RodicInput {
+  rodneCislo: string
+  meno: string
+  priezvisko: string
+}
+
 export interface TaxFormUserInput {
   /**   01 - DIČ (ak nie je pridelené| uvádza sa rodné číslo)*/
   r001_dic: string
@@ -81,7 +87,7 @@ export interface TaxFormUserInput {
   r032_partner_pocet_mesiacov?: string
   partner_step?: number
   partner_spolocna_domacnost?: boolean
-  partner_podmienky?: Record<string, boolean>
+  partner_podmienky?: Record<string, string[]>
 
   /** SECTION  Mortage */
   r035_uplatnuje_uroky?: boolean
@@ -102,6 +108,7 @@ export interface TaxFormUserInput {
 
   /** SECTION Prijmy a poistenie  */
   // TODO: rename t1r10_prijmy to t1r2_prijmy
+  prijem_zo_zivnosti: boolean
   t1r10_prijmy: string
   priloha3_r11_socialne: string
   priloha3_r13_zdravotne: string
@@ -134,7 +141,7 @@ export interface TaxFormUserInput {
   rent_step?: number
 
   /** SECTION  Deti*/
-  hasChildren?: boolean
+  hasChildren?: 'yes' | 'income-used-by-someone-else' | 'no'
   partner_bonus_na_deti_chce_uplatnit?: boolean
   partner_bonus_na_deti?: boolean
   r034_priezvisko_a_meno?: string
@@ -152,6 +159,12 @@ export interface TaxFormUserInput {
   r142_ico?: string
   r142_obchMeno?: string
   XIIoddiel_suhlasZaslUdaje?: boolean
+
+  /** SECTION  Dve percenta rodicom */
+  dve_percenta_rodicom?: 'obidvom' | 'jednemu' | 'nie'
+  dve_percenta_rodicA?: RodicInput
+  dve_percenta_rodicB?: RodicInput
+  dve_percenta_rodicom_nahradna_starostlivost?: boolean
 
   /** SECTION Danovy bonus */
   ziadamVyplatitDanovyBonus?: boolean

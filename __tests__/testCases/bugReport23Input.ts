@@ -1,17 +1,18 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport23Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '14029.01',
   priloha3_r11_socialne: '1262.61',
   priloha3_r13_zdravotne: '4348.99',
   zaplatenePreddavky: '72834.19',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0209151899',
+      rodneCislo: '1103143811',
       wholeYear: false,
       monthFrom: '4',
       monthTo: '9',
@@ -46,7 +47,7 @@ export const bugReport23Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
   partner_podmienky: {
-    1: true,
+    1: ['on'],
   },
   rent: true,
   vyskaPrijmovZPrenajmu: '417.11',

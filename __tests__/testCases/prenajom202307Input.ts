@@ -9,5 +9,5 @@ export const prenajom202307Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '0',
   expectNgoDonationValue: true,
-  percent2: '157,01',
+  percent2: '150,45',
 }

@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext } from 'react'
+import React, { createContext, useContext, PropsWithChildren } from 'react'
 
 interface RadioGroupState {
   readonly selected: string
@@ -22,7 +22,11 @@ interface Props {
   readonly onChange: (value: string) => void
 }
 
-const RadioGroup: FC<Props> = ({ value, onChange, children }) => {
+const RadioGroup = ({
+  value,
+  onChange,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
     <RadioGroupContext.Provider value={{ selected: value, onSelect: onChange }}>
       <div className="govuk-form-group">

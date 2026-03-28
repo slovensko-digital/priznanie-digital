@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202205Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '34800',
   priloha3_r11_socialne: '2253.36',
   priloha3_r13_zdravotne: '951.72',
@@ -37,44 +38,44 @@ export const case202205Input: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '0',
   r032_uplatnujem_na_partnera: false,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '0606180014',
+      rodneCislo: '0906100041',
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
+      monthFrom: '0',
+      monthTo: '0',
     },
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '0606180025',
+      rodneCislo: '0906106784',
       wholeYear: true,
-      monthFrom: `9`,
-      monthTo: '11',
+      monthFrom: `0`,
+      monthTo: '0',
     },
     {
       id: 3,
       priezviskoMeno: 'Rick Sanchez',
-      rodneCislo: '0606180036',
+      rodneCislo: '0906104166',
       wholeYear: true,
-      monthFrom: `9`,
-      monthTo: '11',
+      monthFrom: `0`,
+      monthTo: '0',
     },
     {
       id: 4,
       priezviskoMeno: 'Beth Smith',
-      rodneCislo: '0606180047',
+      rodneCislo: '0906100910',
       wholeYear: true,
-      monthFrom: `9`,
-      monthTo: '11',
+      monthFrom: `0`,
+      monthTo: '0',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: false,
 }

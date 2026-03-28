@@ -1,12 +1,13 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport11Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '97715.04',
   priloha3_r11_socialne: '37131.71',
   priloha3_r13_zdravotne: '7817.20',
   zaplatenePreddavky: '84033.55',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
@@ -61,5 +62,5 @@ export const bugReport11Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '45.99',
   expectNgoDonationValue: true,
-  percent2: '49,11',
+  percent2: '75,85',
 }

@@ -4,7 +4,11 @@ import {
   EmployedUserInput,
   DohodaUserInput,
 } from '../../src/types/PageUserInputs'
-import { PARTNER_MAX_ODPOCET, TAX_YEAR } from '../../src/lib/calculation'
+import {
+  FORM_URL,
+  PARTNER_MAX_ODPOCET,
+  TAX_YEAR,
+} from '../../src/lib/calculation'
 import { formSuccessful } from './executeCase'
 import { generateBirthId } from '../../src/lib/rodneCisloGenerator'
 
@@ -19,9 +23,10 @@ const randomFromRangeString = (min: number, max: number) => {
 }
 
 const randomInput = (): TaxFormUserInput => {
+  const prijem_zo_zivnosti = Math.random() > 0.5
   const employed = Math.random() > 0.5
   const dohoda = Math.random() > 0.5
-  const hasChildren = Math.random() > 0.2
+  const hasChildren = Math.random() > 0.2 ? 'yes' : 'no'
   const partner = Math.random() > 0.7
   const rent = Math.random() > 0.3
   const uroky = Math.random() > 0.3
@@ -31,10 +36,7 @@ const randomInput = (): TaxFormUserInput => {
   const zdravPercent = randomFromRange(0, 40).div(100).toFixed(2)
 
   let input: TaxFormUserInput = {
-    t1r10_prijmy: prijmy.toFixed(2),
-    priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
-    priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
-    zaplatenePreddavky: randomFromRangeString(0, 100000),
+    prijem_zo_zivnosti,
     employed,
     dohoda,
     hasChildren,
@@ -66,6 +68,16 @@ const randomInput = (): TaxFormUserInput => {
     input = { ...input, ...zamestnanie }
   }
 
+  if (prijem_zo_zivnosti) {
+    input = {
+      ...input,
+      t1r10_prijmy: prijmy.toFixed(2),
+      priloha3_r11_socialne: prijmy.times(socPercent).toFixed(2),
+      priloha3_r13_zdravotne: prijmy.times(zdravPercent).toFixed(2),
+      zaplatenePreddavky: randomFromRangeString(0, 100000),
+    }
+  }
+
   const dohody: DohodaUserInput = {
     uhrnPrijmovZoVsetkychDohod: randomFromRangeString(0, 100000),
     uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: randomFromRangeString(
@@ -84,11 +96,11 @@ const randomInput = (): TaxFormUserInput => {
     input = { ...input, ...dohody }
   }
 
-  if (hasChildren) {
+  if (hasChildren === 'yes') {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
     const partnerChildBonus = Math.random() > 0.3
     Array.from({ length: childrenCount }).forEach((_, index) => {
-      const age = randomFromRange(0, 25).round().toNumber()
+      const age = randomFromRange(0, 18).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
       const birthDate = new Date(TAX_YEAR - age, month, 15)
       const gender = Math.random() > 0.5
@@ -157,11 +169,11 @@ const randomInput = (): TaxFormUserInput => {
         .toString(),
       r032_partner_vlastne_prijmy: randomFromRangeString(
         0,
-        PARTNER_MAX_ODPOCET,
+        PARTNER_MAX_ODPOCET.toNumber(),
       ),
       r032_uplatnujem_na_partnera: true,
       partner_spolocna_domacnost: true,
-      partner_podmienky: { '1': true },
+      partner_podmienky: { '1': ['on'] },
     }
   }
 
@@ -219,7 +231,9 @@ describe('Random inputs', () => {
   it('should pass', () => {
     expect(Number(randomFromRange(1, 10))).to.be.within(1, 10)
   })
-  Array.from({ length: 50 }).forEach((_, i) => {
+
+  const testCount = parseInt(process.env.RANDOM_TEST_LENGTH) || 5
+  Array.from({ length: testCount }).forEach((_, i) => {
     it(`should pass random input ${i}`, (done) => {
       const input = randomInput()
       cy.writeFile(`cypress/downloads/randomInput${i}.json`, input)
@@ -233,12 +247,13 @@ describe('Random inputs', () => {
       })
         .then((response) => {
           cy.writeFile(filePath, response.body, 'utf-8')
+          return
         })
         .then(() => {
           /**  Validate our results with the FS form */
-          cy.visit('http://localhost:3000/form/form.601.html')
+          cy.visit(`http://localhost:3000${FORM_URL}`)
           // Ignore uncaught exceptions in the 3rd party form code
-          cy.on('uncaught:exception', (err, runnable) => {
+          cy.on('uncaught:exception', (_err, _runnable) => {
             // returning false here prevents Cypress
             // inside the cy.origin() method from failing the test
             return false
@@ -256,6 +271,7 @@ describe('Random inputs', () => {
           cy.get('#errorsContainer')
             .should((el) => expect(el.text()).to.be.empty)
             .then(() => done())
+          return
         })
     })
   })

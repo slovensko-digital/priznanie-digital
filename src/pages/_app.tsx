@@ -1,10 +1,8 @@
 import App, { AppProps } from 'next/app'
 
-/* eslint-disable import/no-unassigned-import */
 import '../styles/global.css'
 import 'navody-digital-frontend/govuk/all.scss'
 import '../styles/libs.css'
-/* eslint-enable import/no-unassigned-import */
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -32,7 +30,6 @@ import Head from 'next/head'
 import { checkCookie } from '../lib/cookie'
 import getConfig from 'next/config'
 
-/* eslint-disable no-template-curly-in-string */
 setLocale({
   mixed: {
     default: 'Hodnota nie je správna',
@@ -48,7 +45,6 @@ setLocale({
     length: 'Musí mať presne ${length} znakov',
   },
 })
-/* eslint-enable no-template-curly-in-string */
 
 const taxFormUserInputToTaxForm = (input: TaxFormUserInput): TaxForm => {
   return calculate(setDate(input))

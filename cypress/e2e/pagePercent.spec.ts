@@ -1,7 +1,3 @@
-/* eslint-disable func-names */
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/always-return */
-/* eslint-disable promise/catch-or-return */
 /// <reference types="cypress" />
 
 import { with2percentInput } from '../../__tests__/testCases/with2percentInput'
@@ -11,6 +7,7 @@ import { TaxFormUserInput } from '../../src/types/TaxFormUserInput'
 import { UserInput } from '../../src/types/UserInput'
 import path from 'path'
 import { assertUrl, formSuccessful } from './executeCase'
+import { FORM_URL } from '../../src/lib/calculation'
 
 function getInput<K extends keyof UserInput>(key: K, suffix = '') {
   return cy.get(`[data-test="${key}-input${suffix}"]`)
@@ -36,7 +33,7 @@ const getError = () => cy.get('[data-test=error]')
 beforeEach(() => {
   cy.setCookie('you-shall', 'not-pass') // allow direct access to pages via URL
   // Ignore uncaught exceptions in the 3rd party form code
-  cy.on('uncaught:exception', (err, runnable) => {
+  cy.on('uncaught:exception', (_err, _runnable) => {
     // returning false here prevents Cypress
     // inside the cy.origin() method from failing the test
     return false
@@ -52,6 +49,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -111,7 +109,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -168,12 +166,12 @@ describe('twoPercent page', () => {
 
     next()
 
-    // Shows error, when presses next without interaction
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
     next()
-    getError().should('have.length', 1)
 
-    // When presses yes, additional fields appear
-    cy.get('[data-test=dve_percenta_podporujem-inu-input]').click()
+    // When presses 'ano-inu', additional fields appear (clears pre-filled Slovensko.Digital)
+    cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
     // All aditional fields should be required
     next()
@@ -185,6 +183,7 @@ describe('twoPercent page', () => {
     )
     getInput('r142_ico').type('35983558')
     cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').should('be.checked')
 
     next()
 
@@ -224,7 +223,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -244,7 +243,7 @@ describe('twoPercent page', () => {
       .should((el) => expect(el.text()).to.be.empty)
       .then(() => done())
   })
-  it.only('with autoform', (done) => {
+  it('with autoform', (done) => {
     const input = with2percentInput
 
     cy.visit(homeRoute)
@@ -252,6 +251,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -311,7 +311,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -368,8 +368,12 @@ describe('twoPercent page', () => {
 
     next()
 
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
     // When presses yes, additional fields appear
-    cy.get('[data-test=dve_percenta_podporujem-inu-input]').click()
+    cy.get('[data-test=dve_percenta_podporujem-ano-inu-input]').click()
 
     /** With autoform */
     getInput('r142_obchMeno').type('Lifestarter')
@@ -418,7 +422,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)
@@ -443,6 +447,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -502,7 +507,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -559,7 +564,11 @@ describe('twoPercent page', () => {
 
     next()
 
-    cy.get('[data-test=dve_percenta_podporujem-input-no]').click()
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
+    cy.get('[data-test=dve_percenta_podporujem-nie-input]').click()
     next()
     getError().should('have.length', 0)
   })
@@ -571,6 +580,7 @@ describe('twoPercent page', () => {
     cy.contains('Súhlasím a chcem pripraviť daňové priznanie').click()
 
     /**  SECTION Prijmy a vydavky */
+    getInput('prijem_zo_zivnosti', '-yes').click()
     getInput('t1r10_prijmy').type(input.t1r10_prijmy)
     getInput('priloha3_r11_socialne').type(input.priloha3_r11_socialne)
     getInput('priloha3_r13_zdravotne').type(input.priloha3_r13_zdravotne)
@@ -630,7 +640,7 @@ describe('twoPercent page', () => {
     next()
 
     /**  SECTION Kids */
-    if (input.hasChildren) {
+    if (input.hasChildren === 'yes') {
       getInput('hasChildren', '-yes').click()
 
       input.children.forEach((child, index) => {
@@ -687,7 +697,17 @@ describe('twoPercent page', () => {
 
     next()
 
-    cy.get('[data-test=dve_percenta_podporujem-sk-digital-input]').click()
+    /* Section 2% Rodicom */
+    getInput('dve_percenta_rodicom', '-nie').click()
+    next()
+
+    cy.get('[data-test=dve_percenta_podporujem-ano-sk-digital-input]').click()
+
+    cy.get('[data-test="splnam3per-input"]').click()
+    cy.get('[data-test="splnam3per-input"]').should('be.checked')
+
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').click()
+    cy.get('[data-test="XIIoddiel_suhlasZaslUdaje-input"]').should('be.checked')
 
     next()
 
@@ -727,7 +747,7 @@ describe('twoPercent page', () => {
     const filePath = path.join(downloadsFolder, 'file.xml')
 
     /**  Validate our results with the FS form */
-    cy.visit('/form/form.601.html')
+    cy.visit(FORM_URL)
 
     const stub = cy.stub()
     cy.on('window:alert', stub)

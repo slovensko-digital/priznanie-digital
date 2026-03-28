@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const baseInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r005_meno: 'Fake',
@@ -14,10 +15,10 @@ export const baseInput: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
   datum: '22.02.2022',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   expectNgoDonationValue: true,
 
-  percent2: '7,06',
+  percent2: '6,74',
   percent3: '15,39',
 }

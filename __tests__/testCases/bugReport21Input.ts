@@ -1,12 +1,13 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport21Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '14395.50',
   priloha3_r11_socialne: '151.31',
   priloha3_r13_zdravotne: '200',
   zaplatenePreddavky: '0',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
@@ -19,7 +20,7 @@ export const bugReport21Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0252159853',
+      rodneCislo: '0802153286',
       wholeYear: false,
       monthFrom: '0',
       monthTo: '6',

@@ -29,7 +29,13 @@ export interface PartnerBonusFormProps extends FormikProps<PartnerUserInput> {
 
 export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
   const { values, setStep, step } = props
-  const questionElements = [useRef(), useRef(), useRef(), useRef(), useRef()]
+  const questionElements = [
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+    useRef(undefined),
+  ]
 
   useEffect(() => {
     setTimeout(() => {
@@ -41,7 +47,7 @@ export const PartnerBonusForm = (props: PartnerBonusFormProps) => {
     setStep(step - 1)
   }
 
-  const questions: React.FC<any>[] = [ApplyForBonusQuestion]
+  const questions: React.FC<{ disabled?: boolean }>[] = [ApplyForBonusQuestion]
 
   const addQuestionForStep = (currentStep, NextQuestion) => {
     if (step >= currentStep) {

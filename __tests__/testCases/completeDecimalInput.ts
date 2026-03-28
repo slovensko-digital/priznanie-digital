@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const completeDecimalInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000,23',
   priloha3_r13_zdravotne: '1000,23',
   r001_dic: '233123123',
@@ -36,7 +37,7 @@ export const completeDecimalInput: E2eTestUserInput = {
   r032_partner_vlastne_prijmy: '3000,76',
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
@@ -59,7 +60,7 @@ export const completeDecimalInput: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
 
   expectNgoDonationValue: false,
 

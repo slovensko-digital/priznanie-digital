@@ -1,17 +1,18 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport13Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '75532.62',
   priloha3_r11_socialne: '21904.46',
   priloha3_r13_zdravotne: '29457.72',
   zaplatenePreddavky: '71417.47',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '9904156009',
+      rodneCislo: '0802153286',
       wholeYear: false,
       monthFrom: '1',
       monthTo: '3',
@@ -43,7 +44,7 @@ export const bugReport13Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0253153186',
+      rodneCislo: '0953150418',
       wholeYear: true,
       monthFrom: '0',
       monthTo: '6',
@@ -66,7 +67,7 @@ export const bugReport13Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_spolocna_domacnost: true,
   partner_podmienky: {
-    1: true,
+    1: ['on'],
   },
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '15.30',

@@ -17,4 +17,4 @@ export interface PageProps<UserInput> {
   isDebug: boolean
 }
 
-export type Page<UserInput> = NextPage<PageProps<UserInput>>
+export type Page<UserInput = object> = NextPage<PageProps<UserInput>>

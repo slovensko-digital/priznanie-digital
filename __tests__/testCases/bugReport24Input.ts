@@ -1,13 +1,14 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport24Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '16442.32',
   priloha3_r11_socialne: '2630.77',
   priloha3_r13_zdravotne: '4439.43',
   zaplatenePreddavky: '2523.66',
   employed: true,
   dohoda: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
@@ -28,7 +29,7 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '0108155982',
+      rodneCislo: '080815/0783',
       wholeYear: false,
       monthFrom: '0',
       monthTo: '1',
@@ -36,7 +37,7 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '0601156149',
+      rodneCislo: '0808150805',
       wholeYear: false,
       monthFrom: '9',
       monthTo: '11',
@@ -44,7 +45,7 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0757155619',
+      rodneCislo: '0808157988',
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -52,7 +53,7 @@ export const bugReport24Input: E2eTestUserInput = {
     {
       id: 5,
       priezviskoMeno: 'Fake Child 5',
-      rodneCislo: '0105159560',
+      rodneCislo: '0953150418',
       wholeYear: false,
       monthFrom: '7',
       monthTo: '10',

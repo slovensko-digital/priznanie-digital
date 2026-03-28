@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport6Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '17636',
   priloha3_r11_socialne: '1126,68',
   priloha3_r13_zdravotne: '669,86',
@@ -10,7 +11,7 @@ export const bugReport6Input: E2eTestUserInput = {
   r032_uplatnujem_na_partnera: true,
   partner_step: 5,
   partner_podmienky: {
-    '1': true,
+    '1': ['on'],
   },
   r032_partner_vlastne_prijmy: '0',
   r032_partner_pocet_mesiacov: '12',
@@ -31,7 +32,7 @@ export const bugReport6Input: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '179,61',
   udajeODanovomBonuseNaDieta: '141,42',
   uhrnPreddavkovNaDan: '521,36',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,

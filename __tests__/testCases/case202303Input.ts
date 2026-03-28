@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const case202303Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '15450',
   priloha3_r11_socialne: '1720.95',
   priloha3_r13_zdravotne: '687.96',
@@ -38,17 +39,17 @@ export const case202303Input: E2eTestUserInput = {
   r032_partner_pocet_mesiacov: '12',
   r032_partner_vlastne_prijmy: '3000',
   partner_spolocna_domacnost: true,
-  partner_podmienky: { '1': true },
+  partner_podmienky: { '1': ['on'] },
 
   /** SECTION Children */
   children: [
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '040628/7156',
+      rodneCislo: '090430/0925',
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
+      monthFrom: '0',
+      monthTo: '0',
     },
     {
       id: 2,
@@ -59,7 +60,7 @@ export const case202303Input: E2eTestUserInput = {
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
   partner_bonus_na_deti: false,
   r034_priezvisko_a_meno: 'Beth Smith',
   r034_rodne_cislo: '895103/4169',

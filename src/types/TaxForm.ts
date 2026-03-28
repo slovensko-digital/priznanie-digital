@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js'
+import { Rodic } from './OutputJson'
 
 export interface Child {
   priezviskoMeno: string
@@ -225,18 +226,28 @@ export interface TaxForm {
    *   podľa § 33 zákona Ak je r135_dan_na_uhradu, tak absolutna hodnota
    *   r135_dan_na_uhradu */
   r136_danovy_preplatok: Decimal
+  vypln_r146: boolean
+  r146: Decimal
+  r146a: Decimal
   splnam3per: boolean
   /** 2 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   suma_2_percenta: Decimal
   /** 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
   suma_3_percenta: Decimal
-  /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
-  r151: Decimal
-
-  r152?: {
+  r151?: {
     ico: string
     obchMeno: string
     suhlasZaslUdaje: boolean
+  }
+
+  /** 2 % alebo 3 % zo zaplatenej dane (minimálne 3 eurá) z r. 113 */
+  r152: Decimal
+
+  r153?: {
+    rodicA: Rodic
+    rodicB: Rodic
+    neuplatnujemPar50aa: boolean
+    bolZverenyDoStarostlivosti: boolean
   }
   datum: string
   socZdravPoistenieDatum: string
@@ -263,4 +274,5 @@ export interface TaxForm {
     periodicita: string
   }
   canDonateTwoPercentOfTax: boolean
+  maDanovyBonusNaDeti: boolean
 }
