@@ -106,7 +106,9 @@ export const Input = <Name extends UserInputFieldName>({
       >
         {label}
       </label>
-      <span className="govuk-hint">{hint}</span>
+      <span className="govuk-hint" id={`${props.name}-hint`}>
+        {hint}
+      </span>
       {meta.error ? (
         <span
           id={`${props.name}-error`}
@@ -126,6 +128,7 @@ export const Input = <Name extends UserInputFieldName>({
           'aria-invalid': true,
           'aria-describedby': `${props.name}-error`,
         })}
+        aria-details={hint ? `${props.name}-hint` : undefined}
         {...getNumberInputProps()}
         {...field}
         {...props}
