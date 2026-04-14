@@ -264,8 +264,7 @@ const Zamestnanie: Page<EmployedUserInput> = ({
                           <dl className="govuk-summary-list">
                             {zams.map((z, index) => {
                               const label =
-                                z.nazov?.trim() ||
-                                `Zamestnávateľ ${index + 1}`
+                                z.nazov?.trim() || `Zamestnávateľ ${index + 1}`
                               return (
                                 <div
                                   key={z.id}

@@ -121,9 +121,9 @@ const executeTestCase = (testCase: string) => {
             if (index === 0) {
               cy.get('[data-test="add-zamestnavatel"]').click()
             }
-            cy.get(
-              `[data-test="zamestnavatelia[${index}].prijmy-input"]`,
-            ).type(zam.prijmy || '0')
+            cy.get(`[data-test="zamestnavatelia[${index}].prijmy-input"]`).type(
+              zam.prijmy || '0',
+            )
             cy.get(
               `[data-test="zamestnavatelia[${index}].socialnePoistne-input"]`,
             ).type(zam.socialnePoistne || '0')
@@ -179,9 +179,9 @@ const executeTestCase = (testCase: string) => {
             cy.get(`[data-test="dohody[${index}].prijmy-input"]`).type(
               dohoda.prijmy || '0',
             )
-            cy.get(
-              `[data-test="dohody[${index}].socialnePoistne-input"]`,
-            ).type(dohoda.socialnePoistne || '0')
+            cy.get(`[data-test="dohody[${index}].socialnePoistne-input"]`).type(
+              dohoda.socialnePoistne || '0',
+            )
             cy.get(
               `[data-test="dohody[${index}].zdravotnePoistne-input"]`,
             ).type(dohoda.zdravotnePoistne || '0')

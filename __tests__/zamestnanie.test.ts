@@ -36,7 +36,10 @@ describe('zamestnanie', () => {
       {
         input: {
           employed: true,
-          zamestnavatelia: [validZamestnavatel, { ...validZamestnavatel, id: 2 }],
+          zamestnavatelia: [
+            validZamestnavatel,
+            { ...validZamestnavatel, id: 2 },
+          ],
         },
         expected: [],
       },

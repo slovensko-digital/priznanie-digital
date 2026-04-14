@@ -170,13 +170,17 @@ const Dohoda: Page<DohodaUserInput> = ({
                         )}
 
                         <Input
-                          name={`dohody[${editingIndex}].nazov` as keyof UserInput}
+                          name={
+                            `dohody[${editingIndex}].nazov` as keyof UserInput
+                          }
                           type="text"
                           label="Názov dohody (nepovinné)"
                           hint='Napríklad "Dohoda o vykonaní práce – ABC s.r.o."'
                         />
                         <Input
-                          name={`dohody[${editingIndex}].prijmy` as keyof UserInput}
+                          name={
+                            `dohody[${editingIndex}].prijmy` as keyof UserInput
+                          }
                           type="number"
                           label="Úhrn príjmov plynúcich na základe dohody"
                           hint='Na tlačive "Potvrdenie o zdaniteľných príjmoch" nájdete tento údaj v riadku 01a.'
@@ -198,7 +202,9 @@ const Dohoda: Page<DohodaUserInput> = ({
                           hint="Tento údaj nájdete v riadku 02b."
                         />
                         <Input
-                          name={`dohody[${editingIndex}].preddavkyNaDan` as keyof UserInput}
+                          name={
+                            `dohody[${editingIndex}].preddavkyNaDan` as keyof UserInput
+                          }
                           type="number"
                           label="Úhrn preddavkov na daň"
                           hint="Tento údaj nájdete v riadku 04."
