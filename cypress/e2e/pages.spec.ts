@@ -336,6 +336,45 @@ describe('Partner page', () => {
     next()
     assertUrl('/deti')
   })
+
+  it('allows toggling condition checkboxes', () => {
+    cy.visit('/partner')
+
+    cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    next()
+
+    cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
+    next()
+
+    // All condition checkboxes should be togglable
+    for (let i = 1; i <= 5; i++) {
+      const selector = `[data-test="partner_podmienky.${i}-input"]`
+
+      // Check
+      cy.get(selector).click()
+      cy.get(selector).should('be.checked')
+
+      // Uncheck
+      cy.get(selector).click()
+      cy.get(selector).should('not.be.checked')
+
+      // Re-check after unchecking
+      cy.get(selector).click()
+      cy.get(selector).should('be.checked')
+
+      // Uncheck again to reset for next iteration
+      cy.get(selector).click()
+      cy.get(selector).should('not.be.checked')
+    }
+
+    // Check one and proceed
+    cy.get('[data-test="partner_podmienky.1-input"]').click()
+    cy.get('[data-test="partner_podmienky.1-input"]').should('be.checked')
+
+    // Should be able to proceed with checkbox checked
+    next()
+    getInput('r032_partner_vlastne_prijmy').should('exist')
+  })
 })
 
 describe('osobne-udaje page', () => {

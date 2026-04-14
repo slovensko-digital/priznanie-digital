@@ -29,6 +29,12 @@ export const anonymizeTaxForm = (taxFormUserInput: TaxFormUserInput) => {
     iban: 'anon',
     email: 'anon',
     children: taxFormUserInput.children.map(anoymizeChild),
+    dve_percenta_rodicA: taxFormUserInput.dve_percenta_rodicA
+      ? { meno: 'anon', priezvisko: 'anon', rodneCislo: 'anon' }
+      : taxFormUserInput.dve_percenta_rodicA,
+    dve_percenta_rodicB: taxFormUserInput.dve_percenta_rodicB
+      ? { meno: 'anon', priezvisko: 'anon', rodneCislo: 'anon' }
+      : taxFormUserInput.dve_percenta_rodicB,
   }
 }
 

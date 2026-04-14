@@ -6,6 +6,7 @@ import {
 } from '../../src/types/PageUserInputs'
 import {
   FORM_URL,
+  MAX_CHILD_AGE_BONUS,
   PARTNER_MAX_ODPOCET,
   TAX_YEAR,
 } from '../../src/lib/calculation'
@@ -41,6 +42,9 @@ const randomInput = (): TaxFormUserInput => {
     dohoda,
     hasChildren,
     children: [],
+    t1r10_prijmy: '0',
+    priloha3_r11_socialne: '0',
+    priloha3_r13_zdravotne: '0',
     r005_meno: 'Fake',
     r004_priezvisko: 'Name',
     r001_dic: '233123123',
@@ -100,7 +104,7 @@ const randomInput = (): TaxFormUserInput => {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
     const partnerChildBonus = Math.random() > 0.3
     Array.from({ length: childrenCount }).forEach((_, index) => {
-      const age = randomFromRange(0, 18).round().toNumber()
+      const age = randomFromRange(0, MAX_CHILD_AGE_BONUS).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
       const birthDate = new Date(TAX_YEAR - age, month, 15)
       const gender = Math.random() > 0.5
@@ -109,12 +113,13 @@ const randomInput = (): TaxFormUserInput => {
       let monthFrom = 0
       let monthTo = 11
 
-      if (!wholeYear || age === 0 || age === 25) {
+      if (!wholeYear || age === 0 || age === MAX_CHILD_AGE_BONUS) {
         if (age === 0) {
           monthFrom = randomFromRange(month, 11).round().toNumber()
           monthTo = randomFromRange(monthFrom, 11).round().toNumber()
           wholeYear = false
-        } else if (age === 25) {
+        } else if (age === MAX_CHILD_AGE_BONUS) {
+          // child turns 18 during the tax year — bonus only up to and including birth month
           monthFrom = randomFromRange(0, month).round().toNumber()
           monthTo = randomFromRange(monthFrom, month).round().toNumber()
           wholeYear = false

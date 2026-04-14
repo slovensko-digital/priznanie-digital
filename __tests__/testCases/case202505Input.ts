@@ -1,4 +1,5 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202505Input: E2eTestUserInput = {
   r001_dic: '524985744',
@@ -41,7 +42,11 @@ export const case202505Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Mrkvička Ferko',
-      rodneCislo: '2307051802',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 2,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -49,7 +54,11 @@ export const case202505Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Mrkvička Janko',
-      rodneCislo: '2510075315',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 0,
+        turnsAgeInMonth: 10,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '9',
       monthTo: '11',
@@ -69,6 +78,6 @@ export const case202505Input: E2eTestUserInput = {
   dve_percenta_rodicom: 'nie',
 
   expectNgoDonationValue: true,
-  percent2: '4,23',
-  percent3: '6,35',
+  percent2: '4,21',
+  percent3: '6,31',
 }

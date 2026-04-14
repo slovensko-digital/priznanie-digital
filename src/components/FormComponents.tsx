@@ -106,7 +106,9 @@ export const Input = <Name extends UserInputFieldName>({
       >
         {label}
       </label>
-      <span className="govuk-hint">{hint}</span>
+      <span className="govuk-hint" id={`${props.name}-hint`}>
+        {hint}
+      </span>
       {meta.error ? (
         <span
           id={`${props.name}-error`}
@@ -126,6 +128,7 @@ export const Input = <Name extends UserInputFieldName>({
           'aria-invalid': true,
           'aria-describedby': `${props.name}-error`,
         })}
+        aria-details={hint ? `${props.name}-hint` : undefined}
         {...getNumberInputProps()}
         {...field}
         {...props}
@@ -159,7 +162,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
     >
       <fieldset className="govuk-fieldset">
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 className="govuk-fieldset__heading">{title}</h1>
+          <h2 className="govuk-fieldset__heading">{title}</h2>
         </legend>
         {hint ? <span className="govuk-hint">{hint}</span> : null}
         {meta.error ? (
@@ -234,9 +237,9 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
-  const isChecked =
-    field.value ||
-    (field.value && field.value.length > 0 && field.value[0] === 'on')
+  const isChecked = Array.isArray(field.value)
+    ? field.value.length > 0 && field.value[0] === 'on'
+    : !!field.value
 
   return (
     <div
@@ -256,6 +259,7 @@ export const Checkbox = ({
           {...props}
           className="govuk-checkboxes__input"
           type="checkbox"
+          value="on"
           data-test={`${field.name}-input`}
           id={name}
           checked={isChecked}
