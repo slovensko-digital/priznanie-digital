@@ -101,11 +101,50 @@ const executeTestCase = (testCase: string) => {
 
         if (input.employed) {
           getInput('employed', '-yes').click()
-          typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', input)
-          typeToInput('uhrnPreddavkovNaDan', input)
-          typeToInput('udajeODanovomBonuseNaDieta', input)
+
+          const employers =
+            input.zamestnavatelia?.length > 0
+              ? input.zamestnavatelia
+              : [
+                  {
+                    prijmy: input.uhrnPrijmovOdVsetkychZamestnavatelov,
+                    socialnePoistne:
+                      input.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+                    zdravotnePoistne:
+                      input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+                    preddavkyNaDan: input.uhrnPreddavkovNaDan,
+                    danovyBonusNaDieta: input.udajeODanovomBonuseNaDieta,
+                  },
+                ]
+
+          employers.forEach((zam, index) => {
+            if (index === 0) {
+              cy.get('[data-test="add-zamestnavatel"]').click()
+            }
+            cy.get(
+              `[data-test="zamestnavatelia[${index}].prijmy-input"]`,
+            ).type(zam.prijmy || '0')
+            cy.get(
+              `[data-test="zamestnavatelia[${index}].socialnePoistne-input"]`,
+            ).type(zam.socialnePoistne || '0')
+            cy.get(
+              `[data-test="zamestnavatelia[${index}].zdravotnePoistne-input"]`,
+            ).type(zam.zdravotnePoistne || '0')
+            cy.get(
+              `[data-test="zamestnavatelia[${index}].preddavkyNaDan-input"]`,
+            ).type(zam.preddavkyNaDan || '0')
+            cy.get(
+              `[data-test="zamestnavatelia[${index}].danovyBonusNaDieta-input"]`,
+            ).type(zam.danovyBonusNaDieta || '0')
+            cy.get('[data-test="save-zamestnavatel"]').click()
+
+            if (index < employers.length - 1) {
+              cy.get('#addAnother-yes').click()
+              cy.get('[data-test="next"]').click()
+            }
+          })
+
+          cy.get('#addAnother-no').click()
         } else {
           getInput('employed', '-no').click()
         }
@@ -117,11 +156,50 @@ const executeTestCase = (testCase: string) => {
 
         if (input.dohoda) {
           getInput('dohoda', '-yes').click()
-          typeToInput('uhrnPrijmovZoVsetkychDohod', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
-          typeToInput('uhrnPreddavkovNaDanDohody', input)
-          typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+
+          const dohody =
+            input.dohody?.length > 0
+              ? input.dohody
+              : [
+                  {
+                    prijmy: input.uhrnPrijmovZoVsetkychDohod,
+                    socialnePoistne:
+                      input.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
+                    zdravotnePoistne:
+                      input.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
+                    preddavkyNaDan: input.uhrnPreddavkovNaDanDohody,
+                    danovyBonusNaDieta: input.udajeODanovomBonuseNaDietaDohody,
+                  },
+                ]
+
+          dohody.forEach((dohoda, index) => {
+            if (index === 0) {
+              cy.get('[data-test="add-dohoda"]').click()
+            }
+            cy.get(`[data-test="dohody[${index}].prijmy-input"]`).type(
+              dohoda.prijmy || '0',
+            )
+            cy.get(
+              `[data-test="dohody[${index}].socialnePoistne-input"]`,
+            ).type(dohoda.socialnePoistne || '0')
+            cy.get(
+              `[data-test="dohody[${index}].zdravotnePoistne-input"]`,
+            ).type(dohoda.zdravotnePoistne || '0')
+            cy.get(`[data-test="dohody[${index}].preddavkyNaDan-input"]`).type(
+              dohoda.preddavkyNaDan || '0',
+            )
+            cy.get(
+              `[data-test="dohody[${index}].danovyBonusNaDieta-input"]`,
+            ).type(dohoda.danovyBonusNaDieta || '0')
+            cy.get('[data-test="save-dohoda"]').click()
+
+            if (index < dohody.length - 1) {
+              cy.get('#addAnotherDohoda-yes').click()
+              cy.get('[data-test="next"]').click()
+            }
+          })
+
+          cy.get('#addAnotherDohoda-no').click()
         } else {
           getInput('dohoda', '-no').click()
         }
