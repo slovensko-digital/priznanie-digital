@@ -1,3 +1,4 @@
+import { MAX_CHILD_AGE_BONUS } from '../../src/lib/calculation';
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
@@ -63,7 +64,7 @@ export const case202508Input: E2eTestUserInput = {
       id: 3,
       priezviskoMeno: 'Mrkvička Jozef',
       rodneCislo: generateRodneCislo({
-        turnsAge: 18,
+        turnsAge: MAX_CHILD_AGE_BONUS,
         turnsAgeInMonth: 5,
         gender: 'MALE',
       }).pure,
