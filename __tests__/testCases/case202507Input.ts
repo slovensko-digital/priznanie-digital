@@ -1,4 +1,4 @@
-import { MAX_CHILD_AGE_BONUS } from '../../src/lib/calculation';
+import { MAX_CHILD_AGE_BONUS } from '../../src/lib/calculation'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 import { generateRodneCislo } from '../utils/generateRodneCislo'
 
