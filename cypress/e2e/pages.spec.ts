@@ -109,9 +109,9 @@ describe('Employment page', () => {
     // When presses yes, add-employer button appears
     cy.get('[data-test=employed-input-yes]').click()
 
-    // Error when no employer added yet
+    // Error when no employer added yet - shown in ErrorSummary (not field-level)
     next()
-    getError().should('have.length', 1)
+    cy.get('.govuk-error-summary').should('exist')
 
     // Add an employer
     cy.get('[data-test="add-zamestnavatel"]').click()
