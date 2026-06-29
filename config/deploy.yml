@@ -1,0 +1,40 @@
+service: priznanie-digital
+
+image: sd/priznanie-digital
+
+servers:
+  web:
+    options:
+      'add-host': host.docker.internal:host-gateway
+
+deploy_timeout: 200
+
+proxy:
+  ssl: true
+  app_port: 3000
+
+env:
+  secret:
+    - CONVERSION_IMPORT_USERNAME
+    - CONVERSION_IMPORT_PASSWORD
+    - ROLLBAR_SERVER_TOKEN
+    - sendinbluetoken
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "sh"
+  logs: app logs -f
+
+registry:
+  server: registry.dev.slovensko.digital
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+  remote: ssh://kamal@dev.slovensko.digital
+  cache:
+    type: registry
+    options: mode=max,image-manifest=true,oci-mediatypes=true
