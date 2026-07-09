@@ -1,5 +1,14 @@
-import { validate } from '../src/pages/zamestnanie'
+import { validate, validateItem } from '../src/pages/zamestnanie'
 import { testValidation } from './utils/testValidation'
+
+const validZamestnavatel = {
+  id: 1,
+  prijmy: '10000',
+  socialnePoistne: '1000',
+  zdravotnePoistne: '500',
+  preddavkyNaDan: '800',
+  danovyBonusNaDieta: '0',
+}
 
 describe('zamestnanie', () => {
   describe('#validate', () => {
@@ -8,47 +17,79 @@ describe('zamestnanie', () => {
         input: { employed: undefined },
         expected: ['employed'],
       },
-      { input: { employed: false }, expected: [] },
+      {
+        input: { employed: false },
+        expected: [],
+      },
       {
         input: { employed: true },
-        expected: [
-          'uhrnPrijmovOdVsetkychZamestnavatelov',
-          'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
-          'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
-          'uhrnPreddavkovNaDan',
-          'udajeODanovomBonuseNaDieta',
-        ],
+        expected: ['zamestnavatelia'],
+      },
+      {
+        input: { employed: true, zamestnavatelia: [] },
+        expected: ['zamestnavatelia'],
+      },
+      {
+        input: { employed: true, zamestnavatelia: [validZamestnavatel] },
+        expected: [],
       },
       {
         input: {
           employed: true,
-          r029_poberal_dochodok: true,
-          uhrnPrijmovOdVsetkychZamestnavatelov: 'a',
-          uhrnPovinnehoPoistnehoNaSocialnePoistenie: '-1',
-          uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '-1',
-          udajeODanovomBonuseNaDieta: 'a',
-          uhrnPreddavkovNaDan: '-1',
-        },
-        expected: [
-          'uhrnPrijmovOdVsetkychZamestnavatelov',
-          'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
-          'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
-          'uhrnPreddavkovNaDan',
-          'udajeODanovomBonuseNaDieta',
-        ],
-      },
-      {
-        input: {
-          employed: true,
-          r029_poberal_dochodok: true,
-          uhrnPrijmovOdVsetkychZamestnavatelov: '10',
-          uhrnPovinnehoPoistnehoNaSocialnePoistenie: '20',
-          uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '20',
-          udajeODanovomBonuseNaDieta: '30',
-          uhrnPreddavkovNaDan: '40',
+          zamestnavatelia: [
+            validZamestnavatel,
+            { ...validZamestnavatel, id: 2 },
+          ],
         },
         expected: [],
       },
     ])
+  })
+
+  describe('#validateItem', () => {
+    it('returns errors for all empty fields', () => {
+      const errors = validateItem({
+        id: 1,
+        prijmy: '',
+        socialnePoistne: '',
+        zdravotnePoistne: '',
+        preddavkyNaDan: '',
+        danovyBonusNaDieta: '',
+      })
+      expect(Object.keys(errors)).toEqual(
+        expect.arrayContaining([
+          'prijmy',
+          'socialnePoistne',
+          'zdravotnePoistne',
+          'preddavkyNaDan',
+          'danovyBonusNaDieta',
+        ]),
+      )
+    })
+
+    it('returns format errors for invalid values', () => {
+      const errors = validateItem({
+        id: 1,
+        prijmy: 'a',
+        socialnePoistne: '-1',
+        zdravotnePoistne: '-1',
+        preddavkyNaDan: '-1',
+        danovyBonusNaDieta: 'a',
+      })
+      expect(Object.keys(errors)).toEqual(
+        expect.arrayContaining([
+          'prijmy',
+          'socialnePoistne',
+          'zdravotnePoistne',
+          'preddavkyNaDan',
+          'danovyBonusNaDieta',
+        ]),
+      )
+    })
+
+    it('returns no errors for valid item', () => {
+      const errors = validateItem(validZamestnavatel)
+      expect(errors).toEqual({})
+    })
   })
 })

@@ -106,72 +106,69 @@ describe('Employment page', () => {
     next()
     getError().should('have.length', 1)
 
-    // When presses yes, additional fields appears
+    // When presses yes, add-employer button appears
     cy.get('[data-test=employed-input-yes]').click()
 
+    // Error when no employer added yet - shown in ErrorSummary (not field-level)
     next()
-    getError().should('have.length', 5)
+    cy.get('.govuk-error-summary').should('exist')
 
-    // Type to input
-    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', withEmploymentInput)
+    // Add an employer
+    cy.get('[data-test="add-zamestnavatel"]').click()
 
-    next()
-    getError().should('have.length', 4)
-
-    typeToInput(
-      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
-      withEmploymentInput,
+    // Fill employer fields
+    cy.get('[data-test="zamestnavatelia[0].prijmy-input"]').type(
+      withEmploymentInput.uhrnPrijmovOdVsetkychZamestnavatelov!,
     )
-    typeToInput(
-      'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
-      withEmploymentInput,
+    cy.get('[data-test="zamestnavatelia[0].socialnePoistne-input"]').type(
+      withEmploymentInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie!,
     )
-    getInput('uhrnPreddavkovNaDan').type('0')
-    getInput('udajeODanovomBonuseNaDieta').type('0')
+    cy.get('[data-test="zamestnavatelia[0].zdravotnePoistne-input"]').type(
+      withEmploymentInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie!,
+    )
+    cy.get('[data-test="zamestnavatelia[0].preddavkyNaDan-input"]').type('0')
+    cy.get('[data-test="zamestnavatelia[0].danovyBonusNaDieta-input"]').type(
+      '0',
+    )
 
-    // When presses no, the fields disappear
+    // Save employer
+    cy.get('[data-test="save-zamestnavatel"]').click()
+
+    // When presses no, the employer section disappears
     cy.get('[data-test=employed-input-no]').click()
+    cy.get('[data-test="add-zamestnavatel"]').should('not.exist')
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
 
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('not.exist')
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
-
-    // When presses yes, additional fields appears
+    // When presses yes, employer list reappears
     cy.get('[data-test=employed-input-yes]').click()
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('exist')
 
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
-      'have.value',
-      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
-    )
-
-    // Should submit and next page should be parter
+    // Select no for add another and submit
+    cy.get('#addAnother-no').click()
     next()
     assertUrl('/dohoda')
   })
   it('should erase previous answers when answer is changed to "no"', () => {
     cy.visit('/zamestnanie')
 
-    // fill out and submit the form
+    // Add an employer and submit
     getInput('employed', '-yes').click()
-    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', withEmploymentInput)
-    typeToInput(
-      'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
-      withEmploymentInput,
+    cy.get('[data-test="add-zamestnavatel"]').click()
+    cy.get('[data-test="zamestnavatelia[0].prijmy-input"]').type(
+      withEmploymentInput.uhrnPrijmovOdVsetkychZamestnavatelov!,
     )
-    typeToInput(
-      'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
-      withEmploymentInput,
+    cy.get('[data-test="zamestnavatelia[0].socialnePoistne-input"]').type(
+      withEmploymentInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie!,
     )
-    getInput('uhrnPreddavkovNaDan').type('10')
-    getInput('udajeODanovomBonuseNaDieta').type('20')
+    cy.get('[data-test="zamestnavatelia[0].zdravotnePoistne-input"]').type(
+      withEmploymentInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie!,
+    )
+    cy.get('[data-test="zamestnavatelia[0].preddavkyNaDan-input"]').type('0')
+    cy.get('[data-test="zamestnavatelia[0].danovyBonusNaDieta-input"]').type(
+      '0',
+    )
+    cy.get('[data-test="save-zamestnavatel"]').click()
+    cy.get('#addAnother-no').click()
     next()
 
     // go back
@@ -179,48 +176,19 @@ describe('Employment page', () => {
     cy.get('[data-test=back]').click()
     assertUrl('/zamestnanie')
 
-    // form should preserve values when navigated back to it
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
-      'have.value',
-      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
-    )
-    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
-    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
+    // employer should still be listed
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('exist')
 
-    // form should hide
+    // form should hide when clicking no
     getInput('employed', '-no').click()
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('not.exist')
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should('not.exist')
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should('not.exist')
-    getInput('uhrnPreddavkovNaDan').should('not.exist')
-    getInput('udajeODanovomBonuseNaDieta').should('not.exist')
+    cy.get('[data-test="add-zamestnavatel"]').should('not.exist')
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
 
-    // form should display and preserve values until it is submitted
+    // form should display and preserve employer list when toggled back to yes
     getInput('employed', '-yes').click()
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should(
-      'have.value',
-      withEmploymentInput?.uhrnPrijmovOdVsetkychZamestnavatelov?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaSocialnePoistenie?.toString(),
-    )
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
-      'have.value',
-      withEmploymentInput?.uhrnPovinnehoPoistnehoNaZdravotnePoistenie?.toString(),
-    )
-    getInput('uhrnPreddavkovNaDan').should('have.value', '10')
-    getInput('udajeODanovomBonuseNaDieta').should('have.value', '20')
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('exist')
 
-    // submit form
+    // submit form with no (erase employers)
     getInput('employed', '-no').click()
     next()
 
@@ -229,19 +197,10 @@ describe('Employment page', () => {
     cy.get('[data-test=back]').click()
     assertUrl('/zamestnanie')
 
-    // form should no preserve answers because it was submitted with additional fields hidden
+    // clicking yes should show empty employer list (cleared by submitting with no)
     getInput('employed', '-yes').click()
-    getInput('uhrnPrijmovOdVsetkychZamestnavatelov').should('have.value', '')
-    getInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie').should(
-      'have.value',
-      '',
-    )
-    getInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie').should(
-      'have.value',
-      '',
-    )
-    getInput('uhrnPreddavkovNaDan').should('have.value', '')
-    getInput('udajeODanovomBonuseNaDieta').should('have.value', '')
+    cy.get('[data-test="add-zamestnavatel"]').should('exist')
+    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
   })
 })
 describe('Partner page', () => {
@@ -490,26 +449,18 @@ describe('Children page', () => {
 
     assertUrl('/zamestnanie')
     getInput('employed', '-yes').click()
-    typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', {
-      ...withChildrenInput,
-      uhrnPrijmovOdVsetkychZamestnavatelov: '3876',
-    }) // eligible via employment income
-    typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', {
-      ...withChildrenInput,
-      uhrnPovinnehoPoistnehoNaSocialnePoistenie: '600',
-    })
-    typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', {
-      ...withChildrenInput,
-      uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '400',
-    })
-    typeToInput('uhrnPreddavkovNaDan', {
-      ...withChildrenInput,
-      uhrnPreddavkovNaDan: '0',
-    }) // eligible via employment income
-    typeToInput('udajeODanovomBonuseNaDieta', {
-      ...withChildrenInput,
-      udajeODanovomBonuseNaDieta: '0',
-    })
+    cy.get('[data-test="add-zamestnavatel"]').click()
+    cy.get('[data-test="zamestnavatelia[0].prijmy-input"]').type('3876')
+    cy.get('[data-test="zamestnavatelia[0].socialnePoistne-input"]').type('600')
+    cy.get('[data-test="zamestnavatelia[0].zdravotnePoistne-input"]').type(
+      '400',
+    )
+    cy.get('[data-test="zamestnavatelia[0].preddavkyNaDan-input"]').type('0')
+    cy.get('[data-test="zamestnavatelia[0].danovyBonusNaDieta-input"]').type(
+      '0',
+    )
+    cy.get('[data-test="save-zamestnavatel"]').click()
+    cy.get('#addAnother-no').click()
     next()
 
     assertUrl('/dohoda')
