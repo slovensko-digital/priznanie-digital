@@ -41,8 +41,6 @@ export const bugReport1Input: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '11',
     },
     {
       id: 2,
@@ -54,8 +52,6 @@ export const bugReport1Input: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '11',
     },
   ],
   platil_prispevky_na_dochodok: false,

@@ -19,8 +19,6 @@ export const bugReport10Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 1,
@@ -31,8 +29,6 @@ export const bugReport10Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
   ],
   r005_meno: 'Fake',

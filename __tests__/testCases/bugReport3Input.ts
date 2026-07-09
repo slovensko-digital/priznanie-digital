@@ -42,8 +42,6 @@ export const bugReport3Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 2,
@@ -54,8 +52,6 @@ export const bugReport3Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
   ],
   platil_prispevky_na_dochodok: true,

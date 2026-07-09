@@ -19,8 +19,6 @@ export const bugReport14Input: E2eTestUserInput = {
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 1,
@@ -31,8 +29,6 @@ export const bugReport14Input: E2eTestUserInput = {
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 2,
@@ -43,8 +39,6 @@ export const bugReport14Input: E2eTestUserInput = {
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 3,
@@ -55,8 +49,6 @@ export const bugReport14Input: E2eTestUserInput = {
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
   ],
   r005_meno: 'Fake',

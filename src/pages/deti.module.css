@@ -26,3 +26,7 @@
 .flexGrow {
   flex-grow: 1;
 }
+.checkBoxRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
