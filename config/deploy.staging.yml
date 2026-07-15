@@ -1,0 +1,24 @@
+servers:
+  web:
+    hosts:
+      - dev.slovensko.digital
+
+env:
+  clear:
+    NODE_ENV: production
+    NEXT_PUBLIC_isLive: "false"
+    NEXT_PUBLIC_isPostponeLive: "false"
+    NEXT_PUBLIC_navodyBaseUrl: https://staging.navody.digital
+    NEXT_PUBLIC_priznanieStepUrl: /zivotne-situacie/elektronicke-podanie-danoveho-priznania-2022/krok/prihlasit-sa-na-financnu-spravu
+    NEXT_PUBLIC_odkladStepUrl: /zivotne-situacie/odklad-danoveho-priznania-2023/krok/podat-odklad
+    NEXT_PUBLIC_informujteMaKedBudeLive: /zivotne-situacie/elektronicke-podanie-danoveho-priznania-2024
+    CONVERSION_IMPORT_FILEPATH: /data/conversion-import.csv
+
+proxy:
+  host: staging.uznanie.digital
+
+volumes:
+  - /data/uznanie-digital:/data
+
+ssh:
+  user: kamal

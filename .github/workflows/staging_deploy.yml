@@ -1,0 +1,41 @@
+name: Deploy to Staging
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  staging-deploy:
+    name: Deploy to staging environment
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Install Kamal gem
+        run: gem install kamal -v 2.12.0
+
+      - uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.DEV_DEPLOY_KEY }}
+
+      - name: Run deploy command
+        env:
+          KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+          CONVERSION_IMPORT_USERNAME: ${{ secrets.CONVERSION_IMPORT_USERNAME }}
+          CONVERSION_IMPORT_PASSWORD: ${{ secrets.CONVERSION_IMPORT_PASSWORD }}
+          ROLLBAR_SERVER_TOKEN: ${{ secrets.ROLLBAR_SERVER_TOKEN }}
+          SENDINBLUE_TOKEN: ${{ secrets.SENDINBLUE_TOKEN }}
+
+        run: kamal deploy -d staging
