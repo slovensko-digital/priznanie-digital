@@ -2,6 +2,8 @@ servers:
   web:
     hosts:
       - dev.slovensko.digital
+    options:
+      memory: 500m
 
 env:
   clear:
@@ -15,10 +17,10 @@ env:
     CONVERSION_IMPORT_FILEPATH: /data/conversion-import.csv
 
 proxy:
-  host: staging.uznanie.digital
+  host: staging.priznanie.digital
 
 volumes:
-  - /data/uznanie-digital:/data
+  - /data/priznanie-digital:/data
 
 ssh:
   user: kamal
