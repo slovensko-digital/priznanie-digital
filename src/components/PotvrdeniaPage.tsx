@@ -5,6 +5,8 @@ import { BooleanRadio, FormWrapper, Input } from './FormComponents'
 import { ErrorSummary } from './ErrorSummary'
 import { BackLink } from './BackLink'
 import { Page } from './Page'
+import TooltipHint from './TooltipHint'
+import styles from './potvrdeniaPage.module.css'
 import { makeEmptyPotvrdenie } from '../lib/initialValues'
 import { formatCurrency, parseInputNumber } from '../lib/utils'
 import {
@@ -55,6 +57,8 @@ export interface PotvrdeniaPageConfig {
   emptyValues: Partial<TaxFormUserInput>
   question: string
   prijmy: FieldText
+  /** picture of the row on the confirmation, shown in a tooltip */
+  hintImages?: Record<AmountField, string>
   itemName: string
   nameLabel: string
   nameHint?: string
@@ -149,7 +153,24 @@ const ItemList = ({
                   name={fieldName(field)}
                   type="number"
                   label={fieldTexts[field].label}
-                  hint={fieldTexts[field].hint}
+                  hint={
+                    config.hintImages ? (
+                      <div>
+                        <span className={styles.hintText}>
+                          {fieldTexts[field].hint}
+                        </span>
+                        <TooltipHint>
+                          <img
+                            className={styles.hintImage}
+                            src={config.hintImages[field]}
+                            alt={config.hintImages[field]}
+                          />
+                        </TooltipHint>
+                      </div>
+                    ) : (
+                      fieldTexts[field].hint
+                    )
+                  }
                 />
               ))}
               <div className="govuk-button-group">

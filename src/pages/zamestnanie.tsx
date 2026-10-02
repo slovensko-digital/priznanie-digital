@@ -14,6 +14,13 @@ const { PotvrdeniaPage, validate, validateItem } = makePotvrdeniaPage({
     hint: 'Tento údaj nájdete v riadku 01.',
     required: 'Zadajte úhrn vyplatených zdaniteľných príjmov',
   },
+  hintImages: {
+    prijmy: '/assets/images/zamestnanie-hint-01.png',
+    socialnePoistne: '/assets/images/zamestnanie-hint-02a.png',
+    zdravotnePoistne: '/assets/images/zamestnanie-hint-02b.png',
+    preddavkyNaDan: '/assets/images/zamestnanie-hint-04.png',
+    danovyBonusNaDieta: '/assets/images/zamestnanie-hint-13.png',
+  },
   itemName: 'Zamestnávateľ',
   nameLabel: 'Názov zamestnávateľa (nepovinné)',
   addButton: 'Pridať zamestnávateľa',

@@ -13,6 +13,8 @@ import {
   dohodaUserInputInitialValues,
 } from '../src/lib/initialValues'
 import {
+  DOHODA_TOTALS,
+  ZAMESTNANIE_TOTALS,
   itemFromTotals,
   sumItems,
   totalsFromItems,
@@ -34,13 +36,7 @@ const item = (values: Partial<PotvrdenieInput> = {}): PotvrdenieInput => ({
   ...values,
 })
 
-const totals = {
-  prijmy: 'uhrnPrijmovOdVsetkychZamestnavatelov',
-  socialnePoistne: 'uhrnPovinnehoPoistnehoNaSocialnePoistenie',
-  zdravotnePoistne: 'uhrnPovinnehoPoistnehoNaZdravotnePoistenie',
-  preddavkyNaDan: 'uhrnPreddavkovNaDan',
-  danovyBonusNaDieta: 'udajeODanovomBonuseNaDieta',
-} as const
+const totals = ZAMESTNANIE_TOTALS
 
 describe('potvrdenia', () => {
   it('#sumItems sums comma and dot decimals without float errors', () => {
@@ -101,7 +97,9 @@ describe.each([
     list: 'zamestnavatelia',
     testId: 'zamestnavatel',
     addAnother: 'addAnother',
-    prijmyTotal: 'uhrnPrijmovOdVsetkychZamestnavatelov',
+    totals: ZAMESTNANIE_TOTALS,
+    atLeastOne: 'Pridajte aspoň jedného zamestnávateľa',
+    headings: ['1 zamestnávateľa', '2 zamestnávateľov', '5 zamestnávateľov'],
     emptyValues: employmentUserInputInitialValues,
   },
   {
@@ -112,7 +110,9 @@ describe.each([
     list: 'dohody',
     testId: 'dohoda',
     addAnother: 'addAnotherDohoda',
-    prijmyTotal: 'uhrnPrijmovZoVsetkychDohod',
+    totals: DOHODA_TOTALS,
+    atLeastOne: 'Pridajte aspoň jednu dohodu',
+    headings: ['1 dohodu', '2 dohody', '5 dohôd'],
     emptyValues: dohodaUserInputInitialValues,
   },
 ])(
@@ -125,7 +125,9 @@ describe.each([
     list,
     testId,
     addAnother,
-    prijmyTotal,
+    totals: pageTotals,
+    atLeastOne,
+    headings,
     emptyValues,
   }) => {
     describe('#validate', () => {
@@ -199,12 +201,21 @@ describe.each([
       await waitFor(() => expect(push).toHaveBeenCalledWith('/next'))
       const saved = setTaxFormUserInput.mock.calls[0][0]
       expect(saved[list]).toHaveLength(2)
-      expect(saved[prijmyTotal]).toBe('3000,75')
+      expect(saved).toMatchObject({
+        [pageTotals.prijmy]: '3000,75',
+        [pageTotals.socialnePoistne]: '200,00',
+        [pageTotals.zdravotnePoistne]: '100,00',
+        [pageTotals.preddavkyNaDan]: '160,00',
+        [pageTotals.danovyBonusNaDieta]: '0,00',
+      })
     })
 
-    it('requires a complete item and an answer whether to add another', () => {
+    it('requires a complete item and an answer whether to add another', async () => {
       const { setTaxFormUserInput } = setup({ [flag]: true })
+      click('next')
+      expect(await screen.findByText(atLeastOne)).toBeTruthy()
       click(`add-${testId}`)
+      expect(screen.queryByText(atLeastOne)).toBeNull()
       click(`save-${testId}`)
       expect(screen.getAllByTestId('error')).toHaveLength(5)
 
@@ -213,6 +224,16 @@ describe.each([
       click('next')
       expect(screen.getByText('Vyznačte odpoveď')).toBeTruthy()
       expect(setTaxFormUserInput).not.toHaveBeenCalled()
+    })
+
+    it.each([1, 2, 5])('shows heading for %i items', (count) => {
+      setup({
+        [flag]: true,
+        [list]: Array.from({ length: count }, (_, id) => item({ id })),
+      })
+      expect(
+        screen.getByText(`Pridali ste ${headings[[1, 2, 5].indexOf(count)]}`),
+      ).toBeTruthy()
     })
 
     it('cancel restores an edited item and drops a new one', async () => {
@@ -229,19 +250,23 @@ describe.each([
 
       finish()
       await waitFor(() => expect(setTaxFormUserInput).toHaveBeenCalled())
-      expect(setTaxFormUserInput.mock.calls[0][0][prijmyTotal]).toBe('100,00')
+      expect(setTaxFormUserInput.mock.calls[0][0][pageTotals.prijmy]).toBe(
+        '100,00',
+      )
     })
 
     it('removing an item updates totals', async () => {
       const { setTaxFormUserInput } = setup({
         [flag]: true,
         [list]: [item({ id: 1, prijmy: '1' }), item({ id: 2, prijmy: '2' })],
-        [prijmyTotal]: '999',
+        [pageTotals.prijmy]: '999',
       })
       click(`remove-${testId}-0`)
       finish()
       await waitFor(() => expect(setTaxFormUserInput).toHaveBeenCalled())
-      expect(setTaxFormUserInput.mock.calls[0][0][prijmyTotal]).toBe('2,00')
+      expect(setTaxFormUserInput.mock.calls[0][0][pageTotals.prijmy]).toBe(
+        '2,00',
+      )
     })
 
     it('answering no clears the list', async () => {
@@ -259,7 +284,7 @@ describe.each([
     it('migrates old totals into one item and blocks it until complete', async () => {
       const { setTaxFormUserInput } = setup({
         [flag]: true,
-        [prijmyTotal]: '100',
+        [pageTotals.prijmy]: '100',
       })
       expect(screen.getByTestId(`edit-${testId}-0`)).toBeTruthy()
       expect(screen.queryByTestId(`edit-${testId}-1`)).toBeNull()
