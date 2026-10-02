@@ -54,6 +54,63 @@ export const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
+type ListItemField =
+  | 'prijmy'
+  | 'socialnePoistne'
+  | 'zdravotnePoistne'
+  | 'preddavkyNaDan'
+
+type ListItem = Partial<Record<ListItemField, string>>
+
+/**
+ * Expected total of a list field. When the test case defines list items, the
+ * total is their sum and it must match the uhrn* value of the test case
+ * (which is what calculate() uses for the expected results).
+ */
+const expectedTotal = (
+  items: ListItem[] | undefined,
+  field: ListItemField,
+  uhrn: string | undefined,
+) => {
+  const fromUhrn = parseInputNumber(uhrn)
+  if (!items || items.length === 0) return fromUhrn
+  const sum = items.reduce(
+    (acc, item) => acc + parseInputNumber(item[field] || '0'),
+    0,
+  )
+  expect(sum, `sum of ${field} matches test case uhrn value`).to.be.closeTo(
+    fromUhrn,
+    0.001,
+  )
+  return sum
+}
+
+const assertSummaryTotals = (
+  rows: [title: string, field: ListItemField][],
+  items: ListItem[] | undefined,
+  uhrn: Partial<Record<ListItemField, string>>,
+) => {
+  rows.forEach(([title, field]) => {
+    const total = expectedTotal(items, field, uhrn[field])
+    if (total > 0) {
+      cy.contains('tr', title).contains(formatCurrency(total))
+    }
+  })
+}
+
+const assertSummaryTotalsByTestId = (
+  rows: [testId: string, field: ListItemField][],
+  items: ListItem[] | undefined,
+  uhrn: Partial<Record<ListItemField, string>>,
+) => {
+  rows.forEach(([testId, field]) => {
+    const total = expectedTotal(items, field, uhrn[field])
+    if (total > 0) {
+      cy.get(`[data-test="${testId}"]`).contains(formatCurrency(total))
+    }
+  })
+}
+
 // const toFormattedNumber = (input: string) =>
 //   Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
 
@@ -140,10 +197,14 @@ const executeTestCase = (testCase: string) => {
 
             if (index < employers.length - 1) {
               cy.get('#addAnother-yes').click()
-              cy.get('[data-test="next"]').click()
             }
           })
 
+          // every entered employer is listed
+          cy.get('.govuk-summary-list__row').should(
+            'have.length',
+            employers.length,
+          )
           cy.get('#addAnother-no').click()
         } else {
           getInput('employed', '-no').click()
@@ -195,10 +256,14 @@ const executeTestCase = (testCase: string) => {
 
             if (index < dohody.length - 1) {
               cy.get('#addAnotherDohoda-yes').click()
-              cy.get('[data-test="next"]').click()
             }
           })
 
+          // every entered dohoda is listed
+          cy.get('.govuk-summary-list__row').should(
+            'have.length',
+            dohody.length,
+          )
           cy.get('#addAnotherDohoda-no').click()
         } else {
           getInput('dohoda', '-no').click()
@@ -463,6 +528,52 @@ const executeTestCase = (testCase: string) => {
           )
         }
         cy.get('.govuk-table__cell').contains(input.r001_dic)
+
+        // totals of employers / dohody lists are summed into uhrn* fields
+        if (input.employed) {
+          assertSummaryTotals(
+            [
+              ['Úhrn príjmov od všetkých zamestnávateľov', 'prijmy'],
+              ['Úhrn preddavkov na daň', 'preddavkyNaDan'],
+            ],
+            input.zamestnavatelia,
+            {
+              prijmy: input.uhrnPrijmovOdVsetkychZamestnavatelov,
+              preddavkyNaDan: input.uhrnPreddavkovNaDan,
+            },
+          )
+          assertSummaryTotalsByTestId(
+            [
+              ['r039_socialne', 'socialnePoistne'],
+              ['r039_zdravotne', 'zdravotnePoistne'],
+            ],
+            input.zamestnavatelia,
+            {
+              socialnePoistne: input.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
+              zdravotnePoistne:
+                input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
+            },
+          )
+        }
+        if (input.dohoda) {
+          assertSummaryTotals(
+            [
+              ['Úhrn príjmov zo všetkých dohôd', 'prijmy'],
+              ['Úhrn sociálneho poistného z dohôd', 'socialnePoistne'],
+              ['Úhrn zdravotného poistného z dohôd', 'zdravotnePoistne'],
+              ['Úhrn preddavkov na daň z dohôd', 'preddavkyNaDan'],
+            ],
+            input.dohody,
+            {
+              prijmy: input.uhrnPrijmovZoVsetkychDohod,
+              socialnePoistne:
+                input.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
+              zdravotnePoistne:
+                input.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
+              preddavkyNaDan: input.uhrnPreddavkovNaDanDohody,
+            },
+          )
+        }
 
         next()
 
