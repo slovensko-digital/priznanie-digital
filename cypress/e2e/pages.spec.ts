@@ -402,10 +402,7 @@ describe('osobne-udaje page', () => {
 
     cy.contains('PhDr. Ingrid Nosková').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should(
-      'contain.value',
-      'Ingrid Nosková',
-    )
+    getInput('meno_priezvisko').should('contain.value', 'Ingrid Nosková')
     getInput('r006_titul').should('contain.value', 'PhDr.')
     getInput('r006_titul_za').should('contain.value', 'PhD.')
     getInput('r004_priezvisko').should('contain.value', 'Nosková')
