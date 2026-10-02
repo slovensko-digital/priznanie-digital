@@ -80,11 +80,11 @@ const {
 const TaxFormSection = ({ nextRoute, isDebug, isLive }) => {
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      <h2 className="govuk-heading-l govuk-!-margin-top-3">
         Vyplnenie daňového priznania
         <br />
         {`(verzia za rok ${TAX_YEAR})`}
-      </h1>
+      </h2>
 
       {!isLive && (
         <Warning className="govuk-!-font-weight-bold">

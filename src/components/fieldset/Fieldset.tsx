@@ -15,7 +15,7 @@ const Fieldset = ({
   return (
     <fieldset className="govuk-fieldset">
       <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 className="govuk-fieldset__heading">{title}</h1>
+        <h2 className="govuk-fieldset__heading">{title}</h2>
       </legend>
       {hint && <span className="govuk-hint">{hint}</span>}
       {error && (

@@ -336,6 +336,45 @@ describe('Partner page', () => {
     next()
     assertUrl('/deti')
   })
+
+  it('allows toggling condition checkboxes', () => {
+    cy.visit('/partner')
+
+    cy.get('[data-test=r032_uplatnujem_na_partnera-input-yes]').click()
+    next()
+
+    cy.get('[data-test=partner_spolocna_domacnost-input-yes]').click()
+    next()
+
+    // All condition checkboxes should be togglable
+    for (let i = 1; i <= 5; i++) {
+      const selector = `[data-test="partner_podmienky.${i}-input"]`
+
+      // Check
+      cy.get(selector).click()
+      cy.get(selector).should('be.checked')
+
+      // Uncheck
+      cy.get(selector).click()
+      cy.get(selector).should('not.be.checked')
+
+      // Re-check after unchecking
+      cy.get(selector).click()
+      cy.get(selector).should('be.checked')
+
+      // Uncheck again to reset for next iteration
+      cy.get(selector).click()
+      cy.get(selector).should('not.be.checked')
+    }
+
+    // Check one and proceed
+    cy.get('[data-test="partner_podmienky.1-input"]').click()
+    cy.get('[data-test="partner_podmienky.1-input"]').should('be.checked')
+
+    // Should be able to proceed with checkbox checked
+    next()
+    getInput('r032_partner_vlastne_prijmy').should('exist')
+  })
 })
 
 describe('osobne-udaje page', () => {
@@ -359,22 +398,19 @@ describe('osobne-udaje page', () => {
     /** With autoform */
     typeToInput('r001_dic', baseInput)
     typeToInput('r003_nace', baseInput)
-    getInput('meno_priezvisko').type('urban ayurveda')
+    getInput('meno_priezvisko').type('Ingrid Nosková')
 
-    cy.contains('PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA').click() // use a name that needs to be parsed
+    cy.contains('PhDr. Ingrid Nosková').click() // use a name that needs to be parsed
 
-    getInput('meno_priezvisko').should(
-      'contain.value',
-      'PhDr. Pavel Urban, PhD., PhD. - AYURVÉDA',
-    )
+    getInput('meno_priezvisko').should('contain.value', 'Ingrid Nosková')
     getInput('r006_titul').should('contain.value', 'PhDr.')
     getInput('r006_titul_za').should('contain.value', 'PhD.')
-    getInput('r004_priezvisko').should('contain.value', 'Urban')
-    getInput('r005_meno').should('contain.value', 'Pavel')
-    getInput('r007_ulica').should('contain.value', 'Clementisova')
-    getInput('r008_cislo').should('contain.value', '1350/45')
-    getInput('r009_psc').should('contain.value', '024 01')
-    getInput('r010_obec').should('contain.value', 'Kysucké Nové Mesto')
+    getInput('r004_priezvisko').should('contain.value', 'Nosková')
+    getInput('r005_meno').should('contain.value', 'Ingrid')
+    getInput('r007_ulica').should('contain.value', 'Podkonice')
+    getInput('r008_cislo').should('contain.value', '311')
+    getInput('r009_psc').should('contain.value', '976 13')
+    getInput('r010_obec').should('contain.value', 'Podkonice')
     getInput('r011_stat').should('contain.value', 'Slovenská republika')
 
     next()
