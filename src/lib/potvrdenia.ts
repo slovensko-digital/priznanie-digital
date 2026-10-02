@@ -2,7 +2,6 @@ import Decimal from 'decimal.js'
 import { PotvrdenieInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { numberInputRegexp, parseInputNumber } from './utils'
 
-/** Amounts of a "Potvrdenie o zdaniteľných príjmoch", each summed into an uhrn* field */
 export const AMOUNT_FIELDS = [
   'prijmy',
   'socialnePoistne',
@@ -13,7 +12,6 @@ export const AMOUNT_FIELDS = [
 
 export type AmountField = (typeof AMOUNT_FIELDS)[number]
 
-/** uhrn* field of the tax form where the total of each amount is stored */
 export type Totals = Record<AmountField, keyof TaxFormUserInput>
 
 export const ZAMESTNANIE_TOTALS: Totals = {
@@ -49,7 +47,6 @@ export const totalsFromItems = (
     AMOUNT_FIELDS.map((field) => [totals[field], sumItems(items, field)]),
   )
 
-/** Data saved before the list existed (only uhrn* totals) becomes one item */
 export const itemFromTotals = (
   input: Partial<TaxFormUserInput>,
   totals: Totals,

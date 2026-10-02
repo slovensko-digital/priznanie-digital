@@ -13,7 +13,6 @@ export const monthNames: string[] = [
   'December',
 ]
 
-/** One "Potvrdenie o zdaniteľných príjmoch" from an employer or a dohoda */
 export interface PotvrdenieInput {
   id: number
   nazov?: string

@@ -1,10 +1,6 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
-/**
- * Two employers (TPP) and two dohody entered through the "add to a list" UI.
- * The uhrn* fields must equal the sums of the list items - this is what the
- * pages store on submit and what calculation/XML is based on.
- */
+// uhrn* totals must equal the sums of the items
 export const case202510Input: E2eTestUserInput = {
   r001_dic: '1040000000',
   r003_nace: '01120 - Pestovanie ryže',

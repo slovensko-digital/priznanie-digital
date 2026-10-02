@@ -49,15 +49,12 @@ const FIELD_TEXTS: Record<Exclude<AmountField, 'prijmy'>, FieldText> = {
 }
 
 export interface PotvrdeniaPageConfig {
-  /** answer to "Mali ste príjmy…?" */
   flag: 'employed' | 'dohoda'
   list: 'zamestnavatelia' | 'dohody'
   totals: Totals
-  /** values saved when the user has no such income */
   emptyValues: Partial<TaxFormUserInput>
   question: string
   prijmy: FieldText
-  /** label of an item without a name, e.g. "Dohoda" -> "Dohoda 2" */
   itemName: string
   nameLabel: string
   nameHint?: string
@@ -66,7 +63,6 @@ export interface PotvrdeniaPageConfig {
   addAnotherQuestion: string
   addedHeading: (count: number) => string
   atLeastOneError: string
-  /** used in data-test attributes, e.g. "dohoda" -> "add-dohoda" */
   testId: string
   addAnotherId: string
 }
@@ -81,10 +77,6 @@ interface ItemListProps {
   onDone: () => void
 }
 
-/**
- * List of confirmations the user can add, change and remove, based on
- * https://design.tax.service.gov.uk/hmrc-design-patterns/add-to-a-list/
- */
 const ItemList = ({
   config,
   fieldTexts,
@@ -329,7 +321,6 @@ const ItemList = ({
   )
 }
 
-/** Page with a yes/no question and a list of confirmations (zamestnanie, dohody) */
 export const makePotvrdeniaPage = (config: PotvrdeniaPageConfig) => {
   const fieldTexts = { prijmy: config.prijmy, ...FIELD_TEXTS }
   const requiredMessages = Object.fromEntries(

@@ -91,7 +91,6 @@ describe.skip('Cookie consent', () => {
   })
 })
 
-/** /zamestnanie and /dohoda are the same "add to a list" page */
 const potvrdeniaPages = [
   {
     route: '/zamestnanie',

@@ -62,7 +62,6 @@ export const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-/** Enters confirmations on /zamestnanie or /dohoda one by one */
 const fillPotvrdenia = (
   testId: 'zamestnavatel' | 'dohoda',
   list: 'zamestnavatelia' | 'dohody',
@@ -84,7 +83,6 @@ const fillPotvrdenia = (
   cy.get(`#${addAnother}-no`).click()
 }
 
-/** List items of a test case, or one item made from its uhrn* totals */
 const potvrdeniaOf = (
   items: PotvrdenieInput[] | undefined,
   input: E2eTestUserInput,

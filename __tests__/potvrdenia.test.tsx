@@ -183,7 +183,6 @@ describe.each([
       click(`add-${testId}`)
       fill(0, { ...item({ prijmy: '1000,50' }), nazov: 'Firma A' })
       click(`save-${testId}`)
-      // "Áno" opens the form for the next item right away
       click(`${addAnother}-yes`)
       fill(1, item({ prijmy: '2000.25' }))
       click(`save-${testId}`)
