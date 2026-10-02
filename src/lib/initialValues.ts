@@ -13,9 +13,8 @@ import {
 } from '../types/PageUserInputs'
 import {
   ChildInput,
-  DohodaItemInput,
+  PotvrdenieInput,
   TaxFormUserInput,
-  ZamestnavatelInput,
 } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
@@ -81,22 +80,10 @@ export const rentUserInputInitialValues: RentUserInput = {
   rent_step: 0,
 }
 
-let zamestnavatelCounter = 0
+let potvrdenieCounter = 0
 
-export const makeEmptyZamestnavatel = (): ZamestnavatelInput => ({
-  id: zamestnavatelCounter++,
-  nazov: '',
-  prijmy: '',
-  socialnePoistne: '',
-  zdravotnePoistne: '',
-  preddavkyNaDan: '',
-  danovyBonusNaDieta: '',
-})
-
-let dohodaCounter = 0
-
-export const makeEmptyDohoda = (): DohodaItemInput => ({
-  id: dohodaCounter++,
+export const makeEmptyPotvrdenie = (): PotvrdenieInput => ({
+  id: potvrdenieCounter++,
   nazov: '',
   prijmy: '',
   socialnePoistne: '',

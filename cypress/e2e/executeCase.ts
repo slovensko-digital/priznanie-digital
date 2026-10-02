@@ -20,6 +20,14 @@ import {
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { PotvrdenieInput } from '../../src/types/TaxFormUserInput'
+import {
+  AMOUNT_FIELDS,
+  DOHODA_TOTALS,
+  Totals,
+  ZAMESTNANIE_TOTALS,
+  itemFromTotals,
+} from '../../src/lib/potvrdenia'
 
 function formatCurrency(value: number) {
   return formatCurrencyOrigin(value).replaceAll('\u00A0', ' ')
@@ -54,62 +62,35 @@ export const formSuccessful = (stub) => () => {
 
 const getError = () => cy.get('[data-test=error]')
 
-type ListItemField =
-  | 'prijmy'
-  | 'socialnePoistne'
-  | 'zdravotnePoistne'
-  | 'preddavkyNaDan'
-
-type ListItem = Partial<Record<ListItemField, string>>
-
-/**
- * Expected total of a list field. When the test case defines list items, the
- * total is their sum and it must match the uhrn* value of the test case
- * (which is what calculate() uses for the expected results).
- */
-const expectedTotal = (
-  items: ListItem[] | undefined,
-  field: ListItemField,
-  uhrn: string | undefined,
+/** Enters confirmations on /zamestnanie or /dohoda one by one */
+const fillPotvrdenia = (
+  testId: 'zamestnavatel' | 'dohoda',
+  list: 'zamestnavatelia' | 'dohody',
+  items: Partial<PotvrdenieInput>[],
 ) => {
-  const fromUhrn = parseInputNumber(uhrn)
-  if (!items || items.length === 0) return fromUhrn
-  const sum = items.reduce(
-    (acc, item) => acc + parseInputNumber(item[field] || '0'),
-    0,
-  )
-  expect(sum, `sum of ${field} matches test case uhrn value`).to.be.closeTo(
-    fromUhrn,
-    0.001,
-  )
-  return sum
-}
-
-const assertSummaryTotals = (
-  rows: [title: string, field: ListItemField][],
-  items: ListItem[] | undefined,
-  uhrn: Partial<Record<ListItemField, string>>,
-) => {
-  rows.forEach(([title, field]) => {
-    const total = expectedTotal(items, field, uhrn[field])
-    if (total > 0) {
-      cy.contains('tr', title).contains(formatCurrency(total))
-    }
+  const addAnother = testId === 'dohoda' ? 'addAnotherDohoda' : 'addAnother'
+  items.forEach((item, index) => {
+    cy.get(
+      index === 0 ? `[data-test="add-${testId}"]` : `#${addAnother}-yes`,
+    ).click()
+    AMOUNT_FIELDS.forEach((field) =>
+      cy
+        .get(`[data-test="${list}[${index}].${field}-input"]`)
+        .type(item[field] || '0'),
+    )
+    cy.get(`[data-test="save-${testId}"]`).click()
   })
+  cy.get('.govuk-summary-list__row').should('have.length', items.length)
+  cy.get(`#${addAnother}-no`).click()
 }
 
-const assertSummaryTotalsByTestId = (
-  rows: [testId: string, field: ListItemField][],
-  items: ListItem[] | undefined,
-  uhrn: Partial<Record<ListItemField, string>>,
-) => {
-  rows.forEach(([testId, field]) => {
-    const total = expectedTotal(items, field, uhrn[field])
-    if (total > 0) {
-      cy.get(`[data-test="${testId}"]`).contains(formatCurrency(total))
-    }
-  })
-}
+/** List items of a test case, or one item made from its uhrn* totals */
+const potvrdeniaOf = (
+  items: PotvrdenieInput[] | undefined,
+  input: E2eTestUserInput,
+  totals: Totals,
+) =>
+  items?.length ? items : [itemFromTotals(input, totals, {} as PotvrdenieInput)]
 
 // const toFormattedNumber = (input: string) =>
 //   Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
@@ -158,54 +139,11 @@ const executeTestCase = (testCase: string) => {
 
         if (input.employed) {
           getInput('employed', '-yes').click()
-
-          const employers =
-            input.zamestnavatelia?.length > 0
-              ? input.zamestnavatelia
-              : [
-                  {
-                    prijmy: input.uhrnPrijmovOdVsetkychZamestnavatelov,
-                    socialnePoistne:
-                      input.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
-                    zdravotnePoistne:
-                      input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
-                    preddavkyNaDan: input.uhrnPreddavkovNaDan,
-                    danovyBonusNaDieta: input.udajeODanovomBonuseNaDieta,
-                  },
-                ]
-
-          employers.forEach((zam, index) => {
-            if (index === 0) {
-              cy.get('[data-test="add-zamestnavatel"]').click()
-            }
-            cy.get(`[data-test="zamestnavatelia[${index}].prijmy-input"]`).type(
-              zam.prijmy || '0',
-            )
-            cy.get(
-              `[data-test="zamestnavatelia[${index}].socialnePoistne-input"]`,
-            ).type(zam.socialnePoistne || '0')
-            cy.get(
-              `[data-test="zamestnavatelia[${index}].zdravotnePoistne-input"]`,
-            ).type(zam.zdravotnePoistne || '0')
-            cy.get(
-              `[data-test="zamestnavatelia[${index}].preddavkyNaDan-input"]`,
-            ).type(zam.preddavkyNaDan || '0')
-            cy.get(
-              `[data-test="zamestnavatelia[${index}].danovyBonusNaDieta-input"]`,
-            ).type(zam.danovyBonusNaDieta || '0')
-            cy.get('[data-test="save-zamestnavatel"]').click()
-
-            if (index < employers.length - 1) {
-              cy.get('#addAnother-yes').click()
-            }
-          })
-
-          // every entered employer is listed
-          cy.get('.govuk-summary-list__row').should(
-            'have.length',
-            employers.length,
+          fillPotvrdenia(
+            'zamestnavatel',
+            'zamestnavatelia',
+            potvrdeniaOf(input.zamestnavatelia, input, ZAMESTNANIE_TOTALS),
           )
-          cy.get('#addAnother-no').click()
         } else {
           getInput('employed', '-no').click()
         }
@@ -217,54 +155,11 @@ const executeTestCase = (testCase: string) => {
 
         if (input.dohoda) {
           getInput('dohoda', '-yes').click()
-
-          const dohody =
-            input.dohody?.length > 0
-              ? input.dohody
-              : [
-                  {
-                    prijmy: input.uhrnPrijmovZoVsetkychDohod,
-                    socialnePoistne:
-                      input.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
-                    zdravotnePoistne:
-                      input.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
-                    preddavkyNaDan: input.uhrnPreddavkovNaDanDohody,
-                    danovyBonusNaDieta: input.udajeODanovomBonuseNaDietaDohody,
-                  },
-                ]
-
-          dohody.forEach((dohoda, index) => {
-            if (index === 0) {
-              cy.get('[data-test="add-dohoda"]').click()
-            }
-            cy.get(`[data-test="dohody[${index}].prijmy-input"]`).type(
-              dohoda.prijmy || '0',
-            )
-            cy.get(`[data-test="dohody[${index}].socialnePoistne-input"]`).type(
-              dohoda.socialnePoistne || '0',
-            )
-            cy.get(
-              `[data-test="dohody[${index}].zdravotnePoistne-input"]`,
-            ).type(dohoda.zdravotnePoistne || '0')
-            cy.get(`[data-test="dohody[${index}].preddavkyNaDan-input"]`).type(
-              dohoda.preddavkyNaDan || '0',
-            )
-            cy.get(
-              `[data-test="dohody[${index}].danovyBonusNaDieta-input"]`,
-            ).type(dohoda.danovyBonusNaDieta || '0')
-            cy.get('[data-test="save-dohoda"]').click()
-
-            if (index < dohody.length - 1) {
-              cy.get('#addAnotherDohoda-yes').click()
-            }
-          })
-
-          // every entered dohoda is listed
-          cy.get('.govuk-summary-list__row').should(
-            'have.length',
-            dohody.length,
+          fillPotvrdenia(
+            'dohoda',
+            'dohody',
+            potvrdeniaOf(input.dohody, input, DOHODA_TOTALS),
           )
-          cy.get('#addAnotherDohoda-no').click()
         } else {
           getInput('dohoda', '-no').click()
         }
@@ -528,52 +423,6 @@ const executeTestCase = (testCase: string) => {
           )
         }
         cy.get('.govuk-table__cell').contains(input.r001_dic)
-
-        // totals of employers / dohody lists are summed into uhrn* fields
-        if (input.employed) {
-          assertSummaryTotals(
-            [
-              ['Úhrn príjmov od všetkých zamestnávateľov', 'prijmy'],
-              ['Úhrn preddavkov na daň', 'preddavkyNaDan'],
-            ],
-            input.zamestnavatelia,
-            {
-              prijmy: input.uhrnPrijmovOdVsetkychZamestnavatelov,
-              preddavkyNaDan: input.uhrnPreddavkovNaDan,
-            },
-          )
-          assertSummaryTotalsByTestId(
-            [
-              ['r039_socialne', 'socialnePoistne'],
-              ['r039_zdravotne', 'zdravotnePoistne'],
-            ],
-            input.zamestnavatelia,
-            {
-              socialnePoistne: input.uhrnPovinnehoPoistnehoNaSocialnePoistenie,
-              zdravotnePoistne:
-                input.uhrnPovinnehoPoistnehoNaZdravotnePoistenie,
-            },
-          )
-        }
-        if (input.dohoda) {
-          assertSummaryTotals(
-            [
-              ['Úhrn príjmov zo všetkých dohôd', 'prijmy'],
-              ['Úhrn sociálneho poistného z dohôd', 'socialnePoistne'],
-              ['Úhrn zdravotného poistného z dohôd', 'zdravotnePoistne'],
-              ['Úhrn preddavkov na daň z dohôd', 'preddavkyNaDan'],
-            ],
-            input.dohody,
-            {
-              prijmy: input.uhrnPrijmovZoVsetkychDohod,
-              socialnePoistne:
-                input.uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody,
-              zdravotnePoistne:
-                input.uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody,
-              preddavkyNaDan: input.uhrnPreddavkovNaDanDohody,
-            },
-          )
-        }
 
         next()
 

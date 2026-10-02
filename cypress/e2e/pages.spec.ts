@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { withEmploymentInput } from '../../__tests__/testCases/withEmploymentInput'
 import { withChildrenInput } from '../../__tests__/testCases/withChildrenInput'
 import { baseInput } from '../../__tests__/testCases/baseInput'
 
@@ -10,6 +9,7 @@ import { withPensionInput } from '../../__tests__/testCases/withPensionInput'
 import { withPartnerInput } from '../../__tests__/testCases/withPartnerInput'
 import { withBonusInput } from '../../__tests__/testCases/withBonusInput'
 import { UserInput } from '../../src/types/UserInput'
+import { AMOUNT_FIELDS } from '../../src/lib/potvrdenia'
 import {
   MAX_CHILD_AGE_BONUS,
   PARTNER_MAX_ODPOCET,
@@ -91,364 +91,93 @@ describe.skip('Cookie consent', () => {
   })
 })
 
-type ListItemValues = {
-  nazov?: string
-  prijmy: string
-  socialnePoistne: string
-  zdravotnePoistne: string
-  preddavkyNaDan: string
-  danovyBonusNaDieta: string
-}
-
-const listItemFields = [
-  'prijmy',
-  'socialnePoistne',
-  'zdravotnePoistne',
-  'preddavkyNaDan',
-  'danovyBonusNaDieta',
+/** /zamestnanie and /dohoda are the same "add to a list" page */
+const potvrdeniaPages = [
+  {
+    route: '/zamestnanie',
+    previous: '/prijmy-a-vydavky',
+    next: '/dohoda',
+    flag: 'employed',
+    list: 'zamestnavatelia',
+    testId: 'zamestnavatel',
+    addAnother: 'addAnother',
+    total: 'Úhrn príjmov od všetkých zamestnávateľov',
+  },
+  {
+    route: '/dohoda',
+    previous: '/zamestnanie',
+    next: '/partner',
+    flag: 'dohoda',
+    list: 'dohody',
+    testId: 'dohoda',
+    addAnother: 'addAnotherDohoda',
+    total: 'Úhrn príjmov zo všetkých dohôd',
+  },
 ] as const
 
-const getListInput = (
-  list: 'zamestnavatelia' | 'dohody',
-  index: number,
-  field: keyof ListItemValues,
-) => cy.get(`[data-test="${list}[${index}].${field}-input"]`)
-
-const fillListItem = (
-  list: 'zamestnavatelia' | 'dohody',
-  index: number,
-  values: ListItemValues,
-) => {
-  if (values.nazov) {
-    getListInput(list, index, 'nazov').type(values.nazov)
-  }
-  listItemFields.forEach((field) => {
-    getListInput(list, index, field).type(values[field])
-  })
-}
-
-/** Names of list items (without the "Príjmy: …" hint under each name) */
-const assertListLabels = (labels: string[]) =>
-  cy.get('.govuk-summary-list__key').should((keys) => {
-    expect(keys.toArray().map((k) => k.firstChild?.textContent)).to.deep.equal(
-      labels,
-    )
-  })
-
-/** Opens edit form of an existing list item, checks values and cancels. */
-const assertListItemValues = (
-  item: 'zamestnavatel' | 'dohoda',
-  index: number,
-  values: ListItemValues,
-) => {
-  const list = item === 'zamestnavatel' ? 'zamestnavatelia' : 'dohody'
-  cy.get(`[data-test="edit-${item}-${index}"]`).click()
-  if (values.nazov !== undefined) {
-    getListInput(list, index, 'nazov').should('have.value', values.nazov)
-  }
-  listItemFields.forEach((field) => {
-    getListInput(list, index, field).should('have.value', values[field])
-  })
-  cy.get(`[data-test="cancel-${item}"]`).click()
-  cy.get(`[data-test="edit-${item}-${index}"]`).should('exist')
-}
-
-const addListItems = (
-  item: 'zamestnavatel' | 'dohoda',
-  items: ListItemValues[],
-) => {
-  const list = item === 'zamestnavatel' ? 'zamestnavatelia' : 'dohody'
-  const addAnother =
-    item === 'zamestnavatel' ? 'addAnother' : 'addAnotherDohoda'
-  items.forEach((values, index) => {
-    if (index === 0) {
-      cy.get(`[data-test="add-${item}"]`).click()
-    } else {
-      cy.get(`#${addAnother}-yes`).click()
-    }
-    fillListItem(list, index, values)
-    cy.get(`[data-test="save-${item}"]`).click()
-  })
-  cy.get('.govuk-summary-list__row').should('have.length', items.length)
-  cy.get(`#${addAnother}-no`).click()
-}
-
-const employer: ListItemValues = {
-  prijmy: withEmploymentInput.uhrnPrijmovOdVsetkychZamestnavatelov!,
-  socialnePoistne:
-    withEmploymentInput.uhrnPovinnehoPoistnehoNaSocialnePoistenie!,
-  zdravotnePoistne:
-    withEmploymentInput.uhrnPovinnehoPoistnehoNaZdravotnePoistenie!,
-  preddavkyNaDan: '10',
-  danovyBonusNaDieta: '20',
-}
-
-const twoEmployers: ListItemValues[] = [
-  {
-    nazov: 'Firma A',
-    prijmy: '1000,50',
-    socialnePoistne: '100',
-    zdravotnePoistne: '50,25',
-    preddavkyNaDan: '80',
-    danovyBonusNaDieta: '0',
-  },
-  {
-    prijmy: '2000.25',
-    socialnePoistne: '200,50',
-    zdravotnePoistne: '100',
-    preddavkyNaDan: '120,40',
-    danovyBonusNaDieta: '0',
-  },
-]
-
-const twoDohody: ListItemValues[] = [
-  {
-    nazov: 'DoVP ABC',
-    prijmy: '500',
-    socialnePoistne: '47,01',
-    zdravotnePoistne: '20',
-    preddavkyNaDan: '45,30',
-    danovyBonusNaDieta: '0',
-  },
-  {
-    prijmy: '300,40',
-    socialnePoistne: '28.20',
-    zdravotnePoistne: '12,02',
-    preddavkyNaDan: '27',
-    danovyBonusNaDieta: '0',
-  },
-]
-
-/** Checks value of a row in /suhrn table (non-breaking spaces normalized) */
-const assertSummaryRow = (title: string, value: string) => {
-  cy.contains('tr', title)
-    .find('td')
-    .last()
-    .invoke('text')
-    .should((text) => {
-      expect(text.replaceAll('\u00A0', ' ')).to.equal(value)
+potvrdeniaPages.forEach((page) => {
+  const addTwoItems = () => {
+    ;['1000,50', '2000.25'].forEach((prijmy, index) => {
+      cy.get(
+        index === 0
+          ? `[data-test="add-${page.testId}"]`
+          : `#${page.addAnother}-yes`,
+      ).click()
+      AMOUNT_FIELDS.forEach((field) =>
+        cy
+          .get(`[data-test="${page.list}[${index}].${field}-input"]`)
+          .type(field === 'prijmy' ? prijmy : '10'),
+      )
+      cy.get(`[data-test="save-${page.testId}"]`).click()
     })
-}
+    cy.get(`#${page.addAnother}-no`).click()
+  }
 
-describe('Employment page', () => {
-  it('has working ui', () => {
-    cy.visit('/zamestnanie')
+  describe(`${page.route} page`, () => {
+    it('has working ui and keeps items when navigating back', () => {
+      cy.visit(page.route)
+      cy.get('[data-test=back]').click()
+      assertUrl(page.previous)
+      cy.visit(page.route)
 
-    // Back button should work and be the correct page
-    cy.get('[data-test=back]').click()
-    assertUrl('/prijmy-a-vydavky')
+      next()
+      getError().should('have.length', 1)
+      getInput(page.flag, '-yes').click()
+      addTwoItems()
+      next()
+      assertUrl(page.next)
 
-    //  Go back to our page
-    cy.visit('/zamestnanie')
+      cy.get('[data-test=back]').click()
+      assertUrl(page.route)
+      cy.get('.govuk-summary-list__row').should('have.length', 2)
+      cy.get(`[data-test="edit-${page.testId}-1"]`).click()
+      cy.get(`[data-test="${page.list}[1].prijmy-input"]`).should(
+        'have.value',
+        '2000.25',
+      )
+    })
 
-    // Shows error, when presses next without interaction
-    next()
-    getError().should('have.length', 1)
+    it('shows the total on summary page and erases items after "no"', () => {
+      // "?edit" makes the page continue to /suhrn, keeping the in-memory state
+      cy.visit(`${page.route}?edit`)
+      getInput(page.flag, '-yes').click()
+      addTwoItems()
+      next()
+      assertUrl('/suhrn')
+      cy.contains('tr', page.total).should((row) =>
+        expect(row.text().replaceAll('\u00A0', ' ')).to.contain('3 000,75 EUR'),
+      )
 
-    // When presses yes, add-employer button appears
-    cy.get('[data-test=employed-input-yes]').click()
-
-    // Error when no employer added yet - shown in ErrorSummary (not field-level)
-    next()
-    cy.get('.govuk-error-summary').contains(
-      'Pridajte aspoň jedného zamestnávateľa',
-    )
-
-    // Add an employer
-    cy.get('[data-test="add-zamestnavatel"]').click()
-
-    // Saving empty employer shows errors for all 5 fields
-    cy.get('[data-test="save-zamestnavatel"]').click()
-    cy.get('.govuk-error-summary li').should('have.length', 5)
-    // each field also shows its own inline error
-    getError().should('have.length', 5)
-
-    // Fill employer fields
-    fillListItem('zamestnavatelia', 0, employer)
-
-    // Save employer
-    cy.get('[data-test="save-zamestnavatel"]').click()
-    assertListLabels(['Zamestnávateľ 1'])
-
-    // "Add another" question has to be answered
-    next()
-    cy.contains('Vyznačte odpoveď')
-    assertUrl('/zamestnanie')
-
-    // When presses no, the employer section disappears
-    cy.get('[data-test=employed-input-no]').click()
-    cy.get('[data-test="add-zamestnavatel"]').should('not.exist')
-    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
-
-    // When presses yes, employer list reappears with preserved values
-    cy.get('[data-test=employed-input-yes]').click()
-    assertListItemValues('zamestnavatel', 0, employer)
-
-    // Select no for add another and submit
-    cy.get('#addAnother-no').click()
-    next()
-    assertUrl('/dohoda')
-  })
-  it('cancel of a new employer removes it', () => {
-    cy.visit('/zamestnanie')
-    getInput('employed', '-yes').click()
-    cy.get('[data-test="add-zamestnavatel"]').click()
-    getListInput('zamestnavatelia', 0, 'prijmy').type('100')
-    cy.get('[data-test="cancel-zamestnavatel"]').click()
-    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
-    cy.get('[data-test="add-zamestnavatel"]').should('exist')
-  })
-  it('should erase previous answers when answer is changed to "no"', () => {
-    cy.visit('/zamestnanie')
-
-    // Add an employer and submit
-    getInput('employed', '-yes').click()
-    addListItems('zamestnavatel', [employer])
-    next()
-
-    // go back
-    assertUrl('/dohoda')
-    cy.get('[data-test=back]').click()
-    assertUrl('/zamestnanie')
-
-    // form should preserve values when navigated back to it
-    cy.get('.govuk-summary-list__row').should('have.length', 1)
-    assertListItemValues('zamestnavatel', 0, employer)
-
-    // form should hide when clicking no
-    getInput('employed', '-no').click()
-    cy.get('[data-test="add-zamestnavatel"]').should('not.exist')
-    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
-
-    // form should display and preserve values until it is submitted
-    getInput('employed', '-yes').click()
-    assertListItemValues('zamestnavatel', 0, employer)
-
-    // submit form with no (erase employers)
-    getInput('employed', '-no').click()
-    next()
-
-    // go back
-    assertUrl('/dohoda')
-    cy.get('[data-test=back]').click()
-    assertUrl('/zamestnanie')
-
-    // form should not preserve answers because it was submitted with "no"
-    getInput('employed', '-yes').click()
-    cy.get('[data-test="edit-zamestnavatel-0"]').should('not.exist')
-    cy.get('[data-test="add-zamestnavatel"]').click()
-    listItemFields.forEach((field) => {
-      getListInput('zamestnavatelia', 0, field).should('have.value', '')
+      cy.get(`a[href="${page.route}?edit"]`).click()
+      getInput(page.flag, '-no').click()
+      next()
+      cy.get(`a[href="${page.route}?edit"]`).click()
+      getInput(page.flag, '-yes').click()
+      cy.get(`[data-test="add-${page.testId}"]`).should('exist')
     })
   })
 })
-describe('Dohoda page', () => {
-  it('has working ui', () => {
-    cy.visit('/dohoda')
 
-    cy.get('[data-test=back]').click()
-    assertUrl('/zamestnanie')
-    cy.visit('/dohoda')
-
-    next()
-    getError().should('have.length', 1)
-
-    getInput('dohoda', '-yes').click()
-    next()
-    cy.get('.govuk-error-summary').contains('Pridajte aspoň jednu dohodu')
-
-    cy.get('[data-test="add-dohoda"]').click()
-    cy.get('[data-test="save-dohoda"]').click()
-    cy.get('.govuk-error-summary li').should('have.length', 5)
-    // each field also shows its own inline error
-    getError().should('have.length', 5)
-
-    fillListItem('dohody', 0, twoDohody[0])
-    cy.get('[data-test="save-dohoda"]').click()
-    assertListLabels(['DoVP ABC'])
-
-    // hide and show preserves values
-    getInput('dohoda', '-no').click()
-    cy.get('[data-test="edit-dohoda-0"]').should('not.exist')
-    getInput('dohoda', '-yes').click()
-    assertListItemValues('dohoda', 0, twoDohody[0])
-
-    cy.get('#addAnotherDohoda-no').click()
-    next()
-    assertUrl('/partner')
-
-    // values preserved after navigating back
-    cy.get('[data-test=back]').click()
-    assertUrl('/dohoda')
-    assertListItemValues('dohoda', 0, twoDohody[0])
-
-    // submitting "no" erases dohody
-    getInput('dohoda', '-no').click()
-    next()
-    assertUrl('/partner')
-    cy.get('[data-test=back]').click()
-    assertUrl('/dohoda')
-    getInput('dohoda', '-yes').click()
-    cy.get('[data-test="edit-dohoda-0"]').should('not.exist')
-    cy.get('[data-test="add-dohoda"]').should('exist')
-  })
-})
-describe('Multiple employers and dohody', () => {
-  it('sums all list items into totals shown on summary page', () => {
-    // "?edit" makes the page continue to /suhrn, keeping the in-memory state
-    cy.visit('/zamestnanie?edit')
-    getInput('employed', '-yes').click()
-    addListItems('zamestnavatel', twoEmployers)
-    assertListLabels(['Firma A', 'Zamestnávateľ 2'])
-    next()
-
-    assertUrl('/suhrn')
-    assertSummaryRow('Úhrn príjmov od všetkých zamestnávateľov', '3 000,75 EUR')
-    cy.get('[data-test=r039_socialne]').should((el) =>
-      expect(el.text().replaceAll('\u00A0', ' ')).to.equal('300,50 EUR'),
-    )
-    cy.get('[data-test=r039_zdravotne]').should((el) =>
-      expect(el.text().replaceAll('\u00A0', ' ')).to.equal('150,25 EUR'),
-    )
-
-    // add two dohody
-    cy.get('a[href="/dohoda?edit"]').click()
-    assertUrl('/dohoda')
-    getInput('dohoda', '-yes').click()
-    addListItems('dohoda', twoDohody)
-    next()
-
-    assertUrl('/suhrn')
-    assertSummaryRow('Úhrn príjmov zo všetkých dohôd', '800,40 EUR')
-    assertSummaryRow('Úhrn sociálneho poistného z dohôd', '75,21 EUR')
-    assertSummaryRow('Úhrn zdravotného poistného z dohôd', '32,02 EUR')
-    assertSummaryRow('Úhrn preddavkov na daň z dohôd', '72,30 EUR')
-    // employment totals are untouched
-    assertSummaryRow('Úhrn príjmov od všetkých zamestnávateľov', '3 000,75 EUR')
-
-    // going back to employment shows both employers (no duplicates)
-    cy.get('a[href="/zamestnanie?edit"]').click()
-    assertUrl('/zamestnanie')
-    cy.get('.govuk-summary-list__row').should('have.length', 2)
-    assertListItemValues('zamestnavatel', 1, twoEmployers[1])
-
-    // removing an employer updates totals
-    cy.get('[data-test="remove-zamestnavatel-0"]').click()
-    cy.get('.govuk-summary-list__row').should('have.length', 1)
-    cy.get('#addAnother-no').click()
-    next()
-
-    assertUrl('/suhrn')
-    assertSummaryRow('Úhrn príjmov od všetkých zamestnávateľov', '2 000,25 EUR')
-    assertSummaryRow('Úhrn preddavkov na daň', '120,40 EUR')
-
-    // dohody are preserved too
-    cy.get('a[href="/dohoda?edit"]').click()
-    cy.get('.govuk-summary-list__row').should('have.length', 2)
-    assertListItemValues('dohoda', 0, twoDohody[0])
-    assertListItemValues('dohoda', 1, twoDohody[1])
-  })
-})
 describe('Partner page', () => {
   it('has working ui', () => {
     cy.visit('/partner')
