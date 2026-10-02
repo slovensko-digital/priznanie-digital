@@ -2,7 +2,7 @@
   "name": "priznanie-digital",
   "version": "0.1.0",
   "engines": {
-    "node": "22"
+    "node": "24"
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -55,7 +55,7 @@
     "@types/iban": "0.0.35",
     "@types/jest": "^29.5.14",
     "@types/lodash.clonedeep": "4.5.9",
-    "@types/node": "22.18.8",
+    "@types/node": "24.19.1",
     "@types/react": "19.2.2",
     "@types/xml2js": "0.4.14",
     "@types/yup": "0.29.14",
