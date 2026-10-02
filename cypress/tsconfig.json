@@ -3,7 +3,7 @@
   "include": ["../cypress.config.ts", "cypress/**/*.ts", "**/*.ts", "**/*.js"],
   "exclude": [],
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "types": ["cypress"]
   }
 }
