@@ -1,4 +1,3 @@
-import React from 'react'
 import { NextPage } from 'next'
 import { getPostponeRoutes } from '../../lib/routes'
 import { PostponeUserInput } from '../../types/PostponeUserInput'

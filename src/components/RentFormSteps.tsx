@@ -1,4 +1,3 @@
-import React from 'react'
 import { BooleanRadio, Input } from './FormComponents'
 import { Details } from './Details'
 import {

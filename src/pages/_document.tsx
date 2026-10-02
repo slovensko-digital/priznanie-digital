@@ -1,5 +1,9 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import {
+  PUBLIC_RUNTIME_CONFIG_SCRIPT_ID,
+  serializePublicRuntimeConfig,
+} from '../lib/runtimeConfig'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -11,6 +15,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script
+            id={PUBLIC_RUNTIME_CONFIG_SCRIPT_ID}
+            dangerouslySetInnerHTML={{ __html: serializePublicRuntimeConfig() }}
+          />
           <link rel="icon" href="/favicon.ico" />
 
           {/* Primary Meta Tags */}

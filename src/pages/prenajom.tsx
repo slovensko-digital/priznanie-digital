@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form } from 'formik'
 import { FormWrapper } from '../components/FormComponents'
 import { FormErrors, RentUserInput } from '../types/PageUserInputs'

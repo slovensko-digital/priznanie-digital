@@ -5,7 +5,7 @@
     "node": "22"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "dev:cy": "start-server-and-test dev http://localhost:3000/ cy:open",
     "build": "next build",
     "start": "node node_modules/next/dist/bin/next start -p $PORT",
@@ -33,7 +33,7 @@
     "js-file-download": "0.4.12",
     "lodash.clonedeep": "4.5.0",
     "navody-digital-frontend": "^0.1.9",
-    "next": "15.5.24",
+    "next": "16.3.8",
     "nookies": "2.5.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
@@ -64,7 +64,7 @@
     "babel-eslint": "10.1.0",
     "cypress": "13.17.0",
     "eslint": "9.25.1",
-    "eslint-config-next": "15.3.1",
+    "eslint-config-next": "16.3.8",
     "eslint-config-prettier": "^10.1.2",
     "eslint-formatter-pretty": "6.0.1",
     "eslint-module-utils": "^2.12.0",
@@ -83,7 +83,7 @@
     "node-mocks-http": "^1.17.2",
     "prettier": "3.6.2",
     "start-server-and-test": "1.15.4",
-    "typescript": "4.8.4",
+    "typescript": "5.8.3",
     "typescript-eslint": "^8.31.0",
     "xml2js": "0.6.2"
   },

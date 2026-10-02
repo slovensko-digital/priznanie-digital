@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form, FormikProps } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

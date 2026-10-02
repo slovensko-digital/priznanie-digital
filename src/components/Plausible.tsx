@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import getConfig from 'next/config'
+import getConfig from '../lib/runtimeConfig'
 
 const {
   publicRuntimeConfig: { plausibleDomain },

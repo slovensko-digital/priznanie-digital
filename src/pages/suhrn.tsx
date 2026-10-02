@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { formatCurrency, formatDate, parseInputNumber } from '../lib/utils'
