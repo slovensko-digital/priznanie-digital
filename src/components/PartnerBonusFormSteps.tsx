@@ -1,4 +1,3 @@
-import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
