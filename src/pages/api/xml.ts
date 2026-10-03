@@ -4,6 +4,7 @@ import { setDate } from '../../lib/utils'
 import { calculate } from '../../lib/calculation'
 import { TaxForm } from '../../types/TaxForm'
 import { TaxFormUserInput } from '../../types/TaxFormUserInput'
+import { RollbarInstance } from '../../lib/rollbar'
 
 export default async (
   req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async (
   const taxFormUserInput: TaxFormUserInput = req.body.taxFormUserInput
 
   if (!taxFormUserInput) {
+    RollbarInstance.error('Invalid taxFormUserInput', { reqBody: req.body })
     return res.status(500).json({ error: 'invalid data' })
   }
   const taxForm: TaxForm = calculate(setDate(taxFormUserInput))

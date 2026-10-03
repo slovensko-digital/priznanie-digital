@@ -8,14 +8,13 @@ export default defineConfig({
   video: false,
   projectId: 'ivst8i',
   downloadsFolder: 'cypress/downloads',
-  fileServerFolder: 'cypress/fileServer',
   trashAssetsBeforeRuns: true,
   retries: 1,
   e2e: {
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     setupNodeEvents(on) {
-      on("task", { validateXml });
+      on('task', { validateXml })
     },
   },
 })

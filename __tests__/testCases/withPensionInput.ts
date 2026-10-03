@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const withPensionInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   t1r10_prijmy: '25000',
@@ -19,11 +20,11 @@ export const withPensionInput: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '170',
 
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
 
   expectNgoDonationValue: true,
 
-  percent2: '6,55',
+  percent2: '6,23',
   percent3: '14,63',
 }

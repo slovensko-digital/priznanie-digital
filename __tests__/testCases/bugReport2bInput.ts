@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const bugReport2bInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '30000',
   priloha3_r11_socialne: '2000',
   priloha3_r13_zdravotne: '2000',
@@ -31,7 +32,7 @@ export const bugReport2bInput: E2eTestUserInput = {
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '0',
   udajeODanovomBonuseNaDieta: '0',
   uhrnPreddavkovNaDan: '0',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   platil_prispevky_na_dochodok: false,
   zaplatene_prispevky_na_dochodok: '0',
@@ -58,6 +59,6 @@ export const bugReport2bInput: E2eTestUserInput = {
     r005_meno: 'anon',
   },
 
-  percent2: '4,90',
+  percent2: '4,48',
   percent3: '13,61',
 }

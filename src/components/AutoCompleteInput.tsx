@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import classNames from 'classnames'
 import { useField } from 'formik'
 import styles from './AutoCompleteInput.module.css'

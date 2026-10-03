@@ -7,7 +7,7 @@ var stringBuilder;
 function createxmlfinal() {
     stringBuilder = new $.StringBuilder();
     stringBuilder.appendLine('<?xml version="1.0" encoding="UTF-8"?>');
-    stringBuilder.appendLine('<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ozn493_2022.xsd">');
+    stringBuilder.appendLine('<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ozn493_2024.xsd">');
 
     ident = 1;
     stringBuilder.appendLine(AddSectionIdent('<hlavicka>'));

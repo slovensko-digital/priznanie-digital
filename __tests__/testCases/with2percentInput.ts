@@ -1,6 +1,7 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
 
 export const with2percentInput: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   priloha3_r11_socialne: '1000',
   priloha3_r13_zdravotne: '1000',
   r005_meno: 'Fake',
@@ -14,12 +15,12 @@ export const with2percentInput: E2eTestUserInput = {
   r011_stat: 'Slovensko',
   t1r10_prijmy: '25000',
   datum: '22.02.2020',
-  hasChildren: false,
+  hasChildren: 'no',
   children: [],
   expectNgoDonationValue: true,
   dve_percenta_podporujem: 'ano-sk-digital',
   XIIoddiel_suhlasZaslUdaje: true,
 
-  percent2: '7,06',
-  percent3: '10,59',
+  percent2: '6,74',
+  percent3: '10,11',
 }

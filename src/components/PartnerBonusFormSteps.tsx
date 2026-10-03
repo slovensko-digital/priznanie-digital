@@ -1,4 +1,3 @@
-import React from 'react'
 import { BooleanRadio, Checkbox, Input } from './FormComponents'
 import { formatRodneCislo } from '../lib/utils'
 import { PartnerBonusFormProps } from './PartnerBonusForm'
@@ -59,6 +58,7 @@ export const IncomeQuestion = ({ disabled }) => {
             <li>sociálne dávky,</li>
             <li>dávky a príspevky v hmotnej núdzi,</li>
             <li>nemocenské a úrazové dávky,</li>
+            <li>daňový bonus na zaplatené úroky</li>
             <li>peňažný príspevok na opatrovanie</li>
             <li>dôchodok (invalidný, starobný, výsluhový, vdovský)</li>
             <li>dávky z garančného poistenia,</li>

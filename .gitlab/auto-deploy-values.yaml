@@ -4,3 +4,13 @@ service:
 image:
   secrets:
   - name: skdigital-bonet-registry
+persistence:
+  enabled: true
+  volumes:
+  - name: priznanie-digital-conversion-storage
+    mount:
+      path: /data
+    claim:
+      accessMode: ReadWriteMany
+      size: 128Mi
+      storageClass: nfs-client

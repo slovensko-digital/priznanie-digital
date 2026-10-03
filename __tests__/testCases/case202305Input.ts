@@ -1,9 +1,11 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const case202305Input: E2eTestUserInput = {
-  t1r10_prijmy: '34800',
-  priloha3_r11_socialne: '2253.36',
-  priloha3_r13_zdravotne: '951.72',
+  prijem_zo_zivnosti: true,
+  t1r10_prijmy: '15000',
+  priloha3_r11_socialne: '1000',
+  priloha3_r13_zdravotne: '400',
   zaplatenePreddavky: '0',
   r001_dic: '233123123',
   r003_nace: '62010 - Počítačové programovanie',
@@ -44,7 +46,11 @@ export const case202305Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Morty Smith',
-      rodneCislo: '1106247406',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 14,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '6',
       monthTo: '11',
@@ -52,7 +58,11 @@ export const case202305Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Summer Smith',
-      rodneCislo: '1106240146',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 14,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: `9`,
       monthTo: '11',
@@ -60,7 +70,11 @@ export const case202305Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Rick Sanchez',
-      rodneCislo: '1106248473',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 14,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: `9`,
       monthTo: '11',
@@ -68,13 +82,17 @@ export const case202305Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Beth Smith',
-      rodneCislo: '1106240740',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 14,
+        turnsAgeInMonth: 6,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: `9`,
       monthTo: '11',
     },
   ],
-  hasChildren: true,
+  hasChildren: 'yes',
   partner_bonus_na_deti: true,
   r034_priezvisko_a_meno: 'Beth Smith',
   r034_rodne_cislo: '895103/4169',

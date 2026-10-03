@@ -1,6 +1,8 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport1Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '5000',
   priloha3_r11_socialne: '100',
   priloha3_r13_zdravotne: '100',
@@ -27,12 +29,16 @@ export const bugReport1Input: E2eTestUserInput = {
   uhrnPrijmovOdVsetkychZamestnavatelov: '3248,3',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '400',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '35,22',
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 1,
       priezviskoMeno: 'anon',
-      rodneCislo: '1607201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 9,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
 
       wholeYear: true,
       monthFrom: '0',
@@ -41,7 +47,11 @@ export const bugReport1Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'anon',
-      rodneCislo: '1057201167',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 7,
+        gender: 'FEMALE',
+      }).pure,
 
       wholeYear: true,
       monthFrom: '0',

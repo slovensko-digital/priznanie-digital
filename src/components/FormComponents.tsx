@@ -10,6 +10,25 @@ import classnames from 'classnames'
 import { UserInput } from '../types/UserInput'
 import { numberInputRegexp } from '../lib/utils'
 
+/**
+ * Utility type that generates dot-notation paths for nested objects.
+ * E.g., for { a: { b: string } } it generates "a" | "a.b"
+ */
+type NestedKeyOf<T, Depth extends number = 3> = Depth extends 0
+  ? never
+  : T extends object
+    ? {
+        [K in keyof T & string]: T[K] extends object
+          ? K | `${K}.${NestedKeyOf<T[K], Prev[Depth]>}`
+          : K
+      }[keyof T & string]
+    : never
+
+type Prev = [never, 0, 1, 2, 3]
+
+/** All valid field names: top-level keys + nested paths */
+type UserInputFieldName = NestedKeyOf<UserInput>
+
 export type FormWrapperProps<FormikInput> = FormikConfig<FormikInput> & {
   children: (formikProps: FormikProps<FormikInput>) => ReactNode
 }
@@ -49,7 +68,7 @@ interface InputProps<Name> {
   width?: 30 | 20 | 10 | 5 | 4 | 3 | 2 | 'auto'
 }
 
-export const Input = <Name extends keyof UserInput>({
+export const Input = <Name extends UserInputFieldName>({
   label,
   hint,
   width,
@@ -87,7 +106,9 @@ export const Input = <Name extends keyof UserInput>({
       >
         {label}
       </label>
-      <span className="govuk-hint">{hint}</span>
+      <span className="govuk-hint" id={`${props.name}-hint`}>
+        {hint}
+      </span>
       {meta.error ? (
         <span
           id={`${props.name}-error`}
@@ -107,6 +128,7 @@ export const Input = <Name extends keyof UserInput>({
           'aria-invalid': true,
           'aria-describedby': `${props.name}-error`,
         })}
+        aria-details={hint ? `${props.name}-hint` : undefined}
         {...getNumberInputProps()}
         {...field}
         {...props}
@@ -140,7 +162,7 @@ export const BooleanRadio = <Name extends keyof UserInput>({
     >
       <fieldset className="govuk-fieldset">
         <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 className="govuk-fieldset__heading">{title}</h1>
+          <h2 className="govuk-fieldset__heading">{title}</h2>
         </legend>
         {hint ? <span className="govuk-hint">{hint}</span> : null}
         {meta.error ? (
@@ -215,9 +237,9 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
-  const isChecked =
-    field.value ||
-    (field.value && field.value.length > 0 && field.value[0] === 'on')
+  const isChecked = Array.isArray(field.value)
+    ? field.value.length > 0 && field.value[0] === 'on'
+    : !!field.value
 
   return (
     <div
@@ -237,6 +259,7 @@ export const Checkbox = ({
           {...props}
           className="govuk-checkboxes__input"
           type="checkbox"
+          value="on"
           data-test={`${field.name}-input`}
           id={name}
           checked={isChecked}

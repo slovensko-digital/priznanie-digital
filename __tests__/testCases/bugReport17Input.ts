@@ -1,17 +1,23 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport17Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '13062.35',
   priloha3_r11_socialne: '3004.34',
   priloha3_r13_zdravotne: '3788.08',
   zaplatenePreddavky: '65140.39',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0953152046',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '4',
       monthTo: '7',
@@ -19,7 +25,11 @@ export const bugReport17Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '0502150297',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '1',
       monthTo: '7',
@@ -27,7 +37,11 @@ export const bugReport17Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '1807152831',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 7,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -35,7 +49,11 @@ export const bugReport17Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '0003159090',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -43,7 +61,11 @@ export const bugReport17Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0655154005',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 8,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '4',
       monthTo: '6',

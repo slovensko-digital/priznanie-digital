@@ -1,17 +1,23 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport13Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '75532.62',
   priloha3_r11_socialne: '21904.46',
   priloha3_r13_zdravotne: '29457.72',
   zaplatenePreddavky: '71417.47',
   employed: false,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '9904156009',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 17,
+        turnsAgeInMonth: 2,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '1',
       monthTo: '3',
@@ -19,7 +25,11 @@ export const bugReport13Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '1858155101',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 7,
+        turnsAgeInMonth: 8,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -27,7 +37,11 @@ export const bugReport13Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '1601154742',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 9,
+        turnsAgeInMonth: 1,
+        gender: 'MALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '4',
       monthTo: '1',
@@ -35,7 +49,11 @@ export const bugReport13Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '1758159436',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 8,
+        turnsAgeInMonth: 8,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -43,7 +61,11 @@ export const bugReport13Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '0253153186',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 16,
+        turnsAgeInMonth: 3,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '6',

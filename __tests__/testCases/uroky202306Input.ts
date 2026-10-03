@@ -19,5 +19,5 @@ export const uroky202306Input: E2eTestUserInput = {
   uroky_pocet_dlznikov: '2',
   r035_zaplatene_uroky: '347.77',
   expectNgoDonationValue: true,
-  percent2: '3,13',
+  percent2: '13,77',
 }

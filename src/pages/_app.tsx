@@ -4,7 +4,7 @@ import '../styles/global.css'
 import 'navody-digital-frontend/govuk/all.scss'
 import '../styles/libs.css'
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { setLocale } from 'yup'
 import { calculate } from '../lib/calculation'
@@ -28,7 +28,7 @@ import { Page } from '../components/Page'
 import { Plausible } from '../components/Plausible'
 import Head from 'next/head'
 import { checkCookie } from '../lib/cookie'
-import getConfig from 'next/config'
+import getConfig from '../lib/runtimeConfig'
 
 setLocale({
   mixed: {
@@ -141,7 +141,6 @@ const MyApp = ({
 
 // disable automatic static optimization to enable server-side rendering for all pages
 // this will make sure public runtime config is loaded from env vars during run time, not build time
-// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
 MyApp.getInitialProps = (context) => {
   const props = App.getInitialProps(context)
   const {

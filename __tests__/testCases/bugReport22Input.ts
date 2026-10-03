@@ -1,17 +1,23 @@
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { generateRodneCislo } from '../utils/generateRodneCislo'
 
 export const bugReport22Input: E2eTestUserInput = {
+  prijem_zo_zivnosti: true,
   t1r10_prijmy: '92715.60',
   priloha3_r11_socialne: '5562.94',
   priloha3_r13_zdravotne: '18543.12',
   zaplatenePreddavky: '5764.27',
   employed: true,
-  hasChildren: true,
+  hasChildren: 'yes',
   children: [
     {
       id: 0,
       priezviskoMeno: 'Fake Child 0',
-      rodneCislo: '0060159913',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 17,
+        turnsAgeInMonth: 7,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '3',
       monthTo: '7',
@@ -19,7 +25,11 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 1,
       priezviskoMeno: 'Fake Child 1',
-      rodneCislo: '000615/0716',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 15,
+        turnsAgeInMonth: 3,
+        gender: 'MALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '0',
       monthTo: '7',
@@ -27,7 +37,11 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 2,
       priezviskoMeno: 'Fake Child 2',
-      rodneCislo: '2055159238',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 5,
+        turnsAgeInMonth: 5,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -35,7 +49,11 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 3,
       priezviskoMeno: 'Fake Child 3',
-      rodneCislo: '1660157169',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 9,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: false,
       monthFrom: '4',
       monthTo: '11',
@@ -43,7 +61,11 @@ export const bugReport22Input: E2eTestUserInput = {
     {
       id: 4,
       priezviskoMeno: 'Fake Child 4',
-      rodneCislo: '1860157805',
+      rodneCislo: generateRodneCislo({
+        turnsAge: 7,
+        turnsAgeInMonth: 10,
+        gender: 'FEMALE',
+      }).pure,
       wholeYear: true,
       monthFrom: '0',
       monthTo: '11',
@@ -80,12 +102,12 @@ export const bugReport22Input: E2eTestUserInput = {
   prenajomPrijemZPrilezitostnejCinnosti: true,
   vyskaOslobodenia: '55.54',
   r035_uplatnuje_uroky: true,
-  uroky_zmluva_rok_uzatvorenia: '2019',
+  uroky_zmluva_rok_uzatvorenia: '2020',
   uroky_zmluva_mesiac_uzatvorenia: '2',
   uroky_zmluva_den_uzatvorenia: '1',
   uroky_zaciatok_urocenia_den: '21',
   uroky_zaciatok_urocenia_mesiac: '8',
-  uroky_zaciatok_urocenia_rok: '2019',
+  uroky_zaciatok_urocenia_rok: '2020',
   uroky_dalsi_dlznik: true,
   uroky_pocet_dlznikov: '7',
   r035_zaplatene_uroky: '4328.81',
@@ -95,5 +117,5 @@ export const bugReport22Input: E2eTestUserInput = {
   platil_prispevky_na_dochodok: true,
   zaplatene_prispevky_na_dochodok: '13.78',
   expectNgoDonationValue: true,
-  percent2: '107,26',
+  percent2: '169,60',
 }

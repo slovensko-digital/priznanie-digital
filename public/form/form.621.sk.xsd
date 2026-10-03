@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Riadne, opravne a dodatocne danove priznanie k dani z prijmov fyzickej osoby, typ B, DPFOBv24_1 -->
+<!-- Riadne, opravne a dodatocne danove priznanie k dani z prijmov fyzickej osoby, typ B, DPFOBv25 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xsd:annotation>
-		<xsd:documentation>DPFOBv24</xsd:documentation>
+		<xsd:documentation>DPFOBv25</xsd:documentation>
 	</xsd:annotation>
 	<!-- prazdny retazec -->
 	<xsd:simpleType name="emptyStr">
@@ -89,6 +89,11 @@
 	<xsd:simpleType name="fix2023">
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="[2][0][2][3]"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="fix2024">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[2][0][2][4]"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:simpleType name="fixBool">
@@ -256,7 +261,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="priezviskoMeno" type="xsd:string"/>
-						<xsd:element name="rodneCislo" type="optInt"/>
+						<xsd:element name="rodneCislo" type="xsd:string"/>
 						<xsd:element name="m00" type="only_0_1"/>
 						<xsd:element name="m01" type="only_0_1"/>
 						<xsd:element name="m02" type="only_0_1"/>
@@ -308,10 +313,12 @@
 			<xsd:element name="r48" type="r48Type"/>
 			<xsd:element name="r49" type="r49Type"/>
 			<xsd:element name="r50" type="r50Type"/>
+			<xsd:element name="r50a" type="r50aType"/>
 			<xsd:element name="r51" type="optDec"/>
 			<xsd:element name="r52" type="optDec"/>
 			<xsd:element name="r53" type="optDec"/>
 			<xsd:element name="r54" type="optDec"/>
+			<xsd:element name="r54a" type="optDec"/>
 			<xsd:element name="r55" type="optDec"/>
 			<xsd:element name="r56" type="optDec"/>
 			<xsd:element name="r57" type="optDec"/>
@@ -406,23 +413,25 @@
 			<xsd:element name="r144" type="optDec"/>
 			<xsd:element name="r145" type="xsd:string"/>
 			<xsd:element name="r146" type="optDec"/>
+			<xsd:element name="r146a" type="optDec"/>
 			<xsd:element name="r147" type="optDec"/>
 			<xsd:element name="r148" type="optDec"/>
 			<xsd:element name="r149" type="only_0_1"/>
 			<xsd:element name="r150" type="optInt"/>
-			<xsd:element name="neuplatnujem" type="only_0_1"/>
-			<xsd:element name="splnam3per" type="only_0_1"/>
-			<xsd:element name="r151" type="optDec"/>
-			<xsd:element name="r152" type="r152Type"/>
+			<xsd:element name="r151" type="r151Type"/>
+			<xsd:element name="r152" type="optDec"/>
+			<xsd:element name="r153" type="udajeRodicaType"/>
 			<xsd:element name="osobitneZaznamy" type="osobitneZaznamyType"/>
-			<xsd:element name="r153" type="optInt"/>
+			<xsd:element name="r154" type="optInt"/>
 			<xsd:element name="datumVyhlasenia" type="optDateLine"/>
 			<xsd:element name="danovyPreplatokBonus" type="danovyPreplatokBonusType"/>
 			<xsd:element name="prilPar30cOdpocetVydavkov" type="prilPar30cOdpocetVydavkovType"
 				minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="pril1bPar30eVydavkyInvesticie"
 				type="pril1bPar30eVydavkyInvesticieType" minOccurs="0" maxOccurs="1"/>
-			<xsd:element name="prilPodielyNaZisku" type="prilPodielyNaZiskuType"/>
+			<xsd:element name="pril1cPar30caVydavkySport" type="pril1cPar30caVydavkySportType"/>
+			<xsd:element name="pril2PodielyNaZisku" type="pril2PodielyNaZiskuType"/>
+			<xsd:element name="pril3VynosyZDlhopisov" type="pril3VynosyZDlhopisovType"/>
 			<xsd:element name="socZdravPoistenie" type="socZdravPoistenieType"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -451,6 +460,12 @@
 			<xsd:element name="udaje" type="udajeStraty50Type"/>
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:complexType name="r50aType">
+		<xsd:sequence>
+			<xsd:element name="rok" type="fix2024"/>
+			<xsd:element name="udaje" type="udajeStraty50aType"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="udajeStratyType">
 		<xsd:sequence>
 			<xsd:element name="r02" type="optDec"/>
@@ -461,14 +476,21 @@
 	<xsd:complexType name="udajeStraty50Type">
 		<xsd:sequence>
 			<xsd:element name="r02" type="optDec"/>
+			<xsd:element name="r03" type="optDec"/>
 			<xsd:element name="r04" type="optDec"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
+	<xsd:complexType name="udajeStraty50aType">
+		<xsd:sequence>
+			<xsd:element name="r02" type="optDec"/>
+			<xsd:element name="r04" type="optDec"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="manzel">
 		<xsd:sequence>
 			<xsd:element name="priezviskoMeno" type="xsd:string"/>
-			<xsd:element name="rodneCislo" type="optInt"/>
+			<xsd:element name="rodneCislo" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="nczdManzel">
@@ -486,7 +508,7 @@
 	<xsd:complexType name="dietaType">
 		<xsd:sequence>
 			<xsd:element name="priezviskoMeno" type="xsd:string"/>
-			<xsd:element name="rodneCislo" type="optInt"/>
+			<xsd:element name="rodneCislo" type="xsd:string"/>
 			<xsd:element name="m00" type="only_0_1"/>
 			<xsd:element name="m01" type="only_0_1"/>
 			<xsd:element name="m02" type="only_0_1"/>
@@ -595,11 +617,13 @@
 			<xsd:element name="t3r19" type="tab2stlpceType"/>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="r152Type">
+	<xsd:complexType name="r151Type">
 		<xsd:sequence>
 			<xsd:element name="ico" type="optInt"/>
-			<xsd:element name="obchMeno" type="obchMenoType"/>
-			<xsd:element name="suhlasZaslUdaje" type="only_0_1"/>
+			<xsd:element name="splnam3per" type="only_0_1"/>
+			<xsd:element name="neuplatnujemPar50" type="only_0_1"/>
+			<xsd:element name="obchodneMeno" type="obchMenoType"/>
+			<xsd:element name="suhlasSoZaslanim" type="only_0_1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="obchMenoType">
@@ -677,7 +701,7 @@
 			<xsd:element name="zTohoVydavky" type="optDec"/>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="prilPodielyNaZiskuType">
+	<xsd:complexType name="pril2PodielyNaZiskuType">
 		<xsd:sequence>
 			<xsd:element name="pr1" type="optDec"/>
 			<xsd:element name="pr2" type="optDec"/>
@@ -707,6 +731,24 @@
 			<xsd:element name="pr26" type="fix35"/>
 			<xsd:element name="pr27" type="optDec"/>
 			<xsd:element name="pr28" type="optDec"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="pril3VynosyZDlhopisovType">
+		<xsd:sequence>
+			<xsd:element name="pr1" type="optDec"/>
+			<xsd:element name="pr2" type="optDec"/>
+			<xsd:element name="pr3" type="optDec"/>
+			<xsd:element name="pr4" type="optInt"/>
+			<xsd:element name="pr5" type="optDec"/>
+			<xsd:element name="pr6" type="optDec"/>
+			<xsd:element name="pr7" type="optDec"/>
+			<xsd:element name="pr8" type="optDec"/>
+			<xsd:element name="pr9" type="optDec"/>
+			<xsd:element name="pr10" type="optDec"/>
+			<xsd:element name="pr11" type="optDec"/>
+			<xsd:element name="pr12" type="optDec"/>
+			<xsd:element name="pr13" type="optDec"/>
+			<xsd:element name="pr14" type="optDec"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="socZdravPoistenieType">
@@ -747,6 +789,18 @@
 			<xsd:element name="r12" type="optDec"/>
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:complexType name="pril1cPar30caVydavkySportType">
+		<xsd:sequence>
+			<xsd:element name="r01" type="udajeInvesticieSportType"/>
+			<xsd:element name="r02" type="udajeInvesticieSportType"/>
+			<xsd:element name="r03" type="udajeInvesticieSportType"/>
+			<xsd:element name="r04" type="udajeInvesticieSportType"/>
+			<xsd:element name="r05" type="udajeInvesticieSportType"/>
+			<xsd:element name="r06" type="optDec"/>
+			<xsd:element name="r07" type="optDec"/>
+			<xsd:element name="r08" type="optDec"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="udajeInvesticieType">
 		<xsd:sequence>
 			<xsd:element name="s01Od" type="optDateLine"/>
@@ -754,6 +808,14 @@
 			<xsd:element name="s02" type="optDec"/>
 			<xsd:element name="s03" type="optDec"/>
 			<xsd:element name="s04" type="optDec"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="udajeInvesticieSportType">
+		<xsd:sequence>
+			<xsd:element name="s01Od" type="optDateLine"/>
+			<xsd:element name="s01Do" type="optDateLine"/>
+			<xsd:element name="s02" type="optDec"/>
+			<xsd:element name="s03" type="optDec"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="nerezidentType">
@@ -769,6 +831,21 @@
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="rodicType">
+		<xsd:sequence>
+			<xsd:element name="rodneCislo" type="xsd:string"/>
+			<xsd:element name="priezvisko" type="xsd:string"/>
+			<xsd:element name="meno" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="udajeRodicaType">
+		<xsd:sequence>
+			<xsd:element name="neuplatnujemPar50aa" type="only_0_1"/>
+			<xsd:element name="rodicA" type="rodicType"/>
+			<xsd:element name="rodicB" type="rodicType"/>
+			<xsd:element name="bolZverenyDoStarostlivosti" type="only_0_1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

@@ -90,7 +90,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t</r32>');
 
     stringBuilder.appendLine('\t<r33>');
-    var repeatingCount = $('[id^=layoutRow40037]').length;
+    var repeatingCount = $('[id^=layoutRow41819]').length;
 
     var i = 1;
     for (; i <= repeatingCount; i++) {
@@ -301,14 +301,24 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<rok>2023</rok>');
     stringBuilder.appendLine('\t\t<udaje>');
     stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_50').val()) + '</r02>');
+    stringBuilder.appendLine('\t\t\t<r03>' + htmlEncode($('#R3_50').val()) + '</r03>');
     stringBuilder.appendLine('\t\t\t<r04>' + htmlEncode($('#R4_50').val()) + '</r04>');
     stringBuilder.appendLine('\t\t</udaje>');
     stringBuilder.appendLine('\t</r50>');
+
+    stringBuilder.appendLine('\t<r50a>');
+    stringBuilder.appendLine('\t\t<rok>2024</rok>');
+    stringBuilder.appendLine('\t\t<udaje>');
+    stringBuilder.appendLine('\t\t\t<r02>' + htmlEncode($('#R2_50a').val()) + '</r02>');
+    stringBuilder.appendLine('\t\t\t<r04>' + htmlEncode($('#R4_50a').val()) + '</r04>');
+    stringBuilder.appendLine('\t\t</udaje>');
+    stringBuilder.appendLine('\t</r50a>');
 
     stringBuilder.appendLine('\t<r51>' + htmlEncode($('#t51').val()) + '</r51>');
     stringBuilder.appendLine('\t<r52>' + htmlEncode($('#t52').val()) + '</r52>');
     stringBuilder.appendLine('\t<r53>' + htmlEncode($('#t53').val()) + '</r53>');
     stringBuilder.appendLine('\t<r54>' + htmlEncode($('#t54').val()) + '</r54>');
+    stringBuilder.appendLine('\t<r54a>' + htmlEncode($('#t54a').val()) + '</r54a>');
     stringBuilder.appendLine('\t<r55>' + htmlEncode($('#t55').val()) + '</r55>');
     stringBuilder.appendLine('\t<r56>' + htmlEncode($('#t56').val()) + '</r56>');
     stringBuilder.appendLine('\t<r57>' + htmlEncode($('#t57').val()) + '</r57>');
@@ -537,22 +547,37 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t<r144>' + htmlEncode($('#t144').val()) + '</r144>');
     stringBuilder.appendLine('\t<r145>' + htmlEncode($('#t145').val()) + '</r145>');
     stringBuilder.appendLine('\t<r146>' + htmlEncode($('#t146').val()) + '</r146>');
+    stringBuilder.appendLine('\t<r146a>' + htmlEncode($('#t146a').val()) + '</r146a>');
     stringBuilder.appendLine('\t<r147>' + htmlEncode($('#t147').val()) + '</r147>');
     stringBuilder.appendLine('\t<r148>' + htmlEncode($('#t148').val()) + '</r148>');
     stringBuilder.appendLine('\t<r149>' + (document.getElementById("t149").checked ? '1' : '0') + '</r149>');
     stringBuilder.appendLine('\t<r150>' + htmlEncode($('#t150').val()) + '</r150>');
-    stringBuilder.appendLine('\t<neuplatnujem>' + (document.getElementById("cbNeuplatnujem").checked ? '1' : '0') + '</neuplatnujem>');
-    stringBuilder.appendLine('\t<splnam3per>' + (document.getElementById("cbSplnam3Per").checked ? '1' : '0') + '</splnam3per>');
-    stringBuilder.appendLine('\t<r151>' + htmlEncode($('#tbPodiel151').val()) + '</r151>');
-
-    stringBuilder.appendLine('\t<r152>');
+    stringBuilder.appendLine('\t<r151>');
     stringBuilder.appendLine('\t\t<ico>' + htmlEncode($('#tbico152').val()) + '</ico>');
-    stringBuilder.appendLine('\t\t<obchMeno>');
+    stringBuilder.appendLine('\t\t<splnam3per>' + (document.getElementById("cbSplnam3Per").checked ? '1' : '0') + '</splnam3per>');
+    stringBuilder.appendLine('\t\t<neuplatnujemPar50>' + (document.getElementById("cbNeuplatnujem").checked ? '1' : '0') + '</neuplatnujemPar50>');
+    stringBuilder.appendLine('\t\t<obchodneMeno>');
     stringBuilder.appendLine('\t\t\t<riadok><![CDATA[' + $('#tbObchMeno152').val().substr(0, 37) + ']]></riadok>');
     stringBuilder.appendLine('\t\t\t<riadok><![CDATA[' + $('#tbObchMeno152').val().substr(37, 37) + ']]></riadok>');
-    stringBuilder.appendLine('\t\t</obchMeno>');
-    stringBuilder.appendLine('\t\t<suhlasZaslUdaje>' + (document.getElementById("chbSuhlas").checked ? '1' : '0') + '</suhlasZaslUdaje>');
-    stringBuilder.appendLine('\t</r152>');
+    stringBuilder.appendLine('\t\t</obchodneMeno>');
+    stringBuilder.appendLine('\t\t<suhlasSoZaslanim>' + (document.getElementById("chbsuhlas").checked ? '1' : '0') + '</suhlasSoZaslanim>');
+    stringBuilder.appendLine('\t</r151>');
+    stringBuilder.appendLine('\t<r152>' + htmlEncode($('#tbPodiel152').val()) + '</r152>');
+    stringBuilder.appendLine('\t<r153>');
+    stringBuilder.appendLine('\t\t<neuplatnujemPar50aa>' + (document.getElementById("cbParagraf50aa").checked ? '1' : '0') + '</neuplatnujemPar50aa>');
+    stringBuilder.appendLine('\t\t<rodicA>');
+    stringBuilder.appendLine('\t\t\t<rodneCislo>' + htmlEncode($('#tbRodneCislo153A_1').val()) + htmlEncode($('#tbRodneCislo153A_2').val()) + '</rodneCislo>');
+    stringBuilder.appendLine('\t\t\t<priezvisko>' + htmlEncode($('#Priezvisko153A').val()) + '</priezvisko>');
+    stringBuilder.appendLine('\t\t\t<meno>' + htmlEncode($('#Meno153A').val()) + '</meno>');
+    stringBuilder.appendLine('\t\t</rodicA>');
+    stringBuilder.appendLine('\t\t<rodicB>');
+    stringBuilder.appendLine('\t\t\t<rodneCislo>' + htmlEncode($('#tbRodneCislo153B_1').val()) + htmlEncode($('#tbRodneCislo153B_2').val()) + '</rodneCislo>');
+    stringBuilder.appendLine('\t\t\t<priezvisko>' + htmlEncode($('#Priezvisko153B').val()) + '</priezvisko>');
+    stringBuilder.appendLine('\t\t\t<meno>' + htmlEncode($('#Meno153B').val()) + '</meno>');
+    stringBuilder.appendLine('\t\t</rodicB>');
+    stringBuilder.appendLine('\t\t<bolZverenyDoStarostlivosti>' + (document.getElementById("chNahrStar").checked ? '1' : '0') + '</bolZverenyDoStarostlivosti>');
+    stringBuilder.appendLine('\t</r153>');
+
 
     // XIV. Oddiel
     stringBuilder.appendLine('\t<osobitneZaznamy>');
@@ -571,7 +596,7 @@ function createxmlfinal() {
             stringBuilder.appendLine('\t\t\t<zTohoVydavky>' + htmlEncode($('#odd13zToho').val()) + '</zTohoVydavky>');
             stringBuilder.appendLine('\t\t</udajeOprijmoch>');
         } else {
-            if (!document.getElementById("layoutRow39930_Repeating_" + i)) break;
+            if (!document.getElementById("layoutRow41712_Repeating_" + i)) break;
             stringBuilder.appendLine('\t\t<udajeOprijmoch>');
             stringBuilder.appendLine('\t\t\t<kodStatu>' + htmlEncode($('#odd13kod_Repeating_' + i).val()) + '</kodStatu>');
             stringBuilder.appendLine('\t\t\t<druhPrimuPar>' + htmlEncode($('#odd13Par_Repeating_' + i).val()) + '</druhPrimuPar>');
@@ -588,7 +613,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<zaznamy><![CDATA[' + $('#taZaznamy').val() + ']]></zaznamy>');
     stringBuilder.appendLine('\t</osobitneZaznamy>');
 
-    stringBuilder.appendLine('\t<r153>' + htmlEncode($('#t153').val()) + '</r153>');
+    stringBuilder.appendLine('\t<r154>' + htmlEncode($('#t154').val()) + '</r154>');
     stringBuilder.appendLine('\t<datumVyhlasenia>' + htmlEncode($('#dtpDatumSpravneUplne').val()) + '</datumVyhlasenia>');
 
     // XV. Oddiel
@@ -607,7 +632,7 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<datum>' + htmlEncode($('#dtpDatumDB').val()) + '</datum>');
     stringBuilder.appendLine('\t</danovyPreplatokBonus>');
 
-    var lr = $("[id^='layoutRow40053']");
+    var lr = $("[id^='layoutRow41835']");
     var polePoli = new Array();
     polePoli.push(lr.eq(0).find("[id^='DatumProjektu']").val());
     polePoli.push(lr.eq(0).find("[id^='Pri1r1DatumOd']").val());
@@ -709,7 +734,22 @@ function createxmlfinal() {
 
     stringBuilder.appendLine('\t</pril1bPar30eVydavkyInvesticie>');
 
-    stringBuilder.appendLine('\t<prilPodielyNaZisku>');
+    stringBuilder.appendLine('\t<pril1cPar30caVydavkySport>');
+    for (var z = 1; z <= 5; z++) {//5 rovnakych riadkov
+        stringBuilder.appendLine('\t\t<r0' + z + '>');
+        stringBuilder.appendLine('\t\t\t<s01Od>' + htmlEncode($('#Pri1cr' + z + 'DatumOd').val()) + '</s01Od>');
+        stringBuilder.appendLine('\t\t\t<s01Do>' + htmlEncode($('#Pri1cr' + z + 'DatumDo').val()) + '</s01Do>');
+        stringBuilder.appendLine('\t\t\t<s02>' + htmlEncode($('#Pri1cr' + z + 'Stlpec2').val()) + '</s02>');
+        stringBuilder.appendLine('\t\t\t<s03>' + htmlEncode($('#Pri1cr' + z + 'Stlpec3').val()) + '</s03>');
+        stringBuilder.appendLine('\t\t</r0' + z + '>');
+    }
+    stringBuilder.appendLine('\t\t<r06>' + htmlEncode($('#Pri1cr6Stlpec3').val()) + '</r06>');
+    stringBuilder.appendLine('\t\t<r07>' + htmlEncode($('#Pri1cr7Stlpec3').val()) + '</r07>');
+    stringBuilder.appendLine('\t\t<r08>' + htmlEncode($('#Pri1cr8Stlpec3').val()) + '</r08>');
+
+    stringBuilder.appendLine('\t</pril1cPar30caVydavkySport>');
+
+    stringBuilder.appendLine('\t<pril2PodielyNaZisku>');
     stringBuilder.appendLine('\t\t<pr1>' + htmlEncode($('#tbPr2S1_01').val()) + '</pr1>');
     stringBuilder.appendLine('\t\t<pr2>' + htmlEncode($('#tbPr2S1_02').val()) + '</pr2>');
     stringBuilder.appendLine('\t\t<pr3>' + htmlEncode($('#tbPr2S1_03').val()) + '</pr3>');
@@ -757,13 +797,10 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<pr27>' + htmlEncode($('#tbPr2_27').val()) + '</pr27>');
     stringBuilder.appendLine('\t\t<pr28>' + htmlEncode($('#tbPr2_28').val()) + '</pr28>');
 
-    stringBuilder.appendLine('\t</prilPodielyNaZisku>');
+    stringBuilder.appendLine('\t</pril2PodielyNaZisku>');
 
-    stringBuilder.appendLine('\t<socZdravPoistenie>');
-    stringBuilder.appendLine('\t\t<pr1>');
-    stringBuilder.appendLine('\t\t\t<s1>' + htmlEncode($('#tbPr3S1').val()) + '</s1>');
-    stringBuilder.appendLine('\t\t\t<s2>' + htmlEncode($('#tbPr3S2').val()) + '</s2>');
-    stringBuilder.appendLine('\t\t</pr1>');
+    stringBuilder.appendLine('\t<pril3VynosyZDlhopisov>');
+    stringBuilder.appendLine('\t\t<pr1>' + htmlEncode($('#tbPr3_01').val()) + '</pr1>');
     stringBuilder.appendLine('\t\t<pr2>' + htmlEncode($('#tbPr3_02').val()) + '</pr2>');
     stringBuilder.appendLine('\t\t<pr3>' + htmlEncode($('#tbPr3_03').val()) + '</pr3>');
     stringBuilder.appendLine('\t\t<pr4>' + htmlEncode($('#tbPr3_04').val()) + '</pr4>');
@@ -777,7 +814,26 @@ function createxmlfinal() {
     stringBuilder.appendLine('\t\t<pr12>' + htmlEncode($('#tbPr3_12').val()) + '</pr12>');
     stringBuilder.appendLine('\t\t<pr13>' + htmlEncode($('#tbPr3_13').val()) + '</pr13>');
     stringBuilder.appendLine('\t\t<pr14>' + htmlEncode($('#tbPr3_14').val()) + '</pr14>');
-    stringBuilder.appendLine('\t\t<pr15>' + htmlEncode($('#tbPr3_15').val()) + '</pr15>');
+    stringBuilder.appendLine('\t</pril3VynosyZDlhopisov>');
+    stringBuilder.appendLine('\t<socZdravPoistenie>');
+    stringBuilder.appendLine('\t\t<pr1>');
+    stringBuilder.appendLine('\t\t\t<s1>' + htmlEncode($('#tbPr4S1').val()) + '</s1>');
+    stringBuilder.appendLine('\t\t\t<s2>' + htmlEncode($('#tbPr4S2').val()) + '</s2>');
+    stringBuilder.appendLine('\t\t</pr1>');
+    stringBuilder.appendLine('\t\t<pr2>' + htmlEncode($('#tbPr4_02').val()) + '</pr2>');
+    stringBuilder.appendLine('\t\t<pr3>' + htmlEncode($('#tbPr4_03').val()) + '</pr3>');
+    stringBuilder.appendLine('\t\t<pr4>' + htmlEncode($('#tbPr4_04').val()) + '</pr4>');
+    stringBuilder.appendLine('\t\t<pr5>' + htmlEncode($('#tbPr4_05').val()) + '</pr5>');
+    stringBuilder.appendLine('\t\t<pr6>' + htmlEncode($('#tbPr4_06').val()) + '</pr6>');
+    stringBuilder.appendLine('\t\t<pr7>' + htmlEncode($('#tbPr4_07').val()) + '</pr7>');
+    stringBuilder.appendLine('\t\t<pr8>' + htmlEncode($('#tbPr4_08').val()) + '</pr8>');
+    stringBuilder.appendLine('\t\t<pr9>' + htmlEncode($('#tbPr4_09').val()) + '</pr9>');
+    stringBuilder.appendLine('\t\t<pr10>' + htmlEncode($('#tbPr4_10').val()) + '</pr10>');
+    stringBuilder.appendLine('\t\t<pr11>' + htmlEncode($('#tbPr4_11').val()) + '</pr11>');
+    stringBuilder.appendLine('\t\t<pr12>' + htmlEncode($('#tbPr4_12').val()) + '</pr12>');
+    stringBuilder.appendLine('\t\t<pr13>' + htmlEncode($('#tbPr4_13').val()) + '</pr13>');
+    stringBuilder.appendLine('\t\t<pr14>' + htmlEncode($('#tbPr4_14').val()) + '</pr14>');
+    stringBuilder.appendLine('\t\t<pr15>' + htmlEncode($('#tbPr4_15').val()) + '</pr15>');
     stringBuilder.appendLine('\t\t<priPrimoch6ods1a2VediemPU>' + (document.getElementById("chPriPrijmoch").checked ? '1' : '0') + '</priPrimoch6ods1a2VediemPU>');
     stringBuilder.appendLine('\t\t<datum>' + htmlEncode($('#dtpDatumSoc').val()) + '</datum>');
     stringBuilder.appendLine('\t</socZdravPoistenie>');
@@ -974,7 +1030,7 @@ function processTelo(telo) {
             case 'r33': //opakovacie polia
                 var dietaCount = 0;
 
-                removeSections('layoutRow40037');
+                removeSections('layoutRow41819');
 
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
@@ -982,7 +1038,7 @@ function processTelo(telo) {
                         dietaCount++;
                         if (dietaCount > 4)
                             if (j != 0) {
-                                var addButton = $('div[id^=layoutRow40037]').last().find('#addSectionlayoutRow40037');//34277 neexistuje
+                                var addButton = $('div[id^=layoutRow41819]').last().find('#addSectionlayoutRow41819');//34277 neexistuje
                                 addSection(4, 20, addButton);
                             }
                         for (var k = 0; k < bNode.childNodes.length; k++) {
@@ -1265,12 +1321,19 @@ function processTelo(telo) {
             case 'r50':
                 var udaje = aNode.getElementsByTagName('udaje')[0];
                 $("#R2_50").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
+                $("#R3_50").val(getElementsValXml(udaje.getElementsByTagName('r03')[0]));
                 $("#R4_50").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
+                break;
+            case 'r50a':
+                var udaje = aNode.getElementsByTagName('udaje')[0];
+                $("#R2_50a").val(getElementsValXml(udaje.getElementsByTagName('r02')[0]));
+                $("#R4_50a").val(getElementsValXml(udaje.getElementsByTagName('r04')[0]));
                 break;
             case 'r51': $('#t51').val(getNodeValue(aNode)); break;
             case 'r52': $('#t52').val(getNodeValue(aNode)); break;
             case 'r53': $('#t53').val(getNodeValue(aNode)); break;
             case 'r54': $('#t54').val(getNodeValue(aNode)); break;
+            case 'r54a': $('#t54a').val(getNodeValue(aNode)); break;
             case 'r55': $('#t55').val(getNodeValue(aNode)); break;
             case 'r56': $('#t56').val(getNodeValue(aNode)); break;
             case 'r57': $('#t57').val(getNodeValue(aNode)); break;
@@ -1567,18 +1630,18 @@ function processTelo(telo) {
             case 'r144': $('#t144').val(getNodeValue(aNode)); break;
             case 'r145': $('#t145').val(getNodeValue(aNode)); break;
             case 'r146': $('#t146').val(getNodeValue(aNode)); break;
+            case 'r146a': $('#t146a').val(getNodeValue(aNode)); break;
             case 'r147': $('#t147').val(getNodeValue(aNode)); break;
             case 'r148': $('#t148').val(getNodeValue(aNode)); break;
             case 'r149': document.getElementById("t149").checked = (getNodeValue(aNode) == '1' ? true : false); break;
             case 'r150': $('#t150').val(getNodeValue(aNode)); break;
-            case 'neuplatnujem': document.getElementById("cbNeuplatnujem").checked = (getNodeValue(aNode) == '1' ? true : false); break;
-            case 'splnam3per': document.getElementById("cbSplnam3Per").checked = (getNodeValue(aNode) == '1' ? true : false); break;
-            case 'r151': $('#tbPodiel151').val(getNodeValue(aNode)); break;
-            case 'r152':
+            case 'r151':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
                     if (bNode.nodeName == "ico") $('#tbico152').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "obchMeno") {
+                    if (bNode.nodeName == "splnam3per") document.getElementById("cbSplnam3Per").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "neuplatnujemPar50") document.getElementById("cbNeuplatnujem").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "obchodneMeno") {
                         for (var k = 0; k < bNode.childNodes.length; k++) {
                             var cNode = bNode.childNodes[k];
                             if (cNode.nodeName == "riadok") {
@@ -1586,10 +1649,54 @@ function processTelo(telo) {
                             }
                         }
                     }
-
-                    if (bNode.nodeName == "suhlasZaslUdaje") document.getElementById("chbSuhlas").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "suhlasSoZaslanim") document.getElementById("chbsuhlas").checked = (getNodeValue(bNode) == '1' ? true : false);
                 }
                 break;
+            case 'r152': $('#tbPodiel152').val(getNodeValue(aNode)); break;
+            case 'r153':
+                for (var j = 0; j < aNode.childNodes.length; j++) {
+                    var bNode = aNode.childNodes[j];
+                    if (bNode.nodeName == "neuplatnujemPar50aa") document.getElementById("cbParagraf50aa").checked = (getNodeValue(bNode) == '1' ? true : false);
+                    if (bNode.nodeName == "rodicA") {
+                        for (var k = 0; k < bNode.childNodes.length; k++) {
+                            var cNode = bNode.childNodes[k];
+                            if (cNode.nodeName == "rodneCislo") {
+                                if (getNodeValue(cNode).length >= 9) {
+                                    $('#tbRodneCislo153A_1').val(getNodeValue(cNode).substr(0, 6));
+                                    $('#tbRodneCislo153A_2').val(getNodeValue(cNode).substr(6));
+                                } else {
+                                    $('#tbRodneCislo153A_1').val(getNodeValue(cNode).substr(0, 4));
+                                    $('#tbRodneCislo153A_2').val(getNodeValue(cNode).substr(4));
+                                }
+                            }
+                            if (cNode.nodeName == "priezvisko") $('#Priezvisko153A').val(getNodeValue(cNode));
+                            if (cNode.nodeName == "meno") $('#Meno153A').val(getNodeValue(cNode));
+                        }
+                    }
+                    if (bNode.nodeName == "rodicB") {
+                        for (var k = 0; k < bNode.childNodes.length; k++) {
+                            var cNode = bNode.childNodes[k];
+                            if (cNode.nodeName == "rodneCislo") {
+                                if (getNodeValue(cNode).length >= 9) {
+                                    $('#tbRodneCislo153B_1').val(getNodeValue(cNode).substr(0, 6));
+                                    $('#tbRodneCislo153B_2').val(getNodeValue(cNode).substr(6));
+                                } else {
+                                    $('#tbRodneCislo153B_1').val(getNodeValue(cNode).substr(0, 4));
+                                    $('#tbRodneCislo153B_2').val(getNodeValue(cNode).substr(4));
+                                }
+                            }
+                            if (cNode.nodeName == "priezvisko") $('#Priezvisko153B').val(getNodeValue(cNode));
+                            if (cNode.nodeName == "meno") $('#Meno153B').val(getNodeValue(cNode));
+                        }
+                    }
+                    if (bNode.nodeName == "bolZverenyDoStarostlivosti") document.getElementById("chNahrStar").checked = (getNodeValue(bNode) == '1' ? true : false);
+                }
+                break;
+
+            case 'r151': $('#tbPodiel151').val(getNodeValue(aNode)); break;
+
+
+
 
             case 'osobitneZaznamy':
 
@@ -1623,7 +1730,7 @@ function processTelo(telo) {
 
                                     if (cNode.nodeName == "kodStatu") {
                                         if (l > 6) {
-                                            var addButton = $('div[id^=layoutRow39930]').last().find('#addSectionlayoutRow39930');
+                                            var addButton = $('div[id^=layoutRow41712]').last().find('#addSectionlayoutRow41712');
                                             addSection(6, 20, addButton);
                                         }
                                         $('#odd13kod_Repeating_' + (l - 1)).val(getNodeValue(cNode));
@@ -1646,7 +1753,7 @@ function processTelo(telo) {
                 }
                 break;
 
-            case 'r153': $('#t153').val(getNodeValue(aNode)); break;
+            case 'r154': $('#t154').val(getNodeValue(aNode)); break;
             case 'datumVyhlasenia': $('#dtpDatumSpravneUplne').val(upravdatum(getNodeValue(aNode))); break;
 
             case 'danovyPreplatokBonus':
@@ -1675,41 +1782,63 @@ function processTelo(telo) {
                 }
                 break;
 
-            /*case 'prilPar30cOdpocetVydavkov' :
-                $("#ProjektCislo").val(getElementsValXml(aNode.getElementsByTagName('projektCislo')[0]));
-                $("#PocetProjektov").val(getElementsValXml(aNode.getElementsByTagName('pocetProjektov')[0]));
-                $("#DatumProjektu").val(upravdatum(getElementsValXml(aNode.getElementsByTagName('datumRealizacie')[0])));
-                var r01 = aNode.getElementsByTagName('r01')[0];
-                    $("#Pri1r1DatumOd").val(upravdatum(getElementsValXml(r01.getElementsByTagName('zdanObdobieOd')[0])));
-                    $("#Pri1r1DatumDo").val(upravdatum(getElementsValXml(r01.getElementsByTagName('zdanObdobieDo')[0])));
-                    $("#Pri1r1Vyska").val(getElementsValXml(r01.getElementsByTagName('narok')[0]));
-                    $("#Pri1r1Odp").val(getElementsValXml(r01.getElementsByTagName('odpocitanaCast')[0]));
-                var r02 = aNode.getElementsByTagName('r02')[0];
-                    $("#Pri1r2DatumOd").val(upravdatum(getElementsValXml(r02.getElementsByTagName('zdanObdobieOd')[0])));
-                    $("#Pri1r2DatumDo").val(upravdatum(getElementsValXml(r02.getElementsByTagName('zdanObdobieDo')[0])));
-                    $("#Pri1r2Vyska").val(getElementsValXml(r02.getElementsByTagName('narok')[0]));
-                    $("#Pri1r2Odp").val(getElementsValXml(r02.getElementsByTagName('odpocitanaCast')[0]));
-                var r03 = aNode.getElementsByTagName('r03')[0];
-                    $("#Pri1r3DatumOd").val(upravdatum(getElementsValXml(r03.getElementsByTagName('zdanObdobieOd')[0])));
-                    $("#Pri1r3DatumDo").val(upravdatum(getElementsValXml(r03.getElementsByTagName('zdanObdobieDo')[0])));
-                    $("#Pri1r3Vyska").val(getElementsValXml(r03.getElementsByTagName('narok')[0]));
-                    $("#Pri1r3Odp").val(getElementsValXml(r03.getElementsByTagName('odpocitanaCast')[0]));
-                var r04 = aNode.getElementsByTagName('r04')[0];
-                    $("#Pri1r4DatumOd").val(upravdatum(getElementsValXml(r04.getElementsByTagName('zdanObdobieOd')[0])));
-                    $("#Pri1r4DatumDo").val(upravdatum(getElementsValXml(r04.getElementsByTagName('zdanObdobieDo')[0])));
-                    $("#Pri1r4Vyska").val(getElementsValXml(r04.getElementsByTagName('narok')[0]));
-                    $("#Pri1r4Odp").val(getElementsValXml(r04.getElementsByTagName('odpocitanaCast')[0]));
-                var r05 = aNode.getElementsByTagName('r05')[0];
-                    $("#Pri1r5DatumOd").val(upravdatum(getElementsValXml(r05.getElementsByTagName('zdanObdobieOd')[0])));
-                    $("#Pri1r5DatumDo").val(upravdatum(getElementsValXml(r05.getElementsByTagName('zdanObdobieDo')[0])));
-                    $("#Pri1r5Vyska").val(getElementsValXml(r05.getElementsByTagName('narok')[0]));
-                    $("#Pri1r5Odp").val(getElementsValXml(r05.getElementsByTagName('odpocitanaCast')[0]));
-                $("#Pri1r6").val(getElementsValXml(aNode.getElementsByTagName('r06')[0]));
-                $("#CieleProjektu").val(htmlDecode(getElementsValXml(aNode.getElementsByTagName('ciele')[0])));
-                $("#Pri1r7").val(getElementsValXml(aNode.getElementsByTagName('r07')[0]));
-            break;*/
 
-            case 'prilPodielyNaZisku':
+
+                stringBuilder.appendLine('\t<pril1cPar30caVydavkySport>');
+                for (var z = 1; z <= 5; z++) {//5 rovnakych riadkov
+                    if (z < 5) {
+                        stringBuilder.appendLine('\t\t<r0' + z + '>');
+                    } else {
+                        stringBuilder.appendLine('\t\t<r' + z + '>');
+                    }
+                    stringBuilder.appendLine('\t\t\t<s01Od>' + htmlEncode($('#Pri1cr' + z + 'DatumOd').val()) + '</s01Od>');
+                    stringBuilder.appendLine('\t\t\t<s01Do>' + htmlEncode($('#Pri1cr' + z + 'DatumDo').val()) + '</s01Do>');
+                    stringBuilder.appendLine('\t\t\t<s02>' + htmlEncode($('#Pri1cr' + z + 'Stlpec2').val()) + '</s02>');
+                    stringBuilder.appendLine('\t\t\t<s03>' + htmlEncode($('#Pri1cr' + z + 'Stlpec3').val()) + '</s03>');
+                    if (z < 5) {
+                        stringBuilder.appendLine('\t\t</r0' + z + '>');
+                    } else {
+                        stringBuilder.appendLine('\t\t</r' + z + '>');
+                    }
+                }
+                stringBuilder.appendLine('\t\t<r06>' + htmlEncode($('#Pri1cr6Stlpec3').val()) + '</r06>');
+                stringBuilder.appendLine('\t\t<r07>' + htmlEncode($('#Pri1cr7Stlpec3').val()) + '</r07>');
+                stringBuilder.appendLine('\t\t<r08>' + htmlEncode($('#Pri1cr8Stlpec3').val()) + '</r08>');
+
+                stringBuilder.appendLine('\t</pril1cPar30caVydavkySport>');
+
+            case 'pril1cPar30caVydavkySport':
+                var r01 = aNode.getElementsByTagName('r01')[0];
+                $("#Pri1cr1DatumOd").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Od')[0])));
+                $("#Pri1cr1DatumDo").val(upravdatum(getElementsValXml(r01.getElementsByTagName('s01Do')[0])));
+                $("#Pri1cr1Stlpec2").val(getElementsValXml(r01.getElementsByTagName('s02')[0]));
+                $("#Pri1cr1Stlpec3").val(getElementsValXml(r01.getElementsByTagName('s03')[0]));
+                var r02 = aNode.getElementsByTagName('r02')[0];
+                $("#Pri1cr2DatumOd").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Od')[0])));
+                $("#Pri1cr2DatumDo").val(upravdatum(getElementsValXml(r02.getElementsByTagName('s01Do')[0])));
+                $("#Pri1cr2Stlpec2").val(getElementsValXml(r02.getElementsByTagName('s02')[0]));
+                $("#Pri1cr2Stlpec3").val(getElementsValXml(r02.getElementsByTagName('s03')[0]));
+                var r03 = aNode.getElementsByTagName('r03')[0];
+                $("#Pri1cr3DatumOd").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Od')[0])));
+                $("#Pri1cr3DatumDo").val(upravdatum(getElementsValXml(r03.getElementsByTagName('s01Do')[0])));
+                $("#Pri1cr3Stlpec2").val(getElementsValXml(r03.getElementsByTagName('s02')[0]));
+                $("#Pri1cr3Stlpec3").val(getElementsValXml(r03.getElementsByTagName('s03')[0]));
+                var r04 = aNode.getElementsByTagName('r04')[0];
+                $("#Pri1cr4DatumOd").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Od')[0])));
+                $("#Pri1cr4DatumDo").val(upravdatum(getElementsValXml(r04.getElementsByTagName('s01Do')[0])));
+                $("#Pri1cr4Stlpec2").val(getElementsValXml(r04.getElementsByTagName('s02')[0]));
+                $("#Pri1cr4Stlpec3").val(getElementsValXml(r04.getElementsByTagName('s03')[0]));
+                var r05 = aNode.getElementsByTagName('r05')[0];
+                $("#Pri1cr5DatumOd").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Od')[0])));
+                $("#Pri1cr5DatumDo").val(upravdatum(getElementsValXml(r05.getElementsByTagName('s01Do')[0])));
+                $("#Pri1cr5Stlpec2").val(getElementsValXml(r05.getElementsByTagName('s02')[0]));
+                $("#Pri1cr5Stlpec3").val(getElementsValXml(r05.getElementsByTagName('s03')[0]));
+                $("#Pri1cr6Stlpec3").val(getElementsValXml(aNode.getElementsByTagName('r06')[0]));
+                $("#Pri1cr7Stlpec3").val(getElementsValXml(aNode.getElementsByTagName('r07')[0]));
+                $("#Pri1cr8Stlpec3").val(getElementsValXml(aNode.getElementsByTagName('r08')[0]));
+                break;
+
+            case 'pril2PodielyNaZisku':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
 
@@ -1780,17 +1909,10 @@ function processTelo(telo) {
                 }
                 break;
 
-            case 'socZdravPoistenie':
+            case 'pril3VynosyZDlhopisov':
                 for (var j = 0; j < aNode.childNodes.length; j++) {
                     var bNode = aNode.childNodes[j];
-
-                    if (bNode.nodeName == "pr1") {
-                        for (var k = 0; k < bNode.childNodes.length; k++) {
-                            var cNode = bNode.childNodes[k];
-                            if (cNode.nodeName == "s1") $('#tbPr3S1').val(getNodeValue(cNode));
-                            if (cNode.nodeName == "s2") $('#tbPr3S2').val(getNodeValue(cNode));
-                        }
-                    }
+                    if (bNode.nodeName == "pr1") $('#tbPr3_01').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr2") $('#tbPr3_02').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr3") $('#tbPr3_03').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr4") $('#tbPr3_04').val(getNodeValue(bNode));
@@ -1804,7 +1926,34 @@ function processTelo(telo) {
                     if (bNode.nodeName == "pr12") $('#tbPr3_12').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr13") $('#tbPr3_13').val(getNodeValue(bNode));
                     if (bNode.nodeName == "pr14") $('#tbPr3_14').val(getNodeValue(bNode));
-                    if (bNode.nodeName == "pr15") $('#tbPr3_15').val(getNodeValue(bNode));
+                }
+                break;
+
+            case 'socZdravPoistenie':
+                for (var j = 0; j < aNode.childNodes.length; j++) {
+                    var bNode = aNode.childNodes[j];
+
+                    if (bNode.nodeName == "pr1") {
+                        for (var k = 0; k < bNode.childNodes.length; k++) {
+                            var cNode = bNode.childNodes[k];
+                            if (cNode.nodeName == "s1") $('#tbPr4S1').val(getNodeValue(cNode));
+                            if (cNode.nodeName == "s2") $('#tbPr4S2').val(getNodeValue(cNode));
+                        }
+                    }
+                    if (bNode.nodeName == "pr2") $('#tbPr4_02').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr3") $('#tbPr4_03').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr4") $('#tbPr4_04').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr5") $('#tbPr4_05').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr6") $('#tbPr4_06').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr7") $('#tbPr4_07').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr8") $('#tbPr4_08').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr9") $('#tbPr4_09').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr10") $('#tbPr4_10').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr11") $('#tbPr4_11').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr12") $('#tbPr4_12').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr13") $('#tbPr4_13').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr14") $('#tbPr4_14').val(getNodeValue(bNode));
+                    if (bNode.nodeName == "pr15") $('#tbPr4_15').val(getNodeValue(bNode));
                     if (bNode.nodeName == "priPrimoch6ods1a2VediemPU") $("#chPriPrijmoch").attr("checked", (getNodeValue(bNode) == '1' ? true : false)).change();
                     if (bNode.nodeName == "datum") $('#dtpDatumSoc').val(upravdatum(getNodeValue(bNode)));
                 }
@@ -1851,13 +2000,13 @@ break;*/
 
     if (prilPar30cOdpocetVydavkov.length != 0) {
         for (var t = 0; t < prilPar30cOdpocetVydavkov.length; t++) {
-            var thisLR = $("[id^='layoutRow40053']:last");//takéto id pre layoutRow vo formulári aktuálne neexistuje (20221206, zz)
+            var thisLR = $("[id^='layoutRow41835']:last");//takéto id pre layoutRow vo formulári aktuálne neexistuje (20221206, zz)
             if (t != 0) {
-                addSection(1, 999, thisLR.find("[id^='addSectionlayoutRow40053']"));
-                var policko = $("[id^='layoutRow40053']:last").find("[id^='Pri1r7']").attr("disabled", true);
+                addSection(1, 999, thisLR.find("[id^='addSectionlayoutRow41835']"));
+                var policko = $("[id^='layoutRow41835']:last").find("[id^='Pri1r7']").attr("disabled", true);
                 policko.attr("disabled", true);
             }
-            var thisLR = $("[id^='layoutRow40053']:last");
+            var thisLR = $("[id^='layoutRow41835']:last");
             var prilPar30cOdpocetVydavkovXML = prilPar30cOdpocetVydavkov[t];
 
             thisLR.find("[id^='ProjektCislo']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('projektCislo')[0]));
@@ -1894,13 +2043,13 @@ break;*/
             thisLR.find("[id^='Pri1r8']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('r08')[0]));
             thisLR.find("[id^='Pri1r9']").val(getElementsValXml(prilPar30cOdpocetVydavkovXML.getElementsByTagName('r09')[0]));
 
-            if ($('[id^=layoutRow40053]').length == prilPar30cOdpocetVydavkov.length)
+            if ($('[id^=layoutRow41835]').length == prilPar30cOdpocetVydavkov.length)
                 $("#Pri1r7").change();
         }
 
 
         // Nastavenie obmedzeni datumov		
-        var allLR = $("[id^='layoutRow40053']");
+        var allLR = $("[id^='layoutRow41835']");
 
         allLR.each(function () {
             var lr = $(this);
@@ -2122,7 +2271,7 @@ function createfdf(segment, index) {
 function createNfdf() {
     var fdfObsah = new Array();
     var pocetvsetkychsekcii = 1;
-    var pocetvsetkychsekcii = $("[id^='layoutRow40053_']").length;
+    var pocetvsetkychsekcii = $("[id^='layoutRow41835_']").length;
     var pocetsekciinastranu = 1;
     var pocetmaxstran = 10;
     var davka = 0;
@@ -2505,38 +2654,27 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t45').val(), 2) + ')/T (45d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t46').val()) + ')/T (46)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t46').val(), 2) + ')/T (46d)>>');
-    for (var i = 47; i <= 47; i++) {
-        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (47-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (47-2d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (47-3)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (47-3d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (47-4)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (47-4d)>>');
-    }
 
-    for (var i = 48; i <= 48; i++) {
-        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (48-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (48-2d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (48-3)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (48-3d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (48-4)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (48-4d)>>');
-    }
+    for (var i = 47; i <= 50; i++) {
 
-    for (var i = 49; i <= 49; i++) {
-        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (49-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (49-2d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (49-3)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (49-3d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (49-4)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (49-4d)>>');
-    }
+        // pre 47, 48 , 49, 50
+        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (' + i + '-2)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (' + i + '-2d)>>');
 
-    for (var i = 50; i <= 50; i++) {
-        stringBuilder.appendLine('          << /V (' + celacast($('#R2_' + i).val()) + ')/T (50-2)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_' + i).val(), 2) + ')/T (50-2d)>>');
-        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (50-4)>>');
-        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (50-4d)>>');
+        stringBuilder.appendLine('          << /V (' + celacast($('#R3_' + i).val()) + ')/T (' + i + '-3)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R3_' + i).val(), 2) + ')/T (' + i + '-3d)>>');
+
+        stringBuilder.appendLine('          << /V (' + celacast($('#R4_' + i).val()) + ')/T (' + i + '-4)>>');
+        stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_' + i).val(), 2) + ')/T (' + i + '-4d)>>');
+
+        //pre 50a
+        if (i === 50) {
+            stringBuilder.appendLine('          << /V (' + celacast($('#R2_50a').val()) + ')/T (50a-2)>>');
+            stringBuilder.appendLine('          << /V (' + desatinnacast($('#R2_50a').val(), 2) + ')/T (50a-2d)>>');
+
+            stringBuilder.appendLine('          << /V (' + celacast($('#R4_50a').val()) + ')/T (50a-4)>>');
+            stringBuilder.appendLine('          << /V (' + desatinnacast($('#R4_50a').val(), 2) + ')/T (50a-4d)>>');
+        }
     }
     stringBuilder.appendLine('    << /V (' + celacast($('#t51').val()) + ')/T (51)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t51').val(), 2) + ')/T (51d)>>');
@@ -2546,6 +2684,8 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t53').val(), 2) + ')/T (53d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t54').val()) + ')/T (54)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t54').val(), 2) + ')/T (54d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#t54a').val()) + ')/T (54a)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t54a').val(), 2) + ')/T (54ad)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t55').val()) + ')/T (55)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t55').val(), 2) + ')/T (55d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t56').val()) + ')/T (56)>>');
@@ -2869,6 +3009,8 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t145').val()) + ')/T (145)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t146').val()) + ')/T (146)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t146').val(), 2) + ')/T (146d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#t146a').val()) + ')/T (146a)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#t146a').val(), 2) + ')/T (146ad)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t147').val()) + ')/T (147)>>');
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#t147').val(), 2) + ')/T (147d)>>');
     stringBuilder.appendLine('    << /V (' + celacast($('#t148').val()) + ')/T (148)>>');
@@ -2878,16 +3020,27 @@ function createMainFdf() {
 
     //XII. oddiel
     stringBuilder.appendLine('    << /V (' + ($('#cbNeuplatnujem').is(':checked') ? 'X' : '') + ')/T (neuplatnit)>>');
-    stringBuilder.appendLine('    << /V (' + ($('#cbSplnam3Per').is(':checked') ? 'X' : '') + ')/T (splnam)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPodiel151').val()) + ')/T (151)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPodiel151').val(), 2) + ')/T (151d)>>');
-
-    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbico152').val()) + ')/T (152a)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbico152').val()) + ')/T (151a)>>');
     var row = divideRows(2, 'tbObchMeno152');
-    stringBuilder.appendLine('    << /V (' + prepisznakyFdf(row[0]) + ')/T (152b)>>');
-    stringBuilder.appendLine('    << /V (' + prepisznakyFdf(row[1]) + ')/T (152c)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf(row[0]) + ')/T (151b)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf(row[1]) + ')/T (151c)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbSplnam3Per').is(':checked') ? 'X' : '') + ')/T (splnam)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPodiel152').val()) + ')/T (152)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPodiel152').val(), 2) + ')/T (152d)>>');
 
-    stringBuilder.appendLine('    << /V (' + ($('#chbSuhlas').is(':checked') ? 'X' : '') + ')/T (suhlasim)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#chbsuhlas').is(':checked') ? 'X' : '') + ')/T (suhlasim)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#cbParagraf50aa').is(':checked') ? 'X' : '') + ')/T (neuplatnit-rodicia)>>');
+
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbRodneCislo153A_1').val()) + ')/T (153a-rc1)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbRodneCislo153A_2').val()) + ')/T (153a-rc2)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Priezvisko153A').val()) + ')/T (153a-priezvisko)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Meno153A').val()) + ')/T (153a-meno)>>');
+
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbRodneCislo153B_1').val()) + ')/T (153b-rc1)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#tbRodneCislo153B_2').val()) + ')/T (153b-rc2)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Priezvisko153B').val()) + ')/T (153b-priezvisko)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Meno153B').val()) + ')/T (153b-meno)>>');
+    stringBuilder.appendLine('    << /V (' + ($('#chNahrStar').is(':checked') ? 'X' : '') + ')/T (zvereny)>>');
 
     //XIII oddiel
     stringBuilder.appendLine('    << /V (' + ($('#cbUvadza').is(':checked') ? 'X' : '') + ')/T (zaznam1)>>');
@@ -2962,7 +3115,7 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#valRekreacia').val(), 2) + ')/T (vyskad)>>');
 
     stringBuilder.appendLine('    << /V (');
-    var polesekcii1 = $("[id^='layoutRow39930']");
+    var polesekcii1 = $("[id^='layoutRow41712']");
     if (polesekcii1.length > 6) {
         stringBuilder.appendLine(prepisznakyFdf('Ďalšie záznamy:'));
         for (var i = 6; i < polesekcii1.length; i++) {
@@ -2976,7 +3129,7 @@ function createMainFdf() {
     }
 
 
-    var polesekcii2 = $("[id^='layoutRow40037']");
+    var polesekcii2 = $("[id^='layoutRow41819']");
     if (polesekcii2.length > 4) {
         stringBuilder.appendLine(prepisznakyFdf('\nĎalšie vyživované deti:'));
         for (var i = 4; i < polesekcii2.length; i++) {
@@ -3005,7 +3158,7 @@ function createMainFdf() {
     else
         stringBuilder.appendLine(prepisznakyFdf($('#taZaznamy').val()) + ')/T (zaznam2)>>');
 
-    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t153').val()) + ')/T (153)>>');
+    stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t154').val()) + ')/T (154)>>');
 
 
     if (!!$('#dtpDatumSpravneUplne').val()) {
@@ -3049,9 +3202,9 @@ function createMainFdf() {
         stringBuilder.appendLine('    << /V ()/T (XIVdatum3)>>');
     }
 
-    var lr = $("[id^='layoutRow40053']");
+    var lr = $("[id^='layoutRow41835']");
     var pocetFdfStran = lr.length;
-    var lrAkt = $("#layoutRow40053");
+    var lrAkt = $("#layoutRow41835");
     var isProjectEmpty = emptyProject(lrAkt);
 
     if (isProjectEmpty)
@@ -3228,6 +3381,52 @@ function createMainFdf() {
 
     stringBuilder.appendLine('    ]>>');
 
+    //Priloha 1c
+    for (var i = 1; i <= 5; i++) {
+        Pri1cr1DatumOd
+        if (!!$('#Pri1cr' + i + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumOd').val().split(".")[0]) + ')/T (ps' + i + '1a)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1a)>>');
+        }
+        if (!!$('#Pri1cr' + i + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumOd').val().split(".")[1]) + ')/T (ps' + i + '1b)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1b)>>');
+        }
+        if (!!$('#Pri1cr' + i + 'DatumOd').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumOd').val().split(".")[2].substr(2, 2)) + ')/T (ps' + i + '1c)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1c)>>');
+        }
+        if (!!$('#Pri1cr' + i + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumDo').val().split(".")[0]) + ')/T (ps' + i + '1d)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1d)>>');
+        }
+        if (!!$('#Pri1cr' + i + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumDo').val().split(".")[1]) + ')/T (ps' + i + '1e)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1e)>>');
+        }
+        if (!!$('#Pri1cr' + i + 'DatumDo').val()) {
+            stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#Pri1cr' + i + 'DatumDo').val().split(".")[2].substr(2, 2)) + ')/T (ps' + i + '1f)>>');
+        } else {
+            stringBuilder.appendLine('    << /V ()/T (ps' + i + '1f)>>');
+        }
+
+        stringBuilder.appendLine('        << /V (' + celacast($('#Pri1cr' + i + 'Stlpec2').val()) + ')/T (ps' + i + '2)>>    ');
+        stringBuilder.appendLine('        << /V (' + desatinnacast($('#Pri1cr' + i + 'Stlpec2').val()) + ')/T (ps' + i + '2d)>>    ');
+        stringBuilder.appendLine('        << /V (' + celacast($('#Pri1cr' + i + 'Stlpec3').val()) + ')/T (ps' + i + '3)>>    ');
+        stringBuilder.appendLine('        << /V (' + desatinnacast($('#Pri1cr' + i + 'Stlpec3').val()) + ')/T (ps' + i + '3d)>>    ');
+    }
+    stringBuilder.appendLine('      << /V (' + celacast($('#Pri1cr6Stlpec3').val()) + ')/T (ps63)>> ');
+    stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1cr6Stlpec3').val()) + ')/T (ps63d)>> ');
+    stringBuilder.appendLine('      << /V (' + celacast($('#Pri1cr7Stlpec3').val()) + ')/T (ps73)>> ');
+    stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1cr7Stlpec3').val()) + ')/T (ps73d)>> ');
+    stringBuilder.appendLine('      << /V (' + celacast($('#Pri1cr8Stlpec3').val()) + ')/T (ps83)>> ');
+    stringBuilder.appendLine('      << /V (' + desatinnacast($('#Pri1cr8Stlpec3').val()) + ')/T (ps83d)>> ');
+
 
     // Priloha 2
     stringBuilder.appendLine('    << /V (' + celacast($('#tbPr2S1_01').val()) + ')/T (ozd011)>>');
@@ -3300,41 +3499,50 @@ function createMainFdf() {
     stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr2_28').val(), 2) + ')/T (ozd28d)>>');
 
     // Priloha 3
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3S1').val()) + ')/T (szp01-1)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3S1').val(), 2) + ')/T (szp01-1d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3S2').val()) + ')/T (szp01-2)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3S2').val(), 2) + ')/T (szp01-2d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_02').val()) + ')/T (szp02)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_02').val(), 2) + ')/T (szp02d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_03').val()) + ')/T (szp03)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_03').val(), 2) + ')/T (szp03d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_04').val()) + ')/T (szp04)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_04').val(), 2) + ')/T (szp04d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_05').val()) + ')/T (szp05)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_05').val(), 2) + ')/T (szp05d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_06').val()) + ')/T (szp06)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_06').val(), 2) + ')/T (szp06d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_07').val()) + ')/T (szp07)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_07').val(), 2) + ')/T (szp07d)>>');
 
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_08').val()) + ')/T (szp08)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_08').val(), 2) + ')/T (szp08d)>>');
+    for (var i = 1; i <= 14; i++) {
+        
+        stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_' + (i < 10 ? '0' + i : i)).val()) + ')/T (vozd' + (i < 10 ? '0' + i : i) + ')>>');
+        stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_' + (i < 10 ? '0' + i : i)).val(), 2) + ')/T (vozd' + (i < 10 ? '0' + i : i) + 'd)>>');
 
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_09').val()) + ')/T (szp09)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_09').val(), 2) + ')/T (szp09d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_10').val()) + ')/T (szp10)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_10').val(), 2) + ')/T (szp10d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_11').val()) + ')/T (szp11)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_11').val(), 2) + ')/T (szp11d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_12').val()) + ')/T (szp12)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_12').val(), 2) + ')/T (szp12d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_13').val()) + ')/T (szp13)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_13').val(), 2) + ')/T (szp13d)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_14').val()) + ')/T (szp14)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_14').val(), 2) + ')/T (szp14d)>>');
+    }
+
+    // Priloha 4
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4S1').val()) + ')/T (szp01-1)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4S1').val(), 2) + ')/T (szp01-1d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4S2').val()) + ')/T (szp01-2)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4S2').val(), 2) + ')/T (szp01-2d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_02').val()) + ')/T (szp02)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_02').val(), 2) + ')/T (szp02d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_03').val()) + ')/T (szp03)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_03').val(), 2) + ')/T (szp03d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_04').val()) + ')/T (szp04)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_04').val(), 2) + ')/T (szp04d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_05').val()) + ')/T (szp05)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_05').val(), 2) + ')/T (szp05d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_06').val()) + ')/T (szp06)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_06').val(), 2) + ')/T (szp06d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_07').val()) + ')/T (szp07)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_07').val(), 2) + ')/T (szp07d)>>');
+
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_08').val()) + ')/T (szp08)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_08').val(), 2) + ')/T (szp08d)>>');
+
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_09').val()) + ')/T (szp09)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_09').val(), 2) + ')/T (szp09d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_10').val()) + ')/T (szp10)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_10').val(), 2) + ')/T (szp10d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_11').val()) + ')/T (szp11)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_11').val(), 2) + ')/T (szp11d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_12').val()) + ')/T (szp12)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_12').val(), 2) + ')/T (szp12d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_13').val()) + ')/T (szp13)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_13').val(), 2) + ')/T (szp13d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_14').val()) + ')/T (szp14)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_14').val(), 2) + ')/T (szp14d)>>');
     stringBuilder.appendLine('    << /V (' + ($('#chPriPrijmoch').is(':checked') ? 'X' : '') + ')/T (szppu)>>');
-    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr3_15').val()) + ')/T (szp15)>>');
-    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr3_15').val(), 2) + ')/T (szp15d)>>');
+    stringBuilder.appendLine('    << /V (' + celacast($('#tbPr4_15').val()) + ')/T (szp15)>>');
+    stringBuilder.appendLine('    << /V (' + desatinnacast($('#tbPr4_15').val(), 2) + ')/T (szp15d)>>');
 
 
     if (!!$('#dtpDatumSoc').val()) {
@@ -3354,7 +3562,7 @@ function createMainFdf() {
     }
 
     stringBuilder.appendLine(' ]');
-    stringBuilder.appendLine(' /F (form.601.DPFOB-24-print-save.pdf)');
+    stringBuilder.appendLine(' /F (form.621.DPFOB-25-print-save.pdf)');
     stringBuilder.appendLine(' /ID [ <f09672f5777c7363de522b1b240fe891><e243d0a3dc18e99c15162168ae4276d6>]');
     stringBuilder.appendLine(' >>');
     stringBuilder.appendLine('>>');
@@ -3402,7 +3610,7 @@ function createpotvrdenie() {
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t135').val()) + ')/T (r135)>>');
     stringBuilder.appendLine('    << /V (' + prepisznakyFdf($('#t136').val()) + ')/T (r136)>>');
     stringBuilder.appendLine(' ]');
-    stringBuilder.appendLine(' /F (form.601.DPFOB-24-potvrdenie-print-save.pdf)');
+    stringBuilder.appendLine(' /F (form.621.DPFOB-25-potvrdenie-print-save.pdf)');
     stringBuilder.appendLine(' /ID [ <b310ccfdb26d1b632b562cd598a3cb97><50178e60984b848bcecd3e9e265bf14a>]');
     stringBuilder.appendLine(' >>');
     stringBuilder.appendLine('>>');
@@ -3424,12 +3632,12 @@ function createopakovaneNfdf(davka, zaciatoksekcii, koniecsekcii, pocetsekciinas
     stringBuilder.appendLine('    [');
     stringBuilder.appendLine('    << /V(' + prepisznakyFdf('Tlačivo vytlačené z Portálu FS', false) + ')/T (print)>>');
 
-    var lr = $("[id^='layoutRow40053_']");
+    var lr = $("[id^='layoutRow41835_']");
     var pocetFdfStran = lr.length + 1;
     var boolJePlne = false;
 
     if (pocetFdfStran == 1 && davka == 1) {
-        var pomSekciaNaKOntrolu = $("[id='layoutRow40053_Repeating_1']");
+        var pomSekciaNaKOntrolu = $("[id='layoutRow41835_Repeating_1']");
         var arrayPoli = new Array();
 
         arrayPoli.push(pomSekciaNaKOntrolu.find("[id^='Pri1r1DatumOd']").val());
@@ -3567,7 +3775,7 @@ function createopakovaneNfdf(davka, zaciatoksekcii, koniecsekcii, pocetsekciinas
     }
 
     stringBuilder.appendLine('    ]');
-    stringBuilder.appendLine('    /F (form.601.DPFOB-24-priloha10-print-save.pdf)');
+    stringBuilder.appendLine('    /F (form.621.DPFOB-25-priloha10-print-save.pdf)');
     stringBuilder.appendLine('    /ID [ <ddc3355b1fd2420733ea3739a242e02a><25cb8633995744a5a35366d96be3d877>]');
     stringBuilder.appendLine('  >> ');
     stringBuilder.appendLine('>> ');

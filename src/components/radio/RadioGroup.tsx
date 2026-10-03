@@ -1,4 +1,4 @@
-import React, { createContext, useContext, PropsWithChildren } from 'react'
+import { createContext, useContext, PropsWithChildren } from 'react'
 
 interface RadioGroupState {
   readonly selected: string
