@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { DohodaUserInput, FormErrors } from '../types/PageUserInputs'

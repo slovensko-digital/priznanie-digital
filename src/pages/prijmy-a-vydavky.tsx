@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form, FormikProps } from 'formik'
 import { BooleanRadio, FormWrapper, Input } from '../components/FormComponents'
 import { FormErrors, IncomeAndExpenseUserInput } from '../types/PageUserInputs'

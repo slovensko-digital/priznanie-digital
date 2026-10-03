@@ -1,5 +1,4 @@
-import React from 'react'
-import getConfig from 'next/config'
+import getConfig from '../../lib/runtimeConfig'
 import { Page } from '../../components/Page'
 import { PostponeUserInput } from '../../types/PostponeUserInput'
 import { convertPostponeToXML } from '../../lib/postpone/postponeConverter'
