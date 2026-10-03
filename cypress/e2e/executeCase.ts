@@ -20,6 +20,14 @@ import {
 import { PostponeUserInput } from '../../src/types/PostponeUserInput'
 import path from 'path'
 import { E2eTestUserInput } from '../../src/types/E2eTestUserInput'
+import { PotvrdenieInput } from '../../src/types/TaxFormUserInput'
+import {
+  AMOUNT_FIELDS,
+  DOHODA_TOTALS,
+  Totals,
+  ZAMESTNANIE_TOTALS,
+  itemFromTotals,
+} from '../../src/lib/potvrdenia'
 
 function formatCurrency(value: number) {
   return formatCurrencyOrigin(value).replaceAll('\u00A0', ' ')
@@ -53,6 +61,34 @@ export const formSuccessful = (stub) => () => {
 }
 
 const getError = () => cy.get('[data-test=error]')
+
+const fillPotvrdenia = (
+  testId: 'zamestnavatel' | 'dohoda',
+  list: 'zamestnavatelia' | 'dohody',
+  items: Partial<PotvrdenieInput>[],
+) => {
+  const addAnother = testId === 'dohoda' ? 'addAnotherDohoda' : 'addAnother'
+  items.forEach((item, index) => {
+    cy.get(
+      index === 0 ? `[data-test="add-${testId}"]` : `#${addAnother}-yes`,
+    ).click()
+    AMOUNT_FIELDS.forEach((field) =>
+      cy
+        .get(`[data-test="${list}[${index}].${field}-input"]`)
+        .type(item[field] || '0'),
+    )
+    cy.get(`[data-test="save-${testId}"]`).click()
+  })
+  cy.get('.govuk-summary-list__row').should('have.length', items.length)
+  cy.get(`#${addAnother}-no`).click()
+}
+
+const potvrdeniaOf = (
+  items: PotvrdenieInput[] | undefined,
+  input: E2eTestUserInput,
+  totals: Totals,
+) =>
+  items?.length ? items : [itemFromTotals(input, totals, {} as PotvrdenieInput)]
 
 // const toFormattedNumber = (input: string) =>
 //   Number.parseFloat(input.replace(',', '.')).toFixed(2).replace('.', ',')
@@ -101,11 +137,11 @@ const executeTestCase = (testCase: string) => {
 
         if (input.employed) {
           getInput('employed', '-yes').click()
-          typeToInput('uhrnPrijmovOdVsetkychZamestnavatelov', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenie', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenie', input)
-          typeToInput('uhrnPreddavkovNaDan', input)
-          typeToInput('udajeODanovomBonuseNaDieta', input)
+          fillPotvrdenia(
+            'zamestnavatel',
+            'zamestnavatelia',
+            potvrdeniaOf(input.zamestnavatelia, input, ZAMESTNANIE_TOTALS),
+          )
         } else {
           getInput('employed', '-no').click()
         }
@@ -117,11 +153,11 @@ const executeTestCase = (testCase: string) => {
 
         if (input.dohoda) {
           getInput('dohoda', '-yes').click()
-          typeToInput('uhrnPrijmovZoVsetkychDohod', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody', input)
-          typeToInput('uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody', input)
-          typeToInput('uhrnPreddavkovNaDanDohody', input)
-          typeToInput('udajeODanovomBonuseNaDietaDohody', input)
+          fillPotvrdenia(
+            'dohoda',
+            'dohody',
+            potvrdeniaOf(input.dohody, input, DOHODA_TOTALS),
+          )
         } else {
           getInput('dohoda', '-no').click()
         }

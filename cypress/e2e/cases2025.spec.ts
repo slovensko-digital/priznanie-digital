@@ -7,5 +7,6 @@ describe('Cases', () => {
     'case202507',
     'case202508',
     'case202509',
+    'case202510', // two employers + two dohody (add to list UI)
   ])
 })

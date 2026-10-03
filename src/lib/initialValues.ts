@@ -11,7 +11,11 @@ import {
   TaxBonusUserInput,
   RentUserInput,
 } from '../types/PageUserInputs'
-import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
+import {
+  ChildInput,
+  PotvrdenieInput,
+  TaxFormUserInput,
+} from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 
 export const incomeAndExpenseInitialValues: IncomeAndExpenseUserInput = {
@@ -49,6 +53,7 @@ export const personalInformationUserInputInitialValues: PersonalInformationUserI
 
 export const employmentUserInputInitialValues: EmployedUserInput = {
   employed: undefined,
+  zamestnavatelia: [],
   uhrnPrijmovOdVsetkychZamestnavatelov: '',
   uhrnPovinnehoPoistnehoNaSocialnePoistenie: '',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenie: '',
@@ -58,6 +63,7 @@ export const employmentUserInputInitialValues: EmployedUserInput = {
 
 export const dohodaUserInputInitialValues: DohodaUserInput = {
   dohoda: undefined,
+  dohody: [],
   uhrnPrijmovZoVsetkychDohod: '',
   uhrnPovinnehoPoistnehoNaSocialnePoistenieDohody: '',
   uhrnPovinnehoPoistnehoNaZdravotnePoistenieDohody: '',
@@ -73,6 +79,18 @@ export const rentUserInputInitialValues: RentUserInput = {
   vydavkyZPrenajmu: '',
   rent_step: 0,
 }
+
+let potvrdenieCounter = 0
+
+export const makeEmptyPotvrdenie = (): PotvrdenieInput => ({
+  id: potvrdenieCounter++,
+  nazov: '',
+  prijmy: '',
+  socialnePoistne: '',
+  zdravotnePoistne: '',
+  preddavkyNaDan: '',
+  danovyBonusNaDieta: '',
+})
 
 let childCounter = 0
 
