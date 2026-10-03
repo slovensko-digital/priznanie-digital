@@ -36,6 +36,7 @@ const Layout: React.FC<Props> = ({
       </noscript>
 
       <div className="main-content">
+        <AdsConsentBar />
         <Header />
 
         <div className="sdn-headline">
@@ -71,7 +72,6 @@ const Layout: React.FC<Props> = ({
 
       {/* Disabled now, since we don't use user cookies. We will keep the code in case we need to enable it again */}
       {/* <CookieBar /> */}
-      <AdsConsentBar />
     </div>
   )
 }

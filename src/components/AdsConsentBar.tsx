@@ -1,78 +1,114 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AdsConsent, captureClickId, setAdsConsent } from '../lib/conversion'
+
+type State = 'hidden' | 'question' | AdsConsent
 
 /**
  * Asks for consent to measure Google Ads conversions.
  *
  * Shown only to visitors who came from an ad click (URL contains `gclid`)
  * and have not decided yet. Rendered client-side only so server HTML matches.
+ *
+ * Follows the GOV.UK cookie banner (https://design-system.service.gov.uk/components/cookie-banner/)
+ * but with own class names, ad blockers hide `.govuk-cookie-banner`.
  */
 export const AdsConsentBar = () => {
-  const [visible, setVisible] = useState(false)
+  const [state, setState] = useState<State>('hidden')
+  const confirmation = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setVisible(captureClickId(window.location.search))
+    setState(captureClickId(window.location.search) ? 'question' : 'hidden')
   }, [])
 
-  if (!visible) {
+  useEffect(() => {
+    if (state === 'granted' || state === 'denied') {
+      confirmation.current?.focus()
+    }
+  }, [state])
+
+  if (state === 'hidden') {
     return null
   }
 
   const decide = (consent: AdsConsent) => {
     setAdsConsent(consent)
-    setVisible(false)
+    setState(consent)
   }
 
   return (
     <div
-      role="dialog"
-      aria-live="polite"
-      aria-labelledby="measurement-bar-desc"
       className="measurement-bar"
+      role="region"
+      aria-label="Cookies na priznanie.digital"
     >
-      <p
-        id="measurement-bar-desc"
-        className="govuk-body measurement-bar__message"
-      >
-        Používame cookies na meranie reklamy v Google Ads. Súhlasíte s ich
-        použitím?
-      </p>
-      <div className="govuk-button-group">
-        <button
-          type="button"
-          className="govuk-button"
-          data-test="measurement-accept"
-          onClick={() => decide('granted')}
+      {state === 'question' ? (
+        <div className="measurement-bar__message govuk-width-container">
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-two-thirds">
+              <p className="govuk-body">
+                Používame cookies na meranie reklamy v Google Ads. Súhlasíte s
+                ich použitím?
+              </p>
+            </div>
+          </div>
+          <div className="govuk-button-group">
+            <button
+              type="button"
+              className="govuk-button"
+              data-test="measurement-accept"
+              onClick={() => decide('granted')}
+            >
+              Súhlasím
+            </button>
+            <button
+              type="button"
+              className="govuk-button"
+              data-test="measurement-decline"
+              onClick={() => decide('denied')}
+            >
+              Nesúhlasím
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="measurement-bar__message govuk-width-container"
+          role="alert"
+          tabIndex={-1}
+          ref={confirmation}
         >
-          Súhlasím
-        </button>
-        <button
-          type="button"
-          className="govuk-button govuk-button--secondary"
-          data-test="measurement-decline"
-          onClick={() => decide('denied')}
-        >
-          Nesúhlasím
-        </button>
-      </div>
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-two-thirds">
+              <p className="govuk-body">
+                {state === 'granted'
+                  ? 'Súhlasili ste s použitím cookies na meranie reklamy.'
+                  : 'Nesúhlasili ste s použitím cookies na meranie reklamy.'}
+              </p>
+            </div>
+          </div>
+          <div className="govuk-button-group">
+            <button
+              type="button"
+              className="govuk-button"
+              data-test="measurement-hide"
+              onClick={() => setState('hidden')}
+            >
+              Skryť správu
+            </button>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .measurement-bar {
-          position: fixed;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 9999;
-          box-sizing: border-box;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          gap: 0 2em;
-          padding: 1em 1.8em 0;
+          padding-top: 20px;
+          border-bottom: 10px solid transparent;
           background-color: #f3f2f1;
-          border-top: 5px solid #1d70b8;
         }
         .measurement-bar__message {
-          flex: 1 1 30em;
+          margin-bottom: -10px;
+        }
+        .measurement-bar__message:focus {
+          outline: none;
         }
       `}</style>
     </div>

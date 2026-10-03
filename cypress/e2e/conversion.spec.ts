@@ -52,6 +52,9 @@ describe('Google Ads conversion consent', () => {
 
   it('remembers the click ID when accepted and does not ask again', () => {
     grantConsent()
+    cy.contains('Súhlasili ste s použitím cookies na meranie reklamy.')
+    cy.get('[data-test="measurement-hide"]').click()
+    cy.get('[data-test="measurement-hide"]').should('not.exist')
 
     storage('adsConsent').should('equal', 'granted')
     storage('adsClickId').should('contain', `"gclid":"${GCLID}"`)
@@ -64,6 +67,7 @@ describe('Google Ads conversion consent', () => {
     cy.visit(`/?gclid=${GCLID}`)
     decline().click()
     decline().should('not.exist')
+    cy.contains('Nesúhlasili ste s použitím cookies na meranie reklamy.')
 
     storage('adsConsent').should('equal', 'denied')
     storage('adsClickId').should('equal', null)
