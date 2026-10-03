@@ -874,7 +874,7 @@ describe('Results page', () => {
   it('has working ui', () => {
     cy.visit('/vysledky')
 
-    cy.get('h1').contains('Výpočet dane za rok')
+    cy.get('h2').contains('Výpočet dane za rok')
   })
 })
 
@@ -989,7 +989,7 @@ describe('Summary page', () => {
   it('has working ui', () => {
     cy.visit('/suhrn')
 
-    cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
+    cy.get('h2').contains('Súhrn a kontrola vyplnených údajov')
     cy.get('h2').contains('Príjmy a odvody')
   })
   it('displays correct first & last name', () => {

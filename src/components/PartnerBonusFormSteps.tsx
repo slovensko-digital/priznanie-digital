@@ -111,9 +111,9 @@ export const HouseholdQuestion = ({ disabled }) => (
 export const ConditionsQuestion = ({ disabled }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 className="govuk-fieldset__heading">
+      <h2 className="govuk-fieldset__heading">
         Spĺňa vaša manželka / manžel aspoň jednu z podmienok?
-      </h1>
+      </h2>
     </legend>
     <Checkbox
       name="partner_podmienky.1"
@@ -145,9 +145,9 @@ export const ConditionsQuestion = ({ disabled }) => (
 
 export const NotEligible = () => (
   <div data-test="ineligible-message">
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+    <h2 className="govuk-heading-l govuk-!-margin-top-3">
       Nemáte nárok na uplatnenie
-    </h1>
+    </h2>
     <p>Nespĺňate podmienky pre uplatnenie zvýhodnenia na manželku / manžela</p>
   </div>
 )
@@ -157,9 +157,9 @@ export const EligiblePartnerForm = ({
   setFieldValue,
 }: PartnerBonusFormProps) => (
   <>
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+    <h2 className="govuk-heading-l govuk-!-margin-top-3">
       Vybrané údaje o manželke / manželovi
-    </h1>
+    </h2>
     <Input
       name="r031_priezvisko_a_meno"
       type="text"
