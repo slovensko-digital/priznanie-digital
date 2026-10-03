@@ -1,10 +1,9 @@
-import React from 'react'
 import Link from 'next/link'
 import styles from './index.module.css'
 import { Warning } from '../components/Warning'
 import { TAX_YEAR } from '../lib/calculation'
 import { ExternalLink } from '../components/ExternalLink'
-import getConfig from 'next/config'
+import getConfig from '../lib/runtimeConfig'
 
 const IconCheck = () => (
   <svg
