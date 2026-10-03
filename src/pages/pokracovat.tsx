@@ -82,6 +82,7 @@ const ContinuePage: Page = ({ taxForm, taxFormUserInput, isDebug }) => {
   return (
     <RedirectForm
       isDebug={isDebug}
+      conversion="priznanie"
       fields={buildFields(taxForm)}
       canContinue={!!taxFormUserInput.r004_priezvisko}
       debugDownload={buildXml(taxForm)}

@@ -3,6 +3,7 @@ import getConfig from '../lib/runtimeConfig'
 import fileDownload from 'js-file-download'
 import { ErrorSummary } from './ErrorSummary'
 import Link from 'next/link'
+import { ConversionType, trackConversion } from '../lib/conversion'
 
 const {
   publicRuntimeConfig: { navodyBaseUrl },
@@ -18,6 +19,7 @@ interface RedirectFormProps {
   canContinue: boolean
   debugDownload?: string
   isDebug: boolean
+  conversion: ConversionType
 }
 
 export const RedirectForm: React.FC<RedirectFormProps> = ({
@@ -25,13 +27,15 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
   canContinue,
   debugDownload,
   isDebug,
+  conversion,
 }) => {
   const form = useRef(null)
   useEffect(() => {
     if (!isDebug && form.current) {
+      trackConversion(conversion)
       form.current.submit()
     }
-  }, [form, isDebug])
+  }, [form, isDebug, conversion])
 
   if (!canContinue && !isDebug) {
     return (
@@ -54,7 +58,13 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
       <p className="govuk-!-margin-top-6">
         Presmerujeme Vás na Návody.Digital. Čakajte prosím.
       </p>
-      <form action={action} ref={form} method="post">
+      <form
+        action={action}
+        ref={form}
+        method="post"
+        // only the debug button submits this way, auto-submit tracks in the effect above
+        onSubmit={() => trackConversion(conversion)}
+      >
         {fields.map(({ name, value }, index) => (
           <input
             key={`${name}-${index}`}
