@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { FieldArray, Form } from 'formik'
+import { FieldArray, Form, getIn, useFormikContext } from 'formik'
 import styles from './deti.module.css'
 import {
   BooleanRadio,
@@ -288,12 +288,7 @@ const Deti: Page<ChildrenUserInput> = ({
                               daňovník, t. j. stará sa o vyživované dieťa žijúce
                               s ňou v domácnosti.
                             </p>
-                            <div
-                              className={classnames(
-                                'govuk-form-group',
-                                styles.inlineFieldContainer,
-                              )}
-                            >
+                            <MonthsFormGroup name="partner_bonus_na_deti_mesiace">
                               <div
                                 className={classnames(
                                   styles.checkBoxRow,
@@ -309,7 +304,7 @@ const Deti: Page<ChildrenUserInput> = ({
                                   />
                                 ))}
                               </div>
-                            </div>
+                            </MonthsFormGroup>
                             <h2 className="govuk-heading-m">
                               Akým spôsobom vysporiada/la svoje zdaniteľné
                               príjmy druhá oprávnená osoba za rok {TAX_YEAR}?
@@ -517,12 +512,7 @@ const ChildForm = ({
               {monthOptions[monthOptions.length - 1]}
             </p>
           </legend>
-          <div
-            className={classnames(
-              'govuk-form-group',
-              styles.inlineFieldContainer,
-            )}
-          >
+          <MonthsFormGroup name={`children[${index}].noMonthSelected`}>
             <div
               className={classnames(
                 styles.checkBoxRow,
@@ -539,10 +529,36 @@ const ChildForm = ({
                 />
               ))}
             </div>
-          </div>
+          </MonthsFormGroup>
         </RadioConditional>
       </RadioGroup>
     </>
+  )
+}
+
+interface MonthsFormGroupProps {
+  name: string
+  children: ReactNode
+}
+
+const MonthsFormGroup = ({ name, children }: MonthsFormGroupProps) => {
+  const { errors } = useFormikContext<ChildrenUserInput>()
+  const error: string | undefined = getIn(errors, name)
+
+  return (
+    <div
+      className={classnames(
+        'govuk-form-group',
+        error && 'govuk-form-group--error',
+      )}
+    >
+      {error ? (
+        <span id={name} data-test="error" className="govuk-error-message">
+          <span className="govuk-visually-hidden">Chyba:</span> {error}
+        </span>
+      ) : null}
+      <div className={styles.inlineFieldContainer}>{children}</div>
+    </div>
   )
 }
 

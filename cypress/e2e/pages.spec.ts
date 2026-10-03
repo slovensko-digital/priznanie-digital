@@ -581,7 +581,12 @@ describe('Children page', () => {
     // Leave all months unchecked
     next()
 
-    // Should have error for no month selected
+    // Should have error for no month selected next to the month checkboxes
+    getError().should('have.length', 2)
+    cy.get('[id="children[0].noMonthSelected"]').should(
+      'contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
     cy.get('.govuk-error-summary').should(
       'contain',
       'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
@@ -594,11 +599,40 @@ describe('Children page', () => {
     next()
 
     // Should not have error for no month selected, only for missing name
+    cy.get('[id="children[0].noMonthSelected"]').should('not.exist')
     cy.get('.govuk-error-summary').should(
       'not.contain',
       'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
     )
     getError().should('have.length', 1)
+  })
+
+  it('has working validation for partner months', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    next()
+
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
+    getInput('partner_bonus_na_deti', '-yes').click()
+
+    // Leave all partner months unchecked
+    next()
+
+    // Should have error for no month selected next to the month checkboxes
+    cy.get('[id="partner_bonus_na_deti_mesiace"]').should(
+      'contain',
+      'Vyberte mesiace v ktorych si partner uplatňuje daňový bonus',
+    )
+
+    // Select a month
+    cy.get('[data-test="partner_bonus_na_deti_m01-input"]').click()
+    next()
+
+    cy.get('[id="partner_bonus_na_deti_mesiace"]').should('not.exist')
   })
 
   it('has working validation for too old kid', () => {
