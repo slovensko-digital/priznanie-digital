@@ -27,10 +27,13 @@ export const AdsConsentBar = () => {
     <div
       role="dialog"
       aria-live="polite"
-      aria-labelledby="ads-consent-desc"
-      className="ads-consent"
+      aria-labelledby="measurement-bar-desc"
+      className="measurement-bar"
     >
-      <p id="ads-consent-desc" className="govuk-body ads-consent__message">
+      <p
+        id="measurement-bar-desc"
+        className="govuk-body measurement-bar__message"
+      >
         Prišli ste k nám cez reklamu Google. Súhlasíte, aby sme si vo Vašom
         prehliadači zapamätali identifikátor kliknutia na reklamu a po dokončení
         formulára ho odoslali do Google Ads? Pomôže nám to merať účinnosť
@@ -41,7 +44,7 @@ export const AdsConsentBar = () => {
         <button
           type="button"
           className="govuk-button"
-          data-test="ads-consent-accept"
+          data-test="measurement-accept"
           onClick={() => decide('granted')}
         >
           Súhlasím
@@ -49,14 +52,14 @@ export const AdsConsentBar = () => {
         <button
           type="button"
           className="govuk-button govuk-button--secondary"
-          data-test="ads-consent-decline"
+          data-test="measurement-decline"
           onClick={() => decide('denied')}
         >
           Nesúhlasím
         </button>
       </div>
       <style jsx>{`
-        .ads-consent {
+        .measurement-bar {
           position: fixed;
           left: 0;
           right: 0;
@@ -71,7 +74,7 @@ export const AdsConsentBar = () => {
           background-color: #f3f2f1;
           border-top: 5px solid #1d70b8;
         }
-        .ads-consent__message {
+        .measurement-bar__message {
           flex: 1 1 30em;
         }
       `}</style>
