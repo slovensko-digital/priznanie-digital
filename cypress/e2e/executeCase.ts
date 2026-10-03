@@ -377,7 +377,7 @@ const executeTestCase = (testCase: string) => {
         /**  SECTION Summary */
         assertUrl('/suhrn')
 
-        cy.get('h1').contains('Súhrn a kontrola vyplnených údajov')
+        cy.get('h2').contains('Súhrn a kontrola vyplnených údajov')
 
         if (input.prijem_zo_zivnosti) {
           cy.get('.govuk-table__cell').contains(

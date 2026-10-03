@@ -15,9 +15,9 @@ const Suhrn: NextPage<Props> = ({ postponeUserInput }: Props) => {
   return (
     <>
       <BackLink href={previousRoute} />
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      <h2 className="govuk-heading-l govuk-!-margin-top-3">
         Súhrn a kontrola vyplnených údajov
-      </h1>
+      </h2>
       <table className="govuk-table">
         <tbody className="govuk-table__body">
           <tr className="govuk-table__row">

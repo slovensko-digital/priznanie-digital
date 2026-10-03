@@ -249,7 +249,7 @@ const PostponeButton = ({ isPostponeTime, nextPostponeRoute }) => {
     return (
       <button
         type="button"
-        className="btn-secondary govuk-button govuk-button--large govuk-button--disabled"
+        className="btn-secondary govuk-button govuk-button--large"
         disabled
       >
         Termín na podanie odkladu DP vypršal

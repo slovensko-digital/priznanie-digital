@@ -106,9 +106,9 @@ const DvePercenta: Page<TwoPercentUserInput> = ({
     return (
       <>
         {previousPageLink}
-        <h1 className="govuk-heading-l">
+        <h2 className="govuk-heading-l">
           Poukázanie 2% alebo 3% zaplatenej dane neziskovej organizácii
-        </h1>
+        </h2>
         <p data-test="ineligible-message">
           Ľutujeme, nespĺňate podmienky na poukázanie čiastky dane, nakoľko by
           táto čiastka neprekočila{' '}

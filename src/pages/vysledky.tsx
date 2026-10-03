@@ -176,9 +176,9 @@ const Vysledky: Page<Partial<TaxFormUserInput>> = ({
   return (
     <>
       <BackLink href={previousRoute} />
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">
+      <h2 className="govuk-heading-l govuk-!-margin-top-3">
         {`Výpočet dane za rok ${TAX_YEAR}`}
-      </h1>
+      </h2>
       <Summary
         title="Príjmy zo zamestnania a živnosti"
         rows={summaryRows}

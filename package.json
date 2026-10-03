@@ -32,7 +32,7 @@
     "iban": "0.0.14",
     "js-file-download": "0.4.12",
     "lodash.clonedeep": "4.5.0",
-    "navody-digital-frontend": "^0.1.9",
+    "navody-digital-frontend": "github:Ormi/navody-frontend#package-v6-alpha",
     "next": "16.3.8",
     "nookies": "2.5.2",
     "react": "19.2.0",

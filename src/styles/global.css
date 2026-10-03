@@ -11,8 +11,15 @@ body {
   overflow-y: scroll;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100%;
+}
+
 .main-content {
-  min-height: calc(100vh - 421px);
+  flex: 1 0 auto;
 }
 
 .icon {
@@ -59,11 +66,6 @@ button:disabled {
   border: none;
   width: 225px;
   height: 29px;
-}
-
-.sdn-footer {
-  height: 367px;
-  overflow: hidden;
 }
 
 .sdn-footer__disclaimer {

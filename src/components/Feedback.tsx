@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Form } from 'formik'
-import classNames from 'classnames'
 import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
 import { FormWrapper, Input } from './FormComponents'
 import { ErrorSummary } from './ErrorSummary'
@@ -176,12 +175,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
                   <button
                     type="submit"
                     data-test="submit"
-                    className={classNames(
-                      'govuk-button',
-                      'govuk-button--large',
-                      'govuk-!-margin-top-4',
-                      { 'govuk-button--disabled': formik.isSubmitting },
-                    )}
+                    className="govuk-button govuk-button--large govuk-!-margin-top-4"
                     disabled={formik.isSubmitting}
                   >
                     {formik.isSubmitting ? 'Odosielam...' : 'Odoslať'}
