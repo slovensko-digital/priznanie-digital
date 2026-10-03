@@ -103,8 +103,24 @@ const MyApp = ({
     if (next) {
       router.prefetch(next)
     }
-    validateRoute(router, taxForm, taxFormUserInput, postponeUserInput, isDebug)
-  }, [router, nextRoute, taxForm, taxFormUserInput, postponeUserInput])
+    validateRoute(
+      router,
+      taxForm,
+      taxFormUserInput,
+      postponeUserInput,
+      isDebug,
+      isLive,
+      isPostponeLive,
+    )
+  }, [
+    router,
+    nextRoute,
+    taxForm,
+    taxFormUserInput,
+    postponeUserInput,
+    isLive,
+    isPostponeLive,
+  ])
 
   const headline = /^\/odklad\//.test(router.pathname)
     ? 'Odklad daňového priznania'

@@ -152,6 +152,8 @@ describe('routes', () => {
 
   describe('#validateRoute', () => {
     const replace = jest.fn()
+    const mockRouter = (route: string) =>
+      ({ route, replace }) as unknown as NextRouter
 
     afterEach(() => {
       jest.clearAllMocks()
@@ -159,42 +161,222 @@ describe('routes', () => {
 
     it('should redirect from route when form is not filled out', () => {
       validateRoute(
-        { route: '/partner', replace } as unknown as NextRouter,
+        mockRouter('/partner'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         {} as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledWith(homeRoute)
     })
 
     it('should redirect from route when form is empty', () => {
       validateRoute(
-        { route: '/odklad/suhrn', replace } as unknown as NextRouter,
+        mockRouter('/odklad/suhrn'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         { priezvisko: '' } as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledWith(homeRoute)
     })
 
     it('should not redirect from route when form is filled out', () => {
       validateRoute(
-        { route: '/dohoda', replace } as unknown as NextRouter,
+        mockRouter('/dohoda'),
         {} as TaxForm,
         { employed: false } as TaxFormUserInput,
         {} as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledTimes(0)
     })
 
     it('should not redirect from route when postpone form is filled out', () => {
       validateRoute(
-        { route: '/odklad/osobne-udaje', replace } as unknown as NextRouter,
+        mockRouter('/odklad/osobne-udaje'),
         {} as TaxForm,
         {} as TaxFormUserInput,
         { prijmy_zo_zahranicia: false } as PostponeUserInput,
+        false,
+        true,
+        true,
       )
       expect(replace).toHaveBeenCalledTimes(0)
+    })
+
+    describe('isLive guard', () => {
+      it('should redirect form pages to home when isLive=false', () => {
+        validateRoute(
+          mockRouter('/prijmy-a-vydavky'),
+          {} as TaxForm,
+          { prijem_zo_zivnosti: true } as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          false,
+        )
+        expect(replace).toHaveBeenCalledWith(homeRoute)
+      })
+
+      it('should redirect all form pages when isLive=false', () => {
+        const formRoutes = [
+          '/prijmy-a-vydavky',
+          '/zamestnanie',
+          '/partner',
+          '/deti',
+          '/dochodok',
+          '/prenajom',
+          '/osobne-udaje',
+          '/suhrn',
+          '/vysledky',
+        ]
+        for (const route of formRoutes) {
+          replace.mockClear()
+          validateRoute(
+            mockRouter(route),
+            {} as TaxForm,
+            {} as TaxFormUserInput,
+            {} as PostponeUserInput,
+            false,
+            false,
+          )
+          expect(replace).toHaveBeenCalledWith(homeRoute)
+        }
+      })
+
+      it('should not redirect home page when isLive=false', () => {
+        validateRoute(
+          mockRouter('/'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          false,
+        )
+        expect(replace).toHaveBeenCalledTimes(0)
+      })
+
+      it('should not redirect odklad pages when isLive=false but isPostponeLive=true', () => {
+        validateRoute(
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          false,
+          true,
+        )
+        expect(replace).toHaveBeenCalledTimes(0)
+      })
+
+      it('should not redirect when isDebug=true even if isLive=false', () => {
+        validateRoute(
+          mockRouter('/prijmy-a-vydavky'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          true,
+          false,
+        )
+        expect(replace).toHaveBeenCalledTimes(0)
+      })
+    })
+
+    describe('isPostponeLive guard', () => {
+      it('should redirect odklad pages to home when isPostponeLive=false', () => {
+        validateRoute(
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          true,
+          false,
+        )
+        expect(replace).toHaveBeenCalledWith(homeRoute)
+      })
+
+      it('should redirect all odklad pages when isPostponeLive=false', () => {
+        const odkladRoutes = [
+          '/odklad/prijmy-zo-zahranicia',
+          '/odklad/osobne-udaje',
+          '/odklad/suhrn',
+          '/odklad/pokracovat',
+        ]
+        for (const route of odkladRoutes) {
+          replace.mockClear()
+          validateRoute(
+            mockRouter(route),
+            {} as TaxForm,
+            {} as TaxFormUserInput,
+            {} as PostponeUserInput,
+            false,
+            true,
+            false,
+          )
+          expect(replace).toHaveBeenCalledWith(homeRoute)
+        }
+      })
+
+      it('should not redirect form pages when isPostponeLive=false but isLive=true', () => {
+        validateRoute(
+          mockRouter('/prijmy-a-vydavky'),
+          {} as TaxForm,
+          { prijem_zo_zivnosti: true } as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          true,
+          false,
+        )
+        expect(replace).toHaveBeenCalledTimes(0)
+      })
+
+      it('should not redirect when isDebug=true even if isPostponeLive=false', () => {
+        validateRoute(
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          true,
+          true,
+          false,
+        )
+        expect(replace).toHaveBeenCalledTimes(0)
+      })
+    })
+
+    describe('both flags false', () => {
+      it('should redirect form pages when both isLive and isPostponeLive are false', () => {
+        validateRoute(
+          mockRouter('/prijmy-a-vydavky'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          false,
+          false,
+        )
+        expect(replace).toHaveBeenCalledWith(homeRoute)
+      })
+
+      it('should redirect odklad pages when both isLive and isPostponeLive are false', () => {
+        validateRoute(
+          mockRouter('/odklad/prijmy-zo-zahranicia'),
+          {} as TaxForm,
+          {} as TaxFormUserInput,
+          {} as PostponeUserInput,
+          false,
+          false,
+          false,
+        )
+        expect(replace).toHaveBeenCalledWith(homeRoute)
+      })
     })
   })
 })
