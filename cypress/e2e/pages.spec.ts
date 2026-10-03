@@ -650,6 +650,80 @@ describe('Children page', () => {
     getMonthCheckboxes(0).filter(':enabled').should('have.length', 9)
     getMonthCheckboxes(0).filter(':disabled').should('have.length', 3)
   })
+
+  it('resets selected months when rodne cislo changes', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid born in September of tax year
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2509076922')
+    cy.get('[data-test="children[0].m10-input"]').click()
+    cy.get('[data-test="children[0].m10-input"]').should('be.checked')
+
+    // Change to kid eligible for the whole year
+    cy.get('[data-test="children[0].rodneCislo-input"]')
+      .clear()
+      .type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 0)
+  })
+
+  it('keeps selected months when returning to the page', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid with bonus ending in September of tax year
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('070907/4762')
+    cy.get('[data-test="children[0].m02-input"]').click()
+    cy.get('[data-test="children[0].m03-input"]').click()
+
+    next()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+    next()
+    assertUrl('/dochodok')
+
+    cy.get('[data-test=back]').click()
+    assertUrl('/deti')
+
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 2)
+    cy.get('[data-test="children[0].m02-input"]').should('be.checked')
+    cy.get('[data-test="children[0].m03-input"]').should('be.checked')
+  })
+
+  it('keeps part year selection for kid eligible for the whole year when returning to the page', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid eligible for the whole year
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+    cy.get('[data-test="children[0].m02-input"]').click()
+    cy.get('[data-test="children[0].m03-input"]').click()
+
+    next()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+    next()
+    assertUrl('/dochodok')
+
+    cy.get('[data-test=back]').click()
+    assertUrl('/deti')
+
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).should(
+      'be.checked',
+    )
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 2)
+    cy.get('[data-test="children[0].m02-input"]').should('be.checked')
+    cy.get('[data-test="children[0].m03-input"]').should('be.checked')
+  })
 })
 
 describe('Pension page', () => {

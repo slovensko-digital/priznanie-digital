@@ -148,8 +148,6 @@ export interface TaxFormUserInput {
   partner_bonus_na_deti_m10?: boolean
   partner_bonus_na_deti_m11?: boolean
   partner_bonus_na_deti_m12?: boolean
-
-  partner_bonus_na_deti_do?: string
   children: ChildInput[]
 
   /** SECTION  Dve percenta */

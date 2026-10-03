@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { FieldArray, Form } from 'formik'
 import styles from './deti.module.css'
@@ -429,8 +429,22 @@ const ChildForm = ({
     monthNamesFrom.includes(value),
   )
   const bonusInPartOfYear = monthOptions.length < 12
+  const previousRodneCislo = useRef(rodneCislo)
+
+  const getMonthFieldName = (monthIndex: number) => {
+    const formMonthIndex = monthIndex + 1
+    return formMonthIndex >= 10
+      ? `children[${index}].m${formMonthIndex}`
+      : `children[${index}].m0${formMonthIndex}`
+  }
 
   useEffect(() => {
+    // update only when rodneCislo changes, keep saved values on mount
+    if (previousRodneCislo.current === rodneCislo) {
+      return
+    }
+    previousRodneCislo.current = rodneCislo
+
     if (
       validateRodneCislo(rodneCislo) &&
       maxChildAgeBonusMonth(rodneCislo, 'Január')
@@ -440,23 +454,14 @@ const ChildForm = ({
       } else {
         setFieldValue(`children[${index}].wholeYear`, true)
       }
-      if (monthOptions.length) {
-        // reset the month checkboxes
-        monthOptions.forEach((_month, monthIndex) => {
-          setFieldValue(`children[${index}].m0${monthIndex}`, false)
-        })
-      }
+      // reset the month checkboxes
+      monthNames.forEach((_month, monthIndex) => {
+        setFieldValue(getMonthFieldName(monthIndex), false)
+      })
     } else {
       setFieldValue(`children[${index}].wholeYear`, true)
     }
   }, [bonusInPartOfYear, rodneCislo])
-
-  const getMonthFieldName = (monthIndex: number) => {
-    const formMonthIndex = monthIndex + 1
-    return formMonthIndex >= 10
-      ? `children[${index}].m${formMonthIndex}`
-      : `children[${index}].m0${formMonthIndex}`
-  }
 
   return (
     <>
@@ -603,7 +608,6 @@ export const validate = (values: ChildrenUserInput) => {
         !childValues.m11 &&
         !childValues.m12
       ) {
-        console.log(childValues)
         childErrors.noMonthSelected =
           'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus'
         //scroll to the top where the error is shown
