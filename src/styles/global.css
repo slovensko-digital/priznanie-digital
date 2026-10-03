@@ -69,3 +69,12 @@ button:disabled {
 .sdn-footer__disclaimer {
   color: #d0d0d0;
 }
+
+body .govuk-button,
+body .govuk-button[disabled]:hover {
+  background-color: #0f7a52;
+}
+
+body .govuk-button:hover {
+  background-color: #0b5c3e;
+}
