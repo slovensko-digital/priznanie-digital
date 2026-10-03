@@ -1,4 +1,3 @@
-import React from 'react'
 import { formatCurrency } from '../lib/utils'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { Page } from '../components/Page'

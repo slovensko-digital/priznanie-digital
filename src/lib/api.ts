@@ -1,4 +1,4 @@
-import getConfig from 'next/config'
+import getConfig from './runtimeConfig'
 import type { AutoFormSubject } from '../types/api'
 import { translit } from './utils'
 
