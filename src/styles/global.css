@@ -69,3 +69,7 @@ button:disabled {
 .sdn-footer__disclaimer {
   color: #d0d0d0;
 }
+
+.sdn-footer__bottom-container a:focus {
+  color: #0b0c0c;
+}
