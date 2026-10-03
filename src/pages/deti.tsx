@@ -127,7 +127,7 @@ const Deti: Page<ChildrenUserInput> = ({
             </Fieldset>
             {values.hasChildren === 'yes' && (
               <>
-                <h1 className="govuk-heading-l">Informácie o deťoch</h1>
+                <h2 className="govuk-heading-l">Informácie o deťoch</h2>
                 <p className="govuk-hint">
                   V prípade, že ste sa v roku {TAX_YEAR} starali o nezaopatrené
                   dieťa do 18 rokov, pri splnení{' '}
@@ -243,9 +243,9 @@ const Deti: Page<ChildrenUserInput> = ({
 
                         {values.partner_bonus_na_deti && (
                           <>
-                            <h1 className="govuk-heading-l govuk-!-margin-top-3">
+                            <h2 className="govuk-heading-l govuk-!-margin-top-3">
                               Údaje o oprávnenej osobe
-                            </h1>
+                            </h2>
                             <Input
                               name="r034_priezvisko_a_meno"
                               type="text"

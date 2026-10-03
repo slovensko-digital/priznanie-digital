@@ -1,7 +1,7 @@
 export default function DebugPage() {
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-3">Debug stránka</h1>
+      <h2 className="govuk-heading-l govuk-!-margin-top-3">Debug stránka</h2>
       <button
         className="govuk-button"
         onClick={() => {

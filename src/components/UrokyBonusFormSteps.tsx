@@ -53,10 +53,10 @@ export const ZaplateneUrokyQuestion = ({ disabled }) => (
 export const ZaciatokUveruQuestion = ({ disabled, values }) => (
   <div className="govuk-form-group">
     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h1 className="govuk-fieldset__heading">
+      <h2 className="govuk-fieldset__heading">
         Ak si chcete uplatniť daňový bonus na zaplatené úroky z úveru na bývanie
         uveďte:
-      </h1>
+      </h2>
     </legend>
     <p className="govuk-hint">
       Daňovník si môže uplatniť daňový bonus na zaplatené úroky počas piatich po
@@ -298,9 +298,9 @@ export const PrijemQuestion = ({
 
 export const NotEligible = () => (
   <div data-test="ineligible-message">
-    <h1 className="govuk-heading-l govuk-!-margin-top-3">
+    <h2 className="govuk-heading-l govuk-!-margin-top-3">
       Nemáte nárok na uplatnenie
-    </h1>
+    </h2>
     <p>
       Nespĺňate podmienky pre uplatnenie daňového bonusu na zaplatené úroky.
     </p>
