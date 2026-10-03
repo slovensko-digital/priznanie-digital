@@ -9,8 +9,7 @@ type State = 'hidden' | 'question' | AdsConsent
  * Shown only to visitors who came from an ad click (URL contains `gclid`)
  * and have not decided yet. Rendered client-side only so server HTML matches.
  *
- * Follows the GOV.UK cookie banner (https://design-system.service.gov.uk/components/cookie-banner/)
- * but with own class names, ad blockers hide `.govuk-cookie-banner`.
+ * GOV.UK cookie banner: https://design-system.service.gov.uk/components/cookie-banner/
  */
 export const AdsConsentBar = () => {
   const [state, setState] = useState<State>('hidden')
@@ -37,18 +36,20 @@ export const AdsConsentBar = () => {
 
   return (
     <div
-      className="measurement-bar"
+      className="govuk-cookie-banner"
       role="region"
       aria-label="Cookies na priznanie.digital"
     >
       {state === 'question' ? (
-        <div className="measurement-bar__message govuk-width-container">
+        <div className="govuk-cookie-banner__message govuk-width-container">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <p className="govuk-body">
-                Používame cookies na meranie reklamy v Google Ads. Súhlasíte s
-                ich použitím?
-              </p>
+              <div className="govuk-cookie-banner__content">
+                <p className="govuk-body">
+                  Používame cookies na meranie reklamy v Google Ads. Súhlasíte s
+                  ich použitím?
+                </p>
+              </div>
             </div>
           </div>
           <div className="govuk-button-group">
@@ -72,18 +73,20 @@ export const AdsConsentBar = () => {
         </div>
       ) : (
         <div
-          className="measurement-bar__message govuk-width-container"
+          className="govuk-cookie-banner__message govuk-width-container"
           role="alert"
           tabIndex={-1}
           ref={confirmation}
         >
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <p className="govuk-body">
-                {state === 'granted'
-                  ? 'Súhlasili ste s použitím cookies na meranie reklamy.'
-                  : 'Nesúhlasili ste s použitím cookies na meranie reklamy.'}
-              </p>
+              <div className="govuk-cookie-banner__content">
+                <p className="govuk-body">
+                  {state === 'granted'
+                    ? 'Súhlasili ste s použitím cookies na meranie reklamy.'
+                    : 'Nesúhlasili ste s použitím cookies na meranie reklamy.'}
+                </p>
+              </div>
             </div>
           </div>
           <div className="govuk-button-group">
@@ -98,19 +101,6 @@ export const AdsConsentBar = () => {
           </div>
         </div>
       )}
-      <style jsx>{`
-        .measurement-bar {
-          padding-top: 20px;
-          border-bottom: 10px solid transparent;
-          background-color: #f3f2f1;
-        }
-        .measurement-bar__message {
-          margin-bottom: -10px;
-        }
-        .measurement-bar__message:focus {
-          outline: none;
-        }
-      `}</style>
     </div>
   )
 }
