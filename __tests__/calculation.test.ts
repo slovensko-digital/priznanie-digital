@@ -51,8 +51,18 @@ const child = {
   priezviskoMeno: 'Johnny Bravo',
   rodneCislo: '150701 / 1234',
   wholeYear: false,
-  monthFrom: '1', // February
-  monthTo: '9', // October
+  m01: false,
+  m02: true,
+  m03: true,
+  m04: true,
+  m05: true,
+  m06: true,
+  m07: true,
+  m08: true,
+  m09: true,
+  m10: true,
+  m11: false,
+  m12: false,
 }
 
 /** The numbers need to be updated every year, for example 150701 => 160701 */

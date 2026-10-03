@@ -38,8 +38,6 @@ export const withBonusInput: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
     {
       id: 2,
@@ -51,8 +49,6 @@ export const withBonusInput: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
   ],
   hasChildren: 'yes',

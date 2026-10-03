@@ -23,6 +23,38 @@ const randomFromRangeString = (min: number, max: number) => {
   return randomFromRange(min, max).toFixed(2)
 }
 
+const MONTH_KEYS = [
+  'm01',
+  'm02',
+  'm03',
+  'm04',
+  'm05',
+  'm06',
+  'm07',
+  'm08',
+  'm09',
+  'm10',
+  'm11',
+  'm12',
+] as const
+type MonthKey = (typeof MONTH_KEYS)[number]
+
+const monthFlags = (monthFrom: number, monthTo: number) =>
+  Object.fromEntries(
+    MONTH_KEYS.map((key, index) => [
+      key,
+      index >= monthFrom && index <= monthTo,
+    ]),
+  ) as Record<MonthKey, boolean>
+
+const partnerMonthFlags = (monthFrom: number, monthTo: number) =>
+  Object.fromEntries(
+    Object.entries(monthFlags(monthFrom, monthTo)).map(([key, value]) => [
+      `partner_bonus_na_deti_${key}`,
+      value,
+    ]),
+  ) as Record<`partner_bonus_na_deti_${MonthKey}`, boolean>
+
 const randomInput = (): TaxFormUserInput => {
   const prijem_zo_zivnosti = Math.random() > 0.5
   const employed = Math.random() > 0.5
@@ -103,6 +135,7 @@ const randomInput = (): TaxFormUserInput => {
   if (hasChildren === 'yes') {
     const childrenCount = randomFromRange(1, 7).round().toNumber()
     const partnerChildBonus = Math.random() > 0.3
+    const childMonthRanges: { monthFrom: number; monthTo: number }[] = []
     Array.from({ length: childrenCount }).forEach((_, index) => {
       const age = randomFromRange(0, MAX_CHILD_AGE_BONUS).round().toNumber()
       const month = randomFromRange(0, 11).round().toNumber()
@@ -129,19 +162,21 @@ const randomInput = (): TaxFormUserInput => {
         }
       }
 
+      childMonthRanges.push(
+        wholeYear ? { monthFrom: 0, monthTo: 11 } : { monthFrom, monthTo },
+      )
       input.children.push({
         id: index,
         priezviskoMeno: `Fake Child ${index}`,
         rodneCislo: generateBirthId(birthDate, gender ? 'FEMALE' : 'MALE').pure,
         wholeYear,
-        monthFrom: monthFrom.toString(),
-        monthTo: monthTo.toString(),
+        ...(wholeYear ? {} : monthFlags(monthFrom, monthTo)),
       })
     })
 
     if (partnerChildBonus) {
-      const randomKid =
-        input.children[
+      const randomKidMonths =
+        childMonthRanges[
           randomFromRange(0, childrenCount - 1)
             .round()
             .toNumber()
@@ -151,12 +186,10 @@ const randomInput = (): TaxFormUserInput => {
         partner_bonus_na_deti: true,
         r034_priezvisko_a_meno: 'Beth Smith',
         r034_rodne_cislo: '975917/1565',
-        partner_bonus_na_deti_od: randomKid.wholeYear
-          ? '0'
-          : randomKid.monthFrom.toString(),
-        partner_bonus_na_deti_do: randomKid.wholeYear
-          ? '11'
-          : randomKid.monthTo.toString(),
+        ...partnerMonthFlags(
+          randomKidMonths.monthFrom,
+          randomKidMonths.monthTo,
+        ),
         partner_bonus_na_deti_typ_prijmu: '1',
         r034a: randomFromRangeString(0, 100000),
       }
