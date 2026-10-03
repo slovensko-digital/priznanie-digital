@@ -7823,10 +7823,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"navody-digital-frontend@npm:^0.1.9":
-  version: 0.1.9
-  resolution: "navody-digital-frontend@npm:0.1.9"
-  checksum: 10c0/8fdb6ba94739ed1d37a5bd23a3d54d587ee7893a4766f2f0a23960d6b53a8be6f76a408cd2335d32e8cf2d33e747dab6d7bcde9e72a3605b4aee3fca37a4d17a
+"navody-digital-frontend@github:Ormi/navody-frontend#package-v6-alpha":
+  version: 1.0.0-alpha.0
+  resolution: "navody-digital-frontend@https://github.com/Ormi/navody-frontend.git#commit=f08752f39cdd540b58a2df19bee25c3c01f3f2c1"
+  checksum: 10c0/41aa62c65d846626c50c359b061cf19b765724c2d9283ee563f2a5eeb1584bf3d5c1a86befcbcd10beb87f65e85464207ef933f0d4dc47ae812bba1796f3f7b4
   languageName: node
   linkType: hard
 
@@ -8517,7 +8517,7 @@ __metadata:
     jest-raw-loader: "npm:^1.0.1"
     js-file-download: "npm:0.4.12"
     lodash.clonedeep: "npm:4.5.0"
-    navody-digital-frontend: "npm:^0.1.9"
+    navody-digital-frontend: "github:Ormi/navody-frontend#package-v6-alpha"
     next: "npm:16.3.8"
     node-mocks-http: "npm:^1.17.2"
     nookies: "npm:2.5.2"
