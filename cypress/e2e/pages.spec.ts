@@ -37,6 +37,8 @@ const next = () => {
 }
 
 const getError = () => cy.get('[data-test=error]')
+const getMonthCheckboxes = (childIndex: number) =>
+  cy.get(`[data-test^="children[${childIndex}].m"][data-test$="-input"]`)
 const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
@@ -576,24 +578,26 @@ describe('Children page', () => {
     cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
     cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
 
-    // Enter invalid months (November - April)
-    cy.get('[data-test="children[0].monthFrom-select"]').select('10')
-    cy.get('[data-test="children[0].monthTo-select"]').select('3')
-
-    // Try to add 2nd child
+    // Leave all months unchecked
     next()
 
-    // Should have error for invalid months
-    getError().should('have.length', 2)
+    // Should have error for no month selected
+    cy.get('.govuk-error-summary').should(
+      'contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
 
-    // Enter valid months (November - April)
-    cy.get('[data-test="children[0].monthFrom-select"]').select('3')
-    cy.get('[data-test="children[0].monthTo-select"]').select('10')
+    // Select a month
+    cy.get('[data-test="children[0].m11-input"]').click()
 
     // Try to continue
     next()
 
-    // Should not have error for invalid months
+    // Should not have error for no month selected, only for missing name
+    cy.get('.govuk-error-summary').should(
+      'not.contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
     getError().should('have.length', 1)
   })
 
@@ -626,14 +630,8 @@ describe('Children page', () => {
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch September až December',
     )
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
-      'have.length',
-      4,
-    )
-    cy.get('[data-test="children[0].monthTo-select"]>option').should(
-      'have.length',
-      4,
-    )
+    getMonthCheckboxes(0).filter(':enabled').should('have.length', 4)
+    getMonthCheckboxes(0).filter(':disabled').should('have.length', 8)
   })
 
   it('has working range limit for kid bonus ending in tax year', () => {
@@ -649,14 +647,8 @@ describe('Children page', () => {
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch Január až September',
     )
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
-      'have.length',
-      9,
-    )
-    cy.get('[data-test="children[0].monthTo-select"]>option').should(
-      'have.length',
-      9,
-    )
+    getMonthCheckboxes(0).filter(':enabled').should('have.length', 9)
+    getMonthCheckboxes(0).filter(':disabled').should('have.length', 3)
   })
 })
 
