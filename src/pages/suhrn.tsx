@@ -1,6 +1,11 @@
 import Link from 'next/link'
-import { TaxFormUserInput } from '../types/TaxFormUserInput'
-import { formatCurrency, formatDate, parseInputNumber } from '../lib/utils'
+import { ChildInput, TaxFormUserInput } from '../types/TaxFormUserInput'
+import {
+  formatCurrency,
+  formatDate,
+  formatMonthRanges,
+  parseInputNumber,
+} from '../lib/utils'
 import styles from './suhrn.module.css'
 import classnames from 'classnames'
 import { Warning } from '../components/Warning'
@@ -8,34 +13,43 @@ import { Page } from '../components/Page'
 import { BackLink } from '../components/BackLink'
 import {
   TAX_YEAR,
-  monthNumberToName,
   typPrijmuToName,
   zaciatok_urocenia_datum,
 } from '../lib/calculation'
 
-const getPartnerMonthsString = (input: TaxFormUserInput): string => {
-  const months = []
-  if (input.partner_bonus_na_deti_m01) months.push(0)
-  if (input.partner_bonus_na_deti_m02) months.push(1)
-  if (input.partner_bonus_na_deti_m03) months.push(2)
-  if (input.partner_bonus_na_deti_m04) months.push(3)
-  if (input.partner_bonus_na_deti_m05) months.push(4)
-  if (input.partner_bonus_na_deti_m06) months.push(5)
-  if (input.partner_bonus_na_deti_m07) months.push(6)
-  if (input.partner_bonus_na_deti_m08) months.push(7)
-  if (input.partner_bonus_na_deti_m09) months.push(8)
-  if (input.partner_bonus_na_deti_m10) months.push(9)
-  if (input.partner_bonus_na_deti_m11) months.push(10)
-  if (input.partner_bonus_na_deti_m12) months.push(11)
+const getPartnerMonthsString = (input: TaxFormUserInput): string =>
+  formatMonthRanges([
+    input.partner_bonus_na_deti_m01,
+    input.partner_bonus_na_deti_m02,
+    input.partner_bonus_na_deti_m03,
+    input.partner_bonus_na_deti_m04,
+    input.partner_bonus_na_deti_m05,
+    input.partner_bonus_na_deti_m06,
+    input.partner_bonus_na_deti_m07,
+    input.partner_bonus_na_deti_m08,
+    input.partner_bonus_na_deti_m09,
+    input.partner_bonus_na_deti_m10,
+    input.partner_bonus_na_deti_m11,
+    input.partner_bonus_na_deti_m12,
+  ])
 
-  if (months.length === 0) return ''
-  if (months.length === 12) return 'Január - December'
-
-  const firstMonth = months[0]
-  const lastMonth = months[months.length - 1]
-
-  return `${monthNumberToName(firstMonth)} - ${monthNumberToName(lastMonth)}`
-}
+const getChildMonthsString = (child: ChildInput): string =>
+  child.wholeYear
+    ? 'Za celý kalendárny rok'
+    : formatMonthRanges([
+        child.m01,
+        child.m02,
+        child.m03,
+        child.m04,
+        child.m05,
+        child.m06,
+        child.m07,
+        child.m08,
+        child.m09,
+        child.m10,
+        child.m11,
+        child.m12,
+      ])
 
 interface SummaryRow {
   title: string
@@ -285,11 +299,16 @@ const Suhrn: Page<TaxFormUserInput> = ({
         rows={
           taxFormUserInput.hasChildren === 'yes'
             ? taxFormUserInput.children
-                .map((child) => [
+                .map((child, index) => [
                   { title: 'Meno a priezvisko', value: child.priezviskoMeno },
                   {
                     title: 'Rodné číslo',
                     value: child.rodneCislo,
+                  },
+                  {
+                    title: 'Daňový bonus si uplatňujem',
+                    value: getChildMonthsString(child),
+                    testId: `children[${index}].mesiace`,
                   },
                 ])
                 .reduce((result, value) => [...result, ...value], [])
