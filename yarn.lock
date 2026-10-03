@@ -7825,8 +7825,8 @@ __metadata:
 
 "navody-digital-frontend@github:Ormi/navody-frontend#package-v6-alpha":
   version: 1.0.0-alpha.0
-  resolution: "navody-digital-frontend@https://github.com/Ormi/navody-frontend.git#commit=f08752f39cdd540b58a2df19bee25c3c01f3f2c1"
-  checksum: 10c0/41aa62c65d846626c50c359b061cf19b765724c2d9283ee563f2a5eeb1584bf3d5c1a86befcbcd10beb87f65e85464207ef933f0d4dc47ae812bba1796f3f7b4
+  resolution: "navody-digital-frontend@https://github.com/Ormi/navody-frontend.git#commit=b01c26952604a4c34759307686a3832a32773e3d"
+  checksum: 10c0/a15bbdde51d4b14ce49778b5868a1851bc71a2d9a6ea6125b2e9c72e0cea911d9574d064161b2fbad9cb4e948b24e7181a63c7300b3aa36be49da405d4d9c3ad
   languageName: node
   linkType: hard
 
