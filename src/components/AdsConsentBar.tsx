@@ -34,8 +34,8 @@ export const AdsConsentBar = () => {
         id="measurement-bar-desc"
         className="govuk-body measurement-bar__message"
       >
-        Pomôžte nám zistiť, či naša reklama funguje. Súhlasíte s meraním
-        návštevnosti z reklám?
+        Používame cookies na meranie reklamy v Google Ads. Súhlasíte s ich
+        použitím?
       </p>
       <div className="govuk-button-group">
         <button
