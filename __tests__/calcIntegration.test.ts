@@ -1,11 +1,12 @@
 import { promises as fs, readdirSync } from 'fs'
 import { parseStringPromise } from 'xml2js'
 import { convertToXML, convertToJson } from '../src/lib/xml/xmlConverter'
-import { calculate, TAX_YEAR } from '../src/lib/calculation'
+import { calculate, FORM_URL, TAX_YEAR } from '../src/lib/calculation'
 import { TaxFormUserInput } from '../src/types/TaxFormUserInput'
 import { PostponeUserInput } from '../src/types/PostponeUserInput'
 import { convertPostponeToXML } from '../src/lib/postpone/postponeConverter'
 import { setDate } from '../src/lib/utils'
+import { validateXML } from 'xmllint-wasm'
 
 // const WRITE_FILES = process.env.WRITE_FILES === 'yes'
 const WRITE_FILES = false
@@ -17,6 +18,18 @@ const testCases = readdirSync('./__tests__/testCases/', { withFileTypes: true })
   .filter((item) => !item.isDirectory())
   .map((item) => item.name)
   .map((item) => item.replace('Input.ts', ''))
+
+const validateAgainstXsd = async (xml: string) => {
+  const schema = await fs.readFile(
+    `${__dirname}/../public${FORM_URL.replace('.html', '.sk.xsd')}`,
+    'utf-8',
+  )
+  const result = await validateXML({
+    xml: { fileName: 'file.xml', contents: xml },
+    schema: { fileName: 'schema.xsd', contents: schema },
+  })
+  return result.errors.map((e) => e.message)
+}
 
 describe('calcIntergration', () => {
   testCases.forEach((testCase) => {
@@ -31,9 +44,9 @@ describe('calcIntergration', () => {
       }
 
       const taxForm = calculate(setDate(input, new Date(2024, 1, 10)))
-      convertToXML(taxForm)
+      const xml = convertToXML(taxForm)
 
-      // here are no tests for the output, this test are used mainly for coverage
+      expect(await validateAgainstXsd(xml)).toEqual([])
     })
   })
 })

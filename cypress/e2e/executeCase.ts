@@ -488,6 +488,18 @@ const executeTestCase = (testCase: string) => {
         const downloadsFolder = Cypress.config('downloadsFolder')
         const filePath = path.join(downloadsFolder, 'file.xml')
 
+        /** Validate generated XML against the official XSD */
+        const schemaPath = path.join(
+          'public',
+          FORM_URL.replace('.html', '.sk.xsd'),
+        )
+        cy.task('validateXml', { filePath, schemaPath }).then(
+          ({ valid, messages }) => {
+            expect(messages, 'XSD validation errors').to.deep.equal([])
+            expect(valid, 'XML is valid against XSD').to.equal(true)
+          },
+        )
+
         /**  Validate our results with the FS form */
         cy.visit(FORM_URL)
         // Ignore uncaught exceptions in the 3rd party form code

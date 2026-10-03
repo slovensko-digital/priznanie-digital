@@ -70,6 +70,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
 
   /** SECTION Children */
   if (taxForm.maDanovyBonusNaDeti) {
+    const emptyDieta = form.dokument.telo.r33.dieta[0]
     form.dokument.telo.r33.dieta = taxForm.r033.map((child) => {
       return Object.fromEntries(
         Object.entries(child).map(([key, value]) => [
@@ -78,6 +79,10 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
         ]),
       )
     }) as Dieta[]
+    // XSD requires 4 to 20 dieta elements, pad with empty rows
+    while (form.dokument.telo.r33.dieta.length < 4) {
+      form.dokument.telo.r33.dieta.push(cloneDeep(emptyDieta))
+    }
     form.dokument.telo.r33a = boolToString(taxForm.r033a)
     if (taxForm.partner_bonus_na_deti) {
       form.dokument.telo.uplatnujemPar33Ods8 = boolToString(
@@ -223,7 +228,7 @@ export function convertToJson(taxForm: TaxForm): OutputJson {
     )
     form.dokument.telo.r151.splnam3per = boolToString(taxForm.splnam3per)
     form.dokument.telo.r151.ico = taxForm.r151.ico
-    form.dokument.telo.r151.obchodneMeno.riadok = [taxForm.r151.obchMeno]
+    form.dokument.telo.r151.obchodneMeno.riadok = [taxForm.r151.obchMeno, '']
     form.dokument.telo.r151.suhlasSoZaslanim = boolToString(
       taxForm.r151.suhlasZaslUdaje,
     )

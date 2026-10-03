@@ -48,6 +48,13 @@ export interface Zastupca {
   email: string
 }
 
+export interface Nerezident {
+  nerezident: string
+  datumOd: string
+  datumDo: string
+  TIN: string
+}
+
 export interface Hlavicka {
   dic: string
   datumNarodenia: string
@@ -59,7 +66,7 @@ export interface Hlavicka {
   titul: string
   titulZa: string
   adresaTrvPobytu: AdresaTrvPobytu
-  nerezident: string
+  nerezident: Nerezident
   prepojeniePar2: string
   adresaObvPobytu: AdresaObvPobytu
   zastupca: Zastupca
@@ -466,9 +473,9 @@ export interface Tabulka3 {
 }
 
 export interface R151 {
+  ico: string
   splnam3per: string
   neuplatnujemPar50: string
-  ico: string
   obchodneMeno: {
     riadok: string[]
   }
@@ -483,9 +490,9 @@ export interface Rodic {
 
 export interface R153 {
   neuplatnujemPar50aa: string
-  bolZverenyDoStarostlivosti: string
   rodicA: Rodic
   rodicB: Rodic
+  bolZverenyDoStarostlivosti: string
 }
 
 export interface UdajeOprijmoch {
