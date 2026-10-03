@@ -69,3 +69,9 @@ button:disabled {
 .sdn-footer__disclaimer {
   color: #d0d0d0;
 }
+
+.btn-secondary:focus:not(:active):not(:hover) {
+  border-color: #ffbf47 !important;
+  color: #0b0c0c !important;
+  background-color: #ffbf47 !important;
+}
