@@ -3,6 +3,7 @@ import IBAN from 'iban'
 import Decimal from 'decimal.js'
 import base64 from 'base64-js'
 import { MAX_CHILD_AGE_BONUS, monthToKeyValue, TAX_YEAR } from './calculation'
+import { monthNames } from '../types/TaxFormUserInput'
 
 export const sortObjectKeys = (object: object) => {
   const ordered = {}
@@ -150,6 +151,34 @@ export const getRodneCisloAgeAtYearAndMonth = (
   }
 
   return age
+}
+
+/**
+ * Formats selected months (index 0 = January) as month ranges,
+ * e.g. [Jan, Feb, Mar, May] => 'Január - Marec, Máj'
+ */
+export const formatMonthRanges = (selectedMonths: boolean[]): string => {
+  const ranges: string[] = []
+  let rangeStart: number | null = null
+
+  monthNames.forEach((_month, monthIndex) => {
+    const isSelected = !!selectedMonths[monthIndex]
+    if (isSelected && rangeStart === null) {
+      rangeStart = monthIndex
+    }
+    const isRangeEnd =
+      isSelected && (monthIndex === 11 || !selectedMonths[monthIndex + 1])
+    if (isRangeEnd) {
+      ranges.push(
+        rangeStart === monthIndex
+          ? monthNames[monthIndex]
+          : `${monthNames[rangeStart]} - ${monthNames[monthIndex]}`,
+      )
+      rangeStart = null
+    }
+  })
+
+  return ranges.join(', ')
 }
 
 export const formatIban = (newValue: string, previousValue = '') => {

@@ -37,6 +37,8 @@ const next = () => {
 }
 
 const getError = () => cy.get('[data-test=error]')
+const getMonthCheckboxes = (childIndex: number) =>
+  cy.get(`[data-test^="children[${childIndex}].m"][data-test$="-input"]`)
 const assertUrl = (url: Route | PostponeRoute) => {
   cy.url().should('include', url)
 }
@@ -576,25 +578,61 @@ describe('Children page', () => {
     cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
     cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
 
-    // Enter invalid months (November - April)
-    cy.get('[data-test="children[0].monthFrom-select"]').select('10')
-    cy.get('[data-test="children[0].monthTo-select"]').select('3')
-
-    // Try to add 2nd child
+    // Leave all months unchecked
     next()
 
-    // Should have error for invalid months
+    // Should have error for no month selected next to the month checkboxes
     getError().should('have.length', 2)
+    cy.get('[id="children[0].noMonthSelected"]').should(
+      'contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
+    cy.get('.govuk-error-summary').should(
+      'contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
 
-    // Enter valid months (November - April)
-    cy.get('[data-test="children[0].monthFrom-select"]').select('3')
-    cy.get('[data-test="children[0].monthTo-select"]').select('10')
+    // Select a month
+    cy.get('[data-test="children[0].m11-input"]').click()
 
     // Try to continue
     next()
 
-    // Should not have error for invalid months
+    // Should not have error for no month selected, only for missing name
+    cy.get('[id="children[0].noMonthSelected"]').should('not.exist')
+    cy.get('.govuk-error-summary').should(
+      'not.contain',
+      'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus',
+    )
     getError().should('have.length', 1)
+  })
+
+  it('has working validation for partner months', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    next()
+
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-yes').click()
+    getInput('partner_bonus_na_deti', '-yes').click()
+
+    // Leave all partner months unchecked
+    next()
+
+    // Should have error for no month selected next to the month checkboxes
+    cy.get('[id="partner_bonus_na_deti_mesiace"]').should(
+      'contain',
+      'Vyberte mesiace v ktorych si partner uplatňuje daňový bonus',
+    )
+
+    // Select a month
+    cy.get('[data-test="partner_bonus_na_deti_m01-input"]').click()
+    next()
+
+    cy.get('[id="partner_bonus_na_deti_mesiace"]').should('not.exist')
   })
 
   it('has working validation for too old kid', () => {
@@ -626,14 +664,8 @@ describe('Children page', () => {
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch September až December',
     )
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
-      'have.length',
-      4,
-    )
-    cy.get('[data-test="children[0].monthTo-select"]>option').should(
-      'have.length',
-      4,
-    )
+    getMonthCheckboxes(0).filter(':enabled').should('have.length', 4)
+    getMonthCheckboxes(0).filter(':disabled').should('have.length', 8)
   })
 
   it('has working range limit for kid bonus ending in tax year', () => {
@@ -649,14 +681,82 @@ describe('Children page', () => {
     cy.contains(
       'Daňový bonus si môžete uplatniť v mesiacoch Január až September',
     )
-    cy.get('[data-test="children[0].monthFrom-select"]>option').should(
-      'have.length',
-      9,
+    getMonthCheckboxes(0).filter(':enabled').should('have.length', 9)
+    getMonthCheckboxes(0).filter(':disabled').should('have.length', 3)
+  })
+
+  it('resets selected months when rodne cislo changes', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid born in September of tax year
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2509076922')
+    cy.get('[data-test="children[0].m10-input"]').click()
+    cy.get('[data-test="children[0].m10-input"]').should('be.checked')
+
+    // Change to kid eligible for the whole year
+    cy.get('[data-test="children[0].rodneCislo-input"]')
+      .clear()
+      .type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 0)
+  })
+
+  it('keeps selected months when returning to the page', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid with bonus ending in September of tax year
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('070907/4762')
+    cy.get('[data-test="children[0].m02-input"]').click()
+    cy.get('[data-test="children[0].m03-input"]').click()
+
+    next()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+    next()
+    assertUrl('/dochodok')
+
+    cy.get('[data-test=back]').click()
+    assertUrl('/deti')
+
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 2)
+    cy.get('[data-test="children[0].m02-input"]').should('be.checked')
+    cy.get('[data-test="children[0].m03-input"]').should('be.checked')
+  })
+
+  it('keeps part year selection for kid eligible for the whole year when returning to the page', () => {
+    navigateEligibleToChildrenPage()
+    assertUrl('/deti')
+
+    getInput('hasChildren', '-yes').click()
+
+    // Kid eligible for the whole year
+    cy.get('[data-test="children[0].priezviskoMeno-input"]').type('John Doe')
+    cy.get('[data-test="children[0].rodneCislo-input"]').type('2107120015')
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).click()
+    cy.get('[data-test="children[0].m02-input"]').click()
+    cy.get('[data-test="children[0].m03-input"]').click()
+
+    next()
+    getInput('partner_bonus_na_deti_chce_uplatnit', '-no').click()
+    next()
+    assertUrl('/dochodok')
+
+    cy.get('[data-test=back]').click()
+    assertUrl('/deti')
+
+    cy.get(`[data-test="children[0]-bonus-interval-input-partyear"]`).should(
+      'be.checked',
     )
-    cy.get('[data-test="children[0].monthTo-select"]>option').should(
-      'have.length',
-      9,
-    )
+    getMonthCheckboxes(0).filter(':checked').should('have.length', 2)
+    cy.get('[data-test="children[0].m02-input"]').should('be.checked')
+    cy.get('[data-test="children[0].m03-input"]').should('be.checked')
   })
 })
 

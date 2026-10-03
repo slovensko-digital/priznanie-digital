@@ -227,6 +227,7 @@ interface CheckboxProps {
   disabled?: boolean
   label: ReactNode
   hint?: ReactNode
+  notInFormGroup?: boolean
 }
 export const Checkbox = ({
   name,
@@ -234,6 +235,7 @@ export const Checkbox = ({
   className,
   disabled = false,
   hint,
+  notInFormGroup,
   ...props
 }: CheckboxProps) => {
   const [field, meta] = useField(name)
@@ -244,7 +246,7 @@ export const Checkbox = ({
   return (
     <div
       className={classnames([
-        'govuk-form-group',
+        !notInFormGroup && 'govuk-form-group',
         meta.error && 'govuk-form-group--error',
       ])}
     >

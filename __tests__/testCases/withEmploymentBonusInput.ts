@@ -33,8 +33,6 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
     {
       id: 2,
@@ -46,8 +44,6 @@ export const withEmploymentBonusInput: E2eTestUserInput = {
       }).pure,
 
       wholeYear: true,
-      monthFrom: '6',
-      monthTo: '11',
     },
   ],
   datum: '22.02.2020',
