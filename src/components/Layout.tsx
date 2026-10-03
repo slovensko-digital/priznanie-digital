@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { AdsConsentBar } from './AdsConsentBar'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 import { useRouter } from 'next/router'
@@ -70,6 +71,7 @@ const Layout: React.FC<Props> = ({
 
       {/* Disabled now, since we don't use user cookies. We will keep the code in case we need to enable it again */}
       {/* <CookieBar /> */}
+      <AdsConsentBar />
     </div>
   )
 }
