@@ -34,11 +34,8 @@ export const AdsConsentBar = () => {
         id="measurement-bar-desc"
         className="govuk-body measurement-bar__message"
       >
-        Prišli ste k nám cez reklamu Google. Súhlasíte, aby sme si vo Vašom
-        prehliadači zapamätali identifikátor kliknutia na reklamu a po dokončení
-        formulára ho odoslali do Google Ads? Pomôže nám to merať účinnosť
-        reklamy. Nepoužívame žiadne skripty tretích strán ani ďalšie údaje o
-        Vás.
+        Smieme si zapamätať, že ste prišli cez reklamu Google, a po dokončení
+        formulára to oznámiť Google Ads? Pomôže nám to merať účinnosť reklamy.
       </p>
       <div className="govuk-button-group">
         <button
