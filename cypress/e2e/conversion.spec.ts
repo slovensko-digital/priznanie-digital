@@ -32,6 +32,9 @@ const submitRedirectForm = () => {
 }
 
 beforeEach(() => {
+  // debug mode shows the start button even when the app is not live, and the
+  // redirect form is not auto-submitted
+  cy.setCookie('you-shall', 'not-pass')
   cy.intercept('POST', '/api/conversion', { statusCode: 204 }).as('conversion')
 })
 
@@ -78,10 +81,6 @@ describe('Google Ads conversion consent', () => {
 })
 
 describe('Google Ads conversion tracking', () => {
-  beforeEach(() => {
-    cy.setCookie('you-shall', 'not-pass') // debug mode, redirect form is not auto-submitted
-  })
-
   it('reports tax return conversion on redirect to Návody.Digital', () => {
     grantConsent()
 
