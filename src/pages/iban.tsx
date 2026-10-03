@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import { FormErrors, TaxBonusUserInput } from '../types/PageUserInputs'
 import { Form, FormikProps } from 'formik'

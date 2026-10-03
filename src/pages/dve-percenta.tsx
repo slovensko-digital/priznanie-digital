@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import { Form, FormikProps } from 'formik'
 import { Checkbox, FormWrapper, Input } from '../components/FormComponents'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Feedback } from './Feedback'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import getConfig from 'next/config'
+import getConfig from '../lib/runtimeConfig'
 import fileDownload from 'js-file-download'
 import { ErrorSummary } from './ErrorSummary'
 import Link from 'next/link'

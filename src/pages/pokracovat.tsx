@@ -1,5 +1,4 @@
-import React from 'react'
-import getConfig from 'next/config'
+import getConfig from '../lib/runtimeConfig'
 import { Page } from '../components/Page'
 import { TaxForm } from '../types/TaxForm'
 import { convertToXML } from '../lib/xml/xmlConverter'
