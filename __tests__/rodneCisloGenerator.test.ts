@@ -1,4 +1,5 @@
 import { rodnecislo } from 'rodnecislo'
+import { MAX_CHILD_AGE_BONUS } from '../src/lib/calculation'
 import { generateRodneCislo } from './utils/generateRodneCislo'
 
 describe('generateRodneCislo', () => {
@@ -208,7 +209,7 @@ describe('generateRodneCislo', () => {
 
       it('should generate birth ID for child turning 18 in January 2025', () => {
         const result = generateRodneCislo({
-          turnsAge: 18,
+          turnsAge: MAX_CHILD_AGE_BONUS,
           turnsAgeInYear: 2025,
           turnsAgeInMonth: 1, // January
           gender: 'FEMALE',
@@ -245,7 +246,7 @@ describe('generateRodneCislo', () => {
             expectedBirthMonth: 5,
           },
           {
-            turnsAge: 18,
+            turnsAge: MAX_CHILD_AGE_BONUS,
             turnsAgeInYear: 2025,
             turnsAgeInMonth: 3,
             expectedBirthYear: 2007,
@@ -575,7 +576,7 @@ describe('generateRodneCislo', () => {
       })
 
       it('should generate valid IDs for ages', () => {
-        for (let age = 18; age <= 65; age += 10) {
+        for (let age = MAX_CHILD_AGE_BONUS; age <= 65; age += 10) {
           const result = generateRodneCislo({
             age,
             gender: age % 2 === 0 ? 'MALE' : 'FEMALE',
