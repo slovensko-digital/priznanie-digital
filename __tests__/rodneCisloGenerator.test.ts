@@ -207,7 +207,7 @@ describe('generateRodneCislo', () => {
         expect(rc.month()).toBe(6) // July (0-based)
       })
 
-      it('should generate birth ID for child turning 18 in January 2025', () => {
+      it(`should generate birth ID for child turning ${MAX_CHILD_AGE_BONUS} in January 2025`, () => {
         const result = generateRodneCislo({
           turnsAge: MAX_CHILD_AGE_BONUS,
           turnsAgeInYear: 2025,
@@ -217,7 +217,7 @@ describe('generateRodneCislo', () => {
 
         const rc = rodnecislo(result.withDelimeter)
         expect(rc.isValid()).toBe(true)
-        expect(rc.year()).toBe(2007) // 2007 = 2007
+        expect(rc.year()).toBe(2025 - MAX_CHILD_AGE_BONUS)
         expect(rc.month()).toBe(0) // January (0-based)
         expect(rc.isFemale()).toBe(true)
       })
@@ -249,7 +249,7 @@ describe('generateRodneCislo', () => {
             turnsAge: MAX_CHILD_AGE_BONUS,
             turnsAgeInYear: 2025,
             turnsAgeInMonth: 3,
-            expectedBirthYear: 2007,
+            expectedBirthYear: 2025 - MAX_CHILD_AGE_BONUS,
             expectedBirthMonth: 2,
           },
           {
