@@ -87,16 +87,12 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child5Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
           rodneCislo: child10Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
       ],
     })
@@ -126,16 +122,12 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child2Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
           rodneCislo: child12Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
       ],
     })
@@ -170,16 +162,14 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child12Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
           rodneCislo: childNovTaxYear,
           wholeYear: false,
-          monthFrom: '10', // November (0-based)
-          monthTo: '11', // December (0-based)
+          m11: true,
+          m12: true,
         },
       ],
     })
@@ -210,16 +200,12 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child2Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
           rodneCislo: child12Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
       ],
     })
@@ -258,16 +244,14 @@ describe('Daňový bonus na dieťa – official FAQ examples (2025)', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child5Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
         {
           id: 2,
           priezviskoMeno: 'Dieťa Druhé',
           rodneCislo: childNovTaxYear,
           wholeYear: false,
-          monthFrom: '10', // November (0-based)
-          monthTo: '11', // December (0-based)
+          m11: true,
+          m12: true,
         },
       ],
     })
@@ -291,8 +275,6 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child5Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
       ],
     })
@@ -340,8 +322,6 @@ describe('Rows r146 and r146a – based on hasChildren value', () => {
           priezviskoMeno: 'Dieťa Prvé',
           rodneCislo: child5Jan,
           wholeYear: true,
-          monthFrom: '0',
-          monthTo: '11',
         },
       ],
     })

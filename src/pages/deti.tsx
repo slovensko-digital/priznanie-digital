@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { FieldArray, Form } from 'formik'
+import { FieldArray, Form, getIn, useFormikContext } from 'formik'
 import styles from './deti.module.css'
 import {
   BooleanRadio,
   Input,
   FormWrapper,
   Select,
+  Checkbox,
 } from '../components/FormComponents'
 import { ChildrenUserInput } from '../types/PageUserInputs'
 import { ChildInput, monthNames } from '../types/TaxFormUserInput'
@@ -33,8 +34,6 @@ import {
   HIGH_INCOME_THRESHOLD,
   RODNE_CISLO_DLZKA,
   MAX_CHILD_AGE_BONUS,
-  monthKeyValues,
-  monthToKeyValue,
   TAX_YEAR,
 } from '../lib/calculation'
 import { Details } from '../components/Details'
@@ -60,6 +59,13 @@ const Deti: Page<ChildrenUserInput> = ({
       Späť
     </Link>
   )
+
+  const getMonthFieldName = (monthIndex: number): string => {
+    const formMonthIndex = monthIndex + 1
+    return formMonthIndex >= 10
+      ? `partner_bonus_na_deti_m${formMonthIndex}`
+      : `partner_bonus_na_deti_m0${formMonthIndex}`
+  }
 
   return (
     <>
@@ -282,29 +288,23 @@ const Deti: Page<ChildrenUserInput> = ({
                               daňovník, t. j. stará sa o vyživované dieťa žijúce
                               s ňou v domácnosti.
                             </p>
-                            <div
-                              className={classnames(
-                                'govuk-form-group',
-                                styles.inlineFieldContainer,
-                              )}
-                            >
-                              <Select
-                                name={`partner_bonus_na_deti_od`}
-                                label="Od"
-                                optionsWithValue={[
-                                  ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
-                                ]}
-                              />
-                              <Select
-                                name={`partner_bonus_na_deti_do`}
-                                label="Do"
-                                optionsWithValue={[
-                                  ...monthKeyValues(monthNames),
-                                  { name: '', value: '' },
-                                ]}
-                              />
-                            </div>
+                            <MonthsFormGroup name="partner_bonus_na_deti_mesiace">
+                              <div
+                                className={classnames(
+                                  styles.checkBoxRow,
+                                  'govuk-checkboxes govuk-checkboxes--small',
+                                )}
+                              >
+                                {monthNames.map((month, monthIndex) => (
+                                  <Checkbox
+                                    key={month}
+                                    name={getMonthFieldName(monthIndex)}
+                                    label={month}
+                                    notInFormGroup
+                                  />
+                                ))}
+                              </div>
+                            </MonthsFormGroup>
                             <h2 className="govuk-heading-m">
                               Akým spôsobom vysporiada/la svoje zdaniteľné
                               príjmy druhá oprávnená osoba za rok {TAX_YEAR}?
@@ -407,6 +407,7 @@ interface ChildFormProps {
     shouldValidate?: boolean,
   ) => void
 }
+
 const ChildForm = ({
   savedValues: { rodneCislo, wholeYear },
   index,
@@ -418,12 +419,27 @@ const ChildForm = ({
   const monthNamesUntil = monthNames.filter((month) =>
     maxChildAgeBonusMonth(rodneCislo, month),
   )
+
   const monthOptions = monthNamesUntil.filter((value) =>
     monthNamesFrom.includes(value),
   )
   const bonusInPartOfYear = monthOptions.length < 12
+  const previousRodneCislo = useRef(rodneCislo)
+
+  const getMonthFieldName = (monthIndex: number) => {
+    const formMonthIndex = monthIndex + 1
+    return formMonthIndex >= 10
+      ? `children[${index}].m${formMonthIndex}`
+      : `children[${index}].m0${formMonthIndex}`
+  }
 
   useEffect(() => {
+    // update only when rodneCislo changes, keep saved values on mount
+    if (previousRodneCislo.current === rodneCislo) {
+      return
+    }
+    previousRodneCislo.current = rodneCislo
+
     if (
       validateRodneCislo(rodneCislo) &&
       maxChildAgeBonusMonth(rodneCislo, 'Január')
@@ -433,14 +449,10 @@ const ChildForm = ({
       } else {
         setFieldValue(`children[${index}].wholeYear`, true)
       }
-      if (monthOptions.length) {
-        const fromMonthValue = monthToKeyValue(monthOptions[0]).value.toString()
-        const toMonthValue = monthToKeyValue(
-          monthOptions[monthOptions.length - 1],
-        ).value.toString()
-        setFieldValue(`children[${index}].monthFrom`, fromMonthValue)
-        setFieldValue(`children[${index}].monthTo`, toMonthValue)
-      }
+      // reset the month checkboxes
+      monthNames.forEach((_month, monthIndex) => {
+        setFieldValue(getMonthFieldName(monthIndex), false)
+      })
     } else {
       setFieldValue(`children[${index}].wholeYear`, true)
     }
@@ -500,45 +512,74 @@ const ChildForm = ({
               {monthOptions[monthOptions.length - 1]}
             </p>
           </legend>
-          <div
-            className={classnames(
-              'govuk-form-group',
-              styles.inlineFieldContainer,
-            )}
-          >
-            <Select
-              name={`children[${index}].monthFrom`}
-              label="Od"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 0 : false}
-            />
-            <Select
-              name={`children[${index}].monthTo`}
-              label="Do"
-              optionsWithValue={monthKeyValues(monthOptions)}
-              disabled={wholeYear ? 11 : false}
-            />
-          </div>
+          <MonthsFormGroup name={`children[${index}].noMonthSelected`}>
+            <div
+              className={classnames(
+                styles.checkBoxRow,
+                'govuk-checkboxes govuk-checkboxes--small',
+              )}
+            >
+              {monthNames.map((month, monthIndex) => (
+                <Checkbox
+                  key={month}
+                  name={getMonthFieldName(monthIndex)}
+                  label={month}
+                  notInFormGroup
+                  disabled={wholeYear || !monthOptions.includes(month)}
+                />
+              ))}
+            </div>
+          </MonthsFormGroup>
         </RadioConditional>
       </RadioGroup>
     </>
   )
 }
 
+interface MonthsFormGroupProps {
+  name: string
+  children: ReactNode
+}
+
+const MonthsFormGroup = ({ name, children }: MonthsFormGroupProps) => {
+  const { errors } = useFormikContext<ChildrenUserInput>()
+  const error: string | undefined = getIn(errors, name)
+
+  return (
+    <div
+      className={classnames(
+        'govuk-form-group',
+        error && 'govuk-form-group--error',
+      )}
+    >
+      {error ? (
+        <span id={name} data-test="error" className="govuk-error-message">
+          <span className="govuk-visually-hidden">Chyba:</span> {error}
+        </span>
+      ) : null}
+      <div className={styles.inlineFieldContainer}>{children}</div>
+    </div>
+  )
+}
+
 interface ChildFormErrors {
   priezviskoMeno?: string
   rodneCislo?: string
-  monthTo?: string
+  noMonthSelected?: string
 }
+
 interface ChildrenFormErrors {
   hasChildren?: string
   children?: ChildFormErrors[]
-  partner_bonus_na_deti_od?: string
-  partner_bonus_na_deti_do?: string
+  partner_bonus_na_deti_mesiace?: string
   partner_bonus_na_deti_typ_prijmu?: string
   r034_priezvisko_a_meno?: string
   r034_rodne_cislo?: string
   r034a?: string
+}
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 export const validate = (values: ChildrenUserInput) => {
@@ -570,12 +611,23 @@ export const validate = (values: ChildrenUserInput) => {
 
       if (
         !childValues.wholeYear &&
-        Number.parseInt(childValues.monthFrom, 10) >
-          Number.parseInt(childValues.monthTo, 10)
+        !childValues.m01 &&
+        !childValues.m02 &&
+        !childValues.m03 &&
+        !childValues.m04 &&
+        !childValues.m05 &&
+        !childValues.m06 &&
+        !childValues.m07 &&
+        !childValues.m08 &&
+        !childValues.m09 &&
+        !childValues.m10 &&
+        !childValues.m11 &&
+        !childValues.m12
       ) {
-        childErrors.monthTo = `Musí byť ${
-          monthNames[childValues.monthFrom]
-        } alebo neskôr`
+        childErrors.noMonthSelected =
+          'Vyberte aspoň jeden mesiac, v ktorom si uplatňujete daňový bonus'
+        //scroll to the top where the error is shown
+        scrollToTop()
       }
 
       return childErrors
@@ -593,12 +645,23 @@ export const validate = (values: ChildrenUserInput) => {
           'Vyberte jednu z možností spôsobu vysporiadania príjmov'
       }
 
-      if (values.partner_bonus_na_deti_od === '') {
-        errors.partner_bonus_na_deti_od = 'Zadajte začiatok'
-      }
-
-      if (values.partner_bonus_na_deti_do === '') {
-        errors.partner_bonus_na_deti_do = 'Zadajte koniec'
+      if (
+        !values.partner_bonus_na_deti_m01 &&
+        !values.partner_bonus_na_deti_m02 &&
+        !values.partner_bonus_na_deti_m03 &&
+        !values.partner_bonus_na_deti_m04 &&
+        !values.partner_bonus_na_deti_m05 &&
+        !values.partner_bonus_na_deti_m06 &&
+        !values.partner_bonus_na_deti_m07 &&
+        !values.partner_bonus_na_deti_m08 &&
+        !values.partner_bonus_na_deti_m09 &&
+        !values.partner_bonus_na_deti_m10 &&
+        !values.partner_bonus_na_deti_m11 &&
+        !values.partner_bonus_na_deti_m12
+      ) {
+        errors.partner_bonus_na_deti_mesiace =
+          'Vyberte mesiace v ktorych si partner uplatňuje daňový bonus'
+        scrollToTop()
       }
 
       if (!values.r034_priezvisko_a_meno) {

@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { AdsConsentBar } from './AdsConsentBar'
 import { TaxFormUserInput } from '../types/TaxFormUserInput'
 import { PostponeUserInput } from '../types/PostponeUserInput'
 import { useRouter } from 'next/router'
@@ -35,6 +36,7 @@ const Layout: React.FC<Props> = ({
       </noscript>
 
       <div className="main-content">
+        <AdsConsentBar />
         <Header />
 
         <div className="sdn-headline">

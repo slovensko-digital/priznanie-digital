@@ -58,8 +58,6 @@ export const highIncomeChildBonus01Input: E2eTestUserInput = {
         gender: 'FEMALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '1',
-      monthTo: '12',
     },
   ],
 

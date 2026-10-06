@@ -52,8 +52,6 @@ export const case202204Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: '0',
-      monthTo: '0',
     },
     {
       id: 2,
@@ -64,8 +62,6 @@ export const case202204Input: E2eTestUserInput = {
         gender: 'MALE',
       }).pure,
       wholeYear: true,
-      monthFrom: `9`,
-      monthTo: '11',
     },
   ],
   hasChildren: 'yes',

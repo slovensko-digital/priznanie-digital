@@ -75,6 +75,7 @@ const ContinuePage: Page = ({ postponeUserInput, isDebug }) => {
   return (
     <RedirectForm
       isDebug={isDebug}
+      conversion="odklad"
       fields={buildFields(postponeUserInput)}
       canContinue={!!postponeUserInput.priezvisko}
       debugDownload={buildXml(postponeUserInput)}

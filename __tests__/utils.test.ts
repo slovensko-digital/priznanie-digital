@@ -5,6 +5,7 @@ import {
   formatCurrency,
   formatDate,
   formatIban,
+  formatMonthRanges,
   formatPsc,
   formatRodneCislo,
   getRodneCisloAgeAtYearAndMonth,
@@ -21,7 +22,37 @@ import {
 } from '../src/lib/utils'
 import Decimal from 'decimal.js'
 
+const months = (...selected: number[]) =>
+  Array.from({ length: 12 }, (_, index) => selected.includes(index))
+
 describe('utils', () => {
+  describe('#formatMonthRanges', () => {
+    it('should return empty string when no month is selected', () => {
+      expect(formatMonthRanges(months())).toBe('')
+    })
+    it('should format single month', () => {
+      expect(formatMonthRanges(months(4))).toBe('Máj')
+    })
+    it('should format consecutive months as range', () => {
+      expect(formatMonthRanges(months(8, 9, 10, 11))).toBe(
+        'September - December',
+      )
+    })
+    it('should format whole year as range', () => {
+      expect(
+        formatMonthRanges(months(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)),
+      ).toBe('Január - December')
+    })
+    it('should format non-consecutive months as separate ranges', () => {
+      expect(formatMonthRanges(months(0, 1, 2, 4, 6, 7, 11))).toBe(
+        'Január - Marec, Máj, Júl - August, December',
+      )
+    })
+    it('should treat undefined as not selected', () => {
+      expect(formatMonthRanges([true, undefined, true])).toBe('Január, Marec')
+    })
+  })
+
   describe('#sortObjectKeys', () => {
     it('should sort object by key', () => {
       expect(sortObjectKeys({ c: 1, '2': 2, b: 3, a: 4, '1': 5 })).toEqual({
